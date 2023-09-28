@@ -1781,8 +1781,8 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
                             </li>
                             <li class="slide">
@@ -2018,20 +2018,6 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
-                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
-                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                <span class="fw-bold me-2">Number of rows</span>
-                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
-
-                                                    <!-- <option value="1">1</option> -->
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="100">100</option>
-                                                    <option value="200">200</option>
-                                                    <option value="500">500</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="table-responsive">
                                             <table
                                                 class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100"
@@ -3520,21 +3506,13 @@
         });
         // console.log($('#alphabets'))
         // Search functionality
-        $(document).on('keyup', '#typehead', function () {
+        $(document).on('keyup','#typehead' , function () {
             var searchValue = $(this).val().toLowerCase();
-            var numRowsToShow = $('#lengthSelectBox').val();
-
             $('#table_body tr').filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
-
-            if (searchValue === '') {
-                // If search box is empty, use the selected value from the select box
-                $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
-                $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
-            }
         });
-
+        
         // Function to update the table based on filters
         function updateTable() {
             $('#table_body').empty();
@@ -3781,7 +3759,7 @@
 
             return fileName;
         }
-
+        var propertyApiData;
         function getData(selectedFilter = "alphabets") {
             // console.log(2)
             $("#global-loader").fadeIn("fast")
@@ -3795,8 +3773,12 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response)
-                    if (response.data[0].length === 0) {
+                    var tableBody = $('#table_body');
+                    if(response.message=='No Property data found'){
+                        var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                    else if (response.data[0].length === 0) {
                         localStorage.setItem("property", "false")
                         window.location = './new-property.html'
 
@@ -3809,11 +3791,18 @@
                         $("#user-name").text(toTitleCase(response.user))
                         $("#header-user").text(toTitleCase(response.user))
 
-                        var tableBody = $('#table_body');
+                        
 
                         tableBody.empty();
+                        propertyApiData = response?.data[0];
                         console.log(response.data[0].length);
+                        
                         response.data[0].forEach(function (property, index) {
+                            var password = 'your-secret-password';
+                            var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
+
+                            // Include the encrypted value in the URL
+                            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id = `<td style="font-weight: 600;">${property.landlordID}</td>`
                             var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
@@ -3826,10 +3815,10 @@
 
                             // var UserId = '<td>' + US-272323 + '</td>' ;
 
-                            var propertyName = '<td class="propertyName" style="font-weight: 600;">' +
+                            var propertyName = `<td class="propertyName" style="font-weight: 600;"><a href="./view-property.html?property=${encodedPropertyId}" style="color:black;"> ` +
                                 property
                                     .propertyName +
-                                '</td>';
+                                "</a>"+'</td>';
 
                             var totalsqft = `<td class="totalsqft" style="font-weight: 600;">${property.propertySQFT} SQft.</td>`;
 
@@ -3864,11 +3853,7 @@
                                 '</span>' +
                                 '</td>';
                             var created_at = `<td class="created-at d-none" style="font-weight: 600;">${property.created_at}</td>`
-                            var password = 'your-secret-password';
-                            var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
-
-                            // Include the encrypted value in the URL
-                            var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                            
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
@@ -3989,6 +3974,8 @@
 
         }
         getData()
+        
+       
     </script>
     <script>
         $(document).ready(function () {
@@ -4065,7 +4052,7 @@
             });
         })
     </script>
-    <!-- <script>
+<!-- <script>
     $(document).ready(function () {
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -4099,51 +4086,18 @@
 
     });
 </script> -->
-    <script>
-        var helloGuys = true;
-        $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
-                var customScript = document.createElement('script');
-                customScript.src = "../assets/js/custom.js";
-                document.head.appendChild(customScript);
-            }
-        });
-    </script>
-    <script>
-        $(document).change(function () {
-            if ($('#typehead').val() == "") {
+<script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+        }
+    });
+</script>
 
-                let count = 1;
-                $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
-                    if (count > parseInt($("#lengthSelectBox").val())) {
-                        $(this).hide()
-                    }
-                    else {
-                        $(this).show()
-                    }
-                    count++;
-                })
-            }
-        })
-        $(document).ajaxStop(function () {
-            if ($('#typehead').val() == "") {
-
-                let count = 1;
-                $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
-                    if (count > parseInt($("#lengthSelectBox").val())) {
-                        $(this).hide()
-                    }
-                    else {
-                        $(this).show()
-                    }
-                    count++;
-                })
-            }
-        })
-    </script>
 </body>
 
 </html>

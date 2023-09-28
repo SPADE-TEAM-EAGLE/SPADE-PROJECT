@@ -1101,13 +1101,13 @@
                                     Profile</span>
                             </a>
                         </li> -->
+                        <a href="settings.html">
                             <li class="slide">
                                 <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                     <div class="card-header pb-0 border-bottom-0">
                                         <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                         <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
                                         </h3>
-
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="side-menu__label progress progress-md mt-5">
@@ -1116,63 +1116,70 @@
                                     </div>
                                 </div>
                             </li>
+                        </a>
+                        <div class="top-tabs">
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                    class="side-menu__icon fi fi-rs-dashboard"></i><span class="side-menu__label">Overview</span></a>
+                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
+                                        class="side-menu__label">Overview</span></a>
                             </li>
 
-                            <li class="slide">
+                            <li class="slide card-demo">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
                                         class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
                                         class="side-menu__label">Invoicing</span>
                                 </a>
                             </li>
 
-                            <li class="slide">
+                            <li class="slide card-demo1">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks.html"><i
-                                    class="side-menu__icon fi fi-rs-list-check"></i><span class="side-menu__label">Tasks</span>
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-list-check"></i><span
+                                        class="side-menu__label">Tasks</span>
+                                </a>
                             </li>
 
                             <!-- <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
-                                    class="side-menu__icon fi fi-rs-comment"></i><span
-                                    class="side-menu__label">Messages</span>
-                                   
-                                   </a>
+                                        class="side-menu__icon fi fi-rs-comment"></i><span
+                                        class="side-menu__label">Messages</span>
+
+                                </a>
 
                             </li> -->
-
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
                                     <i class="side-menu__icon fi fi-rs-comment"></i>
                                     <span class="side-menu__label">Chat</span>
                                     <span class="badge bg-primary side-badge" id="chatCounter"></span>
-                                    <!-- <i class="angle fe fe-chevron-right"></i> -->
                                 </a>
                             </li>
-
+<!-- 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
                                     <span class="side-menu__label">Notifications</span>
                                 </a>
                             </li>
+                            
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-comment-question"></i>
                                     <span class="side-menu__label">Help</span>
                                 </a>
-                            </li>
-
+                            </li> -->
+                        </div>
+                            <div style="position: absolute; bottom: 0; width: 94%;">
                             <li>
+                                <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
                                 <a class="side-menu__item has-link" href="settings.html" target="_self"><i
-                                    class="side-menu__icon fi fi-rs-settings"></i><span class="side-menu__label">Settings</span>
-                                <!-- <span
+                                        class="side-menu__icon fi fi-rs-settings"></i><span
+                                        class="side-menu__label">Settings</span>
+                                    <!-- <span
                                                class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                            </a>
+                                </a>
                             </li>
+                        </div>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
@@ -1199,7 +1206,8 @@
                                         <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4> 
                                         <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$0</h1>
-                                        <div style="display: flex; align-items: center;"> <i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $0 is due on N/A&emsp;<a href="#" class="btn btn-primary btn-pill">Pay Now</a></span></div>
+                                        <div style="display: flex; align-items: center;"> <i class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $0 is due on N/A&emsp;<a href="#" class="btn btn-primary btn-pill"data-bs-target="#closeaccount"
+                                            data-bs-toggle="modal">Pay Now</a></span></div>
                                         <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span class="side-menu__labell text-white" id="tenant-address"></span>
                                         </div>
 
@@ -1212,6 +1220,52 @@
                             </div>
                         </div>
                         <!-- PAGE-HEADER END -->
+
+                                                   <!-- close account model box start  -->
+                                                   <div class="modal fade" id="closeaccount"
+                                                   tabindex="-1" role="dialog">
+                                                   <div class="modal-dialog modal-md modal-dialog-scrollable"
+                                                       role="document">
+                                                       <div class="modal-content">
+                                                           <div class="modal-header">
+                                                               <button class="btn-close"
+                                                                   data-bs-dismiss="modal"
+                                                                   aria-label="Close">
+                                                                   <span
+                                                                       aria-hidden="true"><img
+                                                                           src="../assets/images/cross-circle.svg" /></span>
+                                                               </button>
+                                                           </div>
+                                                           <div
+                                                               class="modal-body text-center text-dark">
+                                                               <img src="../assets/images/logo_loginmodule.png"
+                                                                   class="model-account-close-logo"
+                                                                   alt="">
+                                                               <h3 class="mt-5 mb-0">
+                                                                <b>Spade Tenant</b>
+                                                               </h3>
+                                                               <h4>Spade Rent</h4>
+                                                               <h2><b>Do you want to pay your due balance?</b>
+                                                               </h2>
+                        
+                                                               <button
+                                                                   class="btn btn-primary btn-pill m-2"
+                                                                   id="form1show"
+                                                                   type="button"
+                                                                   data-bs-dismiss="modal"
+                                                                   aria-label="Close"
+                                                                   style="width: fit-content;">
+                                                                   &nbsp; Paynow &nbsp;
+                                                               </button>
+                                                           </div>
+                                                           <!-- <div class="modal-footer">
+                        
+                                                           </div> -->
+                                                       </div>
+                                                   </div>
+                                                   <!-- close account model box start  -->
+                        
+                                               </div>
 
                         <!-- Row -->
                         <div class="row">
@@ -2844,12 +2898,16 @@ console.log(data)
                                                                     <li><a class="dropdown-item text-dark view-btnn"
                                                                             data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal"
-                                                                            href="#viewModal-invoice">View</a>
+                                                                            href="#viewModal-invoice"><i class="fi fi-rs-eye"></i> &nbsp; View</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item text-dark"
+                                                                        data-bs-target="#closeaccount" data-bs-toggle="modal"
+                                                                           href="#" ><i class="fi fi-rs-dollar"></i> &nbsp; Pay</a>
                                                                     </li>
                                                                     <li><a class="dropdown-item text-dark view-btn"
                                                                             data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal"
-                                                                            href="#viewModal">View PDF Invoice</a>
+                                                                            href="#viewModal"><i class="fi fi-rs-file-invoice-dollar"></i> &nbsp; View PDF Invoice</a>
                                                                     </li>
                                                                     
                                                                 </ul>

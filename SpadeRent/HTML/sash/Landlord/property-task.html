@@ -1071,9 +1071,16 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -2423,7 +2430,7 @@
                 }
             });
             $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
+                            url: 'http://localhost:3000/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2443,7 +2450,11 @@
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            if(response?.data?.length===0){
+                            if(response.message=="No property Task data found"){
+                                var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                            }
+                            else if(response?.data?.length===0){
                                 var row = '<tr><td colspan="6" style="text-align: center;">No Tasks Found</td></tr>';
                                 tableBody.append(row);
                             }
@@ -2528,8 +2539,8 @@
                     console.log('Error: ' + error);
                             }
                         })
-     
-        })
+        
+                    })
     </script>
     <script>
         function logout() {

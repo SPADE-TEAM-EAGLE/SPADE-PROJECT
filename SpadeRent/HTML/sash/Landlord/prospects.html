@@ -1927,9 +1927,16 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -4697,8 +4704,8 @@
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="Qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="Disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
 
                             dropdownMenu.find('a').on('click', function () {
                                 var newStatus = $(this).data('status');
@@ -4752,10 +4759,9 @@
                             } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
 
-                            }
-                            if (prospectus.prospectusStatus !== "qualified" && prospectus.prospectusStatus !== "disqualified") {
+                            } 
+                            else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-
                             }
                             countValues()
                         });

@@ -1065,7 +1065,7 @@ exports.getproperty = async (req, res) => {
       });
       // }
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No Property data found",
       });
     }

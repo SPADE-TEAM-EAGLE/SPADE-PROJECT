@@ -1689,9 +1689,16 @@ color: #000;
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -2925,7 +2932,10 @@ color: #000;
                             $("#add_category_col").hide()
                             $("#category").prop("disabled", false);
                             $("#category").append($('<option></option>').text("Choose..."))
+                            $("#category").append($('<option></option>').text("Electrition"))
+                                $("#category").append($('<option></option>').text("Plumber"))
                             response.data.forEach((category) => {
+                                
                                 $("#category").append($('<option></option>').text(category.category).val(category.id))
                             })
                         }
@@ -2940,7 +2950,10 @@ color: #000;
                             $("#add_category_col").hide()
 
                             $("#category_update").append($('<option></option>').text("Choose..."))
+                            $("#category_update").append($('<option></option>').text("Electrition"))
+                                $("#category_update").append($('<option></option>').text("Plumber"))
                             response.data.forEach((category) => {
+                             
                                 $("#category_update").append($('<option></option>').text(category.category).val(category.id))
                             })
                         }

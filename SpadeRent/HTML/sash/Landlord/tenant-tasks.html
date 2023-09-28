@@ -1255,9 +1255,16 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
-                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a></li>
-                                    <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li>
+                                    <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
+                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
+
+<li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
+                                    <i class="side-menu__icon fi fi-rs-users"></i>
+                                    <span class="side-menu__label">Vendors</span>
+                                </a>
+                            </li>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
@@ -2443,7 +2450,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2480,7 +2487,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2490,8 +2497,14 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response)
-                   if(response?.data[0]?.length > 0){
+                    
+                    if(response?.message=="No tenant Task data found"){
+                        var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                        $('#table_body').append(row);
+                    }
+                   else if(response?.data[0]?.length > 0){
+                    $("#tenant-top-img").attr("src", response?.data[0][0].tenantImage?response?.data[0][0].tenantImage:"../assets/images/users/16.jpg")
+
                         $("#no-task").show()
                         $("#task-table").hide()
                     $("#property_name").text(response?.data[0][0]?.propertyName)

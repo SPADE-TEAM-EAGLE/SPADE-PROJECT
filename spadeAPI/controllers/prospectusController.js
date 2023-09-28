@@ -15,7 +15,8 @@ const {
     UpdateProspectusStatusQuery,
     prospectusInsightQD,
     prospectusInsightEN,
-    prospectusTimeQuery
+    prospectusTimeQuery,
+    addProspectusSources
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -375,4 +376,43 @@ exports.prospectusTime = async (req, res) => {
     }
   };
   //  ############################# Prospectus time ENDS HERE ##################################################
+
   
+  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+  
+  exports.prospectusSources = async (req, res) => {
+    const { Sourcess } = req.body;
+    const { userId } = req.body;
+    // console.log("Sourcess:", Sourcess);
+    // console.log("userId:", userId);
+    try {
+        const SourcesResult = [];
+        for (let i = 0; i < Sourcess.length; i++) {
+            const Sources = Sourcess[i];
+            const prospectusSourcesResult = await queryRunner(
+                selectQuery("prospectusSources", "landlordId", "sourcesCampaign"),
+                [userId, Sources]
+            );
+            if (prospectusSourcesResult[0].length == 0) {
+                const insertedProspectusSourcesResult = await queryRunner(
+                    addProspectusSources,
+                    [userId,Sources]
+                );
+                if (insertedProspectusSourcesResult[0].affectedRows > 0) {
+                    SourcesResult.push(Sources);
+                }
+            }
+        }
+        res.status(200).json({
+            message: "prospectus Sources added successfully",
+            insertedSources: SourcesResult
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+};
+  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+  
+
+
