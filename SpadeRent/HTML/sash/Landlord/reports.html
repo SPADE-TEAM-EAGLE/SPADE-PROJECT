@@ -5091,7 +5091,7 @@ return eval(`${type}(createdAt)`);
             }
 
             function constructInvoiceTable(invoiceData) {
-                $("#table_body_invoice_report").empty()
+                
                 invoiceData.forEach((invoice, index) => {
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
@@ -5200,28 +5200,40 @@ return eval(`${type}(createdAt)`);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    propertyData = response.property;
-                    leaseData = response.lease;
-                    tenantData = response.tenants
-                    if (propertyData.length < 1) {
+                    propertyData = response?.property;
+                    leaseData = response?.lease;
+                    tenantData = response?.tenants
+                    if (propertyData?.length < 1) {
                         $("#download_csv_reports").attr("disabled", true)
                         $("#download_pdf_reports").attr("disabled", true)
+                        $('#table_body_property_report').empty()
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_property_report").append(row);
+                    }else{
+                        constructPropertyTable(propertyData)
                     }
-                    if (leaseData.length < 1) {
+                    if (leaseData?.length < 1) {
                         $("#download_csv_reports2").attr("disabled", true)
                         $("#download_pdf_reports2").attr("disabled", true)
+                        $('#table_body_lease_report').empty()
+
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_lease_report").append(row);
+                    }else{
+                        constructPropertyTableLead(leaseData)
                     }
-                    if (tenantData.length < 1) {
+                    if (tenantData?.length < 1) {
                         $("#download_csv_reports3").attr("disabled", true)
                         $("#download_pdf_reports3").attr("disabled", true)
+                        $("#table_body_tenant_report").empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_tenant_report").append(row);
                     }
-                    constructPropertyTable(propertyData)
-                    if (leaseData.length > 1) {
-                        $("#download_csv_reports_lease").attr("disabled", true)
-                        $("#download_pdf_reports_lease").attr("disabled", true)
+                    else{
+                        constructPropertyTableTenant(tenantData)
                     }
-                    constructPropertyTableLead(leaseData)
-                    constructPropertyTableTenant(tenantData)
+                    
+                    
                 },
                 error: function (xhr, status, error) {
                     // Handle the error response from the API
@@ -5567,8 +5579,13 @@ return eval(`${type}(createdAt)`);
                     if (invoiceData?.length < 1) {
                         $("#download_csv_reports4").attr("disabled", true)
                         $("#download_pdf_reports4").attr("disabled", true)
+                        $('#table_body_invoice_report').empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_invoice_report").append(row);
+                    }else{
+                        constructInvoiceTable(invoiceData)
                     }
-                    constructInvoiceTable(invoiceData)
+                    
                 }, error: function (xhr, status, error) {
 
                 }
@@ -5582,13 +5599,18 @@ return eval(`${type}(createdAt)`);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response.data[0])
-                    taskData = response.data[0];
-                    if (taskData.length < 1) {
+                    if(response.message=="No Tasks data found"){
                         $("#download_csv_reports5").attr("disabled", true)
                         $("#download_pdf_reports5").attr("disabled", true)
+                        $('#table_body_task_report').empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_task_report").append(row);
                     }
+                    else{
+                        taskData = response?.data[0];
+                    
                     constructTaskTable(taskData)
+                    }
 
 
                 },

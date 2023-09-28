@@ -2624,6 +2624,8 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
+    <!-- <script src="../assets/js/email-verification.js"></script> -->
+
 <script>
             $(document).ready(function(){
                 $.ajax({
@@ -2929,17 +2931,26 @@ function dragOverHandler(ev) {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
-                    
-                    if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }               
+                success: function ({ userName, image }) {
+                    if (image !== " " && image !== null) {
+
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                    }
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    $("#user-name").text(toTitleCase(userName))
+                    $("#header-user").text(toTitleCase(userName))
+
+
+
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
@@ -2949,6 +2960,7 @@ function dragOverHandler(ev) {
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            
             $("#resend-invoice").click(() => {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
@@ -3286,8 +3298,8 @@ print = true
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({ data, user }) {
-                        console.log(data)
-                        function toTitleCase(str) {
+                        if(data){
+                            function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -3316,6 +3328,10 @@ print = true
                 $('#menu').append(newItem);
             });
                             
+                        }else{
+                            
+                        }
+                        
                     },
                     error: function (xhr, status, error) {
                         console.log(error)
@@ -4447,6 +4463,30 @@ function resetAccordions() {
                 });
         });
     </script>
+        <script>
+            $(document).ready(() => {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("here")
+                        if (response.message == "Email is verified") {
+                            $("#account-text").remove()
+                            $("#email_verification").remove()
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+            })
+        </script>
     <script>
         function logout() {
             $(document).ready(function () {
