@@ -1078,3 +1078,4 @@ exports.checkProperty = "SELECT * FROM property where propertyName = ? AND addre
 exports.prospectusTimeQuery = "SELECT firstName, lastName, prospectusStatus, email FROM spade_Rent.prospectus WHERE  landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
 exports.checkUpaidInvoiceQuery = `SELECT firstName, lastName, email FROM tenants join invoice on tenants.id = invoice.tenantID WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'`;
 exports.addProspectusSources = "INSERT INTO prospectusSources (landlordId,sourcesCampaign) VALUES (?,?)";
+exports.sourcesCampaignInsight = "SELECT COUNT(*) AS campaignCount, CASE WHEN ps.sourcesCampaign IS NOT NULL THEN ps.sourcesCampaign ELSE 'NotFound' END AS sourceCampaign FROM prospectus p LEFT JOIN prospectusSources ps ON p.sourceCampaign = ps.id WHERE p.landlordId = ? AND p.createdDate >= ? AND p.createdDate <= ? GROUP BY p.sourceCampaign ORDER BY p.sourceCampaign DESC";
