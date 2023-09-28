@@ -5334,7 +5334,7 @@ if (tenant.leaseEndDate) {
     });
     
     $.ajax({
-        url:"http://localhost:3000/api/spade/checkUnpaidInvoices",
+        url:"https://backend.app.spaderent.com/api/spade/checkUnpaidInvoices",
         type:"GET",
         data:{
             tenants:tenantToDelete},
@@ -5346,7 +5346,7 @@ if (tenant.leaseEndDate) {
             if(response.Info=="No data found in tenant "){
                 console.log(tenantToDelete)
                 $.ajax({
-                    url:"http://localhost:3000/api/spade/allTenantDelete",
+                    url:"https://backend.app.spaderent.com/api/spade/allTenantDelete",
                     type:"DELETE",
                     contentType: "application/json;charset=utf-8",
                     data:JSON.stringify({
