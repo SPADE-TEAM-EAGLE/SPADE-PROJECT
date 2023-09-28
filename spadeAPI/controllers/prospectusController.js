@@ -25,7 +25,7 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 exports.addprospectus = async (req, res) => {
     const {
         firstName,
-        middleName,
+        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -53,7 +53,7 @@ exports.addprospectus = async (req, res) => {
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
-            middleName,
+            // middleName,
             lastName,
             phoneNumber,
             email,
@@ -178,7 +178,7 @@ exports.getProspectusByID = async (req, res) => {
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
-        middleName,
+        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -195,7 +195,7 @@ exports.updateProspectus = async (req, res) => {
 
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
-            middleName,
+            // middleName,
             lastName,
             phoneNumber,
             email,
@@ -382,11 +382,10 @@ exports.prospectusTime = async (req, res) => {
   
   exports.prospectusSources = async (req, res) => {
     const { Sourcess } = req.body;
-    const { userId } = req.body;
-    // console.log("Sourcess:", Sourcess);
-    // console.log("userId:", userId);
+    const { userId } = req.user;
     try {
         const SourcesResult = [];
+        const existSourcesResult = [];
         for (let i = 0; i < Sourcess.length; i++) {
             const Sources = Sourcess[i];
             const prospectusSourcesResult = await queryRunner(
@@ -399,14 +398,23 @@ exports.prospectusTime = async (req, res) => {
                     [userId,Sources]
                 );
                 if (insertedProspectusSourcesResult[0].affectedRows > 0) {
-                    SourcesResult.push(Sources);
+                    SourcesResult.push(insertedProspectusSourcesResult[0].insertId);
                 }
+            }else{
+                existSourcesResult.push(prospectusSourcesResult[0][0].id);
             }
         }
-        res.status(200).json({
-            message: "prospectus Sources added successfully",
-            insertedSources: SourcesResult
-        });
+        if(SourcesResult.length > 0){
+            res.status(200).json({
+                message: "prospectus Sources added successfully",
+                insertedSources: SourcesResult
+            });
+        }else{
+            res.status(200).json({
+                message: "prospectus Sources Already Exist",
+                insertedSources: existSourcesResult
+            });
+        }
     } catch (error) {
         console.log(error);
         res.status(400).send(error);
@@ -414,5 +422,3 @@ exports.prospectusTime = async (req, res) => {
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
   
-
-
