@@ -2049,7 +2049,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Property</th>
+                                            
                                             <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
@@ -4511,7 +4511,11 @@
                                                 let categoryname;
                                                 if (item.category == "rent") {
                                                     categoryname = "Rent Amount"
-                                                } else if (item.category == "triple") {
+                                                }
+                                                else if (item.category == "maintainance") {
+                                                    categoryname = "Maintainance"
+                                                }
+                                                 else if (item.category == "triple") {
                                                     categoryname = "Triple Net"
                                                 } else if (item.category == "base") {
                                                     categoryname = "Base Rent"
@@ -4597,7 +4601,7 @@
                         $('#lineItemsTable tbody tr').each(function () {
 
                             var category = $(this).find('[name="category"]').val();
-                            var property = $(this).find('[name="property"]').val();
+                            // var property = $(this).find('[name="property"]').val();
                             var memo = $(this).find('input[name="memo"]').val();
                             var amount = $(this).find('input[name="amount"]').val();
                             var tax = $(this).find('input[name="tax"]').val()
@@ -4605,7 +4609,7 @@
                             if (category) {
                                 lineItems.push({
                                     category: category,
-                                    property: property,
+                                    property: "property",
                                     memo: memo,
                                     amount: amount,
                                     tax: tax
@@ -4662,7 +4666,7 @@
                                     }
                                     $("#addModal").modal("hide")
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                        url: 'http://localhost:3000/api/spade/createInvoice',
                                         type: 'POST',
                                         data: JSON.stringify(data),
                                         contentType: 'application/json',
@@ -4739,7 +4743,7 @@
                             console.log(data)
                             $.ajax({
                                 // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                url: 'http://localhost:3000/api/spade/createInvoice',
                                 type: 'POST',
                                 data: JSON.stringify(data),
                                 contentType: 'application/json',
@@ -5089,6 +5093,8 @@
 
 
                     $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
+                    $("[name='category']").append($('<option></option>').text("Maintainance").val("maintainance"));
+
 
 
                     if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
@@ -5120,12 +5126,16 @@
                     // Get the parent row of the changed input
                     const parentRow = $(this).closest(".tr");
                     let amountInput;
-                    if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+                    if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent" || selectedCategory == "Maintainance") {
                         amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
                         let amount = tenant[0].rentAmount
                         if (selectedCategory == "Rent Amount") {
                             amount = tenant[0].rentAmount
-                        } else if (selectedCategory == "Triple Net") {
+                        }
+                        else if (selectedCategory == "Maintainance") {
+                            amount = tenant[0].maintainance
+                        }
+                         else if (selectedCategory == "Triple Net") {
                             amount = tenant[0].tripleNet
                         } else {
                             amount = tenant[0].baseRent
@@ -5416,6 +5426,9 @@
                         if (!optionExists("rent")) {
                             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
                         }
+                        if (!optionExists("maintainance")) {
+                            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+                        }
 
                         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                             if (!optionExists("triple")) {
@@ -5444,12 +5457,7 @@
           
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
         <td><input type="text" class="form-control" name="memo_update"></td>
         <td><input type="text" class="form-control" name="tax_update"
                                                     placeholder="Tax Associated With This Category"
@@ -5475,13 +5483,7 @@
           
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
         <td><input type="text" class="form-control" name="memo_update"></td>
         <td><input type="text" class="form-control" name="tax_update"
                                                     placeholder="Tax Associated With This Category"
@@ -5501,7 +5503,9 @@
                         if (!optionExists("rent")) {
                             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
                         }
-
+                        if (!optionExists("maintainance")) {
+                            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+                        }
                         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                             if (!optionExists("triple")) {
                                 categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
@@ -5797,7 +5801,11 @@
                         let categoryname;
                         if (item.category == "rent") {
                             categoryname = "Rent Amount"
-                        } else if (item.category == "triple") {
+                        } 
+                        else if (item.category == "maintainance") {
+                            categoryname = "Maintainance"
+                        }
+                        else if (item.category == "triple") {
                             categoryname = "Triple Net"
                         } else if (item.category == "base") {
                             categoryname = "Base Rent"
@@ -5884,7 +5892,11 @@
                             let categoryname;
                             if (item.category == "rent") {
                                 categoryname = "Rent Amount"
-                            } else if (item.category == "triple") {
+                            } 
+                            else if (item.category == "maintainance") {
+                                categoryname = "Maintainance"
+                            }
+                            else if (item.category == "triple") {
                                 categoryname = "Triple Net"
                             } else {
                                 categoryname = "Base Rent"
@@ -6089,13 +6101,7 @@
 
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
                                             <td><input type="text" class="form-control" name="tax_update" value=${tax ? tax : 0}
                                                    placeholder="Tax Associated With This Category"
@@ -6112,6 +6118,7 @@
                             console.log(category == "rent")
                             // Add the "Rent Amount" option to the select element with the name "category_update"
                             $("[name='category_update']").append($('<option></option>').text("Rent Amount").val("rent").prop("selected", category === "rent" ? true : false));
+                            $("[name='category_update']").append($('<option></option>').text("Maintainance").val("rent").prop("selected", category === "maintainance" ? true : false));
                             // Check the property's "gross_or_triple_lease" and add options accordingly
                             if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                                 $("[name='category_update']").append($('<option></option>').text("Triple Net").val("triple").prop("selected", category === "triple" ? true : false));
@@ -6201,14 +6208,14 @@
                         $('#lineItemsTable_update tbody tr').each(function () {
 
                             var category = $(this).find('[name="category_update"]').val();
-                            var property = $(this).find('[name="property_update"]').val();
+                            // var property = $(this).find('[name="property_update"]').val();
                             var memo = $(this).find('input[name="memo_update"]').val();
                             var amount = $(this).find('input[name="amount_update"]').val();
                             var tax = $(this).find('input[name="tax_update"]').val();
 
                             lineItems.push({
                                 category: category,
-                                property: property,
+                                property: "property",
                                 memo: memo,
                                 tax: tax,
                                 amount: amount
@@ -6269,7 +6276,7 @@
                                         images: imageArray
                                     }
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/updateInvoice',
+                                        url: 'http://localhost:3000/api/spade/updateInvoice',
                                         type: 'PUT',
                                         data: JSON.stringify(invoiceData),
                                         contentType: 'application/json',
@@ -6324,7 +6331,7 @@
                                 images: []
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
+                                url: 'http://localhost:3000/api/spade/UpdateInvoice',
                                 type: 'PUT',
                                 data: JSON.stringify(invoiceData),
                                 contentType: 'application/json',

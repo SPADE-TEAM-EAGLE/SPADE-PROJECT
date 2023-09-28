@@ -3024,7 +3024,11 @@ function dragOverHandler(ev) {
                                                 let categoryname;
                                                 if (item.category == "rent") {
                                                     categoryname = "Rent Amount"
-                                                } else if (item.category == "triple") {
+                                                } 
+                                                else if(item.category == "maintainance"){
+                                                    categoryname = "Maintainance"
+                                                }
+                                                else if (item.category == "triple") {
                                                     categoryname = "Triple Net"
                                                 } else if (item.category == "base") {
                                                     categoryname = "Base Rent"
@@ -3175,7 +3179,7 @@ print = true
                                 $("#addModal").modal("hide")
                                 $.ajax({
                                     // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'http://localhost:3000/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -3232,7 +3236,7 @@ print = true
                                 console.log(invoiceData)
                         $.ajax({
                                     // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
-                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
+                                    url: 'http://localhost:3000/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -3473,12 +3477,16 @@ const tenant = tenantData.filter((tenant) => {
 // Get the parent row of the changed input
 const parentRow = $(this).closest(".tr");
 let amountInput;
-if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent" || selectedCategory == "Maintainance") {
     amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
     let amount = tenant[0].rentAmount
     if (selectedCategory == "Rent Amount") {
         amount = tenant[0].rentAmount
-    } else if (selectedCategory == "Triple Net") {
+    }
+    else if (selectedCategory == "Maintainance") {
+        amount = tenant[0].maintainance
+    } 
+    else if (selectedCategory == "Triple Net") {
         amount = tenant[0].tripleNet
     } else {
         amount = tenant[0].baseRent
@@ -3619,7 +3627,7 @@ console.log(allFieldsFilled)
                 
                 
                     $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
-               
+                    $("[name='category']").append($('<option></option>').text("Maintainance").val("maintainance"));
 
                 if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                     
@@ -3904,7 +3912,9 @@ if (!categoryExists) {
         if (!optionExists("rent")) {
             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
         }
-
+        if (!optionExists("maintainance")) {
+            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+        }
         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
             if (!optionExists("triple")) {
                 categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
