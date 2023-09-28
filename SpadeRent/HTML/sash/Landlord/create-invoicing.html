@@ -4898,9 +4898,9 @@
                                 var day = dateObj.getDate();
                                 var month = dateObj.getMonth() + 1;
                                 var year = dateObj.getFullYear();
-                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                                 var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
+                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate?(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)):"N/A")}</small>` + '</td>';
                                 const toShow = invoice.status
                                 var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                                 var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -4999,9 +4999,9 @@
                         var day = dateObj.getDate();
                         var month = dateObj.getMonth() + 1;
                         var year = dateObj.getFullYear();
-                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                         var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
+                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate?(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)):"N/A")}</small>` + '</td>';
                         const toShow = invoice.status
                         var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                         var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"

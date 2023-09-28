@@ -3768,6 +3768,30 @@ color: #000;
         });
     </script> -->
     <script>
+        $(document).ready(() => {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("here")
+                    if (response.message == "Email is verified") {
+                        $("#account-text").remove()
+                        $("#email_verification").remove()
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+        })
+    </script>
+    <script>
         $(document).change(function () {
             if ($('#search_input').val() == "") {
 

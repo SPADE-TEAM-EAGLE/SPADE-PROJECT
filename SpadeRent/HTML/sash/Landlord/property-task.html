@@ -2451,11 +2451,11 @@
                                 });
                             }
                             if(response.message=="No property Task data found"){
-                                var row = '<tr><td colspan="6" style="text-align: center;">No data found</td></tr>';
+                                var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         tableBody.append(row);
                             }
                             else if(response?.data?.length===0){
-                                var row = '<tr><td colspan="6" style="text-align: center;">No Tasks Found</td></tr>';
+                                var row = '<tr><td colspan="12" style="text-align: center;">No Tasks Found</td></tr>';
                                 tableBody.append(row);
                             }
                             else{
@@ -2513,8 +2513,25 @@
 //                                     }).join('') || "Not assigned") +
 //                                     '</td>';
 
-                                var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
-                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+var currentDate = new Date();
+var dueDate = '';
+
+if (task.dueDate) {
+    var targetDate = new Date(task.dueDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedDueDate = `${month}/${day}/${year}`;
+
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+} else {
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+}
+
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                                 var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 

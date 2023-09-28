@@ -4963,40 +4963,49 @@ return eval(`${type}(createdAt)`);
             
             function constructPropertyTable(propertyData, id) {
                 $("#table_body_property_report").empty()
-                propertyData.forEach((property, index) => {
+                if(propertyData.length == 0){
+                    $("#table_body_property_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
+                }else{
+                    propertyData.forEach((property, index) => {
 
-                    if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
-                        $("#propertySelect").append($('<option></option>').text(property.propertyName).val(property.id));
-                    }
-                    console.log(index)
-                    // Construct the HTML for the new row
-                    var newRowHtml = '<tr>' +
-                        '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
-                        '<td class="property-id d-none" style="font-weight: 600;">' + property.id + '</td>' +
-                        '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
-                        '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
-                        '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
-                        '<td class="propertyAddress">' +
-                        '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
-                        '</td>' +
-                        '<td class="propertyUnits">' +
-                        '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' + property.firstName + " " + property.lastName + '</p>' +
-                        '</td>' +
-                        '<td class="propertyUnits">' +
-                        '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
-                        '</td>' +
-                        '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
+if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
+    $("#propertySelect").append($('<option></option>').text(property.propertyName).val(property.id));
+}
+console.log(index)
+// Construct the HTML for the new row
+var newRowHtml = '<tr>' +
+    '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
+    '<td class="property-id d-none" style="font-weight: 600;">' + property.id + '</td>' +
+    '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
+    '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
+    '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
+    '<td class="propertyAddress">' +
+    '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+    '</td>' +
+    '<td class="propertyUnits">' +
+    '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' + property.firstName + " " + property.lastName + '</p>' +
+    '</td>' +
+    '<td class="propertyUnits">' +
+    '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
+    '</td>' +
+    '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
 
-                        '</tr>';
+    '</tr>';
 
-                    // Append the new row to the table body
-                    $('#table_body_property_report').append(newRowHtml);
+// Append the new row to the table body
+$('#table_body_property_report').append(newRowHtml);
 
-                });
+});
+
+                }
+
             }
             function constructPropertyTableLead(leaseData) {
                 $("#table_body_lease_report").empty()
-                leaseData.forEach((lease, index) => {
+                if(leaseData.length == 0){
+                    $("#table_body_lease_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');}
+                    else{
+                        leaseData.forEach((lease, index) => {
                         var remainingDays;
                         if (lease.LeaseExpire) {
                             var leaseDate = new Date(lease.LeaseExpire);
@@ -5031,11 +5040,16 @@ return eval(`${type}(createdAt)`);
                         $('#table_body_lease_report').append(newRowHtml);
                     });
 
+                    }
+
             }
             
             function constructTaskTable(taskData, id) {
                 $("#table_body_task_report").empty()
-                taskData.forEach((task, index) => {
+                if(taskData.length==0){
+                    $("#table_body_task_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
+                }else{
+                    taskData.forEach((task, index) => {
                         // Calculate time difference between task created_at and current date
                         var createdDate = new Date(task.created_at);
                         var currentDate = new Date();
@@ -5088,11 +5102,17 @@ return eval(`${type}(createdAt)`);
 
 
                     });
-            }
+            
+                }
+
+                }
 
             function constructInvoiceTable(invoiceData) {
                 $("#table_body_invoice_report").empty()
-                invoiceData.forEach((invoice, index) => {
+                if(invoiceData.length==0){
+                    $("#table_body_invoice_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
+                }else{
+                    invoiceData.forEach((invoice, index) => {
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
@@ -5111,7 +5131,10 @@ return eval(`${type}(createdAt)`);
                         // Append the new row to the table body
                         $('#table_body_invoice_report').append(newRowHtml);
                     });
-            }
+            
+                }
+            
+                }
 
 
             function constructPropertyTableTenant(propertyData, id) {
@@ -5200,28 +5223,40 @@ return eval(`${type}(createdAt)`);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    propertyData = response.property;
-                    leaseData = response.lease;
-                    tenantData = response.tenants
-                    if (propertyData.length < 1) {
+                    propertyData = response?.property;
+                    leaseData = response?.lease;
+                    tenantData = response?.tenants
+                    if (propertyData?.length < 1) {
                         $("#download_csv_reports").attr("disabled", true)
                         $("#download_pdf_reports").attr("disabled", true)
+                        $('#table_body_property_report').empty()
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_property_report").append(row);
+                    }else{
+                        constructPropertyTable(propertyData)
                     }
-                    if (leaseData.length < 1) {
+                    if (leaseData?.length < 1) {
                         $("#download_csv_reports2").attr("disabled", true)
                         $("#download_pdf_reports2").attr("disabled", true)
+                        $('#table_body_lease_report').empty()
+
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_lease_report").append(row);
+                    }else{
+                        constructPropertyTableLead(leaseData)
                     }
-                    if (tenantData.length < 1) {
+                    if (tenantData?.length < 1) {
                         $("#download_csv_reports3").attr("disabled", true)
                         $("#download_pdf_reports3").attr("disabled", true)
+                        $("#table_body_tenant_report").empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_tenant_report").append(row);
                     }
-                    constructPropertyTable(propertyData)
-                    if (leaseData.length > 1) {
-                        $("#download_csv_reports_lease").attr("disabled", true)
-                        $("#download_pdf_reports_lease").attr("disabled", true)
+                    else{
+                        constructPropertyTableTenant(tenantData)
                     }
-                    constructPropertyTableLead(leaseData)
-                    constructPropertyTableTenant(tenantData)
+                    
+                    
                 },
                 error: function (xhr, status, error) {
                     // Handle the error response from the API
@@ -5567,8 +5602,13 @@ return eval(`${type}(createdAt)`);
                     if (invoiceData?.length < 1) {
                         $("#download_csv_reports4").attr("disabled", true)
                         $("#download_pdf_reports4").attr("disabled", true)
+                        $('#table_body_invoice_report').empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_invoice_report").append(row);
+                    }else{
+                        constructInvoiceTable(invoiceData)
                     }
-                    constructInvoiceTable(invoiceData)
+                    
                 }, error: function (xhr, status, error) {
 
                 }
@@ -5582,13 +5622,18 @@ return eval(`${type}(createdAt)`);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response.data[0])
-                    taskData = response.data[0];
-                    if (taskData.length < 1) {
+                    if(response.message=="No Tasks data found"){
                         $("#download_csv_reports5").attr("disabled", true)
                         $("#download_pdf_reports5").attr("disabled", true)
+                        $('#table_body_task_report').empty();
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $("#table_body_task_report").append(row);
                     }
+                    else{
+                        taskData = response?.data[0];
+                    
                     constructTaskTable(taskData)
+                    }
 
 
                 },
