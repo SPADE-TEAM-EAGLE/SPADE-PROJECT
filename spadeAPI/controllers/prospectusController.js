@@ -382,6 +382,7 @@ exports.prospectusTime = async (req, res) => {
   
   exports.prospectusSources = async (req, res) => {
     const { Sourcess } = req.body;
+    // const { userId } = req.body;
     const { userId } = req.user;
     try {
         const SourcesResult = [];
@@ -398,7 +399,11 @@ exports.prospectusTime = async (req, res) => {
                     [userId,Sources]
                 );
                 if (insertedProspectusSourcesResult[0].affectedRows > 0) {
-                    SourcesResult.push(insertedProspectusSourcesResult[0].insertId);
+                    SourcesResult.push({
+                        insertId : insertedProspectusSourcesResult[0].insertId,
+                        name : Sources
+                    }
+                        );
                 }
             }else{
                 existSourcesResult.push(prospectusSourcesResult[0][0].id);
@@ -422,3 +427,62 @@ exports.prospectusTime = async (req, res) => {
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
   
+
+  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+  exports.getProspectusSources = async (req, res) => {
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+            const prospectusSourcesResult = await queryRunner(
+                selectQuery("prospectusSources", "landlordId"),
+                [userId]
+            );
+            if (prospectusSourcesResult[0].length == 0) {
+                res.status(200).json({
+                                message: " prospectus data not found",
+                            });
+               
+            }else{
+                res.status(200).json({
+                                message: " prospectus get successful",
+                                data : prospectusSourcesResult[0]
+                            });
+            }
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+};
+  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+  
+
+  //  #############################  Insight Sources Start ##################################################
+exports.prospectusInsightSources = async (req, res) => {
+    const {startDate,endDate} = req.params;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const prospectusResult = await queryRunner(prospectusInsightEN, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (prospectusResult[0].length === 0) {
+            return res.status(400).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Engaged and Nurturing get successful",
+            data : prospectusResult[0][0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Engaged and Nurturing",
+            error : error.message
+        });
+    }
+};
+
+//  #############################  Insight Sources END ##################################################
