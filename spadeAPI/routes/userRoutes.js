@@ -241,6 +241,4 @@ router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospe
 router.get("/GettenantAttachEmailPhone/:tenantID", verifyToken, tenantController.GettenantAttachEmailPhone);
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
-
-
-router.post("/prospectusSources", prospectus.prospectusSources);
+router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
