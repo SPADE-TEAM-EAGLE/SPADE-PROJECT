@@ -926,7 +926,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="inputState" class="form-label fw-bold">Phone Number</label>
                                         <input class="w-100" id="phone" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" 
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required> -->
@@ -981,7 +981,17 @@
 
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Prospect Source</a>
+                                            style="text-decoration: underline;" id="addProspectSourceBtn">+ Add Prospect
+                                            Source</a>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 col-xl-12" id="addProspectSourceCol"
+                                        style="display: none;">
+                                        <label for="" class="form-label fw-bold">Add New Prospect Source<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" id="addProspectSource" class="form-control form"
+                                            placeholder="Enter Prospect Source" required>
+                                        <span class="text-danger d-none">Prospect Source is required!</span>
                                     </div>
                                     <!-- <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
@@ -1089,7 +1099,7 @@
                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="firstName_update" class="form-label fw-bold">First Name<spnan
                                                 class="text-danger"> *</span></label>
                                         <input type="text" class="form-control form" placeholder="Enter First Name"
@@ -1105,7 +1115,7 @@
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         <span class="text-danger d-none">Middle Name is required!</span>
                                     </div> -->
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="lastName_update" class="form-label fw-bold">Last Name<spnan
                                                 class="text-danger"> *</span></label>
                                         <input type="text" class="form-control form" placeholder="Enter Last Name"
@@ -1116,12 +1126,12 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="phone2" class="form-label fw-bold">Phone Number</label>
                                         <input class="w-100" id="phone2" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" 
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required> -->
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
+                                        <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg2" class="hide text-danger"></span>
 
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1163,15 +1173,25 @@
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-xl-12">
-                                        <label for="sourceCampaign_update" class="form-label fw-bold ">Source Campaign
+                                        <label for="sourceCampaign_update" class="form-label fw-bold">Source Campaign
                                             <span class="text-danger">*</span></label>
+                                            <!-- <input type="text" id="sourceCampaign_update" class="form-control form"
+                                            placeholder="Enter Source Campaign" required> -->
                                         <select id="sourceCampaign_update"
                                             class="form-select form mb-2 select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Prospect Source</a>
+                                            style="text-decoration: underline;" id="addProspectSourceBtn1">+ Add Prospect Source</a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12" id="addProspectSourceCol1"
+                                        style="display: none;">
+                                        <label for="" class="form-label fw-bold">Add New Prospect Source<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" id="addProspectSource1" class="form-control form"
+                                            placeholder="Enter Prospect Source" required>
+                                        <span class="text-danger d-none">Prospect Source is required!</span>
                                     </div>
 
                                 </form>
@@ -2414,6 +2434,22 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-body p-0">
+                                                                            <div
+                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                                                    <select id="lengthSelectBox"
+                                                                                        class="form-select form" style="width: 80px;">
+
+                                                                                        <!-- <option value="1">1</option> -->
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="25">25</option>
+                                                                                        <option value="100">100</option>
+                                                                                        <option value="200">200</option>
+                                                                                        <option value="500">500</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="table-responsive">
                                                                                 <table
                                                                                     class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
@@ -2941,6 +2977,22 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body p-0">
+                                                                    <div
+                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                                                    <select id="lengthSelectBox1"
+                                                                                        class="form-select form" style="width: 80px;">
+
+                                                                                        <!-- <option value="1">1</option> -->
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="25">25</option>
+                                                                                        <option value="100">100</option>
+                                                                                        <option value="200">200</option>
+                                                                                        <option value="500">500</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
                                                                     <div class="table-responsive">
                                                                         <table
                                                                             class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
@@ -3138,12 +3190,12 @@
                                                                                 <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div
-                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                                class="main-header-center d-lg-block m-0" style="position: relative;">
                                                                                 <button class="btn px-0 pt-2"><i
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
                                                                                 <input type="text" class="form-control"
-                                                                                    id="typehead"
+                                                                                    id="typehead2"
                                                                                     placeholder="Search Users by Name, Email or Date"
                                                                                     autocomplete="off"
                                                                                     style="width: 300px;">
@@ -3261,7 +3313,24 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body p-0">
+                                                                    <div
+                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                                                    <select id="lengthSelectBox2"
+                                                                                        class="form-select form" style="width: 80px;">
+
+                                                                                        <!-- <option value="1">1</option> -->
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="25">25</option>
+                                                                                        <option value="100">100</option>
+                                                                                        <option value="200">200</option>
+                                                                                        <option value="500">500</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
                                                                     <div class="table-responsive">
+                                                                        
                                                                         <table
                                                                             class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
                                                                             id="responsive-datatable3">
@@ -4224,6 +4293,12 @@
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <script>
         $(document).ready(function () {
+            $('#addProspectSourceBtn').click(() => {
+                $('#addProspectSourceCol').css('display', 'block')
+            })
+            $('#addProspectSourceBtn1').click(() => {
+                $('#addProspectSourceCol1').css('display', 'block')
+            })
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
@@ -4530,11 +4605,47 @@
                     }, data: JSON.stringify(data)
                 })
             })
-            $('#typehead').on('keyup', function () {
+            $(document).on('keyup', '#typehead', function () {
                 var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox').val();
+
                 $('#table-body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
+            $(document).on('keyup', '#typehead1', function () {
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox1').val();
+
+                $('#table-body-disqualified tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body-disqualified tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body-disqualified tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
+            $(document).on('keyup', '#typehead2', function () {
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox2').val();
+
+                $('#table-body-qualified tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body-qualified tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body-qualified tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
             });
             var propsectData = [];
             function formatRentAmount(amount) {
@@ -4562,7 +4673,7 @@
                     '<img class="" style="width: 30px;height: 48px;" src="../assets/images/Group 10242.svg">' +
                     '</div>' +
                     '<div class="media-body" style="line-height: 10px;">' +
-                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + " " + prospectus.lastName) + '</h6>' +
+                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName) + '</h6>' +
                     '<strong class="text-dark fw-bold fs-10">' + (property.address + " <br/>" + property.city + ", " + property.state) + '<br>' + prospectus.phoneNumber + '</strong>' +
                     '</div>' +
                     '</div>' +
@@ -4590,32 +4701,6 @@
                 getData()
             });
             function getData() {
-                $.ajax({
-                    url:"http://localhost:3000/api/spade/getProspectusSources",
-                    type: 'GET',
-                    contentType: 'application/json',
-                    headers:{
-                        Authorization:"Bearer " + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        if(response.message==" prospectus data not found"){
-
-                        }else{
-        //                     {
-        //     "id": 18,
-        //     "landlordId": "125",
-        //     "sourcesCampaign": "abc"
-        // },
-                            response.data.forEach(function(item){
-                                $("#sourceCampaign").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
-                                $("#sourceCampaign_update").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
-                            })
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error)
-                    }
-                })
                 var password = 'your-secret-password';
 
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();
@@ -4631,119 +4716,105 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        console.log(response.data);
                         propsectData = response.data;
-                        if (response?.data?.length === 0) {
-                            var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
-                            $("#table-body, #table-body-qualified, #table-body-disqualified").append(row);
-                        } else {
-                            let totalRentDefault = 0;
+
+                        let totalRentDefault = 0;
 
 
-                            response?.data?.forEach(function (item, index) {
-                                var row = $('<tr>');
-                                var prospectus = item?.prospectus;
-                                var property = item?.property;
+                        response?.data?.forEach(function (item, index) {
+                            var row = $('<tr>');
+                            var prospectus = item?.prospectus;
+                            var property = item?.property;
 
-                                row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
-                                row.append($('<td>').text(prospectus.firstName +" " + prospectus.lastName));
-                                row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
-                                row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
-                                row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
-                                row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
-                                row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
-                                row.append($('<td>').html('<span class="fw-bold">' + prospectus.moveDate + '</span>'));
-                                if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
-                                    var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');
+                            row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
+                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.moveDate + '</span>'));
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
+                                var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');
 
-                                } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
-                                    var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
-                                }
-                                else {
-                                    var dropdownToggle = $('<span class="fw-bold text-dark" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-dark"></i></span>');
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
+                                var dropdownToggle = $('<span class="fw-bold text-danger" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-danger"></i></span>');
+                            }
+                            else {
+                                var dropdownToggle = $('<span class="fw-bold text-dark" data-bs-toggle="dropdown" style="cursor: pointer;">' + prospectus.prospectusStatus + '<i class="fi fi-rs-angle-small-down text-dark"></i></span>');
 
-                                }
-                                var dropdownMenu = $('<ul class="dropdown-menu dropdown-menu-top">');
-                                dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
-                                dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
-                                dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
-                                dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
-                                dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
+                            }
+                            var dropdownMenu = $('<ul class="dropdown-menu dropdown-menu-top">');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
 
-                                dropdownMenu.find('a').on('click', function () {
-                                    var newStatus = $(this).data('status');
-                                    dropdownToggle.text(newStatus);
+                            dropdownMenu.find('a').on('click', function () {
+                                var newStatus = $(this).data('status');
+                                dropdownToggle.text(newStatus);
 
-                                    // Make API call to update status
-                                    $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
-                                        type: 'PUT',
-                                        data: JSON.stringify({
-                                            prospectusid: prospectus?.id,
-                                            prospectusStatus: newStatus
-                                        }),
-                                        contentType: 'application/json',
-                                        headers: {
-                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                        },
-                                        success: function (response) {
-                                            getData()
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error('Error updating status:', error);
-                                        }
-                                    });
+                                // Make API call to update status
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                    type: 'PUT',
+                                    data: JSON.stringify({
+                                        prospectusid: prospectus?.id,
+                                        prospectusStatus: newStatus
+                                    }),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        getData()
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error updating status:', error);
+                                    }
                                 });
-                                var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
-
-                                // Include the encrypted value in the URL
-                                var encodedProspectId = encodeURIComponent(encryptedProspectId);
-                                row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
-                                // Assuming this is where you create the "Edit" dropdown option in your table
-                                row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark delete-option" href="javascript:void(0)" id="${prospectus?.id}">Delete</a></li></ul>`));
-
-                                var tableSelector = '';
-                                var rentAmount = parseFloat(prospectus.rentAmount);
-                                if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
-                                    tableSelector = "#table-body-qualified, ";
-
-                                } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
-                                    tableSelector = "#table-body-disqualified, ";
-
-                                }
-                                $(tableSelector + "#table-body").append(row);
-                                totalRentDefault += rentAmount;
-
-                                let elem;
-
-                                if (prospectus?.prospectusStatus?.toLowerCase() == "engaged") {
-                                    populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
-
-                                } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
-                                    populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
-
-                                }
-                                else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
-                                    populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-                                }
-                                countValues()
                             });
+                            var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
+
+                            // Include the encrypted value in the URL
+                            var encodedProspectId = encodeURIComponent(encryptedProspectId);
+                            row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
+                            // Assuming this is where you create the "Edit" dropdown option in your table
+                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark delete-option" href="javascript:void(0)" id="${prospectus?.id}">Delete</a></li></ul>`));
+
+                            var tableSelector = '';
+                            var rentAmount = parseFloat(prospectus.rentAmount);
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
+                                tableSelector = "#table-body-qualified, ";
+
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "disqualified") {
+                                tableSelector = "#table-body-disqualified, ";
+
+                            }
+                            $(tableSelector + "#table-body").append(row);
+                            totalRentDefault += rentAmount;
+
+                            let elem;
+
+                            if (prospectus?.prospectusStatus?.toLowerCase() == "engaged") {
+                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+
+                            } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
+                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+
+                            }
+                            else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
+                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
+                            }
+                            countValues()
+                        });
 
 
-                            $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
+                        $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
 
-                        }
 
-                        if ($('#table_body').is(':empty')) {
-                            var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
-                            $("#table-body").append(row);
-                        } if ($('#table-body-qualified').is(':empty')) {
-                            var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
-                            $("#table-body-qualified").append(row);
-                        }
-                        if ($('#table-body-disqualified').is(':empty')) {
-                           var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
-                            $("#table-body-disqualified").append(row);
-                        }
 
                     },
                     error: function (xhr, status, error) {
@@ -4921,7 +4992,7 @@
 
             }
             function resetAccordion() {
-                $('#firstName,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
+                $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
                     if ($(this).is('select')) {
                         // If it's a select box, select the first option
                         $(this).prop('selectedIndex', 0);
@@ -4933,7 +5004,7 @@
                     $(this).removeClass('border-danger');
                     $(this).next('.text-danger').addClass('d-none');
                 });
-                $('#firstName_update,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
+                $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
                     if ($(this).is('select')) {
                         // If it's a select box, select the first option
                         $(this).prop('selectedIndex', 0);
@@ -5160,7 +5231,7 @@
                 })
                 prospectusStatus = filteredData.prospectus.prospectusStatus;
                 $("#firstName_update").val(filteredData.prospectus.firstName);
-                // $("#middleName_update").val(filteredData.prospectus.middleName);
+                $("#middleName_update").val(filteredData.prospectus.middleName);
                 $("#lastName_update").val(filteredData.prospectus.lastName);
                 $("#phone2").val(filteredData.prospectus.phoneNumber);
                 $("#email_update").val(filteredData.prospectus.email);
@@ -5171,6 +5242,7 @@
                     .text(filteredData.property.unitNumber)
                     .val(filteredData.prospectus.unitInfo).prop("selected", true));
                 $("#propertyDetail_update").val(filteredData.prospectus.prospectDetail);
+                // $("#sourceCampaign_update").val(filteredData.prospectus.sourceCampaign);
                 $("#sourceCampaign_update").append($('<option></option>')
                     .text(filteredData.prospectus.sourceCampaign)
                     .prop("selected", true));
@@ -5193,62 +5265,87 @@
                 var propertyInfo = $("#propertyInfo").val();
                 var unitInfo = $("#unitInfo").val();
                 var propertyDetail = $("#propertyDetail").val();
-                var sourceCampaign = $("#sourceCampaign").val();
+                var sourceCampaign = JSON.parse(`["${$("#addProspectSource").val()}"]`);
                 var moveInDate = $("#moveInDate").val();
                 var potentialRentAmount = $("#potentialRentAmount").val();
                 var status = $("#status").val();
-                var data = {
-                    firstName: firstName,
-                    // middleName: middleName,
-                    lastName: lastName,
-                    phoneNumber: phone,
-                    email: email,
-                    propertyInfo: propertyInfo,
-                    unitInfo: unitInfo,
-                    prospectDetail: propertyDetail,
-                    sourceCampaign: sourceCampaign,
-                    moveDate: moveInDate,
-                    rentAmount: potentialRentAmount,
-                    prospectusStatus: "active"
-                }
+
                 $("#addModal").modal("hide")
-
-
+                $('#addProspectSourceCol').css('display', 'none')
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/addprospectus',
+                    url: 'http://localhost:3000/api/spade/prospectusSources',
                     type: 'POST',
-                    data: JSON.stringify(data),
+                    data: JSON.stringify({
+                        Sourcess: sourceCampaign
+                    }),
                     contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        if (response.message == " prospectus created successful") {
-                            $("#myModal_success").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_success').modal('hide');
-                                resetAccordion()
-                                getData()
+                        console.log("prospectusSources");
+                        console.log(response.insertedSources[0])
+                        console.log(response.message)
+                        if (response.message == "prospectus Sources added successfully") {
+                            var sourceCampaign = response.insertedSources[0].insertId;
+                            var data = {
+                                firstName: firstName,
+                                lastName: lastName,
+                                phoneNumber: phone,
+                                email: email,
+                                propertyInfo: propertyInfo,
+                                unitInfo: unitInfo,
+                                prospectDetail: propertyDetail,
+                                sourceCampaign: sourceCampaign,
+                                moveDate: moveInDate,
+                                rentAmount: potentialRentAmount,
+                                prospectusStatus: "active"
+                            }
+                            $.ajax({
+                                url: 'http://localhost:3000/api/spade/addprospectus',
+                                type: 'POST',
+                                data: JSON.stringify(data),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    if (response.message == " prospectus created successful") {
+                                        $("#myModal_success").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_success').modal('hide');
+                                            resetAccordion()
+                                            getData()
 
-                            }, 2000);
+                                        }, 2000);
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    if (xhr.responseJSON.error === 'No data found') {
+                                        $('#addModal').modal('hide');
+                                        $('#infoModal').modal('show');
+                                        setTimeout(function () {
+                                            $('#infoModal').modal('hide');
+                                        }, 2000);
+                                    } else {
+                                        $('#addModal').modal('hide');
+                                        $("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                        }, 2000);
+                                    }
+                                }
+                            });
+                        }else{
+                        alert("Please fill all the fields.")
                         }
+
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.error === 'No data found') {
-                            $('#addModal').modal('hide');
-                            $('#infoModal').modal('show');
-                            setTimeout(function () {
-                                $('#infoModal').modal('hide');
-                            }, 2000);
-                        } else {
-                            $('#addModal').modal('hide');
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
-                        }
+                        console.log(error);
                     }
                 });
+
 
 
 
@@ -5624,6 +5721,95 @@
 
     </script>
     <script>
+        const input0 = document.querySelector("#phone");
+            const errorMsg = document.querySelector("#error-msg");
+            const validMsg = document.querySelector("#valid-msg");
+
+            // here, the index maps to the error code returned from getValidationError - see readme
+            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            // initialise plugin
+            const iti = window.intlTelInput(input0, {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset = () => {
+                input0.classList.remove("error");
+                errorMsg.innerHTML = "";
+                errorMsg.classList.add("d-none");
+                validMsg.classList.add("d-none");
+            };
+
+            // on blur: validate
+            input0.addEventListener('input', () => {
+                // alert(1)
+                reset();
+                console.log("in phone input")
+                if (input0.value.trim()) {
+                    if (iti.isValidNumber()) {
+                        validMsg.classList.remove("d-none");
+                        phoneError = false
+                        input0.classList.remove("is-invalid");
+      input0.classList.add("is-valid");
+                    } else {
+                        input0.classList.add("is-invalid");
+    input0.classList.remove("is-valid");
+                        phoneError = true
+                        input0.classList.add("error");
+                        const errorCode = iti.getValidationError();
+                        errorMsg.innerHTML = errorMap[errorCode];
+                        errorMsg.classList.remove("d-none");
+                    }
+                }
+            });
+    </script>
+    <script>
+        $(document).ready(function() {
+    const input2 = $("#phone2");
+    const errorMsg2 = $("#error-msg2");
+    const validMsg2 = $("#valid-msg2");
+    
+    // here, the index maps to the error code returned from getValidationError - see readme
+    const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+    
+    // initialise plugin
+    const iti2 = window.intlTelInput(input2[0], {
+        utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+    });
+    
+    const reset2 = () => {
+        input2.removeClass("error");
+        errorMsg2.html("");
+        errorMsg2.addClass("d-none");
+        validMsg2.addClass("d-none");
+    };
+    
+    // on blur: validate
+    input2.on('input', function() {
+        // alert(1);
+        reset2();
+        console.log("in phone input");
+        if (input2.val().trim()) {
+            if (iti2.isValidNumber()) {
+                validMsg2.removeClass("d-none");
+                phoneError2 = false;
+                input2.removeClass("is-invalid");
+                input2.addClass("is-valid");
+            } else {
+                input2.addClass("is-invalid");
+                input2.removeClass("is-valid");
+                phoneError2 = true;
+                input2.addClass("error");
+                const errorCode2 = iti2.getValidationError();
+                errorMsg2.html(errorMap2[errorCode2]);
+                errorMsg2.removeClass("d-none");
+            }
+        }
+    });
+});
+
+    </script>
+    <!-- <script>
         $(document).ready(function () {
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -5647,7 +5833,7 @@
                 $('#responsive-datatable_length')?.remove();
                 $('#responsive-datatable2_length')?.remove();
                 $('#responsive-datatable3_length')?.remove();
-
+                
                 $('script.dynamic-script').remove();
                 scriptUrls.forEach(function (scriptUrl) {
                     var script = document.createElement('script');
@@ -5660,8 +5846,217 @@
                 loadScripts()
             });
         });
-    </script>
+    </script> -->
     <!-- export button End  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            alert(1)
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+                
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+                
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        document.getElementById("download_pdf_reports").addEventListener("click", () => {
+
+            const invoice = this.document.getElementById("tab33");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A2',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+    </script>
+        <script>
+            $(document).change(function () {
+                
+                if ($('#typehead').val() == "") {
+    
+                    let count = 1;
+                    $("#table-body tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead1').val() == "") {
+    
+                    let count = 1;
+                    $("#table-body-disqualified tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox1").val()))
+                        if (count > parseInt($("#lengthSelectBox1").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead2').val() == "") {
+    
+                    let count = 1;
+                    $("#table-body-qualified tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        if (count > parseInt($("#lengthSelectBox2").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+            })
+            $(document).ajaxStop(function () {
+                // alert(1)
+                if ($('#typehead').val() == "") {
+    
+                    let count = 1;
+                    $("#table-body tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead1').val() == "") {
+                    
+                    let count = 1;
+                    $("#table-body-disqualified tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox1").val()))
+                        if (count > parseInt($("#lengthSelectBox1").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+                if ($('#typehead2').val() == "") {
+                    
+                    let count = 1;
+                    $("#table-body-qualified tr").each(function (item, index) {
+                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        if (count > parseInt($("#lengthSelectBox2").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+            })
+        </script>
 </body>
 
 </html>
