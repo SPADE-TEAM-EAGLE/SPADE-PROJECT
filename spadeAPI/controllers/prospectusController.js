@@ -25,7 +25,7 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 exports.addprospectus = async (req, res) => {
     const {
         firstName,
-        middleName,
+        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -53,7 +53,7 @@ exports.addprospectus = async (req, res) => {
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
-            middleName,
+            // middleName,
             lastName,
             phoneNumber,
             email,
@@ -178,7 +178,7 @@ exports.getProspectusByID = async (req, res) => {
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
-        middleName,
+        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -195,7 +195,7 @@ exports.updateProspectus = async (req, res) => {
 
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
-            middleName,
+            // middleName,
             lastName,
             phoneNumber,
             email,
@@ -382,7 +382,7 @@ exports.prospectusTime = async (req, res) => {
   
   exports.prospectusSources = async (req, res) => {
     const { Sourcess } = req.body;
-    const { userId } = req.body;
+    const { userId } = req.user;
     // console.log("Sourcess:", Sourcess);
     // console.log("userId:", userId);
     try {
@@ -414,5 +414,3 @@ exports.prospectusTime = async (req, res) => {
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
   
-
-
