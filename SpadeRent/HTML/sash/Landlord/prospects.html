@@ -4590,6 +4590,32 @@
                 getData()
             });
             function getData() {
+                $.ajax({
+                    url:"http://localhost:3000/api/spade/getProspectusSources",
+                    type: 'GET',
+                    contentType: 'application/json',
+                    headers:{
+                        Authorization:"Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        if(response.message==" prospectus data not found"){
+
+                        }else{
+        //                     {
+        //     "id": 18,
+        //     "landlordId": "125",
+        //     "sourcesCampaign": "abc"
+        // },
+                            response.data.forEach(function(item){
+                                $("#sourceCampaign").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
+                                $("#sourceCampaign_update").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
+                            })
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                    }
+                })
                 var password = 'your-secret-password';
 
                 $("#engaged-propsect-kanban .card .card-body,#nurturing-propsect-kanban .card .card-body,#new-propsect-kanban .card .card-body").empty();

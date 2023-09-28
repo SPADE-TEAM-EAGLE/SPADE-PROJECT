@@ -3046,6 +3046,7 @@ else {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+
                         if (response?.data?.length >= 1) {
                             taskInfo = response?.data[0]
                             tableBody.empty(); // Clear existing table data
@@ -3084,7 +3085,8 @@ else {
                                 });
                             }
                             // Iterate over the filtered tasks and populate the table rows
-                            filteredTasks.forEach(function (task) {
+                            if(filteredTasks.length>=1){
+                                filteredTasks.forEach(function (task) {
                                 var row = $('<tr></tr>');
 
 
@@ -3144,6 +3146,17 @@ else {
                                 var row = '<tr>' + taskName + assignTo + dueDate + propertyName + status + '</tr>';
                                 tableBody.append(row);
                             });
+                        
+                            }else{
+                                tableBody.empty(); // Clear existing table data
+                                var row = '<tr><td colspan="12" style="text-align:center">No Task Found</td></tr>'
+                                tableBody.append(row);
+                            }
+                        
+                        }else{
+                            tableBody.empty(); // Clear existing table data
+                            var row = '<tr><td colspan="12" style="text-align:center">No Task Found</td></tr>'
+                            tableBody.append(row);
                         }
 
                     },
