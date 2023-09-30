@@ -3301,9 +3301,8 @@
         <!--  <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
-
         <!-- socket      -->
-        <script src="http://engage.app.spaderent.com/socket.io/socket.io.js"></script>
+        <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3437,7 +3436,7 @@
 
         <script>
             function initializeWebSocket() {
-                var socket = io('http://engage.app.spaderent.com');
+                var socket = io('https://engage.app.spaderent.com');
 
                 socket.on('connect', function () {
                     console.log('WebSocket connected');
@@ -3450,7 +3449,7 @@
             var socket = initializeWebSocket();
             window.onbeforeunload = function () {
                 socket.disconnect();
-            };
+            };
 
             var tenantId = [];
             var chatId = 0;

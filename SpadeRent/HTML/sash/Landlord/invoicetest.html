@@ -12453,80 +12453,24 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
 
             $('#submit-photo').click(() => {
-                if (selectedFiles.length >= 1) {
-                    var uploadFormData = new FormData();
-                    for (var i = 0; i < selectedFiles.length; i++) {
-                        var file = selectedFiles[i];
-                        uploadFormData.append('image', file);
-                    }
-                    var str = "";
+    if (selectedFiles.length >= 1) {
+        var file = selectedFiles[0]; // Get the first selected file
+        var fileName = file.name;
+        var filePath = "../assets/" + fileName; // Replace with the actual file path
 
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
-                        type: 'POST',
-                        data: uploadFormData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response.images[0]);
-                            // response.images?.forEach(function (value, index, array) {
-                            //     str += value.image_url;
-                            //     if (index < array.length - 1) {
-                            //         str += ",";
-                            //     }
-                            // });
+        // Create a temporary anchor element
+        var anchor = document.createElement('a');
+        anchor.href = filePath;
+        anchor.download = fileName; // Set the download attribute to the file name
 
-                            $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateBusinessLogo',
-                                type: 'PUT',
-                                data: JSON.stringify({
-                                    image: response.images[0].image_url,
-                                    imageKey: response.images[0].image_key
-                                }),
-                                contentType: 'application/json',
-                                processData: false,
-                                headers: {
-                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                },
-                                success: function (response) {
-                                    console.log(response);
-                                    if (response.message == " Business Logo save successful") {
-                                        $("#myModal_success p").text("Succesfully Updated!!!")
-                                        $("#myModal_success").modal("show")
-                                        setTimeout(function () {
-                                            $("#myModal_success").modal("hide");
-                                        }, 2000);
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-                                    console.log('Error: ' + error);
-                                    $("#myModal_warning_connection").modal("show");
-                                    setTimeout(function () {
-                                        $('#myModal_warning_connection').modal('hide');
+        // Trigger a click event on the anchor to initiate the download
+        anchor.click();
 
-                                    }, 2000);
-                                }
-                            });
+        // Remove the anchor element
+        anchor.remove();
+    }
+})
 
-
-
-                        },
-                        error: function (xhr, status, error) {
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-
-                            }, 2000);
-                            console.log('Error: ' + error);
-                        }
-                    });
-
-                }
-
-            })
 
 
             // ############################################################################################

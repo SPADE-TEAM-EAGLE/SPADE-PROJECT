@@ -1479,8 +1479,8 @@
                                     <div class="card-body p-0">
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
                                             <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                <span class="fw-bold me-2">Number of rows</span>
-                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+                                                <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-control select2 form-select" style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -2450,7 +2450,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             //            
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -2487,7 +2487,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantTask',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
