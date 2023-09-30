@@ -2204,7 +2204,105 @@
             $("#endDate_account").val(endDate)
             $("#startDate_amount").val(startDate)
             $("#endDate_amount").val(endDate)
+            $("#startDate_prospect").val(startDate)
+            $("#endDate_prospect").val(endDate)
             // /getDashPropertyData
+            $("#startDate_prospect").on('change',function(){
+                startDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
+                $.ajax({
+                    url: uri,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        if (response?.data) {
+                            const labels = [];
+                            const data = [];
+                            
+
+                            response?.data?.forEach(entry => {
+                                const source = entry.prospectusStatus;
+                                const count = entry.count;
+
+                               
+                                    labels.push(source);
+                                    data.push(count);
+                                
+                            });
+
+                            
+
+                            updateProspectChart(labels, data)
+                        }
+                        
+                        else{
+                            updateProspectChart([],[])
+                        }
+
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+
+            })
+
+            $("#endDate_prospect").on('change',function(){
+                endDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="Filter by Property"){
+                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
+                
+                $.ajax({
+                    url: uri,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        if (response?.data) {
+                            const labels = [];
+                            const data = [];
+                            
+
+                            response?.data?.forEach(entry => {
+                                const source = entry.prospectusStatus;
+                                const count = entry.count;
+
+                               
+                                    labels.push(source);
+                                    data.push(count);
+                                
+                            });
+
+                            
+
+                            updateProspectChart(labels, data)
+                        }
+                        else{
+                            updateProspectChart([],[])
+                        }
+
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+
+            })
+
 
             $("#startDate_invoice").on('change', function () {
                 startDate = $(this).val()
@@ -2870,10 +2968,11 @@
 
                             
 
-                            createSourceCampaignChart(labels, data)
+                            createProspectChart(labels, data)
                         }
-                        
-                        console.log(response)
+                        else{
+                            createProspectChart([],[])
+                        }
 
                     }, error: function (xhr, status, error) {
 
