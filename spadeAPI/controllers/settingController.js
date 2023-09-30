@@ -132,7 +132,8 @@ exports.emailtemplates = async (req, res) => {
 exports.updateBusinessLogo = async (req, res) => {
   const { userId } = req.user; 
   // const { userId } = req.body; 
-  // const { image, imageKey } = req.body; 
+  // const { image, imageKey } = req.body;
+  console.log(req.files); 
   const image  = req.files[0].filename; 
 
   // console.log(userId);
