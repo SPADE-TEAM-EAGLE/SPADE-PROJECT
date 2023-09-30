@@ -21,6 +21,7 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
+const { log } = require("console");
 
 //  #############################  ADD prospectus Start ##################################################
 exports.addprospectus = async (req, res) => {
@@ -99,8 +100,16 @@ exports.getProspectus = async (req, res) => {
         for (let i = 0; i < getProspectusResult[0].length; i++) {
             const propertyInfo = getProspectusResult[0][i].propertyInfo;
             const unitInfo = getProspectusResult[0][i].unitInfo;
+            const sourceID = getProspectusResult[0][i].sourceCampaign;
+            console.log(sourceID);
             // console.log(propertyInfo + " " + unitInfo);
             const firstProspectusResult = getProspectusResult[0][i];
+const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
+const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
+const SourceData = {
+    Source: Source,
+};
+prospectusDataArray.push(SourceData);
 
             const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
             const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : [];
@@ -130,7 +139,8 @@ exports.getProspectus = async (req, res) => {
 //  #############################  GET prospectus By ID START ##################################################
 exports.getProspectusByID = async (req, res) => {
     const { prospectusId } = req.query;
-    console.log(req.query)
+    // const { prospectusId } = req.body;
+    // console.log(req.query)
     try {
 
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
@@ -147,6 +157,18 @@ exports.getProspectusByID = async (req, res) => {
         const firstProspectusResult = getProspectusResult[0][0];
         const propertyInfo = firstProspectusResult.propertyInfo;
         const unitInfo = firstProspectusResult.unitInfo;
+        const sourceID = firstProspectusResult.sourceCampaign;
+
+
+        // ##############################################################################
+
+const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
+const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
+const SourceData = {
+Source: Source,
+};
+prospectusDataArray.push(SourceData);
+        // ##############################################################################
 
         const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
 
