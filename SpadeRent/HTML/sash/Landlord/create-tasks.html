@@ -2107,6 +2107,20 @@
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
+                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                    <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+    
+                                                        <!-- <option value="1">1</option> -->
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="500">500</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table-hover table border text-nowrap text-md-nowrap mb-0 p-0 w-100" id="responsive-datatable">
                                                     <thead>
@@ -3124,6 +3138,7 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
@@ -3706,12 +3721,26 @@
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#search_input').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
+            // $('#').on('keyup', function () {
+            //     var searchValue = $(this).val().toLowerCase();
+            //     $('#table_body tr').filter(function () {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            //     });
+            // });
+            $(document).on('keyup', '#search_input', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox').val();
+
+            $('#table_body tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
+
+            if (searchValue === '') {
+                // If search box is empty, use the selected value from the select box
+                $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
 
             // Function to update the table based on filters
             function updateTable() {
@@ -4054,9 +4083,25 @@
                                     var assignTo = '<td>Not Assigned</td>';
                                 }
 
+                                var currentDate = new Date();
+var dueDate = '';
 
-                                var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
-                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+if (task.dueDate) {
+    var targetDate = new Date(task.dueDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedDueDate = `${month}/${day}/${year}`;
+
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+} else {
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+}
+
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                                 var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 
@@ -4210,9 +4255,9 @@
             });
         })
     </script>
-     <script>
+     <!-- <script>
         $(document).ready(function () {
-            // alert(2)
+           
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -4240,11 +4285,45 @@
                 });
             }
             $(document).ajaxStop(function () {
-                // alert(1)
+           
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#search_input').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#search_input').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>

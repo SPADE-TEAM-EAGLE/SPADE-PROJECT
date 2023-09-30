@@ -361,7 +361,7 @@ exports.UpdateInvoice = async (req, res) => {
           const amount = lineItems[i].amount;
           const lineItemTax = lineItems[i].tax;
 
-          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount,tax]);
+          const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, memo, amount,tax]);
 
           if (invoiceLineItemsResult.affectedRows === 0) {
             return res.send(

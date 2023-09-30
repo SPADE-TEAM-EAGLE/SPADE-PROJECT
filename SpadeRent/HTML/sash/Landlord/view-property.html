@@ -2210,11 +2210,20 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_type").append(data.propertyType)
                     $("#unit_type").append(`<span style="color: #1467B0;"><b>${data.NumberCount.Occupied} (Occupied)</b></span> <span style="color: red;"><b>${data.NumberCount.Vacant} (Vacant)</b></span>`)
                     $("#property_size").text(data.propertySQFT+ " sqft.")
-                    
+                    $("#property_units").text(data.units+" Units")
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
                     data.images.forEach(image => {
-                        $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                        if(image.Image!==" " && image.Image!==null){
+                            
+                            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
+                                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
+                            }else{
+                                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+
+                            }
+
+                        }
                     });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },

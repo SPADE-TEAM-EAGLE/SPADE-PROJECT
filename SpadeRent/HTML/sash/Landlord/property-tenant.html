@@ -1317,6 +1317,21 @@
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
+                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                    <select id="lengthSelectBox"
+                                                        class="form-select form" style="width: 80px;">
+    
+                                                        <!-- <option value="1">1</option> -->
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="500">500</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100"
                                                     id="responsive-datatable">
@@ -2261,12 +2276,20 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             });
             // console.log($('#alphabets'))
             // Search functionality
-            $('#typehead').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             console.log(propertyId)
 
             
@@ -2281,19 +2304,18 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({
-                    data
+                    data,
+                    message
                 }) {
-                    console.log(data)
-                    if (data[0].length === 0) {
-
-                        var tableBody = $('#table_body');
-
-                        tableBody.empty();
-                        // window.location = './new-property.html'
-                    } else {
+                    var tableBody = $('#table_body');
+                    if(message=="No data found"){
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        tableBody.append(row);
+                    }
+                    else {
                         console.log(data[0][0])
 
-                        var tableBody = $('#table_body');
+                        
 
                         tableBody.empty();
 
@@ -2322,33 +2344,48 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             //     '</a></td>';
                             
                             var assignUnit = '<td class="tenant-id " style="font-weight: 600;">' + tenant.unitNumber + '</td>';
-                            var Leasestartdate = '<td class="leasestartdate" style="font-weight: 600;">'+(tenant.leaseStartDate?tenant.leaseStartDate:"N/A")+'</td>';
+                            var Leasestartdate = '';
+                            var currentDate = new Date();
 
+if (tenant.leaseStartDate) {
+
+    var targetDate = new Date(tenant.leaseStartDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}-${day}-${year}`;
+
+    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}`+ '</td>';
+} else {
+    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${tenant.leaseStartDate ? tenant.leaseStartDate : "N/A"}` + '</td>';
+}
                             // var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
 
                             // Create a table row and append the generated columns
                             
+                            
                             var currentDate = new Date();
-                            if (tenant.leaseEndDate) {
-                                var targetDate = new Date(tenant.leaseEndDate);
-                                var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                                // Calculate the time difference in milliseconds
-                                var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                                // Convert milliseconds to days
-                                var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                                var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-                                // Append the days left in the leaseEndDate variable
-                                // leaseEndDate += '<p class="days-left">' + daysLeft + ' day(s) remaining</p>';
-                            } else {
-                                // Handle the case when leaseEndDate is not available
-                                // var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate?tenant.leaseEndDate:"N/A"}`+ '<span>'+ daysLeft+' day(s) remaining</span>' + '</td>';
-                                // leaseEndDate += '<p class="days-left">N/A</p>';
-                                var leaseEndDate = '<td class="tenant-id " style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+    var formattedEndDate = `${month}-${day}-${year}`;
 
-                            }
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                             var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';
@@ -2451,9 +2488,8 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             });
         }
     </script>
-     <script>
+     <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -2481,11 +2517,44 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $(document).ajaxStop(function () {
-                // alert(1)
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>

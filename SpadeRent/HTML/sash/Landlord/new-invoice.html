@@ -912,7 +912,7 @@
 
                                     </div>
                                     <div class="col-12" id="addbussinesslogocol"><a href="settings.html"
-                                            class="text-primary" style="float: right;">Add your bussiness logo!</a>
+                                            class="text-primary" style="float: right;">Add your business logo!</a>
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
@@ -2624,6 +2624,8 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
+    <!-- <script src="../assets/js/email-verification.js"></script> -->
+
 <script>
             $(document).ready(function(){
                 $.ajax({
@@ -2929,17 +2931,26 @@ function dragOverHandler(ev) {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,user }) {
-                    
-                    if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }               
+                success: function ({ userName, image }) {
+                    if (image !== " " && image !== null) {
+
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                    }
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    $("#user-name").text(toTitleCase(userName))
+                    $("#header-user").text(toTitleCase(userName))
+
+
+
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
@@ -2949,6 +2960,7 @@ function dragOverHandler(ev) {
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            
             $("#resend-invoice").click(() => {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
@@ -3012,7 +3024,11 @@ function dragOverHandler(ev) {
                                                 let categoryname;
                                                 if (item.category == "rent") {
                                                     categoryname = "Rent Amount"
-                                                } else if (item.category == "triple") {
+                                                } 
+                                                else if(item.category == "maintainance"){
+                                                    categoryname = "Maintainance"
+                                                }
+                                                else if (item.category == "triple") {
                                                     categoryname = "Triple Net"
                                                 } else if (item.category == "base") {
                                                     categoryname = "Base Rent"
@@ -3286,8 +3302,8 @@ print = true
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function ({ data, user }) {
-                        console.log(data)
-                        function toTitleCase(str) {
+                        if(data){
+                            function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -3316,6 +3332,10 @@ print = true
                 $('#menu').append(newItem);
             });
                             
+                        }else{
+                            
+                        }
+                        
                     },
                     error: function (xhr, status, error) {
                         console.log(error)
@@ -3457,12 +3477,16 @@ const tenant = tenantData.filter((tenant) => {
 // Get the parent row of the changed input
 const parentRow = $(this).closest(".tr");
 let amountInput;
-if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent" || selectedCategory == "Maintainance") {
     amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
     let amount = tenant[0].rentAmount
     if (selectedCategory == "Rent Amount") {
         amount = tenant[0].rentAmount
-    } else if (selectedCategory == "Triple Net") {
+    }
+    else if (selectedCategory == "Maintainance") {
+        amount = tenant[0].maintainance
+    } 
+    else if (selectedCategory == "Triple Net") {
         amount = tenant[0].tripleNet
     } else {
         amount = tenant[0].baseRent
@@ -3603,7 +3627,7 @@ console.log(allFieldsFilled)
                 
                 
                     $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
-               
+                    $("[name='category']").append($('<option></option>').text("Maintainance").val("maintainance"));
 
                 if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                     
@@ -3888,7 +3912,9 @@ if (!categoryExists) {
         if (!optionExists("rent")) {
             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
         }
-
+        if (!optionExists("maintainance")) {
+            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+        }
         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
             if (!optionExists("triple")) {
                 categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
@@ -4447,6 +4473,30 @@ function resetAccordions() {
                 });
         });
     </script>
+        <script>
+            $(document).ready(() => {
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log("here")
+                        if (response.message == "Email is verified") {
+                            $("#account-text").remove()
+                            $("#email_verification").remove()
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+            })
+        </script>
     <script>
         function logout() {
             $(document).ready(function () {

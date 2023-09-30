@@ -15,7 +15,10 @@ const {
     UpdateProspectusStatusQuery,
     prospectusInsightQD,
     prospectusInsightEN,
-    prospectusTimeQuery
+    prospectusTimeQuery,
+    addProspectusSources,
+    sourcesCampaignInsight,
+    dashboardProspectusInsight
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -24,7 +27,6 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 exports.addprospectus = async (req, res) => {
     const {
         firstName,
-        middleName,
         lastName,
         phoneNumber,
         email,
@@ -52,7 +54,7 @@ exports.addprospectus = async (req, res) => {
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
-            middleName,
+            
             lastName,
             phoneNumber,
             email,
@@ -177,7 +179,7 @@ exports.getProspectusByID = async (req, res) => {
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
-        middleName,
+        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -194,7 +196,7 @@ exports.updateProspectus = async (req, res) => {
 
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
-            middleName,
+            // middleName,
             lastName,
             phoneNumber,
             email,
@@ -375,4 +377,144 @@ exports.prospectusTime = async (req, res) => {
     }
   };
   //  ############################# Prospectus time ENDS HERE ##################################################
+
   
+  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+  
+  exports.prospectusSources = async (req, res) => {
+    const { Sourcess } = req.body;
+    // const { userId } = req.body;
+    const { userId } = req.user;
+    try {
+        const SourcesResult = [];
+        const existSourcesResult = [];
+        for (let i = 0; i < Sourcess.length; i++) {
+            const Sources = Sourcess[i];
+            const prospectusSourcesResult = await queryRunner(
+                selectQuery("prospectusSources", "landlordId", "sourcesCampaign"),
+                [userId, Sources]
+            );
+            if (prospectusSourcesResult[0].length == 0) {
+                const insertedProspectusSourcesResult = await queryRunner(
+                    addProspectusSources,
+                    [userId,Sources]
+                );
+                if (insertedProspectusSourcesResult[0].affectedRows > 0) {
+                    SourcesResult.push({
+                        insertId : insertedProspectusSourcesResult[0].insertId,
+                        name : Sources
+                    }
+                        );
+                }
+            }else{
+                existSourcesResult.push(prospectusSourcesResult[0][0].id);
+            }
+        }
+        if(SourcesResult.length > 0){
+            res.status(200).json({
+                message: "prospectus Sources added successfully",
+                insertedSources: SourcesResult
+            });
+        }else{
+            res.status(200).json({
+                message: "prospectus Sources Already Exist",
+                insertedSources: existSourcesResult
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+};
+  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+  
+
+  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+  exports.getProspectusSources = async (req, res) => {
+    
+    const { userId } = req.user;
+    try {
+            const prospectusSourcesResult = await queryRunner(
+                selectQuery("prospectusSources", "landlordId"),
+                [userId]
+            );
+            if (prospectusSourcesResult[0].length == 0) {
+                res.status(200).json({
+                                message: " prospectus data not found",
+                            });
+               
+            }else{
+                res.status(200).json({
+                                message: " prospectus get successful",
+                                data : prospectusSourcesResult[0]
+                            });
+            }
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+};
+  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+  
+
+  //  #############################  Insight Sources Start ##################################################
+exports.sourcesCampaignInsight = async (req, res) => {
+    const {startDate,endDate} = req.params;
+    // const {startDate,endDate, userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const sourcesCampaignInsightResult = await queryRunner(sourcesCampaignInsight, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (sourcesCampaignInsightResult[0].length === 0) {
+            return res.status(201).send("No data found");
+        }
+        res.status(200).json({
+            message: " prospectus Engaged and Nurturing get successful",
+            data : sourcesCampaignInsightResult[0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus Insight Engaged and Nurturing",
+            error : error.message
+        });
+    }
+};
+//  #############################  Insight Sources END ##################################################
+
+
+
+
+  //  #############################  Dashboard prospectus Insight Start ##################################################
+  exports.dashboardProspectusInsight = async (req, res) => {
+    const {startDate,endDate} = req.params;
+    // const {startDate,endDate, userId } = req.body;
+    const { userId } = req.user;
+    try {
+        
+        const dashboardProspectusInsightResult = await queryRunner(dashboardProspectusInsight, [
+            userId,
+            startDate,
+            endDate
+        ]);
+        if (dashboardProspectusInsightResult[0].length === 0) {
+            return res.status(201).send("No data found");
+        }
+        res.status(200).json({
+            message: "  Dashboard prospectus Insight get successful",
+            data : dashboardProspectusInsightResult[0]
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in Dashboard prospectus Insight",
+            error : error.message
+        });
+    }
+};
+//  #############################  Dashboard prospectus Insight END ##################################################

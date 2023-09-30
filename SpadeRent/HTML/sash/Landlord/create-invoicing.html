@@ -1197,7 +1197,7 @@
 
                                     </div>
                                     <div class="col-12" id="addbussinesslogocol"><a href="settings.html"
-                                            class="text-primary" style="float: right;">Add your bussiness logo!</a>
+                                            class="text-primary" style="float: right;">Add your business logo!</a>
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
@@ -1959,7 +1959,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Select Tenant</label>
-                            <select class="form-control select2 form-select d-block" data-placeholder="Select Tenant"
+                            <select class="form-control form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants_update" readonly>
                                 <option label="Choose one">
                                 </option>
@@ -2049,7 +2049,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <!-- <th>Property</th> -->
+                                            
                                             <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
@@ -3280,6 +3280,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="myTable">
                                                 <thead>
@@ -4497,7 +4511,11 @@
                                                 let categoryname;
                                                 if (item.category == "rent") {
                                                     categoryname = "Rent Amount"
-                                                } else if (item.category == "triple") {
+                                                }
+                                                else if (item.category == "maintainance") {
+                                                    categoryname = "Maintainance"
+                                                }
+                                                 else if (item.category == "triple") {
                                                     categoryname = "Triple Net"
                                                 } else if (item.category == "base") {
                                                     categoryname = "Base Rent"
@@ -4583,7 +4601,7 @@
                         $('#lineItemsTable tbody tr').each(function () {
 
                             var category = $(this).find('[name="category"]').val();
-                            var property = $(this).find('[name="property"]').val();
+                            // var property = $(this).find('[name="property"]').val();
                             var memo = $(this).find('input[name="memo"]').val();
                             var amount = $(this).find('input[name="amount"]').val();
                             var tax = $(this).find('input[name="tax"]').val()
@@ -4591,7 +4609,7 @@
                             if (category) {
                                 lineItems.push({
                                     category: category,
-                                    property: property,
+                                    property: "property",
                                     memo: memo,
                                     amount: amount,
                                     tax: tax
@@ -4884,9 +4902,9 @@
                                 var day = dateObj.getDate();
                                 var month = dateObj.getMonth() + 1;
                                 var year = dateObj.getFullYear();
-                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                                 var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
+                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate?(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)):"N/A")}</small>` + '</td>';
                                 const toShow = invoice.status
                                 var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                                 var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -4985,9 +5003,9 @@
                         var day = dateObj.getDate();
                         var month = dateObj.getMonth() + 1;
                         var year = dateObj.getFullYear();
-                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                        var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                         var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate))}</small>` + '</td>';
+                        var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate?(formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)):"N/A")}</small>` + '</td>';
                         const toShow = invoice.status
                         var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                         var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -5075,6 +5093,8 @@
 
 
                     $("[name='category']").append($('<option></option>').text("Rent Amount").val("rent"));
+                    $("[name='category']").append($('<option></option>').text("Maintainance").val("maintainance"));
+
 
 
                     if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
@@ -5106,12 +5126,16 @@
                     // Get the parent row of the changed input
                     const parentRow = $(this).closest(".tr");
                     let amountInput;
-                    if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent") {
+                    if (selectedCategory == "Rent Amount" || selectedCategory == "Triple Net" || selectedCategory == "Base Rent" || selectedCategory == "Maintainance") {
                         amountInput = isCategory ? parentRow.find("[name='amount']") : parentRow.find("[name='amount_update']");
                         let amount = tenant[0].rentAmount
                         if (selectedCategory == "Rent Amount") {
                             amount = tenant[0].rentAmount
-                        } else if (selectedCategory == "Triple Net") {
+                        }
+                        else if (selectedCategory == "Maintainance") {
+                            amount = tenant[0].maintainance
+                        }
+                         else if (selectedCategory == "Triple Net") {
                             amount = tenant[0].tripleNet
                         } else {
                             amount = tenant[0].baseRent
@@ -5402,6 +5426,9 @@
                         if (!optionExists("rent")) {
                             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
                         }
+                        if (!optionExists("maintainance")) {
+                            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+                        }
 
                         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                             if (!optionExists("triple")) {
@@ -5430,12 +5457,7 @@
           
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
         <td><input type="text" class="form-control" name="memo_update"></td>
         <td><input type="text" class="form-control" name="tax_update"
                                                     placeholder="Tax Associated With This Category"
@@ -5461,13 +5483,7 @@
           
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
         <td><input type="text" class="form-control" name="memo_update"></td>
         <td><input type="text" class="form-control" name="tax_update"
                                                     placeholder="Tax Associated With This Category"
@@ -5487,7 +5503,9 @@
                         if (!optionExists("rent")) {
                             categorySelect.append($('<option></option>').text("Rent Amount").val("rent"));
                         }
-
+                        if (!optionExists("maintainance")) {
+                            categorySelect.append($('<option></option>').text("Maintainance").val("maintainance"));
+                        }
                         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                             if (!optionExists("triple")) {
                                 categorySelect.append($('<option></option>').text("Triple Net").val("triple"));
@@ -5639,12 +5657,20 @@
                 });
                 // console.log($('#alphabets'))
                 // Search functionality
-                $('#typehead').on('keyup', function () {
-                    var searchValue = $(this).val().toLowerCase();
-                    $('#table_body tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                    });
-                });
+                $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
                 let invoiceId;
                 let selectedValue;
                 $('input[name="status"]').on('click', function () {
@@ -5775,7 +5801,11 @@
                         let categoryname;
                         if (item.category == "rent") {
                             categoryname = "Rent Amount"
-                        } else if (item.category == "triple") {
+                        } 
+                        else if (item.category == "maintainance") {
+                            categoryname = "Maintainance"
+                        }
+                        else if (item.category == "triple") {
                             categoryname = "Triple Net"
                         } else if (item.category == "base") {
                             categoryname = "Base Rent"
@@ -5862,7 +5892,11 @@
                             let categoryname;
                             if (item.category == "rent") {
                                 categoryname = "Rent Amount"
-                            } else if (item.category == "triple") {
+                            } 
+                            else if (item.category == "maintainance") {
+                                categoryname = "Maintainance"
+                            }
+                            else if (item.category == "triple") {
                                 categoryname = "Triple Net"
                             } else {
                                 categoryname = "Base Rent"
@@ -6067,13 +6101,7 @@
 
           <span class="text-danger d-none">State is required!</span>
         </td>
-        <td>
-          <select id="state" name="property_update" class="form-select form select2-show-search" placeholder="Enter the state" required>
-            <option selected="">Choose...</option>
-            <option value="${propertyName[0].propertyID}" selected=" ">${propertyName[0].propertyName}</option>
-          </select>
-          <span class="text-danger d-none">State is required!</span>
-        </td>
+        
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>
                                             <td><input type="text" class="form-control" name="tax_update" value=${tax ? tax : 0}
                                                    placeholder="Tax Associated With This Category"
@@ -6090,6 +6118,7 @@
                             console.log(category == "rent")
                             // Add the "Rent Amount" option to the select element with the name "category_update"
                             $("[name='category_update']").append($('<option></option>').text("Rent Amount").val("rent").prop("selected", category === "rent" ? true : false));
+                            $("[name='category_update']").append($('<option></option>').text("Maintainance").val("rent").prop("selected", category === "maintainance" ? true : false));
                             // Check the property's "gross_or_triple_lease" and add options accordingly
                             if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
                                 $("[name='category_update']").append($('<option></option>').text("Triple Net").val("triple").prop("selected", category === "triple" ? true : false));
@@ -6179,14 +6208,14 @@
                         $('#lineItemsTable_update tbody tr').each(function () {
 
                             var category = $(this).find('[name="category_update"]').val();
-                            var property = $(this).find('[name="property_update"]').val();
+                            // var property = $(this).find('[name="property_update"]').val();
                             var memo = $(this).find('input[name="memo_update"]').val();
                             var amount = $(this).find('input[name="amount_update"]').val();
                             var tax = $(this).find('input[name="tax_update"]').val();
 
                             lineItems.push({
                                 category: category,
-                                property: property,
+                                property: "property",
                                 memo: memo,
                                 tax: tax,
                                 amount: amount
@@ -6556,9 +6585,8 @@
                 .dropdown()
                 ;
         </script>
- <script>
+ <!-- <script>
     $(document).ready(function () {
-        // alert(2)
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
             "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -6587,11 +6615,44 @@
             });
         }
         $(document).ajaxStop(function () {
-            // alert(1)
             loadScripts()
         });
     });
-</script> 
+</script>  -->
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+</script>
 </body>
 
 </html>

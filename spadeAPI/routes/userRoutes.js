@@ -239,4 +239,9 @@ router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.GettenantAttachEmailPhone);
-
+router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
+router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
+router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
+// router.get("/sourcesCampaignInsight" , prospectus.sourcesCampaignInsight);
+router.get("/sourcesCampaignInsight/:startDate/:endDate", verifyToken, prospectus.sourcesCampaignInsight);
+router.get("/dashboardProspectusInsight/:startDate/:endDate", verifyToken, prospectus.dashboardProspectusInsight);

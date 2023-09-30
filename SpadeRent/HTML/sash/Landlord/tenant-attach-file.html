@@ -3243,12 +3243,26 @@ $(document).on("click",'.delete-option',function(e) {
                         })
                         
                     });
-$('#search_input').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
+// $('#search_input').on('keyup', function() {
+//                 var searchValue = $(this).val().toLowerCase();
+//                 $('#table_body tr').filter(function() {
+//                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+//                 });
+//             });
+$(document).on('keyup', '#search_input', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox').val();
+
+            $('#table_body tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
+
+            if (searchValue === '') {
+                // If search box is empty, use the selected value from the select box
+                $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
             $('#email_verification').on('click', function () {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');

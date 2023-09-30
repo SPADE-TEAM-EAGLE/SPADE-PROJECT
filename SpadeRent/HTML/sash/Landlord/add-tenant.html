@@ -837,6 +837,45 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="infoModal_delete" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                <path fill="#fad383"
+                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
+                                </path>
+                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
+                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
+                            </svg>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
+                            <p class="card-text text-dark">Tenant Invoice is pending Kindly Paid invoice</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1240,6 +1279,76 @@
         </div>
     </div>
     <!-- Modal -->
+
+
+    <div class="modal fade" id="unPaidModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title mb-0" id="previewHeading">Existing <strong class="color-primary">Tenant
+                                Invoices</strong></h2>
+                        <!-- <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button> -->
+                    </div>
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12"><p class="fw-bolder text-danger mb-2">Following are the Tenants with unpaid invoices: </p></div>
+                        <br/>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
+                                    >
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody id="add-tenant-name">
+                                        <tr class="tr">
+                                            <td>
+                                                <p>Fahad</p>
+                                            </td>
+                                            
+                                            <td><p>Aad</p></td>
+                                            <td><p>Aad</p></td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id='close'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -2297,7 +2406,21 @@
 
                                     <div class="card-body p-0">
                                         <!-- <button type="button" id="myButton" class="btn btn-primary px-3 myButton"><i class="fi fi-rs-trash mt-1 fs-20" aria-hidden="true"></i> Delete</button> -->
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox"
+                                                    class="form-control form-select form" style="width: 80px;">
 
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <button id="myButton" class="btn-delete-checkbox myButton"><i class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
                                         <div class="table-responsive"> 
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="responsive-datatable">
@@ -3537,6 +3660,7 @@
                         })
                         $(".edit-option1").click(function () {
                             // e.preventDefault();
+                            $(this).closest('td').find('.done-option').removeAttr('disabled');
                             console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
@@ -4499,12 +4623,20 @@
             filterTable("created-at")
         });
             // Search functionality
-            $('#typehead').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $(".modal").on("click", ".btn-close,.btn-close-bottom", function () {
 
                 $('#addUnitBtn').hide()
@@ -4769,11 +4901,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    if(response.message=="Tenant Invoice is pending Kindly Paid invoice "){
+                        $("#infoModal_delete").modal("show");
+                    }
+                    else{
+                        getData()
 
-
-                    getData()
-
-                    $("#succesModal_delete").modal("show");
+$("#succesModal_delete").modal("show");
+                    }
+                    
 
 
                 },
@@ -4862,11 +4998,11 @@
                         var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
                         // var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName+" " + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
@@ -4881,19 +5017,23 @@
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
                         var currentDate = new Date();
-                        if (tenant.leaseEndDate) {
-                            var targetDate = new Date(tenant.leaseEndDate);
-                            var currentDate = new Date();
-                            var timeDiff = targetDate.getTime() - currentDate.getTime();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                            // Convert milliseconds to days
-                            var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                            var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class=d-block "${daysLeft > 10 ? 'text-primary' : 'text-danger'}">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                        } else {
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                            var leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-                        }
+    var formattedEndDate = `${month}/${day}/${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                         var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
                             assignUnit + rentAmount + leaseEndDate + dropdownMenu +created_at +'</tr>';
@@ -5064,7 +5204,7 @@
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                     var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                     var password = 'your-secret-password';
                     var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5078,18 +5218,26 @@
                         '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                         '</ul></td>';
 
-                    var currentDate = new Date();
-                    var leaseEndDate = '';
+                        var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                    if (tenant.leaseEndDate) {
-                        var targetDate = new Date(tenant.leaseEndDate);
-                        var timeDiff = targetDate.getTime() - currentDate.getTime();
-                        var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                    } else {
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                    }
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}/${day}/${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
+ 
+
 
                     var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
                         assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
@@ -5118,7 +5266,7 @@
                 
                 var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate))}` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5131,18 +5279,24 @@
                     '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                     '</ul></td>';
 
-                var currentDate = new Date();
-                var leaseEndDate = '';
+                    var currentDate = new Date();
+var leaseEndDate = '';
+if (tenant.leaseEndDate) {
 
-                if (tenant.leaseEndDate) {
-                    var targetDate = new Date(tenant.leaseEndDate);
-                    var timeDiff = targetDate.getTime() - currentDate.getTime();
-                    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    var targetDate = new Date(tenant.leaseEndDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-                } else {
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-                }
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedEndDate = `${month}-${day}-${year}`;
+
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+} else {
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+}
 
                 var row = '<tr>' +checkbox +serial + tenantId + tenantName+contactinfo + propertyAddress + assignUnit +
                     rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
@@ -5168,6 +5322,80 @@
             filterTableByPropertyType('Multi-Commercial');
         });
         getData();
+        var tenantToDelete=[]
+        $("#myButton").click(function () {
+            $('#table_body tr').each(function() {
+        var checkbox = $(this).find('.checkbox input.myCheckbox');
+        
+        if (checkbox.is(':checked')) {
+            var tenantId = $(this).find('.tenant-id').text();
+            tenantToDelete.push(tenantId)
+        }
+    });
+    
+    $.ajax({
+        url:"https://backend.app.spaderent.com/api/spade/checkUnpaidInvoices",
+        type:"GET",
+        data:{
+            tenants:tenantToDelete},
+        contentType: "application/json;",
+        headers:{
+            Authorization: "Bearer " + localStorage.getItem("authtoken")
+        },
+        success:function(response){
+            if(response.Info=="No data found in tenant "){
+                console.log(tenantToDelete)
+                $.ajax({
+                    url:"https://backend.app.spaderent.com/api/spade/allTenantDelete",
+                    type:"DELETE",
+                    contentType: "application/json;charset=utf-8",
+                    data:JSON.stringify({
+                        "id":tenantToDelete
+                    }),
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        tenantToDelete=[]
+                        getData()
+
+                    $("#succesModal_delete").modal("show");
+                    },error:function(xhr,status,error){
+                        console.log(error)
+                    }
+
+                })
+            
+            }
+            else{
+                tenantToDelete=[]
+                $("#add-tenant-name").empty()
+                response?.data.forEach(function(item){
+                    $("#add-tenant-name").append(`
+                <tr class="tr">
+                                            <td>
+                                                <p>${item.firstName}</p>
+                                            </td>
+                                            
+                                            <td><p>${item.lastName}</p></td>
+                                            <td><p>${item.email}</p></td>
+                                            
+                                        </tr>
+                `)
+
+                })
+
+
+
+                
+                $("#unPaidModal").modal("show");
+
+            }
+        },error:function(xhr,status,error){
+            console.log(error)
+        }
+    })
+        });
     </script>
 
     <script>
@@ -5279,9 +5507,8 @@
 
     </script>
     
-      <script>
+      <!-- <script>
         $(document).ready(function () {
-            // alert(2)
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
                 "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
@@ -5304,17 +5531,52 @@
     var script = document.createElement('script');
     script.src = scriptUrl;
     script.className = 'dynamic-script';
-    script.setAttribute('defer', 'true'); // Set the "defer" attribute
+    script.setAttribute('defer', 'true'); 
     document.head.appendChild(script);
 });
 
             }
             $(document).ajaxStop(function () {
-                // alert(1)
+             
                 loadScripts()
             });
         });
-    </script> 
+    </script>  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table_body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+    
 </body>
 
 </html>

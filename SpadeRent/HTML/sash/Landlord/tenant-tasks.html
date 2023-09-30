@@ -1324,7 +1324,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
+                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg" id="tenant-top-img"></div>
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
@@ -1477,6 +1477,20 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                                 <thead>
@@ -2449,6 +2463,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
+                    $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/users/16.jpg")
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2482,8 +2497,14 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response)
-                   if(response?.data[0]?.length > 0){
+                    
+                    if(response?.message=="No tenant Task data found"){
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $('#table_body').append(row);
+                    }
+                   else if(response?.data[0]?.length > 0){
+                    // $("#tenant-top-img").attr("src", response?.data[0][0].tenantImage?response?.data[0][0].tenantImage:"../assets/images/users/16.jpg")
+
                         $("#no-task").show()
                         $("#task-table").hide()
                     $("#property_name").text(response?.data[0][0]?.propertyName)
@@ -2534,9 +2555,24 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
 }
 
 
-                        var dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || "Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
-                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
-                        var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
+var currentDate = new Date();
+var dueDate = '';
+
+if (task.dueDate) {
+    var targetDate = new Date(task.dueDate);
+    var timeDiff = targetDate.getTime() - currentDate.getTime();
+    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+
+    var formattedDueDate = `${month}/${day}/${year}`;
+
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+} else {
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+}                        var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                         var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 
 
@@ -2577,12 +2613,20 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 isColumnVisible ? column.show() : column.hide();
             });
         });
-        $('#typehead').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+        $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
         });
     </script>
 
@@ -2641,7 +2685,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         });
     }
 </script>
-<script>
+<!-- <script>
     $(document).ready(function () {
         var scriptUrls = [
             "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -2674,6 +2718,40 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
         });
 
     });
+</script> -->
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
 </script>
 </body>
 

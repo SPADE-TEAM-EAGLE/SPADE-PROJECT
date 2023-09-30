@@ -2526,17 +2526,26 @@ function dragOverHandler(ev) {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,userName }) {
-                    
-                    if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }                  
+                success: function ({ userName, image }) {
+                    if (image !== " " && image !== null) {
+
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                    }
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    $("#user-name").text(toTitleCase(userName))
+                    $("#header-user").text(toTitleCase(userName))
+
+
+
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
@@ -2546,7 +2555,8 @@ function dragOverHandler(ev) {
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-                $.ajax({
+            
+            $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     method: 'GET',
                     contentType: "application/json; charset=utf-8",
@@ -2554,13 +2564,16 @@ function dragOverHandler(ev) {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        function toTitleCase(str) {
-                            return str.replace(/\w\S*/g, function (txt) {
-                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            });
-                        }
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
+                        if(response?.message=='No data found'){
+
+                        }else{
+// function toTitleCase(str) {
+                        //     return str.replace(/\w\S*/g, function (txt) {
+                        //         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        //     });
+                        // }
+                        // $("#user-name").text(toTitleCase(response.user))
+                        // $("#header-user").text(toTitleCase(response.user))
 
                         $("#property").empty()
                         $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
@@ -2575,6 +2588,8 @@ function dragOverHandler(ev) {
 
                         });
                         // Handle state selection change
+                        }
+                        
                     }
                 })
                 $.ajax({
@@ -3045,12 +3060,26 @@ function dragOverHandler(ev) {
                 });
                 // console.log($('#alphabets'))
                 // Search functionality
-                $('#search_input').on('keyup', function () {
-                    var searchValue = $(this).val().toLowerCase();
-                    $('#table_body tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                    });
-                });
+                // $('#search_input').on('keyup', function () {
+                //     var searchValue = $(this).val().toLowerCase();
+                //     $('#table_body tr').filter(function () {
+                //         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                //     });
+                // });
+                $(document).on('keyup', '#search_input', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox').val();
+
+            $('#table_body tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            });
+
+            if (searchValue === '') {
+                // If search box is empty, use the selected value from the select box
+                $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
 
                 // Function to update the table based on filters
                 function updateTable() {
@@ -3274,6 +3303,30 @@ function dragOverHandler(ev) {
             });
             })
         </script>
+            <script>
+                $(document).ready(() => {
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log("here")
+                            if (response.message == "Email is verified") {
+                                $("#account-text").remove()
+                                $("#email_verification").remove()
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                        }
+                    });
+                })
+            </script>
       <script>
         function logout() {
             $(document).ready(function () {

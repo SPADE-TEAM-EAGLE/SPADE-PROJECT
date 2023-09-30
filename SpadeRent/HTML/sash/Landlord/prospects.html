@@ -926,7 +926,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="inputState" class="form-label fw-bold">Phone Number</label>
                                         <input class="w-100" id="phone" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required> -->
@@ -981,7 +981,17 @@
 
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Prospect Source</a>
+                                            style="text-decoration: underline;" id="addProspectSourceBtn">+ Add Prospect
+                                            Source</a>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-12 col-xl-12" id="addProspectSourceCol"
+                                        style="display: none;">
+                                        <label for="" class="form-label fw-bold">Add New Prospect Source<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" id="addProspectSource" class="form-control form"
+                                            placeholder="Enter Prospect Source" required>
+                                        <span class="text-danger d-none">Prospect Source is required!</span>
                                     </div>
                                     <!-- <div class="col-md-4 col-lg-4 col-xl-4">
                                         <label for="status" class="form-label fw-bold">Status <span
@@ -1116,12 +1126,12 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <label for="phone2" class="form-label fw-bold">Phone Number</label>
                                         <input class="w-100" id="phone2" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required> -->
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
+                                        <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg2" class="hide text-danger"></span>
 
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1163,14 +1173,26 @@
                                         <span class="text-danger d-none">Prospects Details is required!</span>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-xl-12">
-                                        <label for="sourceCampaign_update" class="form-label fw-bold ">Source Campaign
+                                        <label for="sourceCampaign_update" class="form-label fw-bold">Source Campaign
                                             <span class="text-danger">*</span></label>
-                                        <select id="sourceCampaign_update" class="form-select form mb-2 select2-show-search">
+                                        <!-- <input type="text" id="sourceCampaign_update" class="form-control form"
+                                            placeholder="Enter Source Campaign" required> -->
+                                        <select id="sourceCampaign_update"
+                                            class="form-select form mb-2 select2-show-search">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
                                         <a href="javascript:void(0)" class="text-primary"
-                                            style="text-decoration: underline;">+ Add Prospect Source</a>
+                                            style="text-decoration: underline;" id="addProspectSourceBtn1">+ Add
+                                            Prospect Source</a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12" id="addProspectSourceCol1"
+                                        style="display: none;">
+                                        <label for="" class="form-label fw-bold">Add New Prospect Source<spnan
+                                                class="text-danger"> *</span></label>
+                                        <input type="text" id="addProspectSource1" class="form-control form"
+                                            placeholder="Enter Prospect Source" required>
+                                        <span class="text-danger d-none">Prospect Source is required!</span>
                                     </div>
 
                                 </form>
@@ -1280,7 +1302,8 @@
                         <div class="card-footer text-center border-0 pt-0">
                             <div class="row">
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
                                     <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
@@ -1871,41 +1894,42 @@
                             <!-- <li class="sub-category">
                                        <h3>UI Kit</h3>
                                    </li> -->
-                                   <li class="slide">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
-                                            class="side-menu__icon fi fi-rs-building"></i><span
-                                            class="side-menu__label">Properties</span>
-                                        
-                                    </a>
-                                </li>
-                                <li class="slide card-demo-2">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
-                                            class="side-menu__icon fi fi-rs-cabin"></i><span
-                                            class="side-menu__label">Tenants</span>
-                                        
-    
-                                    </a>
-                                    
-                                </li>
-    
-                                <!-- <li class="sub-category">
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                        class="side-menu__icon fi fi-rs-building"></i><span
+                                        class="side-menu__label">Properties</span>
+
+                                </a>
+                            </li>
+                            <li class="slide card-demo-2">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__label">Tenants</span>
+
+
+                                </a>
+
+                            </li>
+
+                            <!-- <li class="sub-category">
                                            <h3>Pre-build Pages</h3>
                                        </li> -->
-                                <li class="slide card-demo-3">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="create-invoicing.html"><i
-                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                            class="side-menu__label">Invoicing</span>
-                                        
-                                    </a>
-                                    
-    
-                                </li>
-                                <li class="slide card-demo-4">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                            class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                            class="side-menu__label">Prospects</span>
-                                    </a>
-                                </li>
+                            <li class="slide card-demo-3">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide"
+                                    href="create-invoicing.html"><i
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                        class="side-menu__label">Invoicing</span>
+
+                                </a>
+
+
+                            </li>
+                            <li class="slide card-demo-4">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Prospects</span>
+                                </a>
+                            </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
@@ -1918,16 +1942,15 @@
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
                                     <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
-                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
+                                    <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
                             </li>
-<li class="slide">
+                            <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
                                     <i class="side-menu__icon fi fi-rs-users"></i>
                                     <span class="side-menu__label">Vendors</span>
                                 </a>
                             </li>
-                            
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
@@ -2411,6 +2434,25 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="card-body p-0">
+                                                                            <div
+                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                                <div style="width: 220px"
+                                                                                    class="d-flex justify-content-center align-items-center">
+                                                                                    <span class="fw-bold me-2">Number of
+                                                                                        rows</span>
+                                                                                    <select id="lengthSelectBox"
+                                                                                        class="form-select form"
+                                                                                        style="width: 80px;">
+
+                                                                                        <!-- <option value="1">1</option> -->
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="25">25</option>
+                                                                                        <option value="100">100</option>
+                                                                                        <option value="200">200</option>
+                                                                                        <option value="500">500</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="table-responsive">
                                                                                 <table
                                                                                     class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
@@ -2477,7 +2519,8 @@
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
                                                                     </div> -->
-                                                                    <div class="card-options" style="visibility: hidden;">
+                                                                    <div class="card-options"
+                                                                        style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal" href="#"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -2506,7 +2549,8 @@
                                                                         data-bs-toggle="dropdown"><i
                                                                             class="fi fi-rs-grip-lines fs-20 fw-bold"></i></a>
 
-                                                                    <div class="card-options" style="visibility: hidden;">
+                                                                    <div class="card-options"
+                                                                        style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle="modal" href="#"><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -2544,7 +2588,8 @@
                                                                             href="javascript:void(0)">Personal
                                                                             Settings</a>
                                                                     </div> -->
-                                                                    <div class="card-options" style="visibility: hidden;">
+                                                                    <div class="card-options"
+                                                                        style="visibility: hidden;">
                                                                         <a data-bs-effect="effect-scale"
                                                                             data-bs-toggle=npm stat"modal" href=""><i
                                                                                 class="fi fi-rs-edit fw-bold text-dark"></i></a>
@@ -2935,6 +2980,25 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body p-0">
+                                                                    <div
+                                                                        class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                        <div style="width: 220px"
+                                                                            class="d-flex justify-content-center align-items-center">
+                                                                            <span class="fw-bold me-2">Number of
+                                                                                rows</span>
+                                                                            <select id="lengthSelectBox1"
+                                                                                class="form-select form"
+                                                                                style="width: 80px;">
+
+                                                                                <!-- <option value="1">1</option> -->
+                                                                                <option value="10">10</option>
+                                                                                <option value="25">25</option>
+                                                                                <option value="100">100</option>
+                                                                                <option value="200">200</option>
+                                                                                <option value="500">500</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="table-responsive">
                                                                         <table
                                                                             class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
@@ -3131,13 +3195,13 @@
                                                                             <!-- <div class="form-group m-0">
                                                                                 <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
                                                                             </div> -->
-                                                                            <div
-                                                                                class="main-header-center d-none d-lg-block m-0">
+                                                                            <div class="main-header-center d-lg-block m-0"
+                                                                                style="position: relative;">
                                                                                 <button class="btn px-0 pt-2"><i
                                                                                         class="fe fe-search"
                                                                                         aria-hidden="true"></i></button>
                                                                                 <input type="text" class="form-control"
-                                                                                    id="typehead"
+                                                                                    id="typehead2"
                                                                                     placeholder="Search Users by Name, Email or Date"
                                                                                     autocomplete="off"
                                                                                     style="width: 300px;">
@@ -3255,7 +3319,27 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body p-0">
+                                                                    <div
+                                                                        class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                        <div style="width: 220px"
+                                                                            class="d-flex justify-content-center align-items-center">
+                                                                            <span class="fw-bold me-2">Number of
+                                                                                rows</span>
+                                                                            <select id="lengthSelectBox2"
+                                                                                class="form-select form"
+                                                                                style="width: 80px;">
+
+                                                                                <!-- <option value="1">1</option> -->
+                                                                                <option value="10">10</option>
+                                                                                <option value="25">25</option>
+                                                                                <option value="100">100</option>
+                                                                                <option value="200">200</option>
+                                                                                <option value="500">500</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="table-responsive">
+
                                                                         <table
                                                                             class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100"
                                                                             id="responsive-datatable3">
@@ -3308,7 +3392,8 @@
                                                                     </div>
                                                                     <div style="display: flex; align-items: end;">
 
-                                                                        <select class="form-select form " id="prospect-year">
+                                                                        <select class="form-select form "
+                                                                            id="prospect-year">
                                                                             <option selected>2023</option>
                                                                             <option value="2022">2022</option>
                                                                             <option value="2021">2021</option>
@@ -3464,9 +3549,10 @@
                                                                     <div style="display: flex; align-items: end;">
 
                                                                         <input type="date"
+                                                                            id="source-campaign-start-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
+                                                                        <input type="date" id="source-campaign-end-date"
                                                                             class="form-control form-control-date-width"
                                                                             placeholder="Jan 6, 2022 – Jan 13, 2022">
                                                                     </div>
@@ -4108,17 +4194,17 @@
     <script>
         $(document).ready(function () {
             $('.select2-show-search').select2({
-                    dropdownParent: $('#addModal')
-                });
+                dropdownParent: $('#addModal')
+            });
             $('.modal').on('shown.bs.modal', function () {
-               
+
                 $('.select2-show-search').select2({
                     dropdownParent: $('#addModal')
                 });
             });
-           
+
         }); 
-    </script>   
+    </script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -4148,7 +4234,7 @@
     <script src="../assets/plugins/chart/rounded-barchart.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
 
-   
+
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -4211,34 +4297,39 @@
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
-
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
-<script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
-                        $('#chatCounter').text(response.Count['count(message)'])
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            // window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log(error);
-                    }
-                });
+    <script>
+        $(document).ready(function () {
+            $('#addProspectSourceBtn').click(() => {
+                $('#addProspectSourceCol').css('display', 'block')
+            })
+            $('#addProspectSourceBtn1').click(() => {
+                $('#addProspectSourceCol1').css('display', 'block')
+            })
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("getMessagesCountLandlord");
+                    console.log(response.Count['count(message)']);
+                    $('#chatCounter').text(response.Count['count(message)'])
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        // window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log(error);
+                }
             });
-        </script>
+        });
+    </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
@@ -4265,43 +4356,43 @@
         var prospectID; var prospectusStatus;
         $(document).ready(function () {
             $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/protected',
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-        },
-        success: function ({ userName, email, userId, image }) {
-            function toTitleCase(str) {
-                return str.replace(/\w\S*/g, function (txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
-            }
-            if(image!==" " && image!==null){
-                
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function ({ userName, email, userId, image }) {
+                    function toTitleCase(str) {
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    if (image !== " " && image !== null) {
+
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                    }
 
 
-            $("#user-name").text(toTitleCase(userName))
-            $("#header-user").text(toTitleCase(userName))
-            userEmail = email
-            id1 = userId
-            console.log($("#user-email"))
-            $("#user-email").val(email)
-        },
-        error: function (xhr, status, error) {
-            $("#myModal_warning").modal("show");
-            setTimeout(function () {
-                $('#myModal_warning').modal('hide');
-                window.location = '../Landlord/login_module.html';
-            }, 2000);
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
-        }
-    });
+                    $("#user-name").text(toTitleCase(userName))
+                    $("#header-user").text(toTitleCase(userName))
+                    userEmail = email
+                    id1 = userId
+                    console.log($("#user-email"))
+                    $("#user-email").val(email)
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
@@ -4485,7 +4576,7 @@
             $("#update").click(function () {
                 const data = {
                     firstName: $("#firstName_update").val(),
-                    middleName: $("#middleName_update").val(),
+                    // middleName: $("#middleName_update").val(),
                     lastName: $("#lastName_update").val(),
                     phoneNumber: $("#phone2").val(),
                     email: $("#email_update").val(),
@@ -4494,6 +4585,7 @@
                     unitInfo: $("#unitInfo_update").val(),
                     prospectDetails: $("#propertyDetail_update").val(),
                     sourceCampaign: $("#sourceCampaign_update").val(),
+                    addProspectSource: $("#addProspectSource1").val(),
                     prospectusStatus,
                     prospectusid: prospectID
                 }
@@ -4523,11 +4615,47 @@
                     }, data: JSON.stringify(data)
                 })
             })
-            $('#typehead').on('keyup', function () {
+            $(document).on('keyup', '#typehead', function () {
                 var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox').val();
+
                 $('#table-body tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
+            $(document).on('keyup', '#typehead1', function () {
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox1').val();
+
+                $('#table-body-disqualified tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body-disqualified tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body-disqualified tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
+            $(document).on('keyup', '#typehead2', function () {
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox2').val();
+
+                $('#table-body-qualified tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table-body-qualified tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table-body-qualified tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
             });
             var propsectData = [];
             function formatRentAmount(amount) {
@@ -4542,10 +4670,10 @@
             }
             function populateCards(elem, prospectus, property) {
                 var password = 'your-secret-password';
-var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
+                var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
-// Include the encrypted value in the URL
-var encodedProspectId = encodeURIComponent(encryptedProspectId);
+                // Include the encrypted value in the URL
+                var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 elem.append(
 
                     `<div class="d-flex p-2 mb-2 portlet" style="border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;" id="${"card" + prospectus.id}">` +
@@ -4555,7 +4683,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                     '<img class="" style="width: 30px;height: 48px;" src="../assets/images/Group 10242.svg">' +
                     '</div>' +
                     '<div class="media-body" style="line-height: 10px;">' +
-                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName) + '</h6>' +
+                    '<h6 class="mb-0 mt-0 text-primary fw-bold">' + (prospectus.firstName + " " + prospectus.lastName) + '</h6>' +
                     '<strong class="text-dark fw-bold fs-10">' + (property.address + " <br/>" + property.city + ", " + property.state) + '<br>' + prospectus.phoneNumber + '</strong>' +
                     '</div>' +
                     '</div>' +
@@ -4610,7 +4738,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             var property = item?.property;
 
                             row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
-                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.middleName + " " + prospectus.lastName));
+                            row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
@@ -4631,8 +4759,8 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Active"><i class="fi fi-rs-user text-dark me-2"></i>Active</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Engaged"><i class="fi fi-rs-minus-circle text-dark me-2"></i>Engaged</a></li>');
                             dropdownMenu.append('<li><a class="dropdown-item text-dark" href="javascript:void(0)" data-status="Nurturing"><i class="fi fi-rs-hand-holding-heart text-dark me-2"></i>Nurturing</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="Qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
-                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="Disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-success" href="javascript:void(0)" data-status="qualified"><i class="fi fi-rs-check-circle me-2 text-success"></i>Qualified</a></li>');
+                            dropdownMenu.append('<li><a class="dropdown-item text-danger" href="javascript:void(0)" data-status="disqualified"><i class="fi fi-rs-circle-xmark text-danger text-danger me-2"></i>Disqualified</a></li>');
 
                             dropdownMenu.find('a').on('click', function () {
                                 var newStatus = $(this).data('status');
@@ -4660,8 +4788,8 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             });
                             var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
-// Include the encrypted value in the URL
-var encodedProspectId = encodeURIComponent(encryptedProspectId);
+                            // Include the encrypted value in the URL
+                            var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
                             row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark delete-option" href="javascript:void(0)" id="${prospectus?.id}">Delete</a></li></ul>`));
@@ -4686,10 +4814,9 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
                                 populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
 
-                            } 
-                            if (prospectus.prospectusStatus !== "qualified" && prospectus.prospectusStatus !== "disqualified") {
+                            }
+                            else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
                                 populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
-
                             }
                             countValues()
                         });
@@ -4719,10 +4846,12 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
 
             var startDate = formatDate(oneMonthAgo); // Format the date if needed
             var endDate = formatDate(currentDate);
-            var year=new Date().getFullYear();
+            var year = new Date().getFullYear();
             console.log(year)
             $("#prospect-status-start-date").val(startDate)
             $("#prospect-status-end-date").val(endDate)
+            $("#source-campaign-start-date").val(startDate)
+            $("#source-campaign-end-date").val(endDate)
             $("#prospect-qualified-start-date").val(startDate)
             $("#prospect-qualified-end-date").val(endDate)
             $("#startDate_task").val(startDate)
@@ -4734,6 +4863,48 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
             $("#startDate_amount").val(startDate)
             $("#endDate_amount").val(endDate)
             function getGraphData() {
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        console.log(response)
+                        if (response?.data) {
+                            const labels = [];
+                            const data = [];
+                            let countOthers = 0; // Initialize countOthers variable
+
+                            response?.data?.forEach(entry => {
+                                const source = entry.sourceCampaign == "NotFound" ? "Other" : entry.sourceCampaign;
+                                const count = entry.campaignCount;
+
+                                if (source == "Other") {
+                                    countOthers += count; // Accumulate count for "Other"
+                                } else {
+                                    labels.push(source);
+                                    data.push(count);
+                                }
+                            });
+
+                            // Add "Other" entry with calculated count
+                            if (countOthers > 0) {
+                                labels.push("Other");
+                                data.push(countOthers);
+                            }
+
+                            createSourceCampaignChart(labels, data)
+                        }
+                        
+                        console.log(response)
+
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+
                 $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
                     headers: {
@@ -4749,7 +4920,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
 
                     }
                 })
-            
+
                 $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
                     headers: {
@@ -4758,31 +4929,32 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        
-                        const qualified = [];
-const disqualified = [];
 
-response?.data?.forEach(entry => {
-    const month = entry.Month;
-    const disqualifiedValue = parseInt(entry.Disqualified);
-    const qualifiedValue = parseInt(entry.Qualified);
-        disqualified.push(disqualifiedValue);
-        qualified.push(qualifiedValue);
-});
-createQDChart(qualified, disqualified)
-                   
+                        const qualified = [];
+                        const disqualified = [];
+
+                        response?.data?.forEach(entry => {
+                            const month = entry.Month;
+                            const disqualifiedValue = parseInt(entry.Disqualified);
+                            const qualifiedValue = parseInt(entry.Qualified);
+                            disqualified.push(disqualifiedValue);
+                            qualified.push(qualifiedValue);
+                        });
+                        createQDChart(qualified, disqualified)
+
                     }, error: function (xhr, status, error) {
 
                     }
                 })
-            
+
+
             }
-            
+
             $("#tab333").on("click", function () {
                 getGraphData()
             })
-            $("#prospect-year").on("change",function(){
-                
+            $("#prospect-year").on("change", function () {
+
                 $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
                     headers: {
@@ -4791,27 +4963,128 @@ createQDChart(qualified, disqualified)
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        
-                        const qualified = [];
-const disqualified = [];
 
-response?.data?.forEach(entry => {
-    const month = entry.Month;
-    const disqualifiedValue = parseInt(entry.Disqualified);
-    const qualifiedValue = parseInt(entry.Qualified);
-        disqualified.push(disqualifiedValue);
-        qualified.push(qualifiedValue);
-});
-updateQDChart(qualified, disqualified)
-                   
+                        const qualified = [];
+                        const disqualified = [];
+
+                        response?.data?.forEach(entry => {
+                            const month = entry.Month;
+                            const disqualifiedValue = parseInt(entry.Disqualified);
+                            const qualifiedValue = parseInt(entry.Qualified);
+                            disqualified.push(disqualifiedValue);
+                            qualified.push(qualifiedValue);
+                        });
+                        updateQDChart(qualified, disqualified)
+
                     }, error: function (xhr, status, error) {
 
                     }
                 })
-            
+
 
             })
-            
+            $("#source-campaign-start-date").on("change", function () {
+
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${$(this).val()}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        console.log(response)
+                        if (response?.data) {
+                            const labels = [];
+                            const data = [];
+                            let countOthers = 0; // Initialize countOthers variable
+
+                            response?.data?.forEach(entry => {
+                                const source = entry.sourceCampaign == "NotFound" ? "Other" : entry.sourceCampaign;
+                                const count = entry.campaignCount;
+
+                                if (source == "Other") {
+                                    countOthers += count; // Accumulate count for "Other"
+                                } else {
+                                    labels.push(source);
+                                    data.push(count);
+                                }
+                            });
+
+                            // Add "Other" entry with calculated count
+                            if (countOthers > 0) {
+                                labels.push("Other");
+                                data.push(countOthers);
+                            }
+
+                            updateSourceCampaignChart(labels, data)
+                        }
+                        
+                        console.log(response)
+
+                    }, error: function (xhr, status, error) {
+
+                    }
+
+
+
+
+                })
+            })
+
+
+            $("#source-campaign-end-date").on("change", function () {
+
+$.ajax({
+    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
+    headers: {
+        authorization: "Bearer " + localStorage.getItem("authtoken")
+    },
+    contentType: "application/json",
+    type: "GET",
+    success: function (response) {
+        console.log(response)
+        if (response?.data) {
+            const labels = [];
+            const data = [];
+            let countOthers = 0; // Initialize countOthers variable
+
+            response?.data?.forEach(entry => {
+                const source = entry.sourceCampaign == "NotFound" ? "Other" : entry.sourceCampaign;
+                const count = entry.campaignCount;
+
+                if (source == "Other") {
+                    countOthers += count; // Accumulate count for "Other"
+                } else {
+                    labels.push(source);
+                    data.push(count);
+                }
+            });
+
+            // Add "Other" entry with calculated count
+            if (countOthers > 0) {
+                labels.push("Other");
+                data.push(countOthers);
+            }
+
+            updateSourceCampaignChart(labels, data)
+        }
+        else{
+            console.log("No data")
+            updateSourceCampaignChart([], [])
+        }
+        
+
+    }, error: function (xhr, status, error) {
+
+    }
+
+
+
+
+})
+})
+
             $("#prospect-status-start-date").on("change", function () {
 
                 $.ajax({
@@ -4875,7 +5148,7 @@ updateQDChart(qualified, disqualified)
 
             }
             function resetAccordion() {
-                $('#firstName,#middleName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
+                $('#firstName ,#lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function () {
                     if ($(this).is('select')) {
                         // If it's a select box, select the first option
                         $(this).prop('selectedIndex', 0);
@@ -4887,7 +5160,7 @@ updateQDChart(qualified, disqualified)
                     $(this).removeClass('border-danger');
                     $(this).next('.text-danger').addClass('d-none');
                 });
-                $('#firstName_update,#middleName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
+                $('#firstName_update ,#lastName_update, #phone2,#email_update ,#propertyInfo_update, #unitInfo_update, #propertyDetail_update,#status_update ,#sourceCampaign_update').each(function () {
                     if ($(this).is('select')) {
                         // If it's a select box, select the first option
                         $(this).prop('selectedIndex', 0);
@@ -4909,14 +5182,14 @@ updateQDChart(qualified, disqualified)
                 $('#moveInDate, #potentialRentAmount').removeClass('border-danger border-green');
                 $('#moveInDate_update, #potentialRentAmount_update').next('.text-danger').addClass('d-none');
                 $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
-           $(".accordion-item .icon").eq(1).removeClass("fi-rs-check-circle");
-           $(".accordion-item .icon").eq(1).removeClass("tick cross");
-           $(".accordion-item .icon").eq(1).addClass("fi fi-rs-angle-circle-down");
-           
-           $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
-           $(".accordion-item .icon").eq(0).removeClass("fi-rs-check-circle");
-           $(".accordion-item .icon").eq(0).removeClass("tick cross");
-           $(".accordion-item .icon").eq(0).addClass("fi fi-rs-angle-circle-down chevron");
+                $(".accordion-item .icon").eq(1).removeClass("fi-rs-check-circle");
+                $(".accordion-item .icon").eq(1).removeClass("tick cross");
+                $(".accordion-item .icon").eq(1).addClass("fi fi-rs-angle-circle-down chevron");
+
+                $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
+                $(".accordion-item .icon").eq(0).removeClass("fi-rs-check-circle");
+                $(".accordion-item .icon").eq(0).removeClass("tick cross");
+                $(".accordion-item .icon").eq(0).addClass("fi fi-rs-angle-circle-down chevron");
 
 
             }
@@ -4941,7 +5214,7 @@ updateQDChart(qualified, disqualified)
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
-                                    prospectusStatus: "Qualified"
+                                    prospectusStatus: "qualified"
                                 }),
                                 contentType: 'application/json',
                                 headers: {
@@ -4950,7 +5223,7 @@ updateQDChart(qualified, disqualified)
                                 success: function (response) {
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
-                                    // getData()
+                                    countValues()
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error updating status:', error);
@@ -4963,7 +5236,7 @@ updateQDChart(qualified, disqualified)
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
-                                    prospectusStatus: "Disqualified"
+                                    prospectusStatus: "disqualified"
                                 }),
                                 contentType: 'application/json',
                                 headers: {
@@ -4973,6 +5246,7 @@ updateQDChart(qualified, disqualified)
                                     console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
                                     // getData()
+                                    countValues()
 
                                 },
                                 error: function (xhr, status, error) {
@@ -5074,20 +5348,18 @@ updateQDChart(qualified, disqualified)
                 prospectID = $(this).attr("id");
                 $("#myModal_delete").modal("show")
             })
-            $("#confirmDelete").on("click",function()
-            {
+            $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url:`https://backend.app.spaderent.com/api/spade/deleteProspectus/${prospectID}`,
-                    type:"DELETE",
-                    data:JSON.stringify({
-                        prospectusid:prospectID
+                    url: `https://backend.app.spaderent.com/api/spade/deleteProspectus/${prospectID}`,
+                    type: "DELETE",
+                    data: JSON.stringify({
+                        prospectusid: prospectID
                     }),
-                    contentType:"application/json",
-                    headers:{
-                        authorization:"Bearer "+localStorage.getItem("authtoken")
+                    contentType: "application/json",
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
-                    success:function(response)
-                    {
+                    success: function (response) {
                         $("#myModal_delete").modal("hide")
                         $("#myModal_success_delete").modal("show");
                         setTimeout(function () {
@@ -5097,8 +5369,7 @@ updateQDChart(qualified, disqualified)
 
                         }, 2000);
                     },
-                    error:function(xhr,status,error)
-                    {
+                    error: function (xhr, status, error) {
                         console.log(xhr)
                         $("#myModal_delete").modal("hide")
                         $("#myModal_warning_connection").modal("show");
@@ -5117,7 +5388,7 @@ updateQDChart(qualified, disqualified)
                 })
                 prospectusStatus = filteredData.prospectus.prospectusStatus;
                 $("#firstName_update").val(filteredData.prospectus.firstName);
-                $("#middleName_update").val(filteredData.prospectus.middleName);
+                // $("#middleName_update").val(filteredData.prospectus.middleName);
                 $("#lastName_update").val(filteredData.prospectus.lastName);
                 $("#phone2").val(filteredData.prospectus.phoneNumber);
                 $("#email_update").val(filteredData.prospectus.email);
@@ -5128,6 +5399,7 @@ updateQDChart(qualified, disqualified)
                     .text(filteredData.property.unitNumber)
                     .val(filteredData.prospectus.unitInfo).prop("selected", true));
                 $("#propertyDetail_update").val(filteredData.prospectus.prospectDetail);
+                // $("#sourceCampaign_update").val(filteredData.prospectus.sourceCampaign);
                 $("#sourceCampaign_update").append($('<option></option>')
                     .text(filteredData.prospectus.sourceCampaign)
                     .prop("selected", true));
@@ -5143,69 +5415,149 @@ updateQDChart(qualified, disqualified)
                 e.preventDefault();
 
                 var firstName = $("#firstName").val();
-                var middleName = $("#middleName").val();
+                // var middleName = $("#middleName").val();
                 var lastName = $("#lastName").val();
                 var phone = $("#phone").val();
                 var email = $("#email").val();
                 var propertyInfo = $("#propertyInfo").val();
                 var unitInfo = $("#unitInfo").val();
                 var propertyDetail = $("#propertyDetail").val();
-                var sourceCampaign = $("#sourceCampaign").val();
                 var moveInDate = $("#moveInDate").val();
                 var potentialRentAmount = $("#potentialRentAmount").val();
                 var status = $("#status").val();
-                var data = {
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    phoneNumber: phone,
-                    email: email,
-                    propertyInfo: propertyInfo,
-                    unitInfo: unitInfo,
-                    prospectDetail: propertyDetail,
-                    sourceCampaign: sourceCampaign,
-                    moveDate: moveInDate,
-                    rentAmount: potentialRentAmount,
-                    prospectusStatus: "active"
-                }
+                var sourceCampaign;
                 $("#addModal").modal("hide")
-
-
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
-                    type: 'POST',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        if (response.message == " prospectus created successful") {
-                            $("#myModal_success").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_success').modal('hide');
-                                resetAccordion()
-                                getData()
-
-                            }, 2000);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        if (xhr.responseJSON.error === 'No data found') {
-                            $('#addModal').modal('hide');
-                            $('#infoModal').modal('show');
-                            setTimeout(function () {
-                                $('#infoModal').modal('hide');
-                            }, 2000);
-                        } else {
-                            $('#addModal').modal('hide');
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
-                        }
+                $('#addProspectSourceCol').css('display', 'none')
+                console.log($("#addProspectSource").val())
+                if ($("#sourceCampaign").val() !== "Choose..." && $("#addProspectSource").val() == "") {
+                    sourceCampaign = $("#sourceCampaign").val();
+                    var data = {
+                        firstName: firstName,
+                        lastName: lastName,
+                        phoneNumber: phone,
+                        email: email,
+                        propertyInfo: propertyInfo,
+                        unitInfo: unitInfo,
+                        prospectDetail: propertyDetail,
+                        sourceCampaign: sourceCampaign,
+                        moveDate: moveInDate,
+                        rentAmount: potentialRentAmount,
+                        prospectusStatus: "active"
                     }
-                });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            if (response.message == " prospectus created successful") {
+                                $("#myModal_success").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_success').modal('hide');
+                                    resetAccordion()
+                                    getData()
+
+                                }, 2000);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            if (xhr.responseJSON.error === 'No data found') {
+                                $('#addModal').modal('hide');
+                                $('#infoModal').modal('show');
+                                setTimeout(function () {
+                                    $('#infoModal').modal('hide');
+                                }, 2000);
+                            } else {
+                                $('#addModal').modal('hide');
+                                $("#myModal_warning_connection").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_warning_connection').modal('hide');
+                                }, 2000);
+                            }
+                        }
+                    });
+
+                } else {
+                    sourceCampaign = JSON.parse(`["${$("#addProspectSource").val()}"]`);
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            Sourcess: sourceCampaign
+                        }),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log("prospectusSources");
+                            console.log(response.insertedSources[0])
+                            console.log(response.message)
+                            if (response.message == "prospectus Sources added successfully") {
+                                var sourceCampaign = response.insertedSources[0].insertId;
+                                var data = {
+                                    firstName: firstName,
+                                    lastName: lastName,
+                                    phoneNumber: phone,
+                                    email: email,
+                                    propertyInfo: propertyInfo,
+                                    unitInfo: unitInfo,
+                                    prospectDetail: propertyDetail,
+                                    sourceCampaign: sourceCampaign,
+                                    moveDate: moveInDate,
+                                    rentAmount: potentialRentAmount,
+                                    prospectusStatus: "active"
+                                }
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                                    type: 'POST',
+                                    data: JSON.stringify(data),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        if (response.message == " prospectus created successful") {
+                                            $("#myModal_success").modal("show");
+                                            setTimeout(function () {
+                                                $('#myModal_success').modal('hide');
+                                                resetAccordion()
+                                                getData()
+
+                                            }, 2000);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        if (xhr.responseJSON.error === 'No data found') {
+                                            $('#addModal').modal('hide');
+                                            $('#infoModal').modal('show');
+                                            setTimeout(function () {
+                                                $('#infoModal').modal('hide');
+                                            }, 2000);
+                                        } else {
+                                            $('#addModal').modal('hide');
+                                            $("#myModal_warning_connection").modal("show");
+                                            setTimeout(function () {
+                                                $('#myModal_warning_connection').modal('hide');
+                                            }, 2000);
+                                        }
+                                    }
+                                });
+
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+
+
+                }
+
 
 
 
@@ -5327,68 +5679,68 @@ updateQDChart(qualified, disqualified)
     <script>
         var ctx1 = document.getElementById("chartBar2");
         var myChart;
-       function createQDChart(qualified,disqualified){
-        
-        myChart = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"],
-                datasets: [{
-                    label: "Disqualified",
-                    data: disqualified,
-                    borderColor: "#FF2366",
-                    borderWidth: "0",
-                    backgroundColor: "#FF2366"
-                }, {
-                    label: "Qualified",
-                    data: qualified,
-                    borderColor: "#02BC77",
-                    borderWidth: "0",
-                    backgroundColor: "#02BC77"
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        barPercentage: 0.4,
-                        barValueSpacing: 0,
-                        barDatasetSpacing: 0,
-                        barRadius: 0,
-                        ticks: {
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        },
+        function createQDChart(qualified, disqualified) {
+
+            myChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEP", "OCT", "NOV", "DEC"],
+                    datasets: [{
+                        label: "Disqualified",
+                        data: disqualified,
+                        borderColor: "#FF2366",
+                        borderWidth: "0",
+                        backgroundColor: "#FF2366"
+                    }, {
+                        label: "Qualified",
+                        data: qualified,
+                        borderColor: "#02BC77",
+                        borderWidth: "0",
+                        backgroundColor: "#02BC77"
                     }]
                 },
-                legend: {
-                    labels: {
-                        fontColor: "#9ba6b5"
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            barPercentage: 0.4,
+                            barValueSpacing: 0,
+                            barDatasetSpacing: 0,
+                            barRadius: 0,
+                            ticks: {
+                                fontColor: "#9ba6b5",
+                            },
+                            gridLines: {
+                                color: 'rgba(119, 119, 142, 0.2)'
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: "#9ba6b5",
+                            },
+                            gridLines: {
+                                color: 'rgba(119, 119, 142, 0.2)'
+                            },
+                        }]
                     },
-                },
-            }
-        });
-    
-       }
-         
-       function updateQDChart(qualified,disqualified){
-        myChart.data.datasets[0].data = disqualified;
-        myChart.data.datasets[1].data = qualified;
-        myChart.update();
-       }
-         
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
+                        },
+                    },
+                }
+            });
+
+        }
+
+        function updateQDChart(qualified, disqualified) {
+            myChart.data.datasets[0].data = disqualified;
+            myChart.data.datasets[1].data = qualified;
+            myChart.update();
+        }
+
     </script>
     <!-- /Qualified or Un-Qualified chart-bar/ -->
 
@@ -5462,70 +5814,80 @@ updateQDChart(qualified, disqualified)
     <!-- /* Source Close*/ -->
     <script>
         var ctx = document.getElementById("chartBar11").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Referel", "Social Media", "Google"],
-                datasets: [{
-                    label: 'Sales',
-                    data: [70, 110, 40],
-                    borderWidth: 2,
-                    backgroundColor: ['#09AD95', '#2086C8', '#000'],
-                    borderColor: ['#09AD95', '#2086C8', '#000'],
-                    borderWidth: 2.0,
-                    pointBackgroundColor: '#ffffff',
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: true
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 150,
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        }
-                    }],
-                    xAxes: [{
-                        barPercentage: 0.9,
-                        barValueSpacing: 0,
-                        barDatasetSpacing: 0,
-                        barRadius: 0,
-                        ticks: {
-                            display: true,
-                            fontColor: "#9ba6b5",
-                        },
-                        gridLines: {
-                            display: false,
-                            color: 'rgba(119, 119, 142, 0.2)'
-                        }
+        var myChart1;
+        function createSourceCampaignChart(labels, data) {
+            myChart1 = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sales',
+                        data: data,
+                        borderWidth: 2,
+                        backgroundColor: ['#09AD95', '#2086C8', '#000'],
+                        borderColor: ['#09AD95', '#2086C8', '#000'],
+                        borderWidth: 2.0,
+                        pointBackgroundColor: '#ffffff',
                     }]
                 },
-                legend: {
-                    labels: {
-                        fontColor: "#9ba6b5"
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true
                     },
-                },
-                tooltips: {
-                    enabled: true,
-                    mode: 'single',
-                    callbacks: {
-                        label: function (tooltipItem, data) {
-                            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                            return value;
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 150,
+                                fontColor: "#9ba6b5",
+                            },
+                            gridLines: {
+                                color: 'rgba(119, 119, 142, 0.2)'
+                            }
+                        }],
+                        xAxes: [{
+                            barPercentage: 0.9,
+                            barValueSpacing: 0,
+                            barDatasetSpacing: 0,
+                            barRadius: 0,
+                            ticks: {
+                                display: true,
+                                fontColor: "#9ba6b5",
+                            },
+                            gridLines: {
+                                display: false,
+                                color: 'rgba(119, 119, 142, 0.2)'
+                            }
+                        }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#9ba6b5"
                         },
                     },
-                },
-            }
-        });
+                    tooltips: {
+                        enabled: true,
+                        mode: 'single',
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return value;
+                            },
+                        },
+                    },
+                }
+            });
 
+
+        }
+
+        function updateSourceCampaignChart(labels, data) {
+            myChart1.data.labels = labels;
+            myChart1.data.datasets[0].data = data;
+            myChart1.update();
+        }
 
     </script>
 
@@ -5580,7 +5942,96 @@ updateQDChart(qualified, disqualified)
         });
 
     </script>
-      <script>
+    <script>
+        const input0 = document.querySelector("#phone");
+        const errorMsg = document.querySelector("#error-msg");
+        const validMsg = document.querySelector("#valid-msg");
+
+        // here, the index maps to the error code returned from getValidationError - see readme
+        const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+        // initialise plugin
+        const iti = window.intlTelInput(input0, {
+            utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+        });
+
+        const reset = () => {
+            input0.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("d-none");
+            validMsg.classList.add("d-none");
+        };
+
+        // on blur: validate
+        input0.addEventListener('input', () => {
+            // alert(1)
+            reset();
+            console.log("in phone input")
+            if (input0.value.trim()) {
+                if (iti.isValidNumber()) {
+                    validMsg.classList.remove("d-none");
+                    phoneError = false
+                    input0.classList.remove("is-invalid");
+                    input0.classList.add("is-valid");
+                } else {
+                    input0.classList.add("is-invalid");
+                    input0.classList.remove("is-valid");
+                    phoneError = true
+                    input0.classList.add("error");
+                    const errorCode = iti.getValidationError();
+                    errorMsg.innerHTML = errorMap[errorCode];
+                    errorMsg.classList.remove("d-none");
+                }
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            const input2 = $("#phone2");
+            const errorMsg2 = $("#error-msg2");
+            const validMsg2 = $("#valid-msg2");
+
+            // here, the index maps to the error code returned from getValidationError - see readme
+            const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            // initialise plugin
+            const iti2 = window.intlTelInput(input2[0], {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset2 = () => {
+                input2.removeClass("error");
+                errorMsg2.html("");
+                errorMsg2.addClass("d-none");
+                validMsg2.addClass("d-none");
+            };
+
+            // on blur: validate
+            input2.on('input', function () {
+                // alert(1);
+                reset2();
+                console.log("in phone input");
+                if (input2.val().trim()) {
+                    if (iti2.isValidNumber()) {
+                        validMsg2.removeClass("d-none");
+                        phoneError2 = false;
+                        input2.removeClass("is-invalid");
+                        input2.addClass("is-valid");
+                    } else {
+                        input2.addClass("is-invalid");
+                        input2.removeClass("is-valid");
+                        phoneError2 = true;
+                        input2.addClass("error");
+                        const errorCode2 = iti2.getValidationError();
+                        errorMsg2.html(errorMap2[errorCode2]);
+                        errorMsg2.removeClass("d-none");
+                    }
+                }
+            });
+        });
+
+    </script>
+    <!-- <script>
         $(document).ready(function () {
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -5617,8 +6068,217 @@ updateQDChart(qualified, disqualified)
                 loadScripts()
             });
         });
-    </script>
+    </script> -->
     <!-- export button End  -->
+    <script>
+        $(document).change(function () {
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        document.getElementById("download_pdf_reports").addEventListener("click", () => {
+
+            const invoice = this.document.getElementById("tab33");
+            var opt = {
+                margin: 0.1,
+                filename: `${name}.pdf`,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A2',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+    </script>
+    <script>
+        $(document).change(function () {
+
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+        $(document).ajaxStop(function () {
+            // alert(1)
+            if ($('#typehead').val() == "") {
+
+                let count = 1;
+                $("#table-body tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead1').val() == "") {
+
+                let count = 1;
+                $("#table-body-disqualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+
+                let count = 1;
+                $("#table-body-qualified tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>

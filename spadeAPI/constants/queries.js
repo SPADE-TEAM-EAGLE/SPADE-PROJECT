@@ -632,12 +632,12 @@ exports.updateUnitsTenant =
   "UPDATE propertyunits SET  status = ?  where id = ? ";
 exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
-INNER JOIN property AS p ON t.propertyID = p.id
+LEFT JOIN property AS p ON t.propertyID = p.id
 LEFT JOIN invoice AS i ON t.id = i.tenantID
 LEFT JOIN users AS l ON t.landlordID=l.id
 
-INNER JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
-INNER JOIN propertyimage AS pi ON p.id = pi.propertyID
+LEFT JOIN propertyunits AS pu ON t.propertyUnitID = pu.id
+LEFT JOIN propertyimage AS pi ON p.id = pi.propertyID
 WHERE t.id = ?
 GROUP BY t.id;`;
 exports.updateTenantsProfile =
@@ -1063,9 +1063,9 @@ exports.updateAuthQueryTenant=`UPDATE tenants SET auth = ? WHERE id = ?`;
 exports.updateAuthQuery=`UPDATE users SET auth = ? WHERE id = ?`;
 exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
 exports.updateEmailTemplates = "UPDATE users SET tenantEmail = ? , invoiceEmail = ?, taskEmail = ?, userEmail = ? WHERE id = ? ";
-exports.addProspectusQuery = "INSERT INTO prospectus (landlordId,firstName,middleName,lastName,phoneNumber,email,propertyInfo,unitInfo,prospectDetail,sourceCampaign,moveDate,rentAmount,prospectusStatus,createdDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+exports.addProspectusQuery = "INSERT INTO prospectus (landlordId,firstName,lastName,phoneNumber,email,propertyInfo,unitInfo,prospectDetail,sourceCampaign,moveDate,rentAmount,prospectusStatus,createdDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.getProspectusByIdQuery = `SELECT p.propertyName, p.address, p.city, p.state, p.zipCode, pu.unitNumber, pu.Area, pu.unitDetails, pu.status, (SELECT count(unitNumber) from propertyunits WHERE propertyID = p.id )as totalunits , (SELECT count(unitNumber) from propertyunits WHERE status = "Occupied" AND propertyID = p.id )as totalOccupied,  (SELECT count(unitNumber) from propertyunits WHERE status = "Vacant" AND propertyID = p.id )as totalVacant FROM property as p join propertyunits as pu on pu.propertyID = p.id where p.id = ? and pu.id = ?`;
-exports.UpdateProspectusQuery = "UPDATE prospectus set firstName = ? , middleName = ? , lastName = ? , phoneNumber = ? , email = ? , propertyInfo = ? , unitInfo = ? , prospectDetail = ? , sourceCampaign = ? , rentAmount = ? , prospectusStatus = ? , updatedDate = ? WHERE id = ?";
+exports.UpdateProspectusQuery = "UPDATE prospectus set firstName = ? , lastName = ? , phoneNumber = ? , email = ? , propertyInfo = ? , unitInfo = ? , prospectDetail = ? , sourceCampaign = ? , rentAmount = ? , prospectusStatus = ? , updatedDate = ? WHERE id = ?";
 exports.UpdateProspectusStatusQuery = "UPDATE prospectus set prospectusStatus = ? , updatedDate = ? WHERE id = ?";
 // exports.prospectusInsightQD = "SELECT SUM(CASE WHEN prospectusStatus = 'DisQualified' THEN 1 ELSE 0 END) AS disqualified, SUM(CASE WHEN prospectusStatus = 'Qualified' THEN 1 ELSE 0 END) AS Qualified FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
 exports.prospectusInsightQD = "WITH Months AS (SELECT 1 AS Month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12 ) SELECT m.Month AS Month, COALESCE(SUM(CASE WHEN p.prospectusStatus = 'DisQualified' THEN 1 ELSE 0 END), 0) AS Disqualified, COALESCE(SUM(CASE WHEN p.prospectusStatus = 'Qualified' THEN 1 ELSE 0 END), 0) AS Qualified FROM Months m LEFT JOIN spade_Rent.prospectus p ON m.Month = EXTRACT(MONTH FROM p.createdDate) AND EXTRACT(YEAR FROM p.createdDate) = ? AND p.landlordId = ? GROUP BY m.Month ORDER BY m.Month";
@@ -1076,5 +1076,7 @@ exports.updateUserEmail =
 "UPDATE users SET Email = ?, updated_at = ? where id = ?";
 exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";
 exports.prospectusTimeQuery = "SELECT firstName, lastName, prospectusStatus, email FROM spade_Rent.prospectus WHERE  landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
-// exports.CheckTenant =
-//   "UPDATE propertyunits SET  status = ?  where id = ? ";
+exports.checkUpaidInvoiceQuery = `SELECT firstName, lastName, email FROM tenants join invoice on tenants.id = invoice.tenantID WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'`;
+exports.addProspectusSources = "INSERT INTO prospectusSources (landlordId,sourcesCampaign) VALUES (?,?)";
+exports.sourcesCampaignInsight = "SELECT COUNT(*) AS campaignCount, CASE WHEN ps.sourcesCampaign IS NOT NULL THEN ps.sourcesCampaign ELSE 'NotFound' END AS sourceCampaign FROM prospectus p LEFT JOIN prospectusSources ps ON p.sourceCampaign = ps.id WHERE p.landlordId = ? AND p.createdDate >= ? AND p.createdDate <= ? GROUP BY p.sourceCampaign ORDER BY p.sourceCampaign DESC";
+exports.dashboardProspectusInsight = "SELECT prospectusStatus, COUNT(*) AS count FROM prospectus GROUP BY prospectusStatus HAVING prospectusStatus IN ('qualified', 'disqualified') UNION ALL SELECT 'Active' AS prospectusStatus, COUNT(*) AS count FROM prospectus WHERE prospectusStatus NOT IN ('Qualified', 'Disqualified') AND landlordId = ? AND createdDate >= ? AND createdDate <= ?";
