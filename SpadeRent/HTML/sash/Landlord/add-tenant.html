@@ -1542,7 +1542,7 @@
                                             lease? <i class="fi fi-rs-info ms-2" style="color: #1467B0"></i></label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="Gross Lease"
-                                                name="lease" id="flexCheckDefault">
+                                                name="lease" id="flexCheckDefault" checked>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 Gross Lease
                                             </label>
@@ -1604,6 +1604,35 @@
                                                                 Date</label>
 
                                                             <input type="date" class="form-control" id="leaseEnd"
+                                                                required placeholder="Enter Lease End Date">
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                        <!-- <input type="date" class="form-control input-date" id="middledate" required> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="collapse show" id="collapse3">
+                                            <div class="card card-body">
+                                                <div class="text-justify ps-2 border-model-line">
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-md-6">
+                                                            <label for="inputEmail4" class="form-label">Lease Start
+                                                                Date</label>
+                                                            <input type="date" class="form-control position-relative"
+                                                                id="leaseStart2" placeholder="Enter Lease Start Date">
+                                                            <span class="text-danger d-none">Rent amount is
+                                                                required!</span>
+                                                            <!-- <i class="fi fi-rs-calendar"></i> -->
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="inputPassword4" class="form-label">Lease End
+                                                                Date</label>
+
+                                                            <input type="date" class="form-control" id="leaseEnd2"
                                                                 required placeholder="Enter Lease End Date">
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -3859,18 +3888,26 @@
             });
             $('input[name="lease"]').change(function () {
                 if ($(this).val() === 'Triple Net Lease') {
-                    if (!$('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('show');
-                    }
+                    // if (!$('#collapse1').hasClass('show')) {
+                    //     $('#collapse1').collapse('show');
+                    // }
+                    $('#collapse1').collapse('show');
+                    $('#collapse3').collapse('hide');
                     $('#baseRent').prop('required', true);
                     $('#tripleNet').prop('required', true);
                     $('#leaseStart').prop('required', true);
                     $('#leaseEnd').prop('required', true);
+                    $('#leaseStart2').prop('required', false);
+                    $('#leaseEnd2').prop('required', false);
                 } else if ($(this).val() === 'Gross Lease') {
 
-                    if ($('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('hide');
-                    }
+                    // if ($('#collapse1').hasClass('show')) {
+                    //     $('#collapse1').collapse('hide');
+                    // }
+                    $('#collapse1').collapse('hide');
+                    $('#collapse3').collapse('show');
+                    $('#leaseStart2').prop('required', true);
+                    $('#leaseEnd2').prop('required', true);
                     $('#baseRent').prop('required', false);
                     $('#tripleNet').prop('required', false);
                     $('#leaseStart').prop('required', false);
@@ -3901,10 +3938,18 @@
 
                 // Get Lease Details
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
+                if(formData.gross_or_triple_lease == "Gross Lease"){
+                    formData.leaseStartDate = document.getElementById('leaseStart2').value;
+                formData.leaseEndDate = document.getElementById('leaseEnd2').value;
                 formData.baseRent = document.getElementById('baseRent').value;
-                formData.tripleNet = document.getElementById('tripleNet').value;
-                formData.leaseStartDate = document.getElementById('leaseStart').value;
-                formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                    formData.tripleNet = document.getElementById('tripleNet').value;
+                }else{
+
+                    formData.baseRent = document.getElementById('baseRent').value;
+                    formData.tripleNet = document.getElementById('tripleNet').value;
+                    formData.leaseStartDate = document.getElementById('leaseStart').value;
+                    formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                }
                 formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
 
 
@@ -4010,8 +4055,16 @@
                     $("#leaseStart").val(tenants.leaseStartDate)
                     $("#leaseEnd").val(tenants.leaseEndDate)
                 } else {
-                    console.log('value="Gross Lease"')
+                    $("#collapse3").addClass('show')
                     $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
+                 
+                    $('#leaseStart2').prop('required', true);
+                    $('#leaseEnd2').prop('required', true);
+                  
+                    $("#leaseStart2").val(tenants.leaseStartDate)
+                    $("#leaseEnd2").val(tenants.leaseEndDate)
+                    // $("#baseRent").val("")
+                    // $("#tripleNet").val("")
                 }
                 if (tenants.increaseRent === "yes") {
                     $("#collapse2").addClass('show')
