@@ -2443,7 +2443,6 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         row.append('<td><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + item.propertyType + '</span></a></td>');
                         row.append('<td>' + item.pUnits + ' Unit(s)</td>');
                         var currentDate = new Date();
-                        var currentDate = new Date();
 var leaseEndDate = '';
 if (item.leaseEndDate) {
 
@@ -2451,16 +2450,21 @@ if (item.leaseEndDate) {
     var timeDiff = targetDate.getTime() - currentDate.getTime();
     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
-    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+    var year = targetDate.getFullYear().toString().slice(-2);
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+    var day = targetDate.getDate().toString().padStart(2, '0');
 
     var formattedEndDate = `${month}-${day}-${year}`;
 
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    if (daysLeft < 0) {
+        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + 'Overdue' + '</td>';
+    } else {
+        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    }
 } else {
     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${item.leaseEndDate ? item.leaseEndDate : "N/A"}` + '</td>';
 }
+
 row.append(leaseEndDate);
                         $('#table_body').append(row);
                     });

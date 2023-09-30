@@ -107,16 +107,13 @@ exports.getProspectus = async (req, res) => {
             const firstProspectusResult = getProspectusResult[0][i];
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
-const SourceData = {
-    Source: Source,
-};
-prospectusDataArray.push(SourceData);
 
             const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
             const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : [];
             const prospectusData = {
                 prospectus: firstProspectusResult,
                 property: property,
+                Source: Source,
             };
             prospectusDataArray.push(prospectusData);
 
@@ -165,10 +162,6 @@ exports.getProspectusByID = async (req, res) => {
 
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
-const SourceData = {
-Source: Source,
-};
-prospectusDataArray.push(SourceData);
         // ##############################################################################
 
         const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
@@ -176,6 +169,7 @@ prospectusDataArray.push(SourceData);
         const prospectusData = {
             prospectus: firstProspectusResult,
             property: getPropertyResult[0][0],
+            Source: Source,
         };
 
         prospectusDataArray.push(prospectusData);

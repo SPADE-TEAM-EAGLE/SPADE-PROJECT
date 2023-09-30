@@ -2409,7 +2409,7 @@ var password = 'your-secret-password';
 const prospectId = sjcl.decrypt(password, encryptedProspectId);
 // Assuming response.data is an array of objects containing prospectus and property data
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/getProspectusByID',
+    url: 'http://localhost:3000/api/spade/getProspectusByID',
     type: 'GET',
     data:{
         prospectusId: prospectId
@@ -2513,7 +2513,7 @@ $.ajax({
         $("#prospect-email").text(response.data[0].prospectus.email)
         $("#prospect-phone").text(response.data[0].prospectus.phoneNumber)
         $("#prospect-detail").text(response.data[0].prospectus.prospectDetail)
-        $("#prospect-source").text(response.data[0].prospectus.sourceCampaign)
+        $("#prospect-source").text(response.data[0].Source.sourcesCampaign)
         $("#prospect-amount").text("$ "+response.data[0].prospectus.rentAmount)
         $("#prospect-movein").text(response.data[0].prospectus.moveDate)
         $("#user-address").text(response.data[0].property.address+" | "+response.data[0].property.city+" | "+response.data[0].property.state+" | "+response.data[0].property.zipCode)

@@ -1178,7 +1178,7 @@
                                         <!-- <input type="text" id="sourceCampaign_update" class="form-control form"
                                             placeholder="Enter Source Campaign" required> -->
                                         <select id="sourceCampaign_update"
-                                            class="form-select form mb-2 select2-show-search">
+                                            class="form-select form mb-2">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
@@ -4584,12 +4584,14 @@
                     propertyInfo: $("#propertyInfo_update").val(),
                     unitInfo: $("#unitInfo_update").val(),
                     prospectDetails: $("#propertyDetail_update").val(),
-                    sourceCampaign: $("#sourceCampaign_update").val(),
-                    addProspectSource: $("#addProspectSource1").val(),
+                    // sourceCampaign: $("#sourceCampaign_update").val(),
+                    // addProspectSource: $("#addProspectSource1").val(),
                     prospectusStatus,
                     prospectusid: prospectID
                 }
-                $.ajax({
+                if($("#sourceCampaign_update").val() !== "Choose..." && $("#addProspectSource1").val() == ""){
+                    data.sourceCampaign = $("#sourceCampaign_update").val()
+                    $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
                     type: "PUT",
                     data: JSON.stringify(data),
@@ -4614,6 +4616,62 @@
                         }, 2000);
                     }, data: JSON.stringify(data)
                 })
+            
+                }else{
+                    sourceCampaign = JSON.parse(`["${$("#addProspectSource1").val()}"]`);
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            Sourcess: sourceCampaign
+                        }),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log("prospectusSources");
+                            console.log(response.insertedSources[0])
+                            console.log(response.message)
+                            if (response.message == "prospectus Sources added successfully") {
+                                var sourceCampaign = response.insertedSources[0].insertId;
+                                data.sourceCampaign = sourceCampaign
+                                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                    type: "PUT",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        $("#editModal").modal("hide");
+                        $("#myModal_success").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_success').modal('hide');
+                            getData()
+                        }, 2000);
+                    }, error: function (xhr, status, error) {
+                        $("#editModal").modal("hide");
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                            getData()
+                        }, 2000);
+                    }, data: JSON.stringify(data)
+                })
+            
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+
+                }
+            
             })
             $(document).on('keyup', '#typehead', function () {
                 var searchValue = $(this).val().toLowerCase();
@@ -4668,7 +4726,7 @@
                     return "$ " + amount;
                 }
             }
-            function populateCards(elem, prospectus, property) {
+            function populateCards(elem, prospectus, property,source) {
                 var password = 'your-secret-password';
                 var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
@@ -4719,24 +4777,56 @@
                 $("#table-body-qualified").empty()
                 // Assuming response.data is an array of objects containing prospectus and property data
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getProspectus',
+                    url:"http://localhost:3000/api/spade/getProspectusSources",
+                    type: 'GET',
+                    contentType: 'application/json',
+                    headers:{
+                        Authorization:"Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        if(response.message==" prospectus data not found"){
+
+                        }else{
+        //                     {
+        //     "id": 18,
+        //     "landlordId": "125",
+        //     "sourcesCampaign": "abc"
+        // },
+        $("#sourceCampaign").empty()
+        $("#sourceCampaign_update").empty()
+        $("#sourceCampaign").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
+        $("#sourceCampaign_update").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
+
+                            response.data.forEach(function(item){
+                                $("#sourceCampaign").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
+                                $("#sourceCampaign_update").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
+                            })
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                    }
+                })
+                $.ajax({
+                    url: 'http://localhost:3000/api/spade/getProspectus',
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response.data);
+                        
                         propsectData = response.data;
 
                         let totalRentDefault = 0;
-
+                        console.log(response.data)
 
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
                             var property = item?.property;
-
+                            var source=item?.Source;
+                                
                             row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
                             row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
@@ -4779,6 +4869,7 @@
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
+                                        
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
@@ -4809,14 +4900,14 @@
                             let elem;
 
                             if (prospectus?.prospectusStatus?.toLowerCase() == "engaged") {
-                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property);
+                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property,source);
 
                             } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
-                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property);
+                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property,source);
 
                             }
                             else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
-                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property);
+                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property,source);
                             }
                             countValues()
                         });
@@ -5401,9 +5492,8 @@ $.ajax({
                     .val(filteredData.prospectus.unitInfo).prop("selected", true));
                 $("#propertyDetail_update").val(filteredData.prospectus.prospectDetail);
                 // $("#sourceCampaign_update").val(filteredData.prospectus.sourceCampaign);
-                $("#sourceCampaign_update").append($('<option></option>')
-                    .text(filteredData.prospectus.sourceCampaign)
-                    .prop("selected", true));
+                $("#sourceCampaign_update option[value='" + filteredData.Source.id + "']").prop("selected", true);
+
                 $("#moveInDate_update").val(filteredData.prospectus.moveDate);
                 $("#potentialRentAmount_update").val(filteredData.prospectus.rentAmount);
                 $("#status_update").val(filteredData.prospectus.prospectusStatus);
