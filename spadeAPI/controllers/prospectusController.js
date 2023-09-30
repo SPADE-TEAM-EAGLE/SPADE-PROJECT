@@ -534,3 +534,73 @@ exports.sourcesCampaignInsight = async (req, res) => {
     }
 };
 //  #############################  Dashboard prospectus Insight END ##################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //  #############################  Insight Qualified & disQuilified Start ##################################################
+// exports.prospectusImage = async (req, res) => {
+    
+//     const fileName = req.files;
+//     const userId = "asdfg";
+//     try {
+//        console.log(fileName);
+//        console.log(req.files[0].filename);
+//         res.status(200).json({
+//             message: " prospectus successful",
+//             data : userId
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({
+//             message: "Error occur in prospectus Insight Qualified and Disqualified",
+//             error : error.message
+//         });
+//     }
+// };
+
+// //  #############################  Insight Qualified & disQuilified END ##################################################

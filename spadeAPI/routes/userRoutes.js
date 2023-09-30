@@ -14,6 +14,7 @@ const { chatsController } = require("../controllers/chatsController");
 const messageClt = require("../controllers/messageController");
 const leadsClt = require("../controllers/Leads");
 const paymentIntegration = require("../helper/paymentIntegration");
+const { upload } = require("../middleware/imageUploads");
 
 router.post("/Signup", userController.createUser);
 router.get("/tenantAllPaidInvoice", verifyTokenTenant, tenantController.tenantAllPaidInvoice);
@@ -236,7 +237,7 @@ router.put("/updateProspectusStatus", verifyToken, prospectus.updateProspectusSt
 router.get("/prospectusInsightQD/:year", verifyToken, prospectus.prospectusInsightQD);
 router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.prospectusInsightEN);
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
-router.put("/updateBusinessLogo", verifyToken, settingController.updateBusinessLogo);
+router.put("/updateBusinessLogo", [verifyToken, upload] ,settingController.updateBusinessLogo);
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
