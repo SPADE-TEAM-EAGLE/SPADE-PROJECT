@@ -12461,32 +12461,67 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     }
                     var str = "";
 
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
-                        type: 'POST',
-                        data: uploadFormData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            console.log(response.images[0]);
-                            // response.images?.forEach(function (value, index, array) {
-                            //     str += value.image_url;
-                            //     if (index < array.length - 1) {
-                            //         str += ",";
-                            //     }
-                            // });
+                    // $.ajax({
+                    //     url: 'https://backend.app.spaderent.com/api/spade/upload',
+                    //     type: 'POST',
+                    //     data: uploadFormData,
+                    //     contentType: false,
+                    //     processData: false,
+                    //     headers: {
+                    //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    //     },
+                    //     success: function (response) {
+                    //         console.log(response.images[0]);
+                    //         $.ajax({
+                    //             url: 'http://localhost:3000/api/spade/updateBusinessLogo',
+                    //             type: 'PUT',
+                    //             data: JSON.stringify({
+                    //                 image: response.images[0].image_url,
+                    //                 imageKey: response.images[0].image_key
+                    //             }),
+                    //             contentType: 'application/json',
+                    //             processData: false,
+                    //             headers: {
+                    //                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    //             },
+                    //             success: function (response) {
+                    //                 console.log(response);
+                    //                 if (response.message == " Business Logo save successful") {
+                    //                     $("#myModal_success p").text("Succesfully Updated!!!")
+                    //                     $("#myModal_success").modal("show")
+                    //                     setTimeout(function () {
+                    //                         $("#myModal_success").modal("hide");
+                    //                     }, 2000);
+                    //                 }
+                    //             },
+                    //             error: function (xhr, status, error) {
+                    //                 console.log('Error: ' + error);
+                    //                 $("#myModal_warning_connection").modal("show");
+                    //                 setTimeout(function () {
+                    //                     $('#myModal_warning_connection').modal('hide');
 
-                            $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateBusinessLogo',
+                    //                 }, 2000);
+                    //             }
+                    //         });
+
+
+
+                    //     },
+                    //     error: function (xhr, status, error) {
+                    //         $("#myModal_warning_connection").modal("show");
+                    //         setTimeout(function () {
+                    //             $('#myModal_warning_connection').modal('hide');
+
+                    //         }, 2000);
+                    //         console.log('Error: ' + error);
+                    //     }
+                    // });
+// console.log(uploadFormData);
+                    $.ajax({
+                                url: 'http://localhost:3000/api/spade/updateBusinessLogo',
                                 type: 'PUT',
-                                data: JSON.stringify({
-                                    image: response.images[0].image_url,
-                                    imageKey: response.images[0].image_key
-                                }),
-                                contentType: 'application/json',
+                                data: uploadFormData,
+                                contentType: false,
                                 processData: false,
                                 headers: {
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -12511,18 +12546,6 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 }
                             });
 
-
-
-                        },
-                        error: function (xhr, status, error) {
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-
-                            }, 2000);
-                            console.log('Error: ' + error);
-                        }
-                    });
 
                 }
 
