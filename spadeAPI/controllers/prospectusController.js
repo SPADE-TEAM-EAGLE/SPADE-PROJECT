@@ -17,7 +17,8 @@ const {
     prospectusInsightEN,
     prospectusTimeQuery,
     addProspectusSources,
-    sourcesCampaignInsight
+    sourcesCampaignInsight,
+    dashboardProspectusInsight
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
