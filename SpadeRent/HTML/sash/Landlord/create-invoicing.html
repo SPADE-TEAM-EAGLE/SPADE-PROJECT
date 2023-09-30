@@ -5049,14 +5049,15 @@
                     filterInvoiceData("Recurring Invoice")
                 })
                 $(document).on("click", "#tenants,#tenants_update", function () {
-                    console.log("clicked", $("#tenants").attr("data-value"))
-                    const property = $("#tenants").attr("data-value")
+                    console.log("clicked", $(this).attr("data-value"))
+                    const property = $(this).attr("data-value")
                     console.log("property", property)
                     const propertyName = tenantData.filter((tenant) => {
                         if (tenant.tenantID == property) {
                             return tenant.propertyName
                         }
                     })
+                    console.log("property",propertyName)
                     $("#propertyName").empty()
                     $("#propertyUnit").empty()
                     $("[name='property']").empty()
