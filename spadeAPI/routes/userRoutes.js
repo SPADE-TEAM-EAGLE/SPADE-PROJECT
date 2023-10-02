@@ -98,6 +98,7 @@ router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCode
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
+// router.post('/addAlternateEmailPhone' , tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile); 
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
 router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
