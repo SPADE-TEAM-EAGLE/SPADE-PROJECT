@@ -4137,7 +4137,7 @@
                             $("#user-img-dark").attr("src", response.image)
                         }
                         bussinessLogoImg = response.businessLogo ? response.businessLogo : "../assets/images/Artboard GÇô 1.svg";
-                        $("#bussinessLogo").attr("src","../assets/uploads/"+ bussinessLogoImg)
+                        $("#bussinessLogo").attr("src","data:image/png;base64,"+ bussinessLogoImg)
                         if (response.businessLogo) {
                             $("#addbussinesslogocol").addClass("d-none");
                         }
@@ -5832,7 +5832,7 @@
                             const category = categoryData.filter((categorydata) => {
                                 return categorydata.id == item.category
                             })
-                            categoryname = category[0].categorieName
+                            categoryname = category[0]?.categorieName
                         }
 
                         $("#memo-table").append(`

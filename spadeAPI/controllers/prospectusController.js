@@ -18,7 +18,8 @@ const {
     prospectusTimeQuery,
     addProspectusSources,
     sourcesCampaignInsight,
-    dashboardProspectusInsight
+    dashboardProspectusInsight,
+    prospectTimeGraphQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -538,7 +539,45 @@ exports.sourcesCampaignInsight = async (req, res) => {
 
 
 
+exports.prospectTimeGraph = async (req, res) => {
+    const { startDate, endDate } = req.params;
+    const { userId } = req.user;
+    try {
+        const prospectTimeGraphResult = await queryRunner(prospectTimeGraphQuery, [
+            userId,
+            startDate,
+            endDate,
+        ]);
+        if (prospectTimeGraphResult[0].length === 0) {
+            return res.status(201).send("No data found");
+        }
+        const prospects = prospectTimeGraphResult[0].map(row => {
+            const isAfter15th = new Date(row.createdDate).getDate() > 15;
+            const isEndAfter15th = row.updatedDate ? new Date(row.updatedDate).getDate() > 15 : false;
 
+            const prospectDetail = {
+              prospect_detail: row,
+              startMonth: row.startMonth,
+              endMonth: row.updatedDate ? row.endMonth : new Date().toLocaleString('default', { month: 'short' }) + '-' + new Date().getFullYear(),
+              createdAfter15th: isAfter15th ? '1/2' : '',
+              endAfter15th: isEndAfter15th ? '1/2' : '',
+            };
+          
+            return prospectDetail;
+          });
+        
+        res.status(200).json({
+            message: "prospectus time get successful",
+            data: prospects,
+        });
+    } catch (error) {
+        // console.log(error);
+        res.status(500).json({
+            message: "Error occur in prospectus time",
+            error: error.message,
+        });
+    }
+}
 
 
 

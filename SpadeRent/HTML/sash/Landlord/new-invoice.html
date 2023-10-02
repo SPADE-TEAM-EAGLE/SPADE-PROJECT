@@ -3587,8 +3587,10 @@ console.log(allFieldsFilled)
                 updateButtonStatus();
             });
             $(document).on("click","#tenants,#tenants_update", function(){
-                const property = $("#tenants").attr("data-value")
-                // console.log(property)
+                
+                
+                    const property = $(this).attr("data-value")
+                    
                 const propertyName = tenantData.filter((tenant) => {
                     if (tenant.tenantID == property) {
                         return tenant.propertyName
