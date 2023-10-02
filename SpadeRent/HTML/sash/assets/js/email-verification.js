@@ -186,7 +186,7 @@ $(document).ready(function () {
     })
     $("#verify-btn").on("click", () => {
         $.ajax({
-            url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
+            url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

@@ -155,7 +155,7 @@ if(!isEmpty2 && !isEmpty1){
      $("#next-add-prospect").click(() => {
         //first accordian
         var isEmpty1 = false;
-        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status ,#sourceCampaign').each(function() {
+        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status').each(function() {
             if ($(this).val() === '' || $(this).val() === 'Choose...') {
                 isEmpty1 = true;
                 return false;

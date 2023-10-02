@@ -45,6 +45,7 @@ const verifyToken = async (req, res, next) => {
       city : result[0][0].PACity,
       state : result[0][0].PAState,
       zipCode : result[0][0].PAZipcode,
+      businessLogo : result[0][0].businessLogo,
       
     };
     next();

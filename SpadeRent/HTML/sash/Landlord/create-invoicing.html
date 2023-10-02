@@ -3163,6 +3163,13 @@
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
+                                                    <li class="d-flex justify-content-between"><a
+                                                        href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio"
+                                                            name="exampleRadios" id="recently-added" value="option1">
+                                                    </div>
+                                                </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
@@ -3282,8 +3289,8 @@
                                     <div class="card-body p-0">
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
                                             <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                <span class="fw-bold me-2">Number of rows</span>
-                                                <select id="lengthSelectBox" class="form-select form" style="width: 80px;">
+                                                <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                <select id="lengthSelectBox" class="form-control select2 form-select" style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -4130,7 +4137,7 @@
                             $("#user-img-dark").attr("src", response.image)
                         }
                         bussinessLogoImg = response.businessLogo ? response.businessLogo : "../assets/images/Artboard GÇô 1.svg";
-                        $("#bussinessLogo").attr("src", bussinessLogoImg)
+                        $("#bussinessLogo").attr("src","../assets/uploads/"+ bussinessLogoImg)
                         if (response.businessLogo) {
                             $("#addbussinesslogocol").addClass("d-none");
                         }
@@ -5049,14 +5056,15 @@
                     filterInvoiceData("Recurring Invoice")
                 })
                 $(document).on("click", "#tenants,#tenants_update", function () {
-                    console.log("clicked", $("#tenants").attr("data-value"))
-                    const property = $("#tenants").attr("data-value")
+                    console.log("clicked", $(this).attr("data-value"))
+                    const property = $(this).attr("data-value")
                     console.log("property", property)
                     const propertyName = tenantData.filter((tenant) => {
                         if (tenant.tenantID == property) {
                             return tenant.propertyName
                         }
                     })
+                    console.log("property",propertyName)
                     $("#propertyName").empty()
                     $("#propertyUnit").empty()
                     $("[name='property']").empty()
@@ -5633,7 +5641,15 @@
                             var idB = parseInt($(b).find('.date').text());
                             return idA - idB;
                         });
-                    } else if (selectedFilter === 'descending') {
+                    }
+                    else if (selectedFilter === 'recently-added') {
+                        rows.sort(function (a, b) {
+                            var idA = parseInt($(a).find('.date').text());
+                            var idB = parseInt($(b).find('.date').text());
+                            return idB - idA;
+                        });
+                    }
+                     else if (selectedFilter === 'descending') {
                         rows.sort(function (a, b) {
                             var idA = parseInt($(a).find('.date').text());
                             var idB = parseInt($(b).find('.date').text());
@@ -5650,6 +5666,9 @@
                 });
                 $('#descending').on('click', function () {
                     filterTable("descending")
+                });
+                $('#recently-added').on('click', function () {
+                    filterTable("recently-added")
                 });
                 $('#alphabets').on('click', function () {
                     // console.log(1)viewModal

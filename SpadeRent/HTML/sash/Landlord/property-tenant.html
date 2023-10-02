@@ -1319,9 +1319,9 @@
                                         <div class="card-body p-0">
                                             <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
                                                 <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                    <span class="fw-bold me-2">Number of rows</span>
+                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
                                                     <select id="lengthSelectBox"
-                                                        class="form-select form" style="width: 80px;">
+                                                        class="form-control select2 form-select" style="width: 80px;">
     
                                                         <!-- <option value="1">1</option> -->
                                                         <option value="10">10</option>
@@ -2345,7 +2345,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             
                             var assignUnit = '<td class="tenant-id " style="font-weight: 600;">' + tenant.unitNumber + '</td>';
                             var Leasestartdate = '';
-                            var currentDate = new Date();
+var currentDate = new Date();
 
 if (tenant.leaseStartDate) {
 
@@ -2353,22 +2353,21 @@ if (tenant.leaseStartDate) {
     var timeDiff = targetDate.getTime() - currentDate.getTime();
     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
-    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+    var year = targetDate.getFullYear().toString().slice(-2);
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+    var day = targetDate.getDate().toString().padStart(2, '0');
 
-    var formattedEndDate = `${month}-${day}-${year}`;
+    var formattedStartDate = `${month}-${day}-${year}`;
 
-    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}`+ '</td>';
+    if (daysLeft < 0) {
+        Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + 'Overdue' + '</td>';
+    } else {
+        Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedStartDate ? formattedStartDate : "N/A"}` + '</td>';
+    }
 } else {
     Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${tenant.leaseStartDate ? tenant.leaseStartDate : "N/A"}` + '</td>';
 }
-                            // var propertyUnits = '<td class="tenant-id " style="font-weight: 600;">' + tenant.pUnits + '</td>';
 
-                            // Create a table row and append the generated columns
-                            
-                            
-                            var currentDate = new Date();
 var leaseEndDate = '';
 if (tenant.leaseEndDate) {
 
@@ -2376,16 +2375,21 @@ if (tenant.leaseEndDate) {
     var timeDiff = targetDate.getTime() - currentDate.getTime();
     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
-    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+    var year = targetDate.getFullYear().toString().slice(-2);
+    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+    var day = targetDate.getDate().toString().padStart(2, '0');
 
     var formattedEndDate = `${month}-${day}-${year}`;
 
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    if (daysLeft < 0) {
+        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + 'Overdue' + '</td>';
+    } else {
+        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+    }
 } else {
     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
 }
+
 
                             var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';

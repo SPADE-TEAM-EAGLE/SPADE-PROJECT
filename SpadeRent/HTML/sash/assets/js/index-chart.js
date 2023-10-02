@@ -1,72 +1,82 @@
 
 
 /* Prospect chart-bar*/
-var ctx = document.getElementById("chartBar11").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Won", "Active", "Lost"],
-        datasets: [{
-            label: 'Sales',
-            data: [290, 450, 190],
-            borderWidth: 2,
-            backgroundColor: ['#09AD95', '#2086C8', '#F82649'],
-            borderColor: ['#09AD95', '#2086C8', '#F82649'],
-            borderWidth: 2.0,
-            pointBackgroundColor: '#ffffff',
-        
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            display: true
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150,
-                    fontColor: "#9ba6b5",
-                },
-                gridLines: {
-                    color: 'rgba(119, 119, 142, 0.2)'
-                }
+var ctx1 = document.getElementById("chartBar21").getContext('2d');
+var myChartProspect;
+function createProspectChart(labels, data){
+    console.log("Inside the function!!!!")
+    console.log(labels, data)
+    myChartProspect = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                // label: ["Active","Qualified","Disqualified"],
+                data: data,
+                borderWidth: 2,
+                backgroundColor: ['#09AD95', '#2086C8', '#F82649'],
+                borderColor: ['#09AD95', '#2086C8', '#F82649'],
+                borderWidth: 2.0,
+                pointBackgroundColor: '#ffffff',
+            
             }],
-            xAxes: [{
-                barPercentage: 0.9,
-                barValueSpacing: 0,
-                barDatasetSpacing: 0,
-                barRadius: 0,
-                ticks: {
-                    display: true,
-                    fontColor: "#9ba6b55",
-                },
-                gridLines: {
-                    display: false,
-                    color: 'rgba(119, 119, 142, 0.2)'
-                }
-            }]
+            labels: labels,
         },
-
-        legend: {
-            labels: {
-                fontColor: "#9ba6b5"
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: true
             },
-        },
-    }
-});
-
-
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 150,
+                        fontColor: "#9ba6b5",
+                    },
+                    gridLines: {
+                        color: 'rgba(119, 119, 142, 0.2)'
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.9,
+                    barValueSpacing: 0,
+                    barDatasetSpacing: 0,
+                    barRadius: 0,
+                    ticks: {
+                        display: true,
+                        fontColor: "#9ba6b55",
+                    },
+                    gridLines: {
+                        display: false,
+                        color: 'rgba(119, 119, 142, 0.2)'
+                    }
+                }]
+            },
+    
+            legend: {
+                labels: {
+                    fontColor: "#9ba6b5"
+                },
+            },
+        }
+    });
+}
+function updateProspectChart(labels, data){
+    myChartProspect.data.labels = labels;
+    myChartProspect.data.datasets[0].data = data;
+    myChartProspect.update();
+}
+// createProspectChart([20,10,60])
 // var ctx = document.getElementById("chartPolarr");
-    var myChart;
+    var myChartInvoice;
 /* invoice chart */
 function createInvoiceChart(data){
     
-    var ctx = document.getElementById("chartPolarr");
+    var ctx2 = document.getElementById("chartPolarr");
     // var myChart;
-    myChart = new Chart(ctx, {
+    myChartInvoice = new Chart(ctx2, {
         type: 'polarArea',
         data: {
             datasets: [{
@@ -95,8 +105,8 @@ function createInvoiceChart(data){
 }
 function updateInvoiceChart(data){
     console.log(data)
-    myChart.data.datasets[0].data = data;
-    myChart.update();
+    myChartInvoice.data.datasets[0].data = data;
+    myChartInvoice.update();
 }
 // createInvoiceChart([20,10,60])
 

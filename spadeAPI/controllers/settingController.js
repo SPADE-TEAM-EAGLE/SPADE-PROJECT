@@ -18,6 +18,7 @@ const {
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
+const { log } = require("console");
 const config = process.env;
  
   //  ############################# Update Setting Password Start ############################################################ 
@@ -130,10 +131,16 @@ exports.emailtemplates = async (req, res) => {
 //  ############################# Landlord business logo Start ############################################################
 exports.updateBusinessLogo = async (req, res) => {
   const { userId } = req.user; 
-  const { image, imageKey } = req.body; 
-  console.log(req.body);
+  // const { userId } = req.body; 
+  // const { image, imageKey } = req.body;
+  console.log(req.files); 
+  const image  = req.files[0].filename; 
+
+  // console.log(userId);
   try {
-      const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
+    console.log(image);
+      // const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
+      const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image,userId]);
       if (updateBusinessLogoResult[0].affectedRows > 0) {
         res.status(200).json({
           message: " Business Logo save successful",
