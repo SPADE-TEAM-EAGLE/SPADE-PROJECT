@@ -3,6 +3,7 @@ const { sendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+const sharp = require('sharp');
 const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage.js");
 const { serialize } = require("cookie");
@@ -14,7 +15,8 @@ const {
   updateEmailTemplates,
   updateBusinessLogo,
   addResetToken,
-  updateUserEmail
+  updateUserEmail,
+  updateBusinessLogoImage
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -131,8 +133,7 @@ exports.emailtemplates = async (req, res) => {
 //  ############################# Landlord business logo Start ############################################################
 exports.updateBusinessLogo = async (req, res) => {
   const { userId } = req.user; 
-  // const { userId } = req.body; 
-  // const { image, imageKey } = req.body;
+
   console.log(req.files); 
   const image  = req.files[0].filename; 
 
@@ -242,3 +243,41 @@ exports.changeEmailVerifyToken = async (req, res) => {
 
 
 
+// ####################################### Base64 Start ##########################################
+
+exports.ImageToBase64 = async (req, res) => {
+  const { Image } = req.body;
+  const { userId } = req.user;
+console.log(req.body);
+console.log(userId);
+console.log(req.files);
+  try {
+    const imageBuffer = fs.readFileSync(Image);
+
+    const resizedImageBuffer = await sharp(imageBuffer)
+      .resize({ width: 50 }) // Adjust the width as needed
+      .toBuffer();
+
+    const base64String = resizedImageBuffer.toString('base64');
+
+    if (base64String.length > 240) {
+      return res.status(400).json({ message: "Base64 string exceeds 240 characters" });
+    }
+
+
+    // Example: Storing the base64 string in a database
+    const updateResult = await queryRunner(updateBusinessLogoImage, [base64String, userId]);
+
+    if (updateResult[0].affectedRows === 0) {
+      return res.status(400).json({ message: "Error in Base64" });
+    } else {
+      return res.status(200).json({ message: "Base64 Successful", id: userId });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error", error: error });
+  }
+};
+
+
+// ####################################### Base64 END ##########################################
