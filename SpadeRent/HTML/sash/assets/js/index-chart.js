@@ -1,16 +1,17 @@
 
 
 /* Prospect chart-bar*/
-var ctx1 = document.getElementById("chartBar11").getContext('2d');
+var ctx1 = document.getElementById("chartBar21").getContext('2d');
 var myChartProspect;
 function createProspectChart(labels, data){
-    
+    console.log("Inside the function!!!!")
+    console.log(labels, data)
     myChartProspect = new Chart(ctx1, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
-                label: 'Sales',
+                // label: ["Active","Qualified","Disqualified"],
                 data: data,
                 borderWidth: 2,
                 backgroundColor: ['#09AD95', '#2086C8', '#F82649'],
@@ -18,7 +19,8 @@ function createProspectChart(labels, data){
                 borderWidth: 2.0,
                 pointBackgroundColor: '#ffffff',
             
-            }]
+            }],
+            labels: labels,
         },
         options: {
             responsive: true,

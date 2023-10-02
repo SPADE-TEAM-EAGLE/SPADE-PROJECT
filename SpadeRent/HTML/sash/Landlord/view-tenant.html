@@ -2687,7 +2687,8 @@
                     console.log(xhr.responseText);
                 }
             });
-            $.ajax({
+            function getData(){
+                $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachEmailPhone',
                 type: 'GET',
                 data: {
@@ -2725,6 +2726,9 @@
                     console.log(xhr.responseText);
                 }
             });
+            
+            }
+            getData()
             $(".add-contactInfo").click(() => {
                 $("#contactInfoModal").modal("show")
             })
@@ -2809,7 +2813,7 @@
 
                         $("#contactInfoModal").modal("hide")
                         $("#succesModal").modal("show")
-
+                        getData()
                         // Handle the success response from the backend
                     },
                     error: function (xhr, status, error) {

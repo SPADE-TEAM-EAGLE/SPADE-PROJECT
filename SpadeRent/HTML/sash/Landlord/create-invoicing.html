@@ -3163,6 +3163,13 @@
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
+                                                    <li class="d-flex justify-content-between"><a
+                                                        href="javascript:void(0)" class="text-dark">Recently Added</a>
+                                                    <div class="form-check m-0">
+                                                        <input class="form-check-input mt-2" type="radio"
+                                                            name="exampleRadios" id="recently-added" value="option1">
+                                                    </div>
+                                                </li>
                                                     <!-- <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
@@ -5634,7 +5641,15 @@
                             var idB = parseInt($(b).find('.date').text());
                             return idA - idB;
                         });
-                    } else if (selectedFilter === 'descending') {
+                    }
+                    else if (selectedFilter === 'recently-added') {
+                        rows.sort(function (a, b) {
+                            var idA = parseInt($(a).find('.date').text());
+                            var idB = parseInt($(b).find('.date').text());
+                            return idB - idA;
+                        });
+                    }
+                     else if (selectedFilter === 'descending') {
                         rows.sort(function (a, b) {
                             var idA = parseInt($(a).find('.date').text());
                             var idB = parseInt($(b).find('.date').text());
@@ -5651,6 +5666,9 @@
                 });
                 $('#descending').on('click', function () {
                     filterTable("descending")
+                });
+                $('#recently-added').on('click', function () {
+                    filterTable("recently-added")
                 });
                 $('#alphabets').on('click', function () {
                     // console.log(1)viewModal
