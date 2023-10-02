@@ -603,6 +603,12 @@
         .card {
             border-radius: 15px !important;
         }
+        .property-anchor{
+            color: black;
+        }
+        .dark-mode .property-anchor{
+            color: white;
+        }
     </style>
 
 </head>
@@ -1441,7 +1447,7 @@
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form select2-show-search">
+                            <select id="propertyType_update" class="form-select form">
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -2028,7 +2034,7 @@
                                             <div style="width: 220px" class="d-flex justify-content-center align-items-center">
                                                 <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
                                                 <select id="lengthSelectBox"
-                                                    class="form-control select2 form-select" style="width: 80px;">
+                                                    class="form-control form-select select2 " style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -2658,17 +2664,18 @@
             class="fe fe-plus"></i></a>
 
 
-    <!-- JQUERY JS -->
-    <script src="../assets/js/jquery.min.js"></script>
+            <!-- JQUERY JS -->
+            <script src="../assets/js/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
+    
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
-    <script src="../assets/js/select2.js"></script>
-    <script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
+    <script defer>
         $(document).ready(function () {
+            $('.select2').select2();
             $('#addModal').on('shown.bs.modal', function () {
 
                 $('.select2-show-search').select2({
@@ -3263,6 +3270,10 @@
                         uploadFormData.append('image', selectedFiles[i]);
                     }
                     $("#addModal").modal("hide")
+                    
+    $('#preloader').css('display','flex')
+
+  
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
@@ -3304,15 +3315,22 @@
                                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                     $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                                     if (response === "Property Already Exist") {
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $('#infoModal').modal('show');
                                     } else {
                                         GetNotification();
                                         getData();
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $('#succesModal').modal('show');
                                     }
                                 },
                                 error: function (xhr, status, error) {
                                     if (xhr.responseJSON.error === 'Property Already Exist') {
+                                        
                                         $('#addModal').modal('hide');
                                         $('#infoModal').modal('show');
                                         setTimeout(function () {
@@ -3349,7 +3367,8 @@
                         images: []
                     };
                     $("#addModal").modal("hide")
-
+                    
+    $('#preloader').css('display','flex')
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/property',
                         type: 'POST',
@@ -3368,10 +3387,16 @@
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             $("#unit-link").attr("href", `./bank-acount.html?property=${encodedPropertyId}`);
                             if (response === "Property Already Exist") {
+                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                 $('#infoModal').modal('show');
                             } else {
                                 GetNotification();
                                 getData();
+                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                 $('#succesModal').modal('show');
                             }
                         },
@@ -3863,7 +3888,7 @@
 
                             // var UserId = '<td>' + US-272323 + '</td>' ;
 
-                            var propertyName = `<td class="propertyName" style="font-weight: 600;"><a href="./view-property.html?property=${encodedPropertyId}" style="color:black;"> ` +
+                            var propertyName = `<td class="propertyName" style="font-weight: 600;"><a class="property-anchor" href="./view-property.html?property=${encodedPropertyId}"> ` +
                                 property
                                     .propertyName +
                                 "</a>"+'</td>';
@@ -4094,40 +4119,6 @@
             });
         })
     </script>
-<!-- <script>
-    $(document).ready(function () {
-        var scriptUrls = [
-            "../assets/plugins/datatable/js/jquery.dataTables.min.js",
-            "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
-            "../assets/plugins/datatable/js/dataTables.buttons.min.js",
-            "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
-            "../assets/plugins/datatable/js/jszip.min.js",
-            "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
-            "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
-            "../assets/plugins/datatable/js/buttons.html5.min.js",
-            "../assets/plugins/datatable/js/buttons.print.min.js",
-            "../assets/plugins/datatable/js/buttons.colVis.min.js",
-            "../assets/plugins/datatable/dataTables.responsive.min.js",
-            "../assets/plugins/datatable/responsive.bootstrap5.min.js",
-            "../assets/js/table-data.js"
-        ];
-        function loadScripts() {
-            $('#responsive-datatable_paginate').remove();
-            $('#responsive-datatable_length').remove();
-            $('script.dynamic-script').remove();
-            scriptUrls.forEach(function (scriptUrl) {
-                var script = document.createElement('script');
-                script.src = scriptUrl;
-                script.className = 'dynamic-script';
-                document.head.appendChild(script);
-            });
-        }
-        $(document).ajaxStop(function () {
-            loadScripts()
-        });
-
-    });
-</script> -->
 <script>
     $(document).change(function () {
         if ($('#typehead').val() == "") {

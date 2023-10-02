@@ -3431,7 +3431,7 @@
                 e.preventDefault();
                 //   selectedFiles = [];
                 $('#addModal').modal('hide');
-
+                $('#preloader').css('display','flex')
                 var task = $("#task").val();
                 var assignee = $("#assignee").val();
                 var property = $("#property").val();
@@ -3499,6 +3499,9 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                     if (response === "Task already exists") {
                                         $("#infoModal").modal("show")
                                     }
@@ -3552,6 +3555,9 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             if (response === "Task already exists") {
                                 $("#infoModal").modal("show")
                             }

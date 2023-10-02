@@ -4672,6 +4672,7 @@
                                         // Loop through the lineItems array and add each line item to the FormData object
                                     }
                                     $("#addModal").modal("hide")
+                                    $('#preloader').css('display','flex')
                                     $.ajax({
                                         url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                         type: 'POST',
@@ -4690,6 +4691,9 @@
                                             $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                             $('#addModal select').prop('selectedIndex', 0);
                                             if (send == "yes") {
+                                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                                 $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                                 $("#succesModal").modal("show")
                                                 setTimeout(function () {
@@ -4697,6 +4701,9 @@
                                                     window.location = '../Landlord/invoice.html';
                                                 }, 2000);
                                             } else {
+                                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                                 GetNotification();
                                                 $("#succesModal_invoice").modal("show")
                                                 setTimeout(function () {
@@ -4748,8 +4755,9 @@
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
                             console.log(data)
+                            $("#addModal").modal("hide")
+                            $('#preloader').css('display','flex')
                             $.ajax({
-                                // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                 url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                 type: 'POST',
                                 data: JSON.stringify(data),
@@ -4767,9 +4775,15 @@
                                     $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                     $('#addModal select').prop('selectedIndex', 0);
                                     if (send == "yes") {
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                         $("#succesModal").modal("show")
                                     } else {
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $("#succesModal_invoice").modal("show")
                                     }
                                     if (print) {
@@ -4788,7 +4802,7 @@
 
                 function getData() {
 
-                    $("#preloader").fadeIn("fast");
+                    // $("#preloader").fadeIn("fast");
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                         type: 'GET',
@@ -4943,7 +4957,7 @@
                                 // Append the row to the table body
                                 tableBody.append(row);
                             });
-                            $("#preloader").fadeOut("slow")
+                            // $("#preloader").fadeOut("slow")
                             $('.edit-option').click(function (e) {
                                 e.preventDefault();
                                 const tenantIdElement = $(this).closest("tr").find(".tenant-id");

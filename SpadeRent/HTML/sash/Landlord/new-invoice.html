@@ -3178,8 +3178,8 @@ print = true
                                     // Loop through the lineItems array and add each line item to the FormData object
                                 }
                                 $("#addModal").modal("hide")
+                                ('#preloader').css('display','flex')
                                 $.ajax({
-                                    // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
@@ -3195,12 +3195,17 @@ print = true
                                         localStorage.setItem("invoice","true")
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                         GetNotification();
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $("#succesModal").modal("show")
-                                        if (print) {
+                                        setTimeout(function () {
+                                            if (print) {
                                                 saveAndPrint(tenant, invoiceData)
                                         }else{
                                             window.location="./create-invoicing.html"
                                         }
+                    }, 2000);
                                     },
                                     error: function (xhr, status, error) {
                                         // Handle the error response from the API
@@ -3235,8 +3240,9 @@ print = true
                                     // Loop through the lineItems array and add each line item to the FormData object
                                 }
                                 console.log(invoiceData)
+                                $("#addModal").modal("hide")
+                                $('#preloader').css('display','flex')
                         $.ajax({
-                                    // url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
@@ -3252,12 +3258,18 @@ print = true
                                         localStorage.setItem("invoice","true")
                                         $("#succes-tenantName").text(`sent to ${tenant.firstName + " " + tenant.lastName}.`)
                                         GetNotification();
+                                        $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                         $("#succesModal").modal("show")
-                                        if (print) {
+                                        setTimeout(function () {
+                                            if (print) {
                                                 saveAndPrint(tenant, invoiceData)
                                         }else{
                                             window.location="./create-invoicing.html"
                                         }
+                    }, 2000);
+                                        
                                     },
                                     error: function (xhr, status, error) {
                                         // Handle the error response from the API
@@ -3273,7 +3285,7 @@ print = true
             let categoryData=[]
             let tenantData = []; let invoiceData = [];
             function getData() {
-                $("#preloader").fadeIn("fast");
+                // $("#preloader").fadeIn("fast");
                 $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',

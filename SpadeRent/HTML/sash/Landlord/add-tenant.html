@@ -1424,10 +1424,8 @@
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
                                         <input id="phone" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" maxlength="15"
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" 
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                            required> -->
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                         <span id="error-msg" class="hide text-danger"></span>
 
@@ -1623,7 +1621,7 @@
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date</label>
                                                             <input type="date" class="form-control position-relative"
-                                                                id="leaseStart2" placeholder="Enter Lease Start Date">
+                                                                id="leaseStart2" placeholder="Enter Lease Start Date" required>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
@@ -4173,6 +4171,7 @@
                 // });
                 // }
                 $("#addModal").modal("hide")
+                $('#preloader').css('display','flex')
                 // Make the AJAX call
                 $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/${uri}`,
@@ -4187,12 +4186,18 @@
                         // console.log(response)
                         // Handle the success response
                         if (response.message.includes("Tenants Already exist on this email")) {
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             $('#infoModal').modal('show')
                             setTimeout(function () {
                                 $('#infoModal').modal('hide');
                             }, 2000);
                             resetAccordions()
                         } else if (response.message.includes(" tenant Updated successful")) {
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             getData()
                             GetNotification();
                             localStorage.setItem("tenants", "true")
@@ -4208,6 +4213,9 @@
                         } else if (response.message.includes(" tenant created successful")) {
                             // $('#collapseSecond').removeClass('show')
                             // $('#collapseThird').removeClass('show')
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             GetNotification();
                             $('#succesModal').modal('show')
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
@@ -4605,11 +4613,17 @@
                 if (input.value.trim()) {
                     if (iti.isValidNumber()) {
                         validMsg.classList.remove("d-none");
+                    phoneError = false
+                    input.classList.remove("is-invalid");
+                    input.classList.add("is-valid");
                     } else {
-                        input.classList.add("error");
-                        const errorCode = iti.getValidationError();
-                        errorMsg.innerHTML = errorMap[errorCode];
-                        errorMsg.classList.remove("d-none");
+                        input.classList.add("is-invalid");
+                    input.classList.remove("is-valid");
+                    phoneError = true
+                    input.classList.add("error");
+                    const errorCode = iti.getValidationError();
+                    errorMsg.innerHTML = errorMap[errorCode];
+                    errorMsg.classList.remove("d-none");
                     }
                 }
             });
@@ -4978,7 +4992,7 @@ $("#succesModal_delete").modal("show");
         })
 
         function getData(selectedFilter = "alphabets") {
-            $("#preloader").fadeIn("fast");
+            // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -5100,7 +5114,7 @@ if (tenant.leaseEndDate) {
                     });
 
 
-                    $("#preloader").fadeOut("slow")
+                    // $("#preloader").fadeOut("slow")
 
                     $(document).on("click", '.delete-option', function (e) {
                         e.preventDefault(); // Prevent default anchor behavior
