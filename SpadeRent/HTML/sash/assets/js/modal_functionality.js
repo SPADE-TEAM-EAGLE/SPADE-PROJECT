@@ -402,6 +402,7 @@ $(document).on('click', '#next', function(e) {
             uploadFormData.append('image', selectedFiles[i]);
         }
 $("#addModal").modal("hide")
+$('#preloader').css('display','flex')
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/upload',
             type: 'POST',
@@ -445,9 +446,15 @@ $("#addModal").modal("hide")
                 $('#addModal').modal('hide')
                         
                 if (response.message === "Property Already Exist") {
+                    $('#preloader').fadeOut('slow', function() {
+                        $(this).hide();
+                    });
                     $('#infoModal').modal('show');
                 }else {
                     GetNotification();
+                    $('#preloader').fadeOut('slow', function() {
+                        $(this).hide();
+                    });
                     $('#succesModal').modal('show');
                     localStorage.setItem("property","true")
                 }
@@ -495,7 +502,8 @@ $("#addModal").modal("hide")
             units: units,
             images: []
         };
-
+        $("#addModal").modal("hide")
+        $('#preloader').css('display','flex')
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
@@ -515,9 +523,15 @@ $("#addModal").modal("hide")
         $('#addModal').modal('hide')
     
         if (response.message === "Property Already Exist") {
+            $('#preloader').fadeOut('slow', function() {
+                $(this).hide();
+            });
             $('#infoModal').modal('show');
         } else {
             GetNotification();
+            $('#preloader').fadeOut('slow', function() {
+                $(this).hide();
+            });
             $('#succesModal').modal('show');
             localStorage.setItem("property","true")
         }

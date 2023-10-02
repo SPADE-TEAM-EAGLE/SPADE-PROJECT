@@ -18581,6 +18581,8 @@ img {
     /* border: 2px solid black; */
     padding: 1px;
     object-fit: cover;
+    background-size: cover !important;
+    background-color: #529ee0ab !important;
 }
 
 
@@ -44996,6 +44998,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
     position: relative;
     display: inline-block;
     margin-bottom: 4px;
+    width: 100%;
 }
 
 .iti__hide {
@@ -77435,7 +77438,7 @@ table.dataTable thead>tr>th.sorting_desc:after {
 }
 
 .my_blue {
-    background-color: #529EE0 !important;
+    background-color: #529ee0ab !important;
 }
 
 
@@ -77529,4 +77532,52 @@ button.btn-close {
     padding: 25px;
     border-radius: 10px;
     margin-bottom: 25px;
+}
+
+/* icon dropdown start  */
+
+.ui.dropdown>.dropdown.icon:before {
+    content: "\25BC" !important;
+    font-size: 10px;
+    color: #76839a;
+}
+
+/* icon dropdown End  */
+
+/* Style the custom select container */
+.custom-select {
+    position: relative;
+    width: 100px; /* Adjust the width as needed */
+    display: inline-block;
+    overflow: hidden;
+}
+
+/* Style the select element to remove default styles */
+.custom-select select {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    appearance: none;
+}
+
+/* Add a background image for the dropdown arrow */
+.custom-select::after {
+    content: "\25BC" !important; /* Unicode character for a down-pointing triangle */
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Ensure the arrow doesn't interfere with the select */
+}
+
+.select-wrapper::after {
+    content: "\25BC"; /* Unicode character for a down-pointing triangle */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none; /* Prevents the pseudo-element from capturing clicks */
 }

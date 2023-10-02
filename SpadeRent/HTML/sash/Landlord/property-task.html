@@ -2428,7 +2428,7 @@
                 }
             });
             $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
+                            url: 'http://localhost:3000/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2448,7 +2448,10 @@
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            if(response.message=="No property Task data found"){
+                            console.log("propertyTask");
+                            console.log(response);
+                            if(response == "Error Get property Task" || response.message == "No property Task data found"){
+                                
                                 var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         tableBody.append(row);
                             }
@@ -2457,6 +2460,7 @@
                                 tableBody.append(row);
                             }
                             else{
+                               
                                 response?.data[0]?.forEach(function (task) {
                             var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
 

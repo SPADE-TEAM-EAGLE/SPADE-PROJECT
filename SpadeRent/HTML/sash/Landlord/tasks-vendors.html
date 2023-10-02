@@ -953,14 +953,16 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="tel" data-bs-placement="top"
+                                <input class="form-control" type="phone" data-bs-placement="top"
                                     placeholder="Enter Phone Number" pattern="[0-9]+"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone">
-                                <span class="text-danger d-none">Work Phone number is required!</span>
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="phone2" required>
+                                    <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
+                                    <span id="error-msg2" class="hide text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number" id="phone"
+                                <input class="form-control" type="phone" pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="Enter Mobile Number" id="phone"
                                     required>
                                 <span id="valid-msg" class="d-none text-success">✓ Valid</span>
                                 <span id="error-msg" class="hide text-danger"></span>
@@ -2902,7 +2904,7 @@ color: #000;
                 $("#streetAddress").val("")
                 $("#city").val("")
                 $("#zip").val("")
-                $("#workPhone").val("")
+                $("#phone2").val("")
                 $("#phone").val("")
                 $("#email").val("")
                 $("#category option:first").prop("selected", true);
@@ -2979,6 +2981,7 @@ color: #000;
                 e.preventDefault()
                 // selectedFiles = []
                 $('#addModal').modal('hide');
+                $('#preloader').css('display','flex')
                 // $("#largemodal").addClass("hide");
                 var formData = new FormData();
 
@@ -2991,13 +2994,13 @@ color: #000;
                 var city = $("#city").val();
                 // var status = $("#status").val();
                 var zip = $("#zip").val();
-                var workPhone = $("#workPhone").val();
+                var workPhone = $("#phone2").val();
                 var phone = $("#phone").val();
                 var email = $("#email").val();
                 var category = $("#category").val();
                 if (category == "Add vendor categories first!!") {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -3053,6 +3056,9 @@ color: #000;
 
                                 success: function (response) {
                                     console.log(response)
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                     if (response == "Vendor already exists") {
                                         $("#infoModal").modal("show");
                                     } else if (response.message == " Vendor created successful") {
@@ -3100,7 +3106,7 @@ color: #000;
 
                     if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "" ) {
                         $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -3156,6 +3162,9 @@ color: #000;
 
                                 success: function (response) {
                                     console.log(response)
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                     if (response == "Vendor already exists") {
                                         $("#infoModal").modal("show");
                                     } else if (response.message == " Vendor created successful") {
@@ -3238,6 +3247,9 @@ color: #000;
     
                             success: function (response) {
                                 console.log(response)
+                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                 if (response == "Vendor already exists") {
                                     $("#infoModal").modal("show");
                                 } else if (response.message == " Vendor created successful") {
@@ -3271,7 +3283,7 @@ color: #000;
             });
 
             function getData(selectedFilter = "alphabets") {
-                $("#preloader").fadeIn("fast");
+                // $("#preloader").fadeIn("fast");
                 // console.log(22)
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
@@ -3321,7 +3333,7 @@ color: #000;
                             // Append the row to the table body
                             tableBody.append(row);
                         });
-                        $("#preloader").fadeOut("slow")
+                        // $("#preloader").fadeOut("slow")
 
 
                     },
@@ -3824,6 +3836,86 @@ color: #000;
                 })
             }
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+            const input2 = $("#phone2");
+            const errorMsg2 = $("#error-msg2");
+            const validMsg2 = $("#valid-msg2");
+            const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const iti2 = window.intlTelInput(input2[0], {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+            const reset2 = () => {
+                input2.removeClass("error");
+                errorMsg2.html("");
+                errorMsg2.addClass("d-none");
+                validMsg2.addClass("d-none");
+            };
+            input2.on('input', function () {
+                reset2();
+                console.log("in phone input");
+                if (input2.val().trim()) {
+                    if (iti2.isValidNumber()) {
+                        validMsg2.removeClass("d-none");
+                        phoneError2 = false;
+                        input2.removeClass("is-invalid");
+                        input2.addClass("is-valid");
+                    } else {
+                        input2.addClass("is-invalid");
+                        input2.removeClass("is-valid");
+                        phoneError2 = true;
+                        input2.addClass("error");
+                        const errorCode2 = iti2.getValidationError();
+                        errorMsg2.html(errorMap2[errorCode2]);
+                        errorMsg2.removeClass("d-none");
+                    }
+                }
+            });
+        });
+    </script>
+     <script>
+        const input0 = document.querySelector("#phone");
+        const errorMsg = document.querySelector("#error-msg");
+        const validMsg = document.querySelector("#valid-msg");
+
+        // here, the index maps to the error code returned from getValidationError - see readme
+        const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+        // initialise plugin
+        const iti = window.intlTelInput(input0, {
+            utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+        });
+
+        const reset = () => {
+            input0.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("d-none");
+            validMsg.classList.add("d-none");
+        };
+
+        // on blur: validate
+        input0.addEventListener('input', () => {
+            // alert(1)
+            reset();
+            console.log("in phone input")
+            if (input0.value.trim()) {
+                if (iti.isValidNumber()) {
+                    validMsg.classList.remove("d-none");
+                    phoneError = false
+                    input0.classList.remove("is-invalid");
+                    input0.classList.add("is-valid");
+                } else {
+                    input0.classList.add("is-invalid");
+                    input0.classList.remove("is-valid");
+                    phoneError = true
+                    input0.classList.add("error");
+                    const errorCode = iti.getValidationError();
+                    errorMsg.innerHTML = errorMap[errorCode];
+                    errorMsg.classList.remove("d-none");
+                }
+            }
+        });
     </script>
 </body>
 

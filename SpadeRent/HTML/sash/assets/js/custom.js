@@ -2,7 +2,7 @@
     "use strict";
  // Preloader -------------------------------------*/
  $('#preloader').fadeOut('slow', function() {
-    $(this).remove();
+    $(this).hide();
 });
     // PAGE LOADING
     $(window).on("load", function (e) {
