@@ -3,7 +3,7 @@
 
      // Preloader -------------------------------------*/
  $('#preloader').fadeOut('slow', function() {
-    $(this).remove();
+    $(this).hide();
 });
 
     // PAGE LOADING

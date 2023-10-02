@@ -3433,6 +3433,7 @@ color: #000;
                 var formData = getFormData();
                 // console.log(formData)
                 $("#addModal").modal("hide")
+                $('#preloader').css('display','flex')
                     // Make the AJAX call
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/tenants',
@@ -3446,10 +3447,16 @@ color: #000;
                     success: function(response) {
                             // Handle the success response
                         if (response.message.includes("Tenants Already exist on this email")) {
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             $('#infoModal').modal('show')
 
                         } else {
                             GetNotification();
+                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
                             $("#succesModal").modal("show")
                             localStorage.setItem("tenants","true")

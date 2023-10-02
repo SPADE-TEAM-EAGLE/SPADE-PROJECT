@@ -5446,6 +5446,7 @@ $.ajax({
                     },
                     success: function (response) {
                         $("#myModal_delete").modal("hide")
+                        $("#myModal_success_delete").find('p').text('Successfully Deleted')
                         $("#myModal_success_delete").modal("show");
                         setTimeout(function () {
                             $('#myModal_success_delete').modal('hide');
@@ -5511,6 +5512,7 @@ $.ajax({
                 var status = $("#status").val();
                 var sourceCampaign;
                 $("#addModal").modal("hide")
+                $('#preloader').css('display','flex')
                 $('#addProspectSourceCol').css('display', 'none')
                 console.log($("#addProspectSource").val())
                 if ($("#sourceCampaign").val() !== "Choose..." && $("#addProspectSource").val() == "") {
@@ -5538,6 +5540,10 @@ $.ajax({
                         },
                         success: function (response) {
                             if (response.message == " prospectus created successful") {
+                                $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                                $("#myModal_success").find('p').text('Successfully Added')
                                 $("#myModal_success").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_success').modal('hide');
@@ -5605,6 +5611,10 @@ $.ajax({
                                     },
                                     success: function (response) {
                                         if (response.message == " prospectus created successful") {
+                                            $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+$("#myModal_success").find('p').text('Successfully Added')
                                             $("#myModal_success").modal("show");
                                             setTimeout(function () {
                                                 $('#myModal_success').modal('hide');
@@ -6074,25 +6084,17 @@ $.ajax({
             const input2 = $("#phone2");
             const errorMsg2 = $("#error-msg2");
             const validMsg2 = $("#valid-msg2");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
             const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
             const iti2 = window.intlTelInput(input2[0], {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });
-
             const reset2 = () => {
                 input2.removeClass("error");
                 errorMsg2.html("");
                 errorMsg2.addClass("d-none");
                 validMsg2.addClass("d-none");
             };
-
-            // on blur: validate
             input2.on('input', function () {
-                // alert(1);
                 reset2();
                 console.log("in phone input");
                 if (input2.val().trim()) {
@@ -6113,7 +6115,6 @@ $.ajax({
                 }
             });
         });
-
     </script>
     <!-- export button End  -->
     <script>
