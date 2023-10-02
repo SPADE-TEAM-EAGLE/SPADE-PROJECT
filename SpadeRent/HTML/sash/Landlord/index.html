@@ -967,9 +967,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                                 <div class="d-flex justify-content-end">
                                     <div class="form-group me-3">
-                                        <select class="form-select form-select" id="property-select">
-                                            
-                                        
+                                        <select class="form-select form-control" id="property-select"> 
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -1879,9 +1877,27 @@
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
 
-    <!-- BOOTSTRAP JS -->
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+   <!-- BOOTSTRAP JS -->
+   <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+   <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+   <script src="../assets/plugins/select2/select2.full.min.js"></script>
+   <script src="../assets/js/select2.js"></script>
+   <script>
+       $(document).ready(function () {
+           $('#addModal').on('shown.bs.modal', function () {
+              
+               $('.select2-show-search').select2({
+                   dropdownParent: $('#addModal')
+               });
+           });
+           $('#myModal_edit').on('shown.bs.modal', function () {
+               
+               $('.select2-show-search').select2({
+               dropdownParent: $('#myModal_edit')
+           });
+           });
+       }); 
+   </script>
     
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
