@@ -1081,3 +1081,15 @@ exports.addProspectusSources = "INSERT INTO prospectusSources (landlordId,source
 exports.sourcesCampaignInsight = "SELECT COUNT(*) AS campaignCount, CASE WHEN ps.sourcesCampaign IS NOT NULL THEN ps.sourcesCampaign ELSE 'NotFound' END AS sourceCampaign FROM prospectus p LEFT JOIN prospectusSources ps ON p.sourceCampaign = ps.id WHERE p.landlordId = ? AND p.createdDate >= ? AND p.createdDate <= ? GROUP BY p.sourceCampaign ORDER BY p.sourceCampaign DESC";
 exports.dashboardProspectusInsight = "SELECT SUM(CASE WHEN prospectusStatus = 'Qualified' THEN 1 ELSE 0 END) AS Qualified, SUM(CASE WHEN prospectusStatus = 'Disqualified' THEN 1 ELSE 0 END) AS Disqualified, SUM(CASE WHEN prospectusStatus NOT IN ('Qualified', 'Disqualified') THEN 1 ELSE 0 END) AS Active FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
 exports.updateBusinessLogoImage = "UPDATE users SET businessLogo = ? where id = ?";
+exports.prospectTimeGraphQuery= `
+SELECT
+  *,
+  CONCAT(LEFT(DATE_FORMAT(createdDate, '%b'), 3), '-', YEAR(createdDate)) AS startMonth,
+  CONCAT(LEFT(DATE_FORMAT(updatedDate, '%b'), 3), '-', YEAR(updatedDate)) AS endMonth
+FROM
+  prospectus
+WHERE
+  LandlordID = ? 
+  AND createdDate >= ? 
+  AND updatedDate <= ?
+`;

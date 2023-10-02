@@ -249,5 +249,5 @@ router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
 router.get("/sourcesCampaignInsight/:startDate/:endDate", verifyToken, prospectus.sourcesCampaignInsight);
 router.get("/dashboardProspectusInsight/:startDate/:endDate", verifyToken, prospectus.dashboardProspectusInsight);
 router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources);
-router.put("/ImageToBase64", verifyToken, settingController.ImageToBase64);
-
+router.put("/ImageToBase64", [verifyToken, upload], settingController.ImageToBase64);
+router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.prospectTimeGraph);

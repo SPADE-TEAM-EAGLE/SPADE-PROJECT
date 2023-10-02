@@ -11,7 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
-    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <!-- <script src="https://backend.app.spaderent.com/socket.io/socket.io.js"></script> -->
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
@@ -1163,7 +1163,7 @@
                                         </div>
                                         <div class="card-body">
                                             <!-- <div id="chart-monthlyy" class="chartsh"></div> -->
-                                            <canvas id="chartBar11" class="h-275"></canvas>
+                                            <canvas id="chartBar21" class="h-275"></canvas>
 
                                         </div>
                                     </div>
@@ -1989,7 +1989,7 @@
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
     <script src="../assets/js/index-chart.js"></script>
-    <!-- <script src="http://localhost:3000/"></script> -->
+    <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
       
 <script>
@@ -2227,17 +2227,12 @@
                         if (response?.data) {
                             const labels = [];
                             const data = [];
-                            
-
-                            response?.data?.forEach(entry => {
-                                const source = entry.prospectusStatus;
-                                const count = entry.count;
-
-                               
-                                    labels.push(source);
-                                    data.push(count);
-                                
-                            });
+                            labels.push("Active")
+                            data.push(response?.data[0]?.Active)
+                            labels.push("Disqualified")
+                            data.push(response?.data[0]?.Disqualified)
+                            labels.push("Qualified")
+                            data.push(response?.data[0]?.Qualified)
 
                             
 
@@ -2276,17 +2271,12 @@
                         if (response?.data) {
                             const labels = [];
                             const data = [];
-                            
-
-                            response?.data?.forEach(entry => {
-                                const source = entry.prospectusStatus;
-                                const count = entry.count;
-
-                               
-                                    labels.push(source);
-                                    data.push(count);
-                                
-                            });
+                            labels.push("Active")
+                            data.push(response?.data[0]?.Active)
+                            labels.push("Disqualified")
+                            data.push(response?.data[0]?.Disqualified)
+                            labels.push("Qualified")
+                            data.push(response?.data[0]?.Qualified)
 
                             
 
@@ -2951,23 +2941,18 @@
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
+                        console.log(response)
                         if (response?.data) {
                             const labels = [];
                             const data = [];
+                            labels.push("Active")
+                            data.push(response?.data[0]?.Active)
+                            labels.push("Disqualified")
+                            data.push(response?.data[0]?.Disqualified)
+                            labels.push("Qualified")
+                            data.push(response?.data[0]?.Qualified)
                             
-
-                            response?.data?.forEach(entry => {
-                                const source = entry.prospectusStatus;
-                                const count = entry.count;
-
-                               
-                                    labels.push(source);
-                                    data.push(count);
-                                
-                            });
-
-                            
-
+                            console.log(labels, data)
                             createProspectChart(labels, data)
                         }
                         else{
@@ -2980,31 +2965,32 @@
                 })
 
             
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    if (response.length < 1) {
+            // $.ajax({
+            //     url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+            //     method: 'GET',
+            //     headers: {
+            //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            //     },
+            //     success: function (response) {
+            //         if (response.length < 1) {
 
-                    }
-                    else {
-                        const result = response[0]
-                        invoiceData.push(result?.totalPaid)
-                        invoiceData.push(result?.totalUnPaid)
-                        createInvoiceChart(invoiceData)
-                    }
+            //         }
+            //         else {
+            //             const result = response[0]
+            //             invoiceData.push(result?.totalPaid)
+            //             invoiceData.push(result?.totalUnPaid)
+            //             createInvoiceChart(invoiceData)
+            //         }
 
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
-                }
-            });
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.log('Error occurred while fetching state and city data.');
+            //         console.log(xhr);
+            //         console.log(error);
+            //         // console.log('Error occurred while fetching state and city data.');
+            //     }
+            // });
+            
             $.ajax({
                 url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
                 method: 'GET',
@@ -3435,137 +3421,7 @@ else {
     }
 </script>
     <script src="../assets/js/index-chart.js"></script>
-    <!-- demo walktrough start  -->
-    <!-- <script src="../assets/js/walkthrough-demo.js"></script> -->
-    <!-- <script>
-        function mydemoclick() {
-            introJs().setOptions({
-                steps: [
-                    {
-                        element: document.querySelector('.card-demo-0'),
-                        // title: 'Want to 2 minuts and learn what you can do with Rent',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minutes and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
-                        // intro: 'This step focuses on an element',
-                        position: 'top-bottom'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-1'),
-                        title: 'Manage your Properties',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;">Manage and grow your portfolio from anywhere with ease.</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-2'),
-                        title: 'Manage Tenants',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-3'),
-                        title: 'Manage Invoicing',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-4'),
-                        title: 'Manage Leads',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-5'),
-                        title: 'Manage Tasks',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-6'),
-                        title: 'Manage Reports',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                    {
-                        element: document.querySelector('.card-demo-7'),
-                        title: 'Manage Setttings',
-                        intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                        // intro: 'This step focuses on an element',
-                        position: 'right'
-                    },
-                ]
-            }).start();
-        }
-    </script> -->
-    <!-- <script>
-        introJs().setOptions({
-            steps: [
-                {
-                    element: document.querySelector('.card-demo-0'),
-                    // title: 'Want to 2 minuts and learn what you can do with Rent',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4">Your browser does not support the video tag.</video> <br> <b style="font-size: 17px; color: #000;">Want to 2 minutes and learn what you can do with Rent</b> <br><br> <p style="color: #201414;">Spade Rent is your one-stop-shop to find tenants and manage your Rental property.</p>',
-                    // intro: 'This step focuses on an element',
-                    position: 'top-top'
-                },
-                {
-                    element: document.querySelector('.card-demo-1'),
-                    title: 'Manage your Properties',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;">Manage and grow your portfolio from anywhere with ease.</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-2'),
-                    title: 'Manage Tenants',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web or send a tenant an online application, you first need to add your property.</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-3'),
-                    title: 'Manage Invoicing',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-4'),
-                    title: 'Manage Leads',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-5'),
-                    title: 'Manage Tasks',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-6'),
-                    title: 'Manage Reports',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-                {
-                    element: document.querySelector('.card-demo-7'),
-                    title: 'Manage Setttings',
-                    intro: '<video width="320" height="240" poster="../assets/images/walkthrough-demo1.png" controls><source src="../assets/images/video-testing.mp4" type="video/mp4"></video> <br><b style="font-size: 17px; color: #000;"">Whether you are looking to market your rental across the web</b>',
-                    // intro: 'This step focuses on an element',
-                    position: 'right'
-                },
-            ]
-        }).start();
-    </script>
-     -->
 
-    <!-- demo walktrough End  -->
 
     <!-- date picker js start  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
@@ -3580,43 +3436,7 @@ else {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-    <!-- date picker js start  -->
-
-    <script>
-        $(document).ready(function () {
-            // alert(2)
-            var scriptUrls = [
-                "../assets/plugins/datatable/js/jquery.dataTables.min.js",
-                "../assets/plugins/datatable/js/dataTables.bootstrap5.js",
-                "../assets/plugins/datatable/js/dataTables.buttons.min.js",
-                "../assets/plugins/datatable/js/buttons.bootstrap5.min.js",
-                "../assets/plugins/datatable/js/jszip.min.js",
-                "../assets/plugins/datatable/pdfmake/pdfmake.min.js",
-                "../assets/plugins/datatable/pdfmake/vfs_fonts.js",
-                "../assets/plugins/datatable/js/buttons.html5.min.js",
-                "../assets/plugins/datatable/js/buttons.print.min.js",
-                "../assets/plugins/datatable/js/buttons.colVis.min.js",
-                "../assets/plugins/datatable/dataTables.responsive.min.js",
-                "../assets/plugins/datatable/responsive.bootstrap5.min.js",
-                "../assets/js/table-data.js"
-            ];
-            function loadScripts() {
-                $('#responsive-datatable_paginate').remove();
-                $('#responsive-datatable_length').remove();
-                $('script.dynamic-script').remove();
-                scriptUrls.forEach(function (scriptUrl) {
-                    var script = document.createElement('script');
-                    script.src = scriptUrl;
-                    script.className = 'dynamic-script';
-                    document.head.appendChild(script);
-                });
-            }
-            $(document).ajaxStop(function () {
-                // alert(1)
-                loadScripts()
-            });
-        });
-    </script> 
+  
     
 
 </body>
