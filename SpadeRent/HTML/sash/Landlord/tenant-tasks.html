@@ -2539,18 +2539,35 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         taskName += ' ago</span>' + '</td>';
 
                         if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
-    var assignToHTML = task.vendor.map(({ name, email }) => {
-        return `
-            <div class="me-2">
-                <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
-                <div class="media-body valign-middle mt-0">
-                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+    var assignToHTML = task.vendor.map(({ name, email }, index) => {
+        if (index === 1) {
+            return `
+                <div class="me-2">
+                    <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
+                    <div class="media-body valign-middle mt-0">
+                        <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+                    </div>
                 </div>
-            </div>`;
+                <div style="text-align: -webkit-center;">
+                    <div class="fw-bold worker-count">+${task.vendor.length - 2}</div>
+                    <div class="media-body valign-middle mt-0">
+                        <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+                    </div>
+                </div>`;
+        } else {
+            return `
+                <div class="me-2">
+                    <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
+                    <div class="media-body valign-middle mt-0">
+                        <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
+                    </div>
+                </div>`;
+        }
     }).join("");
 
     var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
-} else {
+}
+ else {
     var assignTo = '<td>Not Assigned</td>';
 }
 

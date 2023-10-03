@@ -2428,7 +2428,7 @@
                 }
             });
             $.ajax({
-                            url: 'http://localhost:3000/api/spade/propertyTask',
+                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2439,7 +2439,8 @@
                             },
                             success: function (response) {
                                 
-
+console.log("propertyTask");
+console.log(response);
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
@@ -2450,7 +2451,7 @@
                             }
                             console.log("propertyTask");
                             console.log(response);
-                            if(response == "Error Get property Task" || response.message == "No property Task data found"){
+                            if(response == "Error Get property Task" || response.message == "No property Task data found"){
                                 
                                 var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         tableBody.append(row);
