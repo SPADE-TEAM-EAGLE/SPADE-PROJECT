@@ -11,7 +11,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
-
+ 
     <!-- FAVICON -->
     <link rel='stylesheet'
         href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
@@ -1640,6 +1640,21 @@
                                 </div>
                             </div>
                             <div class="card-body p-0">
+                                <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                    <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                        <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                        <select id="lengthSelectBox"
+                                            class="form-control form-select select2 " style="width: 80px;">
+
+                                            <!-- <option value="1">1</option> -->
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="100">100</option>
+                                            <option value="200">200</option>
+                                            <option value="500">500</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table-hover table border text-nowrap text-md-nowrap mb-0">
                                         <thead>
@@ -1853,6 +1868,25 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
+    <script defer>
+        $(document).ready(function () {
+            // $('.select2').select2();
+            $('#addModal').on('shown.bs.modal', function () {
+
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+            });
+        }); 
+    </script>
     <script>
         //             // $(document).ready(function() {
 
@@ -1892,7 +1926,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
 
     <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script> -->
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -2197,22 +2231,32 @@ if (task.ImageKey) {
 
                             taskName += '</span>' + '</td>';
 
-                            if (task.AssignTo.length >= 1) { 
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                        (task.AssignTo?.map(({
-                                            name,
-                                            email
-                                        }) => {
-                                            return `
+                            if (task.AssignTo.length >= 1) {
+                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
+                                    for (var i = 0; i < task.AssignTo.length; i++) {
+                                        var name = task.AssignTo[i].name;
+                                        var email = task.AssignTo[i].email;
+                                        assignTo += `
         <div class="me-2">
-            <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
+            <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
             <div class="media-body valign-middle mt-0">
                 <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
             </div>
         </div>`;
-                                        }).join("")) +
-                                        '</td>';
-                                } else {
+                                        if (i === 1) {
+                                            assignTo += `
+        <div style="text-align: -webkit-center;">
+            <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+            </div>
+        </div>`;
+                                            break;
+                                        }
+                                    }
+
+                                    assignTo += '</td>';
+                                }else {
 
                                     var assignTo = '<td>Not Assigned</td>';
                                 }
@@ -2761,13 +2805,20 @@ $('#fileInput').on('change', function () {
                 return fileName;
             }
            
-            $('#typehead').on('keyup', function () {
-                var searchValue = $(this).val().toLowerCase();
-                console.log(searchValue)
-                $('#table_body tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -2807,7 +2858,40 @@ $('#fileInput').on('change', function () {
             }
     </script>
 
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
 
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+</script>
 
 </body>
 

@@ -1217,7 +1217,7 @@
                                     </a>
                                 </li>
                                 <li class="slide card-demo-2">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                    <a class="side-menu__item has-link active" data-bs-toggle="slide" href="add-tenant.html"><i
                                             class="side-menu__icon fi fi-rs-cabin"></i><span
                                             class="side-menu__label">Tenants</span>
                                         
@@ -2247,6 +2247,9 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
+    
 
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -2276,7 +2279,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
 
     <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script> -->
 
     <!-- INTERNAL Data tables js-->
     <!-- <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -2497,7 +2500,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    
+                    console.log("tenantTask");
+                    console.log(response);
                     if(response?.message=="No tenant Task data found"){
                         var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         $('#table_body').append(row);
@@ -2524,6 +2528,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                         var hoursDiff = Math.floor(minutesDiff / 60);
                         var daysDiff = Math.floor(hoursDiff / 24); 
+                        var vendorNames="";
 
                         var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                             `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
@@ -2539,18 +2544,42 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         taskName += ' ago</span>' + '</td>';
 
                         if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
-    var assignToHTML = task.vendor.map(({ name, email }) => {
-        return `
+    var assignToHTML = '';
+    for (var i = 0; i < task.vendor.length; i++) {
+        var name = task.vendor[i].name;
+       
+        assignToHTML += `
             <div class="me-2">
                 <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
                 <div class="media-body valign-middle mt-0">
                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
             </div>`;
-    }).join("");
+        
+        if (i === 1) {
+            if ((Number(task.vendor.length) - 2) === 0) {
+                break;
+            }
+            for (var kk = 2; kk < task.vendor.length; kk++) {
+                vendorNames += '<li class="text-dark">' + task.vendor[kk].name + '</li>';
+            }
+
+            assignToHTML += `
+                <div style="text-align: -webkit-center; cursor: pointer;">
+                    <div class="fw-bold worker-count">+${Number(task.vendor.length) - 2}</div>
+                    <div class="media-body valign-middle mt-0">
+                        <a href="javascript:void(0)" class="text-dark fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                        <ul class="dropdown-menu p-4 text-muted">` + vendorNames + `</ul>
+                    </div>
+                </div>`;
+            break;
+        }
+    }
 
     var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
-} else {
+}
+
+ else {
     var assignTo = '<td>Not Assigned</td>';
 }
 

@@ -1367,6 +1367,21 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                <select id="lengthSelectBox"
+                                                    class="form-control form-select select2 " style="width: 80px;">
+        
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
@@ -1834,6 +1849,8 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
 
@@ -1862,7 +1879,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
 
     <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script> -->
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -2927,12 +2944,20 @@ console.log(data)
 
                 }
             })
-            $('#typehead').on('keyup', function() {
-                var searchValue = $(this).val().toLowerCase();
-                $('#table_body tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                });
-            });
+            $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
+
+    $('#table_body tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        // If search box is empty, use the selected value from the select box
+        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+    }
+});
             $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -3002,6 +3027,40 @@ console.log(data)
         html2pdf().from(invoice).set(opt).save();
     })
     // PDF CODE END
+</script>
+<script>
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+
+            let count = 1;
+            $("#table_body tr").each(function (item, index) {
+                console.log(count, parseInt($("#lengthSelectBox").val()))
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
 </script>
 
 </body>

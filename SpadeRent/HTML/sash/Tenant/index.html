@@ -1388,22 +1388,32 @@
                             var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
                                 '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
                                 '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
-                                    if (task.AssignTo.length >= 1) { 
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                        (task.AssignTo?.map(({
-                                            name,
-                                            email
-                                        }) => {
-                                            return `
+                                    if (task.AssignTo.length >= 1) {
+                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
+                                    for (var i = 0; i < task.AssignTo.length; i++) {
+                                        var name = task.AssignTo[i].name;
+                                        var email = task.AssignTo[i].email;
+                                        assignTo += `
         <div class="me-2">
-            <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
+            <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
             <div class="media-body valign-middle mt-0">
                 <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
             </div>
         </div>`;
-                                        }).join("")) +
-                                        '</td>';
-                                } else {
+                                        if (i === 1) {
+                                            assignTo += `
+        <div style="text-align: -webkit-center;">
+            <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+            </div>
+        </div>`;
+                                            break;
+                                        }
+                                    }
+
+                                    assignTo += '</td>';
+                                }else {
 
                                     var assignTo = '<td style="vertical-align: middle; text-align: center;">Not Assigned</td>';
                                 }
