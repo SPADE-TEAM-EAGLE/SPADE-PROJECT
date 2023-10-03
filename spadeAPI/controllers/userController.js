@@ -68,7 +68,8 @@ const {
   addResetTokenTenant,
   propertyUnitCount,
   getMessageCountByID,
-  checkProperty
+  checkProperty,
+  insertVendorCategory
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -122,6 +123,22 @@ exports.createUser = async function (req, res) {
         "yes",
         "yes",
       ]);
+
+      // // add  prospectus sources
+      // await queryRunner(insertProspectusSources, [
+      //   selectResult[0][0].id,
+      //   "System"
+      // ]);
+
+      // // add vendor Category
+      // const category = ["Plumber","Electrician","carpenters"]
+      // for(let i=0; i< category.length; i++){
+      //   await queryRunner(insertProspectusSources, [
+      //     selectResult[0][0].id,
+      //     category[i]
+      //   ]);
+      // }
+      
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
       return res.status(200).json({ message: "User added successfully" });
@@ -226,9 +243,10 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
+
+
         // ################################# Count ##############################################
         const userId = selectResult[0][0].id;
         console.log(userId);
