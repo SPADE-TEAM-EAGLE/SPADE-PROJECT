@@ -1094,3 +1094,5 @@ WHERE
   AND updatedDate <= ?
 `;
 exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
+exports.insertInUserPermissionUsers =
+  "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
