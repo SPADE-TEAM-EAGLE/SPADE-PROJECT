@@ -13159,7 +13159,7 @@ $.ajax({
                     }, function (res) {
                         if(res?.transactionStatus?.toLowerCase()=="approved" && res?.result?.toLowerCase()=="approved"){
                                                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/updatePlanId',
+                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                         method: 'PUT',
                         data: JSON.stringify({ planID: seletedPlanID }),
                         contentType: 'application/json',
@@ -13234,7 +13234,7 @@ $.ajax({
         });
     
         function validateForm() {
-            
+
             let valid = true;
     
             $('input[required], select[required]').each(function() {
