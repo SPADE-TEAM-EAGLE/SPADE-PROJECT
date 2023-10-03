@@ -448,9 +448,7 @@ exports.updatePasswordTenant = async (req, res) => {
 //  ############################# Add Alternate Email and Phone Start ############################################################
 exports.addAlternateEmailPhone = async (req, res) => {
   const { tenantID, alternatePhone, alternateEmail } = req.body;
-
   try {
-    
       for (let i = 0; i < alternatePhone.length; i++) {
         const phoneName = alternatePhone[i].phoneName;
         const phoneNumber = alternatePhone[i].phoneNumber;
@@ -459,7 +457,6 @@ exports.addAlternateEmailPhone = async (req, res) => {
           [tenantID, phoneName, phoneNumber]
         );
       }
-    
       for (let i = 0; i < alternateEmail.length; i++) {
         const emailName = alternateEmail[i].emailName;
         const email = alternateEmail[i].email;
@@ -468,11 +465,9 @@ exports.addAlternateEmailPhone = async (req, res) => {
           [tenantID, emailName, email]
         );
       }
-    
       res.status(200).json({
         message: "Email and phone number successfully saved",
       });
-    
   } catch (error) {
     console.error("Error:", error);
     res.sendStatus(500);

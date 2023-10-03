@@ -1,7 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
-const { selectQuery } = require("../constants/queries");
+const { selectQuery, userPermissionProtected } = require("../constants/queries");
 // const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
@@ -95,7 +95,57 @@ const verifyTokenTenant = async (req, res, next) => {
     return res.status(400).send("Invalid Token");
   }
 };
+const verifyTokenUesers = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  // console.log(req.headers);
+
+  if (!token) {
+    return res.status(401).send("Access Denied");
+  }
+  try {
+    // console.log(token);
+    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    // console.log("landlord",decoded)
+    const result = await queryRunner(userPermissionProtected, [decoded.UEmail]);
+  // console.log(result[0][0].active);
+    req.user = {
+      email: decoded.UEmail,
+      userId: result[0][0].llnalordId,
+      userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
+      businessName:result[0][0].BusinessName,
+      phone:result[0][0].UPhone,
+      streetAddress:result[0][0].streetAddress,
+      BusinessAddress:result[0][0].BusinessAddress,
+      firstName:result[0][0].UFirstName,
+      lastName:result[0][0].ULastName,
+      image:result[0][0].UImage,
+      imageKey:result[0][0].imageKey,
+      planID:result[0][0].PlanID,
+      isActive : result[0][0].active,
+      tenantEmail : result[0][0].tenantEmail,
+      auth:result[0][0].auth,
+      invoiceEmail : result[0][0].invoiceEmail,
+      taskEmail : result[0][0].taskEmail,
+      businessLogo : result[0][0].businessLogo,
+      businessLogoKey : result[0][0].businessLogoKey,
+      BAzipCode : result[0][0].BAZipcode,
+      BAcity : result[0][0].BACity,
+      BAstate : result[0][0].BAState,
+      city : result[0][0].PACity,
+      state : result[0][0].PAState,
+      zipCode : result[0][0].PAZipcode,
+      // businessLogo : result[0][0].businessLogo,
+      
+    };
+    next();
+    // console.log("hello")
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Invalid Token");
+  }
+};
 module.exports = {
   verifyToken,
-  verifyTokenTenant
+  verifyTokenTenant,
+  verifyTokenUesers
 };

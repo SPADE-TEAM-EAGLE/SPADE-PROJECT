@@ -1093,3 +1093,4 @@ WHERE
   AND createdDate >= ? 
   AND updatedDate <= ?
 `;
+exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
