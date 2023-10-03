@@ -3779,10 +3779,11 @@ $("#view-task-line-item").append(`<tr class="tr">
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        
+                        console.log("getAllTaskTenantRequest");
+                        console.log(response);
                         if (response.data[0].length === 0) {
                             $("#table_body").append('<tr><td colspan="12" style="text-align: center;">No data found</td></tr>')
-                            localStorage.setItem("task","false")
+                            // localStorage.setItem("task","false")
                             // window.location = './new-tasks.html'
                         } else {
                             // $("#user-name").text(response.user)

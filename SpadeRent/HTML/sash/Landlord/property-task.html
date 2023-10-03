@@ -1025,7 +1025,7 @@
                                        <h3>UI Kit</h3>
                                    </li> -->
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                <a class="side-menu__item has-link active" data-bs-toggle="slide" href="properties-all.html"><i
                                         class="side-menu__icon fi fi-rs-building"></i><span
                                         class="side-menu__label">Properties</span>
 
@@ -2428,7 +2428,7 @@
                 }
             });
             $.ajax({
-                            url: 'http://localhost:3000/api/spade/propertyTask',
+                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -2439,7 +2439,8 @@
                             },
                             success: function (response) {
                                 
-
+console.log("propertyTask");
+console.log(response);
                         var tableBody = $('#table_body');
 
                         tableBody.empty();
@@ -2450,7 +2451,7 @@
                             }
                             console.log("propertyTask");
                             console.log(response);
-                            if(response == "Error Get property Task" || response.message == "No property Task data found"){
+                            if(response == "Error Get property Task" || response.message == "No property Task data found"){
                                 
                                 var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         tableBody.append(row);
@@ -2471,7 +2472,7 @@
                                 var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
-
+var vendorNames = "";
                                 var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                                     `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
 
@@ -2485,15 +2486,37 @@
 
                                 taskName += ' ago</span>' + '</td>';
                                 if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
-    var assignToHTML = task.vendor.map(({ name, email }) => {
-        return `
+    var assignToHTML = '';
+    for (var i = 0; i < task.vendor.length; i++) {
+        var name = task.vendor[i].name;
+       
+        assignToHTML += `
             <div class="me-2">
                 <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
                 <div class="media-body valign-middle mt-0">
                     <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
             </div>`;
-    }).join("");
+        
+        if (i === 1) {
+            if ((Number(task.vendor.length) - 2) === 0) {
+                break;
+            }
+            for (var kk = 2; kk < task.vendor.length; kk++) {
+                vendorNames += '<li class="text-dark">' + task.vendor[kk].name + '</li>';
+            }
+
+            assignToHTML += `
+                <div style="text-align: -webkit-center; cursor: pointer;">
+                    <div class="fw-bold worker-count">+${Number(task.vendor.length) - 2}</div>
+                    <div class="media-body valign-middle mt-0">
+                        <a href="javascript:void(0)" class="text-dark fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                        <ul class="dropdown-menu p-4 text-muted">` + vendorNames + `</ul>
+                    </div>
+                </div>`;
+            break;
+        }
+    }
 
     var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
 } else {

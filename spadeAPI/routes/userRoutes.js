@@ -253,7 +253,7 @@ router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources
 router.put("/ImageToBase64", [verifyToken, upload], settingController.ImageToBase64);
 router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.prospectTimeGraph);
 
-                                                    //  User Permission Start
+//  User Permission Start
 
 router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
 router.get("/userCheckEmail", verifyToken, userPermissionController.userCheckEmail);

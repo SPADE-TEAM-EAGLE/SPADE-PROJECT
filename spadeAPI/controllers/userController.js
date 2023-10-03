@@ -1872,8 +1872,9 @@ console.log(Id)
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
+          console.log(vendorResult[0])
           if (vendorResult[0].length > 0) {
-            const categoryIDs = vendorResult[0][i].categoryID;
+            const categoryIDs = vendorResult[0] [0].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
@@ -1911,7 +1912,7 @@ console.log(Id)
   } catch (error) {
     console.log("Error:", error);
     res.send("Error Get property Task");
-  }
+}
 };
 
 //  ############################# Task property ############################################################
