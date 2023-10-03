@@ -793,6 +793,107 @@
             background-repeat: no-repeat;
             background-size: contain;
         }
+
+        /* Gantt chart start  */
+
+        :root {
+  --white: #fff;
+  --divider: lightgrey;
+  --body: #f5f7f8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+        .chart-wrapper {
+            /* max-width: 1150px; */
+            max-width: 100%;
+            padding: 0 10px;
+            margin: 0 auto;
+            border: 2px solid lightgray;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow-x: scroll;
+            }
+
+
+/* CHART-VALUES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.chart-wrapper .chart-values {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.chart-wrapper .chart-values li {
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+}
+
+.chart-wrapper .chart-values li:not(:last-child) {
+  position: relative;
+}
+
+.chart-wrapper .chart-values li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  /* height: 100%; */
+  height: 480px;
+  border-right: 1px solid var(--divider);
+}
+
+
+/* CHART-BARS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.chart-wrapper .chart-bars li {
+  position: relative;
+  color: var(--white);
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  width: 0;
+  opacity: 0;
+  transition: all 0.65s linear 0.2s;
+}
+
+@media screen and (max-width: 600px) {
+  .chart-wrapper .chart-bars li {
+    padding: 10px;
+  }
+}
+
+
+/* FOOTER
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.page-footer {
+  font-size: 0.85rem;
+  padding: 10px;
+  text-align: right;
+  color: var(--black);
+}
+
+.page-footer span {
+  color: #e31b23;
+}
+
+        /* Gantt Chart End  */
     </style>
 
 </head>
@@ -3371,7 +3472,7 @@
 
                                                     <div class="row">
                                                         <!-- Qualified & Disqualified start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5"
+                                                        <div class="col-lg-12 col-md-12 mb-5"
                                                             id="qualified & disqualified">
                                                             <div class="card h-100">
                                                                 <div class="card-header"
@@ -3407,35 +3508,28 @@
                                                         <!-- Qualified & Disqualified end  -->
 
                                                         <!-- Average time from New Lead to Close start  -->
-                                                        <div class="col-lg-6 col-md-12 mb-5" id="banking-stats">
-                                                            <div class="card h-100">
-                                                                <div class="card-header"
-                                                                    style="display: flex; justify-content: space-between;">
-                                                                    <div>
-                                                                        <label for=""><b style="color: #1467B0;">Average
-                                                                                time
-                                                                                from New Lead to Close</b></label>
-                                                                    </div>
-                                                                    <div style="display: flex; align-items: end;">
+                                                        <div class="col-lg-12 col-md-12 mb-5" >
 
-                                                                        <input type="date"
-                                                                            class="form-control form-control-date-width"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                                        <input type="date"
-                                                                            class="form-control form-control-date-width"
-                                                                            placeholder="Jan 6, 2022 – Jan 13, 2022">
-                                                                    </div>
-                                                                    <i class="fe fe-more-vertical"
-                                                                        data-bs-toggle="dropdown"></i>
-                                                                    <ul class="dropdown-menu dropdown-menu-top">
-                                                                        <li><a class="dropdown-item text-danger"
-                                                                                href="#">X Remove</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <canvas id="chartLine" class="h-275"></canvas>
-                                                                </div>
-                                                            </div>
+                                                            <div class="chart-wrapper h-100">
+                                                                <ul class="chart-values">
+                                                                  <li>Jan</li>
+                                                                  <li>Feb</li>
+                                                                  <li>March</li>
+                                                                  <li>April</li>
+                                                                  <li>May</li>
+                                                                  <li>June</li>
+                                                                  <li>July</li>
+                                                                  <li>Aug</li>
+                                                                  <li>Sep</li>
+                                                                  <li>Oct</li>
+                                                                    <li>Nov</li>
+                                                                    <li>Dec</li>
+                                                                </ul>
+                                                                <ul class="chart-bars" id="prospect-timeline">
+
+                                                                </ul>
+                                                              </div>
+                                                              
                                                         </div>
                                                         <!-- Average time from New Lead to Close end  -->
 
@@ -4948,6 +5042,61 @@
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
+                    url:`https://backend.app.spaderent.com/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
+                    headers:{
+                        authorization:"Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                       
+                        $("#prospect-timeline").empty();
+                        if(response?.data?.length > 0){
+                            response?.data?.forEach(function(item){
+                                var prospectusColor;
+                                if(item?.prospect_detail?.prospectusStatus=="qualified"){
+                                    prospectusColor="green"
+                                }else if(item?.prospect_detail?.prospectusStatus=="disqualified"){
+                                    prospectusColor="red"}
+                                else{
+                                    prospectusColor="blue"
+                                }
+                                $("#prospect-timeline").append(`
+  <li data-duration="${
+    item?.startMonth?.split("-")[0] +"-"+  
+    item?.endMonth?.split("-")[0]
+  }" data-color="#b03532" style="background-color: ${prospectusColor}; opacity: 1;">
+    ${item?.prospect_detail?.prospectDetail}
+  </li>
+`);
+                            })
+                        }
+                        else{
+                            // $("#prospect-timeline").append(`<li data-duration="0" data-color="#b03532">Task</li>`)
+                        }
+                        // $("prospect-timeline").append(`<li data-duration="${}" data-color="#b03532">Task</li>`)
+//                         createdAfter15th
+// : 
+// "1/2"
+// endAfter15th
+// : 
+// "1/2"
+// endMonth
+// : 
+// "Sep-2023"
+// prospect_detail
+// : 
+// {id: 71, landlordId: "125", firstName: "Azeem", middleName: null, lastName: "Fahad Ahadfvff",…}
+// startMonth
+// : 
+// "Sep-2023"
+                    }, error: function (xhr, status, error) {
+
+                    }
+                })
+
+
+                $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -6324,6 +6473,51 @@ $("#myModal_success").find('p').text('Successfully Added')
             }
         })
     </script>
+
+    <!-- Gantt chart Start  -->
+        <script>
+            function createChart(e) {
+  const days = document.querySelectorAll(".chart-values li");
+  const tasks = document.querySelectorAll(".chart-bars li");
+  const daysArray = [...days];
+
+  tasks.forEach(el => {
+    const duration = el.dataset.duration.split("-");
+    const startDay = duration[0];
+    const endDay = duration[1];
+    let left = 0,
+      width = 0;
+
+    if (startDay.endsWith("½")) {
+      const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
+      left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+    } else {
+      const filteredArray = daysArray.filter(day => day.textContent == startDay);
+      left = filteredArray[0].offsetLeft;
+    }
+
+    if (endDay.endsWith("½")) {
+      const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
+      width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+    } else {
+      const filteredArray = daysArray.filter(day => day.textContent == endDay);
+      width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+    }
+
+    // apply css
+    el.style.left = `${left}px`;
+    el.style.width = `${width}px`;
+    if (e.type == "load") {
+      el.style.backgroundColor = el.dataset.color;
+      el.style.opacity = 1;
+    }
+  });
+}
+
+window.addEventListener("load", createChart);
+window.addEventListener("resize", createChart);
+        </script>
+    <!-- Gantt Cart End  -->
 </body>
 
 </html>

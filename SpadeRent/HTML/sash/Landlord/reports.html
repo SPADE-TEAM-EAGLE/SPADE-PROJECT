@@ -4303,6 +4303,8 @@
         <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
         <script src="../assets/plugins/formwizard/fromwizard.js"></script>
 
+<!-- Tooltip and Popover JS -->
+<!-- <script src="../assets/js/tooltip&popover.js" defer></script> -->
 
 
         <!-- INTERNAL Data tables js-->
@@ -5057,6 +5059,7 @@ $('#table_body_property_report').append(newRowHtml);
                         var currentDate = new Date();
                         var timeDiff = currentDate - createdDate;
                         var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+                        var vendorNames="";
 
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
@@ -5081,11 +5084,19 @@ $('#table_body_property_report').append(newRowHtml);
             </div>
         </div>`;
                                         if (i === 1) {
+                                            if((Number(task.AssignTo.length) - 2)== 0){
+                                                break;
+                                            }
+                                            for (var kk = 2; kk < task.AssignTo.length; kk++) {
+ vendorNames +=  '<li class="text-dark">' + task.AssignTo[kk].name + '</li>';
+
+                                            }
                                             newRowHtml += `
-        <div style="text-align: -webkit-center;">
+        <div style="text-align: -webkit-center; cursor: pointer;">
             <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
             <div class="media-body valign-middle mt-0">
-                <a href="javascript:void(0)" class="text-black fw-semibold">Vendor</a>
+                <a href="javascript:void(0)" class="text-black fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                <ul class="dropdown-menu p-4 text-muted">`+vendorNames+`</ul>
             </div>
         </div>`;
                                             break;
@@ -6100,6 +6111,7 @@ $('#table_body_property_report').append(newRowHtml);
                 }
             })
         </script>
+        
 </body>
 
 </html>

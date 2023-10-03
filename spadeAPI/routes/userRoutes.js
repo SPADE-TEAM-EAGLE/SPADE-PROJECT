@@ -98,6 +98,7 @@ router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCode
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);
 router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternateEmailPhone);
+// router.post('/addAlternateEmailPhone' , tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile); 
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
 router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
@@ -239,7 +240,6 @@ router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.p
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
 router.put("/updateBusinessLogo", [verifyToken, upload] ,settingController.updateBusinessLogo);
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
-router.put("/changeEmailVerifyToken", verifyToken, settingController.changeEmailVerifyToken);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.GettenantAttachEmailPhone);
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
@@ -249,3 +249,5 @@ router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
 router.get("/sourcesCampaignInsight/:startDate/:endDate", verifyToken, prospectus.sourcesCampaignInsight);
 router.get("/dashboardProspectusInsight/:startDate/:endDate", verifyToken, prospectus.dashboardProspectusInsight);
 router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources);
+router.put("/ImageToBase64", [verifyToken, upload], settingController.ImageToBase64);
+router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.prospectTimeGraph);

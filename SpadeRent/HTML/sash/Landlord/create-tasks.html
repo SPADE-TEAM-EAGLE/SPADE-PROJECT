@@ -4091,11 +4091,14 @@
             </div>
         </div>`;
                                         if (i === 1) {
+                                            if((Number(task.AssignTo.length) - 2)== 0){
+                                                break;
+                                            }
                                             assignTo += `
         <div style="text-align: -webkit-center;">
             <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
             <div class="media-body valign-middle mt-0">
-                <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+                <a href="javascript:void(0)" class="text-dark fw-semibold view-task">View All</a>
             </div>
         </div>`;
                                             break;
