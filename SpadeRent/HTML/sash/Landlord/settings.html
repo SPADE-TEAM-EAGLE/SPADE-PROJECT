@@ -8270,7 +8270,7 @@
                                                                                 <label for="inputEmail4" class="form-label fw-bold">First Name<spnan
                                                                                         class="text-danger"> *</span></label>
                                                                                 <input type="text" class="form-control form" placeholder="Enter First Name"
-                                                                                    id="firstName" required pattern="[A-Za-z\s]+"
+                                                                                    id="firstName_user" required pattern="[A-Za-z\s]+"
                                                                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                                                 <span class="text-danger d-none">First name is required!</span>
                                                                             </div>
@@ -8279,7 +8279,7 @@
                                                                                 <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
                                                                                         class="text-danger"> *</span></label>
                                                                                 <input type="text" class="form-control form" placeholder="Enter Last Name"
-                                                                                    id="lastName" required pattern="[A-Za-z\s]+"
+                                                                                    id="lastName_user" required pattern="[A-Za-z\s]+"
                                                                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                                                 <span class="text-danger d-none">Last name required!</span>
                                                                             </div>
@@ -8287,7 +8287,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="inputCity" class="form-label fw-bold">Email<spnan
                                                                                         class="text-danger"> *</span></label>
-                                                                                <input type="email" class="form-control form" placeholder="Enter Email"
+                                                                                <input type="email_user" class="form-control form" placeholder="Enter Email"
                                                                                     pattern="[A-Za-z0-9_\.@]+"
                                                                                     oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
                                                                                     id="email" required>
@@ -8346,7 +8346,7 @@
                                                                                 <div class="form-group">
                                                                                     <label for="inputState" class="form-label fw-bold">Role<spnan
                                                                                             class="text-danger"> *</span></label>
-                                                                                    <select id="userrole" class="form-select form form-select select2-show-search" required>
+                                                                                    <select id="role_user" class="form-select form form-select select2-show-search" required>
                                                                                         <option selected>Select Option</option>
                                                                                         <option value="Manager">Manager</option>
                                                                                         <option class="Staff">Staff</option>
@@ -8358,7 +8358,7 @@
                                                                             <div class="col-md-12">
                                                                                 <label class="form-label fw-bold">User Photo (Optional)</label>
                                                                                 <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                                                                                    <input id="fileInput" type="file" name="image" placeholder="Enter Photo" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf" aria-label="hello" multiple="">
+                                                                                    <input id="fileInput_user" type="file" name="image" placeholder="Enter Photo" class="custom-file-input form" accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf" aria-label="hello" multiple="">
                                                                                     <span classname="d-none"></span>
                                                                                     <label class="custom-file-label" for="fileInput">
                                                                                         <i class="fi fi-rs-cloud-upload"></i>
@@ -8381,7 +8381,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close" style="width: fit-content;">Close</button>
-                                                            <button class="btn text-light button" style="background-color:#1467B0; width: fit-content;" id="next-add-tenant">Submit</button>
+                                                            <button class="btn text-light button" style="background-color:#1467B0; width: fit-content;" id="next-add-user-permission" disabled>Submit</button>
                                                             <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
                                                             <button class="btn text-light button d-none" style="background-color:#1467B0;" id="save">Save</button> -->
                                                         </div>
@@ -13222,7 +13222,56 @@ $.ajax({
     });
 
 </script>
+<!-- Add this inside your <head> section if jQuery is not included -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
+<script>
+    $(document).ready(function() {
+        $('input, select').on('input change', function() {
+            
+            validateForm();
+        });
+    
+        function validateForm() {
+            
+            let valid = true;
+    
+            $('input[required], select[required]').each(function() {
+                if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
+                    valid = false;
+                    $(this).addClass('is-invalid').removeClass('is-valid');
+                } else {
+                    $(this).addClass('is-valid').removeClass('is-invalid');
+                }
+            });
+    
+            if ($('#email').val() !== "" && !isValidEmail($('#email').val())) {
+                valid = false;
+                $('#email').addClass('is-invalid').removeClass('is-valid');
+            }
+    
+            if (valid) {
+                $('#next-add-user-permission').prop('disabled', false);
+            } else {
+                $('#next-add-user-permission').prop('disabled', true);
+            }
+        }
+    
+        function isValidEmail(email) {
+            let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return regex.test(email);
+        }
+    
+        $('#email').on('input', function() {
+            if (isValidEmail($(this).val())) {
+                $(this).addClass('is-valid').removeClass('is-invalid');
+            } else {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+            }
+        });
+    });
+    </script>
+    
 </body>
 
 </html>
