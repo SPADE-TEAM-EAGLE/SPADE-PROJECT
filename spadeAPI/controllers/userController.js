@@ -1855,7 +1855,7 @@ console.log(Id)
             vID,
           ]);
           if (vendorResult[0].length > 0) {
-            const categoryIDs = vendorResult[0][i].categoryID;
+            const categoryIDs = vendorResult[0][0].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]

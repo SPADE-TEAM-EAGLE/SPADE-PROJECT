@@ -2500,7 +2500,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    
+                    console.log("tenantTask");
+                    console.log(response);
                     if(response?.message=="No tenant Task data found"){
                         var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         $('#table_body').append(row);
@@ -2527,6 +2528,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                         var hoursDiff = Math.floor(minutesDiff / 60);
                         var daysDiff = Math.floor(hoursDiff / 24); 
+                        var vendorNames="";
 
                         var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                             `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
@@ -2542,34 +2544,41 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         taskName += ' ago</span>' + '</td>';
 
                         if (task.vendor && Array.isArray(task.vendor) && task.vendor.length >= 1) {
-    var assignToHTML = task.vendor.map(({ name, email }, index) => {
-        if (index === 1) {
-            return `
-                <div class="me-2">
-                    <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
-                    <div class="media-body valign-middle mt-0">
-                        <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
-                    </div>
+    var assignToHTML = '';
+    for (var i = 0; i < task.vendor.length; i++) {
+        var name = task.vendor[i].name;
+       
+        assignToHTML += `
+            <div class="me-2">
+                <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
+                <div class="media-body valign-middle mt-0">
+                    <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
                 </div>
-                <div style="text-align: -webkit-center;">
-                    <div class="fw-bold worker-count">+${task.vendor.length - 2}</div>
+            </div>`;
+        
+        if (i === 1) {
+            if ((Number(task.vendor.length) - 2) === 0) {
+                break;
+            }
+            for (var kk = 2; kk < task.vendor.length; kk++) {
+                vendorNames += '<li class="text-dark">' + task.vendor[kk].name + '</li>';
+            }
+
+            assignToHTML += `
+                <div style="text-align: -webkit-center; cursor: pointer;">
+                    <div class="fw-bold worker-count">+${Number(task.vendor.length) - 2}</div>
                     <div class="media-body valign-middle mt-0">
-                        <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+                        <a href="javascript:void(0)" class="text-dark fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                        <ul class="dropdown-menu p-4 text-muted">` + vendorNames + `</ul>
                     </div>
                 </div>`;
-        } else {
-            return `
-                <div class="me-2">
-                    <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
-                    <div class="media-body valign-middle mt-0">
-                        <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
-                    </div>
-                </div>`;
+            break;
         }
-    }).join("");
+    }
 
     var assignTo = `<td style="font-weight: 600; text-align: center; display: flex;">${assignToHTML}</td>`;
 }
+
  else {
     var assignTo = '<td>Not Assigned</td>';
 }

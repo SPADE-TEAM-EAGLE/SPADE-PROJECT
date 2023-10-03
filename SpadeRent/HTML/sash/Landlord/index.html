@@ -1954,7 +1954,7 @@
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
 <!-- Tooltip and Popover JS -->
-<script src="../assets/js/tooltip&popover.js" defer></script>
+<!-- <script src="../assets/js/tooltip&popover.js" defer></script> -->
     <!-- INTERNAL Flot JS -->
     <script src="../assets/plugins/flot/jquery.flot.js"></script>
     <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
@@ -3245,11 +3245,9 @@ else {
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
                                 var vendorNames="";
-
                                 var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
                                     '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                                     '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
-
                                 if (daysDiff > 0) {
                                     taskName += daysDiff + ' days';
                                 } else if (hoursDiff > 0) {
@@ -3257,7 +3255,6 @@ else {
                                 } else {
                                     taskName += minutesDiff + ' minutes';
                                 }
-
                                 taskName += '</span></td>';
                                 var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
                                     '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
@@ -3279,14 +3276,14 @@ else {
                                                 break;
                                             }
                                             for (var kk = 2; kk < task.AssignTo.length; kk++) {
- vendorNames += task.AssignTo[kk].name + '<br>';
-
+ vendorNames +=  '<li class="text-dark">' + task.AssignTo[kk].name + '</li>';
                                             }
                                             assignTo += `
-        <div style="text-align: -webkit-center; cursor: pointer;" data-bs-placement="top" data-bs-toggle="tooltip" title="`+vendorNames+`" data-bs-html="true">
+        <div style="text-align: -webkit-center; cursor: pointer;">
             <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
             <div class="media-body valign-middle mt-0">
-                <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+                <a href="javascript:void(0)" class="text-black fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                <ul class="dropdown-menu p-4 text-muted">`+vendorNames+`</ul>
             </div>
         </div>`;
                                             break;

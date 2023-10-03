@@ -88,7 +88,7 @@
       autoButtonsPrevClass: "btn btn-light",
       stepNumberClass: "badge rounded-pill bg-primary me-1",
       onSubmit: function () {
-        alert("Form submitted!");
+        // alert("Form submitted!");
         return true;
       },
     };
@@ -337,7 +337,7 @@ phone.addEventListener('keyup', reset);
   email.addEventListener("keyup", button1);
   lastname.addEventListener("keyup", button1);
   phone.addEventListener("keyup", button1);
-  alert(2)
+  // alert(2)
   function button1() {
     if (
       email.value.match(validEmail) &&
