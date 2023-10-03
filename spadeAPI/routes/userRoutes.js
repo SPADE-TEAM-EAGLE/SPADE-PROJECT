@@ -4,6 +4,7 @@ const userController = require("../controllers/userController");
 const tenantController = require("../controllers/tenantController");
 const invoiceController = require("../controllers/invoiceController");
 const tenantPortalController = require("../controllers/tenantPortalController");
+const userPermissionController = require("../controllers/userPermissionController");
 const settingController = require("../controllers/settingController");
 const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
@@ -251,3 +252,12 @@ router.get("/dashboardProspectusInsight/:startDate/:endDate", verifyToken, prosp
 router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources);
 router.put("/ImageToBase64", [verifyToken, upload], settingController.ImageToBase64);
 router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.prospectTimeGraph);
+
+                                                    //  User Permission Start
+
+router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
+router.get("/userCheckEmail", verifyToken, userPermissionController.userCheckEmail);
+router.put("/updateUserPermissionUsers",  verifyToken, userPermissionController.updateUserPermissionUsers); 
+router.get("/userPermissionGetById", verifyToken, userPermissionController.userPermissionGetById);
+router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
+router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
