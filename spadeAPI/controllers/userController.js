@@ -69,7 +69,8 @@ const {
   propertyUnitCount,
   getMessageCountByID,
   checkProperty,
-  insertVendorCategory
+  insertVendorCategory,
+  insertProspectusSources
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -124,24 +125,24 @@ exports.createUser = async function (req, res) {
         "yes",
       ]);
 
-      // // add  prospectus sources
-      // await queryRunner(insertProspectusSources, [
-      //   selectResult[0][0].id,
-      //   "System"
-      // ]);
+      // add  prospectus sources
+      await queryRunner(insertProspectusSources, [
+        selectResult[0][0].id,
+        "System"
+      ]);
 
-      // // add vendor Category
-      // const category = ["Plumber","Electrician","carpenters"]
-      // for(let i=0; i< category.length; i++){
-      //   await queryRunner(insertProspectusSources, [
-      //     selectResult[0][0].id,
-      //     category[i]
-      //   ]);
-      // }
+      // add vendor Category
+      const category = ["Plumber","Electrician","carpenters"]
+      for(let i=0; i< category.length; i++){
+        await queryRunner(insertVendorCategory, [
+          selectResult[0][0].id,
+          category[i]
+        ]);
+      }
       
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "User added successfully" });
+      return res.status(200).json({ message: "User added successfully",id : selectResult[0][0].id });
     } else {
       return res.status(500).send("Failed to add user");
     }
