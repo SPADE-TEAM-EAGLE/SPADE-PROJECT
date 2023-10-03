@@ -11,11 +11,11 @@ function createProspectChart(labels, data){
         data: {
             labels: labels,
             datasets: [{
-                // label: ["Active","Qualified","Disqualified"],
+                label: 'Prospect',
                 data: data,
                 borderWidth: 2,
-                backgroundColor: ['#09AD95', '#2086C8', '#F82649'],
-                borderColor: ['#09AD95', '#2086C8', '#F82649'],
+                backgroundColor: ['#2086C8', '#F82649', '#09AD95'],
+                borderColor: [ '#2086C8','#F82649','#09AD95'],
                 borderWidth: 2.0,
                 pointBackgroundColor: '#ffffff',
             

@@ -337,6 +337,7 @@ phone.addEventListener('keyup', reset);
   email.addEventListener("keyup", button1);
   lastname.addEventListener("keyup", button1);
   phone.addEventListener("keyup", button1);
+  alert(2)
   function button1() {
     if (
       email.value.match(validEmail) &&

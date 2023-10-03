@@ -978,20 +978,44 @@ exports.addVendorCategory = async (req, res) => {
       [userId]
     );
     const existingCategories = categoryCheckResult[0];
-    categoryToInsert = categories.filter((category) => !existingCategories.some((existingCategory) => existingCategory.category.toLowerCase() === category.category.toLowerCase()));
-    categoryToDelete = existingCategories.filter((existingCategory) => !categories.some((category) => category.category.toLowerCase() === existingCategory.category.toLowerCase()));
-    if (categoryCheckResult[0].length !== 0) {
-      categoryToInsert?.forEach(async (item) => {
-            await queryRunner(addVendorCategory, [item.category, userId]);
-          })
-      categoryToDelete?.forEach(async (item) => {
-            await queryRunner(deleteQuery("vendorcategory", "id"), [item.id]);
-      })
-     
+    if(typeof categories === 'object') {
+      console.log(categories)
+      categoryToInsert=existingCategories.filter((category) => category.category.toLowerCase() == categories?.categories?.toLowerCase());
+      if(categoryToInsert.length === 0) {
+        insertedId = await queryRunner(addVendorCategory, [
+          categories.categories.toLowerCase(),
+          userId,
+        ]);
+        console.log(insertedId[0]?.insertId)
+        res.status(200).json({
+          message: "Categories added/updated successfully",
+          categoryID: insertedId[0]?.insertId, // Include inserted IDs in the response
+        });
+      }
+      else{
+        
+        res.status(200).json({
+          message: "Category already exist",
+          categoryID: categoryToInsert[0]?.id, // Include inserted IDs in the response
+        });
+      }
+    }else if(typeof categories === 'array') {
+      categoryToInsert = categories.filter((category) => !existingCategories.some((existingCategory) => existingCategory.category.toLowerCase() === category.category.toLowerCase()));
+      categoryToDelete = existingCategories.filter((existingCategory) => !categories.some((category) => category.category.toLowerCase() === existingCategory.category.toLowerCase()));
+      if (categoryCheckResult[0].length !== 0) {
+        categoryToInsert?.forEach(async (item) => {
+              await queryRunner(addVendorCategory, [item.category, userId]);
+            })
+        categoryToDelete?.forEach(async (item) => {
+              await queryRunner(deleteQuery("vendorcategory", "id"), [item.id]);
+        })
+       
+      }
+      res.status(200).json({
+        message: "Categories added/updated successfully",
+      });
     }
-    res.status(200).json({
-      message: "Categories added/updated successfully",
-    });
+   
   } catch (error) {
     console.log(error);
     res.status(400).send(error);

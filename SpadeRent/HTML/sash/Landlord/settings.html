@@ -2441,6 +2441,30 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="myModal_declined" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Transaction declined!!, Check your card</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -3651,7 +3675,7 @@
                                                                                                         <span
                                                                                                             class="fs-50 me-1 text-warning">$</span>
                                                                                                         <span
-                                                                                                            class="fs-50 me-1 text-warning total-amount">39.99</span>
+                                                                                                            class="fs-50 me-1 text-warning amount-payable">39.99</span>
                                                                                                         <span
                                                                                                             class="fs-16">/
                                                                                                             per
@@ -3783,7 +3807,7 @@
                                                                                                         <span
                                                                                                             class="fs-50 me-1 text3-green">$</span>
                                                                                                         <span
-                                                                                                            class="fs-50 me-1 text3-green total-amount">69.99</span>
+                                                                                                            class="fs-50 me-1 text3-green amount-payable">69.99</span>
                                                                                                         <span
                                                                                                             class="fs-16">/
                                                                                                             per
@@ -3921,7 +3945,7 @@
                                                                                                         <span
                                                                                                             class="fs-50 me-1 text4-blue">$</span>
                                                                                                         <span
-                                                                                                            class="fs-50 me-1 text4-blue total-amount">129.99</span>
+                                                                                                            class="fs-50 me-1 text4-blue amount-payable">129.99</span>
                                                                                                         <span
                                                                                                             class="fs-16">/
                                                                                                             per
@@ -6040,7 +6064,8 @@
                                                                         <div class="row" style="display: flex; justify-content: center; align-items: center;">
                                                                             <!-- <div class="col-lg-3"></div> -->
                                                                             <div class="col-lg-66">
-                                                                                <div class="cardd">
+                                                                                <div class
+                                                                                ="cardd">
                                                                                     <div class="card-headerr text-center">
                                                                                         <h3><i class="fi fi-rs-lock"></i> PAYMENT</h3>
                                                                                     </div>
@@ -10706,6 +10731,479 @@
             });
         </script>
         <script>
+            var seletedPlanID;
+            function getData() {
+
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        // console.log()
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+        console.log(response)
+        if (response.image !== " " && response.image !== null) {
+
+            $("#user-img").attr("src", response.image)
+            $("#user-img-dark").attr("src", response.image)
+        }
+        $("#firstName").val(toTitleCase(response.firstName))
+        $("#lastName").val(toTitleCase(response.lastName))
+        $("#email").val(response.email)
+        $("#phone1").val(response.phone)
+        $("#businessName").val(toTitleCase(response.businessName || ""))
+        $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
+        $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
+        $("#city1").val(toTitleCase(response.BAcity || ""))
+        $("#state1").val(toTitleCase(response.BAstate || ""))
+        $("#zipcode1").val(response.BAzipCode)
+        $("#city").val(toTitleCase(response.city || ""))
+        $("#state").val(toTitleCase(response.state || ""))
+        $("#zipcode").val(response.zipCode)
+        $("#emailVerify").val(response.email)
+
+        //                         "tenantEmail": "0",
+        // "auth": 0,
+        // "invoiceEmail": "0",
+        // "taskEmail": "0"
+
+        if (response.tenantEmail == 0) {
+            $("#tenant-zero .label")[0].classList.add("activee");
+            $("#tenant-one .label")[0].classList.remove("activee");
+        } else {
+            $("#tenant-one .label")[0].classList.add("activee");
+            $("#tenant-zero .label")[0].classList.remove("activee");
+        }
+        if (response.invoiceEmail == 0) {
+            $("#invoice-zero .label")[0].classList.add("activee");
+            $("#invoice-one .label")[0].classList.remove("activee");
+        } else {
+            $("#invoice-one .label")[0].classList.add("activee");
+            $("#invoice-zero .label")[0].classList.remove("activee");
+        }
+        if (response.taskEmail == 0) {
+            $("#task-zero .label")[0].classList.add("activee");
+            $("#task-one .label")[0].classList.remove("activee");
+        } else {
+            $("#task-one .label")[0].classList.add("activee");
+            $("#task-zero .label")[0].classList.remove("activee");
+        }
+        //                     $(".activee").removeClass("activee");
+        // $(this).addClass("activee");
+        if (response.auth == 1) {
+            $('#2f-Auth').prop('checked', true);
+        } else {
+            $('#2f-Auth').prop('checked', false);
+        }
+        // $("#user-name").text(toTitleCase(response.userName))
+        $("#header-user").text(toTitleCase(response.userName))
+        if (response.image) {
+            image_url = response.image
+            image_key = response.imageKey
+        }
+        if (response.image !== null && response.image !== " ") {
+
+            $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
+        }
+        const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
+
+        if (4 >= parseInt(response.planID)) {
+            [2, 3, 4].forEach(function (item) {
+                if (item < parseInt(response.planID)) {
+                    console.log(names[item])
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                    $(`#${item}`).removeClass("bg-primary");
+                    $(`#${item}`).removeClass("text-white");
+                } else if (item > parseInt(response.planID)) {
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                    $(`#${item}`).removeClass("bg-primary");
+                    $(`#${item}`).removeClass("text-white");
+                } else if (item == parseInt(response.planID)) {
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).text("Selected");
+                    [5, 6, 7].forEach(function (item) {
+                        $(`#${item} .card-btnn span`).empty();
+                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                        $(`#${item}`).removeClass("bg-primary");
+                        $(`#${item}`).removeClass("text-white");
+                    })
+                    // console.log($(".free-card"))
+                    $(".free-card").each(function () {
+                        $(this).addClass("d-none");
+
+
+                    })
+                }
+            });
+        }
+
+        else if (4 < parseInt(response.planID)) {
+            [5, 6, 7].forEach(function (item) {
+                if (item < parseInt(response.planID)) {
+                    console.log(names[item])
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                    $(`#${item}`).removeClass("bg-primary");
+                    $(`#${item}`).removeClass("text-white");
+                } else if (item > parseInt(response.planID)) {
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                    $(`#${item}`).removeClass("bg-primary");
+                    $(`#${item}`).removeClass("text-white");
+                } else if (item == parseInt(response.planID)) {
+                    $(`#${item} .card-btnn span`).empty();
+                    $(`#${item} .card-btnn span`).text("Selected");
+                    [2, 3, 4].forEach(function (item) {
+                        $(`#${item} .card-btnn span`).empty();
+                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
+                        $(`#${item}`).removeClass("bg-primary");
+                        $(`#${item}`).removeClass("text-white");
+                    })
+                    $(".free-card").each(function () {
+                        $(this).addClass("d-none");
+
+
+                    })
+                }
+            });
+        }
+        else {
+            $(".free-card .card").each(function () {
+                $(this).addClass("bg-primary");
+                $(this).addClass("text-white");
+                $(this).find(".card-btnn span").empty();
+                $(this).find(".card-btnn span").text("Selected");
+
+            })
+        }
+
+        $(`#${response.planID}`).addClass("bg-primary");
+        $(`#${response.planID}`).addClass("text-white");
+
+
+    },
+    error: function (xhr, status, error) {
+        $("#myModal_warning").modal("show");
+        setTimeout(function () {
+            $('#myModal_warning').modal('hide');
+            window.location = '../Landlord/login_module.html';
+        }, 2000);
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+    type: 'GET',
+    contentType: false,
+    processData: false,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+
+    success: function (response) {
+        $("#add-item-container5").empty()
+        response.data?.forEach(({ category, landLordId }, index) => {
+            counter++
+
+            $("#add-item-container5").append(`<tr class="tr">
+                                                        <td>
+                                                            <label for=""><b>Categories</b></label>
+                                                            <input type="text" name=""
+                                                                class="form-control vendor-category" value='${category}' readonly>
+                                                        </td>
+                                                        <td><button type="button" class="btn"
+                                                            id="del-btn5"
+                                                                style="text-align: left;">
+                                                                <i
+                                                                    class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button></td>
+                                                    </tr>`)
+        })
+
+    },
+    error: function (xhr, status, error) {
+
+    }
+});
+
+
+
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        categoryData = response.data
+        var taxableCounter = 0
+        $("#add-item-container1").empty()
+        response.data?.forEach(({ id, categorieName, landLordId, setTaxes, taxable }, index) => {
+            counter++
+
+            $("#add-item-container1").append(`<tr class="tr">
+<td>
+    <label for=""><b>Categories</b></label>
+    <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
+</td>
+<td style="width: 1px;">
+    <label for=""><b>Taxable</b></label>
+    <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
+<td><button type="button" class="btn" id="del-btn-complete" style="text-align: left;">
+    <i class="fi fi-rs-trash text-danger fs-5"></i>
+</button></td>
+</tr>`)
+            if (taxable == 1) {
+                taxableCounter++
+                if (taxableCounter == 1) {
+                    $('#tax').val(setTaxes);
+                }
+                // Add the category to the select box if it is taxable and not already present
+                var optionExists = $('#categories option[value="' + categorieName + '"]').length > 0;
+                if (!optionExists) {
+                    $('#categories').append($('<option>', {
+                        value: categorieName,
+                        text: categorieName
+                    }));
+
+                }
+            }
+        })
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
+
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+    type: 'GET',
+    contentType: false,
+    processData: false,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: async function (response) {
+
+        if (response.message == "No data found") {
+            localStorage.setItem("invoice", "false")
+            window.location = './new-invoice.html'
+        }
+        tenantData = response.data[0]
+
+    },
+    error: function (xhr, status, error) {
+        console.log(error)
+        $("#myModal_warning").modal("show");
+        setTimeout(function () {
+            $('#myModal_warning').modal('hide');
+            window.location = '../Landlord/login_module.html';
+        }, 2000);
+    }
+});
+$(document).on('click', '.status-option', function () {
+    // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+    const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+    const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+    const data = {
+        ...data1,
+        ...data2
+    };
+    console.log(data)
+    $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
+});
+$(document).on('click', ".resend-option", function () {
+    console.log(invoiceId)
+    $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
+        type: 'GET', // Change the method to POST
+        data: {
+            invoiceID: invoiceId
+        }, // Send the data in the request body
+        contentType: 'application/json', // Set the content type to JSON
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function (response) {
+            // Handle the success response from the API
+            getData()
+            $("#succesModal_invoice").modal("hide")
+            $("#infoModal").modal("show")
+            setTimeout(function () {
+                $("#infoModal").modal("hide")
+            }, 2000);
+
+        },
+        error: function (xhr, status, error) {
+            // Handle the error response from the API
+            console.log('API error:', error);
+        }
+    });
+})
+
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        if (response?.message == "No data found") {
+            var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+            $("#table_body_unpaid_invoice").append(row);
+        } else if (response?.data) {
+            var tableBody = $("#table_body_unpaid_invoice");
+
+            // Clear the existing content in the table body
+            tableBody.empty();
+
+            invoiceData = response?.data[0].filter(function (invoice) {
+                return invoice.status !== "paid"
+            })
+            if (invoiceData.length >= 1) {
+                $("#closeButton").prop("disabled", true)
+                $("#unpaid-text").removeClass("d-none")
+            } else {
+                $("#closeButton").prop("disabled", false)
+                $("#unpaid-text").addClass("d-none")
+            }
+            invoiceData.forEach(function (invoice) {
+                var row = $("<tr>");
+
+                // Populate invoice properties into cells
+                var invoiceNumber = $("<td class='invoice-id'>").text(invoice.invoiceID);
+                var customerInfo = $("<td>").html(`
+<p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName + " " + invoice.lastName}</p>
+<span>Phone: ${invoice.tPhone}</span>
+`);
+                var description = $("<td>").html(`
+<p style="font-weight: 600;" class="mb-1">${(invoice.note == "" ? "N/A" : invoice.note)}</p>
+<span>${invoice.invoiceType}</span>
+`);
+                var dates = $("<td>").html(`
+<p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
+<span>Due Date: ${invoice.dueDate}</span>
+`);
+                var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
+                var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">$ ${invoice.totalAmount}</p>`);
+                var status = $("<td>").html(`
+<b style="color: red;"><i class="fi fi-rs-clock-three" style="color: red;"></i> ${invoice.status}</b>
+`);
+                const toShow = invoice.status
+                var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                data-bs-toggle="dropdown"></i>
+
+                <ul class="dropdown-menu">
+<li>
+<a class="dropdown-item text-dark view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">View</a>
+</li>
+
+
+${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#changeStatusModal">Receive Payments</a></li>' : ''}
+<li>
+<a class="dropdown-item text-dark resend-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">Resend Invoice</a>
+</li>
+</ul>
+
+        </td>`
+
+
+                row.append(
+                    invoiceNumber, customerInfo, description, dates, address, amount, status, dropdownMenu
+                );
+
+                // Append the row to the table body
+                tableBody.append(row);
+            });
+        }
+
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching invoices.');
+        console.log(xhr);
+        console.log(error);
+    }
+});
+
+
+$.ajax({
+    url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+    },
+    success: function (response) {
+        // vendorCategoryData = response.data
+        // console.log(response.data)
+        // var vendorCategory = 0
+        // $("#add-item-container1").empty()
+        // $("#add-item-container5").empty()
+        // response.data?.forEach(({ category,landLordId }, index) => {
+        //     counter++
+
+        //     $("#add-item-container5").append(`<tr class="tr">
+        //                                                 <td>
+        //                                                     <label for=""><b>Categories</b></label>
+        //                                                     <input type="text" name=""
+        //                                                         class="form-control vendor-category" value='${category}' readonly>
+        //                                                 </td>
+        //                                                 <td><button type="button" class="btn"
+        //                                                         id=""
+        //                                                         style="text-align: left;">
+        //                                                         <i
+        //                                                             class="fi fi-rs-trash text-danger fs-5"></i>
+        //                                                     </button></td>
+        //                                             </tr>`)
+        // })
+        console.log(response)
+
+        if (response.email == "yes") {
+            $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+        } else {
+            $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+        } if (response.push == "yes") {
+            $("input[name='example-radios1'][value='Enable']").prop("checked", true);
+
+
+        } else {
+            $("input[name='example-radios1'][value='Disable']").prop("checked", true);
+
+        }
+        // if (response.text == "yes") {
+        //     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
+
+
+        // } else {
+        //     $("input[name='example-radios3'][value='Disable']").prop("checked", true);
+
+
+        // }
+    },
+    error: function (xhr, status, error) {
+        console.log('Error occurred while fetching state and city data.');
+        console.log(xhr);
+        console.log(error);
+        // console.log('Error occurred while fetching state and city data.');
+    }
+});
+
+}
+
             var categoryData; var image_url = " "; var image_key = " ";
             var password_validate1 = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
             var validconfirmPassword1 = document.getElementById("id_password_new");
@@ -10975,477 +11473,7 @@
                     })
                 })
 
-                function getData() {
-
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/protected',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            // console.log()
-                            function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function (txt) {
-                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                                });
-                            }
-                            console.log(response)
-                            if (response.image !== " " && response.image !== null) {
-
-                                $("#user-img").attr("src", response.image)
-                                $("#user-img-dark").attr("src", response.image)
-                            }
-                            $("#firstName").val(toTitleCase(response.firstName))
-                            $("#lastName").val(toTitleCase(response.lastName))
-                            $("#email").val(response.email)
-                            $("#phone1").val(response.phone)
-                            $("#businessName").val(toTitleCase(response.businessName || ""))
-                            $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
-                            $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
-                            $("#city1").val(toTitleCase(response.BAcity || ""))
-                            $("#state1").val(toTitleCase(response.BAstate || ""))
-                            $("#zipcode1").val(response.BAzipCode)
-                            $("#city").val(toTitleCase(response.city || ""))
-                            $("#state").val(toTitleCase(response.state || ""))
-                            $("#zipcode").val(response.zipCode)
-                            $("#emailVerify").val(response.email)
-
-                            //                         "tenantEmail": "0",
-                            // "auth": 0,
-                            // "invoiceEmail": "0",
-                            // "taskEmail": "0"
-
-                            if (response.tenantEmail == 0) {
-                                $("#tenant-zero .label")[0].classList.add("activee");
-                                $("#tenant-one .label")[0].classList.remove("activee");
-                            } else {
-                                $("#tenant-one .label")[0].classList.add("activee");
-                                $("#tenant-zero .label")[0].classList.remove("activee");
-                            }
-                            if (response.invoiceEmail == 0) {
-                                $("#invoice-zero .label")[0].classList.add("activee");
-                                $("#invoice-one .label")[0].classList.remove("activee");
-                            } else {
-                                $("#invoice-one .label")[0].classList.add("activee");
-                                $("#invoice-zero .label")[0].classList.remove("activee");
-                            }
-                            if (response.taskEmail == 0) {
-                                $("#task-zero .label")[0].classList.add("activee");
-                                $("#task-one .label")[0].classList.remove("activee");
-                            } else {
-                                $("#task-one .label")[0].classList.add("activee");
-                                $("#task-zero .label")[0].classList.remove("activee");
-                            }
-                            //                     $(".activee").removeClass("activee");
-                            // $(this).addClass("activee");
-                            if (response.auth == 1) {
-                                $('#2f-Auth').prop('checked', true);
-                            } else {
-                                $('#2f-Auth').prop('checked', false);
-                            }
-                            // $("#user-name").text(toTitleCase(response.userName))
-                            $("#header-user").text(toTitleCase(response.userName))
-                            if (response.image) {
-                                image_url = response.image
-                                image_key = response.imageKey
-                            }
-                            if (response.image !== null && response.image !== " ") {
-
-                                $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
-                            }
-                            const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
-
-                            if (4 >= parseInt(response.planID)) {
-                                [2, 3, 4].forEach(function (item) {
-                                    if (item < parseInt(response.planID)) {
-                                        console.log(names[item])
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                        $(`#${item}`).removeClass("bg-primary");
-                                        $(`#${item}`).removeClass("text-white");
-                                    } else if (item > parseInt(response.planID)) {
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                        $(`#${item}`).removeClass("bg-primary");
-                                        $(`#${item}`).removeClass("text-white");
-                                    } else if (item == parseInt(response.planID)) {
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).text("Selected");
-                                        [5, 6, 7].forEach(function (item) {
-                                            $(`#${item} .card-btnn span`).empty();
-                                            $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                            $(`#${item}`).removeClass("bg-primary");
-                                            $(`#${item}`).removeClass("text-white");
-                                        })
-                                        // console.log($(".free-card"))
-                                        $(".free-card").each(function () {
-                                            $(this).addClass("d-none");
-
-
-                                        })
-                                    }
-                                });
-                            }
-
-                            else if (4 < parseInt(response.planID)) {
-                                [5, 6, 7].forEach(function (item) {
-                                    if (item < parseInt(response.planID)) {
-                                        console.log(names[item])
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).append("Downgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                        $(`#${item}`).removeClass("bg-primary");
-                                        $(`#${item}`).removeClass("text-white");
-                                    } else if (item > parseInt(response.planID)) {
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                        $(`#${item}`).removeClass("bg-primary");
-                                        $(`#${item}`).removeClass("text-white");
-                                    } else if (item == parseInt(response.planID)) {
-                                        $(`#${item} .card-btnn span`).empty();
-                                        $(`#${item} .card-btnn span`).text("Selected");
-                                        [2, 3, 4].forEach(function (item) {
-                                            $(`#${item} .card-btnn span`).empty();
-                                            $(`#${item} .card-btnn span`).append("Upgrade " + names[item] + " " + `<img src="../assets/images/arrow-yellow.svg" class="float-right mt-0 mr-2" alt="">`);
-                                            $(`#${item}`).removeClass("bg-primary");
-                                            $(`#${item}`).removeClass("text-white");
-                                        })
-                                        $(".free-card").each(function () {
-                                            $(this).addClass("d-none");
-
-
-                                        })
-                                    }
-                                });
-                            }
-                            else {
-                                $(".free-card .card").each(function () {
-                                    $(this).addClass("bg-primary");
-                                    $(this).addClass("text-white");
-                                    $(this).find(".card-btnn span").empty();
-                                    $(this).find(".card-btnn span").text("Selected");
-
-                                })
-                            }
-
-                            $(`#${response.planID}`).addClass("bg-primary");
-                            $(`#${response.planID}`).addClass("text-white");
-
-
-                        },
-                        error: function (xhr, status, error) {
-                            $("#myModal_warning").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning').modal('hide');
-                                window.location = '../Landlord/login_module.html';
-                            }, 2000);
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
-                        type: 'GET',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-
-                        success: function (response) {
-                            $("#add-item-container5").empty()
-                            response.data?.forEach(({ category, landLordId }, index) => {
-                                counter++
-
-                                $("#add-item-container5").append(`<tr class="tr">
-                                                                            <td>
-                                                                                <label for=""><b>Categories</b></label>
-                                                                                <input type="text" name=""
-                                                                                    class="form-control vendor-category" value='${category}' readonly>
-                                                                            </td>
-                                                                            <td><button type="button" class="btn"
-                                                                                id="del-btn5"
-                                                                                    style="text-align: left;">
-                                                                                    <i
-                                                                                        class="fi fi-rs-trash text-danger fs-5"></i>
-                                                                                </button></td>
-                                                                        </tr>`)
-                            })
-
-                        },
-                        error: function (xhr, status, error) {
-
-                        }
-                    });
-
-
-
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            categoryData = response.data
-                            var taxableCounter = 0
-                            $("#add-item-container1").empty()
-                            response.data?.forEach(({ id, categorieName, landLordId, setTaxes, taxable }, index) => {
-                                counter++
-
-                                $("#add-item-container1").append(`<tr class="tr">
-                    <td>
-                        <label for=""><b>Categories</b></label>
-                        <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
-                    </td>
-                    <td style="width: 1px;">
-                        <label for=""><b>Taxable</b></label>
-                        <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
-                    <td><button type="button" class="btn" id="del-btn-complete" style="text-align: left;">
-                        <i class="fi fi-rs-trash text-danger fs-5"></i>
-                    </button></td>
-                </tr>`)
-                                if (taxable == 1) {
-                                    taxableCounter++
-                                    if (taxableCounter == 1) {
-                                        $('#tax').val(setTaxes);
-                                    }
-                                    // Add the category to the select box if it is taxable and not already present
-                                    var optionExists = $('#categories option[value="' + categorieName + '"]').length > 0;
-                                    if (!optionExists) {
-                                        $('#categories').append($('<option>', {
-                                            value: categorieName,
-                                            text: categorieName
-                                        }));
-
-                                    }
-                                }
-                            })
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
-
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
-                        type: 'GET',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: async function (response) {
-
-                            if (response.message == "No data found") {
-                                localStorage.setItem("invoice", "false")
-                                window.location = './new-invoice.html'
-                            }
-                            tenantData = response.data[0]
-
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error)
-                            $("#myModal_warning").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning').modal('hide');
-                                window.location = '../Landlord/login_module.html';
-                            }, 2000);
-                        }
-                    });
-                    $(document).on('click', '.status-option', function () {
-                        // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
-                        const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
-                        const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
-
-                        const data = {
-                            ...data1,
-                            ...data2
-                        };
-                        console.log(data)
-                        $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
-                    });
-                    $(document).on('click', ".resend-option", function () {
-                        console.log(invoiceId)
-                        $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
-                            type: 'GET', // Change the method to POST
-                            data: {
-                                invoiceID: invoiceId
-                            }, // Send the data in the request body
-                            contentType: 'application/json', // Set the content type to JSON
-                            headers: {
-                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                            },
-                            success: function (response) {
-                                // Handle the success response from the API
-                                getData()
-                                $("#succesModal_invoice").modal("hide")
-                                $("#infoModal").modal("show")
-                                setTimeout(function () {
-                                    $("#infoModal").modal("hide")
-                                }, 2000);
-
-                            },
-                            error: function (xhr, status, error) {
-                                // Handle the error response from the API
-                                console.log('API error:', error);
-                            }
-                        });
-                    })
-
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            if (response?.message == "No data found") {
-                                var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
-                                $("#table_body_unpaid_invoice").append(row);
-                            } else if (response?.data) {
-                                var tableBody = $("#table_body_unpaid_invoice");
-
-                                // Clear the existing content in the table body
-                                tableBody.empty();
-
-                                invoiceData = response?.data[0].filter(function (invoice) {
-                                    return invoice.status !== "paid"
-                                })
-                                if (invoiceData.length >= 1) {
-                                    $("#closeButton").prop("disabled", true)
-                                    $("#unpaid-text").removeClass("d-none")
-                                } else {
-                                    $("#closeButton").prop("disabled", false)
-                                    $("#unpaid-text").addClass("d-none")
-                                }
-                                invoiceData.forEach(function (invoice) {
-                                    var row = $("<tr>");
-
-                                    // Populate invoice properties into cells
-                                    var invoiceNumber = $("<td class='invoice-id'>").text(invoice.invoiceID);
-                                    var customerInfo = $("<td>").html(`
-<p style="font-weight: 600;" class="mb-1 text-primary">${invoice.firstName + " " + invoice.lastName}</p>
-<span>Phone: ${invoice.tPhone}</span>
-`);
-                                    var description = $("<td>").html(`
-<p style="font-weight: 600;" class="mb-1">${(invoice.note == "" ? "N/A" : invoice.note)}</p>
-<span>${invoice.invoiceType}</span>
-`);
-                                    var dates = $("<td>").html(`
-<p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
-<span>Due Date: ${invoice.dueDate}</span>
-`);
-                                    var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
-                                    var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">$ ${invoice.totalAmount}</p>`);
-                                    var status = $("<td>").html(`
-<b style="color: red;"><i class="fi fi-rs-clock-three" style="color: red;"></i> ${invoice.status}</b>
-`);
-                                    const toShow = invoice.status
-                                    var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
-                                    data-bs-toggle="dropdown"></i>
-
-                                    <ul class="dropdown-menu">
-<li>
-<a class="dropdown-item text-dark view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">View</a>
-</li>
-
-
-${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#changeStatusModal">Receive Payments</a></li>' : ''}
-<li>
-<a class="dropdown-item text-dark resend-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">Resend Invoice</a>
-</li>
-</ul>
-
-                            </td>`
-
-
-                                    row.append(
-                                        invoiceNumber, customerInfo, description, dates, address, amount, status, dropdownMenu
-                                    );
-
-                                    // Append the row to the table body
-                                    tableBody.append(row);
-                                });
-                            }
-
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching invoices.');
-                            console.log(xhr);
-                            console.log(error);
-                        }
-                    });
-
-
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/checkNotify',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            // vendorCategoryData = response.data
-                            // console.log(response.data)
-                            // var vendorCategory = 0
-                            // $("#add-item-container1").empty()
-                            // $("#add-item-container5").empty()
-                            // response.data?.forEach(({ category,landLordId }, index) => {
-                            //     counter++
-
-                            //     $("#add-item-container5").append(`<tr class="tr">
-                            //                                                 <td>
-                            //                                                     <label for=""><b>Categories</b></label>
-                            //                                                     <input type="text" name=""
-                            //                                                         class="form-control vendor-category" value='${category}' readonly>
-                            //                                                 </td>
-                            //                                                 <td><button type="button" class="btn"
-                            //                                                         id=""
-                            //                                                         style="text-align: left;">
-                            //                                                         <i
-                            //                                                             class="fi fi-rs-trash text-danger fs-5"></i>
-                            //                                                     </button></td>
-                            //                                             </tr>`)
-                            // })
-                            console.log(response)
-
-                            if (response.email == "yes") {
-                                $("input[name='example-radios3'][value='Enable']").prop("checked", true);
-                            } else {
-                                $("input[name='example-radios3'][value='Disable']").prop("checked", true);
-                            } if (response.push == "yes") {
-                                $("input[name='example-radios1'][value='Enable']").prop("checked", true);
-
-
-                            } else {
-                                $("input[name='example-radios1'][value='Disable']").prop("checked", true);
-
-                            }
-                            // if (response.text == "yes") {
-                            //     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
-
-
-                            // } else {
-                            //     $("input[name='example-radios3'][value='Disable']").prop("checked", true);
-
-
-                            // }
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
-
-                }
+                
                 getData()
                 $("#requestcloseaccount").on('hide.bs.modal', function () {
 
@@ -11736,33 +11764,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
-                        method: 'PUT',
-                        data: JSON.stringify({ planID: cardId }),
-                        contentType: 'application/json',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            $("#upgradetopro").modal("show")
-                            $("#myModal_success p").text("Succesfully Updated!!!")
-                            // $("#myModal_success").modal("show")
-                            
-                            setTimeout(function () {
-                                $("#myModal_success").modal("hide");
-                            }, 2000);
-                            getData()
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
-                            // console.log('Error occurred while fetching state and city data.');
-                        }
-                    });
-                    // Use the cardId as needed
-                    console.log('Clicked card ID:', cardId);
+                    var amount=$(this).closest('.pricing-card').find('.amount-payable').text();
+                    seletedPlanID=cardId
+                    $("#upgradetopro #amount").val(amount)
+                    $("#upgradetopro").modal("show")
                 });
 
                 var file;
@@ -12753,25 +12758,58 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(scard)
+                    console.log(response)
                     sfc.createPayment({
                         sessionToken: response.sessionToken, //received from openOrder API
                         clientUniqueId: "695701003",
                         merchantId:"6400701569295268447",
                         merchantSiteId:"244298",
                         cardHolderName: "<card_holder>",
-                        paymentOption: {
-                            userPaymentOptionId: "95475308",
-                            card:{
-                            }
-                        },
-
+                        // paymentOption: {
+                        //     userPaymentOptionId: "95475308",
+                        //     card:{
+                        //     }
+                        // },
+                        paymentOption:scard,
                         billingAddress: {
                             email: "someone@somedomain.com",
                             country: "GB"
                         }
                     }, function (res) {
-                        console.log(res)
+                        if(res?.transactionStatus?.toLowerCase()=="approved" && res?.result?.toLowerCase()=="approved"){
+                                                $.ajax({
+                        url: 'http://localhost:3000/api/spade/updatePlanId',
+                        method: 'PUT',
+                        data: JSON.stringify({ planID: seletedPlanID }),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            $("#upgradetopro").modal("hide")
+                            $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                            $("#myModal_success").modal("show")
+                            
+                            setTimeout(function () {
+                                $("#myModal_success").modal("hide");
+                            }, 2000);
+                            getData()
+                        },
+                        error: function (xhr, status, error) {
+                           $("#myModal_warning_connection").modal("show")
+                            setTimeout(function () {
+                                $("#myModal_warning_connection").modal("hide");
+                            }, 2000);
+                            
+                        }
+                    });
+                    }else{
+                        $("#upgradetopro").modal("hide")
+                        $("#myModal_declined").modal("show")
+                        setTimeout(function () {
+                            $("#myModal_declined").modal("hide");
+                        }, 2000);
+                    }
                     });
                     
                 },

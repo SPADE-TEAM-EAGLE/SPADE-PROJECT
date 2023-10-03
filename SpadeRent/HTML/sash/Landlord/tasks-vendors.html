@@ -2998,7 +2998,7 @@ color: #000;
                 var phone = $("#phone").val();
                 var email = $("#email").val();
                 var category = $("#category").val();
-                if (category == "Add vendor categories first!!") {
+                if (category == "Choose..." || category == "Add vendor categories first!!") {
                     $.ajax({
                         url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
@@ -3014,7 +3014,7 @@ color: #000;
                         success: function (response) {
                             console.log("addVendorCategory");
                             console.log(response.insertedCategories);
-                            category = response.insertedCategories
+                            category = response?.categoryID
                             // Add the form data to the FormData object
                             formData.append('firstName', firstName);
                             formData.append('lastName', lastName);
@@ -3030,7 +3030,7 @@ color: #000;
                             // formData.append('categoryID', 2);
                             console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -3039,13 +3039,13 @@ color: #000;
                                     streetAddress: streetAddress,
                                     state:state,
                                     city: city,
-                                    // status: status,
+                                    
                                     zip: zip,
                                     phone: phone,
                                     workPhone: workPhone,
-                                    // status: status,
+                                    
                                     email: email,
-                                    // formData.append(categoryID:category),
+                                    
                                     categoryID: category
                                 }),
                                 contentType: "application/json; charset=utf-8",
@@ -3136,7 +3136,7 @@ color: #000;
                             // formData.append('categoryID', 2);
                             console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -3221,7 +3221,7 @@ color: #000;
                         // formData.append('categoryID', 2);
                         console.log(status)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                            url: 'http://localhost:3000/api/spade/addVendor',
                             type: 'POST',
                             data: JSON.stringify({
                                 firstName: firstName,
@@ -3297,8 +3297,8 @@ color: #000;
                     success: function (response) {
                         // tenantData=data[0]
                         console.log(response)
-                        if (response.message == "No data found") {
-
+                        if (response.message=="No data found") {
+                            $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
                         }
                         vendorData = (response.data[0] ? response.data[0] : [])
                         // $("#user-name").text(response.name)
@@ -3340,6 +3340,7 @@ color: #000;
                     error: function (xhr, status, error) {
                         var tableBody = $('#table_body');
                         tableBody.empty();
+                        $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
                     }
                 });
 
