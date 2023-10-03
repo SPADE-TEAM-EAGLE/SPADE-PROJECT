@@ -1,6 +1,7 @@
+
 (function ($) {
   "use strict";
-
+alert(4)
   // WIZARD 1
   $("#wizard1").steps({
     headerTag: "h3",
@@ -536,7 +537,7 @@ lastname.addEventListener("keyup", button1);
 input.addEventListener("keyup", button1);
 input.addEventListener("change", button1);
 checkbox.addEventListener("change", button1);
-
+alert(1)
 function button1() {
   // Get the element with id 'email-span-invalid'
   const emailSpan = document.getElementById('email-span-invalid');
@@ -546,7 +547,7 @@ function button1() {
 
   // Check if the element is hidden (display: none)
   const isEmailSpanHidden = computedStyle.display === 'none';
-
+alert(1)
   // Check all the form input conditions and whether the 'email-span-invalid' element is hidden
   if (
     email.value.match(validEmail) &&         // Check email validity
@@ -557,6 +558,7 @@ function button1() {
     checkbox.checked                         // Check if checkbox is checked
     // && phone.value.match(validPhone)      // You seem to have commented out this line, so it's not part of the condition
   ) {
+    
     // If all conditions are met, enable the "Next" button
     document.getElementById("next1").disabled = false;
   } else {
