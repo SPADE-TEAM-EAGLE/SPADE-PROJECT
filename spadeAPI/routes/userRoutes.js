@@ -257,3 +257,7 @@ router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.pro
 
 router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
 router.get("/userCheckEmail", verifyToken, userPermissionController.userCheckEmail);
+router.put("/updateUserPermissionUsers",  verifyToken, userPermissionController.updateUserPermissionUsers); 
+router.get("/userPermissionGetById", verifyToken, userPermissionController.userPermissionGetById);
+router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
+router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
