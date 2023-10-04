@@ -68,7 +68,9 @@ const {
   addResetTokenTenant,
   propertyUnitCount,
   getMessageCountByID,
-  checkProperty
+  checkProperty,
+  insertVendorCategory,
+  insertProspectusSources
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -122,9 +124,25 @@ exports.createUser = async function (req, res) {
         "yes",
         "yes",
       ]);
+
+      // add  prospectus sources
+      await queryRunner(insertProspectusSources, [
+        selectResult[0][0].id,
+        "System"
+      ]);
+
+      // add vendor Category
+      const category = ["Plumber","Electrician","carpenters"]
+      for(let i=0; i< category.length; i++){
+        await queryRunner(insertVendorCategory, [
+          selectResult[0][0].id,
+          category[i]
+        ]);
+      }
+      
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "User added successfully" });
+      return res.status(200).json({ message: "User added successfully",id : selectResult[0][0].id });
     } else {
       return res.status(500).send("Failed to add user");
     }
@@ -226,9 +244,10 @@ exports.Signin = async function (req, res) {
         const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
           expiresIn: "3h",
         });
-
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
+
+
         // ################################# Count ##############################################
         const userId = selectResult[0][0].id;
         console.log(userId);
@@ -1854,8 +1873,9 @@ console.log(Id)
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
+          console.log(vendorResult[0])
           if (vendorResult[0].length > 0) {
-            const categoryIDs = vendorResult[0][i].categoryID;
+            const categoryIDs = vendorResult[0] [0].categoryID;
             const VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
@@ -1893,7 +1913,7 @@ console.log(Id)
   } catch (error) {
     console.log("Error:", error);
     res.send("Error Get property Task");
-  }
+}
 };
 
 //  ############################# Task property ############################################################

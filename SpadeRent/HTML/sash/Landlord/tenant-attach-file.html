@@ -1729,7 +1729,7 @@
                                     </a>
                                 </li>
                                 <li class="slide card-demo-2">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                    <a class="side-menu__item has-link active" data-bs-toggle="slide" href="add-tenant.html"><i
                                             class="side-menu__icon fi fi-rs-cabin"></i><span
                                             class="side-menu__label">Tenants</span>
                                         
@@ -3224,7 +3224,7 @@ $(document).on("click",'.delete-option',function(e) {
                         e.preventDefault(); // Prevent default anchor behavior
                         const imageElement = $(this).closest("tr").find(".file-id").attr("id");
                         $.ajax({
-                            url:"http://localhost3000/api/spade/tenantAttachFileDelete",
+                            url:"https://backend.app.spaderent.com/api/spade/tenantAttachFileDelete",
                             type:"DELETE",
                             data:JSON.stringify({
                                 id:imageElement.trim(" ")

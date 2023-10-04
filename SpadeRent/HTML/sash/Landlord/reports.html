@@ -3971,6 +3971,7 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                                <div class="table-responsive">
                                                                 <table
                                                                     class="table border text-nowrap text-md-nowrap mb-0 property-reports5 p-0 w-100" id="responsive-datatable4">
                                                                     <thead>
@@ -3994,6 +3995,7 @@
 
                                                                     </tbody>
                                                                 </table>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -4301,6 +4303,8 @@
         <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
         <script src="../assets/plugins/formwizard/fromwizard.js"></script>
 
+<!-- Tooltip and Popover JS -->
+<!-- <script src="../assets/js/tooltip&popover.js" defer></script> -->
 
 
         <!-- INTERNAL Data tables js-->
@@ -5055,6 +5059,7 @@ $('#table_body_property_report').append(newRowHtml);
                         var currentDate = new Date();
                         var timeDiff = currentDate - createdDate;
                         var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+                        var vendorNames="";
 
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
@@ -5068,14 +5073,36 @@ $('#table_body_property_report').append(newRowHtml);
 
                         if (task.AssignTo.length > 0) {
                             newRowHtml += '<td style="font-weight: 600;text-align: center;display: flex;">'
-                            newRowHtml += task.AssignTo.map(function ({ name, email }) {
-                                return '<div class="me-2">' +
-                                    '<i class="fi fi-rs-circle-user avatar-md fs-30 text-black"></i>' +
-                                    '<div class="media-body valign-middle mt-0">' +
-                                    '<a href="javascript:void(0)" class="text-black fw-semibold">' + name + '</a>' +
-                                    '</div>' +
-                                    '</div>';
-                            }).join('') + '</td>';
+                                for (var i = 0; i < task.AssignTo.length; i++) {
+                                        var name = task.AssignTo[i].name;
+                                        var email = task.AssignTo[i].email;
+                                        newRowHtml += `
+        <div class="me-2">
+            <i class="fi fi-rs-circle-user avatar-md fs-30 text-black"></i>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-black fw-semibold">${name}</a>
+            </div>
+        </div>`;
+                                        if (i === 1) {
+                                            if((Number(task.AssignTo.length) - 2)== 0){
+                                                break;
+                                            }
+                                            for (var kk = 2; kk < task.AssignTo.length; kk++) {
+ vendorNames +=  '<li class="text-dark">' + task.AssignTo[kk].name + '</li>';
+
+                                            }
+                                            newRowHtml += `
+        <div style="text-align: -webkit-center; cursor: pointer;">
+            <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-black fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                <ul class="dropdown-menu p-4 text-muted">`+vendorNames+`</ul>
+            </div>
+        </div>`;
+                                            break;
+                                        }
+                                    }
+                            newRowHtml += '</td>';
                         } else {
                             newRowHtml += '<td>Not assigned</td>';
                         }
@@ -6084,6 +6111,7 @@ $('#table_body_property_report').append(newRowHtml);
                 }
             })
         </script>
+        
 </body>
 
 </html>

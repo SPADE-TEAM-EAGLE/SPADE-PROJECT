@@ -1093,3 +1093,12 @@ WHERE
   AND createdDate >= ? 
   AND updatedDate <= ?
 `;
+exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
+exports.insertInUserPermissionUsers =
+  "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+  exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ? WHERE id = ?"; 
+
+  exports.insertVendorCategory =
+  "INSERT INTO vendorcategory (landLordId, category) VALUES (?,?)";
+  exports.insertProspectusSources =
+  "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
