@@ -171,6 +171,31 @@ exports.updateUserPermissionUsers = async function (req, res) {
     }
   };
 
+  // User get All Users
+exports.userPermissionGetAll = async function (req, res) {
+
+    const { userId } = req.user;
+    try {
+      const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId"), [
+        userId,
+    ]);
+      if (selectResult[0].length > 0) {
+        return res.status(200).json({
+          data: selectResult[0],
+        });
+      } else {
+        res.status(200).json({
+                   message: "No user Found",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        message: error.message,
+      });
+    }
+  };
+
+
     // Get User Roles
 exports.userPermissionRoles = async function (req, res) {
     try {

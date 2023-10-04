@@ -238,7 +238,14 @@ exports.Signin = async function (req, res) {
       // console.log("2");
       // }
       if (selectResult[0].length === 0) {
-        res.status(400).send("Email not found");
+        // const selectUserPermissionResult = await queryRunner(selectQuery("userPUsers", "Email"), [
+        //   email,
+        // ]);
+        // if (selectUserPermissionResult[0].length === 0) {
+          res.status(400).send("Email not found");
+        // }
+        // else{ }
+        
       } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
         const id = selectResult[0][0].id;
         const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
