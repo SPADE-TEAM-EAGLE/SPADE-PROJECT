@@ -1094,6 +1094,8 @@ WHERE
   AND updatedDate <= ?
 `;
 exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
+exports.userPermissionLogin = "SELECT *,UP.id as UPID FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id WHERE UP.UEmail = ?";
+exports.userPermissionAuth = "SELECT * FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
 exports.insertInUserPermissionUsers =
   "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
   exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ? WHERE id = ?"; 

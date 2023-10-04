@@ -197,21 +197,82 @@ exports.userPermissionGetAll = async function (req, res) {
 
 
     // Get User Roles
-exports.userPermissionRoles = async function (req, res) {
-    try {
-      const selectResult = await queryRunner(selectQuery("userRoles"));
-      if (selectResult[0].length > 0) {
-        return res.status(200).json({
-          data: selectResult[0][0],
-        });
-      } else {
-        res.status(200).json({
-                   message: "No User Roles Found",
-        });
-      }
-    } catch (error) {
-      res.status(400).json({
-        message: error.message,
-      });
-    }
-  };
+    exports.userPermissionRoles = async function (req, res) {
+        function splitAndConvertToObject(value) {
+            const resultObject = {};
+        
+            if (value.includes(',')) {
+              const values = value.split(",");
+              for (const item of values) {
+                resultObject[item] = true;
+              }
+            } else {
+              resultObject[value] = true;
+            }
+        
+            return resultObject;
+          }
+        try {
+          const selectResult = await queryRunner(selectQuery("userRoles"));
+          if (selectResult[0].length > 0) {
+            const dataArray = [];
+      
+            for (let i = 0; i < selectResult[0].length; i++) {
+              const data = {};
+      
+              // Example usage for different fields
+              const role = selectResult[0][i].Urole;
+              const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
+              const properties = splitAndConvertToObject(selectResult[0][i].properties);
+              const units = splitAndConvertToObject(selectResult[0][i].units);
+              const tenants = splitAndConvertToObject(selectResult[0][i].tenants);
+              const tasks = splitAndConvertToObject(selectResult[0][i].task);
+              const invoices = splitAndConvertToObject(selectResult[0][i].invoices);
+              const leads = splitAndConvertToObject(selectResult[0][i].leads);
+              const leadsInsights = splitAndConvertToObject(selectResult[0][i].leadsInsight);
+              const settingProfiles = splitAndConvertToObject(selectResult[0][i].settingProfile);
+              const settingCPasswords = splitAndConvertToObject(selectResult[0][i].settingCPassword);
+              const settingNotifications = splitAndConvertToObject(selectResult[0][i].settingNotification);
+              const settingCThemes = splitAndConvertToObject(selectResult[0][i].settingCTheme);
+              const settingSubscriptions = splitAndConvertToObject(selectResult[0][i].settingSubscription);
+              const settingMUsers = splitAndConvertToObject(selectResult[0][i].settingMUsers);
+              const settingEmailTs = splitAndConvertToObject(selectResult[0][i].settingEmailT);
+              const SettingInvoiceSettings = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
+      
+              dataArray.push({
+                role,
+                llDashboard,
+                properties,
+                units,
+                tenants,
+                tasks,
+                invoices,
+                leads,
+                leadsInsights,
+                settingProfiles,
+                settingCPasswords,
+                settingNotifications,
+                settingCThemes,
+                settingSubscriptions,
+                settingMUsers,
+                settingEmailTs,
+                SettingInvoiceSettings,
+              });
+            }
+      
+            return res.status(200).json({
+              data: dataArray,
+            });
+          } else {
+            res.status(200).json({
+              message: "No User Roles Found",
+            });
+          }
+        } catch (error) {
+          res.status(400).json({
+            message: error.message,
+          });
+        }
+      };
+      
+      
