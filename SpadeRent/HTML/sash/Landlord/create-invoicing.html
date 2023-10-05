@@ -5909,12 +5909,13 @@
                         ...data1,
                         ...data2
                     }
+                    console.log("mydata")
                     console.log(data)
                     $("#tenantName").text(data.firstName + " " + data.lastName)
                     $("#invoiceType").text(data.invoiceType)
                     $("#dueDate").text(data.dueDate)
                     $("#invoiceStatus").text(data.status)
-                    $("#propertyAddress").text(data.pAddress)
+                    $("#propertyAddress").text(data.pAddress + ' ,'+data.pCity + ' ,'+ data.pState+ ' ,'+ data.pZipCode)
 
                     $("#view-invoice-line-item").empty()
                     data.memo.forEach((item) => {

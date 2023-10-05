@@ -3245,6 +3245,7 @@
                                                                                 <th>PROPERTY NAME</th>
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
+                                                                                <th>LEASE START DATE</th>
                                                                                 <th>LEASE EXPIRY</th>
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT PHONE</th>
@@ -5015,6 +5016,8 @@ $('#table_body_property_report').append(newRowHtml);
                 if(leaseData.length == 0){
                     $("#table_body_lease_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');}
                     else{
+                        console.log("leaseData");
+                        console.log(leaseData);
                         leaseData.forEach((lease, index) => {
                         var remainingDays;
                         if (lease.LeaseExpire) {
@@ -5035,8 +5038,10 @@ $('#table_body_property_report').append(newRowHtml);
                             '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + lease.propertyType + '</span></a></td>' +
                             '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
                             '<td class="propertyAddress">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + remainingDays + '</p>' +
-                            // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseStart? lease.LeaseStart: 'N/A') + '</p>' +
+                            '</td>' +
+                            '<td class="propertyAddress">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseExpire? lease.LeaseExpire: 'N/A') + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 800;" class="mb-1">' + lease.firstName + " " + lease.lastName + '</p>' +
@@ -5248,7 +5253,7 @@ $('#table_body_property_report').append(newRowHtml);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/propertyReport',
+                url: 'http://localhost:3000/api/spade/propertyReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
