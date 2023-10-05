@@ -284,7 +284,7 @@ WHERE
 invoice.landlordID = ?;
 `;
 exports.getLeaseReport =
-  "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+  "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
 // get total amount from invoice table
 exports.getTotalAmount =
