@@ -5083,7 +5083,7 @@ $('#table_body_property_report').append(newRowHtml);
                             '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</p></td>';
 
                         if (task.AssignTo.length > 0) {
-                            newRowHtml += '<td style="font-weight: 600;text-align: center;display: flex;">'
+                            newRowHtml += '<td><div style="font-weight: 600;text-align: center;display: flex;">'
                                 for (var i = 0; i < task.AssignTo.length; i++) {
                                         var name = task.AssignTo[i].name;
                                         var email = task.AssignTo[i].email;
@@ -5113,7 +5113,7 @@ $('#table_body_property_report').append(newRowHtml);
                                             break;
                                         }
                                     }
-                            newRowHtml += '</td>';
+                            newRowHtml += '</div></td>';
                         } else {
                             newRowHtml += '<td>Not assigned</td>';
                         }

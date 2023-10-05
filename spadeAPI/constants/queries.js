@@ -281,10 +281,10 @@ property ON property.id = tenants.propertyID
 JOIN
 users ON users.id = tenants.landlordID -- Assuming 'user' is the table that contains the 'Phone' column
 WHERE
-invoice.landlordID = ?;
+invoice.landlordID = ?
 `;
 exports.getLeaseReport =
-  "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+  "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID=?";
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
 // get total amount from invoice table
 exports.getTotalAmount =
