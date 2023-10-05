@@ -26,13 +26,18 @@ const config = process.env;
 
 
 exports.createUserPermissionUser = async function (req, res) {
-    const { firstName, lastName, email, phone, password, Ustatus, role } = req.body;
+    const { firstName, lastName, email, phone, password, Ustatus, role,images } = req.body;
     const { userId } = req.user;
     // const { userId } = req.body;
     const currentDate = new Date();
-    console.log(userId, email,);
+    
     try {
-        console.log("userId, email,");
+      let image_url="";
+      let image_key="";
+        if(images?.length > 0){
+            image_url = images[0]?.image_url;
+            image_key = images[0]?.image_key;
+        }   
         const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId" ,"UEmail"), [
             userId,
             email,
@@ -56,7 +61,9 @@ exports.createUserPermissionUser = async function (req, res) {
             Ustatus,
             role,
             currentDate,
-        ]); 
+            image_url,
+            image_key,
+        ]);
         const name = firstName + " " + lastName;
         const mailSubject = "Spade Welcome Email";
         if (insertResult[0].affectedRows > 0) {
@@ -202,7 +209,7 @@ exports.userPermissionRoles = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("userRoles"));
       if (selectResult[0].length > 0) {
         return res.status(200).json({
-          data: selectResult[0][0],
+          data: selectResult[0],
         });
       } else {
         res.status(200).json({
