@@ -8,6 +8,20 @@
     $(window).on("load", function (e) {
         $("#global-loader").fadeOut("slow");
     })
+    // Email validation
+$(document).on('input', 'input[type="email"]', function () {
+    var email = $(this).val();
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+    var email_span = $(this).siblings('.text-danger');
+    if (!emailRegex.test(email)) {
+        console.log("invalid");
+        $(this).addClass("border-danger").removeClass("border-green");
+        email_span.removeClass('d-none');
+    } else {
+        $(this).addClass("border-green").removeClass("border-danger");
+        email_span.addClass('d-none');
+    }
+});
 
     // COLOR THEME
     $(document).on("click", "a[data-theme]", function () {
