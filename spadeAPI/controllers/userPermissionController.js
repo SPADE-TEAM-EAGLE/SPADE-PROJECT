@@ -27,13 +27,18 @@ const config = process.env;
 
 
 exports.createUserPermissionUser = async function (req, res) {
-    const { firstName, lastName, email, phone, password, Ustatus, role } = req.body;
+    const { firstName, lastName, email, phone, password, Ustatus, role,images } = req.body;
     const { userId } = req.user;
     // const { userId } = req.body;
     const currentDate = new Date();
-    console.log(userId, email,);
+    
     try {
-        console.log("userId, email,");
+      let image_url="";
+      let image_key="";
+        if(images?.length > 0){
+            image_url = images[0]?.image_url;
+            image_key = images[0]?.image_key;
+        }   
         const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId" ,"UEmail"), [
             userId,
             email,
@@ -57,7 +62,9 @@ exports.createUserPermissionUser = async function (req, res) {
             Ustatus,
             role,
             currentDate,
-        ]); 
+            image_url,
+            image_key,
+        ]);
         const name = firstName + " " + lastName;
         const mailSubject = "Spade Welcome Email";
         if (insertResult[0].affectedRows > 0) {
@@ -140,9 +147,16 @@ exports.userPermissionGetById = async function (req, res) {
 
 // update User 
 exports.updateUserPermissionUsers = async function (req, res) {
-    const { firstName, lastName, email, phone, Ustatus, role, id } = req.body;
+    const { firstName, lastName, email, phone, Ustatus, role, id,images } = req.body;
+    console.log(req.body)
     const currentDate = new Date();
+    let image_url="";
+    let image_key="";
     try {
+      if(images?.length > 0){
+          image_url = images[0]?.image_url;
+          image_key = images[0]?.image_key;
+      }
         const insertResult = await queryRunner(updateUserPermissionUsers, [
             firstName,
             lastName,
@@ -151,6 +165,8 @@ exports.updateUserPermissionUsers = async function (req, res) {
             Ustatus,
             role,
             currentDate,
+            image_url,
+            image_key,
             id,
         ]); 
         if (insertResult[0].affectedRows > 0) {
@@ -159,6 +175,7 @@ exports.updateUserPermissionUsers = async function (req, res) {
             return res.status(500).send("Failed to Update User Permission User");
         }
     } catch (error) {
+      console.log(error)
         return res.status(400).json({ message: error.message });
     }
 };
