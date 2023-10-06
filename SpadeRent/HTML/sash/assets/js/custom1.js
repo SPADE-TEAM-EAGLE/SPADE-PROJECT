@@ -19,39 +19,7 @@ $(document).on('input', 'input[type="email"]', function () {
         email_span.addClass('d-none');
     } 
 });
-// phone checker
-const input = document.querySelector('input[type="tel"]');
-const errorMsg = document.querySelector("#error-msg");
-const validMsg = document.querySelector("#valid-msg");
-const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-const iti = window.intlTelInput(input, {
-  utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-});
 
-const reset = () => {
-  input.classList.remove("error");
-  errorMsg.innerHTML = "";
-  errorMsg.classList.add("d-none");
-  validMsg.classList.add("d-none");
-};
-
-input.addEventListener('input', () => {
-  reset();
-  if (input.value.trim()) {
-    if (iti.isValidNumber()) {
-      validMsg.classList.remove("d-none");
-      input.classList.remove("is-invalid");
-      input.classList.add("is-valid");
-    } else {
-      input.classList.add("is-invalid");
-      input.classList.remove("is-valid");
-      input.classList.add("error");
-      const errorCode = iti.getValidationError();
-      errorMsg.innerHTML = errorMap[errorCode];
-      errorMsg.classList.remove("d-none");
-    }
-  }
-});
     // PAGE LOADING
     $(window).on("load", function (e) {
         $("#global-loader").fadeOut("slow");

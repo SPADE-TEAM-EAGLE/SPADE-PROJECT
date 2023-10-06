@@ -642,7 +642,7 @@ color: #000;
                             class="Rent-logo mb-5" />
                         <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
-                        <input id="token" name="token" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+                        <input id="token" name="token" type="tel" class="form-control form mb-2" pattern="[0-9]{5}"
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property.">
@@ -953,7 +953,7 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Work Phone Number</label>
-                                <input class="form-control" type="phone" data-bs-placement="top"
+                                <input class="form-control" type="tel" data-bs-placement="top"
                                     placeholder="Enter Phone Number" pattern="[0-9]+"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="phone2" required>
                                     <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
@@ -961,7 +961,7 @@ color: #000;
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" pattern="[0-9]+"
+                                <input class="form-control" type="tel" pattern="[0-9]+"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '');" placeholder="Enter Mobile Number" id="phone"
                                     required>
                                 <span id="valid-msg" class="d-none text-success">✓ Valid</span>
@@ -1080,13 +1080,15 @@ color: #000;
                                     placeholder="Enter Phone Number" pattern="[0-9]+"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone_update">
                                 <span class="text-danger d-none">Work Phone number is required!</span>
+                                <span id="valid-msg3" class="d-none text-success">✓ Valid</span>
+                                <span id="error-msg3" class="hide text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Mobile Number</label>
-                                <input class="form-control" type="phone" placeholder="Enter Mobile Number"
+                                <input class="form-control" type="tel" placeholder="Enter Mobile Number"
                                     id="phone_update" required>
-                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                <span id="error-msg" class="hide text-danger"></span>
+                                <span id="valid-msg4" class="d-none text-success">✓ Valid</span>
+                                <span id="error-msg4" class="hide text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="form-label fw-bold">Email</label>
@@ -2643,8 +2645,7 @@ color: #000;
             }
         });
     </script>
-    <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script>
+   
 
     <!-- ############################################# -->
     <!-- INTERNAL Autofill-Table JS -->
@@ -2742,6 +2743,7 @@ color: #000;
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -3656,7 +3658,7 @@ color: #000;
             $("#succes-close").click(() => {
                 getData()
             })
-            $(document).on('input change', '#addModal input[type="text"],#addModal input[type="tel"],#addModal input[type="phone"], #addModal select,#addModal textarea', function () {
+            $(document).on('input change', '#addModal input[type="text"],#addModal input[type="tel"],#addModal input[type="tel"], #addModal select,#addModal textarea', function () {
                 // updateTotal();
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -3874,15 +3876,83 @@ color: #000;
             });
         });
     </script>
+    <script>
+        const input3 = document.querySelector("#workPhone_update");
+        const errorMsg3 = document.querySelector("#error-msg3");
+        const validMsg3 = document.querySelector("#valid-msg3");
+        const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const iti3 = window.intlTelInput(input3, {
+            utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+        });
+
+        const reset3 = () => {
+            input3.classList.remove("error");
+            errorMsg3.innerHTML = "";
+            errorMsg3.classList.add("d-none");
+            validMsg3.classList.add("d-none");
+        };
+        input3.addEventListener('input', () => {
+            reset3();
+            console.log("in phone input")
+            if (input3.value.trim()) {
+                if (iti3.isValidNumber()) {
+                    validMsg3.classList.remove("d-none");
+                    phoneError = false
+                    input3.classList.remove("is-invalid");
+                    input3.classList.add("is-valid");
+                } else {
+                    input3.classList.add("is-invalid");
+                    input3.classList.remove("is-valid");
+                    phoneError3 = true
+                    input3.classList.add("error");
+                    const errorCode3 = iti3.getValidationError();
+                    errorMsg3.innerHTML = errorMap3[errorCode3];
+                    errorMsg3.classList.remove("d-none");
+                }
+            }
+        });
+    </script>
+    <script>
+        const input4 = document.querySelector("#phone_update");
+        const errorMsg4 = document.querySelector("#error-msg4");
+        const validMsg4 = document.querySelector("#valid-msg4");
+        const errorMap4 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const iti4 = window.intlTelInput(input4, {
+            utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+        });
+
+        const reset4 = () => {
+            input4.classList.remove("error");
+            errorMsg4.innerHTML = "";
+            errorMsg4.classList.add("d-none");
+            validMsg4.classList.add("d-none");
+        };
+        input4.addEventListener('input', () => {
+            reset4();
+            console.log("in phone input")
+            if (input4.value.trim()) {
+                if (iti4.isValidNumber()) {
+                    validMsg4.classList.remove("d-none");
+                    phoneError = false
+                    input4.classList.remove("is-invalid");
+                    input4.classList.add("is-valid");
+                } else {
+                    input4.classList.add("is-invalid");
+                    input4.classList.remove("is-valid");
+                    phoneError4 = true
+                    input4.classList.add("error");
+                    const errorCode4 = iti4.getValidationError();
+                    errorMsg4.innerHTML = errorMap4[errorCode4];
+                    errorMsg4.classList.remove("d-none");
+                }
+            }
+        });
+    </script>
      <script>
         const input0 = document.querySelector("#phone");
         const errorMsg = document.querySelector("#error-msg");
         const validMsg = document.querySelector("#valid-msg");
-
-        // here, the index maps to the error code returned from getValidationError - see readme
         const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-        // initialise plugin
         const iti = window.intlTelInput(input0, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -3893,10 +3963,7 @@ color: #000;
             errorMsg.classList.add("d-none");
             validMsg.classList.add("d-none");
         };
-
-        // on blur: validate
         input0.addEventListener('input', () => {
-            // alert(1)
             reset();
             console.log("in phone input")
             if (input0.value.trim()) {
@@ -3916,7 +3983,8 @@ color: #000;
                 }
             }
         });
-    </script>
+    </script> 
+     
 </body>
 
 </html>
