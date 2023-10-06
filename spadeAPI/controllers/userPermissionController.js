@@ -17,7 +17,7 @@ const {
     insertInUsers,
     insertInUserPermissionUsers,
     updateUserPermissionUsers,
-    userPermissionUpdate
+    // userPermissionUpdate
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -253,6 +253,7 @@ exports.userPermissionGetAll = async function (req, res) {
               const data = {};
       
               // Example usage for different fields
+              const id = selectResult[0][i].id;
               const role = selectResult[0][i].Urole;
               const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
               const properties = splitAndConvertToObject(selectResult[0][i].properties);
@@ -272,6 +273,7 @@ exports.userPermissionGetAll = async function (req, res) {
               const SettingInvoiceSettings = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
       
               dataArray.push({
+                id,
                 role,
                 llDashboard,
                 properties,
@@ -308,7 +310,7 @@ exports.userPermissionGetAll = async function (req, res) {
       };
 
       // Tenant status CP Start 
-    exports.TenantStatusCP = async function (req, res) {
+    exports.userPermissionUpdate = async function (req, res) {
         const { role,columnName,permission } = req.body;
         // const currentDate = new Date();
         try {

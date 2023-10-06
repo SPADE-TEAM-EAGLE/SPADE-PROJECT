@@ -18,6 +18,7 @@ const verifyToken = async (req, res, next) => {
     // console.log(decoded.UserPermissionID);
     try {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+      console.log(decoded.UserPermissionID);
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
 
       function splitAndConvertToObject(value) {
@@ -34,7 +35,9 @@ const verifyToken = async (req, res, next) => {
 
         return resultObject;
       } 
+      console.log(result[0][0]);
       // Example usage for different fields
+      // const id = result[0][0].id;
       const role = result[0][0].Urole;
       const llDashboard = splitAndConvertToObject(result[0][0].llDashboard);
       const properties = splitAndConvertToObject(result[0][0].properties);
@@ -79,7 +82,6 @@ const verifyToken = async (req, res, next) => {
         city: result[0][0].PACity,
         state: result[0][0].PAState,
         zipCode: result[0][0].PAZipcode,
-
         role,
         llDashboard,
         properties,
@@ -178,25 +180,15 @@ const verifyTokenTenant = async (req, res, next) => {
       image: result[0][0].image,
       imageKey: result[0][0].imageKey,
       businessName: result[0][0].companyName,
-      auth: result[0][0].auth
-
-    };
-
+      auth: result[0][0].auth 
+    }; 
     next();
   } catch (err) {
     console.log(err);
     return res.status(400).send("Invalid Token");
   }
-};
-// const verifyTokenUesers = async (req, res, next) => {
-//   const token = req.headers.authorization.split(" ")[1]; 
-//   if (!token) {
-//     return res.status(401).send("Access Denied");
-//   }
-
-// };
+}; 
 module.exports = {
   verifyToken,
   verifyTokenTenant,
-  // verifyTokenUesers
 };

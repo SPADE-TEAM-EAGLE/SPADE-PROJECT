@@ -253,6 +253,7 @@ router.get("/getProspectusSources", verifyToken, prospectus.getProspectusSources
 router.put("/ImageToBase64", [verifyToken, upload], settingController.ImageToBase64);
 router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.prospectTimeGraph);
 
+router.get("/TenantStatusCP", verifyToken, tenantController.TenantStatusCP);
 //  User Permission Start
 
 router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
@@ -262,4 +263,4 @@ router.put("/updateUserPermissionUsers",  verifyToken, userPermissionController.
 router.get("/userPermissionGetById", verifyToken, userPermissionController.userPermissionGetById);
 router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
-router.put("/TenantStatusCP", verifyToken, userPermissionController.TenantStatusCP);
+router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);

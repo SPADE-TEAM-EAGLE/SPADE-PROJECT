@@ -1104,4 +1104,4 @@ exports.insertInUserPermissionUsers =
   "INSERT INTO vendorcategory (landLordId, category) VALUES (?,?)";
   exports.insertProspectusSources =
   "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
-  exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
+  exports.tenantStatusCountQuery = "SELECT (SELECT count(id) as currentTenant FROM tenants WHERE tenantCreated_at >= ? AND tenantCreated_at <= ? AND landlordID = ?) as currentTenant, count(id) as totalTenant FROM tenants WHERE landlordID = ?";
