@@ -153,20 +153,30 @@ exports.createUser = async function (req, res) {
 };
 exports.checkemail = async function (req, res) {
   const { email } = req.query;
-  console.log(req.query);
+  // const { email } = req.body;
   try {
-    const selectResult = await queryRunner(selectQuery("users", "Email"), [
+    const selectResult = await queryRunner(selectQuery("userPUsers","UEmail"), [ 
+      email,
+  ]);
+  const LandlordSelectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
     ]);
-    if (selectResult[0].length > 0) {
-      return res.status(400).json({
-        data: selectResult,
-        message: "Email already exists",
+    if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
+      return res.status(201).json({
+          message: "Email already exists ",
       });
-    } else {
+    }else if(selectResult[0].length > 0 ){
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    }else if (LandlordSelectResult[0].length > 0){
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    } 
+    else {
       res.status(200).json({
-        // message : "successful send"
-        message: "New user",
+                 message: "New user",
       });
     }
   } catch (error) {

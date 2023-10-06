@@ -83,12 +83,26 @@ exports.userCheckEmail = async function (req, res) {
         userId,
         email,
     ]);
-      if (selectResult[0].length > 0) {
+    const LandlordSelectResult = await queryRunner(selectQuery("users", "Email"), [
+        email,
+      ]);
+      if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
         return res.status(201).json({
-            message: "Email already exists",
+            message: "Email already exists ",
           data: selectResult,
         });
-      } else {
+      }else if(selectResult[0].length > 0 ){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      }else if (LandlordSelectResult[0].length > 0){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      } 
+      else {
         res.status(200).json({
                    message: "New user",
         });
