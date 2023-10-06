@@ -1104,3 +1104,4 @@ exports.insertInUserPermissionUsers =
   "INSERT INTO vendorcategory (landLordId, category) VALUES (?,?)";
   exports.insertProspectusSources =
   "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
+  exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";

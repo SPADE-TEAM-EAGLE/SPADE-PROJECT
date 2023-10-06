@@ -35,6 +35,7 @@ const verifyToken = async (req, res, next) => {
         return resultObject;
       } 
       // Example usage for different fields
+      console.log(result[0]);
       const role = result[0][0].Urole;
       const llDashboard = splitAndConvertToObject(result[0][0].llDashboard);
       const properties = splitAndConvertToObject(result[0][0].properties);

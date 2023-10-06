@@ -262,3 +262,4 @@ router.put("/updateUserPermissionUsers",  verifyToken, userPermissionController.
 router.get("/userPermissionGetById", verifyToken, userPermissionController.userPermissionGetById);
 router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
+router.put("/TenantStatusCP", verifyToken, userPermissionController.TenantStatusCP);

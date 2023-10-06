@@ -16,7 +16,8 @@ const {
     deleteQuery,
     insertInUsers,
     insertInUserPermissionUsers,
-    updateUserPermissionUsers
+    updateUserPermissionUsers,
+    userPermissionUpdate
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -83,18 +84,32 @@ console.log(email + " " + mailSubject + " " + name)
 // User Check Email
 exports.userCheckEmail = async function (req, res) {
     const { email } = req.query;
-    const { userId } = req.user;;
+    const { userId } = req.user;
     try {
       const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId" ,"UEmail"), [
         userId,
         email,
     ]);
-      if (selectResult[0].length > 0) {
+    const LandlordSelectResult = await queryRunner(selectQuery("users", "Email"), [
+        email,
+      ]);
+      if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
         return res.status(201).json({
-            message: "Email already exists",
+            message: "Email already exists ",
           data: selectResult,
         });
-      } else {
+      }else if(selectResult[0].length > 0 ){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      }else if (LandlordSelectResult[0].length > 0){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      } 
+      else {
         res.status(200).json({
                    message: "New user",
         });
@@ -238,6 +253,7 @@ exports.userPermissionGetAll = async function (req, res) {
               const data = {};
       
               // Example usage for different fields
+              const id=selectResult[0][i].id;
               const role = selectResult[0][i].Urole;
               const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
               const properties = splitAndConvertToObject(selectResult[0][i].properties);
@@ -257,6 +273,7 @@ exports.userPermissionGetAll = async function (req, res) {
               const SettingInvoiceSettings = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
       
               dataArray.push({
+                id,
                 role,
                 llDashboard,
                 properties,
@@ -291,5 +308,19 @@ exports.userPermissionGetAll = async function (req, res) {
           });
         }
       };
-      
-      
+
+      // Tenant status CP Start 
+    exports.TenantStatusCP = async function (req, res) {
+        const { role,columnName,permission } = req.body;
+        // const currentDate = new Date();
+        try {
+            const updateResult = await queryRunner(`UPDATE userRoles SET ${columnName} = "${permission}" WHERE id = ${role}`); 
+            if (updateResult[0].affectedRows > 0) {
+                return res.status(200).json({ message: " User Permission Updated Successfully" });
+            } else {
+                return res.status(500).send("Failed to Update User Permission User");
+            }
+        } catch (error) {
+            return res.status(400).json({ message: error.message });
+        }
+    };
