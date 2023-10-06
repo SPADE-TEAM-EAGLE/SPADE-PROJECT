@@ -1064,22 +1064,6 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
 };
 //  ############################# Add Tenant Attach File End ############################################################
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const tenantAllPaidInvoiceResult = await queryRunner(
   //   checkMyAllTenantsInvoicePaidQuerytenant,
   //   [tenantID]
@@ -1122,24 +1106,6 @@ exports.checkUnpaidInvoices = async (req, res) => {
 
 
 //  ############################# Check unpaid invoices End ############################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //  ############################# Delete All Tenant Start ############################################################
 exports.allTenantDelete = async (req, res) => {
@@ -1225,3 +1191,25 @@ exports.allTenantDelete = async (req, res) => {
   }
 };
 //  ############################# Delete All Tenant End ############################################################
+
+
+//  #############################  Tenant status CP Start ############################################################
+// exports.TenantStatusCP = async (req, res) => {
+//   try {
+//     let { id } = req.body;
+   
+
+//     res.status(200).json({
+//       message: " tenant deleted successfully",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({
+//       message:"Error from delete tenants ",
+//       error
+//   });
+//   }
+// };
+//  ############################# Tenant status CP End ############################################################
+
+
