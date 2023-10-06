@@ -2746,6 +2746,26 @@ color: #000;
 <script src="../assets/js/email-phone.js"></script>
     <script>
         $(document).ready(function () {
+
+function validateField($field) {
+    var $errorMessage = $field.next('.text-danger');
+    if ($field.val() === '' || $field.val() === 'Choose...') {
+        $field.addClass('border-danger').removeClass('border-green');
+        $errorMessage.removeClass('d-none');
+        $('#save').prop('disabled', true);
+        console.log("empty");
+    } else {
+        $field.removeClass('border-danger').addClass('border-green');
+        $errorMessage.addClass('d-none');
+        $('#save').prop('disabled', !allFieldsFilled);
+        console.log("filled");
+    }
+}
+$('#myModal_edit :input[required], #myModal_edit :input[required]').on('input change', function () {
+    validateField($(this));
+});
+
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
