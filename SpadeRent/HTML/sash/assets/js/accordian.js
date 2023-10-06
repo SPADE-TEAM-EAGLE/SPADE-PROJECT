@@ -234,10 +234,18 @@ if(!isEmpty2 && !isEmpty1){
      $("#next-add-prospect").click(() => {
         //first accordian
         var isEmpty1 = false;
-        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#status').each(function() {
-            if ($(this).val() === '' || $(this).val() === 'Choose...') {
+        $('#firstName, #lastName, #phone,#email ,#propertyInfo, #unitInfo, #propertyDetail,#sourceCampaign').each(function() {
+            var span = $(this).siblings('.text-danger');
+            if ($(this).val() === '' || $(this).val() == 'Choose...') {
                 isEmpty1 = true;
+                $(this).addClass('border-danger');
+                $(this).removeClass('border-green');
+                span.removeClass('d-none');
                 return false;
+            }else{
+                $(this).addClass('border-green');
+                $(this).removeClass('border-danger');
+                span.addClass('d-none');
             }
         });
         if (!isEmpty1) {
@@ -252,10 +260,20 @@ if(!isEmpty2 && !isEmpty1){
         }
         //second accordian
         var isEmpty2 = false;
-        
-            if ($('#moveInDate').val() === '' || $('#potentialRentAmount').val() === '') {
+        $('#potentialRentAmount, #moveInDate').each(function() {
+            var span = $(this).siblings('.text-danger');
+            if ($(this).val() === '' || $(this).val() == 'Choose...') {
                 isEmpty2 = true;
+                $(this).addClass('border-danger');
+                $(this).removeClass('border-green');
+                span.removeClass('d-none');
+                return false;
+            }else{
+                $(this).addClass('border-green');
+                $(this).removeClass('border-danger');
+                span.addClass('d-none');
             }
+        });
         if (!isEmpty2) {
             $('#collapseOne-add-property').removeClass('show');
             $('#collapseTwo-add-property').removeClass('show');

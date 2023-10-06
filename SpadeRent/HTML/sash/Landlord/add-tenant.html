@@ -1647,7 +1647,7 @@
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" checked
                                                 required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
@@ -4579,45 +4579,6 @@
                     });
                 }
             }
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('blur', () => {
-                reset();
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                    phoneError = false
-                    input.classList.remove("is-invalid");
-                    input.classList.add("is-valid");
-                    } else {
-                        input.classList.add("is-invalid");
-                    input.classList.remove("is-valid");
-                    phoneError = true
-                    input.classList.add("error");
-                    const errorCode = iti.getValidationError();
-                    errorMsg.innerHTML = errorMap[errorCode];
-                    errorMsg.classList.remove("d-none");
-                    }
-                }
-            });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
