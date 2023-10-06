@@ -70,7 +70,8 @@ const {
   getMessageCountByID,
   checkProperty,
   insertVendorCategory,
-  insertProspectusSources
+  insertProspectusSources,
+  userPermissionLogin
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -152,20 +153,30 @@ exports.createUser = async function (req, res) {
 };
 exports.checkemail = async function (req, res) {
   const { email } = req.query;
-  console.log(req.query);
+  // const { email } = req.body;
   try {
-    const selectResult = await queryRunner(selectQuery("users", "Email"), [
+    const selectResult = await queryRunner(selectQuery("userPUsers","UEmail"), [ 
+      email,
+  ]);
+  const LandlordSelectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
     ]);
-    if (selectResult[0].length > 0) {
-      return res.status(400).json({
-        data: selectResult,
-        message: "Email already exists",
+    if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
+      return res.status(201).json({
+          message: "Email already exists ",
       });
-    } else {
+    }else if(selectResult[0].length > 0 ){
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    }else if (LandlordSelectResult[0].length > 0){
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    } 
+    else {
       res.status(200).json({
-        // message : "successful send"
-        message: "New user",
+                 message: "New user",
       });
     }
   } catch (error) {
@@ -181,6 +192,7 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
+  // const { email, password, tenant } = req.query;
   const { email, password, tenant } = req.query;
   // const { email, password, tenant } = req.query;
   // console.log(1)
@@ -235,16 +247,212 @@ exports.Signin = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
         email,
       ]);
-      // console.log("2");
-      // }
+      // console.log(selectResult[0]);
       if (selectResult[0].length === 0) {
-        // const selectUserPermissionResult = await queryRunner(selectQuery("userPUsers", "Email"), [
-        //   email,
-        // ]);
-        // if (selectUserPermissionResult[0].length === 0) {
-          res.status(400).send("Email not found");
-        // }
-        // else{ }
+        const selectUserPermissionResult = await queryRunner(userPermissionLogin, [
+          email,
+        ]);
+        if (selectUserPermissionResult[0].length === 0) {
+          res.status(400).send("Email not foundsss");
+        } else if (await bcrypt.compare(password, selectUserPermissionResult[0][0].UPassword)) {
+          const id = selectUserPermissionResult[0][0].llnalordId;
+          const role = selectUserPermissionResult[0][0].URole;
+          const UserPermissionID = selectUserPermissionResult[0][0].UPID;
+
+          const token = jwt.sign({ email, id, role, UserPermissionID}, config.JWT_SECRET_KEY, {
+            expiresIn: "3h",
+          });
+          // ################################# Count ##############################################
+          const userId = selectUserPermissionResult[0][0].llnalordId;
+          console.log(userId);
+          // Property
+          const propertycheckresult = await queryRunner(
+            selectQuery("property", "landlordID"),
+            [userId]
+          );
+          if (propertycheckresult[0].length > 0) {
+            property = "true";
+          } else {
+            property = "false";
+          }
+          // Tenant
+          const tenantcheckresult = await queryRunner(
+            selectQuery("tenants", "landlordID"),
+            [userId]
+          );
+          if (tenantcheckresult[0].length > 0) {
+            tenants = "true";
+          } else {
+            tenants = "false";
+          }
+  
+          //Invoice
+          const invoicecheckresult = await queryRunner(
+            selectQuery("invoice", "landlordID"),
+            [userId]
+          );
+          if (invoicecheckresult[0].length > 0) {
+            invoice = "true";
+          } else {
+            invoice = "false";
+          }
+  
+          //Task
+          const taskcheckresult = await queryRunner(
+            selectQuery("task", "landlordID"),
+            [userId]
+          );
+          if (taskcheckresult[0].length > 0) {
+            task = "true";
+          } else {
+            task = "false";
+          }
+  
+          //vendors
+          const vendorscheckresult = await queryRunner(
+            selectQuery("vendor", "LandlordID"),
+            [userId]
+          );
+          if (vendorscheckresult[0].length > 0) {
+            vendors = "true";
+          } else {
+            vendors = "false";
+          }
+          // ################################# Count ##############################################
+  
+          if (selectUserPermissionResult[0][0].isUserAccount == "1") {
+            // res.status(200).json({
+            //   token: token,
+            //   body: selectResult[0][0],
+            //   message: "Successful Login",
+            // });
+            // }
+  
+            if (selectUserPermissionResult[0][0].userVerified == "Email Verified") {
+              // ################################# Count ##############################################
+              const userId = selectUserPermissionResult[0][0].llnalordId;
+              // console.log(userId);
+              // Property
+              const propertycheckresult = await queryRunner(
+                selectQuery("property", "landlordID"),
+                [userId]
+              );
+              if (propertycheckresult[0].length > 0) {
+                property = "true";
+              } else {
+                property = "false";
+              }
+              // Tenant
+              const tenantcheckresult = await queryRunner(
+                selectQuery("tenants", "landlordID"),
+                [userId]
+              );
+              if (tenantcheckresult[0].length > 0) {
+                tenants = "true";
+              } else {
+                tenants = "false";
+              }
+  
+              //Invoice
+              const invoicecheckresult = await queryRunner(
+                selectQuery("invoice", "landlordID"),
+                [userId]
+              );
+              if (invoicecheckresult[0].length > 0) {
+                invoice = "true";
+              } else {
+                invoice = "false";
+              }
+  
+              //Task
+              const taskcheckresult = await queryRunner(
+                selectQuery("task", "landlordID"),
+                [userId]
+              );
+              if (taskcheckresult[0].length > 0) {
+                task = "true";
+              } else {
+                task = "false";
+              }
+              //vendors
+              const vendorscheckresult = await queryRunner(
+                selectQuery("vendor", "LandlordID"),
+                [userId]
+              );
+              if (vendorscheckresult[0].length > 0) {
+                vendors = "true";
+              } else {
+                vendors = "false";
+              }
+              // ################################# Count ##############################################
+              
+              res.status(200).json({
+                property: property,
+                tenants: tenants,
+                invoice: invoice,
+                task: task,
+                vendors: vendors,
+                token: token,
+                body: selectUserPermissionResult[0][0],
+                message: "Email is verified",
+              });
+            } else {
+              const emailMessage = await verifyMailCheck(email);
+              if (
+                emailMessage.message ==
+                "Your account is locked due to email verification. Please verify your email."
+              ) {
+                
+                res.status(200).json({
+                  property: property,
+                  tenants: tenants,
+                  invoice: invoice,
+                  task: task,
+                  vendors: vendors,
+                  token: token,
+                  body: selectUserPermissionResult[0][0],
+                  message: "Email is not verified",
+                  msg: emailMessage.message,
+                });
+              } else {
+                res.status(200).json({
+                  property: property,
+                  tenants: tenants,
+                  invoice: invoice,
+                  task: task,
+                  vendors: vendors,
+                  token: token,
+                  body: selectUserPermissionResult[0][0],
+                  message: "Successful Login",
+                  msg: emailMessage.message,
+                  email: email,
+                });
+              }
+            }
+          } else {
+            res.status(200).json({
+              // token: token,
+              // body: selectResult[0][0],
+              message: "Your Account is Closed",
+            });
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // ######################################################################
+
+        else{
+          res.status(400).send("Incorrect Password");
+         }
         
       } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
         const id = selectResult[0][0].id;

@@ -16,7 +16,8 @@ const {
     deleteQuery,
     insertInUsers,
     insertInUserPermissionUsers,
-    updateUserPermissionUsers
+    updateUserPermissionUsers,
+    userPermissionUpdate
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -83,18 +84,32 @@ console.log(email + " " + mailSubject + " " + name)
 // User Check Email
 exports.userCheckEmail = async function (req, res) {
     const { email } = req.query;
-    const { userId } = req.user;;
+    const { userId } = req.user;
     try {
       const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId" ,"UEmail"), [
         userId,
         email,
     ]);
-      if (selectResult[0].length > 0) {
+    const LandlordSelectResult = await queryRunner(selectQuery("users", "Email"), [
+        email,
+      ]);
+      if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
         return res.status(201).json({
-            message: "Email already exists",
+            message: "Email already exists ",
           data: selectResult,
         });
-      } else {
+      }else if(selectResult[0].length > 0 ){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      }else if (LandlordSelectResult[0].length > 0){
+        return res.status(201).json({
+            message: "Email already exists ",
+          data: selectResult,
+        });
+      } 
+      else {
         res.status(200).json({
                    message: "New user",
         });
@@ -132,9 +147,16 @@ exports.userPermissionGetById = async function (req, res) {
 
 // update User 
 exports.updateUserPermissionUsers = async function (req, res) {
-    const { firstName, lastName, email, phone, Ustatus, role, id } = req.body;
+    const { firstName, lastName, email, phone, Ustatus, role, id,images } = req.body;
+    console.log(req.body)
     const currentDate = new Date();
+    let image_url="";
+    let image_key="";
     try {
+      if(images?.length > 0){
+          image_url = images[0]?.image_url;
+          image_key = images[0]?.image_key;
+      }
         const insertResult = await queryRunner(updateUserPermissionUsers, [
             firstName,
             lastName,
@@ -143,6 +165,8 @@ exports.updateUserPermissionUsers = async function (req, res) {
             Ustatus,
             role,
             currentDate,
+            image_url,
+            image_key,
             id,
         ]); 
         if (insertResult[0].affectedRows > 0) {
@@ -151,6 +175,7 @@ exports.updateUserPermissionUsers = async function (req, res) {
             return res.status(500).send("Failed to Update User Permission User");
         }
     } catch (error) {
+      console.log(error)
         return res.status(400).json({ message: error.message });
     }
 };
@@ -204,21 +229,98 @@ exports.userPermissionGetAll = async function (req, res) {
 
 
     // Get User Roles
-exports.userPermissionRoles = async function (req, res) {
-    try {
-      const selectResult = await queryRunner(selectQuery("userRoles"));
-      if (selectResult[0].length > 0) {
-        return res.status(200).json({
-          data: selectResult[0],
-        });
-      } else {
-        res.status(200).json({
-                   message: "No User Roles Found",
-        });
-      }
-    } catch (error) {
-      res.status(400).json({
-        message: error.message,
-      });
-    }
-  };
+    exports.userPermissionRoles = async function (req, res) {
+        function splitAndConvertToObject(value) {
+            const resultObject = {};
+        
+            if (value.includes(',')) {
+              const values = value.split(",");
+              for (const item of values) {
+                resultObject[item] = true;
+              }
+            } else {
+              resultObject[value] = true;
+            }
+        
+            return resultObject;
+          }
+        try {
+          const selectResult = await queryRunner(selectQuery("userRoles"));
+          if (selectResult[0].length > 0) {
+            const dataArray = [];
+      
+            for (let i = 0; i < selectResult[0].length; i++) {
+              const data = {};
+      
+              // Example usage for different fields
+              const id=selectResult[0][i].id;
+              const role = selectResult[0][i].Urole;
+              const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
+              const properties = splitAndConvertToObject(selectResult[0][i].properties);
+              const units = splitAndConvertToObject(selectResult[0][i].units);
+              const tenants = splitAndConvertToObject(selectResult[0][i].tenants);
+              const tasks = splitAndConvertToObject(selectResult[0][i].task);
+              const invoices = splitAndConvertToObject(selectResult[0][i].invoices);
+              const leads = splitAndConvertToObject(selectResult[0][i].leads);
+              const leadsInsights = splitAndConvertToObject(selectResult[0][i].leadsInsight);
+              const settingProfiles = splitAndConvertToObject(selectResult[0][i].settingProfile);
+              const settingCPasswords = splitAndConvertToObject(selectResult[0][i].settingCPassword);
+              const settingNotifications = splitAndConvertToObject(selectResult[0][i].settingNotification);
+              const settingCThemes = splitAndConvertToObject(selectResult[0][i].settingCTheme);
+              const settingSubscriptions = splitAndConvertToObject(selectResult[0][i].settingSubscription);
+              const settingMUsers = splitAndConvertToObject(selectResult[0][i].settingMUsers);
+              const settingEmailTs = splitAndConvertToObject(selectResult[0][i].settingEmailT);
+              const SettingInvoiceSettings = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
+      
+              dataArray.push({
+                id,
+                role,
+                llDashboard,
+                properties,
+                units,
+                tenants,
+                tasks,
+                invoices,
+                leads,
+                leadsInsights,
+                settingProfiles,
+                settingCPasswords,
+                settingNotifications,
+                settingCThemes,
+                settingSubscriptions,
+                settingMUsers,
+                settingEmailTs,
+                SettingInvoiceSettings,
+              });
+            }
+      
+            return res.status(200).json({
+              data: dataArray,
+            });
+          } else {
+            res.status(200).json({
+              message: "No User Roles Found",
+            });
+          }
+        } catch (error) {
+          res.status(400).json({
+            message: error.message,
+          });
+        }
+      };
+
+      // Tenant status CP Start 
+    exports.TenantStatusCP = async function (req, res) {
+        const { role,columnName,permission } = req.body;
+        // const currentDate = new Date();
+        try {
+            const updateResult = await queryRunner(`UPDATE userRoles SET ${columnName} = "${permission}" WHERE id = ${role}`); 
+            if (updateResult[0].affectedRows > 0) {
+                return res.status(200).json({ message: " User Permission Updated Successfully" });
+            } else {
+                return res.status(500).send("Failed to Update User Permission User");
+            }
+        } catch (error) {
+            return res.status(400).json({ message: error.message });
+        }
+    };

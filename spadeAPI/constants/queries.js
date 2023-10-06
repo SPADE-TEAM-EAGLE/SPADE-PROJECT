@@ -284,7 +284,7 @@ WHERE
 invoice.landlordID = ?;
 `;
 exports.getLeaseReport =
-  "SELECT tenants.firstName, tenants.lastName, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
+  "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant
 // get total amount from invoice table
 exports.getTotalAmount =
@@ -1094,11 +1094,14 @@ WHERE
   AND updatedDate <= ?
 `;
 exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
+exports.userPermissionLogin = "SELECT *,UP.id as UPID FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id WHERE UP.UEmail = ?";
+exports.userPermissionAuth = "SELECT * FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
 exports.insertInUserPermissionUsers =
   "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at,UImage,UImageKey) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
-  exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ? WHERE id = ?"; 
+  exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ?,UImage=?,UImageKey=? WHERE id = ?"; 
 
   exports.insertVendorCategory =
   "INSERT INTO vendorcategory (landLordId, category) VALUES (?,?)";
   exports.insertProspectusSources =
   "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
+  exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
