@@ -1029,7 +1029,8 @@ color: #000;
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
-                                                            Date</label>
+                                                            Date<span
+                                                            class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative" id="leaseStart" placeholder="Enter Lease Start Dates">
                                                             <span class="text-danger d-none">Rent amount is
                                                             required!</span>
@@ -1037,7 +1038,8 @@ color: #000;
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
-                                                            Date</label>
+                                                            Date<span
+                                                            class="text-danger"> *</span></label>
 
                                                             <input type="date" class="form-control" id="leaseEnd" required placeholder="Enter Lease End Date">
                                                             <span class="text-danger d-none">Rent amount is
@@ -1056,7 +1058,8 @@ color: #000;
                                                         
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date</label>
+                                                                Date<span
+                                                                class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative"
                                                                 id="leaseStart2" placeholder="Enter Lease Start Date">
                                                             <span class="text-danger d-none">Rent amount is
@@ -1065,7 +1068,8 @@ color: #000;
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
-                                                                Date</label>
+                                                                Date<span
+                                                                class="text-danger"> *</span></label>
 
                                                             <input type="date" class="form-control" id="leaseEnd2"
                                                                 required placeholder="Enter Lease End Date">
@@ -3879,6 +3883,25 @@ $("#succesModal").on('hide.bs.modal', function() {
         }
     });
 </script>
+
+<script>
+    var startDateInput1 = document.getElementById('leaseStart2');
+    var endDateInput1 = document.getElementById('leaseEnd2');
+    var middleDateInputs1 = document.getElementsByClassName('dateofRentchange');
+
+    startDateInput1.addEventListener("change", function () {
+        endDateInput1.min = startDateInput1.value;
+    });
+
+    endDateInput1.addEventListener("change", function () {
+        for (var i = 0; i < middleDateInputs.length; i++) {
+            var middleDateInput1 = middleDateInputs1[i];
+            middleDateInput1.min = startDateInput1.value;
+            middleDateInput1.max = endDateInput1.value;
+        }
+    });
+</script>
+
 <script>
     $(document).ready(() => {
         $.ajax({

@@ -1064,13 +1064,14 @@
                         <div class="col-md-12 col-lg-12 mb-5">
                             <form class="ui form">
                                 <section class="field">
-                                    <label class="form-label fw-bold fs-18">Select Tenant</label>
-                                    <div class="ui fluid search selection dropdown" >
+                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant</label>
+                                    <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Select Tenant</div>
+                                        <!-- <label class="form-label fw-bold fs-18">Select Tenant</label> -->
                                         <div class="menu" id="menu">
-                                            <div class="item" data-value="AL">Select Tenant</div>   
+                                            <div class="item" data-value="AL">Select Option</div>
                                         </div>
                                     </div>
                                 </section>
@@ -3335,7 +3336,7 @@ print = true
                 // Build the HTML structure for the item
                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                     '<img src="' + tenant?.tenantImages?.split(",")[0]+ '" alt="" style="width: 65px; height: 65px;">' +
-                                    '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
+                                    '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
                                     '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
