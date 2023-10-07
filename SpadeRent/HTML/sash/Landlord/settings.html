@@ -11271,12 +11271,12 @@
                                                                                 class="form-label fw-bold">Email<spnan
                                                                                     class="text-danger">
                                                                                     *</span></label>
-                                                                            <input type="email_user"
+                                                                            <input type="email"
                                                                                 class="form-control form"
                                                                                 placeholder="Enter Email"
                                                                                 pattern="[A-Za-z0-9_\.@]+"
                                                                                 oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
-                                                                                id="email" required>
+                                                                                id="email_user" required>
                                                                             <span class="text-danger d-none">Email is
                                                                                 required!</span>
                                                                         </div>
@@ -16872,7 +16872,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     valid = false;
                 });
                 selectedFiles = []
-                $('#add-user-permissions input[required],#add-user-permissions select').removeClass('is-valid').removeClass('is-invalid');
+                $('#add-user-permissions input[required],#add-user-permissions select').removeClass('border-green').removeClass('border-danger');
                 $('#next-add-user-permission').prop('disabled', true);
                 $('#add-user-permissions').find(".file-grid").empty()
                 $('#edit-user-permissions').find(".file-grid").empty()
@@ -16880,112 +16880,113 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             }
 
             $(document).ready(function () {
-                function validateForm() {
-                    let valid = true;
+                // function validateForm() {
+                //     let valid = true;
 
-                    $('#add-user-permissions input[required],#add-user-permissions select').each(function () {
+                //     $('#add-user-permissions input[required],#add-user-permissions select').each(function () {
 
-                        if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
-                            valid = false;
+                //         if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
+                //             valid = false;
 
-                        } else {
+                //         } else {
 
-                        }
-                    });
-                    if ($('#add-user-permissions #email').val() !== "" && !isValidEmail($('#add-user-permissions #email').val())) {
-                        valid = false;
+                //         }
+                //     });
+                //     if ($('#add-user-permissions #email').val() !== "") {
+                //         valid = false;
 
-                    }
+                //     }
 
-                    if (valid) {
-                        $('#next-add-user-permission').prop('disabled', false);
-                    } else {
-                        $('#next-add-user-permission').prop('disabled', true);
-                    }
-                }
+                //     if (valid) {
+                //         $('#next-add-user-permission').prop('disabled', false);
+                //     } else {
+                //         $('#next-add-user-permission').prop('disabled', true);
+                //     }
+                // }
 
-                function validateForm_update() {
-                    let valid = true;
+                // function validateForm_update() {
+                //     let valid = true;
 
-                    $('#edit-user-permissions input[required],#edit-user-permissions select').each(function () {
+                //     $('#edit-user-permissions input[required],#edit-user-permissions select').each(function () {
 
-                        if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
-                            valid = false;
+                //         if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
+                //             valid = false;
 
-                        } else {
+                //         } else {
 
-                        }
-                    });
-                    if ($('#edit-user-permissions #email_user_update').val() !== "" && !isValidEmail($('#edit-user-permissions #email_user_update').val())) {
-                        valid = false;
+                //         }
+                //     });
+                //     if ($('#edit-user-permissions #email_user_update').val() !== "" ) {
+                //         valid = false;
 
-                    }
+                //     }
 
-                    if (valid) {
-                        $('#update_user_permission').prop('disabled', false);
-                    } else {
-                        $('#update_user_permission').prop('disabled', true);
-                    }
-                }
+                //     if (valid) {
+                //         $('#update_user_permission').prop('disabled', false);
+                //     } else {
+                //         $('#update_user_permission').prop('disabled', true);
+                //     }
+                // }
 
-                $('#add-user-permissions input[required],#add-user-permissions select').on('input change', function () {
-                    validateForm();
-                    if ($(this).is('select')) {
-                        if ($(this).val() === "Select Option") {
-                            $(this).removeClass('border-green').addClass('border-danger');
-                        } else {
-                            $(this).removeClass('border-danger').addClass('border-green');
-                        }
-                    }
+                // $('#add-user-permissions input[required],#add-user-permissions select').on('input change', function () {
+                //     validateForm();
+                //     if ($(this).is('select')) {
+                //         if ($(this).val() === "Select Option") {
+                //             $(this).removeClass('border-green').addClass('border-danger');
+                //         } else {
+                //             $(this).removeClass('border-danger').addClass('border-green');
+                //         }
+                //     }
 
-                    else {
-                        if ($(this).val() == "") {
-                            $(this).removeClass('is-valid').addClass('is-invalid');
-                        } else {
-                            $(this).removeClass('is-invalid').addClass('is-valid');
-                        }
-                    }
-                });
-                $('#edit-user-permissions input[required],#edit-user-permissions select').on('input change', function () {
-                    validateForm_update();
-                    if ($(this).is('select')) {
-                        if ($(this).val() === "Select Option") {
-                            $(this).removeClass('border-green').addClass('border-danger');
-                        } else {
-                            $(this).removeClass('border-danger').addClass('border-green');
-                        }
-                    }
+                //     else {
+                //         if ($(this).val() == "") {
+                //             $(this).removeClass('border-green').addClass('border-danger');
+                //         } else {
+                //             $(this).removeClass('border-danger').addClass('border-green');
+                //         }
+                //     }
+                // });
+                // $('#edit-user-permissions input[required],#edit-user-permissions select').on('input change', function () {
+                //     validateForm_update();
+                //     if ($(this).is('select')) {
+                //         if ($(this).val() === "Select Option") {
+                //             $(this).removeClass('border-green').addClass('border-danger');
+                //         } else {
+                //             $(this).removeClass('border-danger').addClass('border-green');
+                //         }
+                //     }
 
-                    else {
-                        if ($(this).val() == "") {
-                            $(this).removeClass('is-valid').addClass('is-invalid');
-                        } else {
-                            $(this).removeClass('is-invalid').addClass('is-valid');
-                        }
-                    }
-                });
-                function isValidEmail(email) {
-                    let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                    return regex.test(email);
-                }
+                //     else {
+                //         if ($(this).val() == "") {
+                //             $(this).removeClass('border-green').addClass('border-danger');
+                //         } else {
+                //             $(this).removeClass('border-danger').addClass('border-green');
+                //         }
+                //     }
+                // });
+                
+                // function isValidEmail(email) {
+                //     let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                //     return regex.test(email);
+                // }
 
-                $('#add-user-permissions #email').on('input', function () {
+                // $('#add-user-permissions #email').on('input', function () {
 
-                    if (isValidEmail($(this).val())) {
-                        $(this).removeClass('is-invalid').addClass('is-valid');
-                    } else {
-                        $(this).removeClass('is-valid').addClass('is-invalid');
-                    }
-                });
+                //     if (isValidEmail($(this).val())) {
+                //         $(this).removeClass('border-danger').addClass('border-green');
+                //     } else {
+                //         $(this).removeClass('border-green').addClass('border-danger');
+                //     }
+                // });
 
-                $('#edit-user-permissions #email_user_update').on('input', function () {
+                // $('#edit-user-permissions #email_user_update').on('input', function () {
 
-                    if (isValidEmail($(this).val())) {
-                        $(this).removeClass('is-invalid').addClass('is-valid');
-                    } else {
-                        $(this).removeClass('is-valid').addClass('is-invalid');
-                    }
-                });
+                //     if (isValidEmail($(this).val())) {
+                //         $(this).removeClass('border-danger').addClass('border-green');
+                //     } else {
+                //         $(this).removeClass('border-green').addClass('border-danger');
+                //     }
+                // });
 
                 $('#next-add-user-permission').on('click', function () {
                     // Check if the form is valid before sending the data
