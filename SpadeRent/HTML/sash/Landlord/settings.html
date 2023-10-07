@@ -17192,7 +17192,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     const role = $("#user-role-holder").children().first().nextAll().find(".active").attr("id")
                     $("#checkbox-container-parent input[type=checkbox]").prop('disabled', true);
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/TenantStatusCP",
+                        url: "http://localhost:3000/api/spade/userPermissionUpdate",
                         type: "PUT",
                         data: JSON.stringify({ role: role, permission: permission, columnName: columnName }),
                         contentType: "application/json",
