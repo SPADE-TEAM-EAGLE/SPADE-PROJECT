@@ -1362,10 +1362,10 @@
                                     <div class="card h-100" >
                                         <div class="card-header" style="display: flex; justify-content: space-between; overflow-x: scroll;">
                                             <div style="display: flex; align-items: center;">
-                                                <label for=""><b>Tenants Status <span class="text-danger">(Not Functional)</span></b></label> &emsp;
-                                                <input type="date" class="form-control form-control-date-width"
+                                                <label for=""><b>Tenants Status</b></label> &emsp;
+                                                <input type="date" class="form-control form-control-date-width" id="startDate_tenant"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022">&emsp;
-                                                <input type="date" class="form-control form-control-date-width"
+                                                <input type="date" class="form-control form-control-date-width" id="endDate_tenant"
                                                     placeholder="Jan 6, 2022 – Jan 13, 2022">
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
@@ -1386,7 +1386,7 @@
                                                     <div class="text-center"
                                                         style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                         <h4 style="margin-bottom: 0em !important;"><b
-                                                                style="color: #000">12</b>
+                                                                style="color: #000" id="current_tenant_count">0</b>
                                                         </h4>
                                                     </div>
                                                 </div>
@@ -1402,7 +1402,7 @@
                                                     <div class="text-center"
                                                         style="background-color: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; height: 50px; width: 60px;">
                                                         <h4 style="margin-bottom: 0em !important;"><b
-                                                                style="color: #000">5</b>
+                                                                style="color: #000" id="previous_tenant_count">0</b>
                                                         </h4>
                                                     </div>
                                                 </div>
@@ -2229,6 +2229,8 @@
         $(document).ready(() => {
             $("#startDate_invoice").val(startDate)
             $("#endDate_invoice").val(endDate)
+            $("#startDate_tenant").val(startDate)
+            $("#endDate_tenant").val(endDate)
             $("#startDate_task").val(startDate)
             $("#endDate_task").val(endDate)
             $("#startDate_property").val(startDate)
@@ -2666,6 +2668,102 @@
 
 
 
+            $("#startDate_tenant").on('change',function(){
+                startDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="All"){
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
+                $.ajax({
+                    url: uri,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function(response) {
+                    
+                    if(response.data){
+                        $("#current_tenant_count").text(response?.data?.currentTenant)
+                        $("#previous_tenant_count").text(response?.data?.previousTenant)
+                
+                    }else{
+                
+                    }
+                                    
+                                    
+                                },
+                                error: function(xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                            setTimeout(function() {
+                                                $('#myModal_warning_connection').modal('hide');
+                
+                                            }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                })
+
+            })
+
+
+            $("#endDate_tenant").on('change',function(){
+                endDate = $(this).val()
+                let uri;
+                if($("#property-select").val()=="All"){
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                }
+                else{
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                }
+                $.ajax({
+                    url: uri,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function(response) {
+                    
+                    if(response.data){
+                        $("#current_tenant_count").text(response?.data?.currentTenant)
+                        $("#previous_tenant_count").text(response?.data?.previousTenant)
+                
+                    }else{
+                
+                    }
+                                    
+                                    
+                                },
+                                error: function(xhr, status, error) {
+                                    $("#myModal_warning_connection").modal("show");
+                                            setTimeout(function() {
+                                                $('#myModal_warning_connection').modal('hide');
+                
+                                            }, 2000);
+                                    console.log('Error: ' + error);
+                                }
+                })
+
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             $("#startDate_amount").on('change', function () {
                 startDate = $(this).val()
@@ -2738,7 +2836,7 @@
             })
             let id; let emailChange = false
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2811,6 +2909,36 @@
                     console.log('Error: ' + error);
                 }
             });
+            $.ajax({
+                url: `https://backend.app.spaderent.com/api/spade/TenantStatusCP/${startDate}/${endDate}`,
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    
+    if(response.data){
+        $("#current_tenant_count").text(response?.data?.currentTenant)
+        $("#previous_tenant_count").text(response?.data?.previousTenant)
+
+    }else{
+
+    }
+                    
+                    
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
+            
             $("#property-select").on("change",function(){
                 if($(this).val()=="All"){
                     window.location.reload()
@@ -2933,7 +3061,8 @@
                 }
         
         })
-            $.ajax({
+            
+        $.ajax({
                 url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {

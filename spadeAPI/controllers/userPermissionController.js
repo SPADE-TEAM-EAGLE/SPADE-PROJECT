@@ -314,7 +314,7 @@ exports.userPermissionGetAll = async function (req, res) {
       };
 
       // Tenant status CP Start 
-    exports.TenantStatusCP = async function (req, res) {
+    exports.userPermissionUpdate = async function (req, res) {
         const { role,columnName,permission } = req.body;
         // const currentDate = new Date();
         try {
