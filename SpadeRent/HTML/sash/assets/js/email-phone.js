@@ -13,42 +13,45 @@ $(document).on('input', 'input[type="email"]', function () {
   }
 });
 
-// Phone checker
-const input = $('input[type="tel"]');
-const errorMsg = input.next("#error-msg").add(input.closest("div").siblings("#error-msg"));
-const validMsg = input.next("#valid-msg").add(input.closest("div").siblings("#valid-msg"));
-
 const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-const iti = window.intlTelInput(input[0], {
-utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+
+$('input[type="tel"]').each(function () {
+  const input = $(this);
+  const errorMsg = input.next(".error-msg").add(input.closest("div").siblings(".error-msg"));
+  const validMsg = input.next(".valid-msg").add(input.closest("div").siblings(".valid-msg"));
+
+  const iti = window.intlTelInput(this, {
+    utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+  });
+
+  const reset = () => {
+    input.removeClass("error");
+    errorMsg.html("");
+    errorMsg.addClass("d-none");
+    validMsg.addClass("d-none");
+  };
+
+  input.on('input', () => {
+    reset();
+    if (input.val().trim()) {
+      if (iti.isValidNumber()) {
+        console.log("valid phone");
+        validMsg.removeClass("d-none");
+        input.removeClass("border-danger");
+        input.addClass("border-green");
+      } else {
+        console.log("invalid phone");
+        input.addClass("border-danger");
+        input.removeClass("border-green");
+        input.addClass("error");
+        const errorCode = iti.getValidationError();
+        errorMsg.html(errorMap[errorCode]);
+        errorMsg.removeClass("d-none");
+      }
+    }
+  });
 });
 
-const reset = () => {
-input.removeClass("error");
-errorMsg.html("");
-errorMsg.addClass("d-none");
-validMsg.addClass("d-none");
-};
-
-input.on('input', () => {
-reset();
-if (input.val().trim()) {
-  if (iti.isValidNumber()) {
-console.log("valid phone");
-    validMsg.removeClass("d-none");
-    input.removeClass("border-danger");
-    input.addClass("border-green");
-  } else {
-console.log("invalid phone");
-    input.addClass("border-danger");
-    input.removeClass("border-green");
-    input.addClass("error");
-    const errorCode = iti.getValidationError();
-    errorMsg.html(errorMap[errorCode]);
-    errorMsg.removeClass("d-none");
-  }
-}
-});
 $(document).on('input change', '.modal input[required]:not([type="email"]):not([type="tel"])', function () {
   var inputText = $(this).val();
   var inputText_span = $(this).siblings('.text-danger');

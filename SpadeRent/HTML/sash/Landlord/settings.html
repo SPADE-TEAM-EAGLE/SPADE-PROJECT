@@ -11286,16 +11286,16 @@
                                                                                 class="form-label fw-bold">Phone Number
                                                                                 <span
                                                                                     class="fw-light">(Optional)</span></label>
-                                                                            <input id="phone3" name="phone" type="tel"
+                                                                            <input id="phone" name="phone" type="tel"
                                                                                 autocomplete="off"
                                                                                 placeholder="Enter Phone Number"
                                                                                 pattern="[0-9]{5}"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                                                            <span id="valid-msg3"
-                                                                                class="d-none text-success">✓
+                                                                            <span id="valid-msg"
+                                                                                class="d-none text-success valid-msg">✓
                                                                                 Valid</span>
-                                                                            <span id="error-msg3"
-                                                                                class="hide text-danger"></span>
+                                                                            <span id="error-msg"
+                                                                                class="hide text-danger error-msg"></span>
                                                                         </div>
 
                                                                         <div class="col-md-12 mt-5">
@@ -11534,11 +11534,11 @@
                                                                                 pattern="[0-9]{5}"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                                 required>
-                                                                            <span id="valid-msg1"
-                                                                                class="d-none text-success">✓
+                                                                            <span id="valid-msg"
+                                                                                class="d-none text-success valid-msg">✓
                                                                                 Valid</span>
-                                                                            <span id="error-msg1"
-                                                                                class="hide text-danger"></span>
+                                                                            <span id="error-msg"
+                                                                                class="hide text-danger error-msg"></span>
                                                                         </div>
 
                                                                         <div class="col-md-6">
@@ -16881,7 +16881,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('#next-add-user-permission').prop('disabled', true);
                 $('#add-user-permissions').find(".file-grid").empty()
                 $('#edit-user-permissions').find(".file-grid").empty()
-                $('#add-user-permissions #phone3').val("")
+                $('#add-user-permissions #phone').val("")
             }
 
             $(document).ready(function () {
@@ -17001,7 +17001,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         firstName: $('#firstName_user').val(),
                         lastName: $('#lastName_user').val(),
                         email: $('#add-user-permissions #email_user').val(),
-                        phone: $('#add-user-permissions #phone3').val(),
+                        phone: $('#add-user-permissions #phone').val(),
                         password: $('#user_permission_password').val(),
                         Ustatus: $('#status_user').val(),
                         role: $('#role_user').val(),
@@ -17226,7 +17226,6 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             return false;
                         }
                     });
-
                     return allFieldsFilled1;
                 }
                 function toggleSubmitButton1() {
@@ -17237,42 +17236,6 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     toggleSubmitButton1();
                 });
                 toggleSubmitButton1();
-            });
-        </script>
-        <script>
-            const input3 = document.querySelector("#phone3");
-            const errorMsg3 = document.querySelector("#error-msg3");
-            const validMsg3 = document.querySelector("#valid-msg3");
-            const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-            const iti3 = window.intlTelInput(input3, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset3 = () => {
-                input3.classList.remove("error");
-                errorMsg3.innerHTML = "";
-                errorMsg3.classList.add("d-none");
-                validMsg3.classList.add("d-none");
-            };
-            input3.addEventListener('input', () => {
-                reset3();
-                console.log("in phone input")
-                if (input3.value.trim()) {
-                    if (iti3.isValidNumber()) {
-                        validMsg3.classList.remove("d-none");
-                        phoneError = false
-                        input3.classList.remove("is-invalid");
-                        input3.classList.add("is-valid");
-                    } else {
-                        input3.classList.add("is-invalid");
-                        input3.classList.remove("is-valid");
-                        phoneError3 = true
-                        input3.classList.add("error");
-                        const errorCode3 = iti3.getValidationError();
-                        errorMsg3.innerHTML = errorMap3[errorCode3];
-                        errorMsg3.classList.remove("d-none");
-                    }
-                }
             });
         </script>
 
