@@ -5,6 +5,20 @@
  $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
+// Email validation
+$(document).on('input', 'input[type="email"]', function () {
+    var email = $(this).val();
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+    var email_span = $(this).siblings('.text-danger');
+    if (!emailRegex.test(email)) {
+        console.log("invalid");
+        $(this).addClass("border-danger").removeClass("border-green");
+        email_span.removeClass('d-none');
+    } else {
+        $(this).addClass("border-green").removeClass("border-danger");
+        email_span.addClass('d-none');
+    } 
+});
 
     // PAGE LOADING
     $(window).on("load", function (e) {

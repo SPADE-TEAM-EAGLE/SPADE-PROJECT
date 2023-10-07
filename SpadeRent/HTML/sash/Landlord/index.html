@@ -2020,6 +2020,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
@@ -3268,13 +3269,13 @@ else {
                                     '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
                                     '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
                                         if (task.AssignTo.length >= 1) {
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
+                                    var assignTo = '<td><div style="font-weight: 600;text-align: center;display: flex;">';
                                     for (var i = 0; i < task.AssignTo.length; i++) {
                                         var name = task.AssignTo[i].name;
                                         var email = task.AssignTo[i].email;
                                         assignTo += `
         <div class="me-2">
-            <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
+            <i class="fi fi-rs-circle-user avatar-md fs-30 text-dark"></i>
             <div class="media-body valign-middle mt-0">
                 <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
             </div>
@@ -3290,7 +3291,7 @@ else {
         <div style="text-align: -webkit-center; cursor: pointer;">
             <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
             <div class="dropup">
-                <a href="javascript:void(0)" class="text-black fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
+                <a href="javascript:void(0)" class="text-dark fw-semibold dropdown-toggle" data-bs-toggle="dropdown">View All</a>
                 <ul class="dropdown-menu p-4 text-muted">`+vendorNames+`</ul>
             </div>
         </div>`;
@@ -3298,7 +3299,7 @@ else {
                                         }
                                     }
 
-                                    assignTo += '</td>';
+                                    assignTo += '</div></td>';
                                 } else {
 
                                     var assignTo = '<td style="vertical-align:middle;">Not Assigned</td>';

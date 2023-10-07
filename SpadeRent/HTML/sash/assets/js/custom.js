@@ -8,6 +8,7 @@
     $(window).on("load", function (e) {
         $("#global-loader").fadeOut("slow");
     })
+  
 
     // COLOR THEME
     $(document).on("click", "a[data-theme]", function () {

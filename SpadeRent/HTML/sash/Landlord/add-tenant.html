@@ -1401,10 +1401,6 @@
                                             pattern="[A-Za-z0-9_\.@]+"
                                             oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
                                             id="email" required>
-
-                                        <!-- <label for="inputCity" class="form-label fw-bold">Email<span
-                                                        class="text-danger"> *</span></label>
-                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"> -->
                                         <span class="text-danger d-none">Email is required!</span>
                                     </div>
 
@@ -1415,7 +1411,7 @@
                                             placeholder="Enter Phone Number" pattern="[0-9]{5}" 
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
+                                        <span id="error-msg" class="d-none text-danger"></span>
 
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1561,9 +1557,9 @@
                                                                     maxlength="7"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                                                </div>
+                                                                <span class="text-danger d-none">Rent amount is
+                                                                    required!</span>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Triple Net
@@ -1576,9 +1572,10 @@
                                                                     maxlength="7"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
-                                                            </div>
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                                                </div>
+                                                                <span class="text-danger d-none">Triple Net
+                                                            Amount is
+                                                                    required!</span>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
@@ -1617,7 +1614,8 @@
                                                                 class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative"
                                                                 id="leaseStart2" placeholder="Enter Lease Start Date" required>
-                                                            <span class="text-danger d-none">Rent amount is
+                                                            <span class="text-danger d-none">Lease Start
+                                                                Date is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
@@ -1628,7 +1626,8 @@
 
                                                             <input type="date" class="form-control" id="leaseEnd2"
                                                                 required placeholder="Enter Lease End Date">
-                                                            <span class="text-danger d-none">Rent amount is
+                                                            <span class="text-danger d-none">Lease End
+                                                                Date is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
@@ -1652,7 +1651,7 @@
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" checked
                                                 required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
@@ -3170,8 +3169,7 @@
             }
         });
     </script>
-    <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script>
+   
 
     <!-- ############################################# -->
 
@@ -3216,6 +3214,7 @@
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 
 
@@ -4603,45 +4602,6 @@
                     });
                 }
             }
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('blur', () => {
-                reset();
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                    phoneError = false
-                    input.classList.remove("is-invalid");
-                    input.classList.add("is-valid");
-                    } else {
-                        input.classList.add("is-invalid");
-                    input.classList.remove("is-valid");
-                    phoneError = true
-                    input.classList.add("error");
-                    const errorCode = iti.getValidationError();
-                    errorMsg.innerHTML = errorMap[errorCode];
-                    errorMsg.classList.remove("d-none");
-                    }
-                }
-            });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -5517,23 +5477,23 @@ if (tenant.leaseEndDate) {
             });
         }
     </script>
-
+    <!-- 
     <script>
-        $('#email').change(function () {
-            var email = $(this).val();
-            var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+        
+            $(document).on('change','input[type="email"]',function () {
+                var email = $(this).val();
+                var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+        
+                if (!email.match(emailRegex)) {
+                    console.log("invalid");
+                    $(this).addClass("border-danger").removeClass("border-green");
+                } else {
+                    $(this).addClass("border-green").removeClass("border-danger");
+                }
+            });
+        
+    </script> -->
 
-            if (!email.match(emailRegex)) {
-
-                console.log("invalid");
-                $(this).addClass("border-danger")
-                $(this).removeClass("border-green")
-            } else {
-                $(this).addClass("border-green")
-                $(this).removeClass("border-danger")
-            }
-        });
-    </script>
 
 <script>
     $(document).ready(()=>{

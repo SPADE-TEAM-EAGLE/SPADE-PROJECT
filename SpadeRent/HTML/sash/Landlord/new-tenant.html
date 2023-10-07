@@ -890,7 +890,7 @@ color: #000;
                                             required >
 
                                         <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
+                                        <span id="error-msg" class="d-none text-danger"></span>
                                         </select>
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1095,7 +1095,7 @@ color: #000;
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno" required>
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" required checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                             No
                                         </label>
@@ -2498,8 +2498,7 @@ color: #000;
             }
         });
     </script>
-    <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script>
+  
 
     <!-- ############################################# -->
     <!-- INTERNAL Autofill-Table JS -->
@@ -2600,6 +2599,7 @@ color: #000;
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
 <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
     <script>
         $(document).ready(function() {
             $.ajax({
@@ -3786,39 +3786,7 @@ $("#succesModal").on('hide.bs.modal', function() {
                     $('#draft').attr("disabled", "disabled");
                 });
             }
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('blur', () => {
-                reset();
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                    } else {
-                        input.classList.add("error");
-                        const errorCode = iti.getValidationError();
-                        errorMsg.innerHTML = errorMap[errorCode];
-                        errorMsg.classList.remove("d-none");
-                    }
-                }
-            });
+         
             $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
