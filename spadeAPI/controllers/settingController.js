@@ -250,14 +250,14 @@ exports.ImageToBase64 = async (req, res) => {
 const Image=req.files[0];
 
   try {
-    const imageBuffer = fs.readFileSync(Image?.path);
+    const imageBuffer = req.files[0].buffer;
 
     const resizedImageBuffer = await sharp(imageBuffer)
       .resize({ width: 50 }) // Adjust the width as needed
       .toBuffer();
 
     const base64String = resizedImageBuffer.toString('base64');
-    console.log(base64String)
+    // console.log(base64String)
 
     // if (base64String.length > 240) {
     //   return res.status(400).json({ message: "Base64 string exceeds 240 characters" });
