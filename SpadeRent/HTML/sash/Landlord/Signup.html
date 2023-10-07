@@ -3095,7 +3095,7 @@
             $("#email").on("change",()=>{
                 var email = $("#email").val();
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                    url: "http://localhost:3000/api/spade/checkemail",
                     type: "GET",
                     contentType: "application/json",
                     data: {
@@ -3105,9 +3105,13 @@
                         // button1()
                         if(response.message == "New user")
                         {
-                         document.getElementById("email-span-invalid").style.display = "none";  
+                         document.getElementById("email-span-invalid").style.display = "none";
+                            $("#email").removeClass("is-invalid");
+                            $("#email").addClass("is-valid");
                         }
                         else{
+                            $("#email").removeClass("is-valid");
+                            $("#email").addClass("is-invalid");
                          document.getElementById("email-span-invalid").style.display = "block";
                         }
                     },

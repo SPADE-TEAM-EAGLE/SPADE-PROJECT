@@ -17,7 +17,8 @@ const {
     insertInUsers,
     insertInUserPermissionUsers,
     updateUserPermissionUsers,
-    userPermissionUpdate
+    userPermissionUpdate,
+    getUsersWithRoles
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -208,9 +209,10 @@ exports.userPermissionGetAll = async function (req, res) {
 
     const { userId } = req.user;
     try {
-      const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId"), [
+      const selectResult = await queryRunner(getUsersWithRoles, [
         userId,
     ]);
+    console.log(selectResult[0])
       if (selectResult[0].length > 0) {
         return res.status(200).json({
           data: selectResult[0],
@@ -221,6 +223,7 @@ exports.userPermissionGetAll = async function (req, res) {
         });
       }
     } catch (error) {
+      console.log(error)
       res.status(400).json({
         message: error.message,
       });

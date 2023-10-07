@@ -1105,3 +1105,6 @@ exports.insertInUserPermissionUsers =
   exports.insertProspectusSources =
   "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
   exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
+
+
+  exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";
