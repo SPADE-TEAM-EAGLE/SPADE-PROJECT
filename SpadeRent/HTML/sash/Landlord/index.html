@@ -2672,10 +2672,10 @@
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2713,10 +2713,10 @@
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2836,7 +2836,7 @@
             })
             let id; let emailChange = false
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2910,7 +2910,7 @@
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/TenantStatusCP/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/TenantStatusCP/${startDate}/${endDate}`,
                 type: 'GET',
                 contentType: false,
                 processData: false,
