@@ -1573,6 +1573,8 @@
                                                                                 pattern="[0-9]{5}" maxlength="15"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                                 required>
+                                                                                <span id="valid-msg" class="d-none text-success">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger"></span>
                                                                         </div>
 
                                                                     </div>
@@ -2441,8 +2443,7 @@
             }
         });
     </script>
-    <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script>
+
 
     <!-- ############################################# -->
     <script src="../assets/plugins/intl-tel-input-master/intlTelInput.js"></script>
@@ -2489,14 +2490,12 @@
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
     <script>
     </script>
 
     <script>
-        // Get the user's preferred color scheme
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Get a reference to the logo element
         const logo = document.getElementById('logo');
 
         if (userPrefersDark) {
@@ -2506,40 +2505,54 @@
         }
     </script>
     <script>
-        var input = document.querySelector("#phone");
-        const errorMsg = document.querySelector("#error-msg");
-        const validMsg = document.querySelector("#valid-msg");
+        // var input = document.querySelector("#phone");
+        // const errorMsg = document.querySelector("#error-msg");
+        // const validMsg = document.querySelector("#valid-msg");
+        // const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        // const iti = window.intlTelInput(input, {
+        //     utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+        // });
 
-        // here, the index maps to the error code returned from getValidationError - see readme
-        const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-        // initialise plugin
-        const iti = window.intlTelInput(input, {
-            utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-        });
-
-        const reset = () => {
-            input.classList.remove("error");
-            errorMsg.innerHTML = "";
-            errorMsg.classList.add("d-none");
-            validMsg.classList.add("d-none");
-        };
-
-        // on blur: validate
-        input.addEventListener('blur', () => {
-            reset();
-            if (input.value.trim()) {
-                if (iti.isValidNumber()) {
-                    validMsg.classList.remove("d-none");
-                } else {
-                    input.classList.add("error");
-                    const errorCode = iti.getValidationError();
-                    errorMsg.innerHTML = errorMap[errorCode];
-                    errorMsg.classList.remove("d-none");
-                }
-            }
-        });
+        // const reset = () => {
+        //     input.classList.remove("error");
+        //     errorMsg.innerHTML = "";
+        //     errorMsg.classList.add("d-none");
+        //     validMsg.classList.add("d-none");
+        // };
+        // input.addEventListener('blur', () => {
+        //     reset();
+        //     if (input.value.trim()) {
+        //         if (iti.isValidNumber()) {
+        //             validMsg.classList.remove("d-none");
+        //         } else {
+        //             input.classList.add("error");
+        //             const errorCode = iti.getValidationError();
+        //             errorMsg.innerHTML = errorMap[errorCode];
+        //             errorMsg.classList.remove("d-none");
+        //         }
+        //     }
+        // });
         $(document).ready(function () {
+            // Call the updateButtonStatus function when any field in the accordions is changed
+            function validateField($field) {
+    var $errorMessage = $field.next('.text-danger');
+    if ($field.attr("id") === "zip" && $field.val().length !== 5) {
+        $field.addClass('border-danger').removeClass('border-green');
+        $errorMessage.removeClass('d-none');
+    } else if ($field.val() === '' || $field.val() === 'Choose...') {
+        $field.addClass('border-danger').removeClass('border-green');
+        $errorMessage.removeClass('d-none');
+    } else {
+        $field.removeClass('border-danger').addClass('border-green');
+        $errorMessage.addClass('d-none');
+    }
+    updateButtonStatus();
+}
+
+$('#accordion-item1 :input[required], #accordion-item2 :input[required]').on('input change', function () {
+    validateField($(this));
+});
+
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',

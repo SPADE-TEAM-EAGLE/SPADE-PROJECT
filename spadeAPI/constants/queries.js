@@ -281,7 +281,7 @@ property ON property.id = tenants.propertyID
 JOIN
 users ON users.id = tenants.landlordID -- Assuming 'user' is the table that contains the 'Phone' column
 WHERE
-invoice.landlordID = ?;
+invoice.landlordID = ?
 `;
 exports.getLeaseReport =
   "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
@@ -1105,3 +1105,7 @@ exports.insertInUserPermissionUsers =
   exports.insertProspectusSources =
   "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
   exports.tenantStatusCountQuery = "SELECT (SELECT count(id) as currentTenant FROM tenants WHERE tenantCreated_at >= ? AND tenantCreated_at <= ? AND landlordID = ?) as currentTenant, count(id) as totalTenant FROM tenants WHERE landlordID = ?";
+  exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
+
+
+  exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";

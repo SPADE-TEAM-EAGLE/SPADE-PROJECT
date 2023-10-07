@@ -194,7 +194,7 @@
             border-color: rgba(255, 255, 255, 0.1);
             background-color: transparent;
             border-right-color: rgba(255, 255, 255, 0.1);
-            color: #dedefd;
+            color: white;
         }
 
         .custom-file-label i {
@@ -1574,11 +1574,12 @@
                         <div class="col-md-12 col-lg-12 mb-5">
                             <form class="ui form">
                                 <section class="field">
-                                    <label class="form-label fw-bold fs-18">Select Tenant</label>
+                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant</label>
                                     <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Select Tenant</div>
+                                        <!-- <label class="form-label fw-bold fs-18">Select Tenant</label> -->
                                         <div class="menu" id="menu">
                                             <div class="item" data-value="AL">Select Option</div>
                                         </div>
@@ -1704,7 +1705,7 @@
                                                     <option selected="">Choose...</option>
                                                 </select>
 
-                                                <span class="text-danger d-none">State is required!</span>
+                                                <span class="text-danger d-none">Category is required!</span>
                                             </td>
                                             <!-- <td><select id="state" name="property" class="form-select form"
                                                     data-bs-placement="top" required>
@@ -2063,7 +2064,7 @@
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
-                                                <span class="text-danger d-none">State is required!</span>
+                                                <span class="text-danger d-none">Category is required!</span>
                                             </td>
                                             <!-- <td><select id="state" name="property" class="form-select form"
                                                     data-bs-placement="top" required>
@@ -4031,6 +4032,7 @@
         </script>
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
 
         <!-- ############################################# -->
 
@@ -4838,7 +4840,7 @@
                                 // Build the HTML structure for the item
                                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                     '<img src="' + tenant?.tenantImages?.split(",")[0]+ '" alt="" style="width: 65px; height: 65px;">' +
-                                    '<div><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
+                                    '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
                                     '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
@@ -5087,6 +5089,7 @@
                     $("#propertyUnit").append($('<option label="Choose one"></option>'))
                     $("#propertyName").append($('<option></option>').text(propertyName[0].propertyName).val(propertyName[0].propertyID))
                     $("#propertyUnit").append($('<option></option>').text(propertyName[0].unitNumber).val(propertyName[0].propertyUnitID))
+                    
                     $("#add-item-container1 .tr").empty()
                     $("#add-item-container1").append(`
       <tr class="tr">
@@ -5096,7 +5099,7 @@
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
           
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
        
         <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
@@ -5126,6 +5129,7 @@
                         $("[name='category']").append($('<option></option>').text("Base Rent").val("base"));
 
                     }
+                    
 
                 })
                 $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function () {
@@ -5401,7 +5405,7 @@
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
           
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
         <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
         <td><input type="text" class="form-control" name="tax"
@@ -5426,7 +5430,7 @@
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
           
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
 
         <td><input type="text" class="form-control" name="memo" placeholder="Enter Memo"></td>
@@ -5477,7 +5481,7 @@
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
           
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
         
         <td><input type="text" class="form-control" name="memo_update"></td>
@@ -5503,7 +5507,7 @@
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
           
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
         
         <td><input type="text" class="form-control" name="memo_update"></td>
@@ -5909,12 +5913,13 @@
                         ...data1,
                         ...data2
                     }
+                    console.log("mydata")
                     console.log(data)
                     $("#tenantName").text(data.firstName + " " + data.lastName)
                     $("#invoiceType").text(data.invoiceType)
                     $("#dueDate").text(data.dueDate)
                     $("#invoiceStatus").text(data.status)
-                    $("#propertyAddress").text(data.pAddress)
+                    $("#propertyAddress").text(data.pAddress + ' ,'+data.pCity + ' ,'+ data.pState+ ' ,'+ data.pZipCode)
 
                     $("#view-invoice-line-item").empty()
                     data.memo.forEach((item) => {
@@ -6132,7 +6137,7 @@
     ${categoryData.map((category) => `<option value="${category.id}" ${category.id == categoryid ? 'selected=" "' : ''}>${category.categorieName}</option>`).join("")}
 </select>
 
-          <span class="text-danger d-none">State is required!</span>
+          <span class="text-danger d-none">Category is required!</span>
         </td>
         
                                             <td><input type="text" class="form-control" name="memo_update" value=${memo}></td>

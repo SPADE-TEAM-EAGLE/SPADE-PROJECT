@@ -3245,6 +3245,7 @@
                                                                                 <th>PROPERTY NAME</th>
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
+                                                                                <th>LEASE START DATE</th>
                                                                                 <th>LEASE EXPIRY</th>
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT PHONE</th>
@@ -4364,7 +4365,8 @@
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom.js"></script>-->
         <script src="../assets/js/getNotification.js"></script>
-        <script src="../assets/js/push_notification.js"></script>
+    <script src="../assets/js/push_notification.js"></script>
+<script src="../assets/js/email-phone.js"></script>
 
         <!-- CUSTOM JS -->
         <script src="../assets/js/custom-swicher.js"></script>
@@ -5015,6 +5017,8 @@ $('#table_body_property_report').append(newRowHtml);
                 if(leaseData.length == 0){
                     $("#table_body_lease_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');}
                     else{
+                        console.log("leaseData");
+                        console.log(leaseData);
                         leaseData.forEach((lease, index) => {
                         var remainingDays;
                         if (lease.LeaseExpire) {
@@ -5035,8 +5039,10 @@ $('#table_body_property_report').append(newRowHtml);
                             '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + lease.propertyType + '</span></a></td>' +
                             '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
                             '<td class="propertyAddress">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + remainingDays + '</p>' +
-                            // '<span style="color: #4573D2;">' + remainingDays + ' Days Remaining</span>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseStart? lease.LeaseStart: 'N/A') + '</p>' +
+                            '</td>' +
+                            '<td class="propertyAddress">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseExpire? lease.LeaseExpire: 'N/A') + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 800;" class="mb-1">' + lease.firstName + " " + lease.lastName + '</p>' +
@@ -5078,7 +5084,7 @@ $('#table_body_property_report').append(newRowHtml);
                             '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</p></td>';
 
                         if (task.AssignTo.length > 0) {
-                            newRowHtml += '<td style="font-weight: 600;text-align: center;display: flex;">'
+                            newRowHtml += '<td><div style="font-weight: 600;text-align: center;display: flex;">'
                                 for (var i = 0; i < task.AssignTo.length; i++) {
                                         var name = task.AssignTo[i].name;
                                         var email = task.AssignTo[i].email;
@@ -5108,7 +5114,7 @@ $('#table_body_property_report').append(newRowHtml);
                                             break;
                                         }
                                     }
-                            newRowHtml += '</td>';
+                            newRowHtml += '</div></td>';
                         } else {
                             newRowHtml += '<td>Not assigned</td>';
                         }
@@ -5248,7 +5254,7 @@ $('#table_body_property_report').append(newRowHtml);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/propertyReport',
+                url: 'http://localhost:3000/api/spade/propertyReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
