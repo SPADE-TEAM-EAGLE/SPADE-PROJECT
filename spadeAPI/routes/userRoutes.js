@@ -256,6 +256,7 @@ router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.pro
 router.get("/TenantStatusCP", verifyToken, tenantController.TenantStatusCP);
 //  User Permission Start
 
+
 router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
 router.get("/userCheckEmail", verifyToken, userPermissionController.userCheckEmail);
 router.get("/userPermissionGetAll", verifyToken, userPermissionController.userPermissionGetAll);
@@ -264,3 +265,4 @@ router.get("/userPermissionGetById", verifyToken, userPermissionController.userP
 router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
 router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);
+
