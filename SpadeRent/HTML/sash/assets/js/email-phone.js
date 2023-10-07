@@ -4,7 +4,7 @@ $(document).on('input', 'input[type="email"]', function () {
   var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
   var email_span = $(this).siblings('.text-danger');
   if (!emailRegex.test(email)) {
-      console.log("invalid");
+      
       $(this).addClass("border-danger").removeClass("border-green");
       email_span.removeClass('d-none');
   } else {

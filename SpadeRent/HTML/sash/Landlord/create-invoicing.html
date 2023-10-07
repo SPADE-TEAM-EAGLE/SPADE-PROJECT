@@ -4122,6 +4122,7 @@
         <script>
             var userData;
             var bussinessLogoImg;
+            var tenantID_property;
             $(document).ready(() => {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -4595,8 +4596,9 @@
                 $(".save-invoice").each(function () {
                     
                     $(this).on("click", function () {
+                        
                         let print = false
-                        var selectedTenant = $('#tenants').attr('data-value');
+                        var selectedTenant = tenantID_property;
                         var selectedInvoiceType = $('input[name="invoice"]:checked').val();
                         var startDate = $('#startDate').val();
                         var endDate = $('#endDate').val();
@@ -5072,9 +5074,9 @@
                     filterInvoiceData("Recurring Invoice")
                 })
                 $(document).on("click", "#tenants,#tenants_update", function () {
-                    console.log("clicked", $(this).attr("data-value"))
+                    
                     const property = $(this).attr("data-value")
-                    console.log("property", property)
+                    tenantID_property = property
                     const propertyName = tenantData.filter((tenant) => {
                         if (tenant.tenantID == property) {
                             return tenant.propertyName

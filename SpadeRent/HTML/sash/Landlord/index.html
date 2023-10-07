@@ -2811,6 +2811,43 @@
                     console.log('Error: ' + error);
                 }
             });
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/TenantStatusCP',
+                type: 'GET',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function(response) {
+                    console.log(response?.data[0])
+                    if(response?.data[0]){
+                        var properties = response?.data[0];
+                        console.log(properties)
+                    var propertySelect = $('#property-select');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("All")
+                    )
+                    properties?.forEach(function(property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                    });              
+                    }
+                    
+                },
+                error: function(xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+
+                            }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
+            
             $("#property-select").on("change",function(){
                 if($(this).val()=="All"){
                     window.location.reload()
@@ -2933,7 +2970,8 @@
                 }
         
         })
-            $.ajax({
+            
+        $.ajax({
                 url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {

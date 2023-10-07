@@ -16880,6 +16880,40 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             }
 
             $(document).ready(function () {
+                $("#email_user,#email_user_update").on("blur", function () { 
+                    const email=$(this).val()
+                    const filedId=$(this).attr("id")
+                   
+                $.ajax({
+                    url: "http://localhost:3000/api/spade/checkemail",
+                    type: "GET",
+                    contentType: "application/json",
+                    data: {
+                        email: email
+                    },
+                    success: function(response) {
+                        // button1()
+                        if(response.message == "New user")
+                        {
+                        //  document.getElementById("email-span-invalid").style.display = "none";
+                            $("#"+filedId).removeClass("border-danger");
+                            $("#"+filedId).addClass("border-green");
+                        }
+                        else{
+                            $("#"+filedId).removeClass("border-green");
+                            $("#"+filedId).addClass("border-danger");
+                        //  document.getElementById("email-span-invalid").style.display = "block";
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById("email-span-invalid").style.display = "block";
+                        $("#next1").attr("disabled",true)
+                        
+                    },
+                });
+            
+                })
+                
                 // function validateForm() {
                 //     let valid = true;
 
@@ -16995,7 +17029,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     let data = {
                         firstName: $('#firstName_user').val(),
                         lastName: $('#lastName_user').val(),
-                        email: $('#add-user-permissions #email').val(),
+                        email: $('#add-user-permissions #email_user').val(),
                         phone: $('#add-user-permissions #phone').val(),
                         password: $('#user_permission_password').val(),
                         Ustatus: $('#status_user').val(),
