@@ -1197,8 +1197,8 @@ exports.allTenantDelete = async (req, res) => {
 //  #############################  Tenant status CP Start ############################################################
 exports.TenantStatusCP = async (req, res) => {
   try {
-    let { startDate, endDate } = req.body;
-    let { userId  } = req.user;
+    let { startDate, endDate } = req.params;
+    let { userId} = req.user;
     const TenantStatusCPResult = await queryRunner(tenantStatusCountQuery, [startDate, endDate,userId,userId]);
     if (TenantStatusCPResult[0].length > 0) {
       let previousTenant;
