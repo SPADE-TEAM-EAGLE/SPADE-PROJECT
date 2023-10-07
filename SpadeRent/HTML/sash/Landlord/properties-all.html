@@ -1037,6 +1037,15 @@
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
+                                        <label for="inputCity" class="form-label fw-bold">City <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" id="city" class="form-control form city-select"
+                                            pattern="[A-Za-z\s]+"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                            placeholder="Enter City">
+                                        <span class="text-danger d-none">City is required!</span>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
                                         <select id="state" class="form-select form select2-show-search">
@@ -1054,15 +1063,7 @@
                                             </select>
                                         </div>
                                     </div> -->
-                                    <div class="col-md-4">
-                                        <label for="inputCity" class="form-label fw-bold">City <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select"
-                                            pattern="[A-Za-z\s]+"
-                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                            placeholder="Enter City">
-                                        <span class="text-danger d-none">City is required!</span>
-                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
                                                 *</span></label>
@@ -1402,7 +1403,7 @@
                             <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control form" id="propertyName_update"
-                                placeholder="Enter Property Name">
+                                placeholder="Enter Property Name" required>
                             <span class="text-danger d-none">Property name required!</span>
                         </div>
                         <div class="col-md-6">
@@ -1417,28 +1418,29 @@
                             <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                     *</span></label>
                             <input type="text" class="form-control form" id="address_update"
-                                placeholder="Enter Address">
+                                placeholder="Enter Address" required>
                             <span class="text-danger d-none">Address is required!</span>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
-                                    *</span></label>
-                            <select id="state_update" class="form-select form state-select select2-show-search">
-                                <option selected>Choose...</option>
-
-                            </select>
-                            <span class="text-danger d-none">State is required!</span>
                         </div>
                         <div class="col-md-4">
                             <label for="inputCity" class="form-label fw-bold">City <span
                                     class="text-danger">*</span></label>
                             <input type="text" id="city_update" class="form-control form city-select"
                                 pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                placeholder="Enter City">
+                                placeholder="Enter City" required>
 
 
                             <span class="text-danger d-none">City is required!</span>
                         </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
+                                    *</span></label>
+                            <select id="state_update" class="form-select form state-select select2-show-search" required>
+                                <option selected>Choose...</option>
+
+                            </select>
+                            <span class="text-danger d-none">State is required!</span>
+                        </div>
+                       
 
                         <div class="col-md-4">
                             <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
@@ -1451,7 +1453,7 @@
                         <div class="col-md-6">
                             <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                     *</span></label>
-                            <select id="propertyType_update" class="form-select form select2-show-search">
+                            <select id="propertyType_update" class="form-select form select2-show-search" required>
                                 <option selected>Choose...</option>
                                 <option>Single Family</option>
                                 <option>Multi-Family</option>
@@ -3439,7 +3441,7 @@
                 var isFilled = true;
 
                 // Check each field for empty value and toggle red border and span visibility
-                $('#myModal_edit').find('input, select').each(function (index) {
+                $('#myModal_edit').find('input[required], select[required]').each(function (index) {
                     var value = $(this).val().trim();
                     var span = $(this).siblings('.text-danger');
                     // console.log($(this))
@@ -3458,6 +3460,7 @@
                         }
                     } else if (index >= 1) {
                         if (value === '' || value === 'Choose...') {
+                            alert(1)
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
                             //   console.log(1)
@@ -3469,7 +3472,7 @@
                             span.addClass('d-none');
                         }
                     }
-                });
+                }); 
 
                 // Toggle button behavior based on the fields' status
                 if (isFilled) {
