@@ -6589,7 +6589,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                
+
 
                                                             </div>
                                                         </div>
@@ -11286,27 +11286,31 @@
                                                                                 class="form-label fw-bold">Phone Number
                                                                                 <span
                                                                                     class="fw-light">(Optional)</span></label>
-                                                                            <input id="phone" name="phone" type="tel"
+                                                                            <input id="phone3" name="phone" type="tel"
                                                                                 autocomplete="off"
                                                                                 placeholder="Enter Phone Number"
                                                                                 pattern="[0-9]{5}"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                                                            <span id="valid-msg"
+                                                                            <span id="valid-msg3"
                                                                                 class="d-none text-success">✓
                                                                                 Valid</span>
-                                                                            <span id="error-msg"
+                                                                            <span id="error-msg3"
                                                                                 class="hide text-danger"></span>
                                                                         </div>
 
                                                                         <div class="col-md-12 mt-5">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    for="validationCustom01"><b>Password</b></label>
+                                                                                    for="validationCustom01"><b>Password</b>
+                                                                                    <spnan class="text-danger">
+                                                                                        *</span>
+                                                                                </label>
                                                                                 <input type="password"
                                                                                     class="form-control"
                                                                                     id="user_permission_password"
                                                                                     aria-describedby="emailHelp"
-                                                                                    placeholder="Enter Password">
+                                                                                    placeholder="Enter Password"
+                                                                                    required>
                                                                                 <i class="fi fi-rs-eye text-dark fs-20"
                                                                                     id="togglePassworduserpermission"
                                                                                     style="cursor: pointer;
@@ -11349,7 +11353,7 @@
                                                                                 <select id="status_user"
                                                                                     class="form-select form form-select select2-show-search"
                                                                                     required>
-                                                                                    <option selected>Select Option
+                                                                                    <option selected>Choose...
                                                                                     </option>
                                                                                     <option value="Active">Active
                                                                                     </option>
@@ -11530,10 +11534,10 @@
                                                                                 pattern="[0-9]{5}"
                                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                                 required>
-                                                                            <span id="valid-msg"
+                                                                            <span id="valid-msg1"
                                                                                 class="d-none text-success">✓
                                                                                 Valid</span>
-                                                                            <span id="error-msg"
+                                                                            <span id="error-msg1"
                                                                                 class="hide text-danger"></span>
                                                                         </div>
 
@@ -13777,7 +13781,7 @@
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
         <!-- CUSTOM JS -->
-     
+
 
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom-swicher.js"></script> -->
@@ -13809,7 +13813,7 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <!-- <script src="../assets/js/form-wizard.js"></script> -->
-      
+
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <!-- <script src="../assets/js/email-verification.js"></script> -->
         <script>
@@ -13839,7 +13843,7 @@
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
-<script src="../assets/js/email-phone.js"></script>
+        <script src="../assets/js/email-phone.js"></script>
 
         <script>
 
@@ -14410,7 +14414,7 @@
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
                 updateSelectedFilesContainer1(); // Update the selected files container
             });
-            
+
             function getData() {
 
                 $.ajax({
@@ -14425,6 +14429,7 @@
                         if (response?.data) {
                             $("#role_user,#userrole_user_update").empty();
                             $("#user-role-holder").children(":nth-child(n+2)").remove();
+                            $("#role_user").append(`<option selected>Choose...</option>`)
                             response?.data?.forEach(function (role, index) {
 
 
@@ -14441,14 +14446,14 @@
                                     $("#manager").attr("data-id", role.id)
                                 } else if (role.role.toLowerCase() == "staff") {
                                     $("#staff").attr("data-id", role.id)
-                                }else{
+                                } else {
                                     $("#owner").attr("data-id", role.id)
                                 }
-                                
+
                                 $("#user-role-holder").append(
                                     `
                         <div class="col-lg-12 col-xl-12">
-                                                                    <div class="card card-color user-role ${role.role=="Owner"?"active":""}" id="${role?.id}"
+                                                                    <div class="card card-color user-role ${role.role == "Owner" ? "active" : ""}" id="${role?.id}"
                                                                         >
                                                                         <div class="card-body">
                                                                             <div class="row"
@@ -14474,15 +14479,15 @@
                         `
 
                                 )
-                                if($("#manager").hasClass("active")){
+                                if ($("#manager").hasClass("active")) {
                                     $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").addClass("active")
                                     $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
                                     $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                }else if($("#staff").hasClass("active")){
+                                } else if ($("#staff").hasClass("active")) {
                                     $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
                                     $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
                                     $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                }else{
+                                } else {
                                     $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").addClass("active")
                                     $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
                                     $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
@@ -16876,7 +16881,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('#next-add-user-permission').prop('disabled', true);
                 $('#add-user-permissions').find(".file-grid").empty()
                 $('#edit-user-permissions').find(".file-grid").empty()
-                $('#add-user-permissions #phone').val("")
+                $('#add-user-permissions #phone3').val("")
             }
 
             $(document).ready(function () {
@@ -16964,7 +16969,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 //         }
                 //     }
                 // });
-                
+
                 // function isValidEmail(email) {
                 //     let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 //     return regex.test(email);
@@ -16995,8 +17000,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     let data = {
                         firstName: $('#firstName_user').val(),
                         lastName: $('#lastName_user').val(),
-                        email: $('#add-user-permissions #email').val(),
-                        phone: $('#add-user-permissions #phone').val(),
+                        email: $('#add-user-permissions #email_user').val(),
+                        phone: $('#add-user-permissions #phone3').val(),
                         password: $('#user_permission_password').val(),
                         Ustatus: $('#status_user').val(),
                         role: $('#role_user').val(),
@@ -17187,6 +17192,88 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             })
 
 
+        </script>
+        <script>
+            $(document).ready(function () {
+                function checkAllFieldsFilled() {
+                    let allFieldsFilled = true;
+                    $("#add-user-permissions input[required],#add-user-permissions select[required]").each(function () {
+                        if ($(this).val() == "" || $(this).val() == "Choose...") {
+                            allFieldsFilled = false;
+                            return false;
+                        }
+                    });
+
+                    return allFieldsFilled;
+                }
+                function toggleSubmitButton() {
+                    const submitButton = $("#next-add-user-permission");
+                    submitButton.prop("disabled", !checkAllFieldsFilled());
+                }
+                $("#add-user-permissions input[required],#add-user-permissions select[required]").on("input change", function () {
+                    toggleSubmitButton();
+                });
+                toggleSubmitButton();
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                function checkAllFieldsFilled1() {
+                    let allFieldsFilled1 = true;
+                    $("#edit-user-permissions input[required],#edit-user-permissions select[required]").each(function () {
+                        if ($(this).val() == "" || $(this).val() == "Choose...") {
+                            allFieldsFilled1 = false;
+                            return false;
+                        }
+                    });
+
+                    return allFieldsFilled1;
+                }
+                function toggleSubmitButton1() {
+                    const submitButton1 = $("#update_user_permission");
+                    submitButton1.prop("disabled", !checkAllFieldsFilled1());
+                }
+                $("#edit-user-permissions input[required],#edit-user-permissions select[required]").on("input change", function () {
+                    toggleSubmitButton1();
+                });
+                toggleSubmitButton1();
+            });
+        </script>
+        <script>
+            const input3 = document.querySelector("#phone3");
+            const errorMsg3 = document.querySelector("#error-msg3");
+            const validMsg3 = document.querySelector("#valid-msg3");
+            const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const iti3 = window.intlTelInput(input3, {
+                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
+            });
+
+            const reset3 = () => {
+                input3.classList.remove("error");
+                errorMsg3.innerHTML = "";
+                errorMsg3.classList.add("d-none");
+                validMsg3.classList.add("d-none");
+            };
+            input3.addEventListener('input', () => {
+                reset3();
+                console.log("in phone input")
+                if (input3.value.trim()) {
+                    if (iti3.isValidNumber()) {
+                        validMsg3.classList.remove("d-none");
+                        phoneError = false
+                        input3.classList.remove("is-invalid");
+                        input3.classList.add("is-valid");
+                    } else {
+                        input3.classList.add("is-invalid");
+                        input3.classList.remove("is-valid");
+                        phoneError3 = true
+                        input3.classList.add("error");
+                        const errorCode3 = iti3.getValidationError();
+                        errorMsg3.innerHTML = errorMap3[errorCode3];
+                        errorMsg3.classList.remove("d-none");
+                    }
+                }
+            });
         </script>
 
 </body>
