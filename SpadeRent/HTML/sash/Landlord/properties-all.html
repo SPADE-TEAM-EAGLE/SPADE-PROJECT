@@ -3051,7 +3051,8 @@
             });
         }
         
-        var states
+        var states;
+        var propertyShow;
         $(document).ready(function () {
             // $('#infoModal').modal('show')
             $.ajax({
@@ -3060,12 +3061,12 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image }) {
+                success: function ({ image,properties }) {
                     if (image !== " " && image !== null) {
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                     }
+                    propertyShow = properties
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -3940,7 +3941,7 @@
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu dropdown-menu-top">' +
-                                `<li><a class="dropdown-item text-dark" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
+                                `<li><a class="dropdown-item text-dark view-property" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: center;"><i class="fi fi-rs-eye" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; View</a></li>` +
                                 '<li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-edit" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;&nbsp; Edit</a></li>' +
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
@@ -4168,11 +4169,98 @@
     $(document).ajaxStop(function () {
         if (helloGuys) {
             helloGuys = false;
+           
             var customScript = document.createElement('script');
             customScript.src = "../assets/js/custom.js";
             document.head.appendChild(customScript);
+            
         }
     });
+    $(document).ajaxStop(function () {
+        if(propertyShow){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!propertyShow[action]) {
+                    switch (action) {
+        case "Add":
+            $("#add_property_btn").remove()
+            break;
+        case "View":
+            $("#table_body tr").each(function (item, index) {
+                $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                $(this).find(".view-property").addClass("d-none")
+            })
+            break;
+        case "Delete":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".delete-option").addClass("d-none")
+                
+            })
+            break;
+        case "Edit":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".edit-option").addClass("d-none")
+                
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+
+
+        })
+        const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                // Check if tenantPermissions is defined
+                if(propertyShow){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!propertyShow[action]) {
+                    switch (action) {
+        case "Add":
+            $("#add_property_btn").remove()
+            break;
+        case "View":
+            $("#table_body tr").each(function (item, index) {
+                $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                $(this).find(".view-property").addClass("d-none")
+            })
+            break;
+        case "Delete":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".delete-option").addClass("d-none")
+                
+            })
+            break;
+        case "Edit":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".edit-option").addClass("d-none")
+                
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+            }
+        });
+    });
+
+    // Start observing the document
+    observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+
 </script>
 
 </body>

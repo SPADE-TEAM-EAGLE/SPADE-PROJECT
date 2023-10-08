@@ -4123,6 +4123,7 @@
             var userData;
             var bussinessLogoImg;
             var tenantID_property;
+            var invoicePermissions;
             $(document).ready(() => {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -4131,9 +4132,9 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("protected");
-                        console.log(response);
+                        
                         userData=response
+                        invoicePermissions=response.invoices
                         if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)
@@ -6692,6 +6693,88 @@
             })
         }
     })
+</script>
+<script>
+            $(document).ajaxStop(function () {
+            if (invoicePermissions) {
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!invoicePermissions[action]) {
+                        switch (action) {
+                            case "Add":
+                                $("#add_property_btn,#add_property_btnn").remove()
+                                break;
+                            case "View":
+
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                                    $(this).find(".view-btnn").addClass("d-none")
+                                })
+                                break;
+                            case "Delete":
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".delete-option").addClass("d-none")
+
+                                })
+                                break;
+                            case "Edit":
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".edit-option").addClass("d-none")
+
+                                })
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+
+            }
+
+
+
+        })
+        const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                // Check if tenantPermissions is defined
+                if (invoicePermissions) {
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!invoicePermissions[action]) {
+                            switch (action) {
+                                case "Add":
+                                    $("#add_property_btn, #add_property_btnn").remove();
+                                    break;
+                                case "View":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".property-anchor").attr("href", "javascript:void(0)");
+                                        $(this).find(".view-btnn").addClass("d-none");
+                                    });
+                                    break;
+                                case "Delete":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".delete-option").addClass("d-none");
+                                    });
+                                    break;
+                                case "Edit":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".edit-option").addClass("d-none");
+                                    });
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    // Start observing the document
+    observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 </script>
 </body>
 

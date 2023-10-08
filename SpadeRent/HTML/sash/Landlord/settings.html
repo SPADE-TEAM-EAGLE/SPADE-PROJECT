@@ -11279,6 +11279,8 @@
                                                                                 id="email_user" required>
                                                                             <span class="text-danger d-none">Email is
                                                                                 required!</span>
+                                                                                <small class="text-danger d-none" id="already-exist">Email already exist!</small>
+
                                                                         </div>
 
                                                                         <div class="col-md-6">
@@ -11521,6 +11523,7 @@
                                                                                 id="email_user_update" required>
                                                                             <span class="text-danger d-none">Email is
                                                                                 required!</span>
+                                                                                <span class="text-danger d-none" id="already-exist-update">Email already exist!</span>
                                                                         </div>
 
                                                                         <div class="col-md-6">
@@ -16883,12 +16886,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('#edit-user-permissions').find(".file-grid").empty()
                 $('#add-user-permissions #phone').val("")
             }
-
+            var isValidEmail=false;
             $(document).ready(function () {
                 $("#email_user,#email_user_update").on("blur", function () { 
                     const email=$(this).val()
                     const filedId=$(this).attr("id")
-                   
+                
                 $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/checkemail",
                     type: "GET",
@@ -16900,19 +16903,24 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         // button1()
                         if(response.message == "New user")
                         {
-                        //  document.getElementById("email-span-invalid").style.display = "none";
+                         $("#already-exist").addClass("d-none")
+                         $("#already-exist-update").addClass("d-none")
                             $("#"+filedId).removeClass("border-danger");
                             $("#"+filedId).addClass("border-green");
+                            isValidEmail=true;
                         }
                         else{
                             $("#"+filedId).removeClass("border-green");
                             $("#"+filedId).addClass("border-danger");
-                        //  document.getElementById("email-span-invalid").style.display = "block";
+                            $("#already-exist,#already-exist-update").removeClass("d-none")
+                            $("#next-add-user-permission").attr("disabled",true)
+                            isValidEmail=false;
                         }
                     },
                     error: function(xhr, status, error) {
-                        document.getElementById("email-span-invalid").style.display = "block";
-                        $("#next1").attr("disabled",true)
+                        $("#already-exist,#already-exist-update").removeClass("d-none")
+                        $("#next-add-user-permission").attr("disabled",true)
+                        isValidEmail=false;
                         
                     },
                 });
@@ -17237,7 +17245,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             return false;
                         }
                     });
-
+                    if(isValidEmail==false)
+                    {
+                        allFieldsFilled=false;
+                    }
                     return allFieldsFilled;
                 }
                 function toggleSubmitButton() {

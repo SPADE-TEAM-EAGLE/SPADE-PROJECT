@@ -4857,7 +4857,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                     '<div class="d-flex" style="flex-direction: row;">' +
                     '<div class="d-flex" style="flex-direction: column;">' +
                     '<div class="m-0 text-primary fw-bold fs-18 rent-amount">' + (formatRentAmount(prospectus.rentAmount)) + '</div>' +
-                    `<a href="./view-prospects.html?prospect=${encodedProspectId}" class="fs-12 text-dark">View More</a>` +
+                    `<a href="./view-prospects.html?prospect=${encodedProspectId}" class="fs-12 text-dark view-btn">View More</a>` +
                     '</div>' +
                     '<div class="m-0 text-primary fw-bold fs-18 ms-2">' +
                     '<div class="dropdown show">' +
@@ -6538,6 +6538,94 @@ $("#myModal_success").find('p').text('Successfully Added')
 
 window.addEventListener("load", createChart);
 window.addEventListener("resize", createChart);
+        </script>
+        <script>
+            
+            $(document).ajaxStop(function () {
+                if(prospect){
+                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!propertyShow[action]) {
+                            switch (action) {
+                case "Add":
+                    $("#add_property_btn").remove()
+                    break;
+                case "View":
+                    $("#table_body tr").each(function (item, index) {
+                        $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                        $(this).find(".view-property").addClass("d-none")
+                    })
+                    break;
+                case "Delete":
+                $("#table_body tr").each(function (item, index) {
+                        $(this).find(".delete-option").addClass("d-none")
+                        
+                    })
+                    break;
+                case "Edit":
+                $("#table_body tr").each(function (item, index) {
+                        $(this).find(".edit-option").addClass("d-none")
+                        
+                    })
+                    break;
+                default:
+                    break;
+            }
+                        }
+            
+        }
+                    
+                    }
+        
+        
+        
+                })
+                const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        // Check if tenantPermissions is defined
+                        if(propertyShow){
+                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!propertyShow[action]) {
+                            switch (action) {
+                case "Add":
+                    $("#add_property_btn").remove()
+                    break;
+                case "View":
+                    $("#table_body tr").each(function (item, index) {
+                        $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                        $(this).find(".view-property").addClass("d-none")
+                    })
+                    break;
+                case "Delete":
+                $("#table_body tr").each(function (item, index) {
+                        $(this).find(".delete-option").addClass("d-none")
+                        
+                    })
+                    break;
+                case "Edit":
+                $("#table_body tr").each(function (item, index) {
+                        $(this).find(".edit-option").addClass("d-none")
+                        
+                    })
+                    break;
+                default:
+                    break;
+            }
+                        }
+            
+        }
+                    
+                    }
+        
+                    }
+                });
+            });
+        
+            // Start observing the document
+            observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+        
         </script>
     <!-- Gantt Cart End  -->
 </body>
