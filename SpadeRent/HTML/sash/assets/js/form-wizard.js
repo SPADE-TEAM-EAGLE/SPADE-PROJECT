@@ -451,7 +451,7 @@ function cardbtnchange2()
 
 
 function cardbtnchange() {
-  document.getElementById("paymentform").reset();
+  // document.getElementById("paymentform").reset();
   loader.style.display = "block";
   card2.classList.add("card-fade");
   card1.classList.add("card-fade");

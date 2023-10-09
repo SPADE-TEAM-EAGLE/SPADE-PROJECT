@@ -992,31 +992,7 @@
                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data">
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-bold">Property Photo (Optional)</label>
-                                        <div class="custom-file" style="border: 1px dashed #00000087;"
-                                            ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                                            <input id="fileInput" type="file" name="image" placeholder="Enter Photo"
-                                                class="custom-file-input form"
-                                                accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
-                                                aria-label="hello" multiple>
-                                            <span className="d-none"></span>
-                                            <label class="custom-file-label" for="fileInput">
-                                                <i class="fi fi-rs-cloud-upload"></i>
-                                                <div class="custom-file-text">
-                                                    <span>Upload Photo here</span>
-                                                    <span>JPEG and PNG, file size no more than 5MB</span><small
-                                                        class="text-danger d-none" id="count-text">Maximum number of
-                                                        files reached.</small><small class="text-danger d-none"
-                                                        id="size-text">File size exceeds 5MB limit.</small>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="selected-files text-white">
-                                            <div class="file-grid"></div>
-                                        </div>
-                                        <span class="text-danger d-none">Photos are required!</span>
-                                    </div>
+                                    
                                     <!-- <div class="col-md-6">
                                         <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
                                         <input type="text" class="form-control form" id="propertyId">
@@ -1094,6 +1070,32 @@
                                             pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Property Total SF is required!</span>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-bold">Property Photo (Optional)</label>
+                                        <div class="custom-file" style="border: 1px dashed #00000087;"
+                                            ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                                            <input id="fileInput" type="file" name="image" placeholder="Enter Photo"
+                                                class="custom-file-input form"
+                                                accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
+                                                aria-label="hello" multiple>
+                                            <span className="d-none"></span>
+                                            <label class="custom-file-label" for="fileInput">
+                                                <i class="fi fi-rs-cloud-upload"></i>
+                                                <div class="custom-file-text">
+                                                    <span>Upload Photo here</span>
+                                                    <span>JPEG and PNG, file size no more than 5MB</span><small
+                                                        class="text-danger d-none" id="count-text">Maximum number of
+                                                        files reached.</small><small class="text-danger d-none"
+                                                        id="size-text">File size exceeds 5MB limit.</small>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="selected-files text-white">
+                                            <div class="file-grid"></div>
+                                        </div>
+                                        <span class="text-danger d-none">Photos are required!</span>
                                     </div>
                                 </form>
                             </div>
@@ -1375,30 +1377,6 @@
                 </div>
                 <div class="modal-body" id="myModal_edit_body">
                     <form class="row g-3" enctype="multipart/form-data" id="update-form">
-                        <div class="col-md-12">
-                            <label class="form-label fw-bold">Property Photo</label>
-                            <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
-                                ondragover="dragOverHandler(event);">
-                                <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
-                                    accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf" aria-label="hello"
-                                    multiple>
-                                <span className="d-none"></span>
-                                <label class="custom-file-label" for="fileInput_update">
-                                    <i class="fi fi-rs-cloud-upload"></i>
-                                    <div class="custom-file-text">
-                                        <span>Upload Photo here</span>
-                                        <span>JPEG and PNG, file size no more than 5MB</span><small
-                                            class="text-danger d-none" id="count-text">Maximum number of files
-                                            reached.</small><small class="text-danger d-none" id="size-text">File size
-                                            exceeds 5MB limit.</small>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="selected-files">
-                                <div class="file-grid"></div>
-                            </div>
-                            <span class="text-danger d-none">Photos are required!</span>
-                        </div>
                         <div class="col-md-6">
                             <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                     class="text-danger">*</span></label>
@@ -1468,6 +1446,30 @@
                                 placeholder="Enter Property Total SQFT" maxlength="5"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                             <span class="text-danger d-none">Property Total SF is required!</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Property Photo</label>
+                            <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
+                                ondragover="dragOverHandler(event);">
+                                <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
+                                    accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf" aria-label="hello"
+                                    multiple>
+                                <span className="d-none"></span>
+                                <label class="custom-file-label" for="fileInput_update">
+                                    <i class="fi fi-rs-cloud-upload"></i>
+                                    <div class="custom-file-text">
+                                        <span>Upload Photo here</span>
+                                        <span>JPEG and PNG, file size no more than 5MB</span><small
+                                            class="text-danger d-none" id="count-text">Maximum number of files
+                                            reached.</small><small class="text-danger d-none" id="size-text">File size
+                                            exceeds 5MB limit.</small>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="selected-files">
+                                <div class="file-grid"></div>
+                            </div>
+                            <span class="text-danger d-none">Photos are required!</span>
                         </div>
                     </form>
                 </div>
@@ -1629,11 +1631,11 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg"
+                                            <img id="user-img" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"
+                                            <img  id="user-img" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
@@ -1881,11 +1883,7 @@
                         <div>
                             <p class="d-inline-flex gap-1 bg-img-mainn">
                                 <span>Add Properties | </span>
-
-                                <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to create Properties?
-                                    </a></span>
-                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"> How to update Properties?
-                                    </a></span>
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"><b>Need help?</b></a></span>
                             </p>
 
 
