@@ -999,8 +999,8 @@ color: #000;
                     <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                             id='close'>Close</button>
                         <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled"
-                            style='background-color:#1467B0;' id='next'>Next</a>
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button disabled modalValid"
+                            style='background-color:#1467B0;' id='next'>Save</a>
                     </div>
                 </div>
             </div>
@@ -3882,11 +3882,11 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
                     if (iti2.isValidNumber()) {
                         validMsg2.removeClass("d-none");
                         phoneError2 = false;
-                        input2.removeClass("is-invalid");
-                        input2.addClass("is-valid");
+                        input2.removeClass("border-danger");
+                        input2.addClass("border-green");
                     } else {
-                        input2.addClass("is-invalid");
-                        input2.removeClass("is-valid");
+                        input2.addClass("border-danger");
+                        input2.removeClass("border-green");
                         phoneError2 = true;
                         input2.addClass("error");
                         const errorCode2 = iti2.getValidationError();
@@ -3919,11 +3919,11 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
                 if (iti3.isValidNumber()) {
                     validMsg3.classList.remove("d-none");
                     phoneError = false
-                    input3.classList.remove("is-invalid");
-                    input3.classList.add("is-valid");
+                    input3.classList.remove("border-danger");
+                    input3.classList.add("border-green");
                 } else {
-                    input3.classList.add("is-invalid");
-                    input3.classList.remove("is-valid");
+                    input3.classList.add("border-danger");
+                    input3.classList.remove("border-green");
                     phoneError3 = true
                     input3.classList.add("error");
                     const errorCode3 = iti3.getValidationError();
@@ -3955,11 +3955,11 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
                 if (iti4.isValidNumber()) {
                     validMsg4.classList.remove("d-none");
                     phoneError = false
-                    input4.classList.remove("is-invalid");
-                    input4.classList.add("is-valid");
+                    input4.classList.remove("border-danger");
+                    input4.classList.add("border-green");
                 } else {
-                    input4.classList.add("is-invalid");
-                    input4.classList.remove("is-valid");
+                    input4.classList.add("border-danger");
+                    input4.classList.remove("border-green");
                     phoneError4 = true
                     input4.classList.add("error");
                     const errorCode4 = iti4.getValidationError();
@@ -3969,7 +3969,7 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
             }
         });
     </script>
-     <script>
+     <!-- <script>
         const input0 = document.querySelector("#phone");
         const errorMsg = document.querySelector("#error-msg");
         const validMsg = document.querySelector("#valid-msg");
@@ -3991,11 +3991,11 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
                 if (iti.isValidNumber()) {
                     validMsg.classList.remove("d-none");
                     phoneError = false
-                    input0.classList.remove("is-invalid");
-                    input0.classList.add("is-valid");
+                    input0.classList.remove("border-danger");
+                    input0.classList.add("border-green");
                 } else {
-                    input0.classList.add("is-invalid");
-                    input0.classList.remove("is-valid");
+                    input0.classList.add("border-danger");
+                    input0.classList.remove("border-green");
                     phoneError = true
                     input0.classList.add("error");
                     const errorCode = iti.getValidationError();
@@ -4004,7 +4004,7 @@ $('#myModal_edit :input[required], #myModal_edit :input[required]').on('input ch
                 }
             }
         });
-    </script> 
+    </script>  -->
      
 </body>
 
