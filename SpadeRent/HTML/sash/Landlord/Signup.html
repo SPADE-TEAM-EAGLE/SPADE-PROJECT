@@ -3105,9 +3105,13 @@
                         // button1()
                         if(response.message == "New user")
                         {
-                         document.getElementById("email-span-invalid").style.display = "none";  
+                         document.getElementById("email-span-invalid").style.display = "none";
+                            $("#email").removeClass("is-invalid");
+                            $("#email").addClass("is-valid");
                         }
                         else{
+                            $("#email").removeClass("is-valid");
+                            $("#email").addClass("is-invalid");
                          document.getElementById("email-span-invalid").style.display = "block";
                         }
                     },
@@ -3117,6 +3121,7 @@
                         
                     },
                 });
+            
             })
             $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',

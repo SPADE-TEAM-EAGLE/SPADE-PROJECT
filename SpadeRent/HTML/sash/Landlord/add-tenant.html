@@ -1177,9 +1177,9 @@
                                 Invite</a>
                         </div>
                     </div>
-                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
-                            data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
-                                class="fe fe-plus me-2"></i><strong>ADD NEW
+                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2"
+                            id="add_property_btnn" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                            href="#addModal"><i class="fe fe-plus me-2"></i><strong>ADD NEW
                                 TENANT</strong></button></div>
 
                 </div>
@@ -1296,19 +1296,21 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-12"><p class="fw-bolder text-danger mb-2">Following are the Tenants with unpaid invoices: </p></div>
-                        <br/>
+                        <div class="col-12">
+                            <p class="fw-bolder text-danger mb-2">Following are the Tenants with unpaid invoices: </p>
+                        </div>
+                        <br />
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0"
-                                    >
+                                <table
+                                    class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0">
                                     <thead>
                                         <tr>
                                             <th>First Name</th>
-                                            
+
                                             <th>Last Name</th>
                                             <th>Email</th>
-                                        
+
                                         </tr>
                                     </thead>
                                     <tbody id="add-tenant-name">
@@ -1316,16 +1318,20 @@
                                             <td>
                                                 <p>Fahad</p>
                                             </td>
-                                            
-                                            <td><p>Aad</p></td>
-                                            <td><p>Aad</p></td>
-                                            
+
+                                            <td>
+                                                <p>Aad</p>
+                                            </td>
+                                            <td>
+                                                <p>Aad</p>
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="modal-footer d-flex">
@@ -1359,10 +1365,9 @@
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-add-tenant"
                                 aria-expanded="true" aria-controls="collapseOne-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Tenant Information</strong> 
+                                <h3 class="m-0"><strong>Tenant Information</strong>
                                     <!-- <i class="fi fi-rs-pencil"></i> -->
-                                    <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
@@ -1401,10 +1406,6 @@
                                             pattern="[A-Za-z0-9_\.@]+"
                                             oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
                                             id="email" required>
-
-                                        <!-- <label for="inputCity" class="form-label fw-bold">Email<span
-                                                        class="text-danger"> *</span></label>
-                                        <input type="email" class="form-control form" placeholder="Enter Email" id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"> -->
                                         <span class="text-danger d-none">Email is required!</span>
                                     </div>
 
@@ -1412,10 +1413,10 @@
                                         <label for="inputState" class="form-label fw-bold">Phone Number <span
                                                 class="fw-light">(Optional)</span></label>
                                         <input id="phone" name="phone" type="tel" autocomplete="off"
-                                            placeholder="Enter Phone Number" pattern="[0-9]{5}" 
+                                            placeholder="Enter Phone Number" pattern="[0-9]{5}"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                        <span id="valid-msg" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg" class="hide text-danger"></span>
+                                        <span id="valid-msg" class="d-none text-success valid-msg">✓ Valid</span>
+                                        <span id="error-msg" class="d-none text-danger error-msg"></span>
 
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1439,7 +1440,8 @@
                                         <div class="form-group">
                                             <label for="inputState" class="form-label fw-bold">State<spnan
                                                     class="text-danger"> *</span></label>
-                                            <select id="state" class="form-select form form-select select2-show-search" required>
+                                            <select id="state" class="form-select form form-select select2-show-search"
+                                                required>
                                                 <option selected>Choose...</option>
                                             </select>
                                             <span class="text-danger d-none">State is required!</span>
@@ -1465,10 +1467,9 @@
                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo-add-tenant" aria-expanded="false"
                                 aria-controls="collapseTwo-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong>Assign Property</strong> 
+                                <h3 class="m-0"><strong>Assign Property</strong>
                                     <!-- <i class="fi fi-rs-pencil"></i> -->
-                                    <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
@@ -1479,7 +1480,8 @@
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Select Property<span
                                                 class="text-danger"> *</span></label>
-                                        <select id="property" class="form-select form form-select select2-show-search" required>
+                                        <select id="property" class="form-select form form-select select2-show-search"
+                                            required>
                                             <option selected>Choose...</option>
 
                                         </select>
@@ -1517,9 +1519,8 @@
                                 aria-expanded="false" aria-controls="collapseThree-add-tenant">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
                                 <h3 class="m-0"><strong>Lease Details</strong>
-                                     <!-- <i class="fi fi-rs-pencil"></i> -->
-                                     <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <!-- <i class="fi fi-rs-pencil"></i> -->
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
@@ -1577,13 +1578,13 @@
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
                                                             </div>
-                                                            <span class="text-danger d-none">Rent amount is
+                                                            <span class="text-danger d-none">Triple Net
+                                                                Amount is
                                                                 required!</span>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date<span
-                                                                class="text-danger"> *</span></label>
+                                                                Date<span class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative"
                                                                 id="leaseStart" placeholder="Enter Lease Start Date">
                                                             <span class="text-danger d-none">Rent amount is
@@ -1592,8 +1593,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
-                                                                Date<span
-                                                                class="text-danger"> *</span></label>
+                                                                Date<span class="text-danger"> *</span></label>
 
                                                             <input type="date" class="form-control" id="leaseEnd"
                                                                 required placeholder="Enter Lease End Date">
@@ -1610,25 +1610,26 @@
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
-                                                        
+
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">Lease Start
-                                                                Date<span
-                                                                class="text-danger"> *</span></label>
+                                                                Date<span class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative"
-                                                                id="leaseStart2" placeholder="Enter Lease Start Date" required>
-                                                            <span class="text-danger d-none">Rent amount is
+                                                                id="leaseStart2" placeholder="Enter Lease Start Date"
+                                                                required>
+                                                            <span class="text-danger d-none">Lease Start
+                                                                Date is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">Lease End
-                                                                Date<span
-                                                                class="text-danger"> *</span></label>
+                                                                Date<span class="text-danger"> *</span></label>
 
                                                             <input type="date" class="form-control" id="leaseEnd2"
                                                                 required placeholder="Enter Lease End Date">
-                                                            <span class="text-danger d-none">Rent amount is
+                                                            <span class="text-danger d-none">Lease End
+                                                                Date is
                                                                 required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
@@ -1652,7 +1653,7 @@
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno"
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" checked
                                                 required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
@@ -2124,41 +2125,42 @@
                             <!-- <li class="sub-category">
                                        <h3>UI Kit</h3>
                                    </li> -->
-                                   <li class="slide">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
-                                            class="side-menu__icon fi fi-rs-building"></i><span
-                                            class="side-menu__label">Properties</span>
-                                        
-                                    </a>
-                                </li>
-                                <li class="slide card-demo-2">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
-                                            class="side-menu__icon fi fi-rs-cabin"></i><span
-                                            class="side-menu__label">Tenants</span>
-                                        
-    
-                                    </a>
-                                    
-                                </li>
-    
-                                <!-- <li class="sub-category">
+                            <li class="slide">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="properties-all.html"><i
+                                        class="side-menu__icon fi fi-rs-building"></i><span
+                                        class="side-menu__label">Properties</span>
+
+                                </a>
+                            </li>
+                            <li class="slide card-demo-2">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
+                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__label">Tenants</span>
+
+
+                                </a>
+
+                            </li>
+
+                            <!-- <li class="sub-category">
                                            <h3>Pre-build Pages</h3>
                                        </li> -->
-                                <li class="slide card-demo-3">
-                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="create-invoicing.html"><i
-                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                            class="side-menu__label">Invoicing</span>
-                                        
-                                    </a>
-                                    
-    
-                                </li>
-                                <li class="slide card-demo-4">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
-                                            class="side-menu__icon fi fi-rs-chart-simple"></i><span
-                                            class="side-menu__label">Prospects</span>
-                                    </a>
-                                </li>
+                            <li class="slide card-demo-3">
+                                <a class="side-menu__item has-link" data-bs-toggle="slide"
+                                    href="create-invoicing.html"><i
+                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                        class="side-menu__label">Invoicing</span>
+
+                                </a>
+
+
+                            </li>
+                            <li class="slide card-demo-4">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="prospects.html"><i
+                                        class="side-menu__icon fi fi-rs-chart-simple"></i><span
+                                        class="side-menu__label">Prospects</span>
+                                </a>
+                            </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="view-tasks.html"><i
@@ -2171,16 +2173,16 @@
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Tasks</a></li>
                                     <li><a href="create-tasks.html" class="slide-item">All</a></li>
                                     <li><a href="tasks-requests.html" class="slide-item">Requests</a> </li>
-                                   <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
+                                    <!-- <li><a href="tasks-vendors.html" class="slide-item">Vendors</a></li> -->
                                 </ul>
                             </li>
-<li class="slide">
+                            <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="tasks-vendors.html">
                                     <i class="side-menu__icon fi fi-rs-users"></i>
                                     <span class="side-menu__label">Vendors</span>
                                 </a>
                             </li>
-                            
+
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="reports.html">
                                     <i class="side-menu__icon fi fi-rs-document"></i>
@@ -2315,8 +2317,7 @@
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="created-at"
-                                                                value="option1">
+                                                                name="exampleRadios" id="created-at" value="option1">
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -2381,12 +2382,12 @@
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                        href="javascript:void(0)">Contact Info</a>
-                                                    <div class="form-check m-0">
-                                                        <input type="checkbox" class="form-check-input mt-2"
-                                                            id="exampleCheck1" checked>
-                                                    </div>
-                                                </li>
+                                                            href="javascript:void(0)">Contact Info</a>
+                                                        <div class="form-check m-0">
+                                                            <input type="checkbox" class="form-check-input mt-2"
+                                                                id="exampleCheck1" checked>
+                                                        </div>
+                                                    </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
                                                             href="javascript:void(0)">Property Address</a>
                                                         <div class="form-check m-0">
@@ -2431,10 +2432,12 @@
                                     <div class="card-body p-0">
                                         <!-- <button type="button" id="myButton" class="btn btn-primary px-3 myButton"><i class="fi fi-rs-trash mt-1 fs-20" aria-hidden="true"></i> Delete</button> -->
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
-                                            <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
-                                                <select id="lengthSelectBox"
-                                                    class="form-control select2 form-select" style="width: 80px;">
+                                            <div style="width: 220px"
+                                                class="d-flex justify-content-center align-items-center">
+                                                <span class="fw-bold me-2" style="min-width: 107px;">Number of
+                                                    rows</span>
+                                                <select id="lengthSelectBox" class="form-control select2 form-select"
+                                                    style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -2445,9 +2448,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button id="myButton" class="btn-delete-checkbox myButton"><i class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
-                                        <div class="table-responsive"> 
-                                            <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0" id="responsive-datatable">
+                                        <button id="myButton" class="btn-delete-checkbox myButton"><i
+                                                class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0"
+                                                id="responsive-datatable">
                                                 <thead>
                                                     <tr>
                                                         <th>SELECT</th>
@@ -3078,16 +3084,16 @@
     <script>
         $(document).ready(function () {
             $('#addModal').on('shown.bs.modal', function () {
-               
+
                 $('.select2-show-search').select2({
                     dropdownParent: $('#addModal')
                 });
             });
             $('#myModal_edit').on('shown.bs.modal', function () {
-                
+
                 $('.select2-show-search').select2({
-                dropdownParent: $('#myModal_edit')
-            });
+                    dropdownParent: $('#myModal_edit')
+                });
             });
         }); 
     </script>
@@ -3133,7 +3139,7 @@
     <!-- INTERNAL APEXCHART JS -->
     <script src="../assets/js/apexcharts.js"></script>
     <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
-    <script src="../assets/js/accordian.js"></script> 
+    <script src="../assets/js/accordian.js"></script>
 
     <!-- INTERNAL Flot JS -->
     <script src="../assets/plugins/flot/jquery.flot.js"></script>
@@ -3160,19 +3166,8 @@
 
     <!-- CUSTOM JS -->
     <!-- <script src="../assets/js/custom.js"></script> -->
-    <script>
-        var helloGuys = true;
-        $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
-                var customScript = document.createElement('script');
-                customScript.src = "../assets/js/custom.js";
-                document.head.appendChild(customScript);
-            }
-        });
-    </script>
-    <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script>
+
+
 
     <!-- ############################################# -->
 
@@ -3190,37 +3185,39 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
-<script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
-                        $('#chatCounter').text(response.Count['count(message)'])
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            // window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log(error);
-                    }
-                });
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("getMessagesCountLandlord");
+                    console.log(response.Count['count(message)']);
+                    $('#chatCounter').text(response.Count['count(message)'])
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        // window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log(error);
+                }
             });
-        </script>
+        });
+    </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
+    <script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 
 
     <script>
+        var tenantPermissions;
         $(document).ready(function () {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
@@ -3273,23 +3270,23 @@
         });
     </script>
 
-<script>
-    var startDateInput1 = document.getElementById('leaseStart2');
-    var endDateInput1 = document.getElementById('leaseEnd2');
-    var middleDateInputs1 = document.getElementsByClassName('dateofRentchange');
+    <script>
+        var startDateInput1 = document.getElementById('leaseStart2');
+        var endDateInput1 = document.getElementById('leaseEnd2');
+        var middleDateInputs1 = document.getElementsByClassName('dateofRentchange');
 
-    startDateInput1.addEventListener("change", function () {
-        endDateInput1.min = startDateInput1.value;
-    });
+        startDateInput1.addEventListener("change", function () {
+            endDateInput1.min = startDateInput1.value;
+        });
 
-    endDateInput1.addEventListener("change", function () {
-        for (var i = 0; i < middleDateInputs.length; i++) {
-            var middleDateInput1 = middleDateInputs1[i];
-            middleDateInput1.min = startDateInput1.value;
-            middleDateInput1.max = endDateInput1.value;
-        }
-    });
-</script>
+        endDateInput1.addEventListener("change", function () {
+            for (var i = 0; i < middleDateInputs.length; i++) {
+                var middleDateInput1 = middleDateInputs1[i];
+                middleDateInput1.min = startDateInput1.value;
+                middleDateInput1.max = endDateInput1.value;
+            }
+        });
+    </script>
 
     <script>
         var selectedFiles = [];
@@ -3383,8 +3380,8 @@
                         console.log('Error: ' + error);
                     }
                 });
-          
-          
+
+
             })
             $('#addModal_units').on('hidden.bs.modal', function () {
                 $.ajax({
@@ -3459,9 +3456,9 @@
                         console.log('Error: ' + error);
                     }
                 });
-          
-          
-        });
+
+
+            });
             function getData2() {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
@@ -3768,7 +3765,7 @@
                     console.log('Error occurred while fetching state and city data.');
                 }
             });
-            
+
             let tenantIdElement
 
             $.ajax({
@@ -3952,12 +3949,12 @@
 
                 // Get Lease Details
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                if(formData.gross_or_triple_lease == "Gross Lease"){
+                if (formData.gross_or_triple_lease == "Gross Lease") {
                     formData.leaseStartDate = document.getElementById('leaseStart2').value;
-                formData.leaseEndDate = document.getElementById('leaseEnd2').value;
-                formData.baseRent = document.getElementById('baseRent').value;
+                    formData.leaseEndDate = document.getElementById('leaseEnd2').value;
+                    formData.baseRent = document.getElementById('baseRent').value;
                     formData.tripleNet = document.getElementById('tripleNet').value;
-                }else{
+                } else {
 
                     formData.baseRent = document.getElementById('baseRent').value;
                     formData.tripleNet = document.getElementById('tripleNet').value;
@@ -4071,10 +4068,10 @@
                 } else {
                     $("#collapse3").addClass('show')
                     $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
-                 
+
                     $('#leaseStart2').prop('required', true);
                     $('#leaseEnd2').prop('required', true);
-                  
+
                     $("#leaseStart2").val(tenants.leaseStartDate)
                     $("#leaseEnd2").val(tenants.leaseEndDate)
                     // $("#baseRent").val("")
@@ -4187,7 +4184,7 @@
                 // });
                 // }
                 $("#addModal").modal("hide")
-                $('#preloader').css('display','flex')
+                $('#preloader').css('display', 'flex')
                 // Make the AJAX call
                 $.ajax({
                     url: `https://backend.app.spaderent.com/api/spade/${uri}`,
@@ -4202,18 +4199,18 @@
                         // console.log(response)
                         // Handle the success response
                         if (response.message.includes("Tenants Already exist on this email")) {
-                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             $('#infoModal').modal('show')
                             setTimeout(function () {
                                 $('#infoModal').modal('hide');
                             }, 2000);
                             resetAccordions()
                         } else if (response.message.includes(" tenant Updated successful")) {
-                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             getData()
                             GetNotification();
                             localStorage.setItem("tenants", "true")
@@ -4229,9 +4226,9 @@
                         } else if (response.message.includes(" tenant created successful")) {
                             // $('#collapseSecond').removeClass('show')
                             // $('#collapseThird').removeClass('show')
-                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             GetNotification();
                             $('#succesModal').modal('show')
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
@@ -4604,45 +4601,6 @@
                     });
                 }
             }
-            const input = document.querySelector("#phone");
-            const errorMsg = document.querySelector("#error-msg");
-            const validMsg = document.querySelector("#valid-msg");
-
-            // here, the index maps to the error code returned from getValidationError - see readme
-            const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-            // initialise plugin
-            const iti = window.intlTelInput(input, {
-                utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
-            });
-
-            const reset = () => {
-                input.classList.remove("error");
-                errorMsg.innerHTML = "";
-                errorMsg.classList.add("d-none");
-                validMsg.classList.add("d-none");
-            };
-
-            // on blur: validate
-            input.addEventListener('blur', () => {
-                reset();
-                if (input.value.trim()) {
-                    if (iti.isValidNumber()) {
-                        validMsg.classList.remove("d-none");
-                    phoneError = false
-                    input.classList.remove("is-invalid");
-                    input.classList.add("is-valid");
-                    } else {
-                        input.classList.add("is-invalid");
-                    input.classList.remove("is-valid");
-                    phoneError = true
-                    input.classList.add("error");
-                    const errorCode = iti.getValidationError();
-                    errorMsg.innerHTML = errorMap[errorCode];
-                    errorMsg.classList.remove("d-none");
-                    }
-                }
-            });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
@@ -4677,15 +4635,15 @@
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idB - idA;
                     });
-                }else if (selectedFilter === 'created-at') {
-                
-                rows.sort(function (a, b) {
-                    var idA = new Date($(a).find('.created-at').text());
-                    console.log(idA)
-                    var idB = new Date($(b).find('.created-at').text());
-                    return idB - idA;
-                });
-            }
+                } else if (selectedFilter === 'created-at') {
+
+                    rows.sort(function (a, b) {
+                        var idA = new Date($(a).find('.created-at').text());
+                        console.log(idA)
+                        var idB = new Date($(b).find('.created-at').text());
+                        return idB - idA;
+                    });
+                }
 
                 tableBody.empty().append(rows);
             }
@@ -4702,24 +4660,24 @@
                 filterTable("alphabets")
             });
             $('#created-at').on('click', function () {
-            // console.log(1)
-            filterTable("created-at")
-        });
+                // console.log(1)
+                filterTable("created-at")
+            });
             // Search functionality
             $(document).on('keyup', '#typehead', function () {
-    var searchValue = $(this).val().toLowerCase();
-    var numRowsToShow = $('#lengthSelectBox').val();
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox').val();
 
-    $('#table_body tr').filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-    });
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
 
-    if (searchValue === '') {
-        // If search box is empty, use the selected value from the select box
-        $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
-        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
-    }
-});
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
             $(".modal").on("click", ".btn-close,.btn-close-bottom", function () {
 
                 $('#addUnitBtn').hide()
@@ -4984,15 +4942,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    if(response.message=="Tenant Invoice is pending Kindly Paid invoice "){
+                    if (response.message == "Tenant Invoice is pending Kindly Paid invoice ") {
                         $("#infoModal_delete").modal("show");
                     }
-                    else{
+                    else {
                         getData()
 
-$("#succesModal_delete").modal("show");
+                        $("#succesModal_delete").modal("show");
                     }
-                    
+
 
 
                 },
@@ -5016,13 +4974,14 @@ $("#succesModal_delete").modal("show");
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image }) {
+                success: function ({ image, tenants }) {
 
                     if (image !== " " && image !== null) {
 
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                     }
+                    tenantPermissions = tenants
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -5081,11 +5040,15 @@ $("#succesModal_delete").modal("show");
                         var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
                         // var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName+" " + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+<<<<<<< HEAD
                         var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + tenant.rentAmount + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
+=======
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
+>>>>>>> 972dfdee25f0e710865a76168d46efe03a599bd8
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
@@ -5094,36 +5057,36 @@ $("#succesModal_delete").modal("show");
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
-                            `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
+                            `<li><a class="dropdown-item text-success view-tenant" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                             '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
                             '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>'
                         '</ul></td>';
                         var currentDate = new Date();
-var leaseEndDate = '';
-if (tenant.leaseEndDate) {
-    var targetDate = new Date(tenant.leaseEndDate);
-    var timeDiff = targetDate.getTime() - currentDate.getTime();
-    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                        var leaseEndDate = '';
+                        if (tenant.leaseEndDate) {
+                            var targetDate = new Date(tenant.leaseEndDate);
+                            var timeDiff = targetDate.getTime() - currentDate.getTime();
+                            var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2);
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
-    var day = targetDate.getDate().toString().padStart(2, '0');
+                            var year = targetDate.getFullYear().toString().slice(-2);
+                            var month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+                            var day = targetDate.getDate().toString().padStart(2, '0');
 
-    var formattedEndDate = `${month}/${day}/${year}`;
+                            var formattedEndDate = `${month}/${day}/${year}`;
 
-    if (daysLeft < 0) {
-        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="text-danger d-block">Overdue</small>` + '</td>';
-    } else {
-        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-    }
-} else {
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-}
+                            if (daysLeft < 0) {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="text-danger d-block">Overdue</small>` + '</td>';
+                            } else {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
+                        } else {
+                            leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                        }
 
 
                         var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
-                            assignUnit + rentAmount + leaseEndDate + dropdownMenu +created_at +'</tr>';
+                            assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
 
                         // Append the row to the table body
                         tableBody.append(row);
@@ -5193,7 +5156,7 @@ if (tenant.leaseEndDate) {
                             propertyUnitSelect.prop("disabled", true);
                             propertyUnitSelect.append($('<option></option>')
                                 .text("No unit available!!"))
-                                $('#addUnitBtn').show()
+                            $('#addUnitBtn').show()
                         } else {
                             $('#addUnitBtn').hide()
                             propertyUnitSelect.prop("disabled", false);
@@ -5291,7 +5254,7 @@ if (tenant.leaseEndDate) {
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                     var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
+                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
                     var password = 'your-secret-password';
                     var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5299,35 +5262,35 @@ if (tenant.leaseEndDate) {
 
                     var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                         '<ul class="dropdown-menu">' +
-                        `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
+                        `<li><a class="dropdown-item text-success view-tenant" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                         '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
                         '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
                         '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                         '</ul></td>';
 
-                        var currentDate = new Date();
-var leaseEndDate = '';
-if (tenant.leaseEndDate) {
+                    var currentDate = new Date();
+                    var leaseEndDate = '';
+                    if (tenant.leaseEndDate) {
 
-    var targetDate = new Date(tenant.leaseEndDate);
-    var timeDiff = targetDate.getTime() - currentDate.getTime();
-    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                        var targetDate = new Date(tenant.leaseEndDate);
+                        var timeDiff = targetDate.getTime() - currentDate.getTime();
+                        var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
-    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+                        var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+                        var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+                        var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-    var formattedEndDate = `${month}/${day}/${year}`;
+                        var formattedEndDate = `${month}/${day}/${year}`;
 
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-} else {
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-}
- 
+                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                    } else {
+                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                    }
+
 
 
                     var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
-                        assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
+                        assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
 
                     // Append the row to the table body
                     $('#table_body').append(row);
@@ -5350,10 +5313,10 @@ if (tenant.leaseEndDate) {
                 var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                 var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                 var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
-                
+
                 var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
-                        var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
+                var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
+                var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -5361,39 +5324,41 @@ if (tenant.leaseEndDate) {
 
                 var dropdownMenu = '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                     '<ul class="dropdown-menu">' +
-                    `<li><a class="dropdown-item text-success" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
+                    `<li><a class="dropdown-item text-success view-tenant" href="./view-tenant.html?tenant=${encodedPropertyId}">View</a></li>` +
                     '<li><a class="edit-option dropdown-item text-primary"  href="javascript:void(0) ">Edit</a></li>' +
+                    '<li><a class="send-option dropdown-item text-success"  href="javascript:void(0) ">Invite to Tenant Portal</a></li>' +
+
                     '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                     '</ul></td>';
 
-                    var currentDate = new Date();
-var leaseEndDate = '';
-if (tenant.leaseEndDate) {
+                var currentDate = new Date();
+                var leaseEndDate = '';
+                if (tenant.leaseEndDate) {
 
-    var targetDate = new Date(tenant.leaseEndDate);
-    var timeDiff = targetDate.getTime() - currentDate.getTime();
-    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                    var targetDate = new Date(tenant.leaseEndDate);
+                    var timeDiff = targetDate.getTime() - currentDate.getTime();
+                    var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
-    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
-    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
+                    var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
+                    var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
+                    var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
 
-    var formattedEndDate = `${month}-${day}-${year}`;
+                    var formattedEndDate = `${month}-${day}-${year}`;
 
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-} else {
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
-}
+                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                } else {
+                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                }
 
-                var row = '<tr>' +checkbox +serial + tenantId + tenantName+contactinfo + propertyAddress + assignUnit +
-                    rentAmount + leaseEndDate + dropdownMenu + created_at+'</tr>';
+                var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress + assignUnit +
+                    rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
 
                 // Append the row to the table body
                 $('#table_body').append(row);
 
             });
         }
-        
+
         $('#single-link').click(function () {
             filterTableByPropertyType('Single Family');
         });
@@ -5409,56 +5374,57 @@ if (tenant.leaseEndDate) {
             filterTableByPropertyType('Multi-Commercial');
         });
         getData();
-        var tenantToDelete=[]
+        var tenantToDelete = []
         $("#myButton").click(function () {
-            $('#table_body tr').each(function() {
-        var checkbox = $(this).find('.checkbox input.myCheckbox');
-        
-        if (checkbox.is(':checked')) {
-            var tenantId = $(this).find('.tenant-id').text();
-            tenantToDelete.push(tenantId)
-        }
-    });
-    
-    $.ajax({
-        url:"https://backend.app.spaderent.com/api/spade/checkUnpaidInvoices",
-        type:"GET",
-        data:{
-            tenants:tenantToDelete},
-        contentType: "application/json;",
-        headers:{
-            Authorization: "Bearer " + localStorage.getItem("authtoken")
-        },
-        success:function(response){
-            if(response.Info=="No data found in tenant "){
-                console.log(tenantToDelete)
-                $.ajax({
-                    url:"https://backend.app.spaderent.com/api/spade/allTenantDelete",
-                    type:"DELETE",
-                    contentType: "application/json;charset=utf-8",
-                    data:JSON.stringify({
-                        "id":tenantToDelete
-                    }),
-                    headers:{
-                        Authorization: "Bearer " + localStorage.getItem("authtoken")
-                    },
-                    success:function(response){
-                        tenantToDelete=[]
-                        getData()
+            $('#table_body tr').each(function () {
+                var checkbox = $(this).find('.checkbox input.myCheckbox');
 
-                    $("#succesModal_delete").modal("show");
-                    },error:function(xhr,status,error){
-                        console.log(error)
+                if (checkbox.is(':checked')) {
+                    var tenantId = $(this).find('.tenant-id').text();
+                    tenantToDelete.push(tenantId)
+                }
+            });
+
+            $.ajax({
+                url: "https://backend.app.spaderent.com/api/spade/checkUnpaidInvoices",
+                type: "GET",
+                data: {
+                    tenants: tenantToDelete
+                },
+                contentType: "application/json;",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    if (response.Info == "No data found in tenant ") {
+                        console.log(tenantToDelete)
+                        $.ajax({
+                            url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
+                            type: "DELETE",
+                            contentType: "application/json;charset=utf-8",
+                            data: JSON.stringify({
+                                "id": tenantToDelete
+                            }),
+                            headers: {
+                                Authorization: "Bearer " + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                tenantToDelete = []
+                                getData()
+
+                                $("#succesModal_delete").modal("show");
+                            }, error: function (xhr, status, error) {
+                                console.log(error)
+                            }
+
+                        })
+
                     }
-
-                })
-            
-            }
-            else{
-                tenantToDelete=[]
-                $("#add-tenant-name").empty()
-                response?.data.forEach(function(item){
-                    $("#add-tenant-name").append(`
+                    else {
+                        tenantToDelete = []
+                        $("#add-tenant-name").empty()
+                        response?.data.forEach(function (item) {
+                            $("#add-tenant-name").append(`
                 <tr class="tr">
                                             <td>
                                                 <p>${item.firstName}</p>
@@ -5470,18 +5436,18 @@ if (tenant.leaseEndDate) {
                                         </tr>
                 `)
 
-                })
+                        })
 
 
 
-                
-                $("#unPaidModal").modal("show");
 
-            }
-        },error:function(xhr,status,error){
-            console.log(error)
-        }
-    })
+                        $("#unPaidModal").modal("show");
+
+                    }
+                }, error: function (xhr, status, error) {
+                    console.log(error)
+                }
+            })
         });
     </script>
 
@@ -5518,48 +5484,48 @@ if (tenant.leaseEndDate) {
             });
         }
     </script>
+    <!-- 
+    <script>
+        
+            $(document).on('change','input[type="email"]',function () {
+                var email = $(this).val();
+                var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
+        
+                if (!email.match(emailRegex)) {
+                    console.log("invalid");
+                    $(this).addClass("border-danger").removeClass("border-green");
+                } else {
+                    $(this).addClass("border-green").removeClass("border-danger");
+                }
+            });
+        
+    </script> -->
+
 
     <script>
-        $('#email').change(function () {
-            var email = $(this).val();
-            var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
-
-            if (!email.match(emailRegex)) {
-
-                console.log("invalid");
-                $(this).addClass("border-danger")
-                $(this).removeClass("border-green")
-            } else {
-                $(this).addClass("border-green")
-                $(this).removeClass("border-danger")
-            }
-        });
-    </script>
-
-<script>
-    $(document).ready(()=>{
-        $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-            },
-            success: function (response) {
-                console.log("here")
-                if(response.message=="Email is verified"){
-                    $("#account-text").remove()
-                      $("#email_verification").remove()
+        $(document).ready(() => {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("here")
+                    if (response.message == "Email is verified") {
+                        $("#account-text").remove()
+                        $("#email_verification").remove()
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
                 }
-            },
-            error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
-                console.log(xhr);
-                console.log(error);
-                // console.log('Error occurred while fetching state and city data.');
-            }
-        });
-    })
-</script>
+            });
+        })
+    </script>
 
     <script>
         // Get all elements with the class name 'myCheckbox' and 'myButton'
@@ -5593,8 +5559,8 @@ if (tenant.leaseEndDate) {
 
 
     </script>
-    
-      <!-- <script>
+
+    <!-- <script>
         $(document).ready(function () {
             var scriptUrls = [
                 "../assets/plugins/datatable/js/jquery.dataTables.min.js",
@@ -5630,6 +5596,19 @@ if (tenant.leaseEndDate) {
         });
     </script>  -->
     <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+
+
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
+    <script>
         $(document).change(function () {
             if ($('#typehead').val() == "") {
 
@@ -5662,8 +5641,89 @@ if (tenant.leaseEndDate) {
                 })
             }
         })
+        $(document).ajaxStop(function () {
+            if (tenantPermissions) {
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!tenantPermissions[action]) {
+                        switch (action) {
+                            case "Add":
+                                $("#add_property_btn,#add_property_btnn").remove()
+                                break;
+                            case "View":
+
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                                    $(this).find(".view-tenant").addClass("d-none")
+                                })
+                                break;
+                            case "Delete":
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".delete-option").addClass("d-none")
+
+                                })
+                                break;
+                            case "Edit":
+                                $("#table_body tr").each(function (item, index) {
+                                    $(this).find(".edit-option").addClass("d-none")
+
+                                })
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+
+            }
+
+
+
+        })
+        const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                // Check if tenantPermissions is defined
+                if (tenantPermissions) {
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!tenantPermissions[action]) {
+                            switch (action) {
+                                case "Add":
+                                    $("#add_property_btn, #add_property_btnn").remove();
+                                    break;
+                                case "View":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".property-anchor").attr("href", "javascript:void(0)");
+                                        $(this).find(".view-tenant").addClass("d-none");
+                                    });
+                                    break;
+                                case "Delete":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".delete-option").addClass("d-none");
+                                    });
+                                    break;
+                                case "Edit":
+                                    $("#table_body tr").each(function (item, index) {
+                                        $(this).find(".edit-option").addClass("d-none");
+                                    });
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    // Start observing the document
+    observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+
     </script>
-    
+
 </body>
 
 </html>

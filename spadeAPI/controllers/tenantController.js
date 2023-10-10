@@ -33,6 +33,7 @@ const {
   checkMyAllTenantsInvoicePaidQuerytenant,
   deleteTenantAccountData,
   checkUpaidInvoiceQuery,
+  tenantStatusCountQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1194,22 +1195,41 @@ exports.allTenantDelete = async (req, res) => {
 
 
 //  #############################  Tenant status CP Start ############################################################
-// exports.TenantStatusCP = async (req, res) => {
-//   try {
-//     let { id } = req.body;
-   
-
-//     res.status(200).json({
-//       message: " tenant deleted successfully",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({
-//       message:"Error from delete tenants ",
-//       error
-//   });
-//   }
-// };
+exports.TenantStatusCP = async (req, res) => {
+  try {
+    let { startDate, endDate } = req.params;
+    let { userId} = req.user;
+    const TenantStatusCPResult = await queryRunner(tenantStatusCountQuery, [startDate, endDate,userId,userId]);
+    if (TenantStatusCPResult[0].length > 0) {
+      let previousTenant;
+      if(TenantStatusCPResult[0][0].currentTenant == 0){
+         previousTenant = 0;
+      }else{
+       previousTenant = TenantStatusCPResult[0][0].totalTenant - TenantStatusCPResult[0][0].currentTenant; 
+      }
+      const data = {
+        totalTenant : TenantStatusCPResult[0][0].totalTenant,
+        currentTenant : TenantStatusCPResult[0][0].currentTenant,
+        previousTenant : previousTenant,
+      }
+    res.status(200).json({
+      message: " tenant Get successfully",
+      data : data
+    });
+  }else{
+    res.status(201).json({
+      message: " No tenant Found",
+      data : data
+    });
+  }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message:"Error tenants Dashboard ",
+      error
+  });
+  }
+};
 //  ############################# Tenant status CP End ############################################################
 
 

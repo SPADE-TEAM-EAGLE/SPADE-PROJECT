@@ -192,8 +192,8 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  // const { email, password, tenant } = req.query;
   const { email, password, tenant } = req.query;
+  // const { email, password, tenant } = req.body;
   // const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;

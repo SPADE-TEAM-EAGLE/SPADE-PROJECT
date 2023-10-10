@@ -142,7 +142,7 @@
     }
 
     .dark-mode .anc_color {
-      color: #dedefd;
+      color: white;
     }
 
     .hrset {
@@ -650,7 +650,7 @@
   <!-- CUSTOM JS -->
   <script src="../assets/js/custom.js"></script>
   
-  <!-- <script src="../assets/js/push_notification.js"></script> -->
+
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J 6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
@@ -755,8 +755,7 @@
         // $("#myModal_success").modal("show");
 
         $.ajax({
-          // url: 'https://backend.app.spaderent.com/api/spade/Signin',
-          url: "http://localhost:3000/api/spade/Signin",
+          url: "https://backend.app.spaderent.com/api/spade/Signin",
           type: "GET",
           contentType: "application/json; charset=utf-8",
           data: {
@@ -832,6 +831,9 @@
             }
           },
         });
+      
+      
+      
         $("#token_auth").on("input",function(){
           if($(this).val().length==6){
             $("#verify_otp_auth").prop("disabled",false)
@@ -850,7 +852,7 @@
               id: userId,
               token: $("#token_auth").val()
             }),
-            success: function (response) {
+            success: function (response) { 
               
               if(response.message){
                 $("#auth-modal").modal("hide")

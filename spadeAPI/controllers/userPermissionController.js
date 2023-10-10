@@ -17,7 +17,8 @@ const {
     insertInUsers,
     insertInUserPermissionUsers,
     updateUserPermissionUsers,
-    userPermissionUpdate
+    userPermissionUpdate,
+    getUsersWithRoles
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -208,9 +209,10 @@ exports.userPermissionGetAll = async function (req, res) {
 
     const { userId } = req.user;
     try {
-      const selectResult = await queryRunner(selectQuery("userPUsers","llnalordId"), [
+      const selectResult = await queryRunner(getUsersWithRoles, [
         userId,
     ]);
+    console.log(selectResult[0])
       if (selectResult[0].length > 0) {
         return res.status(200).json({
           data: selectResult[0],
@@ -221,6 +223,7 @@ exports.userPermissionGetAll = async function (req, res) {
         });
       }
     } catch (error) {
+      console.log(error)
       res.status(400).json({
         message: error.message,
       });
@@ -259,18 +262,18 @@ exports.userPermissionGetAll = async function (req, res) {
               const properties = splitAndConvertToObject(selectResult[0][i].properties);
               const units = splitAndConvertToObject(selectResult[0][i].units);
               const tenants = splitAndConvertToObject(selectResult[0][i].tenants);
-              const tasks = splitAndConvertToObject(selectResult[0][i].task);
+              const task = splitAndConvertToObject(selectResult[0][i].task);
               const invoices = splitAndConvertToObject(selectResult[0][i].invoices);
               const leads = splitAndConvertToObject(selectResult[0][i].leads);
-              const leadsInsights = splitAndConvertToObject(selectResult[0][i].leadsInsight);
-              const settingProfiles = splitAndConvertToObject(selectResult[0][i].settingProfile);
-              const settingCPasswords = splitAndConvertToObject(selectResult[0][i].settingCPassword);
-              const settingNotifications = splitAndConvertToObject(selectResult[0][i].settingNotification);
-              const settingCThemes = splitAndConvertToObject(selectResult[0][i].settingCTheme);
-              const settingSubscriptions = splitAndConvertToObject(selectResult[0][i].settingSubscription);
+              const leadsInsight = splitAndConvertToObject(selectResult[0][i].leadsInsight);
+              const settingProfile = splitAndConvertToObject(selectResult[0][i].settingProfile);
+              const settingCPassword = splitAndConvertToObject(selectResult[0][i].settingCPassword);
+              const settingNotification = splitAndConvertToObject(selectResult[0][i].settingNotification);
+              const settingCTheme = splitAndConvertToObject(selectResult[0][i].settingCTheme);
+              const settingSubscription = splitAndConvertToObject(selectResult[0][i].settingSubscription);
               const settingMUsers = splitAndConvertToObject(selectResult[0][i].settingMUsers);
-              const settingEmailTs = splitAndConvertToObject(selectResult[0][i].settingEmailT);
-              const SettingInvoiceSettings = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
+              const settingEmailT = splitAndConvertToObject(selectResult[0][i].settingEmailT);
+              const SettingInvoiceSetting = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
       
               dataArray.push({
                 id,
@@ -279,18 +282,18 @@ exports.userPermissionGetAll = async function (req, res) {
                 properties,
                 units,
                 tenants,
-                tasks,
+                task,
                 invoices,
                 leads,
-                leadsInsights,
-                settingProfiles,
-                settingCPasswords,
-                settingNotifications,
-                settingCThemes,
-                settingSubscriptions,
+                leadsInsight,
+                settingProfile,
+                settingCPassword,
+                settingNotification,
+                settingCTheme,
+                settingSubscription,
                 settingMUsers,
-                settingEmailTs,
-                SettingInvoiceSettings,
+                settingEmailT,
+                SettingInvoiceSetting,
               });
             }
       
@@ -303,6 +306,7 @@ exports.userPermissionGetAll = async function (req, res) {
             });
           }
         } catch (error) {
+          console.log(error)
           res.status(400).json({
             message: error.message,
           });
@@ -310,7 +314,7 @@ exports.userPermissionGetAll = async function (req, res) {
       };
 
       // Tenant status CP Start 
-    exports.TenantStatusCP = async function (req, res) {
+    exports.userPermissionUpdate = async function (req, res) {
         const { role,columnName,permission } = req.body;
         // const currentDate = new Date();
         try {
