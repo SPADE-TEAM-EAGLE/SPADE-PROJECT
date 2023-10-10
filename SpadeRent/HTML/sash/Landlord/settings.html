@@ -14827,7 +14827,8 @@
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
-                        settingPermissions.push(response.settingProfiles)
+                        if(response.settingProfiles){
+                            settingPermissions.push(response.settingProfiles)
                         settingPermissions.push(response.settingCPasswords)
                         settingPermissions.push(response.settingNotifications)
                         settingPermissions.push(response.settingCThemes)
@@ -14835,6 +14836,8 @@
                         settingPermissions.push(response.settingMUsers)
                         settingPermissions.push(response.settingEmailTs)
                         settingPermissions.push(response.SettingInvoiceSettings)
+                        }
+
                         if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)
@@ -14864,25 +14867,25 @@
                         // "taskEmail": "0"
 
                         if (response.tenantEmail == 0) {
-                            $("#tenant-zero .label")[0].classList.add("activee");
-                            $("#tenant-one .label")[0].classList.remove("activee");
+                            $("#tenant-zero .label")[0]?.classList.add("activee");
+                            $("#tenant-one .label")[0]?.classList.remove("activee");
                         } else {
-                            $("#tenant-one .label")[0].classList.add("activee");
-                            $("#tenant-zero .label")[0].classList.remove("activee");
+                            $("#tenant-one .label")[0]?.classList.add("activee");
+                            $("#tenant-zero .label")[0]?.classList.remove("activee");
                         }
                         if (response.invoiceEmail == 0) {
-                            $("#invoice-zero .label")[0].classList.add("activee");
-                            $("#invoice-one .label")[0].classList.remove("activee");
+                            $("#invoice-zero .label")[0]?.classList.add("activee");
+                            $("#invoice-one .label")[0]?.classList.remove("activee");
                         } else {
-                            $("#invoice-one .label")[0].classList.add("activee");
-                            $("#invoice-zero .label")[0].classList.remove("activee");
+                            $("#invoice-one .label")[0]?.classList.add("activee");
+                            $("#invoice-zero .label")[0]?.classList.remove("activee");
                         }
                         if (response.taskEmail == 0) {
-                            $("#task-zero .label")[0].classList.add("activee");
-                            $("#task-one .label")[0].classList.remove("activee");
+                            $("#task-zero .label")[0]?.classList.add("activee");
+                            $("#task-one .label")[0]?.classList.remove("activee");
                         } else {
-                            $("#task-one .label")[0].classList.add("activee");
-                            $("#task-zero .label")[0].classList.remove("activee");
+                            $("#task-one .label")[0]?.classList.add("activee");
+                            $("#task-zero .label")[0]?.classList.remove("activee");
                         }
                         //                     $(".activee").removeClass("activee");
                         // $(this).addClass("activee");
