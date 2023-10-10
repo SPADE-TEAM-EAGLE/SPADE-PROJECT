@@ -546,6 +546,18 @@ function button1() {
   // Check if the element is hidden (display: none)
   const isEmailSpanHidden = computedStyle.display === 'none';
   // Check all the form input conditions and whether the 'email-span-invalid' element is hidden
+  if(valid){
+    if(email.value.match(validEmail)){
+      email.classList.add('is-valid')
+      email.classList.remove('is-invalid')
+    }else{
+      email.classList.remove('is-valid')
+      email.classList.add('is-invalid')
+    }
+  }else{
+    email.classList.remove('is-valid')
+    email.classList.add('is-invalid')
+  }
   if (
     email.value.match(validEmail) &&         // Check email validity
     valid &&                     // Check if 'email-span-invalid' is hidden

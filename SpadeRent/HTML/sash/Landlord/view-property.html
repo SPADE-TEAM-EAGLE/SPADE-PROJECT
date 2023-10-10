@@ -1016,10 +1016,10 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img  id="user-img" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
 
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
@@ -1289,13 +1289,19 @@
                                             <div class="text-wrap">
                                                 <p class="text-default">What would you like to do next?</p>
 
-                                                <div class="btn-list btn-list-icon">
-                                                    <a class="btn btn-primary btn-pill" id="viewUnitspill" href="property-unit.html"><i
+                                                <div class="btn-list btn-list-icon" style="display: flex; justify-content: space-between;">
+                                                    <div>
+                                                    <a class="btn btn-primary btn-pill me-2" id="viewUnitspill" href="property-unit.html"><i
                                                             class="fi fi-rs-building me-2"></i>Add Units</a>
-                                                    <a class="btn btn-primary btn-pill" id="viewTenantspill" href="property-tenant.html"><i
+                                                    <a class="btn btn-primary btn-pill me-2" id="viewTenantspill" href="property-tenant.html"><i
                                                             class="fi fi-rs-cabin me-2"></i>Add Tenants</a>
-                                                    <a class="btn btn-primary btn-pill" id="viewTaskspill" href="property-task.html"><i
+                                                    <a class="btn btn-primary btn-pill me-2" id="viewTaskspill" href="property-task.html"><i
                                                             class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
+                                                        </div>
+                                                    <div>
+                                                        <a class="btn btn-primary btn-pill" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit"><i
+                                                            class="fi fi-rs-edit me-2"></i>Edit Property</a>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -1304,6 +1310,142 @@
                                 </div>
                             </div>
                             <!-- ROW-2 CLOSED -->
+
+                            <!-- Edit Property popup start  -->
+
+                            <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="text-justify ps-2 border-model-line">
+                                                <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
+                                                        Property</strong></h2>
+                                                <span class="">Spade Rent allows you to add a range of commercial and residential properties,
+                                                    from condos and single-family homes to retail stores and parking lots.</span>
+                                            </div>
+                                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body d-none" id="myModal_edit_body_loader">
+                                            <div class="dimmer active">
+                                                <div class="lds-ring">
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body" id="myModal_edit_body">
+                                            <form class="row g-3" enctype="multipart/form-data" id="update-form">
+                                                <div class="col-md-6">
+                                                    <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control form" id="propertyName_update"
+                                                        placeholder="Enter Property Name">
+                                                    <span class="text-danger d-none">Property name required!</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}"
+                                                        placeholder="Enter Number of Units" maxlength="3"
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required readonly>
+                                                    <span class="text-danger d-none">Units are required!</span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
+                                                            *</span></label>
+                                                    <input type="text" class="form-control form" id="address_update"
+                                                        placeholder="Enter Address">
+                                                    <span class="text-danger d-none">Address is required!</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputCity" class="form-label fw-bold">City <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" id="city_update" class="form-control form city-select"
+                                                        pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                                        placeholder="Enter City">
+                        
+                        
+                                                    <span class="text-danger d-none">City is required!</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
+                                                            *</span></label>
+                                                    <select id="state_update" class="form-select form state-select select2-show-search">
+                                                        <option selected>Choose...</option>
+                        
+                                                    </select>
+                                                    <span class="text-danger d-none">State is required!</span>
+                                                </div>
+                                               
+                        
+                                                <div class="col-md-4">
+                                                    <label for="inputZip" class="form-label fw-bold">Zip <spnan class="text-danger">
+                                                            *</span></label>
+                                                    <input class="form-control form" type="text" id="zip_update" name="zip" pattern="[0-9]{5}"
+                                                        placeholder="A valid 5-digit zip code" maxlength="5" minlength="5"
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                    <span class="text-danger d-none">Zip is required!</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
+                                                            *</span></label>
+                                                    <select id="propertyType_update" class="form-select form state-select select2-show-search">
+                                                        <option selected>Choose...</option>
+                                                        <option>Single Family</option>
+                                                        <option>Multi-Family</option>
+                                                        <option>Multi-Commercial</option>
+                                                    </select>
+                                                    <span class="text-danger d-none">Property Type is required!</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT <spnan
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control form" id="propertyTotalSF_update" pattern="[0-9]{5}"
+                                                        placeholder="Enter Property Total SQFT" maxlength="5"
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                    <span class="text-danger d-none">Property Total SF is required!</span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="form-label fw-bold">Property Photo (Optional)</label>
+                                                    <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
+                                                        ondragover="dragOverHandler(event);">
+                                                        <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
+                                                            accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf" aria-label="hello"
+                                                            multiple>
+                                                        <span className="d-none"></span>
+                                                        <label class="custom-file-label" for="fileInput_update">
+                                                            <i class="fi fi-rs-cloud-upload"></i>
+                                                            <div class="custom-file-text">
+                                                                <span>Upload Photo here</span>
+                                                                <span>JPEG and PNG, file size no more than 5MB</span><small
+                                                                    class="text-danger d-none" id="count-text">Maximum number of files
+                                                                    reached.</small><small class="text-danger d-none" id="size-text">File size
+                                                                    exceeds 5MB limit.</small>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="selected-files">
+                                                        <div class="file-grid"></div>
+                                                    </div>
+                                                    <span class="text-danger d-none">Photos are required!</span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
+                                            <a class="btn btn-primary disabled" id="update">Save changes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Edit Property popup End  -->
+
+
                             <!-- ROW-1 OPEN -->
                             <div class="row">
                                 <div class="col-xl-6 col-sm-6">
@@ -1314,9 +1456,9 @@
                                         <div class="card-body text-center card-body-center">
                                             <div style="display: flex; gap: 1em; align-items: center;">
                                             <span class=""><img src="../assets/images/logo-images/Group 10294.png"
-                                                    alt="" height="60" width="75"></span>
+                                                    alt="" height="60" width="65"></span>
                                                     <div style="flex-direction: column; text-align: left;">
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_name"></b></h4>
+                                            <h4 class="h4 mb-0 font-weight-bold"><b id="property_name"></b></h4>
                                             <p class="card-text text-default mt-2" id="property_address">
                                             </p>
                                         </div>
@@ -1352,7 +1494,7 @@
                                             <span class=""><img src="../assets/images/logo-images/Units.png"
                                                     alt="" height="60" width="65"></span>
                                                     <div style="flex-direction: column; text-align: left;">
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_units"></b></h4>
+                                            <h4 class="h4 mb-0 font-weight-bold"><b id="property_units"></b></h4>
                                             <p class="card-text text-default mt-2" id="unit_type">
                                                 
                                             </p>
@@ -1373,7 +1515,7 @@
                                             <span class=""><img src="../assets/images/logo-images/sqft.png"
                                                     alt="" height="60" width="65"></span>
                                                     <div style="flex-direction: column; text-align: left;">
-                                            <h4 class="h4 mb-0 mt-3 font-weight-bold"><b id="property_size"></b></h4>
+                                            <h4 class="h4 mb-0 font-weight-bold"><b id="property_size"></b></h4>
                                         </div>
                                         </div>
                                         </div>
@@ -2027,6 +2169,18 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
+    <script defer>
+        $(document).ready(function () {
+            $('#myModal_edit').on('shown.bs.modal', function () {
+
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+            });
+        }); 
+    </script>
 
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -2218,18 +2372,24 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_units").text(data.units+" Units")
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
-                    data.images.forEach(image => {
-                        if(image.Image!==" " && image.Image!==null){
-                            
-                            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
-                                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
-                            }else{
-                                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                    if (data.images.length === 0) {
+    $("#image-placeholder").append(`<div style="text-align: center;">No Images Added</div>`);
+}else{
 
-                            }
+    data.images.forEach(image => {
+        if(image.Image!==" " && image.Image!==null){
+            
+            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
+                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
+            }else{
+                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+    
+            }
+    
+        }
+    });
+}
 
-                        }
-                    });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
                 error: function(xhr, status, error) {
