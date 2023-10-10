@@ -2320,6 +2320,7 @@
         }
     </script>
     <script>
+        var unitsPermission;
         $(document).ready(() => {
             $(document).on('keyup', '#typehead', function () {
     var searchValue = $(this).val().toLowerCase();
@@ -2341,7 +2342,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image }) {
+                success: function ({ userName, image,units }) {
                     // console.log()
                     if (image !== " " && image !== null) {
 
@@ -2356,7 +2357,7 @@
                     $("#user-name").text(toTitleCase(userName))
                     $("#header-user").text(toTitleCase(userName))
 
-
+                    unitsPermission = units;
 
                 },
                 error: function (xhr, status, error) {
@@ -2673,9 +2674,92 @@ if (task.dueDate) {
             }
         })
     </script>
-    
+        <script>
+            var helloGuys = true;
+           
+            $(document).ajaxStop(function () {
+                if(unitsPermission){
+                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!unitsPermission[action]) {
+                            switch (action) {
+                case "Add":
+                    // $("#add_property_btn").remove()
+                    break;
+                case "View":
+                    $("#nav_links li:eq('1')").addClass("d-none")
+                    break;
+                case "Delete":
+                // $("#table_body tr").each(function (item, index) {
+                //         $(this).find(".delete-option").addClass("d-none")
+                        
+                //     })
+                    break;
+                case "Edit":
+                // $("#table_body tr").each(function (item, index) {
+                //         $(this).find(".edit-option").addClass("d-none")
+                        
+                //     })
+                    break;
+                default:
+                    break;
+            }
+                        }
+            
+        }
+                    
+                    }
+        
+        
+        
+                })
+                const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        // Check if tenantPermissions is defined
+                        if(unitsPermission){
+                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                    for (const action of actions) {
+                        if (!unitsPermission[action]) {
+                            switch (action) {
+                case "Add":
+                    // $("#add_property_btn").remove()
+                    break;
+                case "View":
+                    console.log($("#nav_links li:eq('1')"))
+                    $("#nav_links li:eq('1')").addClass("d-none")
+                    break;
+                case "Delete":
+                // $("#table_body tr").each(function (item, index) {
+                //         $(this).find(".delete-option").addClass("d-none")
+                        
+                //     })
+                    break;
+                case "Edit":
+                // $("#table_body tr").each(function (item, index) {
+                //         $(this).find(".edit-option").addClass("d-none")
+                        
+                //     })
+                    break;
+                default:
+                    break;
+            }
+                        }
+            
+        }
+                    
+                    }
+        
+                    }
+                });
+            });
+        
+            // Start observing the document
+            observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+        
+        </script>
     
 
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

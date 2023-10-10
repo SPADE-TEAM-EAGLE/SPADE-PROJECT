@@ -2106,6 +2106,7 @@
     </script>
     
     <script>
+        var unitsPermission;
         $(document).ready(function() {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -2113,8 +2114,9 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image }) {
+                success: function ({ userName, image,units }) {
                     // console.log()
+                    unitsPermission = units;
                     if(image!==" " && image!==null){
                 
                 $("#user-img").attr("src", image)
@@ -2401,6 +2403,90 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
     // });
     </script> -->
-</body>
+    <script>
+        var helloGuys = true;
+       
+        $(document).ajaxStop(function () {
+            if(unitsPermission){
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!unitsPermission[action]) {
+                        switch (action) {
+            case "Add":
+                // $("#add_property_btn").remove()
+                break;
+            case "View":
+                $("#nav_links li:eq('1')").addClass("d-none")
+                break;
+            case "Delete":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".delete-option").addClass("d-none")
+                    
+            //     })
+                break;
+            case "Edit":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".edit-option").addClass("d-none")
+                    
+            //     })
+                break;
+            default:
+                break;
+        }
+                    }
+        
+    }
+                
+                }
+    
+    
+    
+            })
+            const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    // Check if tenantPermissions is defined
+                    if(unitsPermission){
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!unitsPermission[action]) {
+                        switch (action) {
+            case "Add":
+                // $("#add_property_btn").remove()
+                break;
+            case "View":
+                console.log($("#nav_links li:eq('1')"))
+                $("#nav_links li:eq('1')").addClass("d-none")
+                break;
+            case "Delete":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".delete-option").addClass("d-none")
+                    
+            //     })
+                break;
+            case "Edit":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".edit-option").addClass("d-none")
+                    
+            //     })
+                break;
+            default:
+                break;
+        }
+                    }
+        
+    }
+                
+                }
+    
+                }
+            });
+        });
+    
+        // Start observing the document
+        observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+    
+    </script>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

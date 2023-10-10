@@ -3754,37 +3754,73 @@ $("#succesModal").on('hide.bs.modal', function() {
                 }
                 updateButtonStatus();
             });
+            function setEditable() {
+                var accordions = $('.accordion-item');
+                console.log(accordions)
+                // Open all accordions
+                accordions.addClass('open');
 
+                $("#edit-btn").addClass("d-none")
+                // $(".border-model-line h2").text("Create ")
+                $(".title-text").empty()
+                $(".title-text").append(`<h2 class="modal-title">Create <strong class="color-primary" id="title-sub">New Tenant</strong></h2><span class="">Post your properties to thousands of potential investors,
+                            tenants and interested individuals.</span>`)
+
+                $(".accordion-item .icon").removeClass("fi-rs-check-circle");
+                $(".accordion-item .icon").addClass("chevron");
+                $(".accordion-item .icon").removeClass("cross");
+                $(".accordion-item .icon").removeClass("tick");
+                // Find all input, select, and other fields within the accordions and make them readonly
+                accordions.find('input,textarea').attr('readonly', false);
+                // Optional: Disable any buttons within the accordions
+                accordions.find('button,select,input[type="radio"]').prop('disabled', false);
+
+                accordions.find('.accordion-button').attr('data-bs-toggle', 'collapse').addClass("collapsed");
+                accordions.find('.accordion-collapse').addClass("show");
+                $("#next").removeClass("d-none")
+
+                $("#save").addClass("d-none")
+                $("#submit").addClass("d-none")
+            }
+            
             function resetAccordions() {
                 // Reset all accordions
-                $('.accordion-item').each(function() {
+                setEditable()
+                $('.accordion-item').each(function () {
                     var accordionId = $(this).attr('id');
-                    var accordionFields = $('#' + accordionId + ' input, #' + accordionId + ' select');
-                    // var imageField = $('#' + accordionId + ' input[type="file"]');
+                    var accordionFields = $('#' + accordionId + ' input:not([type="radio"]), #' + accordionId + ' select');
                     var accordionButton = $('#' + accordionId + ' button.accordion-button');
+
 
                     // Empty input fields
                     accordionFields.val('');
 
-                    // Remove border-danger class
+                    accordionFields.filter('select').each(function () {
+                        $(this).find('option:first').prop('selected', true);
+                    });
                     accordionFields.removeClass('border-danger');
+                    accordionFields.removeClass('border-green');
 
-                    // Hide error spans
+
                     accordionFields.siblings('span.text-danger').addClass('d-none');
 
-                    // Reset image input
-                    // if (imageField.length) {
-                    //     imageField.val('');
-                    //     imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo here');
-                    //     imageField.siblings('.selected-files').find('.file-grid').empty();
-                    // }
-                    // // $('#accordion-item1').find('.file-grid').empty();
-                    // Reset accordion button icons
+
                     accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
                     accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
-                    $('#next').addClass("disabled");
+                    $('#next').attr("id", "next-add-tenant");
                     $('#draft').attr("disabled", "disabled");
                 });
+                $('.row-multiple').each(function () {
+                    var date = $(this).find('.input-date')
+                    var amount = $(this).find('.input-amount')
+                    date.prop('required', false)
+                    amount.prop('required', false)
+                })
+                $('#baseRent').prop('required', false);
+                $('#tripleNet').prop('required', false);
+                $('#leaseStart').prop('required', false);
+                $('#leaseEnd').prop('required', false);
+                
             }
          
             $('input[type="checkbox"]').change(function() {
@@ -3910,6 +3946,6 @@ $("#succesModal").on('hide.bs.modal', function() {
       }
     });
   </script>
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

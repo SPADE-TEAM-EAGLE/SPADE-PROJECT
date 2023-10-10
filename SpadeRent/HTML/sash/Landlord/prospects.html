@@ -797,25 +797,25 @@
         /* Gantt chart start  */
 
         :root {
-  --white: #fff;
-  --divider: lightgrey;
-  --body: #f5f7f8;
-}
+            --white: #fff;
+            --divider: lightgrey;
+            --body: #f5f7f8;
+        }
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-ul {
-  list-style: none;
-}
+        ul {
+            list-style: none;
+        }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         .chart-wrapper {
             /* max-width: 1150px; */
@@ -826,72 +826,72 @@ a {
             background-color: #fff;
             border-radius: 8px;
             overflow-x: scroll;
+        }
+
+
+        /* CHART-VALUES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-values {
+            position: relative;
+            display: flex;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .chart-wrapper .chart-values li {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .chart-wrapper .chart-values li:not(:last-child) {
+            position: relative;
+        }
+
+        .chart-wrapper .chart-values li:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            /* height: 100%; */
+            height: 480px;
+            border-right: 1px solid var(--divider);
+        }
+
+
+        /* CHART-BARS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-bars li {
+            position: relative;
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 0;
+            opacity: 0;
+            transition: all 0.65s linear 0.2s;
+        }
+
+        @media screen and (max-width: 600px) {
+            .chart-wrapper .chart-bars li {
+                padding: 10px;
             }
+        }
 
 
-/* CHART-VALUES
+        /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.chart-wrapper .chart-values {
-  position: relative;
-  display: flex;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
+        .page-footer {
+            font-size: 0.85rem;
+            padding: 10px;
+            text-align: right;
+            color: var(--black);
+        }
 
-.chart-wrapper .chart-values li {
-  flex: 1;
-  min-width: 80px;
-  text-align: center;
-}
-
-.chart-wrapper .chart-values li:not(:last-child) {
-  position: relative;
-}
-
-.chart-wrapper .chart-values li:not(:last-child)::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  /* height: 100%; */
-  height: 480px;
-  border-right: 1px solid var(--divider);
-}
-
-
-/* CHART-BARS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.chart-wrapper .chart-bars li {
-  position: relative;
-  color: var(--white);
-  margin-bottom: 15px;
-  font-size: 16px;
-  border-radius: 20px;
-  padding: 10px 20px;
-  width: 0;
-  opacity: 0;
-  transition: all 0.65s linear 0.2s;
-}
-
-@media screen and (max-width: 600px) {
-  .chart-wrapper .chart-bars li {
-    padding: 10px;
-  }
-}
-
-
-/* FOOTER
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.page-footer {
-  font-size: 0.85rem;
-  padding: 10px;
-  text-align: right;
-  color: var(--black);
-}
-
-.page-footer span {
-  color: #e31b23;
-}
+        .page-footer span {
+            color: #e31b23;
+        }
 
         /* Gantt Chart End  */
     </style>
@@ -991,10 +991,9 @@ a {
                                 id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true"
                                 aria-controls="collapseOne-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
-                                <h3 class="m-0"><strong>Prospect Details</strong> 
+                                <h3 class="m-0"><strong>Prospect Details</strong>
                                     <!-- <i class="fi fi-rs-pencil"></i> -->
-                                    <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
@@ -1194,9 +1193,8 @@ a {
                                 aria-controls="collapseOne-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Prospect Details</strong>
-                                     <!-- <i class="fi fi-rs-pencil"></i> -->
-                                     <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <!-- <i class="fi fi-rs-pencil"></i> -->
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
@@ -1282,8 +1280,7 @@ a {
                                             <span class="text-danger">*</span></label>
                                         <!-- <input type="text" id="sourceCampaign_update" class="form-control form"
                                             placeholder="Enter Source Campaign" required> -->
-                                        <select id="sourceCampaign_update"
-                                            class="form-select form mb-2">
+                                        <select id="sourceCampaign_update" class="form-select form mb-2">
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">Source Campaign is required!</span>
@@ -1350,8 +1347,7 @@ a {
                 <div class="modal-footer">
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                         id='close'>Close</button>
-                        <button class="btn btn-primary text-light button" disabled
-                        id='update'>Save</button>
+                    <button class="btn btn-primary text-light button" disabled id='update'>Save</button>
                 </div>
             </div>
         </div>
@@ -2536,10 +2532,14 @@ a {
                                                                         <div class="card-body p-0">
                                                                             <div
                                                                                 class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
-                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                                                <div style="width: 220px"
+                                                                                    class="d-flex justify-content-center align-items-center">
+                                                                                    <span class="fw-bold me-2"
+                                                                                        style="min-width: 107px;">Number
+                                                                                        of rows</span>
                                                                                     <select id="lengthSelectBox"
-                                                                                        class="form-control select2 form-select" style="width: 80px;">
+                                                                                        class="form-control select2 form-select"
+                                                                                        style="width: 80px;">
 
                                                                                         <!-- <option value="1">1</option> -->
                                                                                         <option value="10">10</option>
@@ -3078,11 +3078,15 @@ a {
                                                                 </div>
                                                                 <div class="card-body p-0">
                                                                     <div
-                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
-                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
-                                                                                    <select id="lengthSelectBox1"
-                                                                                        class="form-control select2 form-select" style="width: 80px;">
+                                                                        class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                        <div style="width: 220px"
+                                                                            class="d-flex justify-content-center align-items-center">
+                                                                            <span class="fw-bold me-2"
+                                                                                style="min-width: 107px;">Number of
+                                                                                rows</span>
+                                                                            <select id="lengthSelectBox1"
+                                                                                class="form-control select2 form-select"
+                                                                                style="width: 80px;">
 
                                                                                 <!-- <option value="1">1</option> -->
                                                                                 <option value="10">10</option>
@@ -3414,11 +3418,15 @@ a {
                                                                 </div>
                                                                 <div class="card-body p-0">
                                                                     <div
-                                                                                class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
-                                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
-                                                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
-                                                                                    <select id="lengthSelectBox2"
-                                                                                        class="form-control select2 form-select" style="width: 80px;">
+                                                                        class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                        <div style="width: 220px"
+                                                                            class="d-flex justify-content-center align-items-center">
+                                                                            <span class="fw-bold me-2"
+                                                                                style="min-width: 107px;">Number of
+                                                                                rows</span>
+                                                                            <select id="lengthSelectBox2"
+                                                                                class="form-control select2 form-select"
+                                                                                style="width: 80px;">
 
                                                                                 <!-- <option value="1">1</option> -->
                                                                                 <option value="10">10</option>
@@ -3507,28 +3515,28 @@ a {
                                                         <!-- Qualified & Disqualified end  -->
 
                                                         <!-- Average time from New Lead to Close start  -->
-                                                        <div class="col-lg-12 col-md-12 mb-5" >
+                                                        <div class="col-lg-12 col-md-12 mb-5">
 
                                                             <div class="chart-wrapper h-100">
                                                                 <ul class="chart-values">
-                                                                  <li>Jan</li>
-                                                                  <li>Feb</li>
-                                                                  <li>March</li>
-                                                                  <li>April</li>
-                                                                  <li>May</li>
-                                                                  <li>June</li>
-                                                                  <li>July</li>
-                                                                  <li>Aug</li>
-                                                                  <li>Sep</li>
-                                                                  <li>Oct</li>
+                                                                    <li>Jan</li>
+                                                                    <li>Feb</li>
+                                                                    <li>March</li>
+                                                                    <li>April</li>
+                                                                    <li>May</li>
+                                                                    <li>June</li>
+                                                                    <li>July</li>
+                                                                    <li>Aug</li>
+                                                                    <li>Sep</li>
+                                                                    <li>Oct</li>
                                                                     <li>Nov</li>
                                                                     <li>Dec</li>
                                                                 </ul>
                                                                 <ul class="chart-bars" id="prospect-timeline">
 
                                                                 </ul>
-                                                              </div>
-                                                              
+                                                            </div>
+
                                                         </div>
                                                         <!-- Average time from New Lead to Close end  -->
 
@@ -4416,7 +4424,7 @@ a {
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
-<script src="../assets/js/email-phone.js"></script>
+    <script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
@@ -4436,31 +4444,31 @@ a {
         });
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
-        var prospectID; var prospectusStatus;
+        var prospectID; var prospectusStatus; var prospectPermission;var leadsInsightsPermission;
         $(document).ready(function () {
 
-function validateField($field) {
-    var $errorMessage = $field.next('.text-danger');
-     if ($field.val() === '' || $field.val() === 'Choose...') {
-        $field.addClass('border-danger').removeClass('border-green');
-        $errorMessage.removeClass('d-none');
-        $('#update').prop('disabled', true);
-        console.log("empty");
-    } else {
-        $field.removeClass('border-danger').addClass('border-green');
-        $errorMessage.addClass('d-none');
-        $('#update').prop('disabled', false);
-        console.log("filles");
-    }
-    
-}
+            function validateField($field) {
+                var $errorMessage = $field.next('.text-danger');
+                if ($field.val() === '' || $field.val() === 'Choose...') {
+                    $field.addClass('border-danger').removeClass('border-green');
+                    $errorMessage.removeClass('d-none');
+                    $('#update').prop('disabled', true);
+                    console.log("empty");
+                } else {
+                    $field.removeClass('border-danger').addClass('border-green');
+                    $errorMessage.addClass('d-none');
+                    $('#update').prop('disabled', false);
+                    console.log("filles");
+                }
 
-$('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :input[required]').on('input change', function () {
-    validateField($(this));
-});
+            }
+
+            $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :input[required]').on('input change', function () {
+                validateField($(this));
+            });
 
 
 
@@ -4470,7 +4478,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, email, userId, image }) {
+                success: function ({ userName, email, userId, image, leads,leadsInsights }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -4481,8 +4489,8 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                     }
-
-
+                    prospectPermission = leads
+                    leadsInsightsPermission=leadsInsights
                     $("#user-name").text(toTitleCase(userName))
                     $("#header-user").text(toTitleCase(userName))
                     userEmail = email
@@ -4698,35 +4706,35 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                     prospectusStatus,
                     prospectusid: prospectID
                 }
-                if($("#sourceCampaign_update").val() !== "Choose..." && $("#addProspectSource1").val() == ""){
+                if ($("#sourceCampaign_update").val() !== "Choose..." && $("#addProspectSource1").val() == "") {
                     data.sourceCampaign = $("#sourceCampaign_update").val()
                     $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
-                    type: "PUT",
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response)
-                        $("#editModal").modal("hide");
-                        $("#myModal_success").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_success').modal('hide');
-                            getData()
-                        }, 2000);
-                    }, error: function (xhr, status, error) {
-                        $("#editModal").modal("hide");
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                            getData()
-                        }, 2000);
-                    }, data: JSON.stringify(data)
-                })
-            
-                }else{
+                        url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                        type: "PUT",
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response)
+                            $("#editModal").modal("hide");
+                            $("#myModal_success").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_success').modal('hide');
+                                getData()
+                            }, 2000);
+                        }, error: function (xhr, status, error) {
+                            $("#editModal").modal("hide");
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                                getData()
+                            }, 2000);
+                        }, data: JSON.stringify(data)
+                    })
+
+                } else {
                     sourceCampaign = JSON.parse(`["${$("#addProspectSource1").val()}"]`);
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
@@ -4746,31 +4754,31 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                                 var sourceCampaign = response.insertedSources[0].insertId;
                                 data.sourceCampaign = sourceCampaign
                                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
-                    type: "PUT",
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log(response)
-                        $("#editModal").modal("hide");
-                        $("#myModal_success").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_success').modal('hide');
-                            getData()
-                        }, 2000);
-                    }, error: function (xhr, status, error) {
-                        $("#editModal").modal("hide");
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                            getData()
-                        }, 2000);
-                    }, data: JSON.stringify(data)
-                })
-            
+                                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                                    type: "PUT",
+                                    data: JSON.stringify(data),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        console.log(response)
+                                        $("#editModal").modal("hide");
+                                        $("#myModal_success").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_success').modal('hide');
+                                            getData()
+                                        }, 2000);
+                                    }, error: function (xhr, status, error) {
+                                        $("#editModal").modal("hide");
+                                        $("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                            getData()
+                                        }, 2000);
+                                    }, data: JSON.stringify(data)
+                                })
+
                             }
 
                         },
@@ -4780,7 +4788,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                     });
 
                 }
-            
+
             })
             $(document).on('keyup', '#typehead', function () {
                 var searchValue = $(this).val().toLowerCase();
@@ -4835,7 +4843,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                     return "$ " + amount;
                 }
             }
-            function populateCards(elem, prospectus, property,source) {
+            function populateCards(elem, prospectus, property, source) {
                 var password = 'your-secret-password';
                 var encryptedProspectId = sjcl.encrypt(password, prospectus.id.toString());
 
@@ -4865,7 +4873,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                     '<span class=""><i class="fe fe-more-vertical"></i></span>' +
                     '</a>' +
                     '<div class="dropdown-menu dropdown-menu-end">' +
-                    `<a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a>` +
+                    `<a class="dropdown-item text-dark edit-option" id="${prospectus?.id}" href="#">Edit</a>` +
                     `<a class="dropdown-item text-danger delete-option" id="${prospectus?.id}" href="javascript:void(0)">Delete</a>` +
                     '</div>' +
                     '</div>' +
@@ -4886,27 +4894,27 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                 $("#table-body-qualified").empty()
                 // Assuming response.data is an array of objects containing prospectus and property data
                 $.ajax({
-                    url:"https://backend.app.spaderent.com/api/spade/getProspectusSources",
+                    url: "https://backend.app.spaderent.com/api/spade/getProspectusSources",
                     type: 'GET',
                     contentType: 'application/json',
-                    headers:{
-                        Authorization:"Bearer " + localStorage.getItem("authtoken")
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        if(response.message==" prospectus data not found"){
+                        if (response.message == " prospectus data not found") {
 
-                        }else{
-        //                     {
-        //     "id": 18,
-        //     "landlordId": "125",
-        //     "sourcesCampaign": "abc"
-        // },
-        $("#sourceCampaign").empty()
-        $("#sourceCampaign_update").empty()
-        $("#sourceCampaign").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
-        $("#sourceCampaign_update").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
+                        } else {
+                            //                     {
+                            //     "id": 18,
+                            //     "landlordId": "125",
+                            //     "sourcesCampaign": "abc"
+                            // },
+                            $("#sourceCampaign").empty()
+                            $("#sourceCampaign_update").empty()
+                            $("#sourceCampaign").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
+                            $("#sourceCampaign_update").append(`<option value="Choose...">Choose...</option>`).prop("selected", true);
 
-                            response.data.forEach(function(item){
+                            response.data.forEach(function (item) {
                                 $("#sourceCampaign").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
                                 $("#sourceCampaign_update").append(`<option value="${item.id}">${item.sourcesCampaign}</option>`)
                             })
@@ -4924,7 +4932,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        
+
                         propsectData = response.data;
 
                         let totalRentDefault = 0;
@@ -4934,8 +4942,8 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
                             var property = item?.property;
-                            var source=item?.Source;
-                                
+                            var source = item?.Source;
+
                             row.append($('<td>').html('<label class="custom-control custom-checkbox-md"><input type="checkbox" class="custom-control-input" name="example-checkbox' + index + '" value="option' + index + '" checked=""><span class="custom-control-label"></span></label>'));
                             row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
@@ -4978,7 +4986,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        
+
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
@@ -4992,7 +5000,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                             var encodedProspectId = encodeURIComponent(encryptedProspectId);
                             row.append($('<td>').html(dropdownToggle).append(dropdownMenu));
                             // Assuming this is where you create the "Edit" dropdown option in your table
-                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}">Edit</a></li><li><a class="dropdown-item text-dark delete-option" href="javascript:void(0)" id="${prospectus?.id}">Delete</a></li></ul>`));
+                            row.append($('<td>').html(`<i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i><ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-dark view-btn" href="./view-prospects.html?prospect=${encodedProspectId}">View</a></li><li><a class="dropdown-item text-dark edit-option" id="${prospectus?.id}" href="#">Edit</a></li><li><a class="dropdown-item text-dark delete-option" href="javascript:void(0)" id="${prospectus?.id}">Delete</a></li></ul>`));
 
                             var tableSelector = '';
                             var rentAmount = parseFloat(prospectus.rentAmount);
@@ -5009,14 +5017,14 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
                             let elem;
 
                             if (prospectus?.prospectusStatus?.toLowerCase() == "engaged") {
-                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property,source);
+                                populateCards($('#engaged-propsect-kanban .card .card-body'), prospectus, property, source);
 
                             } else if (prospectus?.prospectusStatus?.toLowerCase() == "nurturing") {
-                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property,source);
+                                populateCards($('#nurturing-propsect-kanban .card .card-body'), prospectus, property, source);
 
                             }
                             else if (prospectus.prospectusStatus.toLowerCase() !== "qualified" && prospectus.prospectusStatus.toLowerCase() !== "disqualified") {
-                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property,source);
+                                populateCards($('#new-propsect-kanban .card .card-body'), prospectus, property, source);
                             }
                             countValues()
                         });
@@ -5064,54 +5072,54 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
-                    url:`https://backend.app.spaderent.com/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
-                    headers:{
-                        authorization:"Bearer " + localStorage.getItem("authtoken")
+                    url: `https://backend.app.spaderent.com/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                       
+
                         $("#prospect-timeline").empty();
-                        if(response?.data?.length > 0){
-                            response?.data?.forEach(function(item){
+                        if (response?.data?.length > 0) {
+                            response?.data?.forEach(function (item) {
                                 var prospectusColor;
-                                if(item?.prospect_detail?.prospectusStatus=="qualified"){
-                                    prospectusColor="green"
-                                }else if(item?.prospect_detail?.prospectusStatus=="disqualified"){
-                                    prospectusColor="red"}
-                                else{
-                                    prospectusColor="blue"
+                                if (item?.prospect_detail?.prospectusStatus == "qualified") {
+                                    prospectusColor = "green"
+                                } else if (item?.prospect_detail?.prospectusStatus == "disqualified") {
+                                    prospectusColor = "red"
+                                }
+                                else {
+                                    prospectusColor = "blue"
                                 }
                                 $("#prospect-timeline").append(`
-  <li data-duration="${
-    item?.startMonth?.split("-")[0] +"-"+  
-    item?.endMonth?.split("-")[0]
-  }" data-color="#b03532" style="background-color: ${prospectusColor}; opacity: 1;">
+  <li data-duration="${item?.startMonth?.split("-")[0] + "-" +
+                                    item?.endMonth?.split("-")[0]
+                                    }" data-color="#b03532" style="background-color: ${prospectusColor}; opacity: 1;">
     ${item?.prospect_detail?.prospectDetail}
   </li>
 `);
                             })
                         }
-                        else{
+                        else {
                             // $("#prospect-timeline").append(`<li data-duration="0" data-color="#b03532">Task</li>`)
                         }
                         // $("prospect-timeline").append(`<li data-duration="${}" data-color="#b03532">Task</li>`)
-//                         createdAfter15th
-// : 
-// "1/2"
-// endAfter15th
-// : 
-// "1/2"
-// endMonth
-// : 
-// "Sep-2023"
-// prospect_detail
-// : 
-// {id: 71, landlordId: "125", firstName: "Azeem", middleName: null, lastName: "Fahad Ahadfvff",…}
-// startMonth
-// : 
-// "Sep-2023"
+                        //                         createdAfter15th
+                        // : 
+                        // "1/2"
+                        // endAfter15th
+                        // : 
+                        // "1/2"
+                        // endMonth
+                        // : 
+                        // "Sep-2023"
+                        // prospect_detail
+                        // : 
+                        // {id: 71, landlordId: "125", firstName: "Azeem", middleName: null, lastName: "Fahad Ahadfvff",…}
+                        // startMonth
+                        // : 
+                        // "Sep-2023"
                     }, error: function (xhr, status, error) {
 
                     }
@@ -5152,7 +5160,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
 
                             createSourceCampaignChart(labels, data)
                         }
-                        else{
+                        else {
                             createSourceCampaignChart([], [])
                         }
 
@@ -5275,7 +5283,7 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
 
                             updateSourceCampaignChart(labels, data)
                         }
-                        
+
                         console.log(response)
 
                     }, error: function (xhr, status, error) {
@@ -5291,55 +5299,55 @@ $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :in
 
             $("#source-campaign-end-date").on("change", function () {
 
-$.ajax({
-    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
-    headers: {
-        authorization: "Bearer " + localStorage.getItem("authtoken")
-    },
-    contentType: "application/json",
-    type: "GET",
-    success: function (response) {
-        console.log(response)
-        if (response?.data) {
-            const labels = [];
-            const data = [];
-            let countOthers = 0; // Initialize countOthers variable
+                $.ajax({
+                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    type: "GET",
+                    success: function (response) {
+                        console.log(response)
+                        if (response?.data) {
+                            const labels = [];
+                            const data = [];
+                            let countOthers = 0; // Initialize countOthers variable
 
-            response?.data?.forEach(entry => {
-                const source = entry.sourceCampaign == "NotFound" ? "Other" : entry.sourceCampaign;
-                const count = entry.campaignCount;
+                            response?.data?.forEach(entry => {
+                                const source = entry.sourceCampaign == "NotFound" ? "Other" : entry.sourceCampaign;
+                                const count = entry.campaignCount;
 
-                if (source == "Other") {
-                    countOthers += count; // Accumulate count for "Other"
-                } else {
-                    labels.push(source);
-                    data.push(count);
-                }
-            });
+                                if (source == "Other") {
+                                    countOthers += count; // Accumulate count for "Other"
+                                } else {
+                                    labels.push(source);
+                                    data.push(count);
+                                }
+                            });
 
-            // Add "Other" entry with calculated count
-            if (countOthers > 0) {
-                labels.push("Other");
-                data.push(countOthers);
-            }
+                            // Add "Other" entry with calculated count
+                            if (countOthers > 0) {
+                                labels.push("Other");
+                                data.push(countOthers);
+                            }
 
-            updateSourceCampaignChart(labels, data)
-        }
-        else{
-            console.log("No data")
-            updateSourceCampaignChart([], [])
-        }
-        
-
-    }, error: function (xhr, status, error) {
-
-    }
+                            updateSourceCampaignChart(labels, data)
+                        }
+                        else {
+                            console.log("No data")
+                            updateSourceCampaignChart([], [])
+                        }
 
 
+                    }, error: function (xhr, status, error) {
+
+                    }
 
 
-})
-})
+
+
+                })
+            })
 
             $("#prospect-status-start-date").on("change", function () {
 
@@ -5683,7 +5691,7 @@ $.ajax({
                 var status = $("#status").val();
                 var sourceCampaign;
                 $("#addModal").modal("hide")
-                $('#preloader').css('display','flex')
+                $('#preloader').css('display', 'flex')
                 $('#addProspectSourceCol').css('display', 'none')
                 console.log($("#addProspectSource").val())
                 if ($("#sourceCampaign").val() !== "Choose..." && $("#addProspectSource").val() == "") {
@@ -5711,9 +5719,9 @@ $.ajax({
                         },
                         success: function (response) {
                             if (response.message == " prospectus created successful") {
-                                $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
+                                $('#preloader').fadeOut('slow', function () {
+                                    $(this).hide();
+                                });
                                 $("#myModal_success").find('p').text('Successfully Added')
                                 $("#myModal_success").modal("show");
                                 setTimeout(function () {
@@ -5782,10 +5790,10 @@ $.ajax({
                                     },
                                     success: function (response) {
                                         if (response.message == " prospectus created successful") {
-                                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
-$("#myModal_success").find('p').text('Successfully Added')
+                                            $('#preloader').fadeOut('slow', function () {
+                                                $(this).hide();
+                                            });
+                                            $("#myModal_success").find('p').text('Successfully Added')
                                             $("#myModal_success").modal("show");
                                             setTimeout(function () {
                                                 $('#myModal_success').modal('hide');
@@ -6497,137 +6505,207 @@ $("#myModal_success").find('p').text('Successfully Added')
     </script>
 
     <!-- Gantt chart Start  -->
-        <script>
-            function createChart(e) {
-  const days = document.querySelectorAll(".chart-values li");
-  const tasks = document.querySelectorAll(".chart-bars li");
-  const daysArray = [...days];
+    <script>
+        function createChart(e) {
+            const days = document.querySelectorAll(".chart-values li");
+            const tasks = document.querySelectorAll(".chart-bars li");
+            const daysArray = [...days];
 
-  tasks.forEach(el => {
-    const duration = el.dataset.duration.split("-");
-    const startDay = duration[0];
-    const endDay = duration[1];
-    let left = 0,
-      width = 0;
+            tasks.forEach(el => {
+                const duration = el.dataset.duration.split("-");
+                const startDay = duration[0];
+                const endDay = duration[1];
+                let left = 0,
+                    width = 0;
 
-    if (startDay.endsWith("½")) {
-      const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
-      left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
-    } else {
-      const filteredArray = daysArray.filter(day => day.textContent == startDay);
-      left = filteredArray[0].offsetLeft;
-    }
+                if (startDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
+                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay);
+                    left = filteredArray[0].offsetLeft;
+                }
 
-    if (endDay.endsWith("½")) {
-      const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
-      width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
-    } else {
-      const filteredArray = daysArray.filter(day => day.textContent == endDay);
-      width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
-    }
+                if (endDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay);
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                }
 
-    // apply css
-    el.style.left = `${left}px`;
-    el.style.width = `${width}px`;
-    if (e.type == "load") {
-      el.style.backgroundColor = el.dataset.color;
-      el.style.opacity = 1;
-    }
-  });
-}
-
-window.addEventListener("load", createChart);
-window.addEventListener("resize", createChart);
-        </script>
-        <script>
-            
-            $(document).ajaxStop(function () {
-                if(prospect){
-                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
-                    for (const action of actions) {
-                        if (!propertyShow[action]) {
-                            switch (action) {
-                case "Add":
-                    $("#add_property_btn").remove()
-                    break;
-                case "View":
-                    $("#table_body tr").each(function (item, index) {
-                        $(this).find(".property-anchor").attr("href", "javascript:void(0)")
-                        $(this).find(".view-property").addClass("d-none")
-                    })
-                    break;
-                case "Delete":
-                $("#table_body tr").each(function (item, index) {
-                        $(this).find(".delete-option").addClass("d-none")
-                        
-                    })
-                    break;
-                case "Edit":
-                $("#table_body tr").each(function (item, index) {
-                        $(this).find(".edit-option").addClass("d-none")
-                        
-                    })
-                    break;
-                default:
-                    break;
-            }
-                        }
-            
-        }
-                    
-                    }
-        
-        
-        
-                })
-                const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'childList') {
-                        // Check if tenantPermissions is defined
-                        if(propertyShow){
-                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
-                    for (const action of actions) {
-                        if (!propertyShow[action]) {
-                            switch (action) {
-                case "Add":
-                    $("#add_property_btn").remove()
-                    break;
-                case "View":
-                    $("#table_body tr").each(function (item, index) {
-                        $(this).find(".property-anchor").attr("href", "javascript:void(0)")
-                        $(this).find(".view-property").addClass("d-none")
-                    })
-                    break;
-                case "Delete":
-                $("#table_body tr").each(function (item, index) {
-                        $(this).find(".delete-option").addClass("d-none")
-                        
-                    })
-                    break;
-                case "Edit":
-                $("#table_body tr").each(function (item, index) {
-                        $(this).find(".edit-option").addClass("d-none")
-                        
-                    })
-                    break;
-                default:
-                    break;
-            }
-                        }
-            
-        }
-                    
-                    }
-        
-                    }
-                });
+                // apply css
+                el.style.left = `${left}px`;
+                el.style.width = `${width}px`;
+                if (e.type == "load") {
+                    el.style.backgroundColor = el.dataset.color;
+                    el.style.opacity = 1;
+                }
             });
-        
-            // Start observing the document
-            observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
-        
-        </script>
+        }
+
+        window.addEventListener("load", createChart);
+        window.addEventListener("resize", createChart);
+    </script>
+
+
+    <script>
+
+        $(document).ajaxStop(function () {
+            if (prospectPermission) {
+                
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!prospectPermission[action]) {
+                        switch (action) {
+                            case "Add":
+                                $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                    $(this).find(".view-btn").attr("href", "javascript:void(0)")
+                                    $(this).find(".view-btn").addClass("d-none")
+                                })
+                                break;
+                            case "Delete":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                    $(this).find(".delete-option").addClass("d-none")
+
+                                })
+                                break;
+                            case "Edit":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                    $(this).find(".edit-option").addClass("d-none")
+
+                                })
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+            }
+            
+            if(leadsInsightsPermission){
+                console.log("leadsInsightsPermission")
+            console.log(leadsInsightsPermission)
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!leadsInsightsPermission[action]) {
+                        console.log("dfhngjfhjighjkdfgfm,gjkfdhgjkdfh")
+                        switch (action) {
+                            case "Add":
+                                // $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                $("#tab333").remove()
+                                break;
+                            case "Delete":
+                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                //     $(this).find(".delete-option").addClass("d-none")
+
+                                // })
+                                break;
+                            case "Edit":
+                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                //     $(this).find(".edit-option").addClass("d-none")
+
+                                // })
+                                break;
+                            
+                                default:
+                                break;
+                        }
+                    }
+
+                }
+
+            }
+
+
+        })
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    // Check if tenantPermissions is defined
+                    if (prospectPermission) {
+                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                        for (const action of actions) {
+                            if (!prospectPermission[action]) {
+                                switch (action) {
+                                    case "Add":
+                                        $("#add_property_btn").remove()
+                                        break;
+                                    case "View":
+                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
+                                            $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                                            $(this).find(".view-property").addClass("d-none")
+                                        })
+                                        break;
+                                    case "Delete":
+                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
+                                            $(this).find(".delete-option").addClass("d-none")
+
+                                        })
+                                        break;
+                                    case "Edit":
+                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
+                                            $(this).find(".edit-option").addClass("d-none")
+
+                                        })
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                if(leadsInsightsPermission){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!leadsInsightsPermission[action]) {
+                        switch (action) {
+                            case "Add":
+                                // $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                $("#tab333").remove()
+                                break;
+                            case "Delete":
+                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                //     $(this).find(".delete-option").addClass("d-none")
+
+                                // })
+                                break;
+                            case "Edit":
+                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                //     $(this).find(".edit-option").addClass("d-none")
+
+                                // })
+                                break;
+                            
+                                default:
+                                break;
+                        }
+                    }
+
+                }
+
+            }
+
+            });
+        });
+
+        // Start observing the document
+        observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+
+    </script>
     <!-- Gantt Cart End  -->
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

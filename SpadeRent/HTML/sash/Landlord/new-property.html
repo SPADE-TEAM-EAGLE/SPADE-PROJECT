@@ -2317,7 +2317,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,userName }) {
+                success: function ({ image,userName,properties }) {
                     function toTitleCase(str) {
             return str.replace(/\w\S*/g, function(txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2330,6 +2330,9 @@
             }
 $("#header-user").text(toTitleCase(userName))
 $("#user-name").text(userName)
+if(properties.Restrict){
+    window.location='index.html'
+}
                                  },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
@@ -2397,6 +2400,6 @@ $("#user-name").text(userName)
         });
     }
 </script>
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>
