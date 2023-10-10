@@ -16,7 +16,7 @@ $.ajax({
         //     }
             
         // }
-        if(response.properties.Restrict){
+        if(response?.properties?.Restrict){
             console.log("here",window.location.href.indexOf('properties-all.html'))
             if (window.location.href.indexOf('properties-all.html') !== -1) {
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
@@ -29,7 +29,7 @@ $.ajax({
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
             }
         }
-        if(response.tenants.Restrict){
+        if(response?.tenants?.Restrict){
             if (window.location.href.indexOf('add-tenant.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
                 history.back();
@@ -44,7 +44,7 @@ $.ajax({
             }
         }
         
-        if(response.tasks.Restrict){
+        if(response?.tasks?.Restrict){
             if (window.location.href.indexOf('create-tasks.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
                 history.back();}   
@@ -57,7 +57,7 @@ $.ajax({
 
             }
         }
-        if(response.invoices.Restrict){
+        if(response?.invoices?.Restrict){
             if (window.location.href.indexOf('create-invoicing.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='create-invoicing.html']").parent().hide();
                 history.back();}   
@@ -70,7 +70,7 @@ $.ajax({
 
             }
         }
-        if(response.leads.Restrict){
+        if(response?.leads?.Restrict){
             if (window.location.href.indexOf('prospects.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='prospects.html']").parent().hide();
                 history.back();
@@ -81,7 +81,7 @@ $.ajax({
             }
             
         }
-        if(response.settingProfiles.Restrict && response.settingCPasswords.Restrict && response.settingNotifications.Restrict && response.settingCTheme.Restrict && response.settingSubscription.Restrict && response.settingMUsers.Restrict && response.settingEmailT.Restrict && response.SettingInvoiceSetting.Restrict){
+        if(response?.settingProfiles?.Restrict && response?.settingCPasswords?.Restrict && response?.settingNotifications?.Restrict && response?.settingCTheme?.Restrict && response?.settingSubscription?.Restrict && response?.settingMUsers?.Restrict && response?.settingEmailT?.Restrict && response?.SettingInvoiceSetting?.Restrict){
             if (window.location.href.indexOf('settings.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='settings.html']").parent().hide();
                 history.back();

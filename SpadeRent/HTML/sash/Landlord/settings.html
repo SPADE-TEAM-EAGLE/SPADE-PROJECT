@@ -3575,7 +3575,7 @@
                                                             Preferences</a></li>
                                                     <li><a href="#tab8" data-bs-toggle="tab">Appearance</a></li>
                                                     <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
-                                                    <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
+                                                    <li><a href="#tab10" data-bs-toggle="tab" id="permission-tab">Users & Permissions</a>
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
@@ -14817,7 +14817,10 @@
                         $("#state").val(toTitleCase(response.state || ""))
                         $("#zipcode").val(response.zipCode)
                         $("#emailVerify").val(response.email)
-
+                        if(response?.role){
+                            $("#permission-tab").addClass("d-none")
+                            $("#tab10").addClass("d-none")
+                        }
                         //                         "tenantEmail": "0",
                         // "auth": 0,
                         // "invoiceEmail": "0",
