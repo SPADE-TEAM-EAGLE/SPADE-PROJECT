@@ -881,7 +881,7 @@
     <!--/Default Offcanvas-->
     <!-- Modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
@@ -900,7 +900,7 @@
                             <div class="container-fluid" style="    border-right: 1px solid #000000;
                              border-bottom: 1px solid #000000;
                               border-left: 1px solid #000000;
-                               border-top: 7px solid #562AC8;
+                               border-top: 7px solid #1467B0;
                                background-color: white;
                                border-radius: 5px;">
                                 <div class="row mb-5">
@@ -917,7 +917,7 @@
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
-                                #562AC8;">BILLED TO</h5>
+                                #1467B0;">BILLED TO</h5>
                                         <P class="text-black">Your Client<br>1234 Clients Street<br>City, California
                                             <br>90210<br>United Staes<br>1-888-123-8910
                                         </P>
@@ -994,7 +994,7 @@
                                     <div class="col-md-7 d-flex align-items-end">
                                         <div class="">
                                             <h6 class="fw-bold mb-1" style="color: 
-                                #562AC8;">MEMO</h6>
+                                #1467B0;">MEMO</h6>
                                             <P class="text-black">Thank you for your business!</P>
                                         </div>
                                     </div>
@@ -1019,7 +1019,7 @@
                                                         <td>Total</td>
                                                         <td>$550.00</td>
                                                     </tr>
-                                                    <tr style="    border-bottom: 2px solid #562AC8;">
+                                                    <tr style="    border-bottom: 2px solid #1467B0;">
                                                         <td>Deposit Requested</td>
                                                         <td>$550.00</td>
                                                     </tr>
@@ -1047,7 +1047,7 @@
         </div>
     </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
@@ -1659,11 +1659,11 @@
 
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets\header-img\spade.svg" 
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" 
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img-dark" src="../assets\header-img\circlels.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            <img  id="user-img" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
                                         </div>
                                         <div class="dropdown d-flex profile-1 country">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
@@ -1892,8 +1892,8 @@
                         <div>
                             <p class="d-inline-flex gap-1 bg-img-mainn">
                                 <span>Invoice | </span>
-                                  <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add invoices? </a></span>
-                                  
+                                <span><a href="#" onclick="Intercom('showArticle', 8210444)"><b>Need help?</b></a></span> 
+                                  <!-- <span><a href="#" onclick="Intercom('showArticle', 8210506)"> How to add invoices? </a></span> -->
                             </p>
                         </div>
                         <!-- PAGE-HEADER END -->
@@ -2990,7 +2990,7 @@ function dragOverHandler(ev) {
             function saveAndPrint(tenant, data){
                     $("#client-id").empty()
                                             $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                                #562AC8;">BILLED TO</h5>
+                                #1467B0;">BILLED TO</h5>
                                     <p class="text-black">${tenant.firstName + " " + tenant.lastName}<br>${tenant.tAddress
                                                 }<br>${tenant.tCity},
                                         ${tenant.tState}<br>${tenant.tZipcode}<br>United States<br>${tenant.tPhoneNumber}</p>`)
@@ -3077,7 +3077,7 @@ function dragOverHandler(ev) {
                                                     <td>Total</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                 </tr>
-                                                <tr class="text-black" style="    border-bottom: 2px solid #562AC8;">
+                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0;">
                                                     <td>Deposit Requested</td>
                                                     <td>$ 0</td>
                                                 </tr>
@@ -3336,7 +3336,7 @@ print = true
 
                 // Build the HTML structure for the item
                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
-                                    '<img src="' + tenant?.image?.split(",")[0]+ '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<img src="' + (tenant?.image?.split(",")[0]? tenant.tenantimage.split(",")[0]:'../assets/images/icons/Group 34343434.png')+ '" alt="" style="width: 65px; height: 65px;">' +
                                     '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
@@ -4145,7 +4145,7 @@ function resetAccordions() {
 
                 $("#client-id").empty()
                 $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                                #562AC8;">BILLED TO</h5>
+                                #1467B0;">BILLED TO</h5>
                                     <p class="text-dark">${data.firstName + " " + data.lastName}<br>${data.tAddress
                     }<br>${data.tCity},
                                         ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}</p>`)
@@ -4203,7 +4203,7 @@ function resetAccordions() {
                                                     <td>Total</td>
                                                     <td>$550.00</td>
                                                 </tr>
-                                                <tr style="    border-bottom: 2px solid #562AC8;">
+                                                <tr style="    border-bottom: 2px solid #1467B0;">
                                                     <td>Deposit Requested</td>
                                                     <td>$550.00</td>
                                                 </tr>
