@@ -5044,11 +5044,7 @@
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-<<<<<<< HEAD
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + tenant.rentAmount + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
-=======
                         var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
->>>>>>> 972dfdee25f0e710865a76168d46efe03a599bd8
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
