@@ -1,10 +1,8 @@
 
 const multer = require('multer');
 const Path = require('path');
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).array('image');
-
 //  const upload = multer({
 //     storage: multer.diskStorage({
 //         destination : function(req,file,cb){
@@ -12,7 +10,6 @@ const upload = multer({ storage: storage }).array('image');
 //             // cb(null,"uploads")
 //         },
 //         filename : function(req,file,cb){
-        
 //             cb(null, file.fieldname+`-`+ Date.now()+ Path.extname(file.originalname));
 //         }
 //     })
@@ -30,10 +27,8 @@ const uploadExistingFiles = async (req, res, next) => {
           filename: imageName,
           path: `uploads/${imageName}`
         }));
-  
         req.files = [...(req.files || []), ...existingFiles];
       }
-  
       next();
     } catch (error) {
       console.log(error);

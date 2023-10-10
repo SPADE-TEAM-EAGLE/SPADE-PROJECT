@@ -253,7 +253,7 @@ exports.Signin = async function (req, res) {
           email,
         ]);
         if (selectUserPermissionResult[0].length === 0) {
-          res.status(400).send("Email not foundsss");
+          res.status(400).send("Email not found");
         } else if (await bcrypt.compare(password, selectUserPermissionResult[0][0].UPassword)) {
           const id = selectUserPermissionResult[0][0].llnalordId;
           const role = selectUserPermissionResult[0][0].URole;
