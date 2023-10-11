@@ -3109,6 +3109,7 @@
 
         var taskInfo = []
         let taskId;
+        var taskPermissions;
         $(document).ready(function () {
             // $("#succesModal").modal("show")
             $.ajax({
@@ -3117,7 +3118,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image }) {
+                success: function ({ userName, image,tasks }) {
                     if (image !== " " && image !== null) {
 
                         $("#user-img").attr("src", image)
@@ -3131,7 +3132,7 @@
                     $("#user-name").text(toTitleCase(userName))
                     $("#header-user").text(toTitleCase(userName))
 
-
+                    taskPermissions = tasks
 
                 },
                 error: function (xhr, status, error) {
@@ -4368,6 +4369,93 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
             }
         })
     </script>
-</body>
+    <script>
+            $(document).ajaxStop(function () {
+        if(taskPermissions){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!taskPermissions[action]) {
+                    switch (action) {
+        case "Add":
+            $("#add_property_btn").remove()
+            break;
+        case "View":
+            $("#table_body tr").each(function (item, index) {
+                // $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                $(this).find(".view-task").addClass("d-none")
+            })
+            break;
+        case "Delete":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".delete-option").addClass("d-none")
+                
+            })
+            break;
+        case "Edit":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".edit-option").addClass("d-none")
+                
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+
+
+        })
+        const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                // Check if tenantPermissions is defined
+                if(taskPermissions){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!taskPermissions[action]) {
+                    switch (action) {
+        case "Add":
+            $("#add_property_btn").remove()
+            break;
+        case "View":
+            $("#table_body tr").each(function (item, index) {
+                $(this).find(".property-anchor").attr("href", "javascript:void(0)")
+                $(this).find(".view-property").addClass("d-none")
+            })
+            break;
+        case "Delete":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".delete-option").addClass("d-none")
+                
+            })
+            break;
+        case "Edit":
+        $("#table_body tr").each(function (item, index) {
+                $(this).find(".edit-option").addClass("d-none")
+                
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+            }
+        });
+    });
+
+    // Start observing the document
+    observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+
+    </script>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>
