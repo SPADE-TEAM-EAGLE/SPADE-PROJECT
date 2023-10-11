@@ -76,24 +76,28 @@ $('input[type="tel"]').each(function () {
 //       selectText_span.addClass('d-none');
 //   }
 // });
-
-$(document).on('input change', '.modal input[required]:not([type="tel"]) , .modal select[required]', function () {
-
+var modalOpen = false;
+$('.modal input[required]:not([type="tel"]), .modal select[required]').on('input change', function () {
   var modalValid = $(this).val();
   var modalValid_span = $(this).siblings('.text-danger');
- if(
-  ($(this).is('input') && modalValid == '') || 
-  ($(this).is('select') && modalValid == 'Choose...') || 
-  ($(this).is('input[type="email"]') && !emailRegex.test(modalValid)) ||
-  ($(this).is('input[name="zip"]') && modalValid.length != 5) 
-){
-  console.log("checker not Ok");
-  $(this).removeClass("border-green").addClass("border-danger");
-  modalValid_span.removeClass('d-none');
- }else{
-  console.log("checker Ok");
-
-  $(this).removeClass("border-danger").addClass("border-green");
-  modalValid_span.addClass('d-none');
- }
+if(modalOpen){
+  if (
+    ($(this).is('input') && modalValid == '') || 
+    ($(this).is('select') && modalValid == 'Choose...') || 
+    ($(this).is('input[type="email"]') && !emailRegex.test(modalValid)) ||
+    ($(this).is('input[name="zip"]') && modalValid.length != 5) 
+  ) {
+    console.log("checker not Ok");
+    $(this).removeClass("border-green").addClass("border-danger");
+    modalValid_span.removeClass('d-none');
+  } else {
+    console.log("checker Ok");
+    $(this).removeClass("border-danger").addClass("border-green");
+    modalValid_span.addClass('d-none');
+  }
+  modalOpen = true;
+}
+modalOpen = true;
 });
+
+

@@ -1064,7 +1064,7 @@
                         <div class="col-md-12 col-lg-12 mb-5">
                             <form class="ui form">
                                 <section class="field">
-                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant</label>
+                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant<span class="text-danger"> *</span></label>
                                     <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
@@ -1106,7 +1106,7 @@
                         </div>
 
                         <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Property Information</label>
+                            <label class="form-label fw-bold fs-18">Property Information<span class="text-danger"> *</span></label>
                             <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" required>
                                 <option label="Choose one">
@@ -1117,7 +1117,7 @@
                         </div>
 
                         <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Unit</label>
+                            <label class="form-label fw-bold fs-18">Unit<span class="text-danger"> *</span></label>
                             <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" data-bs-placement="top" required>
                                 <option label="Choose one">
@@ -1128,24 +1128,24 @@
                         </div>
                         
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <label class="form-label fw-bold fs-18">Due Date (Optional)</label>
                             <input type="date" class="form-control form" id="dueDate"
                                 placeholder="Select Due Date">
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
                             <div class="col-md-6 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Start Date</label>
+                                <label class="form-label fw-bold fs-18">Start Date (Optional)</label>
                                 <input type="date" class="form-control form" id="startDate" placeholder="Select Start Date">
                                 <span class="text-danger d-none">Start Date is required!</span>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label class="form-label fw-bold fs-18">End Date</label>
+                                <label class="form-label fw-bold fs-18">End Date (Optional)</label>
                                 <input type="date" class="form-control form" id="endDate" placeholder="Enter End Date">
                                 <span class="text-danger d-none">End Date is required!</span>
                             </div>
                             <div class="col-md-12 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Frequency</label>
+                                <label class="form-label fw-bold fs-18">Frequency (Optional)</label>
                                 <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency">
                                     <option label="Choose one">
@@ -1169,7 +1169,7 @@
                                 </label>
                             </div> -->
                             <div class="col-md-12 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Terms</label>
+                                <label class="form-label fw-bold fs-18">Terms (Optional)</label>
                                 <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="terms" placeholder="Select Terms">
                                     <option label="Choose one">
@@ -1187,11 +1187,11 @@
                                     id="lineItemsTable">
                                     <thead>
                                         <tr>
-                                            <th>Category</th>
+                                            <th>Category <span class="text-danger">*</span></th>
                                             <!-- <th>Property</th> -->
                                             <th>Description</th>
                                             <th>Tax</th>
-                                            <th>Amount</th>
+                                            <th>Amount <span class="text-danger">*</span></th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -1316,7 +1316,7 @@
                             </div>
                           </div>
                         <div class="col-md-12 col-lg-8">
-                            <label for=""><b style="color: #1467B0;">Memo</b></label>
+                            <label for=""><b style="color: #1467B0;">Memo (Optional)</b></label>
                             <textarea class="form-control mb-4" placeholder="Memo" rows="4"
                                 id="additionalNotes"></textarea>
                             <span class="text-danger d-none">Photos are required!</span>
@@ -3336,7 +3336,7 @@ print = true
 
                 // Build the HTML structure for the item
                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
-                                    '<img src="' + (tenant?.image?.split(",")[0]? tenant.tenantimage.split(",")[0]:'../assets/images/icons/Group 34343434.png')+ '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<img src="' + (tenant?.image?.split(",")[0]? tenant.image.split(",")[0]:'../assets/images/icons/Group 34343434.png')+ '" alt="" style="width: 65px; height: 65px;">' +
                                     '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
                                     '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +

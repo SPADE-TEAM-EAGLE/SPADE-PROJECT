@@ -1574,7 +1574,7 @@
                         <div class="col-md-12 col-lg-12 mb-5">
                             <form class="ui form">
                                 <section class="field">
-                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant</label>
+                                    <label class="form-label fw-bold fs-18 text-dark mb-3">Select Tenant<span class="text-danger"> *</span></label>
                                     <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
@@ -1620,7 +1620,7 @@
                         </div>
 
                         <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Property Information</label>
+                            <label class="form-label fw-bold fs-18">Property Information<span class="text-danger"> *</span></label>
                             <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Property"
                                 name="tenants" id="propertyName" required>
                                 <option label="Choose one">
@@ -1631,7 +1631,7 @@
                         </div>
 
                         <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Unit</label>
+                            <label class="form-label fw-bold fs-18">Unit<span class="text-danger"> *</span></label>
                             <select class="form-control select2 form-select d-block select2-show-search" data-placeholder="Select Unit"
                                 name="tenants" id="propertyUnit" required>
                                 <option label="Choose one">
@@ -1642,24 +1642,24 @@
                         </div>
 
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <label class="form-label fw-bold fs-18">Due Date (Optional)</label>
                             <input type="date" class="form-control form" id="dueDate" placeholder="Select Due Date">
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
                             <div class="col-md-6 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Start Date</label>
+                                <label class="form-label fw-bold fs-18">Start Date (Optional)</label>
                                 <input type="date" class="form-control form" id="startDate"
                                     placeholder="Select Start Date">
                                 <span class="text-danger d-none">Start Date is required!</span>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label class="form-label fw-bold fs-18">End Date</label>
+                                <label class="form-label fw-bold fs-18">End Date (Optional)</label>
                                 <input type="date" class="form-control form" id="endDate" placeholder="Enter End Date">
                                 <span class="text-danger d-none">End Date is required!</span>
                             </div>
                             <div class="col-md-12 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Frequency</label>
+                                <label class="form-label fw-bold fs-18">Frequency (Optional)</label>
                                 <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="frequency" placeholder="Select Frequency" data-bs-container="#addModal">
                                     <option label="Choose one">
@@ -1671,7 +1671,7 @@
                             </div>
 
                             <div class="col-md-12 col-lg-6">
-                                <label class="form-label fw-bold fs-18">Terms</label>
+                                <label class="form-label fw-bold fs-18">Terms (Optional)</label>
                                 <select class="form-control select2 form-select select2-show-search" data-placeholder="Every Month"
                                     id="terms" data-bs-placement="top" placeholder="Select Terms">
                                     <option label="Choose one">
@@ -1689,18 +1689,17 @@
                                     id="lineItemsTable">
                                     <thead>
                                         <tr>
-                                            <th>Category</th>
-                                            <!-- <th>Property</th> -->
+                                            <th>Category<span class="text-danger"> *</span></th>
                                             <th>Description</th>
                                             <th>Tax</th>
-                                            <th>Amount</th>
+                                            <th>Amount<span class="text-danger"> *</span></th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
                                             <td>
-                                                <select id="state" name="category" class="form-select form"
+                                                <select id="state" name="category" class="form-select form
                                                     data-bs-placement="top" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
@@ -1792,7 +1791,7 @@
                                                 <tbody id="add-item-container1-add">
                                                     <tr class="tr">
                                                         <td>
-                                                            <label for=""><b>Categories</b></label>
+                                                            <label for=""><b>Categories</b><span class="text-danger"> *</span></label>
                                                             <input type="text" name="categories-add"
                                                                 class="form-control category-add">
                                                         </td>
@@ -1863,7 +1862,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-8">
-                            <label for="" style="color: #1467B0;"><b>Memo</b></label>
+                            <label for="" style="color: #1467B0;"><b>Memo (Optional)</b></label>
                             <textarea class="form-control mb-4" placeholder="Add Memo" rows="4" id="additionalNotes"
                                 placeholder="Enter Additional Notes"></textarea>
                             <span class="text-danger d-none">Photos are required!</span>
@@ -1959,7 +1958,7 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col-md-12 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Select Tenant</label>
+                            <label class="form-label fw-bold fs-18">Select Tenant<span class="text-danger"> *</span></label>
                             <select class="form-control form-select d-block" data-placeholder="Select Tenant"
                                 name="tenants" id="tenants_update" readonly>
                                 <option label="Choose one">
@@ -1985,13 +1984,13 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Property Name</label>
+                            <label class="form-label fw-bold fs-18">Property Name<span class="text-danger"> *</span></label>
                             <input type="text" class="form-control form" id="propertyName_update" value="" readonly
                                 required>
                             <span class="text-danger d-none">Property name is required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Due Date</label>
+                            <label class="form-label fw-bold fs-18">Due Date (Optional)</label>
                             <input type="date" class="form-control form" id="dueDate_update" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
@@ -2049,11 +2048,11 @@
                                     id="lineItemsTable_update">
                                     <thead>
                                         <tr>
-                                            <th>Category</th>
+                                            <th>Category<span class="text-danger"> *</span></th>
                                             
                                             <th>Description</th>
                                             <th>Tax</th>
-                                            <th>Amount</th>
+                                            <th>Amount<span class="text-danger"> *</span></th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -2089,6 +2088,7 @@
                             <a href="javascript:;" class="mt-1" id="add-item1_update">+Add Item</a>
                         </div>
                         <div class="col-md-12 col-lg-8">
+                            <label for="">Memo (Optional)</label>
                             <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
                                 id="additionalNotes_update"></textarea>
                             <span class="text-danger d-none">Photos are required!</span>
@@ -3983,8 +3983,7 @@
         <script src="../assets/plugins/chart/utils.js"></script>
 
         <!-- INTERNAL SELECT2 JS -->
-        <script src="../assets/plugins/select2/select2.full.min.js"></script>
-        <script src="../assets/js/select2.js"></script>
+   
 
         <!-- INTERNAL Data tables js-->
         <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>

@@ -57,7 +57,7 @@ $(document).ready(function() {
        var isEmpty3 = false;
        if (lease == "Gross Lease" && yesno == "yes") {
            var date1 = false;
-           $('.input-amount, .dateofRentchange,#leaseStart2,#leaseEnd2').each(function() {
+           $('.input-amount,#leaseStart2,#leaseEnd2').each(function() {
             var span = $(this).siblings('.text-danger');
                if ($(this).val() === '' || $(this).val() === 'Choose...') {
                 var span = $(this).siblings('.text-danger');
@@ -111,7 +111,7 @@ $(document).ready(function() {
         }
        } else if (lease == "Triple Net Lease" && yesno == "yes") {
            var date2 = false;
-           $('.input-amount, .dateofRentchange, #baseRent , #tripleNet , #leaseStart , #leaseEnd').each(function() {
+           $('.input-amount , #leaseStart , #leaseEnd').each(function() {
             var span = $(this).siblings('.text-danger');
             if ($(this).val() === '' || $(this).val() === 'Choose...') {
                 var span = $(this).siblings('.text-danger');
@@ -138,7 +138,7 @@ $(document).ready(function() {
            }
        }else if(lease == "Triple Net Lease" && yesno == "no"){
            var date3 = false;
-           $('#baseRent , #tripleNet , #leaseStart , #leaseEnd').each(function() {
+           $(' #leaseStart , #leaseEnd').each(function() {
             var span = $(this).siblings('.text-danger');
             if ($(this).val() === '' || $(this).val() === 'Choose...') {
                 var span = $(this).siblings('.text-danger');

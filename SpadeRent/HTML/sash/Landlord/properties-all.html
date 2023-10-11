@@ -3443,14 +3443,11 @@
                 $('#myModal_edit').find('input[required], select[required]').each(function (index) {
                     var value = $(this).val().trim();
                     var span = $(this).siblings('.text-danger');
-                    // console.log($(this))
                     if($(this).is('input') && $(this).val() == '' ){
                         isFilled = false;
                     }
                     if ($(this).attr("id") === "zip_update") {
-                        // console.log($(this).val().length)
                         if ($(this).val().length !== 5) {
-                            // console.log("here ik am")
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
                             span.removeClass('d-none');
@@ -3462,10 +3459,8 @@
                         }
                     } else if (index >= 1) {
                         if (value === '' || value === 'Choose...') {
-                            // alert(1)
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
-                            //   console.log(1)
                             span.removeClass('d-none');
                             isFilled = false;
                         } else {
