@@ -618,14 +618,14 @@
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name<span class="text-danger"> *</span></label>
                                 <input id="task" required class="form-control" placeholder="Enter task name" type="text"
                                     placeholder="Enter Task Name">
                                 <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             
                             <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <label for="inputState" class="form-label fw-bold">Related To<span class="text-danger"> *</span></label>
                                 <select required id="property" class="form-select form select2-show-search" placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
@@ -633,7 +633,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date (Optional)</label>
                                 <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
                                     placeholder="Enter Due Date">
                                 <span class="text-danger d-none">Due Date is required!</span>
@@ -663,14 +663,14 @@
                                 <span class="text-danger d-none">Priority is required!</span>
                             </div> -->
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Notes</label>
+                                <label class="form-label fw-bold">Notes (Optional)</label>
                                 <textarea id="notes" class="form-control mb-4"
                                     placeholder="Sorry about that We will look into it." rows="4"
                                     ></textarea>
                                 <!-- <span class="text-danger d-none">Photos are required!</span> -->
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files</label>
+                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
                                     <input id="fileInput" type="file" name="media" class="custom-file-input form"
     accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf" aria-label="hello" multiple>
@@ -1992,6 +1992,7 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js "></script>
     <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/getNotificationTenant.js"></script>
 <script>
             $(document).ready(function(){
                 $.ajax({
@@ -2145,7 +2146,7 @@
             $('#close,#top-close').on('click', function (e) {
                 console.log(333)
                 e.preventDefault()
-                $(".select2-selection__rendered").empty()
+                $("#addModal .select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles = []
                 $(".file-grid").empty()
@@ -2864,7 +2865,7 @@ $('#fileInput').on('change', function () {
 
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                console.log(count, parseInt($("#lengthSelectBox").val()))
+                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
@@ -2880,7 +2881,7 @@ $('#fileInput').on('change', function () {
 
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                console.log(count, parseInt($("#lengthSelectBox").val()))
+                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }

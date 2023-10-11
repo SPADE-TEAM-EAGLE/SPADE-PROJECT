@@ -3298,17 +3298,20 @@ function dragOverHandler(ev) {
                     }
 
                 });
-                $('.hide-select').on('input change', () => {
-                if ($('.ms-choice span').text() == '') {
-                    $('.ms-choice').addClass('border-danger');
-                    $('.ms-choice').removeClass('border-green');
-                    // $('#vendor-span').removeClass('d-none');
-                } else {
-                    $('.ms-choice').removeClass('border-danger');
-                    $('.ms-choice').addClass('border-green');
-                    // $('#vendor-span').addClass('d-none');
-                }
-            });
+                $('.hide-select').on('input change', function () {
+    
+    if (event.type === 'change' || (event.type === 'input' && event.target.value !== event.target.defaultValue)) {
+        if ($('.ms-choice span').text() == '') {
+            $('.ms-choice').addClass('border-danger');
+            $('.ms-choice').removeClass('border-green');
+            // $('#vendor-span').removeClass('d-none');
+        } else {
+            $('.ms-choice').removeClass('border-danger');
+            $('.ms-choice').addClass('border-green');
+            // $('#vendor-span').addClass('d-none');
+        }
+    }
+});
             })
         </script>
             <script>

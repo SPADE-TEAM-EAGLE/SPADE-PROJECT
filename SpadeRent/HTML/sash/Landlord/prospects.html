@@ -1077,7 +1077,7 @@
                                     <div class="col-md-12 col-lg-12 col-xl-12">
                                         <label for="inputState" class="form-label fw-bold">Source Campaign <span
                                                 class="text-danger">*</span></label>
-                                        <select id="sourceCampaign" class="form-select form mb-2 select2-show-search">
+                                        <select id="sourceCampaign" class="form-select form mb-2 select2-show-search" required>
                                             <option selected>Choose...</option>
                                             <option value="system">System</option>
                                         </select>
@@ -1233,8 +1233,8 @@
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <!-- <input id="phone" name="phone" type="tel" autocomplete="off" pattern="[0-9]" placeholder="" maxlength="13" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                             required> -->
-                                        <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
-                                        <span id="error-msg2" class="hide text-danger"></span>
+                                        <span id="valid-msg" class="d-none text-success valid-msg">✓ Valid</span>
+                                        <span id="error-msg" class="hide text-danger error-msg"></span>
 
                                         <!-- <span class="text-danger d-none">State is required!</span> -->
                                     </div>
@@ -1280,7 +1280,7 @@
                                             <span class="text-danger">*</span></label>
                                         <!-- <input type="text" id="sourceCampaign_update" class="form-control form"
                                             placeholder="Enter Source Campaign" required> -->
-                                        <select id="sourceCampaign_update" class="form-select form mb-2">
+                                        <select id="sourceCampaign_update" class="form-select form mb-2" required>
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">This field is required!</span>
@@ -4423,10 +4423,9 @@
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
-    <script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script>
+    <!-- <script>
         $('#email').change(function () {
             var email = $(this).val();
             var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
@@ -4441,7 +4440,7 @@
                 $(this).removeClass("border-danger")
             }
         });
-    </script>
+    </script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
@@ -6214,29 +6213,21 @@
         });
 
     </script>
-    <script>
+    <!-- <script>
         const input0 = document.querySelector("#phone");
         const errorMsg = document.querySelector("#error-msg");
         const validMsg = document.querySelector("#valid-msg");
-
-        // here, the index maps to the error code returned from getValidationError - see readme
         const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
-        // initialise plugin
         const iti = window.intlTelInput(input0, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
-
         const reset = () => {
             input0.classList.remove("error");
             errorMsg.innerHTML = "";
             errorMsg.classList.add("d-none");
             validMsg.classList.add("d-none");
         };
-
-        // on blur: validate
         input0.addEventListener('input', () => {
-            // alert(1)
             reset();
             console.log("in phone input")
             if (input0.value.trim()) {
@@ -6256,8 +6247,8 @@
                 }
             }
         });
-    </script>
-    <script>
+    </script> -->
+    <!-- <script>
         $(document).ready(function () {
             const input2 = $("#phone2");
             const errorMsg2 = $("#error-msg2");
@@ -6293,7 +6284,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
     <!-- export button End  -->
     <script>
         $(document).change(function () {
@@ -6301,7 +6292,7 @@
 
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -6315,7 +6306,7 @@
 
                 let count = 1;
                 $("#table-body-disqualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox1").val()))
                     if (count > parseInt($("#lengthSelectBox1").val())) {
                         $(this).hide()
                     }
@@ -6329,7 +6320,7 @@
 
                 let count = 1;
                 $("#table-body-qualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -6345,7 +6336,7 @@
 
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -6359,7 +6350,7 @@
 
                 let count = 1;
                 $("#table-body-disqualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox1").val()))
                     if (count > parseInt($("#lengthSelectBox1").val())) {
                         $(this).hide()
                     }
@@ -6373,7 +6364,7 @@
 
                 let count = 1;
                 $("#table-body-qualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -6417,7 +6408,7 @@
 
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -6431,7 +6422,7 @@
 
                 let count = 1;
                 $("#table-body-disqualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox1").val()))
                     if (count > parseInt($("#lengthSelectBox1").val())) {
                         $(this).hide()
                     }
@@ -6445,7 +6436,7 @@
 
                 let count = 1;
                 $("#table-body-qualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -6462,7 +6453,7 @@
 
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -6476,7 +6467,7 @@
 
                 let count = 1;
                 $("#table-body-disqualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox1").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox1").val()))
                     if (count > parseInt($("#lengthSelectBox1").val())) {
                         $(this).hide()
                     }
@@ -6490,7 +6481,7 @@
 
                 let count = 1;
                 $("#table-body-qualified tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -6705,6 +6696,8 @@
 
     </script>
     <!-- Gantt Cart End  -->
+    <script src="../assets/js/email-phone.js"></script>
+
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

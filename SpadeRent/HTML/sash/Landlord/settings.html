@@ -1731,7 +1731,7 @@
     <!-- <div id="global-loader">
         <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
     </div> -->
-    <div id="preloader" class="tlp-preloader d-none">
+    <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
             <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
@@ -13907,6 +13907,7 @@
         <script src="../assets/js/push_notification.js"></script>
         <script src="../assets/js/email-phone.js"></script>
 
+
         <script>
 
             $(document).ready(function () {
@@ -14827,14 +14828,17 @@
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
-                        settingPermissions.push(response.settingProfiles)
-                        settingPermissions.push(response.settingCPasswords)
-                        settingPermissions.push(response.settingNotifications)
-                        settingPermissions.push(response.settingCThemes)
-                        settingPermissions.push(response.settingSubscriptions)
-                        settingPermissions.push(response.settingMUsers)
-                        settingPermissions.push(response.settingEmailTs)
-                        settingPermissions.push(response.SettingInvoiceSettings)
+                        if(response.settingProfiles){
+
+                            settingPermissions.push(response.settingProfiles)
+                            settingPermissions.push(response.settingCPasswords)
+                            settingPermissions.push(response.settingNotifications)
+                            settingPermissions.push(response.settingCThemes)
+                            settingPermissions.push(response.settingSubscriptions)
+                            settingPermissions.push(response.settingMUsers)
+                            settingPermissions.push(response.settingEmailTs)
+                            settingPermissions.push(response.SettingInvoiceSettings)
+                        }
                         if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)

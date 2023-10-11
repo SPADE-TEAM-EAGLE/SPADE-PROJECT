@@ -3287,17 +3287,21 @@
                 }
                 updateButtonStatus();
             });
-            $('.hide-select').on('input change', () => {
-                if ($('.ms-choice span').text() == '') {
-                    $('.ms-choice').addClass('border-danger');
-                    $('.ms-choice').removeClass('border-green');
-                    // $('#vendor-span').removeClass('d-none');
-                } else {
-                    $('.ms-choice').removeClass('border-danger');
-                    $('.ms-choice').addClass('border-green');
-                    // $('#vendor-span').addClass('d-none');
-                }
-            });
+            $('.hide-select').on('input change', function () {
+    
+    if (event.type === 'change' || (event.type === 'input' && event.target.value !== event.target.defaultValue)) {
+        if ($('.ms-choice span').text() == '') {
+            $('.ms-choice').addClass('border-danger');
+            $('.ms-choice').removeClass('border-green');
+            // $('#vendor-span').removeClass('d-none');
+        } else {
+            $('.ms-choice').removeClass('border-danger');
+            $('.ms-choice').addClass('border-green');
+            // $('#vendor-span').addClass('d-none');
+        }
+    }
+});
+
             $('#myModal_edit input[required], #myModal_edit select[required], #myModal_edit textarea').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
@@ -4341,7 +4345,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
 
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -4357,7 +4361,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
 
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
