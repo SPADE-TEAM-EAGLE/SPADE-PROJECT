@@ -1128,9 +1128,9 @@
                         </div>
                         
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Due Date (Optional)</label>
+                            <label class="form-label fw-bold fs-18">Due Date<span class="text-danger"> *</span></label>
                             <input type="date" class="form-control form" id="dueDate"
-                                placeholder="Select Due Date">
+                                placeholder="Select Due Date" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
                         <div class="collapse row" id="collapse1">
@@ -1198,7 +1198,7 @@
                                     <tbody id="add-item-container1">
                                         <tr class="tr">
                                             <td>
-                                                <select name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
+                                                <select name="category" class="form-control select2 form-select select2-show-search" placeholder="Enter the state where you reside" required>
                                                     <option selected="">Choose...</option>
                                                 </select>
                                                 <!-- <span class="text-danger d-none">State is required!</span> -->
@@ -1897,7 +1897,7 @@
                             </p>
                         </div>
                         <!-- PAGE-HEADER END -->
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mt-5">
                             <div class="col-xl-7 col-md-7">
                                 <div class="card border p-0 pb-3">
                                     <div class="card-body text-center p-0">
@@ -3623,7 +3623,7 @@ console.log(allFieldsFilled)
                 $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select  name="category" class="form-select form select2-show-search" required>
+          <select  name="category" class="form-control select2 form-select select2-show-search" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -3882,7 +3882,7 @@ if (!categoryExists) {
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select  name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
+          <select  name="category" class="form-control select2 form-select select2-show-search" placeholder="Enter the state where you reside" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
@@ -3905,7 +3905,7 @@ if (!categoryExists) {
                     $("#add-item-container1").append(`
       <tr class="tr">
         <td>
-          <select name="category" class="form-select form select2-show-search" placeholder="Enter the state where you reside" required>
+          <select name="category" class="form-control select2 form-select select2-show-search" placeholder="Enter the state where you reside" required>
             <option selected="">Choose...</option>
             ${categoryData.map((category) => `<option value="${category.id}">${category.categorieName}</option>`).join("")}
           </select>
