@@ -116,5 +116,11 @@ $(document).ready(function(){
 })
 
 
+// $('input[type="date"]').on('change',function(){
+//   var dateValue = $(this).val().split('-');
+//   var assignDateValue = dateValue[1] + '-' +  dateValue[2] + '-' +  dateValue[0]
+//   alert(assignDateValue)
+// $(this).val(assignDateValue)
+// })
 
 
