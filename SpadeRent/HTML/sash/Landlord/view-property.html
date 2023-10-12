@@ -1016,7 +1016,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
                                             <img  id="user-img" src="../assets/images/icons/Group 34343434.png"  class="avatarr profile-user nav-link brroundd cover-image light-layout">
@@ -1318,8 +1318,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <div class="text-justify ps-2 border-model-line">
-                                                <h2 class="modal-title">Update <strong class="color-primary" id="property-name">New
-                                                        Property</strong></h2>
+                                                <h2 class="modal-title">Update <strong class="color-primary" id="property-name">Property</strong></h2>
                                                 <span class="">Spade Rent allows you to add a range of commercial and residential properties,
                                                     from condos and single-family homes to retail stores and parking lots.</span>
                                             </div>
@@ -1410,7 +1409,7 @@
                                                     <span class="text-danger d-none">Property Total SF is required!</span>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label class="form-label fw-bold">Property Photo</label>
+                                                    <label class="form-label fw-bold">Property Photo (Optional)</label>
                                                     <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
                                                         ondragover="dragOverHandler(event);">
                                                         <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
@@ -2370,18 +2369,24 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_units").text(data.units+" Units")
                     $("#property_status").text(data.status)
                     $("#lightgallery").empty()
-                    data.images.forEach(image => {
-                        if(image.Image!==" " && image.Image!==null){
-                            
-                            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
-                                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
-                            }else{
-                                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                    if (data.images.length === 0) {
+    $("#image-placeholder").append(`<div style="text-align: center;">No Images Added</div>`);
+}else{
 
-                            }
+    data.images.forEach(image => {
+        if(image.Image!==" " && image.Image!==null){
+            
+            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
+                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
+            }else{
+                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+    
+            }
+    
+        }
+    });
+}
 
-                        }
-                    });
                     // $("#lightgallery").append('<li class="col-xs-6 col-sm-4 col-md-4 col-xl-3 mb-5 border-bottom-0" data-responsive="../../../../spadeAPI/uploads/'+image.Image+'" data-src="../../../../spadeAPI/uploads/'+image.Image+'" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>"><a href="javascript:void(0)"><img class="img-responsive br-5" src="../../../../spadeAPI/uploads/' + image.Image + '" alt="Thumb-1"></a></li>')
                 },
                 error: function(xhr, status, error) {

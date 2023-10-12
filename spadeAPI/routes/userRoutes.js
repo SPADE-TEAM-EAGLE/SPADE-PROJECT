@@ -255,8 +255,6 @@ router.get("/prospectTimeGraph/:startDate/:endDate", verifyToken, prospectus.pro
 
 router.get("/TenantStatusCP/:startDate/:endDate", verifyToken, tenantController.TenantStatusCP);
 //  User Permission Start
-
-
 router.post("/createUserPermissionUser", verifyToken, userPermissionController.createUserPermissionUser);
 router.get("/userCheckEmail", verifyToken, userPermissionController.userCheckEmail);
 router.get("/userPermissionGetAll", verifyToken, userPermissionController.userPermissionGetAll);

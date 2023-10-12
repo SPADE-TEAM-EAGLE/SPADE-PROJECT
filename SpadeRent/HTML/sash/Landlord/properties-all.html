@@ -1024,7 +1024,7 @@
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">State <span
                                                 class="text-danger">*</span></label>
-                                        <select id="state" class="form-select form select2-show-search">
+                                        <select id="state" class="form-select form select2-show-search" required>
                                             <option selected>Choose...</option>
                                         </select>
                                         <span class="text-danger d-none">State is required!</span>
@@ -1054,7 +1054,7 @@
                                     <div class="col-md-6">
                                         <label for="inputState" class="form-label fw-bold">Property Type <spnan
                                                 class="text-danger">*</span></label>
-                                        <select id="propertyType" class="form-select form select2-show-search">
+                                        <select id="propertyType" class="form-select form select2-show-search" required>
                                             <option selected>Choose...</option>
                                             <option>Single Family</option>
                                             <option>Multi-Family</option>
@@ -1448,7 +1448,7 @@
                             <span class="text-danger d-none">Property Total SF is required!</span>
                         </div>
                         <div class="col-md-12">
-                            <label class="form-label fw-bold">Property Photo</label>
+                            <label class="form-label fw-bold">Property Photo (Optional)</label>
                             <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
                                 ondragover="dragOverHandler(event);">
                                 <input id="fileInput_update" type="file" name="image" class="custom-file-input form"
@@ -1631,7 +1631,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets/images/icons/Group 34343434.png"
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -1903,7 +1903,7 @@
                                                                 by:</strong></a>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)" class="text-dark">A-Z
+                                                            href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">A-Z
                                                             Alphabets</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
@@ -1919,21 +1919,21 @@
                                                     </li> -->
 
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)" class="text-dark">Ascending</a>
+                                                            href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Ascending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="ascending" value="option1">
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)" class="text-dark">Descending</a>
+                                                            href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Descending</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)" class="text-dark">Recently
+                                                            href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Recently
                                                             Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" id="created-at"
@@ -2056,7 +2056,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>USER ID</th>
+                                                        <th>Property ID</th>
                                                         <th class="d-none">PROPERTY ID</th>
                                                         <th>IMAGE</th>
 
@@ -2819,7 +2819,6 @@
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
     <script src="../assets/js/push_notification.js"></script>
-<script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     
@@ -3078,6 +3077,8 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+           
+           
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
@@ -3444,6 +3445,9 @@
                     var value = $(this).val().trim();
                     var span = $(this).siblings('.text-danger');
                     // console.log($(this))
+                    if($(this).is('input') && $(this).val() == '' ){
+                        isFilled = false;
+                    }
                     if ($(this).attr("id") === "zip_update") {
                         // console.log($(this).val().length)
                         if ($(this).val().length !== 5) {
@@ -3459,7 +3463,7 @@
                         }
                     } else if (index >= 1) {
                         if (value === '' || value === 'Choose...') {
-                            alert(1)
+                            // alert(1)
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
                             //   console.log(1)
@@ -4260,6 +4264,7 @@
     observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 
 </script>
+<script src="../assets/js/email-phone.js"></script>
 
 </body>
 

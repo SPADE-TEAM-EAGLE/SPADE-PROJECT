@@ -973,7 +973,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets/images/icons/Group 34343434.png"
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -2587,8 +2587,9 @@
                         row.append(unitDetailsCell);
 
                         const actionCell = $('<td></td>');
-                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" disabled class="btn btn-success me-1 btn-pill done-option ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button"  class="btn btn-danger btn-pill delete-option ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
+                        const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" disabled class="btn btn-success me-1 btn-pill done-option ${unit.unitNumber ? "d-none" : ""}">Done</button>`);
                         actionCell.append(doneButton);
+                        actionCell.append(`<button type="button"  class="btn btn-danger btn-pill delete-option ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`)
                         row.append(actionCell);
 
 

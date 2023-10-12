@@ -2008,7 +2008,7 @@
                                             </div> -->
                                         </div>
                                         <div class="d-flex country">
-                                            <img id="user-img" src="../assets/images/icons/Group 34343434.png"
+                                            <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -3543,9 +3543,9 @@
                             row.append(unitDetailsCell);
 
                             const actionCell = $('<td></td>');
-                            const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option1 ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" class="btn btn-success me-1 btn-pill done-option1 ${unit.unitNumber ? "d-none" : ""}">Done</button><button type="button" class="btn btn-danger btn-pill delete-option1 ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`);
+                            const doneButton = $(`<button type="button" class="btn btn-primary me-1 btn-pill edit-option1 ${unit.unitNumber ? "" : "d-none"}">Edit</button> <button type="button" class="btn btn-success me-1 btn-pill done-option1 ${unit.unitNumber ? "d-none" : ""}">Done</button>`);
                             actionCell.append(doneButton);
-
+                            actionCell.append(`<button type="button"  class="btn btn-danger btn-pill delete-option1 ${unit.status == "Occupied" ? "d-none" : ""}">Delete</button>`)
                             row.append(actionCell);
                             //                             $('#addModal_units').modal('show');
                             //                             $('#addModal_units').modal({
@@ -5031,7 +5031,11 @@
                     // console.log(data[0])
                     let tenantNames = []
                     response.data[0]?.forEach(function (tenant, index) {
+                        var password = 'your-secret-password';
+                        var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
 
+                        // Include the encrypted value in the URL
+                        var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                         var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
@@ -5040,16 +5044,13 @@
                         var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
                         // var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
-                        var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
+                        var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="text-dark" href="./view-tenant.html?tenant=' + encodedPropertyId + '">' + tenant.firstName + ' ' + tenant.lastName + '</a><br><small>' + tenant.tEmail + '</small></td>';
+
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
-                        var password = 'your-secret-password';
-                        var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
-
-                        // Include the encrypted value in the URL
-                        var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + tenant.rentAmount + `<br><small>Next Due Date: ${(tenant.recurringNextDate?(formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)):"N/A")}` + '</td>';
+                        
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
