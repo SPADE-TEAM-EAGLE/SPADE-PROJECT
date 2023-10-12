@@ -46,10 +46,8 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
-
             }
         }
-        
         if(response?.tasks?.Restrict){
             if (window.location.href.indexOf('create-tasks.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
@@ -60,7 +58,6 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
-
             }
         }
         if(response?.invoices?.Restrict){
@@ -73,7 +70,6 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='create-invoicing.html']").parent().hide();
-
             }
         }
         if(response?.leads?.Restrict){
