@@ -2073,7 +2073,7 @@
                                                 <div style="width: 220px" class="d-flex justify-content-center align-items-center">
                                                     <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
                                                     <select id="lengthSelectBox" class="form-control form-select" style="width: 80px;">
-                                                        <option value="1">1</option>
+                                                        <!-- <option value="1">1</option> -->
                                                         <option value="10">10</option>
                                                         <option value="25">25</option>
                                                         <option value="100">100</option>
@@ -3066,7 +3066,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             });
         $(document).ready(function () {
             $("#submit-photo").click(() => {
-                
+                $('#preloader').css('display','flex')
                 $("#submit-photo").prop("disabled", true)
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
@@ -3102,7 +3102,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     },
                             success: function ({message}) {
                                 $("#submit-photo").prop("disabled", false)
-                                
+                                location.reload()
+
                                if(message==" Tenant Files save successful"){
                                     $("#succesModal").modal("show")
                                    
@@ -3126,6 +3127,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         updateSelectedFilesContainer()
                     },
                     error: function (xhr, status, error) {
+                     location.reload()
                         $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');

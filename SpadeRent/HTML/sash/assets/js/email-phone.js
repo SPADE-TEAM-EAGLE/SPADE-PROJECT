@@ -14,6 +14,20 @@ $(document).on('input', 'input[type="email"]', function () {
       email_span.addClass('d-none');
   }
 });
+$(document).on('input change', 'input:not([type="tel"]), select', function () {
+  var input_select_value = $(this).val();
+  var input_select_value_span = $(this).siblings('.text-danger');
+  if (input_select_value === '') {
+    console.log('input or select is empty');
+    $(this).addClass("border-danger").removeClass("border-green");
+    input_select_value_span.removeClass('d-none');
+  } else {
+    console.log('input or select is filled');
+    $(this).addClass("border-green").removeClass("border-danger");
+    input_select_value_span.addClass('d-none');
+  }
+});
+
 
 const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
