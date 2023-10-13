@@ -2975,7 +2975,7 @@
 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        var selectedplan;
+        var selectedplan=0;
         window.intercomSettings = {
                api_base: "https://api-iam.intercom.io",
                app_id: "fjpx1kt1",
@@ -3163,7 +3163,7 @@
                         email: email,
                         phone: phone,
                         password: password,
-                        planID: selectedplan,
+                        planID: (selectedplan>0?selectedplan:1),
                     }),
                     success: function(response) {
                         $("#myModal_success").modal("show");

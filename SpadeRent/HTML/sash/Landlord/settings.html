@@ -2180,636 +2180,505 @@
             </div>
         </div>
     </div>
-    
-                                            <!-- Add User Permissions popup start  -->
-                                            <div class="modal fade" id="add-user-permissions" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="text-justify ps-2 border-model-line title-text">
-                                                                <h2 class="modal-title">Add <strong
-                                                                        class="color-primary" id="title-sub">New
-                                                                        User</strong>
-                                                                </h2>
-                                                                <span class="">Post your properties to thousands of
-                                                                    potential investors,
-                                                                    tenants and interested individuals.</span>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary me-4 mt-3 d-none"
-                                                                id="edit-btn"><i class="fi fi-rs-pencil"
-                                                                    style="display:block"></i><small>Edit
-                                                                    Details</small></button>
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div id="collapseOne-add-tenant"
-                                                                class="accordion-collapse collapse show"
-                                                                aria-labelledby="headingOne"
-                                                                data-bs-parent="#accordionExample">
-                                                                <div class="accordion-body">
-                                                                    <form class="row g-3" enctype="multipart/form-data">
 
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputEmail4"
-                                                                                class="form-label fw-bold">First Name
-                                                                                <spnan class="text-danger">
-                                                                                    *</span>
-                                                                            </label>
-                                                                            <input type="text" class="form-control form"
-                                                                                placeholder="Enter First Name"
-                                                                                id="firstName_user" required
-                                                                                pattern="[A-Za-z\s]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                            <span class="text-danger d-none">First name
-                                                                                is required!</span>
-                                                                        </div>
+    <!-- Add User Permissions popup start  -->
+    <div class="modal fade" id="add-user-permissions" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">Add <strong class="color-primary" id="title-sub">New
+                                User</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of
+                            potential investors,
+                            tenants and interested individuals.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit
+                            Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne-add-tenant" class="accordion-collapse collapse show"
+                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form class="row g-3" enctype="multipart/form-data">
 
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputPassword4"
-                                                                                class="form-label fw-bold">Last Name
-                                                                                <spnan class="text-danger">
-                                                                                    *</span>
-                                                                            </label>
-                                                                            <input type="text" class="form-control form"
-                                                                                placeholder="Enter Last Name"
-                                                                                id="lastName_user" required
-                                                                                pattern="[A-Za-z\s]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                            <span class="text-danger d-none">Last name
-                                                                                required!</span>
-                                                                        </div>
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label fw-bold">First Name
+                                        <spnan class="text-danger">
+                                            *</span>
+                                    </label>
+                                    <input type="text" class="form-control form" placeholder="Enter First Name"
+                                        id="firstName_user" required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">First name
+                                        is required!</span>
+                                </div>
 
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputCity"
-                                                                                class="form-label fw-bold">Email<spnan
-                                                                                    class="text-danger">
-                                                                                    *</span></label>
-                                                                            <input type="email"
-                                                                                class="form-control form"
-                                                                                placeholder="Enter Email"
-                                                                                pattern="[A-Za-z0-9_\.@]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
-                                                                                id="email_user" required>
-                                                                            <span class="text-danger d-none">Email is
-                                                                                required!</span>
-                                                                            <small class="d-none" style="color: #e82646 !important;"
-                                                                                id="already-exist">Email already
-                                                                                exist!</small>
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label fw-bold">Last Name
+                                        <spnan class="text-danger">
+                                            *</span>
+                                    </label>
+                                    <input type="text" class="form-control form" placeholder="Enter Last Name"
+                                        id="lastName_user" required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">Last name
+                                        required!</span>
+                                </div>
 
-                                                                        </div>
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label fw-bold">Email<spnan class="text-danger">
+                                            *</span></label>
+                                    <input type="email" class="form-control form" placeholder="Enter Email"
+                                        pattern="[A-Za-z0-9_\.@]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
+                                        id="email_user" required>
+                                    <span class="text-danger d-none">Email is
+                                        required!</span>
+                                    <small class="d-none" style="color: #e82646 !important;" id="already-exist">Email
+                                        already
+                                        exist!</small>
 
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputState"
-                                                                                class="form-label fw-bold">Phone Number
-                                                                                <span
-                                                                                    class="fw-light">(Optional)</span></label>
-                                                                            <input id="phone" name="phone" type="tel"
-                                                                                autocomplete="off"
-                                                                                placeholder="Enter Phone Number"
-                                                                                pattern="[0-9]{5}"
-                                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                                                            <span id="valid-msg"
-                                                                                class="d-none text-success valid-msg">✓
-                                                                                Valid</span>
-                                                                            <span id="error-msg"
-                                                                                class="hide text-danger error-msg"></span>
-                                                                        </div>
+                                </div>
 
-                                                                        <div class="col-md-12 mt-5">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    for="validationCustom01"><b>Password</b>
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <input type="password"
-                                                                                    class="form-control"
-                                                                                    id="user_permission_password"
-                                                                                    aria-describedby="emailHelp"
-                                                                                    placeholder="Enter Password"
-                                                                                    required>
-                                                                                <i class="fi fi-rs-eye text-dark fs-20"
-                                                                                    id="togglePassworduserpermission"
-                                                                                    style="cursor: pointer;
+                                <div class="col-md-6">
+                                    <label for="inputState" class="form-label fw-bold">Phone Number
+                                        <span class="fw-light">(Optional)</span></label>
+                                    <input id="phone" name="phone" type="tel" autocomplete="off"
+                                        placeholder="Enter Phone Number" pattern="[0-9]{5}"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                    <span id="valid-msg" class="d-none text-success valid-msg">✓
+                                        Valid</span>
+                                    <span id="error-msg" class="hide text-danger error-msg"></span>
+                                </div>
+
+                                <div class="col-md-12 mt-5">
+                                    <div class="form-group">
+                                        <label for="validationCustom01"><b>Password</b>
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <input type="password" class="form-control" id="user_permission_password"
+                                            aria-describedby="emailHelp" placeholder="Enter Password" required>
+                                        <i class="fi fi-rs-eye text-dark fs-20" id="togglePassworduserpermission" style="cursor: pointer;
                                                                                         float: right;
                                                                                         margin-top: -30px;
                                                                                         margin-right: 15px;
                                                                                         color: #4573D2;"></i>
-                                                                                <span class="mt-1 text-danger"
-                                                                                    id="passnotmatch1"
-                                                                                    style="display: none;">
-                                                                                    MUST be atleast 8 characters long,
-                                                                                    Must contain atleast
-                                                                                    One Uppercase and One symbol.
-                                                                                </span>
-                                                                                <div class="mt-3"
-                                                                                    style="display: none;">
-                                                                                    <img src="../assets/images/info.svg"
-                                                                                        alt="" height="11px"
-                                                                                        width="11px">
-                                                                                    <span class="">
-                                                                                        <span
-                                                                                            style="font-weight:700;">MUST</span>
-                                                                                        be 8-12
-                                                                                        characters. Must contain atleast
-                                                                                        One Uppercase and
-                                                                                        One
-                                                                                        symbol.
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                        <span class="mt-1 text-danger" id="passnotmatch1" style="display: none;">
+                                            MUST be atleast 8 characters long,
+                                            Must contain atleast
+                                            One Uppercase and One symbol.
+                                        </span>
+                                        <div class="mt-3" style="display: none;">
+                                            <img src="../assets/images/info.svg" alt="" height="11px" width="11px">
+                                            <span class="">
+                                                <span style="font-weight:700;">MUST</span>
+                                                be 8-12
+                                                characters. Must contain atleast
+                                                One Uppercase and
+                                                One
+                                                symbol.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="inputState"
-                                                                                    class="form-label fw-bold">Status
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <select id="status_user"
-                                                                                    class="form-select form form-select select2-show-search"
-                                                                                    required>
-                                                                                    <option selected>Choose...
-                                                                                    </option>
-                                                                                    <option value="Active">Active
-                                                                                    </option>
-                                                                                    <option class="Inactive">Inactive
-                                                                                    </option>
-                                                                                </select>
-                                                                                <span class="text-danger d-none">State
-                                                                                    is required!</span>
-                                                                            </div>
-                                                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label fw-bold">Status
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <select id="status_user"
+                                            class="form-select form form-select select2-show-search" required>
+                                            <option selected>Choose...
+                                            </option>
+                                            <option value="Active">Active
+                                            </option>
+                                            <option class="Inactive">Inactive
+                                            </option>
+                                        </select>
+                                        <span class="text-danger d-none">State
+                                            is required!</span>
+                                    </div>
+                                </div>
 
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="inputState"
-                                                                                    class="form-label fw-bold">Role
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <select id="role_user"
-                                                                                    class="form-select form form-select select2-show-search"
-                                                                                    required>
-                                                                                    <option selected>Select Option
-                                                                                    </option>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label fw-bold">Role
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <select id="role_user" class="form-select form form-select select2-show-search"
+                                            required>
+                                            <option selected>Select Option
+                                            </option>
 
-                                                                                </select>
-                                                                                <span class="text-danger d-none">State
-                                                                                    is required!</span>
-                                                                            </div>
-                                                                        </div>
+                                        </select>
+                                        <span class="text-danger d-none">State
+                                            is required!</span>
+                                    </div>
+                                </div>
 
-                                                                        <div class="col-md-12">
-                                                                            <label class="form-label fw-bold">User Photo
-                                                                                (Optional)</label>
-                                                                            <div class="custom-file"
-                                                                                style="border: 1px dashed #00000087;"
-                                                                                ondrop="dropHandler(event);"
-                                                                                ondragover="dragOverHandler(event);">
-                                                                                <input id="fileInput_user" type="file"
-                                                                                    name="image"
-                                                                                    placeholder="Enter Photo"
-                                                                                    class="custom-file-input form"
-                                                                                    accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
-                                                                                    aria-label="hello" multiple="">
-                                                                                <span classname="d-none"></span>
-                                                                                <label class="custom-file-label"
-                                                                                    for="fileInput_user">
-                                                                                    <i
-                                                                                        class="fi fi-rs-cloud-upload"></i>
-                                                                                    <div class="custom-file-text">
-                                                                                        <span>Upload Photo here</span>
-                                                                                        <span>JPEG and PNG, file size no
-                                                                                            more than 5MB</span><small
-                                                                                            class="text-danger d-none"
-                                                                                            id="count-text">Maximum
-                                                                                            number of
-                                                                                            files reached.</small><small
-                                                                                            class="text-danger d-none"
-                                                                                            id="size-text">File size
-                                                                                            exceeds 5MB limit.</small>
-                                                                                    </div>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="selected-files text-white">
-                                                                                <div class="file-grid"></div>
-                                                                            </div>
-                                                                            <span class="text-danger d-none">Photos are
-                                                                                required!</span>
-                                                                        </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">User Photo
+                                        (Optional)</label>
+                                    <div class="custom-file" style="border: 1px dashed #00000087;"
+                                        ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                                        <input id="fileInput_user" type="file" name="image" placeholder="Enter Photo"
+                                            class="custom-file-input form"
+                                            accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
+                                            aria-label="hello" multiple="">
+                                        <span classname="d-none"></span>
+                                        <label class="custom-file-label" for="fileInput_user">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Photo here</span>
+                                                <span>JPEG and PNG, file size no
+                                                    more than 5MB</span><small class="text-danger d-none"
+                                                    id="count-text">Maximum
+                                                    number of
+                                                    files reached.</small><small class="text-danger d-none"
+                                                    id="size-text">File size
+                                                    exceeds 5MB limit.</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="selected-files text-white">
+                                        <div class="file-grid"></div>
+                                    </div>
+                                    <span class="text-danger d-none">Photos are
+                                        required!</span>
+                                </div>
 
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button
-                                                                class="btn btn-close-bottom btn-outline-default btn-pill button"
-                                                                data-bs-dismiss="modal" id="close"
-                                                                style="width: fit-content;">Close</button>
-                                                            <button class="btn text-light button"
-                                                                style="background-color:#1467B0; width: fit-content;"
-                                                                id="next-add-user-permission" disabled>Submit</button>
-                                                            <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id="close" style="width: fit-content;">Close</button>
+                    <button class="btn text-light button" style="background-color:#1467B0; width: fit-content;"
+                        id="next-add-user-permission" disabled>Submit</button>
+                    <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
                                                             <button class="btn text-light button d-none" style="background-color:#1467B0;" id="save">Save</button> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add User Permissions popup End  -->
+
+    <!-- Edit User Permissions popup start  -->
+    <div class="modal fade" id="edit-user-permissions" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">Update <strong class="color-primary" id="title-sub">User</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of
+                            potential investors,
+                            tenants and interested individuals.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit
+                            Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne-add-tenant" class="accordion-collapse collapse show"
+                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form class="row g-3" enctype="multipart/form-data">
+
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label fw-bold">First Name
+                                        <spnan class="text-danger">
+                                            *</span>
+                                    </label>
+                                    <input type="text" class="form-control form" placeholder="Enter First Name"
+                                        id="firstName_user_update" required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">First name
+                                        is required!</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label fw-bold">Last Name
+                                        <spnan class="text-danger">
+                                            *</span>
+                                    </label>
+                                    <input type="text" class="form-control form" placeholder="Enter Last Name"
+                                        id="lastName_user_update" required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">Last name
+                                        required!</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label fw-bold">Email<spnan class="text-danger">
+                                            *</span></label>
+                                    <input type="email" class="form-control form" placeholder="Enter Email"
+                                        pattern="[A-Za-z0-9_\.@]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
+                                        id="email_user_update" required>
+                                    <span class="text-danger d-none">Email is
+                                        required!</span>
+                                    <span class="d-none" style="color: #e82646 !important;"
+                                        id="already-exist-update">Email already
+                                        exist!</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="inputState" class="form-label fw-bold">Phone Number
+                                        <span class="fw-light">(Optional)</span></label>
+                                    <input id="phone2" required name="phone" type="tel" autocomplete="off"
+                                        placeholder="Enter Phone Number" pattern="[0-9]{5}"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                    <span id="valid-msg" class="d-none text-success valid-msg">✓
+                                        Valid</span>
+                                    <span id="error-msg" class="hide text-danger error-msg"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label fw-bold">Status
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <select id="status_user_update"
+                                            class="form-select form form-select select2-show-search" required>
+                                            <option selected>Select Option
+                                            </option>
+                                            <option value="Active">Active
+                                            </option>
+                                            <option class="Inactive">Inactive
+                                            </option>
+                                        </select>
+                                        <span class="text-danger d-none">State
+                                            is required!</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label fw-bold">Role
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <select id="userrole_user_update"
+                                            class="form-select form form-select select2-show-search" required>
+                                            <option selected>Select Option
+                                            </option>
+
+                                        </select>
+                                        <span class="text-danger d-none">State
+                                            is required!</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">User Photo
+                                        (Optional)</label>
+                                    <div class="custom-file" style="border: 1px dashed #00000087;"
+                                        ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                                        <input id="fileInput_user_update" type="file" name="image"
+                                            placeholder="Enter Photo" class="custom-file-input form"
+                                            accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
+                                            aria-label="hello" multiple="">
+                                        <span classname="d-none"></span>
+                                        <label class="custom-file-label" for="fileInput_user_update">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Photo here</span>
+                                                <span>JPEG and PNG, file size no
+                                                    more than 5MB</span><small class="text-danger d-none"
+                                                    id="count-text">Maximum
+                                                    number of
+                                                    files reached.</small><small class="text-danger d-none"
+                                                    id="size-text">File size
+                                                    exceeds 5MB limit.</small>
                                             </div>
-                                            <!-- Add User Permissions popup End  -->
+                                        </label>
+                                    </div>
+                                    <div class="selected-files text-white">
+                                        <div class="file-grid"></div>
+                                    </div>
+                                    <span class="text-danger d-none">Photos are
+                                        required!</span>
+                                </div>
 
-                                            <!-- Edit User Permissions popup start  -->
-                                            <div class="modal fade" id="edit-user-permissions" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="text-justify ps-2 border-model-line title-text">
-                                                                <h2 class="modal-title">Update <strong
-                                                                        class="color-primary"
-                                                                        id="title-sub">User</strong>
-                                                                </h2>
-                                                                <span class="">Post your properties to thousands of
-                                                                    potential investors,
-                                                                    tenants and interested individuals.</span>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary me-4 mt-3 d-none"
-                                                                id="edit-btn"><i class="fi fi-rs-pencil"
-                                                                    style="display:block"></i><small>Edit
-                                                                    Details</small></button>
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div id="collapseOne-add-tenant"
-                                                                class="accordion-collapse collapse show"
-                                                                aria-labelledby="headingOne"
-                                                                data-bs-parent="#accordionExample">
-                                                                <div class="accordion-body">
-                                                                    <form class="row g-3" enctype="multipart/form-data">
-
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputEmail4"
-                                                                                class="form-label fw-bold">First Name
-                                                                                <spnan class="text-danger">
-                                                                                    *</span>
-                                                                            </label>
-                                                                            <input type="text" class="form-control form"
-                                                                                placeholder="Enter First Name"
-                                                                                id="firstName_user_update" required
-                                                                                pattern="[A-Za-z\s]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                            <span class="text-danger d-none">First name
-                                                                                is required!</span>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputPassword4"
-                                                                                class="form-label fw-bold">Last Name
-                                                                                <spnan class="text-danger">
-                                                                                    *</span>
-                                                                            </label>
-                                                                            <input type="text" class="form-control form"
-                                                                                placeholder="Enter Last Name"
-                                                                                id="lastName_user_update" required
-                                                                                pattern="[A-Za-z\s]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                            <span class="text-danger d-none">Last name
-                                                                                required!</span>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputCity"
-                                                                                class="form-label fw-bold">Email<spnan
-                                                                                    class="text-danger">
-                                                                                    *</span></label>
-                                                                            <input type="email"
-                                                                                class="form-control form"
-                                                                                placeholder="Enter Email"
-                                                                                pattern="[A-Za-z0-9_\.@]+"
-                                                                                oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
-                                                                                id="email_user_update" required>
-                                                                            <span class="text-danger d-none">Email is
-                                                                                required!</span>
-                                                                            <span class="d-none" style="color: #e82646 !important;"
-                                                                                id="already-exist-update">Email already
-                                                                                exist!</span>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <label for="inputState"
-                                                                                class="form-label fw-bold">Phone Number
-                                                                                <span
-                                                                                    class="fw-light">(Optional)</span></label>
-                                                                            <input id="phone2" required name="phone"
-                                                                                type="tel" autocomplete="off"
-                                                                                placeholder="Enter Phone Number"
-                                                                                pattern="[0-9]{5}"
-                                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                                required>
-                                                                            <span id="valid-msg"
-                                                                                class="d-none text-success valid-msg">✓
-                                                                                Valid</span>
-                                                                            <span id="error-msg"
-                                                                                class="hide text-danger error-msg"></span>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="inputState"
-                                                                                    class="form-label fw-bold">Status
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <select id="status_user_update"
-                                                                                    class="form-select form form-select select2-show-search"
-                                                                                    required>
-                                                                                    <option selected>Select Option
-                                                                                    </option>
-                                                                                    <option value="Active">Active
-                                                                                    </option>
-                                                                                    <option class="Inactive">Inactive
-                                                                                    </option>
-                                                                                </select>
-                                                                                <span class="text-danger d-none">State
-                                                                                    is required!</span>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="inputState"
-                                                                                    class="form-label fw-bold">Role
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <select id="userrole_user_update"
-                                                                                    class="form-select form form-select select2-show-search"
-                                                                                    required>
-                                                                                    <option selected>Select Option
-                                                                                    </option>
-
-                                                                                </select>
-                                                                                <span class="text-danger d-none">State
-                                                                                    is required!</span>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-12">
-                                                                            <label class="form-label fw-bold">User Photo
-                                                                                (Optional)</label>
-                                                                            <div class="custom-file"
-                                                                                style="border: 1px dashed #00000087;"
-                                                                                ondrop="dropHandler(event);"
-                                                                                ondragover="dragOverHandler(event);">
-                                                                                <input id="fileInput_user_update"
-                                                                                    type="file" name="image"
-                                                                                    placeholder="Enter Photo"
-                                                                                    class="custom-file-input form"
-                                                                                    accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
-                                                                                    aria-label="hello" multiple="">
-                                                                                <span classname="d-none"></span>
-                                                                                <label class="custom-file-label"
-                                                                                    for="fileInput_user_update">
-                                                                                    <i
-                                                                                        class="fi fi-rs-cloud-upload"></i>
-                                                                                    <div class="custom-file-text">
-                                                                                        <span>Upload Photo here</span>
-                                                                                        <span>JPEG and PNG, file size no
-                                                                                            more than 5MB</span><small
-                                                                                            class="text-danger d-none"
-                                                                                            id="count-text">Maximum
-                                                                                            number of
-                                                                                            files reached.</small><small
-                                                                                            class="text-danger d-none"
-                                                                                            id="size-text">File size
-                                                                                            exceeds 5MB limit.</small>
-                                                                                    </div>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="selected-files text-white">
-                                                                                <div class="file-grid"></div>
-                                                                            </div>
-                                                                            <span class="text-danger d-none">Photos are
-                                                                                required!</span>
-                                                                        </div>
-
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button
-                                                                class="btn btn-close-bottom btn-outline-default btn-pill button"
-                                                                data-bs-dismiss="modal" id="close"
-                                                                style="width: fit-content;">Close</button>
-                                                            <button class="btn text-light button"
-                                                                style="background-color:#1467B0; width: fit-content;"
-                                                                id="update_user_permission">Update</button>
-                                                            <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-close-bottom btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                        id="close" style="width: fit-content;">Close</button>
+                    <button class="btn text-light button" style="background-color:#1467B0; width: fit-content;"
+                        id="update_user_permission">Update</button>
+                    <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
                                                             <button class="btn text-light button d-none" style="background-color:#1467B0;" id="save">Save</button> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Edit User Permissions popup End  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit User Permissions popup End  -->
 
-                                            <!-- Delete User Permissions popup start  -->
-                                            <div class="modal fade" id="delete-user-permission">
-                                                <div class="modal-dialog modal-dialog-centered text-center"
-                                                    role="document">
-                                                    <div class="modal-content modal-content-demo">
-                                                        <div class="modal-body p-0">
-                                                            <div class="card border p-0 pb-3"
-                                                                style="margin-bottom: 0rem;">
-                                                                <div class="card-header border-0 pt-3">
-                                                                    <button class="btn-close mt-0"
-                                                                        data-bs-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true"><i
-                                                                                class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="card-body text-center">
-                                                                    <span class=""><svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            height="60" width="60" viewBox="0 0 24 24">
-                                                                            <path fill="#f07f8f"
-                                                                                d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
-                                                                            <circle cx="12" cy="17" r="1"
-                                                                                fill="#e62a45" />
-                                                                            <path fill="#e62a45"
-                                                                                d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                                                                        </svg></span>
-                                                                    <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
-                                                                    <p class="card-text">This will delete your User. Are
-                                                                        you sure?</p>
+    <!-- Delete User Permissions popup start  -->
+    <div class="modal fade" id="delete-user-permission">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your User. Are
+                                you sure?</p>
 
-                                                                </div>
-                                                                <div class="card-footer text-center border-0 pt-0">
-                                                                    <div class="row">
-                                                                        <div class="text-center">
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-white me-2"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close">Cancel</a>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-danger"
-                                                                                id="confirmDelete-user">Delete</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Delete User Permissions popup End  -->
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                        id="confirmDelete-user">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete User Permissions popup End  -->
 
-                                            <!-- View User Permissions popup start  -->
-                                            <div class="modal fade" id="view-user-permission" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="text-justify ps-2 border-model-line title-text">
-                                                                <h2 class="modal-title">View <strong
-                                                                        class="color-primary"
-                                                                        id="title-sub">User</strong>
-                                                                </h2>
-                                                                <span class="">Post your properties to thousands of
-                                                                    potential investors,
-                                                                    tenants and interested individuals.</span>
-                                                            </div>
-                                                            <button type="button"
-                                                                class="btn btn-primary me-4 mt-3 d-none"
-                                                                id="edit-btn"><i class="fi fi-rs-pencil"
-                                                                    style="display:block"></i><small>Edit
-                                                                    Details</small></button>
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body mb-5">
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <img id="image_user_view" src="" alt=""
-                                                                        style="width: auto; height: 170px; background-size: cover; background-repeat: no-repeat; background: cornflowerblue; margin-bottom: 30px;">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <label><b>First Name</b></label>
-                                                                    <p class="text-primary"><b id="firstName_user_view"
-                                                                            style="word-wrap: break-word;"></b></p>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <label><b>Last Name</b></label>
-                                                                    <p class="text-primary"><b id="lastName_user_view"
-                                                                            style="word-wrap: break-word;"></b>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <label><b>Email</b></label>
-                                                                    <p class="text-primary"><b id="email_user_view"
-                                                                            style="word-wrap: break-word;"></b>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <label><b>Phone no</b></label>
-                                                                    <p class="text-primary"><b id="phone_user_view"
-                                                                            style="word-wrap: break-word;"></b>
-                                                                    </p>
-                                                                </div>
+    <!-- View User Permissions popup start  -->
+    <div class="modal fade" id="view-user-permission" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">View <strong class="color-primary" id="title-sub">User</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of
+                            potential investors,
+                            tenants and interested individuals.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit
+                            Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body mb-5">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <img id="image_user_view" src="" alt=""
+                                style="width: auto; height: 170px; background-size: cover; background-repeat: no-repeat; background: cornflowerblue; margin-bottom: 30px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>First Name</b></label>
+                            <p class="text-primary"><b id="firstName_user_view" style="word-wrap: break-word;"></b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Last Name</b></label>
+                            <p class="text-primary"><b id="lastName_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Email</b></label>
+                            <p class="text-primary"><b id="email_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Phone no</b></label>
+                            <p class="text-primary"><b id="phone_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
 
-                                                                <div class="col-lg-3 mt-5">
-                                                                    <label><b>Status</b></label>
-                                                                    <p class="text-primary"><b id="status_user_view"
-                                                                            style="word-wrap: break-word;"></b>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="col-lg-3 mt-5">
-                                                                    <label><b>Role</b></label>
-                                                                    <p class="text-primary"><b id="role_user_view"
-                                                                            style="word-wrap: break-word;"></b>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                        <div class="col-lg-3 mt-5">
+                            <label><b>Status</b></label>
+                            <p class="text-primary"><b id="status_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                        <div class="col-lg-3 mt-5">
+                            <label><b>Role</b></label>
+                            <p class="text-primary"><b id="role_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal fade" id="tenant-invite-modal" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-xl modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body p-0">
-                                                            <img src="../assets/images/tenant-invite.png" class="w-100"  alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal fade" id="invoice-invite-modal" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-xl modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body p-0">
-                                                            <img src="../assets/images/invoice-invite.png" class="w-100" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal fade" id="task-invite-modal" tabindex="-1"
-                                                role="dialog">
-                                                <div class="modal-dialog modal-xl modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body p-0">
-                                                            <img src="../assets/images/task-invite.png" class="w-100" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="tenant-invite-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="../assets/images/tenant-invite.png" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="invoice-invite-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="../assets/images/invoice-invite.png" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="task-invite-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="../assets/images/task-invite.png" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="infoModal_account" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -3628,7 +3497,8 @@
                                                             Preferences</a></li>
                                                     <li><a href="#tab8" data-bs-toggle="tab">Appearance</a></li>
                                                     <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
-                                                    <li><a href="#tab10" data-bs-toggle="tab" id="permission-tab">Users & Permissions</a>
+                                                    <li><a href="#tab10" data-bs-toggle="tab" id="permission-tab">Users
+                                                            & Permissions</a>
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
@@ -3706,7 +3576,8 @@
                                                 <input type="file" id="mediaFile" />
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="fname1"><b>First name</b><span class="text-danger"> *</span></label>
+                                                        <label for="fname1"><b>First name</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="text" class="form-control" id="firstName"
                                                             pattern="[A-Za-z\s]+"
                                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
@@ -3714,7 +3585,8 @@
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="lname1"><b>Last name</b><span class="text-danger"> *</span></label>
+                                                        <label for="lname1"><b>Last name</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="text" class="form-control" id="lastName"
                                                             pattern="[A-Za-z\s]+"
                                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
@@ -3723,7 +3595,8 @@
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="email1"><b>Email</b><span class="text-danger"> *</span></label>
+                                                        <label for="email1"><b>Email</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="email" class="form-control" id="email"
                                                             placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
@@ -3731,7 +3604,8 @@
                                                     </div>
 
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="phone1"><b>Phone</b></label><span class="text-danger"> *</span><br>
+                                                        <label for="phone1"><b>Phone</b></label><span
+                                                            class="text-danger"> *</span><br>
                                                         <input id="phone1" name="phone" class="form-control" type="tel"
                                                             placeholder="Enter Phone" pattern="[0-9]+"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -3752,7 +3626,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-8 mb-3">
-                                                                <label for="saddress1"><b>Personal Address</b> (Optional)</label>
+                                                                <label for="saddress1"><b>Personal Address</b>
+                                                                    (Optional)</label>
                                                                 <input type="text" class="form-control"
                                                                     id="streetAddress"
                                                                     placeholder="Enter My Mailing Address" required>
@@ -3763,8 +3638,9 @@
 
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>City</b> (Optional)</label>
-                                                                <input type="text" class="form-control" id="city" pattern="[A-Za-z\s]+"
-                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                                                <input type="text" class="form-control" id="city"
+                                                                    pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                                     placeholder="Enter City" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -3772,8 +3648,9 @@
                                                             <div class="col-md-4 mb-3">
                                                                 <div class="form-group">
                                                                     <label for="inputState"
-                                                                        class="form-labell fw-bold"><b>State</b> (Optional)<spnan
-                                                                            class="text-danger"></span></label>
+                                                                        class="form-labell fw-bold"><b>State</b>
+                                                                        (Optional)<spnan class="text-danger">
+                                                                            </span></label>
                                                                     <select id="state"
                                                                         class="form-select form form-select select2-show-search"
                                                                         required>
@@ -3788,8 +3665,10 @@
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>Zip Code</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="zipcode"
-                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
-                                                                    minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}"
+                                                                    placeholder="A valid 5-digit zip code" maxlength="5"
+                                                                    minlength="5"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -3807,7 +3686,8 @@
 
 
                                                             <div class="col-xl-8 mb-3">
-                                                                <label for="baddress1"><b>Business Address</b> (Optional)</label>
+                                                                <label for="baddress1"><b>Business Address</b>
+                                                                    (Optional)</label>
                                                                 <input type="text" class="form-control"
                                                                     id="businessAddress"
                                                                     placeholder="Enter Business Address" required>
@@ -3818,8 +3698,9 @@
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>City</b> (Optional)</label>
-                                                                <input type="text" class="form-control" id="city1" pattern="[A-Za-z\s]+"
-                                                                oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                                                <input type="text" class="form-control" id="city1"
+                                                                    pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                                     placeholder="Enter City" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -3829,7 +3710,8 @@
                                                                     <!-- <label for="inputState"
                                                                         class="form-label fw-bold">State<span
                                                                             class="text-danger"></span></label> -->
-                                                                    <label for="inputState"><b>State</b> (Optional)</label>
+                                                                    <label for="inputState"><b>State</b>
+                                                                        (Optional)</label>
                                                                     <select id="state1"
                                                                         class="form-select form form-select select2-show-search"
                                                                         required>
@@ -3845,8 +3727,10 @@
                                                             <div class="col-xl-4 mb-3">
                                                                 <label for="bname1"><b>Zip Code</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="zipcode1"
-                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
-                                                                    minlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}"
+                                                                    placeholder="A valid 5-digit zip code" maxlength="5"
+                                                                    minlength="5"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -6830,12 +6714,18 @@
                                                                                                     alt="Pineapple"
                                                                                                     class="add-payment-img">
                                                                                                 <strong>Spade Rent -
-                                                                                                    <span id="plan-name">Basic</span>
+                                                                                                    <span
+                                                                                                        id="plan-name">Basic</span>
                                                                                                     Plan</strong><strong
                                                                                                     style="float: right;">Total</strong><br>
-                                                                                                <span>$<span id="payment-amount">39.99</span> / Per
-                                                                                                    <span id="payment-month">Month</span></span> <span
-                                                                                                    style="float: right;">$<span id="payment-total">479.88</span></span>
+                                                                                                <span>$<span
+                                                                                                        id="payment-amount">39.99</span>
+                                                                                                    / Per
+                                                                                                    <span
+                                                                                                        id="payment-month">Month</span></span>
+                                                                                                <span
+                                                                                                    style="float: right;">$<span
+                                                                                                        id="payment-total">479.88</span></span>
                                                                                             </p>
                                                                                         </div>
                                                                                     </div>
@@ -11855,7 +11745,8 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="#tenant-invite-modal" data-bs-toggle="modal"
+                                                                    </p><a href="#tenant-invite-modal"
+                                                                        data-bs-toggle="modal"
                                                                         class="text-primary float-right"><b>Preview
                                                                             Template</b></a>
                                                                 </div>
@@ -11874,8 +11765,8 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="#invoice-invite-modal" data-bs-toggle="modal"
-                                                                        
+                                                                    </p><a href="#invoice-invite-modal"
+                                                                        data-bs-toggle="modal"
                                                                         class="text-primary float-right"><b>Preview
                                                                             Template</b></a>
                                                                 </div>
@@ -11894,7 +11785,8 @@
                                                                         Lorem Ipsum is simply dummy text of the printing
                                                                         and typesetting industry. Lorem Ipsum has been
                                                                         the industry's
-                                                                    </p><a href="#task-invite-modal" data-bs-toggle="modal"
+                                                                    </p><a href="#task-invite-modal"
+                                                                        data-bs-toggle="modal"
                                                                         class="text-primary float-right"><b>Preview
                                                                             Template</b></a>
                                                                 </div>
@@ -12300,7 +12192,16 @@
                                                         style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                        <div class="col-sm-12 col-md-6 col-lg-12 col-xl-12">
+
+                                                            <div class="col-4" id="businessImg_col">
+                                                                <img class="d-block img-fluid br-5" style="width: 200px;"
+                                                                    src="../assets/images/media/1.jpg"
+                                                                    id="businesslogoInsert">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                             <label class="form-label fw-bold">Add Business Logo</label>
                                                             <div class="custom-file"
                                                                 style="border: 1px dashed #00000087;"
@@ -12331,11 +12232,15 @@
                                                             </div>
                                                             <span class="text-danger d-none">Photos are required!</span>
                                                         </div>
-                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                             <button class="btn btn-primary btn-pill m-2"
                                                                 id="submit-photo">Save</button>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
 
@@ -13881,6 +13786,7 @@
         <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
         <!-- <script src="../assets/js/email-verification.js"></script> -->
         <script>
+            var selectedFiles = [];
             $(document).ready(function () {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
@@ -14400,7 +14306,7 @@
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png') || file?.imageKey?.endsWith('.PNG')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file.imageURL))
@@ -14666,6 +14572,7 @@
                     $("#phone2").val(filteredData.UPhone)
                     $("#userrole_user_update").val(filteredData.URole)
                     $(`#status_user_update`).val(filteredData.UStatus)
+                    selectedFiles = []
                     if (filteredData.UImage !== "") {
 
                         selectedFiles.push({
@@ -14830,15 +14737,21 @@
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
-                        if(response.settingProfiles){
+                        if(response.businessLogo){
+
+                            $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
+                        }else{
+                            $('#businessImg_col').text('No Image Uploaded')
+                        }
+                        if (response.settingProfiles) {
                             settingPermissions.push(response.settingProfiles)
-                        settingPermissions.push(response.settingCPasswords)
-                        settingPermissions.push(response.settingNotifications)
-                        settingPermissions.push(response.settingCThemes)
-                        settingPermissions.push(response.settingSubscriptions)
-                        settingPermissions.push(response.settingMUsers)
-                        settingPermissions.push(response.settingEmailTs)
-                        settingPermissions.push(response.SettingInvoiceSettings)
+                            settingPermissions.push(response.settingCPasswords)
+                            settingPermissions.push(response.settingNotifications)
+                            settingPermissions.push(response.settingCThemes)
+                            settingPermissions.push(response.settingSubscriptions)
+                            settingPermissions.push(response.settingMUsers)
+                            settingPermissions.push(response.settingEmailTs)
+                            settingPermissions.push(response.SettingInvoiceSettings)
                         }
 
                         if (response.image !== " " && response.image !== null) {
@@ -14860,7 +14773,7 @@
                         $("#state").val(toTitleCase(response.state || ""))
                         $("#zipcode").val(response.zipCode)
                         $("#emailVerify").val(response.email)
-                        if(response?.role){
+                        if (response?.role) {
                             $("#permission-tab").addClass("d-none")
                             $("#tab10").addClass("d-none")
                         }
@@ -14998,6 +14911,10 @@
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
+
+
+
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                     type: 'GET',
@@ -15760,7 +15677,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -15864,17 +15781,17 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     var cardId = $(this).closest('.pricing-card').attr('id');
                     var time;
                     $(".nav-price li a").each(function () {
-                        if($(this).hasClass("active")){
-                            if("#annualyear"==$(this).attr("href")){
-                                time="Year"
-                            }else{
-                                time="Month"
+                        if ($(this).hasClass("active")) {
+                            if ("#annualyear" == $(this).attr("href")) {
+                                time = "Year"
+                            } else {
+                                time = "Month"
                             }
 
                         }
                     })
                     $("#payment-month").text(time)
-                    $("#plan-name").text($("#"+cardId+" .card-headerr"+" strong").first().text().trim(" "))
+                    $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                     var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                     seletedPlanID = cardId
                     $("#upgradetopro #amount").val(amount)
@@ -16498,12 +16415,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 hiddenText3.style.display = "none";
             });
 
-            button3.addEventListener("click", function () {
-                hiddenText.style.display = "none";
-                hiddenText1.style.display = "none";
-                hiddenText2.style.display = "none";
-                hiddenText3.style.display = "block";
-            });
+            // button3.addEventListener("click", function () {
+            //     hiddenText.style.display = "none";
+            //     hiddenText1.style.display = "none";
+            //     hiddenText2.style.display = "none";
+            //     hiddenText3.style.display = "block";
+            // });
         </script>
 
         <script>
@@ -16554,7 +16471,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 var email_pro = email_profile.value;
                 // var zipcode = zipcodeInput.value;
                 // var zipcode1 = zipcodeInput1.value;
-                if (firstName === '' || lastName === '' || phone1 === '' || email_pro === '' ) {
+                if (firstName === '' || lastName === '' || phone1 === '' || email_pro === '') {
                     saveButton.disabled = true;
                 } else {
                     saveButton.disabled = false;
@@ -16563,12 +16480,13 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             firstNameInput.addEventListener('keyup', updateButtonState);
             lastNameInput.addEventListener('keyup', updateButtonState);
             phone1Input.addEventListener('keyup', updateButtonState);
-            zipcodeInput.addEventListener('keyup', updateButtonState);
-            zipcodeInput1.addEventListener('keyup', updateButtonState);
+            email_profile.addEventListener('keyup', updateButtonState);
+            // zipcodeInput.addEventListener('keyup', updateButtonState);
+            // zipcodeInput1.addEventListener('keyup', updateButtonState);
 
 
             $('#submit-photo').click(() => {
-                $('#preloader').css('display','flex')
+                $('#preloader').css('display', 'flex')
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
 
@@ -16589,22 +16507,44 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         },
                         success: function (response) {
                             console.log(response);
-                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
-                            if (response.message == "Base64 Successful") {
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
+                            if (response?.message == "Base64 Successful") {
                                 $("#myModal_success p").text("Succesfully Updated!!!")
                                 $("#myModal_success").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_success").modal("hide");
                                 }, 2000);
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                                    method: 'GET',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        selectedFiles = []
+                                        $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
+                                    },
+                                    error: function (xhr, status, error) {
+                                        $("#myModal_warning").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning').modal('hide');
+                                        }, 2000);
+                                        console.log(xhr);
+                                        console.log(error);
+                                    }
+                                });
+
+
+
                                 $('.file-grid').empty()
                             }
                         },
                         error: function (xhr, status, error) {
-                            $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             console.log('Error: ' + error);
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
@@ -16980,7 +16920,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('#edit-user-permissions').find(".file-grid").empty()
                 $('#add-user-permissions #phone').val("")
             }
-            
+
             $("#edit-user-permissions,#add-user-permissions").on("hidden.bs.modal", function () {
                 resetAccordions()
             });
@@ -17298,8 +17238,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     if (permission.endsWith(',')) {
                         permission = permission.slice(0, -1);
                     }
-                    if(permission==""){
-                        permission="Restrict"
+                    if (permission == "") {
+                        permission = "Restrict"
                     }
                     const role = $("#user-role-holder").children().first().nextAll().find(".active").attr("id")
                     $("#checkbox-container-parent input[type=checkbox]").prop('disabled', true);
@@ -17383,40 +17323,40 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
         </script>
         <script>
             $(document).ajaxStop(function () {
-                
+
                 if (settingPermissions.length >= 1) {
                     const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
-                    var index=0;
+                    var index = 0;
                     for (var permission of settingPermissions) {
-                        
+
 
                         for (const action of actions) {
-                            
-                            
-                            
+
+
+
                             if (!permission[action]) {
                                 switch (action) {
                                     case "Add":
 
-                                    // $("#top-panel li:eq(" + index + ")").remove()
+                                        // $("#top-panel li:eq(" + index + ")").remove()
                                         break;
                                     case "View":
-                                        
-                                        
-                                        if($("#top-panel li:eq(" + index + ") a").hasClass("active")){
+
+
+                                        if ($("#top-panel li:eq(" + index + ") a").hasClass("active")) {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
                                             $("#top-panel li:eq(" + index + ") a").removeClass("active")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
-                                            $("#top-panel li:eq(" + (index+1) + ") a").addClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + (index+1) + ")").addClass("active")
-                                        }else{
+                                            $("#top-panel li:eq(" + (index + 1) + ") a").addClass("active")
+                                            $("#tab-pane .tab-pane-hide:eq(" + (index + 1) + ")").addClass("active")
+                                        } else {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
                                             console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                         }
                                         break;
-                                    
+
                                     case "Delete":
                                         // $("#table_body tr").each(function (item, index) {
                                         //     $(this).find(".delete-option").addClass("d-none")
@@ -17429,35 +17369,35 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                                         // })
                                         break;
-                                    
+
                                     default:
 
                                         break;
                                 }
-                            
-                            }else{
+
+                            } else {
                                 switch (action) {
                                     case "Add":
 
-                                    // $("#top-panel li:eq(" + index + ")").remove()
+                                        // $("#top-panel li:eq(" + index + ")").remove()
                                         break;
                                     case "Restrict":
-                                        
-                                        
-                                        if($("#top-panel li:eq(" + index + ") a").hasClass("active")){
+
+
+                                        if ($("#top-panel li:eq(" + index + ") a").hasClass("active")) {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
                                             $("#top-panel li:eq(" + index + ") a").removeClass("active")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
-                                            $("#top-panel li:eq(" + (index+1) + ") a").addClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + (index+1) + ")").addClass("active")
-                                        }else{
+                                            $("#top-panel li:eq(" + (index + 1) + ") a").addClass("active")
+                                            $("#tab-pane .tab-pane-hide:eq(" + (index + 1) + ")").addClass("active")
+                                        } else {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
                                             console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                         }
                                         break;
-                                    
+
                                     case "Delete":
                                         // $("#table_body tr").each(function (item, index) {
                                         //     $(this).find(".delete-option").addClass("d-none")
@@ -17470,12 +17410,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                                         // })
                                         break;
-                                    
+
                                     default:
 
                                         break;
                                 }
-                            
+
                             }
 
                         }
@@ -17492,103 +17432,103 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     if (mutation.type === 'childList') {
                         // Check if tenantPermissions is defined
                         if (settingPermissions.length >= 1) {
-                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
-                    var index=0;
-                    for (var permission of settingPermissions) {
-                        
+                            const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                            var index = 0;
+                            for (var permission of settingPermissions) {
 
-                        for (const action of actions) {
-                            
-                            
-                            
-                            if (!permission[action]) {
-                                switch (action) {
-                                    case "Add":
 
-                                    // $("#top-panel li:eq(" + index + ")").remove()
-                                        break;
-                                    case "View":
-                                        
-                                        
-                                        if($("#top-panel li:eq(" + index + ") a").hasClass("active")){
-                                            $("#top-panel li:eq(" + index + ")").addClass("d-none")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            $("#top-panel li:eq(" + index + ") a").removeClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
-                                            $("#top-panel li:eq(" + (index+1) + ") a").addClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + (index+1) + ")").addClass("active")
-                                        }else{
-                                            $("#top-panel li:eq(" + index + ")").addClass("d-none")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                for (const action of actions) {
+
+
+
+                                    if (!permission[action]) {
+                                        switch (action) {
+                                            case "Add":
+
+                                                // $("#top-panel li:eq(" + index + ")").remove()
+                                                break;
+                                            case "View":
+
+
+                                                if ($("#top-panel li:eq(" + index + ") a").hasClass("active")) {
+                                                    $("#top-panel li:eq(" + index + ")").addClass("d-none")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
+                                                    $("#top-panel li:eq(" + index + ") a").removeClass("active")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
+                                                    $("#top-panel li:eq(" + (index + 1) + ") a").addClass("active")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + (index + 1) + ")").addClass("active")
+                                                } else {
+                                                    $("#top-panel li:eq(" + index + ")").addClass("d-none")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
+                                                    console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                                }
+                                                break;
+
+                                            case "Delete":
+                                                // $("#table_body tr").each(function (item, index) {
+                                                //     $(this).find(".delete-option").addClass("d-none")
+
+                                                // })
+                                                break;
+                                            case "Edit":
+                                                // $("#table_body tr").each(function (item, index) {
+                                                //     $(this).find(".edit-option").addClass("d-none")
+
+                                                // })
+                                                break;
+
+                                            default:
+
+                                                break;
                                         }
-                                        break;
-                                    
-                                    case "Delete":
-                                        // $("#table_body tr").each(function (item, index) {
-                                        //     $(this).find(".delete-option").addClass("d-none")
 
-                                        // })
-                                        break;
-                                    case "Edit":
-                                        // $("#table_body tr").each(function (item, index) {
-                                        //     $(this).find(".edit-option").addClass("d-none")
+                                    } else {
+                                        switch (action) {
+                                            case "Add":
 
-                                        // })
-                                        break;
-                                    
-                                    default:
+                                                // $("#top-panel li:eq(" + index + ")").remove()
+                                                break;
+                                            case "Restrict":
 
-                                        break;
-                                }
-                            
-                            }else{
-                                switch (action) {
-                                    case "Add":
 
-                                    // $("#top-panel li:eq(" + index + ")").remove()
-                                        break;
-                                    case "Restrict":
-                                        
-                                        
-                                        if($("#top-panel li:eq(" + index + ") a").hasClass("active")){
-                                            $("#top-panel li:eq(" + index + ")").addClass("d-none")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            $("#top-panel li:eq(" + index + ") a").removeClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
-                                            $("#top-panel li:eq(" + (index+1) + ") a").addClass("active")
-                                            $("#tab-pane .tab-pane-hide:eq(" + (index+1) + ")").addClass("active")
-                                        }else{
-                                            $("#top-panel li:eq(" + index + ")").addClass("d-none")
-                                            $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                                if ($("#top-panel li:eq(" + index + ") a").hasClass("active")) {
+                                                    $("#top-panel li:eq(" + index + ")").addClass("d-none")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
+                                                    $("#top-panel li:eq(" + index + ") a").removeClass("active")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").removeClass("active")
+                                                    $("#top-panel li:eq(" + (index + 1) + ") a").addClass("active")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + (index + 1) + ")").addClass("active")
+                                                } else {
+                                                    $("#top-panel li:eq(" + index + ")").addClass("d-none")
+                                                    $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
+                                                    console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                                }
+                                                break;
+
+                                            case "Delete":
+                                                // $("#table_body tr").each(function (item, index) {
+                                                //     $(this).find(".delete-option").addClass("d-none")
+
+                                                // })
+                                                break;
+                                            case "Edit":
+                                                // $("#table_body tr").each(function (item, index) {
+                                                //     $(this).find(".edit-option").addClass("d-none")
+
+                                                // })
+                                                break;
+
+                                            default:
+
+                                                break;
                                         }
-                                        break;
-                                    
-                                    case "Delete":
-                                        // $("#table_body tr").each(function (item, index) {
-                                        //     $(this).find(".delete-option").addClass("d-none")
 
-                                        // })
-                                        break;
-                                    case "Edit":
-                                        // $("#table_body tr").each(function (item, index) {
-                                        //     $(this).find(".edit-option").addClass("d-none")
-
-                                        // })
-                                        break;
-                                    
-                                    default:
-
-                                        break;
+                                    }
                                 }
-                            
+                                index++;
+
                             }
                         }
-                        index++;
-
-                    }
-                }
 
 
 
@@ -17600,6 +17540,26 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 
         </script>
-<script src="../assets/js/user-sidebar-permissions.js"></script></body>
+      <script>
+        $('#submit-photo').prop('disabled', true);
+        $(document).on('change', function () {
+            if ($('#tab12 .file-grid').is(':empty')) {
+                $('#submit-photo').prop('disabled', true);
+            } else {
+                $('#submit-photo').prop('disabled', false);
+            }
+        });
+        $(document).ajaxComplete(function(){
+            if ($('#tab12 .file-grid').is(':empty')) {
+                $('#submit-photo').prop('disabled', true);
+            } else {
+                $('#submit-photo').prop('disabled', false);
+            }
+        })
+    </script>
+    
+
+        <script src="../assets/js/user-sidebar-permissions.js"></script>
+</body>
 
 </html>
