@@ -3576,7 +3576,8 @@
                                                 <input type="file" id="mediaFile" />
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="fname1"><b>First name</b></label>
+                                                        <label for="fname1"><b>First name</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="text" class="form-control" id="firstName"
                                                             pattern="[A-Za-z\s]+"
                                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
@@ -3584,7 +3585,8 @@
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="lname1"><b>Last name</b></label>
+                                                        <label for="lname1"><b>Last name</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="text" class="form-control" id="lastName"
                                                             pattern="[A-Za-z\s]+"
                                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
@@ -3593,7 +3595,8 @@
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="email1"><b>Email</b></label>
+                                                        <label for="email1"><b>Email</b><span class="text-danger">
+                                                                *</span></label>
                                                         <input type="email" class="form-control" id="email"
                                                             placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
@@ -3601,7 +3604,8 @@
                                                     </div>
 
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="phone1"><b>Phone</b></label><br>
+                                                        <label for="phone1"><b>Phone</b></label><span
+                                                            class="text-danger"> *</span><br>
                                                         <input id="phone1" name="phone" class="form-control" type="tel"
                                                             placeholder="Enter Phone" pattern="[0-9]+"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -3609,7 +3613,7 @@
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-8 mb-3">
-                                                        <label for="bname1"><b>Business Name</b></label>
+                                                        <label for="bname1"><b>Business Name</b> (Optional)</label>
                                                         <input type="text" class="form-control" id="businessName"
                                                             placeholder="Enter Business Name" required>
                                                         <div class="valid-feedback">Looks good!</div>
@@ -3622,7 +3626,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-8 mb-3">
-                                                                <label for="saddress1"><b>Personal Address</b></label>
+                                                                <label for="saddress1"><b>Personal Address</b>
+                                                                    (Optional)</label>
                                                                 <input type="text" class="form-control"
                                                                     id="streetAddress"
                                                                     placeholder="Enter My Mailing Address" required>
@@ -3632,8 +3637,10 @@
                                                             <div class="col-lg-4"></div>
 
                                                             <div class="col-xl-4 mb-3">
-                                                                <label for="bname1"><b>City</b></label>
+                                                                <label for="bname1"><b>City</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="city"
+                                                                    pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                                     placeholder="Enter City" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -3641,8 +3648,9 @@
                                                             <div class="col-md-4 mb-3">
                                                                 <div class="form-group">
                                                                     <label for="inputState"
-                                                                        class="form-labell fw-bold">State<spnan
-                                                                            class="text-danger"></span></label>
+                                                                        class="form-labell fw-bold"><b>State</b>
+                                                                        (Optional)<spnan class="text-danger">
+                                                                            </span></label>
                                                                     <select id="state"
                                                                         class="form-select form form-select select2-show-search"
                                                                         required>
@@ -3655,9 +3663,11 @@
 
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
-                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <label for="bname1"><b>Zip Code</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="zipcode"
-                                                                    placeholder="Enter Zipcode" pattern="[0-5]+"
+                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}"
+                                                                    placeholder="A valid 5-digit zip code" maxlength="5"
+                                                                    minlength="5"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
@@ -3676,7 +3686,8 @@
 
 
                                                             <div class="col-xl-8 mb-3">
-                                                                <label for="baddress1"><b>Business Address</b></label>
+                                                                <label for="baddress1"><b>Business Address</b>
+                                                                    (Optional)</label>
                                                                 <input type="text" class="form-control"
                                                                     id="businessAddress"
                                                                     placeholder="Enter Business Address" required>
@@ -3686,8 +3697,10 @@
 
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
-                                                                <label for="bname1"><b>City</b></label>
+                                                                <label for="bname1"><b>City</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="city1"
+                                                                    pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                                     placeholder="Enter City" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -3697,7 +3710,8 @@
                                                                     <!-- <label for="inputState"
                                                                         class="form-label fw-bold">State<span
                                                                             class="text-danger"></span></label> -->
-                                                                    <label for="inputState"><b>State</b></label>
+                                                                    <label for="inputState"><b>State</b>
+                                                                        (Optional)</label>
                                                                     <select id="state1"
                                                                         class="form-select form form-select select2-show-search"
                                                                         required>
@@ -3711,9 +3725,11 @@
 
                                                             <div class="col-lg-4"></div>
                                                             <div class="col-xl-4 mb-3">
-                                                                <label for="bname1"><b>Zip Code</b></label>
+                                                                <label for="bname1"><b>Zip Code</b> (Optional)</label>
                                                                 <input type="text" class="form-control" id="zipcode1"
-                                                                    placeholder="Enter Zipcode" pattern="[0-5]+"
+                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}"
+                                                                    placeholder="A valid 5-digit zip code" maxlength="5"
+                                                                    minlength="5"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
@@ -12178,19 +12194,10 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-6 col-lg-12 col-xl-12">
 
-                                                            <div class="col-4"
-                                                                data-responsive="../assets/images/media/1.jpg"
-                                                                data-src="../assets/images/media/1.jpg"
-                                                                lg-event-uid="&amp;1">
-                                                                <a href="javascript:void(0)"
-                                                                    class="d-block link-overlay">
-                                                                    <img class="d-block img-fluid br-5"
-                                                                        src="../assets/images/media/1.jpg" alt=""
-                                                                        id="businesslogoInsert">
-                                                                    <span class="link-overlay-bg">
-                                                                        <i class="fa fa-search"></i>
-                                                                    </span>
-                                                                </a>
+                                                            <div class="col-4" id="businessImg_col">
+                                                                <img class="d-block img-fluid br-5" style="width: 200px;"
+                                                                    src="../assets/images/media/1.jpg"
+                                                                    id="businesslogoInsert">
                                                             </div>
 
                                                         </div>
@@ -12226,14 +12233,14 @@
                                                             <span class="text-danger d-none">Photos are required!</span>
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                            
+
                                                         </div>
                                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                             <button class="btn btn-primary btn-pill m-2"
                                                                 id="submit-photo">Save</button>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
 
@@ -14730,7 +14737,12 @@
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
-                        $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
+                        if(response.businessLogo){
+
+                            $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
+                        }else{
+                            $('#businessImg_col').text('No Image Uploaded')
+                        }
                         if (response.settingProfiles) {
                             settingPermissions.push(response.settingProfiles)
                             settingPermissions.push(response.settingCPasswords)
@@ -14899,6 +14911,10 @@
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
+
+
+
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                     type: 'GET',
@@ -16441,39 +16457,36 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             });
         </script>
         <script>
-            // Get references to the input fields and the save button
             var firstNameInput = document.getElementById("firstName");
             var lastNameInput = document.getElementById("lastName");
-            var zipcodeInput = document.getElementById("zipcode");
-            var zipcodeInput1 = document.getElementById("zipcode1");
             var phone1Input = document.getElementById("phone1");
+            var email_profile = document.getElementById("email");
+            // var zipcodeInput = document.getElementById("zipcode");
+            // var zipcodeInput1 = document.getElementById("zipcode1");
             var saveButton = document.getElementById("save_profile");
-
-            // Function to check and update button state
             function updateButtonState() {
                 var firstName = firstNameInput.value;
                 var lastName = lastNameInput.value;
                 var phone1 = phone1Input.value;
-                var zipcode = zipcodeInput.value;
-                var zipcode1 = zipcodeInput1.value;
-
-                // Check if all three fields are empty
-                if (firstName === '' || lastName === '' || phone1 === '' || zipcode === '' || zipcode1 === '') {
+                var email_pro = email_profile.value;
+                // var zipcode = zipcodeInput.value;
+                // var zipcode1 = zipcodeInput1.value;
+                if (firstName === '' || lastName === '' || phone1 === '' || email_pro === '') {
                     saveButton.disabled = true;
                 } else {
                     saveButton.disabled = false;
                 }
             }
-
-            // Bind the keyup event handler to the input fields
             firstNameInput.addEventListener('keyup', updateButtonState);
             lastNameInput.addEventListener('keyup', updateButtonState);
             phone1Input.addEventListener('keyup', updateButtonState);
-            zipcodeInput.addEventListener('keyup', updateButtonState);
-            zipcodeInput1.addEventListener('keyup', updateButtonState);
+            email_profile.addEventListener('keyup', updateButtonState);
+            // zipcodeInput.addEventListener('keyup', updateButtonState);
+            // zipcodeInput1.addEventListener('keyup', updateButtonState);
 
 
             $('#submit-photo').click(() => {
+                $('#preloader').css('display', 'flex')
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
 
@@ -16494,15 +16507,44 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         },
                         success: function (response) {
                             console.log(response);
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             if (response?.message == "Base64 Successful") {
                                 $("#myModal_success p").text("Succesfully Updated!!!")
                                 $("#myModal_success").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_success").modal("hide");
                                 }, 2000);
+                                $.ajax({
+                                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                                    method: 'GET',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        selectedFiles = []
+                                        $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
+                                    },
+                                    error: function (xhr, status, error) {
+                                        $("#myModal_warning").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning').modal('hide');
+                                        }, 2000);
+                                        console.log(xhr);
+                                        console.log(error);
+                                    }
+                                });
+
+
+
+                                $('.file-grid').empty()
                             }
                         },
                         error: function (xhr, status, error) {
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
                             console.log('Error: ' + error);
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
@@ -17498,6 +17540,25 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 
         </script>
+      <script>
+        $('#submit-photo').prop('disabled', true);
+        $(document).on('change', function () {
+            if ($('#tab12 .file-grid').is(':empty')) {
+                $('#submit-photo').prop('disabled', true);
+            } else {
+                $('#submit-photo').prop('disabled', false);
+            }
+        });
+        $(document).ajaxComplete(function(){
+            if ($('#tab12 .file-grid').is(':empty')) {
+                $('#submit-photo').prop('disabled', true);
+            } else {
+                $('#submit-photo').prop('disabled', false);
+            }
+        })
+    </script>
+    
+
         <script src="../assets/js/user-sidebar-permissions.js"></script>
 </body>
 
