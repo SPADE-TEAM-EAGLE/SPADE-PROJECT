@@ -2666,7 +2666,7 @@ var password = 'your-secret-password';
     $(document).on('click', '#update', function (e) {
             
             e.preventDefault();
-
+        $("#preloader").css("display", "flex");
             $("#myModal_edit").modal("hide");
             var formData = new FormData();
             var propertyName = $("#propertyName_update").val();
@@ -2736,12 +2736,14 @@ var password = 'your-secret-password';
                                 setTimeout(function () {
                                     $("#successfully_changed").modal("hide");
                                 }, 2000);
+                                $("#preloader").css("display", "none");
                             },
                             error: function (xhr, status, error) {
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
+                                $("#preloader").css("display", "none");
                                 console.log('Error: ' + error);
                             }
                         });
@@ -2787,9 +2789,11 @@ var password = 'your-secret-password';
                         setTimeout(function () {
                             $("#successfully_changed").modal("hide");
                         }, 2000);
+                        $("#preloader").css("display", "none");
                     },
                     error: function (xhr, status, error) {
                         window.alert('Error: ' + error);
+                        $("#preloader").css("display", "none");
                     }
                 });
             }
