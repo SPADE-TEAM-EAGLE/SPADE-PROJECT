@@ -1299,7 +1299,7 @@
                                                             class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
                                                         </div>
                                                     <div>
-                                                        <a class="btn btn-primary btn-pill" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit"><i
+                                                        <a class="btn btn-primary btn-pill edit-option-view" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit"><i
                                                             class="fi fi-rs-edit me-2"></i>Edit Property</a>
                                                     </div>
                                                 </div>
@@ -2259,7 +2259,7 @@
     </script>
     
     <script>
-        var unitsPermission;
+        var unitsPermission;var propertyData_edit;
         $(document).ready(function() {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -2353,7 +2353,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    propertyData_edit=data
                         // window.alert(response.message);
                     // console.log(data.propertyName)
                     function toTitleCase(str) {
@@ -2402,7 +2402,79 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             });
         });
 
+        $(document).ready(function(){
+    //         "data": {
+    //     "id": 507,
+    //     "landlordID": "138",
+    //     "propertyName": "Raza Complex",
+    //     "address": "1/f, Bahria Complex 3, Mt Khan Road",
+    //     "city": "Uytyuy",
+    //     "state": "Alabama",
+    //     "zipCode": "67867",
+    //     "propertyType": "Single Family",
+    //     "propertySQFT": "222",
+    //     "status": "Non-active",
+    //     "units": 2,
+    //     "created_at": "2023-10-07 06:23:54",
+    //     "notify": 1,
+    //     "tenantNotify": 0,
+    //     "NumberCount": {
+    //         "unitNumber": "101",
+    //         "Area": "160",
+    //         "unitDetails": "",
+    //         "status": "Occupied",
+    //         "id": 4221,
+    //         "propertyID": "507",
+    //         "Vacant": "0",
+    //         "Occupied": "2"
+    //     },
+    //     "images": []
+    // }
 
+    $("#propertyName_update").val(propertyData_edit.propertyName);
+    $("#unit_update").val(propertyData_edit.units);
+    
+    $("#propertyTotalSF_update").val(propertyData_edit.propertySQFT);
+    $("#zip_update").val(propertyData_edit.zipCode);
+    // $("#edit-option-view").on("click", function(){
+    //     e.preventDefault();
+    //                         const propertyIdElement = $(this).closest("tr").find(".property-id");
+
+    //                         propertyId = propertyIdElement.text();
+
+    //                         const data = response.data[0].find(obj => obj.id.toString() === propertyId);
+    //                         console.log(data)
+    //                         var stateupdateDropdown = $('#state_update');
+
+    //                         //   stateDropdown.append($('<option></option>').text("Choose..."));
+    //                         states.forEach(function (state) {
+    //                             if (state.states === data.state) {
+    //                                 stateupdateDropdown.append($('<option selected></option>').text(state.states)).val(state.states);
+
+    //                             } else {
+    //                                 stateupdateDropdown.append($('<option></option>').text(state.states));
+    //                             }
+
+    //                         });
+    //                         selectedFiles = data.images
+                            
+    //                         updateSelectedFilesContainer()
+    //                         $("#propertyId_update").val(data.id);
+    //                         $("#propertyName_update").val(data.propertyName);
+    //                         $("#address_update").val(data.address);
+    //                         $("#city_update").val(data.city);
+    //                         // $("#state_update").val(data.state);
+    //                         $("#zip_update").val(data.zipCode);
+    //                         $("#propertyType_update").val(data.propertyType);
+    //                         $("#propertyTotalSF_update").val(data.propertySQFT);
+    //                         $("#unit_update").val(data.units);
+    //                         $("#property-name").text(data.propertyName)
+    //                         $('#myModal_edit').modal('show');
+    //     $("#edit-option-view").hide();
+    //     $("#edit-option").show();
+    // })
+ 
+})
         // });
     </script>
     <!-- ############################################# -->
