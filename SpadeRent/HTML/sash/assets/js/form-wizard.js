@@ -330,7 +330,7 @@ let card_btnn16 = document.getElementsByClassName("card-btnn")[15];
 
 
 let nextpayment = document.getElementById("nextpayment");
-nextpayment.addEventListener("click", cardbtnchange2);
+// nextpayment.addEventListener("click", cardbtnchange2);
 
 
 card_btnn1.addEventListener("click", cardbtnchange);
@@ -801,27 +801,27 @@ function paydatevalidation() {
 //   } else {
 //     document.getElementById("nextpayment").disabled = true;
 //   }
-// }
+// } 
 // Wait for the document to be fully loaded
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
 
-  var nextPaymentButton = document.getElementById("nextpayment");
-  nextPaymentButton.disabled = true;
-  document.querySelector("#card4 #payment-form input").addEventListener("input", function () {
-    var areAllFieldsFilled = areAllFieldsFilledInCard4();
-    nextPaymentButton.disabled = !areAllFieldsFilled;
-  });
-  function areAllFieldsFilledInCard4() {
-    var card4 = document.querySelector("#card4 #payment-form");
-    var fields = card4.querySelectorAll("input");
-    for (var i = 0; i < fields.length; i++) {
-      if (!fields[i].value) {
-        return false;
-      }
-    }
-    return true;
-  }
-});
+//   var nextPaymentButton = document.getElementById("nextpayment");
+//   nextPaymentButton.disabled = true;
+//   document.querySelector("#card4 #payment-form input").addEventListener("input", function () {
+//     var areAllFieldsFilled = areAllFieldsFilledInCard4();
+//     nextPaymentButton.disabled = !areAllFieldsFilled;
+//   });
+//   function areAllFieldsFilledInCard4() {
+//     var card4 = document.querySelector("#card4 #payment-form");
+//     var fields = card4.querySelectorAll("input");
+//     for (var i = 0; i < fields.length; i++) {
+//       if (!fields[i].value) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   }
+// });
 
 // phone name
 
