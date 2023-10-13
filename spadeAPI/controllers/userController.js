@@ -1451,6 +1451,7 @@ exports.propertyUpdate = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: error.message,
     });
@@ -1596,7 +1597,8 @@ exports.propertyView = async (req, res) => {
           );
           const images = matchingImages.map((image) => ({
             propertyID: image.propertyID,
-            Image: image.Image,
+            image_url: image.Image,
+            image_key: image.ImageKey,
           }));
           return {
             ...property,
