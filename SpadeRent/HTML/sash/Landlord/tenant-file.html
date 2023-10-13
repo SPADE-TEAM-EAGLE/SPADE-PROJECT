@@ -2558,6 +2558,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             getData()
             
             $("#submit-pics").click(() => {
+                $('#preloader').css('display','flex')
                 $("#submit-pics").prop("disabled", true)
                 var formData = new FormData();
                 formData.append('tenantID', tenantId);
@@ -2592,6 +2593,9 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             success: function ({message}) {
                                 $("#submit-pics").prop("disabled", false)
                                 console.log(message==" Tenant Files save successful")
+                                $('#preloader').fadeOut('slow', function () {
+                                    $(this).hide();
+                                });
                                if(message==" Tenant Files save successful"){
                                     $("#succesModal").modal("show")
                                    
@@ -2602,6 +2606,9 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                 // $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName+" "+data[0][0].lastName}`)
                             },
                             error: function (xhr, status, error) {
+                                $('#preloader').fadeOut('slow', function () {
+                                    $(this).hide();
+                                });
                                 $("#submit-pics").prop("disabled", false)
                                 
                                 $("#myModal_warning_connection").modal("show");
