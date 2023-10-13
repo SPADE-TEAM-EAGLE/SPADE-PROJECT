@@ -29,6 +29,12 @@ $.ajax({
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
             }
         }
+        if(response?.units?.Restrict){
+            
+            if (window.location.href.indexOf('property-unit.html') !== -1) {
+                
+                history.back();}   
+        }
         if(response?.tenants?.Restrict){
             if (window.location.href.indexOf('add-tenant.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
@@ -40,10 +46,8 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
-
             }
         }
-        
         if(response?.tasks?.Restrict){
             if (window.location.href.indexOf('create-tasks.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
@@ -54,7 +58,6 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
-
             }
         }
         if(response?.invoices?.Restrict){
@@ -67,7 +70,6 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='create-invoicing.html']").parent().hide();
-
             }
         }
         if(response?.leads?.Restrict){

@@ -330,7 +330,7 @@ let card_btnn16 = document.getElementsByClassName("card-btnn")[15];
 
 
 let nextpayment = document.getElementById("nextpayment");
-nextpayment.addEventListener("click", cardbtnchange2);
+// nextpayment.addEventListener("click", cardbtnchange2);
 
 
 card_btnn1.addEventListener("click", cardbtnchange);
@@ -355,6 +355,25 @@ card_btnn16.addEventListener("click", cardbtnchange1);
 
 function cardbtnchange1()
 {
+  var cardId=this.getAttribute("data-id");
+  selectedplan = cardId;
+  document.querySelectorAll(".nav-price li a").forEach(function(element) {
+    if (element.classList.contains("active")) {
+        if ("#annualyear" == element.getAttribute("href")) {
+            time = "Year";
+        } else {
+            time = "Month";
+        }
+    }
+});
+document.getElementById("payment-month").innerHTML = time;
+console.log(document.getElementById(cardId))
+document.getElementById("plan-name").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
+var amount = this.closest('.pricing-card').getElementsByClassName('amount-payable')[0].textContent;
+seletedPlanID = cardId;
+document.getElementById("amount").value = amount;
+document.getElementById("payment-amount").innerHTML = amount;
+document.getElementById("payment-total").innerHTML = amount;
   loader.style.display = "block";
   card2.classList.add("card-fade");
   card1.classList.add("card-fade");
@@ -376,29 +395,8 @@ function cardbtnchange1()
     // part4.classList.add("active1");
     part2.classList.add("shadow-active");
     // part2.classList.add("complete1");
-  }
-  // part3.addEventListener("click", thirdBtnChange);
-  // function thirdBtnChange() {
-  // loader.style.display = "block";
-  //   card2.classList.add("card-fade");
-  //   card1.classList.add("card-fade");
-  //   card3.classList.add("card-fade");
-  //   card4.classList.remove("card-fade");
-  //   part3.classList.add("shadow-active");
-  //   part2.classList.remove("shadow-active");
-  //   part1.classList.remove("shadow-active");
+  }}
 
-  //   setTimeout(delay3, 2500);
-  //   function delay3() {
-  //     loader.style.display = "none";
-  //     card2.style.display = "none";
-  //     card1.style.display = "none";
-  //     card3.style.display = "none";
-  //     card4.style.display = "block";
-  //   }
-  // }
-  document.getElementById("top-h1-heading").innerHTML = "Technology for all Real Estate <span>Professionals</span>";
-}
 
 function cardbtnchange2()
 {

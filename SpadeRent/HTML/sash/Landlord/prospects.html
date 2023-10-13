@@ -6997,7 +6997,7 @@
                                 $("#add_prospect").remove()
                                 break;
                             case "View":
-                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view .portlet .portlet-header").each(function (item, index) {
                                     $(this).find(".view-btn").attr("href", "javascript:void(0)")
                                     $(this).find(".view-btn").addClass("d-none")
                                 })
@@ -7028,7 +7028,6 @@
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
                 for (const action of actions) {
                     if (!leadsInsightsPermission[action]) {
-                        console.log("dfhngjfhjighjkdfgfm,gjkfdhgjkdfh")
                         switch (action) {
                             case "Add":
                                 // $("#add_prospect").remove()
@@ -7037,16 +7036,31 @@
                                 $("#tab333").remove()
                                 break;
                             case "Delete":
-                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
-                                //     $(this).find(".delete-option").addClass("d-none")
-
-                                // })
+                                
                                 break;
                             case "Edit":
-                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
-                                //     $(this).find(".edit-option").addClass("d-none")
-
-                                // })
+                                
+                                break;
+                            
+                                default:
+                                break;
+                        }
+                    }else{
+                        switch (action) {
+                            case "Add":
+                                // $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                // $("#tab333").remove()
+                                break;
+                            case "Delete":
+                                
+                                break;
+                            case "Edit":
+                                
+                                break;
+                            case "Restrict":
+                            $("#tab333").remove()
                                 break;
                             
                                 default:
@@ -7065,42 +7079,43 @@
                 if (mutation.type === 'childList') {
                     // Check if tenantPermissions is defined
                     if (prospectPermission) {
-                        const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
-                        for (const action of actions) {
-                            if (!prospectPermission[action]) {
-                                switch (action) {
-                                    case "Add":
-                                        $("#add_property_btn").remove()
-                                        break;
-                                    case "View":
-                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
-                                            $(this).find(".property-anchor").attr("href", "javascript:void(0)")
-                                            $(this).find(".view-property").addClass("d-none")
-                                        })
-                                        break;
-                                    case "Delete":
-                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
-                                            $(this).find(".delete-option").addClass("d-none")
+                
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!prospectPermission[action]) {
+                        switch (action) {
+                            case "Add":
+                                $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view .portlet .portlet-header").each(function (item, index) {
+                                    $(this).find(".view-btn").attr("href", "javascript:void(0)")
+                                    $(this).find(".view-btn").addClass("d-none")
+                                })
+                                break;
+                            case "Delete":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                    $(this).find(".delete-option").addClass("d-none")
 
-                                        })
-                                        break;
-                                    case "Edit":
-                                        $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr").each(function (item, index) {
-                                            $(this).find(".edit-option").addClass("d-none")
+                                })
+                                break;
+                            case "Edit":
+                                $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
+                                    $(this).find(".edit-option").addClass("d-none")
 
-                                        })
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-
+                                })
+                                break;
+                            default:
+                                break;
                         }
-
                     }
 
                 }
-                if(leadsInsightsPermission){
+            }
+            
+            if(leadsInsightsPermission){
+                console.log("leadsInsightsPermission")
+            console.log(leadsInsightsPermission)
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
                 for (const action of actions) {
                     if (!leadsInsightsPermission[action]) {
@@ -7112,16 +7127,31 @@
                                 $("#tab333").remove()
                                 break;
                             case "Delete":
-                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
-                                //     $(this).find(".delete-option").addClass("d-none")
-
-                                // })
+                                
                                 break;
                             case "Edit":
-                                // $("#table-body-qualified tr,#table-body tr,#table-body-disqualified tr,#kanban-view").each(function (item, index) {
-                                //     $(this).find(".edit-option").addClass("d-none")
-
-                                // })
+                                
+                                break;
+                            
+                                default:
+                                break;
+                        }
+                    }else{
+                        switch (action) {
+                            case "Add":
+                                // $("#add_prospect").remove()
+                                break;
+                            case "View":
+                                // $("#tab333").remove()
+                                break;
+                            case "Delete":
+                                
+                                break;
+                            case "Edit":
+                                
+                                break;
+                            case "Restrict":
+                            $("#tab333").remove()
                                 break;
                             
                                 default:
@@ -7133,6 +7163,8 @@
 
             }
 
+                }
+                
             });
         });
 

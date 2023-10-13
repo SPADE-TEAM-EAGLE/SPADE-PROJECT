@@ -43,7 +43,7 @@ const verifyToken = async (req, res, next) => {
       const properties = splitAndConvertToObject(result[0][0].properties);
       const units = splitAndConvertToObject(result[0][0].units);
       const tenants = splitAndConvertToObject(result[0][0].tenants);
-      const tasks = splitAndConvertToObject(result[0][0].task);
+      const tasks = splitAndConvertToObject(result[0][0].task); 
       const invoices = splitAndConvertToObject(result[0][0].invoices);
       const leads = splitAndConvertToObject(result[0][0].leads);
       const leadsInsights = splitAndConvertToObject(result[0][0].leadsInsight);
