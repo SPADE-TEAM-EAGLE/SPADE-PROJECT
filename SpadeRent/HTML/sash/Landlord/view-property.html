@@ -103,7 +103,7 @@
             align-items: center;
             justify-content: center;
             padding: 6px 12px;
-            background-color: #fff;
+            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -1376,7 +1376,7 @@
                                                     <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control form" id="propertyName_update"
-                                                        placeholder="Enter Property Name">
+                                                        placeholder="Enter Property Name" required>
                                                     <span class="text-danger d-none">Property name required!</span>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1391,7 +1391,7 @@
                                                     <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                                             *</span></label>
                                                     <input type="text" class="form-control form" id="address_update"
-                                                        placeholder="Enter Address">
+                                                        placeholder="Enter Address" required>
                                                     <span class="text-danger d-none">Address is required!</span>
                                                 </div>
                                                 <div class="col-md-4">
@@ -1399,7 +1399,7 @@
                                                             class="text-danger">*</span></label>
                                                     <input type="text" id="city_update" class="form-control form city-select"
                                                         pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                                        placeholder="Enter City">
+                                                        placeholder="Enter City" required>
                         
                         
                                                     <span class="text-danger d-none">City is required!</span>
@@ -1407,7 +1407,7 @@
                                                 <div class="col-md-4">
                                                     <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                                             *</span></label>
-                                                    <select id="state_update" class="form-select form state-select select2-show-search">
+                                                    <select id="state_update" class="form-select form state-select select2-show-search" required>
                                                         <option selected>Choose...</option>
                         
                                                     </select>
@@ -1426,7 +1426,7 @@
                                                 <div class="col-md-6">
                                                     <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                                             *</span></label>
-                                                    <select id="propertyType_update" class="form-select form state-select select2-show-search">
+                                                    <select id="propertyType_update" class="form-select form state-select select2-show-search" required>
                                                         <option selected>Choose...</option>
                                                         <option>Single Family</option>
                                                         <option>Multi-Family</option>
@@ -1470,7 +1470,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
-                                            <a class="btn btn-primary" id="update">Save changes</a>
+                                            <a class="btn btn-primary btn-pill" id="update">Save changes</a>
                                         </div>
                                     </div>
                                 </div>
@@ -3044,6 +3044,28 @@ var password = 'your-secret-password';
         observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
     
     </script>
+<script>
+    $(document).ready(function () {
+        $(document).on('input change', '#myModal_edit input[required], #myModal_edit select[required]', function () {
+            var propertyName = $("#propertyName_update").val();
+            var address = $("#address_update").val();
+            var city = $("#city_update").val();
+            var state = $("#state_update").val();
+            var zipCode = $("#zip_update").val();
+            var propertyType = $("#propertyType_update").val();
+            var propertySQFT = $("#propertyTotalSF_update").val();
+            var units = $("#unit_update").val();
+
+            if (propertyName === '' || address === '' || city === '' || state === '' || zipCode === '' || propertyType === '' || propertySQFT === '' || units === '') {
+                $('#update').addClass('disabled')
+            } else {
+                $('#update').removeClass('disabled')
+
+            }
+        });
+    });
+</script>
+
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>
