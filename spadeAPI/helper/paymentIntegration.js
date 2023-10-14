@@ -94,9 +94,7 @@ exports.openOrder = async (req,res) => {
     userTokenId:"12345",
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
-
   };
-
   const requestOptions = {
     method: "POST",
     headers: {
@@ -342,7 +340,7 @@ exports.createSubscriptionPayment = async (req,res) => {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
     planId: "9228",
-    userTokenId: "12345",
+    userTokenId: 12345,
     userPaymentOptionId: "97342878",
     initialAmount: "50.67",
     recurringAmount: "50.67",
@@ -352,22 +350,9 @@ exports.createSubscriptionPayment = async (req,res) => {
       month: "12",
       year: "0"
   },
-//   recurringPeriod: {
-//     day: "0",
-//     month: "1",
-//     year: "0"
-// },
-// endAfter: {
-//     day: "0",
-//     month: "0",
-//     year: "0"
-// },
   timeStamp: timestamp,
-    // clientRequestId: config.clientRequestId,
-    // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+"12345"+"9228"+"97342878"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId+config.merchantSiteId+12345+"9228"+"97342878"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
   };
-  // console.log(requestData.checksum);
   const requestOptions = {
     method: "POST",
     headers: {
@@ -395,6 +380,7 @@ exports.createSubscriptionPayment = async (req,res) => {
       }
     });
   }); 
+
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
@@ -413,6 +399,12 @@ exports.createSubscriptionPayment = async (req,res) => {
       merchantSiteId: config.merchantSiteId,
       userTokenId: "1235",
       clientRequestId: config.clientRequestId,
+      clientId : "23456",
+      user : {
+        firstName : "John",
+        LastName : "Smith",
+
+      },
       timeStamp: timestamp,
       checksum: sha256(config.merchantId+config.merchantSiteId+"1235"+config.clientRequestId+timestamp+config.Secret_Key),
     };
@@ -425,6 +417,8 @@ exports.createSubscriptionPayment = async (req,res) => {
     };
     const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
       let responseData = ''; 
+      let corse = "nuvei";
+      console.log(corse);
       response.on('data', (chunk) => {
         responseData += chunk;
       }); 
