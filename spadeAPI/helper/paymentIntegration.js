@@ -3,6 +3,9 @@ const safecharge = require('safecharge');
 const { request } = require('https'); // Use the built-in https module for HTTPS requests
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
+const { query } = require('express');
+const { queryRunner } = require('./queryRunner');
+const { selectQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
@@ -81,7 +84,7 @@ reqq.end();
 };
 
 exports.openOrder = async (req,res) => {
-    const {currency,amount} = req.body;
+    const {currency,amount,userId} = req.body;
   const apiUrl = config.APIKey;
   const requestData = {
     merchantId: config.merchantId,
@@ -90,8 +93,8 @@ exports.openOrder = async (req,res) => {
     clientUniqueId: config.clientUniqueId,
     currency: currency,
     amount: amount,
-    // transactionType: "Auth",
-    userTokenId:"12345",
+    transactionType: "Auth",
+    userTokenId:userId,
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
   };
@@ -141,31 +144,29 @@ exports.openOrder = async (req,res) => {
 
 // ###################################### CREATE USER #############################################################
 exports.createUserPayment = async (req,res) => {
-  const { userId } = req.body;
-  // const { userId } = req.user;
-  const requestData = {
-
+  const {userId,firstName,lastName,address,state,city,zip,countryCode,phone,locale,email,county} = req.body;
+const requestData = {
   // merchantId: "6400701569295268447",
   // merchantSiteId: "244298",
   // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
   merchantId: config.merchantId,
   merchantSiteId: config.merchantSiteId,
-  userTokenId: "1234332",
+  userTokenId: userId,
   clientRequestId: config.clientRequestId,
-  firstName: "Michael",
-  lastName: "Smith",
-  address: " ",
-  state: " ",
-  city:" ",
-  zip:" ",
-  countryCode: "US",
-  phone: " ",
+  firstName: firstName,
+  lastName: lastName,
+  address: address,
+  state: state,
+  city:city,
+  zip:zip,
+  countryCode: countryCode,
+  phone: phone,
   locale: "en_US",
-  email: "john.smith@test.com",
+  email: email,
   // dateOfBirth: "01-01998",
   county:"USA",
   timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+"1234332"+config.clientRequestId+"Michael"+ "Smith"+" "+" "+" "+" "+"US"+" "+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
+  checksum: sha256(config.merchantId+config.merchantSiteId+userId+config.clientRequestId+firstName+lastName+address+state+city+zip+countryCode+phone+"en_US"+email+"USA"+timestamp+config.Secret_Key),
   // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
   // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
 };
@@ -267,16 +268,17 @@ exports.getUserDetailsPayment = async (req,res) => {
 
   // ###################################### Create Plan #############################################################
 exports.createPlanPayment = async (req,res) => {
+  const {name,initialAmount,recurringAmount,currency} = req.body;
   const requestData = {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
-    name: "Monthly Basics",
-    initialAmount: "50.67",
-    recurringAmount: "50.67",
-    currency: "USD",
+    name: name,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
     startAfter: {
       day: "0",
-      month: "1",
+      month: "0",
       year: "0"
   },
   recurringPeriod: {
@@ -292,7 +294,7 @@ exports.createPlanPayment = async (req,res) => {
   timeStamp: timestamp,
     // clientRequestId: config.clientRequestId,
     // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+"Monthly Basics"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId+config.merchantSiteId+name+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
   // console.log(requestData.checksum);
   const requestOptions = {
@@ -336,23 +338,59 @@ exports.createPlanPayment = async (req,res) => {
 
     // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req,res) => {
+  const {initialAmount,recurringAmount,currency,planId,userTokenId,upoId} = req.body;
   const requestData = {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
-    planId: "9228",
-    userTokenId: 12345,
-    userPaymentOptionId: "97342878",
-    initialAmount: "50.67",
-    recurringAmount: "50.67",
-    currency: "USD",
-    endAfter: {
-      day: "0",
-      month: "12",
-      year: "0"
-  },
+    // planId: planId,
+    userTokenId: userTokenId.toString(),
+    userPaymentOptionId: upoId,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
+    startAfter: {
+    day: "0",
+    month: "0",
+    year: "0"
+},
+
+
   timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+12345+"9228"+"97342878"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
+    // clientRequestId: config.clientRequestId,
+    // timeStamp: timestamp,
+    checksum: sha256(config.merchantId+config.merchantSiteId+(userTokenId.toString())+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
+  const result=await queryRunner(selectQuery("plan", "id"), [
+    planId
+  ]);
+  console.log(result)
+  const {nuveiId,monthlyAnnual}=result[0][0];
+  if(monthlyAnnual=="Monthly"){
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "0",
+      year: "0"
+    }
+    requestData.endAfter= {
+      day: "0",
+      month: "1",
+      year: "0"
+  }
+  
+  }else{
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "1",
+      year: "0"
+    }
+    requestData.endAfter= {
+      day: "0",
+      month: "0",
+      year: "1"
+  }
+}
+requestData.planId=nuveiId;
+console.log(requestData)
   const requestOptions = {
     method: "POST",
     headers: {
@@ -392,60 +430,3 @@ exports.createSubscriptionPayment = async (req,res) => {
   reqq.end();
   };
   // ###################################### Create Subsription #############################################################
-
-  exports.createSubscription = async (req,res) => {
-    const requestData = {
-      merchantId: config.merchantId,
-      merchantSiteId: config.merchantSiteId,
-      userTokenId: "1235",
-      clientRequestId: config.clientRequestId,
-      clientId : "23456",
-      user : {
-        firstName : "John",
-        LastName : "Smith",
-
-      },
-      timeStamp: timestamp,
-      checksum: sha256(config.merchantId+config.merchantSiteId+"1235"+config.clientRequestId+timestamp+config.Secret_Key),
-    };
-    console.log(requestData.checksum);
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-    const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
-      let responseData = ''; 
-      let corse = "nuvei";
-      console.log(corse);
-      response.on('data', (chunk) => {
-        responseData += chunk;
-      }); 
-      response.on('end', () => {
-        try {
-          console.log(responseData);
-          const data = JSON.parse(responseData);
-          res.status(200).json({
-              data
-          })
-        } catch (error) {
-          console.error('Error parsing response:', error);
-          res.status(400).json({
-              message:"Error parsing response",
-              error,
-          })
-        }
-      });
-    }); 
-    reqq.on('error', (error) => {
-      console.error('Error sending request:', error);
-      res.status(400).json({
-          message:"Error sending request",
-          error,
-      })
-    }); 
-    reqq.write(JSON.stringify(requestData));
-    reqq.end();
-    };
-

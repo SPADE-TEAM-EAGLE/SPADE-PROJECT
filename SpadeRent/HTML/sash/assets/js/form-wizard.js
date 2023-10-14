@@ -330,7 +330,7 @@ let card_btnn16 = document.getElementsByClassName("card-btnn")[15];
 
 
 let nextpayment = document.getElementById("nextpayment");
-// nextpayment.addEventListener("click", cardbtnchange2);
+nextpayment.addEventListener("click", cardbtnchange2);
 
 
 card_btnn1.addEventListener("click", cardbtnchange);
