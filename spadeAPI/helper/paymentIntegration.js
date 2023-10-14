@@ -4,6 +4,8 @@ const { request } = require('https'); // Use the built-in https module for HTTPS
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
+const { queryRunner } = require('./queryRunner')
+const { updateUser } = require("./../constants/queries")
 
 // ############################ timestamp #################################
 function getTimestamp() {
@@ -141,28 +143,31 @@ exports.openOrder = async (req,res) => {
 
 // ###################################### CREATE USER #############################################################
 exports.createUserPayment = async (req,res) => {
-const requestData = {
+  const { userId } = req.body;
+  // const { userId } = req.user;
+  const requestData = {
+
   // merchantId: "6400701569295268447",
   // merchantSiteId: "244298",
   // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
   merchantId: config.merchantId,
   merchantSiteId: config.merchantSiteId,
-  userTokenId: "1234",
+  userTokenId: "1234332",
   clientRequestId: config.clientRequestId,
   firstName: "Michael",
   lastName: "Smith",
-  address: "4310 Lemon Tree Ln, Houston, TX 77088",
-  state: "TX",
-  city:"Austin",
-  zip:"77088",
+  address: " ",
+  state: " ",
+  city:" ",
+  zip:" ",
   countryCode: "US",
-  phone: "2818765489",
+  phone: " ",
   locale: "en_US",
   email: "john.smith@test.com",
   // dateOfBirth: "01-01998",
   county:"USA",
   timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+"1234"+config.clientRequestId+"Michael"+ "Smith"+"4310 Lemon Tree Ln, Houston, TX 77088"+"TX"+"Austin"+"77088"+"US"+"2818765489"+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
+  checksum: sha256(config.merchantId+config.merchantSiteId+"1234332"+config.clientRequestId+"Michael"+ "Smith"+" "+" "+" "+" "+"US"+" "+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
   // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
   // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
 };
@@ -184,7 +189,10 @@ const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requ
   }); 
   response.on('end', () => {
     try {
+
       const data = JSON.parse(responseData);
+      const NuveiId = data.userId;
+       queryRunner(updateUser, [NuveiId, userId]);
       res.status(200).json({
           data
       })
