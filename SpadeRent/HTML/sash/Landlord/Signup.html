@@ -2851,7 +2851,7 @@
                                                                     <!-- <div class="col-lg-4"></div> -->
                                                                     <div class="col-lg-12">
                                                                         </form>
-                                                                        <button onclick="main()" id="nextpayment"
+                                                                        <button id="nextpayment"
                                                                             class="btn btn-primary btn-lg btn-block btnn btnstyle">Next
                                                                             <img src="../assets/images/arrow.svg"
                                                                             class="float-right mt-3 mr-2 " alt="">
@@ -2877,7 +2877,7 @@
                                                 </h3>
                                             </div>
                                             <div class="heading-confirm mt-0 text-center">
-                                                <h5>Thank you for your payment. You have a purchased <br> our Premium Plan</h5>
+                                                <h5>Thank you for your payment information.</h5>
                                             </div>
                                             <div class="inputs">
                                                 <form action="">
@@ -3181,13 +3181,14 @@
                         planID: (selectedplan>0?selectedplan:1),
                     }),
                     success: function(response) {
+                        main(response?.id)
                         $("#myModal_success").modal("show");
 
                         if (response.message == "User added successfully") {
                             $("#myModal_success").modal("show");
                             setTimeout(function() {
                                 $('#myModal_success').modal('hide');
-                                window.location = '../Landlord/login_module.html';
+                                // window.location = '../Landlord/login_module.html';
                             }, 2000);
                         }
                     },
@@ -3294,14 +3295,15 @@
           classes: ScFieldClasses,
       });
       cardCvc.attach('#card-cvc');
-      function main() {
+      function main(userId) {
 
           $.ajax({
-              url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+              url: 'http://localhost:3000/api/spade/openOrder',
               type: 'POST',
               data: JSON.stringify({
-                  amount: $("#amount").val(),
-                  currency: "USD"
+                amount:"0",
+                currency: "USD",
+                userId:userId
               }),
               contentType: "application/json; charset=utf-8",
               processData: false,
@@ -3309,31 +3311,101 @@
                   'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
               },
               success: function (response) {
-                  console.log(response)
+                  console.log(response.sessionToken)
                   sfc.createPayment({
-                      sessionToken: response.sessionToken, //received from openOrder API
+                      sessionToken: response?.sessionToken, //received from openOrder API
                       clientUniqueId: "695701003",
-                      merchantId: "6400701569295268447",
-                      merchantSiteId: "244298",
-                      cardHolderName: "<card_holder>",
-                      
+                        merchantId:"6400701569295268447",
+                        merchantSiteId:"244298",
+                      cardHolderName: ($("#firstname1").val()+" "+$("#lastname").val()),
                       paymentOption: scard,
                       billingAddress: {
-                          email: "someone@somedomain.com",
-                          country: "GB"
+                          email: $("#email").val(),
+                          country: "US"
                       }
                   }, function (res) {
                     console.log(res)
                       if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                        $("#myModal_success p").text("Your plan has been succesfully added!!!")
-                                  $("#myModal_success").modal("show")
-
-                                  setTimeout(function () {
-                                      $("#myModal_success").modal("hide");
-                                  }, 2000);
-                                  cardbtnchange2()
+                        
+                        $.ajax({
+                            url:"http://localhost:3000/api/spade/createUserPayment",
+                            type:"POST",
+                            headers:{
+                                Authorization:"Bearer "+localStorage.getItem("authtoken")
+                            },
+                            data:JSON.stringify({
+                                firstName:$("#firstname1").val(),
+                                lastName:$("#lastname").val(),
+                                email:$("#email").val(),
+                                userId:userId,
+                                countryCode:"US",
+                                address:"",
+                                city:"",
+                                state:"",
+                                zip:"",
+                                county:"",
+                                phone:$("#phone1").val(),
+                                
+                            }),
+                            contentType:"application/json",
+                            success:function(response){
+                                console.log(response)
+                                console.log(userId,seletedPlanID,res?.userPaymentOptionId,amount?.value)
+                                $.ajax({
+                            url:"http://localhost:3000/api/spade/createSubscriptionPayment",
+                            type:"POST",
+                            headers:{
+                                Authorization:"Bearer "+localStorage.getItem("authtoken")
+                            },
+                            data:JSON.stringify({
+                                userTokenId:userId,
+                                planId:seletedPlanID,
+                                upoId:res?.userPaymentOptionId,
+                                
+                                currency:"USD",
+                                recurringAmount:amount?.value,
+                                initialAmount:amount?.value
+                                
+                            }),
+                            contentType:"application/json",
+                            success:function(response){
+                                console.log(response)
+                                $("#myModal_success").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                    // window.location = '../Landlord/login_module.html';
+                                }, 2000);
+                            },
+                            error:function(xhr,status,error){
+                                console.log(xhr)
+                                console.log(status)
+                                console.log(error)
+                                $("#myModal_warning_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_warning_declined").modal("hide");
+                                }, 2000);
+                            }
+                        })
+                          
+                                $("#myModal_success").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                    // window.location = '../Landlord/login_module.html';
+                                }, 2000);
+                            },
+                            error:function(xhr,status,error){
+                                console.log(xhr)
+                                console.log(status)
+                                console.log(error)
+                                $("#myModal_warning_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_warning_declined").modal("hide");
+                                }, 2000);
+                            }
+                        })
+       
                         } else {
-                          console.log("herejskjflsdkjlidjfds")
+                          
                           $("#myModal_warning_declined").modal("show")
                           setTimeout(function () {
                               $("#myModal_warning_declined").modal("hide");
@@ -3356,6 +3428,7 @@
           });
 
       }
+  
   </script>
   <!-- ########### payment method End ########## -->
 </body>
