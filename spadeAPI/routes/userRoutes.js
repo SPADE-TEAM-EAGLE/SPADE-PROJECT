@@ -262,3 +262,5 @@ router.get("/userPermissionGetById", verifyToken, userPermissionController.userP
 router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
 router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);
+router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
+router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);

@@ -139,9 +139,6 @@ exports.openOrder = async (req,res) => {
   reqq.end();
 };
 
-
-
-
 // ###################################### CREATE USER #############################################################
 exports.createUserPayment = async (req,res) => {
 const requestData = {
@@ -150,7 +147,7 @@ const requestData = {
   // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
   merchantId: config.merchantId,
   merchantSiteId: config.merchantSiteId,
-  userTokenId: "12345",
+  userTokenId: "1234",
   clientRequestId: config.clientRequestId,
   firstName: "Michael",
   lastName: "Smith",
@@ -165,7 +162,7 @@ const requestData = {
   // dateOfBirth: "01-01998",
   county:"USA",
   timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+"12345"+config.clientRequestId+"Michael"+ "Smith"+"4310 Lemon Tree Ln, Houston, TX 77088"+"TX"+"Austin"+"77088"+"US"+"2818765489"+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
+  checksum: sha256(config.merchantId+config.merchantSiteId+"1234"+config.clientRequestId+"Michael"+ "Smith"+"4310 Lemon Tree Ln, Houston, TX 77088"+"TX"+"Austin"+"77088"+"US"+"2818765489"+"en_US"+"john.smith@test.com"+"USA"+timestamp+config.Secret_Key),
   // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
   // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
 };
@@ -217,10 +214,10 @@ exports.getUserDetailsPayment = async (req,res) => {
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
-    userTokenId: "1235",
+    userTokenId: "1234",
     clientRequestId: config.clientRequestId,
     timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+"1235"+config.clientRequestId+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId+config.merchantSiteId+"1234"+config.clientRequestId+timestamp+config.Secret_Key),
   };
   console.log(requestData.checksum);
   const requestOptions = {
@@ -262,24 +259,43 @@ exports.getUserDetailsPayment = async (req,res) => {
   };
   // ###################################### Get USER Details #############################################################
 
-  // ###################################### Recurring Invoices #############################################################
-exports.getUserDetailsPayment = async (req,res) => {
+  // ###################################### Create Plan #############################################################
+exports.createPlanPayment = async (req,res) => {
   const requestData = {
-    merchantId: config.merchantId,
+    merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
-    userTokenId: "1235",
-    clientRequestId: config.clientRequestId,
-    timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+"1235"+config.clientRequestId+timestamp+config.Secret_Key),
+    name: "Monthly Basics",
+    initialAmount: "50.67",
+    recurringAmount: "50.67",
+    currency: "USD",
+    startAfter: {
+      day: "0",
+      month: "1",
+      year: "0"
+  },
+  recurringPeriod: {
+    day: "0",
+    month: "1",
+    year: "0"
+},
+// endAfter: {
+//     day: "0",
+//     month: "0",
+//     year: "0"
+// },
+  timeStamp: timestamp,
+    // clientRequestId: config.clientRequestId,
+    // timeStamp: timestamp,
+    checksum: sha256(config.merchantId+config.merchantSiteId+"Monthly Basics"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
   };
-  console.log(requestData.checksum);
+  // console.log(requestData.checksum);
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = ''; 
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -310,4 +326,75 @@ exports.getUserDetailsPayment = async (req,res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
   };
-  // ###################################### Recurring Invoices #############################################################
+  // ###################################### Create Plan #############################################################
+
+    // ###################################### Create Subsription #############################################################
+exports.createSubscriptionPayment = async (req,res) => {
+  const requestData = {
+    merchantId: config.merchantId, 
+    merchantSiteId: config.merchantSiteId,
+    planId: "9228",
+    userTokenId: "12345",
+    userPaymentOptionId: "97342878",
+    initialAmount: "50.67",
+    recurringAmount: "50.67",
+    currency: "USD",
+    endAfter: {
+      day: "0",
+      month: "12",
+      year: "0"
+  },
+//   recurringPeriod: {
+//     day: "0",
+//     month: "1",
+//     year: "0"
+// },
+// endAfter: {
+//     day: "0",
+//     month: "0",
+//     year: "0"
+// },
+  timeStamp: timestamp,
+    // clientRequestId: config.clientRequestId,
+    // timeStamp: timestamp,
+    checksum: sha256(config.merchantId+config.merchantSiteId+"12345"+"9228"+"97342878"+"50.67"+"50.67"+"USD"+timestamp+config.Secret_Key),
+  };
+  // console.log(requestData.checksum);
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createSubscription.do", requestOptions, (response) => {
+    let responseData = ''; 
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    }); 
+    response.on('end', () => {
+      try {
+        console.log(responseData);
+        const data = JSON.parse(responseData);
+        res.status(200).json({
+            data
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+            message:"Error parsing response",
+            error,
+        })
+      }
+    });
+  }); 
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+        message:"Error sending request",
+        error,
+    })
+  }); 
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
+  };
+  // ###################################### Create Subsription #############################################################
