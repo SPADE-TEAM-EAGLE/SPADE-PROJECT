@@ -1381,7 +1381,7 @@
                                         <input type="text" class="form-control form" placeholder="Enter First Name"
                                             id="firstName" required pattern="[A-Za-z\s]+"
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                        <span class="text-danger d-none">First name is required!</span>
+                                        <span class="text-danger d-none">This field is required!</span>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPassword4" class="form-label fw-bold">Last Name<spnan
@@ -1389,7 +1389,7 @@
                                         <input type="text" class="form-control form" placeholder="Enter Last Name"
                                             id="lastName" required pattern="[A-Za-z\s]+"
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                        <span class="text-danger d-none">Last name required!</span>
+                                        <span class="text-danger d-none">This field is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label fw-bold">Company Name <span
@@ -1397,7 +1397,7 @@
                                         </label>
                                         <input type="text" class="form-control form" id="company"
                                             placeholder="Enter Company Name">
-                                        <!-- <span class="text-danger d-none">Company name is required!</span> -->
+                                        <!-- <span class="text-danger d-none">This field is required!</span> -->
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">Email<spnan
@@ -1561,7 +1561,7 @@
                                                                     pattern="[0-9]{7}" placeholder="Enter Amount.."
                                                                     maxlength="7"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
+                                                                    >
                                                             </div>
                                                             <span class="text-danger d-none">Rent amount is
                                                                 required!</span>
@@ -1586,9 +1586,8 @@
                                                             <label for="inputEmail4" class="form-label">Lease Start
                                                                 Date<span class="text-danger"> *</span></label>
                                                             <input type="date" class="form-control position-relative"
-                                                                id="leaseStart" placeholder="Enter Lease Start Date">
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                                                id="leaseStart" placeholder="Enter Lease Start Date" required>
+                                                            <span class="text-danger d-none">This field is required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                         <div class="col-md-6">
@@ -1617,9 +1616,7 @@
                                                             <input type="date" class="form-control position-relative"
                                                                 id="leaseStart2" placeholder="Enter Lease Start Date"
                                                                 required>
-                                                            <span class="text-danger d-none">Lease Start
-                                                                Date is
-                                                                required!</span>
+                                                            <span class="text-danger d-none">This field is required!</span>
                                                             <!-- <i class="fi fi-rs-calendar"></i> -->
                                                         </div>
                                                         <div class="col-md-6">
@@ -1687,10 +1684,10 @@
                                                                 (Optional)</label>
                                                             <input type="date"
                                                                 class="form-control input-date dateofRentchange"
-                                                                name="dateofRentchange" id="dateofRentchange" required
+                                                                name="dateofRentchange" id="dateofRentchange" 
                                                                 placeholder="Enter Date of Rent Change">
-                                                            <span class="text-danger d-none">Rent amount is
-                                                                required!</span>
+                                                            <!-- <span class="text-danger d-none">Rent amount is
+                                                                required!</span> -->
                                                         </div>
                                                         <div class="col-md-5">
                                                             <label for="inputPassword4" class="form-label">Rent Amount
@@ -2436,7 +2433,7 @@
                                                 class="d-flex justify-content-center align-items-center">
                                                 <span class="fw-bold me-2" style="min-width: 107px;">Number of
                                                     rows</span>
-                                                <select id="lengthSelectBox" class="form-control select2 form-select"
+                                                <select id="lengthSelectBox" class="form-control form-select"
                                                     style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
@@ -3812,7 +3809,7 @@
                             propertyUnitSelect.append($('<option></option>')
                                 .text("No unit available!!"))
                             $('#addUnitBtn').show()
-                        } else {
+                        } else { 
                             $('#addUnitBtn').hide()
                             propertyUnitSelect.prop("disabled", false);
                             propertyUnitSelect.append($('<option></option>')
@@ -3844,7 +3841,7 @@
 
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" required placeholder="Date of Rent Change">
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange"  placeholder="Date of Rent Change">
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -4085,7 +4082,7 @@
                     tenants.increaseRentAmount.forEach(function (rentAmount) {
                         $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
                                             <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
-                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}"required>
+                                            <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}">
                                           </div>
                                           <div class="col-md-5">
                                             <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
@@ -4325,6 +4322,7 @@
                 $("#save").addClass("d-none")
                 $("#submit").addClass("d-none")
             }
+            
             $(document).on("click", "#next", () => {
                 console.log(2222)
                 var accordions = $('.accordion-item');
@@ -4600,6 +4598,7 @@
                         $('input[name="lease"]').removeClass('border-danger');
                     });
                 }
+            
             }
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
@@ -5611,7 +5610,7 @@
 
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -5627,7 +5626,7 @@
 
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox").val()))
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -5721,6 +5720,6 @@
 
     </script>
 
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

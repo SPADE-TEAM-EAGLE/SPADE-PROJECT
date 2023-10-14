@@ -253,7 +253,7 @@ exports.Signin = async function (req, res) {
           email,
         ]);
         if (selectUserPermissionResult[0].length === 0) {
-          res.status(400).send("Email not foundsss");
+          res.status(400).send("Email not found");
         } else if (await bcrypt.compare(password, selectUserPermissionResult[0][0].UPassword)) {
           const id = selectUserPermissionResult[0][0].llnalordId;
           const role = selectUserPermissionResult[0][0].URole;
@@ -1451,6 +1451,7 @@ exports.propertyUpdate = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: error.message,
     });
@@ -1596,7 +1597,8 @@ exports.propertyView = async (req, res) => {
           );
           const images = matchingImages.map((image) => ({
             propertyID: image.propertyID,
-            Image: image.Image,
+            image_url: image.Image,
+            image_key: image.ImageKey,
           }));
           return {
             ...property,

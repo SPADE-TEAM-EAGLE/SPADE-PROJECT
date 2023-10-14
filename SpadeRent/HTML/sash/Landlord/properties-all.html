@@ -1001,21 +1001,21 @@
                                     <div class="col-md-12">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName"
+                                        <input type="text" class="form-control form" id="propertyName" required
                                             placeholder="Enter Property Name">
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address"
+                                        <input type="text" class="form-control form" id="address" required
                                             placeholder="Enter Address">
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputCity" class="form-label fw-bold">City <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" id="city" class="form-control form city-select"
+                                        <input type="text" id="city" class="form-control form city-select" required
                                             pattern="[A-Za-z\s]+"
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                             placeholder="Enter City">
@@ -2038,7 +2038,7 @@
                                             <div style="width: 220px" class="d-flex justify-content-center align-items-center">
                                                 <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
                                                 <select id="lengthSelectBox"
-                                                    class="form-control form-select select2 " style="width: 80px;">
+                                                    class="form-control form-select" style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -3444,14 +3444,11 @@
                 $('#myModal_edit').find('input[required], select[required]').each(function (index) {
                     var value = $(this).val().trim();
                     var span = $(this).siblings('.text-danger');
-                    // console.log($(this))
                     if($(this).is('input') && $(this).val() == '' ){
                         isFilled = false;
                     }
                     if ($(this).attr("id") === "zip_update") {
-                        // console.log($(this).val().length)
                         if ($(this).val().length !== 5) {
-                            // console.log("here ik am")
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
                             span.removeClass('d-none');
@@ -3463,10 +3460,8 @@
                         }
                     } else if (index >= 1) {
                         if (value === '' || value === 'Choose...') {
-                            // alert(1)
                             $(this).addClass('border-danger');
                             $(this).removeClass('border-green');
-                            //   console.log(1)
                             span.removeClass('d-none');
                             isFilled = false;
                         } else {
@@ -3783,6 +3778,7 @@
                 });
             }
         });
+        
         $(document).on('click', '#confirmDelete', function (e) {
 
             e.preventDefault();
@@ -4138,7 +4134,7 @@
 
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                console.log(count, parseInt($("#lengthSelectBox").val()))
+                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
@@ -4154,7 +4150,7 @@
 
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                console.log(count, parseInt($("#lengthSelectBox").val()))
+                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
@@ -4266,6 +4262,6 @@
 </script>
 <script src="../assets/js/email-phone.js"></script>
 
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

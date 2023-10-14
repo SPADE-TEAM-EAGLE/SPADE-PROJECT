@@ -904,13 +904,13 @@
                                     <div class="col-md-12">
                                         <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="propertyName" placeholder="Enter Property Name">
+                                        <input type="text" class="form-control form" id="propertyName" placeholder="Enter Property Name" required>
                                         <span class="text-danger d-none">Property name required!</span>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label fw-bold">Address <spnan
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form" id="address" placeholder="Enter Address">
+                                        <input type="text" class="form-control form" id="address" placeholder="Enter Address" required>
                                         <span class="text-danger d-none">Address is required!</span>
                                     </div>
                                     <div class="col-md-4">
@@ -950,7 +950,7 @@
                                         <span class="text-danger d-none">Property Type is required!</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT <spnan
+                                        <label for="inputPassword4" class="form-label fw-bold">Property Total SQFT<spnan
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control form" id="propertyTotalSF" pattern="[0-9]{5}" placeholder="Area in square feet" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Property Total SF is required!</span>
@@ -2325,7 +2325,7 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,userName }) {
+                success: function ({ image,userName,properties }) {
                     function toTitleCase(str) {
             return str.replace(/\w\S*/g, function(txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -2405,6 +2405,6 @@ $("#user-name").text(userName)
         });
     }
 </script>
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

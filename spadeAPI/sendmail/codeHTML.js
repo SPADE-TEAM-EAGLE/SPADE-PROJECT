@@ -571,7 +571,6 @@ exports.taskHTML = (
       <p>We hope this email finds you well. We wanted to remind you of some upcoming property maintenance tasks that are
       scheduled in the near future. These tasks are important for maintaining the quality and safety of our property.
       </p>
-      
       <p>Please take note of the following maintenance tasks:</p>
       <ul type="none" style="none">
       <li>
@@ -581,27 +580,23 @@ exports.taskHTML = (
         <p>Priority: <b>${priority}</b></p>
       </li>
       </ul>
-      
       <p>
       It is crucial that these tasks are completed to ensure the smooth operation and longevity of the property. We kindly request
     your cooperation in allowing our maintenance team to access the premises during the designated time for efficient
     completion of these tasks.
       </p>
-      
       <p>
       Should you have any questions or concerns regarding these maintenance tasks or need to reschedule, please don't hesitate
       to contact our property management team at <b>${landLordContactInformation}</b>. We are here to assist you.
       </p>
-      
       <p>
       Thank you for your cooperation in keeping our property well-maintained and safe for everyone. We appreciate your attention
       to this matter.
       </p>
-      
       <p>
       Best regards,
       </p>
-      
+
       <h4><span style="  color: #1467B0; ">${landlordName},</span></h4>
       <h4><span style="  color: #1467B0; ">${companyName},</span></h4>
     </div>

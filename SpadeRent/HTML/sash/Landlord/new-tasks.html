@@ -867,10 +867,10 @@ color: #000;
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-6">
-                                <label for="inputEmail4" class="form-label fw-bold">Task Name</label>
+                                <label for="inputEmail4" class="form-label fw-bold">Task Name<span class="text-danger"> *</span></label>
                                 <input id="task" required class="form-control" type="text"
                                     placeholder="Enter Task Name here">
-                                <span class="text-danger d-none">Task name is required!</span>
+                                <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <!-- <div class="col-md-4">
 
@@ -884,14 +884,14 @@ color: #000;
                                 <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">Add Vendor!</a>
                             </div> -->
                             <div class="col-md-6">
-                                <label for="inputState" class="form-label fw-bold">Related To</label>
+                                <label for="inputState" class="form-label fw-bold">Related To<span class="text-danger"> *</span></label>
                                 <select required id="property" class="form-select form select2-show-search" placeholder="Enter Related To here">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-12">
-                                <label class="form-label fw-bold">Assign To</label>
+                                <label class="form-label fw-bold">Assign To (Optional)</label>
                                 <select multiple="multiple" 
                                 multiple placeholder="Enter Assign To" class="hide-select" id="assignee">
                                     
@@ -902,13 +902,13 @@ color: #000;
                                     Vendor!</a>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">Due Date</label>
-                                <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
+                                <label for="inputEmail4" class="form-label fw-bold">Due Date<span class="text-danger"> *</span></label>
+                                <input id="dueDate" class="form-control" required placeholder="MM/DD/YYYY" type="date"
                                     placeholder="Enter Due Date here">
-                                <span class="text-danger d-none">Due Date is required!</span>
+                                <span class="text-danger d-none">This field is required!required!</span>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Status</label>
+                                <label for="inputState" class="form-label fw-bold">Status<span class="text-danger"> *</span></label>
                                 <select id="status" required class="form-select form select2-show-search" placeholder="Select Status">
                                     <option selected>Choose...</option>
                                     <option value="not started">Not Started</option>
@@ -916,20 +916,20 @@ color: #000;
                                     <option value="completed">Completed</option>
 
                                 </select>
-                                <span class="text-danger d-none">Status is required!</span>
+                                <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">Priority</label>
+                                <label for="inputState" class="form-label fw-bold">Priority<span class="text-danger"> *</span></label>
                                 <select id="priority" required class="form-select form select2-show-search">
                                     <option selected>Choose...</option>
                                     <option name="high">High</option>
                                     <option name="moderate">Moderate</option>
                                     <option name="low">Low</option>
                                 </select>
-                                <span class="text-danger d-none">Priority is required!</span>
+                                <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Notes</label>
+                                <label class="form-label fw-bold">Notes (Optional)</label>
                                 <textarea id="notes" class="form-control mb-4"
                                     placeholder="Enter Your Description" rows="4"
                                     ></textarea>
@@ -954,7 +954,7 @@ color: #000;
                                 <div class="selected-files">
                                     <div class="file-grid"></div>
                                 </div>
-                                <span class="text-danger d-none">Photos are required!</span>
+                                <span class="text-danger d-none">This field is required!</span>
                             </div>
                         </form>
                     </div>
@@ -2644,7 +2644,7 @@ function dragOverHandler(ev) {
                     if(xhr.responseJSON.message=="No vendor data found"){
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
-                        $("#vendor-span").removeClass("d-none");
+                        // $("#vendor-span").removeClass("d-none");
                         $('#addVendorAnchor').show()
                         
 
@@ -3298,17 +3298,20 @@ function dragOverHandler(ev) {
                     }
 
                 });
-                $('.hide-select').on('input change', () => {
-                if ($('.ms-choice span').text() == '') {
-                    $('.ms-choice').addClass('border-danger');
-                    $('.ms-choice').removeClass('border-green');
-                    $('#vendor-span').removeClass('d-none');
-                } else {
-                    $('.ms-choice').removeClass('border-danger');
-                    $('.ms-choice').addClass('border-green');
-                    $('#vendor-span').addClass('d-none');
-                }
-            });
+                $('.hide-select').on('input change', function () {
+    
+    if (event.type === 'change' || (event.type === 'input' && event.target.value !== event.target.defaultValue)) {
+        if ($('.ms-choice span').text() == '') {
+            $('.ms-choice').addClass('border-danger');
+            $('.ms-choice').removeClass('border-green');
+            // $('#vendor-span').removeClass('d-none');
+        } else {
+            $('.ms-choice').removeClass('border-danger');
+            $('.ms-choice').addClass('border-green');
+            // $('#vendor-span').addClass('d-none');
+        }
+    }
+});
             })
         </script>
             <script>
@@ -3369,6 +3372,6 @@ function dragOverHandler(ev) {
             });
         }
     </script>
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

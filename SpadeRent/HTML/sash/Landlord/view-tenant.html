@@ -1551,7 +1551,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label
-                                                                        class="form-label"><strong>Phone</strong></label>
+                                                                        class="form-label"><strong>Phone</strong><span class="text-danger"> *</span></label>
                                                                     <div class="row" id="add-item-containerPhone">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select
@@ -1593,7 +1593,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label
-                                                                        class="form-label"><strong>Email</strong></label>
+                                                                        class="form-label"><strong>Email</strong><span class="text-danger"> *</span></label>
                                                                     <div class="row" id="add-item-containerEmail">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select
@@ -2646,6 +2646,8 @@
             $("#send-invite").click(() => {
                 // $("#succesModal").modal("hide")
                 // console.log(tenantID)
+                $('#preloader').css('display', 'flex')
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
@@ -2661,6 +2663,9 @@
                         console.log(1111)
                         $("#succesModal_email").modal("show")
                         //    getData()
+                        $('#preloader').fadeOut('slow', function () {
+                                    $(this).hide();
+                                });
                     },
                     error: function (xhr, status, error) {
                         // Handle the error response
@@ -2837,6 +2842,7 @@
                             $(this).val('');
                         });
                         getData();
+                        location.reload()
                         // Handle the success response from the backend
                     }
                     ,
@@ -2918,6 +2924,6 @@
             });
         }
     </script>
-</body>
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

@@ -103,7 +103,7 @@
             align-items: center;
             justify-content: center;
             padding: 6px 12px;
-            background-color: #fff;
+            background-color: transparent;
         }
         
         .custom-file-label i {
@@ -1299,7 +1299,7 @@
                                                             class="fi fi-rs-list-check me-2"></i>Add Tasks</a>
                                                         </div>
                                                     <div>
-                                                        <a class="btn btn-primary btn-pill" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#myModal_edit"><i
+                                                        <a class="btn btn-primary btn-pill" id="edit-option-view" data-bs-effect="effect-scale"  href="#"><i
                                                             class="fi fi-rs-edit me-2"></i>Edit Property</a>
                                                     </div>
                                                 </div>
@@ -1312,7 +1312,41 @@
                             <!-- ROW-2 CLOSED -->
 
                             <!-- Edit Property popup start  -->
-
+                            <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                                    <div class="modal-content modal-content-demo">
+                                        <div class="modal-body p-0">
+                                            <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                                                <!-- <div class="card-header border-0 pt-3">
+                                                    <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                                                    </button>
+                                                </div> -->
+                                                <div class="card-body text-center">
+                                                    <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                                            viewBox="0 0 24 24">
+                                                            <path fill="#13bfa6"
+                                                                d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                                                opacity=".99" />
+                                                            <path fill="#71d8c9"
+                                                                d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                                        </svg></span>
+                                                    <!-- <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4> -->
+                                                    <p class="card-text text-dark" id="successfully_changed_text"></p>
+                                                </div>
+                                                <!-- <div class="card-footer text-center border-0 pt-0">
+                                                    <div class="row">
+                                                        <div class="text-center">
+                                                            <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                                            <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="modal fade" id="myModal_edit" aria-labelledby="myModal" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                     <div class="modal-content">
@@ -1342,7 +1376,7 @@
                                                     <label for="inputPassword4" class="form-label fw-bold">Property Name <spnan
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control form" id="propertyName_update"
-                                                        placeholder="Enter Property Name">
+                                                        placeholder="Enter Property Name" required>
                                                     <span class="text-danger d-none">Property name required!</span>
                                                 </div>
                                                 <div class="col-md-6">
@@ -1357,7 +1391,7 @@
                                                     <label for="inputAddress" class="form-label fw-bold">Address <spnan class="text-danger">
                                                             *</span></label>
                                                     <input type="text" class="form-control form" id="address_update"
-                                                        placeholder="Enter Address">
+                                                        placeholder="Enter Address" required>
                                                     <span class="text-danger d-none">Address is required!</span>
                                                 </div>
                                                 <div class="col-md-4">
@@ -1365,7 +1399,7 @@
                                                             class="text-danger">*</span></label>
                                                     <input type="text" id="city_update" class="form-control form city-select"
                                                         pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                                        placeholder="Enter City">
+                                                        placeholder="Enter City" required>
                         
                         
                                                     <span class="text-danger d-none">City is required!</span>
@@ -1373,7 +1407,7 @@
                                                 <div class="col-md-4">
                                                     <label for="inputState" class="form-label fw-bold">State <spnan class="text-danger">
                                                             *</span></label>
-                                                    <select id="state_update" class="form-select form state-select select2-show-search">
+                                                    <select id="state_update" class="form-select form state-select select2-show-search" required>
                                                         <option selected>Choose...</option>
                         
                                                     </select>
@@ -1392,7 +1426,7 @@
                                                 <div class="col-md-6">
                                                     <label for="inputState" class="form-label fw-bold">Property Type <spnan class="text-danger">
                                                             *</span></label>
-                                                    <select id="propertyType_update" class="form-select form state-select select2-show-search">
+                                                    <select id="propertyType_update" class="form-select form state-select select2-show-search" required>
                                                         <option selected>Choose...</option>
                                                         <option>Single Family</option>
                                                         <option>Multi-Family</option>
@@ -1436,7 +1470,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</a>
-                                            <a class="btn btn-primary disabled" id="update">Save changes</a>
+                                            <a class="btn btn-primary btn-pill" id="update">Save changes</a>
                                         </div>
                                     </div>
                                 </div>
@@ -2259,15 +2293,24 @@
     </script>
     
     <script>
+        var unitsPermission;var propertyData_edit;
         $(document).ready(function() {
-            $.ajax({
+            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
+
+// Decryption
+var password = 'your-secret-password';
+const propertyId = sjcl.decrypt(password, encryptedPropertyId);
+var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
+            function getData(){
+                $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image }) {
+                success: function ({ userName, image,units }) {
                     // console.log()
+                    unitsPermission = units;
                     if(image!==" " && image!==null){
                 
                 $("#user-img").attr("src", image)
@@ -2319,24 +2362,6 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
-
-// Decryption
-var password = 'your-secret-password';
-const propertyId = sjcl.decrypt(password, encryptedPropertyId);
-var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
-            // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
-            $("#viewUnitspill").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
-            $("#viewOverviewpill").attr("href", `./view-property.html?property=${encodedPropertyId}`)
-            $("#viewTenantspill").attr("href", `./add-tenant.html`)
-            $("#viewTaskspill").attr("href", `./create-tasks.html`)
-            $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
-            $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
-            $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
-            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
-            $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
-
-            console.log(propertyId)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
@@ -2351,7 +2376,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    propertyData_edit=data
                         // window.alert(response.message);
                     // console.log(data.propertyName)
                     function toTitleCase(str) {
@@ -2359,6 +2384,18 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
+                            
+                            $("#property_name").empty()
+                    $("#property_address").empty()
+                    $("#property_name6").empty()
+                    $("#property-address6").empty()
+                    $("#property_type").empty()
+                    $("#unit_type").empty()
+                    $("#property_size").empty()
+                    $("#property_units").empty()
+                    $("#property_status").empty()
+                    $("#image-placeholder").empty()
+
                     $("#property_name").text(toTitleCase(data.propertyName))
                     $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
                     $("#property_name6").text(toTitleCase(data.propertyName))
@@ -2374,12 +2411,12 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 }else{
 
     data.images.forEach(image => {
-        if(image.Image!==" " && image.Image!==null){
+        if(image.image_url!==" " && image.image_url!==null){
             
-            if(image.Image.includes(".pdf") || image.Image.includes(".docx") || image.Image.includes(".doc")){
+            if(image.image_url.includes(".pdf") || image.image_url.includes(".docx") || image.image_url.includes(".doc")){
                 $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
             }else{
-                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.Image + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.image_url + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
     
             }
     
@@ -2398,9 +2435,372 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             console.log(xhr.responseText);
                 }
             });
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                method: 'GET',
+                success: function ({
+                    data
+                }) {
+                    console.log(data)
+                    // Handle state selection change
+                    // console.log(result)
+
+                    
+                    var stateupdateDropdown = $('#state_update');
+                    // states = result.geonames.filter(function(place) {
+                    //     return place.fcode === "ADM1";
+                    // });
+                    states = data
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    data.forEach(function (state) {
+                        stateupdateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            });
+
+            }
+            getData()
+
+            // const propertyId = (new URL(document.location)).searchParams.get("propertyId");
+            $("#viewUnitspill").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
+            $("#viewOverviewpill").attr("href", `./view-property.html?property=${encodedPropertyId}`)
+            $("#viewTenantspill").attr("href", `./add-tenant.html`)
+            $("#viewTaskspill").attr("href", `./create-tasks.html`)
+            $("#viewUnits").attr("href", `./property-unit.html?property=${encodedPropertyId}`)
+            $("#viewOverview").attr("href", `./view-property.html?property=${encodedPropertyId}`)
+            $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
+            $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
+            $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
+
+            console.log(propertyId)
+           
+      
+        var states;
+           
+
+    //         "data": {
+    //     "id": 507,
+    //     "landlordID": "138",
+    //     "propertyName": "Raza Complex",
+    //     "address": "1/f, Bahria Complex 3, Mt Khan Road",
+    //     "city": "Uytyuy",
+    //     "state": "Alabama",
+    //     "zipCode": "67867",
+    //     "propertyType": "Single Family",
+    //     "propertySQFT": "222",
+    //     "status": "Non-active",
+    //     "units": 2,
+    //     "created_at": "2023-10-07 06:23:54",
+    //     "notify": 1,
+    //     "tenantNotify": 0,
+    //     "NumberCount": {
+    //         "unitNumber": "101",
+    //         "Area": "160",
+    //         "unitDetails": "",
+    //         "status": "Occupied",
+    //         "id": 4221,
+    //         "propertyID": "507",
+    //         "Vacant": "0",
+    //         "Occupied": "2"
+    //     },
+    //     "images": []
+    // }
+
+    var selectedFiles = [];
+        function dropHandler(ev) {
+            console.log("File(s) dropped");
+
+            // Prevent default behavior (Prevent file from being opened)
+            ev.preventDefault();
+
+            if (ev.dataTransfer.items) {
+                // Use DataTransferItemList interface to access the file(s)
+                [...ev.dataTransfer.items].forEach((item, i) => {
+                    // If dropped items aren't files, reject them
+                    if (item.kind === "file") {
+                        const file = item.getAsFile();
+                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                        updateSelectedFilesContainer()
+                    }
+                });
+            } else {
+                // Use DataTransfer interface to access the file(s)
+                [...ev.dataTransfer.files].forEach((file, i) => {
+                    console.log(`… file[${i}].name = ${file.name}`);
+                });
+            }
+        }
+        function dragOverHandler(ev) {
+            console.log("File(s) in drop zone");
+
+            // Prevent default behavior (Prevent file from being opened)
+            ev.preventDefault();
+        }
+        $('#fileInput_update').on('change', function () {
+                // console.log($(this)[0].files)
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            $(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            function updateSelectedFilesContainer() {
+            var selectedFilesContainer = $('.file-grid');
+            console.log(selectedFilesContainer)
+            selectedFilesContainer.empty();
+            console.log(selectedFiles)
+            selectedFiles.forEach(function (file, index) {
+                console.log(selectedFiles.length)
+                console.log(file)
+                var fileElement = $('<div>')
+                    .addClass('selected-file');
+
+                if (file.type && file.type.includes('image')) {
+                    // Handle image files
+                    fileElement.append(
+                        $('<div>').addClass('file-preview')
+                            .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                    );
+                } else if (file.type && file.type.includes('pdf')) {
+                    // Handle PDF files
+                    fileElement.append(
+                        $('<div>').addClass('file-preview')
+                            .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                    );
+                } else {
+                    // Handle S3 bucket URLs for images and PDFs
+                    if (file?.image_key?.endsWith('.jpg') || file?.image_key?.endsWith('.png')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', file.image_url))
+                        );
+                    } else if (file?.image_key?.endsWith('.pdf')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                        );
+                    } else {
+                        // Handle other files (you can modify this part as needed)
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                        );
+                    }
+                }
+                if (file instanceof File) {
+                    fileElement
+                        .append(
+                            $('<div>')
+                                .addClass('file-details')
+                                .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                        )
+                        .append(
+                            $('<span>')
+                                .addClass('delete-file')
+                                .text('X')
+                                .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+                } else if (file instanceof Object) {
+                    console.log(file)
+                    if (file.image_url) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file?.image_key?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    }
+                }
+
+            });
+        }
+        
+    
+        $("#edit-option-view").on("click", function(){
+        
+        $("#propertyName_update").val(propertyData_edit.propertyName);
+    $("#unit_update").val(propertyData_edit.units);
+    $("#address_update").val(propertyData_edit.address);
+    $("#city_update").val(propertyData_edit.city);
+    $("#state_update").val(propertyData_edit.state);
+    $("#propertyType_update").val(propertyData_edit.propertyType);
+    $("#propertyTotalSF_update").val(propertyData_edit.propertySQFT);
+    $("#zip_update").val(propertyData_edit.zipCode);
+    selectedFiles = propertyData_edit.images
+                            
+                            updateSelectedFilesContainer()
+    $("#myModal_edit").modal("show");
+    
+    })
+
+// Decryption
+var password = 'your-secret-password';
+
+    $(document).on('click', '#update', function (e) {
+            
+            e.preventDefault();
+        $("#preloader").css("display", "flex");
+            $("#myModal_edit").modal("hide");
+            var formData = new FormData();
+            var propertyName = $("#propertyName_update").val();
+            var address = $("#address_update").val();
+            var city = $("#city_update").val();
+            var state = $("#state_update").val();
+            var zipCode = $("#zip_update").val();
+            var propertyType = $("#propertyType_update").val();
+            var propertySQFT = $("#propertyTotalSF_update").val();
+            var units = $("#unit_update").val();
+
+
+
+            var existingImageNames = [];
+            selectedFiles.forEach((file) => {
+                if (file instanceof File) {
+                }
+                else {
+                    existingImageNames.push(file)
+                }
+            })
+            // Get the selected files
+            if (selectedFiles.length >= 1) {
+                var files = selectedFiles.map(function (file) {
+                    return file instanceof File ? file : file.name;
+                });
+                files.forEach(function (file) {
+                    formData.append('image', file);
+                });
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/upload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        var imageArray = [...response.images, ...existingImageNames];
+                        const formData = {
+                            id: propertyId,
+                            propertyName: propertyName,
+                            address: address,
+                            city: city,
+                            state: state,
+                            zipCode: zipCode,
+                            propertyType: propertyType,
+                            propertySQFT: propertySQFT,
+                            units: units,
+                            images: imageArray
+                        }
+                        $.ajax({
+                            url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
+                            type: 'PUT',
+                            data: JSON.stringify(formData),
+                            contentType: 'application/json',
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                e.preventDefault()
+                                GetNotification();
+                                getData();
+                                $("#successfully_changed_text").text("Successfully Updated");
+                                $("#successfully_changed").modal("show");
+                                setTimeout(function () {
+                                    $("#successfully_changed").modal("hide");
+                                }, 2000);
+                                $("#preloader").css("display", "none");
+                            },
+                            error: function (xhr, status, error) {
+                                $("#myModal_warning_connection").modal("show");
+                                setTimeout(function () {
+                                    $('#myModal_warning_connection').modal('hide');
+                                }, 2000);
+                                $("#preloader").css("display", "none");
+                                console.log('Error: ' + error);
+                            }
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+                // formData.append("existingImages", existingImageNames)
+            } else {
+
+                const formData = {
+                    id: propertyId,
+                    propertyName: propertyName,
+                    address: address,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode,
+                    propertyType: propertyType,
+                    propertySQFT: propertySQFT,
+                    units: units,
+                    images: []
+                }
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
+                    type: 'PUT',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        e.preventDefault()
+                        GetNotification();
+                        getData();
+                        $("#successfully_changed_text").text("Successfully Updated");
+                        $("#successfully_changed").modal("show");
+                        setTimeout(function () {
+                            $("#successfully_changed").modal("hide");
+                        }, 2000);
+                        $("#preloader").css("display", "none");
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert('Error: ' + error);
+                        $("#preloader").css("display", "none");
+                    }
+                });
+            }
         });
-
-
+        
+ 
+})
         // });
     </script>
     <!-- ############################################# -->
@@ -2560,6 +2960,112 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 
     // });
     </script> -->
-</body>
+    <script>
+        var helloGuys = true;
+       
+        $(document).ajaxStop(function () {
+            if(unitsPermission){
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!unitsPermission[action]) {
+                        switch (action) {
+            case "Add":
+                // $("#add_property_btn").remove()
+                break;
+            case "View":
+                $("#nav_links li:eq('1')").addClass("d-none")
+                break;
+            case "Delete":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".delete-option").addClass("d-none")
+                    
+            //     })
+                break;
+            case "Edit":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".edit-option").addClass("d-none")
+                    
+            //     })
+                break;
+            default:
+                break;
+        }
+                    }
+        
+    }
+                
+                }
+    
+    
+    
+            })
+            const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    // Check if tenantPermissions is defined
+                    if(unitsPermission){
+                    const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+                for (const action of actions) {
+                    if (!unitsPermission[action]) {
+                        switch (action) {
+            case "Add":
+                // $("#add_property_btn").remove()
+                break;
+            case "View":
+                console.log($("#nav_links li:eq('1')"))
+                $("#nav_links li:eq('1')").addClass("d-none")
+                break;
+            case "Delete":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".delete-option").addClass("d-none")
+                    
+            //     })
+                break;
+            case "Edit":
+            // $("#table_body tr").each(function (item, index) {
+            //         $(this).find(".edit-option").addClass("d-none")
+                    
+            //     })
+                break;
+            default:
+                break;
+        }
+                    }
+        
+    }
+                
+                }
+    
+                }
+            });
+        });
+    
+        // Start observing the document
+        observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
+    
+    </script>
+<script>
+    $(document).ready(function () {
+        $(document).on('input change', '#myModal_edit input[required], #myModal_edit select[required]', function () {
+            var propertyName = $("#propertyName_update").val();
+            var address = $("#address_update").val();
+            var city = $("#city_update").val();
+            var state = $("#state_update").val();
+            var zipCode = $("#zip_update").val();
+            var propertyType = $("#propertyType_update").val();
+            var propertySQFT = $("#propertyTotalSF_update").val();
+            var units = $("#unit_update").val();
+
+            if (propertyName === '' || address === '' || city === '' || state === '' || zipCode === '' || propertyType === '' || propertySQFT === '' || units === '') {
+                $('#update').addClass('disabled')
+            } else {
+                $('#update').removeClass('disabled')
+
+            }
+        });
+    });
+</script>
+
+<script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

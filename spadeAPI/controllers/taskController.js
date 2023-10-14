@@ -968,7 +968,8 @@ exports.deleteTask = async (req, res) => {
 // add vendor category 19/9/23
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
-  
+  const elem=[]
+  console.log(typeof elem)
   const { userId } = req.user;
   let insertedId; // Declare insertedId here
 
@@ -978,12 +979,12 @@ exports.addVendorCategory = async (req, res) => {
       [userId]
     );
     const existingCategories = categoryCheckResult[0];
-    if(typeof categories === 'object') {
+    if(!Array.isArray(categories)) {
       console.log(categories)
-      categoryToInsert=existingCategories.filter((category) => category.category.toLowerCase() == categories?.categories?.toLowerCase());
+      categoryToInsert=existingCategories.filter((category) => categories?.categories?.toLowerCase() == categories?.categories?.toLowerCase());
       if(categoryToInsert.length === 0) {
         insertedId = await queryRunner(addVendorCategory, [
-          categories.categories.toLowerCase(),
+          categories?.categories?.toLowerCase(),
           userId,
         ]);
         console.log(insertedId[0]?.insertId)
@@ -999,7 +1000,7 @@ exports.addVendorCategory = async (req, res) => {
           categoryID: categoryToInsert[0]?.id, // Include inserted IDs in the response
         });
       }
-    }else if(typeof categories === 'array') {
+    }else if(Array.isArray(categories)) {
       categoryToInsert = categories.filter((category) => !existingCategories.some((existingCategory) => existingCategory.category.toLowerCase() === category.category.toLowerCase()));
       categoryToDelete = existingCategories.filter((existingCategory) => !categories.some((category) => category.category.toLowerCase() === existingCategory.category.toLowerCase()));
       if (categoryCheckResult[0].length !== 0) {
