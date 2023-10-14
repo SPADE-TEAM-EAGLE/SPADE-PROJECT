@@ -704,20 +704,15 @@ function confirmPasswordValidation() {
 // payment validation start 
 
 var validholdername = /^[A-Za-z\s]+$/;
-let holdername = document.getElementById("holdernamee");
-holdername.addEventListener("keyup", holdernamevalidation);
+// let holdername = document.getElementById("holdernamee");
+// holdername.addEventListener("keyup", holdernamevalidation);
 
 function holdernamevalidation() {
 
   if (holdername.value.match(validholdername)) {
-
-    // document.getElementById("reg-fname").style.borderColor = "green";
-    // return true;
     holdername.classList.remove("is-invalid");
     holdername.classList.add("is-valid");
   } else {
-    // document.getElementById("reg-fname").style.borderColor = "red";
-    // return false;
     holdername.classList.add("is-invalid");
     holdername.classList.remove("is-valid");
   }
@@ -726,8 +721,8 @@ function holdernamevalidation() {
 
 // last name
 var validPhone1 = /^\d{16}$/;
-let cardnumber = document.getElementById("cardnumber");
-cardnumber.addEventListener("keyup", cardnumbervalidation);
+// let cardnumber = document.getElementById("cardnumber");
+// cardnumber.addEventListener("keyup", cardnumbervalidation);
 
 function cardnumbervalidation() {
   if (cardnumber.value.match(validPhone1)) {
@@ -742,8 +737,8 @@ function cardnumbervalidation() {
 // last name
 
 var validcv = /^\d{3}$/;
-let cv = document.getElementById("cv");
-cv.addEventListener("keyup", cvvalidation);
+// let cv = document.getElementById("cv");
+// cv.addEventListener("keyup", cvvalidation);
 
 function cvvalidation() {
   if (cv.value.match(validcv)) {
@@ -763,8 +758,8 @@ function cvvalidation() {
 // phone name
 
 var validzipcode = /^\d{4}$/;
-let zipcode = document.getElementById("zipcode");
-zipcode.addEventListener("keyup", zipcodevalidation);
+// let zipcode = document.getElementById("zipcode");
+// zipcode.addEventListener("keyup", zipcodevalidation);
 
 function zipcodevalidation() {
   if (zipcode.value.match(validzipcode)) {
@@ -775,8 +770,8 @@ function zipcodevalidation() {
     zipcode.classList.remove("is-valid");
   }
 }
-let paydate = document.getElementById("payment-date"); 
-paydate.addEventListener("change", paydatevalidation);
+// let paydate = document.getElementById("payment-date"); 
+// paydate.addEventListener("change", paydatevalidation);
 
 function paydatevalidation() {
   if (paydate.value != "") {
@@ -789,25 +784,45 @@ function paydatevalidation() {
 }
 
 
-holdername.addEventListener("keyup", button2);
-cardnumber.addEventListener("keyup", button2);
-cv.addEventListener("keyup", button2);
-paydate.addEventListener("change", button2);
-zipcode.addEventListener("keyup", button2);
-function button2() {
-  if (
-    holdername.value.match(validholdername) &&
-    cardnumber.value.match(validPhone1) &&
-    cv.value.match(validcv) &&
-    zipcode.value.match(validzipcode) &&
-    paydate.value != ""
-  ) {
-    document.getElementById("nextpayment").disabled = false;
-    // part2.disabled = false;
-  } else {
-    document.getElementById("nextpayment").disabled = true;
-  }
-}
+// holdername.addEventListener("keyup", button2);
+// cardnumber.addEventListener("keyup", button2);
+// cv.addEventListener("keyup", button2);
+// paydate.addEventListener("change", button2);
+// zipcode.addEventListener("keyup", button2);
+// function button2() {
+//   if (
+//     holdername.value.match(validholdername) &&
+//     cardnumber.value.match(validPhone1) &&
+//     cv.value.match(validcv) &&
+//     zipcode.value.match(validzipcode) &&
+//     paydate.value != ""
+//   ) {
+//     document.getElementById("nextpayment").disabled = false;
+//   } else {
+//     document.getElementById("nextpayment").disabled = true;
+//   }
+// } 
+// Wait for the document to be fully loaded
+// document.addEventListener("DOMContentLoaded", function () {
+
+//   var nextPaymentButton = document.getElementById("nextpayment");
+//   nextPaymentButton.disabled = true;
+//   document.querySelector("#card4 #payment-form input").addEventListener("input", function () {
+//     var areAllFieldsFilled = areAllFieldsFilledInCard4();
+//     nextPaymentButton.disabled = !areAllFieldsFilled;
+//   });
+//   function areAllFieldsFilledInCard4() {
+//     var card4 = document.querySelector("#card4 #payment-form");
+//     var fields = card4.querySelectorAll("input");
+//     for (var i = 0; i < fields.length; i++) {
+//       if (!fields[i].value) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   }
+// });
+
 // phone name
 
 // function create_custom_dropdowns() {

@@ -1480,7 +1480,7 @@
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
                                             <div style="width: 220px" class="d-flex justify-content-center align-items-center">
                                                 <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
-                                                <select id="lengthSelectBox" class="form-control select2 form-select" style="width: 80px;">
+                                                <select id="lengthSelectBox" class="form-control form-select" style="width: 80px;">
 
                                                     <!-- <option value="1">1</option> -->
                                                     <option value="10">10</option>
@@ -2757,10 +2757,8 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
 <script>
     $(document).change(function () {
         if ($('#typehead').val() == "") {
-
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
@@ -2773,10 +2771,8 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
     })
     $(document).ajaxStop(function () {
         if ($('#typehead').val() == "") {
-
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                //console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
