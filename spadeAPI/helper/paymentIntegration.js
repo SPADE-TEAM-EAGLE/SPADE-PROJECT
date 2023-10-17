@@ -4,7 +4,7 @@ const { request } = require('https'); // Use the built-in https module for HTTPS
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
-const { queryRunner } = require('./queryRunner');
+// const { queryRunner } = require('./queryRunner');
 const { selectQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { queryRunner } = require('./queryRunner')
@@ -343,22 +343,24 @@ exports.createSubscriptionPayment = async (req,res) => {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
     // planId: planId,
-    userTokenId: userTokenId.toString(),
+    planId: "9298",
+    // userTokenId: userTokenId.toString(),
+    userTokenId: userTokenId,
     userPaymentOptionId: upoId,
     initialAmount: initialAmount,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
-    day: "0",
-    month: "0",
-    year: "0"
+    day: "3",
+    month: "2",
+    year: "1"
 },
 
 
   timeStamp: timestamp,
     // clientRequestId: config.clientRequestId,
     // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+(userTokenId.toString())+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+"9298"+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
   const result=await queryRunner(selectQuery("plan", "id"), [
     planId
@@ -367,26 +369,26 @@ exports.createSubscriptionPayment = async (req,res) => {
   const {nuveiId,monthlyAnnual}=result[0][0];
   if(monthlyAnnual=="Monthly"){
     requestData.recurringPeriod = {
-      day: "0",
+      day: "1",
       month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "1",
-      year: "0"
+      day: "6",
+      month: "7",
+      year: "8"
   }
   
   }else{
     requestData.recurringPeriod = {
-      day: "0",
-      month: "1",
+      day: "1",
+      month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "6",
+      month: "7",
+      year: "8"
   }
 }
 requestData.planId=nuveiId;
