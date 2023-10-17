@@ -4,9 +4,11 @@ const { request } = require('https'); // Use the built-in https module for HTTPS
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
-const { queryRunner } = require('./queryRunner');
+// const { queryRunner } = require('./queryRunner');
 const { selectQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
+const { queryRunner } = require('./queryRunner')
+const { updateUser } = require("./../constants/queries")
 
 // ############################ timestamp #################################
 function getTimestamp() {
@@ -95,9 +97,7 @@ exports.openOrder = async (req,res) => {
     userTokenId:userId,
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
-
   };
-
   const requestOptions = {
     method: "POST",
     headers: {
@@ -188,7 +188,10 @@ const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requ
   }); 
   response.on('end', () => {
     try {
+
       const data = JSON.parse(responseData);
+      const NuveiId = data.userId;
+       queryRunner(updateUser, [NuveiId, userId]);
       res.status(200).json({
           data
       })
@@ -417,6 +420,7 @@ console.log(requestData)
       }
     });
   }); 
+
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
