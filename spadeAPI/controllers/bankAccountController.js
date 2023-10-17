@@ -9,7 +9,7 @@ const fs = require("fs");
 const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage");
 const { serialize } = require("cookie");
-const { insertBankAccount, selectQuery } = require("../constants/queries");
+const { insertBankAccount, selectQuery, updateBankAccountStatusquery } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
 
@@ -55,6 +55,29 @@ exports.GetBankAccount = async (req, res) => {
                 res.status(200).json({data: getResult[0] });
             } else {
                 res.status(201).send("Bank Account data not found");
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(400).send("Error");
+        }
+};
+  //  ############################# Create bank Account ############################################################
+ 
+
+    //  ############################# Create bank Account ############################################################
+exports.updateBankAccountStatus = async (req, res) => {
+    // const { userId } = req.user;
+    const { id,Active } = req.body;
+        try {
+            console.log("asdf");
+            const getResult = await queryRunner(updateBankAccountStatusquery,[Active,id]); 
+            console.log("asdf2");
+
+            if(getResult[0].affectedRows > 0) {
+                
+                res.status(200).json({message : "Status Updated Successful", data: getResult[0] });
+            } else {
+                res.status(201).send("Bank Account status is not updated");
             }
         } catch (error) {
             console.log(error);

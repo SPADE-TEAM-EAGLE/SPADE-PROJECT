@@ -268,3 +268,4 @@ router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
 router.post("/CreateBankAccount", verifyToken, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
+router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
