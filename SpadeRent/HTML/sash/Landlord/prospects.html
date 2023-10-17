@@ -3557,7 +3557,7 @@
                                                                                 Disqualified</b></label>
                                                                     </div>
                                                                     <div style="display: flex; align-items: center;justify-content: center;">
-
+<span class="fw-bold me-3" style="text-wrap: nowrap;">Fliter by year:</span>
                                                                         <select class="form-select form"
                                                                             id="prospect-year" style="min-width: 100px;">
                                                                             <option selected>2023</option>
@@ -5512,7 +5512,8 @@
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-
+console.log("prospectTimeGraph");
+console.log(response);
                         $("#prospect-timeline").empty();
                         if (response?.data?.length > 0) {
                             response?.data?.forEach(function (item) {
@@ -5529,7 +5530,7 @@
   <li data-duration="${item?.startMonth?.split("-")[0] + "-" +
                                     item?.endMonth?.split("-")[0]
                                     }" data-color="#b03532" style="background-color: ${prospectusColor}; opacity: 1;">
-    ${item?.prospect_detail?.prospectDetail}
+    ${item?.prospect_detail?.firstName} ${item?.prospect_detail?.lastName} 
   </li>
 `);
                             })
