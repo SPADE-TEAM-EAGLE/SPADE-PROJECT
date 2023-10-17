@@ -755,6 +755,7 @@ exports.updateUserProfile = async function (req, res) {
 };
 
 exports.updatePlanId = async function (req, res) {
+  // const { userId } = req.body;
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(selectQuery("users", "id"), [

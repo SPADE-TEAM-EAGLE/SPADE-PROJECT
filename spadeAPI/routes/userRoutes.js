@@ -214,6 +214,7 @@ router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTen
 router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
 // router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 router.post("/openOrder", paymentIntegration.openOrder);
+
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
 router.post("/getUserDetailsPayment", paymentIntegration.getUserDetailsPayment);
 // router.post("/createUserPaymentasdfgh", paymentIntegration.createUserPaymentasdfgh);
@@ -262,3 +263,5 @@ router.get("/userPermissionGetById", verifyToken, userPermissionController.userP
 router.delete("/userPermissionUsersDelete", verifyToken, userPermissionController.userPermissionUsersDelete);
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
 router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);
+router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
+router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
