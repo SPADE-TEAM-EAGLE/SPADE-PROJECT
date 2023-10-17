@@ -190,8 +190,7 @@ const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requ
     try {
 
       const data = JSON.parse(responseData);
-      const NuveiId = data.userId;
-       queryRunner(updateUser, [NuveiId, userId]);
+      
       res.status(200).json({
           data
       })
