@@ -77,7 +77,7 @@ function GetNotification() {
                         <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
             }</div> <span class="text-dark"> ${item.Address} > ${item.city
             }</span>
-                        <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                        <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                     </a>
                 </div>
             </div><div class="">
@@ -158,7 +158,7 @@ function GetNotification() {
                         <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
             }</div> <span class="text-dark"> ${item.Address} > ${item.city
             }</span>
-                        <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                        <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                     </a>
                 </div>
             </div><div class="">
@@ -242,7 +242,7 @@ function GetNotification() {
                                 <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
             }</div> <span class="text-dark"> ${item.Address
             } > ${item.city}</span>
-                                <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                                <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                             </a>
                         </div>
                     </div><div class="">

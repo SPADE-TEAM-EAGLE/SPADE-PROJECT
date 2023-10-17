@@ -78,7 +78,7 @@ function GetNotification(){
                       }</div> <span class="text-dark"> ${item.Address} > ${
               item.city
             }</span>
-                      <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                   </a>
               </div>
           </div><div class="">
@@ -203,7 +203,7 @@ function GetNotification(){
                       }</div> <span class="text-dark"> ${item.Address} > ${
               item.city
             }</span>
-                      <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                   </a>
               </div>
           </div><div class="">
@@ -328,7 +328,7 @@ function GetNotification(){
                               }</div> <span class="text-dark"> ${
               item.Address
             } > ${item.city}</span>
-                              <p class="mb-0 fw-bold text-dark fs-15 ">${0}$ Received</p>
+                              <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
                           </a>
                       </div>
                   </div><div class="">
