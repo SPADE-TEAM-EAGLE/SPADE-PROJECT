@@ -340,53 +340,55 @@ exports.createSubscriptionPayment = async (req,res) => {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
     // planId: planId,
-    userTokenId: userTokenId.toString(),
+    userTokenId: userTokenId,
     userPaymentOptionId: upoId,
     initialAmount: initialAmount,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
-    day: "0",
-    month: "0",
-    year: "0"
+    day: "3",
+    month: "2",
+    year: "1"
 },
 
 
   timeStamp: timestamp,
-    // clientRequestId: config.clientRequestId,
-    // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+(userTokenId.toString())+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
+    
+    // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
+  console.log(config.merchantId,config.merchantSiteId,userTokenId,planId,upoId,initialAmount,recurringAmount,currency,timestamp,config.Secret_Key)
+  console.log(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key);
+
   const result=await queryRunner(selectQuery("plan", "id"), [
     planId
   ]);
-  console.log(result)
   const {nuveiId,monthlyAnnual}=result[0][0];
   if(monthlyAnnual=="Monthly"){
     requestData.recurringPeriod = {
-      day: "0",
+      day: "1",
       month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "1",
-      year: "0"
+      day: "6",
+      month: "7",
+      year: "8"
   }
   
   }else{
     requestData.recurringPeriod = {
-      day: "0",
-      month: "1",
+      day: "1",
+      month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "6",
+      month: "7",
+      year: "8"
   }
 }
 requestData.planId=nuveiId;
+requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key)
 console.log(requestData)
   const requestOptions = {
     method: "POST",
