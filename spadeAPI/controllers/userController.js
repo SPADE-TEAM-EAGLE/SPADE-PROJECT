@@ -200,6 +200,7 @@ exports.checkemail = async function (req, res) {
 };
 
 exports.getUser = (req, res) => {
+  // console.log(req.user);
   res.status(200).json(req.user);
 };
 

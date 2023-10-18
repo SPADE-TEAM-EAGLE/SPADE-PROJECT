@@ -3841,7 +3841,7 @@
                 var password = $("#id_password2").val();
                 $("#preloader").css("display", "flex");
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/Signup",
+                    url: "https://backend.app.spaderent.com/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -3972,7 +3972,7 @@
         function main(userId) {
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -3987,7 +3987,7 @@
                 success: function (response) {
                     
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/createUserPayment",
+                        url: "https://backend.app.spaderent.com/api/spade/createUserPayment",
                         type: "POST",
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -4024,7 +4024,7 @@
                       if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                         
                         $.ajax({
-                                url: "http://localhost:3000/api/spade/createSubscriptionPayment",
+                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
                                 type: "POST",
                                 headers: {
                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
