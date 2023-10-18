@@ -1195,34 +1195,33 @@ exports.property = async (req, res) => {
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
     }
-    if (propertyResult[0].affectedRows > 0) {
-      //  notify user using socket
-      // io.to(userId).emit('notification', req.body);
+    // if (propertyResult[0].affectedRows > 0) {
+    //   //  notify user using socket
+    //   // io.to(userId).emit('notification', req.body);
 
-      const mailSubject = "Property Maintenance: " + propertyName;
-      const landlordUser = await queryRunner(selectQuery("users", "id"), [
-        userId,
-      ]);
-      const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
-      const taskEmail = landlordUser[0][0].taskEmail;
-      await taskSendMail(
-        "tenantName",
-        mailSubject,
-        "dueDate",
-        FullName,
-        "property",
-        "assignedTo",
-        "priority",
-        "companyName",
-        "contactLandlord",
-        userId,
-        email,
-        taskEmail
-      );
-    }
+    //   const mailSubject = "Property Maintenance: " + propertyName;
+    //   const landlordUser = await queryRunner(selectQuery("users", "id"), [
+    //     userId,
+    //   ]);
+    //   const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
+    //   const taskEmail = landlordUser[0][0].taskEmail;
+    //   await taskSendMail(
+    //     "tenantName",
+    //     mailSubject,
+    //     "dueDate",
+    //     FullName,
+    //     "property",
+    //     "assignedTo",
+    //     "priority",
+    //     "companyName",
+    //     "contactLandlord",
+    //     userId,
+    //     email,
+    //     taskEmail
+    //   );
+    // }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into
-
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
       const { image_key } = images[i];

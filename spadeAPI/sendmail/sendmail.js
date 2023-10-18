@@ -120,7 +120,6 @@ exports.invoiceSendMail = async (
     console.log(error);
   }
 };
-
 // Task Invoice email
 exports.taskSendMail = async (
   tenantName,
