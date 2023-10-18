@@ -947,7 +947,7 @@
                                         <div class="spinner-border text4-blue me-2" style="width: 3rem; height: 3rem; position: absolute;top: 20%;display: none;z-index: 9;" role="status" id="loader">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
-                                        <div class="col-12 card2 p-0" id="card2" style="display: none;">
+                                        <div class="col-12 card2 p-0" id="card2" >
                                             <!-- ROW-6 OPEN -->
                                             <div class="bg-landing bg-image-style">
                                                 <div class="container-fluid">
@@ -2989,6 +2989,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+<script>
+    $(document).ready(function(){
+        const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("subscribtionId"));
+var password = 'your-secret-password';
+const subsId = sjcl.decrypt(password, encryptedPropertyId);
+if(subsId){
+    alert(subsId);
+    var subscribtionPlanChat = $(`#${subsId}`)
+    subscribtionPlanChat.addClass('text-white bg-primary')
+    subscribtionPlanChat.find('button').text('Subscript Now!')
+}
+    })
+</script>
     <script>
         var selectedplan=0;
         window.intercomSettings = {

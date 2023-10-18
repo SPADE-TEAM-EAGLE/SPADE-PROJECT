@@ -3860,8 +3860,6 @@
                         response.data[0].forEach(function (property, index) {
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
-
-                            // Include the encrypted value in the URL
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id = `<td style="font-weight: 600;">${property.landlordID}</td>`
