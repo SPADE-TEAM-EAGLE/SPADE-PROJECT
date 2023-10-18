@@ -15338,7 +15338,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             clientUniqueId: "695701003",
                             merchantId: "6400701569295268447",
                             merchantSiteId: "244298",
-                            cardHolderName: "<card_holder>",
+                            cardHolderName: (userData.firstName+" "+userData.lastName),
                             // paymentOption: {
                             //     userPaymentOptionId: "95475308",
                             //     card:{
@@ -15346,8 +15346,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             // },
                             paymentOption: scard,
                             billingAddress: {
-                                email: "someone@somedomain.com",
-                                country: "GB"
+                                email: userData.email,
+                                country: "US"
                             }
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
@@ -15359,7 +15359,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 },
                                 data: JSON.stringify({
                                     userTokenId: userData.userId,
-                                    userNuveiId:resp.data.userId,
+                                    userNuveiId:userData.nuveiUserId,
                                     planId: seletedPlanID,
                                     upoId: res?.userPaymentOptionId,
 
@@ -15371,7 +15371,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 contentType: "application/json",
                                 success: function (response) {
                                     $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                    url: 'http://localhost:3000/api/spade/updatePlanId',
                                     method: 'PUT',
                                     data: JSON.stringify({ planID: seletedPlanID }),
                                     contentType: 'application/json',
