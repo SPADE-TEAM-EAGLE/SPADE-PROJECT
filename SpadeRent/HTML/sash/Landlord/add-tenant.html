@@ -28,6 +28,7 @@
     <link href="../assets/css/dark-style.css" rel="stylesheet" />
     <link href="../assets/css/transparent-style.css" rel="stylesheet">
     <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="../assets/css/responsive2.css" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
     <link href="../assets/css/icons.css" rel="stylesheet" />
@@ -581,7 +582,7 @@
                 #add_property_btn {
                     font-size: 12px;
                     margin: 0 !important;
-                    display: none;
+                    /* display: none; */
                 }
 
                 /* #typehead {
@@ -921,13 +922,14 @@
                             </button>
                         </div> -->
                         <div class="card-body text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                                <path fill="#fad383"
-                                    d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z">
-                                </path>
-                                <circle cx="12" cy="16" r="1" fill="#f7b731"></circle>
-                                <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path>
-                            </svg>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                viewBox="0 0 24 24">
+                                <path fill="#13bfa6"
+                                    d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                    opacity=".99" />
+                                <path fill="#71d8c9"
+                                    d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                            </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Info</h4>
                             <p class="card-text text-dark">Email Sended</p>
                         </div>
@@ -2131,7 +2133,7 @@
                             </li>
                             <li class="slide card-demo-2">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
-                                        class="side-menu__icon fi fi-rs-cabin"></i><span
+                                        class="side-menu__icon fi fi-rs-home-location-alt"></i><span
                                         class="side-menu__label">Tenants</span>
 
 
@@ -2255,7 +2257,7 @@
                         </div>
                         <!-- PAGE-HEADER END -->
 
-                        <div>
+                        <div class="responsive-img-scroll">
                             <p class="d-inline-flex gap-1 bg-img-mainn">
                                 <span>Tenant | </span>
                                 <span><a href="#" onclick="Intercom('showArticle', 8210444)"><b>Need help?</b></a></span>
@@ -2325,7 +2327,7 @@
                                                         placeholder="Search Users by Name, Email or Date" type="text"
                                                         id="search_input">
                                                 </div> -->
-                                                <div class="main-header-center d-none d-lg-block m-0">
+                                                <div class="main-header-center d-nonee d-lg-block m-0">
                                                     <button class="btn px-0 pt-2"><i class="fe fe-search"
                                                             aria-hidden="true"></i></button>
                                                     <input type="text" class="form-control" id="typehead"
@@ -2416,13 +2418,19 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <button type="button" class="btn btn-primary btn-pill mx-2"
-                                                id="add_property_btn" data-bs-effect="effect-scale"
-                                                data-bs-toggle="modal" href="#addModal"><i
-                                                    class="fe fe-plus me-2"></i><strong>ADD NEW
-                                                    TENANT</strong></button>
+                                           
                                         </div>
+                                        <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
+                                        id="add_property_btn" data-bs-effect="effect-scale"
+                                        data-bs-toggle="modal" href="#addModal"><i
+                                            class="fe fe-plus me-2"></i><strong>ADD NEW
+                                            TENANT</strong></button>
 
+                                            <!-- Mobile screen button add property Start -->
+                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button" id="add_property_btn"
+                                          data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
+                                              class="fe fe-plus"></i></button>
+                                          <!-- Mobile screen button add property End -->
                                     </div>
 
 
@@ -3061,7 +3069,7 @@
     </div>
 
     <!-- BACK-TO-TOP -->
-    <!-- <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> --> -->
+    <!-- <a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
     <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
             class="fe fe-plus"></i></a>
 
@@ -3273,6 +3281,7 @@
         var middleDateInputs1 = document.getElementsByClassName('dateofRentchange');
 
         startDateInput1.addEventListener("change", function () {
+            // console.log("romailllllllllllllllll");
             endDateInput1.min = startDateInput1.value;
         });
 
@@ -4687,7 +4696,6 @@
             $(".modal").on("hidden.bs.modal", function () {
                 $('#addUnitBtn').hide()
                 if (!$(this).is("#addModal_units")) {
-                    // Perform specific action when modal or backdrop is clicked, excluding #addModal_units
                     resetAccordions("update");
                     console.log("This is accordion");
                 }

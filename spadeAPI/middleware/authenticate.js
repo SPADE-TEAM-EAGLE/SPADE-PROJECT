@@ -55,11 +55,11 @@ const verifyToken = async (req, res, next) => {
       const settingMUsers = splitAndConvertToObject(result[0][0].settingMUsers);
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
-
+      console.log(result[0][0])
       req.user = {
         email: decoded.email,
         userId: result[0][0].llnalordId,
-        nuveiUserId: result[0][0].nuveiId,
+        
         userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
         businessName: result[0][0].BusinessName,
         phone: result[0][0].UPhone,
@@ -120,6 +120,7 @@ const verifyToken = async (req, res, next) => {
       req.user = {
         email: decoded.email,
         userId: result[0][0].id,
+        nuveiUserId: result[0][0].nuveiId,
         userName: result[0][0].FirstName + " " + result[0][0].LastName,
         businessName: result[0][0].BusinessName,
         phone: result[0][0].Phone,
@@ -144,8 +145,7 @@ const verifyToken = async (req, res, next) => {
         state: result[0][0].PAState,
         zipCode: result[0][0].PAZipcode,
         businessLogo: result[0][0].businessLogo,
-        nuveiId: result[0][0].nuveiId,
-        nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
+        subscriptionID: result[0][0].nuveiSubscriptionId,
         nuveiUPOID: result[0][0].nuveiUPOID,
 
       };

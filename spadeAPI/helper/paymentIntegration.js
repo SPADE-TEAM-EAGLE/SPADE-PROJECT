@@ -361,14 +361,19 @@ exports.createSubscriptionPayment = async (req,res) => {
   };
   console.log(config.merchantId,config.merchantSiteId,userTokenId,planId,upoId,initialAmount,recurringAmount,currency,timestamp,config.Secret_Key)
   console.log(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key);
-
+  var correctPlanId;
+  if(planId>=8){
+    correctPlanId=planId/4;
+  }else{
+    correctPlanId=planId;
+  }
   const result=await queryRunner(selectQuery("plan", "id"), [
-    planId
+    correctPlanId
   ]);
   const {nuveiId,monthlyAnnual}=result[0][0];
   console.log(monthlyAnnual)
   if(monthlyAnnual=="Monthly"){
-    requestData.recurringAmount=0;
+    requestData.recurringAmount=0.001;
     requestData.recurringPeriod = {
       day: "0",
       month: "1",
@@ -393,7 +398,7 @@ exports.createSubscriptionPayment = async (req,res) => {
   }
 }
 requestData.planId=nuveiId;
-requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key)
+requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+requestData.recurringAmount+currency+timestamp+config.Secret_Key)
 console.log(requestData)
   const requestOptions = {
     method: "POST",
