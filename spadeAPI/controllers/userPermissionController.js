@@ -233,6 +233,8 @@ exports.userPermissionGetAll = async function (req, res) {
 
     // Get User Roles
     exports.userPermissionRoles = async function (req, res) {
+      const { userId } = req.user;
+      // const { userId } = req.body;
         function splitAndConvertToObject(value) {
             const resultObject = {};
         
@@ -248,7 +250,7 @@ exports.userPermissionGetAll = async function (req, res) {
             return resultObject;
           }
         try {
-          const selectResult = await queryRunner(selectQuery("userRoles"));
+          const selectResult = await queryRunner(selectQuery("userRoles", "userId"),[userId]);
           if (selectResult[0].length > 0) {
             const dataArray = [];
       

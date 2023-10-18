@@ -485,7 +485,7 @@ exports.addTasks = async (req, res) => {
       }
       if (notifyVendor.toLowerCase() === "yes") {
       for (let i = 0; i < vendorEmailarr.length > 0; i++) {
-        console.log("vendor2");
+        // console.log("vendor2");
         await taskSendMail(
           tenantName,
           "Property Maintenance: " + task,
