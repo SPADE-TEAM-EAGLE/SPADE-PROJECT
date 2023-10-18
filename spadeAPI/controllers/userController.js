@@ -71,7 +71,8 @@ const {
   checkProperty,
   insertVendorCategory,
   insertProspectusSources,
-  userPermissionLogin
+  userPermissionLogin,
+  addUserRoles
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -143,7 +144,18 @@ exports.createUser = async function (req, res) {
       
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "User added successfully",id : selectResult[0][0].id });
+      try{
+        await queryRunner(addUserRoles,['Owner', selectResult[0][0].id]);
+        await queryRunner(addUserRoles,['Manager', selectResult[0][0].id]);
+        await queryRunner(addUserRoles,['Staff', selectResult[0][0].id]);
+
+        return res.status(200).json({ message: "User added successfully",id : selectResult[0][0].id });
+      }catch (error){
+        console.log(error)
+        return res.status(500).send("Failed to add user");
+      }
+      
+      
     } else {
       return res.status(500).send("Failed to add user");
     }

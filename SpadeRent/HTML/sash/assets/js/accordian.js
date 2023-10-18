@@ -291,25 +291,41 @@ if(!isEmpty2 && !isEmpty1){
  }
  
      });
-     $("#next-add-bank").click(() => {
+     $(document).on('click', '#next-add-bank', function() {
         
                 //first accordian
-                var isEmpty1 = false;
-                $('#accountName, #card-number-bank,#card-expiry-bank,#card-cvc-bank').each(function() {
-                    var span = $(this).siblings('.text-danger');
-                    console.log($(this).val())
-                    if ($(this).val() === '' || $(this).val() == 'Choose...') {
+                var isEmpty1 = true;
+                $(".inputField").each(function() {
+                    console.log("this",$(this))
+                    if($(this).hasClass("valid")){
+                        isEmpty1 = false;
+                        $(this).addClass('border-green');
+                        $(this).removeClass('border-danger');
+                        span.addClass('d-none');
+                    }else{
                         isEmpty1 = true;
                         $(this).addClass('border-danger');
                         $(this).removeClass('border-green');
                         span.removeClass('d-none');
-                        
-                    }else{
-                        $(this).addClass('border-green');
-                        $(this).removeClass('border-danger');
-                        span.addClass('d-none');
+                        return true;
                     }
                 });
+                
+                    var span = $("#accountName").siblings('.text-danger');
+                    
+                    if ($("#accountName").val() === '' || $("#accountName").val() == 'Choose...') {
+                        isEmpty1 = true;
+                        $("#accountName").addClass('border-danger');
+                        $("#accountName").removeClass('border-green');
+                        span.removeClass('d-none');
+                        
+                    }else{
+                        isEmpty1 = false;
+                        $("#accountName").addClass('border-green');
+                        $("#accountName").removeClass('border-danger');
+                        span.addClass('d-none');
+                    }
+               
                 if (!isEmpty1) {
                     $('#collapseOne-add-property').removeClass('show');
                     $('#collapseTwo-add-property').addClass('show');
@@ -345,10 +361,11 @@ if(!isEmpty2 && !isEmpty1){
                 //     $(".accordion-item .icon").eq(1).removeClass("cross");
                 //     $(".accordion-item .icon").eq(1).addClass("tick");
                 // }
+                console.log("isEmpty1",isEmpty1)
         if(!isEmpty1){
             // $('#collapseTwo-add-property').removeClass('show');
-            $("#next-add-prospect").addClass('d-none')
-            $("#next").removeClass("d-none")
+            $("#next-add-bank").addClass('d-none')
+            $("#next-bank").removeClass("d-none")
             // $("#next-add-property").attr('id',"next")
          }
      });

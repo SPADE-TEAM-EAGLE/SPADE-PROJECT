@@ -5,7 +5,7 @@ const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
 // const { queryRunner } = require('./queryRunner');
-const { selectQuery } = require('../constants/queries');
+const { selectQuery, updateUserBank } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
@@ -84,6 +84,7 @@ reqq.end();
 };
 
 exports.openOrder = async (req,res) => {
+  console.log(req.body)
     const {currency,amount,userId} = req.body;
   const apiUrl = config.APIKey;
   const requestData = {
@@ -337,7 +338,7 @@ exports.createPlanPayment = async (req,res) => {
 
     // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req,res) => {
-  const {initialAmount,recurringAmount,currency,planId,userTokenId,upoId} = req.body;
+  const {initialAmount,recurringAmount,currency,planId,userTokenId,upoId,userNuveiId} = req.body;
   const requestData = {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
@@ -348,9 +349,9 @@ exports.createSubscriptionPayment = async (req,res) => {
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
-    day: "3",
-    month: "2",
-    year: "1"
+    day: "0",
+    month: "0",
+    year: "0"
 },
 
 
@@ -365,28 +366,30 @@ exports.createSubscriptionPayment = async (req,res) => {
     planId
   ]);
   const {nuveiId,monthlyAnnual}=result[0][0];
+  console.log(monthlyAnnual)
   if(monthlyAnnual=="Monthly"){
+    requestData.recurringAmount=0;
     requestData.recurringPeriod = {
-      day: "1",
-      month: "0",
+      day: "0",
+      month: "1",
       year: "0"
     }
     requestData.endAfter= {
-      day: "6",
-      month: "7",
-      year: "8"
+      day: "1",
+      month: "1",
+      year: "0"
   }
   
   }else{
     requestData.recurringPeriod = {
-      day: "1",
-      month: "0",
+      day: "0",
+      month: "1",
       year: "0"
     }
     requestData.endAfter= {
-      day: "6",
-      month: "7",
-      year: "8"
+      day: "0",
+      month: "0",
+      year: "1"
   }
 }
 requestData.planId=nuveiId;
@@ -403,13 +406,22 @@ console.log(requestData)
     response.on('data', (chunk) => {
       responseData += chunk;
     }); 
-    response.on('end', () => {
+    response.on('end', async() => {
       try {
         console.log(responseData);
+        
         const data = JSON.parse(responseData);
-        res.status(200).json({
-            data
+        const result= await queryRunner(updateUserBank, [
+          userNuveiId,
+          data.subscriptionId,
+          userTokenId
+        ]);
+        if(result[0].affectedRows==1){
+          res.status(200).json({
+            data,
         })
+        }
+        
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({

@@ -28,7 +28,7 @@ const config = process.env;
 
 
 exports.createUserPermissionUser = async function (req, res) {
-    const { firstName, lastName, email, phone, password, Ustatus, role,images } = req.body;
+  const { firstName, lastName, email, phone, password, Ustatus, role,images } = req.body;
     const { userId } = req.user;
     // const { userId } = req.body;
     const currentDate = new Date();

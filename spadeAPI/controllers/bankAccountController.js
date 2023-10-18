@@ -22,8 +22,14 @@ exports.CreateBankAccount = async (req, res) => {
     const currentDate = new Date();
 
     if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
+        var status;
         try {
-            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, active, currentDate]);
+            if(active === "true"){
+                status="Active"
+            }else{
+                status="Inactive"
+            }
+            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate]);
 
             if (createResult[0].affectedRows === 0) {
                 res.status(400).send("Error");
@@ -68,8 +74,9 @@ exports.GetBankAccount = async (req, res) => {
 exports.updateBankAccountStatus = async (req, res) => {
     // const { userId } = req.user;
     const { id,Active } = req.body;
+    
         try {
-            console.log("asdf");
+            
             const getResult = await queryRunner(updateBankAccountStatusquery,[Active,id]); 
             console.log("asdf2");
 

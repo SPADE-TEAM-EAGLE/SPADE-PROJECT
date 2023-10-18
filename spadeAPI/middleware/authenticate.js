@@ -59,6 +59,7 @@ const verifyToken = async (req, res, next) => {
       req.user = {
         email: decoded.email,
         userId: result[0][0].llnalordId,
+        nuveiUserId: result[0][0].nuveiId,
         userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
         businessName: result[0][0].BusinessName,
         phone: result[0][0].UPhone,

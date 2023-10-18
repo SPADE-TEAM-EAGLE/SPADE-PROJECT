@@ -1171,7 +1171,7 @@
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
                                                                                                 class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
-                                                                                                data-id="2">
+                                                                                                data-id="5">
                                                                                                 <span>Upgrade
                                                                                                     to
                                                                                                     Basic
@@ -1294,7 +1294,7 @@
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
                                                                                                 class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
-                                                                                                data-id="3"
+                                                                                                data-id="6"
                                                                                                 data-bs-effect="effect-scale"
                                                                                                 data-bs-toggle="modal"
                                                                                                 href="#upgradetopro">
@@ -1427,7 +1427,7 @@
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
                                                                                                 class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
-                                                                                                data-id="4">
+                                                                                                data-id="7">
                                                                                                 <span>Upgrade
                                                                                                     to
                                                                                                     Basic
@@ -1658,7 +1658,7 @@
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
                                                                                                 class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn bg-transparent"
-                                                                                                data-id="6">
+                                                                                                data-id="2">
                                                                                                 Upgrade to Basic
                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
                                                                                                 <img src="../assets/images/arrow-yellow.svg"
@@ -1786,7 +1786,7 @@
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
                                                                                                 class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn bg-transparent"
-                                                                                                data-id="7">
+                                                                                                data-id="3">
                                                                                                 Upgrade to Pro
                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                 <img src="../assets/images/arrow-blue.svg"
@@ -3843,8 +3843,9 @@
                 var email = $("#email").val();
                 var phone = $("#phone1").val();
                 var password = $("#id_password2").val();
+                $("#preloader").css("display", "flex");
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/Signup",
+                    url: "http://localhost:3000/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -3856,18 +3857,20 @@
                         planID: (selectedplan > 0 ? selectedplan : 1),
                     }),
                     success: function (response) {
-                        main(response?.id)
-                        $("#myModal_success").modal("show");
-
-                        if (response.message == "User added successfully") {
-                            $("#myModal_success").modal("show");
+                        if(selectedplan == 0){
+                            $("#preloader").css("display", "none");
+                            $("#successModal").modal("show");
                             setTimeout(function () {
-                                $('#myModal_success').modal('hide');
-                                // window.location = '../Landlord/login_module.html';
+                                $('#successModal').modal('hide');
+                                window.location.href = "./login_module.html";
                             }, 2000);
+                        }else{
+                            main(response?.id)
                         }
+                        
                     },
                     error: function (xhr, status, error) {
+                        $("#preloader").css("display", "none");
                         $("#myModal_warning").modal("show");
                         if (xhr.responseText == "Email already exists") {
                             setTimeout(function () {
@@ -3986,7 +3989,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response.sessionToken)
+                    
                     $.ajax({
                         url: "http://localhost:3000/api/spade/createUserPayment",
                         type: "POST",
@@ -4009,9 +4012,6 @@
                         }),
                         contentType: "application/json",
                         success: function (resp) {
-                            console.log(resp)
-
-                            // console.log(userId, seletedPlanID, res?.userPaymentOptionId, amount?.value)
                             sfc.createPayment({
                       sessionToken: response?.sessionToken, //received from openOrder API
                       clientUniqueId: "695701003",
@@ -4024,7 +4024,7 @@
                           country: "US"
                       }
                   }, function (res) {
-                    console.log(res)
+
                       if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                         
                         $.ajax({
@@ -4035,27 +4035,26 @@
                                 },
                                 data: JSON.stringify({
                                     userTokenId: userId,
+                                    userNuveiId:resp.data.userId,
                                     planId: seletedPlanID,
                                     upoId: res?.userPaymentOptionId,
 
                                     currency: "USD",
                                     recurringAmount: amount?.value,
-                                    initialAmount: amount?.value
+                                    initialAmount: amount?.value,
 
                                 }),
                                 contentType: "application/json",
                                 success: function (response) {
-                                    console.log(response)
+                                    $("#preloader").css("display", "none");
                                     $("#myModal_success").modal("show")
                                     setTimeout(function () {
                                         $("#myModal_success").modal("hide");
-                                        // window.location = '../Landlord/login_module.html';
+                                        window.location = '../Landlord/login_module.html';
                                     }, 2000);
                                 },
                                 error: function (xhr, status, error) {
-                                    console.log(xhr)
-                                    console.log(status)
-                                    console.log(error)
+                                    
                                     $("#myModal_warning_declined").modal("show")
                                     setTimeout(function () {
                                         $("#myModal_warning_declined").modal("hide");
@@ -4071,13 +4070,6 @@
                           }, 2000);
                       }
                   });
-
-                            
-                            $("#myModal_success").modal("show")
-                            setTimeout(function () {
-                                $("#myModal_success").modal("hide");
-                                // window.location = '../Landlord/login_module.html';
-                            }, 2000);
                         },
                         error: function (xhr, status, error) {
                             console.log(xhr)
