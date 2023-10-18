@@ -4,9 +4,11 @@ const { request } = require('https'); // Use the built-in https module for HTTPS
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
-const { queryRunner } = require('./queryRunner');
+// const { queryRunner } = require('./queryRunner');
 const { selectQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
+const { queryRunner } = require('./queryRunner')
+const { updateUser } = require("./../constants/queries")
 
 // ############################ timestamp #################################
 function getTimestamp() {
@@ -95,9 +97,7 @@ exports.openOrder = async (req,res) => {
     userTokenId:userId,
     timeStamp: timestamp,
     checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
-
   };
-
   const requestOptions = {
     method: "POST",
     headers: {
@@ -188,7 +188,10 @@ const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requ
   }); 
   response.on('end', () => {
     try {
+
       const data = JSON.parse(responseData);
+      const NuveiId = data.userId;
+       queryRunner(updateUser, [NuveiId, userId]);
       res.status(200).json({
           data
       })
@@ -340,53 +343,55 @@ exports.createSubscriptionPayment = async (req,res) => {
     merchantId: config.merchantId, 
     merchantSiteId: config.merchantSiteId,
     // planId: planId,
-    userTokenId: userTokenId.toString(),
+    userTokenId: userTokenId,
     userPaymentOptionId: upoId,
     initialAmount: initialAmount,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
-    day: "0",
-    month: "0",
-    year: "0"
+    day: "3",
+    month: "2",
+    year: "1"
 },
 
 
   timeStamp: timestamp,
-    // clientRequestId: config.clientRequestId,
-    // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+(userTokenId.toString())+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
+    
+    // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
+  console.log(config.merchantId,config.merchantSiteId,userTokenId,planId,upoId,initialAmount,recurringAmount,currency,timestamp,config.Secret_Key)
+  console.log(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key);
+
   const result=await queryRunner(selectQuery("plan", "id"), [
     planId
   ]);
-  console.log(result)
   const {nuveiId,monthlyAnnual}=result[0][0];
   if(monthlyAnnual=="Monthly"){
     requestData.recurringPeriod = {
-      day: "0",
+      day: "1",
       month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "1",
-      year: "0"
+      day: "6",
+      month: "7",
+      year: "8"
   }
   
   }else{
     requestData.recurringPeriod = {
-      day: "0",
-      month: "1",
+      day: "1",
+      month: "0",
       year: "0"
     }
     requestData.endAfter= {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "6",
+      month: "7",
+      year: "8"
   }
 }
 requestData.planId=nuveiId;
+requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key)
 console.log(requestData)
   const requestOptions = {
     method: "POST",
@@ -415,6 +420,7 @@ console.log(requestData)
       }
     });
   }); 
+
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
