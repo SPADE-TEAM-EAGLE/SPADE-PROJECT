@@ -291,4 +291,82 @@ if(!isEmpty2 && !isEmpty1){
  }
  
      });
+     $(document).on('click', '#next-add-bank', function() {
+        
+                //first accordian
+                var isEmpty1 = true;
+                $(".inputField").each(function() {
+                    console.log("this",$(this))
+                    if($(this).hasClass("valid")){
+                        isEmpty1 = false;
+                        $(this).addClass('border-green');
+                        $(this).removeClass('border-danger');
+                        span.addClass('d-none');
+                    }else{
+                        isEmpty1 = true;
+                        $(this).addClass('border-danger');
+                        $(this).removeClass('border-green');
+                        span.removeClass('d-none');
+                        return true;
+                    }
+                });
+                
+                    var span = $("#accountName").siblings('.text-danger');
+                    
+                    if ($("#accountName").val() === '' || $("#accountName").val() == 'Choose...') {
+                        isEmpty1 = true;
+                        $("#accountName").addClass('border-danger');
+                        $("#accountName").removeClass('border-green');
+                        span.removeClass('d-none');
+                        
+                    }else{
+                        isEmpty1 = false;
+                        $("#accountName").addClass('border-green');
+                        $("#accountName").removeClass('border-danger');
+                        span.addClass('d-none');
+                    }
+               
+                if (!isEmpty1) {
+                    $('#collapseOne-add-property').removeClass('show');
+                    $('#collapseTwo-add-property').addClass('show');
+                    $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
+                    $(".accordion-item .icon").eq(0).removeClass("chevron");
+                    $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
+                    $(".accordion-item .icon").eq(0).removeClass("cross");
+                    $(".accordion-item .icon").eq(0).addClass("tick");
+                    
+                }
+                // //second accordian
+                // var isEmpty2 = false;
+                // $('#accountActive').each(function() {
+                //     var span = $(this).siblings('.text-danger');
+                //     if ($(this).val() === '' || $(this).val() == 'Choose...') {
+                //         isEmpty2 = true;
+                //         $(this).addClass('border-danger');
+                //         $(this).removeClass('border-green');
+                //         span.removeClass('d-none');
+                //         return false;
+                //     }else{
+                //         $(this).addClass('border-green');
+                //         $(this).removeClass('border-danger');
+                //         span.addClass('d-none');
+                //     }
+                // });
+                // if (!isEmpty2) {
+                //     $('#collapseOne-add-property').removeClass('show');
+                //     $('#collapseTwo-add-property').removeClass('show');
+                //     $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
+                //     $(".accordion-item .icon").eq(1).removeClass("chevron");
+                //     $(".accordion-item .icon").eq(1).addClass("fi-rs-check-circle");
+                //     $(".accordion-item .icon").eq(1).removeClass("cross");
+                //     $(".accordion-item .icon").eq(1).addClass("tick");
+                // }
+                console.log("isEmpty1",isEmpty1)
+        if(!isEmpty1){
+            // $('#collapseTwo-add-property').removeClass('show');
+            $("#next-add-bank").addClass('d-none')
+            $("#next-bank").removeClass("d-none")
+            // $("#next-add-property").attr('id',"next")
+         }
+     });
 });
