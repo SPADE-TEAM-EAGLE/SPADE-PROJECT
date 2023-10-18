@@ -443,3 +443,53 @@ console.log(requestData)
   reqq.end();
   };
   // ###################################### Create Subsription #############################################################
+
+
+    // ###################################### Cancel Subscription #############################################################
+exports.cancelSubscription = async (req,res) => {
+  const {subscriptionId} = req.body;
+  const requestData = {
+    subscriptionId : subscriptionId,
+    merchantId: config.merchantId, 
+    merchantSiteId: config.merchantSiteId,
+  timeStamp: timestamp,
+    checksum: sha256(config.merchantId+config.merchantSiteId+subscriptionId+timestamp+config.Secret_Key),
+  };
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+    let responseData = ''; 
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    }); 
+    response.on('end', () => {
+      try {
+        console.log(responseData);
+        const data = JSON.parse(responseData);
+        res.status(200).json({
+            data
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+            message:"Error parsing response",
+            error,
+        })
+      }
+    });
+  }); 
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+        message:"Error sending request",
+        error,
+    })
+  }); 
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
+  };
+  // ###################################### Cancel Subscription #############################################################
