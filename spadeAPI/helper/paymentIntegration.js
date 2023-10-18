@@ -493,3 +493,77 @@ exports.cancelSubscription = async (req,res) => {
   reqq.end();
   };
   // ###################################### Cancel Subscription #############################################################
+
+
+
+    // ###################################### Payment 2 Payment #############################################################
+    exports.Payment2Payment = async (req,res) => {
+      const {sessionToken, amount, senderDetails} = req.body;
+  const requestData = {
+    merchantId: config.merchantId, 
+    merchantSiteId: config.merchantSiteId,
+    // planId: planId,
+    sessionToken : sessionToken,
+    currency : "USD",
+    amount : amount, 
+
+
+    senderDetails : senderDetails,      // tenant
+    userTokenId: userTokenId,
+    userPaymentOptionId: upoId,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
+    startAfter: {
+    day: "0",
+    month: "0",
+    year: "0"
+},
+
+
+  timeStamp: timestamp,
+    
+    checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key),
+  };
+//   requestData.planId=nuveiId;
+// requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key)
+// console.log(requestData)
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+        let responseData = ''; 
+        response.on('data', (chunk) => {
+          responseData += chunk;
+        }); 
+        response.on('end', () => {
+          try {
+            console.log(responseData);
+            const data = JSON.parse(responseData);
+            res.status(200).json({
+                data
+            })
+          } catch (error) {
+            console.error('Error parsing response:', error);
+            res.status(400).json({
+                message:"Error parsing response",
+                error,
+            })
+          }
+        });
+      }); 
+      reqq.on('error', (error) => {
+        console.error('Error sending request:', error);
+        res.status(400).json({
+            message:"Error sending request",
+            error,
+        })
+      }); 
+      reqq.write(JSON.stringify(requestData));
+      reqq.end();
+      };
+      // ###################################### Payment 2 Payment #############################################################
+    
