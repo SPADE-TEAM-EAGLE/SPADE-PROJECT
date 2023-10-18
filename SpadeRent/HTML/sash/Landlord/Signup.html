@@ -3663,7 +3663,8 @@
     $(document).ready(function(){
         var btnPlanText;
         const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("subscribtionId"));
-var password = 'your-secret-password';
+        if(encryptedPropertyId==null){
+            var password = 'your-secret-password';
 const subsId = sjcl.decrypt(password, encryptedPropertyId);
 if(subsId){
     // alert(subsId);
@@ -3705,6 +3706,8 @@ $(document).on('click', '.btn-free', function() {
     subscribtionPlanChat.find('button').html(btnPlanText)
     }
 });
+        }
+
     })
 </script>
     <script>
@@ -3866,7 +3869,7 @@ $(document).on('click', '.btn-free', function() {
                     // console.log()
                     response.data.forEach((card) => {
 
-                        console.log($(`#${card.id}`))
+                        console.log($(`#${card.id} .amount-payable`))
                         $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                         $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         $(`#${(card.id*4)} .amount-payable`).text(card.planDiscountedAmount)
