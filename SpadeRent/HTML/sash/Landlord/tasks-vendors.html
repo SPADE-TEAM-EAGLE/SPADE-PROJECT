@@ -1049,11 +1049,20 @@ color: #000;
                                     data-bs-container="#addModal" id="streetAddress_update" required>
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">City<span class="text-danger"> *</span></label>
                                 <input class="form-control" type="text" placeholder="Enter City" pattern="[A-Za-z\s]+"
                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                     data-bs-container="#addModal" id="city_update" required>
+                                <span class="text-danger d-none">This field is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">State<span class="text-danger"> *</span></label>
+                                <select class="form-select form select2-show-search"
+                                    id="state_update" required>
+                                    <option selected>Choose...</option>
+                                   
+                                </select>
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <!-- <div class="col-md-4">
@@ -1067,7 +1076,7 @@ color: #000;
                                 </select>
                                 <span class="text-danger d-none">Status is required!</span>
                             </div> -->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="inputEmail3" class="form-label fw-bold">Zip Code<span class="text-danger"> *</span></label>
                                 <input class="form-control form" type="text" id="zip_update" name="zip"
                                     pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
@@ -2809,12 +2818,16 @@ color: #000;
                     });
 
                     var stateDropdown = $('#state');
+                    var stateDropdown_update = $('#state_update');
                     var states = data
+                    var states_update = data
 
                     //   stateDropdown.append($('<option></option>').text("Choose..."));
                     data.forEach(function (state) {
                         stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                        stateDropdown_update.append($('<option></option>').text(state.states).val(state.states));
                     });
+                    
                 },
                 error: function (xhr, status, error) {
                     console.log('Error occurred while fetching state and city data.');
@@ -2909,6 +2922,7 @@ color: #000;
                 $("#businessName_update").val("")
                 $("#streetAddress_update").val("")
                 $("#city_update").val("")
+                $("#state_update").val("")
                 $("#zip_update").val("")
                 $("#workPhone_update").val("")
                 $("#phone_update").val("")
@@ -3376,6 +3390,7 @@ color: #000;
                 $("#businessName_update").val(vendorDetails[0]?.businessName)
                 $("#streetAddress_update").val(vendorDetails[0]?.streetAddress)
                 $("#city_update").val(vendorDetails[0]?.city)
+                $("#state_update").val(vendorDetails[0]?.state)
                 $("#zip_update").val(vendorDetails[0]?.zip)
                 $("#phone_update").val(vendorDetails[0]?.phone)
                 $("#workPhone_update").val(vendorDetails[0]?.workPhone)
@@ -3384,7 +3399,7 @@ color: #000;
 
                 $('#myModal_edit').modal('show');
             });
-            $(document).on("input", "#myModal_edit input, #myModal_edit select", function (e) {
+            $(document).on("input change", "#myModal_edit input, #myModal_edit select", function (e) {
                 e.preventDefault(); // Prevent default anchor behavior
                 var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
@@ -3457,6 +3472,7 @@ color: #000;
                         businessName: $("#businessName_update").val(),
                         streetAddress: $("#streetAddress_update").val(),
                         city: $("#city_update").val(),
+                        state: $("#state_update").val(),
                         zip: $("#zip_update").val(),
                         phone: $("#phone_update").val(),
                         workPhone: $("#workPhone_update").val(),
