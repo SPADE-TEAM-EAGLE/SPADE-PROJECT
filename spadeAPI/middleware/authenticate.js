@@ -83,6 +83,9 @@ const verifyToken = async (req, res, next) => {
         city: result[0][0].PACity,
         state: result[0][0].PAState,
         zipCode: result[0][0].PAZipcode,
+        nuveiId: result[0][0].nuveiId,
+        nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
+        nuveiUPOID: result[0][0].nuveiUPOID,
         role,
         llDashboard,
         properties,
@@ -141,6 +144,9 @@ const verifyToken = async (req, res, next) => {
         state: result[0][0].PAState,
         zipCode: result[0][0].PAZipcode,
         businessLogo: result[0][0].businessLogo,
+        nuveiId: result[0][0].nuveiId,
+        nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
+        nuveiUPOID: result[0][0].nuveiUPOID,
 
       };
       next();
@@ -151,6 +157,8 @@ const verifyToken = async (req, res, next) => {
     }
   }
 };
+
+// sssssssssssssssssssssssssssssssss
 const verifyTokenTenant = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
