@@ -1621,7 +1621,9 @@
                                border-radius: 5px;">
                                 <div class="row mb-5">
                                     <div class="col-12">
-
+                                        <div class="mt-2 mb-2" style="float: right;"><img
+                                                src="../assets/images/users/5.jpg" id="bussinessLogo" alt=""
+                                                style="max-width: 90px;"></div>
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
@@ -2701,6 +2703,7 @@
             // console.log(1222222)
             let invoiceData;
             let tenantData
+            var bussinessLogoImg;
             $(document).on('click', ".view-btn", function (e) {
                     e.preventDefault();
                     const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
@@ -2878,7 +2881,7 @@ console.log(data)
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getAllInvoicesTenant',
+                url: 'http://localhost:3000/api/spade/getAllInvoicesTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2886,10 +2889,16 @@ console.log(data)
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
+                    console.log("getAllInvoicesTenant");
+                    // console.log(response.data[0][0].businessLogo);
                     if (response.message == "No data found") {
                         // window.location = './invoicing.html'
                     }
                     else{
+                    
+                        bussinessLogoImg = response.data[0][0].businessLogo ? response.data[0][0].businessLogo: "../assets/images/Artboard GÇô 1.svg";
+                        $("#bussinessLogo").attr("src","data:image/png;base64,"+ bussinessLogoImg)
+                        console.log(bussinessLogoImg);
                         invoiceData = response?.data[0]
                         console.log("invoice",invoiceData)
     
@@ -2899,8 +2908,6 @@ console.log(data)
                         let tenantNames = []
     
                         response.data[0]?.forEach(function(invoice) {
-    
-    
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
     
                             // var tenantName = '<td class="tenantName" style="font-weight: 600;">' + invoice.firstName + invoice.lastName + `<br><small>${invoice.tPhone}</small>` + '</td>';
@@ -2912,7 +2919,7 @@ console.log(data)
                             var year = dateObj.getFullYear();
                             var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">$ ' + invoice.totalAmount + '<span></span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                     data-bs-toggle="dropdown"></i>

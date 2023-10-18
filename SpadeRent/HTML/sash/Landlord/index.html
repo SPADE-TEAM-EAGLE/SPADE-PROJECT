@@ -842,7 +842,7 @@
                                 </li>
                                 <li class="slide card-demo-2">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="add-tenant.html"><i
-                                            class="side-menu__icon fi fi-rs-cabin"></i><span
+                                            class="side-menu__icon fi fi-rs-home-location-alt"></i><span
                                             class="side-menu__label">Tenants</span>
                                         
     
@@ -1575,14 +1575,12 @@
                                                 <div class="tabs-menu-body">
                                                     
                                                     <div class="tab-content">
-                                                        <div class="tab-pane" id="tab21">
-                                                            <!-- <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                        <div class="tab-pane active" id="tab21">
+                                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
                                                                 <div style="width: 220px" class="d-flex justify-content-center align-items-center">
                                                                     <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
-                                                                    <select id="lengthSelectBox"
-                                                                        class="form-control form-select select2 " style="width: 80px !important;">
-                            
-                                                                        <option value="1">1</option>
+                                                                    <select id="lengthSelectBox" class="form-control form-select" style="width: 80px;border-radius: 7px;">
+                                                                        <!-- <option value="1">1</option> -->
                                                                         <option value="10">10</option>
                                                                         <option value="25">25</option>
                                                                         <option value="100">100</option>
@@ -1590,7 +1588,7 @@
                                                                         <option value="500">500</option>
                                                                     </select>
                                                                 </div>
-                                                            </div> -->
+                                                            </div>
                                                             <div class="table-responsive">
                                                                 <table
                                                                     class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0">
@@ -1612,6 +1610,19 @@
                                                         </div>
 
                                                         <div class="tab-pane" id="tab22">
+                                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                                    <select id="lengthSelectBox2" class="form-control form-select" style="width: 80px;border-radius: 7px;">
+                                                                        <!-- <option value="1">1</option> -->
+                                                                        <option value="10">10</option>
+                                                                        <option value="25">25</option>
+                                                                        <option value="100">100</option>
+                                                                        <option value="200">200</option>
+                                                                        <option value="500">500</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                             <div class="table-responsive">
                                                                 <table
                                                                     class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0" >
@@ -1624,14 +1635,27 @@
                                                                             <th>Status</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
+                                                                    <tbody id="table-body2">
 
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
 
-                                                        <div class="tab-pane active" id="tab23">
+                                                        <div class="tab-pane" id="tab23">
+                                                            <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                <div style="width: 220px" class="d-flex justify-content-center align-items-center">
+                                                                    <span class="fw-bold me-2" style="min-width: 107px;">Number of rows</span>
+                                                                    <select id="lengthSelectBox3" class="form-control form-select" style="width: 80px;border-radius: 7px;">
+                                                                        <!-- <option value="1">1</option> -->
+                                                                        <option value="10">10</option>
+                                                                        <option value="25">25</option>
+                                                                        <option value="100">100</option>
+                                                                        <option value="200">200</option>
+                                                                        <option value="500">500</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                             <div class="table-responsive">
                                                                 <table
                                                                     class="table border text-nowrap text-md-nowrap table-hover mb-0 w-100 p-0" id="responsive-datatable">
@@ -1644,7 +1668,7 @@
                                                                             <th>Status</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
+                                                                    <tbody id="table-body3">
 
                                                                     </tbody>
                                                                 </table>
@@ -3518,7 +3542,7 @@ else {
             }
         }
     </script>
-    <script>
+    <!-- <script>
         var COL_WIDTH = 62;
         var GUTTER_WIDTH = 30;
 
@@ -3567,7 +3591,7 @@ else {
                 localStorage.setItem('htmlLayout', htmlLayout);
             });
         });
-    </script>
+    </script> -->
 
 
 
@@ -3624,14 +3648,67 @@ else {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-<!--   
+  
     <script>
         $(document).change(function () {
-          
-    
+                let count = 1;
+                $("#table-body3 tr").each(function (item, index) {
+                    if (count > parseInt($("#lengthSelectBox3").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            
+        })
+        $(document).ajaxStop(function () {
+                let count = 1;
+                $("#table-body3 tr").each(function (item, index) {
+                    if (count > parseInt($("#lengthSelectBox3").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            
+        })
+    </script> 
+    <script>
+        $(document).change(function () {
+                let count = 1;
+                $("#table-body2 tr").each(function (item, index) {
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            
+        })
+        $(document).ajaxStop(function () {
+                let count = 1;
+                $("#table-body2 tr").each(function (item, index) {
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            
+        })
+    </script> 
+    <script>
+        $(document).change(function () {
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -3643,11 +3720,8 @@ else {
             
         })
         $(document).ajaxStop(function () {
-          
-    
                 let count = 1;
                 $("#table-body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -3658,7 +3732,7 @@ else {
                 })
             
         })
-    </script>  -->
+    </script>
 
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
