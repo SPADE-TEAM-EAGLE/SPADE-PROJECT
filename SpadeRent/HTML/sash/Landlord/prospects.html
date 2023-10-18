@@ -820,15 +820,31 @@
         .chart-wrapper {
             /* max-width: 1150px; */
             max-width: 100%;
-            padding: 0 10px;
+            /* padding: 0 10px; */
             margin: 0 auto;
             border: 2px solid lightgray;
             background-color: #fff;
             border-radius: 8px;
             overflow-x: scroll;
         }
+        .dark-mode .chart-wrapper {
+            /* max-width: 1150px; */
+            max-width: 100%;
+            padding: 0 10px;
+            margin: 0 auto;
+            border: 2px solid lightgray;
+            background-color: #212121;
+            border-radius: 8px;
+            overflow-x: scroll;
+        }
 
-
+#prospect-timeline{
+    overflow-y: auto;
+    height: 430px;
+}
+#prospect-timeline::-webkit-scrollbar{
+    width: 4px;
+}
         /* CHART-VALUES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
         .chart-wrapper .chart-values {
@@ -837,6 +853,7 @@
             margin-bottom: 20px;
             font-weight: bold;
             font-size: 1.2rem;
+            /* color: black; */
         }
 
         .chart-wrapper .chart-values li {
@@ -5596,12 +5613,12 @@ console.log(response);
                             response?.data?.forEach(function (item) {
                                 var prospectusColor;
                                 if (item?.prospect_detail?.prospectusStatus == "qualified") {
-                                    prospectusColor = "green"
+                                    prospectusColor = "#02bc77"
                                 } else if (item?.prospect_detail?.prospectusStatus == "disqualified") {
-                                    prospectusColor = "red"
+                                    prospectusColor = "#ff2366"
                                 }
                                 else {
-                                    prospectusColor = "blue"
+                                    prospectusColor = "#1467b0"
                                 }
                                 $("#prospect-timeline").append(`
   <li data-duration="${item?.startMonth?.split("-")[0] + "-" +
@@ -7018,7 +7035,7 @@ console.log(response);
     </script>
 
     <!-- Gantt chart Start  -->
-    <script>
+    <script >
         function createChart(e) {
             const days = document.querySelectorAll(".chart-values li");
             const tasks = document.querySelectorAll(".chart-bars li");
@@ -7059,6 +7076,7 @@ console.log(response);
 
         window.addEventListener("load", createChart);
         window.addEventListener("resize", createChart);
+        $(document).ajaxStop(createChart)
     </script>
 
 
