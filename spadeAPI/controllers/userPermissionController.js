@@ -79,9 +79,6 @@ exports.createUserPermissionUser = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
-
-
-
 // User Check Email
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
