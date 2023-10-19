@@ -794,7 +794,7 @@ color: #000;
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Prospect</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -807,7 +807,7 @@ color: #000;
 
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage
                                             leads with our property rental software, making it easier for landlords to
@@ -3746,7 +3746,12 @@ color: #000;
                         }
                         // localStorage.removeItem('authtoken');
                         // window.close();
-                        window.open('./login_module.html', "_self")
+                        if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
                         console.log('Done');
                     },
                     error: function (xhr, status, error) {

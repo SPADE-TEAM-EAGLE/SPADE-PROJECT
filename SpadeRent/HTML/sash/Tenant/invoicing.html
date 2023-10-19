@@ -2999,7 +2999,12 @@ console.log(data)
                             localStorage.removeItem('authtoken');
                             localStorage.clear();
                             // window.close();
-                            window.open('./login_module.html', "_self")
+                            if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {

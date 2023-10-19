@@ -1788,7 +1788,7 @@
                                                                                             </button>
                                                                                         </div>
                                                                                         <p
-                                                                                            class="fs-20 m-0 mt-1 text-dark font-weight-bold">
+                                                                                            class="fs-20 m-0 mt-1 font-weight-bold">
                                                                                             Everything in
                                                                                             <span
                                                                                                 class="text3-green">Basic</span>
@@ -1916,7 +1916,7 @@
                                                                                             </button>
                                                                                         </div>
                                                                                         <p
-                                                                                            class="fs-20 m-0 mt-1 text-dark font-weight-bold">
+                                                                                            class="fs-20 m-0 mt-1 font-weight-bold">
                                                                                             Everything in
                                                                                             <span
                                                                                                 class="text4-blue">Pro</span>
@@ -3663,7 +3663,7 @@
     $(document).ready(function(){
         var btnPlanText;
         const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("subscribtionId"));
-        if(encryptedPropertyId==null){
+        if(encryptedPropertyId !="null"){
             var password = 'your-secret-password';
 const subsId = sjcl.decrypt(password, encryptedPropertyId);
 if(subsId){
@@ -4147,6 +4147,14 @@ $(document).on('click', '.btn-free', function() {
 
     </script>
     <!-- ########### payment method End ########## -->
+    <!-- <script>
+        $(document).ready(function() {
+            $(document).on('input change','#card4 input',function(){
+alert(1)
+            })
+           
+        })
+    </script> -->
 </body>
 
 </html>
