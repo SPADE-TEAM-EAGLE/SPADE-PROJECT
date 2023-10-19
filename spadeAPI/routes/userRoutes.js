@@ -215,6 +215,7 @@ router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTen
 router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
 // router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 router.post("/openOrder", paymentIntegration.openOrder);
+router.post("/Payment2Payment", paymentIntegration.Payment2Payment);
 
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
 router.post("/getUserDetailsPayment", paymentIntegration.getUserDetailsPayment);
