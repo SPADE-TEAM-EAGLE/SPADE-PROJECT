@@ -64,7 +64,7 @@ router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 // router.get('/resendEmail', verifyToken, invoiceController.resendEmail);
-router.get('/resendEmail', invoiceController.resendEmail);
+router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
 // router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
 router.delete("/deleteMoreUnits", userController.deleteMoreUnits);
@@ -270,3 +270,4 @@ router.post("/CreateBankAccount", verifyToken, bankAccountController.CreateBankA
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
 router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
+router.delete("/deleteUser",userController.deleteUser);

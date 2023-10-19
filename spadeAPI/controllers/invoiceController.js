@@ -481,8 +481,9 @@ exports.invoiceDelete = async (req, res) => {
 
 //  ############################# Create Invoice Start ############################################################
 exports.resendEmail = async (req, res) => {
-  // const { invoiceID } = req.query;
-  const { invoiceID } = req.body;
+  const { invoiceID } = req.query;
+  // const { invoiceID } = req.body;
+  console.log(invoiceID);
   // const { userId,userName,businessName,invoiceEmail } = req.user;
   const { userId,userName,businessName,invoiceEmail } = req.user;
   try {

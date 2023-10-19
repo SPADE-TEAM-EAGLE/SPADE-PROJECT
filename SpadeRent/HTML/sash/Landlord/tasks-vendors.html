@@ -2986,8 +2986,7 @@ color: #000;
                             $("#add_category_col").hide()
 
                             $("#category_update").append($('<option></option>').text("Choose..."))
-                            $("#category_update").append($('<option></option>').text("Electrition"))
-                                $("#category_update").append($('<option></option>').text("Plumber"))
+                           
                             response.data.forEach((category) => {
                              
                                 $("#category_update").append($('<option></option>').text(category.category).val(category.id))
@@ -3471,7 +3470,7 @@ color: #000;
 
             $("#save").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
+                    url: `http://localhost:3000/api/spade/updateVendor`,
                     type: 'PUT',
                     data: JSON.stringify({
                         vendId: vendorID,
