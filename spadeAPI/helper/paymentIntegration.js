@@ -12,80 +12,80 @@ const { updateUser } = require("./../constants/queries")
 
 // ############################ timestamp #################################
 function getTimestamp() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    return `${year}${month}${day}${hours}${minutes}${seconds}`;
-  }
-  const timestamp = getTimestamp(); 
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${year}${month}${day}${hours}${minutes}${seconds}`;
+}
+const timestamp = getTimestamp();
 // ############################ timestamp #################################
 
-exports.saveCard = async (req,res) => {
-  const {currency,amount} = req.body;
-const apiUrl = config.APIKey;
-const requestData = {
-  merchantId: config.merchantId,
-  merchantSiteId: config.merchantSiteId,
-  clientRequestId: config.clientRequestId,
-  clientUniqueId: config.clientUniqueId,
-  currency: currency,
-  amount: amount,
-  timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
+exports.saveCard = async (req, res) => {
+  const { currency, amount } = req.body;
+  const apiUrl = config.APIKey;
+  const requestData = {
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    clientRequestId: config.clientRequestId,
+    clientUniqueId: config.clientUniqueId,
+    currency: currency,
+    amount: amount,
+    timeStamp: timestamp,
+    checksum: sha256(config.merchantId + config.merchantSiteId + config.clientRequestId + amount + currency + timestamp + config.Secret_Key)
 
-};
+  };
 
-const requestOptions = {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  }
-};
-
-const reqq = request(apiUrl, requestOptions, (response) => {
-  let responseData = ''; 
-  response.on('data', (chunk) => {
-    responseData += chunk;
-  }); 
-  response.on('end', () => {
-    try {
-      const data = JSON.parse(responseData);
-      // console.log(data);
-      res.status(200).json({
-          // data
-          sessionToken:data.sessionToken,
-          clientUniqueId:data.clientUniqueId,
-          merchantId:data.merchantId,
-          merchantSiteId:data.merchantSiteId,
-      })
-    } catch (error) {
-      console.error('Error parsing response:', error);
-      res.status(400).json({
-          message:"Error parsing response",
-          error,
-      })
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     }
+  };
+
+  const reqq = request(apiUrl, requestOptions, (response) => {
+    let responseData = '';
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    });
+    response.on('end', () => {
+      try {
+        const data = JSON.parse(responseData);
+        // console.log(data);
+        res.status(200).json({
+          // data
+          sessionToken: data.sessionToken,
+          clientUniqueId: data.clientUniqueId,
+          merchantId: data.merchantId,
+          merchantSiteId: data.merchantSiteId,
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+          message: "Error parsing response",
+          error,
+        })
+      }
+    });
   });
-}); 
-reqq.on('error', (error) => {
-  console.error('Error sending request:', error);
-  res.status(400).json({
-      message:"Error sending request",
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+      message: "Error sending request",
       error,
-  })
-}); 
-// Send the request body
-reqq.write(JSON.stringify(requestData));
-reqq.end();
+    })
+  });
+  // Send the request body
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
 };
 
-exports.openOrder = async (req,res) => {
+exports.openOrder = async (req, res) => {
   console.log(req.body)
-    const {currency,amount,userId} = req.body;
+  const { currency, amount, userId } = req.body;
   const apiUrl = config.APIKey;
   const requestData = {
     merchantId: config.merchantId,
@@ -95,9 +95,9 @@ exports.openOrder = async (req,res) => {
     currency: currency,
     amount: amount,
     transactionType: "Auth",
-    userTokenId:userId,
+    userTokenId: userId,
     timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key)
+    checksum: sha256(config.merchantId + config.merchantSiteId + config.clientRequestId + amount + currency + timestamp + config.Secret_Key)
   };
   const requestOptions = {
     method: "POST",
@@ -107,124 +107,124 @@ exports.openOrder = async (req,res) => {
   };
 
   const reqq = request(apiUrl, requestOptions, (response) => {
-    let responseData = ''; 
+    let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
-    }); 
+    });
     response.on('end', () => {
       try {
         const data = JSON.parse(responseData);
         // console.log(data);
         res.status(200).json({
-            // data
-            sessionToken:data.sessionToken,
-            clientUniqueId:data.clientUniqueId,
-            merchantId:data.merchantId,
-            merchantSiteId:data.merchantSiteId,
+          // data
+          sessionToken: data.sessionToken,
+          clientUniqueId: data.clientUniqueId,
+          merchantId: data.merchantId,
+          merchantSiteId: data.merchantSiteId,
         })
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({
-            message:"Error parsing response",
-            error,
+          message: "Error parsing response",
+          error,
         })
       }
     });
-  }); 
+  });
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
-        message:"Error sending request",
-        error,
+      message: "Error sending request",
+      error,
     })
-  }); 
+  });
   // Send the request body
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
 
 // ###################################### CREATE USER #############################################################
-exports.createUserPayment = async (req,res) => {
-  const {userId,firstName,lastName,address,state,city,zip,countryCode,phone,locale,email,county} = req.body;
-const requestData = {
-  // merchantId: "6400701569295268447",
-  // merchantSiteId: "244298",
-  // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
-  merchantId: config.merchantId,
-  merchantSiteId: config.merchantSiteId,
-  userTokenId: userId,
-  clientRequestId: config.clientRequestId,
-  firstName: firstName,
-  lastName: lastName,
-  address: address,
-  state: state,
-  city:city,
-  zip:zip,
-  countryCode: countryCode,
-  phone: phone,
-  locale: "en_US",
-  email: email,
-  // dateOfBirth: "01-01998",
-  county:"USA",
-  timeStamp: timestamp,
-  checksum: sha256(config.merchantId+config.merchantSiteId+userId+config.clientRequestId+firstName+lastName+address+state+city+zip+countryCode+phone+"en_US"+email+"USA"+timestamp+config.Secret_Key),
-  // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
-  // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
-};
-// 90547429
-// Console checksum
-// console.log(requestData.checksumConcatenation);
-console.log(requestData.checksum);
+exports.createUserPayment = async (req, res) => {
+  const { userId, firstName, lastName, address, state, city, zip, countryCode, phone, locale, email, county } = req.body;
+  const requestData = {
+    // merchantId: "6400701569295268447",
+    // merchantSiteId: "244298",
+    // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    userTokenId: userId,
+    clientRequestId: config.clientRequestId,
+    firstName: firstName,
+    lastName: lastName,
+    address: address,
+    state: state,
+    city: city,
+    zip: zip,
+    countryCode: countryCode,
+    phone: phone,
+    locale: "en_US",
+    email: email,
+    // dateOfBirth: "01-01998",
+    county: "USA",
+    timeStamp: timestamp,
+    checksum: sha256(config.merchantId + config.merchantSiteId + userId + config.clientRequestId + firstName + lastName + address + state + city + zip + countryCode + phone + "en_US" + email + "USA" + timestamp + config.Secret_Key),
+    // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
+    // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
+  };
+  // 90547429
+  // Console checksum
+  // console.log(requestData.checksumConcatenation);
+  console.log(requestData.checksum);
 
-const requestOptions = {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  }
-};
-const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
-  let responseData = ''; 
-  response.on('data', (chunk) => {
-    responseData += chunk;
-  }); 
-  response.on('end', () => {
-    try {
-
-      const data = JSON.parse(responseData);
-      
-      res.status(200).json({
-          data
-      })
-    } catch (error) {
-      console.error('Error parsing response:', error);
-      res.status(400).json({
-          message:"Error parsing response",
-          error,
-      })
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     }
+  };
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+    let responseData = '';
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    });
+    response.on('end', () => {
+      try {
+
+        const data = JSON.parse(responseData);
+
+        res.status(200).json({
+          data
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+          message: "Error parsing response",
+          error,
+        })
+      }
+    });
   });
-}); 
-reqq.on('error', (error) => {
-  console.error('Error sending request:', error);
-  res.status(400).json({
-      message:"Error sending request",
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+      message: "Error sending request",
       error,
-  })
-}); 
-reqq.write(JSON.stringify(requestData));
-reqq.end();
+    })
+  });
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
 };
 // ###################################### CREATE USER #############################################################
 
 // ###################################### Get USER Details #############################################################
-exports.getUserDetailsPayment = async (req,res) => {
+exports.getUserDetailsPayment = async (req, res) => {
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
     userTokenId: "1234",
     clientRequestId: config.clientRequestId,
     timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+"1234"+config.clientRequestId+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId + config.merchantSiteId + "1234" + config.clientRequestId + timestamp + config.Secret_Key),
   };
   console.log(requestData.checksum);
   const requestOptions = {
@@ -234,43 +234,43 @@ exports.getUserDetailsPayment = async (req,res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
-    let responseData = ''; 
+    let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
-    }); 
+    });
     response.on('end', () => {
       try {
         console.log(responseData);
         const data = JSON.parse(responseData);
         res.status(200).json({
-            data
+          data
         })
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({
-            message:"Error parsing response",
-            error,
+          message: "Error parsing response",
+          error,
         })
       }
     });
-  }); 
+  });
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
-        message:"Error sending request",
-        error,
+      message: "Error sending request",
+      error,
     })
-  }); 
+  });
   reqq.write(JSON.stringify(requestData));
   reqq.end();
-  };
-  // ###################################### Get USER Details #############################################################
+};
+// ###################################### Get USER Details #############################################################
 
-  // ###################################### Create Plan #############################################################
-exports.createPlanPayment = async (req,res) => {
-  const {name,initialAmount,recurringAmount,currency} = req.body;
+// ###################################### Create Plan #############################################################
+exports.createPlanPayment = async (req, res) => {
+  const { name, initialAmount, recurringAmount, currency } = req.body;
   const requestData = {
-    merchantId: config.merchantId, 
+    merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
     name: name,
     initialAmount: initialAmount,
@@ -280,21 +280,21 @@ exports.createPlanPayment = async (req,res) => {
       day: "0",
       month: "0",
       year: "0"
-  },
-  recurringPeriod: {
-    day: "0",
-    month: "1",
-    year: "0"
-},
-// endAfter: {
-//     day: "0",
-//     month: "0",
-//     year: "0"
-// },
-  timeStamp: timestamp,
+    },
+    recurringPeriod: {
+      day: "0",
+      month: "1",
+      year: "0"
+    },
+    // endAfter: {
+    //     day: "0",
+    //     month: "0",
+    //     year: "0"
+    // },
+    timeStamp: timestamp,
     // clientRequestId: config.clientRequestId,
     // timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+name+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
+    checksum: sha256(config.merchantId + config.merchantSiteId + name + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key),
   };
   // console.log(requestData.checksum);
   const requestOptions = {
@@ -304,43 +304,43 @@ exports.createPlanPayment = async (req,res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-    let responseData = ''; 
+    let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
-    }); 
+    });
     response.on('end', () => {
       try {
         console.log(responseData);
         const data = JSON.parse(responseData);
         res.status(200).json({
-            data
+          data
         })
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({
-            message:"Error parsing response",
-            error,
+          message: "Error parsing response",
+          error,
         })
       }
     });
-  }); 
+  });
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
-        message:"Error sending request",
-        error,
+      message: "Error sending request",
+      error,
     })
-  }); 
+  });
   reqq.write(JSON.stringify(requestData));
   reqq.end();
-  };
-  // ###################################### Create Plan #############################################################
+};
+// ###################################### Create Plan #############################################################
 
-    // ###################################### Create Subsription #############################################################
-exports.createSubscriptionPayment = async (req,res) => {
-  const {initialAmount,recurringAmount,currency,planId,userTokenId,upoId,userNuveiId} = req.body;
+// ###################################### Create Subsription #############################################################
+exports.createSubscriptionPayment = async (req, res) => {
+  const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
   const requestData = {
-    merchantId: config.merchantId, 
+    merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
     // planId: planId,
     userTokenId: userTokenId,
@@ -349,57 +349,57 @@ exports.createSubscriptionPayment = async (req,res) => {
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
-    day: "0",
-    month: "0",
-    year: "0"
-},
+      day: "0",
+      month: "0",
+      year: "0"
+    },
 
 
-  timeStamp: timestamp,
-    
+    timeStamp: timestamp,
+
     // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
-  console.log(config.merchantId,config.merchantSiteId,userTokenId,planId,upoId,initialAmount,recurringAmount,currency,timestamp,config.Secret_Key)
-  console.log(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key);
+  console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
+  console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
   var correctPlanId;
-  if(planId>=8){
-    correctPlanId=planId/4;
-  }else{
-    correctPlanId=planId;
+  if (planId >= 8) {
+    correctPlanId = planId / 4;
+  } else {
+    correctPlanId = planId;
   }
-  const result=await queryRunner(selectQuery("plan", "id"), [
+  const result = await queryRunner(selectQuery("plan", "id"), [
     correctPlanId
   ]);
-  const {nuveiId,monthlyAnnual}=result[0][0];
+  const { nuveiId, monthlyAnnual } = result[0][0];
   console.log(monthlyAnnual)
-  if(monthlyAnnual=="Monthly"){
-    requestData.recurringAmount=0.001;
+  if (monthlyAnnual == "Monthly") {
+    requestData.recurringAmount = 0.001;
     requestData.recurringPeriod = {
       day: "0",
       month: "1",
       year: "0"
     }
-    requestData.endAfter= {
+    requestData.endAfter = {
       day: "1",
       month: "1",
       year: "0"
-  }
-  
-  }else{
+    }
+
+  } else {
     requestData.recurringPeriod = {
       day: "0",
       month: "1",
       year: "0"
     }
-    requestData.endAfter= {
+    requestData.endAfter = {
       day: "0",
       month: "0",
       year: "1"
+    }
   }
-}
-requestData.planId=nuveiId;
-requestData.checksum=sha256(config.merchantId+config.merchantSiteId+userTokenId+nuveiId+upoId+initialAmount+requestData.recurringAmount+currency+timestamp+config.Secret_Key)
-console.log(requestData)
+  requestData.planId = nuveiId;
+  requestData.checksum = sha256(config.merchantId + config.merchantSiteId + userTokenId + nuveiId + upoId + initialAmount + requestData.recurringAmount + currency + timestamp + config.Secret_Key)
+  console.log(requestData)
   const requestOptions = {
     method: "POST",
     headers: {
@@ -407,58 +407,58 @@ console.log(requestData)
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/createSubscription.do", requestOptions, (response) => {
-    let responseData = ''; 
+    let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
-    }); 
-    response.on('end', async() => {
+    });
+    response.on('end', async () => {
       try {
         console.log(responseData);
-        
+
         const data = JSON.parse(responseData);
-        const result= await queryRunner(updateUserBank, [
+        const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
           userTokenId
         ]);
-        if(result[0].affectedRows==1){
+        if (result[0].affectedRows == 1) {
           res.status(200).json({
             data,
-        })
+          })
         }
-        
+
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({
-            message:"Error parsing response",
-            error,
+          message: "Error parsing response",
+          error,
         })
       }
     });
-  }); 
+  });
 
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
-        message:"Error sending request",
-        error,
+      message: "Error sending request",
+      error,
     })
-  }); 
+  });
   reqq.write(JSON.stringify(requestData));
   reqq.end();
-  };
-  // ###################################### Create Subsription #############################################################
+};
+// ###################################### Create Subsription #############################################################
 
 
-    // ###################################### Cancel Subscription #############################################################
-exports.cancelSubscription = async (req,res) => {
-  const {subscriptionId} = req.body;
+// ###################################### Cancel Subscription #############################################################
+exports.cancelSubscription = async (req, res) => {
+  const { subscriptionId } = req.body;
   const requestData = {
-    subscriptionId : subscriptionId,
-    merchantId: config.merchantId, 
+    subscriptionId: subscriptionId,
+    merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
-  timeStamp: timestamp,
-    checksum: sha256(config.merchantId+config.merchantSiteId+subscriptionId+timestamp+config.Secret_Key),
+    timeStamp: timestamp,
+    checksum: sha256(config.merchantId + config.merchantSiteId + subscriptionId + timestamp + config.Secret_Key),
   };
   const requestOptions = {
     method: "POST",
@@ -467,34 +467,119 @@ exports.cancelSubscription = async (req,res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
-    let responseData = ''; 
+    let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
-    }); 
+    });
     response.on('end', () => {
       try {
         console.log(responseData);
         const data = JSON.parse(responseData);
         res.status(200).json({
-            data
+          data
         })
       } catch (error) {
         console.error('Error parsing response:', error);
         res.status(400).json({
-            message:"Error parsing response",
-            error,
+          message: "Error parsing response",
+          error,
         })
       }
     });
-  }); 
+  });
   reqq.on('error', (error) => {
     console.error('Error sending request:', error);
     res.status(400).json({
-        message:"Error sending request",
-        error,
+      message: "Error sending request",
+      error,
     })
-  }); 
+  });
   reqq.write(JSON.stringify(requestData));
   reqq.end();
+};
+// ###################################### Cancel Subscription #############################################################
+
+
+
+// ###################################### Payment 2 Payment #############################################################
+exports.Payment2Payment = async (req, res) => {
+  const {sessionToken,amount,currency, senderDetails,recipientDetails} = req.body;
+  console.log(req.body)
+  const requestData = {
+    sessionToken: sessionToken,
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    clientRequestId: config.clientRequestId,
+    amount: amount,
+    currency: currency,
+    clientUniqueId : config.clientUniqueId,
+    senderDetails: senderDetails,
+    // senderDetails: {
+    //   userTokenId: "12345",
+    //   paymentOption: {
+    //     card: {
+    //       cardNumber: "4000027891380961",
+    //       cardHolderName: "John Smith",
+    //       expirationMonth: "12",
+    //       expirationYear: "2030",
+    //       CVV: "217",
+    //       threeD:{},
+    //     },
+    //   },
+    // },      // tenant
+    recipientDetails: recipientDetails,
+    // recipientDetails: {
+    //         userTokenId: "145",
+    //         firstName : "John",
+    //         lastName: "Smith",
+    //         paymentOption: {
+    //             card: {
+    //                 cardNumber: "5333306956697229",
+    //                 cardHolderName: "John Smith",
+    //                 expirationMonth: "12",
+    //                 expirationYear: "25",
+    //                 CVV: "217"
+    //             },
+    //         },
+    //     },
+        timeStamp: timestamp,
+        checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key),
+  }
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
   };
-  // ###################################### Cancel Subscription #############################################################
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/p2pPayment.do", requestOptions, (response) => {
+    let responseData = '';
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    });
+    response.on('end', () => {
+      try {
+        console.log(responseData);
+        const data = JSON.parse(responseData);
+        res.status(200).json({
+          data
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+          message: "Error parsing response",
+          error,
+        })
+      }
+    });
+  });
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+      message: "Error sending request",
+      error,
+    })
+  });
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
+};
+// ###################################### Payment 2 Payment #############################################################
