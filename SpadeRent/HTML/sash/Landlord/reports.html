@@ -2840,7 +2840,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Property Name</b></label>
-                                                            <select class="form-control form-select select2"
+                                                            <select class="form-control form-select select2-show-search"
                                                                 id="propertySelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
                                                             </select>
@@ -2850,7 +2850,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Report Type</b></label>
-                                                            <select class="form-control form-select select2"
+                                                            <select class="form-control form-select select2-show-search"
                                                                 data-placeholder="Select property status" id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
 
@@ -3306,7 +3306,7 @@
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Tenant Name</b></label>
-                                                            <select class="form-control form-select"
+                                                            <select class="form-control form-select select2-show-search"
                                                                 id="tenantSelect" data-placeholder="Choose one">
                                                                 <option label="Choose one"></option>
                                                             </select>
@@ -4287,7 +4287,12 @@
         <script src="../assets/js/select2.js"></script>
         <script>
             $(document).ready(function () {
-                $('.select2-show-search').select2();
+                
+                $(document).ajaxComplete(function(){
+
+                    $('.select2-show-search').select2();
+                })
+
                 $('#addModal').on('shown.bs.modal', function () {
 
                     $('.select2-show-search').select2({
@@ -5974,7 +5979,7 @@ $('#table_body_property_report').append(newRowHtml);
         </script>
         <script>
             $(document).ready(function () {
-                $('.select2').select2();
+                // $('.select2').select2();
                 // $('#addModal').on('shown.bs.modal', function () {
 
                 //     $('.select2-show-search').select2({

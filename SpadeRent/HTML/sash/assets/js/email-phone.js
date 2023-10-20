@@ -26,9 +26,6 @@ $(document).on('input change', 'input:not([type="tel"]):not(.modal *):not(#typeh
   }
 });
 
-
-
-
 const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
 $('input[type="tel"]').each(function () {
@@ -136,5 +133,11 @@ $(document).ready(function(){
 //   alert(assignDateValue)
 // $(this).val(assignDateValue)
 // })
+
+$('#addModal, #myModal_edit').on('hidden.bs.modal', function() {
+  $("#error-msg").addClass('d-none')
+  $("#valid-msg").addClass('d-none')
+});
+
 
 
