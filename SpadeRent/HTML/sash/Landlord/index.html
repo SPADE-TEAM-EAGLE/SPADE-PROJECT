@@ -382,7 +382,7 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Prospect</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -394,7 +394,7 @@
 
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
                                     </div>
@@ -1172,7 +1172,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1198,7 +1198,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1223,7 +1223,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1246,7 +1246,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1334,7 +1334,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1372,7 +1372,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body" style="display: flex; align-items: center;">
@@ -1431,7 +1431,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body" style="padding: 0px 25px 0px 25px;">
@@ -1529,7 +1529,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="#">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -2854,6 +2854,7 @@
                     }
                 });
             })
+           
             $("#resetLayout").on('click', function () {
                 ["property-status",	"amount-status","task-card","task-overview","tenants-status","prospect-status","invoice-card","banking-stats","account-status"].forEach((item) => {
                     localStorage.setItem(item,true)
@@ -3621,8 +3622,12 @@ else {
                         localStorage.clear();
 
                     }
-                    // localStorage.removeItem('authtoken');
-                    // window.close();
+                    
+                    if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
                     window.open('./login_module.html', "_self")
                     console.log('Done');
                 },
@@ -3734,7 +3739,40 @@ else {
             
         })
     </script>
+<script>
+   function hideCard() {
+    var closestCol = $(event.target).closest('.col-lg-6');
+var idAttribute = closestCol.attr('id');
 
+if (idAttribute == "prospect-status") {
+    $('input[data-card="prospect-status"]').prop('checked', false);
+$('#prospect-status').hide()
+} else if(idAttribute == "invoice-card") {
+    $('input[data-card="invoice-card"]').prop('checked', false);
+$('#invoice-card').hide()
+}else if(idAttribute == "banking-stats") {
+    $('input[data-card="banking-stats"]').prop('checked', false);
+$('#banking-stats').hide()
+}else if(idAttribute == "task-overview") {
+    $('input[data-card="task-overview"]').prop('checked', false);
+$('#task-overview').hide()
+}else if(idAttribute == "account-status") {
+    $('input[data-card="account-status"]').prop('checked', false);
+$('#account-status').hide()
+}else if(idAttribute == "tenants-status") {
+    $('input[data-card="tenants-status"]').prop('checked', false);
+$('#tenants-status').hide()
+}else if(idAttribute == "amount-status") {
+    $('input[data-card="amount-status"]').prop('checked', false);
+$('#amount-status').hide()
+}else if(idAttribute == "property-status") {
+    $('input[data-card="property-status"]').prop('checked', false);
+$('#property-status').hide()
+}
+
+}
+
+</script>
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

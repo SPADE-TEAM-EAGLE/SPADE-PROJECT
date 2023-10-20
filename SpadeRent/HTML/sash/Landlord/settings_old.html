@@ -7518,6 +7518,11 @@
                     }
                     // localStorage.removeItem('authtoken');
                     // window.close();
+                    if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
                     window.open('./login_module.html', "_self")
                     console.log('Done');
                 },

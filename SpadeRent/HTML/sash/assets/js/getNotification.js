@@ -67,9 +67,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -95,9 +95,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+                  <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                   ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                  }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -125,9 +125,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -154,9 +154,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10344.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -192,9 +192,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+                   <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -219,9 +219,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+                   <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                   ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                  }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -248,9 +248,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -281,9 +281,9 @@ function GetNotification(){
             }">
             <div class="d-flex align-items-center">
             <div class="me-2">
-                <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                  item.Image?.split(",")[0]
-                }">
+            <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+              ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10344.png' )
+             }')!important; ">
             </div>
             <div class="">
                 <a href="javascript:void(0);">
@@ -317,9 +317,9 @@ function GetNotification(){
             }">
                       <div class="d-flex align-items-center">
                       <div class="me-2">
-                          <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                            item.Image?.split(",")[0]
-                          }">
+                           <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+               }')!important; ">
                       </div>
                       <div class="">
                           <a href="javascript:void(0);">
@@ -349,9 +349,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+                   <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                   ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                  }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -383,9 +383,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -416,9 +416,9 @@ function GetNotification(){
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
-                  <span class="avatar avatar-md brround cover-image" data-bs-image-src="${
-                    item.Image?.split(",")[0]
-                  }">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10344.png' )
+               }')!important; ">
               </div>
               <div class="">
                   <a href="javascript:void(0);">
@@ -514,7 +514,18 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      GetNotification();
+      // alert(type)
+      if(type == "property"){
+        window.location.href="./properties-all.html";
+      }else if(type == "task"){
+        window.location.href="./create-tasks.html";
+      }else if(type == "invoice"){
+        window.location.href="./create-invoicing.html";
+      }else if(type == "tenant"){
+        window.location.href="./add-tenant.html";
+        
+      }
+      // GetNotification();
       console.log(response);
     },
     error: function (xhr, status, error) {

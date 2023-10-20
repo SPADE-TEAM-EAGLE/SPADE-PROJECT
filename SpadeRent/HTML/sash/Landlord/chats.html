@@ -1531,7 +1531,7 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Prospect</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -1544,7 +1544,7 @@
 
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage
                                             leads with our property rental software, making it easier for landlords to
@@ -2582,15 +2582,12 @@
                                         </div>
 
                                         <div class="field">
+                                            
                                             <input id="input-message" class="input-message" type="text"
                                                 placeholder="Type Message..." maxlength="255" />
                                             <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal"
                                                 class="send-file text-black"><i class="fi fi-rs-clip fs-18"></i></a>
-                                            <!-- <div class="icon plus">
-                                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
-                                                </svg>
-                                            </div> -->
+                                            
                                             <div id="send-text" class="icon send text">
                                                 <svg stroke="currentColor" fill="none" stroke-width="2"
                                                     viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
@@ -3801,9 +3798,11 @@
 
                 updateSelectedFilesContainer(); // Update the selected files container
             });
+            const  inputNew = $('#input-message');
             $('#submit-photo').click(() => {
                 $('#submit-photo').css("display", "none");
                 $("#loading-btn").css("display", "inline-block");
+                inputNew.val("")
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
                     for (var i = 0; i < selectedFiles.length; i++) {
@@ -4215,7 +4214,12 @@
                             }
                             // localStorage.removeItem('authtoken');
                             // window.close();
-                            window.open('./login_module.html', "_self")
+                            if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
@@ -4280,26 +4284,21 @@
                 const messages = $('#messages'),
                     input = $('#input-message'),
                     send = $('#send-text');
-                const sendFile = document.querySelector('.send-file'); // Assuming this class exists
-
-                // Function to add the CSS class
+                const sendFile = document.querySelector('.send-file');
                 function addRight62pxClass() {
                     sendFile.style.right = '62px';
                 }
-
-                // Function to remove the CSS class
                 function removeRight62pxClass() {
-                    sendFile.style.right = '13px'; // Reset the style property
+                    sendFile.style.right = '13px';
                 }
                 input.addEventListener('input', function () {
                     const msg = input.value.trim();
                     if (msg === "") {
-                        removeRight62pxClass(); // Apply the CSS class
+                        removeRight62pxClass();
                     } else {
-                        addRight62pxClass(); // Remove the CSS class
+                        addRight62pxClass();
                     }
                 });
-                //Send messages
                 input.addEventListener('keypress', function (ev) {
                     const msg = input.value.trim();
                     if (ev.key === 'Enter' && msg !== "") {

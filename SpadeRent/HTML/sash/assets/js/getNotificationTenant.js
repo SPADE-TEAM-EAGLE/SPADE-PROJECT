@@ -68,9 +68,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -93,9 +93,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -119,9 +119,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -149,9 +149,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -173,9 +173,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -198,9 +198,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -233,9 +233,9 @@ function GetNotification() {
             }">
                         <div class="d-flex align-items-center">
                         <div class="me-2">
-                            <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                                class="avatar-status bg-success"></span>
+                        <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                          ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+                         }')!important; ">
                         </div>
                         <div class="">
                             <a href="javascript:void(0);">
@@ -262,9 +262,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10341.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
@@ -292,9 +292,9 @@ function GetNotification() {
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
-                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="${item.Image?.split(",")[0]
-            }"><span
-                        class="avatar-status bg-success"></span>
+                <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                  ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+                 }')!important; ">
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
