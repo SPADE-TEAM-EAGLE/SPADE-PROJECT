@@ -205,8 +205,8 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  // const { email, password, tenant } = req.query;
-  const { email, password, tenant } = req.body;
+  const { email, password, tenant } = req.query;
+  // const { email, password, tenant } = req.body;
   // const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;
@@ -2831,3 +2831,18 @@ exports.updateAuth = async (req, res) => {
     });
   }
 };
+
+
+exports.deleteUser=async(req,res)=>{
+  const {userId}=req.body;
+  try {
+    const deleteUserResult=await queryRunner(deleteQuery("users","id"),[userId]);
+    if(deleteUserResult[0].affectedRows>0){
+      res.status(200).json({message:"User Deleted"})
+    }else{
+      res.status(400).json({message:"Error in deleting user"})
+    }
+  }catch{
+
+  }
+}

@@ -4854,7 +4854,7 @@
                                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                     '<img src="' + (tenant?.image?.split(",")[0]? tenant.image.split(",")[0]:'../assets/images/icons/Group 34343434.png')+ '" alt="" style="width: 65px; height: 65px;">' +
                                     '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
-                                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span>' +
+                                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span><br>' +
                                     '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
                                     '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
                                     '</div></div>');
@@ -5733,7 +5733,7 @@
                 })
                 $(document).on('click', ".resend-option", function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
+                        url: 'http://localhost:3000/api/spade/resendEmail',
                         type: 'GET', // Change the method to POST
                         data: {
                             invoiceID: invoiceId

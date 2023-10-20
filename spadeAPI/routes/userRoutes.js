@@ -64,7 +64,7 @@ router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
 // router.get('/resendEmail', verifyToken, invoiceController.resendEmail);
-router.get('/resendEmail', invoiceController.resendEmail);
+router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
 // router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
 router.delete("/deleteMoreUnits", userController.deleteMoreUnits);
@@ -215,6 +215,7 @@ router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTen
 router.get("/taskByIDTenant" ,verifyToken ,tenantPortalController.taskByIDTenant);
 // router.get("/taskByIDTenant" , tenantPortalController.taskByIDTenant);
 router.post("/openOrder", paymentIntegration.openOrder);
+router.post("/Payment2Payment", paymentIntegration.Payment2Payment);
 
 router.post("/createUserPayment", paymentIntegration.createUserPayment);
 router.post("/getUserDetailsPayment", paymentIntegration.getUserDetailsPayment);
@@ -270,3 +271,4 @@ router.post("/CreateBankAccount", verifyToken, bankAccountController.CreateBankA
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
 router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
+router.delete("/deleteUser",userController.deleteUser);

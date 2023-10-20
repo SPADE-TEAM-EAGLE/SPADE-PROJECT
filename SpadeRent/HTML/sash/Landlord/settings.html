@@ -11235,7 +11235,27 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                 </div>
                                             </div>
                                             <!-- succes modal -->
-
+                                            <div class="modal fade" id="myModal_warning_declined" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                                                    <div class="modal-content modal-content-demo">
+                                                        <div class="modal-body p-0">
+                                                            <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                                                                <div class="card-body text-center">
+                                                                    <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                                                            viewBox="0 0 24 24">
+                                                                            <path fill="#fad383"
+                                                                                d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                                                            <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                                                            <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                                                        </svg></span>
+                                                                    <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                                                                    <p class="card-text text-dark">Payment declined, Credentials not correct!!</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="tab-pane mt-0" id="tab14">
                                                 <div class="mb-5 responsive-img-scroll">
                                                     <p class="d-inline-flex gap-1 bg-img-mainn">
@@ -13843,10 +13863,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log(response);
+
                         $("#table_body_bank_account").empty()
                         var tbody = $("#table_body_bank_account");
                         if (response?.data) {
+
 
                             response.data.forEach(function (entry, index) {
                                 var row = $("<tr>");
@@ -13867,7 +13888,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             });
                         } else {
                             var row = $("<tr>");
-                            var noDataCell = $('<td colspan="5">').text("No Bank Account Added");
+                            var noDataCell = $('<td colspan="12">').text("No Bank Account Added");
                             row.append(noDataCell);
                             tbody.append(row);
                         }
@@ -16432,39 +16453,49 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         }, function (res) {
                             console.log(res.userPaymentOptionId)
-                            $.ajax({
-                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccount",
-                                type: "POST",
-                                contentType: "application/json",
-                                headers: {
-                                    Authorization: "Bearer " + localStorage.getItem("authtoken")
+                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                $.ajax({
+                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccount",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.getItem("authtoken")
 
-                                },
-                                data: JSON.stringify({
-                                    userId: userData.userId,
-                                    UPOID: res.userPaymentOptionId,
-                                    accountName: $("#accountName").val(),
-                                    description: $("#description-bank").val(),
-                                    active: $("#accountActive").is(":checked"),
-                                }),
-                                success: function (response) {
-                                    $("#addModal-account").modal("hide")
-                                    $("#preloader").css("display", "none")
+                                    },
+                                    data: JSON.stringify({
+                                        userId: userData.userId,
+                                        UPOID: res.userPaymentOptionId,
+                                        accountName: $("#accountName").val(),
+                                        description: $("#description-bank").val(),
+                                        active: $("#accountActive").is(":checked"),
+                                    }),
+                                    success: function (response) {
+                                        $("#addModal-account").modal("hide")
+                                        $("#preloader").css("display", "none")
 
-                                    $("#successfully_changed_text").text("Account added Succesfully!!!")
-                                    $("#successfully_changed").modal("show")
-                                    setTimeout(function () {
-                                        $("#successfully_changed").modal("hide");
-                                    }, 2000);
-                                    getData()
-                                },
-                                error: function () {
-                                    $("#myModal_warning_declined").modal("show")
-                                    setTimeout(function () {
-                                        $("#myModal_warning_declined").modal("hide");
-                                    }, 2000);
-                                }
-                            })
+                                        $("#successfully_changed_text").text("Account added Succesfully!!!")
+                                        $("#successfully_changed").modal("show")
+                                        setTimeout(function () {
+                                            $("#successfully_changed").modal("hide");
+                                        }, 2000);
+                                        getData()
+                                    },
+                                    error: function () {
+                                        $("#preloader").css("display", "none")
+                                        $("#myModal_warning_declined").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_warning_declined").modal("hide");
+                                        }, 2000);
+                                    }
+                                })
+
+                            }else{
+                                $("#preloader").css("display", "none")
+                                $("#myModal_warning_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_warning_declined").modal("hide");
+                                }, 2000);
+                            }
 
                         });
 
@@ -16475,6 +16506,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         console.log(status)
                         console.log(error)
                         console.error('Error sending data:', error);
+                        $("#preloader").css("display", "none")
                         $("#myModal_warning_declined").modal("show")
                         setTimeout(function () {
                             $("#myModal_warning_declined").modal("hide");
