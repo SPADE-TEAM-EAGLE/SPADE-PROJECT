@@ -514,36 +514,9 @@ exports.Payment2Payment = async (req, res) => {
     currency: currency,
     clientUniqueId : config.clientUniqueId,
     senderDetails: senderDetails,
-    // senderDetails: {
-    //   userTokenId: "12345",
-    //   paymentOption: {
-    //     card: {
-    //       cardNumber: "4000027891380961",
-    //       cardHolderName: "John Smith",
-    //       expirationMonth: "12",
-    //       expirationYear: "2030",
-    //       CVV: "217",
-    //       threeD:{},
-    //     },
-    //   },
-    // },      // tenant
     recipientDetails: recipientDetails,
-    // recipientDetails: {
-    //         userTokenId: "145",
-    //         firstName : "John",
-    //         lastName: "Smith",
-    //         paymentOption: {
-    //             card: {
-    //                 cardNumber: "5333306956697229",
-    //                 cardHolderName: "John Smith",
-    //                 expirationMonth: "12",
-    //                 expirationYear: "25",
-    //                 CVV: "217"
-    //             },
-    //         },
-    //     },
-        timeStamp: timestamp,
-        checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key),
+    timeStamp: timestamp,
+    checksum: sha256(config.merchantId+config.merchantSiteId+config.clientRequestId+amount+currency+timestamp+config.Secret_Key),
   }
   const requestOptions = {
     method: "POST",

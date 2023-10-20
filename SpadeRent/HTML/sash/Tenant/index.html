@@ -1849,7 +1849,6 @@
                 { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
             ]
         })
-
         var ScFieldStyles = {
             base: {
                 color: '#32325D',
@@ -1871,14 +1870,12 @@
                 },
             },
         };
-
         var ScFieldClasses = {
             focus: 'focused',
             empty: 'empty',
             invalid: 'invalid',
             complete: 'complete',
-            number:'card-number'
-            
+            number:'card-number'  
         };
         var scard = ScFields.create('ccNumber', {
             style: ScFieldStyles,
@@ -1886,13 +1883,11 @@
             id: 'card-number-input'
         });
         scard.attach('#card-number');
-
         var cardExpiry = ScFields.create('ccExpiration', {
             style: ScFieldStyles,
             classes: ScFieldClasses,
         });
         cardExpiry.attach('#card-expiry');
-
         var cardCvc = ScFields.create('ccCvc', {
             style: ScFieldStyles,
             classes: ScFieldClasses,
@@ -2023,8 +2018,6 @@
                     //         }, 2000);
                     //     }
                     // });
-                        
-                    
                     $.ajax({
                         url: "http://localhost:3000/api/spade/Payment2Payment",
                         type: "POST",
@@ -2033,33 +2026,29 @@
                             amount: $("#amount").val().trim(" "),
                             currency: "USD",
                             senderDetails: {
-    //   userTokenId: userData.userId,
-      paymentOption: {
-        scard,
-        // card: {
-        //   cardNumber: "4000027891380961",
-        //   cardHolderName: "John Smith",
-        //   expirationMonth: "12",
-        //   expirationYear: "2030",
-        //   CVV: "217",
-        //   threeD:{},
-        // },
-      },
-    },
-    recipientDetails: {
-            userTokenId: "145",
-            firstName : "John",
-            lastName: "Smith",
-            paymentOption: {
-                card: {
-                    cardNumber: "5333306956697229",
-                    cardHolderName: "John Smith",
-                    expirationMonth: "12",
-                    expirationYear: "25",
-                    CVV: "217"
-                },
-            },
-        },
+                            userTokenId: userData.userId,
+                            billingAddress:{
+                                firstName: userData.firstName,
+                                lastName: userData.lastName,
+                                email: userData.email,
+                                country: "US"
+                            },
+                            paymentOption: scard,    
+                            },
+                            recipientDetails: {
+                                userTokenId: "145",
+                                firstName : "John",
+                                lastName: "Smith",
+                                paymentOption: {
+                                card: {
+                                    cardNumber: "5333306956697229",
+                                    cardHolderName: "John Smith",
+                                    expirationMonth: "12",
+                                    expirationYear: "25",
+                                    CVV: "217"
+                                },
+                                },
+                            },
                         }),
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem("authtoken")

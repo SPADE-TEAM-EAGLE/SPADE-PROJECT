@@ -13602,7 +13602,11 @@
                         if (response?.message == "No data found") {
                             var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                             $("#table_body_unpaid_invoice").append(row);
+                            $("#closeButton").prop("disabled", false)
+                                $("#unpaid-text").addClass("d-none")
                         } else if (response?.data) {
+                            $("#closeButton").prop("disabled", true)
+                                $("#unpaid-text").removeClass("d-none")
                             var tableBody = $("#table_body_unpaid_invoice");
 
                             // Clear the existing content in the table body
@@ -13611,13 +13615,7 @@
                             invoiceData = response?.data[0].filter(function (invoice) {
                                 return invoice.status !== "paid"
                             })
-                            if (invoiceData.length >= 1) {
-                                $("#closeButton").prop("disabled", true)
-                                $("#unpaid-text").removeClass("d-none")
-                            } else {
-                                $("#closeButton").prop("disabled", false)
-                                $("#unpaid-text").addClass("d-none")
-                            }
+                            
                             invoiceData.forEach(function (invoice) {
                                 var row = $("<tr>");
 
@@ -14157,7 +14155,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     }
                     var interval;
                     counter = 5;
-
+                    
                     function startCounter() {
                         document.getElementById('confirmDelete').disabled = true;
                         $('#confirmDelete').css('opacity', '0.7');
@@ -14844,11 +14842,26 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                     </button></td>
                 </tr>`)
-
+                updateSaveButton()
                 });
-
-
+                $(document).on("input","#add-item-container1 input[name='category']",function(){
+                    updateSaveButton()
+                })
+                function updateSaveButton(){
+                    console.log("fgytuytuytg")
+                    $("#add-item-container1 input[name='category']").each(function(){
+                        if($(this).val() == ""){
+                            $("#save-categories").prop("disabled",true)
+                            return false
+                        }else{
+                            $("#save-categories").prop("disabled",false)
+                        }
+                    })
+                }
+                
                 $('#add-item-container1').on('click', '#del-btn1', function () {
+                    
+                    
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
 
@@ -14872,6 +14885,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     } else {
                         // alert('Cannot delete the last row.');
                     }
+                    updateSaveButton()
                 });
 
 
@@ -14904,6 +14918,22 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             });
 
             $(document).ready(function () {
+                $(document).on("input","#add-item-container5 .vendor-category",function(){
+                    updateSaveVendorButton()
+                })
+                
+                
+                function updateSaveVendorButton(){
+                    console.log("fgytuytuytg")
+                    $("#add-item-container5 .vendor-category").each(function(){
+                        if($(this).val() == ""){
+                            $("#save-vendor").prop("disabled",true)
+                            return false
+                        }else{
+                            $("#save-vendor").prop("disabled",false)
+                        }
+                    })
+                }
                 $("#add-item5").on("click", () => {
                     $("#add-item-container5").append(`<tr class="tr">
                                                                             <td>
@@ -14918,7 +14948,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                                         class="fi fi-rs-trash text-danger fs-5"></i>
                                                                                 </button></td>
                                                                         </tr>`)
-                });
+                updateSaveVendorButton()
+                                                                    });
+            
                 $('#add-item-container5').on('click', '#del-btn5', function () {
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
@@ -14928,6 +14960,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     } else {
                         //   alert('Cannot delete the last row.');
                     }
+                    updateSaveVendorButton()
                 });
 
             });

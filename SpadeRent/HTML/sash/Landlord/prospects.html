@@ -5664,11 +5664,11 @@ console.log(response);
                                 labels.push("Other");
                                 data.push(countOthers);
                             }
-
-                            createSourceCampaignChart(labels, data)
+                            
+                            createSourceCampaignChart(labels, data,Math.max(...data))
                         }
                         else {
-                            createSourceCampaignChart([], [])
+                            createSourceCampaignChart([], [],0)
                         }
 
                     }, error: function (xhr, status, error) {
@@ -6605,7 +6605,7 @@ console.log(response);
     <script>
         var ctx = document.getElementById("chartBar11").getContext('2d');
         var myChart1;
-        function createSourceCampaignChart(labels, data) {
+        function createSourceCampaignChart(labels, data,size) {
             myChart1 = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -6614,8 +6614,8 @@ console.log(response);
                         label: 'Sales',
                         data: data,
                         borderWidth: 2,
-                        backgroundColor: ['#09AD95', '#2086C8', '#000'],
-                        borderColor: ['#09AD95', '#2086C8', '#000'],
+                        // backgroundColor: ['#09AD95', '#2086C8', '#000'],
+                        // borderColor: ['#09AD95', '#2086C8', '#000'],
                         borderWidth: 2.0,
                         pointBackgroundColor: '#ffffff',
                     }]
@@ -6630,7 +6630,7 @@ console.log(response);
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                stepSize: 150,
+                                stepSize: size+5,
                                 fontColor: "#9ba6b5",
                             },
                             gridLines: {

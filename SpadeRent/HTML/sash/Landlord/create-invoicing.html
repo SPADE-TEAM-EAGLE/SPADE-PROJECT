@@ -5668,23 +5668,26 @@
                         });
                     } else if (selectedFilter === 'ascending') {
                         rows.sort(function (a, b) {
-                            var idA = parseInt($(a).find('.date').text());
-                            var idB = parseInt($(b).find('.date').text());
-                            return idA - idB;
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+                            
+                            return idB-idA;
                         });
                     }
                     else if (selectedFilter === 'recently-added') {
                         rows.sort(function (a, b) {
-                            var idA = parseInt($(a).find('.date').text());
-                            var idB = parseInt($(b).find('.date').text());
-                            return idB - idA;
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+                            
+                            return idB-idA;
                         });
                     }
                      else if (selectedFilter === 'descending') {
                         rows.sort(function (a, b) {
-                            var idA = parseInt($(a).find('.date').text());
-                            var idB = parseInt($(b).find('.date').text());
-                            return idB - idA;
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+                            
+                            return idA-idB;
                         });
                     }
 

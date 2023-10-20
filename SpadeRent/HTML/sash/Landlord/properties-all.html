@@ -2039,8 +2039,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Property ID</th>
-                                                        <th class="d-none">PROPERTY ID</th>
+                                                        <th class="d-none">Landlord ID</th>
+                                                        <th>PROPERTY ID</th>
                                                         <th>IMAGE</th>
 
                                                         <th>PROPERTY NAME</th>
@@ -3874,8 +3874,8 @@
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
-                            var id = `<td style="font-weight: 600;">${property.landlordID}</td>`
-                            var propertyId = '<td class="property-id d-none" style="font-weight: 600;">' + property
+                            var id = `<td style="font-weight: 600;" class="d-none">${property.landlordID}</td>`
+                            var propertyId = '<td class="property-id" style="font-weight: 600;">' + property
                                 .id + '</td>';
                             if(property.images[0]?.imageURL){
                                 if(property.images[0]?.imageURL.includes(".pdf") || property.images[0]?.imageURL.includes(".docx") || property.images[0]?.imageURL.includes(".doc") || property.images[0]?.imageURL.includes(".xls") || property.images[0]?.imageURL.includes(".xlsx") || property.images[0]?.imageURL.includes(".ppt") || property.images[0]?.imageURL.includes(".pptx")){
