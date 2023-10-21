@@ -59,7 +59,7 @@ const verifyToken = async (req, res, next) => {
       req.user = {
         email: decoded.email,
         userId: result[0][0].llnalordId,
-        
+        userType : "Landlord",
         userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
         businessName: result[0][0].BusinessName,
         phone: result[0][0].UPhone,
@@ -120,6 +120,7 @@ const verifyToken = async (req, res, next) => {
       req.user = {
         email: decoded.email,
         userId: result[0][0].id,
+        userType : "Landlord",
         nuveiUserId: result[0][0].nuveiId,
         userName: result[0][0].FirstName + " " + result[0][0].LastName,
         businessName: result[0][0].BusinessName,
@@ -174,6 +175,7 @@ const verifyTokenTenant = async (req, res, next) => {
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,
+      userType : "Tenant",
       userName: result[0][0].firstName + " " + result[0][0].lastName,
       landlordID: result[0][0].landlordID,
       propertyID: result[0][0].propertyID,
