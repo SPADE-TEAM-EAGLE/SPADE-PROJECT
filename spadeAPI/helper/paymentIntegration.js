@@ -342,6 +342,7 @@ exports.createPlanPayment = async (req, res) => {
 // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
+  const subscriptionDate = new Date();
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
@@ -362,14 +363,34 @@ exports.createSubscriptionPayment = async (req, res) => {
 
     // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
-  console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
-  console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
+  // console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
+  // console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
   var correctPlanId;
   if (planId >= 8) {
     correctPlanId = planId / 4;
   } else {
     correctPlanId = planId;
   }
+  // ##############################################################################
+  if(userId){
+    const UserResult = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
+    const {subscriptionCreated_at} = UserResult[0][0];
+
+    // 
+    subscriptionDate.setMonth(subscriptionDate.getMonth());
+    const Currentday = subscriptionDate.getDate();
+    const Currentmonth = subscriptionDate.getMonth() + 1;
+    const Currentyear = subscriptionDate.getFullYear();
+    
+    
+    subscriptionCreated_at.setMonth(subscriptionCreated_at.getMonth());
+    const day = subscriptionCreated_at.getDate();
+    const month = subscriptionCreated_at.getMonth() + 1;
+    const year = subscriptionCreated_at.getFullYear();
+
+
+  }
+  // ##############################################################################
   const result = await queryRunner(selectQuery("plan", "id"), [
     correctPlanId
   ]);
@@ -420,9 +441,11 @@ exports.createSubscriptionPayment = async (req, res) => {
         console.log(responseData);
 
         const data = JSON.parse(responseData);
+        
         const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
+          subscriptionDate,
           userTokenId
         ]);
         if (result[0].affectedRows == 1) {
