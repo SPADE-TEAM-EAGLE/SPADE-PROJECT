@@ -1084,7 +1084,7 @@
                                             <div class="mx-2">
                                                 <div class="form-group m-0">
                                                     <input class="form-control"
-                                                        placeholder="Search Users by Name, Email or Date" type="text">
+                                                        placeholder="Search" type="text">
                                                 </div>
                                             </div>
                                         </div>

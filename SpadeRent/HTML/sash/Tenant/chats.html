@@ -754,6 +754,8 @@
             border-radius: 0.75em;
             background: #F8F8F8;
             box-shadow: 0 2px 0 #000 20;
+            font-size: 18px;
+
         }
 
 
@@ -1052,7 +1054,7 @@
         }
 
         #chat {
-            height: calc(100vh - 250px);
+            height: calc(100vh - 100px);
             /* border-radius: 0; */
         }
 
@@ -1363,7 +1365,7 @@
                         <div class="card">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold"><a href="coming-soon.html"
-                                        style="color: white;">Lead</a></div>
+                                        style="color: white;">Prospect</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -1375,7 +1377,7 @@
 
                                     <div class="main-chat-msg-name">
                                         <a href="coming-soon.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Sign up today and experience the
                                             benefits
@@ -1713,14 +1715,14 @@
                                 <li class="slide card-demo">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
                                             class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                            class="side-menu__label">Invoicing</span>
+                                            class="side-menu__label">Invoices</span>
                                     </a>
                                 </li>
     
                                 <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="maintenance-request.html"><i
                                             class="side-menu__icon fi fi-rs-list-check"></i><span
-                                            class="side-menu__label">Maintenance Request</span>
+                                            class="side-menu__label">Requests</span>
                                     </a>
                                 </li>
     
@@ -3422,10 +3424,13 @@
                     });
                     console.log(selectedFiles)
                     updateSelectedFilesContainer(); // Update the selected files container
-                });
+                }); 
+            const  inputNew = $('#input-message');
+
                 $('#submit-photo').click(() => {
                     $('#submit-photo').css("display", "none");
-                    $("#loading-btn").css("display", "inline-block");
+                    $("#loading-btn").css("display", "inline-block")
+                    inputNew.val("");
                     if (selectedFiles.length >= 1) {
                         var uploadFormData = new FormData();
                         for (var i = 0; i < selectedFiles.length; i++) {
@@ -3722,7 +3727,12 @@
                             localStorage.removeItem('authtoken');
                             localStorage.clear();
                             // window.close();
-                            window.open('./login_module.html', "_self")
+                            if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {

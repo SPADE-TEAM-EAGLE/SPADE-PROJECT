@@ -1792,7 +1792,7 @@
                                                                                             </button>
                                                                                         </div>
                                                                                         <p
-                                                                                            class="fs-20 m-0 mt-1 text-dark font-weight-bold">
+                                                                                            class="fs-20 m-0 mt-1 font-weight-bold">
                                                                                             Everything in
                                                                                             <span
                                                                                                 class="text3-green">Basic</span>
@@ -1920,7 +1920,7 @@
                                                                                             </button>
                                                                                         </div>
                                                                                         <p
-                                                                                            class="fs-20 m-0 mt-1 text-dark font-weight-bold">
+                                                                                            class="fs-20 m-0 mt-1 font-weight-bold">
                                                                                             Everything in
                                                                                             <span
                                                                                                 class="text4-blue">Pro</span>
@@ -4081,7 +4081,7 @@
                                     country: "US"
                                 }
                             }, function (res) {
-
+                                console.log(res)
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
@@ -4111,7 +4111,24 @@
                                             }, 2000);
                                         },
                                         error: function (xhr, status, error) {
+                                            $.ajax({
+                                        url:"http://localhost:3000/api/spade/deleteUser",
+                                        type:"DELETE",
+                                        contentType: "application/json",
+                                        data:JSON.stringify({
+                                            userId:userId
+                                        }),
+                                        success:function(response){
+                                            console.log(response)
+                                        },
+                                        error:function(xhr,status,error){
+                                            console.log(xhr)
+                                            console.log(status)
+                                            console.log(error)
+                                        }
 
+                                    })
+                                            $("#preloader").css("display", "none")
                                             $("#myModal_warning_declined").modal("show")
                                             setTimeout(function () {
                                                 $("#myModal_warning_declined").modal("hide");
@@ -4120,10 +4137,28 @@
                                     })
 
                                 } else {
+                                    $.ajax({
+                                        url:"http://localhost:3000/api/spade/deleteUser",
+                                        type:"DELETE",
+                                        contentType: "application/json",
+                                        data:JSON.stringify({
+                                            userId:userId
+                                        }),
+                                        success:function(response){
+                                            console.log(response)
+                                        },
+                                        error:function(xhr,status,error){
+                                            console.log(xhr)
+                                            console.log(status)
+                                            console.log(error)
+                                        }
 
+                                    })
+                                    $("#preloader").css("display", "none")
                                     $("#myModal_warning_declined").modal("show")
                                     setTimeout(function () {
                                         $("#myModal_warning_declined").modal("hide");
+                                        window.location = '../Landlord/Signup.html';
                                     }, 2000);
                                 }
                             });
@@ -4132,6 +4167,24 @@
                             console.log(xhr)
                             console.log(status)
                             console.log(error)
+                            $.ajax({
+                                        url:"http://localhost:3000/api/spade/deleteUser",
+                                        type:"DELETE",
+                                        contentType: "application/json",
+                                        data:JSON.stringify({
+                                            userId:userId
+                                        }),
+                                        success:function(response){
+                                            console.log(response)
+                                        },
+                                        error:function(xhr,status,error){
+                                            console.log(xhr)
+                                            console.log(status)
+                                            console.log(error)
+                                        }
+
+                                    })
+                            $("#preloader").css("display", "none")
                             $("#myModal_warning_declined").modal("show")
                             setTimeout(function () {
                                 $("#myModal_warning_declined").modal("hide");
@@ -4147,6 +4200,24 @@
                     console.log(status)
                     console.log(error)
                     console.error('Error sending data:', error);
+                    $.ajax({
+                                        url:"http://localhost:3000/api/spade/deleteUser",
+                                        type:"DELETE",
+                                        contentType: "application/json",
+                                        data:JSON.stringify({
+                                            userId:userId
+                                        }),
+                                        success:function(response){
+                                            console.log(response)
+                                        },
+                                        error:function(xhr,status,error){
+                                            console.log(xhr)
+                                            console.log(status)
+                                            console.log(error)
+                                        }
+
+                                    })
+                                    $("#preloader").css("display", "none")
                     $("#myModal_warning_declined").modal("show")
                     setTimeout(function () {
                         $("#myModal_warning_declined").modal("hide");
@@ -4159,6 +4230,14 @@
 
     </script>
     <!-- ########### payment method End ########## -->
+    <!-- <script>
+        $(document).ready(function() {
+            $(document).on('input change','#card4 input',function(){
+alert(1)
+            })
+           
+        })
+    </script> -->
 </body>
 
 </html>

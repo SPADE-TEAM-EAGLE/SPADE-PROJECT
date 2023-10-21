@@ -990,7 +990,7 @@
                     <div class="col-md-6 col-lg-3 col-xl-3 mb-5">
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
-                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Lead</a></div>
+                                <div class="card-title fw-bold"><a href="prospects.html" style="color: white;">Prospect</a></div>
                             </div>
                             <div class="card-body">
                                 <div class="text-center chat-image mb-5">
@@ -1002,7 +1002,7 @@
 
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Lead</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants. </p>
                                     </div>
@@ -1836,7 +1836,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="media mt-0 mb-2">
                                                 <div class="media-user me-2">
-                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
+                                                    <div class=""><img alt="" class="rounded-circle avatar avatar-md" id="tenant-top-img" style="max-width: 120px;" src="../assets/images/users/16.jpg"></div>
                                                 </div>
                                                 <div class="media-body">
                                                     <small class="text-white">Tenants</small>
@@ -1964,7 +1964,7 @@
                                                 <div class="mx-2">
                                                     <div class="form-group m-0">
                                                         <input class="form-control"
-                                                            placeholder="Search Users by Name, Email or Date"
+                                                            placeholder="Search"
                                                             type="text" id="search_input">
 
                                                     </div>
@@ -3178,6 +3178,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     tenantData=data[0][0]
                     console.log(data[0])
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
+                    $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
                 },
                 error: {}
             })
@@ -3226,7 +3227,7 @@ function getData(){
                             ${item?.Image?.split(",")[0].endsWith(".pdf") ? `<i class="fi fi-rs-file-pdf fs-20" style="display: flex; align-items: center;"></i>` : `<img src="${item?.Image?.split(",")[0]}" alt="">`}
                             
                             <p style="color: #9B9B9B;" class="mb-1">${item.ImageKey}<br>
-                                <span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;">${item.fileSize} KB</span>
+                                <span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"><a class="fw-bold" href="${item.Image}">Download</a></span>
                             </p>
                         </div>
                     </td>
@@ -3234,9 +3235,11 @@ function getData(){
                         <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
                         <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
                     </td>
-                    <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
+                    <td >
+                        <div style="display: flex; align-items: center; gap: 0.5rem; border: none;">
                         <img src="${localStorage?.getItem("LandlordImg")}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
                         <p class="mt-2">${item?.firstName + " " + item?.lastName}</p>
+                        </div>
                     </td>
                     <td>${formatDate(item.uploadDate)}</td>
                     <td>

@@ -305,8 +305,10 @@ exports.addTasksTenant = async (req, res) => {
         if (vendorResults.affectedRows === 0) {
           return res.send("Error2");
         }
+        console.log(landlordID)
         const landlordCheckResult = await queryRunner(selectQuery("users", "id"),[landlordID]);
         // if()
+        console.log(landlordCheckResult[0])
       const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       const landlordEmail = landlordCheckResult[0][0].Email;
       const CompanyName = landlordCheckResult[0][0].BusinessName || "N/A";

@@ -14,7 +14,7 @@ $(document).on('input', 'input[type="email"]', function () {
       email_span.addClass('d-none');
   }
 });
-$(document).on('input change', 'input:not([type="tel"]):not(.modal *):not(#typehead,#typehead1,#typehead2,#search_input), select:not(#lengthSelectBox, #lengthSelectBox1, #lengthSelectBox2, #lengthSelectBox3, #lengthSelectBox4, #lengthSelectBox5):not(.modal *)', function () {
+$(document).on('input change', 'input:not([type="tel"]):not(.modal *):not(#typehead,#typehead1,#typehead2,#search_input,#typehead_users), select:not(#lengthSelectBox, #lengthSelectBox1, #lengthSelectBox2, #lengthSelectBox3, #lengthSelectBox4, #lengthSelectBox5):not(.modal *)', function () {
   var input_select_value = $(this).val();
   var input_select_value_span = $(this).siblings('.text-danger');
   if (input_select_value === '') {
@@ -25,9 +25,6 @@ $(document).on('input change', 'input:not([type="tel"]):not(.modal *):not(#typeh
     $(this).addClass("border-green").removeClass("border-danger");
   }
 });
-
-
-
 
 const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
 
@@ -136,5 +133,11 @@ $(document).ready(function(){
 //   alert(assignDateValue)
 // $(this).val(assignDateValue)
 // })
+
+$('#addModal, #myModal_edit').on('hidden.bs.modal', function() {
+  $("#error-msg").addClass('d-none')
+  $("#valid-msg").addClass('d-none')
+});
+
 
 

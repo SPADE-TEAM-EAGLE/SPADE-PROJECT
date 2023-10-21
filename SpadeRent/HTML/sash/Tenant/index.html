@@ -44,11 +44,11 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
     <script>
-         if(!localStorage.getItem("authtoken")){
-                window.location="./login_module.html"
-            }
+        if (!localStorage.getItem("authtoken")) {
+            window.location = "./login_module.html"
+        }
     </script>
-<style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         .border {
@@ -69,6 +69,164 @@
 
         .counter-card-hover:hover {
             border: 3px solid #1467B0 !important;
+        }
+
+        .add-payment-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            float: left;
+        }
+
+        .heading-payment {
+            padding: 10px 20px 20px 20px;
+            display: flex;
+            justify-content: left;
+        }
+
+        .payment-paragraph {
+            width: 100%;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .credit-card-image1 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            height: 20px;
+        }
+
+        /* .fadein-loader
+    {
+        animation: fadein 5s;
+    }
+    @keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+} */
+
+        .panel-heading1 {
+            background-color: transparent;
+            border-radius: 14px;
+            border: none;
+            color: #fff;
+            padding: 0;
+        }
+
+        .panel-heading1 a {
+            background-color: transparent !important;
+        }
+
+        .panel-title1 a {
+            display: block;
+            color: #fff !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .trial-plan-option-1,
+        .panel-title1 .trial-plan-option-2 {
+            display: block;
+            color: #1467B0 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .basic-plan-option-1,
+        .panel-title1 .basic-plan-option-2 {
+            display: block;
+            color: #F7C042 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .pro-plan-option-1,
+        .panel-title1 .pro-plan-option-2 {
+            display: block;
+            color: #0CA7B6 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .pre-plan-option-1,
+        .panel-title1 .pre-plan-option-2 {
+            display: block;
+            color: #1D80C4 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-group .panel,
+        .panel-group1 .panel {
+            border-radius: 5px;
+            box-shadow: none;
+            border: 1px solid transparent;
+            overflow: hidden;
+        }
+
+        /* payment method start  */
+        .form-controlll {
+            display: block;
+            width: 100%;
+            padding: 0.645rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 7px;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            padding: 1rem 0.75rem !important;
+        }
+
+        .form-control111 {
+            display: block;
+            width: 100%;
+            padding: 0.475rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 7px;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            padding: 0.85rem 0.75rem !important;
+        }
+
+        .card-form__button {
+            width: 100%;
+            height: 55px;
+            background: #2364d2;
+            border: none;
+            border-radius: 5px;
+            font-size: 22px;
+            font-weight: 500;
+            font-family: "Source Sans Pro", sans-serif;
+            box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+            color: #fff;
+            margin-top: 20px;
+            cursor: pointer;
         }
     </style>
 
@@ -111,10 +269,17 @@
                 <div class="modal-body p-0">
                     <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
                         <div class="card-body text-center">
-                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/><circle cx="12" cy="16" r="1" fill="#f7b731"/><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/></svg></span>
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
                             <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
                             <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                            <p class="card-text text-dark m-0">Kindly check your internet connection or please try again
+                                later.</p>
                         </div>
                     </div>
                 </div>
@@ -173,7 +338,7 @@
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
                                             </a>
                                         </div>
-                           <div class="d-flex country mt-2">
+                                        <div class="d-flex country mt-2">
                                             <a class="nav-link icon text-dark customIntercomButton">
                                                 <i class="fi fi-rs-interrogation"></i>
 
@@ -213,8 +378,9 @@
                                         </div> -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
-                                                data-target=".sidebar-right"><i class="fe fe-bell"></i> 
-                                                <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                                data-target=".sidebar-right"><i class="fe fe-bell"></i>
+                                                <span class="badge bg-secondary header-badge bg-primary"
+                                                    id="count_unread"></span>
                                             </a>
                                             <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -355,44 +521,44 @@
                                     Profile</span>
                             </a>
                         </li> -->
-                        <a href="settings.html">
-                            <li class="slide">
-                                <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-                                    <div class="card-header pb-0 border-bottom-0">
-                                        <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                        <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
-                                        </h3>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="side-menu__label progress progress-md mt-5">
-                                            <div class="progress-bar bg-info" style="width: 0%;">20%</div>
+                            <a href="settings.html">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <div class="progress-bar bg-info" style="width: 0%;">20%</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </a>
-                        <div class="top-tabs">
-                            <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
-                                        class="side-menu__icon fi fi-rs-dashboard"></i><span
-                                        class="side-menu__label">Overview</span></a>
-                            </li>
+                                </li>
+                            </a>
+                            <div class="top-tabs">
+                                <li class="slide">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
+                                            class="side-menu__icon fi fi-rs-dashboard"></i><span
+                                            class="side-menu__label">Overview</span></a>
+                                </li>
 
-                            <li class="slide card-demo">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
-                                        class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
-                                        class="side-menu__label">Invoicing</span>
-                                </a>
-                            </li>
+                                <li class="slide card-demo">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html"><i
+                                            class="side-menu__icon fi fi-rs-file-invoice-dollar"></i><span
+                                            class="side-menu__label">Invoices</span>
+                                    </a>
+                                </li>
 
-                            <li class="slide card-demo1">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="maintenance-request.html"><i
-                                        class="side-menu__icon fi fi-rs-list-check"></i><span
-                                        class="side-menu__label">Maintenance Request</span>
-                                </a>
-                            </li>
+                                <li class="slide card-demo1">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="maintenance-request.html"><i
+                                            class="side-menu__icon fi fi-rs-list-check"></i><span
+                                            class="side-menu__label">Requests</span>
+                                    </a>
+                                </li>
 
-                            <!-- <li class="slide">
+                                <!-- <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                         class="side-menu__icon fi fi-rs-comment"></i><span
                                         class="side-menu__label">Messages</span>
@@ -401,14 +567,14 @@
 
                             </li> -->
 
-                            <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
-                                    <i class="side-menu__icon fi fi-rs-comment"></i>
-                                    <span class="side-menu__label">Chat</span>
-                                    <span class="badge bg-primary side-badge" id="chatCounter"></span>
-                                </a>
-                            </li>
-<!-- 
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                                        <i class="side-menu__icon fi fi-rs-comment"></i>
+                                        <span class="side-menu__label">Chat</span>
+                                        <span class="badge bg-primary side-badge" id="chatCounter"></span>
+                                    </a>
+                                </li>
+                                <!-- 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
                                     <i class="side-menu__icon fi fi-rs-bell"></i>
@@ -422,18 +588,18 @@
                                     <span class="side-menu__label">Help</span>
                                 </a>
                             </li> -->
-                        </div>
+                            </div>
                             <div style="position: absolute; bottom: 0; width: 94%;">
-                            <li>
-                                <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
-                                <a class="side-menu__item has-link" href="settings.html" target="_self"><i
-                                        class="side-menu__icon fi fi-rs-settings"></i><span
-                                        class="side-menu__label">Settings</span>
-                                    <!-- <span
+                                <li>
+                                    <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
+                                    <a class="side-menu__item has-link" href="settings.html" target="_self"><i
+                                            class="side-menu__icon fi fi-rs-settings"></i><span
+                                            class="side-menu__label">Settings</span>
+                                        <!-- <span
                                                class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
-                                </a>
-                            </li>
-                        </div>
+                                    </a>
+                                </li>
+                            </div>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                 width="24" height="24" viewBox="0 0 24 24">
@@ -443,7 +609,7 @@
                 </div>
             </div>
 
-            
+
 
             <!--app-content open-->
             <div class="main-content app-content mt-0">
@@ -470,19 +636,19 @@
                                         </div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
                                         <h1 class="mt-3 text-white font-weight-900"
-                                            style="font-weight: 800; margin-bottom: 0px;">$0</h1>
+                                            style="font-weight: 800; margin-bottom: 0px;" id="amount-payable"></h1>
                                         <div class="mobile-icon-text-align"><i
                                                 class="side-menu__icon fi fi-rs-calendar text-white"></i><span
                                                 class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of
-                                                $0 is due on N/A&emsp; 
-                                                <a href="#"
-                                                    class="btn btn-primary btn-pill btn-paynow-banner"data-bs-target="#closeaccount"
-                                                    data-bs-toggle="modal">Pay
+                                                <span id="amount-payable-span">$0</span> is due on N/A&emsp;
+                                                <a href="#" class="btn btn-primary btn-pill btn-paynow-banner"
+                                                    data-bs-target="#closeaccount" data-bs-toggle="modal">Pay
                                                     Now</a>
-                                                </span></div>
-                                        <div class="mobile-icon-text-align"><i class="side-menu__icon fi fi-rs-building text-white"></i><span
+                                            </span></div>
+                                        <div class="mobile-icon-text-align"><i
+                                                class="side-menu__icon fi fi-rs-building text-white"></i><span
                                                 class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
-                                                 <br>&nbsp;&nbsp; </span>
+                                                <br>&nbsp;&nbsp; </span>
                                         </div>
 
                                     </div>
@@ -492,51 +658,169 @@
                         </div>
                         <!-- PAGE-HEADER END -->
 
-                           <!-- close account model box start  -->
-                           <div class="modal fade" id="closeaccount"
-                           tabindex="-1" role="dialog">
-                           <div class="modal-dialog modal-md modal-dialog-scrollable"
-                               role="document">
-                               <div class="modal-content">
-                                   <div class="modal-header">
-                                       <button class="btn-close"
-                                           data-bs-dismiss="modal"
-                                           aria-label="Close">
-                                           <span
-                                               aria-hidden="true"><img
-                                                   src="../assets/images/cross-circle.svg" /></span>
-                                       </button>
-                                   </div>
-                                   <div
-                                       class="modal-body text-center text-dark">
-                                       <img src="../assets/images/logo_loginmodule.png"
-                                           class="model-account-close-logo"
-                                           alt="">
-                                       <h3 class="mt-5 mb-0">
-                                        <b>Spade Tenant</b>
-                                       </h3>
-                                       <h4>Spade Rent</h4>
-                                       <h2><b>Do you want to pay your due balance?</b>
-                                       </h2>
+                        <!-- close account model box start  -->
+                        <div class="modal fade" id="closeaccount" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><img
+                                                    src="../assets/images/cross-circle.svg" /></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-center text-dark">
+                                        <img src="../assets/images/logo_loginmodule.png"
+                                            class="model-account-close-logo" alt="">
+                                        <h3 class="mt-5 mb-0">
+                                            <b>Spade Tenant</b>
+                                        </h3>
+                                        <h4>Spade Rent</h4>
+                                        <h2><b>Do you want to pay your due balance?</b>
+                                        </h2>
 
-                                       <button
-                                           class="btn btn-primary btn-pill m-2"
-                                           id="form1show"
-                                           type="button"
-                                           data-bs-dismiss="modal"
-                                           aria-label="Close"
-                                           style="width: fit-content;">
-                                           &nbsp; Paynow &nbsp;
-                                       </button>
-                                   </div>
-                                   <!-- <div class="modal-footer">
+                                        <button class="btn btn-primary btn-pill m-2" id="upgradetopro-btn" type="button"
+                                            style="width: fit-content;">
+                                            &nbsp; Paynow &nbsp;
+                                        </button>
+                                    </div>
+                                    <!-- <div class="modal-footer">
 
                                    </div> -->
-                               </div>
-                           </div>
-                           <!-- close account model box start  -->
+                                </div>
+                            </div>
+                            <!-- close account model box start  -->
 
-                       </div>
+                        </div>
+                        <div class="modal fade" id="upgradetopro" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!-- <div class="text-justify ps-2 border-model-line">
+                                       <h2 class="modal-title mb-0" id="previewHeading">Payment <strong class="color-primary">Method</strong></h2>
+                                   </div> -->
+                                        <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i
+                                                    class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body mb-5">
+                                        <!-- <h1>Noman</h1> -->
+
+                                        <div class="container p-0">
+                                            <div class="row"
+                                                style="display: flex; justify-content: center; align-items: center;">
+                                                <!-- <div class="col-lg-3"></div> -->
+                                                <div class="col-lg-66">
+                                                    <div class="cardd">
+                                                        <div class="card-headerr">
+                                                            <h3 class="text-center fw-bold">
+                                                                Add your
+                                                                <span class="text-primary">Payment</span>
+                                                                information
+                                                            </h3>
+                                                            <div class="heading-payment px-0">
+                                                                <p class="payment-paragraph">
+                                                                    <img src="../assets/images/add-payment.png"
+                                                                        alt="Pineapple" class="add-payment-img">
+                                                                    <strong>Spade Rent -
+
+                                                                        Plan</strong><strong
+                                                                        style="float: right;">Total</strong><br>
+
+                                                                    <span style="float: right;">$<span
+                                                                            id="payment-total"></span></span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card-bodyy p-0">
+                                                            <div class="row">
+
+                                                                <form action="/charge" method="post" id="payment-form">
+                                                                    <div class="row">
+                                                                        <!-- <div class="col-lg-3"></div> -->
+                                                                        <div class="col-lg-6 col-xl-6">
+                                                                            <div class="field form-group">
+                                                                                <label class="fw-bold" for="card-number"
+                                                                                    data-tid="scwsdk.form.card_number_label">
+                                                                                    Card
+                                                                                    number
+                                                                                </label>
+                                                                                <div id="card-number"
+                                                                                    class="input form-controlll">
+                                                                                </div>
+
+                                                                                <div class="underline">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-xl-6">
+                                                                            <label class="fw-bold" for="amount"
+                                                                                id="amount-payable-input">
+                                                                                Amount
+                                                                            </label>
+                                                                            <div class="field form-group">
+                                                                                <div class="input">
+                                                                                </div>
+
+                                                                                <div class="underline">
+                                                                                    <input id="amount"
+                                                                                        class="input form-control111">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-xl-6">
+                                                                            <div class="field form-group">
+                                                                                <label class="fw-bold" for="card-expiry"
+                                                                                    data-tid="scwsdk.form.card_expiry_label">
+                                                                                    Expiration
+                                                                                </label>
+                                                                                <div id="card-expiry"
+                                                                                    class="input empty form-controlll">
+                                                                                </div>
+
+                                                                                <div class="underline">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-xl-6">
+                                                                            <div class="field form-group">
+                                                                                <label class="fw-bold" for="card-cvc"
+                                                                                    data-tid="scwsdk.form.card_cvc_label">
+                                                                                    CVV
+                                                                                </label>
+                                                                                <div id="card-cvc"
+                                                                                    class="input empty form-controlll">
+                                                                                </div>
+
+                                                                                <div class="underline ">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="row"
+                                                                style="display: flex; justify-content: center; align-items: center;">
+                                                                <!-- <div class="col-lg-4"></div> -->
+                                                                <div class="col-lg-12">
+                                                                    </form>
+                                                                    <button onclick="main()"
+                                                                        class="btn btn-primary btn-lg btn-block btnn fs-20">Submit
+                                                                        Payment</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- ROW-1 -->
                         <div class="row">
@@ -907,68 +1191,68 @@
 
     </div>
 
-   <!-- Sidebar-right -->
-   <div class="sidebar sidebar-right sidebar-animate">
-    <div class="panel panel-primary card mb-0 shadow-none border-0">
-        <div class="tab-menu-heading border-0 d-flex p-3">
-            <div class="card-title mb-0 text-dark fw-bold">
-                <!-- <i class="fe fe-bell me-2"></i> -->
-                <!-- <span class=" pulse"></span> -->
-                Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
-                    id="updateAllNotifyRead">Mark all
-                    as read</a>
+    <!-- Sidebar-right -->
+    <div class="sidebar sidebar-right sidebar-animate">
+        <div class="panel panel-primary card mb-0 shadow-none border-0">
+            <div class="tab-menu-heading border-0 d-flex p-3">
+                <div class="card-title mb-0 text-dark fw-bold">
+                    <!-- <i class="fe fe-bell me-2"></i> -->
+                    <!-- <span class=" pulse"></span> -->
+                    Notifications <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">Mark all
+                        as read</a>
+                </div>
+                <div class="card-options ms-auto">
+                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
+                            class="fe fe-x text-dark"></i></a>
+                </div>
             </div>
-            <div class="card-options ms-auto">
-                <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                    data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                        class="fe fe-x text-dark"></i></a>
-            </div>
-        </div>
-        <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
-            <div class="tabs-menu border-bottom">
-                <!-- Tabs -->
-                <ul class="nav panel-tabs">
-                    <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
-                                class="all_span"></span></a></li>
-                    <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
-                                class="inbox_span"></span></a></li>
-                    <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
-                                class="Unread_span"></span></a></li>
-                    <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                <div class="tabs-menu border-bottom">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs">
+                        <li><a href="#side1" data-bs-toggle="tab" class="text-dark active">All<span
+                                    class="all_span"></span></a></li>
+                        <li><a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox <span
+                                    class="inbox_span"></span></a></li>
+                        <li><a href="#side3" data-bs-toggle="tab" class="text-dark">Unread <span
+                                    class="Unread_span"></span></a></li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
                                 class="archive_span"></span></a></li> -->
-                </ul>
-            </div>
-            <div class="tab-content">
-               
-                <div class="tab-pane active" id="side1">
-                    <div class="list-group list-group-flush" id="notification-container">
-
-
-                    </div>
+                    </ul>
                 </div>
+                <div class="tab-content">
 
-                <div class="tab-pane " id="side2">
-                    <div class="list-group list-group-flush" id="inbox-notification-container">
+                    <div class="tab-pane active" id="side1">
+                        <div class="list-group list-group-flush" id="notification-container">
 
+
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane " id="side3">
-                    <div class="list-group list-group-flush" id="unread-notification-container">
 
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container">
 
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane " id="side4">
-                    <div class="list-group list-group-flush" id="Archieve-notification-container">
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container">
 
 
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container">
+
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--/Sidebar-right-->
+    <!--/Sidebar-right-->
 
     <!-- Country-selector modal-->
     <div class="modal fade" id="country-selector">
@@ -1064,7 +1348,7 @@
     <!-- BACK-TO-TOP -->
     <!--<a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
     <!--  -->
-    
+
     <!-- JQUERY JS -->
     <script src="../assets/js/jquery.min.js"></script>
 
@@ -1166,42 +1450,42 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/getNotificationTenant.js"></script>
 
-<script>
-            $(document).ready(function(){
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
-                        $('#chatCounter').text(response.Count['count(message)'])
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
-                        console.log(error);
-                    }
-                });
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("getMessagesCountLandlord");
+                    console.log(response.Count['count(message)']);
+                    $('#chatCounter').text(response.Count['count(message)'])
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    console.log(error);
+                }
             });
-        </script>
-        <script src="../assets/js/completeTenantProfile.js"></script>
+        });
+    </script>
+    <script src="../assets/js/completeTenantProfile.js"></script>
 
     <!-- <script src="http://ec2-52-45-181-206.compute-1.amazonaws.com:3000/socket.io/socket.io.js"></script> -->
     <script>
-      // Connect to the socket.io server
-    //   const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
-      // This code won't emit a 'connection' event, as it's automatically handled by socket.ipulo
-      // Handle events from the server
-    // socket.on('notification', (data) => {
-    //   alert(data.message); // You can customize how you want to display the notification
-    // });
-    //   socket.emit('message', 'Hello from the client');
+        // Connect to the socket.io server
+        //   const socket = io('http://ec2-52-45-181-206.compute-1.amazonaws.com:3000');
+        // This code won't emit a 'connection' event, as it's automatically handled by socket.ipulo
+        // Handle events from the server
+        // socket.on('notification', (data) => {
+        //   alert(data.message); // You can customize how you want to display the notification
+        // });
+        //   socket.emit('message', 'Hello from the client');
     </script>
     <script>
         //   $(function() {
@@ -1221,31 +1505,33 @@
         }
     </script>
     <script>
+        var userData;
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                   
+
                     function toTitleCase(str) {
-                            console.log(str)
-                            return str.replace(/\w\S*/g, function (txt) {
-                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                            });
-                        }
+                        console.log(str)
+                        return str.replace(/\w\S*/g, function (txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                    userData = response;
                     $("#header-user").text(toTitleCase(response.userName))
                     $("#tenant-name").empty()
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                     $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp;  <br>&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
 
-                                 },
+                },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
                     }, 2000);
@@ -1270,7 +1556,7 @@
                     // $("#tenant-name").empty()
 
                     // $("#header-user").html(`${response.data.firstName + " " + response.data.lastName}`)
-                    
+
                     // $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.data.firstName + " " + response.data.lastName}`)
                     // $("#tenantName").text(`${response.data.firstName + " " + response.data.lastName}`)
                     // $("#tenant-address").empty()
@@ -1278,11 +1564,11 @@
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
 
-                        }, 2000);
-                        console.log('Error: ' + error);
+                    }, 2000);
+                    console.log('Error: ' + error);
                 }
             });
             $.ajax({
@@ -1300,15 +1586,18 @@
                     $("#invoice-amount").text("$ " + (totalAmount.totalAmount || 0))
                     $("#amount-paid").text("$ " + (totalAmountPaid.totalPaid || 0))
                     $("#amount-outstanding").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+
 
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
 
-                        }, 2000);
-                        console.log('Error: ' + error);
+                    }, 2000);
+                    console.log('Error: ' + error);
                 }
             });
             function updateTable(tabId) {
@@ -1360,37 +1649,38 @@
                             });
                         }
                         // Iterate over the filtered tasks and populate the table rows
-                        filteredTasks.forEach(function (task) {
-                            var row = $('<tr></tr>');
-                            var createdDate = moment(task.created_at);
-                            var currentDate = moment();
-                            console.log(createdDate, currentDate);
+                        if (filteredTasks.length >= 1) {
+                            filteredTasks.forEach(function (task) {
+                                var row = $('<tr></tr>');
+                                var createdDate = moment(task.created_at);
+                                var currentDate = moment();
+                                console.log(createdDate, currentDate);
 
-                            var timeDiff = moment.duration(currentDate.diff(createdDate));
-                            var daysDiff = timeDiff.asDays();
-                            var hoursDiff = timeDiff.asHours();
-                            var minutesDiff = timeDiff.asMinutes();
+                                var timeDiff = moment.duration(currentDate.diff(createdDate));
+                                var daysDiff = timeDiff.asDays();
+                                var hoursDiff = timeDiff.asHours();
+                                var minutesDiff = timeDiff.asMinutes();
 
-                            var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                                '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
+                                var taskName = '<td class="task-id" id=' + task.id + ' style="font-weight: 600;">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                                    '<span class="font-weight-normal" style="color: #9B9B9B;"> By ' + task.createdBy + ' - ';
 
-                            if (daysDiff >= 1) {
-                                taskName += Math.floor(daysDiff) + ' days';
-                            } else if (hoursDiff >= 1) {
-                                taskName += Math.floor(hoursDiff) + ' hours';
-                            } else {
-                                taskName += Math.floor(minutesDiff) + ' minutes';
-                            }
+                                if (daysDiff >= 1) {
+                                    taskName += Math.floor(daysDiff) + ' days';
+                                } else if (hoursDiff >= 1) {
+                                    taskName += Math.floor(hoursDiff) + ' hours';
+                                } else {
+                                    taskName += Math.floor(minutesDiff) + ' minutes';
+                                }
 
-                            taskName += '</span></td>';
+                                taskName += '</span></td>';
 
 
 
-                            var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
-                                '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
-                                    if (task.AssignTo.length >= 1) {
+                                var propertyName = '<td class="property-id" id=' + task.id + ' style="font-weight: 600;">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + task.propertyName + '</p>' +
+                                    '<span class="font-weight-normal" style="color: #9B9B9B;"> Unit no. ' + task.unitNumber
+                                if (task.AssignTo.length >= 1) {
                                     var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">';
                                     for (var i = 0; i < task.AssignTo.length; i++) {
                                         var name = task.AssignTo[i].name;
@@ -1415,23 +1705,28 @@
                                     }
 
                                     assignTo += '</td>';
-                                }else {
+                                } else {
 
                                     var assignTo = '<td style="vertical-align: middle; text-align: center;">Not Assigned</td>';
                                 }
 
-                            var dueDate = '<td class="property-id " style="font-weight: 600;">' +
-                                '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
-                                '<span class="font-weight-normal text-danger"><i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
-                                '</td>';
+                                var dueDate = '<td class="property-id " style="font-weight: 600;">' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
+                                    '<span class="font-weight-normal text-danger"><i class="fe fe-circle me-1"></i>' + task.priority + '</span>' +
+                                    '</td>';
 
-                            // Create a table row and append the generated columns
-                            var status = '<td class="task-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + toTitleCase(task.status) + '</p>' + '</tr>';
-                            // console.log(status)
-                            //   row.append(taskCell, assignedToCell, dueAtCell, relatedToCell, statusCell);
-                            var row = '<tr>' + taskName + assignTo + dueDate + propertyName + status + '</tr>';
-                            tableBody.append(row);
-                        });
+                                // Create a table row and append the generated columns
+                                var status = '<td class="task-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + toTitleCase(task.status) + '</p>' + '</tr>';
+                                // console.log(status)
+                                //   row.append(taskCell, assignedToCell, dueAtCell, relatedToCell, statusCell);
+                                var row = '<tr>' + taskName + assignTo + dueDate + propertyName + status + '</tr>';
+                                tableBody.append(row);
+                            });
+
+                        }
+                        else {
+                            tableBody.append("<tr><td colspan='12' style='text-align:center;'>No Data Found</td></tr>")
+                        }
                     },
                     error: function (error) {
                         console.log('Error fetching data from API:', error);
@@ -1491,7 +1786,7 @@
 
         })
     </script>
-    <!-- column drag and drop end  -->
+
 
     <script>
       function logout() {
@@ -1509,7 +1804,12 @@
                             localStorage.removeItem('authtoken');
                             localStorage.clear();
                             // window.close();
-                            window.open('./login_module.html', "_self")
+                            if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
                             console.log('Done');
                         },
                         error: function (xhr, status, error) {
@@ -1517,14 +1817,14 @@
                         }
                     });
                 });
-            }
-            var confirmationMessage = "Are you sure you want to leave?";
-    e.returnValue = confirmationMessage;
-    return confirmationMessage;
+        
+        }
+
     </script>
 
-    <!-- demo walktrough start  -->
     <script src="../assets/js/walkthrough-demo.js"></script>
+    <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+
     <script>
         function mydemoclick() {
             introJs().setOptions({
@@ -1544,7 +1844,252 @@
             }).start();
         }
     </script>
-    <!-- demo walktrough End  -->
+    <script>
+        var sfc = SafeCharge({
+            env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+            merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+            merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+        });
+        var ScFields = sfc.fields({
+            fonts: [
+                { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
+            ]
+        })
+        var ScFieldStyles = {
+            base: {
+                color: '#32325D',
+                fontWeight: 500,
+                fontFamily: 'Roboto, Consolas, Menlo, monospace',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+                ':-webkit-autofill': {
+                    color: '#e39f48',
+                },
+            },
+            invalid: {
+                color: '#E25950',
+                '::placeholder': {
+                    color: '#FFCCA5',
+                },
+            },
+        };
+        var ScFieldClasses = {
+            focus: 'focused',
+            empty: 'empty',
+            invalid: 'invalid',
+            complete: 'complete',
+            number:'card-number'  
+        };
+        var scard = ScFields.create('ccNumber', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+            id: 'card-number-input'
+        });
+        scard.attach('#card-number');
+        var cardExpiry = ScFields.create('ccExpiration', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+        });
+        cardExpiry.attach('#card-expiry');
+        var cardCvc = ScFields.create('ccCvc', {
+            style: ScFieldStyles,
+            classes: ScFieldClasses,
+        });
+        cardCvc.attach('#card-cvc');
+        function main() {
+            console.log($("#card-expiry"),$("#card-expiry").val())
+            console.log(cardExpiry,cardCvc,scard)
+            // $("#preloader").css("display", "flex")
+            $.ajax({
+                url: 'http://localhost:3000/api/spade/openOrder',
+                type: 'POST',
+                data: JSON.stringify({
+                    amount: "0",
+                    currency: "USD",
+                    userId: userData.userId,
+                }),
+                contentType: "application/json; charset=utf-8",
+                processData: false,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response)
+                    // sfc.createPayment({
+                    //     sessionToken: response.sessionToken, //received from openOrder API
+                    //     clientUniqueId: "695701003",
+                    //     merchantId: "6400701569295268447",
+                    //     merchantSiteId: "244298",
+                    //     cardHolderName: (userData.firstName + " " + userData.lastName),
+                    //     // paymentOption: {
+                    //     //     userPaymentOptionId: "95475308",
+                    //     //     card:{
+                    //     //     }
+                    //     // },
+                    //     paymentOption: scard,
+                    //     billingAddress: {
+                    //         email: userData.email,
+                    //         country: "US"
+                    //     }
+                    // }, function (res) {
+                    //     if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                    //         $.ajax({
+                    //             url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                    //             type: 'POST',
+                    //             contentType: "application/json",
+                    //             data: JSON.stringify({
+                    //                 "subscriptionId": userData.subscriptionID
+                    //             }),
+                    //             headers: {
+                    //                 Authorization: 'Bearer ' + localStorage.getItem("authtoken")
+                    //             },
+
+                    //             success: function (response) {
+                    //                 $.ajax({
+                    //                     url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
+                    //                     type: "POST",
+                    //                     headers: {
+                    //                         Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    //                     },
+                    //                     data: JSON.stringify({
+                    //                         userTokenId: userData.userId,
+                    //                         userNuveiId: userData.nuveiUserId,
+                    //                         planId: seletedPlanID,
+                    //                         upoId: res?.userPaymentOptionId,
+
+                    //                         currency: "USD",
+                    //                         recurringAmount: amount?.value,
+                    //                         initialAmount: amount?.value,
+
+                    //                     }),
+                    //                     contentType: "application/json",
+                    //                     success: function (response) {
+                    //                         $.ajax({
+                    //                             url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                    //                             method: 'PUT',
+                    //                             data: JSON.stringify({ planID: seletedPlanID }),
+                    //                             contentType: 'application/json',
+                    //                             headers: {
+                    //                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    //                             },
+                    //                             success: function (response) {
+                    //                                 $("#preloader").css("display", "none")
+                    //                                 $("#upgradetopro").modal("hide")
+                    //                                 $("#preloader").css("display", "none");
+
+                    //                                 $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                    //                                 $("#myModal_success").modal("show")
+
+                    //                                 setTimeout(function () {
+                    //                                     $("#myModal_success").modal("hide");
+                    //                                 }, 2000);
+                    //                                 getData()
+
+                    //                             },
+                    //                             error: function (xhr, status, error) {
+                    //                                 $("#myModal_warning_connection").modal("show")
+                    //                                 setTimeout(function () {
+                    //                                     $("#myModal_warning_connection").modal("hide");
+                    //                                 }, 2000);
+
+                    //                             }
+                    //                         });
+
+                    //                     },
+                    //                     error: function (xhr, status, error) {
+
+                    //                         $("#myModal_warning_declined").modal("show")
+                    //                         setTimeout(function () {
+                    //                             $("#myModal_warning_declined").modal("hide");
+                    //                         }, 2000);
+                    //                     }
+                    //                 })
+
+                    //             }, error: function (xhr) {
+
+                    //             }
+
+                    //         })
+
+
+                    //     } else {
+                    //         $("#upgradetopro").modal("hide")
+                    //         $("#preloader").css("display", "none")
+                    //         $("#myModal_declined").modal("show")
+                    //         setTimeout(function () {
+                    //             $("#myModal_declined").modal("hide");
+                    //         }, 2000);
+                    //     }
+                    // });
+                    $.ajax({
+                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        type: "POST",
+                        data: JSON.stringify({
+                            sessionToken: response.sessionToken,
+                            amount: $("#amount").val().trim(" "),
+                            currency: "USD",
+                            senderDetails: {
+                            userTokenId: userData.userId,
+                            billingAddress:{
+                                firstName: userData.firstName,
+                                lastName: userData.lastName,
+                                email: userData.email,
+                                country: "US"
+                            },
+                            paymentOption: scard,    
+                            },
+                            recipientDetails: {
+                                userTokenId: "145",
+                                firstName : "John",
+                                lastName: "Smith",
+                                paymentOption: {
+                                card: {
+                                    cardNumber: "5333306956697229",
+                                    cardHolderName: "John Smith",
+                                    expirationMonth: "12",
+                                    expirationYear: "25",
+                                    CVV: "217"
+                                },
+                                },
+                            },
+                        }),
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        contentType: "application/json",
+                        success: function (response) {
+
+                        }, error: function (xhr, status, error) {
+                            console.log(xhr)
+                            console.log(status)
+                            console.log(error)
+                        }
+                    })
+
+                },
+                error: function (xhr, status, error) {
+                    // Handle the error response
+                    console.log(xhr)
+                    console.log(status)
+                    console.log(error)
+                    console.error('Error sending data:', error);
+                }
+            });
+
+        }
+        $("#upgradetopro-btn").on("click", function () {
+            $("#closeaccount").modal("hide");
+            const amount = $("#amount-payable").text().split("$")[1];
+            $("#amount").val(amount)
+            $("#payment-total").text(amount)
+
+            $("#upgradetopro").modal("show");
+        })
+        // console.log($(".CardField-number"))
+    </script>
 
 
 </body>

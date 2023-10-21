@@ -4741,7 +4741,7 @@
 					animationDuration: 400
 				},
 				onClick: null,
-				defaultColor: "#a8afc7",
+				defaultColor: "#529EE0",
 				defaultFontColor: "#a8afc7",
 				defaultFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 				defaultFontSize: 12,
