@@ -3697,7 +3697,7 @@
                 var tenantData;
                 function getData(){
                     $.ajax({
-                    url: "http://localhost:3000/api/spade/GetBankAccountTenant",
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
                     type: "GET",
                     contentType: "application/json",
                     headers: {
@@ -4258,22 +4258,22 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
 
             var ScFieldStyles = {
                 base: {
-                    color: '#fff',
+                    color: '#000',
                     fontWeight: 500,
                     fontFamily: 'Figtree',
                     // fontSize: '16px',
                     fontSmoothing: 'antialiased',
                     '::placeholder': {
-                        color: '#e9edf4',
+                        color: '#000',
                     },
                     ':-webkit-autofill': {
-                        color: '#e39f48',
+                        color: '#000',
                     },
                 },
                 invalid: {
-                    color: '#fff',
+                    color: '#000',
                     '::placeholder': {
-                        color: '#FFCCA5',
+                        color: '#000',
                     },
                 },
             };
@@ -4342,7 +4342,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                             console.log(res.userPaymentOptionId)
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: "http://localhost:3000/api/spade/CreateBankAccountTenant",
+                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountTenant",
                                     type: "POST",
                                     contentType: "application/json",
                                     headers: {

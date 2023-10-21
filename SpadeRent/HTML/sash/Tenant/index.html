@@ -1638,7 +1638,7 @@
         var userData;
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2034,7 +2034,7 @@
             console.log(cardExpiry, cardCvc, scard)
             // $("#preloader").css("display", "flex")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -2068,7 +2068,7 @@
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        url: "https://backend.app.spaderent.com/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
                             sessionToken: response.sessionToken,
@@ -2142,7 +2142,7 @@
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        url: "https://backend.app.spaderent.com/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
                             sessionToken: response.sessionToken,
@@ -2219,7 +2219,7 @@
             $("#upgradetopro").modal("show");
         })
         $.ajax({
-                    url: "http://localhost:3000/api/spade/GetBankAccount",
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccount",
                     type: "GET",
                     contentType: "application/json",
                     headers: {
