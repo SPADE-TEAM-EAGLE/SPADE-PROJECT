@@ -1106,7 +1106,9 @@ exports.insertInUserPermissionUsers =
   exports.tenantStatusCountQuery = "SELECT (SELECT count(id) as currentTenant FROM tenants WHERE tenantCreated_at >= ? AND tenantCreated_at <= ? AND landlordID = ?) as currentTenant, count(id) as totalTenant FROM tenants WHERE landlordID = ?";
   exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
   exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";
-  exports.updateUserBank = "UPDATE users SET nuveiId = ?, nuveiSubscriptionId = ? WHERE id = ?";
   exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant) VALUES (?,?,?,?,?,?,?,?)";
+  exports.updateUserBank = "UPDATE users SET nuveiId = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateBankAccountStatusquery = "UPDATE bankAccount SET Active = ? WHERE UPOID = ?";
+  exports.updateBankAccountquery = "UPDATE bankAccount SET UPOID = ?,accountName = ?,description = ?,Active = ?,updated_at = ? WHERE id = ?";
   exports.addUserRoles = "INSERT INTO userRoles (Urole, userId) VALUES (?,?)";
+  exports.insertUserBankFuture = "INSERT INTO futurePlanUser (landlordId,fuserNuveiId,fplanId,fsubscriptionId,fuserTokenId,fsubscriptionCreated_at) VALUES (?,?,?,?,?,?)";
