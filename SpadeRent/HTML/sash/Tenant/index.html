@@ -894,14 +894,14 @@
                                                                                             class="fw-bold">Account Name
                                                                                             <span
                                                                                                 class="text-danger">*</span></label>
-                                                                                        <select id="state"
+                                                                                        <select id="account"
                                                                                             class="form-select form-control form new-account-dropdown"
                                                                                             required>
                                                                                             <option selected>Choose...
                                                                                             </option>
                                                                                         </select>
                                                                                         <span
-                                                                                            class="text-danger d-none">State
+                                                                                            class="text-danger d-none">Account
                                                                                             is required!</span>
 
                                                                                     </div>
@@ -914,7 +914,7 @@
                                                                                         <div class="input-group mb-3">
                                                                                             <span
                                                                                                 class="input-group-text">$</span>
-                                                                                            <input id="amount"
+                                                                                            <input id="amount-existing"
                                                                                                 type="text"
                                                                                                 class="form-control"
                                                                                                 aria-label="Amount (to the nearest dollar)">
@@ -2048,113 +2048,26 @@
                 },
                 success: function (response) {
                     console.log(response)
-                    // sfc.createPayment({
-                    //     sessionToken: response.sessionToken, //received from openOrder API
-                    //     clientUniqueId: "695701003",
-                    //     merchantId: "6400701569295268447",
-                    //     merchantSiteId: "244298",
-                    //     cardHolderName: (userData.firstName + " " + userData.lastName),
-                    //     // paymentOption: {
-                    //     //     userPaymentOptionId: "95475308",
-                    //     //     card:{
-                    //     //     }
-                    //     // },
-                    //     paymentOption: scard,
-                    //     billingAddress: {
-                    //         email: userData.email,
-                    //         country: "US"
-                    //     }
-                    // }, function (res) {
-                    //     if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                    //         $.ajax({
-                    //             url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
-                    //             type: 'POST',
-                    //             contentType: "application/json",
-                    //             data: JSON.stringify({
-                    //                 "subscriptionId": userData.subscriptionID
-                    //             }),
-                    //             headers: {
-                    //                 Authorization: 'Bearer ' + localStorage.getItem("authtoken")
-                    //             },
-
-                    //             success: function (response) {
-                    //                 $.ajax({
-                    //                     url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
-                    //                     type: "POST",
-                    //                     headers: {
-                    //                         Authorization: "Bearer " + localStorage.getItem("authtoken")
-                    //                     },
-                    //                     data: JSON.stringify({
-                    //                         userTokenId: userData.userId,
-                    //                         userNuveiId: userData.nuveiUserId,
-                    //                         planId: seletedPlanID,
-                    //                         upoId: res?.userPaymentOptionId,
-
-                    //                         currency: "USD",
-                    //                         recurringAmount: amount?.value,
-                    //                         initialAmount: amount?.value,
-
-                    //                     }),
-                    //                     contentType: "application/json",
-                    //                     success: function (response) {
-                    //                         $.ajax({
-                    //                             url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
-                    //                             method: 'PUT',
-                    //                             data: JSON.stringify({ planID: seletedPlanID }),
-                    //                             contentType: 'application/json',
-                    //                             headers: {
-                    //                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    //                             },
-                    //                             success: function (response) {
-                    //                                 $("#preloader").css("display", "none")
-                    //                                 $("#upgradetopro").modal("hide")
-                    //                                 $("#preloader").css("display", "none");
-
-                    //                                 $("#myModal_success p").text("Your plan has been succesfully updated!!!")
-                    //                                 $("#myModal_success").modal("show")
-
-                    //                                 setTimeout(function () {
-                    //                                     $("#myModal_success").modal("hide");
-                    //                                 }, 2000);
-                    //                                 getData()
-
-                    //                             },
-                    //                             error: function (xhr, status, error) {
-                    //                                 $("#myModal_warning_connection").modal("show")
-                    //                                 setTimeout(function () {
-                    //                                     $("#myModal_warning_connection").modal("hide");
-                    //                                 }, 2000);
-
-                    //                             }
-                    //                         });
-
-                    //                     },
-                    //                     error: function (xhr, status, error) {
-
-                    //                         $("#myModal_warning_declined").modal("show")
-                    //                         setTimeout(function () {
-                    //                             $("#myModal_warning_declined").modal("hide");
-                    //                         }, 2000);
-                    //                     }
-                    //                 })
-
-                    //             }, error: function (xhr) {
-
-                    //             }
-
-                    //         })
-
-
-                    //     } else {
-                    //         $("#upgradetopro").modal("hide")
-                    //         $("#preloader").css("display", "none")
-                    //         $("#myModal_declined").modal("show")
-                    //         setTimeout(function () {
-                    //             $("#myModal_declined").modal("hide");
-                    //         }, 2000);
-                    //     }
-                    // });
-                    $.ajax({
+                    if($("#new-account").hasClass("active")){
+                        sfc.createPayment({
+                            sessionToken: response.sessionToken, //received from openOrder API
+                            clientUniqueId: "695701003",
+                            merchantId: "6400701569295268447",
+                            merchantSiteId: "244298",
+                            cardHolderName: (userData.firstName + " " + userData.lastName),
+                            // paymentOption: {
+                            //     userPaymentOptionId: "95475308",
+                            //     card:{
+                            //     }
+                            // },
+                            paymentOption: scard,
+                            billingAddress: {
+                                email: userData.email,
+                                country: "US"
+                            }
+                        }, function (res) {
+                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                $.ajax({
                         url: "http://localhost:3000/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
@@ -2199,6 +2112,91 @@
                         }
                     })
 
+                            } else {
+                                $("#upgradetopro").modal("hide")
+                                $("#preloader").css("display", "none")
+                                $("#myModal_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_declined").modal("hide");
+                                }, 2000);
+                            }
+                        })
+                    
+                    }
+                    else{
+                        sfc.createPayment({
+                            sessionToken: response.sessionToken, //received from openOrder API
+                            clientUniqueId: "695701003",
+                            merchantId: "6400701569295268447",
+                            merchantSiteId: "244298",
+                            cardHolderName: (userData.firstName + " " + userData.lastName),
+                            paymentOption: {
+                                userPaymentOptionId: $("#account").val(),
+                                
+                            },
+                            
+                            billingAddress: {
+                                email: userData.email,
+                                country: "US"
+                            }
+                        }, function (res) {
+                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                $.ajax({
+                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        type: "POST",
+                        data: JSON.stringify({
+                            sessionToken: response.sessionToken,
+                            amount: $("#amount").val().trim(" "),
+                            currency: "USD",
+                            senderDetails: {
+                                userTokenId: userData.userId,
+                                billingAddress: {
+                                    firstName: userData.firstName,
+                                    lastName: userData.lastName,
+                                    email: userData.email,
+                                    country: "US"
+                                },
+                                paymentOption: scard,
+                            },
+                            recipientDetails: {
+                                userTokenId: "145",
+                                firstName: "John",
+                                lastName: "Smith",
+                                paymentOption: {
+                                    card: {
+                                        cardNumber: "5333306956697229",
+                                        cardHolderName: "John Smith",
+                                        expirationMonth: "12",
+                                        expirationYear: "25",
+                                        CVV: "217"
+                                    },
+                                },
+                            },
+                        }),
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        contentType: "application/json",
+                        success: function (response) {
+
+                        }, error: function (xhr, status, error) {
+                            console.log(xhr)
+                            console.log(status)
+                            console.log(error)
+                        }
+                    })
+
+                            } else {
+                                $("#upgradetopro").modal("hide")
+                                $("#preloader").css("display", "none")
+                                $("#myModal_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_declined").modal("hide");
+                                }, 2000);
+                            }
+                        })
+                    
+                    }
                 },
                 error: function (xhr, status, error) {
                     // Handle the error response
@@ -2214,10 +2212,38 @@
             $("#closeaccount").modal("hide");
             const amount = $("#amount-payable").text().split("$")[1];
             $("#amount").val(amount)
+            $("#amount-existing").val(amount)
+
             $("#payment-total").text(amount)
 
             $("#upgradetopro").modal("show");
         })
+        $.ajax({
+                    url: "http://localhost:3000/api/spade/GetBankAccount",
+                    type: "GET",
+                    contentType: "application/json",
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                    },
+                    success: function (response) {
+                        $("#account").empty()
+                        $("#account").append(`<option value="">Select Account</option>`)
+                        $("#table_body_bank_account").empty()
+                        var tbody = $("#table_body_bank_account");
+                        if (response?.data) {
+
+
+                            response.data.forEach(function (entry, index) {
+                                $("#account").append(`<option value="${entry.UPOID}">${entry.accountName}</option>`)
+                            
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+
         // console.log($(".CardField-number"))
     </script>
 

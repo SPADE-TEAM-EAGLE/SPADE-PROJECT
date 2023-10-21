@@ -13997,7 +13997,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-
+                        $("#account").empty()
+                        $("#account").append(`<option value="">Select Account</option>`)
                         $("#table_body_bank_account").empty()
                         var tbody = $("#table_body_bank_account");
                         if (response?.data) {
@@ -15952,6 +15953,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
 
             }
+        
         </script>
 
 
@@ -16748,6 +16750,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         accountName: $("#accountName").val(),
                                         description: $("#description-bank").val(),
                                         active: $("#accountActive").is(":checked"),
+                                        accountTypeTenant:""
                                     }),
                                     success: function (response) {
                                         $("#addModal-account").modal("hide")
