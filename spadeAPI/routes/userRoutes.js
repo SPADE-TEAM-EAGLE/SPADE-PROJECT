@@ -267,6 +267,7 @@ router.get("/userPermissionRoles", verifyToken, userPermissionController.userPer
 router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);
 router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
+router.post("/createSubscriptionPaymentSetting", paymentIntegration.createSubscriptionPaymentSetting);
 router.post("/CreateBankAccount",verifyToken, bankAccountController.CreateBankAccount);
 router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);

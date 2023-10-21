@@ -5,7 +5,7 @@ const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
 // const { queryRunner } = require('./queryRunner');
-const { selectQuery, updateUserBank } = require('../constants/queries');
+const { selectQuery, updateUserBank,insertUserBankFuture } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
@@ -342,7 +342,6 @@ exports.createPlanPayment = async (req, res) => {
 // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
-  const subscriptionDate = new Date();
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
@@ -363,34 +362,14 @@ exports.createSubscriptionPayment = async (req, res) => {
 
     // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
   };
-  // console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
-  // console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
+  console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
+  console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
   var correctPlanId;
   if (planId >= 8) {
     correctPlanId = planId / 4;
   } else {
     correctPlanId = planId;
   }
-  // ##############################################################################
-  if(userId){
-    const UserResult = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
-    const {subscriptionCreated_at} = UserResult[0][0];
-
-    // 
-    subscriptionDate.setMonth(subscriptionDate.getMonth());
-    const Currentday = subscriptionDate.getDate();
-    const Currentmonth = subscriptionDate.getMonth() + 1;
-    const Currentyear = subscriptionDate.getFullYear();
-    
-    
-    subscriptionCreated_at.setMonth(subscriptionCreated_at.getMonth());
-    const day = subscriptionCreated_at.getDate();
-    const month = subscriptionCreated_at.getMonth() + 1;
-    const year = subscriptionCreated_at.getFullYear();
-
-
-  }
-  // ##############################################################################
   const result = await queryRunner(selectQuery("plan", "id"), [
     correctPlanId
   ]);
@@ -441,11 +420,9 @@ exports.createSubscriptionPayment = async (req, res) => {
         console.log(responseData);
 
         const data = JSON.parse(responseData);
-        
         const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
-          subscriptionDate,
           userTokenId
         ]);
         if (result[0].affectedRows == 1) {
@@ -472,8 +449,212 @@ exports.createSubscriptionPayment = async (req, res) => {
     })
   });
   reqq.write(JSON.stringify(requestData));
+  reqq.end();
+};
+
+// ###################################### Create Subsription #############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ###################################### Create Subsription Setting #############################################################
+exports.createSubscriptionPaymentSetting = async (req, res) => {
+  const {
+    initialAmount,
+    recurringAmount,
+    currency,
+    planId,
+    userTokenId,
+    upoId,
+    userNuveiId,
+    userId
+  } = req.body;
+
+  const subscriptionDate = new Date();  
+
+  const requestData = {
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    userTokenId: userTokenId,
+    userPaymentOptionId: upoId,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
+    startAfter: {
+      day: "0",
+      month: "0",
+      year: "0"
+    },
+    timeStamp: timestamp,
+  };
+  // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
+  var correctPlanId;
+
+  if (planId >= 8) {
+    correctPlanId = planId / 4;
+  } else {
+    correctPlanId = planId;
+  }
+
+  const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
+  const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
+
+  // Additional code block (if userId is defined)
+  const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
+  if (userId) {
+    console.log(UserResult[0][0]);
+    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+
+    const subscriptionDate = new Date();
+    subscriptionDate.setMonth(subscriptionDate.getMonth());
+    const Currentday = subscriptionDate.getDate();
+    const Currentmonth = subscriptionDate.getMonth() + 1;
+    const Currentyear = subscriptionDate.getFullYear();
+
+    subscriptionCreated_at.setMonth(subscriptionCreated_at.getMonth());
+    const day = subscriptionCreated_at.getDate();
+    const month = subscriptionCreated_at.getMonth() + 1;
+    const year = subscriptionCreated_at.getFullYear();
+
+    if (
+      Currentmonth === month &&
+      Currentyear === year &&
+      planId > PlanID &&
+      monthlyAnnual === "Monthly"
+    ) {
+      const remainingDays = Currentday - day;
+      let initialAmountChange = plantotalAmount / 30;
+      initialAmountChange = remainingDays * initialAmountChange;
+      initialAmountChange = requestData.initialAmount - initialAmountChange;
+      requestData.initialAmount = initialAmountChange;
+    }
+  }
+
+  console.log(monthlyAnnual);
+
+  if (monthlyAnnual === "Monthly") {
+    requestData.recurringAmount = 0.001;
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "1",
+      year: "0"
+    };
+    requestData.endAfter = {
+      day: "1",
+      month: "1",
+      year: "0"
+    };
+  } else {
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "1",
+      year: "0"
+    };
+    requestData.endAfter = {
+      day: "0",
+      month: "0",
+      year: "1"
+    };
+  }
+
+  requestData.planId = nuveiId;
+  requestData.checksum = sha256(
+    config.merchantId +
+    config.merchantSiteId +
+    userTokenId +
+    nuveiId +
+    upoId +
+    initialAmount +
+    requestData.recurringAmount +
+    currency +
+    timestamp +
+    config.Secret_Key
+  );
+
+  console.log(requestData);
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log("responseData");
+  const reqq = request(
+    "https://ppp-test.nuvei.com/ppp/api/createSubscription.do",
+    requestOptions,
+    (response) => {
+      let responseData = "";
+      response.on("data", (chunk) => {
+        responseData += chunk;
+      });
+
+      response.on("end", async () => {
+        try {
+          // console.log(userNuveiId + " " + "data.subscriptionId" + " " + subscriptionDate + " " + userTokenId);
+          console.log(planId + " " + UserResult[0][0].PlanID);
+          const data = JSON.parse(responseData);
+          // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+          if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+          console.log("planId"); 
+            const result = await queryRunner(insertUserBankFuture, [userId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionDate]);
+            if (result[0].affectedRows == 1) {
+              res.status(200).json({
+                data,
+              });
+            }
+          }else{
+            console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
+            const result = await queryRunner(updateUserBank, [ userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
+            if (result[0].affectedRows == 1) {
+              res.status(200).json({
+                data,
+              });
+            }
+          }
+          //
+        } catch (error) {
+          console.error("Error parsing response:", error);
+          res.status(400).json({
+            message: "Error parsing response",
+            error,
+          });
+        }
+      });
+    }
+  );
+
+  reqq.on("error", (error) => {
+    console.error("Error sending request:", error);
+    res.status(400).json({
+      message: "Error sending request",
+      error,
+    });
+  });
+
+  reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
+
 // ###################################### Create Subsription #############################################################
 
 
