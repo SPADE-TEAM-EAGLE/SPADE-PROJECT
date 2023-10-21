@@ -642,6 +642,30 @@
             font-size: 16px;
             font-weight: 500;
         }
+        .tab-menu-heading::-webkit-scrollbar {
+    width: 12px;
+}
+
+.tab-menu-heading::-webkit-scrollbar-thumb {
+    background-color: lightblue;
+}
+.tab-menu-heading::-webkit-scrollbar-thumb:hover {
+    background-color: lightblue;
+}
+
+.tab-menu-heading::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.dark-mode .tab-menu-heading::-webkit-scrollbar-thumb {
+    background-color: lightblue;
+}
+.dark-mode .tab-menu-heading::-webkit-scrollbar-thumb:hover {
+    background-color: lightblue;
+}
+
+.dark-mode .tab-menu-heading::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
         .card-bodyy {
             -ms-flex: 1 1 auto;
@@ -1810,6 +1834,225 @@
                     <a href="javascript:void(0)" class="btn text-light btn-pill button"
                         style='background-color:#1467B0;' id='update-status'>Update Status</a>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">New <strong
+                                class="color-primary">Account</strong></h2>
+                        <span class="">Spade Rent allows you to add a range of
+                            commercial and residential properties,
+                            from condos and single-family homes to retail stores
+                            and parking lots.</span>
+
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i
+                                class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button text-white"
+                                id="accordian-button-1" type="button"
+                                data-bs-toggle="collapse"
+                                onclick="checkFieldsFilled('accordion-item1')"
+                                id="accordion-button1"
+                                data-bs-target="#collapseOne-add-property"
+                                aria-expanded="true"
+                                aria-controls="collapseOne-add-property">
+                                <span class="m-0 me-4 fs-1"
+                                    style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Account Info</strong>
+                                    <!-- <i
+                                        class="fi fi-rs-pencil"></i> -->
+                                    <i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne-add-property"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3"
+                                    enctype="multipart/form-data"
+                                    action="/charge" method="post"
+                                    id="payment-form-bank">
+                                    <div class="col-md-6">
+                                        <label for="accountName"
+                                            class="form-label fw-bold">Account
+                                            Name <spnan class="text-danger">
+                                                *</span></label>
+                                        <input type="text"
+                                            class="form-control form"
+                                            id="accountName"
+                                            placeholder="Enter Account Name">
+                                        <span
+                                            class="text-danger d-none">Property
+                                            name required!</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="fw-bold"
+                                                for="card-number-bank"
+                                                data-tid="scwsdk.form.card_number_label">
+                                                Card
+                                                number
+                                            </label>
+                                            <div id="card-number-bank"
+                                                class="input form-controlll">
+                                            </div>
+
+                                            <div class="underline">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="fw-bold"
+                                                for="card-expiry-bank"
+                                                data-tid="scwsdk.form.card_expiry_label">
+                                                Expiration
+                                            </label>
+                                            <div id="card-expiry-bank"
+                                                class="input empty form-controlll">
+                                            </div>
+
+                                            <div class="underline">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="fw-bold"
+                                                for="card-cvc-bank"
+                                                data-tid="scwsdk.form.card_cvc_label">
+                                                CVV
+                                            </label>
+                                            <div id="card-cvc-bank"
+                                                class="input empty form-controlll">
+                                            </div>
+
+                                            <div class="underline ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="description"
+                                            class="form-label fw-bold">Description
+                                            <spnan class="text-danger">
+                                                *</span>
+                                        </label>
+                                        <textarea class="form-control mb-4"
+                                            placeholder="Enter Description"
+                                            required="" rows="3"
+                                            id="description-bank"></textarea>
+                                        <span
+                                            class="text-danger d-none">Description
+                                            is required!</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button
+                                class="accordion-button collapsed text-white"
+                                onclick="checkFieldsFilled('accordion-item2')"
+                                type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo-add-property"
+                                aria-expanded="false"
+                                aria-controls="collapseTwo-add-property">
+                                <span class="m-0 me-4 fs-1"
+                                    style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong>ADDITIONAL
+                                        Options</strong>
+                                    <!-- <i
+                                        class="fi fi-rs-pencil"></i> -->
+                                    <i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-add-property"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1"
+                                enctype="multipart/form-data">
+
+                                <div class="col-12 mb-3">
+                                    <div class="material-switch pull-left"
+                                        style="display: flex; align-items: center;">
+                                        <input id="accountActive"
+                                            name="accountActive"
+                                            type="checkbox"> <label
+                                            for="accountActive"
+                                            class="label-success"></label>
+                                        <div style="margin-left: 25px;">
+                                            <h5><b>Use this account to receive
+                                                    payment</b></h5>
+                                            This will allow you to select this
+                                            account when receiving payment.
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+Draft</button> -->
+                    <button class="btn btn-outline-default btn-pill button"
+                        data-bs-dismiss="modal" id='close'
+                        style="width: auto;">Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)"
+                        class="btn text-light button d-none"
+                        style='background-color:#1467B0;' id='next-bank'
+                        onclick="addBank()">Submit</a>
+                    <button class="btn text-light button"
+                        style='background-color:#1467B0; width: auto;'
+                        id='next-add-bank'>Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- succes modal -->
+    <div class="modal fade" id="myModal_warning_declined" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Payment declined, Credentials not correct!!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3132,7 +3375,7 @@
                         </a>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
-                            <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
+                            <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -3504,7 +3747,7 @@
                                                     <li><a href="#tab7" data-bs-toggle="tab">Notification
                                                             Preferences</a></li>
                                                     <li><a href="#tab8" data-bs-toggle="tab">Appearance</a></li>
-                                                    <li><a href="#tab9" data-bs-toggle="tab">Subscription</a></li>
+                                                    <li><a href="#tab9" data-bs-toggle="tab">Pricing Plan</a></li>
                                                     <li><a href="#tab10" data-bs-toggle="tab" id="permission-tab">Users
                                                             & Permissions</a>
                                                     </li>
@@ -4196,7 +4439,8 @@
                                                 <div class="mb-5 responsive-img-scroll">
                                                     <p class="d-inline-flex gap-1 bg-img-mainn">
                                                         <span>Settings | </span>
-                                                        <span>Subscription | </span>
+                                                        <span>Pricing Plan
+                                                            | </span>
                                                         <span><a href="#" onclick="Intercom('showArticle', 8210506)"
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
@@ -4358,7 +4602,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn mt-0" 
                                                                                                             data-id="2">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -4490,7 +4734,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn mt-0"
                                                                                                             data-id="3"
                                                                                                             data-bs-effect="effect-scale"
                                                                                                             data-bs-toggle="modal"
@@ -4631,7 +4875,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn mt-0"
                                                                                                             data-id="4">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -4883,7 +5127,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-white btn-warning border-btn card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-white btn-warning border-btn card-btnn mt-0"
                                                                                                             data-id="6">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -5035,7 +5279,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn mt-0"
                                                                                                             data-id="7">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -5190,7 +5434,7 @@
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn mt-0"
                                                                                                             data-id="8">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -5533,7 +5777,7 @@
                                                                                                                     <div
                                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                                         <button
-                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn mt-0"
                                                                                                                             data-id="20">
                                                                                                                             Upgrade
                                                                                                                             to
@@ -5693,7 +5937,7 @@
                                                                                                                     <div
                                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                                         <button
-                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn mt-0"
                                                                                                                             data-id="24">
                                                                                                                             Upgrade
                                                                                                                             to
@@ -5860,7 +6104,7 @@
                                                                                                                     <div
                                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                                         <button
-                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn mt-0"
                                                                                                                             data-id="28">
                                                                                                                             Upgrade
                                                                                                                             to
@@ -6360,7 +6604,7 @@
                                                                                                                     <div
                                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                                         <button
-                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn mt-0"
                                                                                                                             data-id="12">
                                                                                                                             Upgrade
                                                                                                                             to
@@ -6546,7 +6790,7 @@
                                                                                                                     <div
                                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                                         <button
-                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn mt-0"
                                                                                                                             data-id="16">
                                                                                                                             Upgrade
                                                                                                                             to
@@ -6871,6 +7115,14 @@
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
+
+                                                                                                            <div
+                                                                                                                class="underline">
+                                                                                                                <input
+                                                                                                                    id="amount"
+                                                                                                                    class="input form-control111" readonly>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                     <div class="row"
                                                                                                         style="display: flex; justify-content: center; align-items: center;">
@@ -7203,7 +7455,7 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                          
 
                                             <div class="tab-pane mt-0" id="tab10">
                                                 <div class="mb-5 responsive-img-scroll">
@@ -7258,7 +7510,7 @@
                                                                                         <input type="text"
                                                                                             class="form-control dropdown-toggle"
                                                                                             id="typehead_users"
-                                                                                            placeholder="Search for results..."
+                                                                                            placeholder="Search"
                                                                                             data-bs-toggle="dropdown"
                                                                                             aria-expanded="false">
                                                                                     </div>
@@ -11073,7 +11325,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                                             <input type="text"
                                                                                 class="form-control dropdown-toggle"
                                                                                 id="typehead"
-                                                                                placeholder="Search for results..."
+                                                                                placeholder="Search"
                                                                                 autocomplete="off" style="width: 230px;"
                                                                                 data-bs-toggle="dropdown">
                                                                         </div>
@@ -11085,7 +11337,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                                             class="btn font-weight-bold text-dark"
                                                                             id="customized-btn"
                                                                             data-bs-toggle="dropdown"
-                                                                            style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                            style="border: none;"><strong>CUSTOMIZE</strong><i
                                                                                 class="fe fe-chevron-down ms-2"></i></button>
                                                                         <ul class="dropdown-menu" role="menu">
                                                                             <li><a href="javascript:void(0)"
@@ -11172,225 +11424,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                 <!-- Row -->
                                             </div>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <div class="text-justify ps-2 border-model-line">
-                                                                <h2 class="modal-title">New <strong
-                                                                        class="color-primary">Account</strong></h2>
-                                                                <span class="">Spade Rent allows you to add a range of
-                                                                    commercial and residential properties,
-                                                                    from condos and single-family homes to retail stores
-                                                                    and parking lots.</span>
-
-                                                            </div>
-                                                            <button class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close" id="top-close">
-                                                                <span aria-hidden="true"><i
-                                                                        class="fi fi-rs-circle-xmark text-dark"></i></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="accordion-item mb-4" id="accordion-item1">
-                                                                <h2 class="accordion-header" id="headingOne">
-                                                                    <button class="accordion-button text-white"
-                                                                        id="accordian-button-1" type="button"
-                                                                        data-bs-toggle="collapse"
-                                                                        onclick="checkFieldsFilled('accordion-item1')"
-                                                                        id="accordion-button1"
-                                                                        data-bs-target="#collapseOne-add-property"
-                                                                        aria-expanded="true"
-                                                                        aria-controls="collapseOne-add-property">
-                                                                        <span class="m-0 me-4 fs-1"
-                                                                            style="font-weight: bold;">01</span>
-                                                                        <h3 class="m-0"><strong>Account Info</strong>
-                                                                            <!-- <i
-                                                                                class="fi fi-rs-pencil"></i> -->
-                                                                            <i
-                                                                                class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                                                        </h3>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapseOne-add-property"
-                                                                    class="accordion-collapse collapse show"
-                                                                    aria-labelledby="headingOne"
-                                                                    data-bs-parent="#accordionExample">
-                                                                    <div class="accordion-body">
-                                                                        <form class="row g-3"
-                                                                            enctype="multipart/form-data"
-                                                                            action="/charge" method="post"
-                                                                            id="payment-form-bank">
-                                                                            <div class="col-md-6">
-                                                                                <label for="accountName"
-                                                                                    class="form-label fw-bold">Account
-                                                                                    Name <spnan class="text-danger">
-                                                                                        *</span></label>
-                                                                                <input type="text"
-                                                                                    class="form-control form"
-                                                                                    id="accountName"
-                                                                                    placeholder="Enter Account Name">
-                                                                                <span
-                                                                                    class="text-danger d-none">Property
-                                                                                    name required!</span>
-                                                                            </div>
-
-                                                                            <div class="col-lg-6 col-xl-6">
-                                                                                <div class="field form-group">
-                                                                                    <label class="fw-bold"
-                                                                                        for="card-number-bank"
-                                                                                        data-tid="scwsdk.form.card_number_label">
-                                                                                        Card
-                                                                                        number
-                                                                                    </label>
-                                                                                    <div id="card-number-bank"
-                                                                                        class="input form-controlll">
-                                                                                    </div>
-
-                                                                                    <div class="underline">
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-lg-6 col-xl-6">
-                                                                                <div class="field form-group">
-                                                                                    <label class="fw-bold"
-                                                                                        for="card-expiry-bank"
-                                                                                        data-tid="scwsdk.form.card_expiry_label">
-                                                                                        Expiration
-                                                                                    </label>
-                                                                                    <div id="card-expiry-bank"
-                                                                                        class="input empty form-controlll">
-                                                                                    </div>
-
-                                                                                    <div class="underline">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-6 col-xl-6">
-                                                                                <div class="field form-group">
-                                                                                    <label class="fw-bold"
-                                                                                        for="card-cvc-bank"
-                                                                                        data-tid="scwsdk.form.card_cvc_label">
-                                                                                        CVV
-                                                                                    </label>
-                                                                                    <div id="card-cvc-bank"
-                                                                                        class="input empty form-controlll">
-                                                                                    </div>
-
-                                                                                    <div class="underline ">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-12">
-                                                                                <label for="description"
-                                                                                    class="form-label fw-bold">Description
-                                                                                    <spnan class="text-danger">
-                                                                                        *</span>
-                                                                                </label>
-                                                                                <textarea class="form-control mb-4"
-                                                                                    placeholder="Enter Description"
-                                                                                    required="" rows="3"
-                                                                                    id="description-bank"></textarea>
-                                                                                <span
-                                                                                    class="text-danger d-none">Description
-                                                                                    is required!</span>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="accordion-item" id="accordion-item2">
-                                                                <h2 class="accordion-header" id="headingTwo">
-                                                                    <button
-                                                                        class="accordion-button collapsed text-white"
-                                                                        onclick="checkFieldsFilled('accordion-item2')"
-                                                                        type="button" data-bs-toggle="collapse"
-                                                                        data-bs-target="#collapseTwo-add-property"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="collapseTwo-add-property">
-                                                                        <span class="m-0 me-4 fs-1"
-                                                                            style="font-weight: bold;">02</span>
-                                                                        <h3 class="m-0"><strong>ADDITIONAL
-                                                                                Options</strong>
-                                                                            <!-- <i
-                                                                                class="fi fi-rs-pencil"></i> -->
-                                                                            <i
-                                                                                class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                                                        </h3>
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapseTwo-add-property"
-                                                                    class="accordion-collapse collapse"
-                                                                    aria-labelledby="headingTwo"
-                                                                    data-bs-parent="#accordionExample">
-                                                                    <form class="row g-3 m-1"
-                                                                        enctype="multipart/form-data">
-
-                                                                        <div class="col-12 mb-3">
-                                                                            <div class="material-switch pull-left"
-                                                                                style="display: flex; align-items: center;">
-                                                                                <input id="accountActive"
-                                                                                    name="accountActive"
-                                                                                    type="checkbox"> <label
-                                                                                    for="accountActive"
-                                                                                    class="label-success"></label>
-                                                                                <div style="margin-left: 25px;">
-                                                                                    <h5><b>Use this account to receive
-                                                                                            payment</b></h5>
-                                                                                    This will allow you to select this
-                                                                                    account when receiving payment.
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
-                        Draft</button> -->
-                                                            <button class="btn btn-outline-default btn-pill button"
-                                                                data-bs-dismiss="modal" id='close'
-                                                                style="width: auto;">Close</button>
-                                                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                                                            <a href="javascript:void(0)"
-                                                                class="btn text-light button d-none"
-                                                                style='background-color:#1467B0;' id='next-bank'
-                                                                onclick="addBank()">Submit</a>
-                                                            <button class="btn text-light button"
-                                                                style='background-color:#1467B0; width: auto;'
-                                                                id='next-add-bank'>Next</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- succes modal -->
-                                            <div class="modal fade" id="myModal_warning_declined" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                    <div class="modal-content modal-content-demo">
-                                                        <div class="modal-body p-0">
-                                                            <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                                                                <div class="card-body text-center">
-                                                                    <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path fill="#fad383"
-                                                                                d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
-                                                                            <circle cx="12" cy="16" r="1" fill="#f7b731" />
-                                                                            <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
-                                                                        </svg></span>
-                                                                    <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                                                                    <p class="card-text text-dark">Payment declined, Credentials not correct!!</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="tab-pane mt-0" id="tab14">
                                                 <div class="mb-5 responsive-img-scroll">
                                                     <p class="d-inline-flex gap-1 bg-img-mainn">
@@ -11638,6 +11672,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
 
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                                 <!-- request close account model box start  -->
