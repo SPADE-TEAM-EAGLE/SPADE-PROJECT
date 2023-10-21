@@ -581,7 +581,7 @@
                         </a>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
-                            <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
+                            <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -3326,25 +3326,25 @@ else {
                 });
             })
             
-            $("#send-email").on("click", () => {
-                console.log(id)
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/resendCode',
-                    type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        id: id
-                    }),
-                    success: function (response) {
-                        $("#modaldemo00").modal("hide")
-                        $("#modaldemo8").modal("show")
-                    },
-                    error: function (xhr, status, error) {
-                        // window.alert(xhr.statusText)
-                        console.error(xhr.responseText);
-                    }
-                });
-            })
+            // $("#send-email").on("click", () => {
+            //     console.log(id)
+            //     $.ajax({
+            //         url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+            //         type: 'POST',
+            //         contentType: "application/json; charset=utf-8",
+            //         data: JSON.stringify({
+            //             id: id
+            //         }),
+            //         success: function (response) {
+            //             $("#modaldemo00").modal("hide")
+            //             $("#modaldemo8").modal("show")
+            //         },
+            //         error: function (xhr, status, error) {
+            //             // window.alert(xhr.statusText)
+            //             console.error(xhr.responseText);
+            //         }
+            //     });
+            // })
            
             function updateTable(tabId) {
                 // alert(tabId)

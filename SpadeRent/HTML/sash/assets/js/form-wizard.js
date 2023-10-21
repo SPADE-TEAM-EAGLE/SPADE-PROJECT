@@ -372,6 +372,7 @@ document.getElementById("plan-name").innerHTML = document.getElementById(cardId)
 var amount = this.closest('.pricing-card').getElementsByClassName('amount-payable')[0].textContent;
 seletedPlanID = cardId;
 document.getElementById("amount").value = amount;
+document.getElementById("amount").value = amount;
 document.getElementById("payment-amount").innerHTML = amount;
 document.getElementById("payment-total").innerHTML = amount;
   loader.style.display = "block";

@@ -17,20 +17,18 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 
 //  ############################# Create bank Account ############################################################
 exports.CreateBankAccount = async (req, res) => {
-    // const { userId } = req.user;
-    const { userId,UPOID, accountName, description, active } = req.body;
+    const {userType} = req.user;
+    const { UPOID, accountName, description, active, userId } = req.body;
     const currentDate = new Date();
-
     if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
         var status;
         try {
-            if(active === "true"){
+            if(active){
                 status="Active"
             }else{
                 status="Inactive"
             }
-            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate]);
-
+            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType]);
             if (createResult[0].affectedRows === 0) {
                 res.status(400).send("Error");
             } else {
@@ -49,15 +47,13 @@ exports.CreateBankAccount = async (req, res) => {
   
   //  ############################# Create bank Account ############################################################
 exports.GetBankAccount = async (req, res) => {
-    const { userId } = req.user;
+    const { userId,userType } = req.user;
     // const { userId } = req.body;
         try {
-            const getResult = await queryRunner(selectQuery("bankAccount", "landlordID"),
-            [userId]
+            const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
+            [userId,userType]
           ); 
-
-            if (getResult[0].length > 0) {
-                
+            if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
                 res.status(201).send("Bank Account data not found");
@@ -69,19 +65,13 @@ exports.GetBankAccount = async (req, res) => {
 };
   //  ############################# Create bank Account ############################################################
  
-
     //  ############################# Create bank Account ############################################################
 exports.updateBankAccountStatus = async (req, res) => {
     // const { userId } = req.user;
     const { id,Active } = req.body;
-    
         try {
-            
             const getResult = await queryRunner(updateBankAccountStatusquery,[Active,id]); 
-            console.log("asdf2");
-
             if(getResult[0].affectedRows > 0) {
-                
                 res.status(200).json({message : "Status Updated Successful", data: getResult[0] });
             } else {
                 res.status(201).send("Bank Account status is not updated");

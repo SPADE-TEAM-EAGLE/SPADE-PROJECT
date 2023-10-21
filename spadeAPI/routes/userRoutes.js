@@ -266,9 +266,12 @@ router.delete("/userPermissionUsersDelete", verifyToken, userPermissionControlle
 router.get("/userPermissionRoles", verifyToken, userPermissionController.userPermissionRoles);
 router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPermissionUpdate);
 router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
+router.post("/editPlanPayment", paymentIntegration.editPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
-router.post("/CreateBankAccount", verifyToken, bankAccountController.CreateBankAccount);
+router.post("/CreateBankAccount",verifyToken, bankAccountController.CreateBankAccount);
+router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
+router.get("/GetBankAccountTenant", verifyTokenTenant, bankAccountController.GetBankAccount);
 router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
 router.delete("/deleteUser",userController.deleteUser);

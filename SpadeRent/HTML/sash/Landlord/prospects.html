@@ -1848,7 +1848,7 @@
                         </a>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
-                            <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
+                            <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -2499,7 +2499,7 @@
                                                                                 </div>
                                                                                 <div class="mx-2">
                                                                                     <!-- <div class="form-group m-0">
-                                                                                        <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                                                        <input class="form-control" placeholder="Search" id="search_input" type="text">
                                                                                     </div> -->
                                                                                     <div
                                                                                         class="main-header-center position-relative d-lg-block m-0">
@@ -2509,7 +2509,7 @@
                                                                                         <input type="text"
                                                                                             class="form-control"
                                                                                             id="typehead"
-                                                                                            placeholder="Search Users by Name, Email or Date"
+                                                                                            placeholder="Search"
                                                                                             autocomplete="off"
                                                                                             style="width: 300px;">
 
@@ -2522,7 +2522,7 @@
                                                                                         class="btn font-weight-bold text-dark"
                                                                                         id="customize_btn"
                                                                                         data-bs-toggle="dropdown"
-                                                                                        style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                                        style="border: none;"><strong>CUSTOMIZE</strong><i
                                                                                             class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                                     <ul class="dropdown-menu"
                                                                                         role="menu">
@@ -3046,7 +3046,7 @@
                                                                         </div>
                                                                         <div class="mx-2">
                                                                             <!-- <div class="form-group m-0">
-                                                                                <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                                                <input class="form-control" placeholder="Search" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div
                                                                                 class="main-header-center position-relative d-lg-block m-0">
@@ -3055,7 +3055,7 @@
                                                                                         aria-hidden="true"></i></button>
                                                                                 <input type="text" class="form-control"
                                                                                     id="typehead1"
-                                                                                    placeholder="Search Users by Name, Email or Date"
+                                                                                    placeholder="Search"
                                                                                     autocomplete="off"
                                                                                     style="width: 300px;">
 
@@ -3068,7 +3068,7 @@
                                                                                 class="btn font-weight-bold text-dark"
                                                                                 id="customize_btn"
                                                                                 data-bs-toggle="dropdown"
-                                                                                style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                                style="border: none;"><strong>CUSTOMIZE</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"
@@ -3377,7 +3377,7 @@
                                                                         </div>
                                                                         <div class="mx-2">
                                                                             <!-- <div class="form-group m-0">
-                                                                                <input class="form-control" placeholder="Search Users by Name, Email or Date" id="search_input" type="text">
+                                                                                <input class="form-control" placeholder="Search" id="search_input" type="text">
                                                                             </div> -->
                                                                             <div class="main-header-center d-lg-block m-0"
                                                                                 style="position: relative;">
@@ -3386,7 +3386,7 @@
                                                                                         aria-hidden="true"></i></button>
                                                                                 <input type="text" class="form-control"
                                                                                     id="typehead2"
-                                                                                    placeholder="Search Users by Name, Email or Date"
+                                                                                    placeholder="Search"
                                                                                     autocomplete="off"
                                                                                     style="width: 300px;">
 
@@ -3399,7 +3399,7 @@
                                                                                 class="btn font-weight-bold text-dark"
                                                                                 id="customize_btn"
                                                                                 data-bs-toggle="dropdown"
-                                                                                style="border: none;"><strong>CUSTOMIZED</strong><i
+                                                                                style="border: none;"><strong>CUSTOMIZE</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"
@@ -5688,11 +5688,11 @@
                                 labels.push("Other");
                                 data.push(countOthers);
                             }
-
-                            createSourceCampaignChart(labels, data)
+                            
+                            createSourceCampaignChart(labels, data,Math.max(...data))
                         }
                         else {
-                            createSourceCampaignChart([], [])
+                            createSourceCampaignChart([], [],0)
                         }
 
                     }, error: function (xhr, status, error) {
@@ -6634,7 +6634,7 @@
     <script>
         var ctx = document.getElementById("chartBar11").getContext('2d');
         var myChart1;
-        function createSourceCampaignChart(labels, data) {
+        function createSourceCampaignChart(labels, data,size) {
             myChart1 = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -6643,8 +6643,8 @@
                         label: 'Sales',
                         data: data,
                         borderWidth: 2,
-                        backgroundColor: ['#09AD95', '#2086C8', '#000'],
-                        borderColor: ['#09AD95', '#2086C8', '#000'],
+                        // backgroundColor: ['#09AD95', '#2086C8', '#000'],
+                        // borderColor: ['#09AD95', '#2086C8', '#000'],
                         borderWidth: 2.0,
                         pointBackgroundColor: '#ffffff',
                     }]
@@ -6659,7 +6659,7 @@
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                stepSize: 150,
+                                stepSize: size+5,
                                 fontColor: "#9ba6b5",
                             },
                             gridLines: {

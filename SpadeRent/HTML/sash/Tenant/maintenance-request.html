@@ -617,29 +617,29 @@
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">Task Name<span class="text-danger"> *</span></label>
                                 <input id="task" required class="form-control" placeholder="Enter task name" type="text"
                                     placeholder="Enter Task Name">
                                 <span class="text-danger d-none">Task name is required!</span>
                             </div>
                             
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <label for="inputState" class="form-label fw-bold">Related To<span class="text-danger"> *</span></label>
                                 <select required id="property" class="form-select form select2-show-search" placeholder="Enter Related To">
                                     <option selected>Choose...</option>
                                 </select>
                                 <span class="text-danger d-none">This field is required!</span>
-                            </div>
+                            </div> -->
 
-                            <!-- <div class="col-md-4">
+                            <!-- <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label fw-bold">Due Date (Optional)</label>
                                 <input id="dueDate" class="form-control" placeholder="MM/DD/YYYY" type="date"
                                     placeholder="Enter Due Date">
                                 <span class="text-danger d-none">Due Date is required!</span>
                             </div> -->
                             
-                            <!-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">Status</label>
                                 <select id="status" required class="form-select form"placeholder="Select Status"
                                     >
@@ -661,7 +661,7 @@
                                     <option name="low">Low</option>
                                 </select>
                                 <span class="text-danger d-none">Priority is required!</span>
-                            </div> -->
+                            </div>
                             <div class="col-md-12">
                                 <label class="form-label fw-bold">Description (Optional)</label>
                                 <textarea id="notes" class="form-control mb-4"
@@ -1568,7 +1568,7 @@
                                     </div>
                                     <div class="mx-2">
                                         <!-- <div class="form-group m-0">
-                                                    <input class="form-control" placeholder="Search Users by Name, Email or Date" type="text" id="search_input">
+                                                    <input class="form-control" placeholder="Search" type="text" id="search_input">
                                                 </div> -->
                                         <div class="main-header-center d-nonee d-lg-block m-0">
                                             <button class="btn px-0 pt-2"><i class="fe fe-search"
@@ -2371,7 +2371,7 @@ if (task.ImageKey) {
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                                url: 'http://localhost:3000/api/spade/addTasksTenant',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2419,7 +2419,7 @@ if (task.ImageKey) {
                         // Loop through the lineItems array and add each line item to the FormData object
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                        url: 'http://localhost:3000/api/spade/addTasksTenant',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
