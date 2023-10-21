@@ -17,8 +17,8 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 
 //  ############################# Create bank Account ############################################################
 exports.CreateBankAccount = async (req, res) => {
-    const { userId,userType } = req.user;
-    const { UPOID, accountName, description, active } = req.body;
+    const { userType } = req.user;
+    const { userId,UPOID, accountName, description, active } = req.body;
     const currentDate = new Date();
     if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
         var status;
