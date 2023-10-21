@@ -337,6 +337,77 @@ exports.createPlanPayment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
+
+
+
+exports.editPlanPayment = async (req, res) => {
+  const { planId, initialAmount, recurringAmount, currency } = req.body;
+  const requestData = {
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    planId: planId,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
+    startAfter: {
+      day: "0",
+      month: "0",
+      year: "0"
+    },
+    recurringPeriod: {
+      day: "0",
+      month: "1",
+      year: "0"
+    },
+    // endAfter: {
+    //     day: "0",
+    //     month: "0",
+    //     year: "0"
+    // },
+    timeStamp: timestamp,
+    // clientRequestId: config.clientRequestId,
+    // timeStamp: timestamp,
+    checksum: sha256(config.merchantId + config.merchantSiteId + planId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key),
+  };
+  // console.log(requestData.checksum);
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/editPlan.do", requestOptions, (response) => {
+    let responseData = '';
+    response.on('data', (chunk) => {
+      responseData += chunk;
+    });
+    response.on('end', () => {
+      try {
+        console.log(responseData);
+        const data = JSON.parse(responseData);
+        res.status(200).json({
+          data
+        })
+      } catch (error) {
+        console.error('Error parsing response:', error);
+        res.status(400).json({
+          message: "Error parsing response",
+          error,
+        })
+      }
+    });
+  });
+  reqq.on('error', (error) => {
+    console.error('Error sending request:', error);
+    res.status(400).json({
+      message: "Error sending request",
+      error,
+    })
+  });
+  reqq.write(JSON.stringify(requestData));
+  reqq.end();
+};
 // ###################################### Create Plan #############################################################
 
 // ###################################### Create Subsription #############################################################
