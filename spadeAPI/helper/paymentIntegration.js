@@ -685,6 +685,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     };
 }
 
+console.log("requestData.endAfter : ", requestData.endAfter);
 
   requestData.planId = nuveiId;
   requestData.checksum = sha256(
