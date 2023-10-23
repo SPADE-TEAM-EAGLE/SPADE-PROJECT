@@ -621,10 +621,10 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     // Calculate the difference in years
     let yearsDifference = currentDate.year - createdDate.year;
     yearsDifference = Math.max(0, yearsDifference);
-console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual);
+// console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual);
     if (
-      Currentmonth == month &&
-      Currentyear == year &&
+      currentDate.month == createdDate.month &&
+      currentDate.year == createdDate.year &&
       planId > PlanID &&
       monthlyAnnual == "Monthly"
     ) {
@@ -715,7 +715,7 @@ console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnua
           console.log("planId"); 
           // const subscriptionDate = new Date();
          const AddDays = 30 - daysDifference;
-const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+        const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
             const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDate]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({
