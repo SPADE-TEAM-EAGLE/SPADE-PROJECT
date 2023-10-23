@@ -685,14 +685,13 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
         const seconds = String(date.getSeconds()).padStart(2, '0');
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
-    
+
     requestData.endAfter = {
-        day: subscriptionDate.getDate(),
-        month: subscriptionDate.getMonth() + 1,
-        year: subscriptionDate.getFullYear()
+        day: AddDays,
+        month: "0",
+        year: "0"
     };
 }
-
 console.log("requestData.endAfter : ", requestData.endAfter);
 
   requestData.planId = nuveiId;
