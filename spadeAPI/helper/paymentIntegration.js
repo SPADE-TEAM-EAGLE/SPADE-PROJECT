@@ -590,8 +590,8 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
 
   // Additional code block (if userId is defined)
-  const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
-  if (userId) {
+  const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
+  if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 
@@ -678,7 +678,6 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       response.on("data", (chunk) => {
         responseData += chunk;
       });
-
       response.on("end", async () => {
         try {
           // console.log(userNuveiId + " " + "data.subscriptionId" + " " + subscriptionDate + " " + userTokenId);
@@ -687,7 +686,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
-            const result = await queryRunner(insertUserBankFuture, [userId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionDate]);
+            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionDate]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
