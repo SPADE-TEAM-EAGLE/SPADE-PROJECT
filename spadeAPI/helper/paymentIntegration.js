@@ -559,8 +559,8 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     userTokenId,
     upoId,
     userNuveiId,
-    existPlanAmount,
-    userId
+    userId,
+    existPlanAmount
   } = req.body;
 
   const subscriptionDate = new Date();  
@@ -597,18 +597,31 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
-
     const subscriptionDate = new Date();
-    subscriptionDate.setMonth(subscriptionDate.getMonth());
-    const Currentday = subscriptionDate.getDate();
-    const Currentmonth = subscriptionDate.getMonth() + 1;
-    const Currentyear = subscriptionDate.getFullYear();
-
-    subscriptionCreated_at.setMonth(subscriptionCreated_at.getMonth());
-    const day = subscriptionCreated_at.getDate();
-    const month = subscriptionCreated_at.getMonth() + 1;
-    const year = subscriptionCreated_at.getFullYear();
-    console.log(Currentday,day,Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual)
+    
+    const currentDate = {
+      day: subscriptionDate.getDate(),
+      month: subscriptionDate.getMonth() + 1, 
+      year: subscriptionDate.getFullYear(),
+    };
+    const createdDate = {
+      day: subscriptionCreated_at.getDate(),
+      month: subscriptionCreated_at.getMonth() + 1,
+      year: subscriptionCreated_at.getFullYear(),
+    };
+    
+    // Calculate the difference in days
+    let daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    daysDifference = Math.max(0, Math.round(daysDifference));
+    
+    // Calculate the difference in months
+    let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
+    monthsDifference = Math.max(0, monthsDifference);
+    
+    // Calculate the difference in years
+    let yearsDifference = currentDate.year - createdDate.year;
+    yearsDifference = Math.max(0, yearsDifference);
+console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual);
     if (
       Currentmonth == month &&
       Currentyear == year &&
@@ -616,7 +629,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       monthlyAnnual == "Monthly"
     ) {
       console.log("Monthly if in")
-      let remainingDays = Currentday - day;
+      let remainingDays = daysDifference;
       console.log(remainingDays)
       remainingDays = 30 - remainingDays;
       console.log(remainingDays)
