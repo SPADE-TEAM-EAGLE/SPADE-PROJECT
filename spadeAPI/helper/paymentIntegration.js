@@ -686,13 +686,13 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
-    requestData.endAfter = {
+    requestData.startAfter = {
         day: AddDays,
         month: "0",
         year: "0"
     };
 }
-console.log("requestData.endAfter : ", requestData.endAfter);
+console.log("requestData.endAfter : ", requestData.startAfter);
 
   requestData.planId = nuveiId;
   console.log(requestData);
