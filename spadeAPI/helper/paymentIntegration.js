@@ -594,6 +594,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
+  let daysDifference
   if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
@@ -611,7 +612,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     };
     
     // Calculate the difference in days
-    let daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
     daysDifference = Math.max(0, Math.round(daysDifference));
     
     // Calculate the difference in months
