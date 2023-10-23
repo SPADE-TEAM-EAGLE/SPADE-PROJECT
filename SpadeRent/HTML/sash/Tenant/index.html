@@ -523,7 +523,7 @@
                         </li> -->
                             <a href="settings.html">
                                 <li class="slide">
-                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                    <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                         <div class="card-header pb-0 border-bottom-0">
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                             <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
@@ -1508,7 +1508,7 @@
         var userData;
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1904,7 +1904,7 @@
             console.log(cardExpiry,cardCvc,scard)
             // $("#preloader").css("display", "flex")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -2025,7 +2025,7 @@
                     //     }
                     // });
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        url: "https://backend.app.spaderent.com/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
                             sessionToken: response.sessionToken,
