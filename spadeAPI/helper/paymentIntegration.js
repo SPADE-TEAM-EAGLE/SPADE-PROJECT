@@ -713,7 +713,10 @@ console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnua
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
-            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionDate]);
+          // const subscriptionDate = new Date();
+         const AddDays = 30 - daysDifference;
+const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDate]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
