@@ -592,6 +592,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
+  let daysDifference;
   if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
@@ -609,7 +610,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     };
     
     // Calculate the difference in days
-    let daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+   daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
     daysDifference = Math.max(0, Math.round(daysDifference));
     
     // Calculate the difference in months
@@ -704,9 +705,23 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
           // const subscriptionDate = new Date();
-         const AddDays = 30 - daysDifference;
-        const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDate]);
+        //  const AddDays = 30 - daysDifference;
+        // const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+        const AddDays = 30 - daysDifference;
+subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+
+// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+function formatDateForSQL(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDateFormatted]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
