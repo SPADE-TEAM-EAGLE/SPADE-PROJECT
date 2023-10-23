@@ -672,19 +672,19 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     };
   }
   if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
-    const AddDays = 30 - daysDifference;
+    let AddDays = 30 - daysDifference;
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
     
     // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-    function formatDateForSQL(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    }
+    // function formatDateForSQL(date) {
+    //     const year = date.getFullYear();
+    //     const month = String(date.getMonth() + 1).padStart(2, '0');
+    //     const day = String(date.getDate()).padStart(2, '0');
+    //     const hours = String(date.getHours()).padStart(2, '0');
+    //     const minutes = String(date.getMinutes()).padStart(2, '0');
+    //     const seconds = String(date.getSeconds()).padStart(2, '0');
+    //     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    // }
 
     requestData.startAfter = {
         day: AddDays,
@@ -735,22 +735,22 @@ console.log("requestData.endAfter : ", requestData.startAfter);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
-          // const subscriptionDate = new Date();
+          const subscriptionDate = new Date();
         //  const AddDays = 30 - daysDifference;
         // const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-//         const AddDays = 30 - daysDifference;
-// subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+       AddDays = 30 - daysDifference;
+subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
 
-// // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-// function formatDateForSQL(date) {
-//   const year = date.getFullYear();
-//   const month = String(date.getMonth() + 1).padStart(2, '0');
-//   const day = String(date.getDate()).padStart(2, '0');
-//   const hours = String(date.getHours()).padStart(2, '0');
-//   const minutes = String(date.getMinutes()).padStart(2, '0');
-//   const seconds = String(date.getSeconds()).padStart(2, '0');
-//   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-// }
+// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+function formatDateForSQL(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
 const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
             const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDateFormatted]);
             if (result[0].affectedRows == 1) {
