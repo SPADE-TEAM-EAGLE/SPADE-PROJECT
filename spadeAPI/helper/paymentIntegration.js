@@ -413,6 +413,7 @@ exports.editPlanPayment = async (req, res) => {
 // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
+  const subscriptionDate = new Date(); 
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
@@ -494,6 +495,7 @@ exports.createSubscriptionPayment = async (req, res) => {
         const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
+          subscriptionDate,
           userTokenId
         ]);
         if (result[0].affectedRows == 1) {
@@ -557,6 +559,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     userTokenId,
     upoId,
     userNuveiId,
+    existPlanAmount,
     userId
   } = req.body;
 
@@ -605,24 +608,33 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     const day = subscriptionCreated_at.getDate();
     const month = subscriptionCreated_at.getMonth() + 1;
     const year = subscriptionCreated_at.getFullYear();
-
+    console.log(Currentday,day,Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual)
     if (
-      Currentmonth === month &&
-      Currentyear === year &&
+      Currentmonth == month &&
+      Currentyear == year &&
       planId > PlanID &&
-      monthlyAnnual === "Monthly"
+      monthlyAnnual == "Monthly"
     ) {
-      const remainingDays = Currentday - day;
-      let initialAmountChange = plantotalAmount / 30;
+      console.log("Monthly if in")
+      let remainingDays = Currentday - day;
+      console.log(remainingDays)
+      remainingDays = 30 - remainingDays;
+      console.log(remainingDays)
+      let initialAmountChange = existPlanAmount / 30;
+      console.log(initialAmountChange)
       initialAmountChange = remainingDays * initialAmountChange;
+      console.log(initialAmountChange)
+      console.log(requestData.initialAmount)
       initialAmountChange = requestData.initialAmount - initialAmountChange;
+      console.log(initialAmountChange)
       requestData.initialAmount = initialAmountChange;
+      
     }
   }
 
   console.log(monthlyAnnual);
 
-  if (monthlyAnnual === "Monthly") {
+  if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.001;
     requestData.recurringPeriod = {
       day: "0",
@@ -648,20 +660,21 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   }
 
   requestData.planId = nuveiId;
+  console.log(requestData);
   requestData.checksum = sha256(
     config.merchantId +
     config.merchantSiteId +
     userTokenId +
     nuveiId +
     upoId +
-    initialAmount +
+    requestData.initialAmount +
     requestData.recurringAmount +
     currency +
     timestamp +
     config.Secret_Key
   );
 
-  console.log(requestData);
+  
 
   const requestOptions = {
     method: "POST",
@@ -683,6 +696,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
           // console.log(userNuveiId + " " + "data.subscriptionId" + " " + subscriptionDate + " " + userTokenId);
           console.log(planId + " " + UserResult[0][0].PlanID);
           const data = JSON.parse(responseData);
+          console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
