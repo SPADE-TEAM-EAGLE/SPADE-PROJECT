@@ -7115,13 +7115,6 @@ Draft</button> -->
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
-
-                                                                                                            <div
-                                                                                                                class="underline">
-                                                                                                                <input
-                                                                                                                    id="amount"
-                                                                                                                    class="input form-control111" readonly>
-                                                                                                            </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="row"
@@ -7138,8 +7131,8 @@ Draft</button> -->
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
                                                                             </div>
+                                                                            
                                                                             <!-- New Account End  -->
 
                                                                             <!-- New Existing start  -->
@@ -7244,7 +7237,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div>                                                                            
                                                                             <!-- New Existing End  -->
                                                                         </div>
                                                                     </div>
@@ -13055,6 +13048,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
         </script>
         <script>
             var userId; var userData;
+            var currentSelectedId;
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
@@ -13648,6 +13642,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                     $(`#${item}`).removeClass("bg-primary");
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
+                                    currentSelectedId=response.planID
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [5, 6, 7].forEach(function (item) {
@@ -13680,6 +13675,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                     $(`#${item}`).removeClass("bg-primary");
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
+                                    currentSelectedId=response.planID
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [2, 3, 4].forEach(function (item) {
@@ -14671,6 +14667,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
+                    console.log(currentSelectedId)
+                    console.log(userData)
                     var time;
                     $(".nav-price li a").each(function () {
                         if ($(this).hasClass("active")) {
@@ -14763,7 +14761,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             // $(`.${card.id}`).each(function(){
                             //     this
                             // })
-                            console.log($(`#${card.id}`))
+                            
+                            if(currentSelectedId == card.id){
+                                
+                                userData.currentPrice=card.planDiscountedAmount
+                            }
                             // $(`#${card.id}`).css("bg-primary")
                             $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
@@ -14966,7 +14968,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $("#id_password_new").val("")
                             $("#id_password2").val("")
                             $("#current_password_reset").val("")
-
+                            $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal("hide");
@@ -15780,7 +15782,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                    url: 'http://localhost:3000/api/spade/cancelSubscription',
                                     type: 'POST',
                                     contentType: "application/json",
                                     data: JSON.stringify({
@@ -15791,8 +15793,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     },
 
                                     success: function (response) {
+                                        console.log(userData)
                                         $.ajax({
-                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
+                                            url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                             type: "POST",
                                             headers: {
                                                 Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15802,7 +15805,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 userNuveiId: userData.nuveiUserId,
                                                 planId: seletedPlanID,
                                                 upoId: res?.userPaymentOptionId,
-
+                                                existPlanAmount:userData.currentPrice,
                                                 currency: "USD",
                                                 recurringAmount: amount[0]?.value,
                                                 initialAmount: amount[0]?.value,
@@ -15811,7 +15814,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             contentType: "application/json",
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                    url: 'http://localhost:3000/api/spade/updatePlanId',
                                                     method: 'PUT',
                                                     data: JSON.stringify({ planID: seletedPlanID }),
                                                     contentType: 'application/json',
@@ -15886,7 +15889,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                    url: 'http://localhost:3000/api/spade/cancelSubscription',
                                     type: 'POST',
                                     contentType: "application/json",
                                     data: JSON.stringify({
@@ -15897,8 +15900,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     },
 
                                     success: function (response) {
+                                        console.log(userData)
                                         $.ajax({
-                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
+                                            url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                             type: "POST",
                                             headers: {
                                                 Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15908,7 +15912,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 userNuveiId: userData.nuveiUserId,
                                                 planId: seletedPlanID,
                                                 upoId: $("#account").val(),
-
+                                                existPlanAmount:userData.currentPrice,
                                                 currency: "USD",
                                                 recurringAmount: amount[0]?.value,
                                                 initialAmount: amount[0]?.value,
@@ -15917,7 +15921,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             contentType: "application/json",
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                    url: 'http://localhost:3000/api/spade/updatePlanId',
                                                     method: 'PUT',
                                                     data: JSON.stringify({ planID: seletedPlanID }),
                                                     contentType: 'application/json',

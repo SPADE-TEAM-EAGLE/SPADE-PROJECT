@@ -377,7 +377,7 @@ exports.editPlanPayment = async (req, res) => {
     }
   };
   // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-  const reqq = request("https://ppp-test.nuvei.com/ppp/api/editPlan.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -413,6 +413,7 @@ exports.editPlanPayment = async (req, res) => {
 // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
+  const subscriptionDate = new Date(); 
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
@@ -494,6 +495,7 @@ exports.createSubscriptionPayment = async (req, res) => {
         const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
+          subscriptionDate,
           userTokenId
         ]);
         if (result[0].affectedRows == 1) {
@@ -592,7 +594,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
-  let daysDifference;
+  let daysDifference
   if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
@@ -626,14 +628,20 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       planId > PlanID &&
       monthlyAnnual == "Monthly"
     ) {
-      console.log("Run") 
+      console.log("Monthly if in")
       let remainingDays = daysDifference;
-       remainingDays = 30 - remainingDays;
+      console.log(remainingDays)
+      remainingDays = 30 - remainingDays;
+      console.log(remainingDays)
       let initialAmountChange = existPlanAmount / 30;
+      console.log(initialAmountChange)
       initialAmountChange = remainingDays * initialAmountChange;
+      console.log(initialAmountChange)
+      console.log(requestData.initialAmount)
       initialAmountChange = requestData.initialAmount - initialAmountChange;
       console.log(initialAmountChange)
       requestData.initialAmount = initialAmountChange;
+      
     }
   }
 
@@ -687,6 +695,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 console.log("requestData.endAfter : ", requestData.startAfter);
 
   requestData.planId = nuveiId;
+  console.log(requestData);
   requestData.checksum = sha256(
     config.merchantId +
     config.merchantSiteId +
@@ -700,7 +709,7 @@ console.log("requestData.endAfter : ", requestData.startAfter);
     config.Secret_Key
   );
 
-  console.log(requestData);
+  
 
   const requestOptions = {
     method: "POST",
@@ -722,6 +731,7 @@ console.log("requestData.endAfter : ", requestData.startAfter);
           // console.log(userNuveiId + " " + "data.subscriptionId" + " " + subscriptionDate + " " + userTokenId);
           console.log(planId + " " + UserResult[0][0].PlanID);
           const data = JSON.parse(responseData);
+          console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
           console.log("planId"); 
@@ -800,8 +810,8 @@ exports.cancelSubscription = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
