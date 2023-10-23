@@ -182,8 +182,8 @@ exports.createUserPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -234,8 +234,8 @@ exports.getUserDetailsPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -305,8 +305,8 @@ exports.createPlanPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/createPlan.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
