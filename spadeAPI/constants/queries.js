@@ -919,6 +919,8 @@ exports.updateVerifiedStatusQuery =
   "UPDATE users SET userVerified = ? where id = ? ";
 exports.recurringInvoice =
   "SELECT * FROM invoice WHERE DATE(recurringNextDate) = CURDATE() AND CURDATE() BETWEEN startDate AND endDate ";
+exports.recurringPlan =
+  "SELECT * FROM futurePlanUser AS FPU JOIN users AS U ON FPU.landlordId = U.id WHERE DATE(fsubscriptionCreated_at) = CURDATE(); ";
   exports.recurringInvoiceCheck =
   "SELECT * FROM invoice WHERE DATE(created_at) = CURDATE() AND landlordID = ? AND tenantID = ? AND invoiceType = ? ";
 
@@ -1108,6 +1110,7 @@ exports.insertInUserPermissionUsers =
   exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";
   exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant) VALUES (?,?,?,?,?,?,?,?)";
   exports.updateUserBank = "UPDATE users SET nuveiId = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
+  exports.updateUserBankRecurring = "UPDATE users SET nuveiId = ?, PlanID = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateBankAccountStatusquery = "UPDATE bankAccount SET Active = ? WHERE UPOID = ?";
   exports.updateBankAccountquery = "UPDATE bankAccount SET UPOID = ?,accountName = ?,description = ?,Active = ?,updated_at = ? WHERE id = ?";
   exports.addUserRoles = "INSERT INTO userRoles (Urole, userId) VALUES (?,?)";
