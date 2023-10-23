@@ -557,7 +557,8 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     userTokenId,
     upoId,
     userNuveiId,
-    userId
+    userId,
+    existPlanAmount
   } = req.body;
 
   const subscriptionDate = new Date();  
@@ -594,35 +595,51 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   if (userTokenId) {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
-
     const subscriptionDate = new Date();
-    subscriptionDate.setMonth(subscriptionDate.getMonth());
-    const Currentday = subscriptionDate.getDate();
-    const Currentmonth = subscriptionDate.getMonth() + 1;
-    const Currentyear = subscriptionDate.getFullYear();
-
-    subscriptionCreated_at.setMonth(subscriptionCreated_at.getMonth());
-    const day = subscriptionCreated_at.getDate();
-    const month = subscriptionCreated_at.getMonth() + 1;
-    const year = subscriptionCreated_at.getFullYear();
-
+    
+    const currentDate = {
+      day: subscriptionDate.getDate(),
+      month: subscriptionDate.getMonth() + 1, 
+      year: subscriptionDate.getFullYear(),
+    };
+    const createdDate = {
+      day: subscriptionCreated_at.getDate(),
+      month: subscriptionCreated_at.getMonth() + 1,
+      year: subscriptionCreated_at.getFullYear(),
+    };
+    
+    // Calculate the difference in days
+    let daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    daysDifference = Math.max(0, Math.round(daysDifference));
+    
+    // Calculate the difference in months
+    let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
+    monthsDifference = Math.max(0, monthsDifference);
+    
+    // Calculate the difference in years
+    let yearsDifference = currentDate.year - createdDate.year;
+    yearsDifference = Math.max(0, yearsDifference);
+console.log(Currentmonth, month, Currentyear, year, planId ,PlanID, monthlyAnnual);
     if (
-      Currentmonth === month &&
-      Currentyear === year &&
+      Currentmonth == month &&
+      Currentyear == year &&
       planId > PlanID &&
-      monthlyAnnual === "Monthly"
+      monthlyAnnual == "Monthly"
     ) {
-      const remainingDays = Currentday - day;
-      let initialAmountChange = plantotalAmount / 30;
+      console.log("Run")     // 27          1 
+      let remainingDays = daysDifference;
+       remainingDays = 30 - remainingDays;
+      let initialAmountChange = existPlanAmount / 30;
       initialAmountChange = remainingDays * initialAmountChange;
       initialAmountChange = requestData.initialAmount - initialAmountChange;
+      console.log(initialAmountChange)
       requestData.initialAmount = initialAmountChange;
     }
   }
 
   console.log(monthlyAnnual);
 
-  if (monthlyAnnual === "Monthly") {
+  if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.001;
     requestData.recurringPeriod = {
       day: "0",
@@ -654,7 +671,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     userTokenId +
     nuveiId +
     upoId +
-    initialAmount +
+    requestData.initialAmount +
     requestData.recurringAmount +
     currency +
     timestamp +
