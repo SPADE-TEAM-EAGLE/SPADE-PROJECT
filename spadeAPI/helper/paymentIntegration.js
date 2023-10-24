@@ -687,10 +687,15 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     // }
 
     requestData.startAfter = {
-        day: AddDays,
-        month: "0",
+        day: "1",
+        month: "1",
         year: "0"
     };
+    requestData.endAfter = {
+      day: "1",
+      month: "2",
+      year: "0"
+  };
 }
 console.log("requestData.endAfter : ", requestData.startAfter);
 

@@ -6959,7 +6959,30 @@ Draft</button> -->
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
 
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
-
+                                                    <div class="modal fade" id="downgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close" class="btn-close position-absolute mt-0" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                                                                    
+                                                                    <h4 class="text-dark tx-semibold">The downgrade will take effect at the end of the month.</h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue, please continue. If not, then cancel.</p><button aria-label="Close" class="btn btn-primary pd-x-25" data-bs-dismiss="modal" id="approve-downgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="upgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close" class="btn-close position-absolute mt-0" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                                                                    
+                                                                    <h4 class="text-dark tx-semibold">The upgarde will be immidiate. Your paid amount will be adjusted </h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue, please continue. If not, then cancel.</p><button aria-label="Close" class="btn btn-primary pd-x-25" data-bs-dismiss="modal" id="approve-upgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="modal fade" id="upgradetopro" tabindex="-1"
                                                         role="dialog">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable"
@@ -14662,12 +14685,16 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     });
                 });
-
+                $("#approve-downgrade").click(function(){
+                    $("#downgradeConfirm").modal("hide")
+                    $("#upgradetopro").modal("show")
+                })
                 // Attach a click event listener to each button
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
                     console.log(currentSelectedId)
+                        
                     console.log(userData)
                     var time;
                     $(".nav-price li a").each(function () {
@@ -14680,6 +14707,18 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                         }
                     })
+                    if(time == "Month" && currentSelectedId >cardId){
+                        $("#payment-month").text("Year")
+                    $("#payment-month").text(time)
+                    $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                    var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                    seletedPlanID = cardId
+                    $("#upgradetopro #amount").val(amount)
+                    $("#upgradetopro #payment-amount").text(amount)
+                    $("#upgradetopro #payment-total").text(amount)
+                    $("#downgradeConfirm").modal("show")
+                    }else{
+                        $("#payment-month").text("Year")
                     $("#payment-month").text(time)
                     $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                     var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
@@ -14688,6 +14727,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     $("#upgradetopro #payment-amount").text(amount)
                     $("#upgradetopro #payment-total").text(amount)
                     $("#upgradetopro").modal("show")
+                    }
+                        
                 });
 
                 var file;
