@@ -210,15 +210,16 @@ const Plan = cron.schedule('1 0 * * *', async () => {
   if (selectPlanResult[0].length > 0) {
     console.log("user Plan is found");
     for (let i = 0; i < selectPlanResult[0].length; i++) {
+      const id = selectPlanResult[0][i].id;
       const fuserNuveiId = selectPlanResult[0][i].fuserNuveiId;
       const fplanId = selectPlanResult[0][i].fplanId;
       const fsubscriptionId = selectPlanResult[0][i].fsubscriptionId;
       const fuserTokenId = selectPlanResult[0][i].fuserTokenId;
       const fsubscriptionCreated_at = selectPlanResult[0][i].fsubscriptionCreated_at;
-      // console.log(fuserNuveiId, fplanId, fsubscriptionId, fsubscriptionCreated_at, fuserTokenId);
       const result = await queryRunner(updateUserBankRecurring, [fuserNuveiId, fplanId, fsubscriptionId, fsubscriptionCreated_at, fuserTokenId]);
       if (result[0].affectedRows == 1) {
-        console.log("Plan user Exist");
+        // const DeleteResult = await queryRunner(deleteQuery("futurePlanUser", "id"),[id]);
+
       }
     }
   }

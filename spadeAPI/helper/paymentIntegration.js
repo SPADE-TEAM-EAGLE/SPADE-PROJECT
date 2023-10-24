@@ -692,8 +692,8 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       year: "0"
   };
   requestData.recurringPeriod = {
-    day: AddDays - 1,
-    month: "1",
+    day: AddDays,
+    month: "0",
     year: "0"
   };
   requestData.endAfter = {
@@ -703,7 +703,6 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 };
 }
 console.log("requestData.endAfter : ", requestData.startAfter);
-
   requestData.planId = nuveiId;
   console.log(requestData);
   requestData.checksum = sha256(
@@ -718,9 +717,6 @@ console.log("requestData.endAfter : ", requestData.startAfter);
     timestamp +
     config.Secret_Key
   );
-
-  
-
   const requestOptions = {
     method: "POST",
     headers: {
@@ -788,7 +784,6 @@ const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
       });
     }
   );
-
   reqq.on("error", (error) => {
     console.error("Error sending request:", error);
     res.status(400).json({
@@ -796,11 +791,9 @@ const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
       error,
     });
   });
-
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-
 // ###################################### Create Subsription #############################################################
 
 
