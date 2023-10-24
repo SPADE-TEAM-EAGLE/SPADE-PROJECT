@@ -2666,7 +2666,9 @@
         getData()
     </script> -->
     <script>
+        var categoryData;var landlordId;
         $(document).ready(() => {
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
@@ -2681,6 +2683,7 @@
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
+                        landlordId=response.landlordID
                         $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
                     $("#header-user").text(toTitleCase(response.userName))
@@ -2700,6 +2703,29 @@
                 }
             });
             
+            $.ajax({
+                        url: 'http://localhost:3000/api/spade/invoiceCategoryTenant',
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        contentType: "application/json",
+                        data:JSON.stringify({
+                            "userId":"245"
+                        }),
+                        success: async function (response) {
+                            console.log(response)
+                            categoryData = response.data
+
+                            
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
+
             // console.log(1222222)
             let invoiceData;
             let tenantData
@@ -2750,6 +2776,7 @@ console.log(data)
                         // Add the tax amount to the totalTaxAmount variable
                         totalTaxAmount += taxAmount;
                         let categoryname;
+                        console.log(categoryData)
                         if (item.category == "rent") {
                             categoryname = "Rent Amount"
                         } else if (item.category == "triple") {

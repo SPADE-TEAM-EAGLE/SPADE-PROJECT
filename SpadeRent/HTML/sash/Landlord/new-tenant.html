@@ -3109,7 +3109,7 @@ color: #000;
             // $("#succesModal").modal("show")
             let tenantID;
             $("#send-email-invite").click(() => {
-                    
+                    $("#preloader").css("display", "flex");
                     console.log(tenantID)
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
@@ -3123,14 +3123,15 @@ color: #000;
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function(response) {
-                            $("#succesModal").modal("show")
-                            setTimeout(function() {
+                            $("#preloader").css("display", "none");
+                            
                                 $('#succesModal').modal('hide');
                                 window.location = './add-tenant.html'
-                            }, 2000);
+                            
                             
                         },
                         error: function(xhr, status, error) {
+                            $("#preloader").css("display", "none");
                             // Handle the error response
                             console.log(xhr)
                             console.log(status)

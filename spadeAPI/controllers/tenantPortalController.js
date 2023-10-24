@@ -515,3 +515,25 @@ exports.updateAuthTenant = async (req, res) => {
     });
   }
 };
+exports.getInvoiceCategoriesTenant = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    console.log(req.body)
+    const invoiceImagecheckresult = await queryRunner(
+      selectQuery("InvoiceCategories", "landLordId"),
+      [userId]
+    );
+    if (invoiceImagecheckresult[0].length > 0) {
+      res.status(200).json({
+        data: invoiceImagecheckresult[0],
+      });
+    } else {
+      res.status(400).json({
+        message: "No data found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send("Error from create invoice categories"+error);
+  }
+};
