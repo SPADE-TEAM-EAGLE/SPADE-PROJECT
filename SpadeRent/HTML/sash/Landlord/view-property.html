@@ -2589,7 +2589,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     );
                 } else {
                     // Handle S3 bucket URLs for images and PDFs
-                    if (file?.image_key?.endsWith('.jpg') || file?.image_key?.endsWith('.png')) {
+                    if (file?.image_key?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.image_key?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.image_url))
