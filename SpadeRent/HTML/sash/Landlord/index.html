@@ -2251,14 +2251,16 @@
         const currentDate = new Date();
         const oneMonthAgo = new Date(currentDate);
         oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-
+        const endDateTenant = new Date(currentDate);
+endDateTenant.setDate(endDateTenant.getDate() + 1);
+endDateTenantFormatted = formatDate(endDateTenant);
         startDate = formatDate(oneMonthAgo); // Format the date if needed
         endDate = formatDate(currentDate);
         $(document).ready(() => {
             $("#startDate_invoice").val(startDate)
-            $("#endDate_invoice").val(endDate)
+            $("#endDate_invoice").val(endDateTenantFormatted)
             $("#startDate_tenant").val(startDate)
-            $("#endDate_tenant").val(endDate)
+            $("#endDate_tenant").val(endDateTenantFormatted);
             $("#startDate_task").val(startDate)
             $("#endDate_task").val(endDate)
             $("#startDate_property").val(startDate)
@@ -2939,7 +2941,7 @@
                 }
             });
             $.ajax({
-                url: `https://backend.app.spaderent.com/api/spade/TenantStatusCP/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/TenantStatusCP/${startDate}/${endDateTenantFormatted}`,
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3191,7 +3193,7 @@
             // });
             
             $.ajax({
-                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDateTenantFormatted}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
