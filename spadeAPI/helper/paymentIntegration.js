@@ -622,7 +622,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     // Calculate the difference in years
     let yearsDifference = currentDate.year - createdDate.year;
     yearsDifference = Math.max(0, yearsDifference);
-    if (
+    if                                                                                                              (
       currentDate.month == createdDate.month &&
       currentDate.year == createdDate.year &&
       planId > PlanID &&
