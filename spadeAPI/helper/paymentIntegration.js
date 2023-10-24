@@ -676,26 +676,31 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
     
     // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-    // function formatDateForSQL(date) {
-    //     const year = date.getFullYear();
-    //     const month = String(date.getMonth() + 1).padStart(2, '0');
-    //     const day = String(date.getDate()).padStart(2, '0');
-    //     const hours = String(date.getHours()).padStart(2, '0');
-    //     const minutes = String(date.getMinutes()).padStart(2, '0');
-    //     const seconds = String(date.getSeconds()).padStart(2, '0');
-    //     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    // }
+    function formatDateForSQL(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
 
     requestData.startAfter = {
-        day: "1",
-        month: "1",
-        year: "0"
-    };
-    requestData.endAfter = {
-      day: "1",
-      month: "2",
+      day: AddDays,
+      month: "0",
       year: "0"
   };
+  requestData.recurringPeriod = {
+    day: AddDays - 1,
+    month: "1",
+    year: "0"
+  };
+  requestData.endAfter = {
+    day: AddDays,
+    month: "1",
+    year: "0"
+};
 }
 console.log("requestData.endAfter : ", requestData.startAfter);
 
@@ -747,15 +752,15 @@ console.log("requestData.endAfter : ", requestData.startAfter);
 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
 
 // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-function formatDateForSQL(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const seconds = String(date.getSeconds()).padStart(2, '0');
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
+// function formatDateForSQL(date) {
+//   const year = date.getFullYear();
+//   const month = String(date.getMonth() + 1).padStart(2, '0');
+//   const day = String(date.getDate()).padStart(2, '0');
+//   const hours = String(date.getHours()).padStart(2, '0');
+//   const minutes = String(date.getMinutes()).padStart(2, '0');
+//   const seconds = String(date.getSeconds()).padStart(2, '0');
+//   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+// }
 const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
             const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDateFormatted]);
             if (result[0].affectedRows == 1) {
