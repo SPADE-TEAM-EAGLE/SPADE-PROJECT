@@ -622,7 +622,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     // Calculate the difference in years
     let yearsDifference = currentDate.year - createdDate.year;
     yearsDifference = Math.max(0, yearsDifference);
-    if (
+    if                                                                                                              (
       currentDate.month == createdDate.month &&
       currentDate.year == createdDate.year &&
       planId > PlanID &&
@@ -648,7 +648,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   console.log(monthlyAnnual);
 
   if (monthlyAnnual == "Monthly") {
-    requestData.recurringAmount = 0.001;
+    requestData.recurringAmount = 0.00001;
     requestData.recurringPeriod = {
       day: "0",
       month: "1",
@@ -692,9 +692,9 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       year: "0"
   };
   requestData.recurringPeriod = {
-    day: AddDays,
-    month: "0",
-    year: "0"
+    day: AddDays-1,
+      month: "0",
+      year: "0"
   };
   requestData.endAfter = {
     day: AddDays,
@@ -711,12 +711,15 @@ console.log("requestData.endAfter : ", requestData.startAfter);
     userTokenId +
     nuveiId +
     upoId +
-    requestData.initialAmount +
+    (Math.round(requestData.initialAmount*10)/10) +
     requestData.recurringAmount +
     currency +
     timestamp +
     config.Secret_Key
   );
+
+  
+  requestData.initialAmount = Math.round(requestData.initialAmount * 10) / 10;
   const requestOptions = {
     method: "POST",
     headers: {
