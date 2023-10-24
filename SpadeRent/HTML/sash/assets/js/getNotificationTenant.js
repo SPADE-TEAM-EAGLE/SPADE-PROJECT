@@ -62,7 +62,7 @@ function GetNotification() {
       notification?.forEach((item) => {
         // read-notification-container
         if (item.invoiceID) {
-          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${item.invoiceID
             }">
@@ -74,20 +74,20 @@ function GetNotification() {
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
-                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
-            }</div> <span class="text-dark"> ${item.Address} > ${item.city
-            }</span>
-                        <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">New Invoice</div> <span class="text-dark"> ${item.invoiceType}</span>
+                        <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount}</p>
+                        <p class="mb-0 fw-bold text-dark fs-15 ">Sent by: ${item.landlordFirstName
+                        }</p>
                     </a>
                 </div>
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
               </div></div>`
           );
         } else if (item.propertyID) {
-          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${item.propertyID
             }">
@@ -107,13 +107,13 @@ function GetNotification() {
                     </a>
                 </div>
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
              </div></div>`
           );
         } else if (item.taskID) {
-          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${item.taskID
             }">
@@ -125,7 +125,7 @@ function GetNotification() {
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
-                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
+                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.taskName
             }</div> <span class="text-dark">${item.priority} | ${item.status
             }</span>
                         <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
@@ -133,7 +133,7 @@ function GetNotification() {
                 </div>
                 
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
             </div></div>`
@@ -155,14 +155,14 @@ function GetNotification() {
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
-                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
-            }</div> <span class="text-dark"> ${item.Address} > ${item.city
-            }</span>
-                        <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">New Invoice</div> <span class="text-dark"> ${item.invoiceType}</span>
+            <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount}</p>
+            <p class="mb-0 fw-bold text-dark fs-15 ">Sent by: ${item.landlordFirstName
+            }</p>
                     </a>
                 </div>
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
               </div></div>`
@@ -187,7 +187,7 @@ function GetNotification() {
                     </a>
                 </div>
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
              </div></div>`
@@ -204,7 +204,7 @@ function GetNotification() {
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
-                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
+                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.taskName
             }</div> <span class="text-dark">${item.priority} | ${item.status
             }</span>
                         <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
@@ -212,7 +212,7 @@ function GetNotification() {
                 </div>
                 
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
             </div></div>`
@@ -239,14 +239,14 @@ function GetNotification() {
                         </div>
                         <div class="">
                             <a href="javascript:void(0);">
-                                <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
-            }</div> <span class="text-dark"> ${item.Address
-            } > ${item.city}</span>
-                                <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                                <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">New Invoice</div> <span class="text-dark"> ${item.invoiceType}</span>
+            <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount}</p>
+            <p class="mb-0 fw-bold text-dark fs-15 ">Sent by: ${item.landlordFirstName
+            }</p>
                             </a>
                         </div>
                     </div><div class="">
-                    <span class="fs-12 text-dark">${convertTimestamp(
+                    <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
                       </div></div>`
@@ -276,7 +276,7 @@ function GetNotification() {
                     </a>
                 </div>
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
              </div></div>`
@@ -298,7 +298,7 @@ function GetNotification() {
                 </div>
                 <div class="">
                     <a href="javascript:void(0);">
-                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.landlordFirstName
+                        <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${item.taskName
             }</div> <span class="text-dark">${item.priority} | ${item.status
             }</span>
                         <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
@@ -306,7 +306,7 @@ function GetNotification() {
                 </div>
                 
             </div><div class="">
-            <span class="fs-12 text-dark">${convertTimestamp(
+            <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
               item.created_at
             )}</span>
             </div></div>`

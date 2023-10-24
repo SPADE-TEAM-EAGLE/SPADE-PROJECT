@@ -57,7 +57,7 @@ function GetNotification(){
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-        // read-notification-container
+        // read-notification-container 
         if (item.invoiceID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
   
@@ -78,11 +78,11 @@ function GetNotification(){
                       }</div> <span class="text-dark"> ${item.Address} > ${
               item.city
             }</span>
-                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
                   </a>
               </div>
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
             </div></div>`
@@ -112,7 +112,7 @@ function GetNotification(){
                   </a>
               </div>
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
            </div></div>`
@@ -141,7 +141,7 @@ function GetNotification(){
               </div>
               
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
           </div></div>`
@@ -170,7 +170,7 @@ function GetNotification(){
               </div>
               
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.tenantCreated_at
           )}</span> 
           </div></div>`
@@ -203,11 +203,11 @@ function GetNotification(){
                       }</div> <span class="text-dark"> ${item.Address} > ${
               item.city
             }</span>
-                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
                   </a>
               </div>
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
             </div></div>`
@@ -236,7 +236,7 @@ function GetNotification(){
                   </a>
               </div>
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
            </div></div>`
@@ -264,7 +264,7 @@ function GetNotification(){
               </div>
               
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
           </div></div>`
@@ -297,7 +297,7 @@ function GetNotification(){
             </div>
             
         </div><div class="">
-        <span class="fs-12 text-dark">${convertTimestamp(item.created_at)}</span>
+        <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(item.created_at)}</span>
         </div></div>`
           );
           $(".notification-item").on("click", function () {
@@ -328,11 +328,11 @@ function GetNotification(){
                               }</div> <span class="text-dark"> ${
               item.Address
             } > ${item.city}</span>
-                              <p class="mb-0 fw-bold text-dark fs-15 ">$ ${0} Received</p>
+                              <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
                           </a>
                       </div>
                   </div><div class="">
-                  <span class="fs-12 text-dark">${convertTimestamp(
+                  <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
                     item.created_at
                   )}</span>
                     </div></div>`
@@ -366,7 +366,7 @@ function GetNotification(){
                   </a>
               </div>
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
            </div></div>`
@@ -399,7 +399,7 @@ function GetNotification(){
               </div>
               
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
           )}</span>
           </div></div>`
@@ -432,7 +432,7 @@ function GetNotification(){
               </div>
               
           </div><div class="">
-          <span class="fs-12 text-dark">${convertTimestamp(
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.tenantCreated_at
           )}</span>
           </div></div>`

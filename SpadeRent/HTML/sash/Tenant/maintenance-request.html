@@ -1338,7 +1338,7 @@
                     </li> -->
                     <a href="settings.html">
                         <li class="slide">
-                            <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                            <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                 <div class="card-header pb-0 border-bottom-0">
                                     <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                     <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
@@ -1453,7 +1453,7 @@
                    ">&nbsp;&nbsp; Your next payment of $0 is due on N/A&emsp;<a href="#"
                                             class="btn btn-primary btn-pill" data-bs-target="#closeaccount"
                                             data-bs-toggle="modal">Pay Now</a></span></div>
-                                <div style="display: flex; align-items: center;"><span
+                                <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span
                                         class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
                                          <br>&nbsp;&nbsp; </span>
                                 </div>
@@ -1523,9 +1523,9 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn"
                                             data-bs-toggle="dropdown"><i class="typcn typcn-filter me-2"></i><strong
-                                                id="Filter-btn" style="border: none;">Filter</strong></button>
+                                                id="Filter-btn" style="border: none;">Sort</strong></button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="javascript:void(0)"><strong>Filter by:</strong></a>
+                                            <li><a href="javascript:void(0)"><strong>Sort by:</strong></a>
                                             </li>
                                             <li class="d-flex justify-content-between"><a
                                                     href="javascript:void(0)">A-Z Alphabets</a>
@@ -1574,7 +1574,7 @@
                                             <button class="btn px-0 pt-2"><i class="fe fe-search"
                                                     aria-hidden="true"></i></button>
                                             <input type="text" class="form-control" id="typehead"
-                                                placeholder="Search for results..." autocomplete="off"
+                                                placeholder="Search" autocomplete="off"
                                                 style="width: 230px;">
                                         </div>
                                     </div>
@@ -2035,7 +2035,7 @@
                             });
                         }
                         $("#tenant-address").empty()
-                    $("#tenant-address").append(`&nbsp;&nbsp;  <br>&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
+                    $("#tenant-address").append(`&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
                     $("#header-user").text(toTitleCase(response.userName))
                     $("#tenant-name").empty()
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)

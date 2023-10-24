@@ -1486,7 +1486,7 @@
         .settings-icon {
             border: 0px solid transparent;
             border-radius: 36px;
-            padding: 11px 15px;
+            padding: 10px 15px;
             font-size: 20px;
         }
 
@@ -3403,7 +3403,6 @@ Draft</button> -->
                                             </div>
                                         </div> -->
                                         <!-- LOGO -->
-
                                         <!-- COUNTRY -->
                                         <div class="d-flex country mt-2">
                                             <a class="nav-link icon theme-layout nav-link-bg layout-setting1">
@@ -3601,7 +3600,7 @@ Draft</button> -->
                         </li> -->
                             <a href="settings.html" class="text-dark">
                                 <li class="slide">
-                                    <div class="M-0 mt-3 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                    <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                         <div class="card-header pb-0 border-bottom-0">
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                             <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
@@ -6959,7 +6958,30 @@ Draft</button> -->
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
 
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
-
+                                                    <div class="modal fade" id="downgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close" class="btn-close position-absolute mt-0" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                                                                    
+                                                                    <h4 class="text-dark tx-semibold">The downgrade will take effect at the end of the month.</h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue, please continue. If not, then cancel.</p><button aria-label="Close" class="btn btn-primary pd-x-25" data-bs-dismiss="modal" id="approve-downgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="upgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close" class="btn-close position-absolute mt-0" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                                                                    
+                                                                    <h4 class="text-dark tx-semibold">The upgarde will be immidiate. Your paid amount will be adjusted </h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue, please continue. If not, then cancel.</p><button aria-label="Close" class="btn btn-primary pd-x-25" data-bs-dismiss="modal" id="approve-upgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="modal fade" id="upgradetopro" tabindex="-1"
                                                         role="dialog">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable"
@@ -7292,13 +7314,12 @@ Draft</button> -->
                                                     </div>
 
                                                     <div class="row mt-5">
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-12">
                                                             <div class="card card-color card-primary">
                                                                 <div class="card-body">
                                                                     <div class="row" style="align-items: center;">
-                                                                        <div class="col-xl-6 col-sm-6 col-md-12">
-                                                                            <div
-                                                                                style="display: flex; align-items: center;">
+                                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                                            <div class="close-account-mobile-resp">
                                                                                 <span
                                                                                     class="settings-icon bg-primary-transparent text-primary"><img
                                                                                         src="../assets/images/logo_loginmodule.png"></span>
@@ -7318,8 +7339,7 @@ Draft</button> -->
                                                                                 invoice</p>
 
                                                                         </div>
-                                                                        <div class="col-xl-6 col-sm-6 col-md-12"
-                                                                            style="display: flex; justify-content: end;">
+                                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 close-account-btn-mobile-resp">
                                                                             <button
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
                                                                                 data-bs-target="#closeaccount"
@@ -11218,7 +11238,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6"></div>
-                                                        <div class="col-lg-3 mt-4"
+                                                        <div class="col-lg-3 col-sm-12 col-12 mt-4"
                                                             style="display: flex; width: auto; justify-content: space-evenly;">
                                                             <a href="index.html">
                                                                 <button
@@ -11460,7 +11480,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                                 id="add-item5">+Add New Vendor</a>
                                                         </div>
                                                         <div class="col-lg-5"></div>
-                                                        <div class="col-lg-3 mt-4"
+                                                        <div class="col-lg-3 col-sm-12 col-12 mt-4"
                                                             style="display: flex; width: auto; justify-content: space-evenly;">
                                                             <a href="index.html">
                                                                 <button
@@ -13002,6 +13022,8 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                 });
                 $('.layout-setting11').on("click", function (e) {
                     $('.layout-setting1').removeClass('d-none');
+                    $(this).addClass('activee')
+                    $('.layout-setting22').removeClass('activee')
                     $('body').addClass('dark-mode');
                     $('body').removeClass('light-mode');
                     $('body').removeClass('transparent-mode');
@@ -13029,6 +13051,8 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                 });
                 $('.layout-setting22').on("click", function (e) {
                     $('.layout-setting1').removeClass('d-none');
+                    $(this).addClass('activee')
+                    $('.layout-setting11').removeClass('activee')
 
                     $('body').removeClass('dark-mode');
                     $('body').addClass('light-mode');
@@ -14662,12 +14686,16 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     });
                 });
-
+                $("#approve-downgrade").click(function(){
+                    $("#downgradeConfirm").modal("hide")
+                    $("#upgradetopro").modal("show")
+                })
                 // Attach a click event listener to each button
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
                     console.log(currentSelectedId)
+                        
                     console.log(userData)
                     var time;
                     $(".nav-price li a").each(function () {
@@ -14680,6 +14708,18 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                         }
                     })
+                    if(time == "Month" && currentSelectedId >cardId){
+                        $("#payment-month").text("Year")
+                    $("#payment-month").text(time)
+                    $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                    var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                    seletedPlanID = cardId
+                    $("#upgradetopro #amount").val(amount)
+                    $("#upgradetopro #payment-amount").text(amount)
+                    $("#upgradetopro #payment-total").text(amount)
+                    $("#downgradeConfirm").modal("show")
+                    }else{
+                        $("#payment-month").text("Year")
                     $("#payment-month").text(time)
                     $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                     var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
@@ -14688,6 +14728,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     $("#upgradetopro #payment-amount").text(amount)
                     $("#upgradetopro #payment-total").text(amount)
                     $("#upgradetopro").modal("show")
+                    }
+                        
                 });
 
                 var file;
@@ -15782,7 +15824,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                     type: 'POST',
                                     contentType: "application/json",
                                     data: JSON.stringify({
@@ -15795,7 +15837,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     success: function (response) {
                                         console.log(userData)
                                         $.ajax({
-                                            url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                             type: "POST",
                                             headers: {
                                                 Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15814,7 +15856,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             contentType: "application/json",
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'http://localhost:3000/api/spade/updatePlanId',
+                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                     method: 'PUT',
                                                     data: JSON.stringify({ planID: seletedPlanID }),
                                                     contentType: 'application/json',
@@ -15889,7 +15931,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                     type: 'POST',
                                     contentType: "application/json",
                                     data: JSON.stringify({
@@ -15902,7 +15944,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     success: function (response) {
                                         console.log(userData)
                                         $.ajax({
-                                            url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                             type: "POST",
                                             headers: {
                                                 Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15921,7 +15963,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             contentType: "application/json",
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'http://localhost:3000/api/spade/updatePlanId',
+                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                     method: 'PUT',
                                                     data: JSON.stringify({ planID: seletedPlanID }),
                                                     contentType: 'application/json',
