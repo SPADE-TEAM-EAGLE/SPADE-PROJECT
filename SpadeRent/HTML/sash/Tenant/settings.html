@@ -989,6 +989,51 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_warning_declined" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark">Payment declined, Credentials not correct!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="successfully_changed" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+
+                            <p class="card-text text-dark" id="successfully_changed_text"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -2193,7 +2238,7 @@
                                                     accounting, and more.</p>
                                                 <hr style="background-color: #D3D3D3;">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6" id="input-account">
                                                         <div class="row mt-5">
                                                             <!-- radio button start  -->
 
@@ -2203,21 +2248,21 @@
                                                                     style="display: flex; justify-content: space-between;">
                                                                     <label class="custom-control custom-radio"> <input
                                                                             type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="creditcard"
+                                                                            name="creditcard" id="creditcardd"
                                                                             value="Credit-Card" checked="checked"> <span
                                                                             class="custom-control-label"><b>Credit
                                                                                 Card</b></span> </label>
 
                                                                     <label class="custom-control custom-radio"> <input
                                                                             type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="debitcard"
+                                                                            name="creditcard" id="debitcardd"
                                                                             value="Debit-Card"> <span
                                                                             class="custom-control-label"><b>Debit
                                                                                 Card</b></span> </label>
 
                                                                     <!-- <label class="custom-control custom-radio"> <input
                                                                             type="radio" class="custom-control-input"
-                                                                            name="creditcard" id="ach" value="ACH">
+                                                                            name="creditcard" id="achh" value="ACH">
                                                                         <span
                                                                             class="custom-control-label"><b>ACH</b></span>
                                                                     </label> -->
@@ -2236,34 +2281,74 @@
                                                             <div class="desc Credit-Card Debit-Card">
                                                                 <div class="form-row" id="credit-card">
                                                                     <div class="col-xl-6 mb-5 mt-5">
-                                                                        <input type="number" class="form-control"
-                                                                            id="card-holder-name"
-                                                                            placeholder="Card Holder Name" required>
+                                                                        <input type="text" class="form-control"
+                                                                            id="accountName"
+                                                                            placeholder="Account Name" required>
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                     </div>
                                                                     <div class="col-xl-6 mb-5 mt-5">
-                                                                        <input type="date" class="form-control"
-                                                                            id="card-date" placeholder="Clark" required>
+                                                                        <!-- <input type="date" class="form-control"
+                                                                            id="card-date" placeholder="Clark" required> -->
+                                                                            <div id="card-expiry"
+                                                                                    class="input empty form-control" style="padding: 8px 0px 12px 12px;">
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="underline">
+                                                                                </div>
                                                                     </div>
-                                                                    <div class="col-xl-12 mb-5">
-                                                                        <input type="number" class="form-control"
-                                                                            id="card-number" placeholder="Card Number"
-                                                                            required>
+                                                                    <div class="col-xl-12 mb-5 mt-5">
+                                                                        <!-- <input type="number" class="form-control"
+                                                                            id="card-numberr" placeholder="Card Number"
+                                                                            required> -->
+                                                                            <div
+                                                                                class="field form-group">
+                                                                                <label
+                                                                                    class="fw-bold"
+                                                                                    for="card-number"
+                                                                                    data-tid="scwsdk.form.card_number_label" style="display: none;">
+                                                                                    Card
+                                                                                    number
+                                                                                </label>
+                                                                                <div id="card-number"
+                                                                                    class="input form-control" style="padding: 8px 0px 12px 12px;">
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="underline">
+
+                                                                                </div>
+                                                                            </div>
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                         <img src="../assets/images/viza.png" alt=""
-                                                                            style="display: flex; margin-top: -30px; float: right;">
+                                                                            style="display: flex; margin-top: -44px; float: right;">
                                                                     </div>
 
                                                                     <div class="col-xl-6 mb-5">
-                                                                        <input type="text" class="form-control" id="cvv"
+                                                                        <!-- <input type="text" class="form-control" id="cvv"
                                                                             placeholder="CVV" required>
-                                                                        <div class="valid-feedback">Looks good!</div>
+                                                                        <div class="valid-feedback">Looks good!</div> -->
+                                                                        <div id="card-cvc"
+                                                                        class="input empty form-control" style="padding: 8px 0px 12px 12px;">
                                                                     </div>
-                                                                    <div class="col-xl-6 mb-5">
-                                                                        <input type="number" class="form-control"
-                                                                            id="billing-zip-code"
-                                                                            placeholder="Billing Zip Code" required>
-                                                                        <div class="valid-feedback">Looks good!</div>
+
+                                                                    <div
+                                                                        class="underline ">
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-5">
+                                                                        <!-- <label>Description <span class="text-danger">*</span></label> -->
+                                                                        <input type="text" class="form-control"
+                                                                            id="description-bank"
+                                                                            placeholder="Description..." required>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-5">
+                                                                        <label>Account level <span class="text-danger">*</span></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="level" readonly
+                                                                            placeholder="Primary..." required>
+                                                                        
                                                                     </div>
                                                                     <div class="col-lg-12">
                                                                         <div class="row">
@@ -2272,12 +2357,13 @@
                                                                                 <button
                                                                                     class="btn btn-light btn-pill m-2">Close</button>
                                                                                 <button
-                                                                                    class="btn btn-primary btn-pill m-2">Save</button>
+                                                                                    class="btn btn-primary btn-pill m-2" id="save-tenant-bank" onclick="main()">Save</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
 
                                                             <!-- credit card debit card End  -->
 
@@ -2340,67 +2426,13 @@
 
                                                     </div>
                                                     <div class="col-lg-1"></div>
-                                                    <div class="col-md-5 col-xl-5">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <h1 class="card-title card-title-primary">Primary
-                                                                    Payment Info</h1>
-                                                                <div class="card-options">
-                                                                    <label class="custom-switch m-0"> <input
-                                                                            type="radio" name="radioo"
-                                                                            class="custom-switch-input" checked="">
-                                                                        <span class="custom-switch-indicator"></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <label class="card-holder"><b>Card Holder Name:</b>
-                                                                    Raza Marchant</label> <br>
-                                                                <label class="card-holder"><b>Date of Expiry:</b>
-                                                                    April-03-2028</label> <br>
-                                                                <label class="card-holder"><b>Card Number:</b>
-                                                                    XXXXXXXXXXXXXXX</label><br>
-                                                                <label class="card-holder"><b>CVV:</b> XXX</label>
-                                                                <br>
-                                                                <label class="card-holder"><b>Billing Zip Code:</b>
-                                                                    XXXXX</label>
-                                                            </div>
-                                                            <div class="footer">
-                                                                <a href="#" style="float: right;">Edit Details</a>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-md-5 col-xl-5" id="primary-card">
+                                                        
                                                     </div>
 
                                                     <div class="col-lg-7"></div>
-                                                    <div class="col-md-5 col-xl-5">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <h1 class="card-title card-title-primary1">Secondary
-                                                                    Payment Info</h1>
-                                                                <div class="card-options">
-                                                                    <label class="custom-switch m-0"> <input
-                                                                            type="radio" name="radioo"
-                                                                            class="custom-switch-input"> <span
-                                                                            class="custom-switch-indicator"></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <label class="card-holder"><b>Card Holder Name:</b>
-                                                                    Raza Marchant</label> <br>
-                                                                <label class="card-holder"><b>Date of Expiry:</b>
-                                                                    April-03-2028</label> <br>
-                                                                <label class="card-holder"><b>Card Number:</b>
-                                                                    XXXXXXXXXXXXXXX</label><br>
-                                                                <label class="card-holder"><b>CVV:</b> XXX</label>
-                                                                <br>
-                                                                <label class="card-holder"><b>Billing Zip Code:</b>
-                                                                    XXXXX</label>
-                                                            </div>
-                                                            <div class="footer">
-                                                                <a href="#" style="float: right;">Edit Details</a>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-md-5 col-xl-5" id="secondary-card">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -3662,6 +3694,125 @@
 
             <script>
                 // ----- On render -----
+                var tenantData;
+                function getData(){
+                    $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
+                    type: "GET",
+                    contentType: "application/json",
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                    },
+                    success: function (response) {
+                        $("#primary-card").empty()
+                        $("#secondary-card").empty()
+                        if(response?.data){
+                            if(response?.data?.length>=2){
+                                $("#input-account").hide()
+                            }
+
+                                $("#primary-card").append(
+                                    `
+                                    <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h1 class="card-title card-title-primary">Primary
+                                                                            Payment Info</h1>
+                                                                        <div class="card-options">
+                                                                            <label class="custom-switch m-0"> <input
+                                                                                    type="radio" name="radioo"
+                                                                                    class="custom-switch-input" checked="" value="">
+                                                                                <span class="custom-switch-indicator"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <label class="card-holder"><b>Account Name: ${response?.data[0]?.accountName}</b>
+                                                                            </label> <br>
+                                                                        <label class="card-holder"><b>Date of Expiry:</b>
+                                                                            XXXXXXXXXXXXXXX</label> <br>
+                                                                        <label class="card-holder"><b>Card Number:</b>
+                                                                            XXXXXXXXXXXXXXX</label><br>
+                                                                        <label class="card-holder"><b>CVV:</b> XXX</label>
+                                                                        <br>
+                                                                        
+                                                                    </div>
+                                                                    <div class="footer">
+                                                                        <a href="#" style="float: right;">Edit Details</a>
+                                                                    </div>
+                                                                </div>
+                                    `
+                                )
+                                $("#secondary-card").append(
+                                    `
+                                    <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h1 class="card-title card-title-primary">Secondary
+                                                                            Payment Info</h1>
+                                                                        <div class="card-options">
+                                                                            <label class="custom-switch m-0"> <input
+                                                                                    type="radio" name="radioo"
+                                                                                    class="custom-switch-input" checked="" value="">
+                                                                                <span class="custom-switch-indicator"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <label class="card-holder"><b>Account Name: ${response?.data[1]?.accountName}
+                                                                            </label> <br></b>
+                                                                        <label class="card-holder"><b>Date of Expiry:</b>
+                                                                            XXXXXXXXXXXXXXX</label> <br>
+                                                                        <label class="card-holder"><b>Card Number:</b>
+                                                                            XXXXXXXXXXXXXXX</label><br>
+                                                                        <label class="card-holder"><b>CVV:</b> XXX</label>
+                                                                        <br>
+                                                                        
+                                                                    </div>
+                                                                    <div class="footer">
+                                                                        <a href="#" style="float: right;">Edit Details</a>
+                                                                    </div>
+                                                                </div>
+                                    `
+                                )
+                            
+                            
+                        }
+                        $("#table_body_bank_account").empty()
+                        var tbody = $("#table_body_bank_account");
+                        if (response?.data) {
+
+
+                            response.data.forEach(function (entry, index) {
+                                $("#account").append(`<option value="${entry.UPOID}">${entry.accountName}</option>`)
+                                var row = $("<tr>");
+                                row.append($("<td class='d-none upoid'>").text(entry.UPOID));
+                                row.append($("<td>").text(index + 1));
+
+                                row.append($("<td>").html("<b>" + entry.accountName + "</b>"));
+                                row.append($("<td>").text(entry.description));
+                                row.append($("<td>").html(`<b class="status-bank" style="${entry.Active === 'Active' ? 'color: #25CF54;' : 'color:grey;'}">${entry.Active}</b>`));
+
+                                var buttonCell = $("<td>");
+                                var button = $(`<button type="button" class="btn btn-light btn-pill mt-0 status-change-bank"><strong>${entry.Active !== 'Active' ? 'Connect to Bank' : 'Disconnect'}</strong></button>`);
+
+                                buttonCell.append(button);
+                                row.append(buttonCell);
+
+                                tbody.append(row);
+                            });
+                        } else {
+                            var row = $("<tr>");
+                            var noDataCell = $('<td colspan="12">').text("No Bank Account Added");
+                            row.append(noDataCell);
+                            tbody.append(row);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+
+                }
+                getData()
                 var file; var image_url = " "; var image_key = " ";
                 $(function () {
 
@@ -3864,7 +4015,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
+                        tenantData = response
                         $("#firstName").val(response.firstName)
                         $("#lastName").val(response.lastName)
                         $("#city").val(response.city)
@@ -3998,6 +4149,8 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
             <script>
                 $("#form1show").click(function (e) {
                     $('#form1').show();
+                    $("#form2show").css("display", "none");
+
                 });
             </script>
 
@@ -4078,6 +4231,180 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
        // Call the function on page load to initialize button state
     //    updateButtonState();
 </script>
+
+
+        <!-- ########### payment method start ########## -->
+
+        <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script>
+            var level="Primary";
+            var sfc = SafeCharge({
+                env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+                merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+                merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+            });
+            var ScFields = sfc.fields({
+                fonts: [
+                    { cssUrl: 'https://fonts.googleapis.com/css2?family=Alex+Brush&family=Berkshire+Swash&family=Figtree&family=Great+Vibes&family=Inter&family=Tilt+Prism&display=swap' }, // include your custom fonts
+                ]
+            })
+
+            var ScFieldStyles = {
+                base: {
+                    color: '#000',
+                    fontWeight: 500,
+                    fontFamily: 'Figtree',
+                    // fontSize: '16px',
+                    fontSmoothing: 'antialiased',
+                    '::placeholder': {
+                        color: '#000',
+                    },
+                    ':-webkit-autofill': {
+                        color: '#000',
+                    },
+                },
+                invalid: {
+                    color: '#000',
+                    '::placeholder': {
+                        color: '#000',
+                    },
+                },
+            };
+
+            var ScFieldClasses = {
+                focus: 'focused',
+                empty: 'empty',
+                invalid: 'invalid',
+                complete: 'complete',
+            };
+            var scard = ScFields.create('ccNumber', {
+                style: ScFieldStyles,
+                classes: ScFieldClasses,
+            });
+            scard.attach('#card-number');
+
+            var cardExpiry = ScFields.create('ccExpiration', {
+                style: ScFieldStyles,
+                classes: ScFieldClasses,
+            });
+            cardExpiry.attach('#card-expiry');
+
+            var cardCvc = ScFields.create('ccCvc', {
+                style: ScFieldStyles,
+                classes: ScFieldClasses,
+            });
+            cardCvc.attach('#card-cvc');
+
+            $(".btn-level").on("click",function(){
+                level= $(this).attr("id")
+                $(this).addClass("border-primary")
+                $("#level").val(level)
+                
+            })
+            function main() {
+                
+                $("#preloader").css("display", "flex")
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        amount: "0",
+                        currency: "USD",
+                        userId: tenantData.userId,
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        
+                            sfc.createPayment({
+                            sessionToken: response.sessionToken, //received from openOrder API
+                            clientUniqueId: "695701003",
+                            merchantId: "6400701569295268447",
+                            merchantSiteId: "244298",
+                            cardHolderName: (tenantData.firstName + " " + tenantData.lastName),
+                            
+                            paymentOption: scard,
+                            billingAddress: {
+                                email: tenantData.email,
+                                country: "US"
+                            }
+                        }, function (res) {
+                            console.log(res.userPaymentOptionId)
+                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                $.ajax({
+                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountTenant",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+
+                                    },
+                                    data: JSON.stringify({
+                                        userId: tenantData.userId,
+                                        UPOID: res.userPaymentOptionId,
+                                        accountName: $("#accountName").val(),
+                                        description: $("#description-bank").val(),
+                                        active: true,
+                                        accountTypeTenant:level
+                                    }),
+                                    success: function (response) {
+                                        
+                                        $("#preloader").css("display", "none")
+
+                                        $("#successfully_changed_text").text("Account added Succesfully!!!")
+                                        $("#successfully_changed").modal("show")
+                                        setTimeout(function () {
+                                            $("#successfully_changed").modal("hide");
+                                        }, 2000);
+                                        getData()
+                                    },
+                                    error: function () {
+                                        $("#preloader").css("display", "none")
+                                        $("#myModal_warning_declined").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_warning_declined").modal("hide");
+                                        }, 2000);
+                                    }
+                                })
+
+                            }else{
+                                $("#preloader").css("display", "none")
+                                $("#myModal_warning_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_warning_declined").modal("hide");
+                                }, 2000);
+                            }
+                        });
+
+                        
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        console.error('Error sending data:', error);
+                    }
+                });
+
+            }
+        
+
+            </script>
+
+        <!-- ########### payment method End ########## -->
+
 
 </body>
 

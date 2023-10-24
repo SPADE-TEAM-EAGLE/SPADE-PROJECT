@@ -5,7 +5,7 @@ const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
 // const { queryRunner } = require('./queryRunner');
-const { selectQuery, updateUserBank } = require('../constants/queries');
+const { selectQuery, updateUserBank,insertUserBankFuture } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
@@ -182,8 +182,8 @@ exports.createUserPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -234,8 +234,8 @@ exports.getUserDetailsPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -305,8 +305,8 @@ exports.createPlanPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/createPlan.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -377,7 +377,7 @@ exports.editPlanPayment = async (req, res) => {
     }
   };
   // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-  const reqq = request("https://ppp-test.nuvei.com/ppp/api/editPlan.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -413,6 +413,7 @@ exports.editPlanPayment = async (req, res) => {
 // ###################################### Create Subsription #############################################################
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
+  const subscriptionDate = new Date(); 
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
@@ -480,8 +481,8 @@ exports.createSubscriptionPayment = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createSubscription.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/createSubscription.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/createSubscription.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/createSubscription.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -494,6 +495,7 @@ exports.createSubscriptionPayment = async (req, res) => {
         const result = await queryRunner(updateUserBank, [
           userNuveiId,
           data.subscriptionId,
+          subscriptionDate,
           userTokenId
         ]);
         if (result[0].affectedRows == 1) {
@@ -520,8 +522,285 @@ exports.createSubscriptionPayment = async (req, res) => {
     })
   });
   reqq.write(JSON.stringify(requestData));
+  reqq.end();
+};
+
+// ###################################### Create Subsription #############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ###################################### Create Subsription Setting #############################################################
+exports.createSubscriptionPaymentSetting = async (req, res) => {
+  const {
+    initialAmount,
+    recurringAmount,
+    currency,
+    planId,
+    userTokenId,
+    upoId,
+    userNuveiId,
+    userId,
+    existPlanAmount
+  } = req.body;
+
+  const subscriptionDate = new Date();  
+
+  const requestData = {
+    merchantId: config.merchantId,
+    merchantSiteId: config.merchantSiteId,
+    userTokenId: userTokenId,
+    userPaymentOptionId: upoId,
+    initialAmount: initialAmount,
+    recurringAmount: recurringAmount,
+    currency: currency,
+    startAfter: {
+      day: "0",
+      month: "0",
+      year: "0"
+    },
+    timeStamp: timestamp,
+  };
+  // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
+  var correctPlanId;
+
+  if (planId >= 8) {
+    correctPlanId = planId / 4;
+  } else {
+    correctPlanId = planId;
+  }
+
+  const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
+  const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
+
+  // Additional code block (if userId is defined)
+  const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
+  let daysDifference
+  if (userTokenId) {
+    console.log(UserResult[0][0]);
+    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+    const subscriptionDate = new Date();
+    
+    const currentDate = {
+      day: subscriptionDate.getDate(),
+      month: subscriptionDate.getMonth() + 1, 
+      year: subscriptionDate.getFullYear(),
+    };
+    const createdDate = {
+      day: subscriptionCreated_at.getDate(),
+      month: subscriptionCreated_at.getMonth() + 1,
+      year: subscriptionCreated_at.getFullYear(),
+    };
+    
+    // Calculate the difference in days
+   daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    daysDifference = Math.max(0, Math.round(daysDifference));
+    
+    // Calculate the difference in months
+    let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
+    monthsDifference = Math.max(0, monthsDifference);
+    
+    // Calculate the difference in years
+    let yearsDifference = currentDate.year - createdDate.year;
+    yearsDifference = Math.max(0, yearsDifference);
+    if                                                                                                              (
+      currentDate.month == createdDate.month &&
+      currentDate.year == createdDate.year &&
+      planId > PlanID &&
+      monthlyAnnual == "Monthly"
+    ) {
+      console.log("Monthly if in")
+      let remainingDays = daysDifference;
+      console.log(remainingDays)
+      remainingDays = 30 - remainingDays;
+      console.log(remainingDays)
+      let initialAmountChange = existPlanAmount / 30;
+      console.log(initialAmountChange)
+      initialAmountChange = remainingDays * initialAmountChange;
+      console.log(initialAmountChange)
+      console.log(requestData.initialAmount)
+      initialAmountChange = requestData.initialAmount - initialAmountChange;
+      console.log(initialAmountChange)
+      requestData.initialAmount = initialAmountChange;
+      
+    }
+  }
+
+  console.log(monthlyAnnual);
+
+  if (monthlyAnnual == "Monthly") {
+    requestData.recurringAmount = 0.00001;
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "1",
+      year: "0"
+    };
+    requestData.endAfter = {
+      day: "1",
+      month: "1",
+      year: "0"
+    };
+  } else {
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "1",
+      year: "0"
+    };
+    requestData.endAfter = {
+      day: "0",
+      month: "0",
+      year: "1"
+    };
+  }
+  if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+    let AddDays = 30 - daysDifference;
+    subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+    
+    // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+    function formatDateForSQL(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    requestData.startAfter = {
+      day: AddDays,
+      month: "0",
+      year: "0"
+  };
+  requestData.recurringPeriod = {
+    day: AddDays-1,
+      month: "0",
+      year: "0"
+  };
+  requestData.endAfter = {
+    day: AddDays,
+    month: "1",
+    year: "0"
+};
+}
+console.log("requestData.endAfter : ", requestData.startAfter);
+
+  requestData.planId = nuveiId;
+  console.log(requestData);
+  requestData.checksum = sha256(
+    config.merchantId +
+    config.merchantSiteId +
+    userTokenId +
+    nuveiId +
+    upoId +
+    (Math.round(requestData.initialAmount*10)/10) +
+    requestData.recurringAmount +
+    currency +
+    timestamp +
+    config.Secret_Key
+  );
+
+  
+  requestData.initialAmount = Math.round(requestData.initialAmount * 10) / 10;
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log("responseData");
+  const reqq = request(
+    "https://ppp-test.nuvei.com/ppp/api/createSubscription.do",
+    requestOptions,
+    (response) => {
+      let responseData = "";
+      response.on("data", (chunk) => {
+        responseData += chunk;
+      });
+      response.on("end", async () => {
+        try {
+          // console.log(userNuveiId + " " + "data.subscriptionId" + " " + subscriptionDate + " " + userTokenId);
+          console.log(planId + " " + UserResult[0][0].PlanID);
+          const data = JSON.parse(responseData);
+          console.log(data);
+          // if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+          if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+          console.log("planId"); 
+          const subscriptionDate = new Date();
+        //  const AddDays = 30 - daysDifference;
+        // const subscriptionCreatedDate = subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+       AddDays = 30 - daysDifference;
+subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+
+// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+// function formatDateForSQL(date) {
+//   const year = date.getFullYear();
+//   const month = String(date.getMonth() + 1).padStart(2, '0');
+//   const day = String(date.getDate()).padStart(2, '0');
+//   const hours = String(date.getHours()).padStart(2, '0');
+//   const minutes = String(date.getMinutes()).padStart(2, '0');
+//   const seconds = String(date.getSeconds()).padStart(2, '0');
+//   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+// }
+const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+            const result = await queryRunner(insertUserBankFuture, [userTokenId,userNuveiId,planId,data.subscriptionId,userTokenId,subscriptionCreatedDateFormatted]);
+            if (result[0].affectedRows == 1) {
+              res.status(200).json({
+                data,
+              });
+            }
+          }else{
+            console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
+            const result = await queryRunner(updateUserBank, [ userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
+            if (result[0].affectedRows == 1) {
+              res.status(200).json({
+                data,
+              });
+            }
+          }
+          //
+        } catch (error) {
+          console.error("Error parsing response:", error);
+          res.status(400).json({
+            message: "Error parsing response",
+            error,
+          });
+        }
+      });
+    }
+  );
+
+  reqq.on("error", (error) => {
+    console.error("Error sending request:", error);
+    res.status(400).json({
+      message: "Error sending request",
+      error,
+    });
+  });
+
+  reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
+
 // ###################################### Create Subsription #############################################################
 
 
@@ -541,8 +820,8 @@ exports.cancelSubscription = async (req, res) => {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
-  const reqq = request("https://secure.safecharge.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+  const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+  // const reqq = request("https://secure.safecharge.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;

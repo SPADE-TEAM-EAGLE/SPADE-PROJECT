@@ -268,6 +268,7 @@ router.put("/userPermissionUpdate", verifyToken, userPermissionController.userPe
 router.post("/createPlanPayment", paymentIntegration.createPlanPayment);
 router.post("/editPlanPayment", paymentIntegration.editPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
+router.post("/createSubscriptionPaymentSetting", paymentIntegration.createSubscriptionPaymentSetting);
 router.post("/CreateBankAccount",verifyToken, bankAccountController.CreateBankAccount);
 router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
@@ -275,3 +276,5 @@ router.get("/GetBankAccountTenant", verifyTokenTenant, bankAccountController.Get
 router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
 router.delete("/deleteUser",userController.deleteUser);
+router.put("/updateBankAccountTenant", verifyTokenTenant, bankAccountController.updateBankAccountTenant); 
+router.get("/dummy", bankAccountController.dummy); 

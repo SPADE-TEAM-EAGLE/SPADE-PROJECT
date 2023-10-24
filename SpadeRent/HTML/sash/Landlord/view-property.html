@@ -376,9 +376,9 @@
             #top_main_image {
                 display: none;
             }
-            #top_main_card {
+            /* #top_main_card {
                 height: 220px;
-            }
+            } */
             #nav_links {
                 top: 153px;
             }
@@ -421,9 +421,9 @@
             #top_main_image {
                 display: none;
             }
-            #top_main_card {
+            /* #top_main_card {
                 height: 220px;
-            }
+            } */
             #nav_links {
                 top: 153px;
             }
@@ -1593,7 +1593,7 @@
                             </div> -->
                             <!-- COL END -->
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="card inner-cards">
                                         <div class="card-header justify-content-start bg-light">
                                             <h3 class="card-title font-wieght-bold"><b>Media</b></h3>
@@ -2589,7 +2589,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     );
                 } else {
                     // Handle S3 bucket URLs for images and PDFs
-                    if (file?.image_key?.endsWith('.jpg') || file?.image_key?.endsWith('.png')) {
+                    if (file?.image_key?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.image_key?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.image_url))
@@ -2988,10 +2988,7 @@ var password = 'your-secret-password';
             //     })
                 break;
             case "Edit":
-            // $("#table_body tr").each(function (item, index) {
-            //         $(this).find(".edit-option").addClass("d-none")
-                    
-            //     })
+            $("#edit-option-view").addClass("d-none");
                 break;
             default:
                 break;
@@ -3028,10 +3025,8 @@ var password = 'your-secret-password';
             //     })
                 break;
             case "Edit":
-            // $("#table_body tr").each(function (item, index) {
-            //         $(this).find(".edit-option").addClass("d-none")
-                    
-            //     })
+            $("#edit-option-view").addClass("d-none");
+            
                 break;
             default:
                 break;

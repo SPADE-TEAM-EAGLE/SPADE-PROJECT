@@ -1554,6 +1554,7 @@
                                                                     <label
                                                                         class="form-label"><strong>Phone</strong><span class="text-danger"> *</span></label>
                                                                     <div class="row" id="add-item-containerPhone">
+                                                                        <div class="col-12 row">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select
                                                                                 class="form-control form-select select2"
@@ -1579,7 +1580,7 @@
                                                                             <span id="error-msg"
                                                                                 class="hide text-danger error-msg"></span>
                                                                         </div>
-
+                                                                    </div>
                                                                     </div>
                                                                     <div class="col-12 mt-2">
                                                                         <a href="javascript:;" class="mt-1"
@@ -1596,6 +1597,7 @@
                                                                     <label
                                                                         class="form-label"><strong>Email</strong><span class="text-danger"> *</span></label>
                                                                     <div class="row" id="add-item-containerEmail">
+                                                                        <div class="col-12 row">
                                                                         <div class="col-md-6 mt-2">
                                                                             <select
                                                                                 class="form-control form-select select2"
@@ -1612,7 +1614,7 @@
                                                                                 id="email" placeholder="Enter Email"
                                                                                 required>
                                                                         </div>
-
+                                                                    </div>
                                                                     </div>
                                                                     <div class="col-12 mt-2">
                                                                         <a href="javascript:;" class="mt-1"
@@ -2621,17 +2623,17 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
-            $('.btn-close').each(function () {
-                $(this).click(() => {
-                    console.log("hello");
-                    $('#add-item-containerPhone div').slice(2).remove();
-                    $('#add-item-containerEmail div').slice(2).remove();
-                    $('#add-item-containerPhone div').find('input').val('');
-                    $('#add-item-containerPhone div').find('select').val('');
-                    $('#add-item-containerEmail div').find('input').val('');
-                    $('#add-item-containerEmail div').find('select').val('Select');
-                });
-            });
+            // $('.btn-close').each(function () {
+            //     $(this).click(() => {
+            //         console.log("hello");
+            //         $('#add-item-containerPhone div').slice(2).remove();
+            //         $('#add-item-containerEmail div').slice(2).remove();
+            //         $('#add-item-containerPhone div').find('input').val('');
+            //         $('#add-item-containerPhone div').find('select').val('');
+            //         $('#add-item-containerEmail div').find('input').val('');
+            //         $('#add-item-containerEmail div').find('select').val('Select');
+            //     });
+            // });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
 
             // Decryption
@@ -2779,7 +2781,7 @@
             $("#add-item-phone").on("click", () => {
                 phoneLength++;
                 if($("#add-item-containerPhone").children().length<6 && phoneLength<3){
-                    $("#add-item-containerPhone").append(`<div class="col-md-6 mt-2">
+                    $("#add-item-containerPhone").append(`<div class="col-12 row"><div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
                                                                                 <option label="Select">Choose...</option>
                                                                                 <option value="work">Work</option>
@@ -2788,7 +2790,7 @@
                                                                         </div>
                                                                         <div class="col-md-6 mt-2">
                                                                             <input type="tel" class="form-control" placeholder="Phone Number" required>
-                                                                        </div>`)
+                                                                        </div></div>`)
                 
                 }
                 
@@ -2797,7 +2799,7 @@
                 emailLength++;
                 if($("#add-item-containerEmail").children().length<6 && emailLength<3){
 
-                    $("#add-item-containerEmail").append(`<div class="col-md-6 mt-2">
+                    $("#add-item-containerEmail").append(`<div class="col-12 row"><div class="col-md-6 mt-2">
                                                                                 <select class="form-control form-select select2" data-bs-placeholder="Select" required>
                                                                                     <option label="Select">Choose...</option>
                                                                                     <option value="work">Work</option>
@@ -2806,7 +2808,7 @@
                                                                             </div>
                                                                             <div class="col-md-6 mt-2">
                                                                                 <input type="email" class="form-control" placeholder="Email" required>
-                                                                            </div>`)
+                                                                            </div></div>`)
                 
                
                                                                                 
@@ -2831,22 +2833,26 @@
                     const phoneName = $(this).find("select").val();
                     const phoneNumber = $(this).find("input[type='tel']").val();
                     // console.log(country,phoneNumber)
-
-                    phone.push({
+                    if(phoneName!=="Choose..." && phoneNumber!==""){
+                        phone.push({
                         phoneName: phoneName,
                         phoneNumber: phoneNumber
                     });
+                    }
+                    
                 });
 
                 $("#add-item-containerEmail").each(function () {
                     const emailName = $(this).find("select").val();
                     const email = $(this).find("input[type='email']").val();
                     // console.log(country,email)
-
-                    emailArray.push({
+                    if(emailName!=="Choose..." && email!==""){
+                        emailArray.push({
                         emailName: emailName,
                         email: email
                     });
+                    }
+                    
                 });
                 // console.log(phone,emailArray)
                 formData.append("alternatePhone", JSON.stringify(phone));
@@ -2872,7 +2878,7 @@
                         $('#contactInfoModal input, #contactInfoModal select').each(function () {
                             $(this).val('');
                         });
-                        getData();
+                        // getData();
                         location.reload()
                         // Handle the success response from the backend
                     }
@@ -2887,15 +2893,16 @@
         })
 
         function checkFields() {
-            let allFieldsFilled = true;
+            let allFieldsFilled1 = true;
+            let allFieldsFilled2 = true;
 
             // Check the Phone fields
             $('#add-item-containerPhone input[type="tel"]').each(function () {
                 if ($(this).val() === '' || $(this).val() === 'Choose...') {
-                    allFieldsFilled = false;
+                    allFieldsFilled1 = false;
                     return false; // Exit the loop early if any field is empty
                 } else {
-                    allFieldsFilled = true;
+                    allFieldsFilled1 = true;
                     return true;
                 }
             });
@@ -2903,16 +2910,17 @@
             // Check the Email fields
             $('#add-item-containerEmail input[type="email"]').each(function () {
                 if ($(this).val() === '' || $(this).val() === 'Choose...') {
-                    allFieldsFilled = false;
+                    allFieldsFilled2 = false;
                     return false; // Exit the loop early if any field is empty
                 } else {
-                    allFieldsFilled = true;
+                    allFieldsFilled2 = true;
                     return true;
                 }
             });
-
+            if(allFieldsFilled1 || allFieldsFilled2){
+                $('#next').prop('disabled', false);}
             // Enable or disable the "Next" button based on the validation result
-            $('#next').prop('disabled', !allFieldsFilled);
+            
         }
         $('#add-item-containerPhone').on('input', 'input[type="tel"], input[type="email"]', checkFields);
         $('#add-item-containerEmail').on('input', 'input[type="tel"], input[type="email"]', checkFields);

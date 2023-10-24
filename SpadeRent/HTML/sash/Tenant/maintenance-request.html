@@ -2510,7 +2510,7 @@ if (task.priority == 'High') {
         } else {
             // Handle S3 bucket URLs for images and PDFs
             if (file.ImageKey
-.endsWith('.jpg') || file.ImageKey
+.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file.ImageKey
 .endsWith('.png')) {
                 fileElement.append(
                     $('<div>').addClass('file-preview')
@@ -2770,7 +2770,7 @@ $('#fileInput').on('change', function () {
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file?.endsWith('.jpg') || file?.endsWith('.png')) {
+                        if (file?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.endsWith('.png')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file))

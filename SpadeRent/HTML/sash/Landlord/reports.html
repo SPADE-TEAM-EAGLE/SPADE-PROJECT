@@ -5143,12 +5143,44 @@
                         var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
                         var vendorNames = "";
 
-                        // Construct the HTML for the new row
-                        var newRowHtml = '<tr>' +
-                            '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
-                            '<td><p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                            '</td>' +
-                            '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + hoursDiff + ' hours</p></td>';
+                        var yearsDiff, monthsDiff, daysDiff,weeksDiff;
+
+if (hoursDiff >= 24) {
+    daysDiff = Math.floor(hoursDiff / 24);
+    if (daysDiff >= 7) {
+        weeksDiff = Math.floor(daysDiff / 7);
+        if (weeksDiff >= 4) {
+            monthsDiff = Math.floor(weeksDiff / 4);
+            if (monthsDiff >= 12) {
+                yearsDiff = Math.floor(monthsDiff / 12);
+            }
+        }
+    }
+}
+
+var formattedDiff = '';
+
+if (yearsDiff) {
+    formattedDiff += yearsDiff + (yearsDiff > 1 ? ' years ' : ' year ');
+}
+
+if (monthsDiff) {
+    formattedDiff += monthsDiff + (monthsDiff > 1 ? ' months ' : ' month ');
+}
+
+if (weeksDiff) {
+    formattedDiff += weeksDiff + (weeksDiff > 1 ? ' weeks ' : ' week ');
+}
+
+if (daysDiff) {
+    formattedDiff += daysDiff + (daysDiff > 1 ? ' days ' : ' day ');
+}
+
+var newRowHtml = '<tr>' +
+    '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
+    '<td><p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+    '</td>' +
+    '<td><p style="font-weight: 600;" class="mb-1"> By ' + task.createdBy + ' - ' + formattedDiff + '</p></td>';
 
                         if (task.AssignTo.length > 0) {
                             newRowHtml += '<td><div style="font-weight: 600;text-align: center;display: flex;">'

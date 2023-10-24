@@ -1868,6 +1868,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-xl-12">
                                 <div class="card">
+                                    <div class="noman">
                                     <div class="card-header justify-content-between">
                                         <div class="d-flex">
                                             <div class="btn-group">
@@ -2003,7 +2004,7 @@
                                           <!-- Mobile screen button add property End -->
 
                                         </div>
-                                    </div>
+                                    </div></div>
                                     <div class="card-body p-0">
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between card-overflow">
                                             <div>
@@ -2973,7 +2974,8 @@
                     );
                 } else {
                     // Handle S3 bucket URLs for images and PDFs
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+                       
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.imageURL))

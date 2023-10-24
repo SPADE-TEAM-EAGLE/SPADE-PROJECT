@@ -642,30 +642,34 @@
             font-size: 16px;
             font-weight: 500;
         }
+
         .tab-menu-heading::-webkit-scrollbar {
-    width: 12px;
-}
+            width: 12px;
+        }
 
-.tab-menu-heading::-webkit-scrollbar-thumb {
-    background-color: lightblue;
-}
-.tab-menu-heading::-webkit-scrollbar-thumb:hover {
-    background-color: lightblue;
-}
+        .tab-menu-heading::-webkit-scrollbar-thumb {
+            background-color: lightblue;
+        }
 
-.tab-menu-heading::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-.dark-mode .tab-menu-heading::-webkit-scrollbar-thumb {
-    background-color: lightblue;
-}
-.dark-mode .tab-menu-heading::-webkit-scrollbar-thumb:hover {
-    background-color: lightblue;
-}
+        .tab-menu-heading::-webkit-scrollbar-thumb:hover {
+            background-color: lightblue;
+        }
 
-.dark-mode .tab-menu-heading::-webkit-scrollbar-track {
-    background-color: transparent;
-}
+        .tab-menu-heading::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        .dark-mode .tab-menu-heading::-webkit-scrollbar-thumb {
+            background-color: lightblue;
+        }
+
+        .dark-mode .tab-menu-heading::-webkit-scrollbar-thumb:hover {
+            background-color: lightblue;
+        }
+
+        .dark-mode .tab-menu-heading::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
 
         .card-bodyy {
             -ms-flex: 1 1 auto;
@@ -1486,7 +1490,7 @@
         .settings-icon {
             border: 0px solid transparent;
             border-radius: 36px;
-            padding: 11px 15px;
+            padding: 10px 15px;
             font-size: 20px;
         }
 
@@ -1843,23 +1847,19 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable"
-            role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
-                        <h2 class="modal-title">New <strong
-                                class="color-primary">Account</strong></h2>
+                        <h2 class="modal-title">New <strong class="color-primary">Account</strong></h2>
                         <span class="">Spade Rent allows you to add a range of
                             commercial and residential properties,
                             from condos and single-family homes to retail stores
                             and parking lots.</span>
 
                     </div>
-                    <button class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close" id="top-close">
-                        <span aria-hidden="true"><i
-                                class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -1873,49 +1873,37 @@
                                 data-bs-target="#collapseOne-add-property"
                                 aria-expanded="true"
                                 aria-controls="collapseOne-add-property">
-                                <span class="m-0 me-4 fs-1"
-                                    style="font-weight: bold;">01</span>
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Account Info</strong>
                                     <!-- <i
                                         class="fi fi-rs-pencil"></i> -->
-                                    <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne-add-property"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
+                        <div id="collapseOne-add-property" class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <form class="row g-3"
-                                    enctype="multipart/form-data"
-                                    action="/charge" method="post"
+                                <form class="row g-3" enctype="multipart/form-data" action="/charge" method="post"
                                     id="payment-form-bank">
                                     <div class="col-md-6">
-                                        <label for="accountName"
-                                            class="form-label fw-bold">Account
+                                        <label for="accountName" class="form-label fw-bold">Account
                                             Name <spnan class="text-danger">
                                                 *</span></label>
-                                        <input type="text"
-                                            class="form-control form"
-                                            id="accountName"
+                                        <input type="text" class="form-control form" id="accountName"
                                             placeholder="Enter Account Name">
-                                        <span
-                                            class="text-danger d-none">Property
+                                        <span class="text-danger d-none">Property
                                             name required!</span>
                                     </div>
 
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="field form-group">
-                                            <label class="fw-bold"
-                                                for="card-number-bank"
+                                            <label class="fw-bold" for="card-number-bank"
                                                 data-tid="scwsdk.form.card_number_label">
                                                 Card
                                                 number
                                             </label>
-                                            <div id="card-number-bank"
-                                                class="input form-controlll">
+                                            <div id="card-number-bank" class="input form-controlll">
                                             </div>
 
                                             <div class="underline">
@@ -1926,13 +1914,11 @@
 
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="field form-group">
-                                            <label class="fw-bold"
-                                                for="card-expiry-bank"
+                                            <label class="fw-bold" for="card-expiry-bank"
                                                 data-tid="scwsdk.form.card_expiry_label">
                                                 Expiration
                                             </label>
-                                            <div id="card-expiry-bank"
-                                                class="input empty form-controlll">
+                                            <div id="card-expiry-bank" class="input empty form-controlll">
                                             </div>
 
                                             <div class="underline">
@@ -1941,13 +1927,11 @@
                                     </div>
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="field form-group">
-                                            <label class="fw-bold"
-                                                for="card-cvc-bank"
+                                            <label class="fw-bold" for="card-cvc-bank"
                                                 data-tid="scwsdk.form.card_cvc_label">
                                                 CVV
                                             </label>
-                                            <div id="card-cvc-bank"
-                                                class="input empty form-controlll">
+                                            <div id="card-cvc-bank" class="input empty form-controlll">
                                             </div>
 
                                             <div class="underline ">
@@ -1955,17 +1939,13 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="description"
-                                            class="form-label fw-bold">Description
+                                        <label for="description" class="form-label fw-bold">Description
                                             <spnan class="text-danger">
                                                 *</span>
                                         </label>
-                                        <textarea class="form-control mb-4"
-                                            placeholder="Enter Description"
-                                            required="" rows="3"
-                                            id="description-bank"></textarea>
-                                        <span
-                                            class="text-danger d-none">Description
+                                        <textarea class="form-control mb-4" placeholder="Enter Description" required=""
+                                            rows="3" id="description-bank"></textarea>
+                                        <span class="text-danger d-none">Description
                                             is required!</span>
                                     </div>
                                 </form>
@@ -1981,32 +1961,23 @@
                                 data-bs-target="#collapseTwo-add-property"
                                 aria-expanded="false"
                                 aria-controls="collapseTwo-add-property">
-                                <span class="m-0 me-4 fs-1"
-                                    style="font-weight: bold;">02</span>
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong>ADDITIONAL
                                         Options</strong>
                                     <!-- <i
                                         class="fi fi-rs-pencil"></i> -->
-                                    <i
-                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo-add-property"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1"
-                                enctype="multipart/form-data">
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1" enctype="multipart/form-data">
 
                                 <div class="col-12 mb-3">
-                                    <div class="material-switch pull-left"
-                                        style="display: flex; align-items: center;">
-                                        <input id="accountActive"
-                                            name="accountActive"
-                                            type="checkbox"> <label
-                                            for="accountActive"
-                                            class="label-success"></label>
+                                    <div class="material-switch pull-left" style="display: flex; align-items: center;">
+                                        <input id="accountActive" name="accountActive" type="checkbox"> <label
+                                            for="accountActive" class="label-success"></label>
                                         <div style="margin-left: 25px;">
                                             <h5><b>Use this account to receive
                                                     payment</b></h5>
@@ -2022,16 +1993,12 @@
                 <div class="modal-footer">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
 Draft</button> -->
-                    <button class="btn btn-outline-default btn-pill button"
-                        data-bs-dismiss="modal" id='close'
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'
                         style="width: auto;">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)"
-                        class="btn text-light button d-none"
-                        style='background-color:#1467B0;' id='next-bank'
-                        onclick="addBank()">Submit</a>
-                    <button class="btn text-light button"
-                        style='background-color:#1467B0; width: auto;'
+                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
+                        id='next-bank' onclick="addBank()">Submit</a>
+                    <button class="btn text-light button" style='background-color:#1467B0; width: auto;'
                         id='next-add-bank'>Next</button>
 
                 </div>
@@ -3603,7 +3570,8 @@ Draft</button> -->
                         </li> -->
                             <a href="settings.html" class="text-dark">
                                 <li class="slide">
-                                    <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                    <div class="M-0 mt-3 mb-4 sidebar-count-box"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                         <div class="card-header pb-0 border-bottom-0">
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
                                             <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
@@ -3786,12 +3754,14 @@ Draft</button> -->
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants, and everything in between.</p>
                                                 <hr style="background-color: #D3D3D3;">
-                                                <h3 class="mb-2 text-dark"><b>My Information</b></h3>
-                                                <div
-                                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                <h3 class="mb-2 text-dark h3-personal-inf"><b>My Information</b></h3>
+                                                <div class="line-responsive-center">
+                                                    <div
+                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-12 d-flex align-items-center">
+                                                    <div class="col-lg-12 profile-responsive-div">
                                                         <div id="profile">
                                                             <div class="dashes"></div>
                                                             <div><img src="../assets/images/fancy_upload.png"
@@ -3826,7 +3796,8 @@ Draft</button> -->
                                                 <input type="file" id="mediaFile" />
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="fname1"><b>First name</b><span class="text-danger">
+                                                        <label for="fname1"><b>First name </b> <span
+                                                                class="text-danger">
                                                                 *</span></label>
                                                         <input type="text" class="form-control" id="firstName"
                                                             pattern="[A-Za-z\s]+"
@@ -3835,7 +3806,7 @@ Draft</button> -->
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-4 mb-3 mt-5">
-                                                        <label for="lname1"><b>Last name</b><span class="text-danger">
+                                                        <label for="lname1"><b>Last name</b> <span class="text-danger">
                                                                 *</span></label>
                                                         <input type="text" class="form-control" id="lastName"
                                                             pattern="[A-Za-z\s]+"
@@ -3845,17 +3816,17 @@ Draft</button> -->
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="email1"><b>Email</b><span class="text-danger">
+                                                        <label for="email1"><b>Email</b> <span class="text-danger">
                                                                 *</span></label>
                                                         <input type="email" class="form-control" id="email"
                                                             placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
-                                                        <a href="#tab6" id="toTab6">Change Email</a>
+                                                        <a href="#tab6" class="text-dark" id="toTab6">Change Email</a>
                                                     </div>
 
                                                     <div class="col-xl-4 mb-3">
-                                                        <label for="phone1"><b>Phone</b></label><span
-                                                            class="text-danger"> *</span><br>
+                                                        <label for="phone1"><b>Phone</b> <span class="text-danger">
+                                                                *</span></label>
                                                         <input id="phone1" name="phone" class="form-control" type="tel"
                                                             placeholder="Enter Phone" pattern="[0-9]+"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -4347,12 +4318,14 @@ Draft</button> -->
                                                         accounting, and more.</p>
                                                     <hr style="background-color: #D3D3D3;">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Appearance</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div>
                                                     </div>
                                                     <div class="row" id="myDIV">
                                                         <div class="col-lg-3"
-                                                            style="max-width: 17%; width: fit-content;">
+                                                            style="max-width: 100%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label layout-setting22" style="display: inline-block;">
                                                                 <img src="../assets/images/light-mode.png" alt=""
@@ -4360,7 +4333,7 @@ Draft</button> -->
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
                                                         <div class="col-lg-3"
-                                                            style="max-width: 17%; width: fit-content;">
+                                                            style="max-width: 100%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb6" />
                                                             <label for="cb6" class="label layout-setting11" style="display: inline-block;">
                                                                 <img src="../assets/images/dark-mode.png" alt=""
@@ -4602,7 +4575,7 @@ Draft</button> -->
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn mt-0" 
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn mt-0"
                                                                                                             data-id="2">
                                                                                                             <span>Upgrade
                                                                                                                 to
@@ -6761,7 +6734,51 @@ Draft</button> -->
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
 
                                                     <!-- ####### Upgrade to pro payment method form start ########  -->
+                                                    <div class="modal fade" id="downgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center "
+                                                            role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close"
+                                                                        class="btn-close position-absolute mt-0"
+                                                                        data-bs-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span></button>
 
+                                                                    <h4 class="text-dark tx-semibold">The downgrade will
+                                                                        take effect at the end of the month.</h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue,
+                                                                        please continue. If not, then cancel.</p><button
+                                                                        aria-label="Close"
+                                                                        class="btn btn-primary pd-x-25"
+                                                                        data-bs-dismiss="modal"
+                                                                        id="approve-downgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="upgradeConfirm">
+                                                        <div class="modal-dialog modal-dialog-centered text-center "
+                                                            role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close"
+                                                                        class="btn-close position-absolute mt-0"
+                                                                        data-bs-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span></button>
+
+                                                                    <h4 class="text-dark tx-semibold">The upgarde will
+                                                                        be immidiate. Your paid amount will be adjusted
+                                                                    </h4>
+                                                                    <p class="mg-b-20 mg-x-20">If you wish to continue,
+                                                                        please continue. If not, then cancel.</p><button
+                                                                        aria-label="Close"
+                                                                        class="btn btn-primary pd-x-25"
+                                                                        data-bs-dismiss="modal"
+                                                                        id="approve-upgrade">Continue</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="modal fade" id="upgradetopro" tabindex="-1"
                                                         role="dialog">
                                                         <div class="modal-dialog modal-lg modal-dialog-scrollable"
@@ -6783,21 +6800,29 @@ Draft</button> -->
                                                                     <div class="pricing-tabs">
                                                                         <div class="pri-tabs-heading text-center">
                                                                             <ul class="nav nav-price mt-5">
-                                                                                <li><a data-bs-toggle="tab" href="#existing">Existing</a></li>
-                                                                                <li><a class="active show" data-bs-toggle="tab" href="#new-account">New Account</a></li>
+                                                                                <li><a data-bs-toggle="tab"
+                                                                                        href="#existing">Existing</a>
+                                                                                </li>
+                                                                                <li><a class="active show"
+                                                                                        data-bs-toggle="tab"
+                                                                                        href="#new-account">New
+                                                                                        Account</a></li>
                                                                             </ul>
                                                                         </div>
                                                                         <div class="tab-content">
                                                                             <!-- New Account start  -->
-                                                                            <div class="tab-pane pb-0 active show" id="new-account">
+                                                                            <div class="tab-pane pb-0 active show"
+                                                                                id="new-account">
                                                                                 <div class="container p-0">
                                                                                     <div class="row"
                                                                                         style="display: flex; justify-content: center; align-items: center;">
                                                                                         <!-- <div class="col-lg-3"></div> -->
                                                                                         <div class="col-lg-66">
                                                                                             <div class="cardd">
-                                                                                                <div class="card-headerr">
-                                                                                                    <h3 class="text-center fw-bold">
+                                                                                                <div
+                                                                                                    class="card-headerr">
+                                                                                                    <h3
+                                                                                                        class="text-center fw-bold">
                                                                                                         Add your
                                                                                                         <span
                                                                                                             class="text-primary">Payment</span>
@@ -6810,7 +6835,8 @@ Draft</button> -->
                                                                                                             <img src="../assets/images/add-payment.png"
                                                                                                                 alt="Pineapple"
                                                                                                                 class="add-payment-img">
-                                                                                                            <strong>Spade Rent -
+                                                                                                            <strong>Spade
+                                                                                                                Rent -
                                                                                                                 <span
                                                                                                                     id="plan-name">Basic</span>
                                                                                                                 Plan</strong><strong
@@ -6826,14 +6852,17 @@ Draft</button> -->
                                                                                                         </p>
                                                                                                     </div>
                                                                                                 </div>
-            
-                                                                                                <div class="card-bodyy p-0">
+
+                                                                                                <div
+                                                                                                    class="card-bodyy p-0">
                                                                                                     <div class="row">
-            
-                                                                                                        <form action="/charge"
+
+                                                                                                        <form
+                                                                                                            action="/charge"
                                                                                                             method="post"
                                                                                                             id="payment-form">
-                                                                                                            <div class="row">
+                                                                                                            <div
+                                                                                                                class="row">
                                                                                                                 <!-- <div class="col-lg-3"></div> -->
                                                                                                                 <div
                                                                                                                     class="col-lg-6 col-xl-6">
@@ -6849,10 +6878,10 @@ Draft</button> -->
                                                                                                                         <div id="card-number"
                                                                                                                             class="input form-controlll">
                                                                                                                         </div>
-            
+
                                                                                                                         <div
                                                                                                                             class="underline">
-            
+
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -6869,7 +6898,7 @@ Draft</button> -->
                                                                                                                         <div
                                                                                                                             class="input">
                                                                                                                         </div>
-            
+
                                                                                                                         <div
                                                                                                                             class="underline">
                                                                                                                             <input
@@ -6891,7 +6920,7 @@ Draft</button> -->
                                                                                                                         <div id="card-expiry"
                                                                                                                             class="input empty form-controlll">
                                                                                                                         </div>
-            
+
                                                                                                                         <div
                                                                                                                             class="underline">
                                                                                                                         </div>
@@ -6910,31 +6939,25 @@ Draft</button> -->
                                                                                                                         <div id="card-cvc"
                                                                                                                             class="input empty form-controlll">
                                                                                                                         </div>
-            
+
                                                                                                                         <div
                                                                                                                             class="underline ">
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
-
-                                                                                                            <div
-                                                                                                                class="underline">
-                                                                                                                <input
-                                                                                                                    id="amount"
-                                                                                                                    class="input form-control111" readonly>
-                                                                                                            </div>
-                                                                                                        </div>
                                                                                                     </div>
-                                                                                                    <div class="row"
-                                                                                                        style="display: flex; justify-content: center; align-items: center;">
-                                                                                                        <!-- <div class="col-lg-4"></div> -->
-                                                                                                        <div class="col-lg-12">
-                                                                                                            </form>
-                                                                                                            <button onclick="main()"
-                                                                                                                class="btn btn-primary btn-lg btn-block btnn fs-20">Submit
-                                                                                                                Payment</button>
-                                                                                                        </div>
+                                                                                                </div>
+                                                                                                <div class="row"
+                                                                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                                                                    <!-- <div class="col-lg-4"></div> -->
+                                                                                                    <div
+                                                                                                        class="col-lg-12">
+                                                                                                        </form>
+                                                                                                        <button
+                                                                                                            onclick="main()"
+                                                                                                            class="btn btn-primary btn-lg btn-block btnn fs-20">Submit
+                                                                                                            Payment</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -6942,6 +6965,7 @@ Draft</button> -->
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                             <!-- New Account End  -->
 
                                                                             <!-- New Existing start  -->
@@ -6952,18 +6976,32 @@ Draft</button> -->
                                                                                         <!-- <div class="col-lg-3"></div> -->
                                                                                         <div class="col-lg-66">
                                                                                             <div class="cardd">
-                                                                                                <div class="card-headerr">
+                                                                                                <div
+                                                                                                    class="card-headerr">
                                                                                                     <div class="row">
-                                                                                                        <div class="col-lg-2"></div>
-                                                                                                        <div class="col-lg-8">
-                                                                                                    <h3 class="text-center fw-bold">
-                                                                                                        Streamline Your <br>
-                                                                                                        <span
-                                                                                                            class="text-primary">Rental Property Management</span> <br>
-                                                                                                            and simplify your accounting tasks.
-                                                                                                    </h3>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                                        <div
+                                                                                                            class="col-lg-2">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="col-lg-8">
+                                                                                                            <h3
+                                                                                                                class="text-center fw-bold">
+                                                                                                                Streamline
+                                                                                                                Your
+                                                                                                                <br>
+                                                                                                                <span
+                                                                                                                    class="text-primary">Rental
+                                                                                                                    Property
+                                                                                                                    Management</span>
+                                                                                                                <br>
+                                                                                                                and
+                                                                                                                simplify
+                                                                                                                your
+                                                                                                                accounting
+                                                                                                                tasks.
+                                                                                                            </h3>
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                     <div
                                                                                                         class="heading-payment px-0">
                                                                                                         <p
@@ -6971,7 +7009,8 @@ Draft</button> -->
                                                                                                             <img src="../assets/images/add-payment.png"
                                                                                                                 alt="Pineapple"
                                                                                                                 class="add-payment-img">
-                                                                                                            <strong>Spade Rent -
+                                                                                                            <strong>Spade
+                                                                                                                Rent -
                                                                                                                 <span
                                                                                                                     id="plan-name">Basic</span>
                                                                                                                 Plan</strong><strong
@@ -6987,24 +7026,39 @@ Draft</button> -->
                                                                                                         </p>
                                                                                                     </div>
                                                                                                 </div>
-            
-                                                                                                <div class="card-bodyy p-0">
+
+                                                                                                <div
+                                                                                                    class="card-bodyy p-0">
                                                                                                     <div class="row">
-            
-                                                                                                        <form action="/charge"
+
+                                                                                                        <form
+                                                                                                            action="/charge"
                                                                                                             method="post"
                                                                                                             id="payment-form">
-                                                                                                            <div class="row">
+                                                                                                            <div
+                                                                                                                class="row">
                                                                                                                 <!-- <div class="col-lg-3"></div> -->
                                                                                                                 <div
                                                                                                                     class="col-lg-6 col-xl-6">
-                                                                                                                        <label for="inputAccount" class="fw-bold">Account <span
-                                                                                                                                class="text-danger">*</span></label>
-                                                                                                                        <select id="account" class="form-select form-control form new-account-dropdown" required>
-                                                                                                                            <option selected>Choose...</option>
-                                                                                                                        </select>
-                                                                                                                        <span class="text-danger d-none">Account is required!</span>
-                                                                                                                    
+                                                                                                                    <label
+                                                                                                                        for="inputAccount"
+                                                                                                                        class="fw-bold">Account
+                                                                                                                        <span
+                                                                                                                            class="text-danger">*</span></label>
+                                                                                                                    <select
+                                                                                                                        id="account"
+                                                                                                                        class="form-select form-control form new-account-dropdown"
+                                                                                                                        required>
+                                                                                                                        <option
+                                                                                                                            selected>
+                                                                                                                            Choose...
+                                                                                                                        </option>
+                                                                                                                    </select>
+                                                                                                                    <span
+                                                                                                                        class="text-danger d-none">Account
+                                                                                                                        is
+                                                                                                                        required!</span>
+
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="col-lg-6 col-xl-6">
@@ -7019,7 +7073,7 @@ Draft</button> -->
                                                                                                                         <div
                                                                                                                             class="input">
                                                                                                                         </div>
-            
+
                                                                                                                         <div
                                                                                                                             class="underline">
                                                                                                                             <input
@@ -7028,15 +7082,17 @@ Draft</button> -->
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
-                                                                                                                
+
                                                                                                             </div>
                                                                                                     </div>
                                                                                                     <div class="row"
                                                                                                         style="display: flex; justify-content: center; align-items: center;">
                                                                                                         <!-- <div class="col-lg-4"></div> -->
-                                                                                                        <div class="col-lg-12">
+                                                                                                        <div
+                                                                                                            class="col-lg-12">
                                                                                                             </form>
-                                                                                                            <button onclick="main()"
+                                                                                                            <button
+                                                                                                                onclick="main()"
                                                                                                                 class="btn btn-primary btn-lg btn-block btnn fs-20">Submit
                                                                                                                 Payment</button>
                                                                                                         </div>
@@ -7069,8 +7125,10 @@ Draft</button> -->
                                                         that account.</p>
                                                     <hr style="background-color: #D3D3D3;">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Invoices</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div>
                                                     </div>
 
                                                     <div class="table-responsive">
@@ -7100,16 +7158,22 @@ Draft</button> -->
                                                     </div>
 
                                                     <div class="row mt-5">
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-12">
                                                             <div class="card card-color card-primary">
                                                                 <div class="card-body">
                                                                     <div class="row" style="align-items: center;">
-                                                                        <div class="col-xl-6 col-sm-6 col-md-12">
-                                                                            <div
-                                                                                style="display: flex; align-items: center;">
-                                                                                <span
-                                                                                    class="settings-icon bg-primary-transparent text-primary"><img
-                                                                                        src="../assets/images/logo_loginmodule.png"></span>
+                                                                        <div
+                                                                            class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                                            <div class="close-account-mobile-resp d-flex align-items-center">
+                                                                                <span style="background-image: url(../assets/images/logo_loginmodule.png);
+                                                                                height: 50px;
+                                                                                width: 50px;
+                                                                                display: block;
+                                                                                background-repeat: no-repeat;
+                                                                                background-size: contain;
+                                                                                background-color: white;
+                                                                                background-position: center;
+                                                                                border-radius: 50%;"></span>
                                                                                 &nbsp;&nbsp;
                                                                                 <div style="display: inline-block;">
                                                                                     <h3 class="mb-0"></h3>
@@ -7126,8 +7190,8 @@ Draft</button> -->
                                                                                 invoice</p>
 
                                                                         </div>
-                                                                        <div class="col-xl-6 col-sm-6 col-md-12"
-                                                                            style="display: flex; justify-content: end;">
+                                                                        <div
+                                                                            class="col-xl-6 col-lg-6 col-md-6 col-sm-12 close-account-btn-mobile-resp">
                                                                             <button
                                                                                 class="btn btn-light text-primaryy btn-pill m-2"
                                                                                 data-bs-target="#closeaccount"
@@ -7256,8 +7320,10 @@ Draft</button> -->
                                                     </div>
 
                                                 </div>
-                                          
 
+
+
+                                            </div>
                                             <div class="tab-pane mt-0" id="tab10">
                                                 <div class="mb-5 responsive-img-scroll">
                                                     <p class="d-inline-flex gap-1 bg-img-mainn">
@@ -7275,7 +7341,7 @@ Draft</button> -->
                                                                 units to moving out tenants, and everything in between.
                                                             </p>
                                                         </div>
-                                                        <button type="button" class="btn btn-primary btn-pill mx-2"
+                                                        <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
                                                             id="add_property_btn" data-bs-effect="effect-scale"
                                                             data-bs-toggle="modal" href="#add-user-permissions"
                                                             style="width: fit-content;"><i
@@ -7283,11 +7349,18 @@ Draft</button> -->
                                                                 style="color: white !important;"></i><strong>ADD NEW
                                                                 USERS</strong></button>
                                                     </div>
+
+                                                     <!-- Mobile screen button add property Start -->
+                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button" id="add_property_btn"
+                                          data-bs-effect="effect-scale" data-bs-toggle="modal" href="#add-user-permissions"><i
+                                              class="fe fe-plus" style="color: #fff;"></i></button>
+                                          <!-- Mobile screen button add property End -->
                                                     <hr style="background-color: #D3D3D3;">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Users</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div></div>
 
                                                     <!-- table start  -->
                                                     <div class="row">
@@ -7456,13 +7529,13 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                                     <div
                                                                         class="card-body d-flex justify-content-center align-items-center">
                                                                         <div class="col-lg-12 col-xl-12 text-center">
-                                                                            <h2
-                                                                                class="h2-personal-inf text-dark text-start mb-3">
+                                                                            <h2 class="h2-personal-inf text-dark text-start mobile-text-start mb-3">
                                                                                 Owner Permissions
                                                                             </h2>
-                                                                            <div
-                                                                                style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                                            </div>
+                                                                            <div class="line-responsive-center">
+                                                                                <div
+                                                                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                                                </div></div>
                                                                             <div>
                                                                                 <strong>Owner have all the
                                                                                     permissions</strong>
@@ -10945,9 +11018,10 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div></div>
                                                     <div class="row">
                                                         <div class="col-lg-7">
                                                             <div class="table-responsive">
@@ -10995,9 +11069,10 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                         </div>
                                                     </div>
                                                     <h2 class="h2-personal-inf text-dark mb-3 mt-5">Tax Setting</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div></div>
                                                     <div class="row">
                                                         <div class="col-lg-3">
                                                             <div class="form-group"> <label class="form-label"><b>Select
@@ -11017,7 +11092,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6"></div>
-                                                        <div class="col-lg-3 mt-4"
+                                                        <div class="col-lg-3 col-sm-12 col-12 mt-4"
                                                             style="display: flex; width: auto; justify-content: space-evenly;">
                                                             <a href="index.html">
                                                                 <button
@@ -11028,9 +11103,10 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                         </div>
                                                     </div>
                                                     <h2 class="h2-personal-inf text-dark mb-3 mt-5">Business Logo</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div></div>
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-6 col-lg-12 col-xl-12">
 
@@ -11227,9 +11303,10 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Vendor Categories</h2>
-                                                    <div
-                                                        style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
-                                                    </div>
+                                                    <div class="line-responsive-center">
+                                                        <div
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                        </div></div>
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="table-responsive">
@@ -11257,7 +11334,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                                 id="add-item5">+Add New Vendor</a>
                                                         </div>
                                                         <div class="col-lg-5"></div>
-                                                        <div class="col-lg-3 mt-4"
+                                                        <div class="col-lg-3 col-sm-12 col-12 mt-4"
                                                             style="display: flex; width: auto; justify-content: space-evenly;">
                                                             <a href="index.html">
                                                                 <button
@@ -11462,7 +11539,6 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
 
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <!-- request close account model box start  -->
@@ -12849,6 +12925,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
         </script>
         <script>
             var userId; var userData;
+            var currentSelectedId;
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
@@ -12906,7 +12983,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png') || file?.imageKey?.endsWith('.PNG')) {
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png') || file?.imageKey?.endsWith('.PNG')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file.imageURL))
@@ -13442,6 +13519,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                     $(`#${item}`).removeClass("bg-primary");
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
+                                    currentSelectedId = response.planID
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [5, 6, 7].forEach(function (item) {
@@ -13474,6 +13552,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                     $(`#${item}`).removeClass("bg-primary");
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
+                                    currentSelectedId = response.planID
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [2, 3, 4].forEach(function (item) {
@@ -13686,10 +13765,10 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                             var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                             $("#table_body_unpaid_invoice").append(row);
                             $("#closeButton").prop("disabled", false)
-                                $("#unpaid-text").addClass("d-none")
+                            $("#unpaid-text").addClass("d-none")
                         } else if (response?.data) {
                             $("#closeButton").prop("disabled", true)
-                                $("#unpaid-text").removeClass("d-none")
+                            $("#unpaid-text").removeClass("d-none")
                             var tableBody = $("#table_body_unpaid_invoice");
 
                             // Clear the existing content in the table body
@@ -13698,7 +13777,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                             invoiceData = response?.data[0].filter(function (invoice) {
                                 return invoice.status !== "paid"
                             })
-                            
+
                             invoiceData.forEach(function (invoice) {
                                 var row = $("<tr>");
 
@@ -13826,7 +13905,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-
+                        $("#account").empty()
+                        $("#account").append(`<option value="">Select Account</option>`)
                         $("#table_body_bank_account").empty()
                         var tbody = $("#table_body_bank_account");
                         if (response?.data) {
@@ -14239,7 +14319,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     }
                     var interval;
                     counter = 5;
-                    
+
                     function startCounter() {
                         document.getElementById('confirmDelete').disabled = true;
                         $('#confirmDelete').css('opacity', '0.7');
@@ -14459,11 +14539,17 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     });
                 });
-
+                $("#approve-downgrade").click(function () {
+                    $("#downgradeConfirm").modal("hide")
+                    $("#upgradetopro").modal("show")
+                })
                 // Attach a click event listener to each button
                 $('.card-btnn').click(function () {
                     // Retrieve the ID of the parent card
                     var cardId = $(this).closest('.pricing-card').attr('id');
+                    console.log(currentSelectedId)
+
+                    console.log(userData)
                     var time;
                     $(".nav-price li a").each(function () {
                         if ($(this).hasClass("active")) {
@@ -14475,14 +14561,28 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                         }
                     })
-                    $("#payment-month").text(time)
-                    $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
-                    var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
-                    seletedPlanID = cardId
-                    $("#upgradetopro #amount").val(amount)
-                    $("#upgradetopro #payment-amount").text(amount)
-                    $("#upgradetopro #payment-total").text(amount)
-                    $("#upgradetopro").modal("show")
+                    if (time == "Month" && currentSelectedId > cardId) {
+                        $("#payment-month").text("Year")
+                        $("#payment-month").text(time)
+                        $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                        var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        seletedPlanID = cardId
+                        $("#upgradetopro #amount").val(amount)
+                        $("#upgradetopro #payment-amount").text(amount)
+                        $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm").modal("show")
+                    } else {
+                        $("#payment-month").text("Year")
+                        $("#payment-month").text(time)
+                        $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                        var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        seletedPlanID = cardId
+                        $("#upgradetopro #amount").val(amount)
+                        $("#upgradetopro #payment-amount").text(amount)
+                        $("#upgradetopro #payment-total").text(amount)
+                        $("#upgradetopro").modal("show")
+                    }
+
                 });
 
                 var file;
@@ -14556,7 +14656,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             // $(`.${card.id}`).each(function(){
                             //     this
                             // })
-                            console.log($(`#${card.id}`))
+
+                            if (currentSelectedId == card.id) {
+
+                                userData.currentPrice = card.planDiscountedAmount
+                            }
                             // $(`#${card.id}`).css("bg-primary")
                             $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
@@ -14759,7 +14863,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $("#id_password_new").val("")
                             $("#id_password2").val("")
                             $("#current_password_reset").val("")
-
+                            $("#myModal_success p").text("Succesfully Updated!!!")
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal("hide");
@@ -14926,26 +15030,26 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         <i class="fi fi-rs-trash text-danger fs-5"></i>
                     </button></td>
                 </tr>`)
-                updateSaveButton()
+                    updateSaveButton()
                 });
-                $(document).on("input","#add-item-container1 input[name='category']",function(){
+                $(document).on("input", "#add-item-container1 input[name='category']", function () {
                     updateSaveButton()
                 })
-                function updateSaveButton(){
+                function updateSaveButton() {
                     console.log("fgytuytuytg")
-                    $("#add-item-container1 input[name='category']").each(function(){
-                        if($(this).val() == ""){
-                            $("#save-categories").prop("disabled",true)
+                    $("#add-item-container1 input[name='category']").each(function () {
+                        if ($(this).val() == "") {
+                            $("#save-categories").prop("disabled", true)
                             return false
-                        }else{
-                            $("#save-categories").prop("disabled",false)
+                        } else {
+                            $("#save-categories").prop("disabled", false)
                         }
                     })
                 }
-                
+
                 $('#add-item-container1').on('click', '#del-btn1', function () {
-                    
-                    
+
+
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
 
@@ -15002,19 +15106,19 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             });
 
             $(document).ready(function () {
-                $(document).on("input","#add-item-container5 .vendor-category",function(){
+                $(document).on("input", "#add-item-container5 .vendor-category", function () {
                     updateSaveVendorButton()
                 })
-                
-                
-                function updateSaveVendorButton(){
+
+
+                function updateSaveVendorButton() {
                     console.log("fgytuytuytg")
-                    $("#add-item-container5 .vendor-category").each(function(){
-                        if($(this).val() == ""){
-                            $("#save-vendor").prop("disabled",true)
+                    $("#add-item-container5 .vendor-category").each(function () {
+                        if ($(this).val() == "") {
+                            $("#save-vendor").prop("disabled", true)
                             return false
-                        }else{
-                            $("#save-vendor").prop("disabled",false)
+                        } else {
+                            $("#save-vendor").prop("disabled", false)
                         }
                     })
                 }
@@ -15032,9 +15136,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                                         class="fi fi-rs-trash text-danger fs-5"></i>
                                                                                 </button></td>
                                                                         </tr>`)
-                updateSaveVendorButton()
-                                                                    });
-            
+                    updateSaveVendorButton()
+                });
+
                 $('#add-item-container5').on('click', '#del-btn5', function () {
                     var $row = $(this).closest('.tr');
                     var $rowsContainer = $row.parent();
@@ -15537,7 +15641,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             });
             cardCvc.attach('#card-cvc');
             function main() {
-                
+
                 $("#preloader").css("display", "flex")
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/openOrder',
@@ -15553,223 +15657,225 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        if($("#new-account").hasClass("active")){
+                        if ($("#new-account").hasClass("active")) {
                             sfc.createPayment({
-                            sessionToken: response.sessionToken, //received from openOrder API
-                            clientUniqueId: "695701003",
-                            merchantId: "6400701569295268447",
-                            merchantSiteId: "244298",
-                            cardHolderName: (userData.firstName + " " + userData.lastName),
-                            // paymentOption: {
-                            //     userPaymentOptionId: "95475308",
-                            //     card:{
-                            //     }
-                            // },
-                            paymentOption: scard,
-                            billingAddress: {
-                                email: userData.email,
-                                country: "US"
-                            }
-                        }, function (res) {
-                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                                $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
-                                    type: 'POST',
-                                    contentType: "application/json",
-                                    data: JSON.stringify({
-                                        "subscriptionId": userData.subscriptionID
-                                    }),
-                                    headers: {
-                                        Authorization: 'Bearer ' + localStorage.getItem("authtoken")
-                                    },
+                                sessionToken: response.sessionToken, //received from openOrder API
+                                clientUniqueId: "695701003",
+                                merchantId: "6400701569295268447",
+                                merchantSiteId: "244298",
+                                cardHolderName: (userData.firstName + " " + userData.lastName),
+                                // paymentOption: {
+                                //     userPaymentOptionId: "95475308",
+                                //     card:{
+                                //     }
+                                // },
+                                paymentOption: scard,
+                                billingAddress: {
+                                    email: userData.email,
+                                    country: "US"
+                                }
+                            }, function (res) {
+                                if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                    $.ajax({
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                        type: 'POST',
+                                        contentType: "application/json",
+                                        data: JSON.stringify({
+                                            "subscriptionId": userData.subscriptionID
+                                        }),
+                                        headers: {
+                                            Authorization: 'Bearer ' + localStorage.getItem("authtoken")
+                                        },
 
-                                    success: function (response) {
-                                        $.ajax({
-                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
-                                            type: "POST",
-                                            headers: {
-                                                Authorization: "Bearer " + localStorage.getItem("authtoken")
-                                            },
-                                            data: JSON.stringify({
-                                                userTokenId: userData.userId,
-                                                userNuveiId: userData.nuveiUserId,
-                                                planId: seletedPlanID,
-                                                upoId: res?.userPaymentOptionId,
+                                        success: function (response) {
+                                            console.log(userData)
+                                            $.ajax({
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                type: "POST",
+                                                headers: {
+                                                    Authorization: "Bearer " + localStorage.getItem("authtoken")
+                                                },
+                                                data: JSON.stringify({
+                                                    userTokenId: userData.userId,
+                                                    userNuveiId: userData.nuveiUserId,
+                                                    planId: seletedPlanID,
+                                                    upoId: res?.userPaymentOptionId,
+                                                    existPlanAmount: userData.currentPrice,
+                                                    currency: "USD",
+                                                    recurringAmount: amount[0]?.value,
+                                                    initialAmount: amount[0]?.value,
 
-                                                currency: "USD",
-                                                recurringAmount: amount[0]?.value,
-                                                initialAmount: amount[0]?.value,
+                                                }),
+                                                contentType: "application/json",
+                                                success: function (response) {
+                                                    $.ajax({
+                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                        method: 'PUT',
+                                                        data: JSON.stringify({ planID: seletedPlanID }),
+                                                        contentType: 'application/json',
+                                                        headers: {
+                                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                        },
+                                                        success: function (response) {
+                                                            $("#preloader").css("display", "none")
+                                                            $("#upgradetopro").modal("hide")
+                                                            $("#preloader").css("display", "none");
 
-                                            }),
-                                            contentType: "application/json",
-                                            success: function (response) {
-                                                $.ajax({
-                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
-                                                    method: 'PUT',
-                                                    data: JSON.stringify({ planID: seletedPlanID }),
-                                                    contentType: 'application/json',
-                                                    headers: {
-                                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                                    },
-                                                    success: function (response) {
-                                                        $("#preloader").css("display", "none")
-                                                        $("#upgradetopro").modal("hide")
-                                                        $("#preloader").css("display", "none");
+                                                            $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                                                            $("#myModal_success").modal("show")
 
-                                                        $("#myModal_success p").text("Your plan has been succesfully updated!!!")
-                                                        $("#myModal_success").modal("show")
+                                                            setTimeout(function () {
+                                                                $("#myModal_success").modal("hide");
+                                                            }, 2000);
+                                                            getData()
 
-                                                        setTimeout(function () {
-                                                            $("#myModal_success").modal("hide");
-                                                        }, 2000);
-                                                        getData()
+                                                        },
+                                                        error: function (xhr, status, error) {
+                                                            $("#myModal_warning_connection").modal("show")
+                                                            setTimeout(function () {
+                                                                $("#myModal_warning_connection").modal("hide");
+                                                            }, 2000);
 
-                                                    },
-                                                    error: function (xhr, status, error) {
-                                                        $("#myModal_warning_connection").modal("show")
-                                                        setTimeout(function () {
-                                                            $("#myModal_warning_connection").modal("hide");
-                                                        }, 2000);
+                                                        }
+                                                    });
 
-                                                    }
-                                                });
+                                                },
+                                                error: function (xhr, status, error) {
 
-                                            },
-                                            error: function (xhr, status, error) {
+                                                    $("#myModal_warning_declined").modal("show")
+                                                    setTimeout(function () {
+                                                        $("#myModal_warning_declined").modal("hide");
+                                                    }, 2000);
+                                                }
+                                            })
 
-                                                $("#myModal_warning_declined").modal("show")
-                                                setTimeout(function () {
-                                                    $("#myModal_warning_declined").modal("hide");
-                                                }, 2000);
-                                            }
-                                        })
+                                        }, error: function (xhr) {
 
-                                    }, error: function (xhr) {
+                                        }
 
-                                    }
-
-                                })
+                                    })
 
 
-                            } else {
-                                $("#upgradetopro").modal("hide")
-                                $("#preloader").css("display", "none")
-                                $("#myModal_declined").modal("show")
-                                setTimeout(function () {
-                                    $("#myModal_declined").modal("hide");
-                                }, 2000);
-                            }
-                        });
+                                } else {
+                                    $("#upgradetopro").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    $("#myModal_declined").modal("show")
+                                    setTimeout(function () {
+                                        $("#myModal_declined").modal("hide");
+                                    }, 2000);
+                                }
+                            });
 
-                        }else{
+                        } else {
                             sfc.createPayment({
-                            sessionToken: response.sessionToken, //received from openOrder API
-                            clientUniqueId: "695701003",
-                            merchantId: "6400701569295268447",
-                            merchantSiteId: "244298",
-                            cardHolderName: (userData.firstName + " " + userData.lastName),
-                            paymentOption: {
-                                userPaymentOptionId: $("#account").val(),
-                            },
-                            // paymentOption: scard,
-                            billingAddress: {
-                                email: userData.email,
-                                country: "US"
-                            }
-                        }, function (res) {
-                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                                $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
-                                    type: 'POST',
-                                    contentType: "application/json",
-                                    data: JSON.stringify({
-                                        "subscriptionId": userData.subscriptionID
-                                    }),
-                                    headers: {
-                                        Authorization: 'Bearer ' + localStorage.getItem("authtoken")
-                                    },
+                                sessionToken: response.sessionToken, //received from openOrder API
+                                clientUniqueId: "695701003",
+                                merchantId: "6400701569295268447",
+                                merchantSiteId: "244298",
+                                cardHolderName: (userData.firstName + " " + userData.lastName),
+                                paymentOption: {
+                                    userPaymentOptionId: $("#account").val(),
+                                },
+                                // paymentOption: scard,
+                                billingAddress: {
+                                    email: userData.email,
+                                    country: "US"
+                                }
+                            }, function (res) {
+                                if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                    $.ajax({
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                        type: 'POST',
+                                        contentType: "application/json",
+                                        data: JSON.stringify({
+                                            "subscriptionId": userData.subscriptionID
+                                        }),
+                                        headers: {
+                                            Authorization: 'Bearer ' + localStorage.getItem("authtoken")
+                                        },
 
-                                    success: function (response) {
-                                        $.ajax({
-                                            url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
-                                            type: "POST",
-                                            headers: {
-                                                Authorization: "Bearer " + localStorage.getItem("authtoken")
-                                            },
-                                            data: JSON.stringify({
-                                                userTokenId: userData.userId,
-                                                userNuveiId: userData.nuveiUserId,
-                                                planId: seletedPlanID,
-                                                upoId: $("#account").val(),
+                                        success: function (response) {
+                                            console.log(userData)
+                                            $.ajax({
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                type: "POST",
+                                                headers: {
+                                                    Authorization: "Bearer " + localStorage.getItem("authtoken")
+                                                },
+                                                data: JSON.stringify({
+                                                    userTokenId: userData.userId,
+                                                    userNuveiId: userData.nuveiUserId,
+                                                    planId: seletedPlanID,
+                                                    upoId: $("#account").val(),
+                                                    existPlanAmount: userData.currentPrice,
+                                                    currency: "USD",
+                                                    recurringAmount: amount[0]?.value,
+                                                    initialAmount: amount[0]?.value,
 
-                                                currency: "USD",
-                                                recurringAmount: amount[0]?.value,
-                                                initialAmount: amount[0]?.value,
+                                                }),
+                                                contentType: "application/json",
+                                                success: function (response) {
+                                                    $.ajax({
+                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                        method: 'PUT',
+                                                        data: JSON.stringify({ planID: seletedPlanID }),
+                                                        contentType: 'application/json',
+                                                        headers: {
+                                                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                                        },
+                                                        success: function (response) {
+                                                            $("#preloader").css("display", "none")
+                                                            $("#upgradetopro").modal("hide")
+                                                            $("#preloader").css("display", "none");
 
-                                            }),
-                                            contentType: "application/json",
-                                            success: function (response) {
-                                                $.ajax({
-                                                    url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
-                                                    method: 'PUT',
-                                                    data: JSON.stringify({ planID: seletedPlanID }),
-                                                    contentType: 'application/json',
-                                                    headers: {
-                                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                                    },
-                                                    success: function (response) {
-                                                        $("#preloader").css("display", "none")
-                                                        $("#upgradetopro").modal("hide")
-                                                        $("#preloader").css("display", "none");
+                                                            $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                                                            $("#myModal_success").modal("show")
 
-                                                        $("#myModal_success p").text("Your plan has been succesfully updated!!!")
-                                                        $("#myModal_success").modal("show")
+                                                            setTimeout(function () {
+                                                                $("#myModal_success").modal("hide");
+                                                            }, 2000);
+                                                            getData()
 
-                                                        setTimeout(function () {
-                                                            $("#myModal_success").modal("hide");
-                                                        }, 2000);
-                                                        getData()
+                                                        },
+                                                        error: function (xhr, status, error) {
+                                                            $("#myModal_warning_connection").modal("show")
+                                                            setTimeout(function () {
+                                                                $("#myModal_warning_connection").modal("hide");
+                                                            }, 2000);
 
-                                                    },
-                                                    error: function (xhr, status, error) {
-                                                        $("#myModal_warning_connection").modal("show")
-                                                        setTimeout(function () {
-                                                            $("#myModal_warning_connection").modal("hide");
-                                                        }, 2000);
+                                                        }
+                                                    });
 
-                                                    }
-                                                });
+                                                },
+                                                error: function (xhr, status, error) {
 
-                                            },
-                                            error: function (xhr, status, error) {
+                                                    $("#myModal_warning_declined").modal("show")
+                                                    setTimeout(function () {
+                                                        $("#myModal_warning_declined").modal("hide");
+                                                    }, 2000);
+                                                }
+                                            })
 
-                                                $("#myModal_warning_declined").modal("show")
-                                                setTimeout(function () {
-                                                    $("#myModal_warning_declined").modal("hide");
-                                                }, 2000);
-                                            }
-                                        })
+                                        }, error: function (xhr) {
 
-                                    }, error: function (xhr) {
+                                        }
 
-                                    }
-
-                                })
+                                    })
 
 
-                            } else {
-                                $("#upgradetopro").modal("hide")
-                                $("#preloader").css("display", "none")
-                                $("#myModal_declined").modal("show")
-                                setTimeout(function () {
-                                    $("#myModal_declined").modal("hide");
-                                }, 2000);
-                            }
-                        });
+                                } else {
+                                    $("#upgradetopro").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    $("#myModal_declined").modal("show")
+                                    setTimeout(function () {
+                                        $("#myModal_declined").modal("hide");
+                                    }, 2000);
+                                }
+                            });
 
                         }
                         console.log(response)
-                        
+
                     },
                     error: function (xhr, status, error) {
                         // Handle the error response
@@ -15781,6 +15887,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
 
             }
+
         </script>
 
 
@@ -16577,6 +16684,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         accountName: $("#accountName").val(),
                                         description: $("#description-bank").val(),
                                         active: $("#accountActive").is(":checked"),
+                                        accountTypeTenant: ""
                                     }),
                                     success: function (response) {
                                         $("#addModal-account").modal("hide")
@@ -16598,7 +16706,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     }
                                 })
 
-                            }else{
+                            } else {
                                 $("#preloader").css("display", "none")
                                 $("#myModal_warning_declined").modal("show")
                                 setTimeout(function () {

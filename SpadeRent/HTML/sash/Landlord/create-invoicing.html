@@ -2088,6 +2088,96 @@
                         <div class="col-12 mb-2">
                             <a href="javascript:;" class="mt-1" id="add-item1_update">+Add Item</a>
                         </div>
+                        <div class="col-12 mb-2">
+                            <a data-bs-toggle="collapse" href="#collapse-category-update" role="button" aria-expanded="false"
+                                aria-controls="collapse-category-update">
+                                + Add Category
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse-category-update">
+                            <div class="card card-body">
+                                <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0">
+                                                <tbody id="add-item-container1-add-update">
+                                                    <tr class="tr">
+                                                        <td>
+                                                            <label for=""><b>Categories</b><span class="text-danger"> *</span></label>
+                                                            <input type="text" name="categories-add-update"
+                                                                class="form-control category-add-update">
+                                                        </td>
+                                                        <td style="width: 1px;">
+                                                            <label for=""><b>Taxable</b></label>
+                                                            <div class="material-switch pull-right mt-1">
+                                                                <input id="someSwitchOptionInfo-add-update"
+                                                                    class="category-tax-add-update"
+                                                                    name="someSwitchOption001-add-update" type="checkbox">
+                                                                <label for="someSwitchOptionInfo-add-update"
+                                                                    class="label-info"></label>
+                                                            </div>
+                                                            <!-- <div class="form-check form-switch">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox" role="switch"
+                                                                    id="flexSwitchCheckChecked"
+                                                                    checked>
+                                                                <label class="form-check-label"
+                                                                    for="flexSwitchCheckChecked">Taxable</label>
+                                                            </div> -->
+                                                        </td>
+                                                        <td><button type="button" class="btn" id="del-btn1-add-update"
+                                                                style="text-align: left;">
+                                                                <i class="fi fi-rs-trash text-danger fs-5"></i>
+                                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="javascript:;" class="mt-1 text-primary" id="add-item1-add-update">+Add Line
+                                            Item</a>
+                                    </div>
+                                </div>
+                                <h2 class="h2-personal-inf text-dark mb-3 mt-5">Tax Setting</h2>
+                                <div
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group"> <label class="form-label"><b>Select
+                                                    Category</b></label> <select name="categories-add-update"
+                                                id="categories-add-update" class="form-control form-select"
+                                                data-bs-placeholder="Select Category">
+
+                                            </select> </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group mt-2">
+                                            <label for=""><b>Set Taxes for Invoice</b></label>
+                                            <input type="text" name="tax-add-update" placeholder="8.26%" id="tax-add-update"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-3 mt-4"
+                                        style="display: flex; width: auto; justify-content: space-evenly;">
+                                        <a href="#">
+                                            <button class="btn btn-light btn-pill m-2 w-100"
+                                                onclick="(() => { $('#collapse-category-update').collapse('hide'); })()">Close</button>
+                                        </a>
+                                        <button class="btn btn-primary btn-pill m-2 w-40" id="save-categories-add-update"
+                                            disabled>Save</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
                         <div class="col-md-12 col-lg-8">
                             <label for="">Memo (Optional)</label>
                             <textarea class="form-control mb-4" placeholder="Additional Notes" rows="4"
@@ -4218,7 +4308,7 @@
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.png')) {
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file.Image))
@@ -5400,6 +5490,201 @@
                     });
 
                 });
+
+
+                var counter_update;
+                $(document).on("click", "#add-item1-add-update", () => {
+                    counter_update++;
+                    $("#add-item-container1-add-update").append(`<tr class="tr">
+                    <td>
+                        <label for=""><b>Categories</b></label>
+                        <input type="text" name="category-add-update" class="form-control category-add-update">
+                    </td>
+                    <td style="width: 1px;">
+                        <label for=""><b>Taxable</b></label>
+                        <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo-add-update` + counter_update + `" class='category-tax-add-update' name="someSwitchOption-add-update` + counter_update + `" type="checkbox"> <label for="someSwitchOptionInfo-add-update` + counter_update + `" class="label-info"></label> </div>                                                                      </td>
+                    <td><button type="button" class="btn" id="del-btn1-add-update" style="text-align: left;">
+                        <i class="fi fi-rs-trash text-danger fs-5"></i>
+                    </button></td>
+                </tr>`)
+
+                });
+                $('#add-item-container1-add-update').on('click', '#del-btn1-add-update', function () {
+                    var $row = $(this).closest('.tr');
+                    var $rowsContainer = $row.parent();
+
+                    // Retrieve the category from the deleted row
+                    var category = $row.find('.category-add-update').val();
+
+                    if ($rowsContainer.children('.tr').length > 1) {
+                        // Remove the row
+                        $row.remove();
+                        if ($('#categories-add-update').val() === category) {
+                            // Clear the tax input field
+                            $('#tax-add-update').val('');
+                        }
+                        // Remove the category from the select box
+                        $('#categories-add-update option[value="' + category + '"]').remove();
+
+                        // Remove the category from localStorage
+                        localStorage.removeItem(category);
+
+                        // Check if the deleted category is currently selected in the select box
+                    } else {
+                        // alert('Cannot delete the last row.');
+                    }
+                });
+                $(document).on('change', '.category-tax-add-update', function () {
+
+                    var category = $(this).closest('tr').find('.category-add-update').val();
+                    var taxable = $(this).is(':checked');
+                    console.log(taxable, category)
+                    if (taxable) {
+
+                        // Add the category to the select box if it is taxable and not already present
+                        var optionExists = $('#categories-add-update option[value="' + category + '"]').length > 0;
+                        if (!optionExists) {
+                            $('#categories-add-update').append($('<option>', {
+                                value: category,
+                                text: category
+                            }));
+                        }
+                    } else {
+                        // Remove the category from the select box if it is not taxable
+                        $('#categories-add-update option[value="' + category + '"]').remove();
+                    }
+                });
+                $('#categories-add-update').change(function () {
+                    var selectedCategory = $(this).val();
+                    const category = categoryData?.filter((category) => { return selectedCategory === category.categorieName })
+                    var taxAmount;
+                    if (category?.length === 1) {
+                        taxAmount = category[0].setTaxes;
+                    } else {
+                        taxAmount = localStorage.getItem(selectedCategory);
+                    }
+                    if (taxAmount !== null) {
+                        $('#tax-add-update').val(taxAmount);
+                    } else {
+                        $('#tax-add-update').val("");
+                    }
+                });
+
+                // Event handler for tax input change
+                $('#tax-add-update').change(function () {
+                    var selectedCategory = $('#categories-add-update').val();
+                    var taxAmount = $(this).val();
+
+                    localStorage.setItem(selectedCategory, taxAmount);
+                });
+                $(document).on("input", "[name='categories-add-update']", function () {
+                    var atLeastOneFilled = false;
+                    $("[name='categories-add-update']").each(function () {
+                        console.log($(this).val())
+                        if ($(this).val() !== '' && $(this).val() !== null) {
+                            atLeastOneFilled = true;
+                            return false; // Exit the loop early if a filled input is found
+                        }
+                    });
+
+                    if (atLeastOneFilled) {
+                        $('#save-categories-add-update').attr('disabled', false);
+                    } else {
+                        $('#save-categories-add-update').attr('disabled', true);
+
+                    }
+                });
+                $('#collapse-category-update').on('hidden.bs.collapse', function () {
+                    $(this).find('input, select').val(''); // Reset input and select values
+                    $(this).find('input[type="checkbox"]').prop('checked', false); // Uncheck checkboxes
+                    $(this).find('input, select').removeClass('border-green border-danger'); // Remove validation classes
+                }
+                );
+                $('#save-categories-add-update').click(function () {
+                    $('#save-categories-add-update').prop('disabled', true);
+                    var data = []; // Array to store data for each row
+
+                    // Iterate over each table row
+                    $('#collapse-category-update .tr').each(function () {
+                        var categoryName = $(this).find('.category-add-update').val();
+                        //   var taxAmount = $(this).find('.tax-amount-add').val();
+                        var categoryId = $(this).find('.category-update').attr('id')
+                        var taxable = $(this).find('.category-tax-add-update').is(':checked');
+                        if (typeof categoryName !== 'undefined') {
+
+                            var row = {
+                                categoryName: categoryName,
+                                categoryId: categoryId,
+                                taxable: taxable
+                            };
+                            if (localStorage.getItem(categoryName)) {
+                                row.taxAmount = localStorage.getItem(categoryName)
+                            } else {
+                                const category = categoryData?.filter((category) => { return categoryName == category.categorieName })
+                                if (category?.length === 1) {
+                                    taxAmount = category[0].setTaxes;
+                                    row.taxAmount = taxAmount
+                                }
+                                else {
+                                    row.taxAmount = null
+                                }
+
+                            }
+                            // Add the row object to the data array
+                            localStorage.removeItem(categoryName)
+                            data.push(row);
+                        }
+                        // Create an object for each row's data
+
+                    });
+                    console.log(data)
+                    // Send the data to the backend using AJAX
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            $('#save-categories-add-update').prop('disabled', false);
+
+                            $("#collapse-category-update").collapse('hide');
+                            const property = $("#tenants").attr("data-value");
+                            const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
+                            $("#add-item-container1_update").find(".tr").find("[name='category_update']").each(function () {
+                                const selectedCategory = $(this);
+                                response?.data?.forEach(function (category) {
+                                    const optionExists = (value) => selectedCategory.find('option[value="' + value + '"]').length > 0;
+                                    if (!optionExists(category.id)) {
+
+                                        const newOption = $('<option></option>').text(category.categorieName).val(category.id);
+                                        selectedCategory.append(newOption);
+                                        // Check if category.id already exists in categoryData
+                                        const categoryExists = categoryData.some(item => item.id === category.id);
+
+                                        if (!categoryExists) {
+
+                                            categoryData.push(category);
+                                        }
+                                    }
+                                });
+                            });
+
+                            // Perform any additional actions or show success message
+                        },
+                        error: function (xhr, status, error) {
+                            $('#save-categories-add-update').prop('disabled', false);
+
+                            // Handle the error response
+                            console.log('Error occurred:', error);
+                            // Perform error handling or show error message
+                        }
+                    });
+
+                });
+
 
                 $(document).on("click", "#add-item1", () => {
                     const property = $("#tenants").attr("data-value");
