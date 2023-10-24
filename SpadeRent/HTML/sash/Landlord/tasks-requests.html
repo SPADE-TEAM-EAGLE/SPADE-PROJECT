@@ -3599,7 +3599,7 @@ color: #000;
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
                         if (file.imageKey
-                            .endsWith('.jpg') || file.imageKey
+                            .endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file.imageKey
                                 .endsWith('.png')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
@@ -3874,7 +3874,24 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
 
                                 var currentDate = new Date();
 var dueDate = '';
+var priorityClass = ''; // Initialize a variable to store the CSS class for text color
 
+if (task.priority == 'High') {
+    priorityClass = 'text-danger'; // Set the class for high priority
+} else if (task.priority == 'Low') {
+    priorityClass = 'text-success'; // Set the class for low priority
+} else if (task.priority == 'Moderate') {
+    priorityClass = 'text-warning'; // Set the class for moderate priority
+}
+var priorityIcon = ''; // Initialize a variable to store the CSS class for text color
+
+if (task.priority == 'High') {
+    priorityIcon = '<i class="fi fi-rs-triangle-warning me-1 text-danger"></i>'; // Set the class for high priority
+} else if (task.priority == 'Low') {
+    priorityIcon = '<i class="fi fi-rs-hexagon-exclamation me-1 text-success"></i>'; // Set the class for low priority
+} else if (task.priority == 'Moderate') {
+    priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
+}
 if (task.dueDate) {
     var targetDate = new Date(task.dueDate);
     var timeDiff = targetDate.getTime() - currentDate.getTime();
@@ -3886,9 +3903,9 @@ if (task.dueDate) {
 
     var formattedDueDate = `${month}/${day}/${year}`;
 
-    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
 } else {
-    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal text-danger"> <i class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
 }                                var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                                 var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 

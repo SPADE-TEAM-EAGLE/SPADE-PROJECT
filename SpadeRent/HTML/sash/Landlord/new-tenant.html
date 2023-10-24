@@ -3109,7 +3109,7 @@ color: #000;
             // $("#succesModal").modal("show")
             let tenantID;
             $("#send-email-invite").click(() => {
-                    $("#succesModal").modal("hide")
+                    $("#preloader").css("display", "flex");
                     console.log(tenantID)
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
@@ -3123,9 +3123,15 @@ color: #000;
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function(response) {
-                            window.location = "./add-tenant.html"
+                            $("#preloader").css("display", "none");
+                            
+                                $('#succesModal').modal('hide');
+                                window.location = './add-tenant.html'
+                            
+                            
                         },
                         error: function(xhr, status, error) {
+                            $("#preloader").css("display", "none");
                             // Handle the error response
                             console.log(xhr)
                             console.log(status)
@@ -3493,9 +3499,9 @@ resetAccordions()
     // $('#accordion-item1').find('.file-grid').empty();
     // getData()
 })
-$("#succesModal").on('hide.bs.modal', function() {
-    window.location = './add-tenant.html'
-})
+// $("#succesModal").on('hide.bs.modal', function() {
+//     window.location = './add-tenant.html'
+// })
       
             $(document).on('click',"#next",() => {
                 console.log(1)

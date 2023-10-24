@@ -155,6 +155,7 @@ router.put('/verifyEmailUpdate', userController.verifyEmailUpdate);
 router.post("/addInvoiceCategory", verifyToken, invoiceController.createInvoiceCategories);
 router.put("/updatedInvoiceCategory", verifyToken, invoiceController.updateInvoiceCategories);
 router.get("/invoiceCategory", verifyToken, invoiceController.getInvoiceCategories);
+router.post("/invoiceCategoryTenant", verifyTokenTenant, tenantPortalController.getInvoiceCategoriesTenant);
 router.get("/getInvoiceCategoriesText", verifyToken, invoiceController.getInvoiceCategoriesText);
 router.get("/dashboard", verifyToken, userController.getDashboardData);
 router.get("/checkNotify", verifyToken, notifyController.getCheckedNotify);

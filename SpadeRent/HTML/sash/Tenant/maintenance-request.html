@@ -1447,11 +1447,11 @@
                                 </div>
                                 <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
                                 <h1 class="mt-3 text-white font-weight-900"
-                                    style="font-weight: 800; margin-bottom: 0px;">$0</h1>
+                                    style="font-weight: 800; margin-bottom: 0px;" id="amount-payable">$0</h1>
                                 <div style="display: flex; align-items: center;"> <i
                                         class="side-menu__icon fi fi-rs-calendar text-white"></i><span class="side-menu__labell text-white
-                   ">&nbsp;&nbsp; Your next payment of $0 is due on N/A&emsp;<a href="#"
-                                            class="btn btn-primary btn-pill" data-bs-target="#closeaccount"
+                   ">&nbsp;&nbsp; Your next payment of <span id="amount-payable-span"></span> is due on N/A&emsp;<a href="#"
+                                            class="btn btn-primary btn-pill btn-paynow-banner" data-bs-target="#closeaccount"
                                             data-bs-toggle="modal">Pay Now</a></span></div>
                                 <div style="display: flex; align-items: center;"><i class="side-menu__icon fi fi-rs-building text-white"></i><span
                                         class="side-menu__labell text-white" id="tenant-address">&nbsp;&nbsp;
@@ -2015,6 +2015,27 @@
                         console.log(error);
                     }
                 });
+                $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
+                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                    $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+                    }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
             });
         </script>
         <script src="../assets/js/completeTenantProfile.js"></script>
@@ -2261,9 +2282,25 @@ if (task.ImageKey) {
 
                                     var assignTo = '<td>Not Assigned</td>';
                                 }
+                                var priorityClass = ''; // Initialize a variable to store the CSS class for text color
 
-                            var dueDate = '<td class="dueDate" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal text-danger"> <i
-                                                                        class="fe fe-circle me-1"></i>${task.priority}</span>` + '</td>';
+if (task.priority == 'High') {
+    priorityClass = 'text-danger'; // Set the class for high priority
+} else if (task.priority == 'Low') {
+    priorityClass = 'text-success'; // Set the class for low priority
+} else if (task.priority == 'Moderate') {
+    priorityClass = 'text-warning'; // Set the class for moderate priority
+}
+var priorityIcon = ''; // Initialize a variable to store the CSS class for text color
+
+if (task.priority == 'High') {
+    priorityIcon = '<i class="fi fi-rs-triangle-warning me-1 text-danger"></i>'; // Set the class for high priority
+} else if (task.priority == 'Low') {
+    priorityIcon = '<i class="fi fi-rs-hexagon-exclamation me-1 text-success"></i>'; // Set the class for low priority
+} else if (task.priority == 'Moderate') {
+    priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
+}
+                            var dueDate = '<td class="dueDate" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                    
@@ -2473,7 +2510,7 @@ if (task.ImageKey) {
         } else {
             // Handle S3 bucket URLs for images and PDFs
             if (file.ImageKey
-.endsWith('.jpg') || file.ImageKey
+.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file.ImageKey
 .endsWith('.png')) {
                 fileElement.append(
                     $('<div>').addClass('file-preview')
@@ -2733,7 +2770,7 @@ $('#fileInput').on('change', function () {
                         );
                     } else {
                         // Handle S3 bucket URLs for images and PDFs
-                        if (file?.endsWith('.jpg') || file?.endsWith('.png')) {
+                        if (file?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.endsWith('.png')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file))
