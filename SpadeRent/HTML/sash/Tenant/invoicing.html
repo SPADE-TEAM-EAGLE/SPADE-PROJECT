@@ -2823,14 +2823,10 @@
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
-                        contentType: "application/json",
-                        data:JSON.stringify({
-                            "userId":"245"
-                        }),
+                        
                         success: async function (response) {
                             console.log(response)
                             categoryData = response.data
-
                             
                         },
                         error: function (xhr, status, error) {
@@ -2885,7 +2881,7 @@
 
                 data.memo.forEach((item) => {
                     // Calculate the tax amount as a percentage of the item amount
-                    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+                    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
 
                         // Add the tax amount to the totalTaxAmount variable
                         totalTaxAmount += taxAmount;
@@ -2895,9 +2891,14 @@
                             categoryname = "Rent Amount"
                         } else if (item.category == "triple") {
                             categoryname = "Triple Net"
-                        } else if (item.category == "base") {
+                        }
+                        else if (item.category == "maintainance") {
+                            categoryname = "Maintainance"
+                        }
+                         else if (item.category == "base") {
                             categoryname = "Base Rent"
                         } else {
+                            console.log(item.category)
                             const category = categoryData.filter((categorydata) => {
                                 return categorydata.id == item.category
                             })
@@ -2912,7 +2913,7 @@
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
-            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax?item.tax:0} %</td>
             <td style="border-bottom: 2px solid black;">${item.amount}</td>
             
         </tr>
@@ -2971,19 +2972,46 @@
 
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
+                    const category = categoryData.filter((cat) => { return item.category == cat.id })
 
                     console.log(item)
-                    $("#view-invoice-line-item").append(`
+                    if (category.length == 0) {
+                            let categoryname;
+                            if (item.category == "rent") {
+                                categoryname = "Rent Amount"
+                            } 
+                            else if (item.category == "maintainance") {
+                                categoryname = "Maintainance"
+                            }
+                            else if (item.category == "triple") {
+                                categoryname = "Triple Net"
+                            } else {
+                                categoryname = "Base Rent"
+                            }
+                            $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${item.category}</b></p>
+                                                        <p class="text-primary"><b>${categoryname}</b></p>
                                                     </td>
                                                     
-                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
                                                     <td><p class="text-primary"><b>${item.memo}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
+                        } else {
+                            $("#view-invoice-line-item").append(`
+                <tr>
+                                                    <td>
+                                                        <p class="text-primary"><b>${category[0]?.categorieName}</b></p>
+                                                    </td>
+                                                    
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
+                                                </tr>
+                `)
+                        }
 
 
                 })

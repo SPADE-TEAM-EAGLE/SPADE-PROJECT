@@ -158,6 +158,7 @@ var chart = c3.generate({
 
   // Step 2: Initialize the Morris Donut chart using the variable
   function createDonutChart(data){
+    console.log(data)
     donutChartInstance = new Morris.Donut({
         element: 'morrisBar88',
         data: data,
@@ -173,6 +174,7 @@ var chart = c3.generate({
     });
   }
   function updateDonutChart(data){
+    console.log(data)
     donutChartInstance.setData(data);
   }
  /* Account status chart-donut*/

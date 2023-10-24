@@ -517,11 +517,11 @@ exports.updateAuthTenant = async (req, res) => {
 };
 exports.getInvoiceCategoriesTenant = async (req, res) => {
   try {
-    const { userId } = req.body;
-    console.log(req.body)
+    const { landlordID } = req.user;
+   
     const invoiceImagecheckresult = await queryRunner(
       selectQuery("InvoiceCategories", "landLordId"),
-      [userId]
+      [landlordID]
     );
     if (invoiceImagecheckresult[0].length > 0) {
       res.status(200).json({
