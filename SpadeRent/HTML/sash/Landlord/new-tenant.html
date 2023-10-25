@@ -1770,10 +1770,10 @@ color: #000;
                                         <h3 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3"><i
+                                        <!-- <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification" class="btn btn-primary btn-pill btn-xl email-verification-btn mb-3"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
-                                                class="angle fe fe-arrow-right create-btn-plus"></i></a>
+                                                class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
                                                 <p class="text-white m-0 mt-3" id="account-text">Your account will be locked after 7-Days</p>
                                     </div>
                                     <div class="col-lg-3">
@@ -3109,7 +3109,7 @@ color: #000;
             // $("#succesModal").modal("show")
             let tenantID;
             $("#send-email-invite").click(() => {
-                    
+                    $("#preloader").css("display", "flex");
                     console.log(tenantID)
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
@@ -3123,14 +3123,15 @@ color: #000;
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function(response) {
-                            $("#succesModal").modal("show")
-                            setTimeout(function() {
+                            $("#preloader").css("display", "none");
+                            
                                 $('#succesModal').modal('hide');
                                 window.location = './add-tenant.html'
-                            }, 2000);
+                            
                             
                         },
                         error: function(xhr, status, error) {
+                            $("#preloader").css("display", "none");
                             // Handle the error response
                             console.log(xhr)
                             console.log(status)

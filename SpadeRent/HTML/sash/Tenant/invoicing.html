@@ -2780,7 +2780,9 @@
         getData()
     </script> -->
     <script>
+        var categoryData;var landlordId;
         $(document).ready(() => {
+            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
@@ -2790,12 +2792,13 @@
                 success: function (response) {
 
                     function toTitleCase(str) {
-                        console.log(str)
-                        return str.replace(/\w\S*/g, function (txt) {
-                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                        });
-                    }
-                    $("#tenant-address").empty()
+                            console.log(str)
+                            return str.replace(/\w\S*/g, function (txt) {
+                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                            });
+                        }
+                        landlordId=response.landlordID
+                        $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
                     $("#header-user").text(toTitleCase(response.userName))
                     $("#tenant-name").empty()
@@ -2813,6 +2816,25 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             });
+            
+            $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategoryTenant',
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        
+                        success: async function (response) {
+                            console.log(response)
+                            categoryData = response.data
+                            
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
 
             // console.log(1222222)
             let invoiceData;
@@ -2859,23 +2881,29 @@
 
                 data.memo.forEach((item) => {
                     // Calculate the tax amount as a percentage of the item amount
-                    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax)) / 100;
+                    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
 
-                    // Add the tax amount to the totalTaxAmount variable
-                    totalTaxAmount += taxAmount;
-                    let categoryname;
-                    if (item.category == "rent") {
-                        categoryname = "Rent Amount"
-                    } else if (item.category == "triple") {
-                        categoryname = "Triple Net"
-                    } else if (item.category == "base") {
-                        categoryname = "Base Rent"
-                    } else {
-                        const category = categoryData.filter((categorydata) => {
-                            return categorydata.id == item.category
-                        })
-                        categoryname = category[0].categorieName
-                    }
+                        // Add the tax amount to the totalTaxAmount variable
+                        totalTaxAmount += taxAmount;
+                        let categoryname;
+                        console.log(categoryData)
+                        if (item.category == "rent") {
+                            categoryname = "Rent Amount"
+                        } else if (item.category == "triple") {
+                            categoryname = "Triple Net"
+                        }
+                        else if (item.category == "maintainance") {
+                            categoryname = "Maintainance"
+                        }
+                         else if (item.category == "base") {
+                            categoryname = "Base Rent"
+                        } else {
+                            console.log(item.category)
+                            const category = categoryData.filter((categorydata) => {
+                                return categorydata.id == item.category
+                            })
+                            categoryname = category[0].categorieName
+                        }
 
                     $("#memo-table").append(`
         <tr class="text-black">
@@ -2885,7 +2913,7 @@
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
-            <td style="border-bottom: 2px solid black;"> ${item.tax} %</td>
+            <td style="border-bottom: 2px solid black;"> ${item.tax?item.tax:0} %</td>
             <td style="border-bottom: 2px solid black;">${item.amount}</td>
             
         </tr>
@@ -2944,19 +2972,46 @@
 
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
+                    const category = categoryData.filter((cat) => { return item.category == cat.id })
 
                     console.log(item)
-                    $("#view-invoice-line-item").append(`
+                    if (category.length == 0) {
+                            let categoryname;
+                            if (item.category == "rent") {
+                                categoryname = "Rent Amount"
+                            } 
+                            else if (item.category == "maintainance") {
+                                categoryname = "Maintainance"
+                            }
+                            else if (item.category == "triple") {
+                                categoryname = "Triple Net"
+                            } else {
+                                categoryname = "Base Rent"
+                            }
+                            $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${item.category}</b></p>
+                                                        <p class="text-primary"><b>${categoryname}</b></p>
                                                     </td>
                                                     
-                                                    <td><p class="text-primary"><b>${item.property}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
                                                     <td><p class="text-primary"><b>${item.memo}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
+                        } else {
+                            $("#view-invoice-line-item").append(`
+                <tr>
+                                                    <td>
+                                                        <p class="text-primary"><b>${category[0]?.categorieName}</b></p>
+                                                    </td>
+                                                    
+                                                    <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
+                                                </tr>
+                `)
+                        }
 
 
                 })
