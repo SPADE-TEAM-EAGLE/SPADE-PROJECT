@@ -1079,6 +1079,7 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
 //  ############################# Check unpaid invoices Start ############################################################
 exports.checkUnpaidInvoices = async (req, res) => {
   const {tenants} = req.query;
+  // const {tenants} = req.body;
   console.log(tenants);
   // tenants is in array form
   try {

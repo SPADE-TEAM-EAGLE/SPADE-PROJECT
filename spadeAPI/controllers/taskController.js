@@ -371,9 +371,10 @@ exports.addTasks = async (req, res) => {
     // created_at,
     // created_by,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   const vendorID = assignee;
   const { userId, userName,taskEmail } = req.user;
+  // const { userId, userName,taskEmail } = req.body;
 
   const currentDate = new Date();
   try {
@@ -403,7 +404,8 @@ exports.addTasks = async (req, res) => {
         return res.status(400).send("Error1");
       }
       // else {
-      const tasksID = TasksResult[0].insertId;
+        const tasksID = TasksResult[0].insertId;
+        if(images){
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
@@ -417,6 +419,7 @@ exports.addTasks = async (req, res) => {
           throw new Error("data doesn't inserted in property image table");
         }
       }
+    }
       //   //  add vendor
       for (let i = 0; i < vendorID.length; i++) {
         const Vendorid = vendorID[i];

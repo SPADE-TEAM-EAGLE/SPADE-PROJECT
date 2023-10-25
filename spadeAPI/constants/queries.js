@@ -682,7 +682,7 @@ GROUP BY
 i.id;
 `;
 exports.resendEmailQuery =
-  "SELECT * FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?";
+  "SELECT *, invoice.id as invoiceId FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?";
 exports.getByIdInvoicesQuery =
   "SELECT i.id as invoiceID,i.dueDate, i.daysDue , i.startDate, i.totalAmount, i.status,i.created_at, t.firstName AS tFName, t.lastName AS tLName, t.phoneNumber as tPhone, p.propertyName, pu.unitNumber, l.FirstName as landlordFName, l.LastName as landlordLName, l.phone as landlordPhone FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits AS pu ON t.propertyUnitID = pu.id JOIN users as l ON l.id = i.landlordID WHERE i.id = ? ";
 exports.updateInvoice =
@@ -1078,7 +1078,11 @@ exports.updateBusinessLogo = "UPDATE users SET businessLogo = ? where id = ? ";
 exports.updateUserEmail = "UPDATE users SET Email = ?, updated_at = ? where id = ?";
 exports.checkProperty = "SELECT * FROM property where propertyName = ? AND address = ? AND landlordID = ? ";
 exports.prospectusTimeQuery = "SELECT firstName, lastName, prospectusStatus, email FROM spade_Rent.prospectus WHERE  landlordId = ? AND createdDate >= ? AND createdDate <= ? ";
-exports.checkUpaidInvoiceQuery = `SELECT firstName, lastName, email FROM tenants join invoice on tenants.id = invoice.tenantID WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'`;
+exports.checkUpaidInvoiceQuery = `SELECT DISTINCT firstName, lastName, email
+FROM tenants
+JOIN invoice ON tenants.id = invoice.tenantID
+WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'
+`;
 exports.addProspectusSources = "INSERT INTO prospectusSources (landlordId,sourcesCampaign) VALUES (?,?)";
 exports.sourcesCampaignInsight = "SELECT COUNT(*) AS campaignCount, CASE WHEN ps.sourcesCampaign IS NOT NULL THEN ps.sourcesCampaign ELSE 'NotFound' END AS sourceCampaign FROM prospectus p LEFT JOIN prospectusSources ps ON p.sourceCampaign = ps.id WHERE p.landlordId = ? AND p.createdDate >= ? AND p.createdDate <= ? GROUP BY p.sourceCampaign ORDER BY p.sourceCampaign DESC";
 exports.dashboardProspectusInsight = "SELECT SUM(CASE WHEN prospectusStatus = 'Qualified' THEN 1 ELSE 0 END) AS Qualified, SUM(CASE WHEN prospectusStatus = 'Disqualified' THEN 1 ELSE 0 END) AS Disqualified, SUM(CASE WHEN prospectusStatus NOT IN ('Qualified', 'Disqualified') THEN 1 ELSE 0 END) AS Active FROM spade_Rent.prospectus WHERE landlordId = ? AND createdDate >= ? AND createdDate <= ? ";

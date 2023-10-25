@@ -73,32 +73,39 @@ exports.sendMailLandlord = async (email, mailSubject , name) => {
 // Invoice email
 exports.invoiceSendMail = async (
   tenantName,
-  tenantEmail,
+  address,
+  dueDate,
+  terms,
+  additionalNotes,
+  lineItems,
+  totalAmount,
   mailSubject,
-  dueDays,
-  invoiceID,
-  landlordName,
-  id,
-  businessName,
-  invoiceTemplate
+  tenantEmail,
+  invoiceEmail,
+  landlordID
 ) => {
   try {
-    console.log(id)
+    // console.log(id)
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
-      id
+      landlordID
     ]);
-    
+    const landlordResult = await queryRunner(selectQuery("users", "id"), [
+      landlordID
+    ]);
+    const LandlordName = landlordResult[0][0].FirstName + " " + landlordResult[0][0].LastName;
+    const LandlordPhone = landlordResult[0][0].Phone;
+    const BusinessAddress = landlordResult[0][0].BusinessAddress+","+landlordResult[0][0].BACity+","+landlordResult[0][0].BAState+","+landlordResult[0][0].BAZipcode;
+
     if (islandlordNotify[0][0].emailNotification === "no") {
       console.log("email notification is off");
       return;
     }
-    if(invoiceTemplate == '0'){
-      var emailHTML = invoiceMail.invoiceHTML0(tenantName, dueDays, invoiceID, landlordName,businessName)
-    }else{
-      var emailHTML = invoiceMail.invoiceHTML1(tenantName, dueDays, invoiceID, landlordName,businessName)
-    
-    }
-
+    // if(invoiceEmail == '1'){
+      var emailHTML = invoiceMail.invoiceHTML0(tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,LandlordName,LandlordPhone,BusinessAddress)
+    // }
+    // else{
+    //   var emailHTML = invoiceMail.invoiceHTML1(tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount)
+    // }
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
@@ -146,12 +153,12 @@ exports.taskSendMail = async (
     //   console.log("email notification is off");
     //   return;
     // }
-    if(taskTemplate == '0'){
+    // if(taskTemplate == '0'){
       var emailHTML = taskMail.taskHTML0(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
-    }else{
-      var emailHTML = taskMail.taskHTML1(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
+    // }else{
+    //   var emailHTML = taskMail.taskHTML1(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
     
-    }
+    // }
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
