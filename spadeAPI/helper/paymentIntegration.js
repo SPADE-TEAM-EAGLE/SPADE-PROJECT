@@ -689,8 +689,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   } else {
     requestData.recurringPeriod = {
       day: "0",
-      month: "1",
-      year: "0"
+      month: "0",
+      year: "1"
     };
     requestData.endAfter = {
       day: "0",
@@ -724,7 +724,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
 
   // Annually downgrade
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
-    let AddDays = 365 - daysDifference;
+    console.log()
+    let AddDays = 365 - daysDifferenceAnnually;
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
   
     requestData.startAfter = {
