@@ -14717,6 +14717,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm").modal("show")
                     }
+                    console.log("kmknnjnjtdfbgcsgbgcdx")
+                    console.log(time == "Year" && currentSelectedId > cardId)
                     if (time == "Year" && currentSelectedId > cardId) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
@@ -14786,7 +14788,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm").modal("show")
+                        $("#downgradeConfirm-yearly").modal("show")
                     } 
                     else {
                         $("#payment-month").text("Year")
@@ -15898,7 +15900,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -15911,7 +15913,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15933,7 +15935,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     
                                                     if(!selectedDowngrade){
                                                         $.ajax({
-                                                        url: 'http://localhost:3000/api/spade/updatePlanId',
+                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
                                                         contentType: 'application/json',
@@ -16022,7 +16024,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -16035,7 +16037,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
