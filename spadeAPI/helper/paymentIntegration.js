@@ -578,6 +578,21 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     },
     timeStamp: timestamp,
   };
+
+// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+
+function formatDateForSQL(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+
+
   // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
   var correctPlanId;
 
@@ -593,11 +608,11 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
   let daysDifference
-  if (userTokenId) {
+  // Monthly
+  if (monthlyAnnual == "Monthly") {
     console.log(UserResult[0][0]);
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
     const subscriptionDate = new Date();
-
     const currentDate = {
       day: subscriptionDate.getDate(),
       month: subscriptionDate.getMonth() + 1,
@@ -620,6 +635,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     // Calculate the difference in years
     let yearsDifference = currentDate.year - createdDate.year;
     yearsDifference = Math.max(0, yearsDifference);
+    // Monthly Upgrade
     if (
       currentDate.month == createdDate.month &&
       currentDate.year == createdDate.year &&
@@ -642,8 +658,21 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
 
     }
   }
-
-  // console.log(monthlyAnnual);
+  let daysDifferenceAnnually;
+  if (monthlyAnnual == "Annually") {
+    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+const currentDate = new Date();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+ daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
+//
+      let remainingDays = daysDifferenceAnnually;
+      remainingDays = 365 - remainingDays;
+      let initialAmountChange = existPlanAmount / 365;
+      initialAmountChange = remainingDays * initialAmountChange;
+      initialAmountChange = requestData.initialAmount - initialAmountChange;
+      requestData.initialAmount = initialAmountChange;
+  }
 
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.00001;
@@ -669,21 +698,13 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       year: "1"
     };
   }
-  if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
+
+   
+  // Monthly Downgrade 
+  if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly") {
     let AddDays = 30 - daysDifference;
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-
-    // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-    function formatDateForSQL(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      const seconds = String(date.getSeconds()).padStart(2, '0');
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    }
-
+  
     requestData.startAfter = {
       day: AddDays,
       month: "0",
@@ -698,6 +719,28 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
       day: AddDays,
       month: "1",
       year: "0"
+    };
+  }
+
+  // Annually downgrade
+  if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
+    let AddDays = 365 - daysDifference;
+    subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+  
+    requestData.startAfter = {
+      day: AddDays,
+      month: "0",
+      year: "0"
+    };
+    requestData.recurringPeriod = {
+      day: AddDays - 1,
+      month: "0",
+      year: "0"
+    };
+    requestData.endAfter = {
+      day: AddDays,
+      month: "0",
+      year: "1"
     };
   }
   console.log("requestData.endAfter : ", requestData.startAfter);
@@ -738,19 +781,29 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
           console.log(planId + " " + UserResult[0][0].PlanID);
           const data = JSON.parse(responseData);
           console.log(data);
-          if (planId < UserResult[0][0].PlanID && monthlyAnnual === "Monthly") {
-            console.log("planId");
+          // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
+          if (planId < UserResult[0][0].PlanID) {
+            // console.log("planId");
             const subscriptionDate = new Date();
-            AddDays = 30 - daysDifference;
-            subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-            const subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+            let subscriptionCreatedDateFormatted;
+            if(monthlyAnnual == "Monthly"){
+              AddDays = 30 - daysDifference;
+              subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+              subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);              
+            }else{
+              AddDays = 365 - daysDifference;
+              subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+               subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+            }
+
             const result = await queryRunner(insertUserBankFuture, [userTokenId, userNuveiId, planId, data.subscriptionId, userTokenId, subscriptionCreatedDateFormatted]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
               });
             }
-          } else {
+          } // For Yearly
+          else {
             console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
             if (result[0].affectedRows == 1) {
