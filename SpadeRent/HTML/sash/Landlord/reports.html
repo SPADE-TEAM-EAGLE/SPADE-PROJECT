@@ -2840,7 +2840,7 @@
                                                                 data-placeholder="Select property status"
                                                                 id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
-
+                                                                <option value="All">All</option>
                                                                 <option value="Occupied">Occupied Property</option>
                                                                 <option value="Vacant">Vaccant Property</option>
                                                             </select>
@@ -5063,6 +5063,7 @@
                 if (propertyData.length == 0) {
                     $("#table_body_property_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
                 } else {
+                    $("#propertySelect").append($('<option></option>').text("All").val("All"));
                     propertyData.forEach((property, index) => {
 
                         if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
@@ -5312,6 +5313,7 @@ if (task.priority == 'High') {
 
             function constructPropertyTableTenant(propertyData, id) {
                 $("#table_body_tenant_report").empty()
+                $("#tenantSelect").append($('<option></option>').text("All").val("All"));
                 propertyData.forEach((tenant, index) => {
                     console.log(tenant)
                     if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
@@ -5459,8 +5461,12 @@ if (task.priority == 'High') {
                                 return property?.occupancy_status == selectedValue
                             });
                         }
+                        if(filteredData.length == 0){
+                            constructPropertyTable(propertyData);
+                        }else{
 
-                        constructPropertyTable(filteredData);
+                            constructPropertyTable(filteredData);
+                        }
                     }
                     else {
 
@@ -5473,7 +5479,12 @@ if (task.priority == 'High') {
                                 return property.id == selectedValue
                             });
                         }
-                        constructPropertyTable(filteredData);
+                        if(filteredData.length == 0){
+                            constructPropertyTable(propertyData);
+                        }else{
+
+                            constructPropertyTable(filteredData);
+                        }
                     }
                 }
                 else {

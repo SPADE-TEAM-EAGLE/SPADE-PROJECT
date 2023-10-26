@@ -6768,7 +6768,7 @@ Draft</button> -->
                                                             <div class="modal-content tx-size-sm">
                                                                 <div class="modal-body text-center p-4 pb-5">
                                                                     <button aria-label="Close"
-                                                                        class="btn-close position-absolute mt-0"
+                                                                        class="btn-close position-absolute mt-0 btn-pill"
                                                                         data-bs-dismiss="modal"><span
                                                                             aria-hidden="true">&times;</span></button>
 
@@ -6777,7 +6777,7 @@ Draft</button> -->
                                                                     <p class="mg-b-20 mg-x-20">If you wish to continue,
                                                                         please continue. If not, then cancel.</p><button
                                                                         aria-label="Close"
-                                                                        class="btn btn-primary pd-x-25"
+                                                                        class="btn btn-primary pd-x-25 btn-pill"
                                                                         data-bs-dismiss="modal"
                                                                         id="approve-downgrade">Continue</button>
                                                                 </div>
@@ -15789,7 +15789,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -15802,7 +15802,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15821,7 +15821,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 contentType: "application/json",
                                                 success: function (response) {
                                                     $.ajax({
-                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                        url: 'http://localhost:3000/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
                                                         contentType: 'application/json',
@@ -15896,7 +15896,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
+                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -15909,7 +15909,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15928,7 +15928,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 contentType: "application/json",
                                                 success: function (response) {
                                                     $.ajax({
-                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                        url: 'http://localhost:3000/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
                                                         contentType: 'application/json',
