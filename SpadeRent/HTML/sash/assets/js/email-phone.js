@@ -137,6 +137,20 @@ $(document).ready(function(){
 $('#addModal, #myModal_edit').on('hidden.bs.modal', function() {
   $("#error-msg").addClass('d-none')
   $("#valid-msg").addClass('d-none')
+  for (var indexx = 0; indexx < 10; indexx++) {
+    $("#error-msg"+ indexx).addClass('d-none')
+    $("#valid-msg" +indexx).addClass('d-none')
+  }
+  $(this).find('input, select,textarea').each(function(){
+   if($(this).is('select')) {
+    $(this).val('Choose...');
+    $(this).removeClass('border-green').removeClass('border-danger')
+
+   }else{
+     $(this).val("")
+     $(this).removeClass('border-green').removeClass('border-danger')
+   }
+  })
 });
 
 

@@ -4114,7 +4114,7 @@
         <!-- <script src="../assets/js/custom.js"></script> -->
         <script>
             var helloGuys = true;
-            $(document).ajaxComplete(function () {
+            $(document).ajaxStop(function () {
                 if (helloGuys) {
                     helloGuys = false;
                     var customScript = document.createElement('script');
@@ -6952,13 +6952,13 @@
                 document.head.appendChild(script);
             });
         }
-        $(document).ajaxComplete(function () {
+        $(document).ajaxStop(function () {
             loadScripts()
         });
     });
 </script>  -->
 <script>
-    $(document).on('change','#lengthSelectBox',function () {
+    $(document).change(function () {
         if ($('#typehead').val() == "") {
 
             let count = 1;
@@ -6974,7 +6974,7 @@
             })
         }
     })
-    $(document).ajaxComplete(function () {
+    $(document).ajaxStop(function () {
         if ($('#typehead').val() == "") {
 
             let count = 1;
@@ -6992,7 +6992,7 @@
     })
 </script>
 <script>
-            $(document).ajaxComplete(function () {
+            $(document).ajaxStop(function () {
             if (invoicePermissions) {
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
                 for (const action of actions) {

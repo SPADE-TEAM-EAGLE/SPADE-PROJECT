@@ -2472,7 +2472,7 @@ Draft</button> -->
                                         <span class="fw-light">(Optional)</span></label>
                                     <input id="phone" name="phone" type="tel" autocomplete="off"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     <span id="valid-msg" class="d-none text-success valid-msg">✓
                                         Valid</span>
                                     <span id="error-msg" class="hide text-danger error-msg"></span>
@@ -7173,7 +7173,9 @@ Draft</button> -->
                                                                                 background-size: contain;
                                                                                 background-color: white;
                                                                                 background-position: center;
-                                                                                border-radius: 50%;"></span>
+                                                                                border-radius: 50%;
+                                                                                border: 11px solid white;
+                                                                                "></span>
                                                                                 &nbsp;&nbsp;
                                                                                 <div style="display: inline-block;">
                                                                                     <h3 class="mb-0"></h3>
@@ -16566,7 +16568,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     $('#submit-photo').prop('disabled', false);
                 }
             });
-            $(document).ajaxComplete(function () {
+            $(document).ajaxStop(function () {
                 if ($('#tab12 .file-grid').is(':empty')) {
                     $('#submit-photo').prop('disabled', true);
                 } else {
