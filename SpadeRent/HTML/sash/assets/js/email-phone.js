@@ -134,7 +134,7 @@ $(document).ready(function(){
 // $(this).val(assignDateValue)
 // })
 
-$('#addModal, #myModal_edit').on('hidden.bs.modal', function() {
+$('#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions').on('hidden.bs.modal', function() {
   $("#error-msg").addClass('d-none')
   $("#valid-msg").addClass('d-none')
   for (var indexx = 0; indexx < 10; indexx++) {
@@ -145,6 +145,8 @@ $('#addModal, #myModal_edit').on('hidden.bs.modal', function() {
    if($(this).is('select')) {
     $(this).val('Choose...');
     $(this).removeClass('border-green').removeClass('border-danger')
+    $(this).siblings('span').addClass('d-none')
+    console.log($(this).siblings('span'));
 
    }else{
      $(this).val("")
