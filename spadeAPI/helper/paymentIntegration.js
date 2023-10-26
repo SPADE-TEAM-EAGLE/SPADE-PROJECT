@@ -658,14 +658,16 @@ function formatDateForSQL(date) {
     }
   }
   let daysDifferenceAnnually;
-  if (planId > PlanID && monthlyAnnual == "Annually") {
-    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+  if (planId < PlanID && monthlyAnnual == "Annually") {
+    // console.log("planId " + planId + "PlanID " + PlanID)
+    // const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
 
  daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
 //
+console.log("daysDifferenceAnnually " + daysDifferenceAnnually);
       let remainingDays = daysDifferenceAnnually;
       remainingDays = 365 - remainingDays;
       let initialAmountChange = existPlanAmount / 365;

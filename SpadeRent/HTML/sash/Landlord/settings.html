@@ -14194,6 +14194,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             var tenantData = [];
             var counter;
             var selectedTime="Year";
+            var selectedDowngrade=false
             $(document).ready(() => {
                 // ----- On render -----\\
                 $(document).on('click', ".view-btnn", function (e) {
@@ -14654,6 +14655,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
                 $("#approve-downgrade").click(function () {
                     $("#downgradeConfirm").modal("hide")
+                    selectedDowngrade=true
                     $("#upgradetopro").modal("show")
                 })
                 // Attach a click event listener to each button
@@ -15902,7 +15904,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 }),
                                                 contentType: "application/json",
                                                 success: function (response) {
-                                                    $.ajax({
+                                                    
+                                                    if(selectedDowngrade){
+                                                        $.ajax({
                                                         url: 'http://localhost:3000/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
@@ -15932,7 +15936,21 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                                                         }
                                                     });
+                                                   
+                                                    }else{
+                                                        $("#preloader").css("display", "none")
+                                                            $("#upgradetopro").modal("hide")
+                                                            $("#preloader").css("display", "none");
 
+                                                            $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                                                            $("#myModal_success").modal("show")
+
+                                                            setTimeout(function () {
+                                                                $("#myModal_success").modal("hide");
+                                                            }, 2000);
+                                                            getData()
+                                                    }
+                                                
                                                 },
                                                 error: function (xhr, status, error) {
 
@@ -16009,7 +16027,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 }),
                                                 contentType: "application/json",
                                                 success: function (response) {
-                                                    $.ajax({
+                                                    if(selectedDowngrade){
+                                                        $.ajax({
                                                         url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
@@ -16039,6 +16058,20 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                                                         }
                                                     });
+
+                                                    }else{
+                                                        $("#preloader").css("display", "none")
+                                                            $("#upgradetopro").modal("hide")
+                                                            $("#preloader").css("display", "none");
+
+                                                            $("#myModal_success p").text("Your plan has been succesfully updated!!!")
+                                                            $("#myModal_success").modal("show")
+
+                                                            setTimeout(function () {
+                                                                $("#myModal_success").modal("hide");
+                                                            }, 2000);
+                                                            getData()
+                                                    }
 
                                                 },
                                                 error: function (xhr, status, error) {
