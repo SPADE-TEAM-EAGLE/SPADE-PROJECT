@@ -1947,47 +1947,54 @@
                                                         </div>
                                                     </li> -->
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Image</a>
+                                                            href="javascript:void(0)">PROPERTY ID</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Name</a>
+                                                            href="javascript:void(0)">IMAGE</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Sqft</a>
+                                                            href="javascript:void(0)">PROPERTY NAME</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Type</a>
+                                                            href="javascript:void(0)">TOTAL SQFT</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Units</a>
+                                                            href="javascript:void(0)">PROPERTY TYPE</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Address</a>
+                                                            href="javascript:void(0)">UNITS</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li>
+                                                    <li class="d-flex justify-content-between"><a class="text-dark"
+                                                        href="javascript:void(0)">PROPERTY ADDRESS</a>
+                                                    <div class="form-check m-0">
+                                                        <input type="checkbox" class="form-check-input mt-2"
+                                                            id="exampleCheck1" checked>
+                                                    </div>
+                                                </li>
 
 
                                                 </ul>
@@ -3040,7 +3047,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ image,properties }) {
-                    if (image !== " " && image !== null) {
+                    if (image !== " " && image !== null && image!== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                     }
@@ -3562,8 +3569,7 @@
     if (searchValue === '') {
         // If search box is empty, use the selected value from the select box
         $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
-        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
-    }
+        $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();}
 });
         
         // Function to update the table based on filters

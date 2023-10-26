@@ -3840,8 +3840,10 @@
                         reader.onload = function (e) {
                             console.log("11111111111111111");
                             console.log(reader.result);
-                            // if()
-                            $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                            if(reader.result){
+
+                                $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                            }
 
 
                         }
@@ -4038,16 +4040,16 @@
                             image_url = response.image
                             image_key = response.imageKey
                         }
-                        if(response.image !== null && response.image !== " " ){
+                        if(response.image !== null && response.image !== " " && response.image !== "" ){
 
 $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
 }       
 
                 
-                if(response.image!==" " && response.image!==null){
+                if(response.image!==" " && response.image!==null && response.image!==""){
                 
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
+                $("#user-img").attr("src", response.image)
+                $("#user-img-dark").attr("src", response.image)
             }
             if(response.auth == 1){
         $('#2f-Auth').prop('checked', true);

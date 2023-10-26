@@ -3192,7 +3192,7 @@
                                 console.log(1111111)
                                 console.log(response)
                                 localStorage.setItem("LandlordImg", response.data.image)
-                                if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " ") {
+                                if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "") {
                                     var newBgImageUrl = `url('` + localStorage.getItem("LandlordImg") + `')`;
                                     $(".person").css("background-image", newBgImageUrl);
                                 } else {
@@ -3293,7 +3293,7 @@
                             console.log("check rec", message.message);
 
                             messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
         if(message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')){
                             const imageUrls = message.message.split(',');
@@ -3635,14 +3635,14 @@
 
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
     </div>
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="ms-1"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="ms-1"></div>
 </div>`;
 
                                                         } else if (response.data[i]['userType'] == "landlord") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
         if(response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')){
         const imageUrls = response.data[i]['message'].split(',');
@@ -3888,7 +3888,7 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
                     // const image = document.createElement('img');
                     // image.setAttribute('src', localStorage.getItem("tenantImg") ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg");

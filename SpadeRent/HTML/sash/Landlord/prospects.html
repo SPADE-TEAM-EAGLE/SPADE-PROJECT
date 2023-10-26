@@ -1220,8 +1220,12 @@
                         <div class="col-md-12">
                             <div class="card inner-cards">
                                 <div class="card-header justify-content-start">
+                                    <div class="column-flex-direction d-flex align-items-center">
                                     <button class="btn btn-primary btn-pill pt-1 pb-1" id="add-units1">Add
                                         Units</button>
+                                        <p class="ms-3"><b>Instruction: Please fill Unit Information individually one at
+                                            a time.</b></p>
+                                    </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
@@ -2522,7 +2526,7 @@
                                                                                         class="btn font-weight-bold text-dark"
                                                                                         id="customize_btn"
                                                                                         data-bs-toggle="dropdown"
-                                                                                        style="border: none;"><strong>CUSTOMIZE</strong><i
+                                                                                        style="border: none;"><strong>FILTER</strong><i
                                                                                             class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                                     <ul class="dropdown-menu"
                                                                                         role="menu">
@@ -3068,7 +3072,7 @@
                                                                                 class="btn font-weight-bold text-dark"
                                                                                 id="customize_btn"
                                                                                 data-bs-toggle="dropdown"
-                                                                                style="border: none;"><strong>CUSTOMIZE</strong><i
+                                                                                style="border: none;"><strong>FILTER</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"
@@ -3399,7 +3403,7 @@
                                                                                 class="btn font-weight-bold text-dark"
                                                                                 id="customize_btn"
                                                                                 data-bs-toggle="dropdown"
-                                                                                style="border: none;"><strong>CUSTOMIZE</strong><i
+                                                                                style="border: none;"><strong>FILTER</strong><i
                                                                                     class="fe fe-chevron-down ms-2 text-dark"></i></button>
                                                                             <ul class="dropdown-menu" role="menu">
                                                                                 <li><a href="javascript:void(0)"
@@ -4610,6 +4614,7 @@
                                 propertyUnitSelect.append($('<option></option>')
                                     .text("No unit available!!"))
                                 $('#addUnitBtn').show()
+                                
                             } else {
                                 $('#addUnitBtn').hide()
                                 propertyUnitSelect.prop("disabled", false);
@@ -5011,7 +5016,7 @@
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-                    if (image !== " " && image !== null) {
+                    if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
