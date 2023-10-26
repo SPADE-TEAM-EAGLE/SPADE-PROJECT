@@ -609,9 +609,9 @@ function formatDateForSQL(date) {
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
   let daysDifference
   // Monthly
+  const { subscriptionCreated_at, PlanID } = UserResult[0][0];
   if (monthlyAnnual == "Monthly") {
-    console.log(UserResult[0][0]);
-    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+    // console.log(UserResult[0][0]);
     const subscriptionDate = new Date();
     const currentDate = {
       day: subscriptionDate.getDate(),
@@ -655,11 +655,10 @@ function formatDateForSQL(date) {
       initialAmountChange = requestData.initialAmount - initialAmountChange;
       // console.log(initialAmountChange)
       requestData.initialAmount = initialAmountChange;
-
     }
   }
   let daysDifferenceAnnually;
-  if (monthlyAnnual == "Annually") {
+  if (planId > PlanID && monthlyAnnual == "Annually") {
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
@@ -673,7 +672,6 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       initialAmountChange = requestData.initialAmount - initialAmountChange;
       requestData.initialAmount = initialAmountChange;
   }
-
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.00001;
     requestData.recurringPeriod = {
@@ -689,8 +687,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   } else {
     requestData.recurringPeriod = {
       day: "0",
-      month: "1",
-      year: "0"
+      month: "0",
+      year: "1"
     };
     requestData.endAfter = {
       day: "0",
@@ -698,8 +696,6 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "1"
     };
   }
-
-   
   // Monthly Downgrade 
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly") {
     let AddDays = 30 - daysDifference;
@@ -724,7 +720,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
 
   // Annually downgrade
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
-    let AddDays = 365 - daysDifference;
+
+    let AddDays = 365 - daysDifferenceAnnually;
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
   
     requestData.startAfter = {
