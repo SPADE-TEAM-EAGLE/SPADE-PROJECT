@@ -2840,7 +2840,7 @@
                                                                 data-placeholder="Select property status"
                                                                 id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
-
+                                                                <option value="All">All</option>
                                                                 <option value="Occupied">Occupied Property</option>
                                                                 <option value="Vacant">Vaccant Property</option>
                                                             </select>
@@ -3044,9 +3044,9 @@
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Report Timeline</b></label>
                                                             <select class="form-control form-select"
-                                                                data-placeholder="Select timeline"
+                                                                data-placeholder="All"
                                                                 id="leaseFilterSelect">
-                                                                <option label="Select timeline" selected>All
+                                                                <option label="All" selected>All
                                                                 </option>
                                                                 <option value="15">15 days</option>
                                                                 <option value="30">30 days</option>
@@ -3563,9 +3563,9 @@
                                                         <div class="form-group">
                                                             <label class="form-label"><b>Timeline</b></label>
                                                             <select class="form-control form-select"
-                                                                data-placeholder="Select timeline"
+                                                                data-placeholder="All Invoices"
                                                                 id="invoiceTimeSelect">
-                                                                <option label="Select timeline" selected>All
+                                                                <option label="All" selected>All
                                                                 </option>
                                                                 <option value="currentmonth">Current Month</option>
                                                                 <option value="lastmonth">Previous Month</option>
@@ -3580,7 +3580,7 @@
                                                             <label class="form-label"><b>Report Type</b></label>
                                                             <select class="form-control form-select"
                                                                 data-placeholder="Choose one" id="invoiceTypeSelect">
-                                                                <option label="Select invoice status" selected>All
+                                                                <option label="All" selected>All
                                                                 </option>
                                                                 <option value="unpaid">Unpaid
                                                                 </option>
@@ -3831,7 +3831,7 @@
                                                             <select class="form-control form-select"
                                                                 data-placeholder="Select timeline"
                                                                 id="taskStatusSelect">
-                                                                <option label="Select task status" selected>All
+                                                                <option label="All" selected>All
                                                                 </option>
                                                                 <option value="in progress">In progress</option>
 
@@ -4604,7 +4604,7 @@
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
                 $('#tab55').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -5063,6 +5063,7 @@
                 if (propertyData.length == 0) {
                     $("#table_body_property_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
                 } else {
+                    $("#propertySelect").append($('<option></option>').text("All").val("All"));
                     propertyData.forEach((property, index) => {
 
                         if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
@@ -5312,6 +5313,7 @@ if (task.priority == 'High') {
 
             function constructPropertyTableTenant(propertyData, id) {
                 $("#table_body_tenant_report").empty()
+                $("#tenantSelect").append($('<option></option>').text("All").val("All"));
                 propertyData.forEach((tenant, index) => {
                     console.log(tenant)
                     if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
@@ -5459,8 +5461,12 @@ if (task.priority == 'High') {
                                 return property?.occupancy_status == selectedValue
                             });
                         }
+                        if(filteredData.length == 0){
+                            constructPropertyTable(propertyData);
+                        }else{
 
-                        constructPropertyTable(filteredData);
+                            constructPropertyTable(filteredData);
+                        }
                     }
                     else {
 
@@ -5473,7 +5479,12 @@ if (task.priority == 'High') {
                                 return property.id == selectedValue
                             });
                         }
-                        constructPropertyTable(filteredData);
+                        if(filteredData.length == 0){
+                            constructPropertyTable(propertyData);
+                        }else{
+
+                            constructPropertyTable(filteredData);
+                        }
                     }
                 }
                 else {

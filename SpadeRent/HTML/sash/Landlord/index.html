@@ -1172,7 +1172,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1198,7 +1198,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1223,7 +1223,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1246,7 +1246,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1341,7 +1341,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -1379,7 +1379,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body" style="display: flex; align-items: center;">
@@ -1438,7 +1438,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body" style="padding: 0px 25px 0px 25px;">
@@ -1536,7 +1536,7 @@
                                             </div>
                                             <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu dropdown-menu-top">
-                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
+                                                <li><a class="dropdown-item text-danger remove-card" href="javascript:void(0)" onclick="hideCard()">X Remove</a></li>
                                             </ul>
                                         </div>
                                         <div class="card-body">
@@ -2216,10 +2216,22 @@
             });
 
             // Handle checkbox changes
-            $('input[type="checkbox"]').on('change', function () {
+            $('input[type="checkbox"],.remove-card').on('change', function () {
                 var cardId = $(this).data('card');
                 var card = $('#' + cardId);
                 console.log(card)
+                if ($(this).is(':checked')) {
+                    card.show();
+                    localStorage.setItem(cardId, 'true');
+                } else {
+                    card.hide();
+                    localStorage.setItem(cardId, 'false');
+                }
+            });
+            $('.remove-card').on('click', function () {
+                var cardId = $(this).closest('.col-lg-6').attr('id');
+                var card = $('#' + cardId);
+                console.log($(this).closest('.col-lg-6').attr('id'))
                 if ($(this).is(':checked')) {
                     card.show();
                     localStorage.setItem(cardId, 'true');

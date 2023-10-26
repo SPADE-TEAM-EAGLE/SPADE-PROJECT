@@ -1802,6 +1802,43 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_delete_bulk">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your tenant. Are you sure?</p>
+
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete-bulk">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="myModal_delete">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -4628,15 +4665,25 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        // console.log($(a).find('.rentAmount').text())
+                        const regex = /\$ (\d+)/;
+                        const matcha = $(a).find('.rentAmount').text().match(regex);
+                        const matchb = $(b).find('.rentAmount').text().match(regex);
+
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
+                        var idA = parseInt(matcha[1]);
+                        var idB = parseInt(matchb[1]);
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        const regex = /\$ (\d+)/;
+                        const matcha = $(a).find('.rentAmount').text().match(regex);
+                        const matchb = $(b).find('.rentAmount').text().match(regex);
+
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
+                        var idA = parseInt(matcha[1]);
+                        var idB = parseInt(matchb[1]); 
                         return idB - idA;
                     });
                 } else if (selectedFilter === 'created-at') {
@@ -4927,6 +4974,35 @@
                 }
             });
         });
+        
+
+                        $(document).on('click', '#confirmDelete-bulk', function (e) {
+
+e.preventDefault();
+
+$('#myModal_delete_bulk').modal('hide');
+$.ajax({
+                            url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
+                            type: "DELETE",
+                            contentType: "application/json;charset=utf-8",
+                            data: JSON.stringify({
+                                "id": tenantToDelete
+                            }),
+                            headers: {
+                                Authorization: "Bearer " + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                tenantToDelete = []
+                                getData()
+
+                                $("#succesModal_delete").modal("show");
+                            }, error: function (xhr, status, error) {
+                                console.log(error)
+                            }
+
+                        })
+})
+
         $(document).on('click', '#confirmDelete', function (e) {
 
             e.preventDefault();
@@ -5376,8 +5452,9 @@
         var tenantToDelete = []
         $("#myButton").click(function () {
             $('#table_body tr').each(function () {
+                console.log($(this).find('.checkbox input.myCheckbox'))
                 var checkbox = $(this).find('.checkbox input.myCheckbox');
-
+                console.log((checkbox.is(':checked')))
                 if (checkbox.is(':checked')) {
                     var tenantId = $(this).find('.tenant-id').text();
                     tenantToDelete.push(tenantId)
@@ -5397,27 +5474,7 @@
                 success: function (response) {
                     if (response.Info == "No data found in tenant ") {
                         console.log(tenantToDelete)
-                        $.ajax({
-                            url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
-                            type: "DELETE",
-                            contentType: "application/json;charset=utf-8",
-                            data: JSON.stringify({
-                                "id": tenantToDelete
-                            }),
-                            headers: {
-                                Authorization: "Bearer " + localStorage.getItem("authtoken")
-                            },
-                            success: function (response) {
-                                tenantToDelete = []
-                                getData()
-
-                                $("#succesModal_delete").modal("show");
-                            }, error: function (xhr, status, error) {
-                                console.log(error)
-                            }
-
-                        })
-
+                        $('#myModal_delete_bulk').modal('show');
                     }
                     else {
                         tenantToDelete = []

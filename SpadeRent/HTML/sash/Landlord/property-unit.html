@@ -2627,7 +2627,23 @@ $('#property_size').text(data.propertySQFT)
 
                         tableBody.append(row);
                     });
-                    $('.done-option').click(function (e) {
+                    
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+
+                    }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
+     
+     
+     
+        }
+        getData()
+        $(document).on("click",'.done-option',function (e) {
                         console.log(22)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
@@ -2677,11 +2693,12 @@ $('#property_size').text(data.propertySQFT)
                     let values = [];
                     var unitIdElement;
                     var unitId;
-                    $(".delete-option").click(function (e) {
+                    $(document).on("click",".delete-option",function (e) {
                         e.preventDefault();
                         unitIdElement = $(this).closest("tr").find(".unit-id");
                         unitId = unitIdElement.text();
-
+                        values=[]
+                        console.log(values)
                         $(`#${unitId}`).find('td').each(function () {
                             let cellValue = "";
                             const input = $(this).find('input')
@@ -2730,7 +2747,7 @@ $('#property_size').text(data.propertySQFT)
                             }
                         });
                     })
-                    $(".edit-option").click(function () {
+                    $(document).on("click",".edit-option",function () {
                         // e.preventDefault();
                         // alert(1)
                         $(this).closest('td').find('.done-option').removeAttr('disabled');
@@ -2752,21 +2769,6 @@ $('#property_size').text(data.propertySQFT)
                         });
                         // $(this).replaceWith( ('<a class="dropdown-item text-success done-option" href="" disabled>Done</a>') )
                     })
-                },
-                error: function (xhr, status, error) {
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-
-                    }, 2000);
-                    console.log('Error: ' + error);
-                }
-            });
-     
-     
-     
-        }
-        getData()
     </script>
     <script>
         function logout() {

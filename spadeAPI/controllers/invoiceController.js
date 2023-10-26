@@ -72,32 +72,49 @@ exports.createInvoice = async (req, res) => {
       );
       if (selectTenantsResult[0].length > 0) {
         const TenantEmail = selectTenantsResult[0][0].email;
+        const propertyID = selectTenantsResult[0][0].propertyID;
         const TenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
         // send mail to tenant from landlord company
         const mailSubject = "invoice From " + userName;
         const businessNames = businessName || "N/A";
+        const selectpropertyResult = await queryRunner(
+          selectQuery("property", "id"),
+          [propertyID]
+        );
+        const propertyAddress = selectpropertyResult[0][0].address;
+
         sendMail.invoiceSendMail(
           TenantName,
-          TenantEmail,
-          mailSubject,
+          propertyAddress,
           dueDate,
-          invoiceID,
-          userName,
-          userId,
-          businessNames,
-          invoiceEmail
+          terms,
+          additionalNotes,
+          lineItems,
+          totalAmount,
+          mailSubject,
+          TenantEmail,
+          invoiceEmail,
+          userId
+        //// dueDate,
+        //// invoiceID,
+          //// userName,
+          //// userId,
+          //// businessNames,
+          //// invoiceEmail
         );
       }
 
       if (lineItems) {
-        // console.log(lineItems)
+        // console.log(lineItems);
         for (let i = 0; i < lineItems.length; i++) {
           if (Object.keys(lineItems[i]).length >= 1) {
             const category = lineItems[i].category;
-            
+            // console.log(category);
             const memo = lineItems[i].memo;
             const amount = lineItems[i].amount;
             const lineItemTax = lineItems[i].tax;
+            // console.log(invoiceID, category, memo, amount, lineItemTax);
+
             const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, memo, amount, lineItemTax])
             if (invoiceLineItemsResult.affectedRows === 0) {
               res.send('Error2 in line item invoice');
@@ -299,6 +316,7 @@ exports.UpdateInvoice = async (req, res) => {
   } = req.body;
   try {
     const { userId,userName,businessName,invoiceEmail } = req.user;
+    // const { userId,userName,businessName,invoiceEmail } = req.body;
     // console.log(req.body)
     const currentDate = new Date();
     const invoiceUpdatedResult = await queryRunner(updateInvoice, [
@@ -324,6 +342,7 @@ exports.UpdateInvoice = async (req, res) => {
     // if select tenants result is not empty then send mail to tenant
     if (selectTenantsResult[0].length > 0) {
       const tenantEmail = selectTenantsResult[0][0].email;
+      const propertyID = selectTenantsResult[0][0].propertyID;
       const tenantName =
         selectTenantsResult[0][0].firstName +
         " " +
@@ -331,17 +350,24 @@ exports.UpdateInvoice = async (req, res) => {
 
       const mailSubject = "invoice From " + userName;
       let businessNames = businessName || "N/A";
+      const selectpropertyResult = await queryRunner(
+        selectQuery("property", "id"),
+        [propertyID]
+      );
+      const propertyAddress = selectpropertyResult[0][0].address;
       sendMail.invoiceSendMail(
 
         tenantName,
-        tenantEmail,
-        mailSubject,
+        propertyAddress,
         dueDate,
-        invoiceID,
-        userName,
-        userId,
-        businessNames,
-        invoiceEmail
+        terms,
+        additionalNotes,
+        lineItems,
+        totalAmount,
+        mailSubject,
+       tenantEmail,
+       invoiceEmail,
+          userId
       );
     }
     //  if line items is not empty then delete line items and insert new line items
@@ -379,6 +405,7 @@ exports.UpdateInvoice = async (req, res) => {
       selectQuery("invoiceimages", "invoiceID"),
       [invoiceID]
     );
+    if(images){
     if (images.length === invoiceCheckResult[0].length) {
       res.json({ message: "Invoice updated successfully" });
     } else if (images.length !== invoiceCheckResult[0].length) {
@@ -426,9 +453,11 @@ exports.UpdateInvoice = async (req, res) => {
       return res.status(200).json({
         message: "Invoice updated successfully",
       });
+    } 
     } else {
       res.json({ message: "Invoice updated successfully" });
     }
+
   } catch (error) {
     console.log(error);
     return res.status(400).send("Error occurred while updating invoice"+error);
@@ -483,15 +512,21 @@ exports.invoiceDelete = async (req, res) => {
 exports.resendEmail = async (req, res) => {
   const { invoiceID } = req.query;
   // const { invoiceID } = req.body;
-  console.log(invoiceID);
-  // const { userId,userName,businessName,invoiceEmail } = req.user;
+  // console.log(invoiceID);
   const { userId,userName,businessName,invoiceEmail } = req.user;
+  // const { userId,userName,businessName,invoiceEmail } = req.body;
   try {
     const resendEmailResult = await queryRunner(resendEmailQuery, [invoiceID]);
 
     if (resendEmailResult[0].length > 0) {
       const tenantEmail = resendEmailResult[0][0].email;
       const dueDate = resendEmailResult[0][0].dueDate;
+      const terms = resendEmailResult[0][0].terms;
+      const note = resendEmailResult[0][0].note;
+      const totalAmount = resendEmailResult[0][0].totalAmount;
+      // const invoiceId = resendEmailResult[0][0].invoiceId;
+      // console.log("invoiceId");
+      // console.log(invoiceId);
       const frequency = resendEmailResult[0][0].frequency;
       const tenantName =
         resendEmailResult[0][0].firstName +
@@ -500,16 +535,31 @@ exports.resendEmail = async (req, res) => {
       const mailSubject = "Invoice From " + userName;
       var businessNames = businessName || "N/A";
       console.log(tenantName,businessNames,tenantEmail);
+      const propertyID = resendEmailResult[0][0].propertyID;
+      const selectpropertyResult = await queryRunner(
+        selectQuery("property", "id"),
+        [propertyID]
+        );
+        const propertyAddress = selectpropertyResult[0][0].address;
+      const selectLineItemResult = await queryRunner(
+        selectQuery("invoicelineitems", "invoiceID"),
+        [invoiceID]
+      );
+      const lineItem = selectLineItemResult[0];
+      
       sendMail.invoiceSendMail(
         tenantName,
-        tenantEmail,
-        mailSubject,
+        propertyAddress,
         dueDate,
-        invoiceID,
-        userName,
-        userId,
-        businessNames,
-        invoiceEmail
+        terms,
+        note,
+        lineItem,
+        totalAmount,
+        mailSubject,
+        tenantEmail,
+        invoiceEmail,
+        userId
+        // userId,
       );
     }
     res.status(200).json({

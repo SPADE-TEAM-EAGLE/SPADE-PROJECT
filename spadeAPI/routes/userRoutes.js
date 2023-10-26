@@ -63,7 +63,7 @@ router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
 router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
-// router.get('/resendEmail', verifyToken, invoiceController.resendEmail);
+// router.get('/resendEmail', invoiceController.resendEmail);
 router.get('/resendEmail', verifyToken,invoiceController.resendEmail);
 // router.get("/PropertyUnits", verifyToken, userController.getpropertyUnits);
 router.post("/addMoreUnits", userController.addMoreUnits);
@@ -115,6 +115,7 @@ router.put('/putInvoiceStatusUpdates', verifyToken, invoiceController.putInvoice
 router.get('/getAllInvoices', verifyToken, invoiceController.getAllInvoices);
 router.get('/getByIdInvoices', verifyToken, invoiceController.getByIdInvoices);
 router.put('/UpdateInvoice', verifyToken, invoiceController.UpdateInvoice);
+// router.put('/UpdateInvoice', invoiceController.UpdateInvoice);
 router.delete('/invoiceDelete', verifyToken, invoiceController.invoiceDelete);
 router.post("/addVendor", verifyToken, taskController.addVendors);  
 router.put("/updateVendor", verifyToken, taskController.updateVendor); //=> **********  update vendor
@@ -124,6 +125,7 @@ router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory)
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
+// router.post("/addTasks", taskController.addTasks);
 // router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/getAllTask",verifyToken ,taskController.getAllTask);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
@@ -249,6 +251,7 @@ router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospe
 router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.GettenantAttachEmailPhone);
 router.delete("/allTenantDelete", verifyToken, tenantController.allTenantDelete);
 router.get("/checkUnpaidInvoices", verifyToken, tenantController.checkUnpaidInvoices);
+// router.get("/checkUnpaidInvoices",tenantController.checkUnpaidInvoices);
 router.post("/prospectusSources", verifyToken, prospectus.prospectusSources);
 // router.get("/sourcesCampaignInsight" , prospectus.sourcesCampaignInsight);
 router.get("/sourcesCampaignInsight/:startDate/:endDate", verifyToken, prospectus.sourcesCampaignInsight);
