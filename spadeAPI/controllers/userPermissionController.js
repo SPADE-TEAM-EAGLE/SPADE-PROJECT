@@ -152,8 +152,14 @@ exports.updateUserPermissionUsers = async function (req, res) {
   let image_key = "";
   try {
     if (images?.length > 0) {
-      image_url = images[0]?.image_url;
-      image_key = images[0]?.image_key;
+      if(images[0]?.imageURL){
+        image_url = images[0]?.imageURL;
+        image_key = images[0]?.imageKey;
+      }
+      else{
+        image_url = images[0]?.image_url;
+        image_key = images[0]?.image_key;
+      }
     }
     const insertResult = await queryRunner(updateUserPermissionUsers, [
       firstName,

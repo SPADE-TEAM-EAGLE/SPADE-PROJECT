@@ -1085,11 +1085,14 @@ exports.checkUnpaidInvoices = async (req, res) => {
     const allResults = []; 
     for (let i = 0; i < tenants.length; i++) {
       const ID = tenants[i];
-      const checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [ID]);
+      console.log(ID)
+      var checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [tenants[i]]);
+      console.log(checkUnpaidInvoicesResult)
       if (checkUnpaidInvoicesResult[0].length === 0) {
         continue;
       }
-      allResults.push(...checkUnpaidInvoicesResult[0]);
+      allResults.push(...await checkUnpaidInvoicesResult[0]);
+      console.log(allResults)
     }
     if (allResults.length === 0) {
       return res.status(201).json({ Info: "No data found in tenant " });

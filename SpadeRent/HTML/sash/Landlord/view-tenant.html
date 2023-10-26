@@ -2731,8 +2731,8 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        emailLength=response?.Email?.length;
-                        phoneLength=response?.Phone?.length;
+                        emailLength=response?.Email?.length?response?.Email?.length:0;
+                        phoneLength=response?.Phone?.length?response?.Phone?.length:0;
                         if (response?.Email?.length > 0 || response?.Phone?.length > 0) {
                             $("#tenant-text").text(" ")
                             if(response?.Phone?.length>=3){
@@ -2779,7 +2779,9 @@
                 $("#contactInfoModal").modal("show")
             })
             $("#add-item-phone").on("click", () => {
+                // alert(1)
                 phoneLength++;
+                console.log($("#add-item-containerPhone").children().length,phoneLength)
                 if($("#add-item-containerPhone").children().length<6 && phoneLength<3){
                     $("#add-item-containerPhone").append(`<div class="col-12 row"><div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
@@ -2829,7 +2831,7 @@
                 const formData = new FormData();
                 const phone = [];
                 const emailArray = [];
-                $("#add-item-containerPhone").each(function () {
+                $("#add-item-containerPhone .row").each(function () {
                     const phoneName = $(this).find("select").val();
                     const phoneNumber = $(this).find("input[type='tel']").val();
                     // console.log(country,phoneNumber)
@@ -2842,7 +2844,7 @@
                     
                 });
 
-                $("#add-item-containerEmail").each(function () {
+                $("#add-item-containerEmail .row").each(function () {
                     const emailName = $(this).find("select").val();
                     const email = $(this).find("input[type='email']").val();
                     // console.log(country,email)
@@ -2854,6 +2856,7 @@
                     }
                     
                 });
+                console.log(emailArray,phone)
                 // console.log(phone,emailArray)
                 formData.append("alternatePhone", JSON.stringify(phone));
                 formData.append("alternateEmail", JSON.stringify(emailArray));

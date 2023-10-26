@@ -981,7 +981,7 @@ exports.addVendorCategory = async (req, res) => {
     const existingCategories = categoryCheckResult[0];
     if(!Array.isArray(categories)) {
       console.log(categories)
-      categoryToInsert=existingCategories.filter((category) => categories?.categories?.toLowerCase() == categories?.categories?.toLowerCase());
+      categoryToInsert=existingCategories.filter((category) => category?.categories?.toLowerCase() == categories?.categories?.toLowerCase());
       if(categoryToInsert.length === 0) {
         insertedId = await queryRunner(addVendorCategory, [
           categories?.categories?.toLowerCase(),

@@ -4842,7 +4842,21 @@
 
                             tableBody.append(row);
                         });
-                        $("#add-units1").click(() => {
+                        
+                    },
+
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+
+                        }, 2000);
+                        console.log('Error: ' + error);
+                    }
+                });
+
+            }
+            $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
@@ -4869,9 +4883,9 @@
                                 }
                             })
                         })
-                        $('.done-option1').click(function (e) {
-                            console.log(22)
-                            e.preventDefault();
+                        $(document).on("click",'.done-option1',function (e) {
+                            // console.log(22)
+                            // e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
                             let values = []
@@ -4916,9 +4930,9 @@
                                 }
                             })
                         });
-                        $('.delete-option1').click(function (e) {
-                            console.log(333)
-                            e.preventDefault();
+                        $(document).on("click",'.delete-option1',function(){
+                            // console.log(333)
+                            // e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
                             let values = []
@@ -4960,7 +4974,10 @@
                                 }
                             });
                         })
-                        $(".edit-option1").click(function () {
+                        // $('.delete-option1').click(function (e) {
+                            
+                        // })
+                        $(document).on("click",".edit-option1",function () {
                             // e.preventDefault();
                             $(this).closest('td').find('.done-option').removeAttr('disabled');
                             console.log(1)
@@ -4980,20 +4997,7 @@
                             });
                             // $(this).replaceWith( ('<a class="dropdown-item text-success done-option" href="" disabled>Done</a>') )
                         })
-                    },
-
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-
-                        }, 2000);
-                        console.log('Error: ' + error);
-                    }
-                });
-
-            }
-
+                    
 
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -5462,7 +5466,7 @@
 
                         let totalRentDefault = 0;
                         console.log(response.data)
-
+                        
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
@@ -5561,12 +5565,15 @@
 
 
                         $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
-
-
+                        
 
                     },
                     error: function (xhr, status, error) {
                         // Handle error
+                        $("#table-body-qualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+                        $("#table-body-disqualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+                        $("#table-body").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+
                     }
                 });
 
