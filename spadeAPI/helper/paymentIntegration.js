@@ -596,6 +596,9 @@ function formatDateForSQL(date) {
   // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
   var correctPlanId;
 
+
+
+
   if (planId >= 8) {
     correctPlanId = planId / 4;
   } else {
@@ -610,6 +613,13 @@ function formatDateForSQL(date) {
   let daysDifference
   // Monthly
   const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+  // Annually Downgrade
+  if (planId < PlanID && monthlyAnnual == "Annually"){
+    return res.status(200).json({
+      Message : "unable to downgrade",
+    });
+  
+  }
   if (monthlyAnnual == "Monthly") {
     // console.log(UserResult[0][0]);
     const subscriptionDate = new Date();
@@ -658,15 +668,13 @@ function formatDateForSQL(date) {
     }
   }
   let daysDifferenceAnnually;
-  if (planId < PlanID && monthlyAnnual == "Annually") {
-    console.log("planId " + planId + "PlanID " + PlanID)
+  if (planId > PlanID && monthlyAnnual == "Annually") {
     const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
  daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
 //
-console.log("daysDifferenceAnnually " + daysDifferenceAnnually);
       let remainingDays = daysDifferenceAnnually;
       remainingDays = 365 - remainingDays;
       let initialAmountChange = existPlanAmount / 365;
@@ -724,7 +732,7 @@ console.log("daysDifferenceAnnually " + daysDifferenceAnnually);
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
 
     let AddDays = 365 - daysDifferenceAnnually;
-
+    
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
   
     requestData.startAfter = {
