@@ -6784,6 +6784,31 @@ Draft</button> -->
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="modal fade" id="downgradeConfirm-yearly">
+                                                        <div class="modal-dialog modal-dialog-centered text-center "
+                                                            role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-4 pb-5">
+                                                                    <button aria-label="Close"
+                                                                        class="btn-close position-absolute mt-0 btn-pill"
+                                                                        data-bs-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span></button>
+
+                                                                    <h4 class="text-dark tx-semibold">The downgrade will
+                                                                        only be possible at the end of current subscription.</h4>
+                                                                    <!-- <p class="mg-b-20 mg-x-20">If you wish to continue,
+                                                                        please continue. If not, then cancel.</p> -->
+                                                                        <button
+                                                                        aria-label="Close"
+                                                                        class="btn btn-primary pd-x-25 btn-pill"
+                                                                        data-bs-dismiss="modal"
+                                                                        >Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="modal fade" id="upgradeConfirm">
                                                         <div class="modal-dialog modal-dialog-centered text-center "
                                                             role="document">
@@ -14691,7 +14716,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm").modal("show")
-                    } 
+                    }
                     if (time == "Year" && currentSelectedId > cardId) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
@@ -14701,7 +14726,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm").modal("show")
+                        console.log($("#downgradeConfirm-yearly"))
+                        $("#downgradeConfirm-yearly").modal("show")
                     } 
                     else {
                         $("#payment-month").text("Year")
@@ -15905,7 +15931,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 contentType: "application/json",
                                                 success: function (response) {
                                                     
-                                                    if(selectedDowngrade){
+                                                    if(!selectedDowngrade){
                                                         $.ajax({
                                                         url: 'http://localhost:3000/api/spade/updatePlanId',
                                                         method: 'PUT',
@@ -16027,7 +16053,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 }),
                                                 contentType: "application/json",
                                                 success: function (response) {
-                                                    if(selectedDowngrade){
+                                                    if(!selectedDowngrade){
                                                         $.ajax({
                                                         url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                         method: 'PUT',
