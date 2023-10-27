@@ -4256,12 +4256,14 @@
 
                         userData = response
                         invoicePermissions = response.invoices
-                        if (response.image !== " " && response.image !== null) {
+                        if (response.image !== " " && response.image !== null && response.image!=="") {
 
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
                         }
                         bussinessLogoImg = response.businessLogo ? response.businessLogo : "../assets/images/Artboard GÇô 1.svg";
+                        console.log("bussinessLogoImg");
+                        console.log(bussinessLogoImg);
                         $("#bussinessLogo").attr("src", "data:image/png;base64," + bussinessLogoImg)
                         if (response.businessLogo) {
                             $("#addbussinesslogocol").addClass("d-none");
