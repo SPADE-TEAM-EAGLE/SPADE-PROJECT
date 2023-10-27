@@ -501,6 +501,7 @@ function updateAllNotifyRead() {
 }
 
 function updateDataNotify(notificationId, type) {
+  $('#preloader').css('display','flex')
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
@@ -525,10 +526,13 @@ function updateDataNotify(notificationId, type) {
         window.location.href="./add-tenant.html";
         
       }
+      // $('#preloader').css('display','none')
       // GetNotification();
       console.log(response);
     },
     error: function (xhr, status, error) {
+      $('#preloader').css('display','none')
+
       console.log("Error: " + error);
     },
   });

@@ -854,7 +854,7 @@
                             <form class="row g-3 m-1" enctype="multipart/form-data">
 
                                 <div class="col-12 mb-1">
-                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
+                                    <label for="inputAddress" class="form-label fw-bold>Number of Units<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control px-2" id="units" placeholder=" ">
                                     <span class="text-danger d-none">Units are required!</span>
@@ -1239,13 +1239,13 @@
                                 <div class="row">
                                     <div class="col-lg-9 position-relative mobile-scroll-tabs">
                                         <h1 class="page-titlee text-white mb-1" style="font-weight: 700;" id="property_name6"></h1>
-                                        <h5 class="page-titlee text-white" style="font-weight: 100;" id="property-address6"></h5>
+                                        <h5 class="page-titlee text-white" style="font-weight: 100; margin-bottom: 40px;" id="property-address6"></h5>
                                         <!-- <a href="javascript:void(0)" id="email_verification"
                                                                     class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                                         class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                                                     verification &nbsp; <i
                                                                         class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-                                        <ul class="nav1 br-7 position-absolute" style="bottom: 0;" id="nav_links">
+                                        <ul class="nav1 br-7 position-absolute" style="bottom: 0; top: inherit" id="nav_links">
                                             <li class="nav-item1 p-0">
                                                 <a class="nav-link active p-2" href="view-property.html" id="viewOverview">Overview</a>
                                             </li>
@@ -1381,7 +1381,7 @@
                                                     <span class="text-danger d-none">Property name required!</span>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label for="inputAddress" class="form-label fw-bold">Number of Units<span
+                                                    <label for="inputAddress" class="form-label fw-bold>Number of Units<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control form px-2" id="unit_update" pattern="[0-9]{5}"
                                                         placeholder="Enter Number of Units" maxlength="3"
@@ -2312,7 +2312,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function ({ userName, image,units }) {
                     // console.log()
                     unitsPermission = units;
-                    if(image!==" " && image!==null){
+                    if(image!==" " && image!==null && image!== ""){
                 
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)
@@ -2415,9 +2415,9 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         if(image.image_url!==" " && image.image_url!==null){
             
             if(image.image_url.includes(".pdf") || image.image_url.includes(".docx") || image.image_url.includes(".doc")){
-                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
+                $("#image-placeholder").append('<div class="col-lg-2 p-0 me-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
             }else{
-                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.image_url + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                $("#image-placeholder").append('<div class="col-lg-2 p-0 me-2"><img src="' + image.image_url + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
     
             }
     
@@ -3057,7 +3057,7 @@ var password = 'your-secret-password';
             var propertySQFT = $("#propertyTotalSF_update").val();
             var units = $("#unit_update").val();
 
-            if (propertyName === '' || address === '' || city === '' || state === '' || zipCode === '' || propertyType === '' || propertySQFT === '' || units === '') {
+            if (propertyName === '' || address === '' || city === '' || state === 'Choose...' || zipCode === '' || propertyType === 'Choose...' || propertySQFT === '' || units === '') {
                 $('#update').addClass('disabled')
             } else {
                 $('#update').removeClass('disabled')

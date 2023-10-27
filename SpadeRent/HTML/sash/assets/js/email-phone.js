@@ -141,6 +141,8 @@ $('#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions').on('h
     $("#error-msg"+ indexx).addClass('d-none')
     $("#valid-msg" +indexx).addClass('d-none')
   }
+  // var selectedFiles = [];
+  // console.log($(this).find(".file-grid"));
   $(this).find('input, select,textarea').each(function(){
    if($(this).is('select')) {
     $(this).val('Choose...');

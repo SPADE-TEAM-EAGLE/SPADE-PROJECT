@@ -1760,8 +1760,11 @@
                         <div class="col-md-12">
                             <div class="card inner-cards">
                                 <div class="card-header justify-content-start">
+                                    <div class="column-flex-direction d-flex align-items-center">
                                     <button class="btn btn-primary btn-pill pt-1 pb-1 done-option1" id="add-units1">Add
                                         Units</button>
+                                        <p class="ms-3"><b>Instruction: Please fill Unit Information individually one at a time.</b></p>
+                                    </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
@@ -2390,7 +2393,7 @@
                                                 <button type="button"
                                                     class="btn btn-dark bg-transparent font-weight-bold text-dark"
                                                     id="customize_btn" data-bs-toggle="dropdown"
-                                                    style="border: none;"><strong>CUSTOMIZE</strong><i
+                                                    style="border: none;"><strong>FILTER</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="javascript:void(0)"><strong class="text-dark">Column
@@ -2462,7 +2465,9 @@
                                         <!-- <button type="button" id="myButton" class="btn btn-primary px-3 myButton"><i class="fi fi-rs-trash mt-1 fs-20" aria-hidden="true"></i> Delete</button> -->
                                         
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between">
-                                            <div>
+                                            <div class="d-flex align-items-center">
+                                                <button id="myButton" class="btn btn-danger myButton me-2 btn-sm"><i
+                                                    class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
                                                 <div class="main-header-center d-nonee d-lg-block m-0">
                                                     <button class="btn px-0 pt-2"><i class="fe fe-search"
                                                             aria-hidden="true"></i></button>
@@ -2471,7 +2476,7 @@
                                                 </div>
                                             </div>
                                             <div style="width: 220px"
-                                                class="d-flex justify-content-center align-items-center">
+                                                class="d-flex justify-content-end align-items-center">
                                                 <span class="fw-bold me-2 mobile-text-hide-filer-number">Number of
                                                     rows</span>
                                                 <select id="lengthSelectBox" class="form-control form-select"
@@ -2486,8 +2491,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button id="myButton" class="btn-delete-checkbox myButton"><i
-                                                class="fi fi-rs-trash mt-1 fs-16"></i> &nbsp;Delete</button>
+                                        
                                         <div class="table-responsive">
                                             <table
                                                 class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0"
@@ -5054,7 +5058,7 @@ $.ajax({
                 },
                 success: function ({ image, tenants }) {
 
-                    if (image !== " " && image !== null) {
+                    if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
