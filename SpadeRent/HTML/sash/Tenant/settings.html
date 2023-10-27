@@ -1927,33 +1927,37 @@
                                                 <input type="file" id="mediaFile" />
                                                 <div class="form-row mt-5">
                                                     <div class="col-xl-3 mb-3 mt-5">
-                                                        <label for="validationCustom01"><b>First name</b></label>
+                                                        <label for="validationCustom01"><b>First name</b> <span class="text-danger">
+                                                            *</span></label>
                                                         <input type="text" class="form-control" id="firstName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="John" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-xl-3 mb-3 mt-5">
-                                                        <label for="validationCustom02"><b>Last name</b></label>
+                                                        <label for="validationCustom02"><b>Last name</b> <span class="text-danger">
+                                                            *</span></label>
                                                         <input type="text" class="form-control" id="lastName" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                             placeholder="Clark" required>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-6"></div>
                                                     <div class="col-xl-3 mb-3">
-                                                        <label for="validationCustom02"><b>Email</b></label>
+                                                        <label for="validationCustom02"><b>Email</b> <span class="text-danger">
+                                                            *</span></label>
                                                         <input type="email" class="form-control" id="email" pattern="[A-Za-z0-9_\.@]+" oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
                                                             placeholder="johnclark@outlook.com" required readonly>
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
 
                                                     <div class="col-xl-3 mb-3">
-                                                        <label for="validationCustom02"><b>Phone</b></label><br>
+                                                        <label for="validationCustom02"><b>Phone</b> <span class="text-danger">
+                                                            *</span></label>
                                                         <input id="phone" name="phone" type="tel" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                         <div class="valid-feedback">Looks good!</div>
                                                     </div>
                                                     <div class="col-lg-6"></div>
                                                     <div class="col-xl-6 mb-3">
-                                                        <label for="validationCustom02"><b>Business Name</b></label>
+                                                        <label for="validationCustom02"><b>Business Name  (Optional)</b></label>
                                                         <input type="text" class="form-control" id="businessName"
                                                             placeholder="" required>
                                                         <div class="valid-feedback">Looks good!</div>
@@ -1966,7 +1970,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-6 mb-3">
-                                                                <label for="saddress1"><b>Address</b></label>
+                                                                <label for="saddress1"><b>Address   (Optional)</b></label>
                                                                 <input type="text" class="form-control" id="address"
                                                                     placeholder="Enter Address" required="">
                                                                 <div class="valid-feedback">Looks good!</div>
@@ -1974,8 +1978,8 @@
                                                             <div class="col-lg-6"></div>
 
                                                             <div class="col-xl-2 mb-3">
-                                                                <label for="validationCustom02"><b>City</b></label>
-                                                                <input type="text" class="form-control" id="city"
+                                                                <label for="validationCustom02"><b>City  (Optional)</b></label>
+                                                                <input type="text" class="form-control" id="city" pattern="[A-Za-z\s]+" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                                                     placeholder="Houston" required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
@@ -1986,8 +1990,7 @@
                                                                     placeholder="Taxes" required>
                                                                 <div class="valid-feedback">Looks good!</div> -->
                                                                 <div class="form-group">
-                                                                    <label for="inputState" class="form-labell fw-bold"><b>State</b><spnan
-                                                                        class="text-danger"></span></label>
+                                                                    <label for="inputState" class="form-labell fw-bold"><b>State   (Optional)</b></label>
                                                                     <select id="state" class="form-select form form-select" required>
                                                                     <option selected>Choose...</option>
                                                                     </select>
@@ -1996,9 +1999,12 @@
                                                             </div>
 
                                                             <div class="col-xl-2 mb-3">
-                                                                <label for="zip"><b>Zip Code</b></label>
-                                                                <input type="text" class="form-control" id="zip"
-                                                                    placeholder="67863" required>
+                                                                <label for="zip"><b>Zip Code  (Optional)</b></label>
+                                                                <input type="text" class="form-control" id="zip" pattern="[0-9]{5}"
+                                                                placeholder="A valid 5-digit zip code" maxlength="5"
+                                                                minlength="5"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                     required>
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
 

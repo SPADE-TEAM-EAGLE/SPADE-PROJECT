@@ -1198,8 +1198,8 @@
                                 <div class="row mb-5">
                                     <div class="col-12">
                                         <div class="mt-2 mb-2" style="float: right;"><img
-                                                src="../assets/images/users/5.jpg" id="bussinessLogo" alt=""
-                                                style="width: 70px;"></div>
+                                                src="../assets/images/users/5.jpg" id="bussinessLogo" class="py-2" alt=""
+                                                style="width: 170px;"></div>
                                     </div>
                                     <div class="col-12" id="addbussinesslogocol"><a href="settings.html"
                                             class="text-primary" style="float: right;">Add your business logo!</a>
@@ -3321,7 +3321,7 @@
                                                 <button type="button"
                                                     class="btn btn-dark bg-transparent font-weight-bold text-dark"
                                                     id="customize_btn" data-bs-toggle="dropdown"
-                                                    style="border: none;"><strong>VISIBILITY</strong><i
+                                                    style="border: none;"><strong>FILTER</strong><i
                                                         class="fe fe-chevron-down ms-2"></i></button>
                                                 <ul class="dropdown-menu" id="customize_btn_check" role="menu">
                                                     <li><a href="javascript:void(0)" class="text-dark"><strong>Column
@@ -3471,7 +3471,7 @@
 
     </div>
 
-    < <!-- Sidebar-right -->
+    <!-- Sidebar-right -->
         <div class="sidebar sidebar-right sidebar-animate">
             <div class="panel panel-primary card mb-0 shadow-none border-0">
                 <div class="tab-menu-heading border-0 d-flex p-3">
@@ -4140,17 +4140,7 @@
 
         <!-- CUSTOM JS -->
         <!-- <script src="../assets/js/custom.js"></script> -->
-        <script>
-            var helloGuys = true;
-            $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
-                    var customScript = document.createElement('script');
-                    customScript.src = "../assets/js/custom.js";
-                    document.head.appendChild(customScript);
-                }
-            });
-        </script>
+        
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
         <script src="../assets/js/email-phone.js"></script>
@@ -6993,7 +6983,6 @@
 
                     let count = 1;
                     $("#table_body tr").each(function (item, index) {
-                        //console.log(count, parseInt($("#lengthSelectBox").val()))
                         if (count > parseInt($("#lengthSelectBox").val())) {
                             $(this).hide()
                         }
@@ -7006,10 +6995,8 @@
             })
             $(document).ajaxStop(function () {
                 if ($('#typehead').val() == "") {
-
                     let count = 1;
                     $("#table_body tr").each(function (item, index) {
-                        //console.log(count, parseInt($("#lengthSelectBox").val()))
                         if (count > parseInt($("#lengthSelectBox").val())) {
                             $(this).hide()
                         }
@@ -7105,6 +7092,17 @@
         </script>
 
         <script src="../assets/js/user-sidebar-permissions.js"></script>
+        <script>
+            var helloGuys = true;
+            $(document).ajaxStop(function () {
+                if (helloGuys) {
+                    helloGuys = false;
+                    var customScript = document.createElement('script');
+                    customScript.src = "../assets/js/custom.js";
+                    document.head.appendChild(customScript);
+                }
+            });
+        </script>
 </body>
 
 </html>
