@@ -2311,6 +2311,7 @@ exports.updatedNotification = async (req, res) => {
 exports.getAllProperty = async (req, res) => {
   try {
     const { userId } = req.user;
+    // const { userId } = req.body;
     const getAllPropertyData = await queryRunner(getPropertyReport, [userId]);
     const getTenantsReport = await queryRunner(getTenantReport, [userId]);
     const getLeaseReportData = await queryRunner(getLeaseReport, [userId]);
