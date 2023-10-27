@@ -622,10 +622,6 @@ return daysDiff;
   const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
 
   
-  // const { subscriptionCreated_at, PlanID } = UserResult[0][0];
-
-
-
 // Move Monthly to Annually
 let daysDifferenceMtoA; 
 if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
@@ -635,10 +631,6 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
   // let remainingDays = daysDifferenceMtoA;
   let remainingDays = 30 - daysDifferenceMtoA;
-  let initialAmountChange = existPlanAmount / 30;
-  initialAmountChange = remainingDays * initialAmountChange;
-  initialAmountChange = requestData.initialAmount - initialAmountChange;
-  requestData.initialAmount = initialAmountChange;
   // let AddDays = 30 - daysDifferenceMtoA;
   subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
   requestData.startAfter = {
@@ -673,7 +665,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
 
 
   // Annually Downgrade
-  if (planId < PlanID && monthlyAnnual == "Annually"){
+  if (planId < PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4 ){
     return res.status(200).json({
       Message : "unable to downgrade",
       Reason : "you want to switch Annually Upgrade to downgrade kindly contact to support team"
@@ -852,7 +844,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
           const data = JSON.parse(responseData);
           console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
-          if (planId < UserResult[0][0].PlanID) {
+          if (planId < UserResult[0][0].PlanID || planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual) {
             const subscriptionDate = new Date();
             let subscriptionCreatedDateFormatted;
             if(monthlyAnnual == "Monthly"){
@@ -871,7 +863,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
                 data,
               });
             }
-          } // For Yearly
+          }
+           // For Yearly
           else {
             console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
