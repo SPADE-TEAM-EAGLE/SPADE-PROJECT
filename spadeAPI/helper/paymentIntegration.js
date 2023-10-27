@@ -642,17 +642,17 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
   // let AddDays = 30 - daysDifferenceMtoA;
   subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
   requestData.startAfter = {
-    day: AddDays,
+    day: remainingDays,
     month: "0",
     year: "0"
   };
   requestData.recurringPeriod = {
-    day: AddDays - 1,
+    day: remainingDays - 1,
     month: "0",
     year: "0"
   };
   requestData.endAfter = {
-    day: AddDays,
+    day: remainingDays,
     month: "0",
     year: "1"
   };
