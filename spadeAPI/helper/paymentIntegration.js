@@ -620,41 +620,41 @@ function formatDateForSQL(date) {
 
 
 // Move Monthly to Annually
-let daysDifferenceMtoA; 
-if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
-  daysDifferenceMtoA = dayDifference(subscriptionCreated_at);
-  daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
-  let remainingDays = daysDifferenceMtoA;
-  // console.log(remainingDays)
-  remainingDays = 30 - remainingDays;
-  // console.log(remainingDays)
-  let initialAmountChange = existPlanAmount / 30;
-  // console.log(initialAmountChange)
-  initialAmountChange = remainingDays * initialAmountChange;
-  // console.log(initialAmountChange)
-  // console.log(requestData.initialAmount)
-  initialAmountChange = requestData.initialAmount - initialAmountChange;
-  // console.log(initialAmountChange)
-  requestData.initialAmount = initialAmountChange;
-  let AddDays = 30 - daysDifferenceMtoA;
-  subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+// let daysDifferenceMtoA; 
+// if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+//   daysDifferenceMtoA = dayDifference(subscriptionCreated_at);
+//   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+//   let remainingDays = daysDifferenceMtoA;
+//   // console.log(remainingDays)
+//   remainingDays = 30 - remainingDays;
+//   // console.log(remainingDays)
+//   let initialAmountChange = existPlanAmount / 30;
+//   // console.log(initialAmountChange)
+//   initialAmountChange = remainingDays * initialAmountChange;
+//   // console.log(initialAmountChange)
+//   // console.log(requestData.initialAmount)
+//   initialAmountChange = requestData.initialAmount - initialAmountChange;
+//   // console.log(initialAmountChange)
+//   requestData.initialAmount = initialAmountChange;
+//   let AddDays = 30 - daysDifferenceMtoA;
+//   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
 
-  requestData.startAfter = {
-    day: AddDays,
-    month: "0",
-    year: "0"
-  };
-  requestData.recurringPeriod = {
-    day: AddDays - 1,
-    month: "0",
-    year: "0"
-  };
-  requestData.endAfter = {
-    day: AddDays,
-    month: "0",
-    year: "1"
-  };
-}
+//   requestData.startAfter = {
+//     day: AddDays,
+//     month: "0",
+//     year: "0"
+//   };
+//   requestData.recurringPeriod = {
+//     day: AddDays - 1,
+//     month: "0",
+//     year: "0"
+//   };
+//   requestData.endAfter = {
+//     day: AddDays,
+//     month: "0",
+//     year: "1"
+//   };
+// }
 
 
 
