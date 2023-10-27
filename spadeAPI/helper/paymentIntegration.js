@@ -626,11 +626,17 @@ return daysDiff;
 let daysDifferenceMtoA; 
 if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
   const currentDate = new Date();
+  console.log(subscriptionCreated_at)
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+console.log(timeDifference)
+
 daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+console.log(daysDifferenceMtoA)
   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+  console.log(daysDifferenceMtoA)
   // let remainingDays = daysDifferenceMtoA;
   let remainingDays = 30 - daysDifferenceMtoA;
+  console.log(remainingDays)
   // let AddDays = 30 - daysDifferenceMtoA;
   subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
   requestData.startAfter = {
@@ -783,7 +789,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   }
 
   // Annually downgrade
-  if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
+  if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4) {
     
     let AddDays = 365 - daysDifferenceAnnually;
     
@@ -805,6 +811,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "1"
     };
   }
+  
   console.log("requestData.endAfter : ", requestData.startAfter);
   requestData.planId = nuveiId;
   console.log(requestData);
