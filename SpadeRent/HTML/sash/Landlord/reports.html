@@ -2856,130 +2856,132 @@
                                                     <div class="col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div class="card-header justify-content-between">
-                                                                <div class="d-flex">
-                                                                    <div class="mx-2">
-                                                                        <div
-                                                                            class="main-header-center d-nonee d-lg-block m-0">
-                                                                            <button class="btn px-0"><i
-                                                                                    class="fe fe-search"
-                                                                                    aria-hidden="true"></i></button>
-                                                                            <input type="text" class="form-control"
-                                                                                id="typehead"
-                                                                                placeholder="Search"
-                                                                                autocomplete="off"
-                                                                                style="width: 230px;">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                
 
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        onclick="exportTableToCSV('person.csv')"
-                                                                        id="download_csv_reports"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV('Property_Report.csv')"
+                                                                        id="download_csv_reports"><b class="csv_icon"><i class="fi fi-rs-file-csv fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             CSV</strong></button>
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        id="download_pdf_reports"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports"><b class="pdf_icon"><i class="fi fi-rs-file-pdf fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             PDF</strong></button>
-                                                                    <div class="btn-group">
-                                                                        <button type="button"
-                                                                            class="btn font-weight-bold text-dark"
-                                                                            id="customize_btn" data-bs-toggle="dropdown"
-                                                                            style="border: none;"><strong>FILTER</strong><i
-                                                                                class="fe fe-chevron-down ms-2"></i></button>
-                                                                        <ul class="dropdown-menu" role="menu">
-                                                                            <li><a href="javascript:void(0)"
-                                                                                    class="text-dark"><strong>Coulmns to
-                                                                                        Show</strong></a>
-                                                                            </li>
-                                                                            <!-- <li class="d-flex justify-content-between">
-                                                                                        <a class="text-dark"
-                                                                                            href="javascript:void(0)">PROPERTY ID</a>
-                                                                                        <div class="form-check m-0">
-                                                                                            <input type="checkbox"
-                                                                                                class="form-check-input mt-2"
-                                                                                                id="exampleCheck1" checked>
-                                                                                        </div>
-                                                                                    </li> -->
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">PROPERTY
-                                                                                    NAME</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">PROPERTY
-                                                                                    TYPE</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">UNIT
-                                                                                    NUMBER</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">PROPERTY
-                                                                                    ADDRESS</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">TENANT
-                                                                                    NAME</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">TENANT
-                                                                                    EMAIL</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">PHONE</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
+                                                                   
 
+                                                                </div>
+                                                                <div class="btn-group">
+                                                                    <button type="button"
+                                                                        class="btn font-weight-bold text-dark"
+                                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                                        style="border: none;"><strong>FILTER</strong><i
+                                                                            class="fe fe-chevron-down ms-2"></i></button>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li><a href="javascript:void(0)"
+                                                                                class="text-dark"><strong>Coulmns to
+                                                                                    Show</strong></a>
+                                                                        </li>
+                                                                        <!-- <li class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY ID</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li> -->
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PROPERTY
+                                                                                NAME</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PROPERTY
+                                                                                TYPE</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">UNIT
+                                                                                NUMBER</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PROPERTY
+                                                                                ADDRESS</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">TENANT
+                                                                                NAME</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">TENANT
+                                                                                EMAIL</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PHONE</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
                                                                 <div
-                                                                    class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-end">
+                                                                    class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between">
+                                                                    <div class="d-flex">
+                                                                        <div >
+                                                                            <div
+                                                                                class="main-header-center d-nonee d-lg-block m-0">
+                                                                                <button class="btn px-0"><i
+                                                                                        class="fe fe-search"
+                                                                                        aria-hidden="true"></i></button>
+                                                                                <input type="text" class="form-control"
+                                                                                    id="typehead"
+                                                                                    placeholder="Search"
+                                                                                    autocomplete="off"
+                                                                                    style="width: 230px;">
+    
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     <div style="width: 220px"
-                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        class="d-flex justify-content-end align-items-center">
                                                                         <span class="fw-bold me-2"
                                                                             style="min-width: 107px;">Number of
                                                                             rows</span>
@@ -3006,8 +3008,11 @@
                                                                                 
                                                                                     <th>PROPERTY NAME</th>
                                                                                     <th>PROPERTY TYPE</th>
-                                                                                    <th>UNIT NUMBER</th>
                                                                                     <th>ADDRESS</th>
+                                                                                    <th>UNIT NUMBER</th>
+                                                                                    <th>CITY</th>
+                                                                                    <th>STATE</th>
+                                                                                    <th>ZIP CODE</th>
                                                                                     <th>TENANT NAME</th>
                                                                                     <th>EMAIL</th>
                                                                                     <th>PHONE NUMBER</th>
@@ -3131,12 +3136,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        onclick="exportTableToCSV2('person.csv')"
-                                                                        id="download_csv_reports2"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV2('Lease_Report.csv')"
+                                                                        id="download_csv_reports2"><b class="csv_icon"><i class="fi fi-rs-file-csv fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             CSV</strong></button>
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        id="download_pdf_reports2"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports2"><b class="pdf_icon"><i class="fi fi-rs-file-pdf fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             PDF</strong></button>
                                                                     <div class="btn-group">
                                                                         <button type="button"
@@ -3226,7 +3231,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div style="width: 220px"
-                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        class="d-flex justify-content-end align-items-center">
                                                                         <span class="fw-bold me-2"
                                                                             style="min-width: 107px;">Number of
                                                                             rows</span>
@@ -3387,12 +3392,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        onclick="exportTableToCSV3('person.csv')"
-                                                                        id="download_csv_reports3"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV3('Tenant_Report.csv')"
+                                                                        id="download_csv_reports3"><b class="csv_icon"><i class="fi fi-rs-file-csv fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             CSV</strong></button>
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        id="download_pdf_reports3"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports3"><b class="pdf_icon"><i class="fi fi-rs-file-pdf fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             PDF</strong></button>
                                                                     <div class="btn-group">
                                                                         <button type="button"
@@ -3501,7 +3506,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div style="width: 220px"
-                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        class="d-flex justify-content-end align-items-center">
                                                                         <span class="fw-bold me-2"
                                                                             style="min-width: 107px;">Number of
                                                                             rows</span>
@@ -3663,12 +3668,12 @@
                                                                 </div> -->
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        onclick="exportTableToCSV4('person.csv')"
-                                                                        id="download_csv_reports4"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV4('Invoice_Report.csv')"
+                                                                        id="download_csv_reports4"><b class="csv_icon"><i class="fi fi-rs-file-csv fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             CSV</strong></button>
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        id="download_pdf_reports4"><strong>Export as
+                                                                    <button type="button" class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports4"><b class="pdf_icon"><i class="fi fi-rs-file-pdf fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             PDF</strong></button>
                                                                     <div class="btn-group">
                                                                         <button type="button"
@@ -3765,7 +3770,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div style="width: 220px"
-                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        class="d-flex justify-content-end align-items-center">
                                                                         <span class="fw-bold me-2"
                                                                             style="min-width: 107px;">Number of
                                                                             rows</span>
@@ -3916,12 +3921,12 @@
                                                                 </div> -->
                                                                 </div>
                                                                 <div class="d-flex">
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        onclick="exportTableToCSV5('person.csv')"
-                                                                        id="download_csv_reports5"><strong>Export as
-                                                                            CSV</strong></button>
-                                                                    <button type="button" class="btn btn-primary mx-2"
-                                                                        id="download_pdf_reports5"><strong>Export as
+                                                                    <!-- <button type="button" class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV5('Task_Report.csv')"
+                                                                        id="download_csv_reports5"><b class="csv_icon"><i class="fi fi-rs-file-csv fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
+                                                                            CSV</strong></button> -->
+                                                                    <button type="button" class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports5"><b class="pdf_icon"><i class="fi fi-rs-file-pdf fs-20" style="vertical-align: text-top;"></i></b><strong>Export as
                                                                             PDF</strong></button>
                                                                     <div class="btn-group">
                                                                         <button type="button"
@@ -4033,7 +4038,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div style="width: 220px"
-                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        class="d-flex justify-content-end align-items-center">
                                                                         <span class="fw-bold me-2"
                                                                             style="min-width: 107px;">Number of
                                                                             rows</span>
@@ -4620,78 +4625,51 @@
             });
             // PDF CODE START
             document.getElementById("download_pdf_reports").addEventListener("click", async () => {
-                const invoice = document.getElementById("htmlContent");
+  const pdfContent = document.getElementById("htmlContent");
 
-                // Store the references and initial display state of the last column cells and header cells
-                const tableRows = invoice.querySelectorAll("tr");
-                const rowStates = [];
-                tableRows.forEach(row => {
-                    const cells = row.querySelectorAll("td");
-                    if (cells.length > 0) {
-                        const lastCell = cells[cells.length - 1];
-                        rowStates.push({
-                            cell: lastCell,
-                            display: lastCell.style.display
-                        });
-                        lastCell.style.display = "none";
-                    }
-                });
+  // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
-                const tableHeader = invoice.querySelector("thead");
-                const headerStates = [];
-                if (tableHeader) {
-                    const headerCells = tableHeader.querySelectorAll("th");
-                    if (headerCells.length > 0) {
-                        const lastHeaderCell = headerCells[headerCells.length - 1];
-                        headerStates.push({
-                            cell: lastHeaderCell,
-                            display: lastHeaderCell.style.display
-                        });
-                        lastHeaderCell.style.display = "none";
-                    }
-                }
+  // Modify the filename to include the current date
+  const filename = `Property Report ${formattedDate}.pdf`;
 
-                // Create a copy of the modified invoice content for generating PDF
-                const pdfContent = invoice.cloneNode(true);
+  var opt = {
+    margin: 0.1,
+    filename: filename, // Use the modified filename
+    image: {
+      type: 'jpeg',
+      quality: 0.98
+    },
+    html2canvas: {
+      scale: 2
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'A2',
+      orientation: 'portrait'
+    }
+  };
 
-                // Restore the initial display state after creating the PDF content
-                rowStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
+  html2pdf().from(pdfContent).set(opt).save();
+});
 
-                headerStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
-
-                var opt = {
-                    margin: 0.1,
-                    filename: `${name}.pdf`,
-                    image: {
-                        type: 'jpeg',
-                        quality: 0.98
-                    },
-                    html2canvas: {
-                        scale: 2
-                    },
-                    jsPDF: {
-                        unit: 'in',
-                        format: 'A3',
-                        orientation: 'portrait'
-                    }
-                };
-
-                // Generate the PDF
-                await html2pdf().from(pdfContent).set(opt).save();
-            });
 
 
 
             document.getElementById("download_pdf_reports2").addEventListener("click", () => {
 
                 const invoice = this.document.getElementById("htmlContent2");
+                
+  // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+  // Modify the filename to include the current date
+  const filename = `Lease Report ${formattedDate}.pdf`;
                 var opt = {
                     margin: 0.1,
-                    filename: `${name}.pdf`,
+                    filename: filename,
                     image: {
                         type: 'jpeg',
                         quality: 0.98
@@ -4710,9 +4688,15 @@
             document.getElementById("download_pdf_reports3").addEventListener("click", () => {
 
                 const invoice = this.document.getElementById("htmlContent3");
+                // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+  // Modify the filename to include the current date
+  const filename = `Tenant Report ${formattedDate}.pdf`;
                 var opt = {
                     margin: 0.1,
-                    filename: `${name}.pdf`,
+                    filename: filename,
                     image: {
                         type: 'jpeg',
                         quality: 0.98
@@ -4730,51 +4714,42 @@
             })
             document.getElementById("download_pdf_reports4").addEventListener("click", async () => {
                 const invoice = document.getElementById("htmlContent4");
+// Get the current date
+const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
-                // Store the references and initial display state of the last column cells and header cells
-                const tableRows = invoice.querySelectorAll("tr");
-                const rowStates = [];
-                tableRows.forEach(row => {
-                    const cells = row.querySelectorAll("td");
-                    if (cells.length > 0) {
-                        const lastCell = cells[cells.length - 1];
-                        rowStates.push({
-                            cell: lastCell,
-                            display: lastCell.style.display
-                        });
-                        lastCell.style.display = "none";
-                    }
-                });
-
-                const tableHeader = invoice.querySelector("thead");
-                const headerStates = [];
-                if (tableHeader) {
-                    const headerCells = tableHeader.querySelectorAll("th");
-                    if (headerCells.length > 0) {
-                        const lastHeaderCell = headerCells[headerCells.length - 1];
-                        headerStates.push({
-                            cell: lastHeaderCell,
-                            display: lastHeaderCell.style.display
-                        });
-                        lastHeaderCell.style.display = "none";
-                    }
-                }
-
-                // Create a copy of the modified invoice content for generating PDF
-                const pdfContent = invoice.cloneNode(true);
-
-                // Restore the initial display state after creating the PDF content
-                rowStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
-
-                headerStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
-
+  // Modify the filename to include the current date
+  const filename = `Invoice Report ${formattedDate}.pdf`;
                 var opt = {
                     margin: 0.1,
-                    filename: `${name}.pdf`,
+                    filename: filename,
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2
+                    },
+                    jsPDF: {
+                        unit: 'in',
+                        format: 'A2',
+                        orientation: 'portrait'
+                    }
+                };
+                html2pdf().from(invoice).set(opt).save();
+            });
+
+            document.getElementById("download_pdf_reports5").addEventListener("click", async () => {
+                const taskss = document.getElementById("htmlContent5");
+// Get the current date
+const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+  // Modify the filename to include the current date
+  const filename = `Task Report ${formattedDate}.pdf`;
+                var opt = {
+                    margin: 0.1,
+                    filename: filename,
                     image: {
                         type: 'jpeg',
                         quality: 0.98
@@ -4790,72 +4765,7 @@
                 };
 
                 // Generate the PDF
-                await html2pdf().from(pdfContent).set(opt).save();
-            });
-
-            document.getElementById("download_pdf_reports5").addEventListener("click", async () => {
-                const invoice = document.getElementById("htmlContent5");
-
-                // Store the references and initial display state of the last column cells and header cells
-                const tableRows = invoice.querySelectorAll("tr");
-                const rowStates = [];
-                tableRows.forEach(row => {
-                    const cells = row.querySelectorAll("td");
-                    if (cells.length > 0) {
-                        const lastCell = cells[cells.length - 1];
-                        rowStates.push({
-                            cell: lastCell,
-                            display: lastCell.style.display
-                        });
-                        lastCell.style.display = "none";
-                    }
-                });
-
-                const tableHeader = invoice.querySelector("thead");
-                const headerStates = [];
-                if (tableHeader) {
-                    const headerCells = tableHeader.querySelectorAll("th");
-                    if (headerCells.length > 0) {
-                        const lastHeaderCell = headerCells[headerCells.length - 1];
-                        headerStates.push({
-                            cell: lastHeaderCell,
-                            display: lastHeaderCell.style.display
-                        });
-                        lastHeaderCell.style.display = "none";
-                    }
-                }
-
-                // Create a copy of the modified invoice content for generating PDF
-                const pdfContent = invoice.cloneNode(true);
-
-                // Restore the initial display state after creating the PDF content
-                rowStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
-
-                headerStates.forEach(state => {
-                    state.cell.style.display = state.display;
-                });
-
-                var opt = {
-                    margin: 0.1,
-                    filename: `${name}.pdf`,
-                    image: {
-                        type: 'jpeg',
-                        quality: 0.98
-                    },
-                    html2canvas: {
-                        scale: 2
-                    },
-                    jsPDF: {
-                        unit: 'in',
-                        format: 'A3',
-                        orientation: 'portrait'
-                    }
-                };
-
-                // Generate the PDF
-                await html2pdf().from(pdfContent).set(opt).save();
+                await html2pdf().from(taskss).set(opt).save();
             });
 
             // PDF CODE END
@@ -4890,8 +4800,11 @@
                         row.push(cols[j].innerText);
                     csv.push(row.join(","));
                 }
-                //call the function to download the CSV file
-                downloadCSV(csv.join("\n"), filename);
+                // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  const filename_report = `Property Report ${formattedDate}.csv`;
+                downloadCSV(csv.join("\n"), filename_report);
             }
             function exportTableToCSV2(filename) {
                 //declare a JavaScript variable of array type
@@ -4905,8 +4818,11 @@
                         row.push(cols[j].innerText);
                     csv.push(row.join(","));
                 }
-                //call the function to download the CSV file
-                downloadCSV(csv.join("\n"), filename);
+                 // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  const filename_report = `Lease Report ${formattedDate}.csv`;
+                downloadCSV(csv.join("\n"), filename_report);
             }
             function exportTableToCSV3(filename) {
                 //declare a JavaScript variable of array type
@@ -4920,8 +4836,11 @@
                         row.push(cols[j].innerText);
                     csv.push(row.join(","));
                 }
-                //call the function to download the CSV file
-                downloadCSV(csv.join("\n"), filename);
+                 // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  const filename_report = `Tenant Report ${formattedDate}.csv`;
+                downloadCSV(csv.join("\n"), filename_report);
             }
             function exportTableToCSV4(filename) {
                 //declare a JavaScript variable of array type
@@ -4935,8 +4854,11 @@
                         row.push(cols[j].innerText);
                     csv.push(row.join(","));
                 }
-                //call the function to download the CSV file
-                downloadCSV(csv.join("\n"), filename);
+                 // Get the current date
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  const filename_report = `Invoice Report ${formattedDate}.csv`;
+                downloadCSV(csv.join("\n"), filename_report);
             }
             // function exportTableToCSV5(filename) {
             //    var csv = [];
@@ -5076,9 +4998,19 @@
                         
                             '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
                             '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
-                            '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                            '</td>' +
+                            '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
+                            
+                            '<td class="propertyCity">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + property.city + '</p>' +
+                            '</td>' +
+                            '<td class="propertyState">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + property.state + '</p>' +
+                            '</td>' +
+                            '<td class="propertyZip">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + property.zipCode + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' + property.firstName + " " + property.lastName + '</p>' +

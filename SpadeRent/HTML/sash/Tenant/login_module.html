@@ -329,7 +329,34 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+  
+  <div class="modal fade effect-scale" id="auth-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body pt-5">
+          <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
+            <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
+              class="Rent-logo mb-5" />
+            <h1 class="mb-4 text-dark fw-bold">Two-Factor Authentication</h1>
+            <small class="lead text-default mb-3 fs-6">Your account is secured with Two-Factor Authentication. We have
+              sent an OTP to your registered email. <span class="text-primary fs-6" id="text-email"></span></small>
+            <label for="token_auth">Enter 6-digit code</label>
+            <input id="token_auth" name="token_auth" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
+              maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+              placeholder="Enter 6-digit code">
+            <label class="text-danger">* Will expire in 5 minutes</label>
+            <div class="">
+              <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
+              <button href="javascript:void(0)" class="btn btn-primary btn-pill" disabled id="verify_otp_auth">Verify</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="infoModal_auth" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
       <div class="modal-content modal-content-demo">
         <div class="modal-body p-0">
@@ -360,32 +387,6 @@
                   </div> -->
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade effect-scale" id="auth-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-l" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body pt-5">
-          <div class="d-flex flex-column justify-content-center align-items-center p-5" style="text-align: center;">
-            <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" style="max-width: 110px;"
-              class="Rent-logo mb-5" />
-            <h1 class="mb-4 text-dark fw-bold">Two-Factor Authentication</h1>
-            <small class="lead text-default mb-3 fs-6">Your account is secured with Two-Factor Authentication. We have
-              sent an OTP to your registered email. <span class="text-primary fs-6" id="text-email"></span></small>
-            <label for="token_auth">Enter 6-digit code</label>
-            <input id="token_auth" name="token_auth" type="phone" class="form-control form mb-2" pattern="[0-9]{5}"
-              maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
-              placeholder="Enter 6-digit code">
-            <label class="text-danger">* Will expire in 5 minutes</label>
-            <div class="">
-              <!-- <a href="javascript:void(0)" class="btn btn-outline-primary btn-pill me-2">Remind Me Later</a> -->
-              <button href="javascript:void(0)" class="btn btn-primary btn-pill" disabled id="verify_otp_auth">Verify</button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -785,15 +786,15 @@
               $("#verify_otp_auth").prop("disabled",false)
               if(xhr.responseJSON.message=="OTP expired"){
                 $("#info-text").text("OTP expired!!!")
-                $("#infoModal").modal("show")
+                $("#infoModal_auth").modal("show")
                 setTimeout(function () {
-                  $("#infoModal").modal("hide");
+                  $("#infoModal_auth").modal("hide");
                 }, 1700);
               }else if(xhr.responseJSON.message=="Cannot Validate!!!"){
                 $("#info-text").text("Incorrect OTP")
-                $("#infoModal").modal("show")
+                $("#infoModal_auth").modal("show")
                 setTimeout(function () {
-                  $("#infoModal").modal("hide");
+                  $("#infoModal_auth").modal("hide");
                 }, 1700);
               }
             }
