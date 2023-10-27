@@ -622,11 +622,44 @@ return daysDiff;
   const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
 
   
+  // const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 
-  // Move Monthly to Annually
-  // if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
 
-  // }
+
+// Move Monthly to Annually
+let daysDifferenceMtoA; 
+if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+  const currentDate = new Date();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+  // let remainingDays = daysDifferenceMtoA;
+  let remainingDays = 30 - daysDifferenceMtoA;
+  let initialAmountChange = existPlanAmount / 30;
+  initialAmountChange = remainingDays * initialAmountChange;
+  initialAmountChange = requestData.initialAmount - initialAmountChange;
+  requestData.initialAmount = initialAmountChange;
+  // let AddDays = 30 - daysDifferenceMtoA;
+  subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
+  requestData.startAfter = {
+    day: AddDays,
+    month: "0",
+    year: "0"
+  };
+  requestData.recurringPeriod = {
+    day: AddDays - 1,
+    month: "0",
+    year: "0"
+  };
+  requestData.endAfter = {
+    day: AddDays,
+    month: "0",
+    year: "1"
+  };
+}
+
+
+
 
 
 
@@ -671,9 +704,9 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
     let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
     monthsDifference = Math.max(0, monthsDifference);
 
-    // // Calculate the difference in years
-    // let yearsDifference = currentDate.year - createdDate.year;
-    // yearsDifference = Math.max(0, yearsDifference);
+    // Calculate the difference in years
+    let yearsDifference = currentDate.year - createdDate.year;
+    yearsDifference = Math.max(0, yearsDifference);
     // Monthly Upgrade
     if (
       currentDate.month == createdDate.month &&
@@ -698,8 +731,12 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
   }
   let daysDifferenceAnnually;
   if (planId > PlanID && monthlyAnnual == "Annually") {
-    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
- daysDifferenceAnnually = dayDifference(subscriptionCreated_at);
+ 
+const currentDate = new Date();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+ daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
+//
       let remainingDays = daysDifferenceAnnually;
       remainingDays = 365 - remainingDays;
       let initialAmountChange = existPlanAmount / 365;
@@ -816,7 +853,6 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
           console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
           if (planId < UserResult[0][0].PlanID) {
-            // console.log("planId");
             const subscriptionDate = new Date();
             let subscriptionCreatedDateFormatted;
             if(monthlyAnnual == "Monthly"){
