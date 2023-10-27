@@ -14805,7 +14805,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             console.log(time)
                         }
                     })
-                    
+                    console.log(parseInt(currentSelectedId),parseInt(cardId))
                     if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId)) {
                         console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
                         $("#payment-month").text("Year")
@@ -14828,7 +14828,20 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm-yearly").modal("show")
-                    } 
+                    }
+                    
+                    else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<5) {
+                        $("#payment-month").text("Year")
+                        $("#payment-month").text(time)
+                        $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                        var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        seletedPlanID = cardId
+                        $("#upgradetopro #amount").val(amount)
+                        $("#upgradetopro #payment-amount").text(amount)
+                        $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm-yearly").modal("show")
+                    }
+
                     else {
                         console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
                         $("#payment-month").text("Year")
