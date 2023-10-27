@@ -590,11 +590,12 @@ function formatDateForSQL(date) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+const currentDate = new Date();
 function dayDifference(datee) {
-  const currentDate = new Date();
+  
 const timeDifference = currentDate.getTime() - datee.getTime();
- daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-return daysDifferenceAnnually;
+let daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+return daysDiff;
 }
 // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
 
@@ -648,27 +649,27 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
   // Monthly
   let daysDifference;
   if (monthlyAnnual == "Monthly") {
-    // console.log(UserResult[0][0]);
-    // const subscriptionDate = new Date();
-    // const currentDate = {
-    //   day: subscriptionDate.getDate(),
-    //   month: subscriptionDate.getMonth() + 1,
-    //   year: subscriptionDate.getFullYear(),
-    // };
-    // const createdDate = {
-    //   day: subscriptionCreated_at.getDate(),
-    //   month: subscriptionCreated_at.getMonth() + 1,
-    //   year: subscriptionCreated_at.getFullYear(),
-    // };
+    console.log(UserResult[0][0]);
+    const subscriptionDate = new Date();
+    const currentDate = {
+      day: subscriptionDate.getDate(),
+      month: subscriptionDate.getMonth() + 1,
+      year: subscriptionDate.getFullYear(),
+    };
+    const createdDate = {
+      day: subscriptionCreated_at.getDate(),
+      month: subscriptionCreated_at.getMonth() + 1,
+      year: subscriptionCreated_at.getFullYear(),
+    };
 
     // Calculate the difference in days
-    // daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
-    daysDifference = dayDifference(subscriptionCreated_at);
+    daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    // daysDifference = dayDifference(subscriptionCreated_at);
     daysDifference = Math.max(0, Math.round(daysDifference));
 
     // Calculate the difference in months
-    // let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
-    // monthsDifference = Math.max(0, monthsDifference);
+    let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
+    monthsDifference = Math.max(0, monthsDifference);
 
     // // Calculate the difference in years
     // let yearsDifference = currentDate.year - createdDate.year;
@@ -720,9 +721,9 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
     };
   } else {
     requestData.recurringPeriod = {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "30",
+      month: "11",
+      year: "0"
     };
     requestData.endAfter = {
       day: "0",
