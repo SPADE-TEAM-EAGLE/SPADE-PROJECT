@@ -853,7 +853,6 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
           console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
           if (planId < UserResult[0][0].PlanID) {
-            // console.log("planId");
             const subscriptionDate = new Date();
             let subscriptionCreatedDateFormatted;
             if(monthlyAnnual == "Monthly"){
