@@ -29,7 +29,7 @@ $(document).ready(function () {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
             }
-            if(image!==" " && image!==null){
+            if(image!==" " && image!==null && image!== ""){
                 
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)

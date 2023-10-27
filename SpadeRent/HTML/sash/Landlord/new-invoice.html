@@ -1075,7 +1075,7 @@
                                         <div class="default text">Select Tenant</div>
                                         <!-- <label class="form-label fw-bold fs-18">Select Tenant</label> -->
                                         <div class="menu" id="menu">
-                                            <div class="item" data-value="AL">Select Option</div>
+                                            <!-- <div class="item" data-value="AL">Select Option</div> -->
                                         </div>
                                     </div>
                                 </section>
@@ -2943,7 +2943,7 @@ function dragOverHandler(ev) {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image }) {
-                    if (image !== " " && image !== null) {
+                    if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)

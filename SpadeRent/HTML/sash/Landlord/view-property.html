@@ -2312,7 +2312,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function ({ userName, image,units }) {
                     // console.log()
                     unitsPermission = units;
-                    if(image!==" " && image!==null){
+                    if(image!==" " && image!==null && image!== ""){
                 
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)
@@ -2415,9 +2415,9 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         if(image.image_url!==" " && image.image_url!==null){
             
             if(image.image_url.includes(".pdf") || image.image_url.includes(".docx") || image.image_url.includes(".doc")){
-                $("#image-placeholder").append('<div class="col-lg-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
+                $("#image-placeholder").append('<div class="col-lg-2 p-0 me-2"><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 90px;"></i></div>')
             }else{
-                $("#image-placeholder").append('<div class="col-lg-2"><img src="' + image.image_url + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
+                $("#image-placeholder").append('<div class="col-lg-2 p-0 me-2"><img src="' + image.image_url + '" alt="" class="img-fluid roundedd" style="width: 125px; height: 115px;"></div>')
     
             }
     
@@ -3057,7 +3057,7 @@ var password = 'your-secret-password';
             var propertySQFT = $("#propertyTotalSF_update").val();
             var units = $("#unit_update").val();
 
-            if (propertyName === '' || address === '' || city === '' || state === '' || zipCode === '' || propertyType === '' || propertySQFT === '' || units === '') {
+            if (propertyName === '' || address === '' || city === '' || state === 'Choose...' || zipCode === '' || propertyType === 'Choose...' || propertySQFT === '' || units === '') {
                 $('#update').addClass('disabled')
             } else {
                 $('#update').removeClass('disabled')

@@ -2528,7 +2528,7 @@ function dragOverHandler(ev) {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image }) {
-                    if (image !== " " && image !== null) {
+                    if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)

@@ -590,6 +590,13 @@ function formatDateForSQL(date) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+const currentDate = new Date();
+function dayDifference(datee) {
+  
+const timeDifference = currentDate.getTime() - datee.getTime();
+let daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+return daysDiff;
+}
 // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
 
 
@@ -675,7 +682,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
   // Monthly
   let daysDifference;
   if (monthlyAnnual == "Monthly") {
-    // console.log(UserResult[0][0]);
+    console.log(UserResult[0][0]);
     const subscriptionDate = new Date();
     const currentDate = {
       day: subscriptionDate.getDate(),
@@ -690,6 +697,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
 
     // Calculate the difference in days
     daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    // daysDifference = dayDifference(subscriptionCreated_at);
     daysDifference = Math.max(0, Math.round(daysDifference));
 
     // Calculate the difference in months
@@ -750,9 +758,9 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
     };
   } else {
     requestData.recurringPeriod = {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "30",
+      month: "11",
+      year: "0"
     };
     requestData.endAfter = {
       day: "0",
@@ -784,7 +792,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
 
   // Annually downgrade
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
-
+    
     let AddDays = 365 - daysDifferenceAnnually;
     
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);

@@ -1523,7 +1523,7 @@
                                                 communications
                                                 and portal access. </span>
                                         </div>
-                                        <img src="" alt="" style="border-radius: 50%; width: 70px;height: 70px;"
+                                        <img class="me-3" src="" alt="" style="border-radius: 50%; width: 70px;height: 70px;"
                                             id="tenant-img">
                                         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true"><i
@@ -1654,7 +1654,7 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-light mb-3 mb-sm-0 me-3 mt-1">
+                                                        <div class="media-icon bg-light-blue mb-3 mb-sm-0 me-3 mt-1">
                                                             <i class="fi fi-rs-phone-call text-primary"></i>
                                                         </div>
                                                         <div class="media-body">
@@ -1686,7 +1686,7 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-light  mb-3 mb-sm-0 me-3 mt-1">
+                                                        <div class="media-icon bg-light-blue  mb-3 mb-sm-0 me-3 mt-1">
                                                             <i class="fi fi-rs-portrait text-primary"></i>
                                                         </div>
                                                         <div class="media-body">
@@ -1723,7 +1723,7 @@
                                             <div class="main-profile-contact-list">
                                                 <div class="me-5">
                                                     <div class="media mb-4 d-flex">
-                                                        <div class="media-icon bg-light  mb-3 mb-sm-0 me-3 mt-1">
+                                                        <div class="media-icon bg-light-blue  mb-3 mb-sm-0 me-3 mt-1">
 
                                                             <i class="fi fi-rs-window-alt text-primary"></i>
                                                         </div>
@@ -2577,7 +2577,7 @@
                     localStorage.setItem("LandlordImg", response.image)
                     localStorage.setItem("landlordId", response.userId)
                     // LandlordImg = response.image;
-                    if (response.image !== " " && response.image !== null) {
+                    if (response.image !== " " && response.image !== null && response.image!=="") {
 
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
@@ -2704,7 +2704,7 @@
                         $("#tenant-email").text(data[0][0].tEmail)
                         $("#tenant-phone").text(data[0][0].tPhoneNumber)
                         $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
-                        $("#tenant-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/users/16.jpg")
+                        $("#tenant-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
                         $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
 
                     }

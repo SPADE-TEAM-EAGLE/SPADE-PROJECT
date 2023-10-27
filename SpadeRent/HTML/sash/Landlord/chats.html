@@ -3517,7 +3517,7 @@
                         localStorage.setItem("landlordId", response.userId)
                         // LandlordImg = response.image;
 
-                        if (response.image !== " " && response.image !== null) {
+                        if (response.image !== " " && response.image !== null && response.image!=="") {
 
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
@@ -3642,7 +3642,7 @@
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
                         console.log("check rec", message);
                         messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" && localStorage.getItem("tenantImg") !== "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
                         if (message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')) {
                             const imageUrls = message.message.split(',');
@@ -4059,7 +4059,7 @@
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
                                                             </div>
                                                             <div style="width: 36px;height: 36px; border-radius: 50%;
-                                                            background: url(${localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : randomImg});
+                                                            background: url(${localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg});
                                                             background-position: center;
                                                             background-size: cover;" class="ms-1"> 
                                                             </div> 
@@ -4069,7 +4069,7 @@
                                                             const time = timeArray.slice(0, 2).join(":");
 
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
     <div class="msg-text">`;
                                                             if (response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')) {
                                                                 const imageUrls = response.data[i]['message'].split(',');
@@ -4382,7 +4382,7 @@
 
                     // Create image container
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
+                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg) + `);background-position: center;background-size: cover;`);
                     imageContainer.setAttribute('class', 'ms-1');
                     // const image = document.createElement('img');
                     // image.setAttribute('src', localStorage.getItem("LandlordImg") != "null" ? localStorage.getItem("LandlordImg") : "../assets/images/users/5.jpg");
