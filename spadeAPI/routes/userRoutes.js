@@ -172,6 +172,7 @@ router.put("/updateAllTenantNotifyRead", verifyTokenTenant, notifyController.upd
 
 
 // property report task
+// router.get("/propertyReport", userController.getAllProperty);
 router.get("/propertyReport", verifyToken, userController.getAllProperty);
 router.get("/invoiceReport", verifyToken, userController.getInvoiceReportData);
 router.get("/taskReport", verifyToken, userController.getTaskReportData);

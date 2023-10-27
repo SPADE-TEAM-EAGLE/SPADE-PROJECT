@@ -580,7 +580,6 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   };
 
 // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-
 function formatDateForSQL(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -592,15 +591,10 @@ function formatDateForSQL(date) {
 }
 const currentDate = new Date();
 function dayDifference(datee) {
-  
 const timeDifference = currentDate.getTime() - datee.getTime();
 let daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 return daysDiff;
 }
-// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-
-
-  // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
   var correctPlanId;
 
 
