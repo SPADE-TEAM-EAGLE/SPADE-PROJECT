@@ -1,5 +1,5 @@
 //js code
-$("#save-email").addClass("disabled")
+// $("#save-email").addClass("disabled")
 let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
@@ -125,6 +125,9 @@ $(document).ready(function () {
                     {
                         $("#save-email").removeClass("disabled")
                         $("#verify-email-span").addClass("d-none")
+                    }else{
+                        $("#save-email").addClass("disabled")
+                        $("#verify-email-span").removeClass("d-none")
                     }
                 },
                 error: function(xhr, status, error) {

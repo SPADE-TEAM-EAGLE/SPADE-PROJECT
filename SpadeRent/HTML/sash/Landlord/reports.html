@@ -5819,8 +5819,17 @@ if (task.priority == 'High') {
                     }
                     else {
                         taskData = response?.data[0];
-
-                        constructTaskTable(taskData)
+                        if(taskData?.length < 1){
+                            $("#download_csv_reports5").attr("disabled", true)
+                            $("#download_pdf_reports5").attr("disabled", true)
+                            $('#table_body_task_report').empty();
+                            var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                            $("#table_body_task_report").append(row);
+                        }
+                        else{
+                                constructTaskTable(taskData)
+                        }
+                        
                     }
 
 

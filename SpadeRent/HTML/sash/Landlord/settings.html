@@ -3277,8 +3277,7 @@ Draft</button> -->
                                 <div class="text-center">
                                     <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
                                         aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete <span
-                                            id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -12345,7 +12344,7 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
                                                 d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
                                         </svg></span>
                                     <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                                    <p class="card-text text-dark">Email Not Found</p>
+                                    <p class="card-text text-dark">Email Already Exist</p>
                                 </div>
                             </div>
                         </div>
@@ -13252,17 +13251,17 @@ justify-content: center;"><i class="fi fi-rs-key d-flex fs-24"></i></span>
 
                                 )
                                 if ($("#manager").hasClass("active")) {
+                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                } else if ($("#staff").hasClass("active")) {
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").addClass("active")
+                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                } else {
                                     $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").addClass("active")
                                     $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                } else if ($("#staff").hasClass("active")) {
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                } else {
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
                                 }
                                 eval(`$("#table_body_${role.role.toLowerCase()} tr")`).each(function () {
                                     const childObject = $(this).attr("data-id")
@@ -14497,42 +14496,42 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     var interval;
                     counter = 5;
 
-                    function startCounter() {
-                        document.getElementById('confirmDelete') = true;
-                        $('#confirmDelete').css('opacity', '0.7');
+                    // function startCounter() {
+                    //     document.getElementById('confirmDelete').disabled = true;
+                    //     $('#confirmDelete').css('opacity', '0.7');
 
-                        var counterElement = document.getElementById('counter_delete');
-                        counterElement.style.display = "inline";
-                        counterElement.textContent = ' (' + counter + ')';
+                    //     var counterElement = document.getElementById('counter_delete');
+                    //     counterElement.style.display = "inline";
+                    //     counterElement.textContent = ' (' + counter + ')';
 
-                        interval = setInterval(function () {
-                            counter--;
-                            counterElement.textContent = ' (' + counter + ')';
+                    //     interval = setInterval(function () {
+                    //         counter--;
+                    //         counterElement.textContent = ' (' + counter + ')';
 
-                            if (counter === 0) {
-                                document.getElementById('confirmDelete').disabled = false;
-                                $('#confirmDelete').css('opacity', '1');
+                    //         if (counter === 0) {
+                    //             document.getElementById('confirmDelete').disabled = false;
+                    //             $('#confirmDelete').css('opacity', '1');
 
-                                counterElement.style.display = "none";
-                                clearInterval(interval);
-                            }
-                        }, 1000);
-                    }
+                    //             counterElement.style.display = "none";
+                    //             clearInterval(interval);
+                    //         }
+                    //     }, 1000);
+                    // }
 
-                    function resetCounter() {
-                        clearInterval(interval);
-                        counter = 5;
-                    }
+                    // function resetCounter() {
+                    //     clearInterval(interval);
+                    //     counter = 5;
+                    // }
 
-                    // Call the startCounter function when the modal is shown
-                    $('#myModal_delete').on('shown.bs.modal', function () {
-                        startCounter();
-                    });
+                    // // Call the startCounter function when the modal is shown
+                    // $('#myModal_delete').on('shown.bs.modal', function () {
+                    //     startCounter();
+                    // });
 
-                    // Call the resetCounter function when the modal is closed
-                    $('#myModal_delete').on('hidden.bs.modal', function () {
-                        resetCounter();
-                    });
+                    // // Call the resetCounter function when the modal is closed
+                    // $('#myModal_delete').on('hidden.bs.modal', function () {
+                    //     resetCounter();
+                    // });
 
                     // counter for delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
                     $('#myModal_delete').modal('show');
@@ -14558,6 +14557,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             setTimeout(function () {
                                 $("#successfully_changed").modal("hide");
                             }, 2000);
+                            
                         },
                         error: function (xhr, status, error) {
                             // window.alert('Error: ' + error);
@@ -16400,7 +16400,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 var imageArray = response.images;
                                 data.images = imageArray
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/createUserPermissionUser', // Replace with your API endpoint
+                                    url: 'http://localhost:3000/api/spade/createUserPermissionUser', // Replace with your API endpoint
                                     type: 'POST', // Adjust the HTTP method if needed
                                     contentType: 'application/json', // Set the content type
                                     data: JSON.stringify(data), // Convert data to JSON format
@@ -16461,7 +16461,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                     } else {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createUserPermissionUser', // Replace with your API endpoint
+                            url: 'http://localhost:3000/api/spade/createUserPermissionUser', // Replace with your API endpoint
                             type: 'POST', // Adjust the HTTP method if needed
                             contentType: 'application/json', // Set the content type
                             data: JSON.stringify(data), // Convert data to JSON format
@@ -16552,10 +16552,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     if (permission == "") {
                         permission = "Restrict"
                     }
-                    const role = $("#user-role-holder").children().first().nextAll().find(".active").attr("id")
+                    const role = $("#user-role-holder").children().eq(1).nextAll().find(".active").attr("id");
+
                     $("#checkbox-container-parent input[type=checkbox]").prop('disabled', true);
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/userPermissionUpdate",
+                        url: "http://localhost:3000/api/spade/userPermissionUpdate",
                         type: "PUT",
                         data: JSON.stringify({ role: role, permission: permission, columnName: columnName }),
                         contentType: "application/json",
@@ -16877,6 +16878,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
         <script>
+            var scard_bank;
             function createNuveiFields(){
                 var sfc_bank = SafeCharge({
                 env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
@@ -16917,7 +16919,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 invalid: 'invalid',
                 complete: 'complete',
             };
-            var scard_bank = ScFields_bank.create('ccNumber', {
+            scard_bank = ScFields_bank.create('ccNumber', {
                 style: ScFieldStyles,
                 classes: ScFieldClasses,
             });

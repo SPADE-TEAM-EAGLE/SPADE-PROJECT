@@ -3642,12 +3642,21 @@ color: #000;
                     }
                 });
             }
-            $("#succesModal,#infoModal").on('hide.bs.modal', function () {
+            $("#infoModal").on('hide.bs.modal', function () {
 
                 resetAccordions()
+                
                 // $('#accordion-item1').find('.file-grid').empty();
                 // getData()
             })
+            $("#succesModal").on('hide.bs.modal', function () {
+
+resetAccordions()
+window.location = './add-tenant.html';
+// $('#accordion-item1').find('.file-grid').empty();
+// getData()
+})
+            
             // $("#succesModal").on('hide.bs.modal', function() {
             //     window.location = './add-tenant.html'
             // })
