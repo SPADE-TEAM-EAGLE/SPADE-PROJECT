@@ -615,46 +615,41 @@ function formatDateForSQL(date) {
   const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
 
   
-
+  // const { subscriptionCreated_at, PlanID } = UserResult[0][0];
 
 
 
 // Move Monthly to Annually
-// let daysDifferenceMtoA; 
-// if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
-//   daysDifferenceMtoA = dayDifference(subscriptionCreated_at);
-//   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
-//   let remainingDays = daysDifferenceMtoA;
-//   // console.log(remainingDays)
-//   remainingDays = 30 - remainingDays;
-//   // console.log(remainingDays)
-//   let initialAmountChange = existPlanAmount / 30;
-//   // console.log(initialAmountChange)
-//   initialAmountChange = remainingDays * initialAmountChange;
-//   // console.log(initialAmountChange)
-//   // console.log(requestData.initialAmount)
-//   initialAmountChange = requestData.initialAmount - initialAmountChange;
-//   // console.log(initialAmountChange)
-//   requestData.initialAmount = initialAmountChange;
-//   let AddDays = 30 - daysDifferenceMtoA;
-//   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-
-//   requestData.startAfter = {
-//     day: AddDays,
-//     month: "0",
-//     year: "0"
-//   };
-//   requestData.recurringPeriod = {
-//     day: AddDays - 1,
-//     month: "0",
-//     year: "0"
-//   };
-//   requestData.endAfter = {
-//     day: AddDays,
-//     month: "0",
-//     year: "1"
-//   };
-// }
+let daysDifferenceMtoA; 
+if(planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+  const currentDate = new Date();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+  // let remainingDays = daysDifferenceMtoA;
+  let remainingDays = 30 - daysDifferenceMtoA;
+  let initialAmountChange = existPlanAmount / 30;
+  initialAmountChange = remainingDays * initialAmountChange;
+  initialAmountChange = requestData.initialAmount - initialAmountChange;
+  requestData.initialAmount = initialAmountChange;
+  // let AddDays = 30 - daysDifferenceMtoA;
+  subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
+  requestData.startAfter = {
+    day: AddDays,
+    month: "0",
+    year: "0"
+  };
+  requestData.recurringPeriod = {
+    day: AddDays - 1,
+    month: "0",
+    year: "0"
+  };
+  requestData.endAfter = {
+    day: AddDays,
+    month: "0",
+    year: "1"
+  };
+}
 
 
 
@@ -728,7 +723,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
   }
   let daysDifferenceAnnually;
   if (planId > PlanID && monthlyAnnual == "Annually") {
-    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+ 
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
  daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));

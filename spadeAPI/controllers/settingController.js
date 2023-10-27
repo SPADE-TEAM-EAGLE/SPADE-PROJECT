@@ -277,6 +277,4 @@ const Image=req.files[0];
     return res.status(500).json({ message: "Internal Server Error", error: error });
   }
 };
-
-
 // ####################################### Base64 END ##########################################
