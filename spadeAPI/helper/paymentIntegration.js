@@ -673,7 +673,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
 
 
   // Annually Downgrade
-  if (planId < PlanID && monthlyAnnual == "Annually"){
+  if (planId < PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4 ){
     return res.status(200).json({
       Message : "unable to downgrade",
       Reason : "you want to switch Annually Upgrade to downgrade kindly contact to support team"
