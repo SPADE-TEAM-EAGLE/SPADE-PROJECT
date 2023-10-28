@@ -11264,13 +11264,13 @@ Draft</button> -->
                                                                 style="border: 1px dashed #00000087;"
                                                                 ondrop="dropHandler(event);"
                                                                 ondragover="dragOverHandler(event);">
-                                                                <input id="fileInput" type="file" name="image"
+                                                                <input id="fileInput_business" type="file" name="image"
                                                                     placeholder="Enter Photo"
                                                                     class="custom-file-input form"
                                                                     accept=".jpg, .png, image/jpeg, image/png"
                                                                     aria-label="hello" multiple>
                                                                 <span className="d-none"></span>
-                                                                <label class="custom-file-label" for="fileInput">
+                                                                <label class="custom-file-label" for="fileInput_business">
                                                                     <i class="fi fi-rs-cloud-upload"></i>
                                                                     <div class="custom-file-text">
                                                                         <span>Upload Photo here</span>
@@ -13078,14 +13078,17 @@ Draft</button> -->
                     // Use DataTransferItemList interface to access the file(s)
                     [...ev.dataTransfer.items].forEach((item, i) => {
                         // If dropped items aren't files, reject them
+                //         files.forEach(function (file) {
+                //     file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                // });
                         if (item.kind === "file") {
                             const file = item.getAsFile();
-                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                             updateSelectedFilesContainer1()
                         }
                     });
-                } else {
-                    // Use DataTransfer interface to access the file(s)
+                }
+                 else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
                         console.log(`… file[${i}].name = ${file.name}`);
                     });
@@ -13179,6 +13182,15 @@ Draft</button> -->
 
 
             $('#fileInput_user').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer1(); // Update the selected files container
+            });
+            $('#fileInput_business').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
                 files.forEach(function (file) {
@@ -15918,7 +15930,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -15931,7 +15943,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -15953,7 +15965,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     
                                                     if(!selectedDowngrade){
                                                         $.ajax({
-                                                        url: 'http://localhost:3000/api/spade/updatePlanId',
+                                                        url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                         method: 'PUT',
                                                         data: JSON.stringify({ planID: seletedPlanID }),
                                                         contentType: 'application/json',
@@ -16042,7 +16054,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -16055,7 +16067,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")

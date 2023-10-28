@@ -501,7 +501,7 @@ function updateAllNotifyRead() {
 }
 
 function updateDataNotify(notificationId, type) {
-  $('#preloader').css('display','flex')
+  // $('#preloader').css('display','flex')
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
@@ -531,7 +531,7 @@ function updateDataNotify(notificationId, type) {
       console.log(response);
     },
     error: function (xhr, status, error) {
-      $('#preloader').css('display','none')
+      // $('#preloader').css('display','none')
 
       console.log("Error: " + error);
     },
