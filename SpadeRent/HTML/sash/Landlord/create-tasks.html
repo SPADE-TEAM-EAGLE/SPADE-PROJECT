@@ -633,6 +633,7 @@
                 font-weight: bold !important;
             }
         }
+       
     </style>
 
 </head>
@@ -2757,9 +2758,6 @@
     <script src="../assets/js/select2.js"></script>
     <script>
         $(document).ready(function () {
-            // $('.select2-show-search').select2({
-            //     dropdownParent: $('#addModal')
-            // });
             $('#addModal').on('shown.bs.modal', function () {
 
                 $('.select2-show-search').select2({
@@ -2803,7 +2801,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
 
     <!-- INTERNAL SELECT2 JS -->
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <!-- <script src="../assets/plugins/select2/select2.full.min.js"></script> -->
 
     <!-- INTERNAL Data tables js-->
     <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -4240,7 +4238,7 @@ if (task.priority == 'High') {
                                     name
                                 }) => {
                                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
-                                    $("#myModal_edit .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}"><span class="select2-selection__choice__remove" role="presentation">×</span>${name}</li>`)
+                                    $("#myModal_edit .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}">${name}</li>`)
                                 })
 
                                 $('#myModal_edit').modal('show');

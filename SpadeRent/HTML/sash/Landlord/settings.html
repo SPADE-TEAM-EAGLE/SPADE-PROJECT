@@ -1107,7 +1107,7 @@
         }
 
         .text4-blue {
-            color: #1D80C4 !important;
+            color: #8bd8bd !important;
         }
 
         .card {
@@ -4533,7 +4533,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-warning"
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-warning" style="border-top: 17px solid #F7C042 !important;"
                                                                                                 id="5">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
@@ -4622,7 +4622,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-green"
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-green" style="border-top: 17px solid #0CA7B6 !important;"
                                                                                                 id="6">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
@@ -4766,7 +4766,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-blue"
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-blue" style="border-top: 17px solid #8bd8bd !important;"
                                                                                                 id="7">
                                                                                                 <div class="d-flex justify-content-end"
                                                                                                     style="
@@ -4983,7 +4983,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-warning "
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-warning " style="border-top: 17px solid #F7C042 !important;"
                                                                                                 id="2">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
@@ -5083,7 +5083,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-green"
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-green" style="border-top: 17px solid #0CA7B6 !important;"
                                                                                                 id="3">
                                                                                                 <div
                                                                                                     class="card-headerr d-block text-justified pt-2">
@@ -5240,7 +5240,7 @@ Draft</button> -->
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-lg-8 col-xl-3 col-md-8 col-sm-12 mb-3">
-                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-blue"
+                                                                                            <div class="h-100 card p-5 pricing-card card-boder-light-blue" style="border-top: 17px solid #8bd8bd !important;"
                                                                                                 id="4">
                                                                                                 <div class="d-flex justify-content-end"
                                                                                                     style="
@@ -11249,13 +11249,13 @@ Draft</button> -->
                                                                 style="border: 1px dashed #00000087;"
                                                                 ondrop="dropHandler(event);"
                                                                 ondragover="dragOverHandler(event);">
-                                                                <input id="fileInput" type="file" name="image"
+                                                                <input id="fileInput_business" type="file" name="image"
                                                                     placeholder="Enter Photo"
                                                                     class="custom-file-input form"
                                                                     accept=".jpg, .png, image/jpeg, image/png"
                                                                     aria-label="hello" multiple>
                                                                 <span className="d-none"></span>
-                                                                <label class="custom-file-label" for="fileInput">
+                                                                <label class="custom-file-label" for="fileInput_business">
                                                                     <i class="fi fi-rs-cloud-upload"></i>
                                                                     <div class="custom-file-text">
                                                                         <span>Upload Photo here</span>
@@ -13063,14 +13063,17 @@ Draft</button> -->
                     // Use DataTransferItemList interface to access the file(s)
                     [...ev.dataTransfer.items].forEach((item, i) => {
                         // If dropped items aren't files, reject them
+                //         files.forEach(function (file) {
+                //     file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                // });
                         if (item.kind === "file") {
                             const file = item.getAsFile();
-                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                            file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                             updateSelectedFilesContainer1()
                         }
                     });
-                } else {
-                    // Use DataTransfer interface to access the file(s)
+                }
+                 else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
                         console.log(`… file[${i}].name = ${file.name}`);
                     });
@@ -13164,6 +13167,15 @@ Draft</button> -->
 
 
             $('#fileInput_user').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                // console.log(files)
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 1 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                });
+
+                updateSelectedFilesContainer1(); // Update the selected files container
+            });
+            $('#fileInput_business').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)
                 files.forEach(function (file) {
