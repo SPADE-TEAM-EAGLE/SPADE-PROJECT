@@ -596,10 +596,6 @@ let daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 return daysDiff;
 }
   var correctPlanId;
-
-
-
-
   if (planId >= 8) {
     correctPlanId = planId / 4;
   } else {
