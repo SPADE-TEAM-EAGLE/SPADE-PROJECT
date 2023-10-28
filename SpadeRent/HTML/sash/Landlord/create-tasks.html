@@ -1978,63 +1978,49 @@
                                         <div class="card-header justify-content-between">
                                             <div class="d-flex">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-default text-dark py-1"
-                                                        id="filter_btn" data-bs-toggle="dropdown"><i
-                                                            class="typcn typcn-filter fs-16"></i><strong
-                                                            id="Filter-btn">Sort</strong></button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="javascript:void(0)"><strong
-                                                                    class="text-dark">Sort by:</strong></a>
+                                                    <button type="button" class="btn btn-outline-default text-dark py-1" id="filter_btn" data-bs-toggle="dropdown" aria-expanded="true"><i class="typcn typcn-filter me-2 fs-16"></i><strong>Sort</strong></button>
+                                                    <ul class="dropdown-menu" role="menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 41px, 0px);" data-popper-placement="bottom-start">
+                                                        <li><a href="javascript:void(0)"><strong class="text-dark">Sort
+                                                                    by:</strong></a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)" for="exampleRadio">Default</a>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">A-Z
+                                                                Alphabets</a>
                                                             <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="alphabets" value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)" for="exampleRadio">Task
-                                                                Name</a>
+    
+                                                        <!-- <li class="d-flex justify-content-between"><a href="javascript:void(0)" class="text-dark">Date Modified</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1">
+                                                                    name="exampleRadios" id="alphabets" value="option1">
+                                                            </div>
+                                                        </li> -->
+    
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Ascending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="ascending" value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)">Assigned To</a>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Descending</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" type="radio" name="exampleRadios" id="descending" value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between"><a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Recently
+                                                                Added</a>
+                                                            <div class="form-check m-0">
+                                                                <input class="form-check-input mt-2" id="created-at" type="radio" name="exampleRadios" value="option1">
+                                                            </div>
+                                                        </li>
+                                                        <!-- <li class="d-flex justify-content-between"><a
+                                                                href="javascript:void(0)">Recently Added</a>
                                                             <div class="form-check m-0">
                                                                 <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1" checked>
+                                                                    name="exampleRadios" id="exampleRadios1" value="option1"
+                                                                    checked>
                                                             </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)">Date</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)">Ascending</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1" checked>
-                                                            </div>
-                                                        </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark"
-                                                                href="javascript:void(0)">Descending</a>
-                                                            <div class="form-check m-0">
-                                                                <input class="form-check-input mt-2" type="radio"
-                                                                    name="exampleRadios" id="exampleRadios1"
-                                                                    value="option1" checked>
-                                                            </div>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                                 
@@ -3353,25 +3339,40 @@
                 console.log($("#notes_view"))
 
                 $("#view-task-line-item").empty()
-                data.AssignTo.forEach((item) => {
+                if(data?.AssignTo?.length > 0){
+                    data.AssignTo.forEach((item) => {
 
-                    console.log(item)
+console.log(item)
+$("#view-task-line-item").append(`<tr class="tr">
+                            <td>
+                                <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+                            </td>
+                            
+                        </tr>`)
+
+
+})
+                }
+                else{
                     $("#view-task-line-item").append(`<tr class="tr">
-                                                <td>
-                                                    <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
-                                                </td>
-                                                
-                                            </tr>`)
-
-
-                })
-                // $("#totalAmount").text('$ ' + data.totalAmount)
+                            <td>
+                                <p class="text-primary"><b>${"N/A"}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+                            </td>
+                            
+                        </tr>`)
+                }
                 if (data.taskImages[0].Image) {
                     const files = data.taskImages;
                     $("#view-task-images").empty();
@@ -3722,17 +3723,25 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.property-id').text());
-                        var idB = parseInt($(b).find('.property-id').text());
+                        var idA = parseInt($(a).find('.due-at').text());
+                        var idB = parseInt($(b).find('.due-at').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.property-id').text());
-                        var idB = parseInt($(b).find('.property-id').text());
+                        var idA = parseInt($(a).find('.due-at').text());
+                        var idB = parseInt($(b).find('.due-at').text());
                         return idB - idA;
                     });
-                }
+                }else if (selectedFilter === 'recently-added') {
+        rows.sort(function (a, b) {
+            console.log($(a),$(b))
+            var createdAtA = new Date($(a).find('.task-id').attr('data-id'));
+            var createdAtB = new Date($(b).find('.task-id').attr('data-id'));
+            console.log(createdAtA, createdAtB)
+            return createdAtB - createdAtA;
+        });
+    }
 
                 tableBody.empty().append(rows);
             }
@@ -3748,6 +3757,9 @@
                 // console.log(1)
                 filterTable("alphabets")
             });
+            $('#created-at').on('click', function () {
+    filterTable("recently-added");
+});
             // console.log($('#alphabets'))
             // Search functionality
             // $('#').on('keyup', function () {
@@ -4094,7 +4106,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
 
-                                var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
+                                var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
                                     `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
 
                                 if (daysDiff > 0) {
@@ -4172,13 +4184,13 @@ if (task.priority == 'High') {
 
                                     var formattedDueDate = `${month}/${day}/${year}`;
 
-                                    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+                                    dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                                 } else {
-                                    dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+                                    dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                                 }
 
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
-                                var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+                                var status = '<td class="status " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
 
 
 
