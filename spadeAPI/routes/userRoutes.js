@@ -60,6 +60,7 @@ router.put(
   userController.putPropertyUnitsUpdates
 );
 router.delete("/propertyDelete", verifyToken, userController.propertyDelete);
+// router.delete("/propertyDelete",userController.propertyDelete);
 router.put("/updateProperty", verifyToken, userController.propertyUpdate);
 // router.get('/viewProperty' ,userController.propertyView);
 router.get("/viewProperty", verifyToken, userController.propertyView);
