@@ -2124,7 +2124,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6"></div>
-                                                    <div class="col-lg-6 mt-5">
+                                                    <!-- <div class="col-lg-6 mt-5">
                                                                 <h2 class="h2-personal-inf">Verification</h2>
                                                         <p class="p-personal-inf">You can change your login email and password below.</p>
                                                         <hr style="background-color: #D3D3D3;">
@@ -2143,7 +2143,7 @@
                                                                     >Continue</button>
                                                             </div>
                                                             </div>
-                                                    </div>
+                                                    </div> -->
 
                                                 </div>
                                             </div>
@@ -2452,7 +2452,7 @@
                                                     <hr style="background-color: #D3D3D3;">
                                                     <h2 class="h2-personal-inf text-dark mb-3 balance-due">Balance Due
                                                     </h2>
-                                                    <h1 class="text-primary balnce-price mb-0"><b>$ 0.00</b></h1>
+                                                    <h1 class="text-primary balnce-price mb-0"><b id="outstanding-amount">$ 0.00</b></h1>
                                                     <button class="btn btn-primary text-primaryy btn-pill m-2"
                                                         id="form2show"
                                                         style="width: fit-content; border: transparent;"><b>Pay
@@ -2460,7 +2460,7 @@
                                                     <p class="mt-4" id="text-hide"><b>You are not able to close account
                                                             because you have <br>
                                                             outstanding balance of <span
-                                                                style="color: #1467B0;">$0.00</span></b></p>
+                                                                style="color: #1467B0;" id="amount-payable-span">$0.00</span></b></p>
 
                                                     <div class="row mt-5">
                                                         <div id="form2" style="display: none;">
@@ -3595,6 +3595,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                $("#tab6").find("input").val("")
                                 $("#myModal_success").modal("show");
                                 setTimeout(function () {
                                     $("#myModal_success").modal("hide");
@@ -4409,6 +4410,32 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                 });
 
             }
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
+                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                    $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                
+                    $("#outstanding-amount").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    if(totalAmountUnpaid.totalUnPaid<=0){
+                        $("#form2show").hide()
+                        $("#form3").show()
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+                    }, 2000);
+                    console.log('Error: ' + error);
+                }
+            });
         
 
             </script>

@@ -1584,7 +1584,7 @@
                                     <div class="ui fluid search selection dropdown">
                                         <input type="hidden" name="shipper_state_state">
                                         <i class="dropdown icon"></i>
-                                        <div class="default text">Select Tenant</div>
+                                        <div class="default text" id="select-box-to-empty">Select Tenant</div>
                                         <!-- <label class="form-label fw-bold fs-18">Select Tenant</label> -->
                                         <div class="menu" id="menu">
                                             <div class="item" data-value="AL">Select Option</div>
@@ -1639,7 +1639,7 @@
 
                         <div class="col-md-12 col-lg-6">
                             <label class="form-label fw-bold fs-18">Unit<span class="text-danger"> *</span></label>
-                            <select class="form-control select2 form-select d-block select2-show-search"
+                            <select class="form-control form-select d-block"
                                 data-placeholder="Select Unit" name="tenants" id="propertyUnit" required>
                                 <option label="Choose one">
                                 </option>
@@ -1971,7 +1971,7 @@
                             <label class="form-label fw-bold fs-18">Select Tenant<span class="text-danger">
                                     *</span></label>
                             <select class="form-control form-select d-block" data-placeholder="Select Tenant"
-                                name="tenants" id="tenants_update" readonly>
+                                name="tenants" id="tenants_update">
                                 <option label="Choose one">
                                 </option>
                             </select>
@@ -2029,7 +2029,7 @@
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div>
                             <!-- <div class="col-md-8 col-lg-5">
-                                <label class="form-label fw-bold fs-18">Number of Days until due</label>
+                                <label class="form-label fw-bold fs-18>Number of Days until due</label>
                                 <input type="text" class="form-control form" id="daysUntilDue_update">
                                 <span class="text-danger d-none">Photos are required!</span>
                             </div> -->
@@ -4458,6 +4458,9 @@
                     $('#toggle-button,.save-invoice').attr("disabled", true);
                     $(".file-grid").empty()
                     $("#shipper_state_state").parent().empty()
+                    $("#select-box-to-empty").empty();
+                    $("#select-box-to-empty").text("Select Tenant");
+                    $("#collapse-category").removeClass("show");
                 }
                 $("#succesModal,#infoModal,#addModal,#myModal_edit,#succesModal_invoice").on('hide.bs.modal', function () {
 
@@ -6391,12 +6394,14 @@
                         ...data2
                     };
                     console.log(data)
+                    $("#tenants_update").empty()
                     tenantData.forEach(function (tenant) {
                         if (tenant.tenantID == data.tenantID) {
                             $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID).attr("selected", "selected"));
-                        } else {
-                            $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
-                        }
+                        } 
+                        // else {
+                        //     $("#tenants_update").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
+                        // }
                     });
                     if (data.invoiceType === "One Time Invoice") {
                         $("#invoice_update").attr('checked', 'checked')

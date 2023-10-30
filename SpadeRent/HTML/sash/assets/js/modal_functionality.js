@@ -249,7 +249,7 @@ $(document).ready(function () {
             return $(this).val() === '' || $(this).val() === 'Choose...';
         }).length === 0;
         var zipField = $('#zip');
-        if (zipField.val().length !== 5) {
+        if (zipField?.val()?.length !== 5) {
             allFieldsFilled = false;
         }
         return allFieldsFilled;

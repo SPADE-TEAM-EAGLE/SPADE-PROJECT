@@ -547,7 +547,7 @@
                 #add_property_btn {
                     font-size: 12px;
                     margin: 0 !important;
-                    display: none;
+                    /* display: none; */
                 }
 
                 /* #typehead {
@@ -1759,9 +1759,6 @@
         .bg-white-black {
             background-color: lightblue;
         }
-        .float-right{
-            float: right;
-        }
     </style>
 
 </head>
@@ -1887,19 +1884,20 @@
                                     id="payment-form-bank">
                                     <div class="col-md-6">
                                         <label for="accountName" class="form-label fw-bold">Account
-                                            Name <spnan class="text-danger"> *</span></label>
+                                            Name <spnan class="text-danger">
+                                                *</span></label>
                                         <input type="text" class="form-control form" id="accountName"
-                                            placeholder="Enter Account Name" style="padding: 1rem 0.75rem !important;">
+                                            placeholder="Enter Account Name">
                                         <span class="text-danger d-none">Property
                                             name required!</span>
                                     </div>
 
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="field form-group">
-                                            <label class="form-label fw-bold" for="card-number-bank"
+                                            <label class="fw-bold" for="card-number-bank"
                                                 data-tid="scwsdk.form.card_number_label">
                                                 Card
-                                                number<spnan class="text-danger"> *</span>
+                                                number
                                             </label>
                                             <div id="card-number-bank" class="input form-controlll">
                                             </div>
@@ -1914,7 +1912,7 @@
                                         <div class="field form-group">
                                             <label class="fw-bold" for="card-expiry-bank"
                                                 data-tid="scwsdk.form.card_expiry_label">
-                                                Expiration<spnan class="text-danger"> *</span>
+                                                Expiration
                                             </label>
                                             <div id="card-expiry-bank" class="input empty form-controlll">
                                             </div>
@@ -1927,7 +1925,7 @@
                                         <div class="field form-group">
                                             <label class="fw-bold" for="card-cvc-bank"
                                                 data-tid="scwsdk.form.card_cvc_label">
-                                                CVV<spnan class="text-danger"> *</span>
+                                                CVV
                                             </label>
                                             <div id="card-cvc-bank" class="input empty form-controlll">
                                             </div>
@@ -1938,7 +1936,8 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="description" class="form-label fw-bold">Description
-                                            <spnan class="text-danger"> *</span>
+                                            <spnan class="text-danger">
+                                                *</span>
                                         </label>
                                         <textarea class="form-control mb-4" placeholder="Enter Description" required=""
                                             rows="3" id="description-bank"></textarea>
@@ -1990,7 +1989,7 @@ Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'
                         style="width: auto;">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn btn-pill text-light button d-none" style='background-color:#1467B0;'
+                    <a href="javascript:void(0)" class="btn text-light button d-none" style='background-color:#1467B0;'
                         id='next-bank' onclick="addBank()">Submit</a>
                     <button class="btn text-light button" style='background-color:#1467B0; width: auto;'
                         id='next-add-bank'>Next</button>
@@ -3278,8 +3277,7 @@ Draft</button> -->
                                 <div class="text-center">
                                     <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
                                         aria-label="Close">Cancel</a>
-                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete <span
-                                            id="counter_delete"> (5)</span></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -4098,8 +4096,8 @@ Draft</button> -->
                                                             <div class="card-body">
                                                                 <div style="display: flex; align-items: center;">
                                                                     <img src="../assets/images/security-confirmation.png"
-                                                                        alt=""
-                                                                        style="margin-right: 20px; height: 110px;">
+                                                                        alt="" class="lock-icon-responsive"
+                                                                        >
                                                                     <div>
                                                                         <h3 class="text-white"><b>Security
                                                                                 Confirmation</b></h3>
@@ -4319,7 +4317,7 @@ Draft</button> -->
                                                         </div>
                                                     </div>
                                                     <div class="row" id="myDIV">
-                                                        <div class="col-lg-3"
+                                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
                                                             style="max-width: 100%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5" />
                                                             <label for="cb5" class="label layout-setting22"
@@ -4328,7 +4326,7 @@ Draft</button> -->
                                                                     class="btnn" id="myonoffswitch1"></label>
                                                             <h5 style="padding: 10px;">Light Mode</h5>
                                                         </div>
-                                                        <div class="col-lg-3"
+                                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
                                                             style="max-width: 100%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb6" />
                                                             <label for="cb6" class="label layout-setting11"
@@ -4478,7 +4476,7 @@ Draft</button> -->
                                                                                                     <div
                                                                                                         class="text-center border-top-0 pt-1 pb-1">
                                                                                                         <button
-                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold card-btnn btn-primary mt-0"
+                                                                                                            class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn mt-0"
                                                                                                             data-id="1">
                                                                                                             Free Trial
                                                                                                         </button>
@@ -4571,9 +4569,6 @@ Draft</button> -->
                                                                                                             <span>Upgrade
                                                                                                                 to
                                                                                                                 Basic
-                                                                                                                <!-- <img src="../assets/images/arrow-yellow.svg"
-                                                                                                                    class="float-right mt-1 mr-2 "
-                                                                                                                    alt=""> -->
                                                                                                                 </span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
@@ -4660,9 +4655,8 @@ Draft</button> -->
                                                                                                         <button
                                                                                                             class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn mt-0"
                                                                                                             data-id="3"
-                                                                                                            data-bs-effect="effect-scale"
-                                                                                                            data-bs-toggle="modal"
-                                                                                                            href="#upgradetopro">
+                                                                                                            
+                                                                                                            href="#">
                                                                                                             <span>Upgrade
                                                                                                                 to
                                                                                                                 Pro 
@@ -4817,10 +4811,9 @@ Draft</button> -->
                                                                                                             <span>Upgrade
                                                                                                                 to
                                                                                                                 Basic
-                                                                                                                <!-- <img src="../assets/images/arrow-blue1.svg"
+                                                                                                                <img src="../assets/images/arrow-blue1.svg"
                                                                                                                     class="float-right mt-1 mr-2 "
-                                                                                                                    alt=""> -->
-                                                                                                                </span>
+                                                                                                                    alt=""></span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
 
@@ -5030,9 +5023,6 @@ Draft</button> -->
                                                                                                                 to
                                                                                                                 Basic
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
-                                                                                                                <!-- <img src="../assets/images/arrow-yellow.svg"
-                                                                                                                    class="float-right mt-1 mr-2 "
-                                                                                                                    alt=""> -->
                                                                                                                 </span>
                                                                                                         </button>
                                                                                                     </div>
@@ -5134,7 +5124,7 @@ Draft</button> -->
                                                                                                                 Pro
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                                 <img src="../assets/images/arrow-blue.svg"
-                                                                                                                    class="float-right mt-1 mr-2 "
+                                                                                                                    class="float-right mt-0 mr-2 "
                                                                                                                     alt=""></span>
 
                                                                                                         </button>
@@ -5300,10 +5290,9 @@ Draft</button> -->
                                                                                                                 to
                                                                                                                 Basic
                                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
-                                                                                                                <!-- <img src="../assets/images/arrow-blue1.svg"
-                                                                                                                    class="float-right mt-1 mr-2 "
-                                                                                                                    alt=""> -->
-                                                                                                                </span>
+                                                                                                                <img src="../assets/images/arrow-blue1.svg"
+                                                                                                                    class="float-right mt-0 mr-2 "
+                                                                                                                    alt=""></span>
 
                                                                                                         </button>
                                                                                                     </div>
@@ -5590,9 +5579,7 @@ Draft</button> -->
                                                                                                                             to
                                                                                                                             Basic
                                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
-                                                                                                                            <!-- <img src="../assets/images/arrow-yellow.svg"
-                                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                                alt=""> -->
+                                                                                                                            
                                                                                                                         </button>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -5919,9 +5906,9 @@ Draft</button> -->
                                                                                                                             to
                                                                                                                             Basic
                                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
-                                                                                                                            <!-- <img src="../assets/images/arrow-blue1.svg"
+                                                                                                                            <img src="../assets/images/arrow-blue1.svg"
                                                                                                                                 class="float-right mt-1 mr-2 "
-                                                                                                                                alt=""> -->
+                                                                                                                                alt="">
                                                                                                                         </button>
                                                                                                                     </div>
                                                                                                                     <p
@@ -6236,9 +6223,7 @@ Draft</button> -->
                                                                                                                             to
                                                                                                                             Basic
                                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
-                                                                                                                            <!-- <img src="../assets/images/arrow-yellow.svg"
-                                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                                alt=""> -->
+                                                                                                                            
                                                                                                                         </button>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -6422,7 +6407,7 @@ Draft</button> -->
                                                                                                                             Pro
                                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
                                                                                                                             <img src="../assets/images/arrow-blue.svg"
-                                                                                                                                class="float-right mt-1 mr-2 "
+                                                                                                                                class="float-right mt-0 mr-2 "
                                                                                                                                 alt="">
                                                                                                                         </button>
                                                                                                                     </div>
@@ -6607,9 +6592,9 @@ Draft</button> -->
                                                                                                                             to
                                                                                                                             Basic
                                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
-                                                                                                                            <!-- <img src="../assets/images/arrow-blue1.svg"
-                                                                                                                                class="float-right mt-1 mr-2 "
-                                                                                                                                alt=""> -->
+                                                                                                                            <img src="../assets/images/arrow-blue1.svg"
+                                                                                                                                class="float-right mt-0 mr-2 "
+                                                                                                                                alt="">
                                                                                                                         </button>
                                                                                                                     </div>
                                                                                                                     <p
@@ -7443,7 +7428,7 @@ Draft</button> -->
                                                                                 <div class="mx-2">
                                                                                     <div class="form-group m-0">
                                                                                         <input type="text"
-                                                                                            class="form-control dropdown-toggle"
+                                                                                            class="form-control search-input-field dropdown-toggle"
                                                                                             id="typehead_users"
                                                                                             placeholder="Search"
                                                                                             data-bs-toggle="dropdown"
@@ -7482,7 +7467,7 @@ Draft</button> -->
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12 col-xl-12 order-md-2">
+                                                                <div class="col-lg-12 col-xl-12 order-md-2 order-2">
                                                                     <h2 class="h2-personal-inf text-dark mb-3">Users
                                                                         Role Definition</h2>
                                                                     <div
@@ -11315,10 +11300,8 @@ Draft</button> -->
 
                                                     <div class="col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-header justify-content-between"
-                                                                style="display: flex; align-items: flex-end;">
+                                                            <div class="card-header justify-content-between bank-account-header-responsives">
                                                                 <div class="d-flex">
-
                                                                     <div class="mx-2">
                                                                         <!-- <div class="form-group m-0">
                                                     <input class="form-control" placeholder="Search" id="search_input" type="text">
@@ -11330,9 +11313,9 @@ Draft</button> -->
                                                                                     class="fe fe-search"
                                                                                     aria-hidden="true"></i></button>
                                                                             <input type="text"
-                                                                                class="form-control dropdown-toggle"
+                                                                                class="form-control search-input-fieldd dropdown-toggle"
                                                                                 id="typehead" placeholder="Search"
-                                                                                autocomplete="off" style="width: 230px;"
+                                                                                autocomplete="off"
                                                                                 data-bs-toggle="dropdown">
                                                                         </div>
                                                                     </div>
@@ -11343,7 +11326,7 @@ Draft</button> -->
                                                                             class="btn font-weight-bold text-dark"
                                                                             id="customized-btn"
                                                                             data-bs-toggle="dropdown"
-                                                                            style="border: none;"><strong>FILTER</strong><i
+                                                                            style="border: none;"><strong>CUSTOMIZE</strong><i
                                                                                 class="fe fe-chevron-down ms-2"></i></button>
                                                                         <ul class="dropdown-menu" role="menu">
                                                                             <li><a href="javascript:void(0)"
@@ -11392,7 +11375,7 @@ Draft</button> -->
 
                                                                         </ul>
                                                                     </div>
-                                                                    <button type="button" class="btn btn-primary mx-2"
+                                                                    <button type="button" class="btn btn-primary mx-2 laptop-button"
                                                                         id="add_property_btn"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
@@ -11401,6 +11384,12 @@ Draft</button> -->
                                                                             style="color: white !important;"></i><strong>ADD
                                                                             NEW
                                                                             ACCOUNT</strong></button>
+
+                                                                            <!-- Mobile screen button add property Start -->
+                                                                                <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button" id="add_property_btn"
+                                                                                data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal-account"><i
+                                                                                    class="fe fe-plus" style="color: #fff !important;"></i></button>
+                                                                            <!-- Mobile screen button add property End -->
                                                                 </div>
                                                             </div>
                                                             <div class="card-body p-0">
@@ -12366,7 +12355,7 @@ Draft</button> -->
                                                 d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
                                         </svg></span>
                                     <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                                    <p class="card-text text-dark">Email Not Found</p>
+                                    <p class="card-text text-dark">Email Already Exist</p>
                                 </div>
                             </div>
                         </div>
@@ -13217,7 +13206,7 @@ Draft</button> -->
             });
 
             function getData() {
-
+                
                 $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/userPermissionRoles",
                     type: "GET",
@@ -13253,7 +13242,7 @@ Draft</button> -->
 
                                 $("#user-role-holder").append(
                                     `
-                        <div class="col-lg-12 col-xl-12 order-md-1">
+                        <div class="col-lg-12 col-xl-12 order-md-1 order-1">
                                                                     <div class="card card-color user-role ${role.role == "Owner" ? "active" : ""}" id="${role?.id}"
                                                                         >
                                                                         <div class="card-body">
@@ -13285,17 +13274,17 @@ Draft</button> -->
 
                                 )
                                 if ($("#manager").hasClass("active")) {
+                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                } else if ($("#staff").hasClass("active")) {
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").addClass("active")
+                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                } else {
                                     $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").addClass("active")
                                     $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                } else if ($("#staff").hasClass("active")) {
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").removeClass("active")
-                                } else {
-                                    $("#user-role-holder").children(":nth-child(2)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
                                 }
                                 eval(`$("#table_body_${role.role.toLowerCase()} tr")`).each(function () {
                                     const childObject = $(this).attr("data-id")
@@ -13426,7 +13415,7 @@ Draft</button> -->
                             settingPermissions.push(response.SettingInvoiceSettings)
                         }
 
-                        if (response.image !== " " && response.image !== null && response.image!=="") {
+                        if (response.image !== " " && response.image !== null) {
 
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
@@ -13488,7 +13477,7 @@ Draft</button> -->
                             image_url = response.image
                             image_key = response.imageKey
                         }
-                        if (response.image !== null && response.image !== " " && response.image !== "") {
+                        if (response.image !== null && response.image !== " ") {
 
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                         }
@@ -13509,6 +13498,7 @@ Draft</button> -->
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
                                     currentSelectedId = response.planID
+                                    console.log("Selected ID ajwhduisahduhdsuhdhdufhkd",currentSelectedId)
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [5, 6, 7].forEach(function (item) {
@@ -13542,6 +13532,7 @@ Draft</button> -->
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
                                     currentSelectedId = response.planID
+                                    console.log("Selected ID ajwhduisahduhdsuhdhdufhkd",currentSelectedId)
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [2, 3, 4].forEach(function (item) {
@@ -13625,6 +13616,43 @@ Draft</button> -->
                 });
 
 
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // console.log()
+                        response.data.forEach((card) => {
+                            // $(`.${card.id}`).each(function(){
+                            //     this
+                            // })
+                                console.log("Selected ID ajwhduisahduhdsuhdhdufhkd",currentSelectedId)
+                            if (currentSelectedId == card.id) {
+                                if(parseInt(currentSelectedId)<5){
+                                userData.currentPrice = parseInt(card?.planDiscountedAmount)*12
+
+                                }else{
+                                    userData.currentPrice = card.planDiscountedAmount
+
+                                }
+                            }
+                            console.log(userData)
+                            // $(`#${card.id}`).css("bg-primary")
+                            $(`#${card.id} .total-amount`).text("$ " + card.plantotalAmount)
+                            $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
+                            $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
+
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
 
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
@@ -13711,7 +13739,8 @@ Draft</button> -->
                         ...data1,
                         ...data2
                     };
-                    console.log(data)
+                    console.log("djsndksjnjsnfjnsjfsjnfjndsjfnjdsn")
+                    console.log($(`input[name="status"][value="${data.status}"]`))
                     $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
                 });
                 $(document).on('click', ".resend-option", function () {
@@ -14245,7 +14274,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             // Close Account password eye End 
 
 
-
+            var invoiceId;
 
             var invoiceData = [];
             var tenantData = [];
@@ -14334,7 +14363,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                     $("#viewModal-invoice").modal("show")
                 })
-                var invoiceId;
+                
                 $(document).on('click', '.three-dots', function () {
                     const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                     const invoiceSerialElement = $(this).closest("tr").find(".serial");
@@ -14491,42 +14520,42 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     var interval;
                     counter = 5;
 
-                    function startCounter() {
-                        document.getElementById('confirmDelete').disabled = true;
-                        $('#confirmDelete').css('opacity', '0.7');
+                    // function startCounter() {
+                    //     document.getElementById('confirmDelete').disabled = true;
+                    //     $('#confirmDelete').css('opacity', '0.7');
 
-                        var counterElement = document.getElementById('counter_delete');
-                        counterElement.style.display = "inline";
-                        counterElement.textContent = ' (' + counter + ')';
+                    //     var counterElement = document.getElementById('counter_delete');
+                    //     counterElement.style.display = "inline";
+                    //     counterElement.textContent = ' (' + counter + ')';
 
-                        interval = setInterval(function () {
-                            counter--;
-                            counterElement.textContent = ' (' + counter + ')';
+                    //     interval = setInterval(function () {
+                    //         counter--;
+                    //         counterElement.textContent = ' (' + counter + ')';
 
-                            if (counter === 0) {
-                                document.getElementById('confirmDelete').disabled = false;
-                                $('#confirmDelete').css('opacity', '1');
+                    //         if (counter === 0) {
+                    //             document.getElementById('confirmDelete').disabled = false;
+                    //             $('#confirmDelete').css('opacity', '1');
 
-                                counterElement.style.display = "none";
-                                clearInterval(interval);
-                            }
-                        }, 1000);
-                    }
+                    //             counterElement.style.display = "none";
+                    //             clearInterval(interval);
+                    //         }
+                    //     }, 1000);
+                    // }
 
-                    function resetCounter() {
-                        clearInterval(interval);
-                        counter = 5;
-                    }
+                    // function resetCounter() {
+                    //     clearInterval(interval);
+                    //     counter = 5;
+                    // }
 
-                    // Call the startCounter function when the modal is shown
-                    $('#myModal_delete').on('shown.bs.modal', function () {
-                        startCounter();
-                    });
+                    // // Call the startCounter function when the modal is shown
+                    // $('#myModal_delete').on('shown.bs.modal', function () {
+                    //     startCounter();
+                    // });
 
-                    // Call the resetCounter function when the modal is closed
-                    $('#myModal_delete').on('hidden.bs.modal', function () {
-                        resetCounter();
-                    });
+                    // // Call the resetCounter function when the modal is closed
+                    // $('#myModal_delete').on('hidden.bs.modal', function () {
+                    //     resetCounter();
+                    // });
 
                     // counter for delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
                     $('#myModal_delete').modal('show');
@@ -14552,6 +14581,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             setTimeout(function () {
                                 $("#successfully_changed").modal("hide");
                             }, 2000);
+                            
                         },
                         error: function (xhr, status, error) {
                             // window.alert('Error: ' + error);
@@ -14749,6 +14779,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm").modal("show")
                     }
+                    console.log("kmknnjnjtdfbgcsgbgcdx")
+                    console.log(time == "Year" && currentSelectedId > cardId)
                     if (time == "Year" && currentSelectedId > cardId) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
@@ -14797,8 +14829,32 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             console.log(time)
                         }
                     })
+                    console.log(parseInt(currentSelectedId),parseInt(cardId))
+                    if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId)) {
+                        console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
+                        $("#payment-month").text("Year")
+                        $("#payment-month").text(time)
+                        $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                        var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        seletedPlanID = cardId
+                        $("#upgradetopro #amount").val(amount)
+                        $("#upgradetopro #payment-amount").text(amount)
+                        $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm").modal("show")
+                    } 
+                    else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)<5) {
+                        $("#payment-month").text("Year")
+                        $("#payment-month").text(time)
+                        $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
+                        var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        seletedPlanID = cardId
+                        $("#upgradetopro #amount").val(amount)
+                        $("#upgradetopro #payment-amount").text(amount)
+                        $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm-yearly").modal("show")
+                    }
                     
-                    if (time == "Month" && currentSelectedId > cardId) {
+                    else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<5) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14807,9 +14863,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm").modal("show")
-                    } 
-                    if (time == "Year" && currentSelectedId > cardId) {
+                        $("#downgradeConfirm-yearly").modal("show")
+                    }
+                    else if (parseInt(currentSelectedId)<=7 && parseInt(currentSelectedId)>=5 && parseInt(cardId)<5) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14818,9 +14874,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm").modal("show")
-                    } 
+                        $("#downgradeConfirm-yearly").modal("show")
+                        $("#upgradetopro").modal("show")
+                    }
                     else {
+                        console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14893,41 +14951,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     }
                 })
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        // console.log()
-                        response.data.forEach((card) => {
-                            // $(`.${card.id}`).each(function(){
-                            //     this
-                            // })
-
-                            if (currentSelectedId == card.id) {
-                                if(selectedTime=="Month"){
-                                    userData.currentPrice = card.planDiscountedAmount
-                                }else{
-                                userData.currentPrice = parseInt(card?.planDiscountedAmount)*12
-
-                                }
-                            }
-                            // $(`#${card.id}`).css("bg-primary")
-                            $(`#${card.id} .total-amount`).text("$ " + card.plantotalAmount)
-                            $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
-                            $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
-
-                        })
-                    },
-                    error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
-                        // console.log('Error occurred while fetching state and city data.');
-                    }
-                });
+                
                 function profileComplete() {
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
@@ -16552,7 +16576,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     if (permission == "") {
                         permission = "Restrict"
                     }
-                    const role = $("#user-role-holder").children().first().nextAll().find(".active").attr("id")
+                    const role = $("#user-role-holder").children().eq(1).nextAll().find(".active").attr("id");
+
                     $("#checkbox-container-parent input[type=checkbox]").prop('disabled', true);
                     $.ajax({
                         url: "https://backend.app.spaderent.com/api/spade/userPermissionUpdate",
@@ -16877,7 +16902,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
         <script>
-             var scard_bank;
+            var scard_bank;
             function createNuveiFields(){
                 var sfc_bank = SafeCharge({
                 env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)

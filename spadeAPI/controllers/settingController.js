@@ -262,8 +262,6 @@ const Image=req.files[0];
     // if (base64String.length > 240) {
     //   return res.status(400).json({ message: "Base64 string exceeds 240 characters" });
     // }
-
-
     // Example: Storing the base64 string in a database
     const updateResult = await queryRunner(updateBusinessLogoImage, [base64String, userId]);
 
@@ -277,6 +275,4 @@ const Image=req.files[0];
     return res.status(500).json({ message: "Internal Server Error", error: error });
   }
 };
-
-
 // ####################################### Base64 END ##########################################

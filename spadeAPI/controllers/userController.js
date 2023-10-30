@@ -1353,13 +1353,29 @@ exports.getpropertyByID = async (req, res) => {
 
 //  ############################# Delete Property Start ############################################################
 exports.propertyDelete = async (req, res) => {
+  const { id } = req.body;
   try {
-    const { id } = req.body;
+    const propertyUnitscheckresult = await queryRunner(
+      selectQuery("propertyunits", "propertyID","status"),
+      [id, "Occupied"]
+    );
+    if (propertyUnitscheckresult[0].length > 0) {
+      res.status(200).json({
+        message: " You are not able to delete Property (your unit is occupied)",
+        units : propertyUnitscheckresult[0]
+      });
+      } else{
+
+
     const PropertyDeleteResult = await queryRunner(
       deleteQuery("property", "id"),
       [id]
     );
     if (PropertyDeleteResult[0].affectedRows > 0) {
+      const PropertyUnitDeleteResult = await queryRunner(
+        deleteQuery("propertyunits", "propertyID"),
+        [id]
+      );
       const propertycheckresult = await queryRunner(
         selectQuery("propertyimage", "propertyID"),
         [id]
@@ -1389,6 +1405,8 @@ exports.propertyDelete = async (req, res) => {
       });
       // console.log(PropertyDeleteResult)
     }
+
+  }
   } catch (error) {
     res.send("Error from delete Property ");
     // console.log(req.body)
@@ -2311,10 +2329,10 @@ exports.updatedNotification = async (req, res) => {
 exports.getAllProperty = async (req, res) => {
   try {
     const { userId } = req.user;
+    // const { userId } = req.body;
     const getAllPropertyData = await queryRunner(getPropertyReport, [userId]);
     const getTenantsReport = await queryRunner(getTenantReport, [userId]);
     const getLeaseReportData = await queryRunner(getLeaseReport, [userId]);
-
     res.status(200).json({
       property: getAllPropertyData[0],
       tenants: getTenantsReport[0],

@@ -1556,6 +1556,12 @@
                                                         name="exampleRadios" id="descending" value="option1">
                                                 </div>
                                             </li>
+                                            <li class="d-flex justify-content-between"><a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Recently
+                                                Added</a>
+                                            <div class="form-check m-0">
+                                                <input class="form-check-input mt-2" id="created-at" type="radio" name="exampleRadios" value="option1">
+                                            </div>
+                                        </li>
                                             <!-- <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
@@ -2241,7 +2247,7 @@ if (task.ImageKey) {
                             var hoursDiff = Math.floor(minutesDiff / 60);
                             var daysDiff = Math.floor(hoursDiff / 24);
 
-                            var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                            var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
                                 `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
 
                             if (daysDiff > 0) {
@@ -2301,7 +2307,7 @@ if (task.priority == 'High') {
 } else if (task.priority == 'Moderate') {
     priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
 }
-                            var dueDate = '<td class="dueDate" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                    
@@ -2570,47 +2576,54 @@ if (task.priority == 'High') {
 //                     $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);})
 // })
 function filterTable(selectedFilter) {
-    console.log(selectedFilter)
-    var tableBody = $('#table_body');
-    var rows = tableBody.find('tr');
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
 
-    if (selectedFilter === 'alphabets') {
-        rows.sort(function(a, b) {
-            var textA = $(a).find('.task-id p').text().toLowerCase();
-            var textB = $(b).find('.task-id p').text().toLowerCase();
-            return textA.localeCompare(textB);
-        });
-    } else if (selectedFilter === 'ascending') {
-        rows.sort(function(a, b) {
-            var dateA = new Date($(a).find('.dueDate p.mb-1').text());
-            var dateB = new Date($(b).find('.dueDate p.mb-1').text());
-            return dateA - dateB;
-        });
-    } else if (selectedFilter === 'descending') {
-        rows.sort(function(a, b) {
-            var dateA = new Date($(a).find('.dueDate p.mb-1').text());
-            var dateB = new Date($(b).find('.dueDate p.mb-1').text());
-            console.log($(a).find('.property-id p.mb-1').text())
-            return dateB - dateA;
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function (a, b) {
+                        var textA = $(a).find('.propertyName').text().toLowerCase();
+                        var textB = $(b).find('.propertyName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.due-at').text());
+                        var idB = parseInt($(b).find('.due-at').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function (a, b) {
+                        var idA = parseInt($(a).find('.due-at').text());
+                        var idB = parseInt($(b).find('.due-at').text());
+                        return idB - idA;
+                    });
+                }else if (selectedFilter === 'recently-added') {
+        rows.sort(function (a, b) {
+            console.log($(a),$(b))
+            var createdAtA = new Date($(a).find('.task-id').attr('data-id'));
+            var createdAtB = new Date($(b).find('.task-id').attr('data-id'));
+            console.log(createdAtA, createdAtB)
+            return createdAtB - createdAtA;
         });
     }
 
-    tableBody.empty().append(rows);
-}
+                tableBody.empty().append(rows);
+            }
 
-
-
-        // Filter functionality
-        $('#ascending').on('click', function() {
-            filterTable("ascending")
-        });
-        $('#descending').on('click', function() {
-            filterTable("descending")
-        });
-        $('#alphabets').on('click', function() {
-            // console.log(1)
-            filterTable("alphabets")
-        });
+            // Filter functionality
+            $('#ascending').on('click', function () {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function () {
+                filterTable("descending")
+            });
+            $('#alphabets').on('click', function () {
+                // console.log(1)
+                filterTable("alphabets")
+            });
+            $('#created-at').on('click', function () {
+    filterTable("recently-added");
+});
 $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 // console.log(files)

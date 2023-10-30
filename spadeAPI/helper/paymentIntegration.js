@@ -580,7 +580,6 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
   };
 
 // Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-
 function formatDateForSQL(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -590,38 +589,82 @@ function formatDateForSQL(date) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
-// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
-
-
-  // const UserResult = await queryRunner(selectQuery("users", "id"), [userId]);
+const currentDate = new Date();
+function dayDifference(datee) {
+const timeDifference = currentDate.getTime() - datee.getTime();
+let daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+return daysDiff;
+}
   var correctPlanId;
-
-
-
-
   if (planId >= 8) {
     correctPlanId = planId / 4;
   } else {
     correctPlanId = planId;
   }
-
   const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
   const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
-
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
-  let daysDifference
-  // Monthly
+  
   const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+  
+  const currentPlanResult = await queryRunner(selectQuery("plan", "id"), [PlanID]);
+  const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
+
+  
+// // Move Monthly to Annually
+// let daysDifferenceMtoA; 
+// if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
+//   const currentDate = new Date();
+// const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+// daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+//   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+//   // let remainingDays = daysDifferenceMtoA;
+//   let remainingDays = 30 - daysDifferenceMtoA;
+//   // let AddDays = 30 - daysDifferenceMtoA;
+//   subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
+//   requestData.startAfter = {
+//     day: remainingDays,
+//     month: "0",
+//     year: "0"
+//   };
+//   requestData.recurringPeriod = {
+//     day: remainingDays - 1,
+//     month: "0",
+//     year: "0"
+//   };
+//   requestData.endAfter = {
+//     day: remainingDays,
+//     month: "0",
+//     year: "1"
+//   };
+// }
+
+
+
+
+
+
+  // Move Annually to Monthly
+if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+  return res.status(200).json({
+    Message : "unable to downgrade",
+    Reason : "you want to switch Annually to monthly kindly contact to support team"
+  });
+}
+
+
   // Annually Downgrade
-  if (planId < PlanID && monthlyAnnual == "Annually"){
+  if (planId < PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4 ){
     return res.status(200).json({
       Message : "unable to downgrade",
+      Reason : "you want to switch Annually Upgrade to downgrade kindly contact to support team"
     });
-  
   }
+  // Monthly
+  let daysDifference;
   if (monthlyAnnual == "Monthly") {
-    // console.log(UserResult[0][0]);
+    console.log(UserResult[0][0]);
     const subscriptionDate = new Date();
     const currentDate = {
       day: subscriptionDate.getDate(),
@@ -636,6 +679,7 @@ function formatDateForSQL(date) {
 
     // Calculate the difference in days
     daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
+    // daysDifference = dayDifference(subscriptionCreated_at);
     daysDifference = Math.max(0, Math.round(daysDifference));
 
     // Calculate the difference in months
@@ -669,10 +713,9 @@ function formatDateForSQL(date) {
   }
   let daysDifferenceAnnually;
   if (planId > PlanID && monthlyAnnual == "Annually") {
-    const { subscriptionCreated_at, PlanID } = UserResult[0][0];
+ 
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
-
  daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
 //
@@ -683,6 +726,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       initialAmountChange = requestData.initialAmount - initialAmountChange;
       requestData.initialAmount = initialAmountChange;
   }
+
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.00001;
     requestData.recurringPeriod = {
@@ -697,9 +741,9 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
     };
   } else {
     requestData.recurringPeriod = {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "30",
+      month: "11",
+      year: "0"
     };
     requestData.endAfter = {
       day: "0",
@@ -730,28 +774,66 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   }
 
   // Annually downgrade
-  if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually") {
+  // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4) {
     
-    let AddDays = 365 - daysDifferenceAnnually;
+  //   let AddDays = 365 - daysDifferenceAnnually;
     
-    subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+  //   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
   
-    requestData.startAfter = {
-      day: AddDays,
-      month: "0",
-      year: "0"
-    };
-    requestData.recurringPeriod = {
-      day: AddDays - 1,
-      month: "0",
-      year: "0"
-    };
-    requestData.endAfter = {
-      day: AddDays,
-      month: "0",
-      year: "1"
-    };
-  }
+  //   requestData.startAfter = {
+  //     day: AddDays,
+  //     month: "0",
+  //     year: "0"
+  //   };
+  //   requestData.recurringPeriod = {
+  //     day: AddDays - 1,
+  //     month: "0",
+  //     year: "0"
+  //   };
+  //   requestData.endAfter = {
+  //     day: AddDays,
+  //     month: "0",
+  //     year: "1"
+  //   };
+  // }
+
+
+
+
+
+// Move Monthly to Annually
+let daysDifferenceMtoA; 
+if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
+  const currentDate = new Date();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
+  let remainingDays = 30 - daysDifferenceMtoA;
+  subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
+  requestData.startAfter = {
+    day: remainingDays,
+    month: "0",
+    year: "0"
+  };
+  requestData.recurringPeriod = {
+    day: remainingDays - 1,
+    month: "1",
+    year: "0"
+  };
+  requestData.endAfter = {
+    day: remainingDays,
+    month: "0",
+    year: "1"
+  };
+}
+
+
+
+
+
+
+
+
   console.log("requestData.endAfter : ", requestData.startAfter);
   requestData.planId = nuveiId;
   console.log(requestData);
@@ -791,8 +873,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
           const data = JSON.parse(responseData);
           console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
-          if (planId < UserResult[0][0].PlanID) {
-            // console.log("planId");
+          if (planId < UserResult[0][0].PlanID || planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual) {
             const subscriptionDate = new Date();
             let subscriptionCreatedDateFormatted;
             if(monthlyAnnual == "Monthly"){
@@ -811,7 +892,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
                 data,
               });
             }
-          } // For Yearly
+          }
+           // For Yearly
           else {
             console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);

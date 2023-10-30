@@ -1376,14 +1376,14 @@
                                                                 name="exampleRadios" id="descending" value="option1">
                                                         </div>
                                                     </li>
-                                                    <!-- <li class="d-flex justify-content-between"><a
+                                                    <li class="d-flex justify-content-between"><a
                                                             href="javascript:void(0)">Recently Added</a>
                                                         <div class="form-check m-0">
                                                             <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
+                                                                name="exampleRadios" id="recently-added" value="option1"
                                                                 checked>
                                                         </div>
-                                                    </li> -->
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="mx-2">
@@ -2089,6 +2089,7 @@
                     console.log('Error: ' + error);
                 }
             });
+        
         });
     </script>
     <script src="../assets/js/completeTenantProfile.js"></script>
@@ -2321,6 +2322,7 @@
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             let result;
+            
             // const Filter=((selectedFilter)=>{
             //     if (selectedFilter === 'alphabets') {
 
@@ -2780,6 +2782,58 @@
         getData()
     </script> -->
     <script>
+        function filterTable(selectedFilter) {
+                    var tableBody = $('#table_body');
+                    var rows = tableBody.find('tr');
+                    console.log(selectedFilter)
+                    if (selectedFilter === 'alphabets') {
+                        rows.sort(function (a, b) {
+                            var textA = $(a).find('.propertyName').text().toLowerCase();
+                            var textB = $(b).find('.propertyName').text().toLowerCase();
+                            return textA.localeCompare(textB);
+                        });
+                    } else if (selectedFilter === 'ascending') {
+                        rows.sort(function (a, b) {
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+
+                            return idB - idA;
+                        });
+                    }
+                    else if (selectedFilter === 'recently-added') {
+                        rows.sort(function (a, b) {
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+
+                            return idB - idA;
+                        });
+                    }
+                    else if (selectedFilter === 'descending') {
+                        rows.sort(function (a, b) {
+                            var idA = new Date($(a).find('.date').text());
+                            var idB = new Date($(b).find('.date').text());
+
+                            return idA - idB;
+                        });
+                    }
+
+                    tableBody.empty().append(rows);
+                }
+
+                // Filter functionality
+                $('#ascending').on('click', function () {
+                    filterTable("ascending")
+                });
+                $('#descending').on('click', function () {
+                    filterTable("descending")
+                });
+                $('#recently-added').on('click', function () {
+                    filterTable("recently-added")
+                });
+                $('#alphabets').on('click', function () {
+                    // console.log(1)viewModal
+                    filterTable("alphabets")
+                });
         var categoryData;var landlordId;
         $(document).ready(() => {
             
@@ -2964,11 +3018,11 @@
                 }
                 console.log(data)
                 $("#tenantName").text(data.firstName + " " + data.lastName)
-                $("#invoiceType").text(data.invoiceType)
-                $("#dueDate").text(data.dueDate)
+                $("#invoiceType").text(data.invoiceType?data.invoiceType:"N/A")
+                $("#dueDate").text(data.dueDate?data.dueDate:"N/A")
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
-                $("#notes").text(data.note)
+                $("#notes").text(data.note?data.note:"N/A")
 
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
@@ -2995,7 +3049,7 @@
                                                     </td>
                                                     
                                                     <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"N/A"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
@@ -3007,7 +3061,7 @@
                                                     </td>
                                                     
                                                     <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"N/A"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
@@ -3049,6 +3103,11 @@
                     console.log('Error: ' + error);
                 }
             });
+            function formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                        return date.toLocaleDateString('en-US', options);
+                    }
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getAllInvoicesTenant',
                 type: 'GET',
@@ -3086,9 +3145,9 @@
                             var day = dateObj.getDate();
                             var month = dateObj.getMonth() + 1;
                             var year = dateObj.getFullYear();
-                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + day + "/" + month + "/" + year + '</td>';
+                            var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">$ ' + invoice.totalAmount + '<span></span>' + `<br><small>Next Due Date: November-12-2020</small>` + '</td>';
+                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                     data-bs-toggle="dropdown"></i>
