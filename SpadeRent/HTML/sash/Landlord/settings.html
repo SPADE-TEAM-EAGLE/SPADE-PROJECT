@@ -1102,8 +1102,8 @@
         }
 
         .btn4-blue {
-            color: #1D80C4;
-            border: 2px solid #1D80C4;
+            color: #8bd8bd;
+            border: 2px solid #8bd8bd;
         }
 
         .text4-blue {
@@ -3742,6 +3742,7 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants, and everything in between.</p>
@@ -4413,6 +4414,10 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="mb-5">
+                                                    <p class="fw-bolder" id="remaining-days-text"><span class="text-danger fw-bolder">* </span>
+                                                        You are currently subscribed to the Trial Plan with <span id="remaining-days" class="text-primary"></span> remaining days. To access enhanced functionalities, we recommend upgrading to the paid version.</p>
+                                                </div>
                                                 <div class="card-body p-0">
                                                     <div class="col-12 card2 p-0">
                                                         <!-- ROW-6 OPEN -->
@@ -4811,9 +4816,7 @@ Draft</button> -->
                                                                                                             <span>Upgrade
                                                                                                                 to
                                                                                                                 Basic
-                                                                                                                <img src="../assets/images/arrow-blue1.svg"
-                                                                                                                    class="float-right mt-1 mr-2 "
-                                                                                                                    alt=""></span>
+                                                                                                                </span>
 
                                                                                                             <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
 
@@ -13054,7 +13057,7 @@ Draft</button> -->
         </script>
         <script>
             var userId; var userData;
-            var currentSelectedId;
+            var currentSelectedId=0;
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
@@ -13384,7 +13387,7 @@ Draft</button> -->
                 })
                 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -13420,6 +13423,16 @@ Draft</button> -->
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
                         }
+                        const createdDate = new Date(response.create_at);
+const currentDate = new Date();
+console.log(createdDate)
+// Calculate the time difference in milliseconds
+const timeDifference = currentDate - createdDate;
+console.log(timeDifference)
+// Convert milliseconds to days
+const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+console.log(daysPassed)
+$("#remaining-days").text(30 - daysPassed)
                         $("#firstName").val(toTitleCase(response.firstName))
                         $("#lastName").val(toTitleCase(response.lastName))
                         $("#email").val(response.email)
@@ -13513,6 +13526,14 @@ Draft</button> -->
 
 
                                     })
+                                    $("#remaining-days-text").addClass("d-none");
+                                }else{
+                                    $(".free-card").each(function () {
+                                        $(this).addClass("d-none");
+
+
+                                    })
+                                    $("#remaining-days-text").removeClass("d-none");
                                 }
                             });
                         }
@@ -13546,6 +13567,14 @@ Draft</button> -->
 
 
                                     })
+                                    $("#remaining-days-text").addClass("d-none");
+                                }else{
+                                    $(".free-card").each(function () {
+                                        $(this).addClass("d-none");
+
+
+                                    })
+                                    $("#remaining-days-text").removeClass("d-none");
                                 }
                             });
                         }
@@ -14843,6 +14872,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#downgradeConfirm").modal("show")
                     } 
                     else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)<5) {
+                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14854,7 +14884,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     
-                    else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<5) {
+                    else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<5  && parseInt(currentSelectedId)!=0) {
+                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -15597,7 +15628,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
 
-                    var file = $('#fileInput')[0].files[0];
+                    var file = $('#fileInput_business')[0].files[0];
                     console.log(file)
                     uploadFormData.append('image', file);
 

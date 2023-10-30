@@ -86,6 +86,8 @@ const verifyToken = async (req, res, next) => {
         nuveiId: result[0][0].nuveiId,
         nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
         nuveiUPOID: result[0][0].nuveiUPOID,
+        create_at: result[0][0].created_at,
+
         role,
         llDashboard,
         properties,
@@ -148,6 +150,8 @@ const verifyToken = async (req, res, next) => {
         businessLogo: result[0][0].businessLogo,
         subscriptionID: result[0][0].nuveiSubscriptionId,
         nuveiUPOID: result[0][0].nuveiUPOID,
+        create_at: result[0][0].created_at,
+
 
       };
       next();
