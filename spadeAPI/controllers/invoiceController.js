@@ -759,7 +759,19 @@ exports.deleteInCategories = async (req, res) => {
 exports.deleteVendCategories = async (req, res) => {
   try {
     const { catId } = req.body;
+    // const { userId } = req.body;
     const { userId } = req.user;
+
+    const VendorCategoryCheckResult = await queryRunner(
+      selectQuery("vendor", "categoryID"),
+      [catId]
+    );
+    if (VendorCategoryCheckResult[0].length > 0) {
+      res.status(200).json({
+        Message: `Unable To Delete this Category`,
+        Reason: `This Category is assign to ${VendorCategoryCheckResult[0][0].firstName} ${VendorCategoryCheckResult[0][0].lastName}`,
+      });
+    } else {
     const deleteInvoiceCategoriesResult = await queryRunner(
       deleteVendorCategories,
       [catId, userId]
@@ -773,6 +785,7 @@ exports.deleteVendCategories = async (req, res) => {
         message: "No data found",
       });
     }
+  }
   } catch (error) {
     console.log(error);
     res.send("Error from delete Vendor categories"+error);
