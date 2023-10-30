@@ -464,9 +464,9 @@ exports.createSubscriptionPayment = async (req, res) => {
     requestData.initialAmount=initialAmount*12
     requestData.recurringAmount = 0.001;
     requestData.recurringPeriod = {
-      day: "0",
-      month: "0",
-      year: "1"
+      day: "30",
+      month: "11",
+      year: "0"
     }
     requestData.endAfter = {
       day: "1",
@@ -474,9 +474,10 @@ exports.createSubscriptionPayment = async (req, res) => {
       year: "1"
     }
   }
-  requestData.planId = nuveiId;
-  requestData.checksum = sha256(config.merchantId + config.merchantSiteId + userTokenId + nuveiId + upoId + initialAmount + requestData.recurringAmount + currency + timestamp + config.Secret_Key);
   console.log(requestData)
+  requestData.planId = nuveiId;
+  requestData.checksum = sha256(config.merchantId + config.merchantSiteId + userTokenId + nuveiId + upoId + requestData.initialAmount + requestData.recurringAmount + currency + timestamp + config.Secret_Key)
+  
   const requestOptions = {
     method: "POST",
     headers: {
