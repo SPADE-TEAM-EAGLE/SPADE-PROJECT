@@ -732,8 +732,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = 0.00001;
     requestData.recurringPeriod = {
-      day: "0",
-      month: "1",
+      day: "29",
+      month: "0",
       year: "0"
     };
     requestData.endAfter = {
