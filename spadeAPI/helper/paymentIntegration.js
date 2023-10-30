@@ -420,7 +420,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     // planId: planId,
     userTokenId: userTokenId,
     userPaymentOptionId: upoId,
-    initialAmount: initialAmount,
+    initialAmount: initialAmount*12,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
@@ -475,7 +475,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     }
   }
   requestData.planId = nuveiId;
-  requestData.checksum = sha256(config.merchantId + config.merchantSiteId + userTokenId + nuveiId + upoId + initialAmount + requestData.recurringAmount + currency + timestamp + config.Secret_Key)
+  requestData.checksum = sha256(config.merchantId + config.merchantSiteId + userTokenId + nuveiId + upoId + initialAmount + requestData.recurringAmount + currency + timestamp + config.Secret_Key);
   console.log(requestData)
   const requestOptions = {
     method: "POST",
@@ -775,33 +775,6 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
     };
   }
 
-  // Annually downgrade
-  // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4) {
-    
-  //   let AddDays = 365 - daysDifferenceAnnually;
-    
-  //   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-  
-  //   requestData.startAfter = {
-  //     day: AddDays,
-  //     month: "0",
-  //     year: "0"
-  //   };
-  //   requestData.recurringPeriod = {
-  //     day: AddDays - 1,
-  //     month: "0",
-  //     year: "0"
-  //   };
-  //   requestData.endAfter = {
-  //     day: AddDays,
-  //     month: "0",
-  //     year: "1"
-  //   };
-  // }
-
-
-
-
 
 // Move Monthly to Annually
 let daysDifferenceMtoA; 
@@ -883,7 +856,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
               subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
               subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);              
             }else{
-              AddDays = 365 - daysDifference;
+              AddDays = 365 - daysDifferenceAnnually;
               subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
             }
