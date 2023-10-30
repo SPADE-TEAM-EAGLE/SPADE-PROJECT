@@ -110,7 +110,9 @@ const task = cron.schedule('0 9,20 * * *', async () => {
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             const lineItems = lineItemsResult[0];
-            await invoiceSendMail(tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail,invoiceEmail,landlordID);
+            const AddDate = new Date();
+AddDate.setDate(AddDate.getDate() + 5);
+            await invoiceSendMail(tenantName,address,AddDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail,invoiceEmail,landlordID);
             if (lineItemsResult[0].length > 0) {
               for (let j = 0; j < lineItemsResult[0].length; j++) {
                 const category = lineItemsResult[0][j].category;
@@ -190,7 +192,9 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               }
               const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
               const lineItems = lineItemsResult[0];
-              await invoiceSendMail(tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail, invoiceEmail, landlordID);
+              const AddDate = new Date();
+AddDate.setDate(AddDate.getDate() + 5);
+              await invoiceSendMail(tenantName,address,AddDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail, invoiceEmail, landlordID);
             if (lineItemsResult[0].length > 0) {
               for (let j = 0; j < lineItemsResult[0].length; j++) {
                 const category = lineItemsResult[0][j].category;

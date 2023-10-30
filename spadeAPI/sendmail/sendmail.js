@@ -94,7 +94,16 @@ exports.invoiceSendMail = async (
     ]);
     const LandlordName = landlordResult[0][0].FirstName + " " + landlordResult[0][0].LastName;
     const LandlordPhone = landlordResult[0][0].Phone;
-    const BusinessAddress = landlordResult[0][0].BusinessAddress+","+landlordResult[0][0].BACity+","+landlordResult[0][0].BAState+","+landlordResult[0][0].BAZipcode;
+    let BusinessAddress;
+    if (landlordResult[0][0].BusinessAddress == null) {
+      BusinessAddress = "Not Available";
+    } else {
+      BusinessAddress = landlordResult[0][0].BusinessAddress + "," +
+        landlordResult[0][0].BACity + "," +
+        landlordResult[0][0].BAState + "," +
+        landlordResult[0][0].BAZipcode;
+    }
+    
 
     if (islandlordNotify[0][0].emailNotification === "no") {
       console.log("email notification is off");
