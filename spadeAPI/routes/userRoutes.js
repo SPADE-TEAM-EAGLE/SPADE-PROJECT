@@ -180,6 +180,7 @@ router.get("/taskReport", verifyToken, userController.getTaskReportData);
 // router.get("/taskReport", userController.getTaskReportData);
 // dekete invoice catergory
 router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
+// router.delete("/deleteVendorCategory", invoiceController.deleteVendCategories);
 router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
 
 // chats start
