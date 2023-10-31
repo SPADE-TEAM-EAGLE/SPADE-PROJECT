@@ -75,7 +75,7 @@ function GetNotification(){
                   <a href="javascript:void(0);">
                       <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                         item.firstName
-                      }</div> <span class="text-dark"> ${item.Address} > ${
+                      }</div> <span class="text-dark"> ${item.Address? item.Address : "N/A"} > ${
               item.city
             }</span>
                       <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
@@ -200,9 +200,9 @@ function GetNotification(){
                   <a href="javascript:void(0);">
                       <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                         item.firstName
-                      }</div> <span class="text-dark"> ${item.Address} > ${
-              item.city
-            }</span>
+                      }</div> <span class="text-dark"> ${item.Address? item.Address : "N/A"} > ${
+                        item.city
+                      }</span>
                       <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
                   </a>
               </div>
@@ -325,9 +325,9 @@ function GetNotification(){
                           <a href="javascript:void(0);">
                               <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                                 item.firstName
-                              }</div> <span class="text-dark"> ${
-              item.Address
-            } > ${item.city}</span>
+                              }</div> <span class="text-dark"> ${item.Address? item.Address : "N/A"} > ${
+                                item.city
+                              }</span>
                               <p class="mb-0 fw-bold text-dark fs-15 ">$ ${item.totalAmount} </p>
                           </a>
                       </div>

@@ -2463,7 +2463,7 @@ Draft</button> -->
                                         <span class="fw-light">(Optional)</span></label>
                                     <input id="phone" name="phone" type="tel" autocomplete="off"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" >
                                     <span id="valid-msg" class="d-none text-success valid-msg">✓
                                         Valid</span>
                                     <span id="error-msg" class="hide text-danger error-msg"></span>
@@ -2650,9 +2650,9 @@ Draft</button> -->
                                 <div class="col-md-6">
                                     <label for="inputState" class="form-label fw-bold">Phone Number
                                         <span class="fw-light">(Optional)</span></label>
-                                    <input id="phone2" required name="phone" type="tel" autocomplete="off"
+                                    <input id="phone2"  name="phone" type="tel" autocomplete="off"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" >
                                     <span id="valid-msg" class="d-none text-success valid-msg">✓
                                         Valid</span>
                                     <span id="error-msg" class="hide text-danger error-msg"></span>
@@ -7419,7 +7419,7 @@ Draft</button> -->
                                                                         <div
                                                                             class="col-xl-6 col-lg-6 col-md-6 col-sm-12 close-account-btn-mobile-resp">
                                                                             <button onclick="Intercom('show'); Intercom('showNewMessage');"
-                                                                                class="btn btn-primary btn-pill m-2 w-auto"><b>Contact to support</b></button>
+                                                                                class="btn btn-default btn-pill m-2 w-auto"><b>Contact to support</b></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -16406,31 +16406,6 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 //         $('#next-add-user-permission').prop('disabled', true);
                 //     }
                 // }
-
-                // function validateForm_update() {
-                //     let valid = true;
-
-                //     $('#edit-user-permissions input[required],#edit-user-permissions select').each(function () {
-
-                //         if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Select Option")) {
-                //             valid = false;
-
-                //         } else {
-
-                //         }
-                //     });
-                //     if ($('#edit-user-permissions #email_user_update').val() !== "" ) {
-                //         valid = false;
-
-                //     }
-
-                //     if (valid) {
-                //         $('#update_user_permission').prop('disabled', false);
-                //     } else {
-                //         $('#update_user_permission').prop('disabled', true);
-                //     }
-                // }
-
                 // $('#add-user-permissions input[required],#add-user-permissions select').on('input change', function () {
                 //     validateForm();
                 //     if ($(this).is('select')) {
@@ -16449,25 +16424,36 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 //         }
                 //     }
                 // });
-                // $('#edit-user-permissions input[required],#edit-user-permissions select').on('input change', function () {
-                //     validateForm_update();
-                //     if ($(this).is('select')) {
-                //         if ($(this).val() === "Select Option") {
-                //             $(this).removeClass('border-green').addClass('border-danger');
-                //         } else {
-                //             $(this).removeClass('border-danger').addClass('border-green');
-                //         }
-                //     }
-
-                //     else {
-                //         if ($(this).val() == "") {
-                //             $(this).removeClass('border-green').addClass('border-danger');
-                //         } else {
-                //             $(this).removeClass('border-danger').addClass('border-green');
-                //         }
-                //     }
-                // });
-
+                $('#edit-user-permissions input[required],#edit-user-permissions select[required]').on('input change', function () {
+                    validateForm_update();
+                    if ($(this).is('select')) {
+                        if ($(this).val() === "Choose...") {
+                            $(this).removeClass('border-green').addClass('border-danger');
+                        } else {
+                            $(this).removeClass('border-danger').addClass('border-green');
+                        }
+                    }
+                    else {
+                        if ($(this).val() == "") {
+                            $(this).removeClass('border-green').addClass('border-danger');
+                        } else {
+                            $(this).removeClass('border-danger').addClass('border-green');
+                        }
+                    }
+                });
+                function validateForm_update() {
+                    let valid = true;
+                    $('#edit-user-permissions input[required],#edit-user-permissions select[required]').each(function () {
+                        if ($(this).val() === "" || ($(this).is('select') && $(this).val() === "Choose...")) {
+                            valid = false;
+                        }
+                    });
+                    if (valid) {
+                        $('#update_user_permission').prop('disabled', false);
+                    } else {
+                        $('#update_user_permission').prop('disabled', true);
+                    }
+                }
                 // function isValidEmail(email) {
                 //     let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 //     return regex.test(email);
