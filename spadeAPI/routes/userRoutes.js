@@ -277,6 +277,8 @@ router.post("/editPlanPayment", paymentIntegration.editPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
 router.post("/createSubscriptionPaymentSetting", paymentIntegration.createSubscriptionPaymentSetting);
 router.post("/CreateBankAccount",verifyToken, bankAccountController.CreateBankAccount);
+router.post("/CreateBankAccountSignup", bankAccountController.CreateBankAccountSignup);
+
 router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
 router.get("/GetBankAccountTenant", verifyTokenTenant, bankAccountController.GetBankAccount);
