@@ -172,6 +172,8 @@ let card2 = document.getElementById("card2");
 let card3 = document.getElementById("card3");
 let card4 = document.getElementById("card4");
 let card5 = document.getElementById("card5");
+let card5_new = document.getElementById("card5-new");
+
 let part1 = document.getElementById("part1");
 let part3 = document.getElementById("part3");
 // let part4 = document.getElementById("part4");
@@ -315,7 +317,8 @@ let card_btnn6 = document.getElementsByClassName("card-btnn")[5];
 let card_btnn7 = document.getElementsByClassName("card-btnn")[6];
 let card_btnn8 = document.getElementsByClassName("card-btnn")[7];
 
-let done = document.getElementById("done");
+// let done = document.getElementById("done");
+let done_new = document.getElementById("done-new");
 
 
 // let card_btnn9 = document.getElementsByClassName("btnt")[0];
@@ -334,7 +337,9 @@ nextpayment.addEventListener("click", cardbtnchange2);
 
 
 card_btnn1.addEventListener("click", cardbtnchange);
-done.addEventListener("click", cardbtnchange);
+// done.addEventListener("click", cardbtnchange);
+done_new.addEventListener("click", cardbtnchange);
+
 card_btnn2.addEventListener("click", cardbtnchange1);
 card_btnn3.addEventListener("click", cardbtnchange1);
 card_btnn4.addEventListener("click", cardbtnchange1);
@@ -366,9 +371,13 @@ function cardbtnchange1()
         }
     }
 });
+console.log(document.getElementById("plan-name"))
+// document.getElementById("plan-name").innerHTML = time;
 document.getElementById("payment-month").innerHTML = time;
 console.log(document.getElementById(cardId))
 document.getElementById("plan-name").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
+document.getElementById("plan-name-card").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
+
 var amount = this.closest('.pricing-card').getElementsByClassName('amount-payable')[0].textContent;
 seletedPlanID = cardId;
 document.getElementById("amount").value = amount;
@@ -380,6 +389,8 @@ document.getElementById("payment-total").innerHTML = amount;
   card1.classList.add("card-fade");
   card3.classList.add("card-fade");
   card5.classList.add("card-fade");
+  card5_new.classList.add("card-fade");
+
   card4.classList.remove("card-fade");
   // part4.classList.add("shadow-active");
   part3.classList.remove("shadow-active");
@@ -393,6 +404,8 @@ document.getElementById("payment-total").innerHTML = amount;
     card3.style.display = "none";
     card4.style.display = "block";
     card5.style.display = "none";
+    card5_new.style.display = "none";
+
     // part4.classList.add("active1");
     part2.classList.add("shadow-active");
     // part2.classList.add("complete1");
@@ -406,7 +419,8 @@ function cardbtnchange2()
   card1.classList.add("card-fade");
   card3.classList.add("card-fade");
   card4.classList.add("card-fade");
-  card5.classList.remove("card-fade");
+  card5.classList.add("card-fade");
+  card5_new.classList.remove("card-fade");
   // part4.classList.add("shadow-active");
   part3.classList.remove("shadow-active");
   part2.classList.remove("shadow-active");
@@ -418,7 +432,9 @@ function cardbtnchange2()
     card1.style.display = "none";
     card3.style.display = "none";
     card4.style.display = "none";
-    card5.style.display = "block";
+    card5.style.display = "none";
+    card5_new.style.display = "block";
+
     // part4.classList.add("active1");
     part2.classList.add("shadow-active");
     // part2.classList.add("complete1");
@@ -457,6 +473,8 @@ function cardbtnchange() {
   card4.classList.add("card-fade");
   card3.classList.remove("card-fade");
   card5.classList.add("card-fade");
+  
+  card5_new.classList.add("card-fade");
   part3.classList.add("shadow-active");
   part2.classList.remove("shadow-active");
   part1.classList.remove("shadow-active");
@@ -467,6 +485,7 @@ function cardbtnchange() {
     card1.style.display = "none";
     card4.style.display = "none";
     card5.style.display = "none";
+    card5_new.style.display = "none";
     card3.style.display = "block";
     part3.classList.add("active1");
     part3.classList.add("shadow-active");
@@ -479,6 +498,7 @@ function cardbtnchange() {
     card1.classList.add("card-fade");
     card4.classList.add("card-fade");
     card5.classList.add("card-fade");
+    card5_new.classList.add("card-fade");
     card3.classList.remove("card-fade");
     part3.classList.add("shadow-active");
     part2.classList.remove("shadow-active");
@@ -491,6 +511,7 @@ function cardbtnchange() {
       card1.style.display = "none";
       card4.style.display = "none";
       card5.style.display = "none";
+      card5_new.style.display = "none";
       card3.style.display = "block";
     }
   }

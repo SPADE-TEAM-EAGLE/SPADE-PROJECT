@@ -892,7 +892,7 @@
                 </div>
                 <div class="col-12">
                     <div class="boxes">
-                        <div class="main-div">
+                        <div class="main-div" id="main-div">
                             <div class="anchor">
                                 <a href="#" class="active1 shadow-active mb-2" id="part1">1</a>
                                 <h6 class="font-weight-bold text-center">
@@ -3367,7 +3367,7 @@ AI.</span>
                                             </div>
                                             <div ></div>
                                             <div class="heading-confirm mt-0 text-center p-5">
-                                                <h4 class="mb-0 px-5">Thank you for your payment. You have purchased our <span>Premium Plan</span></h4>
+                                                <h4 class="mb-0 px-5">Thank you for your payment. You have purchased our <span id="plan-name-card"></span> plan.</h4>
                                             </div>
                                             <div class=" mx-3 mb-3">
                                                 <form action="">
@@ -3377,6 +3377,34 @@ AI.</span>
                                                             <button type="button"
                                                                 class="btn btn-primary btn-lg btn-block btnn btnstyle"
                                                                 id="done">
+                                                                Done
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 card1 p-0 card " id="card5-new" style="display: none;">
+                                            <div class="card-body text-center mb-0">
+                                                <img src="../assets/images/invoice-dollar.png" alt="">
+                                            </div>
+                                            <div class="heading-confirm mt-0">
+                                                <h3 class="text-center fw-bold fs-30 mb-0">Card Details
+                                                </h3>
+                                            </div>
+                                            <div ></div>
+                                            <div class="heading-confirm mt-0 text-center p-5">
+                                                <h4 class="mb-0 px-5">Thank you for your card information. Payment will process shortly.</h4>
+                                            </div>
+                                            <div class=" mx-3 mb-3">
+                                                <form action="">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group"></div>
+                                                            <button type="button"
+                                                                class="btn btn-primary btn-lg btn-block btnn btnstyle"
+                                                                id="done-new">
                                                                 Done
                                                             </button>
 
@@ -3786,6 +3814,9 @@ AI.</span>
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script>
+        $("#done").click(function () {
+            window.location.href = "./login_module.html";
+        });
         var sfc = SafeCharge({
             env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
             merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
@@ -3805,7 +3836,7 @@ AI.</span>
                 fontSize: '16px',
                 fontSmoothing: 'antialiased',
                 '::placeholder': {
-                    color: '#CFD7DF',
+                    color: 'grey',
                 },
                 ':-webkit-autofill': {
                     color: '#e39f48',
@@ -3828,6 +3859,7 @@ AI.</span>
         var scard = ScFields.create('ccNumber', {
             style: ScFieldStyles,
             classes: ScFieldClasses,
+            
         });
         scard.attach('#card-number');
 
@@ -3842,6 +3874,7 @@ AI.</span>
             classes: ScFieldClasses,
         });
         cardCvc.attach('#card-cvc');
+        
         function main(userId) {
 
             $.ajax({
@@ -3915,12 +3948,62 @@ AI.</span>
                                         }),
                                         contentType: "application/json",
                                         success: function (response) {
-                                            $("#preloader").css("display", "none");
-                                            $("#myModal_success").modal("show")
-                                            setTimeout(function () {
-                                                $("#myModal_success").modal("hide");
-                                                window.location = '../Landlord/login_module.html';
-                                            }, 2000);
+                                            $.ajax({
+                                    url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+
+                                    },
+                                    data: JSON.stringify({
+                                        userId: userId,
+                                        UPOID: res?.userPaymentOptionId,
+                                        accountName: ($("#firstname1").val()+" "+$("#lastname").val()),
+                                        description: "",
+                                        active: $("#accountActive").is(":checked"),
+                                        accountTypeTenant: ""
+                                    }),
+                                    success: function (response) {
+                                        $("#preloader").css("display", "none");
+                                            
+  card2.classList.add("card-fade");
+  card1.classList.add("card-fade");
+  card3.classList.add("card-fade");
+  card4.classList.add("card-fade");
+  card5_new.classList.add("card-fade");
+  card5.classList.remove("card-fade");
+  // part4.classList.add("shadow-active");
+  part3.classList.add("d-none");
+  part2.classList.add("d-none");
+  part1.classList.add("d-none");
+
+    loader.style.display = "none";
+    card2.style.display = "none";
+    card1.style.display = "none";
+    card3.style.display = "none";
+    card4.style.display = "none";
+    card5.style.display = "block";
+    card5_new.style.display = "none";
+    $("#main-div").addClass("d-none");
+                                    },
+                                    error: function () {
+                                        $("#preloader").css("display", "none")
+                                        $("#myModal_warning_declined").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_warning_declined").modal("hide");
+                                        }, 2000);
+                                    }
+                                })
+
+
+
+
+
+
+
+
+                                            
                                         },
                                         error: function (xhr, status, error) {
                                             $.ajax({

@@ -3560,7 +3560,7 @@ Draft</button> -->
                                         style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                         <div class="card-header pb-0 border-bottom-0">
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            <h3 class="card-title side-menu__label">Complete your Profile
                                             </h3>
 
                                         </div>
@@ -3736,6 +3736,7 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
                                                     moving out tenants, and everything in between.</p>
@@ -4412,6 +4413,10 @@ Draft</button> -->
                                                         <span><a href="#" onclick="Intercom('showArticle', 8210506)"
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
+                                                </div>
+                                                <div class="mb-5">
+                                                    <p class="fw-bolder" id="remaining-days-text"><span class="text-danger fw-bolder">* </span>
+                                                        You are currently subscribed to the Trial Plan with <span id="remaining-days" class="text-primary"></span> remaining days. To access enhanced functionalities, we recommend upgrading to the paid version.</p>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <div class="col-12 card2 p-0">
@@ -13122,7 +13127,7 @@ Draft</button> -->
         </script>
         <script>
             var userId; var userData;
-            var currentSelectedId;
+            var currentSelectedId=0;
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
@@ -13488,6 +13493,16 @@ Draft</button> -->
                             $("#user-img").attr("src", response.image)
                             $("#user-img-dark").attr("src", response.image)
                         }
+                        const createdDate = new Date(response.create_at);
+const currentDate = new Date();
+console.log(createdDate)
+// Calculate the time difference in milliseconds
+const timeDifference = currentDate - createdDate;
+console.log(timeDifference)
+// Convert milliseconds to days
+const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+console.log(daysPassed)
+$("#remaining-days").text(30 - daysPassed)
                         $("#firstName").val(toTitleCase(response.firstName))
                         $("#lastName").val(toTitleCase(response.lastName))
                         $("#email").val(response.email)
@@ -13581,6 +13596,14 @@ Draft</button> -->
 
 
                                     })
+                                    $("#remaining-days-text").addClass("d-none");
+                                }else{
+                                    $(".free-card").each(function () {
+                                        $(this).addClass("d-none");
+
+
+                                    })
+                                    $("#remaining-days-text").removeClass("d-none");
                                 }
                             });
                         }
@@ -13614,6 +13637,14 @@ Draft</button> -->
 
 
                                     })
+                                    $("#remaining-days-text").addClass("d-none");
+                                }else{
+                                    $(".free-card").each(function () {
+                                        $(this).addClass("d-none");
+
+
+                                    })
+                                    $("#remaining-days-text").removeClass("d-none");
                                 }
                             });
                         }
@@ -14909,8 +14940,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm").modal("show")
-                    }
-                    else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId) < 5) {
+                    } 
+                    else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)<5) {
+                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14921,8 +14953,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm-yearly").modal("show")
                     }
-
-                    else if (parseInt(cardId) <= 7 && parseInt(cardId) >= 5 && parseInt(currentSelectedId) < 5) {
+                    
+                    else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<5  && parseInt(currentSelectedId)!=0) {
+                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -14942,8 +14975,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm-yearly").modal("show")
-                        $("#upgradetopro").modal("show")
+                        // $("#downgradeConfirm-yearly").modal("show")
+                        // $("#upgradetopro").modal("show")
+                        $("#downgradeConfirm").modal("show")
                     }
                     else {
                         console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")

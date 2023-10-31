@@ -180,6 +180,7 @@ router.get("/taskReport", verifyToken, userController.getTaskReportData);
 // router.get("/taskReport", userController.getTaskReportData);
 // dekete invoice catergory
 router.delete("/deleteInvoiceCategory", verifyToken, invoiceController.deleteInCategories);
+// router.delete("/deleteVendorCategory", invoiceController.deleteVendCategories);
 router.delete("/deleteVendorCategory", verifyToken, invoiceController.deleteVendCategories);
 
 // chats start
@@ -276,6 +277,8 @@ router.post("/editPlanPayment", paymentIntegration.editPlanPayment);
 router.post("/createSubscriptionPayment", paymentIntegration.createSubscriptionPayment);
 router.post("/createSubscriptionPaymentSetting", paymentIntegration.createSubscriptionPaymentSetting);
 router.post("/CreateBankAccount",verifyToken, bankAccountController.CreateBankAccount);
+router.post("/CreateBankAccountSignup", bankAccountController.CreateBankAccountSignup);
+
 router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
 router.get("/GetBankAccountTenant", verifyTokenTenant, bankAccountController.GetBankAccount);
