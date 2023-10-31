@@ -554,6 +554,7 @@ exports.createSubscriptionPayment = async (req, res) => {
 
 // ###################################### Create Subsription Setting #############################################################
 exports.createSubscriptionPaymentSetting = async (req, res) => {
+ 
   const {
     initialAmount,
     recurringAmount,
@@ -853,6 +854,10 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
             }
             const result = await queryRunner(insertUserBankFuture, [userTokenId, userNuveiId, planId, data.subscriptionId, userTokenId, subscriptionCreatedDateFormatted]);
+            const selectUserResult = await queryRunner(selectQuery('users', 'id'), [userTokenId]);
+            const Name = selectUserResult[0][0].FirstName + " "+ selectUserResult[0][0].LastName;
+            const email = selectUserResult[0][0].Email;
+            
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,

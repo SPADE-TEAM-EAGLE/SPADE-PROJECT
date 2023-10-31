@@ -1120,4 +1120,4 @@ exports.insertInUserPermissionUsers =
   exports.addUserRoles = "INSERT INTO userRoles (Urole, userId) VALUES (?,?)";
   exports.insertUserBankFuture = "INSERT INTO futurePlanUser (landlordId,fuserNuveiId,fplanId,fsubscriptionId,fuserTokenId,fsubscriptionCreated_at) VALUES (?,?,?,?,?,?)";
   
-  exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ?, accountNumber =? WHERE id = ?";
+  exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ? WHERE id = ?";

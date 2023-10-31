@@ -9,7 +9,7 @@ const fs = require("fs");
 const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage");
 const { serialize } = require("cookie");
-const { insertBankAccount, selectQuery, updateBankAccountStatusquery,updateBankAccountquery,insertUserBankFuture } = require("../constants/queries");
+const { insertBankAccount, selectQuery, updateBankAccountStatusquery,updateBankAccountquery,insertUserBankFuture,updatePropertyBankAccountQuery } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
 
@@ -126,4 +126,23 @@ exports.updateBankAccountTenant = async (req, res) => {
     //         }
     // };
       //  ############################# dummy ############################################################
+    
+   
+   
+      //  ############################# Update bank Account Status ############################################################
+    exports.updatePropertyBankAccount = async (req, res) => {
+        const { id, UPOID, accountName} = req.body;
+            try {
+                const getResult = await queryRunner(updatePropertyBankAccountQuery,[UPOID, accountName, id]); 
+                if(getResult[0].affectedRows > 0) {
+                    res.status(200).json({message : "Property Account Updated Successful"});
+                } else {
+                    res.status(201).send("Property Account is not updated");
+                }
+            } catch (error) {
+                console.log(error);
+                res.status(400).send("Error");
+            }
+    };
+      //  ############################# Property Account ############################################################
     
