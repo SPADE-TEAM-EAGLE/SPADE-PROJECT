@@ -775,8 +775,6 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "0"
     };
   }
-
-
 // Move Monthly to Annually
 let daysDifferenceMtoA; 
 if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
@@ -802,13 +800,6 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     year: "1"
   };
 }
-
-
-
-
-
-
-
 
   console.log("requestData.endAfter : ", requestData.startAfter);
   requestData.planId = nuveiId;
@@ -861,7 +852,6 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
               subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
             }
-
             const result = await queryRunner(insertUserBankFuture, [userTokenId, userNuveiId, planId, data.subscriptionId, userTokenId, subscriptionCreatedDateFormatted]);
             if (result[0].affectedRows == 1) {
               res.status(200).json({

@@ -72,7 +72,8 @@ const {
   insertVendorCategory,
   insertProspectusSources,
   userPermissionLogin,
-  addUserRoles
+  addUserRoles,
+  updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -2864,3 +2865,21 @@ exports.deleteUser=async(req,res)=>{
 
   }
 }
+
+    //  ############################# Update bank Account Status ############################################################
+    exports.updatePropertyBankAccount = async (req, res) => {
+      const { id, UPOID, accountName, accountNumber } = req.body;
+          try {
+              const getResult = await queryRunner(updatePropertyBankAccountQuery,[UPOID, accountName, accountNumber,id]); 
+              if(getResult[0].affectedRows > 0) {
+                  res.status(200).json({message : "Property Account Updated Successful"});
+              } else {
+                  res.status(201).send("Property Account is not updated");
+              }
+          } catch (error) {
+              console.log(error);
+              res.status(400).send("Error");
+          }
+  };
+    //  ############################# Property Account ############################################################
+  

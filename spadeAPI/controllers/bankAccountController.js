@@ -107,23 +107,23 @@ exports.updateBankAccountTenant = async (req, res) => {
 
 
       //  ############################# dummy ############################################################
-      exports.dummy = async (req, res) => {
-        console.log("object")
-        const { userId,userNuveiId,planId,subscriptionId,userTokenId } = req.body;
-        const subscriptionDate = new Date();
-            try {
-                const result = await queryRunner(insertUserBankFuture, [userId,userNuveiId,planId,subscriptionId,userTokenId,subscriptionDate]);
-                if (result[0].affectedRows == 1) {
-                  res.status(200).json({
-                    message:"asddsdcsdc"
-                  });
-                } else {
-                    res.status(201).send("Bank Account data is not updated");
-                }
-            } catch (error) {
-                console.log(error);
-                res.status(400).send("Error");
-            }
-    };
+    //   exports.dummy = async (req, res) => {
+    //     console.log("object")
+    //     const { userId,userNuveiId,planId,subscriptionId,userTokenId } = req.body;
+    //     const subscriptionDate = new Date();
+    //         try {
+    //             const result = await queryRunner(insertUserBankFuture, [userId,userNuveiId,planId,subscriptionId,userTokenId,subscriptionDate]);
+    //             if (result[0].affectedRows == 1) {
+    //               res.status(200).json({
+    //                 message:"asddsdcsdc"
+    //               });
+    //             } else {
+    //                 res.status(201).send("Bank Account data is not updated");
+    //             }
+    //         } catch (error) {
+    //             console.log(error);
+    //             res.status(400).send("Error");
+    //         }
+    // };
       //  ############################# dummy ############################################################
     
