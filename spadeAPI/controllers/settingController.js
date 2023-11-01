@@ -132,12 +132,14 @@ exports.emailtemplates = async (req, res) => {
 
 //  ############################# Landlord business logo Start ############################################################
 exports.updateBusinessLogo = async (req, res) => {
-  const { userId } = req.user; 
+  // const { userId } = req.user; 
+  const { userId } = req.body; 
 
-  console.log(req.files); 
+  console.log("req.files"); 
   const image  = req.files[0].filename; 
 
-  // console.log(userId);
+
+  console.log(image);
   try {
     console.log(image);
       // const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);

@@ -7,6 +7,7 @@ const { query } = require('express');
 // const { queryRunner } = require('./queryRunner');
 const { selectQuery, updateUserBank, insertUserBankFuture } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
+const { paymentMail } = require("../sendmail/sendmail");
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
 
@@ -615,38 +616,6 @@ return daysDiff;
   const currentPlanResult = await queryRunner(selectQuery("plan", "id"), [PlanID]);
   const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
 
-  
-// // Move Monthly to Annually
-// let daysDifferenceMtoA; 
-// if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
-//   const currentDate = new Date();
-// const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
-// daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-//   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
-//   // let remainingDays = daysDifferenceMtoA;
-//   let remainingDays = 30 - daysDifferenceMtoA;
-//   // let AddDays = 30 - daysDifferenceMtoA;
-//   subscriptionDate.setDate(subscriptionDate.getDate() + remainingDays); 
-//   requestData.startAfter = {
-//     day: remainingDays,
-//     month: "0",
-//     year: "0"
-//   };
-//   requestData.recurringPeriod = {
-//     day: remainingDays - 1,
-//     month: "0",
-//     year: "0"
-//   };
-//   requestData.endAfter = {
-//     day: remainingDays,
-//     month: "0",
-//     year: "1"
-//   };
-// }
-
-
-
-
 
 
   // Move Annually to Monthly
@@ -841,33 +810,51 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
           const data = JSON.parse(responseData);
           console.log(data);
           // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
-          if (planId < UserResult[0][0].PlanID || planId < PlanID && currentPlanMonthlyAnnual != monthlyAnnual) {
-            const subscriptionDate = new Date();
-            let subscriptionCreatedDateFormatted;
-            if(monthlyAnnual == "Monthly"){
-              AddDays = 30 - daysDifference;
-              subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-              subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);              
-            }else{
-              AddDays = 365 - daysDifferenceAnnually;
-              subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-               subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
-            }
-            const result = await queryRunner(insertUserBankFuture, [userTokenId, userNuveiId, planId, data.subscriptionId, userTokenId, subscriptionCreatedDateFormatted]);
             const selectUserResult = await queryRunner(selectQuery('users', 'id'), [userTokenId]);
             const Name = selectUserResult[0][0].FirstName + " "+ selectUserResult[0][0].LastName;
             const email = selectUserResult[0][0].Email;
+            const mailSubject = "Welcome to Spade Rent";
+            if (
+              (planId < UserResult[0][0].PlanID || planId < PlanID) &&
+              currentPlanMonthlyAnnual !== monthlyAnnual
+            ) {
+              const subscriptionDate = new Date();
+              let subscriptionCreatedDateFormatted;
             
-            if (result[0].affectedRows == 1) {
-              res.status(200).json({
-                data,
-              });
+              // Get user data
+              if (monthlyAnnual === "Monthly") {
+                AddDays = 30 - daysDifference;
+                subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+              } else {
+                AddDays = 365 - daysDifferenceAnnually;
+                subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+              }
+            
+              const result = await queryRunner(insertUserBankFuture, [
+                userTokenId,
+                userNuveiId,
+                planId,
+                data.subscriptionId,
+                userTokenId,
+                subscriptionCreatedDateFormatted,
+              ]);
+            
+              paymentMail(Name, subscriptionCreatedDateFormatted, requestData.initialAmount, email, mailSubject);
+            
+              if (result[0].affectedRows === 1) {
+                res.status(200).json({
+                  data,
+                });
+              }
             }
-          }
+            
            // For Yearly
           else {
-            console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
+            // console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
+            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,mailSubject); 
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
