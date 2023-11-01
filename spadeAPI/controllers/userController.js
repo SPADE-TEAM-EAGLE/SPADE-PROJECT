@@ -1276,7 +1276,6 @@ exports.getproperty = async (req, res) => {
       selectQuery("property", "landlordID"),
       [userId]
     );
-
     if (allPropertyResult.length > 0) {
       for (var i = 0; i < allPropertyResult[0].length; i++) {
         const propertyID = allPropertyResult[0][i].id;

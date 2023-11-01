@@ -205,10 +205,10 @@ exports.taskSendMail = async (
 
 
 exports.paymentMail = async (
-  Name,subscriptionDate,Amount,email,mailSubject
+  Name,subscriptionDate,Amount,email,planName,mailSubject
 ) => {
   try {
-      var emailHTML = paymentMails.paymentHTML(Name,subscriptionDate,Amount)
+      var emailHTML = paymentMails.paymentHTML(Name,subscriptionDate,Amount,planName)
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,

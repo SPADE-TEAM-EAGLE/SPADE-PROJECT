@@ -607,7 +607,7 @@ return daysDiff;
     correctPlanId = planId;
   }
   const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
-  const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
+  const { nuveiId, monthlyAnnual, plantotalAmount, planName } = result[0][0];
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
   
@@ -841,7 +841,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                 subscriptionCreatedDateFormatted,
               ]);
             
-              paymentMail(Name, subscriptionCreatedDateFormatted, requestData.initialAmount, email, mailSubject);
+              paymentMail(Name, subscriptionCreatedDateFormatted, requestData.initialAmount, email,planName , mailSubject);
             
               if (result[0].affectedRows === 1) {
                 res.status(200).json({
@@ -854,7 +854,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
           else {
             // console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
-            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,mailSubject); 
+            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,planName, mailSubject); 
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
