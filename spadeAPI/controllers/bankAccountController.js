@@ -42,6 +42,32 @@ exports.CreateBankAccount = async (req, res) => {
         res.status(400).send("One or more parameters are undefined.");
     }
 };
+exports.CreateBankAccountSignup = async (req, res) => {
+const userType = "Landlord";
+    const { UPOID, accountName, description, active, userId,accountTypeTenant } = req.body;
+    const currentDate = new Date();
+    if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
+        var status;
+        try {
+            if(active){
+                status="Active"
+            }else{
+                status="Inactive"
+            }
+            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant]);
+            if (createResult[0].affectedRows === 0) {
+                res.status(400).send("Error");
+            } else {
+                res.status(200).json({ message: "Bank account added successfully", data: createResult[0].insertId });
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(400).send("Error");
+        }
+    } else {
+        res.status(400).send("One or more parameters are undefined.");
+    }
+};
   //  ############################# Create bank Account ############################################################
  
   

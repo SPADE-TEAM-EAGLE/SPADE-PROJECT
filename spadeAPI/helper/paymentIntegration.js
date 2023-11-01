@@ -449,30 +449,30 @@ exports.createSubscriptionPayment = async (req, res) => {
   const { nuveiId, monthlyAnnual } = result[0][0];
   console.log(monthlyAnnual)
   if (monthlyAnnual == "Monthly") {
-    requestData.recurringAmount = 0.001;
+    requestData.recurringAmount = initialAmount;
     requestData.recurringPeriod = {
-      day: "29",
+      day: "1",
       month: "0",
       year: "0"
     }
     requestData.endAfter = {
-      day: "1",
-      month: "1",
-      year: "0"
+      day: "0",
+      month: "0",
+      year: "20"
     }
 
   } else {
     requestData.initialAmount=initialAmount*12
-    requestData.recurringAmount = 0.001;
+    requestData.recurringAmount = initialAmount*12;
     requestData.recurringPeriod = {
-      day: "30",
-      month: "11",
-      year: "0"
-    }
-    requestData.endAfter = {
-      day: "1",
+      day: "0",
       month: "0",
       year: "1"
+    }
+    requestData.endAfter = {
+      day: "0",
+      month: "0",
+      year: "20"
     }
   }
   console.log(requestData)
@@ -701,27 +701,27 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   }
 
   if (monthlyAnnual == "Monthly") {
-    requestData.recurringAmount = 0.00001;
+    // requestData.recurringAmount = initialAmount;
     requestData.recurringPeriod = {
-      day: "29",
-      month: "0",
-      year: "0"
-    };
-    requestData.endAfter = {
-      day: "1",
+      day: "0",
       month: "1",
-      year: "0"
-    };
-  } else {
-    requestData.recurringPeriod = {
-      day: "30",
-      month: "11",
       year: "0"
     };
     requestData.endAfter = {
       day: "0",
       month: "0",
+      year: "20"
+    };
+  } else {
+    requestData.recurringPeriod = {
+      day: "0",
+      month: "0",
       year: "1"
+    };
+    requestData.endAfter = {
+      day: "0",
+      month: "0",
+      year: "20"
     };
   }
   // Monthly Downgrade 
@@ -735,14 +735,14 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "0"
     };
     requestData.recurringPeriod = {
-      day: AddDays - 1,
+      day: AddDays,
       month: "0",
       year: "0"
     };
     requestData.endAfter = {
-      day: AddDays,
-      month: "1",
-      year: "0"
+      day: "0",
+      month: "0",
+      year: "20"
     };
   }
 // Move Monthly to Annually
@@ -760,14 +760,14 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     year: "0"
   };
   requestData.recurringPeriod = {
-    day: remainingDays - 1,
+    day: remainingDays,
     month: "1",
     year: "0"
   };
   requestData.endAfter = {
-    day: remainingDays,
-    month: "0",
-    year: "1"
+    day: "0",
+      month: "0",
+      year: "20"
   };
 }
 
