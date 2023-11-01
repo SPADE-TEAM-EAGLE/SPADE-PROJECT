@@ -143,7 +143,7 @@ $('#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions').on('h
   }
   // var selectedFiles = [];
   // console.log($(this).find(".file-grid"));
-  $(this).find('input, select:not(#assignee_update),textarea').each(function(){
+  $(this).find('input:not([type="radio"]), select:not(#assignee_update),textarea').each(function(){
    if($(this).is('select')) {
     $(this).val('Choose...');
     $(this).removeClass('border-green').removeClass('border-danger')

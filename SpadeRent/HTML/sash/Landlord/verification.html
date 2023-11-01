@@ -562,7 +562,8 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <input type="number" class="form-control input-inside" id="verification" aria-describedby="verificationHelp" placeholder="Enter 6-Digits Code" onkeyup="validatecode()"/>
+                                                                        <input type="text" class="form-control input-inside" id="verification" aria-describedby="verificationHelp" maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, ''); validatecode();" placeholder="Enter 6-Digit Code" />
+
                                                                         <span class="mt-1 text-danger" id="verification-spans" style="display: none">
                                                                           Verification code is invalid. Please enter a Valid Code
                                       </span>
