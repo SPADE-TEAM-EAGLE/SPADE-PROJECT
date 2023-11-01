@@ -369,4 +369,84 @@ if(!isEmpty2 && !isEmpty1){
             // $("#next-add-property").attr('id',"next")
          }
      });
+
+
+     $(document).on('click', '#next-add-bank-property', function() {
+        
+        //first accordian
+        var isEmpty1 = true;
+        $("#next-add-bank-property .inputField").each(function() {
+            console.log("this",$(this))
+            if($(this).hasClass("valid")){
+                isEmpty1 = false;
+                $(this).addClass('border-green');
+                $(this).removeClass('border-danger');
+                span.addClass('d-none');
+            }else{
+                isEmpty1 = true;
+                $(this).addClass('border-danger');
+                $(this).removeClass('border-green');
+                span.removeClass('d-none');
+                return true;
+            }
+        });
+        
+            var span = $("#accountName-property").siblings('.text-danger');
+            
+            if ($("#accountName-property").val() === '' || $("#accountName-property").val() == 'Choose...') {
+                isEmpty1 = true;
+                $("#accountName-property").addClass('border-danger');
+                $("#accountName-property").removeClass('border-green');
+                span.removeClass('d-none');
+                
+            }else{
+                isEmpty1 = false;
+                $("#accountName-property").addClass('border-green');
+                $("#accountName-property").removeClass('border-danger');
+                span.addClass('d-none');
+            }
+       
+        if (!isEmpty1) {
+            $('#collapseOne-add-bank-property').removeClass('show');
+            $('#collapseTwo-add-bank-property').addClass('show');
+            // $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
+            // $(".accordion-item .icon").eq(0).removeClass("chevron");
+            // $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
+            // $(".accordion-item .icon").eq(0).removeClass("cross");
+            // $(".accordion-item .icon").eq(0).addClass("tick");
+            
+        }
+        // //second accordian
+        var isEmpty2 = false;
+        $('#propertySelect').each(function() {
+            var span = $(this).siblings('.text-danger');
+            if ($(this).val() === '' || $(this).val() == 'Choose...') {
+                isEmpty2 = true;
+                $(this).addClass('border-danger');
+                $(this).removeClass('border-green');
+                span.removeClass('d-none');
+                return false;
+            }else{
+                $(this).addClass('border-green');
+                $(this).removeClass('border-danger');
+                span.addClass('d-none');
+            }
+        });
+        if (!isEmpty2) {
+            $('#collapseOne-add-bank-property').removeClass('show');
+            $('#collapseTwo-add-bank-property').removeClass('show');
+            // $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
+            // $(".accordion-item .icon").eq(1).removeClass("chevron");
+            // $(".accordion-item .icon").eq(1).addClass("fi-rs-check-circle");
+            // $(".accordion-item .icon").eq(1).removeClass("cross");
+            // $(".accordion-item .icon").eq(1).addClass("tick");
+        }
+        
+if(!isEmpty1 && !isEmpty2){
+    // $('#collapseTwo-add-property').removeClass('show');
+    $("#next-add-bank-property").addClass('d-none')
+    $("#next-bank-property").removeClass("d-none")
+    // $("#next-add-property").attr('id',"next")
+ }
+});
 });
