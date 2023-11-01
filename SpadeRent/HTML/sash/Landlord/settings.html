@@ -1767,6 +1767,23 @@
         .navbar-toggler.navresponsive-toggler{
             margin-top: 0;
         }
+        #remaining-days-text{
+            background-color: rgba(119, 192, 243, 0.24);
+    padding: 18px 100px;
+    border: transparent;
+    border-radius: 10px;
+    text-align: center;
+        }
+        #remaining-days-text #remaining-days{
+            padding: 2px;
+    border: transparent;
+    border-radius: 3px;
+        }
+        #remaining-days-plan{
+            padding: 3px;
+    border: transparent;
+    border-radius: 4px;
+        }
     </style>
 
 </head>
@@ -1875,7 +1892,7 @@
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button text-white p-4" id="accordian-button-1" type="button"
                                 data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')"
-                                id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true"
+                                id="accordion-button1" data-bs-target="#collapseOne-add-bank-property" aria-expanded="true"
                                 aria-controls="collapseOne-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
                                 <h3 class="m-0"><strong>Account Information</strong>
@@ -1885,19 +1902,18 @@
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseOne-add-property" class="accordion-collapse collapse show"
+                        <div id="collapseOne-add-bank-property" class="accordion-collapse accordion-collapse-bank collapse show"
                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <form class="row g-3" enctype="multipart/form-data" action="/charge" method="post"
                                     id="payment-form-bank">
                                     <div class="col-md-6">
-                                        <label for="accountName" class="form-label fw-bold">Account
+                                        <label for="accountName-property" class="form-label fw-bold">Account
                                             Name <spnan class="text-danger">
                                                 *</span></label>
-                                        <input type="text" class="form-control form" id="accountName"
+                                        <input type="text" class="form-control form" id="accountName-property"
                                             placeholder="Enter Account Name" style="padding: 1rem 0.75rem !important;">
-                                        <span class="text-danger d-none">Property
-                                            name required!</span>
+                                        <span class="text-danger d-none">Account name required!</span>
                                     </div>
 
                                     <div class="col-lg-6 col-xl-6">
@@ -1954,7 +1970,7 @@
                         <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed text-white p-4"
                                 onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo-add-property" aria-expanded="false"
+                                data-bs-target="#collapseTwo-add-bank-property" aria-expanded="false"
                                 aria-controls="collapseTwo-add-property">
                                 <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
                                 <h3 class="m-0"><strong style="text-transform: capitalize;">Property
@@ -1965,9 +1981,9 @@
                                 </h3>
                             </button>
                         </h2>
-                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
+                        <div id="collapseTwo-add-bank-property" class="accordion-collapse collapse"
                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
+                            <form class="row g-3 m-1 mb-2" enctype="multipart/form-data">
                                 
                                 <div class="col-12">
                                     <label for="propertySelect" class="form-label fw-bold">Select
@@ -1982,40 +1998,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="accordion-item" id="accordion-item3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed text-white p-4"
-                                onclick="checkFieldsFilled('accordion-item3')" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree-add-property" aria-expanded="false"
-                                aria-controls="collapseThree-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
-                                <h3 class="m-0"><strong style="text-transform: capitalize;">Additional
-                                        Options</strong>
-                                    <!-- <i
-                                        class="fi fi-rs-pencil"></i> -->
-                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <div class="material-switch pull-left" style="display: flex; align-items: center;">
-                                        <input id="accountActive" name="accountActive" type="checkbox"> <label
-                                            for="accountActive" class="label-success"></label>
-                                        <div style="margin-left: 25px;">
-                                            <h5><b>Use this account to receive
-                                                    payment</b></h5>
-                                            This will allow you to select this
-                                            account when receiving payment.
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
@@ -2023,8 +2006,10 @@ Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'
                         style="width: auto;">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn text-light btn-pill button" style='background-color:#1467B0;'
-                         onclick="addBankProperty()">Submit</a>
+                    <a href="javascript:void(0)" class="btn text-light btn-pill button d-none" style='background-color:#1467B0;'
+                         onclick="addBankProperty()" id='next-bank-property'>Submit</a>
+                    <button class="btn text-light btn-pill button" style='background-color:#1467B0; width: auto;'
+                        id='next-add-bank-property'>Next</button>
 
 
                 </div>
@@ -4606,8 +4591,8 @@ Draft</button> -->
                                                     </p>
                                                 </div>
                                                 <div class="mb-5">
-                                                    <p class="fw-bolder" id="remaining-days-text"><span class="text-danger fw-bolder">* </span>
-                                                        You are currently subscribed to the Trial Plan with <span id="remaining-days" class="text-primary"></span> remaining days. To access enhanced functionalities, we recommend upgrading to the paid version.</p>
+                                                    <p class="fw-bolder" id="remaining-days-text">
+                                                        You are currently subscribed to the Trial Plan with <span id="remaining-days" class="text-white bg-primary"></span> remaining days. <br>To access enhanced functionalities, we recommend upgrading to the paid version.</p>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <div class="col-12 card2 p-0">
@@ -6972,7 +6957,7 @@ Draft</button> -->
                                                                         data-bs-dismiss="modal"><span
                                                                             aria-hidden="true">&times;</span></button>
                                                                             <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
-                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">Downgrade will only be possible at the end of the currect subscription.</h4>
+                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">Downgrade will only be possible at the end of the currect subscription. After <span id="remaining-days-plan" class="text-white bg-primary"></span><span id="remaining-days-plan-days"></span></h4>
                                                                     <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
                                                                     <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
                                                                     <button
@@ -13672,7 +13657,7 @@ Draft</button> -->
                                         const objectKey = toTitleCase($(this).children().find("input").attr("class").split(" ")[1])
 
 
-                                        console.log(childObject, objectKey)
+                                        // console.log(childObject, objectKey)
                                         $(this).children().find("input").prop("checked", role[childObject][objectKey])
                                         // console.log(toTitleCase($(this).children().find("input").attr("class").split(" ")[1]))
                                     })
@@ -13809,6 +13794,9 @@ console.log(timeDifference)
 const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 console.log(daysPassed)
 $("#remaining-days").text(30 - daysPassed)
+$("#remaining-days-plan").text(30 - daysPassed)
+$("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
+
                         $("#firstName").val(toTitleCase(response.firstName))
                         $("#lastName").val(toTitleCase(response.lastName))
                         $("#email").val(response.email)
@@ -14043,7 +14031,7 @@ $("#remaining-days").text(30 - daysPassed)
 
                                 }
                             }
-                            console.log(userData)
+                            console.log("Propertyhfgyhfhfhfghfghndsdngdfgn",userData)
                             // $(`#${card.id}`).css("bg-primary")
                             $(`#${card.id} .total-amount`).text("$ " + card.plantotalAmount)
                             $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
@@ -14065,7 +14053,7 @@ $("#remaining-days").text(30 - daysPassed)
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        
+                        $("#table_body_bank_account_property").empty()
                     if(response?.data[0]){
                         var properties = response?.data[0];
                         console.log(properties)
@@ -14096,7 +14084,11 @@ $("#remaining-days").text(30 - daysPassed)
                         }
     
                                 });           
+                    }else{
+                        $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);
+                  
                     }
+                    
                     },
                     error: function (xhr, status, error) {
                         console.log('Error occurred while fetching state and city data.');
@@ -16421,7 +16413,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -16434,7 +16426,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     existPlanAmount: userData.currentPrice,
                                                     currency: "USD",
                                                     // recurringAmount: (selectedTime=="Year"?(parseInt(amount[0]?.value)*12):amount[0]?.value),
-                                                    recurringAmount: "0.001",
+                                                    recurringAmount: (selectedTime == "Year" ? (parseInt(amount[0]?.value) * 12) : amount[0]?.value),
                                                     initialAmount: (selectedTime == "Year" ? (parseInt(amount[0]?.value) * 12) : amount[0]?.value),
 
                                                 }),
@@ -16545,7 +16537,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -16557,7 +16549,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     upoId: $("#account").val(),
                                                     existPlanAmount: userData.currentPrice,
                                                     currency: "USD",
-                                                    recurringAmount: "0.001",
+                                                    recurringAmount: (selectedTime == "Year" ? (parseInt(amount[0]?.value) * 12) : amount[0]?.value),
                                                     initialAmount: (selectedTime == "Year" ? (parseInt(amount[0]?.value) * 12) : amount[0]?.value),
 
                                                 }),
@@ -17614,7 +17606,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     data: JSON.stringify({
                                         id:$("#propertySelect").val(),
                                         UPOID: res.userPaymentOptionId,
-                                        accountName: $("#accountName").val(),
+                                        accountName: $("#accountName-property").val(),
                                         
                                     }),
                                     success: function (response) {
@@ -17669,13 +17661,23 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             
             $("#addModal-account").on("hidden.bs.modal", function () {
                 $("#accountName").val("")
-                $("input").removeClass("border-green border-danger")
+                $("#addModal-account input").removeClass("border-green border-danger")
                 $("#description-bank").val("")
                 $("#accountActive").prop("checked", false)
                 $("#card-number-bank").empty()
                 $("#card-expiry-bank").empty()
                 $("#card-cvc-bank").empty()
                 createNuveiFields()
+            });
+
+            $("#addModal-account-property").on("hidden.bs.modal", function () {
+                $("#accountName-property").val("")
+                $("#addModal-account-property input").removeClass("border-green border-danger")
+                $("#addModal-account-property select").removeClass("border-green border-danger")
+                $("#card-number-bank-property").empty()
+                $("#card-expiry-bank-property").empty()
+                $("#card-cvc-bank-property").empty()
+                createNuveiFieldsProperty()
             });
             $('#tab16 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element

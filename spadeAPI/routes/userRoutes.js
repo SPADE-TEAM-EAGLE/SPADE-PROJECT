@@ -248,7 +248,8 @@ router.put("/updateProspectusStatus", verifyToken, prospectus.updateProspectusSt
 router.get("/prospectusInsightQD/:year", verifyToken, prospectus.prospectusInsightQD);
 router.get("/prospectusInsightEN/:startDate/:endDate", verifyToken, prospectus.prospectusInsightEN);
 router.delete("/deleteProspectus/:prospectusID", verifyToken, prospectus.deleteProspectus);
-router.put("/updateBusinessLogo", [verifyToken, upload] ,settingController.updateBusinessLogo);
+// router.put("/updateBusinessLogo", [verifyToken, upload] ,settingController.updateBusinessLogo);
+router.put("/updateBusinessLogo", upload ,settingController.updateBusinessLogo);
 router.put("/changeEmail", verifyToken, settingController.changeEmail);
 router.get("/prospectusTime/:startDate/:endDate", verifyToken, prospectus.prospectusTime);
 router.get("/GettenantAttachEmailPhone", verifyToken, tenantController.GettenantAttachEmailPhone);
