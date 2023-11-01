@@ -72,7 +72,8 @@ const {
   insertVendorCategory,
   insertProspectusSources,
   userPermissionLogin,
-  addUserRoles
+  addUserRoles,
+  // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
 const { hashedPassword } = require("../helper/hash");
@@ -2864,3 +2865,5 @@ exports.deleteUser=async(req,res)=>{
 
   }
 }
+
+  

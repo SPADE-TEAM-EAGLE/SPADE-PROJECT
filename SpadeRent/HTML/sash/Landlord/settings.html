@@ -1854,6 +1854,180 @@
         </div>
     </div>
     <!-- Modal -->
+    <div class="modal fade" id="addModal-account-property" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Add <strong class="color-primary">Property Account</strong></h2>
+                        <span class="">Spade Rent allows you to add a range of
+                            commercial and residential properties,
+                            from condos and single-family homes to retail stores
+                            and parking lots.</span>
+
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion-item mb-4" id="accordion-item1">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button text-white p-4" id="accordian-button-1" type="button"
+                                data-bs-toggle="collapse" onclick="checkFieldsFilled('accordion-item1')"
+                                id="accordion-button1" data-bs-target="#collapseOne-add-property" aria-expanded="true"
+                                aria-controls="collapseOne-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                <h3 class="m-0"><strong>Account Information</strong>
+                                     <!-- <i class="fi fi-rs-pencil"></i> -->
+                                    <i
+                                        class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseOne-add-property" class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form class="row g-3" enctype="multipart/form-data" action="/charge" method="post"
+                                    id="payment-form-bank">
+                                    <div class="col-md-6">
+                                        <label for="accountName" class="form-label fw-bold">Account
+                                            Name <spnan class="text-danger">
+                                                *</span></label>
+                                        <input type="text" class="form-control form" id="accountName"
+                                            placeholder="Enter Account Name" style="padding: 1rem 0.75rem !important;">
+                                        <span class="text-danger d-none">Property
+                                            name required!</span>
+                                    </div>
+
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="form-label fw-bold" for="card-number-bank-property"
+                                                data-tid="scwsdk.form.card_number_label">
+                                                Card
+                                                number
+                                            </label>
+                                            <div id="card-number-bank-property" class="input form-controlll">
+                                            </div>
+
+                                            <div class="underline">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="fw-bold" for="card-expiry-bank-property"
+                                                data-tid="scwsdk.form.card_expiry_label">
+                                                Expiration
+                                            </label>
+                                            <div id="card-expiry-bank-property" class="input empty form-controlll">
+                                            </div>
+
+                                            <div class="underline">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6">
+                                        <div class="field form-group">
+                                            <label class="fw-bold" for="card-cvc-bank-property"
+                                                data-tid="scwsdk.form.card_cvc_label">
+                                                CVV
+                                            </label>
+                                            <div id="card-cvc-bank-property" class="input empty form-controlll">
+                                            </div>
+
+                                            <div class="underline ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item2">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed text-white p-4"
+                                onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo-add-property" aria-expanded="false"
+                                aria-controls="collapseTwo-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                <h3 class="m-0"><strong style="text-transform: capitalize;">Property
+                                        Info</strong>
+                                    <!-- <i
+                                        class="fi fi-rs-pencil"></i> -->
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1" enctype="multipart/form-data">
+                                
+                                <div class="col-12">
+                                    <label for="propertySelect" class="form-label fw-bold">Select
+                                        Property <spnan class="text-danger">
+                                            *</span></label>
+                                    <select class="form-select" required aria-label="Default select example" id="propertySelect">
+                                        <option selected>Select Property</option>
+                                        
+                                      </select>
+                                </div>
+                            
+                            </form>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="accordion-item3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed text-white p-4"
+                                onclick="checkFieldsFilled('accordion-item3')" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree-add-property" aria-expanded="false"
+                                aria-controls="collapseThree-add-property">
+                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">03</span>
+                                <h3 class="m-0"><strong style="text-transform: capitalize;">Additional
+                                        Options</strong>
+                                    <!-- <i
+                                        class="fi fi-rs-pencil"></i> -->
+                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                </h3>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form class="row g-3 m-1" enctype="multipart/form-data">
+
+                                <div class="col-12 mb-3">
+                                    <div class="material-switch pull-left" style="display: flex; align-items: center;">
+                                        <input id="accountActive" name="accountActive" type="checkbox"> <label
+                                            for="accountActive" class="label-success"></label>
+                                        <div style="margin-left: 25px;">
+                                            <h5><b>Use this account to receive
+                                                    payment</b></h5>
+                                            This will allow you to select this
+                                            account when receiving payment.
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
+Draft</button> -->
+                    <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'
+                        style="width: auto;">Close</button>
+                    <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                    <a href="javascript:void(0)" class="btn text-light button" style='background-color:#1467B0;'
+                         onclick="addBankProperty()">Submit</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="addModal-account" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -3720,8 +3894,11 @@ Draft</button> -->
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
-                                                    <li><a href="#tab13" data-bs-toggle="tab">Bank Account</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
+                                                    <li><a href="#tab13" data-bs-toggle="tab">Payment Methods</a></li>
+                                                    <li><a href="#tab16" data-bs-toggle="tab">Bank Account</a></li>
+
+                                                    
                                                     <!-- <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li> -->
                                                 </ul>
                                             </div>
@@ -11502,7 +11679,124 @@ Draft</button> -->
                                                 </div>
                                                 <!-- Row -->
                                             </div>
+                                            <div class="tab-pane mt-0" id="tab16">
+                                                <div class="mb-5 responsive-img-scroll">
+                                                    <p class="d-inline-flex gap-1 bg-img-mainn">
+                                                        <span>Settings | </span>
+                                                        <span>Properties Account | </span>
+                                                        <span><a href="#" onclick="Intercom('showArticle', 8210506)"
+                                                                class="text-primary"><b>Need Help?</b></a></span>
+                                                    </p>
+                                                </div>
+                                                <!-- Row -->
+                                                <div class="row">
 
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div
+                                                                class="card-header justify-content-between bank-account-header-responsives">
+                                                                <div class="d-flex">
+                                                                    <div class="mx-2">
+                                                                        <!-- <div class="form-group m-0">
+                                                    <input class="form-control" placeholder="Search" id="search_input" type="text">
+                                                </div> -->
+                                                                        <div
+                                                                            class="main-header-center d-nonee d-lg-block m-0 dropdown">
+                                                                            <button class="btn"
+                                                                                style="width: fit-content; margin-top: 0px;"><i
+                                                                                    class="fe fe-search"
+                                                                                    aria-hidden="true"></i></button>
+                                                                            <input type="text"
+                                                                                class="form-control search-input-fieldd dropdown-toggle"
+                                                                                id="typehead-property" placeholder="Search"
+                                                                                autocomplete="off"
+                                                                                data-bs-toggle="dropdown">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <div class="btn-group">
+                                                                        <button type="button"
+                                                                            class="btn font-weight-bold text-dark"
+                                                                            id="customized-btn"
+                                                                            data-bs-toggle="dropdown"
+                                                                            style="border: none;"><strong>CUSTOMIZE</strong><i
+                                                                                class="fe fe-chevron-down ms-2"></i></button>
+                                                                        <ul class="dropdown-menu" role="menu">
+                                                                            <li><a href="javascript:void(0)"
+                                                                                    class="text-dark"><strong>Coulmns to
+                                                                                        Show</strong></a>
+                                                                            </li>
+                                                                            
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">ACCOUNT</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2 customized-check"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2 customized-check"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+
+                                                                        </ul>
+                                                                    </div>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 laptop-button"
+                                                                        id="add_property_btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#addModal-account-property"><i
+                                                                            class="fe fe-plus me-2 text-white"
+                                                                            style="color: white !important;"></i><strong>ADD
+                                                                            NEW
+                                                                            ACCOUNT</strong></button>
+
+                                                                    <!-- Mobile screen button add property Start -->
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 fixed-button mobile-button"
+                                                                        id="add_property_btn"
+                                                                        data-bs-effect="effect-scale"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#addModal-account-property"><i class="fe fe-plus"
+                                                                            style="color: #fff !important;"></i></button>
+                                                                    <!-- Mobile screen button add property End -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table border text-nowrap text-md-nowrap mb-0"
+                                                                        id="responsive-datatable">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                
+                                                                                <th>#</th>
+                                                                                <th class="d-none">UPOID</th>
+                                                                                <th>ACCOUNT</th>
+                                                                                <th>PROPERTY</th>
+                                                                                
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="table_body_bank_account_property">
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row -->
+                                            </div>
 
                                             <div class="tab-pane mt-0" id="tab14">
                                                 <div class="mb-5 responsive-img-scroll">
@@ -13763,7 +14057,53 @@ $("#remaining-days").text(30 - daysPassed)
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/allProperty',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        
+                    if(response?.data[0]){
+                        var properties = response?.data[0];
+                        console.log(properties)
+                    var propertySelect = $('#propertySelect');
+                    propertySelect.empty(); // Clear existing options
+                    propertySelect.append($('<option></option>')
+                        .text("Choose...")
+                    )
+                    properties?.forEach(function(property) {
+                        var option = $('<option></option>')
+                            .text(property.propertyName)
+                            .val(property.id);
+                        propertySelect.append(option);
+                        
+                        
+                    }); 
+                    var counterAccount=0;      
+                    properties?.forEach(function(property,index) {
+                        if(property?.accountName){
+                            counterAccount++
+                            var row = $("<tr>");
+                            row.append($("<td class='d-none upoid'>").text(property.UPOID));
+                                row.append($("<td>").text(counterAccount));
 
+                                row.append($("<td>").html("<b>" + property.accountName + "</b>"));
+                                row.append($("<td>").text(property.propertyName))    
+                                    $("#table_body_bank_account_property").append(row);
+                        }
+    
+                                });           
+                    }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                     method: 'GET',
@@ -16653,6 +16993,15 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     });
 
                 });
+                $(document).on('keyup', '#typehead-property', function () {
+                    var searchValue = $(this).val().toLowerCase();
+
+
+                    $('#table_body_bank_account_property tr').filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                    });
+
+                });
                 function toTitleCase(str) {
                     return str.toLowerCase().replace(/(?:^|\s)\w/g, function (match) {
                         return match.toUpperCase();
@@ -17002,6 +17351,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             crossorigin="anonymous"></script>
         <script>
             var scard_bank;
+            var scard_bank_property;
+
             function createNuveiFields() {
                 var sfc_bank = SafeCharge({
                     env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
@@ -17047,6 +17398,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     classes: ScFieldClasses,
                 });
                 scard_bank.attach('#card-number-bank');
+                
 
                 var cardExpiry_bank = ScFields_bank.create('ccExpiration', {
                     style: ScFieldStyles,
@@ -17060,6 +17412,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
                 cardCvc_bank.attach('#card-cvc-bank');
             }
+            
             createNuveiFields()
             function addBank() {
                 $("#preloader").css("display", "flex")
@@ -17154,7 +17507,165 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
 
             }
+            
+            
+            function createNuveiFieldsProperty() {
+                var sfc_bank_property = SafeCharge({
+                    env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+                    merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+                    merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+                });
+                var ScFields_bank_property = sfc_bank_property.fields({
+                    fonts: [
+                        { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
+                    ]
+                })
 
+                var ScFieldStyles_bank_property = {
+                    base: {
+                        color: '#32325D',
+                        fontWeight: 500,
+                        fontFamily: 'Roboto, Consolas, Menlo, monospace',
+                        fontSize: '16px',
+                        fontSmoothing: 'antialiased',
+                        '::placeholder': {
+                            color: '#CFD7DF',
+                        },
+                        ':-webkit-autofill': {
+                            color: '#e39f48',
+                        },
+                    },
+                    invalid: {
+                        color: '#E25950',
+                        '::placeholder': {
+                            color: '#FFCCA5',
+                        },
+                    },
+                };
+
+                var ScFieldClasses_bank_property = {
+                    focus: 'focused',
+                    empty: 'empty',
+                    invalid: 'invalid',
+                    complete: 'complete',
+                };
+                scard_bank_property = ScFields_bank_property.create('ccNumber', {
+                    style: ScFieldStyles,
+                    classes: ScFieldClasses,
+                });
+                scard_bank_property.attach('#card-number-bank-property');
+                
+
+                var cardExpiry_bank_property = ScFields_bank_property.create('ccExpiration', {
+                    style: ScFieldStyles,
+                    classes: ScFieldClasses,
+                });
+                cardExpiry_bank_property.attach('#card-expiry-bank-property');
+
+                var cardCvc_bank_property = ScFields_bank_property.create('ccCvc', {
+                    style: ScFieldStyles,
+                    classes: ScFieldClasses,
+                });
+                cardCvc_bank_property.attach('#card-cvc-bank-property');
+            }
+            
+            createNuveiFieldsProperty()
+            
+            function addBankProperty() {
+                $("#preloader").css("display", "flex")
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        amount: "0",
+                        currency: "USD",
+                        userId: userData.userId,
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response.sessionToken)
+                        sfc.createPayment({
+                            sessionToken: response?.sessionToken, //received from openOrder API
+                            clientUniqueId: "695701003",
+                            merchantId: "6400701569295268447",
+                            merchantSiteId: "244298",
+                            cardHolderName: (userData.firstName + " " + userData.lastName),
+                            paymentOption: scard_bank_property,
+                            billingAddress: {
+                                email: userData.email,
+                                country: "US"
+                            }
+                        }, function (res) {
+                            console.log(res.userPaymentOptionId)
+                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                $.ajax({
+                                    url: "http://localhost:3000/api/spade/updatePropertyBankAccount",
+                                    type: "PUT",
+                                    contentType: "application/json",
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+
+                                    },
+                                    data: JSON.stringify({
+                                        id:$("#propertySelect").val(),
+                                        UPOID: res.userPaymentOptionId,
+                                        accountName: $("#accountName").val(),
+                                        
+                                    }),
+                                    success: function (response) {
+                                        $("#addModal-account-property").modal("hide")
+                                        $("#preloader").css("display", "none")
+
+                                        $("#successfully_changed_text").text("Account added Succesfully!!!")
+                                        $("#successfully_changed").modal("show")
+                                        setTimeout(function () {
+                                            $("#successfully_changed").modal("hide");
+                                        }, 2000);
+                                        getData()
+                                    },
+                                    error: function () {
+                                        $("#addModal-account-property").modal("hide")
+                                        $("#preloader").css("display", "none")
+                                        $("#myModal_warning_declined").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_warning_declined").modal("hide");
+                                        }, 2000);
+                                    }
+                                })
+
+                            } else {
+                                $("#preloader").css("display", "none")
+                                $("#myModal_warning_declined").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_warning_declined").modal("hide");
+                                }, 2000);
+                            }
+
+                        });
+
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        console.error('Error sending data:', error);
+                        $("#preloader").css("display", "none")
+                        $("#myModal_warning_declined").modal("show")
+                        setTimeout(function () {
+                            $("#myModal_warning_declined").modal("hide");
+                        }, 2000);
+                    }
+                });
+
+            }
+
+            
+            
             $("#addModal-account").on("hidden.bs.modal", function () {
                 $("#accountName").val("")
                 $("input").removeClass("border-green border-danger")
@@ -17165,13 +17676,22 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $("#card-cvc-bank").empty()
                 createNuveiFields()
             });
-            $('.customized-check').change(function () {
-                console.log("here")
+            $('#tab16 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
                 // Toggle the visibility of the corresponding column
-                $('#responsive-datatable').find('tr').each(function () {
+                $('#tab16').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+            $('#tab13 input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                console.log(columnIndex, isColumnVisible)
+                // Toggle the visibility of the corresponding column
+                $('#tab13').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });

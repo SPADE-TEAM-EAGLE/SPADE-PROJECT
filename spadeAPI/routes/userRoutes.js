@@ -286,4 +286,5 @@ router.put("/updateBankAccountStatus", verifyToken, bankAccountController.update
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
 router.delete("/deleteUser",userController.deleteUser);
 router.put("/updateBankAccountTenant", verifyTokenTenant, bankAccountController.updateBankAccountTenant); 
-router.get("/dummy", bankAccountController.dummy); 
+// router.get("/dummy", bankAccountController.dummy); 
+router.put("/updatePropertyBankAccount", bankAccountController.updatePropertyBankAccount); 
