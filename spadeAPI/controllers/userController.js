@@ -11,6 +11,7 @@ const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage.js");
 const { serialize } = require("cookie");
 const {
+
   selectQuery,
   deleteQuery,
   insertInUsers,
@@ -73,7 +74,8 @@ const {
   insertProspectusSources,
   userPermissionLogin,
   addUserRoles,
-  UpdatePropertyUnitCount
+  UpdatePropertyUnitCount,
+  UnitCounts
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -1215,6 +1217,7 @@ exports.property = async (req, res) => {
         "",
         "",
         "Vacant",
+        userId,
       ]);
       // paidUnits
       // if property units data not inserted into property units table then throw error
@@ -1327,6 +1330,8 @@ exports.getpropertyByID = async (req, res) => {
 //  ############################# Delete Property Start ############################################################
 exports.propertyDelete = async (req, res) => {
   const { id } = req.body;
+  const { userId } = req.user;
+  // const { userId } = req.body;
   try {
     const propertyUnitscheckresult = await queryRunner(
       selectQuery("propertyunits", "propertyID","status"),
@@ -1335,11 +1340,10 @@ exports.propertyDelete = async (req, res) => {
     if (propertyUnitscheckresult[0].length > 0) {
       res.status(200).json({
         message: " You are not able to delete Property (your unit is occupied)",
-        units : propertyUnitscheckresult[0]
+        units : propertyUnitscheckresult[0],
+
       });
       } else{
-
-
     const PropertyDeleteResult = await queryRunner(
       deleteQuery("property", "id"),
       [id]
@@ -1362,6 +1366,9 @@ exports.propertyDelete = async (req, res) => {
           deleteQuery("propertyimage", "propertyID"),
           [id]
         );
+        const propertyUnitsCountResult = await queryRunner(UnitCounts,[userId]);
+        const count = propertyUnitsCountResult[0][0].count;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [count,userId]);
         if (propertyDeleteresult[0].affectedRows > 0) {
           res.status(200).json({
             message: " Property deleted successfully",
@@ -1951,6 +1958,7 @@ exports.viewAllPropertyTenant = async (req, res) => {
 //  ############################# Add more property units Start ############################################################
 exports.addMoreUnits = async (req, res) => {
   const { propertyID } = req.body;
+  const { userId,paidUnits } = req.user;
 
   try {
     const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
@@ -1959,6 +1967,7 @@ exports.addMoreUnits = async (req, res) => {
       "",
       "",
       "Vacant",
+      userId
     ]);
     if (propertyUnitResult[0].affectedRows > 0) {
       const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
@@ -1970,6 +1979,9 @@ exports.addMoreUnits = async (req, res) => {
           unitCount,
           propertyID,
         ]);
+        const unitCountLandlord = paidUnits + 1;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+        
         if (updateaddMoreUnitsResult[0].affectedRows > 0) {
           res.status(200).json({
             data: unitCount,
@@ -1997,6 +2009,7 @@ exports.addMoreUnits = async (req, res) => {
 //  ############################# Delete property units Start ############################################################
 exports.deleteMoreUnits = async (req, res) => {
   const { unitID, propertyID } = req.body;
+  const { userId,paidUnits } = req.user;
   try {
     // const propertyUnitResult = await queryRunner(insertInPropertyUnits, [propertyID, "", "", "", "Vacant"]);
     const unitDeleteResult = await queryRunner(
@@ -2014,6 +2027,9 @@ exports.deleteMoreUnits = async (req, res) => {
           unitCount,
           propertyID,
         ]);
+        const unitCountLandlord = paidUnits - 1;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+        
         // console.log(updateaddMoreUnitsResult);
         if (updateaddMoreUnitsResult[0].affectedRows > 0) {
           res.status(200).json({

@@ -591,7 +591,7 @@ exports.insertInPropertyImage =
 exports.insertInTaskImage =
   "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
-  "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
+  "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status,landlordId) VALUES (?,?,?,?,?,?)";
 exports.updateProperty =
   "UPDATE property SET landlordID = ?, propertyName = ? , address = ? , city = ? , state = ? , zipCode = ? , propertyType = ? , propertySQFT = ? , status = ?, units = ?  WHERE id = ? ";
 exports.updatePropertyUnits =
@@ -1122,3 +1122,4 @@ exports.insertInUserPermissionUsers =
   
   exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ? WHERE id = ?";
   exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
+  exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
