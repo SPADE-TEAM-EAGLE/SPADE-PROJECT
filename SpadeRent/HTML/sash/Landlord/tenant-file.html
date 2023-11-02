@@ -977,7 +977,7 @@
             <!-- app-Header -->
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between align-items-center">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
@@ -986,12 +986,13 @@
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" class="text-primary fw-bold">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
-                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                        <div class="d-flex order-lg-2 header-right-icons">
                             <!-- SEARCH -->
                             <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
@@ -2438,6 +2439,18 @@ function dragOverHandler(ev) {
                         }
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
+                        const createdDate_div = new Date(response.create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
+
+                    if (parseInt(response.planID) != 0) {
+                        $('.span_upgrade_now').hide()
+                                    $('#span_upgrade_now_div').hide()
+                        }
                         // LandlordImg = response.image;
                         if(response.image!==" " && response.image!==null && response.image!==""){
                 
