@@ -2286,7 +2286,7 @@
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-                                        <p class="text-white m-0 mt-3" id="account-text"></p>
+                                        <!-- <p class="text-white m-0 mt-3" id="account-text"></p> -->
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -5026,6 +5026,10 @@ $.ajax({
                 success: function (response) {
                     if (response.message == "Tenant Invoice is pending Kindly Paid invoice ") {
                         $("#infoModal_delete").modal("show");
+                        setTimeout(function () {
+                            $('#infoModal_delete').modal('hide');
+
+                        }, 2000);
                     }
                     else {
                         getData()

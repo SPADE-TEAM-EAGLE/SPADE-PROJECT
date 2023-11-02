@@ -5062,29 +5062,29 @@ const currentDate = new Date();
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                         
-                            '<td class="propertyName" style="font-weight: 600;">' + property.propertyName + '</td>' +
+                            '<td class="propertyName" style="font-weight: 600;">' + (property.propertyName?property.propertyName:"N/A") + '</td>' +
                             '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
                             '<td class="propertyAddress">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + property.address + '</p>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (property.address?property.address:"N/A") + '</p>' +
                             '</td>' +
                             '<td class="property-id" style="font-weight: 600;">' + property.units + '</td>' +
                             
                             '<td class="propertyCity">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + property.city + '</p>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (property.city?property.city:"N/A") + '</p>' +
                             '</td>' +
                             '<td class="propertyState">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + property.state + '</p>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (property.state?property.state:"N/A") + '</p>' +
                             '</td>' +
                             '<td class="propertyZip">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + property.zipCode + '</p>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (property.zipCode?property.zipCode:"N/A") + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 600; color: #1467B0;" class="mb-1">' + property.firstName + " " + property.lastName + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
-                            '<p style="font-weight: 600;" class="mb-1">' + property.email + '</p>' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (property.email?property.email:"N/A") + '</p>' +
                             '</td>' +
-                            '<td class="property-id" style="font-weight: 600;">' + property.phoneNumber + '</td>' +
+                            '<td class="property-id" style="font-weight: 600;">' + (property.phoneNumber?property.phoneNumber:"N/A") + '</td>' +
 
                             '</tr>';
 
@@ -5133,7 +5133,7 @@ const currentDate = new Date();
                             '<p style="font-weight: 800;" class="mb-1">' + lease.firstName + " " + lease.lastName + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
-                            '<span class="font-weight-normal">Phone: ' + lease.phoneNumber + '</span>' +
+                            '<span class="font-weight-normal">Phone: ' + (lease.phoneNumber?lease.phoneNumber:"N/A") + '</span>' +
                             '</td>' +
                             '</tr>';
 
@@ -5290,13 +5290,13 @@ if (task.priority == 'High') {
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                             '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>' +
                             '<td class="tenantName" style="font-weight: 600; color: #4573D2;">' + invoice.firstName + " " + invoice.lastName + '</td>' +
-                            '<td class="memo" style="font-weight: 600;">' + invoice.email + '</td>' +
+                            '<td class="memo" style="font-weight: 600;">' + (invoice.email?invoice.email:"N/A") + '</td>' +
                             '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '</td>' +
                             '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '</td>' +
-                            '<td class="propertyName" style="font-weight: 600;">' + invoice.userPhone + '</td>' +
+                            '<td class="propertyName" style="font-weight: 600;">' + (invoice.userPhone?invoice.userPhone:"N/A") + '</td>' +
                             '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '</td>' +
                             '<td class="rentAmount" style="font-weight: 600;">Next Due Date: ' + (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) + '</td>' +
-                            '<td class="status" style="font-weight: 600;">' + invoice.address + '</td>' +
+                            '<td class="status" style="font-weight: 600;">' + (invoice.address?invoice.address:"N/A") + '</td>' +
 
                             '</tr>';
 
@@ -5338,7 +5338,7 @@ if (task.priority == 'High') {
                         '</td>' +
                         '<td class="propertyUnits">' +
                         // '<p style="font-weight: 800; color: #000;" class="mb-1">' + tenant.firstName+" "+tenant.lastName + '</p>' +
-                        '<span class="font-weight-normal">Phone: ' + tenant.phoneNumber + '</span>' +
+                        '<span class="font-weight-normal">Phone: ' + (tenant.phoneNumber?tenant.phoneNumber:"N/A") + '</span>' +
                         '</td>' +
                         '</tr>';
 

@@ -3209,13 +3209,13 @@
                                             style="font-weight: 100; margin-bottom: 0px;">Welcome to Spade Portal</h3>
                                         <h1 class="page-titlee text-white" style="font-weight: 700;" id="user-name">
                                         </h1>
-                                        <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
+                                        <!-- <a data-bs-toggle="modal" href="#modaldemo00" id="email_verification"
                                             class="btn btn-primary btn-pill btn-xl email-verification-btn"><i
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a>
                                         <p class="text-white m-0 mt-3" id="account-text">
-                                        </p>
+                                        </p> -->
                                     </div>
                                     <div class="col-lg-3">
                                         <img src="../assets/header-img/Group1.png" alt="">
@@ -5954,7 +5954,7 @@
                     var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                     console.log(columnIndex, isColumnVisible)
                     // Toggle the visibility of the corresponding column
-                    $('table').find('tr').each(function () {
+                    $('#myTable').find('tr').each(function () {
                         var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                         isColumnVisible ? column.show() : column.hide();
                     });
@@ -6097,122 +6097,115 @@
                         ...data2
                     }
                     $("#client-id").empty()
-                    $("#client-id").append(`<h5 class="fw-bold" style="color: 
-                                #1467B0;">BILLED TO</h5>
-                                    <p class="text-black">${data.firstName + " " + data.lastName}<br>${data.tAddress
-                        }<br>${data.tCity},
-                                        ${data.tState}<br>${data.tZipcode}<br>United States<br>${data.tPhoneNumber}<br>${data.tEmail}</p>`)
-                    console.log(1)
-                    $("#owner-id").empty()
-                    $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${userData.businessName}</h5>
-                                    <p class="text-black">${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United
-                                        States<br>1-888-123-8910</p>`)
-                    $("#table-body").empty()
-                    var dateObj = new Date(data.created_at);
-                    var day = dateObj.getDate();
-                    var month = dateObj.getMonth() + 1;
-                    var year = dateObj.getFullYear();
-                    $("#table-body").append(
-                        `<tr class="text-black">
-                        <td>${day}/${month}/${year}</td>
-                        <td>INV-${data.invoiceID}</td>
-                                                    <td>$ ${data.totalAmount}</td>
-                                                    <td>${data.dueDate}</td>
-                                                    <td>Due On Receipt</td>
-                    </tr>
-                    `
-                    )
-                    //                     {
-                    //     "email": "fahadahad567@gmail.com",
-                    //     "userId": 125,
-                    //     "userName": "Ahad Hsshsh",
-                    //     "businessName": "",
-                    //     "phone": "2014563216",
-                    //     "streetAddress": "",
-                    //     "BusinessAddress": "",
-                    //     "firstName": "Ahad",
-                    //     "lastName": "Hsshsh",
-                    //     "image": "https://spades3bucket.s3.amazonaws.com/1694765664593_1692984370826_my%20avatar-08~3.png",
-                    //     "imageKey": "1694765664593_1692984370826_my avatar-08~3.png",
-                    //     "planID": "4",
-                    //     "isActive": 1,
-                    //     "tenantEmail": "0",
-                    //     "auth": 0,
-                    //     "invoiceEmail": "1",
-                    //     "taskEmail": "1",
-                    //     "businessLogo": "https://spades3bucket.s3.amazonaws.com/1695295632479_1692361110176_2023-07-01%20%2815%29.png",
-                    //     "businessLogoKey": "1695295632479_1692361110176_2023-07-01 (15).png",
-                    //     "zipCode": null,
-                    //     "city": null,
-                    //     "state": null
-                    // }
-                    $("#memo-table").empty()
-                    let totalTaxAmount = 0;
 
-                    data.memo.forEach((item) => {
-                        // Calculate the tax amount as a percentage of the item amount
-                        const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
+let clientName = (data.firstName && data.lastName) ? `${data.firstName} ${data.lastName}` : "N/A";
+let clientAddress = data.tAddress ? data.tAddress : "N/A";
+let clientCity = data.tCity ? data.tCity : "N/A";
+let clientState = data.tState ? data.tState : "N/A";
+let clientZipcode = data.tZipcode ? data.tZipcode : "N/A";
+let clientPhoneNumber = data.tPhoneNumber ? data.tPhoneNumber : "N/A";
+let clientEmail = data.tEmail ? data.tEmail : "N/A";
 
-                        // Add the tax amount to the totalTaxAmount variable
-                        totalTaxAmount += taxAmount;
-                        let categoryname;
-                        if (item.category == "rent") {
-                            categoryname = "Rent Amount"
-                        }
-                        else if (item.category == "maintainance") {
-                            categoryname = "Maintainance"
-                        }
-                        else if (item.category == "triple") {
-                            categoryname = "Triple Net"
-                        } else if (item.category == "base") {
-                            categoryname = "Base Rent"
-                        } else {
-                            const category = categoryData.filter((categorydata) => {
-                                return categorydata.id == item.category
-                            })
-                            categoryname = category[0]?.categorieName
-                        }
+$("#client-id").append(`
+    <h5 class="fw-bold" style="color: #1467B0;">BILLED TO</h5>
+    <p class="text-black">
+        ${clientName}<br>${clientAddress}<br>${clientCity},
+        ${clientState}<br>${clientZipcode}<br>United States<br>${clientPhoneNumber}<br>${clientEmail}
+    </p>
+`);
 
-                        $("#memo-table").append(`
+console.log(1)
+
+$("#owner-id").empty()
+$("#owner-id").append(`
+    <h5 class="text-black fw-bold">${userData.businessName}</h5>
+    <p class="text-black">
+        ${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United States<br>1-888-123-8910
+    </p>
+`);
+
+$("#table-body").empty()
+var dateObj = new Date(data.created_at);
+
+var day = dateObj.getDate();
+var month = dateObj.getMonth() + 1;
+var year = dateObj.getFullYear();
+$("#table-body").append(
+    `<tr class="text-black">
+        <td>${day}/${month}/${year}</td>
+        <td>INV-${data.invoiceID}</td>
+        <td>$ ${data.totalAmount?data.totalAmount:0}</td>
+        <td>${data.dueDate?data.dueDate:"N/A"}</td>
+        <td>Due On Receipt</td>
+    </tr>`
+)
+
+$("#memo-table").empty()
+let totalTaxAmount = 0;
+
+data.memo.forEach((item) => {
+    // Calculate the tax amount as a percentage of the item amount
+    const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
+
+    // Add the tax amount to the totalTaxAmount variable
+    totalTaxAmount += taxAmount;
+    let categoryname;
+    if (item.category == "rent") {
+        categoryname = "Rent Amount"
+    }
+    else if (item.category == "maintenance") {
+        categoryname = "Maintenance"
+    }
+    else if (item.category == "triple") {
+        categoryname = "Triple Net"
+    } else if (item.category == "base") {
+        categoryname = "Base Rent"
+    } else {
+        const category = categoryData.filter((categorydata) => {
+            return categorydata.id == item.category
+        })
+        categoryname = category[0]?.categorieName
+    }
+
+    $("#memo-table").append(`
         <tr class="text-black">
             <td style="border-bottom: 2px solid black;">
                 <p style="font-weight: bold;" class="mb-1">Services</p>
-                <span>${item.memo}</span>
+                <span>${item.memo?item.memo:"N/A"}</span>
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
-            <td style="border-bottom: 2px solid black;">${categoryname}</td>
+            <td style="border-bottom: 2px solid black;">${categoryname?categoryname:"N/A"}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount}</td>
-            
+            <td style="border-bottom: 2px solid black;">${item.amount?item.amount:0}</td>
         </tr>
     `);
-                        $("#price-table").empty()
-                        $("#price-table").append(`
-                <tr class="text-black">
-                                                    <td>Subtotal</td>
-                                                    <td>$ ${data.totalAmount - totalTaxAmount}</td>
-                                                </tr>
-                                                <tr class="text-black">
-                                                    <td>Discount</td>
-                                                    <td>$ ${0}</td>
-                                                </tr>
-                                                <tr class="text-black" style="    border-bottom: 1px solid #AFAFAF;">
-                                                    <td>Tax</td>
-                                                    <td>$ ${totalTaxAmount}</td>
-                                                </tr>
-                                                <tr class="text-black">
-                                                    <td>Total</td>
-                                                    <td>$ ${data.totalAmount}</td>
-                                                </tr>
-                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0;">
-                                                    <td>Deposit Requested</td>
-                                                    <td>$ 0</td>
-                                                </tr>
-                                                <tr class="text-black">
-                                                    <td class="fw-bold">Deposit Due</td>
-                                                    <td class="fw-bold">$ ${data.totalAmount}</td>
-                                                </tr>
-                `)
+    $("#price-table").empty()
+$("#price-table").append(`
+    <tr class="text-black">
+        <td>Subtotal</td>
+        <td>$ ${(data.totalAmount?data.totalAmount:0) - (totalTaxAmount?totalTaxAmount:0)}</td>
+    </tr>
+    <tr class="text-black">
+        <td>Discount</td>
+        <td>$ ${0}</td>
+    </tr>
+    <tr class="text-black" style="border-bottom: 1px solid #AFAFAF;">
+        <td>Tax</td>
+        <td>$ ${totalTaxAmount?totalTaxAmount:0}</td>
+    </tr>
+    <tr class="text-black">
+        <td>Total</td>
+        <td>$ ${data.totalAmount?data.totalAmount:0}</td>
+    </tr>
+    <tr class="text-black" style="border-bottom: 2px solid #1467B0;">
+        <td>Deposit Requested</td>
+        <td>$ 0</td>
+    </tr>
+    <tr class="text-black">
+        <td class="fw-bold">Deposit Due</td>
+        <td class="fw-bold">$ ${data.totalAmount?data.totalAmount:0}</td>
+    </tr>
+`);
 
 
                     })
