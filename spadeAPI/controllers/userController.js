@@ -73,6 +73,7 @@ const {
   insertProspectusSources,
   userPermissionLogin,
   addUserRoles,
+  UpdatePropertyUnitCount
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -1138,7 +1139,6 @@ exports.pricingPlan = async (req, res) => {
 // };
 exports.property = async (req, res) => {
   const {
-    // landlordID,
     propertyName,
     address,
     city,
@@ -1150,12 +1150,7 @@ exports.property = async (req, res) => {
     images,
   } = req.body;
   try {
-    //  await NotificationSocket("notification", "New notification received!")
-
-    const { userId, email } = req.user;
-    // const io = req.io;
-    // io.emit("notification", req.body);
-    // io.emit("notification", { message: "New notification received!" });
+    const { userId, email,paidUnits } = req.user;
     if (
       !propertyName ||
       !address ||
@@ -1197,31 +1192,6 @@ exports.property = async (req, res) => {
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
     }
-    // if (propertyResult[0].affectedRows > 0) {
-    //   //  notify user using socket
-    //   // io.to(userId).emit('notification', req.body);
-
-    //   const mailSubject = "Property Maintenance: " + propertyName;
-    //   const landlordUser = await queryRunner(selectQuery("users", "id"), [
-    //     userId,
-    //   ]);
-    //   const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
-    //   const taskEmail = landlordUser[0][0].taskEmail;
-    //   await taskSendMail(
-    //     "tenantName",
-    //     mailSubject,
-    //     "dueDate",
-    //     FullName,
-    //     "property",
-    //     "assignedTo",
-    //     "priority",
-    //     "companyName",
-    //     "contactLandlord",
-    //     userId,
-    //     email,
-    //     taskEmail
-    //   );
-    // }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into
     for (let i = 0; i < images.length; i++) {
@@ -1246,12 +1216,15 @@ exports.property = async (req, res) => {
         "",
         "Vacant",
       ]);
+      // paidUnits
       // if property units data not inserted into property units table then throw error
       if (propertyResult.affectedRows === 0) {
         throw new Error("data doesn't inserted in property units table");
       }
     }
-    // if everything is ok then send message and property id
+    const unitCount = paidUnits + units;
+    const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCount,userId]);
+    
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,

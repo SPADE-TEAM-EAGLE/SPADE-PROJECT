@@ -1121,3 +1121,4 @@ exports.insertInUserPermissionUsers =
   exports.insertUserBankFuture = "INSERT INTO futurePlanUser (landlordId,fuserNuveiId,fplanId,fsubscriptionId,fuserTokenId,fsubscriptionCreated_at) VALUES (?,?,?,?,?,?)";
   
   exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ? WHERE id = ?";
+  exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
