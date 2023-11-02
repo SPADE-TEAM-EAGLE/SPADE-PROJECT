@@ -5660,19 +5660,7 @@ $.ajax({
             });
         });
     </script>  -->
-    <script>
-        var helloGuys = true;
-        $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
-
-
-                var customScript = document.createElement('script');
-                customScript.src = "../assets/js/custom.js";
-                document.head.appendChild(customScript);
-            }
-        });
-    </script>
+   
     <script>
         $(document).change(function () {
             if ($('#typehead').val() == "") {
@@ -5788,7 +5776,19 @@ $.ajax({
     observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 
     </script>
+ <script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
 
+
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+        }
+    });
+</script>
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>

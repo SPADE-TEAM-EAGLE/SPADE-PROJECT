@@ -4214,17 +4214,7 @@
     })
 </script>
 <script>
-    var helloGuys = true;
-    $(document).ajaxStop(function () {
-        if (helloGuys) {
-            helloGuys = false;
-           
-            var customScript = document.createElement('script');
-            customScript.src = "../assets/js/custom.js";
-            document.head.appendChild(customScript);
-            
-        }
-    });
+    
     $(document).ajaxStop(function () {
         if(propertyShow){
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
@@ -4312,6 +4302,19 @@
 
 </script>
 <script src="../assets/js/email-phone.js"></script>
+<script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
+           
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+            
+        }
+    });
+</script>
 
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
