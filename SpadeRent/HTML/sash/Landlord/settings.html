@@ -6957,7 +6957,7 @@ Draft</button> -->
                                                                         data-bs-dismiss="modal"><span
                                                                             aria-hidden="true">&times;</span></button>
                                                                             <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
-                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">Downgrade will only be possible at the end of the currect subscription. After <span id="remaining-days-plan" class="text-white bg-primary"></span><span id="remaining-days-plan-days"></span></h4>
+                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;"><span id="downgradeConfirm-text-start">Downgrade</span> will only be possible at the end of the currect subscription. After <span id="remaining-days-plan" class="text-white bg-primary"></span><span id="remaining-days-plan-days"></span></h4>
                                                                     <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
                                                                     <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
                                                                     <button
@@ -11634,7 +11634,9 @@ Draft</button> -->
                                                                         id="add_property_btn"
                                                                         data-bs-effect="effect-scale"
                                                                         data-bs-toggle="modal"
-                                                                        href="#addModal-account"><i class="fe fe-plus"
+                                                                        href="#ADD
+                                                                        NEW
+                                                                        ACCOUNT<"><i class="fe fe-plus"
                                                                             style="color: #fff !important;"></i></button>
                                                                     <!-- Mobile screen button add property End -->
                                                                 </div>
@@ -13792,7 +13794,7 @@ const timeDifference = currentDate - createdDate;
 console.log(timeDifference)
 // Convert milliseconds to days
 const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-console.log(daysPassed)
+// console.log(daysPassed)
 $("#remaining-days").text(30 - daysPassed)
 $("#remaining-days-plan").text(30 - daysPassed)
 $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
@@ -15283,6 +15285,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm-text-start").text("Downgrade")
+
                         $("#downgradeConfirm").modal("show")
                     } 
                     else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)<5) {
@@ -15321,6 +15325,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-total").text(amount)
                         // $("#downgradeConfirm-yearly").modal("show")
                         // $("#upgradetopro").modal("show")
+                        $("#downgradeConfirm-text-start").text("Transfer from Monthly to Anually")
+
                         $("#downgradeConfirm").modal("show")
                     }
                     else {
@@ -16393,7 +16399,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -16517,7 +16523,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
