@@ -51,6 +51,22 @@
             window.location = "./login_module.html"
         }
     </script>
+     <script>
+        // Function to open the tab based on the URL fragment
+        function openTabFromFragment() {
+          var fragment = window.location.hash;
+          if (fragment) {
+            var tab = document.querySelector('a[href="' + fragment + '"]');
+            if (tab) {
+              // Simulate a click on the tab link to open the tab
+              tab.click();
+            }
+          }
+        }
+    
+        // Add an event listener to call the function when the DOM is ready
+        document.addEventListener('DOMContentLoaded', openTabFromFragment);
+      </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -1098,7 +1114,7 @@
         }
 
         .btn3-green {
-            color: #0CA7B6;
+            color: #0CA7B6 !important;
             border: 2px solid #0CA7B6;
         }
 
@@ -1107,7 +1123,7 @@
         }
 
         .btn4-blue {
-            color: #8bd8bd;
+            color: #8bd8bd !important;
             border: 2px solid #8bd8bd;
         }
 
@@ -3460,21 +3476,22 @@ Draft</button> -->
             <!-- app-Header -->
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between align-items-center">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
-                        <a class="logo-horizontal " href="index.html">
+                        <a class="logo-horizontal" href="index.html">
                             <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" onclick="openTabFromFragment()" class="text-primary fw-bold">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
-                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                        <div class="d-flex order-lg-2 header-right-icons">
                             <!-- SEARCH -->
                             <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
@@ -3879,6 +3896,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 
                                                 <h2 class="h2-personal-inf">Personal Information</h2>
                                                 <p class="p-personal-inf">Automate everything from listing units to
@@ -4115,6 +4142,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <h2 class="h2-personal-inf">Login & Password</h2>
                                                 <p class="p-personal-inf">You can change your login email and password
                                                     below.
@@ -4322,6 +4359,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <h2 class="h2-personal-inf">Notifications</h2>
                                                 <p class="p-personal-inf">Spade Rent property management software helps
                                                     manage, grow, and automate hundreds of thousands of properties in
@@ -4441,6 +4488,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="card-body p-0">
                                                     <h2 class="h2-personal-inf">Change System Theme</h2>
                                                     <p class="p-personal-inf">easiest all-in-one property management
@@ -4557,8 +4614,18 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
-                                                <div class="mb-5">
-                                                    <p class="fw-bolder" id="remaining-days-text">
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-5 d-none">
+                                                    <p class="" id="remaining-days-text">
                                                         You are currently subscribed to the Trial Plan with <span id="remaining-days" class="text-white bg-primary"></span> remaining days. <br>To access enhanced functionalities, we recommend upgrading to the paid version.</p>
                                                 </div>
                                                 <div class="card-body p-0">
@@ -7584,6 +7651,16 @@ Draft</button> -->
                                                         <span><a href="#" onclick="Intercom('showArticle', 8210506)"
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
+                                                </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <div style="display: flex; justify-content: space-between;">
@@ -10951,12 +11028,22 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="card-body p-0" id="tab11_tab_preview">
                                                     <h2 class="h2-personal-inf text-dark">Select a Template</h2>
 
                                                     <hr style="background-color: #D3D3D3;">
                                                     <div class="row">
-                                                        <div class="col-xl-3 col-md-6 col-sm-12"
+                                                        <div class="col-xl-4 col-md-6 col-sm-12"
                                                             id="tenant-invite-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb1" />
@@ -10982,7 +11069,7 @@ Draft</button> -->
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="invoice-show">
+                                                        <div class="col-xl-4 col-md-6 col-sm-12" id="invoice-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb2" />
                                                                 <label for="cb2" class="label">
@@ -11006,7 +11093,7 @@ Draft</button> -->
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-3 col-md-6 col-sm-12" id="taskupdate-show">
+                                                        <div class="col-xl-4 col-md-6 col-sm-12" id="taskupdate-show">
                                                             <div class="card overflow-hidden card-preview-templates">
                                                                 <input type="radio" name="test" id="cb3" />
                                                                 <label for="cb3" class="label">
@@ -11348,6 +11435,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="card-body p-0">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
                                                     <div class="line-responsive-center">
@@ -11506,6 +11603,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- Row -->
                                                 <div class="row">
 
@@ -11636,6 +11743,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- Row -->
                                                 <div class="row">
 
@@ -11755,6 +11872,16 @@ Draft</button> -->
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
                                                 </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="card-body p-0">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Vendor Categories</h2>
                                                     <div class="line-responsive-center">
@@ -11811,6 +11938,16 @@ Draft</button> -->
                                                         <span><a href="#" onclick="Intercom('showArticle', 8210506)"
                                                                 class="text-primary"><b>Need Help?</b></a></span>
                                                     </p>
+                                                </div>
+                                                <div class="row span_upgrade_now_div">
+                                                    <div class="col-12">
+                                                        <div class="upgrade_planing">
+                                                            <div class="row">
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg" onclick="openTabFromFragment()"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="card-body p-0">
                                                     <!-- <h2 class="h2-personal-inf">Close Account</h2>
@@ -13724,6 +13861,18 @@ Draft</button> -->
                         }
                         userData = response
                         userId = response?.id
+                        const createdDate_div = new Date(response.create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
+
+                    if (parseInt(response.planID) != 0) {
+                        $('.span_upgrade_now').hide()
+                                    $('#span_upgrade_now_div').hide()
+                        }
                         if (response.businessLogo) {
 
                             $("#businesslogoInsert").attr("src", "data:image/png;base64," + response?.businessLogo)
@@ -13749,12 +13898,9 @@ Draft</button> -->
                         const createdDate = new Date(response.create_at);
 const currentDate = new Date();
 console.log(createdDate)
-// Calculate the time difference in milliseconds
 const timeDifference = currentDate - createdDate;
 console.log(timeDifference)
-// Convert milliseconds to days
 const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-// console.log(daysPassed)
 $("#remaining-days").text(30 - daysPassed)
 $("#remaining-days-plan").text(30 - daysPassed)
 $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
@@ -16056,6 +16202,18 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         } else {
                                             $('#businessImg_col').text('No Image Uploaded')
                                         }
+                                        const createdDate_div = new Date(response.create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
+
+                    if (parseInt(response.planID) != 0) {
+                        $('.span_upgrade_now').hide()
+                                    $('#span_upgrade_now_div').hide()
+                        }
                                     },
                                     error: function (xhr, status, error) {
                                         $("#myModal_warning").modal("show");
@@ -16241,28 +16399,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             })
             // ############################################################################################
         </script>
-        <script>
-            var helloGuys = true;
-            $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
-                    var customScript = document.createElement('script');
-                    customScript.src = "../assets/js/custom1.js";
-                    document.head.appendChild(customScript);
-                }
-            });
-        </script>
-        <script>
-            var helloGuys = true;
-            $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
-                    var customScript = document.createElement('script');
-                    customScript.src = "../assets/js/custom1.js";
-                    document.head.appendChild(customScript);
-                }
-            });
-        </script>
+       
+       
 
         <!-- ########### payment method start ########## -->
 
@@ -17670,6 +17808,17 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
         </script>
         <script src="../assets/js/accordian.js"></script>
         <script src="../assets/js/user-sidebar-permissions.js"></script>
+        <script>
+            var helloGuys = true;
+            $(document).ajaxStop(function () {
+                if (helloGuys) {
+                    helloGuys = false;
+                    var customScript = document.createElement('script');
+                    customScript.src = "../assets/js/custom1.js";
+                    document.head.appendChild(customScript);
+                }
+            });
+        </script>
 </body>
 
 </html>
