@@ -136,7 +136,8 @@ $(document).ready(function() {
                $(".accordion-item .icon").eq(2).addClass("tick");
                isEmpty3 = false;
            }
-       }else if(lease == "Triple Net Lease" && yesno == "no"){
+       }
+       else if(lease == "Triple Net Lease" && yesno == "no"){
            var date3 = false;
            $(' #leaseStart , #leaseEnd').each(function() {
             var span = $(this).siblings('.text-danger');

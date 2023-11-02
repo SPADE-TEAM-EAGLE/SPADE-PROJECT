@@ -1502,7 +1502,7 @@
             <!-- app-Header -->
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between align-items-center">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
@@ -1511,12 +1511,13 @@
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" class="text-primary fw-bold">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
-                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                        <div class="d-flex order-lg-2 header-right-icons">
                             <!-- SEARCH -->
                             <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
@@ -1880,7 +1881,7 @@
                                                 class="angle fe fe-mail create-btn-plus"></i>&nbsp;Complete email
                                             verification &nbsp; <i
                                                 class="angle fe fe-arrow-right create-btn-plus"></i></a> -->
-                                        <p class="text-white m-0 mt-3" id="account-text"></p>
+                                        <!-- <p class="text-white m-0 mt-3" id="account-text"></p> -->
 
                                     </div>
                                     <div class="col-lg-3">
@@ -1898,6 +1899,16 @@
                             </p>
 
 
+                        </div>
+                        <div class="row span_upgrade_now_div">
+                            <div class="col-12">
+                                <div class="upgrade_planing">
+                                    <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Row -->
                         <div class="row">
@@ -3081,12 +3092,24 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,properties }) {
+                success: function ({ image,properties, create_at,planID }) {
                     if (image !== " " && image !== null && image!== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                     }
                     propertyShow = properties
+                    const createdDate_div = new Date(create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
+
+                    if (parseInt(planID) != 0) {
+                        $('.span_upgrade_now').hide()
+                                    $('#span_upgrade_now_div').hide()
+                        }
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -4214,17 +4237,7 @@
     })
 </script>
 <script>
-    var helloGuys = true;
-    $(document).ajaxStop(function () {
-        if (helloGuys) {
-            helloGuys = false;
-           
-            var customScript = document.createElement('script');
-            customScript.src = "../assets/js/custom.js";
-            document.head.appendChild(customScript);
-            
-        }
-    });
+    
     $(document).ajaxStop(function () {
         if(propertyShow){
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
@@ -4312,6 +4325,19 @@
 
 </script>
 <script src="../assets/js/email-phone.js"></script>
+<script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
+           
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+            
+        }
+    });
+</script>
 
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 

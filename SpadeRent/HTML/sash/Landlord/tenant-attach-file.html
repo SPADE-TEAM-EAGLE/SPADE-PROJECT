@@ -1466,7 +1466,7 @@
             <!-- app-Header -->
             <div class="app-header header sticky" id="navbar-placeholder">
                 <div class="container-fluid main-container">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between align-items-center">
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
@@ -1475,12 +1475,13 @@
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" class="text-primary fw-bold">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div> -->
-                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                        <div class="d-flex order-lg-2 header-right-icons">
                             <!-- SEARCH -->
                             <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
@@ -1894,6 +1895,16 @@
                               
                                
                         </div>
+                        <div class="row span_upgrade_now_div">
+                            <div class="col-12">
+                                <div class="upgrade_planing">
+                                    <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- PAGE-HEADER END -->
                         <div class="over_view" id="Overview">
                             <!-- ROW-2 OPEN -->
@@ -1977,11 +1988,11 @@
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY</a>
+                                                        <!-- <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">PROPERTY</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
                                                             </div>
-                                                        </li>
+                                                        </li> -->
                                                         <li class="d-flex justify-content-between"><a class="text-dark" href="javascript:void(0)">OWNER</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" checked>
@@ -2099,7 +2110,7 @@
                                                             <th>#</th>
                                                             <th>File name</th>
                                                             <th>Properties</th>
-                                                            <th>Owner</th>
+                                                            
                                                             <th>Date upload</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -2780,17 +2791,7 @@
 
     <!-- CUSTOM JS -->
     <!-- <script src="../assets/js/custom.js"></script> -->
-    <script>
-        var helloGuys = true;
-        $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
-                var customScript = document.createElement('script');
-                customScript.src = "../assets/js/custom.js";
-                document.head.appendChild(customScript);
-            }
-        });
-    </script>
+    
    
 
     <!-- ############################################# -->
@@ -2891,6 +2892,18 @@
                         $("#header-user").text(toTitleCase(response.userName))
                         // userEmail = email
                         // id = userId
+                        const createdDate_div = new Date(response.create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
+
+                    if (parseInt(response.planID) != 0) {
+                        $('.span_upgrade_now').hide()
+                                    $('#span_upgrade_now_div').hide()
+                        }
                     },
                     error: function (xhr, status, error) {
                         localStorage.removeItem('authtoken');
@@ -3245,12 +3258,7 @@ function getData(){
                         <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
                         <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
                     </td>
-                    <td >
-                        <div style="display: flex; align-items: center; gap: 0.5rem; border: none;">
-                        <img src="${localStorage?.getItem("LandlordImg")}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
-                        <p class="mt-2">${item?.firstName + " " + item?.lastName}</p>
-                        </div>
-                    </td>
+                    
                     <td>${formatDate(item.uploadDate)}</td>
                     <td>
                         <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
@@ -3370,7 +3378,17 @@ $(document).on('keyup', '#search_input', function () {
             }
         })
     </script>
-
+<script>
+    var helloGuys = true;
+    $(document).ajaxStop(function () {
+        if (helloGuys) {
+            helloGuys = false;
+            var customScript = document.createElement('script');
+            customScript.src = "../assets/js/custom.js";
+            document.head.appendChild(customScript);
+        }
+    });
+</script>
 <script src="../assets/js/user-sidebar-permissions.js"></script></body>
 
 </html>
