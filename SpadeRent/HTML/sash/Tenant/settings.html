@@ -3050,7 +3050,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
-                        }, 2000);
+                        }, 20000);
                         console.log(error);
                     }
                 });
@@ -3603,7 +3603,7 @@
                                     $("#myModal_success").modal("hide");
                                     localStorage.setItem("authtoken", response.token);
                                     // window.location = "../Landlord/index.html";
-                                }, 2000);
+                                }, 20000);
                             },
                             error: function (xhr, status, error) {
                                 // Handle the error response from the API
@@ -3612,13 +3612,13 @@
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
-                                    }, 2000);
+                                    }, 20000);
 
                                 } else if (xhr.responseText == "Incorrect Password") {
                                     $("#myModal_warning").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning').modal('hide');
-                                    }, 2000);
+                                    }, 20000);
 
                                 }
                                 else {
@@ -3906,7 +3906,7 @@
                                 $("#infoModal_account").modal("show");
                                 setTimeout(function () {
                                     $('#infoModal_account').modal('hide');
-                                }, 2000);
+                                }, 20000);
                             } else if (response.message == "Tenant has paid invoices") {
                                 $("#requestcloseaccount").modal("show")
                                 
@@ -3919,13 +3919,13 @@
                                 $("#infoModal_account").modal("show");
                                 setTimeout(function () {
                                     $('#infoModal_account').modal('hide');
-                                }, 2000);
+                                }, 20000);
                             } else {
                                 $("#myModal_warning").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning').modal('hide');
                                     // window.location = '../Landlord/login_module.html';
-                                }, 2000);
+                                }, 20000);
                             }
                         }
                     });
@@ -3976,7 +3976,7 @@
                                         profileComplete();
                                         setTimeout(function () {
                                             $("#myModal_success").modal("hide");
-                                        }, 2000);
+                                        }, 20000);
 
                                     },
                                     error: function (xhr, status, error) {
@@ -4008,7 +4008,7 @@
                                 $("#myModal_success").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_success").modal("hide");
-                                }, 2000);
+                                }, 20000);
                                 getData()
 
                             },
@@ -4072,7 +4072,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     setTimeout(function() {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
-                    }, 2000);
+                    }, 20000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
@@ -4101,19 +4101,19 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                 $("#succesModal_verify_auth").modal("show")
                 setTimeout(()=>{
                     $("#succesModal_verify_auth").modal("hide")
-                },2000)
+                },20000)
             },
             error:function(xhr,status,error){
                 if(xhr.responseJSON.message=="Error in updating 2 Factor Authentication"){
                     $("#myModal_incorrect_auth").modal("show")
                     setTimeout(()=>{
                         $("#myModal_incorrect_auth").modal("hide")
-                    },2000)
+                    },20000)
                 }else{
                     $("#myModal_warning_connection").modal("show")
                     setTimeout(()=>{
                         $("#myModal_warning_connection").modal("hide")
-                    },2000)
+                    },20000)
                 }
                 
             }
@@ -4378,7 +4378,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                                         $("#successfully_changed").modal("show")
                                         setTimeout(function () {
                                             $("#successfully_changed").modal("hide");
-                                        }, 2000);
+                                        }, 20000);
                                         getData()
                                     },
                                     error: function () {
@@ -4386,7 +4386,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                                         $("#myModal_warning_declined").modal("show")
                                         setTimeout(function () {
                                             $("#myModal_warning_declined").modal("hide");
-                                        }, 2000);
+                                        }, 20000);
                                     }
                                 })
 
@@ -4395,7 +4395,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                                 $("#myModal_warning_declined").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_warning_declined").modal("hide");
-                                }, 2000);
+                                }, 20000);
                             }
                         });
 
@@ -4434,7 +4434,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    }, 20000);
                     console.log('Error: ' + error);
                 }
             });

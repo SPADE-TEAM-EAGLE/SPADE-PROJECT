@@ -4514,7 +4514,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         // window.location = '../Landlord/login_module.html';
-                    }, 2000);
+                    }, 20000);
                     console.log(error);
                 }
             });
@@ -4591,7 +4591,7 @@
                         propertySelect.append($('<option></option>')
                             .text("Choose...")
                         )
-                        properties.forEach(function (property) {
+                        properties?.forEach(function (property) {
                             var option = $('<option></option>')
                                 .text(property.propertyName)
                                 .val(property.id);
@@ -4645,7 +4645,7 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
 
-                        }, 2000);
+                        }, 20000);
                         console.log('Error: ' + error);
                     }
                 });
@@ -4670,7 +4670,7 @@
                         propertySelect.append($('<option></option>')
                             .text("Choose...")
                         )
-                        properties.forEach(function (property) {
+                        properties?.forEach(function (property) {
                             var option = $('<option></option>')
                                 .text(property.propertyName)
                                 .val(property.id);
@@ -4723,7 +4723,7 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
 
-                        }, 2000);
+                        }, 20000);
                         console.log('Error: ' + error);
                     }
                 });
@@ -4860,7 +4860,7 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
 
-                        }, 2000);
+                        }, 20000);
                         console.log('Error: ' + error);
                     }
                 });
@@ -4888,7 +4888,7 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
 
-                                    }, 2000);
+                                    }, 20000);
                                     console.log('Error: ' + error);
                                 }
                             })
@@ -4935,7 +4935,7 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
 
-                                    }, 2000);
+                                    }, 20000);
                                     console.log('Error: ' + error);
                                 }
                             })
@@ -4979,7 +4979,7 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
 
-                                    }, 2000);
+                                    }, 20000);
                                     console.log('Error: ' + error);
                                 }
                             });
@@ -5052,7 +5052,7 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
-                    }, 2000);
+                    }, 20000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
                     console.log(error);
@@ -5077,7 +5077,7 @@ $(".plan_remaining_days_data").each(function(){
                     propertySelect.append($('<option></option>')
                         .text("Choose...")
                     )
-                    properties.forEach(function (property) {
+                    properties?.forEach(function (property) {
                         var option = $('<option></option>')
                             .text(property.propertyName)
                             .val(property.id);
@@ -5125,7 +5125,7 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
 
-                    }, 2000);
+                    }, 20000);
                     console.log('Error: ' + error);
                 }
             });
@@ -5274,14 +5274,14 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function () {
                                 $('#myModal_success').modal('hide');
                                 getData()
-                            }, 2000);
+                            }, 20000);
                         }, error: function (xhr, status, error) {
                             $("#editModal").modal("hide");
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                                 getData()
-                            }, 2000);
+                            }, 20000);
                         }, data: JSON.stringify(data)
                     })
 
@@ -5319,14 +5319,14 @@ $(".plan_remaining_days_data").each(function(){
                                         setTimeout(function () {
                                             $('#myModal_success').modal('hide');
                                             getData()
-                                        }, 2000);
+                                        }, 20000);
                                     }, error: function (xhr, status, error) {
                                         $("#editModal").modal("hide");
                                         $("#myModal_warning_connection").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning_connection').modal('hide');
                                             getData()
-                                        }, 2000);
+                                        }, 20000);
                                     }, data: JSON.stringify(data)
                                 })
 
@@ -5483,7 +5483,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
+                        // $("#preloader").hide();
                         propsectData = response.data;
 
                         let totalRentDefault = 0;
@@ -6150,7 +6150,7 @@ $(".plan_remaining_days_data").each(function(){
                         // Hide the dropped portlet after 2 seconds
                         setTimeout(function () {
                             $(".dropped-portlet").hide();
-                        }, 2000);
+                        }, 20000);
                     }
                 });
 
@@ -6192,7 +6192,7 @@ $(".plan_remaining_days_data").each(function(){
                             resetAccordion()
                             getData()
 
-                        }, 2000);
+                        }, 20000);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr)
@@ -6200,7 +6200,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        }, 20000);
                     }
                 })
             })
@@ -6299,7 +6299,7 @@ $(".plan_remaining_days_data").each(function(){
                                     resetAccordion()
                                     getData()
 
-                                }, 2000);
+                                }, 20000);
                             }
                         },
                         error: function (xhr, status, error) {
@@ -6308,13 +6308,13 @@ $(".plan_remaining_days_data").each(function(){
                                 $('#infoModal').modal('show');
                                 setTimeout(function () {
                                     $('#infoModal').modal('hide');
-                                }, 2000);
+                                }, 20000);
                             } else {
                                 $('#addModal').modal('hide');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
-                                }, 2000);
+                                }, 20000);
                             }
                         }
                     });
@@ -6370,7 +6370,7 @@ $(".plan_remaining_days_data").each(function(){
                                                 resetAccordion()
                                                 getData()
 
-                                            }, 2000);
+                                            }, 20000);
                                         }
                                     },
                                     error: function (xhr, status, error) {
@@ -6379,13 +6379,13 @@ $(".plan_remaining_days_data").each(function(){
                                             $('#infoModal').modal('show');
                                             setTimeout(function () {
                                                 $('#infoModal').modal('hide');
-                                            }, 2000);
+                                            }, 20000);
                                         } else {
                                             $('#addModal').modal('hide');
                                             $("#myModal_warning_connection").modal("show");
                                             setTimeout(function () {
                                                 $('#myModal_warning_connection').modal('hide');
-                                            }, 2000);
+                                            }, 20000);
                                         }
                                     }
                                 });
