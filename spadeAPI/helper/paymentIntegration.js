@@ -421,7 +421,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     // planId: planId,
     userTokenId: userTokenId,
     userPaymentOptionId: upoId,
-    initialAmount: initialAmount*12,
+    initialAmount: initialAmount,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
@@ -446,7 +446,7 @@ exports.createSubscriptionPayment = async (req, res) => {
   const result = await queryRunner(selectQuery("plan", "id"), [
     correctPlanId
   ]);
-  const { nuveiId, monthlyAnnual } = result[0][0];
+  const { nuveiId, monthlyAnnual, planName } = result[0][0];
   console.log(monthlyAnnual)
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = initialAmount;
@@ -462,7 +462,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     }
 
   } else {
-    requestData.initialAmount=initialAmount*12
+    requestData.initialAmount=initialAmount*12;
     requestData.recurringAmount = initialAmount*12;
     requestData.recurringPeriod = {
       day: "0",
@@ -502,6 +502,12 @@ exports.createSubscriptionPayment = async (req, res) => {
           subscriptionDate,
           userTokenId
         ]);
+
+        const selectUserResult = await queryRunner(selectQuery('users', 'id'), [userTokenId]);
+            const Name = selectUserResult[0][0].FirstName + " "+ selectUserResult[0][0].LastName;
+            const email = selectUserResult[0][0].Email;
+            const mailSubject = "Thank You for Subscribing to Spade Rent";
+        paymentMail(Name,subscriptionDate,requestData.initialAmount,email,planName, mailSubject); 
         if (result[0].affectedRows == 1) {
           res.status(200).json({
             data,
@@ -607,7 +613,7 @@ return daysDiff;
     correctPlanId = planId;
   }
   const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
-  const { nuveiId, monthlyAnnual, plantotalAmount } = result[0][0];
+  const { nuveiId, monthlyAnnual, plantotalAmount, planName } = result[0][0];
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
   
@@ -813,7 +819,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const selectUserResult = await queryRunner(selectQuery('users', 'id'), [userTokenId]);
             const Name = selectUserResult[0][0].FirstName + " "+ selectUserResult[0][0].LastName;
             const email = selectUserResult[0][0].Email;
-            const mailSubject = "Welcome to Spade Rent";
+            const mailSubject = "Thank You for Subscribing to Spade Rent";
             if (
               (planId < UserResult[0][0].PlanID || planId < PlanID) &&
               currentPlanMonthlyAnnual !== monthlyAnnual
@@ -841,7 +847,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                 subscriptionCreatedDateFormatted,
               ]);
             
-              paymentMail(Name, subscriptionCreatedDateFormatted, requestData.initialAmount, email, mailSubject);
+              paymentMail(Name, subscriptionCreatedDateFormatted, requestData.initialAmount, email,planName , mailSubject);
             
               if (result[0].affectedRows === 1) {
                 res.status(200).json({
@@ -854,7 +860,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
           else {
             // console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
-            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,mailSubject); 
+            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,planName, mailSubject); 
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,

@@ -11,6 +11,7 @@ const Path = require("path");
 const imageToDelete = require("./../middleware/deleteImage.js");
 const { serialize } = require("cookie");
 const {
+
   selectQuery,
   deleteQuery,
   insertInUsers,
@@ -73,6 +74,8 @@ const {
   insertProspectusSources,
   userPermissionLogin,
   addUserRoles,
+  UpdatePropertyUnitCount,
+  UnitCounts
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -1138,7 +1141,6 @@ exports.pricingPlan = async (req, res) => {
 // };
 exports.property = async (req, res) => {
   const {
-    // landlordID,
     propertyName,
     address,
     city,
@@ -1150,12 +1152,7 @@ exports.property = async (req, res) => {
     images,
   } = req.body;
   try {
-    //  await NotificationSocket("notification", "New notification received!")
-
-    const { userId, email } = req.user;
-    // const io = req.io;
-    // io.emit("notification", req.body);
-    // io.emit("notification", { message: "New notification received!" });
+    const { userId, email,paidUnits } = req.user;
     if (
       !propertyName ||
       !address ||
@@ -1197,31 +1194,6 @@ exports.property = async (req, res) => {
     if (propertyResult.affectedRows === 0) {
       throw new Error("Data doesn't inserted in property table");
     }
-    // if (propertyResult[0].affectedRows > 0) {
-    //   //  notify user using socket
-    //   // io.to(userId).emit('notification', req.body);
-
-    //   const mailSubject = "Property Maintenance: " + propertyName;
-    //   const landlordUser = await queryRunner(selectQuery("users", "id"), [
-    //     userId,
-    //   ]);
-    //   const FullName = landlordUser[0][0].FirstName + " " + landlordUser[0][0].LastName;
-    //   const taskEmail = landlordUser[0][0].taskEmail;
-    //   await taskSendMail(
-    //     "tenantName",
-    //     mailSubject,
-    //     "dueDate",
-    //     FullName,
-    //     "property",
-    //     "assignedTo",
-    //     "priority",
-    //     "companyName",
-    //     "contactLandlord",
-    //     userId,
-    //     email,
-    //     taskEmail
-    //   );
-    // }
     const { insertId } = propertyResult[0];
     // we are using loop to send images data into
     for (let i = 0; i < images.length; i++) {
@@ -1245,13 +1217,17 @@ exports.property = async (req, res) => {
         "",
         "",
         "Vacant",
+        userId,
       ]);
+      // paidUnits
       // if property units data not inserted into property units table then throw error
       if (propertyResult.affectedRows === 0) {
         throw new Error("data doesn't inserted in property units table");
       }
     }
-    // if everything is ok then send message and property id
+    const unitCount = paidUnits + units;
+    const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCount,userId]);
+    
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,
@@ -1276,7 +1252,6 @@ exports.getproperty = async (req, res) => {
       selectQuery("property", "landlordID"),
       [userId]
     );
-
     if (allPropertyResult.length > 0) {
       for (var i = 0; i < allPropertyResult[0].length; i++) {
         const propertyID = allPropertyResult[0][i].id;
@@ -1355,6 +1330,8 @@ exports.getpropertyByID = async (req, res) => {
 //  ############################# Delete Property Start ############################################################
 exports.propertyDelete = async (req, res) => {
   const { id } = req.body;
+  const { userId } = req.user;
+  // const { userId } = req.body;
   try {
     const propertyUnitscheckresult = await queryRunner(
       selectQuery("propertyunits", "propertyID","status"),
@@ -1363,11 +1340,9 @@ exports.propertyDelete = async (req, res) => {
     if (propertyUnitscheckresult[0].length > 0) {
       res.status(200).json({
         message: " You are not able to delete Property (your unit is occupied)",
-        units : propertyUnitscheckresult[0]
+        units : propertyUnitscheckresult[0],
       });
       } else{
-
-
     const PropertyDeleteResult = await queryRunner(
       deleteQuery("property", "id"),
       [id]
@@ -1390,6 +1365,9 @@ exports.propertyDelete = async (req, res) => {
           deleteQuery("propertyimage", "propertyID"),
           [id]
         );
+        const propertyUnitsCountResult = await queryRunner(UnitCounts,[userId]);
+        const count = propertyUnitsCountResult[0][0].count;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [count,userId]);
         if (propertyDeleteresult[0].affectedRows > 0) {
           res.status(200).json({
             message: " Property deleted successfully",
@@ -1406,7 +1384,6 @@ exports.propertyDelete = async (req, res) => {
       });
       // console.log(PropertyDeleteResult)
     }
-
   }
   } catch (error) {
     res.send("Error from delete Property ");
@@ -1979,6 +1956,7 @@ exports.viewAllPropertyTenant = async (req, res) => {
 //  ############################# Add more property units Start ############################################################
 exports.addMoreUnits = async (req, res) => {
   const { propertyID } = req.body;
+  const { userId,paidUnits } = req.user;
 
   try {
     const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
@@ -1987,6 +1965,7 @@ exports.addMoreUnits = async (req, res) => {
       "",
       "",
       "Vacant",
+      userId
     ]);
     if (propertyUnitResult[0].affectedRows > 0) {
       const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
@@ -1998,6 +1977,9 @@ exports.addMoreUnits = async (req, res) => {
           unitCount,
           propertyID,
         ]);
+        const unitCountLandlord = paidUnits + 1;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+        
         if (updateaddMoreUnitsResult[0].affectedRows > 0) {
           res.status(200).json({
             data: unitCount,
@@ -2025,6 +2007,7 @@ exports.addMoreUnits = async (req, res) => {
 //  ############################# Delete property units Start ############################################################
 exports.deleteMoreUnits = async (req, res) => {
   const { unitID, propertyID } = req.body;
+  const { userId,paidUnits } = req.user;
   try {
     // const propertyUnitResult = await queryRunner(insertInPropertyUnits, [propertyID, "", "", "", "Vacant"]);
     const unitDeleteResult = await queryRunner(
@@ -2042,6 +2025,9 @@ exports.deleteMoreUnits = async (req, res) => {
           unitCount,
           propertyID,
         ]);
+        const unitCountLandlord = paidUnits - 1;
+        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+        
         // console.log(updateaddMoreUnitsResult);
         if (updateaddMoreUnitsResult[0].affectedRows > 0) {
           res.status(200).json({
