@@ -2639,6 +2639,11 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
                         // Append the row to the table body
                         tableBody.append(row);
                     })}
+                
+                    else{
+                        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+                        $('#table_body').append(row);
+                    }
                 },
                 error: function(xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");

@@ -2135,40 +2135,7 @@ Draft</button> -->
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item" id="accordion-item2">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed text-white p-4"
-                                onclick="checkFieldsFilled('accordion-item2')" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo-add-property" aria-expanded="false"
-                                aria-controls="collapseTwo-add-property">
-                                <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
-                                <h3 class="m-0"><strong style="text-transform: capitalize;">Additional
-                                        Options</strong>
-                                    <!-- <i
-                                        class="fi fi-rs-pencil"></i> -->
-                                    <i class="fi fi-rs-angle-circle-down chevron icon"></i>
-                                </h3>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo-add-property" class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <form class="row g-3 m-1" enctype="multipart/form-data">
-
-                                <div class="col-12 mb-3">
-                                    <div class="material-switch pull-left" style="display: flex; align-items: center;">
-                                        <input id="accountActive" name="accountActive" type="checkbox"> <label
-                                            for="accountActive" class="label-success"></label>
-                                        <div style="margin-left: 25px;">
-                                            <h5><b>Use this account to receive
-                                                    payment</b></h5>
-                                            This will allow you to select this
-                                            account when receiving payment.
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <!-- <button class="btn btn-dark button-left me-auto button" data-bs-dismiss="modal" id='draft' disabled>Save as
@@ -2176,9 +2143,9 @@ Draft</button> -->
                     <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id='close'
                         style="width: auto;">Close</button>
                     <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                    <a href="javascript:void(0)" class="btn btn-pill text-light button d-none" style='background-color:#1467B0;'
+                    <a href="javascript:void(0)" class="btn text-light button d-none btn-pill" style='background-color:#1467B0;'
                         id='next-bank' onclick="addBank()">Submit</a>
-                    <button class="btn text-light button" style='background-color:#1467B0; width: auto;'
+                    <button class="btn text-light button btn-pill" style='background-color:#1467B0; width: auto;'
                         id='next-add-bank'>Next</button>
 
                 </div>
@@ -3901,7 +3868,7 @@ Draft</button> -->
                                                     <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
                                                     <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
                                                     <li><a href="#tab13" data-bs-toggle="tab">Payment Methods</a></li>
-                                                    <li><a href="#tab16" data-bs-toggle="tab">Bank Account</a></li>
+                                                    <li><a href="#tab16" data-bs-toggle="tab">Properties Account</a></li>
 
                                                     
                                                     <!-- <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li> -->
@@ -7049,9 +7016,9 @@ Draft</button> -->
                                                                         data-bs-dismiss="modal"><span
                                                                             aria-hidden="true">&times;</span></button>
                                                                             <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
-                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">Downgrade will only be possible at the end of the currect subscription.</h4>
-                                                                    <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
-                                                                    <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                                                                            <h4 class="text-dark tx-semibold" style="font-size: 22px;"><span id="downgradeConfirm-yearly-text-start">Downgrade</span> will only be possible at the end of the currect subscription.</h4>
+                                                                            <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                                                                            <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
                                                                     <button
                                                                         aria-label="Close"
                                                                         class="btn btn-primary btn-pill w-auto mt-2"
@@ -11687,6 +11654,15 @@ Draft</button> -->
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
+                                                                                    href="javascript:void(0)">CARD TYPE</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2 customized-check"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
                                                                                     href="javascript:void(0)">ACCOUNT</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
@@ -11703,24 +11679,7 @@ Draft</button> -->
                                                                                         id="exampleCheck1" checked>
                                                                                 </div>
                                                                             </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">STATUS</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2 customized-check"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
-                                                                            <li class="d-flex justify-content-between">
-                                                                                <a class="text-dark"
-                                                                                    href="javascript:void(0)">ACTION</a>
-                                                                                <div class="form-check m-0">
-                                                                                    <input type="checkbox"
-                                                                                        class="form-check-input mt-2 customized-check"
-                                                                                        id="exampleCheck1" checked>
-                                                                                </div>
-                                                                            </li>
+                                                                            
 
                                                                         </ul>
                                                                     </div>
@@ -11757,10 +11716,11 @@ Draft</button> -->
                                                                             <tr>
                                                                                 <th class="d-none">UPOID</th>
                                                                                 <th>#</th>
-                                                                                <th>ACCOUNT</th>
+                                                                                <th>CARD TYPE</th>
+
+                                                                                <th>ACCOUNT-HOLDER NAME</th>
                                                                                 <th>DESCRIPTION</th>
-                                                                                <th>STATUS</th>
-                                                                                <th>ACTION</th>
+                                                                                
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="table_body_bank_account">
@@ -13945,6 +13905,7 @@ $("#remaining-days").text(30 - daysPassed)
 $("#remaining-days-plan").text(30 - daysPassed)
 $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
 
+
                         $("#firstName").val(toTitleCase(response.firstName))
                         $("#lastName").val(toTitleCase(response.lastName))
                         $("#email").val(response.email)
@@ -14231,7 +14192,10 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                     $("#table_body_bank_account_property").append(row);
                         }
     
-                                });           
+                                });
+                    if(counterAccount==0){
+                        console.log("segfjhfdgfsgfjhsdgfjhsdgfsgdfsgfgfgghrfgikwerhrwj",counterAccount);
+                        $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);}
                     }else{
                         $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);
                   
@@ -14532,16 +14496,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 var row = $("<tr>");
                                 row.append($("<td class='d-none upoid'>").text(entry.UPOID));
                                 row.append($("<td>").text(index + 1));
-
+                                    row.append($("<td>").html("<img src='" + "../assets/images/SPRK_default_preset_name_custom-–-1-1536x186.png" + "' alt='image' class='img-fluid' style='width: 120px; height: 22px;'>"));
                                 row.append($("<td>").html("<b>" + entry.accountName + "</b>"));
                                 row.append($("<td>").text(entry.description ? entry.description : "N/A"));
-                                row.append($("<td>").html(`<b class="status-bank" style="${entry.Active === 'Active' ? 'color: #25CF54;' : 'color:grey;'}">${entry.Active}</b>`));
-
-                                var buttonCell = $("<td>");
-                                var button = $(`<button type="button" class="btn btn-light btn-pill mt-0 status-change-bank w-auto"><strong>${entry.Active !== 'Active' ? 'Connect to Bank' : 'Disconnect to Bank'}</strong></button>`);
-
-                                buttonCell.append(button);
-                                row.append(buttonCell);
+                                
+                                    
 
                                 tbody.append(row);
                             });
@@ -15445,6 +15404,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm-yearly-text-start").text("Downgrade")
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     
@@ -15458,6 +15418,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
+                        $("#downgradeConfirm-yearly-text-start").text("Transfer from Annually to Mothly")
+
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(currentSelectedId) <= 7 && parseInt(currentSelectedId) >= 5 && parseInt(cardId) < 5) {
@@ -17595,7 +17557,7 @@ $(".plan_remaining_days_data").each(function(){
                                         UPOID: res.userPaymentOptionId,
                                         accountName: $("#accountName").val(),
                                         description: $("#description-bank").val(),
-                                        active: $("#accountActive").is(":checked"),
+                                        active: "Active",
                                         accountTypeTenant: ""
                                     }),
                                     success: function (response) {
