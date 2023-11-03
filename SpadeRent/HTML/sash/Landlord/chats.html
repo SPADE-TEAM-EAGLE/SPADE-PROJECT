@@ -1651,7 +1651,7 @@
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
-                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>.&nbsp;&nbsp; <a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-sm"><img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">Upgrade Now</a></span>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" class="text-primary fw-bold">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
@@ -3314,7 +3314,7 @@
         <a href="#addModal" data-bs-effect="effect-scale" data-bs-toggle="modal" id="add-tenant-side-btn"><i
                 class="fe fe-plus"></i></a>
         <!-- socket      -->
-        <script src="https://chatapi.spaderent.com/socket.io/socket.io.js"></script>
+        <script src="https://engage.app.spaderent.com/socket.io/socket.io.js"></script>
         <!-- JQUERY JS -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
@@ -3415,7 +3415,7 @@
         <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://userapi.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3439,7 +3439,7 @@
 
         <script>
             function initializeWebSocket() {
-                var socket = io('https://chatapi.spaderent.com');
+                var socket = io('https://engage.app.spaderent.com');
 
                 socket.on('connect', function () {
                     console.log('WebSocket connected');
@@ -3460,11 +3460,11 @@
             var tenantName = "";
             localStorage.removeItem('tenantId');
             localStorage.removeItem('tenantName');
-            // var socket = io('https://chatapi.spaderent.com');
+            // var socket = io('https://engage.app.spaderent.com');
             $(document).ready(function () {
 
                 $.ajax({
-                    url: 'https://userapi.spaderent.com/api/spade/ProfileComplete',
+                    url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3490,7 +3490,7 @@
                 let userEmail;
                 let emailChange = false;
                 $.ajax({
-                    url: 'https://userapi.spaderent.com/api/spade/protected',
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3517,7 +3517,7 @@ $(".plan_remaining_days_data").each(function(){
 
                     if (parseInt(response.planID) != 0) {
                         $('.span_upgrade_now').hide()
-                                    $('.span_upgrade_now_div').hide()
+                                    $('#span_upgrade_now_div').hide()
                         }
                         if (response.image !== " " && response.image !== null && response.image!=="") {
 
@@ -3556,7 +3556,7 @@ $(".plan_remaining_days_data").each(function(){
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://userapi.spaderent.com/api/spade/createNewMessage',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3589,7 +3589,7 @@ $(".plan_remaining_days_data").each(function(){
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://userapi.spaderent.com/api/spade/createNewMessage',
+                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -3814,7 +3814,7 @@ $(".plan_remaining_days_data").each(function(){
                     var str = "";
 
                     $.ajax({
-                        url: 'https://userapi.spaderent.com/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3842,7 +3842,7 @@ $(".plan_remaining_days_data").each(function(){
                                 receiverID: Number(localStorage.getItem("tenantId"))
                             };
                             $.ajax({
-                                url: 'https://userapi.spaderent.com/api/spade/createNewMessage',
+                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
                                 type: 'POST',
                                 data: JSON.stringify(messageData2),
                                 contentType: 'application/json',
@@ -3903,7 +3903,7 @@ $(".plan_remaining_days_data").each(function(){
                     };
 
                     $.ajax({
-                        url: 'https://userapi.spaderent.com/api/spade/accessChats',
+                        url: 'https://backend.app.spaderent.com/api/spade/accessChats',
                         type: 'POST',
                         data: JSON.stringify(tenantIdd),
                         contentType: 'application/json',
@@ -3926,7 +3926,7 @@ $(".plan_remaining_days_data").each(function(){
                                 localStorage.setItem("tenantName", tenatName)
                                 socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                 $.ajax({
-                                    url: 'https://userapi.spaderent.com/api/spade/updateMessagesCountLandlord',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountLandlord',
                                     type: 'PUT',
                                     data: JSON.stringify({
                                         sender: tenatId
@@ -3946,7 +3946,7 @@ $(".plan_remaining_days_data").each(function(){
                                     }
                                 });
                                 $.ajax({
-                                    url: 'https://userapi.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
+                                    url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                     type: 'GET',
                                     contentType: false,
                                     processData: false,
@@ -3988,7 +3988,7 @@ $(".plan_remaining_days_data").each(function(){
                                         }
 
                                         $.ajax({
-                                            url: 'https://userapi.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                            url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
                                             type: 'GET',
                                             contentType: 'application/json',
                                             processData: false,
@@ -3997,7 +3997,7 @@ $(".plan_remaining_days_data").each(function(){
                                             },
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'https://userapi.spaderent.com/api/spade/getMessagesCountLandlord',
+                                                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                                                     method: 'GET',
                                                     headers: {
                                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4138,7 +4138,7 @@ $(".plan_remaining_days_data").each(function(){
 
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://userapi.spaderent.com/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -4196,7 +4196,7 @@ $(".plan_remaining_days_data").each(function(){
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'https://userapi.spaderent.com/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
