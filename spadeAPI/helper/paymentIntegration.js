@@ -421,7 +421,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     // planId: planId,
     userTokenId: userTokenId,
     userPaymentOptionId: upoId,
-    initialAmount: initialAmount*12,
+    initialAmount: initialAmount,
     recurringAmount: recurringAmount,
     currency: currency,
     startAfter: {
@@ -462,7 +462,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     }
 
   } else {
-    requestData.initialAmount=initialAmount*12
+    requestData.initialAmount=initialAmount*12;
     requestData.recurringAmount = initialAmount*12;
     requestData.recurringPeriod = {
       day: "0",

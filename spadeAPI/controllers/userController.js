@@ -1341,7 +1341,6 @@ exports.propertyDelete = async (req, res) => {
       res.status(200).json({
         message: " You are not able to delete Property (your unit is occupied)",
         units : propertyUnitscheckresult[0],
-
       });
       } else{
     const PropertyDeleteResult = await queryRunner(
@@ -1385,7 +1384,6 @@ exports.propertyDelete = async (req, res) => {
       });
       // console.log(PropertyDeleteResult)
     }
-
   }
   } catch (error) {
     res.send("Error from delete Property ");
