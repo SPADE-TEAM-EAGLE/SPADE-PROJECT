@@ -20,7 +20,9 @@ const verifyToken = async (req, res, next) => {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
       console.log(decoded.UserPermissionID);
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
-
+      console.log(result[0][0])
+      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
+      
       function splitAndConvertToObject(value) {
         const resultObject = {};
 
@@ -56,58 +58,124 @@ const verifyToken = async (req, res, next) => {
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
       console.log(result[0][0])
-      req.user = {
-        email: decoded.email,
-        userId: result[0][0].llnalordId,
-        userType : "Landlord",
-        userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
-        businessName: result[0][0].BusinessName,
-        phone: result[0][0].UPhone,
-        streetAddress: result[0][0].streetAddress,
-        BusinessAddress: result[0][0].BusinessAddress,
-        firstName: result[0][0].UFirstName,
-        lastName: result[0][0].ULastName,
-        image: result[0][0].UImage,
-        imageKey: result[0][0].imageKey,
-        planID: result[0][0].PlanID,
-        isActive: result[0][0].active,
-        tenantEmail: result[0][0].tenantEmail,
-        auth: result[0][0].auth,
-        invoiceEmail: result[0][0].invoiceEmail,
-        taskEmail: result[0][0].taskEmail,
-        businessLogo: result[0][0].businessLogo,
-        businessLogoKey: result[0][0].businessLogoKey,
-        BAzipCode: result[0][0].BAZipcode,
-        BAcity: result[0][0].BACity,
-        BAstate: result[0][0].BAState,
-        city: result[0][0].PACity,
-        state: result[0][0].PAState,
-        zipCode: result[0][0].PAZipcode,
-        nuveiId: result[0][0].nuveiId,
-        nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
-        nuveiUPOID: result[0][0].nuveiUPOID,
-        create_at: result[0][0].created_at,
-        paidUnits: result[0][0].paidUnits,
+      if(futurePlanId[0]?.length!=0){
+        
+        const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
 
-        role,
-        llDashboard,
-        properties,
-        units,
-        tenants,
-        tasks,
-        invoices,
-        leads,
-        leadsInsights,
-        settingProfiles,
-        settingCPasswords,
-        settingNotifications,
-        settingCThemes,
-        settingSubscriptions,
-        settingMUsers,
-        settingEmailTs,
-        SettingInvoiceSettings,
+// Get the current date
+const currentDate = new Date();
 
-      };
+// Calculate the time difference in milliseconds
+const timeDifference = targetDate - currentDate;
+
+// Convert the time difference to days
+const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+req.user = {
+  email: decoded.email,
+  userId: result[0][0].llnalordId,
+  userType : "Landlord",
+  userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
+  businessName: result[0][0].BusinessName,
+  phone: result[0][0].UPhone,
+  streetAddress: result[0][0].streetAddress,
+  BusinessAddress: result[0][0].BusinessAddress,
+  firstName: result[0][0].UFirstName,
+  lastName: result[0][0].ULastName,
+  image: result[0][0].UImage,
+  imageKey: result[0][0].imageKey,
+  planID: result[0][0].PlanID,
+  isActive: result[0][0].active,
+  tenantEmail: result[0][0].tenantEmail,
+  auth: result[0][0].auth,
+  invoiceEmail: result[0][0].invoiceEmail,
+  taskEmail: result[0][0].taskEmail,
+  businessLogo: result[0][0].businessLogo,
+  businessLogoKey: result[0][0].businessLogoKey,
+  BAzipCode: result[0][0].BAZipcode,
+  BAcity: result[0][0].BACity,
+  BAstate: result[0][0].BAState,
+  city: result[0][0].PACity,
+  state: result[0][0].PAState,
+  zipCode: result[0][0].PAZipcode,
+  nuveiId: result[0][0].nuveiId,
+  nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
+  nuveiUPOID: result[0][0].nuveiUPOID,
+  create_at: result[0][0].created_at,
+  futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
+  daysRemaining:daysRemaining,
+  role,
+  llDashboard,
+  properties,
+  units,
+  tenants,
+  tasks,
+  invoices,
+  leads,
+  leadsInsights,
+  settingProfiles,
+  settingCPasswords,
+  settingNotifications,
+  settingCThemes,
+  settingSubscriptions,
+  settingMUsers,
+  settingEmailTs,
+  SettingInvoiceSettings,
+
+};
+}else{
+  req.user = {
+    email: decoded.email,
+    userId: result[0][0].llnalordId,
+    userType : "Landlord",
+    userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
+    businessName: result[0][0].BusinessName,
+    phone: result[0][0].UPhone,
+    streetAddress: result[0][0].streetAddress,
+    BusinessAddress: result[0][0].BusinessAddress,
+    firstName: result[0][0].UFirstName,
+    lastName: result[0][0].ULastName,
+    image: result[0][0].UImage,
+    imageKey: result[0][0].imageKey,
+    planID: result[0][0].PlanID,
+    isActive: result[0][0].active,
+    tenantEmail: result[0][0].tenantEmail,
+    auth: result[0][0].auth,
+    invoiceEmail: result[0][0].invoiceEmail,
+    taskEmail: result[0][0].taskEmail,
+    businessLogo: result[0][0].businessLogo,
+    businessLogoKey: result[0][0].businessLogoKey,
+    BAzipCode: result[0][0].BAZipcode,
+    BAcity: result[0][0].BACity,
+    BAstate: result[0][0].BAState,
+    city: result[0][0].PACity,
+    state: result[0][0].PAState,
+    zipCode: result[0][0].PAZipcode,
+    nuveiId: result[0][0].nuveiId,
+    nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
+    nuveiUPOID: result[0][0].nuveiUPOID,
+    create_at: result[0][0].created_at,
+
+    role,
+    llDashboard,
+    properties,
+    units,
+    tenants,
+    tasks,
+    invoices,
+    leads,
+    leadsInsights,
+    settingProfiles,
+    settingCPasswords,
+    settingNotifications,
+    settingCThemes,
+    settingSubscriptions,
+    settingMUsers,
+    settingEmailTs,
+    SettingInvoiceSettings,
+
+  };
+}
+      
       next();
     } catch (err) {
       console.log(err);
@@ -119,6 +187,59 @@ const verifyToken = async (req, res, next) => {
       const result = await queryRunner(selectQuery("users", "Email"), [
         decoded.email,
       ]);
+      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
+      if(futurePlanId[0]?.length!=0){
+        
+        const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
+
+// Get the current date
+const currentDate = new Date();
+
+// Calculate the time difference in milliseconds
+const timeDifference = targetDate - currentDate;
+
+// Convert the time difference to days
+const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+        // console.log(result[0][0].active);
+        req.user = {
+          email: decoded.email,
+          userId: result[0][0].id,
+          userType : "Landlord",
+          nuveiUserId: result[0][0].nuveiId,
+          userName: result[0][0].FirstName + " " + result[0][0].LastName,
+          businessName: result[0][0].BusinessName,
+          phone: result[0][0].Phone,
+          streetAddress: result[0][0].streetAddress,
+          BusinessAddress: result[0][0].BusinessAddress,
+          firstName: result[0][0].FirstName,
+          lastName: result[0][0].LastName,
+          image: result[0][0].image,
+          imageKey: result[0][0].imageKey,
+          planID: result[0][0].PlanID,
+          isActive: result[0][0].active,
+          tenantEmail: result[0][0].tenantEmail,
+          auth: result[0][0].auth,
+          invoiceEmail: result[0][0].invoiceEmail,
+          taskEmail: result[0][0].taskEmail,
+          businessLogo: result[0][0].businessLogo,
+          businessLogoKey: result[0][0].businessLogoKey,
+          BAzipCode: result[0][0].BAZipcode,
+          BAcity: result[0][0].BACity,
+          BAstate: result[0][0].BAState,
+          city: result[0][0].PACity,
+          state: result[0][0].PAState,
+          zipCode: result[0][0].PAZipcode,
+          businessLogo: result[0][0].businessLogo,
+          subscriptionID: result[0][0].nuveiSubscriptionId,
+          nuveiUPOID: result[0][0].nuveiUPOID,
+          create_at: result[0][0].created_at,
+          futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
+          daysRemaining:daysRemaining,
+  
+  
+        };
+      }else{
+        console.log(futurePlanId[0][futurePlanId[0].length-1]);
       // console.log(result[0][0].active);
       req.user = {
         email: decoded.email,
@@ -156,6 +277,8 @@ const verifyToken = async (req, res, next) => {
 
 
       };
+      }
+      
       next();
       // console.log("hello")
     } catch (err) {
