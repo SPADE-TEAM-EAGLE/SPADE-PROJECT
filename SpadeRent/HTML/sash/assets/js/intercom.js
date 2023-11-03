@@ -73,7 +73,7 @@ $.ajax({
         setTimeout(function () {
             $('#myModal_warning').modal('hide');
             window.location = '../Landlord/login_module.html';
-        }, 2000);
+        }, 20000);
         
     }
 });
