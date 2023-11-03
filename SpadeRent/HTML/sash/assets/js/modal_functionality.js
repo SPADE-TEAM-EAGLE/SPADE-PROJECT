@@ -467,14 +467,14 @@ $('#preloader').css('display','flex')
                             $('#infoModal').modal('show');
                             setTimeout(function() {
                                 $('#infoModal').modal('hide');
-                            }, 20000);
+                            }, 2000);
                         }
                        else{
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function() {
                             $('#myModal_warning_connection').modal('hide');
 
-                        }, 20000);
+                        }, 2000);
                        }
                         console.log('Error: ' + error);
                         console.log(xhr)
@@ -486,7 +486,7 @@ $('#preloader').css('display','flex')
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
 
-                            }, 20000);
+                            }, 2000);
                             console.log('Error: ' + error);
             }
         });
@@ -544,13 +544,13 @@ $('#preloader').css('display','flex')
                     $('#infoModal').modal('show');
                     setTimeout(function() {
                         $('#infoModal').modal('hide');
-                    }, 20000);
+                    }, 2000);
                 }else{
                     $('#addModal').modal('hide');
                     $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
-                            }, 20000);
+                            }, 2000);
                 }
             }
         });

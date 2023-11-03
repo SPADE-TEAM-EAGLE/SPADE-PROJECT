@@ -22073,7 +22073,7 @@
    *
    * Implementation of the squarify treemap algorithm described in:
    *
-   * Bruls, Mark; Huizing, Kees; van Wijk, Jarke J. (20000), "Squarified treemaps"
+   * Bruls, Mark; Huizing, Kees; van Wijk, Jarke J. (2000), "Squarified treemaps"
    * in de Leeuw, W.; van Liere, R., Data Visualization 2000:
    * Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, Springer-Verlag, pp. 33–42.
    *

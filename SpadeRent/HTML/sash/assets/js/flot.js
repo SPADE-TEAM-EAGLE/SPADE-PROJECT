@@ -134,7 +134,7 @@ $(function() {
             updateInterval = +v;
             if (updateInterval < 1) {
                 updateInterval = 1;
-            } else if (updateInterval > 20000) {
+            } else if (updateInterval > 2000) {
                 updateInterval = 2000;
             }
             $(this).val("" + updateInterval);
