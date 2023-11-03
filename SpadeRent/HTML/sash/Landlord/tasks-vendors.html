@@ -1409,7 +1409,7 @@ color: #000;
                             <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
-                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>. <a href="./settings.html#tab9" class="text-primary fw-bold">Upgrade Now</a></span>
+                        <span class="span_upgrade_now text-center">Your Trail plan will expire in <span class="plan_remaining_days_data">20 Days</span>.&nbsp;&nbsp; <a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-sm"><img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">Upgrade Now</a></span>
                         <!-- LOGO -->
                         <!-- <div class="main-header-center ms-3 d-none d-lg-block">
                             <input type="text" class="form-control" id="typehead" placeholder="Search">
@@ -1781,8 +1781,8 @@ color: #000;
                             <div class="col-12">
                                 <div class="upgrade_planing">
                                     <div class="row">
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold text-black m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade Now</a></span></div></div>
                                 </div>
                                 </div>
                             </div>
@@ -2875,17 +2875,11 @@ color: #000;
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-                    const createdDate_div = new Date(create_at);
-const currentDate_div = new Date();
-const timeDifference_div = currentDate_div - createdDate_div;
-const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
-$(".plan_remaining_days_data").each(function(){
-    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
-});
+                   
 
                     if (parseInt(planID) != 0) {
                         $('.span_upgrade_now').hide()
-                                    $('#span_upgrade_now_div').hide()
+                                    $('.span_upgrade_now_div').hide()
                         }
                     if (image !== " " && image !== null && image!== "") {
 
@@ -2895,7 +2889,13 @@ $(".plan_remaining_days_data").each(function(){
                     $("#user-name").text(toTitleCase(userName))
                     $("#header-user").text(toTitleCase(userName))
 
-
+                    const createdDate_div = new Date(create_at);
+const currentDate_div = new Date();
+const timeDifference_div = currentDate_div - createdDate_div;
+const daysPassed_div = Math.floor(timeDifference_div / (1000 * 60 * 60 * 24));
+$(".plan_remaining_days_data").each(function(){
+    $(this).text((30 - daysPassed_div) > 1 ? (30 - daysPassed_div) + " Days" : "1 Day");
+});
                 },
                 error: function (xhr, status, error) {
                     // $("#myModal_warning").modal("show");

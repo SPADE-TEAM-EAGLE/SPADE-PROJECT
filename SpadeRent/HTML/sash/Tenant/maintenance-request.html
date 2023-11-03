@@ -2248,7 +2248,7 @@ if (task.ImageKey) {
                             var hoursDiff = Math.floor(minutesDiff / 60);
                             var daysDiff = Math.floor(hoursDiff / 24);
 
-                            var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                            var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<a style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</a><br>' +
                                 `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
 
                             if (daysDiff > 0) {
@@ -2278,7 +2278,7 @@ if (task.ImageKey) {
         <div style="text-align: -webkit-center;">
             <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
             <div class="media-body valign-middle mt-0">
-                <a href="javascript:void(0)" class="text-dark fw-semibold">Vendor</a>
+                <a href="javascript:void(0)" class="text-dark fw-semibold view-task">View All</a>
             </div>
         </div>`;
                                             break;
@@ -2312,7 +2312,7 @@ if (task.priority == 'High') {
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                    
-                    var status = '<td class="property-id" style="font-weight: 600;">' + (task.status) + '</td>';
+                    var status = '<td class="property-id" style="font-weight: 600;">' + (task.status.charAt(0).toUpperCase() + task.status.slice(1)) + '</td>';
                             var dropdownMenu =
                                 '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                 '<ul class="dropdown-menu">' +
