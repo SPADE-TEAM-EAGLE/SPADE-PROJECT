@@ -1696,7 +1696,7 @@ color: #000;
                             <div class="col-12">
                                 <div class="upgrade_planing">
                                     <div class="row">
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center"><span class="fw-bold text-black m-2">Your Trial will expire in<br><span class="text-primary fs-30 plan_remaining_days_data">30 Days</span></span></div>
                                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center d-flex justify-content-center align-items-center"><div class="m-2"><span><a href="./settings.html#tab9" class="btn btn-primary btn-pill btn-lg"><img src="../assets/images/starImg.png" class="me-2" style="width: 25px;" alt="">Upgrade</a></span></div></div>
                                 </div>
                                 </div>
@@ -3864,21 +3864,36 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
 
                                 taskName += '</span>' + '</td>';
                                 if (task.AssignTo.length >= 1) {
-                                    var assignTo = '<td style="font-weight: 600;text-align: center;display: flex;">' +
-                                        (task.AssignTo?.map(({
-                                            name,
-                                            email
-                                        }) => {
-                                            return `
+                                    var assignTo = '<td><div style="font-weight: 600;text-align: center;display: flex;">';
+                                    for (var i = 0; i < task.AssignTo.length; i++) {
+                                        var name = task.AssignTo[i].name;
+                                        var email = task.AssignTo[i].email;
+                                        assignTo += `
         <div class="me-2">
-            <i class="fi fi-rs-circle-user avatar-md fs-30" ></i>
+            <i class="fi fi-rs-circle-user avatar-md fs-30"></i>
             <div class="media-body valign-middle mt-0">
                 <a href="javascript:void(0)" class="text-dark fw-semibold">${name}</a>
             </div>
         </div>`;
-                                        }).join("")) +
-                                        '</td>';
-                                } else {
+                                        if (i === 1) {
+                                            if((Number(task.AssignTo.length) - 2)== 0){
+                                                break;
+                                            }
+                                            assignTo += `
+        <div style="text-align: -webkit-center;">
+            <div class="fw-bold worker-count">+${Number(task.AssignTo.length) - 2}</div>
+            <div class="media-body valign-middle mt-0">
+                <a href="javascript:void(0)" class="text-dark fw-semibold view-task">View All</a>
+            </div>
+        </div>`;
+                                            break;
+                                        }
+                                    }
+
+                                    assignTo += '</div></td>';
+                                }
+
+                                else {
 
                                     var assignTo = '<td>Not Assigned</td>';
                                 }
