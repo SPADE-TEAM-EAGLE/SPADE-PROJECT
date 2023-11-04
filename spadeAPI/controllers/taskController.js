@@ -973,8 +973,8 @@ exports.deleteTask = async (req, res) => {
 
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
-  const elem = [];
-  console.log(typeof elem);
+ 
+
 
   const { userId } = req.user;
   // const { userId } = req.body;
@@ -984,7 +984,8 @@ exports.addVendorCategory = async (req, res) => {
     const categoryCheckResult = await queryRunner(selectQuery("vendorcategory", "landLordId"), [userId]);
     const existingCategories = categoryCheckResult[0];
 
-    if (!Array.isArray(categories.categories)) {
+    if (!Array.isArray(categories)) {
+      console.log("fsdjksdjfksdfksdkjsdkjfksdjjsdfsdjsd")
       console.log(categories);
       const categoryToInsert = existingCategories.find(category => 
         category.categories && category.categories.toLowerCase() === categories.categories.toLowerCase()
@@ -1007,26 +1008,27 @@ exports.addVendorCategory = async (req, res) => {
           categoryID: categoryToInsert.id,
         });
       }
-    } else if (Array.isArray(categories.categories)) {
-
-      const categoryToInsert = categories.categories.filter(category => 
+    } else if (Array.isArray(categories)) {
+      
+      const categoryToInsert = categories.filter(category => 
         !existingCategories.some(existingCategory =>
-          existingCategory.categories && existingCategory.categories.toLowerCase() === category.category.toLowerCase()
+          existingCategory.category && existingCategory.category.toLowerCase() === category.category.toLowerCase()
         )
       );
 
       const categoryToDelete = existingCategories.filter(existingCategory => 
-        !categories.categories.some(category =>
-          category.category && category.category.toLowerCase() === existingCategory.categories.toLowerCase()
+        !categories.some(category =>
+          category.category && category.category.toLowerCase() === existingCategory.category.toLowerCase()
         )
       );
-
+          console.log(categoryToInsert);
+          await Promise.all(
+            categoryToInsert.map(async (item) => {
+              await queryRunner(addVendorCategory, [item.category, userId]);
+            })
+          );
       if (categoryCheckResult[0].length !== 0) {
-        await Promise.all(
-          categoryToInsert.map(async (item) => {
-            await queryRunner(addVendorCategory, [item, userId]);
-          })
-        );
+        
 
         await Promise.all(
           categoryToDelete.map(async (item) => {
