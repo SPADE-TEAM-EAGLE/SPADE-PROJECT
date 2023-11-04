@@ -75,7 +75,8 @@ const {
   userPermissionLogin,
   addUserRoles,
   UpdatePropertyUnitCount,
-  UnitCounts
+  UnitCounts,
+  UpdateUserNuveiIdQuery
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -2847,6 +2848,21 @@ exports.deleteUser=async(req,res)=>{
       res.status(200).json({message:"User Deleted"})
     }else{
       res.status(400).json({message:"Error in deleting user"})
+    }
+  }catch{
+
+  }
+}
+
+
+exports.UpdateUserNuveiId = async(req,res)=>{
+  const {userId, nuveiId}=req.body;
+  try {
+    const updateUserResult=await queryRunner(UpdateUserNuveiIdQuery,[nuveiId, userId]);
+    if(updateUserResult[0].affectedRows > 0){
+      res.status(200).json({message:"User updated"})
+    }else{
+      res.status(400).json({message:"Error in update user"})
     }
   }catch{
 

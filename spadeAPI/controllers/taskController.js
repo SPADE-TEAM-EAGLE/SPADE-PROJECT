@@ -969,64 +969,87 @@ exports.deleteTask = async (req, res) => {
 
 
 // add vendor category 19/9/23
+// const { queryRunner } = require('your-query-runner-library'); // Import your queryRunner library here
+
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
-  console.log(categories)
-  const elem=[]
-  console.log(typeof elem)
-  // const { userId } = req.user;
-  const { userId } = req.body;
-  let insertedId; // Declare insertedId here
+ 
+
+
+  const { userId } = req.user;
+  // const { userId } = req.body;
+  let insertedId;
 
   try {
-    const categoryCheckResult = await queryRunner(
-      selectQuery("vendorcategory", "landLordId"),
-      [userId]
-    );
+    const categoryCheckResult = await queryRunner(selectQuery("vendorcategory", "landLordId"), [userId]);
     const existingCategories = categoryCheckResult[0];
-    if(!Array.isArray(categories)) {
-      console.log(categories)
-      categoryToInsert=existingCategories.filter((category) => category?.categories?.toLowerCase() == categories?.categories?.toLowerCase());
-      if(categoryToInsert.length === 0) {
+
+    if (!Array.isArray(categories)) {
+      console.log("fsdjksdjfksdfksdkjsdkjfksdjjsdfsdjsd")
+      console.log(categories);
+      const categoryToInsert = existingCategories.find(category => 
+        category.categories && category.categories.toLowerCase() === categories.categories.toLowerCase()
+      );
+
+      if (!categoryToInsert) {
         insertedId = await queryRunner(addVendorCategory, [
-          categories?.categories?.toLowerCase(),
+          categories.categories.toLowerCase(),
           userId,
         ]);
-        console.log(insertedId[0]?.insertId)
+        console.log(insertedId[0]?.insertId);
+
         res.status(200).json({
           message: "Categories added/updated successfully",
-          categoryID: insertedId[0]?.insertId, // Include inserted IDs in the response
+          categoryID: insertedId[0]?.insertId,
         });
-      }
-      else{
-        
+      } else {
         res.status(200).json({
-          message: "Category already exist",
-          categoryID: categoryToInsert[0]?.id, // Include inserted IDs in the response
+          message: "Category already exists",
+          categoryID: categoryToInsert.id,
         });
       }
-    }else if(Array.isArray(categories)) {
-      categoryToInsert = categories.filter((category) => !existingCategories.some((existingCategory) => existingCategory.category.toLowerCase() === category.category.toLowerCase()));
-      categoryToDelete = existingCategories.filter((existingCategory) => !categories.some((category) => category.category.toLowerCase() === existingCategory.category.toLowerCase()));
-      if (categoryCheckResult[0].length !== 0) {
-        categoryToInsert?.forEach(async (item) => {
+    } else if (Array.isArray(categories)) {
+      
+      const categoryToInsert = categories.filter(category => 
+        !existingCategories.some(existingCategory =>
+          existingCategory.category && existingCategory.category.toLowerCase() === category.category.toLowerCase()
+        )
+      );
+
+      const categoryToDelete = existingCategories.filter(existingCategory => 
+        !categories.some(category =>
+          category.category && category.category.toLowerCase() === existingCategory.category.toLowerCase()
+        )
+      );
+          console.log(categoryToInsert);
+          await Promise.all(
+            categoryToInsert.map(async (item) => {
               await queryRunner(addVendorCategory, [item.category, userId]);
             })
-        categoryToDelete?.forEach(async (item) => {
-              await queryRunner(deleteQuery("vendorcategory", "id"), [item.id]);
-        })
-       
+          );
+      if (categoryCheckResult[0].length !== 0) {
+        
+
+        await Promise.all(
+          categoryToDelete.map(async (item) => {
+            console.log(item);
+            await queryRunner(deleteQuery("vendorcategory", "id"), [item.id]);
+          })
+        );
       }
+
       res.status(200).json({
         message: "Categories added/updated successfully",
       });
     }
-   
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(400).send(error);
   }
 };
+
+
+
 
 
 

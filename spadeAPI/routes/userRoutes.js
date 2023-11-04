@@ -289,3 +289,4 @@ router.delete("/deleteUser",userController.deleteUser);
 router.put("/updateBankAccountTenant", verifyTokenTenant, bankAccountController.updateBankAccountTenant); 
 // router.get("/dummy", bankAccountController.dummy); 
 router.put("/updatePropertyBankAccount", bankAccountController.updatePropertyBankAccount); 
+router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId); 
