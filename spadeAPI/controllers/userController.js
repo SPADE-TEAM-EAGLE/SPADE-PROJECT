@@ -266,7 +266,11 @@ exports.Signin = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
         email,
       ]);
+// if(selectResult[0][0].PlanID == 1){
+//   const currentDate = new date();
+//   const createdDate = "2023-07-14 12:34:07";
 
+// }
       // console.log(selectResult[0]);
       if (selectResult[0].length === 0) {
         const selectUserPermissionResult = await queryRunner(userPermissionLogin, [
