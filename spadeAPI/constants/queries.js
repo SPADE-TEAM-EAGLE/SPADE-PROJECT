@@ -578,7 +578,7 @@ exports.updatePasswordLandlord =
   // "UPDATE users SET Password = ? where id = ? and token = ?";
   "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =
-  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,,created_at,subscriptionCreated_at) VALUES (?,?,?, ?, ?, ?, ?, ?, ?)";
+  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at,subscriptionCreated_at) VALUES (?,?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
 exports.updateUser =
   "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, image = ?, imageKey = ?, PACity = ?, PAState = ?, PAZipcode = ?, BACity  = ?, BAState = ?, BAZipcode = ? WHERE id = ?";
