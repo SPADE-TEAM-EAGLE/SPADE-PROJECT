@@ -973,7 +973,8 @@ exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
   const elem=[]
   console.log(typeof elem)
-  const { userId } = req.user;
+  // const { userId } = req.user;
+  const { userId } = req.body;
   let insertedId; // Declare insertedId here
 
   try {
