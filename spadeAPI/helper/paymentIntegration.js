@@ -821,23 +821,39 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const email = selectUserResult[0][0].Email;
             const mailSubject = "Thank You for Subscribing to Spade Rent";
             if (
-              (planId < UserResult[0][0].PlanID || planId < PlanID) &&
-              currentPlanMonthlyAnnual !== monthlyAnnual
+              (planId < UserResult[0][0].PlanID || planId < PlanID)
             ) {
               const subscriptionDate = new Date();
               let subscriptionCreatedDateFormatted;
             
               // Get user data
+              // if (monthlyAnnual === "Monthly") {
+              //   AddDays = 30 - daysDifference;
+              //   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+              //   subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+              // } else {
+              //   AddDays = 365 - daysDifferenceAnnually;
+              //   subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+              //   subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+              // }
               if (monthlyAnnual === "Monthly") {
+                console.log("ON Monthly " + daysDifference);
                 AddDays = 30 - daysDifference;
+                console.log(AddDays);
+
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                console.log(subscriptionDate);
                 subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+                console.log(subscriptionCreatedDateFormatted);
               } else {
+                console.log("ON Yearly " + daysDifferenceAnnually);
                 AddDays = 365 - daysDifferenceAnnually;
+                console.log(AddDays);
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                console.log(subscriptionDate);
                 subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+                console.log(subscriptionCreatedDateFormatted);
               }
-            
               const result = await queryRunner(insertUserBankFuture, [
                 userTokenId,
                 userNuveiId,

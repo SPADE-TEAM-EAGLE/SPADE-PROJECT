@@ -2857,6 +2857,7 @@ exports.deleteUser=async(req,res)=>{
 
 exports.UpdateUserNuveiId = async(req,res)=>{
   const {userId, nuveiId}=req.body;
+  
   try {
     const updateUserResult=await queryRunner(UpdateUserNuveiIdQuery,[nuveiId, userId]);
     if(updateUserResult[0].affectedRows > 0){
@@ -2864,7 +2865,8 @@ exports.UpdateUserNuveiId = async(req,res)=>{
     }else{
       res.status(400).json({message:"Error in update user"})
     }
-  }catch{
+  }catch(error){
+    console.log(error)
 
   }
 }

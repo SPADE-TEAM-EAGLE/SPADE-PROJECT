@@ -3893,12 +3893,30 @@
                                         }),
                                         contentType: "application/json",
                                         success: function (resp) {
+                                            
+                                            $.ajax({
+                                                url: "http://localhost:3000/api/spade/UpdateUserNuveiId",
+                                        type: "PUT",
+                                        
+                                        data: JSON.stringify({
+                                            
+                                            userId: userId,
+                                            nuveiId:resp?.data?.userId,
+
+                                        }),
+                                        contentType: "application/json",
+                                        success: function (response) {
                                             $("#preloader").css("display", "none");
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal('hide');
-                                // window.location.href = "./login_module.html";
+                                window.location.href = "./login_module.html";
                             }, 2000);
+                                        },
+                                        error: function (xhr, status, error) {}
+
+                                            })
+                                            
                                         }, error: function (xhr, status, error) {
 
                                         }
@@ -3963,7 +3981,7 @@
         crossorigin="anonymous"></script>
     <script>
         $("#done").click(function () {
-            // window.location.href = "./login_module.html";
+            window.location.href = "./login_module.html";
         });
         var sfc = SafeCharge({
             env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
@@ -4201,7 +4219,7 @@
                                     $("#myModal_warning_declined").modal("show")
                                     setTimeout(function () {
                                         $("#myModal_warning_declined").modal("hide");
-                                        // window.location = '../Landlord/Signup.html';
+                                        window.location = '../Landlord/Signup.html';
                                     }, 2000);
                                 }
                             });
