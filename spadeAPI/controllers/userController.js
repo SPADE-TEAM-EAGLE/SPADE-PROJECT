@@ -114,6 +114,7 @@ exports.createUser = async function (req, res) {
       hashPassword,
       planID,
       currentDate,
+      currentDate,
     ]);
     const name = firstName + " " + lastName;
     const mailSubject = "Spade Welcome Email";
