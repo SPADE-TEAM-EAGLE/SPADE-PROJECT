@@ -825,6 +825,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
               //  && currentPlanMonthlyAnnual !== monthlyAnnual
             ) {
               const subscriptionDate = new Date();
+              const subscriptionDateQuery = new Date();
               let subscriptionCreatedDateFormatted;
             
               // Get user data
@@ -853,9 +854,10 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             
            // For Yearly
           else {
+            const subscriptionDateQuery = new Date();
             // console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
-            const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDate, userTokenId]);
-            paymentMail(Name,subscriptionDate,requestData.initialAmount,email,planName, mailSubject); 
+            const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDateQuery, userTokenId]);
+            paymentMail(Name,subscriptionDateQuery,requestData.initialAmount,email,planName, mailSubject); 
             if (result[0].affectedRows == 1) {
               res.status(200).json({
                 data,
