@@ -971,6 +971,7 @@ exports.deleteTask = async (req, res) => {
 // add vendor category 19/9/23
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
+  console.log(categories)
   const elem=[]
   console.log(typeof elem)
   // const { userId } = req.user;
