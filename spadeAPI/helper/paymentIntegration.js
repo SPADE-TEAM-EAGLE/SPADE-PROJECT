@@ -755,7 +755,8 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
 let daysDifferenceMtoA; 
 if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
   const currentDate = new Date();
-const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
+const timeDifference = currentDate.getTime() - subscriptionCreated_at.
+getTime();
 daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
   daysDifferenceMtoA = Math.max(0, Math.round(daysDifferenceMtoA));
   let remainingDays = 30 - daysDifferenceMtoA;
