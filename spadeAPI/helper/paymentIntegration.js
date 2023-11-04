@@ -691,7 +691,7 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
     }
   }
   // let daysDifferenceAnnually;
-  if (planId > PlanID && monthlyAnnual == "Annually") {
+  if (planId < PlanID && monthlyAnnual == "Annually") {
  
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
@@ -828,24 +828,10 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
               let subscriptionCreatedDateFormatted;
             
               // Get user data
-              if (monthlyAnnual === "Monthly") {
-                console.log("ON Monthly " + daysDifference);
-                AddDays = 30 - daysDifference;
-                console.log(AddDays);
 
+                AddDays = 30 - daysDifference;
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-                console.log(subscriptionDate);
                 subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
-                console.log(subscriptionCreatedDateFormatted);
-              } else {
-                console.log("ON Yearly " + daysDifference);
-                AddDays = 365 - daysDifference;
-                console.log(AddDays);
-                subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
-                console.log(subscriptionDate);
-                subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
-                console.log(subscriptionCreatedDateFormatted);
-              }
             
               const result = await queryRunner(insertUserBankFuture, [
                 userTokenId,
