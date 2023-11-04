@@ -690,15 +690,15 @@ if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
       requestData.initialAmount = initialAmountChange;
     }
   }
-  let daysDifferenceAnnually;
+  // let daysDifferenceAnnually;
   if (planId > PlanID && monthlyAnnual == "Annually") {
  
 const currentDate = new Date();
 const timeDifference = currentDate.getTime() - subscriptionCreated_at.getTime();
- daysDifferenceAnnually = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.getMonth() + 1) + (currentDate.getFullYear() - subscriptionCreated_at.getFullYear()) * 12;
 //
-      let remainingDays = daysDifferenceAnnually;
+      let remainingDays = daysDifference;
       remainingDays = 365 - remainingDays;
       let initialAmountChange = existPlanAmount / 365;
       initialAmountChange = remainingDays * initialAmountChange;
@@ -821,21 +821,30 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const email = selectUserResult[0][0].Email;
             const mailSubject = "Thank You for Subscribing to Spade Rent";
             if (
-              (planId < UserResult[0][0].PlanID || planId < PlanID) &&
-              currentPlanMonthlyAnnual !== monthlyAnnual
+              planId < UserResult[0][0].PlanID || planId < PlanID
+              //  && currentPlanMonthlyAnnual !== monthlyAnnual
             ) {
               const subscriptionDate = new Date();
               let subscriptionCreatedDateFormatted;
             
               // Get user data
               if (monthlyAnnual === "Monthly") {
+                console.log("ON Monthly " + daysDifference);
                 AddDays = 30 - daysDifference;
+                console.log(AddDays);
+
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                console.log(subscriptionDate);
                 subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+                console.log(subscriptionCreatedDateFormatted);
               } else {
-                AddDays = 365 - daysDifferenceAnnually;
+                console.log("ON Yearly " + daysDifference);
+                AddDays = 365 - daysDifference;
+                console.log(AddDays);
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
+                console.log(subscriptionDate);
                 subscriptionCreatedDateFormatted = formatDateForSQL(subscriptionDate);
+                console.log(subscriptionCreatedDateFormatted);
               }
             
               const result = await queryRunner(insertUserBankFuture, [
