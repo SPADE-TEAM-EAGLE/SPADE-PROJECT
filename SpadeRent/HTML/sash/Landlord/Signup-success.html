@@ -107,7 +107,7 @@ S
                 </div>
                 <div class="row-signup-success">
                     <div class="col-xl-6 col-lg-9 col-md-11 col-sm-12">
-                    <h1 class="signup-success-h1">Nice work, <span style="color: #1467B0;">Noman Peerzada!</span> Your Account is ready.</h1>
+                    <h1 class="signup-success-h1">Nice work, <span style="color: #1467B0;" id="landloard-name"></span> Your Account is ready.</h1>
                 </div>
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -116,7 +116,8 @@ S
                         one software, one login, and no add-ons.</p>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-12 signup-success-button mt-4 mb-5">
-                <button type="button" class="btn btn-block btn-pill btn-primary" style="width: fit-content; font-weight: bold; background: #1467b0;">Login to Dashboard</button>
+                    <button type="button" class="btn btn-block btn-pill btn-primary" onclick="window.location.href='./login_module.html';" style="width: fit-content; font-weight: bold; background: #1467b0;">Login to Dashboard</button>
+
             </div>
             </div>
                 </div>
@@ -262,7 +263,7 @@ S
 
     <script>
         $(document).ready(function () {
-    
+            $("#landloard-name").text(localStorage.getItem("fullNameLandlord"));
           if ($('body').hasClass('dark-mode')) {
             $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
           } else {

@@ -3910,7 +3910,7 @@
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
                                 $("#myModal_success").modal('hide');
-                                window.location.href = "./login_module.html";
+                                window.location.href = "./Signup-success.html";
                             }, 2000);
                                         },
                                         error: function (xhr, status, error) {}
@@ -3981,7 +3981,7 @@
         crossorigin="anonymous"></script>
     <script>
         $("#done").click(function () {
-            window.location.href = "./login_module.html";
+            window.location.href = "./Signup-success.html";
         });
         var sfc = SafeCharge({
             env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
@@ -4096,7 +4096,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
+                                        url: "http://localhost:3000/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -4132,7 +4132,7 @@
                                                 }),
                                                 success: function (response) {
                                                     $("#preloader").css("display", "none");
-
+                                                    localStorage.setItem("fullNameLandlord", $("#firstname1").val() + " " + $("#lastname").val())
                                                     card2.classList.add("card-fade");
                                                     card1.classList.add("card-fade");
                                                     card3.classList.add("card-fade");
