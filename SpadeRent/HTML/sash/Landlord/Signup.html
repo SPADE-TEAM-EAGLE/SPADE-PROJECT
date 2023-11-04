@@ -3842,7 +3842,7 @@
                 var password = $("#id_password2").val();
                 $("#preloader").css("display", "flex");
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/Signup",
+                    url: "https://backend.app.spaderent.com/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -3895,7 +3895,7 @@
                                         success: function (resp) {
                                             
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/UpdateUserNuveiId",
+                                                url: "https://backend.app.spaderent.com/api/spade/UpdateUserNuveiId",
                                         type: "PUT",
                                         
                                         data: JSON.stringify({
@@ -4096,7 +4096,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "http://localhost:3000/api/spade/createSubscriptionPayment",
+                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -4115,7 +4115,7 @@
                                         contentType: "application/json",
                                         success: function (response) {
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
+                                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountSignup",
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 headers: {

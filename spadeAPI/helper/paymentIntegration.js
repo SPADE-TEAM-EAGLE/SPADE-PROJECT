@@ -825,7 +825,7 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
               //  && currentPlanMonthlyAnnual !== monthlyAnnual
             ) {
               const subscriptionDate = new Date();
-              const subscriptionDateQuery = new Date();
+             
               let subscriptionCreatedDateFormatted;
             
               // Get user data

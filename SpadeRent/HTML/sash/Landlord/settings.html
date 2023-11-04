@@ -13993,6 +13993,13 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         }
                         
                         $(`#${response?.futurePlanId} .py-2`).append(`Will be selected after <span>${response?.daysRemaining} ${response?.daysRemaining>1?"days":"day"}</span>`);
+                        [2,3,4,5,6,7].forEach((item)=>{
+                            if(item==response?.futurePlanId){
+
+                            }else{
+                                $(`#${item} .py-2`).empty();
+                            }
+                        })
                         $(`#${response.planID}`).addClass("bg-primary");
                         $(`#${response.planID}`).addClass("text-white");
                         $.ajax({
@@ -14511,7 +14518,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 var row = $("<tr>");
                                 row.append($("<td class='d-none upoid'>").text(entry.UPOID));
                                 row.append($("<td>").text(index + 1));
-                                    row.append($("<td>").html("<img src='" + "../assets/images/SPRK_default_preset_name_custom-–-1-1536x186.png" + "' alt='image' class='img-fluid' style='width: 120px; height: 22px;'>"));
+                                    row.append($("<td>").html("<img src='" + "../assets/images/SPRK_default_preset_name_custom-–-1-1536x186.png" + "' alt='image' class='img-fluid' style='width: 150px; height: 25px;'>"));
                                 row.append($("<td>").html("<b>" + entry.accountName + "</b>"));
                                 row.append($("<td>").text(entry.description ? entry.description : "N/A"));
                                 
@@ -15254,7 +15261,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -16570,7 +16577,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -16633,8 +16640,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                         setTimeout(function () {
                                                             $("#myModal_success").modal("hide");
                                                         }, 20000);
-                                                        window.location.reload();
                                                         
+                                                        getData()
                                                     }
 
                                                 },
@@ -16695,7 +16702,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         success: function (response) {
                                             console.log(userData)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -16756,8 +16763,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                         setTimeout(function () {
                                                             $("#myModal_success").modal("hide");
                                                         }, 20000);
-                                                        
-                                                        window.location.reload();
+                                                        getData()
                                                     }
 
                                                 },

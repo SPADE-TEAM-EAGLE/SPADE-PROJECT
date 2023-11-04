@@ -1610,11 +1610,11 @@
                         </div>
                         <div class="col-lg-3">
                             <label><b>Invoice Type</b></label>
-                            <p class="text-primary"><b id="invoiceType">One Time Invoice</b></p>
+                            <p class="text-primary"><b id="invoiceType"></b></p>
                         </div>
                         <div class="col-lg-3">
                             <label><b>Due Date</b></label>
-                            <p class="text-primary"><b id="dueDate">Jan-01-2023</b></p>
+                            <p class="text-primary"><b id="dueDate"></b></p>
                         </div>
                         <div class="col-lg-3">
                             <label><b>Status</b></label>
@@ -1624,7 +1624,7 @@
                         </div>
                         <div class="col-lg-12 mt-5">
                             <label><b>Property Information</b></label>
-                            <p class="text-primary"><b id="propertyAddress">3114 Stargate Ct</b></p>
+                            <p class="text-primary"><b id="propertyAddress"></b></p>
                         </div>
                         <div class="col-lg-12 mt-5">
                             <div style="display: flex;">
@@ -1654,16 +1654,16 @@
                                     <tbody id="view-invoice-line-item">
                                         <tr class="tr">
                                             <td>
-                                                <p class="text-primary"><b>Rent</b></p>
+                                                <p class="text-primary"><b></b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b>3114 Stargate Ct</b></p>
+                                                <p class="text-primary"><b></b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b>Testing</b></p>
+                                                <p class="text-primary"><b></b></p>
                                             </td>
                                             <td>
-                                                <p class="text-primary"><b>$200.00</b></p>
+                                                <p class="text-primary"><b></b></p>
                                             </td>
                                             <!-- <td><button type="button" class="btn" id="del-btn1">
                                                     <i class="fi fi-rs-trash text-danger fs-5"></i>
@@ -1681,7 +1681,7 @@
                         <div class="col-md-12 col-lg-4 mt-5">
                             <span class="float-end">
                                 <label class="form-label fw-bold m-0">Balance Due</label>
-                                <h1 class="text-primary fw-bold m-0" id="totalAmount">$200.00</h1>
+                                <h1 class="text-primary fw-bold m-0" id="totalAmount"></h1>
                             </span>
                         </div>
                         <div class="col-lg-12 mt-5 mb-5" id="view-invoice-images">
@@ -3010,10 +3010,15 @@
                     ...data1,
                     ...tenantData
                 }
-                console.log(data)
+                
                 $("#tenantName").text(data.firstName + " " + data.lastName)
                 $("#invoiceType").text(data.invoiceType?data.invoiceType:"N/A")
-                $("#dueDate").text(data.dueDate?data.dueDate:"N/A")
+                if(data.invoiceType=="One Time Invoice"){
+                    $("#dueDate").text(data.dueDate?data.dueDate:"N/A")
+                }else{
+                    $("#dueDate").text(data1.recurringNextDate?data1.recurringNextDate:"N/A")
+                }
+                
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
                 $("#notes").text(data.note?data.note:"N/A")
@@ -3141,7 +3146,13 @@
                             var year = dateObj.getFullYear();
                             var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                            var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            var invoiceAmount;
+                            if(invoice.invoiceType=="One Time Invoice"){
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                            }
+                            else{
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            }
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                     data-bs-toggle="dropdown"></i>

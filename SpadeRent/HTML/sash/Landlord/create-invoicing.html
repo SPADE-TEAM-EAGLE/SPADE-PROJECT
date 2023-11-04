@@ -5071,7 +5071,14 @@ $(".plan_remaining_days_data").each(function(){
                                 var year = dateObj.getFullYear();
                                 var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                                 var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                                var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                                var invoiceAmount;
+                            if(invoice.invoiceType=="One Time Invoice"){
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                            }
+                            else{
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            }
+
                                 const toShow = invoice.status
                                 var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) + '</td>';
 
@@ -6253,7 +6260,13 @@ $("#price-table").append(`
                     console.log(data)
                     $("#tenantName").text(data.firstName + " " + data.lastName)
                     $("#invoiceType").text(data.invoiceType)
-                    $("#dueDate").text(data.dueDate)
+                    if(data.invoiceType=="One Time Invoice"){
+                       
+                        $("#dueDate").text(data?.dueDate)
+                    }else{
+                        $("#dueDate").text(data1?.recurringNextDate)
+                    }
+                    
                     $("#invoiceStatus").text(data.status)
                     $("#propertyAddress").text(data.pAddress + ' ,' + data.pCity + ' ,' + data.pState + ' ,' + data.pZipCode)
 
