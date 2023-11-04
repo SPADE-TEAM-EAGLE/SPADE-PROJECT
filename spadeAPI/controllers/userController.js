@@ -266,6 +266,7 @@ exports.Signin = async function (req, res) {
       const selectResult = await queryRunner(selectQuery("users", "Email"), [
         email,
       ]);
+
       // console.log(selectResult[0]);
       if (selectResult[0].length === 0) {
         const selectUserPermissionResult = await queryRunner(userPermissionLogin, [
@@ -2870,5 +2871,3 @@ exports.UpdateUserNuveiId = async(req,res)=>{
 
   }
 }
-
-  
