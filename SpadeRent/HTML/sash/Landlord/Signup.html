@@ -121,12 +121,60 @@
             justify-content: center;
             align-items: center;
         }
-
-        .shadow-active {
-            box-shadow: 0px 3px 13px rgba(0, 0, 0, 0.160784);
+        .dark-mode .boxes a {
+            display: flex;
+            background: transparent;
+            border: 2px solid #707070;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: #707070;
+            font-weight: bold;
+            width: 80px;
+            height: 80px;
+            justify-content: center;
+            align-items: center;
         }
 
+        .dark-mode .active1 {
+            display: flex;
+            background: transparent;
+            border: 2px solid lightgrey !important;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: lightgrey !important;
+            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shadow-active {
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.160784);
+        }
+        .dark-mode .shadow-active {
+    box-shadow: 0px 0px 13px lightgrey;
+}
+
+
         .complete1 {
+            display: flex;
+            padding: 20px 35px;
+            background: #1467B0 !important;
+            border: 2px solid #1467B0 !important;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: white !important;
+            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+        .dark-mode .complete1 {
             display: flex;
             padding: 20px 35px;
             background: #1467B0 !important;
@@ -942,13 +990,15 @@
                                                         <div class="col-lg-6 col-md-6">
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control input-inside"
-                                                                    id="firstname1" placeholder="Enter First Name*">
+                                                                    id="firstname1" placeholder="Enter First Name*" pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control input-inside"
-                                                                    id="lastname" placeholder="Enter Last Name*">
+                                                                    id="lastname" placeholder="Enter Last Name*" pattern="[A-Za-z\s]+"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -971,9 +1021,10 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <input type="phone" id="phone1" class="form-control"
+                                                                <input type="tel" id="phone1" class="form-control"
                                                                     style="padding: 1.7rem 4.75rem !important; font-size: 1rem !important;"
-                                                                    placeholder="Enter Phone Number">
+                                                                    placeholder="Enter Phone Number" pattern="[0-9]+"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                                                 <span id="valid-msg" class="hide">✓ Valid</span>
                                                                 <span id="error-msg" class="hide"></span>
                                                             </div>
@@ -1164,7 +1215,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn bg-transparent"
                                                                                                 data-id="5">
                                                                                                 <span>Upgrade
                                                                                                     to
@@ -1295,7 +1346,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn bg-transparent"
                                                                                                 data-id="6"
                                                                                                 data-bs-effect="effect-scale"
                                                                                                 data-bs-toggle="modal"
@@ -1447,7 +1498,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn bg-transparent"
                                                                                                 data-id="7">
                                                                                                 <span>Upgrade to Premium
                                                                                                     <img src="../assets/images/arrow-blue1.svg"
@@ -1681,7 +1732,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn bg-transparent"
                                                                                                 data-id="2">
                                                                                                 Upgrade to Basic
                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text-warning" aria-hidden="true"></i> -->
@@ -1776,7 +1827,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn bg-transparent"
                                                                                                 data-id="3">
                                                                                                 Upgrade to Pro
                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text3-green" aria-hidden="true"></i> -->
@@ -1931,7 +1982,7 @@
                                                                                         <div
                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                             <button
-                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn bg-transparent"
                                                                                                 data-id="4">
                                                                                                 Upgrade to Premium
                                                                                                 <!-- <i class="fa fa-long-arrow-right mt-1 float-right text4-blue" aria-hidden="true"></i> -->
@@ -2206,7 +2257,7 @@
                                                                                                         <div
                                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                                             <button
-                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn bg-transparent"
                                                                                                                 data-id="20">
                                                                                                                 Upgrade
                                                                                                                 to Basic
@@ -2534,7 +2585,7 @@
                                                                                                         <div
                                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                                             <button
-                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn"
+                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn4-blue border-btn card-btnn bg-transparent"
                                                                                                                 data-id="28">
                                                                                                                 Upgrade
                                                                                                                 to
@@ -2831,7 +2882,7 @@
                                                                                                         <div
                                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                                             <button
-                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn"
+                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold text-warning border-btn card-btnn bg-transparent"
                                                                                                                 data-id="8">
                                                                                                                 Upgrade
                                                                                                                 to Basic
@@ -2957,7 +3008,7 @@
                                                                                                         <div
                                                                                                             class="text-center border-top-0 pt-1 pb-1">
                                                                                                             <button
-                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn"
+                                                                                                                class="btn btn-lg btn-block btn-free font-weight-bold btn3-green card-btnn bg-transparent"
                                                                                                                 data-id="12">
                                                                                                                 Upgrade
                                                                                                                 to Pro
