@@ -578,7 +578,7 @@ exports.updatePasswordLandlord =
   // "UPDATE users SET Password = ? where id = ? and token = ?";
   "UPDATE users SET Password = ? , updated_at = ? where id = ? AND token = ?";
 exports.insertInUsers =
-  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+  "INSERT INTO users (id,FirstName, LastName, Email, Phone, Password, PlanID,created_at,subscriptionCreated_at) VALUES (?,?,?, ?, ?, ?, ?, ?, ?)";
 // updated user query
 exports.updateUser =
   "UPDATE users SET FirstName = ?, LastName = ?, Email = ?, Phone = ?, updated_at = ?, BusinessName = ?, streetAddress = ?, BusinessAddress = ?, image = ?, imageKey = ?, PACity = ?, PAState = ?, PAZipcode = ?, BACity  = ?, BAState = ?, BAZipcode = ? WHERE id = ?";
@@ -591,7 +591,7 @@ exports.insertInPropertyImage =
 exports.insertInTaskImage =
   "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
-  "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
+  "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status,landlordId) VALUES (?,?,?,?,?,?)";
 exports.updateProperty =
   "UPDATE property SET landlordID = ?, propertyName = ? , address = ? , city = ? , state = ? , zipCode = ? , propertyType = ? , propertySQFT = ? , status = ?, units = ?  WHERE id = ? ";
 exports.updatePropertyUnits =
@@ -876,7 +876,7 @@ WHERE
 exports.tenantTaskQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery =
-  "SELECT i.id as invoiceID, i.dueDate, i.daysDue , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, l.businessLogo FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID join users as l ON l.id = i.landlordID  WHERE i.tenantID = ? GROUP BY i.id ";
+  "SELECT i.id as invoiceID, i.dueDate, i.daysDue,i.recurringNextDate , i.startDate,i.endDate,i.repeatTerms,i.terms ,i.note, i.totalAmount, i.frequency,i.created_at, i.invoiceType, i.status, t.firstName, t.lastName, t.id as tenantID, t.phoneNumber as tPhone, p.propertyName, l.businessLogo FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id LEFT JOIN invoiceimages as ii ON i.id = ii.invoiceID join users as l ON l.id = i.landlordID  WHERE i.tenantID = ? GROUP BY i.id ";
 exports.AlltasksTenantsQuery = `SELECT
 tk.id,
 tk.taskName,
@@ -1121,3 +1121,6 @@ exports.insertInUserPermissionUsers =
   exports.insertUserBankFuture = "INSERT INTO futurePlanUser (landlordId,fuserNuveiId,fplanId,fsubscriptionId,fuserTokenId,fsubscriptionCreated_at) VALUES (?,?,?,?,?,?)";
   
   exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ? WHERE id = ?";
+  exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
+  exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
+  exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";

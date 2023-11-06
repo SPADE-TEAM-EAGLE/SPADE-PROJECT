@@ -11916,7 +11916,7 @@ Draft</button> -->
                                                     </div>
                                                 </div>
                                                 <div class="card-body p-0">
-                                                    <h2 class="h2-personal-inf text-dark mb-3">Vendor Categories</h2>
+                                                    <h2 class="h2-personal-inf text-dark mb-3">Vendor Category</h2>
                                                     <div class="line-responsive-center">
                                                         <div
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
@@ -13720,6 +13720,56 @@ Draft</button> -->
                 
                 // $("#myModal_warning_declined").modal("show")
                 selectedDowngrade = false
+                function toTitleCase(str) {
+                    return str.replace(/\w\S*/g, function (txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    });
+                }
+
+
+
+                $(document).on('click', '.status-option', function () {
+                    // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
+                    const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
+                    const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
+
+                    const data = {
+                        ...data1,
+                        ...data2
+                    };
+                    console.log("djsndksjnjsnfjnsjfsjnfjndsjfnjdsn")
+                    console.log($(`input[name="status"][value="${data.status}"]`))
+                    $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
+                });
+                $(document).on('click', ".resend-option", function () {
+                    console.log(invoiceId)
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
+                        type: 'GET', // Change the method to POST
+                        data: {
+                            invoiceID: invoiceId
+                        }, // Send the data in the request body
+                        contentType: 'application/json', // Set the content type to JSON
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            // Handle the success response from the API
+                            getData()
+                            $("#succesModal_invoice").modal("hide")
+                            $("#infoModal").modal("show")
+                            setTimeout(function () {
+                                $("#infoModal").modal("hide")
+                            }, 20000);
+
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response from the API
+                            console.log('API error:', error);
+                        }
+                    });
+                })
+
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
@@ -13842,8 +13892,10 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             $('#profile').css('background-image', 'url(' + response.image + ')').addClass('hasImage');
                         }
                         const names = { 2: "to Basic", 3: "to Pro", 4: "to Premium", 5: "to Basic", 6: "to Pro", 7: "to Premium" };
-
+                        $(".free-card").each(function () {
+                                        $(this).addClass("d-none");})
                         if (4 >= parseInt(response.planID)) {
+                            
                             [2, 3, 4].forEach(function (item) {
                                 if (item < parseInt(response.planID)) {
                                     console.log(names[item])
@@ -13883,6 +13935,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                     })
                                     $("#remaining-days-text").removeClass("d-none");
                                 }
+                                
                             });
                         }
 
@@ -13940,136 +13993,118 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         }
                         
                         $(`#${response?.futurePlanId} .py-2`).append(`Will be selected after <span>${response?.daysRemaining} ${response?.daysRemaining>1?"days":"day"}</span>`);
+                        [2,3,4,5,6,7].forEach((item)=>{
+                            if(item==response?.futurePlanId){
+
+                            }else{
+                                $(`#${item} .py-2`).empty();
+                            }
+                        })
                         $(`#${response.planID}`).addClass("bg-primary");
                         $(`#${response.planID}`).addClass("text-white");
-
-
-                    },
-                    error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 20000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
-                        // console.log('Error occurred while fetching state and city data.');
-                    }
-                });
-
-
-                $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/userPermissionRoles",
-                    type: "GET",
-                    contentType: "application/json",
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                    },
-                    success: function (response) {
-
-                        if (response?.data) {
-                            $("#role_user,#userrole_user_update").empty();
-                            $("#user-role-holder").children(":nth-child(n+3)").remove();
-                            $("#role_user").append(`<option selected>Choose...</option>`)
-                            response?.data?.forEach(function (role, index) {
-
-
-                                $("#userrole_user_update").append(
-                                    `
-                                    <option value="${role?.id}">${role?.role}</option>
-                                    `)
-                                $("#role_user").append(
-                                    `
-                                    <option value="${role?.id}">${role?.role}</option>
-                                    `)
-
-                                if (role.role.toLowerCase() == "manager") {
-                                    $("#manager").attr("data-id", role.id)
-                                } else if (role.role.toLowerCase() == "staff") {
-                                    $("#staff").attr("data-id", role.id)
-                                } else {
-                                    $("#owner").attr("data-id", role.id)
-                                }
-
-                                $("#user-role-holder").append(
-                                    `
-                        <div class="col-lg-12 col-xl-12 order-md-1 order-1">
-                                                                    <div class="card card-color user-role ${role.role == "Owner" ? "active" : ""}" id="${role?.id}"
-                                                                        >
-                                                                        <div class="card-body">
-                                                                            <div class="row"
-                                                                                style="align-items: center;">
-                                                                                <div
-                                                                                    class="col-xl-4 col-sm-4 col-md-12">
-                                                                                    <div class="d-flex justify-content-start align-items-center"> <span
-                                                                                            class="settings-icon bg-primary-transparent text-primary p-0 bg-white-black" style="width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;"><i
-                                                                                                class="fi fi-rs-key d-flex fs-24"></i></span>
-                                                                                        &nbsp; <b class="ms-2">${role.role}</b>
+                        $.ajax({
+                        url: "https://backend.app.spaderent.com/api/spade/userPermissionRoles",
+                        type: "GET",
+                        contentType: "application/json",
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                        },
+                        success: function (response) {
+    
+                            if (response?.data) {
+                                $("#role_user,#userrole_user_update").empty();
+                                $("#user-role-holder").children(":nth-child(n+3)").remove();
+                                $("#role_user").append(`<option selected>Choose...</option>`)
+                                response?.data?.forEach(function (role, index) {
+    
+    
+                                    $("#userrole_user_update").append(
+                                        `
+                                        <option value="${role?.id}">${role?.role}</option>
+                                        `)
+                                    $("#role_user").append(
+                                        `
+                                        <option value="${role?.id}">${role?.role}</option>
+                                        `)
+    
+                                    if (role.role.toLowerCase() == "manager") {
+                                        $("#manager").attr("data-id", role.id)
+                                    } else if (role.role.toLowerCase() == "staff") {
+                                        $("#staff").attr("data-id", role.id)
+                                    } else {
+                                        $("#owner").attr("data-id", role.id)
+                                    }
+    
+                                    $("#user-role-holder").append(
+                                        `
+                            <div class="col-lg-12 col-xl-12 order-md-1 order-1">
+                                                                        <div class="card card-color user-role ${role.role == "Owner" ? "active" : ""}" id="${role?.id}"
+                                                                            >
+                                                                            <div class="card-body">
+                                                                                <div class="row"
+                                                                                    style="align-items: center;">
+                                                                                    <div
+                                                                                        class="col-xl-4 col-sm-4 col-md-12">
+                                                                                        <div class="d-flex justify-content-start align-items-center"> <span
+                                                                                                class="settings-icon bg-primary-transparent text-primary p-0 bg-white-black" style="width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;"><i
+                                                                                                    class="fi fi-rs-key d-flex fs-24"></i></span>
+                                                                                            &nbsp; <b class="ms-2">${role.role}</b>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="col-xl-8 col-sm-8 col-md-12 border-left">
-                                                                                    <p>Responsible for keeping your
-                                                                                        properties well equipped and
-                                                                                        running smoothly. </p>
+                                                                                    <div
+                                                                                        class="col-xl-8 col-sm-8 col-md-12 border-left">
+                                                                                        <p>Responsible for keeping your
+                                                                                            properties well equipped and
+                                                                                            running smoothly. </p>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                        `
-
-                                )
-                                if ($("#manager").hasClass("active")) {
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                } else if ($("#staff").hasClass("active")) {
-                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
-                                } else {
-                                    $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").addClass("active")
-                                    $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
-                                    $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
-                                }
-                                eval(`$("#table_body_${role.role.toLowerCase()} tr")`).each(function () {
-                                    const childObject = $(this).attr("data-id")
-
-                                    $(this).children().not(':first-child').each(function () {
-                                        const objectKey = toTitleCase($(this).children().find("input").attr("class").split(" ")[1])
-
-
-                                        // console.log(childObject, objectKey)
-                                        $(this).children().find("input").prop("checked", role[childObject][objectKey])
-                                        // console.log(toTitleCase($(this).children().find("input").attr("class").split(" ")[1]))
+                            `
+    
+                                    )
+                                    if ($("#manager").hasClass("active")) {
+                                        $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").addClass("active")
+                                        $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
+                                        $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                    } else if ($("#staff").hasClass("active")) {
+                                        $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").addClass("active")
+                                        $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                        $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").removeClass("active")
+                                    } else {
+                                        $("#user-role-holder").children(":nth-child(3)").children(":nth-child(1)").addClass("active")
+                                        $("#user-role-holder").children(":nth-child(4)").children(":nth-child(1)").removeClass("active")
+                                        $("#user-role-holder").children(":nth-child(5)").children(":nth-child(1)").removeClass("active")
+                                    }
+                                    eval(`$("#table_body_${role.role.toLowerCase()} tr")`).each(function () {
+                                        const childObject = $(this).attr("data-id")
+    
+                                        $(this).children().not(':first-child').each(function () {
+                                            const objectKey = toTitleCase($(this).children().find("input").attr("class").split(" ")[1])
+    
+    
+                                            // console.log(childObject, objectKey)
+                                            $(this).children().find("input").prop("checked", role[childObject][objectKey])
+                                            // console.log(toTitleCase($(this).children().find("input").attr("class").split(" ")[1]))
+                                        })
+    
                                     })
-
                                 })
-                            })
-
-
-
-                        } else {
+    
+    
+    
+                            } else {
+                            }
+                        }, error: function (xhr, status, error) {
+    
                         }
-                    }, error: function (xhr, status, error) {
-
-                    }
-                })
-
-
-                function toTitleCase(str) {
-                    return str.replace(/\w\S*/g, function (txt) {
-                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                    });
-                }
-
-                $.ajax({
+                    })
+                    $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
                     type: "GET",
                     contentType: "application/json",
@@ -14314,75 +14349,6 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 });
-
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: async function (response) {
-
-                        if (response.message == "No data found") {
-                            localStorage.setItem("invoice", "false")
-                            window.location = './new-invoice.html'
-                        }
-                        tenantData = response.data[0]
-
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error)
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 20000);
-                    }
-                });
-                $(document).on('click', '.status-option', function () {
-                    // const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
-                    const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
-                    const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
-
-                    const data = {
-                        ...data1,
-                        ...data2
-                    };
-                    console.log("djsndksjnjsnfjnsjfsjnfjndsjfnjdsn")
-                    console.log($(`input[name="status"][value="${data.status}"]`))
-                    $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
-                });
-                $(document).on('click', ".resend-option", function () {
-                    console.log(invoiceId)
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
-                        type: 'GET', // Change the method to POST
-                        data: {
-                            invoiceID: invoiceId
-                        }, // Send the data in the request body
-                        contentType: 'application/json', // Set the content type to JSON
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            // Handle the success response from the API
-                            getData()
-                            $("#succesModal_invoice").modal("hide")
-                            $("#infoModal").modal("show")
-                            setTimeout(function () {
-                                $("#infoModal").modal("hide")
-                            }, 20000);
-
-                        },
-                        error: function (xhr, status, error) {
-                            // Handle the error response from the API
-                            console.log('API error:', error);
-                        }
-                    });
-                })
-
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
                     method: 'GET',
@@ -14552,7 +14518,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 var row = $("<tr>");
                                 row.append($("<td class='d-none upoid'>").text(entry.UPOID));
                                 row.append($("<td>").text(index + 1));
-                                    row.append($("<td>").html("<img src='" + "../assets/images/SPRK_default_preset_name_custom-–-1-1536x186.png" + "' alt='image' class='img-fluid' style='width: 120px; height: 22px;'>"));
+                                    row.append($("<td>").html("<img src='" + "../assets/images/SPRK_default_preset_name_custom-–-1-1536x186.png" + "' alt='image' class='img-fluid' style='width: 150px; height: 25px;'>"));
                                 row.append($("<td>").html("<b>" + entry.accountName + "</b>"));
                                 row.append($("<td>").text(entry.description ? entry.description : "N/A"));
                                 
@@ -14571,6 +14537,52 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         console.log(error);
                     }
                 });
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: async function (response) {
+
+                        if (response.message == "No data found") {
+                            localStorage.setItem("invoice", "false")
+                            window.location = './new-invoice.html'
+                        }
+                        tenantData = response.data[0]
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 20000);
+                    }
+                });
+                
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = '../Landlord/login_module.html';
+                        }, 20000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                });
+                
+
+
+
 
             }
             $(document).on("click", ".edit-option-user", function () {
@@ -16628,6 +16640,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                         setTimeout(function () {
                                                             $("#myModal_success").modal("hide");
                                                         }, 20000);
+                                                        
                                                         getData()
                                                     }
 

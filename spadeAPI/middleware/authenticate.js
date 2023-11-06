@@ -273,6 +273,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
         subscriptionID: result[0][0].nuveiSubscriptionId,
         nuveiUPOID: result[0][0].nuveiUPOID,
         create_at: result[0][0].created_at,
+        paidUnits: result[0][0].paidUnits,
 
 
       };
