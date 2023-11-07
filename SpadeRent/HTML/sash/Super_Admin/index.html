@@ -44,11 +44,11 @@
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <script>
+    <!-- <script>
         if (!localStorage.getItem("authtoken")) {
             window.location = "./login_module.html"
         }
-    </script>
+    </script> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -1702,8 +1702,8 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <!-- <script src="../assets/js/custom.js"></script> -->
-    <script>
+    <script src="../assets/js/custom.js"></script>
+    <!-- <script>
         var helloGuys = true;
         $(document).ajaxStop(function () {
             if (helloGuys) {
@@ -1713,10 +1713,10 @@
                 document.head.appendChild(customScript);
             }
         });
-    </script>
+    </script> -->
 
     <!-- ############################################# -->
-    <script src="../assets/js/intercom-tenant.js"></script>
+    <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1731,32 +1731,32 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
-    <!-- <script src="../assets/js/email-verification.js"></script>
-    <script src="../assets/js/getNotificationTenant.js"></script> -->
+    <script src="../assets/js/email-verification.js"></script>
+    <script src="../assets/js/getNotificationTenant.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
-                    $('#chatCounter').text(response.Count['count(message)'])
-                },
-                error: function (xhr, status, error) {
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
-                    console.log(error);
-                }
-            });
-        });
+        // $(document).ready(function () {
+        //     $.ajax({
+        //         url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+        //         method: 'GET',
+        //         headers: {
+        //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        //         },
+        //         success: function (response) {
+        //             console.log("getMessagesCountLandlord");
+        //             console.log(response.Count['count(message)']);
+        //             $('#chatCounter').text(response.Count['count(message)'])
+        //         },
+        //         error: function (xhr, status, error) {
+        //             $("#myModal_warning").modal("show");
+        //             setTimeout(function () {
+        //                 $('#myModal_warning').modal('hide');
+        //                 window.location = '../Landlord/login_module.html';
+        //             }, 2000);
+        //             console.log(error);
+        //         }
+        //     });
+        // });
     </script>
     <!-- <script src="../assets/js/completeTenantProfile.js"></script> -->
 
