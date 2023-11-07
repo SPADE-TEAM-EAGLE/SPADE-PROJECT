@@ -15,7 +15,7 @@ const config = process.env;
 
 // ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
-    const { email,password }=req.body;
+    const { email,password }=req.query;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
