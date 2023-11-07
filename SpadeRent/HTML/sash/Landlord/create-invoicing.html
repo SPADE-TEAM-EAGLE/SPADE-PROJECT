@@ -2743,7 +2743,7 @@
                         </div>
                         <div class="col-lg-3">
                             <label><b>Due Date</b></label>
-                            <p class="text-primary"><b id="dueDate">Jan-01-2023</b></p>
+                            <p class="text-primary"><b id="dueDate-view"></b></p>
                         </div>
                         <div class="col-lg-3">
                             <label><b>Status</b></label>
@@ -6256,15 +6256,16 @@ $("#price-table").append(`
                         ...data1,
                         ...data2
                     }
-                    console.log("mydata")
-                    console.log(data)
+                    
                     $("#tenantName").text(data.firstName + " " + data.lastName)
                     $("#invoiceType").text(data.invoiceType)
                     if(data.invoiceType=="One Time Invoice"){
                        
-                        $("#dueDate").text(data?.dueDate)
+                        $("#dueDate-view").text(data?.dueDate)
                     }else{
-                        $("#dueDate").text(data1?.recurringNextDate)
+                        console.log("mydata")
+                    console.log(data?.recurringNextDate)
+                        $("#dueDate-view").text(data?.recurringNextDate)
                     }
                     
                     $("#invoiceStatus").text(data.status)

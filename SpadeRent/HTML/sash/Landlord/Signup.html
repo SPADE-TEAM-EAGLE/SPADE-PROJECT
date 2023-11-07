@@ -3957,6 +3957,8 @@
                                         }),
                                         contentType: "application/json",
                                         success: function (response) {
+                                            localStorage.setItem("fullNameLandlord", $("#firstname1").val() + " " + $("#lastname").val())
+
                                             $("#preloader").css("display", "none");
                             $("#myModal_success").modal("show");
                             setTimeout(function () {
@@ -4018,6 +4020,7 @@
                     },
                 });
             });
+        
         });
     </script>
     <!-- ########### payment method start ########## -->
