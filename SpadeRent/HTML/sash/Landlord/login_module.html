@@ -797,11 +797,12 @@
               userId = response.body.id
               $("#user-email").val(email)
               $("#modaldemo00").modal("show")
-
-
             } else if (response.message == "Your Account is Closed") {
               $("#info-text").text(response.message || response)
               $("#infoModal").modal("show")
+            }
+            else if(response.message=="Your Subscription is expiredddd"){
+              window.location="./trial-expired.html";
             }
           },
           error: function (xhr, status, error) {

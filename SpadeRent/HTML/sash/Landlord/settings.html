@@ -7039,7 +7039,30 @@ Draft</button> -->
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <div class="modal fade" id="downgradenotPossible">
+                                                        <div class="modal-dialog modal-dialog-centered text-center "
+                                                            role="document">
+                                                            <div class="modal-content tx-size-sm">
+                                                                <div class="modal-body text-center p-5">
+                                                                    <div class="p-5">
+                                                                    <button aria-label="Close"
+                                                                        class="btn-close position-absolute mt-0 btn-pill text-dark"
+                                                                        data-bs-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span></button>
+                                                                            <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
+                                                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">It is not possible to subscribe at the moment because the downgrade or upgrade process is already in progress.</h4>
+                                                                    <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                                                                    <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                                                                    <button
+                                                                        aria-label="Close"
+                                                                        class="btn btn-primary btn-pill w-auto mt-2"
+                                                                        data-bs-dismiss="modal"
+                                                                        >Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="modal fade" id="downgradeConfirm-yearly">
                                                         <div class="modal-dialog modal-dialog-centered text-center "
                                                             role="document">
@@ -13566,6 +13589,7 @@ Draft</button> -->
         <script>
             var userId; var userData;
             var currentSelectedId=0;
+            var future=false;
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
@@ -13993,12 +14017,15 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         }
                         
                         $(`#${response?.futurePlanId} .py-2`).append(`Will be selected after <span>${response?.daysRemaining} ${response?.daysRemaining>1?"days":"day"}</span>`);
+                        
                         [2,3,4,5,6,7].forEach((item)=>{
                             if(item==response?.futurePlanId){
-
+                                future=true;
                             }else{
                                 $(`#${item} .py-2`).empty();
                             }
+                         
+                            
                         })
                         $(`#${response.planID}`).addClass("bg-primary");
                         $(`#${response.planID}`).addClass("text-white");
@@ -14537,6 +14564,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         console.log(error);
                     }
                 });
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
@@ -15448,7 +15476,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     })
                     console.log(parseInt(currentSelectedId), parseInt(cardId))
-                    if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)>=5 && parseInt(cardId)<=7) {
+                    if(future){
+                        $("#downgradenotPossible").modal("show");
+                    }
+                    else if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)>=5 && parseInt(cardId)<=7) {
                         console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)

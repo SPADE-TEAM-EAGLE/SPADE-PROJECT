@@ -74,6 +74,7 @@ const userType = "Landlord";
   //  ############################# Create bank Account ############################################################
 exports.GetBankAccount = async (req, res) => {
     const { userId,userType } = req.user;
+    console.log(req.user)
     // const { userId } = req.body;
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
