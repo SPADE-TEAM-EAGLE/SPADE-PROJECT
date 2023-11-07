@@ -300,7 +300,7 @@ exports.Signin = async function (req, res) {
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     if (daysDiff >= 30) {
         return res.status(200).json({
-          message: "Your Subscription is expiredddd"
+          message: "Your Subscription is expired"
         }); 
     }
       }
@@ -2897,7 +2897,8 @@ exports.UpdateUserNuveiId = async(req,res)=>{
       res.status(400).json({message:"Error in update user"})
     }
   }catch(error){
-    console.log(error)
+    console.log(error);
+    res.status(400).send(error.message);
 
   }
 }

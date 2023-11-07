@@ -7,7 +7,8 @@ const tenantPortalController = require("../controllers/tenantPortalController");
 const userPermissionController = require("../controllers/userPermissionController");
 const settingController = require("../controllers/settingController");
 const bankAccountController = require("../controllers/bankAccountController");
-const { verifyToken, verifyTokenTenant } = require("../middleware/authenticate");
+const superAdmin = require("../controllers/superAdmin");
+const { verifyToken, verifyTokenTenant, verifySuperAdmin } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
 const prospectus = require("../controllers/prospectusController");
 const fileUpload = require("../helper/S3Bucket");
@@ -290,3 +291,6 @@ router.put("/updateBankAccountTenant", verifyTokenTenant, bankAccountController.
 // router.get("/dummy", bankAccountController.dummy); 
 router.put("/updatePropertyBankAccount", bankAccountController.updatePropertyBankAccount);
 router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
+router.get("/signInAdmin", superAdmin.signInAdmin);
+// router.get("/allLandlord", superAdmin.allLandlord);
+router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
