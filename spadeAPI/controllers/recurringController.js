@@ -30,7 +30,7 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const frequency = selectTenantsResult[0][i].frequency;
       const dueDate = selectTenantsResult[0][i].dueDate;
       const dueDays = selectTenantsResult[0][i].daysDue;
-      const repeatTerms = selectTenantsResult[0][i].repeatTerms;            
+      const repeatTerms = selectTenantsResult[0][i].repeatTerms;
       const terms = selectTenantsResult[0][i].terms;
       const additionalNotes = selectTenantsResult[0][i].note;
       const totalAmount = selectTenantsResult[0][i].totalAmount;
@@ -64,18 +64,10 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           const second = String(nextDate.getSeconds()).padStart(2, '0');
           const recurringNextDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 
-
-
-
-
-
-
-
-
           console.log("ready");
           // ############################################################# MONthly Rest of the code remains the same...
           // Recurring Next Date END 
-          const invoiceResult = await queryRunner(insertInvoice,[landlordID, tenantID, invoiceType, startDate, endDate, frequency,dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount,notify, recurringNextDate]);
+          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
             // console.log("object");
@@ -91,28 +83,28 @@ const task = cron.schedule('0 9,20 * * *', async () => {
             let mailSubject;
             let invoiceEmail;
             if (selectTenantsResult[0].length > 0) {
-               tenantEmail = selectTenantsResult[0][0].email;
+              tenantEmail = selectTenantsResult[0][0].email;
               const landlordID = selectTenantsResult[0][0].landlordID;
               const propertyID = selectTenantsResult[0][0].propertyID;
-               tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+              tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
               // console.log("1234")
               const selectPropertyResult = await queryRunner(selectQuery('property', 'id'), [propertyID])
-               address = selectPropertyResult[0][0].address;
+              address = selectPropertyResult[0][0].address;
               const selectLandlordResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
               const BusinessName = selectLandlordResult[0][0].BusinessName || "N/A";
               const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
               invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
-               mailSubject = "Invoice From " + userName;
+              mailSubject = "Invoice From " + userName;
               // await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, userName, landlordID, BusinessName, invoiceEmail); landlordID,invoiceEmail
-              
+
               // console.log("1234222")
               // console.log(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency)
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             const lineItems = lineItemsResult[0];
             const AddDate = new Date();
-AddDate.setDate(AddDate.getDate() + 5);
-            await invoiceSendMail(tenantName,address,AddDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail,invoiceEmail,landlordID);
+            AddDate.setDate(AddDate.getDate() + 5);
+            await invoiceSendMail(tenantName, address, AddDate, terms, additionalNotes, lineItems, totalAmount, mailSubject, tenantEmail, invoiceEmail, landlordID);
             if (lineItemsResult[0].length > 0) {
               for (let j = 0; j < lineItemsResult[0].length; j++) {
                 const category = lineItemsResult[0][j].category;
@@ -157,8 +149,8 @@ AddDate.setDate(AddDate.getDate() + 5);
           // console.log("6");
           // console.log(landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate);
 
-          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify,recurringNextDate]);
-          
+          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
+
           console.log(invoiceResult);
           if (invoiceResult.affectedRows === 0) {
             // console.log("7");
@@ -174,12 +166,12 @@ AddDate.setDate(AddDate.getDate() + 5);
             let mailSubject;
             let invoiceEmail;
             if (selectTenantsResult[0].length > 0) {
-               tenantEmail = selectTenantsResult[0][0].email;
-               tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
-               const propertyID = selectTenantsResult[0][0].propertyID;
+              tenantEmail = selectTenantsResult[0][0].email;
+              tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+              const propertyID = selectTenantsResult[0][0].propertyID;
               // console.log("1234")
               const selectPropertyResult = await queryRunner(selectQuery('property', 'id'), [propertyID])
-               address = selectPropertyResult[0][0].address;
+              address = selectPropertyResult[0][0].address;
               const landlordID = selectTenantsResult[0][0].landlordID;
               // const mailSubject = invoiceID + " From " + frequency;
               // const mailSubject = "Invoice From " + userName;
@@ -187,14 +179,14 @@ AddDate.setDate(AddDate.getDate() + 5);
               const BusinessName = selectLandlordResult[0][0].BusinessName || "N/A";
               const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
               invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
-               mailSubject = "Invoice From " + userName;
-               // tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail
-              }
-              const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
-              const lineItems = lineItemsResult[0];
-              const AddDate = new Date();
-AddDate.setDate(AddDate.getDate() + 5);
-              await invoiceSendMail(tenantName,address,AddDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail, invoiceEmail, landlordID);
+              mailSubject = "Invoice From " + userName;
+              // tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail
+            }
+            const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
+            const lineItems = lineItemsResult[0];
+            const AddDate = new Date();
+            AddDate.setDate(AddDate.getDate() + 5);
+            await invoiceSendMail(tenantName, address, AddDate, terms, additionalNotes, lineItems, totalAmount, mailSubject, tenantEmail, invoiceEmail, landlordID);
             if (lineItemsResult[0].length > 0) {
               for (let j = 0; j < lineItemsResult[0].length; j++) {
                 const category = lineItemsResult[0][j].category;

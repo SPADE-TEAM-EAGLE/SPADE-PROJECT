@@ -625,12 +625,12 @@ return daysDiff;
 
 
   // Move Annually to Monthly
-if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
-  return res.status(200).json({
-    Message : "unable to downgrade",
-    Reason : "you want to switch Annually to monthly kindly contact to support team"
-  });
-}
+// if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+//   return res.status(200).json({
+//     Message : "unable to downgrade",
+//     Reason : "you want to switch Annually to monthly kindly contact to support team"
+//   });
+// }
 
 
   // Annually Downgrade
