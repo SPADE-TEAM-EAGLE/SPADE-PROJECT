@@ -616,21 +616,22 @@ return daysDiff;
   const { nuveiId, monthlyAnnual, plantotalAmount, planName } = result[0][0];
   // Additional code block (if userId is defined)
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
-  
+  console.log(UserResult[0][0])
   const { subscriptionCreated_at, PlanID } = UserResult[0][0];
-  
+  console.log("PlanID : ", PlanID);
   const currentPlanResult = await queryRunner(selectQuery("plan", "id"), [PlanID]);
+  console.log(currentPlanResult[0][0])
   const { monthlyAnnual : currentPlanMonthlyAnnual } = currentPlanResult[0][0];
 
 
 
   // Move Annually to Monthly
-if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
-  return res.status(200).json({
-    Message : "unable to downgrade",
-    Reason : "you want to switch Annually to monthly kindly contact to support team"
-  });
-}
+// if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
+//   return res.status(200).json({
+//     Message : "unable to downgrade",
+//     Reason : "you want to switch Annually to monthly kindly contact to support team"
+//   });
+// }
 
 
   // Annually Downgrade
@@ -776,7 +777,11 @@ daysDifferenceMtoA = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       year: "20"
   };
 }
-
+if(planId > PlanID && PlanID==1){
+  
+    requestData.initialAmount = initialAmount;
+  
+}
   console.log("requestData.endAfter : ", requestData.startAfter);
   requestData.planId = nuveiId;
   console.log(requestData);
