@@ -328,7 +328,31 @@ const verifyTokenTenant = async (req, res, next) => {
     return res.status(400).send("Invalid Token");
   }
 }; 
+
+
+
+const verifySuperAdmin = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  if (!token) {
+    return res.status(401).send("Access Denied");
+  }
+  try {
+    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    const result = await queryRunner(selectQuery("superAdmin", "email"), [decoded.email]);
+    req.user = {
+      email: result[0][0].email,
+      userId: result[0][0].id,
+      userName: result[0][0].fName + " " + result[0][0].lName,
+      AdminCreatedDate: result[0][0].created_at
+    }; 
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Invalid Token");
+  }
+}; 
 module.exports = {
   verifyToken,
   verifyTokenTenant,
+  verifySuperAdmin
 };
