@@ -23,6 +23,9 @@ const verifyToken = async (req, res, next) => {
       console.log(result[0][0])
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
+      console.log("result[0][0].PlanID");
+      console.log(result[0][0]);
+      // console.log(result[0][0].planID);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
       
       function splitAndConvertToObject(value) {
@@ -199,6 +202,7 @@ req.user = {
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
+      // console.log(planCountResult[0]);
       if(futurePlanId[0]?.length!=0){
         
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
