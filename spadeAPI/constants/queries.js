@@ -1125,3 +1125,4 @@ exports.insertInUserPermissionUsers =
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";
   exports.allLandlordQuery = "SELECT * FROM users as u join plan as p on u.PlanID = p.id";
+  exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";

@@ -1,7 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
-const { selectQuery, userPermissionProtected, userPermissionAuth } = require("../constants/queries");
+const { selectQuery, userPermissionProtected, userPermissionAuth, countTenantQuery } = require("../constants/queries");
 // const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
@@ -22,6 +22,8 @@ const verifyToken = async (req, res, next) => {
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
       console.log(result[0][0])
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
+      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
+      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
       
       function splitAndConvertToObject(value) {
         const resultObject = {};
@@ -57,6 +59,9 @@ const verifyToken = async (req, res, next) => {
       const settingMUsers = splitAndConvertToObject(result[0][0].settingMUsers);
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
+      const totalTenantAllow = splitAndConvertToObject(planCountResult[0][0].totalTenants);
+      const totalTenantHave = splitAndConvertToObject(countTenantResult[0][0].totalTenant);
+      
       console.log(result[0][0])
       if(futurePlanId[0]?.length!=0){
         
@@ -120,6 +125,8 @@ req.user = {
   settingMUsers,
   settingEmailTs,
   SettingInvoiceSettings,
+  totalTenantAllow,
+  totalTenantHave
 
 };
 }else{
@@ -172,6 +179,8 @@ req.user = {
     settingMUsers,
     settingEmailTs,
     SettingInvoiceSettings,
+    totalTenantAllow,
+    totalTenantHave
 
   };
 }
@@ -188,6 +197,8 @@ req.user = {
         decoded.email,
       ]);
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
+      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
+      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
       if(futurePlanId[0]?.length!=0){
         
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
@@ -235,6 +246,9 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           create_at: result[0][0].created_at,
           futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
           daysRemaining:daysRemaining,
+          // countTenantResult planCountResult
+          totalTenantAllow : planCountResult[0][0].totalTenants,
+      totalTenantHave : countTenantResult[0][0].totalTenant
   
   
         };
@@ -274,6 +288,8 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
         nuveiUPOID: result[0][0].nuveiUPOID,
         create_at: result[0][0].created_at,
         paidUnits: result[0][0].paidUnits,
+        totalTenantAllow : planCountResult[0][0].totalTenants,
+      totalTenantHave : countTenantResult[0][0].totalTenant
 
 
       };
