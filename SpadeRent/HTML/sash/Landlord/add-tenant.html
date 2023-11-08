@@ -1179,7 +1179,7 @@
                                 Invite</a>
                         </div>
                     </div>
-                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2"
+                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2 add-tenant-btn"
                             id="add_property_btnn" data-bs-effect="effect-scale" data-bs-toggle="modal"
                             href="#addModal"><i class="fe fe-plus me-2"></i><strong>ADD NEW
                                 TENANT</strong></button></div>
@@ -2457,7 +2457,7 @@
                                                 </ul>
                                             </div>
                                            
-                                            <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
+                                            <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button add-tenant-btn"
                                             id="add_property_btn" data-bs-effect="effect-scale"
                                             data-bs-toggle="modal" href="#addModal"><i
                                                 class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -2465,7 +2465,7 @@
                                         </div>
 
                                             <!-- Mobile screen button add property Start -->
-                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button" id="add_property_btn"
+                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button add-tenant-btn" id="add_property_btn"
                                           data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                               class="fe fe-plus"></i></button>
                                           <!-- Mobile screen button add property End -->
@@ -5066,13 +5066,16 @@ $.ajax({
             // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants , create_at , planID }) {
-
+                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave }) {
+                    if(totalTenantHave>=totalTenantAllow){
+                        
+                        $(".add-tenant-btn").attr("disabled",true)
+                    }
                     if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)

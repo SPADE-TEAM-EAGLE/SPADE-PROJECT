@@ -3307,6 +3307,14 @@ $(".plan_remaining_days_data").each(function(){
 
 
             });
+            document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+document.addEventListener('keyup', function(e) {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'x' || e.key === 'v'|| e.key === 'i')) {
+    e.preventDefault();
+  }
+});
 
             function getData(selectedFilter = "alphabets") {
                 // $("#preloader").fadeIn("fast");
@@ -3334,7 +3342,7 @@ $(".plan_remaining_days_data").each(function(){
                         let tenantNames = []
                         if(response?.data[0]?.length>=20){
                             $(".add-btn-vendor").attr("disabled",true);
-                            $(".add-btn-vendor").remove();
+                            
 
                         }
                         response.data[0]?.forEach(function (vendor, index) {
