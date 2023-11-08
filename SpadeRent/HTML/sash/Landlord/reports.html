@@ -3330,6 +3330,7 @@
                                                                                 <th>UNIT NUMBER</th>
                                                                                 <th>LEASE START DATE</th>
                                                                                 <th>LEASE EXPIRY</th>
+                                                                                <th>REMAINING DAYS</th>
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT PHONE</th>
 
@@ -5164,7 +5165,20 @@ const currentDate = new Date();
                             // Set a default value or display a message for empty expirydate
                             remainingDays = 'N/A';
                         }
-
+                        var leaseDays
+                        console.log("jnfdnjdnfndjfn",lease.LeaseStart,lease.LeaseExpire)
+                        if(lease.LeaseStart && lease.LeaseExpire){
+                            var leaseStartDate = new Date(lease.LeaseStart);
+                            var leaseEndDate = new Date(lease.LeaseExpire);
+                            var timeDiff = Math.abs(leaseEndDate - leaseStartDate);
+                            leaseDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            console.log("remiamfmkmkmfkdmfmdfmsf",leaseDays);
+                            if (leaseDays>1){
+                                leaseDays = leaseDays + " days";
+                            }else{
+                                leaseDays = leaseDays + " day";
+                            }
+                        }
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
@@ -5175,8 +5189,12 @@ const currentDate = new Date();
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseStart ? lease.LeaseStart : 'N/A') + '</p>' +
                             '</td>' +
+                            
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseExpire ? lease.LeaseExpire : 'N/A') + '</p>' +
+                            '</td>' +
+                            '<td class="propertyAddress">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (leaseDays ? leaseDays : 'N/A') + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 800;" class="mb-1">' + lease.firstName + " " + lease.lastName + '</p>' +
