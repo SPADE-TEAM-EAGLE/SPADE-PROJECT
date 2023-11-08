@@ -562,7 +562,7 @@
                     </div>
                     <div class="col-12 mb-2 pb-5">
                       <div class="form-group"></div>
-                      <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="next1">
+                      <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="submit-login">
                         Login
                         <!-- <img src="../assets/images/arrow.svg" class="float-right mt-1" alt=""> -->
                         <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2" alt="" />
@@ -626,7 +626,32 @@
    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
   <script>
     $(document).ready(function () {
-
+      $("#submit-login").on("click",function(){
+        $.ajax({
+        url: "http://localhost:3000/api/spade//signInAdmin",
+        type: "GET",
+        contentType: "application/json",
+        data:{
+          email: $("#login-email").val(),
+          password: $("#id_password1").val()
+        },
+        success: function (response) {
+          // console.log(result);
+          $("#myModal_success").modal("show");
+                              localStorage.setItem("authtoken", response.token);
+                setTimeout(function () {
+                  $("#myModal_success").modal("hide");
+                  window.location = "../Super_Admin/index.html";
+                }, 2000);
+          
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+      
+      })
+      
       if ($('body').hasClass('dark-mode')) {
         $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
       } else {

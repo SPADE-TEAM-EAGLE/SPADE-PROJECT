@@ -211,8 +211,8 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  // const { email, password, tenant } = req.query;
-  const { email, password, tenant } = req.body;
+  const { email, password, tenant } = req.query;
+  // const { email, password, tenant } = req.body;
   // const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;
@@ -298,10 +298,9 @@ exports.Signin = async function (req, res) {
         const subscriptionDate = new Date(selectUserPermissionResult[0][0].created_at);
         const timeDiff = currentDate - subscriptionDate;
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-
     if (daysDiff >= 30) {
         return res.status(200).json({
-          message: "Your Subscription is expiredddd"
+          message: "Your Subscription is expired"
         }); 
     }
       }
@@ -2898,7 +2897,8 @@ exports.UpdateUserNuveiId = async(req,res)=>{
       res.status(400).json({message:"Error in update user"})
     }
   }catch(error){
-    console.log(error)
+    console.log(error);
+    res.status(400).send(error.message);
 
   }
 }
