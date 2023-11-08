@@ -255,34 +255,39 @@ exports.getTenantReport =
   "SELECT tenants.id AS tenantID, tenants.companyName, tenants.firstName, tenants.lastName,tenants.leaseStartDate,tenants.leaseEndDate,tenants.phoneNumber,property.propertyType,property.propertyName,property.id AS propertyId ,property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 exports.getTaskReportData =
   "SELECT task.id AS taskID, task.taskName, task.priority, task.dueDate, task.created_at, task.createdBy, task.status, vendor.lastName, vendor.firstName, property.propertyName, property.units FROM task JOIN tenants ON task.tenantID = tenants.id JOIN property ON tenants.propertyID = property.id JOIN vendor ON task.vendorID = vendor.id WHERE task.landlordID = ?";
-exports.getInvoiceReportData = `SELECT
-invoice.id AS invoiceID,
-invoice.created_at,
-invoice.totalAmount,
-invoice.dueDate,
-invoice.recurringNextDate,
-invoice.status,
-property.propertyName,
-property.address,
-property.city,
-property.state,
-property.zipCode,
-users.Phone AS userPhone, -- Assuming 'user' is the table that contains the 'Phone' column
-tenants.email,
-tenants.phoneNumber,
-tenants.firstName,
-tenants.lastName
+  exports.getInvoiceReportData = `SELECT
+  invoice.id AS invoiceID,
+  invoice.created_at,
+  invoice.totalAmount,
+  invoice.dueDate,
+  invoice.recurringNextDate,
+  invoice.status,
+  property.propertyName,
+  property.address,
+  property.city,
+  property.state,
+  property.zipCode,
+  users.Phone AS userPhone, -- Assuming 'users' is the table that contains the 'Phone' column
+  tenants.email,
+  tenants.phoneNumber,
+  tenants.firstName,
+  tenants.lastName,
+  propertyunits.unitNumber,
+  tenants.propertyUnitID
 FROM
-invoice
+  invoice
 JOIN
-tenants ON tenants.id = invoice.tenantID
+  tenants ON tenants.id = invoice.tenantID
 JOIN
-property ON property.id = tenants.propertyID
+  propertyunits ON propertyunits.id = tenants.propertyUnitID
 JOIN
-users ON users.id = tenants.landlordID -- Assuming 'user' is the table that contains the 'Phone' column
+  property ON property.id = tenants.propertyID
+JOIN
+  users ON users.id = tenants.landlordID -- Assuming 'users' is the table that contains the 'Phone' column
 WHERE
-invoice.landlordID = ?
+  invoice.landlordID = ?
 `;
+
 exports.getLeaseReport =
   "SELECT tenants.firstName, tenants.lastName, tenants.leaseStartDate AS LeaseStart, tenants.leaseEndDate AS LeaseExpire, tenants.phoneNumber, property.propertyType,property.id AS propertyId ,property.propertyName, property.units FROM tenants JOIN property ON tenants.propertyID = property.id WHERE tenants.landlordID = ?";
 // getTotalAmount getTotalAmountUnpaid getTotalAmountPaid getNumPropertyTenant

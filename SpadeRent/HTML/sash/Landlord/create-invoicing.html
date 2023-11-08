@@ -1284,7 +1284,7 @@
                                         <div class="">
                                             <h6 class="fw-bold mb-1" style="color: 
                                 #1467B0;">MEMO</h6>
-                                            <P class="text-black">Thank you for your business!</P>
+                                            <P class="text-black" id="memo-view">Thank you for your business!</P>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -4622,6 +4622,7 @@ $(".plan_remaining_days_data").each(function(){
                     return fileName;
                 }
                 function saveAndPrint(tenant, data) {
+                    console.log(data,"dfsdfsfdfsdfsdfsdffdfsdfsdfsdfsfdfsfsfs")
                     $("#client-id").empty()
                     $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #1467B0;">BILLED TO</h5>
@@ -4650,6 +4651,7 @@ $(".plan_remaining_days_data").each(function(){
                     )
 
                     $("#memo-table").empty()
+                    $("#memo-view").text(data.additionalNotes?data.additionalNotes:"N/A")
                     let totalTaxAmount = 0;
 
                     data.lineItems.forEach((item) => {
@@ -6239,6 +6241,7 @@ $("#price-table").append(`
 
 
                     })
+                    $("#memo-view").text(data.note?data.note:"N/A")
                     $("#viewModal").modal("show")
                 })
 
