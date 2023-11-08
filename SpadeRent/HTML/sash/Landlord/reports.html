@@ -2789,8 +2789,8 @@
                                                     </li>
                                                     <li><a href="#tab66" data-bs-toggle="tab">Lease Reports</a></li>
                                                     <li><a href="#tab77" data-bs-toggle="tab">Tenant Reports</a></li>
-                                                    <li><a href="#tab88" data-bs-toggle="tab">Invoice Report</a></li>
-                                                    <li><a href="#tab99" data-bs-toggle="tab">Task Report</a></li>
+                                                    <li><a href="#tab88" data-bs-toggle="tab">Invoice Reports</a></li>
+                                                    <li><a href="#tab99" data-bs-toggle="tab">Task Reports</a></li>
                                                     <!-- <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
@@ -2852,8 +2852,8 @@
                                                                 id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
                                                                 <option value="All">All</option>
-                                                                <option value="Occupied">Occupied Property</option>
-                                                                <option value="Vacant">Vaccant Property</option>
+                                                                <option value="Occupied">Occupied</option>
+                                                                <option value="Vacant">Vaccant</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -2923,8 +2923,7 @@
                                                                         
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">PROPERTY
-                                                                                ADDRESS</a>
+                                                                                href="javascript:void(0)">ADDRESS</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2943,7 +2942,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">City</a>
+                                                                                href="javascript:void(0)">CITY</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2980,8 +2979,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">TENANT
-                                                                                EMAIL</a>
+                                                                                href="javascript:void(0)">EMAIL ADDRESS</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2990,7 +2988,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">PHONE</a>
+                                                                                href="javascript:void(0)">PHONE NUMBER</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -3053,7 +3051,7 @@
                                                                                     <th>STATE</th>
                                                                                     <th>ZIP CODE</th>
                                                                                     <th>TENANT NAME</th>
-                                                                                    <th>EMAIL</th>
+                                                                                    <th>EMAIL ADDRESS</th>
                                                                                     <th>PHONE NUMBER</th>
 
                                                                                 </tr>
@@ -3246,8 +3244,7 @@
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
-                                                                                    href="javascript:void(0)">LEASE
-                                                                                    EXPIRY</a>
+                                                                                    href="javascript:void(0)">LEASE END DATE</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
                                                                                         class="form-check-input mt-2"
@@ -3329,7 +3326,7 @@
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
                                                                                 <th>LEASE START DATE</th>
-                                                                                <th>LEASE EXPIRY</th>
+                                                                                <th>LEASE END DATE</th>
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT PHONE</th>
 
@@ -3852,8 +3849,7 @@
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
-                                                                                    href="javascript:void(0)">PROPERTY
-                                                                                    ADDRESS</a>
+                                                                                    href="javascript:void(0)">ADDRESS</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
                                                                                         class="form-check-input mt-2"
@@ -3917,7 +3913,7 @@
                                                                                 <th>PHONE</th>
                                                                                 <th>AMOUNT</th>
                                                                                 <th>NEXT DUE DATE</th>
-                                                                                <th>PROPERTY ADDRESS</th>
+                                                                                <th>ADDRESS</th>
 
                                                                             </tr>
                                                                         </thead>
@@ -5112,7 +5108,7 @@ const currentDate = new Date();
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                         
                             '<td class="propertyName" style="font-weight: 600;">' + (property.propertyName?property.propertyName:"N/A") + '</td>' +
-                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
+                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">' + property.propertyType + '</span></a></td>' +
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (property.address?property.address:"N/A") + '</p>' +
                             '</td>' +
@@ -5168,9 +5164,8 @@ const currentDate = new Date();
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
-                          
                             '<td class="propertyName" style="font-weight: 600;">' + lease.propertyName + '</td>' +
-                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + lease.propertyType + '</span></a></td>' +
+                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">' + lease.propertyType + '</span></a></td>' +
                             '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseStart ? lease.LeaseStart : 'N/A') + '</p>' +
@@ -5344,7 +5339,7 @@ if (task.priority == 'High') {
                             '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '</td>' +
                             '<td class="propertyName" style="font-weight: 600;">' + (invoice.userPhone?invoice.userPhone:"N/A") + '</td>' +
                             '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '</td>' +
-                            '<td class="rentAmount" style="font-weight: 600;">Next Due Date: ' + (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) + '</td>' +
+                            '<td class="rentAmount" style="font-weight: 600;">' + (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) + '</td>' +
                             '<td class="status" style="font-weight: 600;">' + (invoice.address?invoice.address:"N/A") + '</td>' +
 
                             '</tr>';
@@ -5371,7 +5366,7 @@ if (task.priority == 'High') {
                     var newRowHtml = '<tr>' +
                         '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                         '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + '</td>' +
-                        '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>Single Family</span></a></td>' +
+                        '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">Single Family</span></a></td>' +
                         '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
                         '<td class="propertyAddress">' +
                         '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseEndDate) + '</p>' +
