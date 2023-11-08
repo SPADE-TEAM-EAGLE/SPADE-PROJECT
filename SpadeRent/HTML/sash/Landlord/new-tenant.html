@@ -1435,7 +1435,7 @@ color: #000;
                         </div>
                     </div>
                     <div class="mt-2">
-                        <a type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
+                        <a type="button" class="btn btn-primary btn-pill mx-2 add-tenant-btn" id="add_property_btn"
                             href="./add-tenant.html">
                             <i class="fe fe-plus me-2"></i>
                             <strong>ADD NEW TENANT</strong>
@@ -1954,7 +1954,7 @@ color: #000;
                                         <div class="row">
                                             <div class="text-center">
                                                 <button type="button"
-                                                    class="btn btn-primary btn-pill btn-xl font-weight-bold"
+                                                    class="btn btn-primary btn-pill btn-xl font-weight-bold add-tenant-btn"
                                                     id="add_property_btn" data-bs-effect="effect-scale"
                                                     data-bs-toggle="modal" href="#addModal"><i
                                                         class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -3323,12 +3323,16 @@ color: #000;
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({
-                    userName, image , create_at,planID
+                    userName, image , create_at,planID,totalTenantHave,totalTenantAllow
                 }) {
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
+                    }
+                    if(totalTenantHave>=totalTenantAllow){
+                        
+                        $(".add-tenant-btn").prop("disabled",true);
                     }
                     if (image !== " " && image !== null && image!== "") {
 
