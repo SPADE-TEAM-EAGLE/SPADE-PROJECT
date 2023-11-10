@@ -379,12 +379,12 @@
                                             class="side-menu__label">Overview</span></a>
                                 </li>
 
-                                <li class="slide card-demo">
+                                <!-- <li class="slide card-demo">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-ticket"></i><span
                                             class="side-menu__label">Tickets</span>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="customers.html"><i
@@ -400,7 +400,14 @@
                                     </a>
                                 </li>
 
-                                <li class="slide card-demo1">
+                                <li class="slide card-demo">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html"><i
+                                            class="side-menu__icon fi fi-rs-ticket"></i><span
+                                            class="side-menu__label">User Management</span>
+                                    </a>
+                                </li>
+
+                                <!-- <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
                                             class="side-menu__label">Revenue</span>
@@ -427,9 +434,9 @@
                                         <span class="side-menu__label">Chats</span>
                                         <span class="badge bg-primary side-badge" id="chatCounter"></span>
                                     </a>
-                                </li>
+                                </li> -->
                             </div>
-                            <div style="position: absolute; bottom: 0; width: 94%; top: 100%;">
+                            <div style="position: absolute; bottom: 0; width: 94%;">
                                 <li>
                                     <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
                                 </li>
@@ -671,18 +678,39 @@
                                                         <th></th>
                                                         <th>customer id</th>
                                                         <th class="d-none">Landlord ID</th>
-                                                        <th>Name</th>
-                                                        <th>contact information</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
 
                                                         <th>subscription</th>
                                                         <th>amount</th>
-                                                        
-                                                        <th>Status</th>
+                                                        <th>Purchase Date</th>
+                                                        <th>Next Billing</th>
+                                                        <!-- <th>Status</th> -->
                                                         <th>ACTION</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table_body">
-                                                    
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="font-weight: 600;">US-272323</td>
+                                                        <td style="font-weight: 600;"><b>Jonathan </b></td>
+                                                        <td style="font-weight: 600;"><b>J. Dicken</b></td>
+                                                         <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" style="background-color: #C8F3F7;color: #0BAAB8;"><i class="fi fi-rs-dot-circle me-1"></i><b>Pro Plan Purchased</b></span></a></td>
+                                                        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$69.99/ Per Month</b></p><span>Purchase Date: Feb/02/2022</span></td>
+                                                        <td style="font-weight: 600;">April/02/2023 3:00PM</td>
+                                                        <td style="font-weight: 600;">May/02/2023 3:00PM</td>
+                                                        <!-- <td class="propertyAddress"><p style="font-weight: 600; color: #FB233B;" class="mb-1"><b><i class="fi fi-rs-clock-three"></i> Expired</b></p><span style="color: #1467B0;">Renew Now</span></td> -->
+                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                            <ul class="dropdown-menu dropdown-menu-top">
+                                                            <li><a class="dropdown-item text-dark view-property" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: start;"> Upgrade Annualy/Monthly</a></li>
+                                                            <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Sent Reminder</a></li>
+                                                            <li><a class="edit-option dropdown-item text-dark"  data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal" style="display: flex; align-items: start;"> Close Account</a></li>
+                                                            <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Downgrade to Monthly (Old Plan)</a></li>
+                                                            <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Monthly (New Plan)</a></li>
+                                                            <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Yearly (New Plan)</a></li>
+                                                            <li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: start;">Delete</a></li>
+                                                        </ul></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -692,6 +720,68 @@
                         </div>
                         <!-- Row -->
                         <!-- main body end  -->
+
+                        <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title">Close <strong class="color-primary">Account</strong></h2>
+                                            <span class="">Closing your account will serve as your notice of termination of the Spade Rent (or any other Spade Rent agreement governing this account) for this account.</span>
+                                        </div>
+                                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                                            <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                            data-bs-parent="#accordionExample">
+                                            <form class="row g-3" enctype="multipart/form-data">
+                                                <div class="col-12">
+                                                    <label for="inputState" class="form-label fw-bold">Select Reason</label>
+                                                    <select class="form-select form select2-show-search"
+                                                        id="reason" onchange="showOtherInput()" required>
+                                                        <option selected>Choose...</option>
+                                                        <option value="No longer using the service/product">No longer using the service/product</option>
+                                                        <option value="Found an alternative service/product">Found an alternative service/product</option>
+                                                        <option value="Unsatisfactory customer service">Unsatisfactory customer service</option>
+                                                        <option value="Technical issues or bugs">Technical issues or bugs</option>
+                                                        <option value="Concerns about data privacy/security">Concerns about data privacy/security</option>
+                                                        <option value="Cost-related reasons">Cost-related reasons</option>
+                                                        <option value="User interface/user experience issues">User interface/user experience issues</option>
+                                                        <option value="Too many advertisement">Too many advertisement</option>
+                                                        <option value="Limited features or functionality">Limited features or functionality</option>
+                                                        <option value="Changed personal circumstances">Changed personal circumstances</option>
+                                                        <option value="Difficulty in canceling or managing the account">Difficulty in canceling or managing the account</option>
+                                                        <option value="Received better offers or promotions elsewhere">Received better offers or promotions elsewhere</option>
+                                                        <option value="Quality of the product/service">Quality of the product/service</option>
+                                                        <option value="Account management difficulties">Account management difficulties</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <span class="text-danger d-none">Status is required!</span>
+                                                </div>
+                                                
+                                                <div class="col-12" id="otherInputContainer" style="display: none;">
+                                                    <label for="inputEmail3" id="otherInput" class="form-label fw-bold">Other</label>
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                                
+                    
+                                            </form>
+                                        </div>
+                    
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-end">
+                                        <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                                                id='close'>Close</button>
+                                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                                            <a href="javascript:void(0)" class="btn text-light btn-pill button modalValid"
+                                                style='background-color:#1467B0;' id='nextt'>Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -890,6 +980,17 @@
     <!-- BOOTSTRAP JS -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+        }); 
+    </script>
 
     <!-- SPARKLINE JS-->
     <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -1108,6 +1209,22 @@ $(document).change(function () {
         }
     })
         })
+    </script>
+
+    <script>
+        function showOtherInput() {
+            var dropdown = document.getElementById("reason");
+            var otherInputContainer = document.getElementById("otherInputContainer");
+            var otherInput = document.getElementById("otherInput");
+
+            if (dropdown.value === "Other") {
+                otherInputContainer.style.display = "block";
+                otherInput.required = true; // If you want the "other" input to be required
+            } else {
+                otherInputContainer.style.display = "none";
+                otherInput.required = false;
+            }
+            }
     </script>
 
 </body>
