@@ -2619,7 +2619,7 @@
    
 
     <!-- ############################################# -->
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <script src="../assets/js/intercom.js"></script>
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -2634,6 +2634,7 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     
@@ -2939,12 +2940,13 @@ function dragOverHandler(ev) {
                 return fileName;
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image,create_at,planID }) {
+                success: function ({ userName, image,create_at,planID,...rest }) {
+                    adjustPlan(rest)
                     if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)

@@ -4199,6 +4199,7 @@
         </script>
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
+        <script src="../assets/js/pricing-plan.js"></script>
         <script>
             var startDateInput = document.getElementById('startDate');
             var endDateInput = document.getElementById('endDate');
@@ -4248,13 +4249,13 @@
             var invoicePermissions;
             $(document).ready(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
+                        adjustPlan(response)
                         userData = response
                         invoicePermissions = response.invoices
                         if (response.image !== " " && response.image !== null && response.image!=="") {

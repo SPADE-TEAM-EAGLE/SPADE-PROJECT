@@ -3237,6 +3237,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <script>
         $(document).ready(function () {
@@ -5066,12 +5067,13 @@ $.ajax({
             // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave }) {
+                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave,...rest }) {
+                    adjustPlan(rest)
                     if(totalTenantHave>=totalTenantAllow){
                         
                         $(".add-tenant-btn").attr("disabled",true)
