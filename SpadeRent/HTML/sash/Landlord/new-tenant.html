@@ -1937,6 +1937,29 @@ color: #000;
                                 </div>
                             </div>
                         </div>
+                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between bg-blue-black">
+                            <div class="d-flex">
+                                <div class="text-white fw-bold d-flex justify-content-center align-items-center">Tenant Limit</div>
+                                <div class="text-white d-flex ms-5">
+                                    <div class="mx-3">
+                                        <p class="m-0 fw-bold">Active Tenants</p>
+                                        <p class="m-0 fs-20" id="tenant-exist">20</p>
+                                    </div>
+                                    <div class="mx-3">
+                                        <p class="m-0 fw-bold">Total Limit of Tenants</p>
+                                        <p class="m-0 fs-20" id="total-tenant">20</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center text-white">
+                                <span class="me-2">For More Tenants</span>
+                                <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
+                                    <img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">
+                                    Upgrade Now
+                                  </button>
+                                  
+                            </div>
+                        </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
                             <div class="col-xl-7 col-md-7">
@@ -3325,6 +3348,8 @@ color: #000;
                 success: function ({
                     userName, image , create_at,planID,totalTenantHave,totalTenantAllow,...rest
                 }) {
+                    $("#tenant-exist").text(totalTenantHave);
+                    $("#total-tenant").text(totalTenantAllow);
                     adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
