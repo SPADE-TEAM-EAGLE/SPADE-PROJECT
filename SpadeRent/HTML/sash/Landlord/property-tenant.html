@@ -2026,7 +2026,7 @@
 
     <!-- INTERNAL INDEX JS -->
     <script src="../assets/js/index1.js"></script>
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
     
@@ -2095,12 +2095,13 @@
         
         $(document).ready(function() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image,units,create_at,planID }) {
+                success: function ({ userName, image,units,create_at,planID,...rest }) {
+                    adjustPlan(rest)
                     // console.log()
                     if(image!==" " && image!==null && image!== ""){
                 

@@ -1366,7 +1366,7 @@
                 <div class="modal-body">
                     <form class="row g-3" enctype="multipart/form-data">
                         <div class="col-md-12">
-                            <label class="form-label fw-bold">Upload Photo</label>
+                            <label class="form-label fw-bold">Upload</label>
                             <div class="custom-file" style="border: 1px dashed #00000087;" ondrop="dropHandler(event);"
                                 ondragover="dragOverHandler(event);">
                                 <input id="fileInput" type="file" name="image" placeholder="Enter Photo"
@@ -1376,8 +1376,8 @@
                                 <label class="custom-file-label" for="fileInput">
                                     <i class="fi fi-rs-cloud-upload"></i>
                                     <div class="custom-file-text">
-                                        <span>Upload Photo here</span>
-                                        <span>JPEG and PNG, file size no more than 10MB</span>
+                                        <span>Upload here</span>
+                                        <span>JPEG, PNG and PDF file size no more than 10MB</span>
                                     </div>
                                 </label>
                             </div>
@@ -3409,6 +3409,7 @@
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
 <script src="../assets/js/email-phone.js"></script>
+<script src="../assets/js/pricing-plan.js"></script>
         <script>
             $(document).ready(function () {
                 $('#input-message').on('input', function () {
@@ -3502,12 +3503,13 @@
                 let userEmail;
                 let emailChange = false;
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        adjustPlan(response)
                         console.log("protected");
                         console.log(response);
 

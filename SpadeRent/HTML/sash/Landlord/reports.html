@@ -2783,14 +2783,14 @@
                                         <div class=" tab-menu-heading mt-5">
                                             <div class="tabs-menu1">
                                                 <!-- Tabs -->
-                                                <ul class="nav panel-tabs nav-width-scroll1">
+                                                <ul class="nav panel-tabs nav-width-scroll1 reporting-tab-parent">
                                                     <li><a href="#tab55" class="active" data-bs-toggle="tab">Property
                                                             Reports</a>
                                                     </li>
                                                     <li><a href="#tab66" data-bs-toggle="tab">Lease Reports</a></li>
                                                     <li><a href="#tab77" data-bs-toggle="tab">Tenant Reports</a></li>
-                                                    <li><a href="#tab88" data-bs-toggle="tab">Invoice Report</a></li>
-                                                    <li><a href="#tab99" data-bs-toggle="tab">Task Report</a></li>
+                                                    <li><a href="#tab88" data-bs-toggle="tab">Invoice Reports</a></li>
+                                                    <li><a href="#tab99" data-bs-toggle="tab">Task Reports</a></li>
                                                     <!-- <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
                                                     </li>
                                                     <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
@@ -2852,8 +2852,8 @@
                                                                 id="reportTypeSelect">
                                                                 <option label="Choose one"></option>
                                                                 <option value="All">All</option>
-                                                                <option value="Occupied">Occupied Property</option>
-                                                                <option value="Vacant">Vaccant Property</option>
+                                                                <option value="Occupied">Occupied</option>
+                                                                <option value="Vacant">Vaccant</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -2923,8 +2923,7 @@
                                                                         
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">PROPERTY
-                                                                                ADDRESS</a>
+                                                                                href="javascript:void(0)">ADDRESS</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2943,7 +2942,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">City</a>
+                                                                                href="javascript:void(0)">CITY</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2980,8 +2979,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">TENANT
-                                                                                EMAIL</a>
+                                                                                href="javascript:void(0)">EMAIL ADDRESS</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -2990,7 +2988,7 @@
                                                                         </li>
                                                                         <li class="d-flex justify-content-between">
                                                                             <a class="text-dark"
-                                                                                href="javascript:void(0)">PHONE</a>
+                                                                                href="javascript:void(0)">PHONE NUMBER</a>
                                                                             <div class="form-check m-0">
                                                                                 <input type="checkbox"
                                                                                     class="form-check-input mt-2"
@@ -3053,7 +3051,7 @@
                                                                                     <th>STATE</th>
                                                                                     <th>ZIP CODE</th>
                                                                                     <th>TENANT NAME</th>
-                                                                                    <th>EMAIL</th>
+                                                                                    <th>EMAIL ADDRESS</th>
                                                                                     <th>PHONE NUMBER</th>
 
                                                                                 </tr>
@@ -3246,8 +3244,16 @@
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
-                                                                                    href="javascript:void(0)">LEASE
-                                                                                    EXPIRY</a>
+                                                                                    href="javascript:void(0)">LEASE END DATE</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">REMAINING DAYS</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
                                                                                         class="form-check-input mt-2"
@@ -3329,7 +3335,8 @@
                                                                                 <th>PROPERTY TYPE</th>
                                                                                 <th>UNIT NUMBER</th>
                                                                                 <th>LEASE START DATE</th>
-                                                                                <th>LEASE EXPIRY</th>
+                                                                                <th>LEASE END DATE</th>
+                                                                                <th>REMAINING DAYS</th>
                                                                                 <th>TENANT NAME</th>
                                                                                 <th>TENANT PHONE</th>
 
@@ -3825,6 +3832,25 @@
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
+                                                                                    href="javascript:void(0)">ADDRESS</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">
+                                                                                    UNIT NUMBER</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
                                                                                     href="javascript:void(0)">PHONE</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
@@ -3852,14 +3878,14 @@
                                                                             </li>
                                                                             <li class="d-flex justify-content-between">
                                                                                 <a class="text-dark"
-                                                                                    href="javascript:void(0)">PROPERTY
-                                                                                    ADDRESS</a>
+                                                                                    href="javascript:void(0)">STATUS</a>
                                                                                 <div class="form-check m-0">
                                                                                     <input type="checkbox"
                                                                                         class="form-check-input mt-2"
                                                                                         id="exampleCheck1" checked>
                                                                                 </div>
                                                                             </li>
+                                                                            
                                                                         </ul>
                                                                     </div>
 
@@ -3914,10 +3940,14 @@
                                                                                 <th>EMAIL</th>
                                                                                 <th>INVOICE DATE</th>
                                                                                 <th>PROPERTY NAME</th>
+                                                                                <th>ADDRESS</th>
+                                                                                <th>UNIT NUMBER</th>
                                                                                 <th>PHONE</th>
                                                                                 <th>AMOUNT</th>
                                                                                 <th>NEXT DUE DATE</th>
-                                                                                <th>PROPERTY ADDRESS</th>
+                                                                                <th>STATUS</th>
+
+                                                                                
 
                                                                             </tr>
                                                                         </thead>
@@ -4636,6 +4666,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+        <script src="../assets/js/pricing-plan.js"></script>
         <!-- <script src="../assets/js/email-verification.js"></script> -->
         <script>
             $(document).ready(function () {
@@ -5112,7 +5143,7 @@ const currentDate = new Date();
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                         
                             '<td class="propertyName" style="font-weight: 600;">' + (property.propertyName?property.propertyName:"N/A") + '</td>' +
-                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + property.propertyType + '</span></a></td>' +
+                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">' + property.propertyType + '</span></a></td>' +
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (property.address?property.address:"N/A") + '</p>' +
                             '</td>' +
@@ -5164,19 +5195,35 @@ const currentDate = new Date();
                             // Set a default value or display a message for empty expirydate
                             remainingDays = 'N/A';
                         }
-
+                        var leaseDays
+                        console.log("jnfdnjdnfndjfn",lease.LeaseStart,lease.LeaseExpire)
+                        if(lease.LeaseStart && lease.LeaseExpire){
+                            var leaseStartDate = new Date(lease.LeaseStart);
+                            var leaseEndDate = new Date(lease.LeaseExpire);
+                            var timeDiff = Math.abs(leaseEndDate - leaseStartDate);
+                            leaseDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            console.log("remiamfmkmkmfkdmfmdfmsf",leaseDays);
+                            if (leaseDays>1){
+                                leaseDays = leaseDays + " days";
+                            }else{
+                                leaseDays = leaseDays + " day";
+                            }
+                        }
                         // Construct the HTML for the new row
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
-                          
                             '<td class="propertyName" style="font-weight: 600;">' + lease.propertyName + '</td>' +
-                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>' + lease.propertyType + '</span></a></td>' +
+                            '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">' + lease.propertyType + '</span></a></td>' +
                             '<td class="property-id" style="font-weight: 600;">' + lease.units + '</td>' +
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseStart ? lease.LeaseStart : 'N/A') + '</p>' +
                             '</td>' +
+                            
                             '<td class="propertyAddress">' +
                             '<p style="font-weight: 600;" class="mb-1">' + (lease.LeaseExpire ? lease.LeaseExpire : 'N/A') + '</p>' +
+                            '</td>' +
+                            '<td class="propertyAddress">' +
+                            '<p style="font-weight: 600;" class="mb-1">' + (leaseDays ? leaseDays : 'N/A') + '</p>' +
                             '</td>' +
                             '<td class="propertyUnits">' +
                             '<p style="font-weight: 800;" class="mb-1">' + lease.firstName + " " + lease.lastName + '</p>' +
@@ -5327,7 +5374,14 @@ if (task.priority == 'High') {
                 }
 
             }
-
+            function toTitleCase(str) {
+                return str.replace(
+                    /\w\S*/g,
+                    function (txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    }
+                );
+            }
             function constructInvoiceTable(invoiceData) {
                 $("#table_body_invoice_report").empty()
                 if (invoiceData.length == 0) {
@@ -5342,10 +5396,13 @@ if (task.priority == 'High') {
                             '<td class="memo" style="font-weight: 600;">' + (invoice.email?invoice.email:"N/A") + '</td>' +
                             '<td class="date" style="font-weight: 600;">' + formatDate(invoice.created_at) + '</td>' +
                             '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + '</td>' +
+                            '<td class="propertyAddress" style="font-weight: 600;">' + invoice.address + '</td>' +
+                            '<td class="propertyName" style="font-weight: 600;">' + invoice.unitNumber + '</td>' +
+
                             '<td class="propertyName" style="font-weight: 600;">' + (invoice.userPhone?invoice.userPhone:"N/A") + '</td>' +
                             '<td class="rentAmount" style="font-weight: 600;">' + formatCurrency(invoice.totalAmount) + '</td>' +
-                            '<td class="rentAmount" style="font-weight: 600;">Next Due Date: ' + (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) + '</td>' +
-                            '<td class="status" style="font-weight: 600;">' + (invoice.address?invoice.address:"N/A") + '</td>' +
+                            '<td class="rentAmount" style="font-weight: 600;">' + (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) + '</td>' +
+                            '<td class="status" style="font-weight: 600;">' + (toTitleCase(invoice.status))+ '</td>'
 
                             '</tr>';
 
@@ -5371,7 +5428,7 @@ if (task.priority == 'High') {
                     var newRowHtml = '<tr>' +
                         '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                         '<td class="propertyName" style="font-weight: 600;">' + tenant.propertyName + '</td>' +
-                        '<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3"><i class="fe fe-circle me-1"></i>Single Family</span></a></td>' +
+                        `<td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn-light rounded-pill-Single-Family rounded-pill py-2 px-3">${tenant.propertyType}</span></a></td>` +
                         '<td class="property-id" style="font-weight: 600;">' + tenant.units + '</td>' +
                         '<td class="propertyAddress">' +
                         '<p style="font-weight: 600;" class="mb-1">' + formatDate(tenant.leaseEndDate) + '</p>' +
@@ -5408,12 +5465,13 @@ if (task.priority == 'High') {
 
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, userName,create_at,planID  }) {
+                success: function ({ image, userName,create_at,planID,...rest  }) {
+                    adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

@@ -516,7 +516,7 @@
             </p>
           </div>
         </div>
-        <div class="col-md-12 col-lg-5 col-xl-5 mb-5 mt-5">
+        <div class="col-md-8 col-lg-5 col-xl-5 mb-5 mt-5">
           <div class="login-div">
             <div class="box card">
               <span>
@@ -624,11 +624,23 @@
   <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
    <!-- SIDE-MENU JS-->
    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+   <script>
+    //***************************************************************** */
+const togglePassword1 = document.querySelector("#togglePassword1");
+const password1 = document.querySelector("#id_password1");
+
+togglePassword1.addEventListener("click", function (e) {
+  const type =
+    password1.getAttribute("type") === "password" ? "text" : "password";
+  password1.setAttribute("type", type);
+ 
+});
+   </script>
   <script>
     $(document).ready(function () {
       $("#submit-login").on("click",function(){
         $.ajax({
-        url: "http://localhost:3000/api/spade//signInAdmin",
+        url: "https://backend.app.spaderent.com/api/spade//signInAdmin",
         type: "GET",
         contentType: "application/json",
         data:{

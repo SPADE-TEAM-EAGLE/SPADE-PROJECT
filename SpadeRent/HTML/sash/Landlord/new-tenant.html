@@ -1435,7 +1435,7 @@ color: #000;
                         </div>
                     </div>
                     <div class="mt-2">
-                        <a type="button" class="btn btn-primary btn-pill mx-2" id="add_property_btn"
+                        <a type="button" class="btn btn-primary btn-pill mx-2 add-tenant-btn" id="add_property_btn"
                             href="./add-tenant.html">
                             <i class="fe fe-plus me-2"></i>
                             <strong>ADD NEW TENANT</strong>
@@ -1937,6 +1937,29 @@ color: #000;
                                 </div>
                             </div>
                         </div>
+                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between bg-blue-black">
+                            <div class="d-flex">
+                                <div class="text-white fw-bold d-flex justify-content-center align-items-center">Tenant Limit</div>
+                                <div class="text-white d-flex ms-5">
+                                    <div class="mx-3">
+                                        <p class="m-0 fw-bold">Active Tenants</p>
+                                        <p class="m-0 fs-20" id="tenant-exist">20</p>
+                                    </div>
+                                    <div class="mx-3">
+                                        <p class="m-0 fw-bold">Total Limit of Tenants</p>
+                                        <p class="m-0 fs-20" id="total-tenant">20</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center text-white">
+                                <span class="me-2">For More Tenants</span>
+                                <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
+                                    <img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">
+                                    Upgrade Now
+                                  </button>
+                                  
+                            </div>
+                        </div>
                         <!-- PAGE-HEADER END -->
                         <div class="row justify-content-center">
                             <div class="col-xl-7 col-md-7">
@@ -1954,7 +1977,7 @@ color: #000;
                                         <div class="row">
                                             <div class="text-center">
                                                 <button type="button"
-                                                    class="btn btn-primary btn-pill btn-xl font-weight-bold"
+                                                    class="btn btn-primary btn-pill btn-xl font-weight-bold add-tenant-btn"
                                                     id="add_property_btn" data-bs-effect="effect-scale"
                                                     data-bs-toggle="modal" href="#addModal"><i
                                                         class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -2718,7 +2741,7 @@ color: #000;
     <!-- FORMELEMENTS JS -->
     <script src="../assets/js/formelementadvnced.js"></script>
     <script src="../assets/js/form-elements.js"></script>
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
@@ -3317,18 +3340,25 @@ color: #000;
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({
-                    userName, image , create_at,planID
+                    userName, image , create_at,planID,totalTenantHave,totalTenantAllow,...rest
                 }) {
+                    $("#tenant-exist").text(totalTenantHave);
+                    $("#total-tenant").text(totalTenantAllow);
+                    adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
+                    }
+                    if(totalTenantHave>=totalTenantAllow){
+                        
+                        $(".add-tenant-btn").prop("disabled",true);
                     }
                     if (image !== " " && image !== null && image!== "") {
 

@@ -1179,7 +1179,7 @@
                                 Invite</a>
                         </div>
                     </div>
-                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2"
+                    <div class="mt-2"> <button type="button" class="btn btn-primary btn-pill mx-2 add-tenant-btn"
                             id="add_property_btnn" data-bs-effect="effect-scale" data-bs-toggle="modal"
                             href="#addModal"><i class="fe fe-plus me-2"></i><strong>ADD NEW
                                 TENANT</strong></button></div>
@@ -2433,7 +2433,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="d-flex justify-content-between"><a class="text-dark"
-                                                            href="javascript:void(0)">Assign Units</a>
+                                                            href="javascript:void(0)">Assigned Units</a>
                                                         <div class="form-check m-0">
                                                             <input type="checkbox" class="form-check-input mt-2"
                                                                 id="exampleCheck1" checked>
@@ -2457,7 +2457,7 @@
                                                 </ul>
                                             </div>
                                            
-                                            <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
+                                            <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button add-tenant-btn"
                                             id="add_property_btn" data-bs-effect="effect-scale"
                                             data-bs-toggle="modal" href="#addModal"><i
                                                 class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -2465,7 +2465,7 @@
                                         </div>
 
                                             <!-- Mobile screen button add property Start -->
-                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button" id="add_property_btn"
+                                          <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button add-tenant-btn" id="add_property_btn"
                                           data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                               class="fe fe-plus"></i></button>
                                           <!-- Mobile screen button add property End -->
@@ -2502,7 +2502,27 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between bg-blue-black">
+                                            <div class="d-flex">
+                                                <div class="text-white fw-bold d-flex justify-content-center align-items-center">Tenant Limit</div>
+                                                <div class="text-white d-flex ms-5">
+                                                    <div class="mx-3">
+                                                        <p class="m-0 fw-bold">Active Tenants</p>
+                                                        <p class="m-0 fs-20" id="tenant-exist">20</p>
+                                                    </div>
+                                                    <div class="mx-3">
+                                                        <p class="m-0 fw-bold">Total Limit of Tenants</p>
+                                                        <p class="m-0 fs-20" id="total-tenant">20</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center text-white">
+                                                <span class="me-2">For More Tenants</span>
+                                                <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
+                                                    <img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">
+                                                    Upgrade Now
+                                                  </button>                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table
                                                 class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0"
@@ -2515,7 +2535,7 @@
                                                         <th>TENANT NAME</th>
                                                         <th>CONTACT INFO</th>
                                                         <th>PROPERTY ADDRESS</th>
-                                                        <th>ASSIGN UNITS</th>
+                                                        <th>ASSIGNED UNITS</th>
                                                         <th>RENT AMOUNT</th>
                                                         <th>LEASE END DATE</th>
                                                         <th>ACTION</th>
@@ -3237,6 +3257,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <script>
         $(document).ready(function () {
@@ -3901,7 +3922,7 @@
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange"  placeholder="Date of Rent Change">
                                           </div>
                                           <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                                            <label for="inputPassword4" class="form-label">Rent Amount</label>
                                             <input type="text" class="form-control input-amount" id="amountChange" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                           </div>
@@ -4142,7 +4163,7 @@
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}">
                                           </div>
                                           <div class="col-md-5">
-                                            <label for="inputPassword4" class="form-label">Rent Amount Correlating to that Date</label>
+                                            <label for="inputPassword4" class="form-label">Rent Amount</label>
                                             <input type="text" class="form-control input-amount" id="amountChange" value="${rentAmount.increaseRentAmount}" pattern="[0-9]{7}" placeholder="Enter Amount.." maxlength="7"
                                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                           </div>
@@ -5066,13 +5087,19 @@ $.ajax({
             // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants , create_at , planID }) {
-
+                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave,...rest }) {
+                    $("#tenant-exist").text(totalTenantHave);
+                    $("#total-tenant").text(totalTenantAllow);
+                    adjustPlan(rest)
+                    if(totalTenantHave>=totalTenantAllow){
+                        
+                        $(".add-tenant-btn").attr("disabled",true)
+                    }
                     if (image !== " " && image !== null && image!== "") {
 
                         $("#user-img").attr("src", image)

@@ -1134,7 +1134,7 @@
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title d-flex align-items-center ps-1">
                             <strong class="color-primary">Success!&nbsp;</strong>
-                            <i class="fi fi-rs-check-circle text-success"></i>
+                            <!-- <i class="fi fi-rs-check-circle text-success"></i> -->
                         </h2>
                         <a id="unit-link" class="btn btn-outline-default btn-pill ms-1 my-2"
                             style='background-color:#1467B0;color: white;'>Connect Bank Account</a>
@@ -2209,6 +2209,7 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
 <script>
             $(document).ready(function(){
@@ -2298,12 +2299,13 @@
 })
 
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,userName,properties,create_at,planID }) {
+                success: function ({ image,userName,properties,create_at,planID,...rest }) {
+                    adjustPlan(rest)
                     function toTitleCase(str) {
             return str.replace(/\w\S*/g, function(txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

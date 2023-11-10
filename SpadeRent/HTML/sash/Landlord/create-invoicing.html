@@ -1201,7 +1201,7 @@
                                                 src="../assets/images/users/5.jpg" id="bussinessLogo" class="py-2" alt=""
                                                 style="width: 170px;"></div>
                                     </div>
-                                    <div class="col-12" id="addbussinesslogocol"><a href="settings.html"
+                                    <div class="col-12" id="addbussinesslogocol"><a href="settings.html#tab12"
                                             class="text-primary" style="float: right;">Add your business logo!</a>
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
@@ -1255,9 +1255,9 @@
                                             <table class="table-hover table border text-nowrap text-md-nowrap mb-0">
                                                 <thead>
                                                     <tr>
+                                                        <th>CATEGORY</th>
                                                         <th>DESCRIPTION</th>
                                                         <th>PROPERTY</th>
-                                                        <th>CATEGORY</th>
                                                         <th>TAX %</th>
                                                         <th>AMOUNT</th>
                                                     </tr>
@@ -1284,7 +1284,7 @@
                                         <div class="">
                                             <h6 class="fw-bold mb-1" style="color: 
                                 #1467B0;">MEMO</h6>
-                                            <P class="text-black">Thank you for your business!</P>
+                                            <P class="text-black" id="memo-view">Thank you for your business!</P>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -1698,7 +1698,7 @@
                                     id="lineItemsTable">
                                     <thead>
                                         <tr>
-                                            <th>Amount of Categories<span class="text-danger"> *</span></th>
+                                            <th>Category Title<span class="text-danger"> *</span></th>
                                             <th>Description</th>
                                             <th>Tax</th>
                                             <th>Amount</th>
@@ -2604,7 +2604,7 @@
                                                     <td>Total</td>
                                                     <td>$550.00</td>
                                                 </tr>
-                                                <tr style="    border-bottom: 2px solid #1467B0;">
+                                                <tr style="    border-bottom: 2px solid #1467B0 !important;">
                                                     <td>Deposit Requested</td>
                                                     <td>$550.00</td>
                                                 </tr>
@@ -4199,6 +4199,7 @@
         </script>
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
+        <script src="../assets/js/pricing-plan.js"></script>
         <script>
             var startDateInput = document.getElementById('startDate');
             var endDateInput = document.getElementById('endDate');
@@ -4248,13 +4249,13 @@
             var invoicePermissions;
             $(document).ready(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
+                        adjustPlan(response)
                         userData = response
                         invoicePermissions = response.invoices
                         if (response.image !== " " && response.image !== null && response.image!=="") {
@@ -4622,6 +4623,7 @@ $(".plan_remaining_days_data").each(function(){
                     return fileName;
                 }
                 function saveAndPrint(tenant, data) {
+                    console.log(data,"dfsdfsfdfsdfsdfsdffdfsdfsdfsdfsfdfsfsfs")
                     $("#client-id").empty()
                     $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #1467B0;">BILLED TO</h5>
@@ -4650,6 +4652,7 @@ $(".plan_remaining_days_data").each(function(){
                     )
 
                     $("#memo-table").empty()
+                    $("#memo-view").text(data.additionalNotes?data.additionalNotes:"N/A")
                     let totalTaxAmount = 0;
 
                     data.lineItems.forEach((item) => {
@@ -4680,14 +4683,14 @@ $(".plan_remaining_days_data").each(function(){
                         }
 
                         $("#memo-table").append(`
-        <tr class="text-black">
+                        <tr class="text-black">
+                            <td style="border-bottom: 2px solid black;">${categoryname}</td>
             <td style="border-bottom: 2px solid black;">
                 <p style="font-weight: bold;" class="mb-1">Services</p>
                 <span>${item.memo}</span>
             </td>
             <td style="border-bottom: 2px solid black;">${tenant.propertyName}</td>
             
-            <td style="border-bottom: 2px solid black;">${categoryname}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
             <td style="border-bottom: 2px solid black;">$ ${item.amount}</td>
             
@@ -4711,7 +4714,7 @@ $(".plan_remaining_days_data").each(function(){
                                                     <td>Total</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                 </tr>
-                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0;">
+                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0 !important;">
                                                     <td>Deposit Requested</td>
                                                     <td>$ 0</td>
                                                 </tr>
@@ -6162,10 +6165,10 @@ var month = dateObj.getMonth() + 1;
 var year = dateObj.getFullYear();
 $("#table-body").append(
     `<tr class="text-black">
-        <td>${day}/${month}/${year}</td>
+        <td>${month}/${day}/${year}</td>
         <td>INV-${data.invoiceID}</td>
         <td>$ ${data.totalAmount?data.totalAmount:0}</td>
-        <td>${data.dueDate?data.dueDate:"N/A"}</td>
+        <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
         <td>Due On Receipt</td>
     </tr>`
 )
@@ -6198,15 +6201,15 @@ data.memo.forEach((item) => {
     }
 
     $("#memo-table").append(`
-        <tr class="text-black">
+    <tr class="text-black">
+        <td style="border-bottom: 2px solid black;">${categoryname?categoryname:"N/A"}</td>
             <td style="border-bottom: 2px solid black;">
                 <p style="font-weight: bold;" class="mb-1">Services</p>
                 <span>${item.memo?item.memo:"N/A"}</span>
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
-            <td style="border-bottom: 2px solid black;">${categoryname?categoryname:"N/A"}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount?item.amount:0}</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.amount?item.amount:0}</td>
         </tr>
     `);
     $("#price-table").empty()
@@ -6227,7 +6230,7 @@ $("#price-table").append(`
         <td>Total</td>
         <td>$ ${data.totalAmount?data.totalAmount:0}</td>
     </tr>
-    <tr class="text-black" style="border-bottom: 2px solid #1467B0;">
+    <tr class="text-black" style="border-bottom: 2px solid #1467B0 !important;">
         <td>Deposit Requested</td>
         <td>$ 0</td>
     </tr>
@@ -6239,6 +6242,7 @@ $("#price-table").append(`
 
 
                     })
+                    $("#memo-view").text(data.note?data.note:"N/A")
                     $("#viewModal").modal("show")
                 })
 
