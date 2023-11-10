@@ -5,7 +5,8 @@ const { serialize } = require("cookie");
 const {
   selectQuery,
   deleteQuery,
-  allLandlordQuery
+  allLandlordQuery,
+  insertDeletedUserQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -61,3 +62,66 @@ exports.signInAdmin = async(req,res)=>{
     }
   }
   // ######################################## All Landlord ########################################
+
+
+
+
+
+  // ######################################## All Landlord Delete ########################################
+  exports.deleteLandlord=async(req,res)=>{
+    const { landlordId, adminId, reason }=req.body;
+    const deleted_at = new Date();
+    try {
+      const selectUserResult = await queryRunner(selectQuery("users","id"),[landlordId]);
+      if(selectUserResult[0].length > 0){
+        const fName = selectUserResult[0][0].FirstName;
+        const lName = selectUserResult[0][0].LastName;
+        const email = selectUserResult[0][0].Email;
+        const phone = selectUserResult[0][0].Phone;
+        const planId = selectUserResult[0][0].PlanID;
+        console.log(fName , lName)
+        const deleteUserResult=await queryRunner(deleteQuery("users","id"),[landlordId]);
+        if(deleteUserResult[0].affectedRows>0){
+          console.log("1")
+        const insertLandlordResult=await queryRunner(insertDeletedUserQuery,[adminId, fName, lName, email, phone, planId, reason, deleted_at,landlordId]);
+        console.log("2")  
+        const deleteUserBankAccountResult = await queryRunner(deleteQuery("bankAccount","userId"),[landlordId]);
+        console.log("3")
+        const deleteUserChatSResult = await queryRunner(deleteQuery("chats","senderId"),[landlordId]);
+        console.log("4")
+        const deleteUserChatRResult = await queryRunner(deleteQuery("chats","receiverID"),[landlordId]);
+        console.log("5")
+        const deleteUserInvoiceResult = await queryRunner(deleteQuery("invoice","landlordID"),[landlordId]);
+        console.log("6")
+        const deleteUserInvoiceCategoryResult = await queryRunner(deleteQuery("InvoiceCategories","landLordId"),[landlordId]);
+        console.log("7")
+        const deleteUserleadsResult = await queryRunner(deleteQuery("leads","landlordId"),[landlordId]);
+        console.log("8")
+        const deleteUserPropertyResult = await queryRunner(deleteQuery("property","landlordID"),[landlordId]);
+        console.log("9")
+        const deleteUserPropertyUnitsResult = await queryRunner(deleteQuery("propertyunits","landlordId"),[landlordId]);
+        console.log("0")
+        const deleteUserNotificationResult = await queryRunner(deleteQuery("notification","landlordID"),[landlordId]);
+        console.log("11")
+        const deleteUserProspectusResult = await queryRunner(deleteQuery("prospectus","landlordId"),[landlordId]);
+        console.log("22")
+        const deleteUserProspectusSourcesResult = await queryRunner(deleteQuery("prospectusSources","landlordId"),[landlordId]);
+        console.log("33")
+        const deleteUsertaskResult = await queryRunner(deleteQuery("task","landlordID"),[landlordId]);
+        console.log("44")
+        const deleteUsertenantsResult = await queryRunner(deleteQuery("tenants","landlordID"),[landlordId]);
+        console.log("55")
+        const deleteUserUserPUsersResult = await queryRunner(deleteQuery("userPUsers","llnalordId"),[landlordId]);
+        console.log("66")
+        const deleteUserVendorResult = await queryRunner(deleteQuery("vendor","LandlordID"),[landlordId]);
+          
+          res.status(200).json({message:"Landlord All Information Is Deleted"})
+
+      }
+      }else{
+        res.status(400).json({message:"Landlord is not found"})
+      }
+    }catch{
+    }
+  }
+  // ######################################## All Landlord Delete ########################################
