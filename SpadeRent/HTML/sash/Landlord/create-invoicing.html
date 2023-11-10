@@ -6165,10 +6165,10 @@ var month = dateObj.getMonth() + 1;
 var year = dateObj.getFullYear();
 $("#table-body").append(
     `<tr class="text-black">
-        <td>${day}/${month}/${year}</td>
+        <td>${month}/${day}/${year}</td>
         <td>INV-${data.invoiceID}</td>
         <td>$ ${data.totalAmount?data.totalAmount:0}</td>
-        <td>${data.dueDate?data.dueDate:"N/A"}</td>
+        <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
         <td>Due On Receipt</td>
     </tr>`
 )
@@ -6209,7 +6209,7 @@ data.memo.forEach((item) => {
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount?item.amount:0}</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.amount?item.amount:0}</td>
         </tr>
     `);
     $("#price-table").empty()
