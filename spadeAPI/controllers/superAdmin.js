@@ -6,10 +6,12 @@ const {
   selectQuery,
   deleteQuery,
   allLandlordQuery,
-  insertDeletedUserQuery
+  insertDeletedUserQuery,
+  insertUsersAdmin
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
+const { sendMailLandlord } = require("../sendmail/sendmail.js");
 const config = process.env;
 
 
@@ -140,6 +142,62 @@ exports.signInAdmin = async(req,res)=>{
         res.status(201).json({
             message:"Get All Closed Account",
             data : allClosedLandlordResult[0]})
+      }
+    }catch(error){
+        console.log(error);
+        res.status(400).send(error.message);
+  
+    }
+  }
+  // ######################################## All Closed Landlord ########################################
+
+
+
+ // ######################################## All Closed Landlord ########################################
+
+  exports.createUserAdmin = async function (req, res) {
+    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image } = req.body;
+    const currentDate = new Date();
+    try {
+      const selectResult = await queryRunner(selectQuery("superAdmin","email"), [
+        email,
+      ]);
+      if (selectResult[0].length > 0) {
+        return res.status(201).send("Email already exists");
+      }
+      const hashPassword = await hashedPassword(password);
+      // generate a unique identifier for the user
+      const salt = bcrypt.genSaltSync(10);
+      const id = bcrypt
+        .hashSync(lastName + new Date().getTime().toString(), salt)
+        .substring(0, 10);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,currentDate]);
+      const name = firstName + " " + lastName;
+      const mailSubject = "Spade Admin Welcome Email";
+      if (insertResult[0].affectedRows > 0) {
+        console.log(email + " " + mailSubject + " " + name)
+        await sendMailLandlord(email, mailSubject, name);
+        return res.status(200).json({ message: "Users Permission User added successfully" });
+      } else {
+        return res.status(500).send("Failed to add User Permission User");
+      }
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  };
+   // ######################################## All Closed Landlord ########################################
+
+
+     // ######################################## All Closed Landlord ########################################
+  exports.allUserAdmin = async(req,res)=>{
+    try {
+      const allUserAdminResult = await queryRunner(selectQuery("superAdmin"));
+      if(allUserAdminResult[0].length == 0){
+          res.status(201).json({message:"Super Admin Users is not found"})
+        }else{
+        res.status(201).json({
+            message:"Get All Super Admin Users",
+            data : allUserAdminResult[0]})
       }
     }catch(error){
         console.log(error);

@@ -296,3 +296,5 @@ router.get("/signInAdmin", superAdmin.signInAdmin);
 router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/deleteLandlord",superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",superAdmin.allClosedLandlord);
+router.post("/createUserAdmin",superAdmin.createUserAdmin);
+router.get("/allUserAdmin",superAdmin.allUserAdmin);

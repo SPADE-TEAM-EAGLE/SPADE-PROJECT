@@ -1132,3 +1132,4 @@ exports.insertInUserPermissionUsers =
   exports.allLandlordQuery = "SELECT * FROM users as u join plan as p on u.PlanID = p.id";
   exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId) values (?,?,?,?,?,?,?,?,?)";
+  exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?)";
