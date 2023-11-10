@@ -44,7 +44,7 @@
 
     body {
       /* background-image: linear-gradient(#1467b0, #4ca7cf); */
-      height: auto;
+      height: 100%;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -130,9 +130,16 @@
     }
 
     .horizontalMenucontainer {
-      background-image: url(../assets/images/buildings.png);
+      background-image: url(../assets/images/backWhiteBuilding.webp);
       background-repeat: no-repeat;
-      background-size: auto;
+      background-size: cover;
+      background-position-x: right;
+      height: 100%;
+    }
+     .dark-mode .horizontalMenucontainer {
+      background-image: url(../assets/images/backBlackBuilding.webp);
+      background-repeat: no-repeat;
+      background-size: cover;
       background-position-x: right;
       height: 100%;
     }
@@ -188,7 +195,7 @@
     @media (max-width: 768px) {
       body {
         background-image: none;
-        height: auto;
+        height: 100%;
         width: 100%;
         padding: 0;
         margin: 0;
@@ -569,10 +576,10 @@
                       </button>
                     </div>
                     <div class="col-12 mb-2">
-                      <div class="d-flex justify-content-between">
-                        <a href="Signup.html" class="text-dark fw-bold">Sign up for account</a>
-                        <a href="../Tenant/login_module.html" class="text-dark fw-bold">Login as Tenant</a>
-                        <a href="Forget-password.html" class="blue-color fw-bold">Forgot Password</a>
+                      <div class="d-flex justify-content-end">
+                        <!-- <a href="Signup.html" class="text-dark fw-bold">Sign up for account</a> -->
+                        <!-- <a href="../Tenant/login_module.html" class="text-dark fw-bold">Login as Tenant</a> -->
+                        <a href="Forget-password.html" class="blue-color fw-bold">Forgot Password?</a>
                       </div>
                     </div>
                     <div class="col-12 mt-5">
@@ -658,6 +665,13 @@ togglePassword1.addEventListener("click", function (e) {
           
         },
         error: function (error) {
+          
+          $("#myModal_warning_connection").modal("show");
+                      
+                setTimeout(function () {
+                  $("#myModal_warning_connection").modal("hide");
+             
+                }, 2000);
           console.log(error);
         }
       });
