@@ -2824,6 +2824,7 @@
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+    <script src="../assets/js/pricing-plan.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -3087,12 +3088,13 @@
         $(document).ready(function () {
             // $('#infoModal').modal('show')
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image,properties, create_at,planID }) {
+                success: function ({ image,properties, create_at,planID,...rest }) {
+                    adjustPlan(rest)
                     if (image !== " " && image !== null && image!== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)

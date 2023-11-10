@@ -2056,7 +2056,7 @@
     <script src="../assets/js/index-chart.js"></script>
     <!-- <script src="https://backend.app.spaderent.com/"></script> -->
     <script src="../assets/js/email-verification.js"></script>
-    
+    <script src="../assets/js/pricing-plan.js"></script>
       
 <script>
             $(document).ready(function(){
@@ -2884,12 +2884,13 @@ endDateTenantFormatted = formatDate(endDateTenant);
             })
             let id; let emailChange = false
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, email, userId, image , planID , create_at }) {
+                success: function ({ userName, email, userId, image , planID , create_at,...rest }) {
+                    adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

@@ -2576,7 +2576,7 @@ color: #000;
     <!-- FORMELEMENTS JS -->
     <script src="../assets/js/formelementadvnced.js"></script>
     <script src="../assets/js/form-elements.js"></script>
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
@@ -3509,12 +3509,13 @@ color: #000;
     let selectedFiles=[]
     $(document).ready(()=>{
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image,create_at,planID }) {
+                success: function ({ userName, image,create_at,planID,...rest }) {
+                    adjustPlan(rest)
                     // console.log()
                     if(image!==" " && image!==null && image!== ""){
                 

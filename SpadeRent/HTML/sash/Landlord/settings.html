@@ -13062,6 +13062,7 @@ Draft</button> -->
         <!-- Color Theme js -->
         <script src="../assets/js/themeColors.js"></script>
         <script src="../assets/js/intercom.js"></script>
+        <script src="../assets/js/pricing-plan.js"></script>
         <!-- Switcher js -->
         <!-- <script src="../assets/switcher/js/switcher.js"></script> -->
 
@@ -13794,13 +13795,14 @@ Draft</button> -->
                 })
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
                         // console.log()
+                        adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -16283,7 +16285,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     $("#myModal_success").modal("hide");
                                 }, 20000);
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                                    url: 'http://localhost:3000/api/spade/protected',
                                     method: 'GET',
                                     headers: {
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

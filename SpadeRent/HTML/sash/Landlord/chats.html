@@ -3409,6 +3409,7 @@
         <script src="../assets/js/getNotification.js"></script>
         <script src="../assets/js/push_notification.js"></script>
 <script src="../assets/js/email-phone.js"></script>
+<script src="../assets/js/pricing-plan.js"></script>
         <script>
             $(document).ready(function () {
                 $('#input-message').on('input', function () {
@@ -3502,12 +3503,13 @@
                 let userEmail;
                 let emailChange = false;
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        adjustPlan(response)
                         console.log("protected");
                         console.log(response);
 
