@@ -295,3 +295,4 @@ router.get("/signInAdmin", superAdmin.signInAdmin);
 // router.get("/allLandlord", superAdmin.allLandlord);
 router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/deleteLandlord",superAdmin.deleteLandlord);
+router.get("/allClosedLandlord",superAdmin.allClosedLandlord);

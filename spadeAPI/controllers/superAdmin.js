@@ -125,3 +125,26 @@ exports.signInAdmin = async(req,res)=>{
     }
   }
   // ######################################## All Landlord Delete ########################################
+
+
+
+
+  
+  // ######################################## All Closed Landlord ########################################
+  exports.allClosedLandlord = async(req,res)=>{
+    try {
+      const allClosedLandlordResult = await queryRunner(selectQuery("closedAccount"));
+      if(allClosedLandlordResult[0].length == 0){
+          res.status(201).json({message:"Landlord Closed Account is not found"})
+        }else{
+        res.status(201).json({
+            message:"Get All Closed Account",
+            data : allClosedLandlordResult[0]})
+      }
+    }catch(error){
+        console.log(error);
+        res.status(400).send(error.message);
+  
+    }
+  }
+  // ######################################## All Closed Landlord ########################################
