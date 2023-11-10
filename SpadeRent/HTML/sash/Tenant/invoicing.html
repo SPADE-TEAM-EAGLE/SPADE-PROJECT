@@ -1170,7 +1170,7 @@
                                         style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
                                         <div class="card-header pb-0 border-bottom-0">
                                             <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
-                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            <h3 class="card-title side-menu__label text-dark">&nbsp; Complete your Profile
                                             </h3>
                                         </div>
                                         <div class="card-body pt-0">
@@ -1719,7 +1719,7 @@
                                     <div class="col-12">
                                         <div class="mt-2 mb-2" style="float: right;"><img
                                                 src="../assets/images/users/5.jpg" id="bussinessLogo" alt=""
-                                                style="max-width: 90px;"></div>
+                                                style="max-width: 150px; min-width: 120px;"></div>
                                     </div>
                                     <div class="col-md-6" style="text-align: left;" id="client-id">
                                         <h5 class="fw-bold" style="color: 
@@ -1825,7 +1825,7 @@
                                                         <td>Total</td>
                                                         <td>$550.00</td>
                                                     </tr>
-                                                    <tr style="    border-bottom: 2px solid #1467B0;">
+                                                    <tr style="    border-bottom: 2px solid #1467B0 !important;">
                                                         <td>Deposit Requested</td>
                                                         <td>$550.00</td>
                                                     </tr>
@@ -2915,10 +2915,10 @@
                 var year = dateObj.getFullYear();
                 $("#table-body").append(
                     `<tr class="text-black">
-                        <td>${day}/${month}/${year}</td>
+                        <td>${month}/${day}/${year}</td>
                                                     <td>INV-10012</td>
                                                     <td>$ ${data.totalAmount}</td>
-                                                    <td>${data.dueDate}</td>
+                                                    <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
                                                     <td>Due On Receipt</td>
                     </tr>
                     `
@@ -2962,7 +2962,7 @@
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;">${categoryname}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax?item.tax:0} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount}</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.amount}</td>
             
         </tr>
     `);
@@ -2984,7 +2984,7 @@
                                                     <td>Total</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                 </tr>
-                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0;">
+                                                <tr class="text-black" style="    border-bottom: 2px solid #1467B0 !important;">
                                                     <td>Deposit Requested</td>
                                                     <td>$ 0</td>
                                                 </tr>
