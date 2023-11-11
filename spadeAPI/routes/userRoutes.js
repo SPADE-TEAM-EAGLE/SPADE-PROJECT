@@ -291,11 +291,14 @@ router.put("/updateBankAccountTenant", verifyTokenTenant, bankAccountController.
 // router.get("/dummy", bankAccountController.dummy); 
 router.put("/updatePropertyBankAccount", bankAccountController.updatePropertyBankAccount);
 router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
+
+//                                             superAdmin
+
 router.get("/signInAdmin", superAdmin.signInAdmin);
-// router.get("/allLandlord", superAdmin.allLandlord);
 router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
+router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
