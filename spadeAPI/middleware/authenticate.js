@@ -25,9 +25,8 @@ const verifyToken = async (req, res, next) => {
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
       console.log("result[0][0].PlanID");
       console.log(result[0][0]);
-      // console.log(result[0][0].planID);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
-      
+
       function splitAndConvertToObject(value) {
         const resultObject = {};
 
