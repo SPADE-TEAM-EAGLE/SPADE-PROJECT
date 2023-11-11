@@ -71,7 +71,8 @@ exports.signInAdmin = async(req,res)=>{
 
   // ######################################## All Landlord Delete ########################################
   exports.deleteLandlord=async(req,res)=>{
-    const { landlordId, adminId, reason }=req.body;
+    const { landlordId, reason }=req.body;
+    const {userId : adminId } = req.user;
     const deleted_at = new Date();
     try {
       const selectUserResult = await queryRunner(selectQuery("users","id"),[landlordId]);
