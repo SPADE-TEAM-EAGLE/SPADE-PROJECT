@@ -647,21 +647,25 @@ togglePassword1.addEventListener("click", function (e) {
     $(document).ready(function () {
       $("#submit-login").on("click",function(){
         $.ajax({
-        url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
+        url: "http://localhost:3000/api/spade/signInAdmin?email="+$("#login-email").val() + "&password="+$("#id_password1").val(),
         type: "GET",
         contentType: "application/json",
-        data:{
-          email: $("#login-email").val(),
-          password: $("#id_password1").val()
-        },
+        // data: JSON.stringify({
+        //   email: $("#login-email").val(),
+        //   password: $("#id_password1").val()
+        // }),
         success: function (response) {
-          // console.log(result);
-          $("#myModal_success").modal("show");
-                              localStorage.setItem("authtoken", response.token);
-                setTimeout(function () {
-                  $("#myModal_success").modal("hide");
-                  window.location = "../Super_Admin/index.html";
-                }, 2000);
+          // console.log(response.token)
+          if(response.message == "SignIn Successful"){
+            $("#myModal_success").modal("show");
+                                localStorage.setItem("authtoken", response.token);
+                  setTimeout(function () {
+                    $("#myModal_success").modal("hide");
+                    window.location = "../Super_Admin/index.html";
+                  }, 2000);
+          }else{
+
+          }
           
         },
         error: function (error) {

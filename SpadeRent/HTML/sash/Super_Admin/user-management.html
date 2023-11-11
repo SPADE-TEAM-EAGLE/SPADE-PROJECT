@@ -961,6 +961,108 @@ label {
             </div>
         </div>
     </div>
+    <div class="modal fade" id="view-user-admin" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">View <strong class="color-primary" id="title-sub">User</strong>
+                        </h2>
+                        <span class="">Post your properties to thousands of
+                            potential investors,
+                            tenants and interested individuals.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none" id="edit-btn"><i
+                            class="fi fi-rs-pencil" style="display:block"></i><small>Edit
+                            Details</small></button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body mb-5">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <img id="image_user_view" src="" alt=""
+                                style="width: auto; height: 170px; background-size: cover; background-repeat: no-repeat; background: cornflowerblue; margin-bottom: 30px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label><b>First Name</b></label>
+                            <p class="text-primary"><b id="firstName_user_view" style="word-wrap: break-word;"></b></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Last Name</b></label>
+                            <p class="text-primary"><b id="lastName_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Email</b></label>
+                            <p class="text-primary"><b id="email_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                        <div class="col-lg-3">
+                            <label><b>Phone no</b></label>
+                            <p class="text-primary"><b id="phone_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+
+                        <!-- <div class="col-lg-3 mt-5">
+                            <label><b>Status</b></label>
+                            <p class="text-primary"><b id="status_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div> -->
+                        <div class="col-lg-3 mt-5">
+                            <label><b>Role</b></label>
+                            <p class="text-primary"><b id="role_user_view" style="word-wrap: break-word;"></b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+      <!-- Delete User Permissions popup start  -->
+      <div class="modal fade" id="delete-user-admin">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">This will delete your User. Are
+                                you sure?</p>
+
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                        id="confirmDelete-user">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete User Permissions popup End  -->
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1606,140 +1708,15 @@ label {
                                                             <table class="table border text-nowrap text-md-nowrap mb-0">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th></th>
+                                                                        <th>IMAGE</th>
                                                                         <th>USER</th>
                                                                         <th>CONTACT INFORMATION</th>
                                                                         <th>ROLE</th>
-                                                                        <th></th>
+                                                                        <th>ACTION</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body">
-                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td>
-                                                                            <div class="media m-0 mt-0">
-                                                                                <img class="avatar brround avatar-md me-3" alt="avatra-img" src="../assets/images/users/18.jpg">
-                                                                                <div class="media-body">
-
-                                                                                    <a href="javascript:void(0)" class="text-primary fw-semibold"><b>Justin
-                                                                                            Septimus</b></a>
-                                                                                    <div>
-                                                                                        <p class="text-successs" style="color: green;">
-                                                                                            <b>.</b> Active
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">
-                                                                                example@gmail.com
-                                                                            </p>
-                                                                            <span>+1 990
-                                                                                99300003</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">Owner
-                                                                            </p>
-                                                                        </td>
-                                                                        <td>
-                                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
-
-                                                                            <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
-                                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td>
-                                                                            <div class="media m-0 mt-0">
-                                                                                <img class="avatar brround avatar-md me-3" alt="avatra-img" src="../assets/images/users/18.jpg">
-                                                                                <div class="media-body">
-
-                                                                                    <a href="javascript:void(0)" class="text-primary fw-semibold"><b>Anika
-                                                                                            Rhiel
-                                                                                            Madsen</b></a>
-                                                                                    <div>
-                                                                                        <p class="text-successs" style="color: green;">
-                                                                                            <b>.</b> Active
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">
-                                                                                example@gmail.com
-                                                                            </p>
-                                                                            <span>+1 990
-                                                                                99300003</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">Manager
-                                                                            </p>
-                                                                        </td>
-                                                                        <td>
-                                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
-
-                                                                            <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
-                                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td>
-                                                                            <div class="media m-0 mt-0">
-                                                                                <img class="avatar brround avatar-md me-3" alt="avatra-img" src="../assets/images/users/18.jpg">
-                                                                                <div class="media-body">
-
-                                                                                    <a href="javascript:void(0)" class="text-primary fw-semibold"><b>Miracle
-                                                                                            Vaccaro</b></a>
-                                                                                    <div>
-                                                                                        <p class="text-successs" style="color: green;">
-                                                                                            <b>.</b> Active
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">
-                                                                                example@gmail.com
-                                                                            </p>
-                                                                            <span>+1 990
-                                                                                99300003</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <p style="font-weight: 600;" class="mb-1">Staff
-                                                                            </p>
-                                                                        </td>
-                                                                        <td>
-                                                                            <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
-
-                                                                            <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
-                                                                                <li><a class="dropdown-item text-primary" href="javascript:void(0)">Edit</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-danger" href="javascript:void(0)">Delete</a>
-                                                                                </li>
-                                                                                <li><a class="dropdown-item text-success" href="javascript:void(0)">View</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </td>
-                                                                    </tr>
+                                                                <tbody id="table_body_user">
+                                                                   
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -2628,7 +2605,7 @@ label {
     </script>
 
     <!-- ############################################# -->
-    <script src="../assets/js/intercom-tenant.js"></script>
+    <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -2643,6 +2620,97 @@ label {
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script>
+        $(document).ready(function(){
+            var userAdminData;
+            function getAllUserAdminData(){
+                $.ajax({
+                        url: "http://localhost:3000/api/spade/allUserAdmin",
+                        type: "GET",
+                        contentType: 'application/json',
+                        headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response)
+                            $("#table_body_user").empty()
+                            if (response?.data) {
+                            userAdminData = response?.data;
+                            response?.data.forEach((element, index) => {
+                               
+                                $("#table_body_user").append(`
+    <tr data-id="${element.id}">
+     <td>
+        <img class="avatar brround avatar-md me-3" alt="avatra-img" src="${element.images? element.images : '../assets/images/users/18.jpg' }">
+        
+        </td>
+        <td>
+            <div class="media m-0 mt-0">
+                <div class="media-body">
+                    <a href="javascript:void(0)" class="text-primary fw-semibold view-option"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></a>
+                    <div class="d-none">
+                        <p class="text-successs" style="color: green;">
+                             Active
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p style="font-weight: 600;" class="mb-1">
+                ${element.email ? element.email : "N/A"}
+            </p>
+            <span>${element.phone ? element.phone : "N/A"}</span>
+        </td>
+        <td>
+            <p style="font-weight: 600;" class="mb-1">${element.role ? element.role : "N/A"}</p>
+        </td>
+        <td>
+                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
+                                <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
+                                    <li><a class="dropdown-item text-primary edit-option-user" href="#" data-bs-effect="effect-scale">Edit</a></li>
+                                    <li><a class="dropdown-item text-danger delete-option-userAdmin" href="#" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
+                                    <li><a class="dropdown-item text-success view-option" href="#" data-bs-effect="effect-scale">View</a></li>
+                                </ul>
+                            </td>
+    </tr>
+`);
+
+                                                                })
+                                                            }
+                          
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error)
+
+                        },
+                    });
+
+
+            }
+          
+
+            getAllUserAdminData()
+                    $(document).on("click", ".view-option", function () {
+                        var userAdminShow;
+                userAdminShow = $(this).closest("tr").attr("data-id");
+                $("#firstName_user_view").text(userAdminData[userAdminShow].fName ? userAdminData[userAdminShow].fName : "N/A");
+$("#lastName_user_view").text(userAdminData[userAdminShow].lName ? userAdminData[userAdminShow].lName : "N/A");
+$("#email_user_view").text(userAdminData[userAdminShow].email ? userAdminData[userAdminShow].email : "N/A");
+$("#phone_user_view").text(userAdminData[userAdminShow].phone ? userAdminData[userAdminShow].phone : "N/A");
+$("#role_user_view").text(userAdminData[userAdminShow].role ? userAdminData[userAdminShow].role : "N/A");
+// $(`#status_user_view`).text(userAdminData[userAdminShow].status ? userAdminData[userAdminShow].status : "N/A");
+
+                $('#image_user_view').attr('src', userAdminData[userAdminShow].images ? userAdminData[userAdminShow].images : '../assets/images/users/16.jpg')
+                $("#view-user-admin").modal("show")
+            })
+            $(document).on("click", ".delete-option-userAdmin", function () {
+                var userAdminId = $(this).closest("tr").attr("data-id");
+                $('#confirmDelete-user').attr('data-id', userAdminId)
+                $("#delete-user-admin").modal("show")
+            })
+        })
+    </script>
 
 </body>
 
