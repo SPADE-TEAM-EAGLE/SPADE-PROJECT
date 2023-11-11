@@ -1110,7 +1110,7 @@ exports.userPermissionAuth = "SELECT * FROM userPUsers as UP JOIN users as US ON
 exports.insertInUserPermissionUsers =
   "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at,UImage,UImageKey) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
   exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ?,UImage=?,UImageKey=? WHERE id = ?"; 
-
+  
   exports.insertVendorCategory =
   "INSERT INTO vendorcategory (landLordId, category) VALUES (?,?)";
   exports.insertProspectusSources = "INSERT INTO prospectusSources (landlordId, sourcesCampaign) VALUES (?,?)";
@@ -1133,3 +1133,5 @@ exports.insertInUserPermissionUsers =
   exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId) values (?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?)";
+
+  exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, password = ?, phone = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? WHERE id = ?"; 

@@ -7,7 +7,8 @@ const {
   deleteQuery,
   allLandlordQuery,
   insertDeletedUserQuery,
-  insertUsersAdmin
+  insertUsersAdmin,
+  updateUserAdminQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -24,8 +25,7 @@ exports.signInAdmin = async(req,res)=>{
       if(checkResult[0].length == 0){
           res.status(201).json({message:"Admin is not found"})
         }else if(await bcrypt.compare(password, checkResult[0][0].password)){
-            const id = checkResult[0][0].id;
-            
+            const id = checkResult[0][0].id; 
             const token = jwt.sign({ email, id }, config.JWT_SECRET_KEY, {
                 expiresIn: "3h",
             });
@@ -206,3 +206,77 @@ exports.signInAdmin = async(req,res)=>{
     }
   }
   // ######################################## All Closed Landlord ########################################
+
+
+
+
+  // ######################################## user Admin By Id ########################################
+  exports.userAdminGetById = async function (req, res) {
+    const { id } = req.query;
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "id"), [
+      id,
+    ]);
+    if (selectResult[0].length > 0) {
+      return res.status(200).json({
+        data: selectResult[0][0],
+      });
+    } else {
+      res.status(200).json({
+        message: "No admin user Found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+    // ######################################## user Admin By Id ########################################
+    
+    
+    
+    
+    // ######################################## user Admin Edit ########################################
+    exports.updateAdminUser = async function (req, res) {
+      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image, id } = req.body;
+      const currentDate = new Date();
+      try {
+        const insertResult = await queryRunner(updateUserAdminQuery, [
+          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,id]);
+        if (insertResult[0].affectedRows > 0) {
+          return res.status(200).json({ message: " User Updated Successfully" });
+        } else {
+          return res.status(500).send("Failed to Update User Permission User");
+        }
+      } catch (error) {
+        console.log(error)
+        return res.status(400).json({ message: error.message });
+      }
+    };
+      // ######################################## user Admin Edit ########################################
+
+
+      // ######################################## user Admin delete ########################################
+      exports.userAdminDelete = async function (req, res) {
+        const { id } = req.body;
+        try {
+          const selectResult = await queryRunner(deleteQuery("superAdmin", "id"), [
+            id,
+          ]);
+          if (selectResult[0].affectedRows > 0) {
+            return res.status(200).json({
+              message: "Admin User Deleted Successsful"
+            });
+          } else {
+            res.status(200).json({
+              message: "No admin user Found",
+            });
+          }
+        } catch (error) {
+          res.status(400).json({
+            message: error.message,
+          });
+        }
+      };
+        // ######################################## user Admin delete ########################################
