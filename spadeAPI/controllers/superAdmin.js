@@ -72,7 +72,7 @@ exports.signInAdmin = async(req,res)=>{
   // ######################################## All Landlord Delete ########################################
   exports.deleteLandlord=async(req,res)=>{
     const { landlordId, reason }=req.body;
-    const {userId : adminId } = req.user;
+    const { userName } = req.user;
     const deleted_at = new Date();
     try {
       const selectUserResult = await queryRunner(selectQuery("users","id"),[landlordId]);
@@ -86,7 +86,7 @@ exports.signInAdmin = async(req,res)=>{
         const deleteUserResult=await queryRunner(deleteQuery("users","id"),[landlordId]);
         if(deleteUserResult[0].affectedRows>0){
           console.log("1")
-        const insertLandlordResult=await queryRunner(insertDeletedUserQuery,[adminId, fName, lName, email, phone, planId, reason, deleted_at,landlordId]);
+        const insertLandlordResult=await queryRunner(insertDeletedUserQuery,[userName, fName, lName, email, phone, planId, reason, deleted_at,landlordId]);
         console.log("2")  
         const deleteUserBankAccountResult = await queryRunner(deleteQuery("bankAccount","userId"),[landlordId]);
         console.log("3")
