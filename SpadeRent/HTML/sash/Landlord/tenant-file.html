@@ -2263,7 +2263,7 @@
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
@@ -2424,14 +2424,14 @@ function dragOverHandler(ev) {
             }
         $(document).ready(() => {
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
                         console.log(response);
-
+                        adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

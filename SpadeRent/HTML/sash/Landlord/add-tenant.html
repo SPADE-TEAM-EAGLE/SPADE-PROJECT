@@ -2502,7 +2502,27 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between bg-blue-black" style="text-wrap: nowrap;overflow-x: auto;">
+                                            <div class="d-flex">
+                                                <div class="text-white fw-bold d-flex justify-content-center align-items-center">Tenant Limit</div>
+                                                <div class="text-white d-flex ms-5">
+                                                    <div class="mx-3">
+                                                        <p class="m-0 fw-bold">Active Tenants</p>
+                                                        <p class="m-0 fs-20" id="tenant-exist">20</p>
+                                                    </div>
+                                                    <div class="mx-3">
+                                                        <p class="m-0 fw-bold">Total Limit of Tenants</p>
+                                                        <p class="m-0 fs-20" id="total-tenant">20</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center text-white ms-5">
+                                                <span class="me-2">For More Tenants</span>
+                                                <button class="btn btn-default btn-pill btn-sm text-black fw-bold" style="width: max-content;" onclick="window.location.href='./settings.html#tab9'">
+                                                    <img src="../assets/images/starImg.png" class="me-2" style="width: 22px;" alt="">
+                                                    Upgrade Now
+                                                  </button>                                            </div>
+                                        </div>
                                         <div class="table-responsive">
                                             <table
                                                 class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100 p-0"
@@ -3237,6 +3257,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- <script src="../assets/js/email-verification.js"></script> -->
     <script>
         $(document).ready(function () {
@@ -5066,12 +5087,15 @@ $.ajax({
             // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave }) {
+                success: function ({ image, tenants , create_at , planID,totalTenantAllow,totalTenantHave,...rest }) {
+                    $("#tenant-exist").text(totalTenantHave);
+                    $("#total-tenant").text(totalTenantAllow);
+                    adjustPlan(rest)
                     if(totalTenantHave>=totalTenantAllow){
                         
                         $(".add-tenant-btn").attr("disabled",true)

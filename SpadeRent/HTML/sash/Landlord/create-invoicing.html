@@ -4199,6 +4199,7 @@
         </script>
         <script src="../assets/js/intercom.js"></script>
         <script src="../assets/js/getNotification.js"></script>
+        <script src="../assets/js/pricing-plan.js"></script>
         <script>
             var startDateInput = document.getElementById('startDate');
             var endDateInput = document.getElementById('endDate');
@@ -4248,13 +4249,13 @@
             var invoicePermissions;
             $(document).ready(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
+                        adjustPlan(response)
                         userData = response
                         invoicePermissions = response.invoices
                         if (response.image !== " " && response.image !== null && response.image!=="") {
@@ -6164,10 +6165,10 @@ var month = dateObj.getMonth() + 1;
 var year = dateObj.getFullYear();
 $("#table-body").append(
     `<tr class="text-black">
-        <td>${day}/${month}/${year}</td>
+        <td>${month}/${day}/${year}</td>
         <td>INV-${data.invoiceID}</td>
         <td>$ ${data.totalAmount?data.totalAmount:0}</td>
-        <td>${data.dueDate?data.dueDate:"N/A"}</td>
+        <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
         <td>Due On Receipt</td>
     </tr>`
 )
@@ -6208,7 +6209,7 @@ data.memo.forEach((item) => {
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
-            <td style="border-bottom: 2px solid black;">${item.amount?item.amount:0}</td>
+            <td style="border-bottom: 2px solid black;">$ ${item.amount?item.amount:0}</td>
         </tr>
     `);
     $("#price-table").empty()

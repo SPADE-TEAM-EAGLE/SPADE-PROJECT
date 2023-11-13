@@ -2289,7 +2289,7 @@
 
     <!-- Color Theme js -->
     <script src="../assets/js/themeColors.js"></script>
-
+    <script src="../assets/js/pricing-plan.js"></script>
     <!-- CUSTOM JS -->
     <!-- <script src="../assets/js/custom.js"></script> -->
     
@@ -2305,13 +2305,14 @@ const propertyId = sjcl.decrypt(password, encryptedPropertyId);
 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             function getData(){
                 $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, image,units,create_at,planID }) {
+                success: function ({ userName, image,units,create_at,planID,...rest }) {
                     // console.log()
+                    adjustPlan(rest)
                     unitsPermission = units;
                     if(image!==" " && image!==null && image!== ""){
                 

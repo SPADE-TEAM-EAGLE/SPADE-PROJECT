@@ -18,7 +18,7 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         }
 $(document).ready(function () {
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/protected',
+        url: 'http://localhost:3000/api/spade/protected',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
