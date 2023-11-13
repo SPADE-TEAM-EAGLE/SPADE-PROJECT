@@ -1596,7 +1596,7 @@
                 <div class="modal-header">
                     <div class="text-justify ps-2 border-model-line">
                         <h2 class="modal-title mb-0">View <strong class="color-primary">Invoice</strong></h2>
-                        <button type="button" class="btn btn-primary">#Invoice Number: INV-89900A</button>
+                        <button type="button" class="btn btn-primary">#Invoice Number: <span id="invoice-number">INV-89900A</span></button>
                     </div>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="viewModal-invoice">
                         <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark text-dark"></i></span>
@@ -2832,7 +2832,7 @@
         $(document).ready(() => {
             
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3003,14 +3003,13 @@
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
                 invoiceId = invoiceIdElement.text();
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
-                console.log(tenantData)
-                // const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
+               
 
                 const data = {
                     ...data1,
                     ...tenantData
                 }
-                
+                $("#invoice-number").text("INV-"+data.invoiceID);
                 $("#tenantName").text(data.firstName + " " + data.lastName)
                 $("#invoiceType").text(data.invoiceType?data.invoiceType:"N/A")
                 if(data.invoiceType=="One Time Invoice"){
@@ -3117,23 +3116,22 @@
                 },
                 success: function (response) {
                     console.log("getAllInvoicesTenant");
+                    console.log(response?.message == "No data found");
                     // console.log(response.data[0][0].businessLogo);
-                    if (response.message == "No data found") {
-                        // window.location = './invoicing.html'
-                    }
+                    var tableBody = $('#table_body');
+                        tableBody.empty();
+                    if(response?.message=="No data found"){
+                            
+                            tableBody.append(`<tr><td colspan="12" style="text-align: center;">No Data Found</td></tr>`)
+                        }
                     else {
 
                         bussinessLogoImg = response.data[0][0].businessLogo ? response.data[0][0].businessLogo : "../assets/images/Artboard GÇô 1.svg";
                         $("#bussinessLogo").attr("src", "data:image/png;base64," + bussinessLogoImg)
-                        console.log(bussinessLogoImg);
                         invoiceData = response?.data[0]
-                        console.log("invoice", invoiceData)
-
                         var tableBody = $('#table_body');
                         tableBody.empty();
-                        // console.log(data[0])
                         let tenantNames = []
-
                         response.data[0]?.forEach(function (invoice) {
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
@@ -3183,7 +3181,6 @@
                             // Append the row to the table body
                             tableBody.append(row);
                         });
-
                     }
                 },
                 error: function () {
