@@ -29,6 +29,7 @@ router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
 router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
+router.post("/uploadAdmin", verifySuperAdmin, fileUpload.fileUpload);
 
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
