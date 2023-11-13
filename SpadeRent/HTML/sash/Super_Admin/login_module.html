@@ -567,7 +567,7 @@
                             "></i>
                       </div>
                     </div>
-                    <div class="col-12 mb-2 pb-5">
+                    <div class="col-12 mb-2 pb-2">
                       <div class="form-group"></div>
                       <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="submit-login">
                         Login
@@ -575,7 +575,7 @@
                         <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2" alt="" />
                       </button>
                     </div>
-                    <div class="col-12 mb-2">
+                    <div class="col-12 mb-0">
                       <div class="d-flex justify-content-end">
                         <!-- <a href="Signup.html" class="text-dark fw-bold">Sign up for account</a> -->
                         <!-- <a href="../Tenant/login_module.html" class="text-dark fw-bold">Login as Tenant</a> -->
@@ -647,21 +647,25 @@ togglePassword1.addEventListener("click", function (e) {
     $(document).ready(function () {
       $("#submit-login").on("click",function(){
         $.ajax({
-        url: "https://backend.app.spaderent.com/api/spade//signInAdmin",
+        url: "http://localhost:3000/api/spade/signInAdmin?email="+$("#login-email").val() + "&password="+$("#id_password1").val(),
         type: "GET",
         contentType: "application/json",
-        data:{
-          email: $("#login-email").val(),
-          password: $("#id_password1").val()
-        },
+        // data: JSON.stringify({
+        //   email: $("#login-email").val(),
+        //   password: $("#id_password1").val()
+        // }),
         success: function (response) {
-          // console.log(result);
-          $("#myModal_success").modal("show");
-                              localStorage.setItem("authtoken", response.token);
-                setTimeout(function () {
-                  $("#myModal_success").modal("hide");
-                  window.location = "../Super_Admin/index.html";
-                }, 2000);
+          // console.log(response.token)
+          if(response.message == "SignIn Successful"){
+            $("#myModal_success").modal("show");
+                                localStorage.setItem("authtoken", response.token);
+                  setTimeout(function () {
+                    $("#myModal_success").modal("hide");
+                    window.location = "../Super_Admin/index.html";
+                  }, 2000);
+          }else{
+
+          }
           
         },
         error: function (error) {

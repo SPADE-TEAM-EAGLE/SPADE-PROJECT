@@ -3002,7 +3002,6 @@
             // Prevent default behavior (Prevent file from being opened)
             ev.preventDefault();
         }
-
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             console.log(selectedFilesContainer)
@@ -3083,6 +3082,8 @@
             });
         }
         
+
+        
         var states;
         var propertyShow;
         $(document).ready(function () {
@@ -3134,16 +3135,9 @@ $(".plan_remaining_days_data").each(function(){
                     data
                 }) {
                     console.log(data)
-                    // Handle state selection change
-                    // console.log(result)
-
                     var stateDropdown = $('#state');
                     var stateupdateDropdown = $('#state_update');
-                    // states = result.geonames.filter(function(place) {
-                    //     return place.fcode === "ADM1";
-                    // });
                     states = data
-                    //   stateDropdown.append($('<option></option>').text("Choose..."));
                     data.forEach(function (state) {
                         stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                     });
