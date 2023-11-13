@@ -1135,3 +1135,4 @@ exports.insertInUserPermissionUsers =
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?)";
 
   exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, password = ?, phone = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? WHERE id = ?"; 
+  exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
