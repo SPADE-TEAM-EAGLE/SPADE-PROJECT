@@ -299,6 +299,7 @@ router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
 // router.delete("/closedLandlord", superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
+// router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
 // router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
 router.post("/createUserAdmin", superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);

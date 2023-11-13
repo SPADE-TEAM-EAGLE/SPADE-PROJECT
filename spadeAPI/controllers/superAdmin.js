@@ -8,7 +8,8 @@ const {
   allLandlordQuery,
   insertDeletedUserQuery,
   insertUsersAdmin,
-  updateUserAdminQuery
+  updateUserAdminQuery,
+  deleteLandlordQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -19,8 +20,8 @@ const config = process.env;
 
 // ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
-    // const { email,password }=req.query;
-    const { email,password }=req.body;
+    const { email,password }=req.query;
+    // const { email,password }=req.body;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
@@ -122,7 +123,7 @@ exports.signInAdmin = async(req,res)=>{
   // ######################################## All Closed Landlord ########################################
   exports.allClosedLandlord = async(req,res)=>{
     try {
-      const allClosedLandlordResult = await queryRunner(selectQuery("closedAccount"));
+      const allClosedLandlordResult = await queryRunner(deleteLandlordQuery);
       if(allClosedLandlordResult[0].length == 0){
           res.status(201).json({message:"Landlord Closed Account is not found"})
         }else{
