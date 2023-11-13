@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://localhost:3000/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
