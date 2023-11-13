@@ -19,7 +19,8 @@ const config = process.env;
 
 // ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
-    const { email,password }=req.query;
+    // const { email,password }=req.query;
+    const { email,password }=req.body;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
@@ -72,7 +73,8 @@ exports.signInAdmin = async(req,res)=>{
   // ######################################## All Landlord Delete ########################################
   exports.deleteLandlord=async(req,res)=>{
     const { landlordId, reason }=req.body;
-    const { userName } = req.user;
+    // const {userId, userName } = req.body;
+    const {userId, userName } = req.user;
     const deleted_at = new Date();
     try {
       const selectUserResult = await queryRunner(selectQuery("users","id"),[landlordId]);
@@ -82,42 +84,26 @@ exports.signInAdmin = async(req,res)=>{
         const email = selectUserResult[0][0].Email;
         const phone = selectUserResult[0][0].Phone;
         const planId = selectUserResult[0][0].PlanID;
+        const landlordCreated_at = selectUserResult[0][0].created_at;
         console.log(fName , lName)
         const deleteUserResult=await queryRunner(deleteQuery("users","id"),[landlordId]);
         if(deleteUserResult[0].affectedRows>0){
-          console.log("1")
-        const insertLandlordResult=await queryRunner(insertDeletedUserQuery,[userName, fName, lName, email, phone, planId, reason, deleted_at,landlordId]);
-        console.log("2")  
+        const insertLandlordResult=await queryRunner(insertDeletedUserQuery,[userName, userId, fName, lName, email, phone, planId, reason, deleted_at,landlordId,landlordCreated_at]);
         const deleteUserBankAccountResult = await queryRunner(deleteQuery("bankAccount","userId"),[landlordId]);
-        console.log("3")
         const deleteUserChatSResult = await queryRunner(deleteQuery("chats","senderId"),[landlordId]);
-        console.log("4")
         const deleteUserChatRResult = await queryRunner(deleteQuery("chats","receiverID"),[landlordId]);
-        console.log("5")
         const deleteUserInvoiceResult = await queryRunner(deleteQuery("invoice","landlordID"),[landlordId]);
-        console.log("6")
         const deleteUserInvoiceCategoryResult = await queryRunner(deleteQuery("InvoiceCategories","landLordId"),[landlordId]);
-        console.log("7")
         const deleteUserleadsResult = await queryRunner(deleteQuery("leads","landlordId"),[landlordId]);
-        console.log("8")
         const deleteUserPropertyResult = await queryRunner(deleteQuery("property","landlordID"),[landlordId]);
-        console.log("9")
         const deleteUserPropertyUnitsResult = await queryRunner(deleteQuery("propertyunits","landlordId"),[landlordId]);
-        console.log("0")
         const deleteUserNotificationResult = await queryRunner(deleteQuery("notification","landlordID"),[landlordId]);
-        console.log("11")
         const deleteUserProspectusResult = await queryRunner(deleteQuery("prospectus","landlordId"),[landlordId]);
-        console.log("22")
         const deleteUserProspectusSourcesResult = await queryRunner(deleteQuery("prospectusSources","landlordId"),[landlordId]);
-        console.log("33")
         const deleteUsertaskResult = await queryRunner(deleteQuery("task","landlordID"),[landlordId]);
-        console.log("44")
         const deleteUsertenantsResult = await queryRunner(deleteQuery("tenants","landlordID"),[landlordId]);
-        console.log("55")
         const deleteUserUserPUsersResult = await queryRunner(deleteQuery("userPUsers","llnalordId"),[landlordId]);
-        console.log("66")
         const deleteUserVendorResult = await queryRunner(deleteQuery("vendor","LandlordID"),[landlordId]);
-          
           res.status(200).json({message:"Landlord All Information Is Deleted"})
 
       }
