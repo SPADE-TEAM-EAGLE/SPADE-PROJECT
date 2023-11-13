@@ -1134,4 +1134,4 @@ exports.insertInUserPermissionUsers =
   exports.insertDeletedUserQuery = "insert into closedAccount (adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId) values (?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?)";
 
-  exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, password = ?, phone = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? WHERE id = ?"; 
+  exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? WHERE id = ?"; 

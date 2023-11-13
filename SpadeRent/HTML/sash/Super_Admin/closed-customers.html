@@ -1029,8 +1029,8 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-    <!-- <script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
         var helloGuys = true;
         $(document).ajaxStop(function () {
             if (helloGuys) {
@@ -1040,10 +1040,10 @@
                 document.head.appendChild(customScript);
             }
         });
-    </script> -->
+    </script>
 
     <!-- ############################################# -->
-    <script src="../assets/js/intercom-tenant.js"></script>
+    <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
 
     <!-- C3 CHART JS -->
     <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
@@ -1058,6 +1058,57 @@
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script>
+        $(document).ready(function(){
+            function getAllClosedLandlord(){
+                $.ajax({
+                    url: "http://localhost:3000/api/spade/allClosedLandlord",
+                    type: "GET",
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        // $("#table_body").empty()
+                        if (response.data) {
+                            userAdminData = response?.data;
+                            response?.data.forEach((element, index) => {
+                                
+$('#table_body').append(` <tr>
+                                                        <td></td>
+                                                        <td style="font-weight: 600;">US-272323</td>
+                                                        <td style="font-weight: 600;"><b>${element.fName ? element.fName : "N/A" } ${element.lName ? element.lName : "N/A"}</b></td>
+                                                        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A" }</p><span>${element.phone ? element.phone : "N/A" }</span></td>
+                                                        <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" style="background-color: #C8F3F7;color: #0BAAB8;"><i class="fi fi-rs-dot-circle me-1"></i><b>Pro Plan Purchased</b></span></a></td>
+                                                        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$69.99/ Per Month</b></p><span>Purchase Date: Feb/02/2022</span></td>
+                                                        <td style="font-weight: 600;">April/02/2023 3:00PM</td>
+                                                        <td style="font-weight: 600;">May/02/2023 3:00PM</td>
+                                                        <td style="font-weight: 600;"><p>Lorem ipsum dolor sit, amet consectetur <br> adipisicing elit.</p></td>
+                                                        <!-- <td class="propertyAddress"><p style="font-weight: 600; color: #FB233B;" class="mb-1"><b><i class="fi fi-rs-clock-three"></i> Expired</b></p><span style="color: #1467B0;">Renew Now</span></td> -->
+                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                                                            <ul class="dropdown-menu dropdown-menu-top">
+                                                                <!-- <li><a class="dropdown-item text-dark view-property" href="./view-property.html?property="" style="display: flex; align-items: start;"> Upgrade Annualy/Monthly</a></li>
+                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Sent Reminder</a></li>
+                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Close Account</a></li>
+                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Downgrade to Monthly (Old Plan)</a></li>
+                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Monthly (New Plan)</a></li> -->
+                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> View</a></li>
+                                                                <li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: start;">Delete</a></li>
+                                                        </ul></td>
+                                                    </tr>
+`)
+                            })}
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+
+                    },
+                });
+            }
+            getAllClosedLandlord();
+        })
+    </script>
 
 </body>
 

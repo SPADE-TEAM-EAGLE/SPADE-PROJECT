@@ -16257,13 +16257,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $('#preloader').css('display', 'flex')
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
-
                     var file = $('#fileInput_business')[0].files[0];
                     console.log(file)
                     uploadFormData.append('image', file);
-
                     var str = "";
-
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/ImageToBase64',
                         type: 'PUT',

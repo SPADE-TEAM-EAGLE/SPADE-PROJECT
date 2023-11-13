@@ -246,7 +246,7 @@ exports.signInAdmin = async(req,res)=>{
         const insertResult = await queryRunner(updateUserAdminQuery, [
           firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,id]);
         if (insertResult[0].affectedRows > 0) {
-          return res.status(200).json({ message: " User Updated Successfully" });
+          return res.status(200).json({ message: "User Updated Successfully" });
         } else {
           return res.status(500).send("Failed to Update User Permission User");
         }
