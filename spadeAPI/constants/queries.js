@@ -1136,3 +1136,5 @@ exports.insertInUserPermissionUsers =
 
   exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? , imageKey = ? WHERE id = ?"; 
   exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
+  exports.updateAdmin =
+  "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";

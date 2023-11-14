@@ -910,6 +910,41 @@
         </div>
     </div>
     <!-- /GLOBAL-LOADER -->
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg></span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Password change successfully</p>
+                        </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -2527,8 +2562,18 @@
     <script src="../assets/js/charts.js"></script>
 
     <script>
+        var image_url = " "; var image_key = " ";
+        function toTitleCase(str) {
+            return str.replace(
+                /\w\S*/g,
+                function (txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                }
+            );
+        }
         $(document).ready(function () {
-            $.ajax({
+            function getData(){
+                $.ajax({
                 url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
@@ -2536,12 +2581,30 @@
                 },
                 success: function (response) {
                     console.log(response);
+                    $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                    $("#firstName").val(response.firstName);
+                    $("#lastName").val(response.lastName);
+                    $("#email").val(response.email);
+                    $("#phone").val(response.phone);
+                    $("#address").val(response.address);
+                    $("#city").val(response.city);
+                    $("#state").val(response.state);
+                    $("#zip").val(response.zipCode);
+                    $("#businessName").val(response.zipCode);
+
+                    
+                    $("#profile").empty();
+                    $("#profile").css("background-image", "url(" + response.image + ")");
+                    if (response.image) {
+                            image_url = response.image
+                            image_key = response.imageKey
+                        }
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
+                        window.location = './login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
@@ -2549,9 +2612,143 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             })
+        
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                method: 'GET',
+                success: function ({
+                    data
+                }) {
+                    // Handle state selection change
+                    $('#state').change(function () {
+                        var selectedState = $(this).val();
+
+
+
+
+                        // if (selectedState !== "Choose...") {
+                        //     var cities = result.geonames.filter(function (place) {
+                        //         return place.adminName1 === selectedState && place.fcode === "PPL";
+                        //     });  
+                        // }
+                    });
+
+                    var stateDropdown = $('#state');
+                    var states = data
+
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    data.forEach(function (state) {
+                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                }
+            });
+
+            }
+            getData();
+            $(document).on("click", "#save_profile", () => {
+                    $("#save_profile").prop("disabled", true)
+
+                    let userData = {
+                        firstName: $("#firstName").val(),
+                        lastName: $("#lastName").val(),
+                        email: $("#email").val(),
+                        phone: $("#phone").val(),
+                        businessName: $("#businessName").val(),
+                        zipcode: $("#zip").val(),
+                        city: $("#city").val(),
+                        state: $("#state").val(),
+                        address: $("#address").val(),
+                        imageUrl: image_url,
+                        imageKey: image_key
+                    }
+                    const userForm = new FormData()
+                    if (file) {
+                        userForm.append("image", file)
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/uploadAdmin',
+                            type: 'POST',
+                            data: userForm,
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                console.log(response.images[0].image_url);
+                                userData.imageUrl = response.images[0].image_url
+                                userData.imageKey = response.images[0].image_key
+                                $.ajax({
+                                    url: 'http://localhost:3000/api/spade/updateAdminProfile',
+                                    method: 'PUT',
+                                    data: JSON.stringify(userData),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                    },
+                                    success: function (response) {
+                                        $("#save_profile").prop("disabled", false)
+
+                                        $("#myModal_success p").text("Succesfully Updated!!!")
+                                       
+                                        $("#myModal_success").modal("show")
+                                        setTimeout(function () {
+                                            $("#myModal_success").modal("hide");
+                                        }, 20000);
+                                        getData()
+                                    },
+                                    error: function (xhr, status, error) {
+                                        $("#save_profile").prop("disabled", false)
+                                        console.log('Error occurred while fetching state and city data.');
+                                        console.log(xhr);
+                                        console.log(error);
+                                        // console.log('Error occurred while fetching state and city data.');
+                                    }
+                                });
+
+                            },
+                            error: function (error) {
+                                console.error('Error submitting image:', error);
+                                // Handle the error here
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: 'http://localhost:3000/api/spade/updateAdminProfile',
+                            method: 'PUT',
+                            data: JSON.stringify(userData),
+                            contentType: 'application/json',
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                            },
+                            success: function (response) {
+                                $("#save_profile").prop("disabled", false)
+                                $("#myModal_success p").text("Succesfully Updated!!!")
+                                
+                                $("#myModal_success").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 20000);
+                                getData()
+
+                            },
+                            error: function (xhr, status, error) {
+                                $("#save_profile").prop("disabled", false)
+                                console.log('Error occurred while fetching state and city data.');
+                                console.log(xhr);
+                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                            }
+                        });
+                    }
+                })
+
         })
     </script>
     <script>
+        var file;
         $(function () {
 
             $('#profile').addClass('dragging').removeClass('dragging');

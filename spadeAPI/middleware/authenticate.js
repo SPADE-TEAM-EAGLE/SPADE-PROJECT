@@ -397,6 +397,8 @@ const verifySuperAdmin = async (req, res, next) => {
       email: result[0][0].email,
       userId: result[0][0].id,
       userName: result[0][0].fName + " " + result[0][0].lName,
+      firstName: result[0][0].fName,
+      lastName: result[0][0].lName,
       AdminCreatedDate: result[0][0].created_at,
       phone: result[0][0].phone,
       image: result[0][0].images,

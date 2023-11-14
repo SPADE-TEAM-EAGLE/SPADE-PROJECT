@@ -9,11 +9,13 @@ const {
   insertDeletedUserQuery,
   insertUsersAdmin,
   updateUserAdminQuery,
-  deleteLandlordQuery
+  deleteLandlordQuery,
+  updateAdmin
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { sendMailLandlord } = require("../sendmail/sendmail.js");
+const { updateUser } = require("safecharge");
 const config = process.env;
 
 
@@ -270,4 +272,66 @@ exports.signInAdmin = async(req,res)=>{
         // ######################################## user Admin delete ########################################
 exports.getAdmin = (req, res) => {
   res.status(200).json(req.user);
+};
+exports.updateAdminProfile = async function (req, res) {
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    businessName,
+    zipcode,
+    city,
+state,
+address,
+imageUrl,
+imageKey
+    
+  } = req.body;
+  const { userId } = req.user;
+  console.log(req.body);
+  console.log(userId);
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "id"), [
+      userId,
+    ]);
+    // current date
+    const now = new Date();
+    // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+
+    const isUserExist = selectResult[0][0];
+    if (!isUserExist) {
+      // throw new Error("User not found");
+      res.status(200).json({
+        message: "User not found",
+      });
+    }
+    if (isUserExist) {
+      const updateUserParams = [
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zipcode,
+        businessName,
+        imageUrl,
+        imageKey,
+        userId,
+      ];
+      const updateResult = await queryRunner(updateAdmin, updateUserParams);
+      if (updateResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Admin updated successfully",
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
 };
