@@ -306,4 +306,4 @@ router.post("/createUserAdmin", superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
 router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
-router.delete("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
+// router.delete("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
