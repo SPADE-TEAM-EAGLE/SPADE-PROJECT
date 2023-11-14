@@ -3290,9 +3290,10 @@ color: #000;
             $(document).on("click", "#update_userAdmin", function () {
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
+                    
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade//uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3302,7 +3303,7 @@ color: #000;
                         },
                         success: function (response) {
                             console.log("uploadAdmin");
-                            console.log(response.images[0].image_url);
+                            console.log(response);
                             var imageUser = response.images[0].image_url;
                             $.ajax({
                                 url: "http://localhost:3000/api/spade/updateAdminUser",
@@ -3312,8 +3313,8 @@ color: #000;
                                     lastName: $("#lastName_user_update").val(),
                                     email: $("#email_user_update").val(),
                                     phone: $("#phone_user_update").val(),
-                                    password: "",
-                                    // password : $("#password_user_update").val(),
+                                    // password: "",
+                                    password : $("#password_user_update").val(),
                                     role: $("#role_user_update").val(),
                                     address: $("#address_user_update").val(),
                                     city: $("#city_user_update").val(),
@@ -3354,46 +3355,46 @@ color: #000;
                             console.log('Error: ' + error);
                         }
                     });
-                }else{
+                } else {
                     $.ajax({
-                                url: "http://localhost:3000/api/spade/updateAdminUser",
-                                type: "PUT",
-                                data: JSON.stringify({
-                                    firstName: $("#firstName_user_update").val(),
-                                    lastName: $("#lastName_user_update").val(),
-                                    email: $("#email_user_update").val(),
-                                    phone: $("#phone_user_update").val(),
-                                    password: "",
-                                    // password : $("#password_user_update").val(),
-                                    role: $("#role_user_update").val(),
-                                    address: $("#address_user_update").val(),
-                                    city: $("#city_user_update").val(),
-                                    state: $("#state_user_update").val(),
-                                    zipcode: $("#zip_user_update").val(),
-                                    image: "",
-                                    id: $("#userid_update").val()
-                                }),
-                                headers: {
-                                    Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                                },
-                                contentType: "application/json",
-                                success: function (data) {
-                                    console.log(data);
-                                    $('#edit-user-permissions').modal('hide')
-                                    if (data.message == "User Updated Successfully") {
-                                        $("#myModal_success p").text("User updated succesfully")
-                                        $("#myModal_success").modal("show");
-                                        
-                                        setTimeout(function () {
-                                            $("#myModal_success").modal("hide");
-                                        }, 2000);
-                                        getAllUserAdminData()
-                                    }
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            })
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        type: "PUT",
+                        data: JSON.stringify({
+                            firstName: $("#firstName_user_update").val(),
+                            lastName: $("#lastName_user_update").val(),
+                            email: $("#email_user_update").val(),
+                            phone: $("#phone_user_update").val(),
+                            // password: "",
+                            password : $("#password_user_update").val(),
+                            role: $("#role_user_update").val(),
+                            address: $("#address_user_update").val(),
+                            city: $("#city_user_update").val(),
+                            state: $("#state_user_update").val(),
+                            zipcode: $("#zip_user_update").val(),
+                            image: "",
+                            id: $("#userid_update").val()
+                        }),
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                        },
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                            $('#edit-user-permissions').modal('hide')
+                            if (data.message == "User Updated Successfully") {
+                                $("#myModal_success p").text("User updated succesfully")
+                                $("#myModal_success").modal("show");
+
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
+                                getAllUserAdminData()
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
                 }
 
             })
@@ -3427,7 +3428,7 @@ color: #000;
                 if (userAdminDataNew.images !== "") {
 
                     selectedFiles.push({
-                        imageKey: userAdminDataNew.images_key,
+                        // imageKey: userAdminDataNew.images,
                         imageURL: userAdminDataNew.images
                     })
                 }
@@ -3497,7 +3498,7 @@ color: #000;
                     var uploadFormData = new FormData();
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade//uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3611,6 +3612,15 @@ color: #000;
 
                 }
             })
+            $('#add-user-permissions').on('hidden.bs.modal', function () {
+                $(this).find('.file-grid').empty();
+                selectedFiles = [];
+            });
+            $('#edit-user-permissions').on('hidden.bs.modal', function () {
+                $(this).find('.file-grid').empty();
+                selectedFiles = [];
+            });
+
         })
     </script>
     <script>
