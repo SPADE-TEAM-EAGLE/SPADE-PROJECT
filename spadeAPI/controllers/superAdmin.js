@@ -144,7 +144,7 @@ exports.signInAdmin = async(req,res)=>{
  // ######################################## All Closed Landlord ########################################
 
   exports.createUserAdmin = async function (req, res) {
-    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image } = req.body;
+    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey } = req.body;
     const currentDate = new Date();
     try {
       const selectResult = await queryRunner(selectQuery("superAdmin","email"), [
@@ -159,7 +159,7 @@ exports.signInAdmin = async(req,res)=>{
       const id = bcrypt
         .hashSync(lastName + new Date().getTime().toString(), salt)
         .substring(0, 10);
-      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,currentDate]);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,imageKey,currentDate]);
       const name = firstName + " " + lastName;
       const mailSubject = "Spade Admin Welcome Email";
       if (insertResult[0].affectedRows > 0) {
@@ -268,3 +268,6 @@ exports.signInAdmin = async(req,res)=>{
         }
       };
         // ######################################## user Admin delete ########################################
+exports.getUser = (req, res) => {
+  res.status(200).json(req.user);
+};
