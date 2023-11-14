@@ -1154,6 +1154,53 @@
                     }
                 })
             })
+            $(document).on('keyup', '#typehead', function () {
+                var searchValue = $(this).val().toLowerCase();
+                var numRowsToShow = $('#lengthSelectBox').val();
+
+                $('#table_body tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                });
+
+                if (searchValue === '') {
+                    // If search box is empty, use the selected value from the select box
+                    $('#table_body tr:visible:lt(' + numRowsToShow + ')').show();
+                    $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+                }
+            });
+            $(document).change(function () {
+                if ($('#typehead').val() == "") {
+
+                    let count = 1;
+                    $("#table_body tr").each(function (item, index) {
+                        //console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+            })
+            $(document).ajaxStop(function () {
+                if ($('#typehead').val() == "") {
+
+                    let count = 1;
+                    $("#table_body tr").each(function (item, index) {
+                        //console.log(count, parseInt($("#lengthSelectBox").val()))
+                        if (count > parseInt($("#lengthSelectBox").val())) {
+                            $(this).hide()
+                        }
+                        else {
+                            $(this).show()
+                        }
+                        count++;
+                    })
+                }
+            })
+
         })
     </script>
 

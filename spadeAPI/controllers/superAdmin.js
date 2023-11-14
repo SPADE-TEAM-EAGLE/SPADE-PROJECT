@@ -227,11 +227,11 @@ exports.signInAdmin = async(req,res)=>{
     
     // ######################################## user Admin Edit ########################################
     exports.updateAdminUser = async function (req, res) {
-      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image, id } = req.body;
+      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey, id } = req.body;
       const currentDate = new Date();
       try {
         const insertResult = await queryRunner(updateUserAdminQuery, [
-          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,id]);
+          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey,id]);
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
@@ -268,6 +268,6 @@ exports.signInAdmin = async(req,res)=>{
         }
       };
         // ######################################## user Admin delete ########################################
-exports.getUser = (req, res) => {
+exports.getAdmin = (req, res) => {
   res.status(200).json(req.user);
 };

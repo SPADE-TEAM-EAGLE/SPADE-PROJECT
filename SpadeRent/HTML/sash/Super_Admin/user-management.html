@@ -3298,154 +3298,157 @@ color: #000;
                          newFiles = false;
                     }
                 })
-                alert(newFiles + " " + selectedFiles.length)
-                console.log(selectedFiles);
-                // if (selectedFiles.length >= 1 && newFiles == true) {
-                //     var uploadFormData = new FormData();
-                //     console.log(selectedFiles[0]);
-                //     uploadFormData.append('image', selectedFiles[0]);
-                //     $.ajax({
-                //         url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
-                //         type: 'POST',
-                //         data: uploadFormData,
-                //         contentType: false,
-                //         processData: false,
-                //         headers: {
-                //             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                //         },
-                //         success: function (response) {
-                //             console.log("uploadAdmin");
-                //             console.log(response);
-                //             var imageUser = response.images[0].image_url;
-                //             $.ajax({
-                //                 url: "http://localhost:3000/api/spade/updateAdminUser",
-                //                 type: "PUT",
-                //                 data: JSON.stringify({
-                //                     firstName: $("#firstName_user_update").val(),
-                //                     lastName: $("#lastName_user_update").val(),
-                //                     email: $("#email_user_update").val(),
-                //                     phone: $("#phone_user_update").val(),
-                //                     password : $("#password_user_update").val(),
-                //                     role: $("#role_user_update").val(),
-                //                     address: $("#address_user_update").val(),
-                //                     city: $("#city_user_update").val(),
-                //                     state: $("#state_user_update").val(),
-                //                     zipcode: $("#zip_user_update").val(),
-                //                     image: imageUser,
-                //                     id: $("#userid_update").val()
-                //                 }),
-                //                 headers: {
-                //                     Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                //                 },
-                //                 contentType: "application/json",
-                //                 success: function (data) {
-                //                     console.log(data);
-                //                     $('#edit-user-permissions').modal('hide')
-                //                     if (data.message == "User Updated Successfully") {
-                //                         $("#myModal_success p").text("User updated succesfully")
-                //                         $("#myModal_success").modal("show");
-                //                         $('.file-grid').empty()
-                //                         selectedFiles = []
-                //                         setTimeout(function () {
-                //                             $("#myModal_success").modal("hide");
-                //                         }, 2000);
-                //                         getAllUserAdminData()
-                //                     }
-                //                 },
-                //                 error: function (err) {
-                //                     $('.file-grid').empty()
-                //                     console.log(err);
-                //                 }
-                //             })
-                //         },
-                //         error: function (xhr, status, error) {
-                //             $("#myModal_warning_connection").modal("show");
-                //             setTimeout(function () {
-                //                 $('#myModal_warning_connection').modal('hide');
-                //             }, 20000);
-                //             console.log('Error: ' + error);
-                //         }
-                //     });
-                // }else if(selectedFiles.length >= 1 && newFiles == false){
-                //     $.ajax({
-                //         url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
-                //         type: "PUT",
-                //         data: JSON.stringify({
-                //             firstName: $("#firstName_user_update").val(),
-                //             lastName: $("#lastName_user_update").val(),
-                //             email: $("#email_user_update").val(),
-                //             phone: $("#phone_user_update").val(),
-                //             password : $("#password_user_update").val(),
-                //             role: $("#role_user_update").val(),
-                //             address: $("#address_user_update").val(),
-                //             city: $("#city_user_update").val(),
-                //             state: $("#state_user_update").val(),
-                //             zipcode: $("#zip_user_update").val(),
-                //             image: "",
-                //             id: $("#userid_update").val()
-                //         }),
-                //         headers: {
-                //             Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                //         },
-                //         contentType: "application/json",
-                //         success: function (data) {
-                //             console.log(data);
-                //             $('#edit-user-permissions').modal('hide')
-                //             if (data.message == "User Updated Successfully") {
-                //                 $("#myModal_success p").text("User updated succesfully")
-                //                 $("#myModal_success").modal("show");
+                // alert(newFiles + " " + selectedFiles[0].imageURL)
+                if (selectedFiles.length >= 1 && newFiles == true) {
+                    var uploadFormData = new FormData();
+                    console.log(selectedFiles[0]);
+                    uploadFormData.append('image', selectedFiles[0]);
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        type: 'POST',
+                        data: uploadFormData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log("uploadAdmin");
+                            console.log(response);
+                            var imageUser = response.images[0].image_url;
+                            var imageKey = response.images[0].image_key;
+                            $.ajax({
+                                url: "http://localhost:3000/api/spade/updateAdminUser",
+                                type: "PUT",
+                                data: JSON.stringify({
+                                    firstName: $("#firstName_user_update").val(),
+                                    lastName: $("#lastName_user_update").val(),
+                                    email: $("#email_user_update").val(),
+                                    phone: $("#phone_user_update").val(),
+                                    password : $("#password_user_update").val(),
+                                    role: $("#role_user_update").val(),
+                                    address: $("#address_user_update").val(),
+                                    city: $("#city_user_update").val(),
+                                    state: $("#state_user_update").val(),
+                                    zipcode: $("#zip_user_update").val(),
+                                    image: imageUser,
+                                    imageKey: imageKey,
+                                    id: $("#userid_update").val()
+                                }),
+                                headers: {
+                                    Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                                },
+                                contentType: "application/json",
+                                success: function (data) {
+                                    console.log(data);
+                                    $('#edit-user-permissions').modal('hide')
+                                    if (data.message == "User Updated Successfully") {
+                                        $("#myModal_success p").text("User updated succesfully")
+                                        $("#myModal_success").modal("show");
+                                        $('.file-grid').empty()
+                                        selectedFiles = []
+                                        setTimeout(function () {
+                                            $("#myModal_success").modal("hide");
+                                        }, 2000);
+                                        getAllUserAdminData()
+                                    }
+                                },
+                                error: function (err) {
+                                    $('.file-grid').empty()
+                                    console.log(err);
+                                }
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 20000);
+                            console.log('Error: ' + error);
+                        }
+                    });
+                }else if(selectedFiles.length >= 1 && newFiles == false){
+                    $.ajax({
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        type: "PUT",
+                        data: JSON.stringify({
+                            firstName: $("#firstName_user_update").val(),
+                            lastName: $("#lastName_user_update").val(),
+                            email: $("#email_user_update").val(),
+                            phone: $("#phone_user_update").val(),
+                            password : $("#password_user_update").val(),
+                            role: $("#role_user_update").val(),
+                            address: $("#address_user_update").val(),
+                            city: $("#city_user_update").val(),
+                            state: $("#state_user_update").val(),
+                            zipcode: $("#zip_user_update").val(),
+                            image: selectedFiles[0].imageURL,
+                            imageKey: selectedFiles[0].imageKey,
+                            id: $("#userid_update").val()
+                        }),
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                        },
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                            $('#edit-user-permissions').modal('hide')
+                            if (data.message == "User Updated Successfully") {
+                                $("#myModal_success p").text("User updated succesfully")
+                                $("#myModal_success").modal("show");
 
-                //                 setTimeout(function () {
-                //                     $("#myModal_success").modal("hide");
-                //                 }, 2000);
-                //                 getAllUserAdminData()
-                //             }
-                //         },
-                //         error: function (err) {
-                //             console.log(err);
-                //         }
-                //     })
-                // }
-                // else {
-                //     $.ajax({
-                //         url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
-                //         type: "PUT",
-                //         data: JSON.stringify({
-                //             firstName: $("#firstName_user_update").val(),
-                //             lastName: $("#lastName_user_update").val(),
-                //             email: $("#email_user_update").val(),
-                //             phone: $("#phone_user_update").val(),
-                //             password : $("#password_user_update").val(),
-                //             role: $("#role_user_update").val(),
-                //             address: $("#address_user_update").val(),
-                //             city: $("#city_user_update").val(),
-                //             state: $("#state_user_update").val(),
-                //             zipcode: $("#zip_user_update").val(),
-                //             image: "",
-                //             id: $("#userid_update").val()
-                //         }),
-                //         headers: {
-                //             Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                //         },
-                //         contentType: "application/json",
-                //         success: function (data) {
-                //             console.log(data);
-                //             $('#edit-user-permissions').modal('hide')
-                //             if (data.message == "User Updated Successfully") {
-                //                 $("#myModal_success p").text("User updated succesfully")
-                //                 $("#myModal_success").modal("show");
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
+                                getAllUserAdminData()
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                }
+                else {
+                    $.ajax({
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        type: "PUT",
+                        data: JSON.stringify({
+                            firstName: $("#firstName_user_update").val(),
+                            lastName: $("#lastName_user_update").val(),
+                            email: $("#email_user_update").val(),
+                            phone: $("#phone_user_update").val(),
+                            password : $("#password_user_update").val(),
+                            role: $("#role_user_update").val(),
+                            address: $("#address_user_update").val(),
+                            city: $("#city_user_update").val(),
+                            state: $("#state_user_update").val(),
+                            zipcode: $("#zip_user_update").val(),
+                            image: "",
+                            imageKey: "",
+                            id: $("#userid_update").val()
+                        }),
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                        },
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                            $('#edit-user-permissions').modal('hide')
+                            if (data.message == "User Updated Successfully") {
+                                $("#myModal_success p").text("User updated succesfully")
+                                $("#myModal_success").modal("show");
 
-                //                 setTimeout(function () {
-                //                     $("#myModal_success").modal("hide");
-                //                 }, 2000);
-                //                 getAllUserAdminData()
-                //             }
-                //         },
-                //         error: function (err) {
-                //             console.log(err);
-                //         }
-                //     })
-                // }
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
+                                getAllUserAdminData()
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                }
 
             })
             $(document).on("click", ".edit-option-userAdmin", function () {
@@ -3665,14 +3668,25 @@ color: #000;
                 }
             })
             $('#add-user-permissions').on('hidden.bs.modal', function () {
-                $(this).find('.file-grid').empty();
+                alert(1)
+                $('.file-grid').each(function(){
+                $(this).empty();
+                })
                 selectedFiles = [];
             });
             $('#edit-user-permissions').on('hidden.bs.modal', function () {
-                $(this).find('.file-grid').empty();
+                alert(2)
+                $('.file-grid').each(function(){
+                 $(this).empty();
+                })
                 selectedFiles = [];
             });
-
+            $(document).on('keyup', '#typehead', function () {
+                    var searchValue = $(this).val().toLowerCase();
+                    $('#table_body_user tr').filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+                    });
+                });
         })
     </script>
     <script>
