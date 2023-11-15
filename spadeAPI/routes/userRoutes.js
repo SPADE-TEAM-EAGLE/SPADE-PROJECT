@@ -295,7 +295,8 @@ router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
 //                                             superAdmin
 
 router.get("/signInAdmin", superAdmin.signInAdmin);
-router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
+// router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
+router.get("/allLandlord",superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 // router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
