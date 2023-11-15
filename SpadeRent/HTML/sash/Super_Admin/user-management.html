@@ -688,7 +688,7 @@ color: #000;
         }
 
         h1 {
-            text-align: center;
+            /* text-align: center; */
             font-size: 28px;
             font-weight: normal;
             letter-spacing: 1px;
@@ -1017,9 +1017,11 @@ color: #000;
 
                                 <div class="col-md-6">
                                     <label for="inputState" class="form-label fw-bold">Phone Number
-                                        <span class="fw-light">(Optional)</span></label>
+                                        <spnan class="text-danger">
+                                            *</span>
+                                    </label>
                                     <input id="phone_user_update" name="phone" type="tel" autocomplete="off"
-                                        placeholder="Enter Phone Number" pattern="[0-9]{5}"
+                                        placeholder="Enter Phone Number" pattern="[0-9]{5}" required
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     <span id="valid-msg" class="d-none text-success valid-msg">✓
                                         Valid</span>
@@ -1713,9 +1715,10 @@ color: #000;
                                     </a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);" onclick="logout()">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"
+                                        onclick="logout()">
                                         <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
-                                        <span class="side-menu__label" >Logout</span>
+                                        <span class="side-menu__label">Logout</span>
                                     </a>
                                 </li>
                             </div>
@@ -1887,13 +1890,14 @@ color: #000;
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="inputState" class="form-label fw-bold">
-                                                                    Phone Number
-                                                                    <span class="fw-light">(Optional)</span>
+                                                                    Phone Number<spnan class="text-danger">
+                                                                        *</span>
                                                                 </label>
                                                                 <input id="phone__user" name="phone" type="tel"
                                                                     autocomplete="off" placeholder="Enter Phone Number"
                                                                     pattern="[0-9]{5}"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                                    required>
                                                                 <span id="valid-msg"
                                                                     class="d-none text-success valid-msg">
                                                                     ✓
@@ -2106,7 +2110,7 @@ color: #000;
                                                 <button class="btn btn-close-bottom btn-outline-default btn-pill button"
                                                     data-bs-dismiss="modal" id="close"
                                                     style="width: fit-content;">Close</button>
-                                                <button class="btn text-light button"
+                                                <button class="btn text-light button saveBtn"
                                                     style="background-color:#1467B0; width: fit-content;"
                                                     id="add-new-user-submit">Submit</button>
                                                 <!-- <button class="btn text-light button d-none" style="background-color:#1467B0;" id="submit">Submit</button>
@@ -3195,87 +3199,87 @@ color: #000;
             }
             var userAdminData;
             var image_url = " "; var image_key = " ";
-        function toTitleCase(str) {
-            return str.replace(
-                /\w\S*/g,
-                function (txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                }
-            );
-        }
+            function toTitleCase(str) {
+                return str.replace(
+                    /\w\S*/g,
+                    function (txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    }
+                );
+            }
             function getAllUserAdminData() {
                 $.ajax({
-                url: "http://localhost:3000/api/spade/protectedAdmin",
-                type: "GET",
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(response);
-                    $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
-                    $("#firstName").val(response.firstName);
-                    $("#lastName").val(response.lastName);
-                    $("#email").val(response.email);
-                    $("#phone").val(response.phone);
-                    $("#address").val(response.address);
-                    $("#city").val(response.city);
-                    $("#state").val(response.state);
-                    $("#zip").val(response.zipCode);
-                    $("#businessName").val(response.zipCode);
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    type: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                        $("#firstName").val(response.firstName);
+                        $("#lastName").val(response.lastName);
+                        $("#email").val(response.email);
+                        $("#phone").val(response.phone);
+                        $("#address").val(response.address);
+                        $("#city").val(response.city);
+                        $("#state").val(response.state);
+                        $("#zip").val(response.zipCode);
+                        $("#businessName").val(response.zipCode);
 
-                    
-                    $("#profile").empty();
-                    $("#profile").css("background-image", "url(" + response.image + ")");
-                    if (response.image) {
+
+                        $("#profile").empty();
+                        $("#profile").css("background-image", "url(" + response.image + ")");
+                        if (response.image) {
                             image_url = response.image
                             image_key = response.imageKey
                         }
-                },
-                error: function (xhr, status, error) {
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
-                    }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
-                    // console.log('Error occurred while fetching state and city data.');
-                }
-            })
-        
-            $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
-                method: 'GET',
-                success: function ({
-                    data
-                }) {
-                    // Handle state selection change
-                    $('#state').change(function () {
-                        var selectedState = $(this).val();
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = './login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                })
+
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    method: 'GET',
+                    success: function ({
+                        data
+                    }) {
+                        // Handle state selection change
+                        $('#state').change(function () {
+                            var selectedState = $(this).val();
 
 
 
 
-                        // if (selectedState !== "Choose...") {
-                        //     var cities = result.geonames.filter(function (place) {
-                        //         return place.adminName1 === selectedState && place.fcode === "PPL";
-                        //     });  
-                        // }
-                    });
+                            // if (selectedState !== "Choose...") {
+                            //     var cities = result.geonames.filter(function (place) {
+                            //         return place.adminName1 === selectedState && place.fcode === "PPL";
+                            //     });  
+                            // }
+                        });
 
-                    var stateDropdown = $('#state');
-                    var states = data
+                        var stateDropdown = $('#state');
+                        var states = data
 
-                    //   stateDropdown.append($('<option></option>').text("Choose..."));
-                    data.forEach(function (state) {
-                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                }
-            });
+                        //   stateDropdown.append($('<option></option>').text("Choose..."));
+                        data.forEach(function (state) {
+                            stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error occurred while fetching state and city data.');
+                    }
+                });
                 $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/allUserAdmin",
                     type: "GET",
@@ -3375,10 +3379,10 @@ color: #000;
                 var newFiles = null
                 selectedFiles.forEach((file) => {
                     if (file instanceof File) {
-                         newFiles = true;
+                        newFiles = true;
                     }
                     else {
-                         newFiles = false;
+                        newFiles = false;
                     }
                 })
                 // alert(newFiles + " " + selectedFiles[0].imageURL)
@@ -3408,7 +3412,7 @@ color: #000;
                                     lastName: $("#lastName_user_update").val(),
                                     email: $("#email_user_update").val(),
                                     phone: $("#phone_user_update").val(),
-                                    password : $("#password_user_update").val(),
+                                    password: $("#password_user_update").val(),
                                     role: $("#role_user_update").val(),
                                     address: $("#address_user_update").val(),
                                     city: $("#city_user_update").val(),
@@ -3450,7 +3454,7 @@ color: #000;
                             console.log('Error: ' + error);
                         }
                     });
-                }else if(selectedFiles.length >= 1 && newFiles == false){
+                } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
                         url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
@@ -3459,7 +3463,7 @@ color: #000;
                             lastName: $("#lastName_user_update").val(),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
-                            password : $("#password_user_update").val(),
+                            password: $("#password_user_update").val(),
                             role: $("#role_user_update").val(),
                             address: $("#address_user_update").val(),
                             city: $("#city_user_update").val(),
@@ -3500,7 +3504,7 @@ color: #000;
                             lastName: $("#lastName_user_update").val(),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
-                            password : $("#password_user_update").val(),
+                            password: $("#password_user_update").val(),
                             role: $("#role_user_update").val(),
                             address: $("#address_user_update").val(),
                             city: $("#city_user_update").val(),
@@ -3752,24 +3756,24 @@ color: #000;
             })
             $('#add-user-permissions').on('hidden.bs.modal', function () {
                 // alert(1)
-                $('.file-grid').each(function(){
-                $(this).empty();
+                $('.file-grid').each(function () {
+                    $(this).empty();
                 })
                 selectedFiles = [];
             });
             $('#edit-user-permissions').on('hidden.bs.modal', function () {
                 // alert(2)
-                $('.file-grid').each(function(){
-                 $(this).empty();
+                $('.file-grid').each(function () {
+                    $(this).empty();
                 })
                 selectedFiles = [];
             });
             $(document).on('keyup', '#typehead', function () {
-                    var searchValue = $(this).val().toLowerCase();
-                    $('#table_body_user tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
-                    });
+                var searchValue = $(this).val().toLowerCase();
+                $('#table_body_user tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
                 });
+            });
         })
     </script>
     <script>
@@ -3807,15 +3811,53 @@ color: #000;
     <script>
         function logout() {
             $(document).ready(function () {
-                        localStorage.clear();
-                        if($('body').hasClass('dark-mode')){
-                            localStorage.setItem("sashdarkMode",true)
-                        }else if($('body').hasClass('light-mode')){
-                            localStorage.setItem("sashlightMode",true)
-                        }
-                        window.open('./login_module.html', "_self")
+                localStorage.clear();
+                if ($('body').hasClass('dark-mode')) {
+                    localStorage.setItem("sashdarkMode", true)
+                } else if ($('body').hasClass('light-mode')) {
+                    localStorage.setItem("sashlightMode", true)
+                }
+                window.open('./login_module.html', "_self")
             });
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            function validateForm() {
+                var isValid = true;
+                $("#add-user-permissions [required]").each(function () {
+                    if ($(this).val() === '') {
+                        isValid = false;
+                        return false;
+                    }
+                });
+                return isValid;
+            }
+            $("#add-user-permissions").on("input change", "input[required], select[required], textarea[required]", function () {
+                var isValid = validateForm();
+                $("#add-new-user-submit").prop("disabled", !isValid);
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            function validateForm2() {
+                var isValid = true;
+                $("#edit-user-permissions [required]").each(function () {
+                    if ($(this).val() === '') {
+                        isValid = false;
+                        return false;
+                    }
+                });
+                return isValid;
+            }
+            $("#edit-user-permissions").on("input change", "input[required], select[required], textarea[required]", function () {
+                var isValid = validateForm2();
+                $("#update_userAdmin").prop("disabled", !isValid);
+            });
+
+        });
     </script>
 </body>
 
