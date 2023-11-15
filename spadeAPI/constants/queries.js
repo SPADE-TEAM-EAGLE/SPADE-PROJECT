@@ -1138,3 +1138,4 @@ exports.insertInUserPermissionUsers =
   exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
   exports.updateAdmin =
   "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
+  exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 
