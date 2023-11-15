@@ -1217,16 +1217,16 @@ row.append(`<td class='propertyType'><a class='like' href='javascript:;'><span c
                 row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + "Active" + "</b></p></td>");
 
                 var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
-                dropdownMenu.append("<li><a class='dropdown-item text-dark view-property' href='./view-property.html?property=" + item.id + "' style='display: flex; align-items: start;'> Upgrade Annualy/Monthly</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Downgrade to Monthly (Old Plan)</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Upgrade to Monthly (New Plan)</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Upgrade to Yearly (New Plan)</a></li>");
-                dropdownMenu.append("<li><a class='delete-option dropdown-item text-danger' href='javascript:void(0)' style='display: flex; align-items: start;'>Delete</a></li>");
+dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?property=" + item.id + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
+dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
+dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
 
-                row.append("<td><i class='fe fe-more-vertical' data-bs-toggle='dropdown'></i>");
-                row.append(dropdownMenu);
+dropdownMenu.append("<li><a class='delete-option dropdown-item text-danger' href='javascript:void(0)' style='display: flex; align-items: start;'>Delete</a></li>");
+
+var dropdownHTML = dropdownMenu.prop('outerHTML');
+var tableData = $("<td>").append(`<i class='fe fe-more-vertical' data-bs-toggle='dropdown'></i>${dropdownHTML}`);
+row.append(tableData);
+
 
                 table.append(row);
             });
