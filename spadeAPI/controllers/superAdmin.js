@@ -11,7 +11,8 @@ const {
   updateUserAdminQuery,
   deleteLandlordQuery,
   allLandlordPlanQuery,
-  updateAdmin
+  updateAdmin,
+  landlordReportAdminQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -359,3 +360,25 @@ imageKey
     });
   }
 };
+
+             // ######################################## landlord Dashboard ########################################
+             exports.landlordReportAdmin = async function (req, res) {
+              const { id } = req.body;
+              try {
+                const selectResult = await queryRunner(landlordReportAdminQuery);
+                if (selectResult[0].length > 0) {
+                  return res.status(200).json({
+                    totalLandlord: selectResult[0]
+                  });
+                } else {
+                  res.status(200).json({
+                    message: "No Landlord Found",
+                  });
+                }
+              } catch (error) {
+                res.status(400).json({
+                  message: error.message,
+                });
+              }
+            };
+              // ######################################## landlord Dashboard ########################################

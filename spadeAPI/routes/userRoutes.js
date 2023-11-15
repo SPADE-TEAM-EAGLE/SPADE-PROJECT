@@ -307,3 +307,4 @@ router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
 router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
 router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
+router.get("/landlordReportAdmin",superAdmin.landlordReportAdmin);
