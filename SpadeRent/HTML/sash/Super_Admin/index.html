@@ -44,11 +44,11 @@
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
-    <!-- <script>
+    <script>
         if (!localStorage.getItem("authtoken")) {
             window.location = "./login_module.html"
         }
-    </script> -->
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -610,7 +610,7 @@
                                 </li>
 
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);" onclick="logout()">
                                         <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
                                         <span class="side-menu__label">Logout</span>
                                     </a>
@@ -1653,8 +1653,8 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-    <!-- <script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
         var helloGuys = true;
         $(document).ajaxStop(function () {
             if (helloGuys) {
@@ -1664,7 +1664,7 @@
                 document.head.appendChild(customScript);
             }
         });
-    </script> -->
+    </script>
 
     <!-- ############################################# -->
     <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
@@ -1698,7 +1698,7 @@
         $(document).ready(function () {
             function getData(){
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1775,7 +1775,19 @@
         });
     </script>
     <!-- <script src="../assets/js/completeTenantProfile.js"></script> -->
-
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                        localStorage.clear();
+                        if($('body').hasClass('dark-mode')){
+                            localStorage.setItem("sashdarkMode",true)
+                        }else if($('body').hasClass('light-mode')){
+                            localStorage.setItem("sashlightMode",true)
+                        }
+                        window.open('./login_module.html', "_self")
+            });
+        }
+    </script>
 
 
 

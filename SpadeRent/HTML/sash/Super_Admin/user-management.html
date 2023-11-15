@@ -1713,9 +1713,9 @@ color: #000;
                                     </a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);" onclick="logout()">
                                         <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
-                                        <span class="side-menu__label">Logout</span>
+                                        <span class="side-menu__label" >Logout</span>
                                     </a>
                                 </li>
                             </div>
@@ -3054,6 +3054,7 @@ color: #000;
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-phone.js"></script>
     <script>
         $(document).ready(function () {
             var selectedFiles = [];
@@ -3204,7 +3205,7 @@ color: #000;
         }
             function getAllUserAdminData() {
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3750,14 +3751,14 @@ color: #000;
                 }
             })
             $('#add-user-permissions').on('hidden.bs.modal', function () {
-                alert(1)
+                // alert(1)
                 $('.file-grid').each(function(){
                 $(this).empty();
                 })
                 selectedFiles = [];
             });
             $('#edit-user-permissions').on('hidden.bs.modal', function () {
-                alert(2)
+                // alert(2)
                 $('.file-grid').each(function(){
                  $(this).empty();
                 })
@@ -3802,6 +3803,19 @@ color: #000;
             });
         });
 
+    </script>
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                        localStorage.clear();
+                        if($('body').hasClass('dark-mode')){
+                            localStorage.setItem("sashdarkMode",true)
+                        }else if($('body').hasClass('light-mode')){
+                            localStorage.setItem("sashlightMode",true)
+                        }
+                        window.open('./login_module.html', "_self")
+            });
+        }
     </script>
 </body>
 

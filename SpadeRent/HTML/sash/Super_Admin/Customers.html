@@ -454,7 +454,7 @@
                                 </li>
 
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);" onclick="logout()">
                                         <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
                                         <span class="side-menu__label">Logout</span>
                                     </a>
@@ -763,7 +763,7 @@
                                                 
                                                 <div class="col-12" id="otherInputContainer" style="display: none;">
                                                     <label for="inputEmail3" id="otherInput" class="form-label fw-bold">Other</label>
-                                                    <input class="form-control" type="text">
+                                                    <textarea class="form-control" type="text"></textarea>
                                                 </div>
                                                 
                     
@@ -1096,7 +1096,7 @@
         $(document).ready(function(){
             function getData(){
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1311,6 +1311,19 @@ $(document).change(function () {
                 otherInput.required = false;
             }
             }
+    </script>
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                        localStorage.clear();
+                        if($('body').hasClass('dark-mode')){
+                            localStorage.setItem("sashdarkMode",true)
+                        }else if($('body').hasClass('light-mode')){
+                            localStorage.setItem("sashlightMode",true)
+                        }
+                        window.open('./login_module.html', "_self")
+            });
+        }
     </script>
 
 </body>

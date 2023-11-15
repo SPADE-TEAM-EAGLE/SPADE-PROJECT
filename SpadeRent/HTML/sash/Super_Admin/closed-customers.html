@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="delete-user-admin">
+    <!-- <div class="modal fade" id="delete-user-admin">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -176,7 +176,70 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="modal fade" id="delete-user-admin" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line">
+                        <h2 class="modal-title">Close <strong class="color-primary">Account</strong></h2>
+                        <span class="">Closing your account will serve as your notice of termination of the Spade Rent (or any other Spade Rent agreement governing this account) for this account.</span>
+                    </div>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                        <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-12">
+                                <input type="hidden" id="deleteLandlordId">
+                                <label for="inputState" class="form-label fw-bold">Select Reason</label>
+                                <select class="form-select form select2-show-search"
+                                    id="reason" onchange="showOtherInput()" required>
+                                    <option selected>Choose...</option>
+                                    <option value="No longer using the service/product">No longer using the service/product</option>
+                                    <option value="Found an alternative service/product">Found an alternative service/product</option>
+                                    <option value="Unsatisfactory customer service">Unsatisfactory customer service</option>
+                                    <option value="Technical issues or bugs">Technical issues or bugs</option>
+                                    <option value="Concerns about data privacy/security">Concerns about data privacy/security</option>
+                                    <option value="Cost-related reasons">Cost-related reasons</option>
+                                    <option value="User interface/user experience issues">User interface/user experience issues</option>
+                                    <option value="Too many advertisement">Too many advertisement</option>
+                                    <option value="Limited features or functionality">Limited features or functionality</option>
+                                    <option value="Changed personal circumstances">Changed personal circumstances</option>
+                                    <option value="Difficulty in canceling or managing the account">Difficulty in canceling or managing the account</option>
+                                    <option value="Received better offers or promotions elsewhere">Received better offers or promotions elsewhere</option>
+                                    <option value="Quality of the product/service">Quality of the product/service</option>
+                                    <option value="Account management difficulties">Account management difficulties</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="text-danger d-none">Status is required!</span>
+                            </div>
+                            
+                            <div class="col-12" id="otherInputContainer" style="display: none;">
+                                <label for="inputEmail3" id="otherInput" class="form-label fw-bold">Other</label>
+                                <textarea class="form-control w-100" id="reasonOther"  name="" id="" rows="10"></textarea>
+                            </div>
+                            
+
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    <div class=""><button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                            id='close'>Close</button>
+                        <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                        <a href="javascript:void(0)" class="btn text-light btn-pill button modalValid"
+                            style='background-color:#1467B0;' id="confirmDelete-user">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <!-- PAGE -->
     <div class="page">
         <div class="page-main">
@@ -499,7 +562,7 @@
                                 </li>
 
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);" onclick="logout()">
                                         <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
                                         <span class="side-menu__label">Logout</span>
                                     </a>
@@ -1047,6 +1110,21 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+        function showOtherInput() {
+            var dropdown = document.getElementById("reason");
+            var otherInputContainer = document.getElementById("otherInputContainer");
+            var otherInput = document.getElementById("otherInput");
+
+            if (dropdown.value === "Other") {
+                otherInputContainer.style.display = "block";
+                otherInput.required = true; // If you want the "other" input to be required
+            } else {
+                otherInputContainer.style.display = "none";
+                otherInput.required = false;
+            }
+            }
+    </script>
+    <script>
         var image_url = " "; var image_key = " ";
         function toTitleCase(str) {
             return str.replace(
@@ -1059,7 +1137,7 @@
         $(document).ready(function () {
             function getData(){
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1213,7 +1291,7 @@
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: $('#deleteLandlordId').val(),
-                        reason: $('#deleteReason').val()
+                        reason: ($('#reason').val() == "Other"? $('#reasonOther').val() :  $('#reason').val() )
                     }),
                     contentType: "application/json",
                     headers: {
@@ -1222,6 +1300,12 @@
                     success: function (response) {
                         console.log("closedLandlord");
                         console.log(response);
+                        $("#delete-user-admin").modal("hide")
+                        $("#myModal_success p").text("User deleted succesfully")
+                            $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                $("#myModal_success").modal("hide");
+                            }, 2000);
                         // if (response.message == "Admin User Deleted Successsful") {
                         //     $("#delete-user-admin").modal("hide")
                         //     $("#myModal_success p").text("User deleted succesfully")
@@ -1234,6 +1318,8 @@
                         $("#preloader").css("display", "none")
 
                     }, error: function (xhr, status, error) {
+                        $("#delete-user-admin").modal("hide")
+
                         $("#preloader").css("display", "none")
                         console.log(error)
                     }
@@ -1288,7 +1374,19 @@
 
         })
     </script>
-
+<script>
+    function logout() {
+        $(document).ready(function () {
+                    localStorage.clear();
+                    if($('body').hasClass('dark-mode')){
+                        localStorage.setItem("sashdarkMode",true)
+                    }else if($('body').hasClass('light-mode')){
+                        localStorage.setItem("sashlightMode",true)
+                    }
+                    window.open('./login_module.html', "_self")
+        });
+    }
+</script>
 </body>
 
 </html>
