@@ -304,6 +304,7 @@ router.post("/createUserAdmin", superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
 router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
+router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
 router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
-router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
+router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAdmin);

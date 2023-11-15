@@ -1136,6 +1136,7 @@ exports.insertInUserPermissionUsers =
 
   exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? , imageKey = ? WHERE id = ?"; 
   exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
+  exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 
+  exports.landlordReportAdminQuery = "SELECT u.FirstName, u.LastName, u.Email, u.Phone, pl.planName, count(p.id) as totalProperty, count(t.id) as totalTenants, count(tk.id) as totalTasks from users as u left join plan as pl on u.PlanID = pl.id left join property as p on u.id = p.landlordID left join tenants as t on u.id = t.landlordID left join task as tk on u.id = tk.landlordID group by u.Email"; 
   exports.updateAdmin =
   "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
-  exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 

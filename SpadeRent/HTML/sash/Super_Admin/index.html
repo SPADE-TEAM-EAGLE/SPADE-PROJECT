@@ -1259,9 +1259,9 @@
                                 <div class="card" id="task">
                                     <div class="card-header recent-announcement-tabs"
                                         style="display: flex;justify-content: space-between;overflow-x: scroll;">
-                                        <h2 class="card-title recent-title" style="margin-right: 25px;">Recent <span
-                                                style="color: #1467B0;">Activity</span></h2>
-                                        <div class="tab-menu-heading float-right"
+                                        <h2 class="card-title recent-title" style="margin-right: 25px;">Total <span
+                                                style="color: #1467B0;">Landlord</span></h2>
+                                        <div class="tab-menu-heading float-right d-none"
                                             style="background-color: #e0e0e0; border-radius: 30px; padding: 4px;">
                                             <div class="tabs-menu">
                                                 <!-- Tabs -->
@@ -1279,10 +1279,53 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="panel panel-primary">
+                                    <div class="card-body p-0">
+                                        <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between card-overflow">
+                                            <div>
+                                                <div class="main-header-center d-nonee d-lg-block m-0">
+                                                    <button class="btn px-0 pt-2"><i class="fe fe-search"
+                                                            aria-hidden="true"></i></button>
+                                                    <input type="text" class="form-control search-input-field" id="typehead"
+                                                        placeholder="Search" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div style="width: 220px" class="d-flex justify-content-end align-items-center">
+                                                <span class="fw-bold me-2 mobile-text-hide-filer-number">Number of rows</span>
+                                                <select id="lengthSelectBox"
+                                                    class="form-control form-select" style="width: 80px;">
+
+                                                    <!-- <option value="1">1</option> -->
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                    <option value="99999999999">All</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                                                <thead class="table-recent">
+                                                    <tr>
+                                                        <th>User</th>
+                                                        <th>Contact</th>
+                                                        <th>Plan Name</th>
+                                                        <th>Total Properties</th>
+                                                        <th>Total Tenants</th>
+                                                        <th>Total Tasks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="totalLandlord">
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-primary  d-none">
 
                                             <div class="panel-body tabs-menu-body">
+                                                
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="tab21">
                                                         <div class="table-responsive">
@@ -1778,11 +1821,7 @@
                         }else if(element.planName == "Trial"){
                             $('#totalTrial').text(element.userCount)
                         }
-                        
-
                     });
-
-
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");
@@ -1794,6 +1833,51 @@
                     console.log(error);
                 }
             })
+            $.ajax({
+                url: "http://localhost:3000/api/spade/landlordReportAdmin",
+                type: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response.totalLandlord[0]);
+                    response?.totalLandlord.forEach(function(element){
+                        if (element.planName == "Basic") {
+                            var landlordPlanName = `style="color: #F7C042;"`
+                        }else if (element.planName == "Pro") {
+                            var landlordPlanName = `style="color: #0CA7B6;"`
+                        }else if (element.planName == "Premium") {
+                            var landlordPlanName = `style="color: #1D80C4;"`
+                        }else if(element.planName == "Trial"){
+                            var landlordPlanName = `style="color: red;"`
+                        }else{
+
+                        }
+                        $('#totalLandlord').append(`<tr>
+                                                            <td><b>${element.FirstName? element.FirstName :"N/A" } ${element.LastName? element.LastName :"N/A" }</b> <br>
+                                                                <span
+                                                                    class="td-span">${element.Email? element.Email :"N/A" }</span>
+                                                            </td>
+                                                            <td>${element.Phone? element.Phone :"N/A" }</td>
+                                                            <td class="fw-bold" ${landlordPlanName}>${element.planName? element.planName+ " Plan" :"N/A" }</td>
+                                                            <td>${element.totalProperty}</td>
+                                                            <td>${element.totalTenants}</td>
+                                                            <td>${element.totalTasks}</td>
+                                                            
+                                                        </tr>`)
+                    })
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log(xhr);
+                    console.log(error);
+                }
+            })
+            
             function getData() {
                 $.ajax({
                     url: "http://localhost:3000/api/spade/protectedAdmin",
@@ -1886,7 +1970,48 @@
             });
         }
     </script>
+<script>
+     $(document).on('keyup', '#typehead', function () {
+    var searchValue = $(this).val().toLowerCase();
+    var numRowsToShow = $('#lengthSelectBox').val();
 
+    $('#totalLandlord tr').filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+    });
+
+    if (searchValue === '') {
+        $('#totalLandlord tr:visible:lt(' + numRowsToShow + ')').show();
+        $('#totalLandlord tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();}
+});
+    $(document).change(function () {
+        if ($('#typehead').val() == "") {
+            let count = 1;
+            $("#totalLandlord tr").each(function (item, index) {
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+    $(document).ajaxStop(function () {
+        if ($('#typehead').val() == "") {
+            let count = 1;
+            $("#totalLandlord tr").each(function (item, index) {
+                if (count > parseInt($("#lengthSelectBox").val())) {
+                    $(this).hide()
+                }
+                else {
+                    $(this).show()
+                }
+                count++;
+            })
+        }
+    })
+</script>
 
 
 </body>
