@@ -1129,12 +1129,14 @@ exports.insertInUserPermissionUsers =
   exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";
-  exports.allLandlordQuery = "SELECT * FROM users as u join plan as p on u.PlanID = p.id";
+  exports.allLandlordQuery = "SELECT *,u.id as landlordId FROM users as u join plan as p on u.PlanID = p.id";
   exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminName, adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId,landlordCreatedDate) values (?,?,?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
   exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? , imageKey = ? WHERE id = ?"; 
   exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
+  exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 
+  exports.landlordReportAdminQuery = "SELECT u.FirstName, u.LastName, u.Email, u.Phone, pl.planName, count(p.id) as totalProperty, count(t.id) as totalTenants, count(tk.id) as totalTasks from users as u left join plan as pl on u.PlanID = pl.id left join property as p on u.id = p.landlordID left join tenants as t on u.id = t.landlordID left join task as tk on u.id = tk.landlordID group by u.Email"; 
   exports.updateAdmin =
   "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";

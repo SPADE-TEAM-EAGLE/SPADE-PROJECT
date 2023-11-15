@@ -29,8 +29,7 @@ router.get("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
 router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
-router.post("/uploadAdmin", verifySuperAdmin, fileUpload.fileUpload);
-
+router.post("/uploadAdmin", verifySuperAdmin, fileUpload.fileUpload); 
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
@@ -296,9 +295,9 @@ router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
 //                                             superAdmin
 
 router.get("/signInAdmin", superAdmin.signInAdmin);
-router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
+// router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
+router.get("/allLandlord",superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
-// router.delete("/closedLandlord", superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 // router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
 // router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
@@ -306,5 +305,7 @@ router.post("/createUserAdmin", superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
 router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
+router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
 router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
+router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAdmin);
