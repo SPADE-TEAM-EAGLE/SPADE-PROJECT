@@ -10,11 +10,13 @@ const {
   insertUsersAdmin,
   updateUserAdminQuery,
   deleteLandlordQuery,
-  allLandlordPlanQuery
+  allLandlordPlanQuery,
+  updateAdmin
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { sendMailLandlord } = require("../sendmail/sendmail.js");
+const { updateUser } = require("safecharge");
 const config = process.env;
 
 
@@ -145,7 +147,7 @@ exports.signInAdmin = async(req,res)=>{
  // ######################################## All Closed Landlord ########################################
 
   exports.createUserAdmin = async function (req, res) {
-    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image } = req.body;
+    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey } = req.body;
     const currentDate = new Date();
     try {
       const selectResult = await queryRunner(selectQuery("superAdmin","email"), [
@@ -160,7 +162,7 @@ exports.signInAdmin = async(req,res)=>{
       const id = bcrypt
         .hashSync(lastName + new Date().getTime().toString(), salt)
         .substring(0, 10);
-      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,currentDate]);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,imageKey,currentDate]);
       const name = firstName + " " + lastName;
       const mailSubject = "Spade Admin Welcome Email";
       if (insertResult[0].affectedRows > 0) {
@@ -228,11 +230,11 @@ exports.signInAdmin = async(req,res)=>{
     
     // ######################################## user Admin Edit ########################################
     exports.updateAdminUser = async function (req, res) {
-      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image, id } = req.body;
+      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey, id } = req.body;
       const currentDate = new Date();
       try {
         const insertResult = await queryRunner(updateUserAdminQuery, [
-          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,id]);
+          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey,id]);
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
@@ -292,3 +294,68 @@ exports.signInAdmin = async(req,res)=>{
         }
       };
         // ######################################## total Customer ########################################
+exports.getAdmin = (req, res) => {
+  res.status(200).json(req.user);
+};
+exports.updateAdminProfile = async function (req, res) {
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    businessName,
+    zipcode,
+    city,
+state,
+address,
+imageUrl,
+imageKey
+    
+  } = req.body;
+  const { userId } = req.user;
+  console.log(req.body);
+  console.log(userId);
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "id"), [
+      userId,
+    ]);
+    // current date
+    const now = new Date();
+    // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+
+    const isUserExist = selectResult[0][0];
+    if (!isUserExist) {
+      // throw new Error("User not found");
+      res.status(200).json({
+        message: "User not found",
+      });
+    }
+    if (isUserExist) {
+      const updateUserParams = [
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zipcode,
+        businessName,
+        imageUrl,
+        imageKey,
+        userId,
+      ];
+      const updateResult = await queryRunner(updateAdmin, updateUserParams);
+      if (updateResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Admin updated successfully",
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

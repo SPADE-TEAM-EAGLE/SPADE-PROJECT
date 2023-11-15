@@ -1132,8 +1132,10 @@ exports.insertInUserPermissionUsers =
   exports.allLandlordQuery = "SELECT * FROM users as u join plan as p on u.PlanID = p.id";
   exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminName, adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId,landlordCreatedDate) values (?,?,?,?,?,?,?,?,?,?,?)";
-  exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?)";
+  exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
-  exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? WHERE id = ?"; 
+  exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, password = ?, role = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? , imageKey = ? WHERE id = ?"; 
   exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
   exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 
+  exports.updateAdmin =
+  "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";

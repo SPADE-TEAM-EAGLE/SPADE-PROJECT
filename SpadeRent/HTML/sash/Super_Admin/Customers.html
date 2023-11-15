@@ -1054,8 +1054,8 @@
     <script src="../assets/js/themeColors.js"></script>
 
     <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-    <!-- <script>
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
         var helloGuys = true;
         $(document).ajaxStop(function () {
             if (helloGuys) {
@@ -1065,7 +1065,7 @@
                 document.head.appendChild(customScript);
             }
         });
-    </script> -->
+    </script>
 
     <!-- ############################################# -->
     <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
@@ -1084,7 +1084,93 @@
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
+        var image_url = " "; var image_key = " ";
+        function toTitleCase(str) {
+            return str.replace(
+                /\w\S*/g,
+                function (txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                }
+            );
+        }
         $(document).ready(function(){
+            function getData(){
+                $.ajax({
+                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                type: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                    $("#firstName").val(response.firstName);
+                    $("#lastName").val(response.lastName);
+                    $("#email").val(response.email);
+                    $("#phone").val(response.phone);
+                    $("#address").val(response.address);
+                    $("#city").val(response.city);
+                    $("#state").val(response.state);
+                    $("#zip").val(response.zipCode);
+                    $("#businessName").val(response.zipCode);
+
+                    
+                    $("#profile").empty();
+                    $("#profile").css("background-image", "url(" + response.image + ")");
+                    if (response.image) {
+                            image_url = response.image
+                            image_key = response.imageKey
+                        }
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            })
+        
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                method: 'GET',
+                success: function ({
+                    data
+                }) {
+                    // Handle state selection change
+                    $('#state').change(function () {
+                        var selectedState = $(this).val();
+
+
+
+
+                        // if (selectedState !== "Choose...") {
+                        //     var cities = result.geonames.filter(function (place) {
+                        //         return place.adminName1 === selectedState && place.fcode === "PPL";
+                        //     });  
+                        // }
+                    });
+
+                    var stateDropdown = $('#state');
+                    var states = data
+
+                    //   stateDropdown.append($('<option></option>').text("Choose..."));
+                    data.forEach(function (state) {
+                        stateDropdown.append($('<option></option>').text(state.states).val(state.states));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error occurred while fetching state and city data.');
+                }
+            });
+
+            }
+            getData();
             $.ajax({
         url: "https://backend.app.spaderent.com/api/spade/allLandlord",
         type: "GET",
