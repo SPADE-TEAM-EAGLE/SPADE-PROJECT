@@ -236,7 +236,7 @@ exports.signInAdmin = async(req,res)=>{
       try {
         const hashPassword = await hashedPassword(password);
         const insertResult = await queryRunner(updateUserAdminQuery, [
-          firstName, lastName, email, phone, hashPassword, role, address,city,state,zipcode,image,imageKey,id]);
+          firstName, lastName, email, phone, hashPassword, role, address,city,state,zipcode,image,imageKey,currentDate,id]);
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
