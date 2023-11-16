@@ -1086,10 +1086,10 @@ color: #000;
                                         </label>
                                         <select id="role_user_update" class="form-select form form-select" required>
 
-                                            <option value="Owner">Owner</option>
+                                            <!-- <option value="Owner">Owner</option> -->
                                             <option value="Manager">Manager</option>
                                             <option value="Staff">Staff</option>
-                                            <option value="Admin">Admin</option>
+                                            <!-- <option value="Admin">Admin</option> -->
 
                                         </select>
                                         <span class="text-danger d-none">State
@@ -1132,8 +1132,8 @@ color: #000;
                                             *
                                             </span>
                                     </label>
-                                    <select id="state_user_update" class="form-select form form-select" required>
-                                        <option selected>Choose...</option>
+                                    <select id="state_user_update" class="form-select form form-select select2-show-search" required>
+                                        <!-- <option selected>Choose...</option> -->
                                     </select>
                                     <span class="text-danger d-none">
                                         state
@@ -1233,7 +1233,7 @@ color: #000;
                     <div class="row">
                         <div class="col-lg-3">
                             <img id="image_user_view" src="" alt=""
-                                style="width: auto; height: 170px; background-size: cover; background-repeat: no-repeat; background: cornflowerblue; margin-bottom: 30px;">
+                                style="width: auto; height: 170px; background-size: cover; background-repeat: no-repeat; background: cornflowerblue; margin-bottom: 15px;">
                         </div>
                     </div>
                     <div class="row">
@@ -1795,7 +1795,7 @@ color: #000;
                                 <hr style="background-color: #D3D3D3;">
                                 <h2 class="h2-personal-inf text-dark mb-3">Users</h2>
                                 <div
-                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                 </div>
                                 <!-- Add User Permissions popup start  -->
                                 <div class="modal fade" id="add-user-permissions" tabindex="-1" role="dialog">
@@ -1979,10 +1979,10 @@ color: #000;
                                                                     </label>
                                                                     <select id="role_user"
                                                                         class="form-select form form-select" required>
-                                                                        <option value="Owner">Owner</option>
+                                                                        <!-- <option value="Owner">Owner</option> -->
                                                                         <option value="Manager">Manager</option>
                                                                         <option value="Staff">Staff</option>
-                                                                        <option value="Admin">Admin</option>
+                                                                        <!-- <option value="Admin">Admin</option> -->
                                                                     </select>
                                                                     <span class="text-danger d-none">
                                                                         State
@@ -2031,7 +2031,7 @@ color: #000;
                                                                 <select id="state_user"
                                                                     class="form-select form form-select select2-show-search"
                                                                     required>
-                                                                    <option selected>Choose...</option>
+                                                                    <!-- <option selected>Choose...</option> -->
                                                                 </select>
                                                                 <span class="text-danger d-none">
                                                                     state
@@ -2163,7 +2163,7 @@ color: #000;
                                                     User Roles
                                                 </h2>
                                                 <div
-                                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                    style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                                 </div>
                                                 <div class="card card-color active" onclick="activateTab(1)">
                                                     <div class="card-body">
@@ -2264,7 +2264,7 @@ color: #000;
                                                             Permissions
                                                         </h2>
                                                         <div
-                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
+                                                            style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                                         </div>
                                                         <p>You can set custom access levels for each page in Spade Rent.
                                                             This will allow or block a user from viewing that page or
@@ -3043,8 +3043,25 @@ color: #000;
             }
         });
     </script>
-    <script src="../assets/plugins/select2/select2.full.min.js"></script>
-    <script src="../assets/js/select2.js"></script>
+    <script src="../assets/plugins/select2/select2.full.min.js" defer></script>
+    <script src="../assets/js/select2.js" defer></script>
+    <script defer>
+        $(document).ready(function () {
+            // $('.select2').select2();
+            // $('#addModal').on('shown.bs.modal', function () {
+
+            //     $('.select2-show-search').select2({
+            //         dropdownParent: $('#addModal')
+            //     });
+            // });
+            $('#edit-user-permissions').on('shown.bs.modal', function () {
+
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#edit-user-permissions')
+                });
+            });
+        }); 
+    </script>
     <!-- ############################################# -->
     <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
     <!-- C3 CHART JS -->
