@@ -12,7 +12,8 @@ const {
   deleteLandlordQuery,
   allLandlordPlanQuery,
   updateAdmin,
-  landlordReportAdminQuery
+  landlordReportAdminQuery,
+  updatePlanId
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -382,3 +383,69 @@ imageKey
               }
             };
               // ######################################## landlord Dashboard ########################################
+
+
+exports.getUserforAdmin=async function(req,res){
+  const {userId}=req.query;
+  try {
+    const selectResult = await queryRunner(selectQuery("users", "id"), [
+      userId,
+    ]);
+    const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[userId]);
+    const planCountResult=await queryRunner(selectQuery("plan", "id"),[selectResult[0][0]?.PlanID]);
+    if(futurePlanId[0]?.length!=0){
+        
+      const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
+
+// Get the current date
+const currentDate = new Date();
+
+// Calculate the time difference in milliseconds
+const timeDifference = targetDate - currentDate;
+
+// Convert the time difference to days
+const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+selectResult[0][0].daysRemaining=daysRemaining;    
+}    
+if(selectResult[0].length>=1){
+      
+      res.status(200).json({...futurePlanId[0][futurePlanId[0].length-1],...planCountResult[0][0],...selectResult[0][0]});
+    }else{
+      res.status(200).send("No user found");
+    }
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
+exports.updatePlanIdByAdmin = async function (req, res) {
+  // const { userId } = req.body;
+  const { userId } = req.body;
+  console.log(userId)
+  try {
+    const selectResult = await queryRunner(selectQuery("users", "id"), [
+      userId,
+    ]);
+    // current date
+    const isUserExist = selectResult[0][0];
+    if (!isUserExist) {
+      // throw new Error("User not found");
+      res.status(200).json({
+        message: "User not found",
+      });
+    }
+    if (isUserExist) {
+      const updateUserParams = [req.body.planID, userId];
+      console.log(updateUserParams)
+      const updateResult = await queryRunner(updatePlanId, updateUserParams);
+      if (updateResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "planID updated successfully",
+        });
+      }
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

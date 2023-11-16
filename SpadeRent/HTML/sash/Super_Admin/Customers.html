@@ -1220,13 +1220,9 @@ row.append(`<td class='propertyType'><a class='like' href='javascript:;'><span c
                 row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + "Active" + "</b></p></td>");
 
                 var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
-;
-if(item.planName == "Trial"){
 
-}else{
-    dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "&plan=" + (encodeURIComponent(sjcl.encrypt(password, item.PlanID.toString()))) + "&poid=" + (encodeURIComponent(sjcl.encrypt(password, item.UPOID))) +"&name=" + (encodeURIComponent(sjcl.encrypt(password, item.accountName.toString()))) +"' style='display: flex; align-items: start;'>Change Plan</a></li>");
+    dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "&plan=" + (encodeURIComponent(sjcl.encrypt(password, item.PlanID.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
 
-}
 dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
 dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
 
