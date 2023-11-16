@@ -1844,31 +1844,40 @@
                 },
                 success: function (response) {
                     console.log(response.totalLandlord[0]);
-                    response?.totalLandlord.forEach(function (element) {
-                        if (element.planName == "Basic") {
-                            var landlordPlanName = `style="color: #F7C042;"`
-                        } else if (element.planName == "Pro") {
-                            var landlordPlanName = `style="color: #0CA7B6;"`
-                        } else if (element.planName == "Premium") {
-                            var landlordPlanName = `style="color: #1D80C4;"`
-                        } else if (element.planName == "Trial") {
-                            var landlordPlanName = `style="color: red;"`
-                        } else {
+                    if (response?.totalLandlord && response.totalLandlord.length > 0) {
+    response.totalLandlord.forEach(function (element) {
+        var landlordPlanName = ""; 
+        if (element.planName == "Basic") {
+            landlordPlanName = `style="color: #F7C042;"`;
+        } else if (element.planName == "Pro") {
+            landlordPlanName = `style="color: #0CA7B6;"`;
+        } else if (element.planName == "Premium") {
+            landlordPlanName = `style="color: #1D80C4;"`;
+        } else if (element.planName == "Trial") {
+            landlordPlanName = `style="color: red;"`;
+        }
 
-                        }
-                        $('#totalLandlord').append(`<tr>
-                                                            <td><b>${element.FirstName ? element.FirstName : "N/A"}</b>
-                                                            </td>
-                                                            <td><b>${element.LastName ? element.LastName : "N/A"}</b></td>
-                                                            <td>${element.Email ? element.Email : "N/A"}</td>
-                                                            <td>${element.Phone ? element.Phone : "N/A"}</td>
-                                                            <td class="fw-bold" ${landlordPlanName}>${element.planName ? element.planName + " Plan" : "N/A"}</td>
-                                                            <td>${element.totalProperty}</td>
-                                                            <td>${element.totalTenants}</td>
-                                                            <td>${element.totalTasks}</td>
-                                                            
-                                                        </tr>`)
-                    })
+        $('#totalLandlord').append(`
+            <tr>
+                <td><b>${element.FirstName ? element.FirstName : "N/A"}</b></td>
+                <td><b>${element.LastName ? element.LastName : "N/A"}</b></td>
+                <td>${element.Email ? element.Email : "N/A"}</td>
+                <td>${element.Phone ? element.Phone : "N/A"}</td>
+                <td class="fw-bold" ${landlordPlanName}>${element.planName ? element.planName + " Plan" : "N/A"}</td>
+                <td>${element.totalProperty}</td>
+                <td>${element.totalTenants}</td>
+                <td>${element.totalTasks}</td>
+            </tr>
+        `);
+    });
+} else {
+    $('#totalLandlord').append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+}
+
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning").modal("show");

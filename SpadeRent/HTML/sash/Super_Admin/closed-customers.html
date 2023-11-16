@@ -1261,7 +1261,14 @@
                                                     </tr>
 `)
                             })
-                        }
+                        }else {
+    $("#table_body").empty();
+    $("#table_body").append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+}
                     },
                     error: function (xhr, status, error) {
                         console.log(error)

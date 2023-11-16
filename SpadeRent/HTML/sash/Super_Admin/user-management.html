@@ -1027,7 +1027,7 @@ color: #000;
                                         Valid</span>
                                     <span id="error-msg" class="hide text-danger error-msg"></span>
                                 </div>
-                                <div class="col-md-12 mt-5">
+                                <div class="col-md-12 mt-5 d-none">
                                     <div class="form-group">
                                         <label for="validationCustom01">
                                             <b>Password</b>
@@ -1036,7 +1036,7 @@ color: #000;
                                                 </span>
                                         </label>
                                         <input type="password" class="form-control" id="password_user_update"
-                                            aria-describedby="emailHelp" placeholder="Enter Password" required>
+                                            aria-describedby="emailHelp" placeholder="Enter Password" >
                                         <i class="fi fi-rs-eye text-dark fs-20" id="togglePassworduserpermission" style="cursor: pointer;
                                                             float: right;
                                                             margin-top: -30px;
@@ -3351,7 +3351,14 @@ color: #000;
 `);
 
                             })
-                        }
+                        }else {
+    $("#table_body_user").empty();
+    $("#table_body_user").append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+}
 
                     },
                     error: function (xhr, status, error) {
@@ -3430,7 +3437,7 @@ color: #000;
                                     lastName: $("#lastName_user_update").val(),
                                     email: $("#email_user_update").val(),
                                     phone: $("#phone_user_update").val(),
-                                    password: $("#password_user_update").val(),
+                                    // password: $("#password_user_update").val(),
                                     role: $("#role_user_update").val(),
                                     address: $("#address_user_update").val(),
                                     city: $("#city_user_update").val(),
@@ -3481,7 +3488,7 @@ color: #000;
                             lastName: $("#lastName_user_update").val(),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
-                            password: $("#password_user_update").val(),
+                            // password: $("#password_user_update").val(),
                             role: $("#role_user_update").val(),
                             address: $("#address_user_update").val(),
                             city: $("#city_user_update").val(),
@@ -3522,7 +3529,7 @@ color: #000;
                             lastName: $("#lastName_user_update").val(),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
-                            password: $("#password_user_update").val(),
+                            // password: $("#password_user_update").val(),
                             role: $("#role_user_update").val(),
                             address: $("#address_user_update").val(),
                             city: $("#city_user_update").val(),
@@ -3574,7 +3581,7 @@ color: #000;
                 $("#email_user_update").val(userAdminDataNew.email)
                 $("#phone_user_update").val(userAdminDataNew.phone)
                 $("#role_user_update").val(userAdminDataNew.role);
-                $('#password_user_update').val(userAdminDataNew.password)
+                // $('#password_user_update').val(userAdminDataNew.password)
                 // $("#role_user_update option[value='" + userAdminDataNew.role + "']").attr('selected', 'selected');
                 // $(`#status_user_update`).val(userAdminDataNew.status)
                 $(`#state_user_update`).val(userAdminDataNew.state)
