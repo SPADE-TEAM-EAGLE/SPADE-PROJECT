@@ -25,8 +25,8 @@ const config = process.env;
 
 // ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
-    const { email,password }=req.query;
-    // const { email,password }=req.body;
+    // const { email,password }=req.query;
+    const { email,password }=req.body;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
@@ -159,12 +159,12 @@ exports.signInAdmin = async(req,res)=>{
         return res.status(201).send("Email already exists");
       }
       const hashPassword = await hashedPassword(password);
-      // generate a unique identifier for the user
-      const salt = bcrypt.genSaltSync(10);
-      const id = bcrypt
-        .hashSync(lastName + new Date().getTime().toString(), salt)
-        .substring(0, 10);
-      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, password, phone, role, address,city,state,zipcode,image,imageKey,currentDate]);
+      // // generate a unique identifier for the user
+      // const salt = bcrypt.genSaltSync(10);
+      // const id = bcrypt
+      //   .hashSync(lastName + new Date().getTime().toString(), salt)
+      //   .substring(0, 10);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, role, address,city,state,zipcode,image,imageKey,currentDate]);
       const name = firstName + " " + lastName;
       const mailSubject = "Spade Admin Welcome Email";
       if (insertResult[0].affectedRows > 0) {
@@ -232,11 +232,11 @@ exports.signInAdmin = async(req,res)=>{
     
     // ######################################## user Admin Edit ########################################
     exports.updateAdminUser = async function (req, res) {
-      const {  firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey, id } = req.body;
+      const {  firstName, lastName, email, phone, role, address,city,state,zipcode,image,imageKey, id } = req.body;
       const currentDate = new Date();
       try {
         const insertResult = await queryRunner(updateUserAdminQuery, [
-          firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey,id]);
+          firstName, lastName, email, phone, role, address,city,state,zipcode,image,imageKey,currentDate,id]);
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
