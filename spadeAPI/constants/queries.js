@@ -1129,7 +1129,7 @@ exports.insertInUserPermissionUsers =
   exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";
-  exports.allLandlordQuery = "SELECT *,u.id as landlordId FROM users as u join plan as p on u.PlanID = p.id";
+  exports.allLandlordQuery = "SELECT *, u.id AS landlordId, b.* FROM users AS u JOIN plan AS p ON u.PlanID = p.id LEFT JOIN bankAccount AS b ON u.id = b.userId";
   exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminName, adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId,landlordCreatedDate) values (?,?,?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, role, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";

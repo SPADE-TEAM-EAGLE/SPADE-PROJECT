@@ -1081,6 +1081,7 @@
     <!-- CHARTJS JS -->
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
@@ -1173,7 +1174,7 @@
             }
             getData();
             $.ajax({
-        url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+        url: "http://localhost:3000/api/spade/allLandlord",
         type: "GET",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1182,12 +1183,14 @@
         success: function(response) {
             var table = $("#table_body");
             table.empty();
-        
+            var password = 'your-secret-password';
+
+                                    // Include the encrypted value in the URL
             response?.data?.forEach(function(item) {
                 var row = $("<tr>");
 
                     row.append("<td></td>");
-                row.append("<td style='font-weight: 600;'>" + item.id + "</td>");
+                row.append("<td style='font-weight: 600;'>" + item.landlordId + "</td>");
                 row.append("<td style='font-weight: 600;'><b>" + item.FirstName + " " + item.LastName + "</b></td>");
                 row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'>" + item.Email + "</p><span>" + item.Phone + "</span></td>");
                 var background;
@@ -1218,16 +1221,22 @@ row.append(`<td class='propertyType'><a class='like' href='javascript:;'><span c
                 row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + "Active" + "</b></p></td>");
 
                 var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
-                dropdownMenu.append("<li><a class='dropdown-item text-dark view-property' href='./view-property.html?property=" + item.id + "' style='display: flex; align-items: start;'> Upgrade Annualy/Monthly</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Downgrade to Monthly (Old Plan)</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Upgrade to Monthly (New Plan)</a></li>");
-                dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Upgrade to Yearly (New Plan)</a></li>");
-                dropdownMenu.append("<li><a class='delete-option dropdown-item text-danger' href='javascript:void(0)' style='display: flex; align-items: start;'>Delete</a></li>");
+;
+if(item.planName == "Trial"){
 
-                row.append("<td><i class='fe fe-more-vertical' data-bs-toggle='dropdown'></i>");
-                row.append(dropdownMenu);
+}else{
+    dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "&plan=" + (encodeURIComponent(sjcl.encrypt(password, item.PlanID.toString()))) + "&poid=" + (encodeURIComponent(sjcl.encrypt(password, item.UPOID))) +"&name=" + (encodeURIComponent(sjcl.encrypt(password, item.accountName.toString()))) +"' style='display: flex; align-items: start;'>Change Plan</a></li>");
+
+}
+dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
+dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
+
+dropdownMenu.append("<li><a class='delete-option dropdown-item text-danger' href='javascript:void(0)' style='display: flex; align-items: start;'>Delete</a></li>");
+
+var dropdownHTML = dropdownMenu.prop('outerHTML');
+var tableData = $("<td>").append(`<i class='fe fe-more-vertical' data-bs-toggle='dropdown'></i>${dropdownHTML}`);
+row.append(tableData);
+
 
                 table.append(row);
             });
