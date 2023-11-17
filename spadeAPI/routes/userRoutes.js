@@ -309,3 +309,4 @@ router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
 router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
 router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAdmin);
+router.get("/adminUserPermissionRoles", superAdmin.adminUserPermissionRoles);
