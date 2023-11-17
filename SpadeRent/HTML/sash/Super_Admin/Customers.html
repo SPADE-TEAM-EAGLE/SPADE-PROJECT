@@ -82,6 +82,96 @@
         <!-- /GLOBAL-LOADER -->
         <div
             class="modal fade"
+            id="delete-user-admin"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title">Close
+                                <strong class="color-primary">Account</strong>
+                            </h2>
+                            <span class="">Closing your account will serve as your notice of termination of the Spade Rent (or any other Spade Rent agreement governing this account) for this account.</span>
+                        </div>
+                        <button
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="top-close"
+                        >
+                            <span aria-hidden="true">
+                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div
+                            id="collapseOne"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample"
+                        >
+                            <form class="row g-3" enctype="multipart/form-data">
+                                <div class="col-12">
+                                    <input type="hidden" id="deleteLandlordId">
+                                    <label for="inputState" class="form-label fw-bold">Select Reason</label>
+                                    <select
+                                        class="form-select form select2-show-search"
+                                        id="reason"
+                                        onchange="showOtherInput()"
+                                        required
+                                    >
+                                        <option selected>Choose...</option>
+                                        <option value="No longer using the service/product">No longer using the service/product</option>
+                                        <option value="Found an alternative service/product">Found an alternative service/product</option>
+                                        <option value="Unsatisfactory customer service">Unsatisfactory customer service</option>
+                                        <option value="Technical issues or bugs">Technical issues or bugs</option>
+                                        <option value="Concerns about data privacy/security">Concerns about data privacy/security</option>
+                                        <option value="Cost-related reasons">Cost-related reasons</option>
+                                        <option value="User interface/user experience issues">User interface/user experience issues</option>
+                                        <option value="Too many advertisement">Too many advertisement</option>
+                                        <option value="Limited features or functionality">Limited features or functionality</option>
+                                        <option value="Changed personal circumstances">Changed personal circumstances</option>
+                                        <option value="Difficulty in canceling or managing the account">Difficulty in canceling or managing the account</option>
+                                        <option value="Received better offers or promotions elsewhere">Received better offers or promotions elsewhere</option>
+                                        <option value="Quality of the product/service">Quality of the product/service</option>
+                                        <option value="Account management difficulties">Account management difficulties</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="text-danger d-none">Status is required!</span>
+                                </div>
+                                <div class="col-12" id="otherInputContainer" style="display: none;">
+                                    <label for="inputEmail3" id="otherInput" class="form-label fw-bold">Other</label>
+                                    <textarea
+                                        class="form-control w-100"
+                                        id="reasonOther"
+                                        name=""
+                                        id=""
+                                        rows="10"
+                                    ></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end">
+                        <div class="">
+                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
+                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
+                            <a
+                                href="javascript:void(0)"
+                                class="btn text-light btn-pill button modalValid"
+                                style="background-color:#1467B0;"
+                                id="confirmDelete-user"
+                            >Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
             id="myModal_warning"
             tabindex="-1"
             role="dialog"
@@ -419,7 +509,7 @@
                                     </a>
                                 </li> -->
                                     <li class="slide card-demo1">
-                                        <a class="side-menu__item" data-bs-toggle="slide" href="customers.html">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                             <i class="side-menu__icon fi fi-rs-users"></i>
                                             <span class="side-menu__label">Customers</span>
                                         </a>
@@ -719,6 +809,17 @@
                                                             </li>
                                                             <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">STATUS</a>
+                                                                <div class="form-check m-0">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input mt-2"
+                                                                        id="exampleCheck1"
+                                                                        checked
+                                                                    >
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between">
+                                                                <a class="text-dark" href="javascript:void(0)">NEXT BILLING</a>
                                                                 <div class="form-check m-0">
                                                                     <input
                                                                         type="checkbox"
@@ -1246,9 +1347,22 @@
             );
         }
         $(document).ready(function(){
-            function getData(){
+            function convertDateFormat(sqlDate) {
+  const dateObj = new Date(sqlDate); // Parse the input string to a Date object
+  
+  // Extract year, month, and day from the date object
+  const year = String(dateObj.getFullYear()).slice(2); // Extracting last two digits of the year
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Month starts from 0
+  const day = String(dateObj.getDate()).padStart(2, '0');
+
+  // Format the date as mm/dd/yy
+  const formattedDate = `${month}/${day}/${year}`;
+  
+  return formattedDate;
+}            
+function getData(){
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1289,7 +1403,7 @@
             })
         
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1320,17 +1434,15 @@
                     console.log('Error occurred while fetching state and city data.');
                 }
             });
-
-            }
-            getData();
             $.ajax({
-        url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+        url: "http://localhost:3000/api/spade/allLandlord",
         type: "GET",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("authtoken")
         },
         contentType: "application/json",
         success: function(response) {
+            
             var table = $("#table_body");
             table.empty();
             var password = 'your-secret-password';
@@ -1359,25 +1471,44 @@ if (item.planName == "Pro") {
     color = "#0BAAB8";
 }
 
-if (item.planName == "Trial ") {
+if (item.planName == "Trial") {
     background = "#32CD32";
     color = "#228B22";
 }
 
 row.append(`<td class='propertyType'><a class='like' href='javascript:;'><span class='badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3' style="background-color: ${background};color: ${color};""><i class='fi fi-rs-dot-circle me-1'></i><b>${item.planName} Plan Purchased</b></span></a></td>`);
 
-                row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'><b>$" + item.planDiscountedAmount + "/ Per " + item.duration + "</b></p><span>Purchase Date: " + item.created_at + "</span></td>");
+                row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'><b>$" + item.planDiscountedAmount + " " + item.duration + "</b></p><span>Purchase Date: " + (item.subscriptionCreated_at?convertDateFormat(item.subscriptionCreated_at):"N/A") + "</span></td>");
                 
                 row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + "Active" + "</b></p></td>");
+                let nextBilling;
+
+if (item.duration === "Per Month") {
+    if(item.subscriptionCreated_at){
+        nextBilling = moment(item.subscriptionCreated_at).add(1, 'months').format('MM/DD/YY');
+    }
+    else{
+        nextBilling = "N/A"
+    }
+} else {
+    if(item.subscriptionCreated_at){
+        nextBilling = moment(item.subscriptionCreated_at).add(1, 'years').format('MM/DD/YY');
+    }
+    else{
+        nextBilling = "N/A"
+    }
+    
+}
+
+
+                row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + (nextBilling) + "</b></p></td>");
 
                 var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
 
-    dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "&plan=" + (encodeURIComponent(sjcl.encrypt(password, item.PlanID.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
+    dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
 
-dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Sent Reminder</a></li>");
-dropdownMenu.append("<li><a class='edit-option dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
+dropdownMenu.append("<li><a class='close-landlord dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
 
-dropdownMenu.append("<li><a class='delete-option dropdown-item text-danger' href='javascript:void(0)' style='display: flex; align-items: start;'>Delete</a></li>");
 
 var dropdownHTML = dropdownMenu.prop('outerHTML');
 var tableData = $("<td>").append(`<i class='fe fe-more-vertical' data-bs-toggle='dropdown'></i>${dropdownHTML}`);
@@ -1394,6 +1525,53 @@ row.append(tableData);
             // Handle errors here
         }
     });
+    
+            }
+            getData();
+            $(document).on("click",".close-landlord",function(){
+                $("#delete-user-admin").modal("show");
+            })
+            $("#confirmDelete-user").on("click",function(){
+                $.ajax({
+                    url: "http://localhost:3000/api/spade/closedLandlord",
+                    type: "DELETE",
+                    data: JSON.stringify({
+                        landlordId: $('#deleteLandlordId').val(),
+                        reason: ($('#reason').val() == "Other"? $('#reasonOther').val() :  $('#reason').val() )
+                    }),
+                    contentType: "application/json",
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                    },
+                    success: function (response) {
+                        console.log("closedLandlord");
+                        console.log(response);
+                        $("#delete-user-admin").modal("hide")
+                        $("#myModal_success p").text("User deleted succesfully")
+                            $("#myModal_success").modal("show")
+                            setTimeout(function () {
+                                $("#myModal_success").modal("hide");
+                            }, 2000);
+                        // if (response.message == "Admin User Deleted Successsful") {
+                        //     $("#delete-user-admin").modal("hide")
+                        //     $("#myModal_success p").text("User deleted succesfully")
+                        //     $("#myModal_success").modal("show")
+                        //     setTimeout(function () {
+                        //         $("#myModal_success").modal("hide");
+                        //     }, 2000);
+                        // }
+                        getAllClosedLandlord()
+                        $("#preloader").css("display", "none")
+
+                    }, error: function (xhr, status, error) {
+                        $("#delete-user-admin").modal("hide")
+
+                        $("#preloader").css("display", "none")
+                        console.log(error)
+                    }
+                })
+            
+            })
     $('input[type="checkbox"]').change(function () {
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
