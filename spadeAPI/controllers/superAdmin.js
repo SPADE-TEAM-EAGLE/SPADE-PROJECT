@@ -382,3 +382,73 @@ imageKey
               }
             };
               // ######################################## landlord Dashboard ########################################
+
+
+
+
+              // ######################################## Get User Roles ########################################
+
+ // Get User Roles
+exports.adminUserPermissionRoles = async function (req, res) {
+  // const { userId, userRole } = req.user;
+  const { userId, userRole } = req.user;
+  function splitAndConvertToObject(value) {
+    const resultObject = {};
+
+    if (value.includes(',')) {
+      const values = value.split(",");
+      for (const item of values) {
+        resultObject[item] = true;
+      }
+    } else {
+      resultObject[value] = true;
+    }
+
+    return resultObject;
+  }
+  try {
+    // const selectResult = await queryRunner(selectQuery("adminUserPermission", "id"), [userRole]);
+    const selectResult = await queryRunner(selectQuery("adminUserPermission"));
+    if (selectResult[0].length > 0) {
+      const dataArray = [];
+
+      for (let i = 0; i < selectResult[0].length; i++) {
+        const data = {};
+
+        // Example usage for different fields
+        const id = selectResult[0][i].id;
+        const role = selectResult[0][i].userid;
+        const overView = splitAndConvertToObject(selectResult[0][i].overView);
+        const customers = splitAndConvertToObject(selectResult[0][i].customers);
+        const closedAccount = splitAndConvertToObject(selectResult[0][i].closedAccount);
+        const appearance = splitAndConvertToObject(selectResult[0][i].appearance);
+        const profile = splitAndConvertToObject(selectResult[0][i].profile);
+
+        dataArray.push({
+          id,
+          role,
+          overView,
+          customers,
+          closedAccount,
+          appearance,
+          profile
+          
+        });
+      }
+      return res.status(200).json({
+        data: dataArray,
+      });
+    } else {
+      res.status(200).json({
+        message: "No User Roles Found",
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};             
+  // ######################################## Get User Roles ########################################
+
