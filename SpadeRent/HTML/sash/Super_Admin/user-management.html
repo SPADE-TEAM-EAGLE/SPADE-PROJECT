@@ -3652,6 +3652,9 @@ color: #000;
                 });
             }
             getAllStates()
+            function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
             $(document).on("click", "#update_userAdmin", function () {
                 $("#preloader").css("display", "flex")
                 var existingImageNames = [];
@@ -3687,8 +3690,8 @@ color: #000;
                                 url: "http://localhost:3000/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
-                                    firstName: $("#firstName_user_update").val(),
-                                    lastName: $("#lastName_user_update").val(),
+                                    firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
+                                    lastName: capitalizeFirstLetter($("#lastName_user_update").val()),
                                     email: $("#email_user_update").val(),
                                     phone: $("#phone_user_update").val(),
                                     // password: $("#password_user_update").val(),
@@ -3740,8 +3743,8 @@ color: #000;
                         url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
-                            firstName: $("#firstName_user_update").val(),
-                            lastName: $("#lastName_user_update").val(),
+                            firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
+                            lastName: capitalizeFirstLetter($("#lastName_user_update").val()),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
                             // password: $("#password_user_update").val(),
@@ -3783,8 +3786,8 @@ color: #000;
                         url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
-                            firstName: $("#firstName_user_update").val(),
-                            lastName: $("#lastName_user_update").val(),
+                            firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
+                            lastName: capitalizeFirstLetter($("#lastName_user_update").val()),
                             email: $("#email_user_update").val(),
                             phone: $("#phone_user_update").val(),
                             // password: $("#password_user_update").val(),
@@ -3941,8 +3944,8 @@ color: #000;
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({
-                                    firstName: $('#firstName_user').val(),
-                                    lastName: $('#lastName_user').val(),
+                                    firstName: capitalizeFirstLetter($('#firstName_user').val()),
+                                    lastName: capitalizeFirstLetter($('#lastName_user').val()),
                                     email: $('#email_user').val(),
                                     phone: $('#phone__user').val(),
                                     password: $('#password_user').val(),
@@ -3999,8 +4002,8 @@ color: #000;
                         type: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify({
-                            firstName: $('#firstName_user').val(),
-                            lastName: $('#lastName_user').val(),
+                            firstName: capitalizeFirstLetter($('#firstName_user').val()),
+                            lastName: capitalizeFirstLetter($('#lastName_user').val()),
                             email: $('#email_user').val(),
                             phone: $('#phone__user').val(),
                             password: $('#password_user').val(),
