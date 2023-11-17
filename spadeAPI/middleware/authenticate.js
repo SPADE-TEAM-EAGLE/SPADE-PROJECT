@@ -407,7 +407,7 @@ const verifySuperAdmin = async (req, res, next) => {
       city: result[0][0].city,
       state: result[0][0].state,
       zipCode: result[0][0].zipcode,
-      userRole: result[0][0].role,
+      userRole: result[0][0].roleId,
     }; 
     next();
   } catch (err) {
