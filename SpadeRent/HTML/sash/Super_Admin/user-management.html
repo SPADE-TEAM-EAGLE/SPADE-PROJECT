@@ -3481,7 +3481,7 @@ color: #000;
             }
             function getAllUserAdminData() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3525,7 +3525,7 @@ color: #000;
                     }
                 })
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3562,7 +3562,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 })
                 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -3594,7 +3594,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     }
                 });
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allUserAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/allUserAdmin",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -3666,7 +3666,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
             getAllUserAdminData()
             function getAllStates() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -3713,7 +3713,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     console.log(selectedFiles[0]);
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3727,7 +3727,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: "http://localhost:3000/api/spade/updateAdminUser",
+                                url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     firstName: $("#firstName_user_update").val(),
@@ -3780,7 +3780,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: $("#firstName_user_update").val(),
@@ -3823,7 +3823,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: $("#firstName_user_update").val(),
@@ -3932,7 +3932,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/userAdminDelete",
+                    url: "https://backend.app.spaderent.com/api/spade/userAdminDelete",
                     type: "DELETE",
                     data: JSON.stringify({ id: deleteUserId }),
                     contentType: "application/json",
@@ -3966,7 +3966,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     var uploadFormData = new FormData();
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3980,7 +3980,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/createUserAdmin',
+                                url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -4038,7 +4038,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     });
                 } else {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/createUserAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
                         type: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify({
