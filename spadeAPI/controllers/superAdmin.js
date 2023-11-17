@@ -151,35 +151,36 @@ exports.allClosedLandlord = async (req, res) => {
 
 // ######################################## All Closed Landlord ########################################
 
-exports.createUserAdmin = async function (req, res) {
-  const { firstName, lastName, email, phone, password, role, address, city, state, zipcode, image, imageKey } = req.body;
-  const currentDate = new Date();
-  try {
-    const selectResult = await queryRunner(selectQuery("superAdmin", "email"), [
-      email,
-    ]);
-    if (selectResult[0].length > 0) {
-      return res.status(201).send("Email already exists");
+  exports.createUserAdmin = async function (req, res) {
+    const { firstName, lastName, email, phone, password, roleId, address,city,state,zipcode,image,imageKey } = req.body;
+    const currentDate = new Date();
+    try {
+      const selectResult = await queryRunner(selectQuery("superAdmin","email"), [
+        email,
+      ]);
+      if (selectResult[0].length > 0) {
+        return res.status(201).send("Email already exists");
+      }
+      const hashPassword = await hashedPassword(password);
+      // // generate a unique identifier for the user
+      // const salt = bcrypt.genSaltSync(10);
+      // const id = bcrypt
+      //   .hashSync(lastName + new Date().getTime().toString(), salt)
+      //   .substring(0, 10);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, roleId, address,city,state,zipcode,image,imageKey,currentDate]);
+      const name = firstName + " " + lastName;
+      const mailSubject = "Spade Admin Welcome Email";
+      if (insertResult[0].affectedRows > 0) {
+        console.log(email + " " + mailSubject + " " + name)
+        await sendMailLandlord(email, mailSubject, name);
+        return res.status(200).json({ message: "Users Permission User added successfully" });
+      } else {
+        return res.status(500).send("Failed to add User Permission User");
+      }
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
     }
-    const hashPassword = await hashedPassword(password);
-    // // generate a unique identifier for the user
-    // const salt = bcrypt.genSaltSync(10);
-    // const id = bcrypt
-    //   .hashSync(lastName + new Date().getTime().toString(), salt)
-    //   .substring(0, 10);
-    const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, role, address, city, state, zipcode, image, imageKey, currentDate]);
-    const name = firstName + " " + lastName;
-    const mailSubject = "Spade Admin Welcome Email";
-    if (insertResult[0].affectedRows > 0) {
-      console.log(email + " " + mailSubject + " " + name)
-      await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "Users Permission User added successfully" });
-    } else {
-      return res.status(500).send("Failed to add User Permission User");
-    }
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
+    
 };
 // ######################################## All Closed Landlord ########################################
 
@@ -229,18 +230,40 @@ exports.userAdminGetById = async function (req, res) {
     });
   }
 };
-// ######################################## user Admin By Id ########################################
+    // ######################################## user Admin By Id ########################################
+    
+    
+    
+    
+    // ######################################## user Admin Edit ########################################
+    exports.updateAdminUser = async function (req, res) {
+      const {  firstName, lastName, email, phone, roleId, address,city,state,zipcode,image,imageKey, id } = req.body;
+      const currentDate = new Date();
+      try {
+        const insertResult = await queryRunner(updateUserAdminQuery, [
+          firstName, lastName, email, phone, roleId, address,city,state,zipcode,image,imageKey,currentDate,id]);
+        if (insertResult[0].affectedRows > 0) {
+          return res.status(200).json({ message: "User Updated Successfully" });
+        } else {
+          return res.status(500).send("Failed to Update User Permission User");
+        }
+      } catch (error) {
+        console.log(error)
+        return res.status(400).json({ message: error.message });
+      }
+    };
+      // ######################################## user Admin Edit ########################################
 
 
 
 
 // ######################################## user Admin Edit ########################################
 exports.updateAdminUser = async function (req, res) {
-  const { firstName, lastName, email, phone, role, address, city, state, zipcode, image, imageKey, id } = req.body;
+  const { firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, id } = req.body;
   const currentDate = new Date();
   try {
     const insertResult = await queryRunner(updateUserAdminQuery, [
-      firstName, lastName, email, phone, role, address, city, state, zipcode, image, imageKey, currentDate, id]);
+      firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, currentDate, id]);
     if (insertResult[0].affectedRows > 0) {
       return res.status(200).json({ message: "User Updated Successfully" });
     } else {
@@ -366,28 +389,27 @@ exports.updateAdminProfile = async function (req, res) {
   }
 };
 
-// ######################################## landlord Dashboard ########################################
-exports.landlordReportAdmin = async function (req, res) {
-  const { id } = req.body;
-  try {
-    const selectResult = await queryRunner(landlordReportAdminQuery);
-    if (selectResult[0].length > 0) {
-      return res.status(200).json({
-        totalLandlord: selectResult[0]
-      });
-    } else {
-      res.status(200).json({
-        message: "No Landlord Found",
-      });
-    }
-  } catch (error) {
-    res.status(400).json({
-      message: error.message,
-    });
-  }
-};
-// ######################################## landlord Dashboard ########################################
-
+             // ######################################## landlord Dashboard ########################################
+             exports.landlordReportAdmin = async function (req, res) {
+              const { id } = req.body;
+              try {
+                const selectResult = await queryRunner(landlordReportAdminQuery);
+                if (selectResult[0].length > 0) {
+                  return res.status(200).json({
+                    totalLandlord: selectResult[0]
+                  });
+                } else {
+                  res.status(200).json({
+                    message: "No Landlord Found",
+                  });
+                }
+              } catch (error) {
+                res.status(400).json({
+                  message: error.message,
+                });
+              }
+            };
+              // ######################################## landlord Dashboard ########################################
 
 
 
@@ -525,7 +547,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
     try {
       const updateResult = await queryRunner(`UPDATE adminUserPermission SET ${columnName} = "${permission}" WHERE id = ${role}`);
       if (updateResult[0].affectedRows > 0) {
-        return res.status(200).json({ message: " User Permission Updated Successfully" });
+        return res.status(200).json({ message: "User Permission Updated Successfully" });
       } else {
         return res.status(500).send("Failed to Update User Permission User");
       }
