@@ -219,9 +219,9 @@ req.user = {
       const result = await queryRunner(selectQuery("users", "Email"), [
         decoded.email,
       ]);
-      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
-      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
-      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
+      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0]?.id]);
+      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0]?.PlanID]);
+      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0]?.id]);
       // console.log(planCountResult[0]);
       if(futurePlanId[0]?.length!=0){
         

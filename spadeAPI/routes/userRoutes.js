@@ -33,6 +33,8 @@ router.post("/uploadAdmin", verifySuperAdmin, fileUpload.fileUpload);
 // router.delete("/delete/:key", fileUpload.fileDelete);
 router.put("/updatePlanId", verifyToken, userController.updatePlanId);
 // router.get('/Signinall', userController.Signinall);
+router.put("/updatePlanIdByAdmin", verifySuperAdmin, superAdmin.updatePlanIdByAdmin);
+
 router.post("/resetEmail", userController.createResetEmail);
 router.post("/verifyResetEmailCode", userController.verifyResetEmailCode);
 router.post("/verifyAuthCode",userController.verifyAuthCode)
@@ -283,6 +285,7 @@ router.post("/CreateBankAccountSignup", bankAccountController.CreateBankAccountS
 
 router.post("/CreateBankAccountTenant",verifyTokenTenant, bankAccountController.CreateBankAccount);
 router.get("/GetBankAccount", verifyToken, bankAccountController.GetBankAccount);
+router.get("/GetBankAccountAdmin", verifySuperAdmin, bankAccountController.GetBankAccountAdmin);
 router.get("/GetBankAccountTenant", verifyTokenTenant, bankAccountController.GetBankAccount);
 router.put("/updateBankAccountStatus", verifyToken, bankAccountController.updateBankAccountStatus); 
 router.post("/cancelSubscription", paymentIntegration.cancelSubscription);
@@ -309,4 +312,5 @@ router.get("/totalCustomer",verifySuperAdmin ,superAdmin.totalCustomer);
 router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
 router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAdmin);
+router.get("/getUser",verifySuperAdmin,superAdmin.getUserforAdmin);
 router.get("/adminUserPermissionRoles", superAdmin.adminUserPermissionRoles);
