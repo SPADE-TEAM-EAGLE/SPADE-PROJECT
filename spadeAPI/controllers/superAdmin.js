@@ -149,7 +149,7 @@ exports.signInAdmin = async(req,res)=>{
  // ######################################## All Closed Landlord ########################################
 
   exports.createUserAdmin = async function (req, res) {
-    const { firstName, lastName, email, phone, password, role, address,city,state,zipcode,image,imageKey } = req.body;
+    const { firstName, lastName, email, phone, password, roleId, address,city,state,zipcode,image,imageKey } = req.body;
     const currentDate = new Date();
     try {
       const selectResult = await queryRunner(selectQuery("superAdmin","email"), [
@@ -164,7 +164,7 @@ exports.signInAdmin = async(req,res)=>{
       // const id = bcrypt
       //   .hashSync(lastName + new Date().getTime().toString(), salt)
       //   .substring(0, 10);
-      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, role, address,city,state,zipcode,image,imageKey,currentDate]);
+      const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, roleId, address,city,state,zipcode,image,imageKey,currentDate]);
       const name = firstName + " " + lastName;
       const mailSubject = "Spade Admin Welcome Email";
       if (insertResult[0].affectedRows > 0) {
@@ -232,11 +232,11 @@ exports.signInAdmin = async(req,res)=>{
     
     // ######################################## user Admin Edit ########################################
     exports.updateAdminUser = async function (req, res) {
-      const {  firstName, lastName, email, phone, role, address,city,state,zipcode,image,imageKey, id } = req.body;
+      const {  firstName, lastName, email, phone, roleId, address,city,state,zipcode,image,imageKey, id } = req.body;
       const currentDate = new Date();
       try {
         const insertResult = await queryRunner(updateUserAdminQuery, [
-          firstName, lastName, email, phone, role, address,city,state,zipcode,image,imageKey,currentDate,id]);
+          firstName, lastName, email, phone, roleId, address,city,state,zipcode,image,imageKey,currentDate,id]);
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
@@ -444,8 +444,9 @@ exports.updatePlanIdByAdmin = async function (req, res) {
       }
     }
   } catch (error) {
-    res.status(400).json({
-      message: error.message,
-    });
-  }
-};
+
+
+  
+};             
+};             
+
