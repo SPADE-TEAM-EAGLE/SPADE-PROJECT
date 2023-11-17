@@ -171,6 +171,49 @@
             </div>
         </div>
         <div
+                    class="modal fade"
+                    id="myModal_success"
+                    tabindex="-1"
+                    role="dialog"
+                >
+                    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                        <div class="modal-content modal-content-demo">
+                            <div class="modal-body p-0">
+                                <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                                    <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                                    <div class="card-body text-center">
+                                        <span class="">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                height="60"
+                                                width="60"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path fill="#13bfa6" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"/>
+                                                <path fill="#71d8c9" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"/>
+                                            </svg>
+                                        </span>
+                                        <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                                        <p class="card-text text-dark">Password change successfully</p>
+                                    </div>
+                                    <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div
             class="modal fade"
             id="myModal_warning"
             tabindex="-1"
@@ -1337,7 +1380,7 @@
 <!-- CHART-DONUT JS -->
 <script src="../assets/js/charts.js"></script>
 <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var landlordId;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -1452,7 +1495,7 @@ function getData(){
                 var row = $("<tr>");
 
                     row.append("<td></td>");
-                row.append("<td style='font-weight: 600;'>" + item.landlordId + "</td>");
+                row.append("<td class='ladlordId' style='font-weight: 600;'>" + item.landlordId + "</td>");
                 row.append("<td style='font-weight: 600;'><b>" + item.FirstName + " " + item.LastName + "</b></td>");
                 row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'>" + item.Email + "</p><span>" + item.Phone + "</span></td>");
                 var background;
@@ -1528,15 +1571,20 @@ row.append(tableData);
     
             }
             getData();
+            
             $(document).on("click",".close-landlord",function(){
+                landlordId=$(this).closest("tr").find(".ladlordId").text();
+                console.log(landlordId)
                 $("#delete-user-admin").modal("show");
+
             })
             $("#confirmDelete-user").on("click",function(){
+                $("#delete-user-admin").modal("hide")
                 $.ajax({
                     url: "http://localhost:3000/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
-                        landlordId: $('#deleteLandlordId').val(),
+                        landlordId: landlordId,
                         reason: ($('#reason').val() == "Other"? $('#reasonOther').val() :  $('#reason').val() )
                     }),
                     contentType: "application/json",
@@ -1546,7 +1594,7 @@ row.append(tableData);
                     success: function (response) {
                         console.log("closedLandlord");
                         console.log(response);
-                        $("#delete-user-admin").modal("hide")
+                        
                         $("#myModal_success p").text("User deleted succesfully")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {
@@ -1560,7 +1608,7 @@ row.append(tableData);
                         //         $("#myModal_success").modal("hide");
                         //     }, 2000);
                         // }
-                        getAllClosedLandlord()
+                        getData()
                         $("#preloader").css("display", "none")
 
                     }, error: function (xhr, status, error) {
