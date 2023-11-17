@@ -395,7 +395,7 @@ exports.landlordReportAdmin = async function (req, res) {
 // Get User Roles
 exports.adminUserPermissionRoles = async function (req, res) {
   // const { userId, userRole } = req.user;
-  const { userId, userRole } = req.user;
+  // const { userId, userRole } = req.user;
   function splitAndConvertToObject(value) {
     const resultObject = {};
 
@@ -448,9 +448,10 @@ exports.adminUserPermissionRoles = async function (req, res) {
       });
     }
   } catch (error) {
-  };
-  };
     console.log(error)
+  };
+  };
+
     exports.getUserforAdmin = async function (req, res) {
       const { userId } = req.query;
       try {
@@ -518,3 +519,19 @@ exports.adminUserPermissionRoles = async function (req, res) {
     // ######################################## Get User Roles ########################################
 
   // };
+
+
+  exports.adminUserPermissionUpdate = async function (req, res) {
+    const { role, columnName, permission } = req.body;
+    // const currentDate = new Date();
+    try {
+      const updateResult = await queryRunner(`UPDATE adminUserPermission SET ${columnName} = "${permission}" WHERE id = ${role}`);
+      if (updateResult[0].affectedRows > 0) {
+        return res.status(200).json({ message: " User Permission Updated Successfully" });
+      } else {
+        return res.status(500).send("Failed to Update User Permission User");
+      }
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  };
