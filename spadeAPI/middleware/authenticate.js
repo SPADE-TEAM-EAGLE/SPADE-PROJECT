@@ -1,7 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
-const { selectQuery, userPermissionProtected, userPermissionAuth, countTenantQuery } = require("../constants/queries");
+const { selectQuery, userPermissionProtected, userPermissionAuth, countTenantQuery, adminPermissionQuery } = require("../constants/queries");
 // const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
 const config = process.env;
 const verifyToken = async (req, res, next) => {
@@ -390,9 +390,60 @@ const verifySuperAdmin = async (req, res, next) => {
   if (!token) {
     return res.status(401).send("Access Denied");
   }
+  function splitAndConvertToObject(value) {
+    const resultObject = {};
+
+    if (value.includes(',')) {
+      const values = value.split(",");
+      for (const item of values) {
+        resultObject[item] = true;
+      }
+    } else {
+      resultObject[value] = true;
+    }
+
+    return resultObject;
+  }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
     const result = await queryRunner(selectQuery("superAdmin", "email"), [decoded.email]);
+
+
+
+
+
+    const selectResult = await queryRunner(adminPermissionQuery,[result[0][0].id]);
+    let dataArray = [];
+    if (selectResult[0].length > 0) {
+      for (let i = 0; i < selectResult[0].length; i++) {
+        const data = {};
+
+        // Example usage for different fields
+        const id = selectResult[0][i].id;
+        const role = selectResult[0][i].userid;
+        const overView = splitAndConvertToObject(selectResult[0][i].overView);
+        const customers = splitAndConvertToObject(selectResult[0][i].customers);
+        const closedAccount = splitAndConvertToObject(selectResult[0][i].closedAccount);
+        const appearance = splitAndConvertToObject(selectResult[0][i].appearance);
+        const profile = splitAndConvertToObject(selectResult[0][i].profile);
+
+        dataArray.push({
+          id,
+          role,
+          overView,
+          customers,
+          closedAccount,
+          appearance,
+          profile
+
+        });
+      }
+
+    }
+
+
+
+
     req.user = {
       email: result[0][0].email,
       userId: result[0][0].id,
@@ -408,6 +459,7 @@ const verifySuperAdmin = async (req, res, next) => {
       state: result[0][0].state,
       zipCode: result[0][0].zipcode,
       userRole: result[0][0].roleId,
+      userPeremission: dataArray
     }; 
     next();
   } catch (err) {
