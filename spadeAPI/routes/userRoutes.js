@@ -315,4 +315,4 @@ router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAd
 router.get("/getUser",verifySuperAdmin,superAdmin.getUserforAdmin);
 router.get("/adminUserPermissionRoles",verifySuperAdmin,superAdmin.adminUserPermissionRoles);
 router.put("/adminUserPermissionUpdate",verifySuperAdmin,superAdmin.adminUserPermissionUpdate);
-
+router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
