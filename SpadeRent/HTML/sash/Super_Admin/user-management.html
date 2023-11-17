@@ -3289,9 +3289,8 @@ color: #000;
                     success: function (response) {
                         // console.log("protectedAdmin");
                         console.log(response);
-                        UsersRoles = response.userRole;
+                        UsersRoles = response.userRole == 2 ? "Manager":"Staff";
                         // alert(UsersRoles)
-
                         $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                         $("#firstName").val(response.firstName);
                         $("#lastName").val(response.lastName);
@@ -3645,6 +3644,9 @@ color: #000;
                 row.find('input[type="checkbox"]').each(function () {
                     if ($(this).prop('checked')) {
                         checkedClasses.push($(this).closest('td').attr('class'));
+                    }else{
+                        checkedClasses.push("Restrict");
+
                     }
                 });
                 // alert(checkedClasses);

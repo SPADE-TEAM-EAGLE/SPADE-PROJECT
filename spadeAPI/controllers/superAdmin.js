@@ -13,7 +13,8 @@ const {
   allLandlordPlanQuery,
   updateAdmin,
   landlordReportAdminQuery,
-  updatePlanId
+  updatePlanId,
+  adminRevenueQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -541,9 +542,6 @@ exports.adminUserPermissionRoles = async function (req, res) {
     };
     // ######################################## Get User Roles ########################################
 
-  // };
-
-
   exports.adminUserPermissionUpdate = async function (req, res) {
     const { role, columnName, permission } = req.body;
     // const currentDate = new Date();
@@ -553,6 +551,24 @@ exports.adminUserPermissionRoles = async function (req, res) {
         return res.status(200).json({ message: "User Permission Updated Successfully" });
       } else {
         return res.status(500).send("Failed to Update User Permission User");
+      }
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  };
+
+
+
+
+
+  exports.getAdminRevenue = async function (req, res) {
+    // const {} = req.body;
+    try {
+      const updateResult = await queryRunner(adminRevenueQuery);
+      if (updateResult[0].length > 0) {
+        return res.status(200).json({ message: " get Admin Revenue", data : updateResult[0][0] });
+      } else {
+        return res.status(500).send("No data found in revenue");
       }
     } catch (error) {
       return res.status(400).json({ message: error.message });

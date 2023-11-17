@@ -5,6 +5,7 @@ const tenantMail = require("./tenantInviteMail.js");
 const invoiceMail = require("./invoiceMail.js");
 const taskMail = require("./taskMail.js");
 const paymentMails = require("./paymentMail.js");
+const propertyMails = require("./propertyMails.js");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
 const constants = process.env;
@@ -209,6 +210,34 @@ exports.paymentMail = async (
 ) => {
   try {
       var emailHTML = paymentMails.paymentHTML(Name,subscriptionDate,Amount,planName)
+    let transpoter = await createTransporter();
+    var mailOptions = {
+      from: constants.EMAIL_HOST,
+      to: email,
+      // to:"aj8706786@gmail.com",
+      subject: mailSubject,
+      html: emailHTML,
+    };
+    transpoter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error occur to send email" + error);
+      } else {
+        // console.log("email send sucessfully" + info.response);
+        console.log("email send sucessfully");
+      }
+    });
+  } catch (error) {
+    // console.log("sendmail "+error.message);
+    console.log(error);
+  }
+};
+
+
+exports.propertyMail = async (
+  propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email
+) => {
+  try {
+      var emailHTML = propertyMails.propertyHTML(propertyName,pAddress,propertyType,propertySQFT,units,userName)
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,

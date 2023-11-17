@@ -3,6 +3,7 @@ const {
   sendMail,
   taskSendMail,
   sendMailLandlord,
+  propertyMail
 } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -1185,7 +1186,7 @@ exports.property = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId, email,paidUnits } = req.user;
+    const { userId, email,paidUnits,userName } = req.user;
     if (
       !propertyName ||
       !address ||
@@ -1260,7 +1261,9 @@ exports.property = async (req, res) => {
     }
     const unitCount = paidUnits + units;
     const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCount,userId]);
-    
+    const pAddress = address+","+city+","+state+","+zipCode;
+    const mailSubject = "New Property Added";
+    await propertyMail(propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email )
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,
