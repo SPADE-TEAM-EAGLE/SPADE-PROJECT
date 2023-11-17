@@ -219,9 +219,9 @@ req.user = {
       const result = await queryRunner(selectQuery("users", "Email"), [
         decoded.email,
       ]);
-      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
-      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
-      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
+      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0]?.id]);
+      const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0]?.PlanID]);
+      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0]?.id]);
       // console.log(planCountResult[0]);
       if(futurePlanId[0]?.length!=0){
         
@@ -407,7 +407,7 @@ const verifySuperAdmin = async (req, res, next) => {
       city: result[0][0].city,
       state: result[0][0].state,
       zipCode: result[0][0].zipcode,
-      userRole: result[0][0].role,
+      userRole: result[0][0].roleId,
     }; 
     next();
   } catch (err) {

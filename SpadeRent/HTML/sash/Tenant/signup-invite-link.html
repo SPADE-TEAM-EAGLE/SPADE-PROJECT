@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
-    <!-- BOOTSTRAP CSS -->
-    <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- STYLE CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <link href="../assets/css/dark-style.css" rel="stylesheet">
-    <link href="../assets/css/transparent-style.css" rel="stylesheet">
-    <link href="../assets/css/skin-modes.css" rel="stylesheet">
-    <!--- FONT ICONS CSS -->
-    <link href="../assets/css/icons.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-    <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <title>Login</title>
-    <script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        >
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+        <!-- BOOTSTRAP CSS -->
+        <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- STYLE CSS -->
+        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/dark-style.css" rel="stylesheet">
+        <link href="../assets/css/transparent-style.css" rel="stylesheet">
+        <link href="../assets/css/skin-modes.css" rel="stylesheet">
+        <!--- FONT ICONS CSS -->
+        <link href="../assets/css/icons.css" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <!-- COLOR SKIN CSS -->
+        <link
+            id="theme"
+            rel="stylesheet"
+            type="text/css"
+            media="all"
+            href="../assets/colors/color1.css"
+        >
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <title>Login</title>
+        <script>
          if(!localStorage.getItem("authtoken")){
                 window.location="./login_module.html"
             }
-    </script>
-<style>
+        </script>
+        <style>
         * {
             font-family: 'Figtree', sans-serif !important;
         }
@@ -529,11 +537,10 @@
             border: transparent;
             border-radius: 50%;
         }
-    </style>
-</head>
-
-<body onload="check()">
-    <div class="d-flex country" style="     width: 70px;
+        </style>
+    </head>
+    <body onload="check()">
+        <div class="d-flex country" style="     width: 70px;
     height: 70px;
     border-radius: 50%;
     position: fixed;
@@ -544,45 +551,53 @@
     transition: 0.5s;
     z-index: 999;
     top: 15px;">
-        <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="check()" id="dark-light-button">
-            <span class="dark-layout text-dark"><i class="fe fe-moon"></i></span>
-            <span class="light-layout"><i class="fe fe-sun"></i></span>
-        </a>
-    </div>
-    
-      <!-- GLOBAL-LOADER -->
-      <div id="preloader" class="tlp-preloader">
-        <div class="animation-preloader">
-            <div class="tlp-spinner"></div>
-            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+            <a class="nav-link icon theme-layout nav-link-bg layout-setting" onclick="check()" id="dark-light-button">
+                <span class="dark-layout text-dark">
+                    <i class="fe fe-moon"></i>
+                </span>
+                <span class="light-layout">
+                    <i class="fe fe-sun"></i>
+                </span>
+            </a>
         </div>
-    </div>
-    <!-- /GLOBAL-LOADER -->
-
-    <div class="wapper ">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="main-div">
-                        <span>
-                            <img src="../assets/images/Artboard GÇô 1.svg" alt="Rent-logo" class="Rent-logo" id="logo">
-                        </span>
-                    </div>
-                </div>
-                <div class="col-12 heading-padding" >
-                    <div class="welcome-head">
-                        <div class="main-div flex-column">
-                            <h1 class="text-center font-weight-500" id="top-h1-heading">
-                                Welcome to
-                                <span>Spade</span> Tenant Portal
-                            </h1>
-                            <h4 class="text-center">
-                                Sign up today and experience the benefits of an all-in-one property management tool!
-                            </h4>
+        <!-- GLOBAL-LOADER -->
+        <div id="preloader" class="tlp-preloader">
+            <div class="animation-preloader">
+                <div class="tlp-spinner"></div>
+                <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+            </div>
+        </div>
+        <!-- /GLOBAL-LOADER -->
+        <div class="wapper ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="main-div">
+                            <span>
+                                <img
+                                    src="../assets/images/Artboard GÇô 1.svg"
+                                    alt="Rent-logo"
+                                    class="Rent-logo"
+                                    id="logo"
+                                >
+                            </span>
                         </div>
                     </div>
-                </div>
-                <!-- <div class="col-12">
+                    <div class="col-12 heading-padding">
+                        <div class="welcome-head">
+                            <div class="main-div flex-column">
+                                <h1 class="text-center font-weight-500" id="top-h1-heading">
+                                    Welcome to
+                                    <span>Spade</span>
+                                    Tenant Portal
+                                </h1>
+                                <h4 class="text-center">
+                                    Sign up today and experience the benefits of an all-in-one property management tool!
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-12">
                     <div class="boxes">
                         <div class="main-div">
                             <div class="anchor">
@@ -609,77 +624,107 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="col-12">
-                    <div class="main-div">
-                        <div class="container-fluid">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-12 col-md-12 ">
-                                    <div class="row justify-content-center">
-                                        <!-- card 3 start  -->
-                                        <div class="col-lg-4 card3 p-0 card" id="card3">
-                                            <div class="heading">
-                                                <h3 class="text-center">
-                                                    Create your
-                                                    <span>Security</span> info
-                                                </h3>
-                                            </div>
-                                            <div class="inputs">
-                                                <form action="">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <input type="password" class="form-control input-inside" id="tenant-password" aria-describedby="emailHelp" placeholder="Password">
-                                                                <img src="../assets/images/eye-crossed.svg" id="togglePassword1" style="    cursor: pointer;
+                    <div class="col-12">
+                        <div class="main-div">
+                            <div class="container-fluid">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-12 col-md-12 ">
+                                        <div class="row justify-content-center">
+                                            <!-- card 3 start  -->
+                                            <div class="col-lg-4 card3 p-0 card" id="card3">
+                                                <div class="heading">
+                                                    <h3 class="text-center">
+                                                        Create your
+                                                        <span>Security</span>
+                                                        info
+                                                    </h3>
+                                                </div>
+                                                <div class="inputs">
+                                                    <form action="">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <input
+                                                                        type="password"
+                                                                        class="form-control input-inside"
+                                                                        id="tenant-password"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Password"
+                                                                    >
+                                                                    <img
+                                                                        src="../assets/images/eye-crossed.svg"
+                                                                        id="togglePassword1"
+                                                                        style="    cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -38px;
                                                                 margin-right: 7px;
                                                                 color: #4573D2;
-                                                                width: 20px;" alt="">
+                                                                width: 20px;"
+                                                                        alt=""
+                                                                    >
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <input type="password" class="form-control input-inside" id="tenant-con-password" aria-describedby="emailHelp" placeholder="Confirm Password">
-                                                                <span class="form-check-label mt-1" id="tenant_con_span" style="color: red;display: none;">
-                                                                    Password does not match. Please enter correct Password
-                                                                </span>
-                                                                <!-- <img src="../assets/images/eye-crossed.svg" id="togglePassword2" style="cursor: pointer;
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <input
+                                                                        type="password"
+                                                                        class="form-control input-inside"
+                                                                        id="tenant-con-password"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Confirm Password"
+                                                                    >
+                                                                    <span class="form-check-label mt-1" id="tenant_con_span" style="color: red;display: none;">
+                                                                        Password does not match. Please enter correct Password
+                                                                    </span>
+                                                                    <!-- <img src="../assets/images/eye-crossed.svg" id="togglePassword2" style="cursor: pointer;
                                                                     float: right;
                                                                     margin-top: -38px;
                                                                     margin-right: 15px;
                                                                     color: #4573D2;" alt=""> -->
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 pb-3">
-                                                            <img src="../assets/images/info.svg" alt="">
-                                                            <span class="form-check-label" for="gridCheck">
-                                                                    <b>MUST</b> be 8-12 characters. Must contain atleast One Uppercase and One symbol.
+                                                            <div class="col-12 pb-3">
+                                                                <img src="../assets/images/info.svg" alt="">
+                                                                <span class="form-check-label" for="gridCheck">
+                                                                    <b>MUST</b>
+                                                                    be 8-12 characters. Must contain atleast One Uppercase and One symbol.
                                                                 </span>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-check checker">
-                                                                <input class="form-check-input" type="checkbox" id="gridCheck" checked required>
-                                                                <label class="form-check-label" for="gridCheck">
-                                                                    By clicking next, I agree to spade Rent's
-                                                                    <span>Privacy Policy</span>
-                                                                    and
-                                                                    <span>Terms of Use</span>
-                                                                </label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-check checker">
+                                                                    <input
+                                                                        class="form-check-input"
+                                                                        type="checkbox"
+                                                                        id="gridCheck"
+                                                                        checked
+                                                                        required
+                                                                    >
+                                                                    <label class="form-check-label" for="gridCheck">
+                                                                        By clicking next, I agree to spade Rent's
+                                                                        <span>Privacy Policy</span>
+                                                                        and
+                                                                        <span>Terms of Use</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group"></div>
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn btn-primary btn-lg btn-block btnn btnstyle"
+                                                                    id="tenant-next"
+                                                                    disabled
+                                                                >
+                                                                    Next
+                                                                    <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2 " alt="">
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group"></div>
-                                                            <button type="button" class="btn btn-primary btn-lg btn-block btnn btnstyle" id="tenant-next" disabled>
-                                                                Next                
-                                                                <img src="../assets/images/arrow.svg"
-                                                                    class="float-right mt-3 mr-2 " alt="">
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <!-- card 3 end  -->
                                         </div>
-                                        <!-- card 3 end  -->
                                     </div>
                                 </div>
                             </div>
@@ -688,51 +733,50 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- JQUERY JS -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <!-- BOOTSTRAP JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        <!-- JQUERY JS -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <!-- BOOTSTRAP JS -->
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script> -->
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- SIDE-MENU JS-->
-    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
-    <!-- TypeHead js -->
-    <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
-    <script src="../assets/js/typehead.js"></script>
-    <!-- SIDEBAR JS -->
-    <script src="../assets/plugins/sidebar/sidebar.js"></script>
-    <!-- FORM WIZARD JS-->
-    <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
-    <script src="../assets/plugins/formwizard/fromwizard.js"></script>
-    <!-- INTERNAl Jquery.steps js -->
-    <script src="../assets/plugins/jquery-steps/jquery.steps.min.js"></script>
-    <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll.js"></script>
-    <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
-    <!-- INTERNAL Accordion-Wizard-Form js-->
-    <script src="../assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
-    <script src="../assets/js/form-wizard.js"></script>
-    <!-- FILE UPLOADES JS -->
-    <script src="../assets/plugins/fileuploads/js/fileupload.js"></script>
-    <script src="../assets/plugins/fileuploads/js/file-upload.js"></script>
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
-    <!-- Color Theme js -->
-    <script src="../assets/js/themeColors.js"></script>
-    <!-- Sticky js -->
-    <script src="../assets/js/sticky.js"></script>
-    <!-- CUSTOM JS -->
-    <script src="../assets/js/custom.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+        <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- SIDE-MENU JS-->
+        <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+        <!-- TypeHead js -->
+        <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+        <script src="../assets/js/typehead.js"></script>
+        <!-- SIDEBAR JS -->
+        <script src="../assets/plugins/sidebar/sidebar.js"></script>
+        <!-- FORM WIZARD JS-->
+        <script src="../assets/plugins/formwizard/jquery.smartWizard.js"></script>
+        <script src="../assets/plugins/formwizard/fromwizard.js"></script>
+        <!-- INTERNAl Jquery.steps js -->
+        <script src="../assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+        <script src="../assets/plugins/parsleyjs/parsley.min.js"></script>
+        <!-- Perfect SCROLLBAR JS-->
+        <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+        <script src="../assets/plugins/p-scroll/pscroll.js"></script>
+        <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+        <!-- INTERNAL Accordion-Wizard-Form js-->
+        <script src="../assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
+        <script src="../assets/js/form-wizard.js"></script>
+        <!-- FILE UPLOADES JS -->
+        <script src="../assets/plugins/fileuploads/js/fileupload.js"></script>
+        <script src="../assets/plugins/fileuploads/js/file-upload.js"></script>
+        <!-- INTERNAL File-Uploads Js-->
+        <script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+        <script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+        <script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+        <script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+        <script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+        <!-- Color Theme js -->
+        <script src="../assets/js/themeColors.js"></script>
+        <!-- Sticky js -->
+        <script src="../assets/js/sticky.js"></script>
+        <!-- CUSTOM JS -->
+        <script src="../assets/js/custom.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -741,31 +785,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script> -->
-    <!-- JQUERY JS -->
-    <!-- <script src="../assets/js/jquery.min.js"></script> -->
-    <!-- BOOTSTRAP JS -->
-    <!-- <script src="../assets/plugins/bootstrap/js/popper.min.js"></script> -->
-    <!-- <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
-    <!-- COUNTERS JS-->
-    <script src="../assets/plugins/counters/counterup.min.js"></script>
-    <script src="../assets/plugins/counters/waypoints.min.js"></script>
-    <script src="../assets/plugins/counters/counters-1.js"></script>
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="../assets/plugins/owl-carousel/owl.carousel.js"></script>
-    <script src="../assets/plugins/company-slider/slider.js"></script>
-    <!-- Star Rating Js-->
-    <script src="../assets/plugins/rating/jquery-rate-picker.js"></script>
-    <script src="../assets/plugins/rating/rating-picker.js"></script>
-    <!-- Star Rating-1 Js-->
-    <script src="../assets/plugins/ratings-2/jquery.star-rating.js"></script>
-    <script src="../assets/plugins/ratings-2/star-rating.js"></script>
-    <!-- Sticky js -->
-    <script src="../assets/js/sticky.js"></script>
-    <!-- CUSTOM JS -->
-    <script src="../assets/js/landing.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-    <script>
+        <!-- JQUERY JS -->
+        <!-- <script src="../assets/js/jquery.min.js"></script> -->
+        <!-- BOOTSTRAP JS -->
+        <!-- <script src="../assets/plugins/bootstrap/js/popper.min.js"></script> -->
+        <!-- <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
+        <!-- COUNTERS JS-->
+        <script src="../assets/plugins/counters/counterup.min.js"></script>
+        <script src="../assets/plugins/counters/waypoints.min.js"></script>
+        <script src="../assets/plugins/counters/counters-1.js"></script>
+        <!-- Perfect SCROLLBAR JS-->
+        <script src="../assets/plugins/owl-carousel/owl.carousel.js"></script>
+        <script src="../assets/plugins/company-slider/slider.js"></script>
+        <!-- Star Rating Js-->
+        <script src="../assets/plugins/rating/jquery-rate-picker.js"></script>
+        <script src="../assets/plugins/rating/rating-picker.js"></script>
+        <!-- Star Rating-1 Js-->
+        <script src="../assets/plugins/ratings-2/jquery.star-rating.js"></script>
+        <script src="../assets/plugins/ratings-2/star-rating.js"></script>
+        <!-- Sticky js -->
+        <script src="../assets/js/sticky.js"></script>
+        <!-- CUSTOM JS -->
+        <script src="../assets/js/landing.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+        <script>
         // ****************************************************************************************************************
         const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])[a-zA-Z\W_]{8,12}$/;
         var tenant_con_span = document.getElementById("tenant_con_span");
@@ -895,8 +938,6 @@
         //     });
         // });
         // });
-    </script>
-
-</body>
-
+        </script>
+    </body>
 </html>
