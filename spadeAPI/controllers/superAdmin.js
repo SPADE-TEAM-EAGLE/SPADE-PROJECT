@@ -259,11 +259,11 @@ exports.userAdminGetById = async function (req, res) {
 
 // ######################################## user Admin Edit ########################################
 exports.updateAdminUser = async function (req, res) {
-  const { firstName, lastName, email, phone, role, address, city, state, zipcode, image, imageKey, id } = req.body;
+  const { firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, id } = req.body;
   const currentDate = new Date();
   try {
     const insertResult = await queryRunner(updateUserAdminQuery, [
-      firstName, lastName, email, phone, role, address, city, state, zipcode, image, imageKey, currentDate, id]);
+      firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, currentDate, id]);
     if (insertResult[0].affectedRows > 0) {
       return res.status(200).json({ message: "User Updated Successfully" });
     } else {
