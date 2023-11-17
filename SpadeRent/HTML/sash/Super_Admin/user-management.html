@@ -1112,8 +1112,8 @@ color: #000;
                                         </label>
                                         <select id="role_user_update" class="form-select form form-select" required>
                                             <!-- <option value="Owner">Owner</option> -->
-                                            <option value="Manager">Manager</option>
-                                            <option value="Staff">Staff</option>
+                                            <option value="2">Manager</option>
+                                            <option value="3">Staff</option>
                                             <!-- <option value="Admin">Admin</option> -->
                                         </select>
                                         <span class="text-danger d-none">
@@ -2020,8 +2020,8 @@ color: #000;
                                                                     <select id="role_user"
                                                                         class="form-select form form-select" required>
                                                                         <!-- <option value="Owner">Owner</option> -->
-                                                                        <option value="Manager">Manager</option>
-                                                                        <option value="Staff">Staff</option>
+                                                                        <option value="2">Manager</option>
+                                                                        <option value="3">Staff</option>
                                                                         <!-- <option value="Admin">Admin</option> -->
                                                                     </select>
                                                                     <span class="text-danger d-none">
@@ -3322,91 +3322,172 @@ color: #000;
                                         UsersRolesId = element.id
                                         // Appearance
                                         if (!element.appearance.View) {
-                                            $('#table_body #appearance .View').empty()
+                                            // $('#table_body #appearance .View').empty()
+                                            $('#table_body #appearance .View input[type="checkbox"]').prop('checked', false);
+                                        }
+                                        else {
+                                            $('#table_body #appearance .View input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.appearance.Add) {
-                                            $('#table_body #appearance .Add').empty()
+                                            $('#table_body #appearance .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #appearance .Add').empty()
+                                        } else {
+                                            $('#table_body #appearance .Add input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.appearance.Edit) {
-                                            $('#table_body #appearance .Edit').empty()
+                                            $('#table_body #appearance .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body #appearance .Edit').empty()
+                                        } else {
+                                            $('#table_body #appearance .Edit input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.appearance.Delete) {
-                                            $('#table_body #appearance .Delete').empty()
+                                            $('#table_body #appearance .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #appearance .Delete').empty()
+                                        } else {
+                                            $('#table_body #appearance .Delete input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.appearance.Restrict) {
-                                            $('#table_body #appearance .Restrict').empty()
+                                            $('#table_body #appearance .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #appearance .Restrict').empty()
+                                        } else {
+                                            $('#table_body #appearance .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                         // close Account
                                         if (!element.closedAccount.View) {
-                                            $('#table_body #closedAccount .View').empty()
+                                            $('#table_body #closedAccount .View input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #closedAccount .View').empty()
+                                        } else {
+                                            $('#table_body #closedAccount .View input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.closedAccount.Add) {
-                                            $('#table_body #closedAccount .Add').empty()
+                                            $('#table_body #closedAccount .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #closedAccount .Add').empty()
+                                        } else {
+                                            $('#table_body #closedAccount .Add input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.closedAccount.Edit) {
-                                            $('#table_body #closedAccount .Edit').empty()
+                                            $('#table_body #closedAccount .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body #closedAccount .Edit').empty()
+                                        } else {
+                                            $('#table_body #closedAccount .Edit input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.closedAccount.Delete) {
-                                            $('#table_body #closedAccount .Delete').empty()
+                                            $('#table_body #closedAccount .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #closedAccount .Delete').empty()
+                                        } else {
+                                            $('#table_body #closedAccount .Delete input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.closedAccount.Restrict) {
-                                            $('#table_body #closedAccount .Restrict').empty()
+                                            $('#table_body #closedAccount .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #closedAccount .Restrict').empty()
+                                        } else {
+                                            $('#table_body #closedAccount .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                         // customers
                                         if (!element.customers.View) {
-                                            $('#table_body #customers .View').empty()
+                                            $('#table_body #customers .View input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #customers .View').empty()
+                                        } else {
+                                            $('#table_body #customers .View input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.customers.Add) {
-                                            $('#table_body #customers .Add').empty()
+                                            $('#table_body #customers .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #customers .Add').empty()
+                                        } else {
+                                            $('#table_body #customers .Add input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.customers.Edit) {
-                                            $('#table_body #customers .Edit').empty()
+                                            // $('#table_body #customers .Edit').empty()
+                                        } else {
+                                            $('#table_body #customers .Edit input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.customers.Delete) {
-                                            $('#table_body #customers .Delete').empty()
+                                            $('#table_body #customers .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #customers .Delete').empty()
+                                        } else {
+                                            $('#table_body #customers .Delete input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.customers.Restrict) {
-                                            $('#table_body #customers .Restrict').empty()
+                                            $('#table_body #customers .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #customers .Restrict').empty()
+                                        } else {
+                                            $('#table_body #customers .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                         // overView
                                         if (!element.overView.View) {
-                                            $('#table_body #overView .View').empty()
+                                            $('#table_body #overView .View input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #overView .View').empty()
+                                        } else {
+                                            $('#table_body #overView .View input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.overView.Add) {
-                                            $('#table_body #overView .Add').empty()
+                                            $('#table_body #overView .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #overView .Add').empty()
+                                        } else {
+                                            $('#table_body #overView .Add input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.overView.Edit) {
-                                            $('#table_body #overView .Edit').empty()
+                                            $('#table_body #overView .Edit input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #overView .Edit').empty()
+                                        } else {
+                                            $('#table_body #overView .Edit input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.overView.Delete) {
-                                            $('#table_body #overView .Delete').empty()
+                                            $('#table_body #overView .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #overView .Delete').empty()
+                                        } else {
+                                            $('#table_body #overView .Delete input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.overView.Restrict) {
-                                            $('#table_body #overView .Restrict').empty()
+                                            $('#table_body #overView .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #overView .Restrict').empty()
+                                        } else {
+                                            $('#table_body #overView .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                         // profile
                                         if (!element.profile.View) {
-                                            $('#table_body #profile1 .View').empty()
+                                            $('#table_body #profile1 .View input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #profile1 .View').empty()
+                                        } else {
+                                            $('#table_body #profile1 .View input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.profile.Add) {
-                                            $('#table_body #profile1 .Add').empty()
+                                            $('#table_body #profile1 .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #profile1 .Add').empty()
+                                        } else {
+                                            $('#table_body #profile1 .Add input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.profile.Edit) {
-                                            $('#table_body #profile1 .Edit').empty()
+                                            $('#table_body #profile1 .Edit input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #profile1 .Edit').empty()
+                                        } else {
+                                            $('#table_body #profile1 .Edit input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.profile.Delete) {
-                                            $('#table_body #profile1 .Delete').empty()
+                                            $('#table_body #profile1 .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #profile1 .Delete').empty()
+                                        } else {
+                                            $('#table_body #profile1 .Delete input[type="checkbox"]').prop('checked', true);
                                         }
                                         if (!element.profile.Restrict) {
-                                            $('#table_body #profile1 .Restrict').empty()
+                                            $('#table_body #profile1 .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body #profile1 .Restrict').empty()
+                                        } else {
+                                            $('#table_body #profile1 .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                     }
+                               
+                               
                                 });
                             },
                             error: function (xhr, status, error) {
                                 console.log(error);
                             }
                         })
+
+
                     },
                     error: function (xhr, status, error) {
                         $("#myModal_warning").modal("show");
@@ -3493,7 +3574,7 @@ color: #000;
             <span>${element.phone ? element.phone : "N/A"}</span>
         </td>
         <td>
-            <p style="font-weight: 600;" class="mb-1">${element.roleId ? element.roleId : "N/A"}</p>
+            <p style="font-weight: 600;" class="mb-1">${element.roleId == 2 ? "Manager" : "Staff"}</p>
         </td>
         <td>
                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
@@ -3556,10 +3637,17 @@ color: #000;
             }
             getAllStates()
             $("#table_body").on("change", "input[type='checkbox']", function () {
+                $("#preloader").css("display", "flex")
                 console.log($(this).closest('td').attr("class"));
                 console.log($(this).closest('tr').attr("id"));
-            //     var UsersRoles;
-            // var UsersRolesId;
+                var row = $(this).closest('tr');
+                var checkedClasses = [];
+                row.find('input[type="checkbox"]').each(function () {
+                    if ($(this).prop('checked')) {
+                        checkedClasses.push($(this).closest('td').attr('class'));
+                    }
+                });
+                // alert(checkedClasses);
                 if ($(this).closest('tr').attr("id")) {
                     $.ajax({
                         url: "http://localhost:3000/api/spade/adminUserPermissionUpdate",
@@ -3567,7 +3655,7 @@ color: #000;
                         data: JSON.stringify({
                             role: UsersRolesId,
                             columnName: $(this).closest('tr').attr("id").replace('1', ''),
-                            permission: $(this).closest('td').attr("class")
+                            permission: checkedClasses
                         }),
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -3575,13 +3663,23 @@ color: #000;
                         contentType: "application/json",
                         success: function (data) {
                             $("#preloader").css("display", "none")
-                            console.log(data);
+                            if (data.message == "User Permission Updated Successfully") {
+                                $("#myModal_success p").text("User Permisson Updated succesfully")
+                                $("#myModal_success").modal("show");
+
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 1000);
+                            }
+                            // location.reload()
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
                             console.log(err);
                         }
                     })
+                } else {
+                    $("#preloader").css("display", "none")
                 }
             })
             function capitalizeFirstLetter(string) {
@@ -3811,7 +3909,7 @@ color: #000;
                 $("#lastName_user_view").text(userAdminDataNew.lName ? userAdminDataNew.lName : "N/A");
                 $("#email_user_view").text(userAdminDataNew.email ? userAdminDataNew.email : "N/A");
                 $("#phone_user_view").text(userAdminDataNew.phone ? userAdminDataNew.phone : "N/A");
-                $("#role_user_view").text(userAdminDataNew.roleId ? userAdminDataNew.roleId : "N/A");
+                $("#role_user_view").text(userAdminDataNew.roleId  == 2 ? "Manager" : "Staff");
                 // $(`#status_user_view`).text(userAdminData[userAdminShow].status ? userAdminShow[userAdminShow].status : "N/A");
 
                 $('#image_user_view').attr('src', userAdminDataNew.images ? userAdminDataNew.images : '../assets/images/users/16.jpg')

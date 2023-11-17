@@ -550,7 +550,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
     try {
       const updateResult = await queryRunner(`UPDATE adminUserPermission SET ${columnName} = "${permission}" WHERE id = ${role}`);
       if (updateResult[0].affectedRows > 0) {
-        return res.status(200).json({ message: " User Permission Updated Successfully" });
+        return res.status(200).json({ message: "User Permission Updated Successfully" });
       } else {
         return res.status(500).send("Failed to Update User Permission User");
       }
