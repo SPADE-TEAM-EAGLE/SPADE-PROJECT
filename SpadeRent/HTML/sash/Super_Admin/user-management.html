@@ -3479,7 +3479,7 @@ color: #000;
             }
             function getAllUserAdminData() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3687,7 +3687,7 @@ color: #000;
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: "http://localhost:3000/api/spade/updateAdminUser",
+                                url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3740,7 +3740,7 @@ color: #000;
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3783,7 +3783,7 @@ color: #000;
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3940,7 +3940,7 @@ color: #000;
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/createUserAdmin',
+                                url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({

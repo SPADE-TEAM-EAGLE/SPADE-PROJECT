@@ -90,6 +90,25 @@ exports.GetBankAccount = async (req, res) => {
             res.status(400).send("Error");
         }
 };
+
+exports.GetBankAccountAdmin = async (req, res) => {
+    const { userId,userType } = req.query;
+    console.log(req.query)
+    // const { userId } = req.body;
+        try {
+            const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
+            [userId,userType]
+          ); 
+            if (getResult[0].length > 0) {   
+                res.status(200).json({data: getResult[0] });
+            } else {
+                res.status(201).send("Bank Account data not found");
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(400).send("Error");
+        }
+};
   //  ############################# Create bank Account ############################################################
  
     //  ############################# Update bank Account Status ############################################################
