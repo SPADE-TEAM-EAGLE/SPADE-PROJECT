@@ -313,3 +313,6 @@ router.get("/protectedAdmin",verifySuperAdmin ,superAdmin.getAdmin);
 router.put("/updateAdminProfile", verifySuperAdmin, superAdmin.updateAdminProfile);
 router.get("/landlordReportAdmin", verifySuperAdmin, superAdmin.landlordReportAdmin);
 router.get("/getUser",verifySuperAdmin,superAdmin.getUserforAdmin);
+router.get("/adminUserPermissionRoles",verifySuperAdmin,superAdmin.adminUserPermissionRoles);
+router.put("/adminUserPermissionUpdate",verifySuperAdmin,superAdmin.adminUserPermissionUpdate);
+
