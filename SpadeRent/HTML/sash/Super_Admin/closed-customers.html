@@ -1267,6 +1267,9 @@
                 },
                 success: function (response) {
                     console.log(response);
+                    $("#tenant-name").empty();
+                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome </span>`+
+                                                toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                     $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                     $("#firstName").val(response.firstName);
                     $("#lastName").val(response.lastName);
@@ -1298,7 +1301,43 @@
                     // console.log('Error occurred while fetching state and city data.');
                 }
             })
-        
+            $.ajax({
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    type: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        function formatNumberWithSuffix(number) {
+    if (number >= 1e6) {
+        return (number / 1e6).toFixed(2) + "M";
+    } else if (number >= 1e3) {
+        return (number / 1e3).toFixed(2) + "K";
+    } else {
+        return number.toFixed(2);
+    }
+}
+
+$("#amount-payable").text("$" + (response?.data?.totalRevenue ? formatNumberWithSuffix(parseFloat(response.data.totalRevenue)) : '0.00'));
+$("#invoice-amount").text("$" + (response?.data?.totalRevenue ? formatNumberWithSuffix(parseFloat(response.data.totalRevenue)) : '0.00'));
+$("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix(parseFloat(response.data.annually)) : '0.00'));
+$("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = './login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                })
+                
             $.ajax({
                 url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
