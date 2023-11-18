@@ -301,6 +301,7 @@ router.get("/signInAdmin", superAdmin.signInAdmin);
 // router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.get("/allLandlord",superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
+// router.delete("/closedLandlord", superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 // router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
 // router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
@@ -320,3 +321,6 @@ router.get("/adminResetEmail",superAdmin.adminResetEmail);
 router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
 router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
+router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
+router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
+
