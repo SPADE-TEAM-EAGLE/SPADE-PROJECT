@@ -321,5 +321,5 @@ router.get("/adminResetEmail",superAdmin.adminResetEmail);
 router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
 router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
-router.put("/updateAdminNotification",superAdmin.updateAdminNotification);
+router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
 
