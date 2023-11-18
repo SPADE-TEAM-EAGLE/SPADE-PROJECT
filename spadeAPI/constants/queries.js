@@ -1141,3 +1141,7 @@ exports.insertInUserPermissionUsers =
   exports.updateAdmin = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
   exports.adminRevenueQuery = "select sum(case when p.monthlyAnnual = 'Monthly' then plantotalAmount else 0 end) as monthly, sum(case when p.monthlyAnnual = 'Annually' then plantotalAmount else 0 end) as annually, sum(case when p.monthlyAnnual in ('Annually', 'Monthly') then plantotalAmount else 0 end) as totalRevenue from plan as p join users as u on p.id = u.PlanID where p.monthlyAnnual in ('Monthly','Annually')";
   exports.adminPermissionQuery = "SELECT ap.userid as adminUserRole, ap.overView ,ap.customers, ap.closedAccount , ap.appearance, ap.profile FROM superAdmin as sa join adminUserPermission as ap on sa.roleId = ap.id where sa.id = ?";
+  exports.addResetTokenAdmin =
+  "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
+  exports.updatePasswordAdmin =
+  "UPDATE superAdmin SET password = ? , updated_at = ? where id = ? AND token = ?";

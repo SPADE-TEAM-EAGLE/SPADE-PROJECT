@@ -846,7 +846,6 @@ exports.createResetEmail = async (req, res) => {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
     ]);
-    // console.log(selectResult[0])
     if (selectResult[0].length > 0) {
       const userid = selectResult[0][0].id;
       const name =
@@ -901,7 +900,7 @@ exports.verifyResetEmailCode = async (req, res) => {
       }
     } else {
       res.status(404).json({
-        message: "Cannot Validate!!!",
+        message: "Cannot Validate!",
       });
     }
   } catch (error) {

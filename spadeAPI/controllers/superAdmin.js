@@ -14,11 +14,13 @@ const {
   updateAdmin,
   landlordReportAdminQuery,
   updatePlanId,
-  adminRevenueQuery
+  adminRevenueQuery,
+  addResetTokenAdmin,
+  updatePasswordAdmin
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
-const { sendMailLandlord } = require("../sendmail/sendmail.js");
+const { sendMailLandlord, sendMail } = require("../sendmail/sendmail.js");
 const { updateUser } = require("safecharge");
 const config = process.env;
 
@@ -573,3 +575,110 @@ exports.adminUserPermissionRoles = async function (req, res) {
       return res.status(400).json({ message: error.message });
     }
   };
+
+
+//  ############################# Reset Email ############################################################
+exports.adminResetEmail = async (req, res) => {
+  const { email } = req.body;
+  // console.log(email);
+  const mailSubject = "Spade Reset Email";
+  const random = Math.floor(100000 + Math.random() * 900000);
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "email"), [
+      email,
+    ]);
+    if (selectResult[0].length > 0) {
+      const userid = selectResult[0][0].id;
+      const name = selectResult[0][0].fName + " " + selectResult[0][0].lName;
+      sendMail(email, mailSubject, random, name);
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+      const updateResult = await queryRunner(addResetTokenAdmin, [
+        random,
+        formattedDate,
+        userid,
+      ]);
+      if (updateResult[0].affectedRows === 0) {
+        res.status(400).send("Error");
+
+      } else {
+        res.status(200).json({ message: "Sended", id: userid });
+      }
+    } else if (selectResult[0].length === 0) {
+      res.status(400).send("Email not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error");
+  }
+};
+//  ############################# Reset Email ############################################################
+
+//  ############################# Verify Reset Email Code ############################################################
+exports.adminVerifyResetEmailCode = async (req, res) => {
+  const { id, token } = req.body;
+
+  try {
+    const selectResult = await queryRunner(
+      selectQuery("superAdmin", "id", "token"),
+      [id, token]
+    );
+    if (selectResult[0].length > 0) {
+      const now = new Date(selectResult[0][0].updated_at);
+      const now2 = new Date();
+      const formattedDate = now2.toISOString().slice(0, 19).replace("T", " ");
+      const time = new Date(formattedDate) - now;
+      const time2 = time / 1000;
+      if (time2 >= 120) {
+        res.status(408).send("Time out");
+      } else {
+        res.status(200).json({
+          message: "Successful",
+          id: id,
+          token: token,
+        });
+      }
+    } else {
+      res.status(404).json({
+        message: "Cannot Validate!",
+      });
+    }
+  } catch (error) {
+    res.status(400).send("Error");
+  }
+};
+
+//  ############################# Verify Reset Email Code ############################################################
+
+//  ############################# Update Password ############################################################
+
+exports.updatePasswordAdmin = async (req, res) => {
+  const { id, password, confirmpassword, token } = req.body;
+
+  try {
+    if (password === confirmpassword) {
+      const hashPassword = await hashedPassword(password);
+      const currentDate = new Date();
+      const selectResult = await queryRunner(updatePasswordAdmin, [
+        hashPassword,
+        currentDate,
+        id,
+        token,
+      ]);
+      if (selectResult[0].affectedRows > 0) {
+        res.status(200).json({
+          message: "Successful password saved",
+        });
+      } else {
+        console.log("here");
+        res.status(500).send("Error");
+      }
+    } else {
+      res.status(201).send("Password Does not match ");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error" + error);
+  }
+};
+//  ############################# Update Password ############################################################
