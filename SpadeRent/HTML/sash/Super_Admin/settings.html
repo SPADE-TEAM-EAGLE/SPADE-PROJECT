@@ -1271,7 +1271,7 @@
                                 </li>
                             </a> -->
                                 <div class="top-tabs">
-                                    <li class="slide">
+                                    <li class="slide permissionView_overview permissionRestrict_overview">
                                         <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                             <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                             <span class="side-menu__label">Overview</span>
@@ -1283,13 +1283,13 @@
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                    <li class="slide card-demo1">
+                                    <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                             <i class="side-menu__icon fi fi-rs-users"></i>
                                             <span class="side-menu__label">Customers</span>
                                         </a>
                                     </li>
-                                    <li class="slide card-demo1">
+                                    <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                             <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                             <span class="side-menu__label">Closed Customers</span>
@@ -1395,11 +1395,11 @@
                                                 <div class="tabs-menu1">
                                                     <!-- Tabs -->
                                                     <ul class="nav panel-tabs">
-                                                        <li>
+                                                        <li class="permissionView_profile">
                                                             <a href="#tab5" class="active" data-bs-toggle="tab">Profile</a>
                                                         </li>
                                                         <!-- <li><a href="#tab6" data-bs-toggle="tab">Security Settings</a></li> -->
-                                                        <li>
+                                                        <li class="permissionView_appearance">
                                                             <a href="#tab7" data-bs-toggle="tab">Appearance</a>
                                                         </li>
                                                         <!-- <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li>
@@ -1417,7 +1417,7 @@
                                     <div class="panel panel-primary">
                                         <div class="panel-body tabs-menu-body">
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="tab5">
+                                                <div class="tab-pane active permissionView_profile" id="tab5">
                                                     <h2 class="h2-personal-inf">My Information</h2>
                                                     <p class="p-personal-inf">
                                                         Automate everything from listing units to
@@ -1652,7 +1652,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane" id="tab6">
+                                                <div class="tab-pane permissionView_appearance" id="tab6">
                                                     <h2 class="h2-personal-inf">Login & Password</h2>
                                                     <p class="p-personal-inf">
                                                         You can change your login email and password
@@ -2744,6 +2744,154 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    // overview
+                    if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
+
+} else {
+    $(".permissionView_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Add) {
+
+} else {
+    $(".permissionAdd_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Edit) {
+
+} else {
+    $(".permissionEdit_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Delete) {
+
+} else {
+    $(".permissionDelete_overview").each(function () {
+        $(this).remove()
+    })
+}
+//customer
+if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
+
+} else {
+    $(".permissionView_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Add) {
+
+} else {
+    $(".permissionAdd_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Edit) {
+
+} else {
+    $(".permissionEdit_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Delete) {
+
+} else {
+    $(".permissionDelete_customers").each(function () {
+        $(this).remove()
+    })
+}
+// closedAccount
+
+if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
+
+} else {
+    $(".permissionView_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Add) {
+
+} else {
+    $(".permissionAdd_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Edit) {
+
+} else {
+    $(".permissionEdit_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Delete) {
+
+} else {
+    $(".permissionDelete_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+// appearance
+
+if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
+
+} else {
+    $(".permissionView_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Add) {
+
+} else {
+    $(".permissionAdd_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Edit) {
+
+} else {
+    $(".permissionEdit_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Delete) {
+
+} else {
+    $(".permissionDelete_appearance").each(function () {
+        $(this).remove()
+    })
+}
+// profile
+
+if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
+
+} else {
+    $(".permissionView_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Add) {
+
+} else {
+    $(".permissionAdd_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Edit) {
+
+} else {
+    $(".permissionEdit_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Delete) {
+
+} else {
+    $(".permissionDelete_profile").each(function () {
+        $(this).remove()
+    })
+}
                     console.log(response);
                     $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                     $("#firstName").val(response.firstName);

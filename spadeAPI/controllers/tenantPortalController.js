@@ -36,7 +36,7 @@ const config = process.env;
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
           // console.log("1");
-        const {userId} = req.user; 
+        const {userId} = req.user;
         // const {userId,userName} = req.user;
         // console.log(userId,userName) 
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);

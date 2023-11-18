@@ -1683,7 +1683,7 @@ color: #000;
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide">
+                                <li class="slide permissionView_overview permissionRestrict_overview">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -1695,13 +1695,13 @@ color: #000;
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                <li class="slide card-demo1">
+                                <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                         <i class="side-menu__icon fi fi-rs-users"></i>
                                         <span class="side-menu__label">Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo1">
+                                <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
@@ -4353,7 +4353,154 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
-                        // alert(UsersRoles)
+                        // overview
+                        if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
+
+} else {
+    $(".permissionView_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Add) {
+
+} else {
+    $(".permissionAdd_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Edit) {
+
+} else {
+    $(".permissionEdit_overview").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].overView.Delete) {
+
+} else {
+    $(".permissionDelete_overview").each(function () {
+        $(this).remove()
+    })
+}
+//customer
+if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
+
+} else {
+    $(".permissionView_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Add) {
+
+} else {
+    $(".permissionAdd_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Edit) {
+
+} else {
+    $(".permissionEdit_customers").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].customers.Delete) {
+
+} else {
+    $(".permissionDelete_customers").each(function () {
+        $(this).remove()
+    })
+}
+// closedAccount
+
+if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
+
+} else {
+    $(".permissionView_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Add) {
+
+} else {
+    $(".permissionAdd_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Edit) {
+
+} else {
+    $(".permissionEdit_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].closedAccount.Delete) {
+
+} else {
+    $(".permissionDelete_closedAccount").each(function () {
+        $(this).remove()
+    })
+}
+// appearance
+
+if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
+
+} else {
+    $(".permissionView_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Add) {
+
+} else {
+    $(".permissionAdd_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Edit) {
+
+} else {
+    $(".permissionEdit_appearance").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].appearance.Delete) {
+
+} else {
+    $(".permissionDelete_appearance").each(function () {
+        $(this).remove()
+    })
+}
+// profile
+
+if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
+
+} else {
+    $(".permissionView_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Add) {
+
+} else {
+    $(".permissionAdd_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Edit) {
+
+} else {
+    $(".permissionEdit_profile").each(function () {
+        $(this).remove()
+    })
+}
+if (response.userPeremission[0].profile.Delete) {
+
+} else {
+    $(".permissionDelete_profile").each(function () {
+        $(this).remove()
+    })
+}
                         $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                         $("#firstName").val(response.firstName);
                         $("#lastName").val(response.lastName);
@@ -4364,6 +4511,10 @@ color: #000;
                         $("#state").val(response.state);
                         $("#zip").val(response.zipCode);
                         $("#businessName").val(response.zipCode);
+                        $("#tenant-name").empty();
+                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span>`+
+                                                toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                        
                         $("#profile").empty();
                         $("#profile").css("background-image", "url(" + response.image + ")");
                         if (response.image) {
@@ -4881,7 +5032,43 @@ color: #000;
                         // console.log('Error occurred while fetching state and city data.');
                     }
                 })
+                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    type: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        function formatNumberWithSuffix(number) {
+    if (number >= 1e6) {
+        return (number / 1e6).toFixed(2) + "M";
+    } else if (number >= 1e3) {
+        return (number / 1e3).toFixed(2) + "K";
+    } else {
+        return number.toFixed(2);
+    }
+}
 
+$("#amount-payable").text("$" + (response?.data?.totalRevenue ? formatNumberWithSuffix(parseFloat(response.data.totalRevenue)) : '0.00'));
+$("#invoice-amount").text("$" + (response?.data?.totalRevenue ? formatNumberWithSuffix(parseFloat(response.data.totalRevenue)) : '0.00'));
+$("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix(parseFloat(response.data.annually)) : '0.00'));
+$("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                            window.location = './login_module.html';
+                        }, 2000);
+                        console.log('Error occurred while fetching state and city data.');
+                        console.log(xhr);
+                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                    }
+                })
+                
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
@@ -4928,7 +5115,17 @@ color: #000;
                             userAdminData = response?.data;
                             console.log(userAdminData);
                             response?.data.forEach((element, index) => {
+                                var roleLabel;
 
+if (element.roleId == 2) {
+    roleLabel = "Manager";
+} else if (element.roleId == 3) {
+    roleLabel = "Staff";
+} else if (element.roleId == 1) {
+    roleLabel = "Admin";
+} else {
+    roleLabel = "N/A";
+}
                                 $("#table_body_user").append(`
     <tr data-id="${element.id}">
      <td>
@@ -4954,7 +5151,7 @@ color: #000;
             <span>${element.phone ? element.phone : "N/A"}</span>
         </td>
         <td>
-            <p style="font-weight: 600;" class="mb-1">${element.roleId == 2 ? "Manager" : "Staff"}</p>
+            <p style="font-weight: 600;" class="mb-1">${roleLabel}</p>
         </td>
         <td>
                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
@@ -5291,7 +5488,18 @@ color: #000;
                 $("#lastName_user_view").text(userAdminDataNew.lName ? userAdminDataNew.lName : "N/A");
                 $("#email_user_view").text(userAdminDataNew.email ? userAdminDataNew.email : "N/A");
                 $("#phone_user_view").text(userAdminDataNew.phone ? userAdminDataNew.phone : "N/A");
-                $("#role_user_view").text(userAdminDataNew.roleId  == 2 ? "Manager" : "Staff");
+                var roleLabel1;
+
+if (userAdminDataNew.roleId == 2) {
+    roleLabel1 = "Manager";
+} else if (userAdminDataNew.roleId == 3) {
+    roleLabel1 = "Staff";
+} else if (userAdminDataNew.roleId == 1) {
+    roleLabel1 = "Admin";
+} else {
+    roleLabel1 = "N/A";
+}
+                $("#role_user_view").text(roleLabel1);
                 // $(`#status_user_view`).text(userAdminData[userAdminShow].status ? userAdminShow[userAdminShow].status : "N/A");
 
                 $('#image_user_view').attr('src', userAdminDataNew.images ? userAdminDataNew.images : '../assets/images/users/16.jpg')

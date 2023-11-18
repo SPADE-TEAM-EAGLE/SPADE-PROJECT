@@ -77,7 +77,9 @@ const {
   addUserRoles,
   UpdatePropertyUnitCount,
   UnitCounts,
-  UpdateUserNuveiIdQuery
+  UpdateUserNuveiIdQuery,
+  InvoiceCategoriesQuery,
+  adminNotificationQuery
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -139,16 +141,30 @@ exports.createUser = async function (req, res) {
         selectResult[0][0].id,
         "System"
       ]);
-
       // add vendor Category
-      const category = ["Plumber","Electrician","carpenters"]
+      const category = ["Handyman","Plumber","Electrician","Lawn Maintenance"]
       for(let i=0; i< category.length; i++){
         await queryRunner(insertVendorCategory, [
           selectResult[0][0].id,
           category[i]
         ]);
       }
-      
+
+      // add Invoice Category
+      const invoiceCategory = ["Late Fees","Miscellaneous Fees","Security Deposit"]
+      for(let i=0; i< invoiceCategory.length; i++){
+        await queryRunner(InvoiceCategoriesQuery, [
+          selectResult[0][0].id,
+          invoiceCategory[i],
+          "0",
+          "0"
+        ]);
+      }
+      // add Admin Notification
+        await queryRunner(adminNotificationQuery, [
+          selectResult[0][0].id, firstName, lastName, planID,"Created",currentDate
+        ]);
+
       // await sendMail(email, mailSubject, password, name);
       await sendMailLandlord(email, mailSubject, name);
       try{
@@ -156,7 +172,11 @@ exports.createUser = async function (req, res) {
         await queryRunner(addUserRoles,['Manager', selectResult[0][0].id]);
         await queryRunner(addUserRoles,['Staff', selectResult[0][0].id]);
 
-        return res.status(200).json({ message: "User added successfully",id : selectResult[0][0].id });
+        return res.status(200).json({ 
+          message: "User added successfully",
+          id : selectResult[0][0].id 
+        });
+
       }catch (error){
         console.log(error)
         return res.status(500).send("Failed to add user");
@@ -846,7 +866,6 @@ exports.createResetEmail = async (req, res) => {
     const selectResult = await queryRunner(selectQuery("users", "Email"), [
       email,
     ]);
-    // console.log(selectResult[0])
     if (selectResult[0].length > 0) {
       const userid = selectResult[0][0].id;
       const name =
@@ -901,7 +920,7 @@ exports.verifyResetEmailCode = async (req, res) => {
       }
     } else {
       res.status(404).json({
-        message: "Cannot Validate!!!",
+        message: "Cannot Validate!",
       });
     }
   } catch (error) {
