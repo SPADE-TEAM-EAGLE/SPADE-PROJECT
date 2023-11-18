@@ -697,11 +697,11 @@ exports.updatePasswordAdmin = async (req, res) => {
 
 //  ############################# Update Password ############################################################
 exports.getAdminNotification = async function (req, res) {
-  // const {} = req.body;
+  const { id } = req.body;
   try {
-    const updateResult = await queryRunner(getAdminNotificationQuery);
-    if (updateResult[0].length > 0) {
-      return res.status(200).json({ message: " get Admin Revenue", data : updateResult[0][0] });
+    const getResult = await queryRunner(updateAdminNotificationQuery);
+    if (getResult[0].length > 0) {
+      return res.status(200).json({ message: " get Admin Notification", Notification : getResult[0][0] });
     } else {
       return res.status(500).send("No data found in Notification");
     }
