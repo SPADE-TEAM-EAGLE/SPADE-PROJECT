@@ -85,7 +85,7 @@ function GetNotification(){
                       <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                         item.fName
                       }</div> <span class="text-dark"> Plan > ${
-                        plans[item.planId]
+                        plans[item.planId]+' $'+item.plantotalAmount
                         
             }</span>
                       <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
@@ -119,7 +119,7 @@ function GetNotification(){
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
-                      plans[item.planId]
+                      plans[item.planId]+' $'+item.plantotalAmount
                       
           }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
@@ -151,7 +151,7 @@ function GetNotification(){
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
-                      plans[item.planId]
+                      plans[item.planId]+' $'+item.plantotalAmount
                       
           }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
@@ -190,13 +190,11 @@ $("#updateAllNotifyRead").on("click", function () {
 });
 
 function updateAllNotifyRead() {
-  getNotifyData()
+  GetNotification()
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
+    url: "http://localhost:3000/api/spade/updateAllAdminNotification",
     type: "PUT",
-    data: JSON.stringify({
-      notify: 1,
-    }),
+
     contentType: "application/json",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
