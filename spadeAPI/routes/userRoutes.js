@@ -317,3 +317,5 @@ router.get("/adminUserPermissionRoles",verifySuperAdmin,superAdmin.adminUserPerm
 router.put("/adminUserPermissionUpdate",verifySuperAdmin,superAdmin.adminUserPermissionUpdate);
 router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
 router.get("/adminResetEmail",superAdmin.adminResetEmail);
+router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
+router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);

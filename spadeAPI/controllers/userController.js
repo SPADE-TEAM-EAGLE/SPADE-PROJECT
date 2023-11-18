@@ -900,7 +900,7 @@ exports.verifyResetEmailCode = async (req, res) => {
       }
     } else {
       res.status(404).json({
-        message: "Cannot Validate!!!",
+        message: "Cannot Validate!",
       });
     }
   } catch (error) {

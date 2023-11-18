@@ -1143,3 +1143,5 @@ exports.insertInUserPermissionUsers =
   exports.adminPermissionQuery = "SELECT ap.userid as adminUserRole, ap.overView ,ap.customers, ap.closedAccount , ap.appearance, ap.profile FROM superAdmin as sa join adminUserPermission as ap on sa.roleId = ap.id where sa.id = ?";
   exports.addResetTokenAdmin =
   "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
+  exports.updatePasswordAdmin =
+  "UPDATE superAdmin SET password = ? , updated_at = ? where id = ? AND token = ?";
