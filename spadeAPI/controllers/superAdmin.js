@@ -20,7 +20,8 @@ const {
   addResetToken,
   adminNotificationQuery,
   getAdminNotificationQuery,
-  updateAdminNotificationQuery
+  updateAdminNotificationQuery,
+  updateAllAdminNotificationQuery,
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -757,3 +758,21 @@ exports.updateAdminNotification = async function (req, res) {
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }};
+
+
+
+
+  //  ############################# Update All Admin Notification ############################################################
+  exports.updateAllAdminNotification = async function (req, res) {
+    // const {} = req.body;
+    try {
+      const updateAllResult = await queryRunner(updateAllAdminNotificationQuery);
+      if (updateAllResult[0].affectedRows > 0) {
+        return res.status(200).json({ message: " update All Admin Notification"});
+      } else {
+        return res.status(500).send("Error in update All Admin Notification");
+      }
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }};
+  
