@@ -14,11 +14,12 @@ const {
   updateAdmin,
   landlordReportAdminQuery,
   updatePlanId,
-  adminRevenueQuery
+  adminRevenueQuery,
+  addResetTokenAdmin
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
-const { sendMailLandlord } = require("../sendmail/sendmail.js");
+const { sendMailLandlord, sendMail } = require("../sendmail/sendmail.js");
 const { updateUser } = require("safecharge");
 const config = process.env;
 
@@ -573,3 +574,40 @@ exports.adminUserPermissionRoles = async function (req, res) {
       return res.status(400).json({ message: error.message });
     }
   };
+
+
+//  ############################# Reset Email ############################################################
+exports.adminResetEmail = async (req, res) => {
+  const { email } = req.body;
+  // console.log(email);
+  const mailSubject = "Spade Reset Email";
+  const random = Math.floor(100000 + Math.random() * 900000);
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "email"), [
+      email,
+    ]);
+    if (selectResult[0].length > 0) {
+      const userid = selectResult[0][0].id;
+      const name = selectResult[0][0].fName + " " + selectResult[0][0].lName;
+      sendMail(email, mailSubject, random, name);
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+      const updateResult = await queryRunner(addResetTokenAdmin, [
+        random,
+        formattedDate,
+        userid,
+      ]);
+      if (updateResult[0].affectedRows === 0) {
+        res.status(400).send("Error");
+      } else {
+        res.status(200).json({ message: "Sended", id: userid });
+      }
+    } else if (selectResult[0].length === 0) {
+      res.status(400).send("Email not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error");
+  }
+};
+//  ############################# Reset Email ############################################################
