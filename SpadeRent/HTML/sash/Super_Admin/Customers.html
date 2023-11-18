@@ -711,18 +711,7 @@
                                                                     >
                                                                 </div>
                                                             </li>
-                                                            <li class="d-flex justify-content-between">
-                                                                <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Expired</a>
-                                                                <div class="form-check m-0">
-                                                                    <input
-                                                                        class="form-check-input mt-2"
-                                                                        type="radio"
-                                                                        name="exampleRadios"
-                                                                        id="expired"
-                                                                        value="option1"
-                                                                    >
-                                                                </div>
-                                                            </li>
+                                                            
                                                             <li class="d-flex justify-content-between">
                                                                 <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Ascending</a>
                                                                 <div class="form-check m-0">
@@ -762,14 +751,7 @@
                                                                     >
                                                                 </div>
                                                             </li>
-                                                            <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
+                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -922,8 +904,8 @@
                                                             <th></th>
                                                             <th>customer id</th>
                                                             <th class="d-none">Landlord ID</th>
-                                                            <th>First Name</th>
-                                                            <th>Last Name</th>
+                                                            <th>Name</th>
+                                                            <th>Contact</th>    
                                                             <th>subscription</th>
                                                             <th>amount</th>
                                                             <th>Purchase Date</th>
@@ -933,65 +915,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="table_body">
-                                                        <tr>
-                                                            <td></td>
-                                                            <td style="font-weight: 600;">US-272323</td>
-                                                            <td style="font-weight: 600;">
-                                                                <b>Jonathan</b>
-                                                            </td>
-                                                            <td style="font-weight: 600;">
-                                                                <b>J. Dicken</b>
-                                                            </td>
-                                                            <td class="propertyType">
-                                                                <a class="like" href="javascript:;">
-                                                                    <span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" style="background-color: #C8F3F7;color: #0BAAB8;">
-                                                                        <i class="fi fi-rs-dot-circle me-1"></i>
-                                                                        <b>Pro Plan Purchased</b>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                            <td class="propertyAddress">
-                                                                <p style="font-weight: 600;" class="mb-1">
-                                                                    <b>$69.99/ Per Month</b>
-                                                                </p>
-                                                                <span>Purchase Date: Feb/02/2022</span>
-                                                            </td>
-                                                            <td style="font-weight: 600;">April/02/2023 3:00PM</td>
-                                                            <td style="font-weight: 600;">May/02/2023 3:00PM</td>
-                                                            <!-- <td class="propertyAddress"><p style="font-weight: 600; color: #FB233B;" class="mb-1"><b><i class="fi fi-rs-clock-three"></i> Expired</b></p><span style="color: #1467B0;">Renew Now</span></td> -->
-                                                            <td>
-                                                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-                                                                <ul class="dropdown-menu dropdown-menu-top">
-                                                                    <li>
-                                                                        <a class="dropdown-item text-dark view-property" href="./view-property.html?property=${encodedPropertyId}" style="display: flex; align-items: start;"> Upgrade Annualy/Monthly</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Sent Reminder</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a
-                                                                            class="edit-option dropdown-item text-dark"
-                                                                            data-bs-effect="effect-scale"
-                                                                            data-bs-toggle="modal"
-                                                                            href="#addModal"
-                                                                            style="display: flex; align-items: start;"
-                                                                        > Close Account</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Downgrade to Monthly (Old Plan)</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Monthly (New Plan)</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Yearly (New Plan)</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: start;">Delete</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -1533,8 +1457,8 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 var row = $("<tr>");
 
                     row.append("<td></td>");
-                row.append("<td class='ladlordId' style='font-weight: 600;'>" + item.landlordId + "</td>");
-                row.append("<td style='font-weight: 600;'><b>" + item.FirstName + " " + item.LastName + "</b></td>");
+                row.append("<td class='landlordId' style='font-weight: 600;'>" + item.landlordId + "</td>");
+                row.append("<td class='landlordName' style='font-weight: 600;'><b>" + item.FirstName + " " + item.LastName + "</b></td>");
                 row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'>" + item.Email + "</p><span>" + item.Phone + "</span></td>");
                 var background;
 var color;
@@ -1553,13 +1477,14 @@ if (item.planName == "Pro") {
 }
 
 if (item.planName == "Trial") {
-    background = "#32CD32";
-    color = "#228B22";
+    background = "#32cd32ba";
+    color = "#0f7a0f";
+
 }
 
 row.append(`<td class='propertyType'><a class='like' href='javascript:;'><span class='badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3' style="background-color: ${background};color: ${color};""><i class='fi fi-rs-dot-circle me-1'></i><b>${item.planName} Plan Purchased</b></span></a></td>`);
 
-                row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'><b>$" + item.planDiscountedAmount + " " + item.duration + "</b></p><span>Purchase Date: " + (item.subscriptionCreated_at?convertDateFormat(item.subscriptionCreated_at):"N/A") + "</span></td>");
+                row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'><b>$" + item.planDiscountedAmount + " " + item.duration + "</b></p><span class='purchase-date'>Purchase Date: " + (item.subscriptionCreated_at?convertDateFormat(item.subscriptionCreated_at):"N/A") + "</span></td>");
                 
                 row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + "Active" + "</b></p></td>");
                 let nextBilling;
@@ -1582,7 +1507,7 @@ if (item.duration === "Per Month") {
 }
 
 
-                row.append("<td class='propertyAddress text-success'><p style='font-weight: 600;' class='mb-1'><b> " + (nextBilling) + "</b></p></td>");
+                row.append("<td class='text-success'><p style='font-weight: 600;' class='mb-1'><b> " + (nextBilling) + "</b></p></td>");
 
                 var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
 
@@ -1611,7 +1536,7 @@ row.append(tableData);
             getData();
             
             $(document).on("click",".close-landlord",function(){
-                landlordId=$(this).closest("tr").find(".ladlordId").text();
+                landlordId=$(this).closest("tr").find(".landlordId").text();
                 console.log(landlordId)
                 $("#delete-user-admin").modal("show");
 
@@ -1718,6 +1643,59 @@ $(document).change(function () {
         }
     })
         })
+        function filterTable(selectedFilter) {
+
+var tableBody = $('#table_body');
+var rows = tableBody.find('tr');
+
+if (selectedFilter === 'alphabets') {
+    rows.sort(function (a, b) {
+        var textA = $(a).find('.landlordName').text().toLowerCase();
+        var textB = $(b).find('.landlordName').text().toLowerCase();
+        return textA.localeCompare(textB);
+    });
+} else if (selectedFilter === 'created-at') {
+
+    rows.sort(function (a, b) {
+        var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        console.log(idA)
+        var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        return idB - idA;
+    });
+}
+else if (selectedFilter === 'ascending') {
+    rows.sort(function (a, b) {
+        var idA = parseInt($(a).find('.landlordId').text());
+        var idB = parseInt($(b).find('.landlordId').text());
+        return idA - idB;
+    });
+}
+else if (selectedFilter === 'descending') {
+    rows.sort(function (a, b) {
+        var idA = parseInt($(a).find('.landlordId').text());
+        var idB = parseInt($(b).find('.landlordId').text());
+        return idB - idA;
+    });
+}
+
+tableBody.empty().append(rows);
+}
+
+// Filter functionality
+$('#ascending').on('click', function () {
+filterTable("ascending")
+});
+$('#descending').on('click', function () {
+filterTable("descending")
+});
+$('#alphabets').on('click', function () {
+// console.log(1)
+filterTable("alphabets")
+});
+$('#created-at').on('click', function () {
+// console.log(1)
+filterTable("created-at")
+});
 </script>
 <script>
         function showOtherInput() {
