@@ -33,8 +33,144 @@ function GetNotification(){
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
+      const plans={
+        "5":"Monthly-Basic",
+        "6":"Monthly-Pro",
+        "7":"Monthly-Premium",
+        "2":"Yearly-Basic",
+        "3":"Yearly-Pro",
+        "4":"Yearly-Premium",
+      }
       console.log(response);
-      
+      const notification = response.Notification
+        // {
+        //     "id": 3,
+        //     "landlordId": "386",
+        //     "fName": "aaaaa",
+        //     "lName": "ssssssssss",
+        //     "planId": "3",
+        //     "created_deleted": "Deleted",
+        //     "c_dTime": "2023-11-18T10:36:00.000Z",
+        //     "readNotification": "1"
+        // },
+      // filter out based on data notification.notify = 0 then unread else read
+      const unread = notification.filter((item) => item.readNotification == 0);
+      const read = notification.filter((item) => item.readNotification == 1);
+      console.log(unread, "unread");
+      console.log(read, "read");
+      console.log(notification, "all");
+      // all
+      $(".all_span").text(`(${notification.length})`);
+      $(".inbox_span").text(`(${read.length})`);
+      $(".Unread_span").text(`(${unread.length})`);
+      $("#count_unread").text(unread.length > 0 ? unread.length : '0');
+      $(".archive_span").text(`(${notification.length})`);
+      $("#notification-container").empty();
+      notification?.forEach((item) => {
+        
+          const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
+  
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+              item.id
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.fName
+                      }</div> <span class="text-dark"> Plan > ${
+                        plans[item.planId]
+                        
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.c_dTime
+          )}</span>
+            </div></div>`
+          );
+        
+      });
+      $("#inbox-notification-container").empty();
+      read?.forEach((item) => {
+        // read-notification-container
+        const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
+  
+        $("#inbox-notification-container").append(
+          `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+            item.id
+          }">
+            <div class="d-flex align-items-center">
+            <div class="me-2">
+            <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+             }')!important; ">
+            </div>
+            <div class="">
+                <a href="javascript:void(0);">
+                    <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                      item.fName
+                    }</div> <span class="text-dark"> Plan > ${
+                      plans[item.planId]
+                      
+          }</span>
+                    <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
+                </a>
+            </div>
+        </div><div class="">
+        <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+          item.c_dTime
+        )}</span>
+          </div></div>`
+        );
+      });
+      $("#unread-notification-container").empty();
+      unread?.forEach((item) => {
+        const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
+  
+        $("#unread-notification-container").append(
+          `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+            item.id
+          }">
+            <div class="d-flex align-items-center">
+            <div class="me-2">
+            <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+             }')!important; ">
+            </div>
+            <div class="">
+                <a href="javascript:void(0);">
+                    <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                      item.fName
+                    }</div> <span class="text-dark"> Plan > ${
+                      plans[item.planId]
+                      
+          }</span>
+                    <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
+                </a>
+            </div>
+        </div><div class="">
+        <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+          item.c_dTime
+        )}</span>
+          </div></div>`
+        );
+      });
+
+      $(".notification-item").on("click", function () {
+        const itemId = $(this).data("id");
+        const type=$(this).find(".created-deleted").text().trim().toLowerCase()=="created"?"Customers":"closed-customers";
+        console.log(type)
+        updateDataNotify(itemId, type);
+      });
     },
     error: function (xhr, status, error) {
       console.log("Error occurred while fetching state and city data.");
@@ -52,24 +188,7 @@ $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
   GetNotification();
 });
-function getNotifyData(){
-  $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/notify",
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("authtoken"),
-    },
-    success: function (response) {
 
-    },
-    error: function (xhr, status, error) {
-      console.log("Error occurred while fetching state and city data.");
-      console.log(xhr);
-      console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
-    },
-  });
-}
 function updateAllNotifyRead() {
   getNotifyData()
   $.ajax({
@@ -92,14 +211,13 @@ function updateAllNotifyRead() {
 }
 
 function updateDataNotify(notificationId, type) {
+  console.log(notificationId, type);
   // $('#preloader').css('display','flex')
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
+    url: "http://localhost:3000/api/spade/updateAdminNotification",
     type: "PUT",
     data: JSON.stringify({
-      notify: 1,
       id: notificationId,
-      type: type,
     }),
     contentType: "application/json",
     headers: {
@@ -107,15 +225,10 @@ function updateDataNotify(notificationId, type) {
     },
     success: function (response) {
       // alert(type)
-      if(type == "property"){
-        window.location.href="./properties-all.html";
-      }else if(type == "task"){
-        window.location.href="./create-tasks.html";
-      }else if(type == "invoice"){
-        window.location.href="./create-invoicing.html";
-      }else if(type == "tenant"){
-        window.location.href="./add-tenant.html";
-        
+      if(type == "Customers"){
+        window.location.href="./Customers.html";
+      }else{
+        window.location.href="./closed-customers.html";
       }
       // $('#preloader').css('display','none')
       // GetNotification();
