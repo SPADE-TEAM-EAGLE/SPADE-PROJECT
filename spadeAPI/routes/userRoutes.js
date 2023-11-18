@@ -319,3 +319,4 @@ router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
 router.get("/adminResetEmail",superAdmin.adminResetEmail);
 router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
+router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
