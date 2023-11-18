@@ -72,7 +72,7 @@ function GetNotification(){
   
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
-              item.id
+              item.notificationId
             }">
               <div class="d-flex align-items-center">
               <div class="me-2">
@@ -85,9 +85,13 @@ function GetNotification(){
                       <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                         item.fName
                       }</div> <span class="text-dark"> Plan > ${
-                        plans[item.planId]+' $'+item.plantotalAmount
+                        plans[item.planId]
                         
-            }</span>
+            }</span><br/>  <span class="text-dark"> Price > ${
+              '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+
+              
+  }</span>
                       <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                   </a>
               </div>
@@ -106,7 +110,7 @@ function GetNotification(){
   
         $("#inbox-notification-container").append(
           `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
-            item.id
+            item.notificationId
           }">
             <div class="d-flex align-items-center">
             <div class="me-2">
@@ -119,9 +123,13 @@ function GetNotification(){
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
-                      plans[item.planId]+' $'+item.plantotalAmount
+                      plans[item.planId]
                       
-          }</span>
+          }</span><br/>  <span class="text-dark"> Price > ${
+            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+
+            
+}</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                 </a>
             </div>
@@ -138,7 +146,7 @@ function GetNotification(){
   
         $("#unread-notification-container").append(
           `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
-            item.id
+            item.notificationId
           }">
             <div class="d-flex align-items-center">
             <div class="me-2">
@@ -151,9 +159,13 @@ function GetNotification(){
                     <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
-                      plans[item.planId]+' $'+item.plantotalAmount
+                      plans[item.planId]
                       
-          }</span>
+          }</span><br/>  <span class="text-dark"> Price > ${
+            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+
+            
+}</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                 </a>
             </div>
@@ -223,11 +235,11 @@ function updateDataNotify(notificationId, type) {
     },
     success: function (response) {
       // alert(type)
-      if(type == "Customers"){
-        window.location.href="./Customers.html";
-      }else{
-        window.location.href="./closed-customers.html";
-      }
+      // if(type == "Customers"){
+      //   window.location.href="./Customers.html";
+      // }else{
+      //   window.location.href="./closed-customers.html";
+      // }
       // $('#preloader').css('display','none')
       // GetNotification();
       console.log(response);
