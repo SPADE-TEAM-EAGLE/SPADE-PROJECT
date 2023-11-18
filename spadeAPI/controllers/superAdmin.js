@@ -16,7 +16,9 @@ const {
   updatePlanId,
   adminRevenueQuery,
   addResetTokenAdmin,
-  updatePasswordAdmin
+  updatePasswordAdmin,
+  adminNotificationQuery,
+  getAdminNotificationQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -99,6 +101,9 @@ exports.deleteLandlord = async (req, res) => {
       const deleteUserResult = await queryRunner(deleteQuery("users", "id"), [landlordId]);
       if (deleteUserResult[0].affectedRows > 0) {
         const insertLandlordResult = await queryRunner(insertDeletedUserQuery, [userName, userId, fName, lName, email, phone, planId, reason, deleted_at, landlordId, landlordCreated_at]);
+              // add Admin Notification
+              await queryRunner(adminNotificationQuery, [landlordId, fName, lName, planId,"Deleted",deleted_at]);
+      
         const deleteUserBankAccountResult = await queryRunner(deleteQuery("bankAccount", "userId"), [landlordId]);
         const deleteUserChatSResult = await queryRunner(deleteQuery("chats", "senderId"), [landlordId]);
         const deleteUserChatRResult = await queryRunner(deleteQuery("chats", "receiverID"), [landlordId]);
@@ -114,6 +119,7 @@ exports.deleteLandlord = async (req, res) => {
         const deleteUsertenantsResult = await queryRunner(deleteQuery("tenants", "landlordID"), [landlordId]);
         const deleteUserUserPUsersResult = await queryRunner(deleteQuery("userPUsers", "llnalordId"), [landlordId]);
         const deleteUserVendorResult = await queryRunner(deleteQuery("vendor", "LandlordID"), [landlordId]);
+
         res.status(200).json({ message: "Landlord All Information Is Deleted" })
 
       }
@@ -682,3 +688,24 @@ exports.updatePasswordAdmin = async (req, res) => {
   }
 };
 //  ############################# Update Password ############################################################
+
+
+
+
+
+
+
+//  ############################# Update Password ############################################################
+exports.getAdminNotification = async function (req, res) {
+  // const {} = req.body;
+  try {
+    const updateResult = await queryRunner(getAdminNotificationQuery);
+    if (updateResult[0].length > 0) {
+      return res.status(200).json({ message: " get Admin Revenue", data : updateResult[0][0] });
+    } else {
+      return res.status(500).send("No data found in Notification");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};

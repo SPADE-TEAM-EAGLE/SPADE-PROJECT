@@ -1145,3 +1145,8 @@ exports.insertInUserPermissionUsers =
   "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
   exports.updatePasswordAdmin =
   "UPDATE superAdmin SET password = ? , updated_at = ? where id = ? AND token = ?";
+  exports.InvoiceCategoriesQuery =
+  "INSERT INTO InvoiceCategories (landLordId, categorieName ,setTaxes ,taxable) VALUES (?,?,?,?)";
+  exports.adminNotificationQuery = "INSERT INTO adminNotification (landlordId,fName,lName,planId,created_deleted,c_dTime) VALUES (?,?,?,?,?,?)";
+  exports.getAdminNotificationQuery = "SELECT * FROM spade_Rent.adminNotification order by id desc";
+  
