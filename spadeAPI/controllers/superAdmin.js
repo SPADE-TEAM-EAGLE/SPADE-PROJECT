@@ -18,7 +18,8 @@ const {
   addResetTokenAdmin,
   updatePasswordAdmin,
   adminNotificationQuery,
-  getAdminNotificationQuery
+  getAdminNotificationQuery,
+  updateAdminNotificationQuery
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -695,15 +696,32 @@ exports.updatePasswordAdmin = async (req, res) => {
 
 
 
-//  ############################# Update Password ############################################################
+//  ############################# get Admin Notification ############################################################
 exports.getAdminNotification = async function (req, res) {
   const { id } = req.body;
   try {
-    const getResult = await queryRunner(updateAdminNotificationQuery);
+    const getResult = await queryRunner(getAdminNotificationQuery);
     if (getResult[0].length > 0) {
       return res.status(200).json({ message: " get Admin Notification", Notification : getResult[0][0] });
     } else {
       return res.status(500).send("No data found in Notification");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+
+
+//  ############################# Update Admin Notification ############################################################
+exports.updateAdminNotification = async function (req, res) {
+  const { id } = req.body;
+  try {
+    const getResult = await queryRunner(updateAdminNotificationQuery,["1",id]);
+    if (getResult[0].affectedRows > 0) {
+      return res.status(200).json({ message: " update Admin Notification"});
+    } else {
+      return res.status(500).send("Error in update Admin Notification");
     }
   } catch (error) {
     return res.status(400).json({ message: error.message });

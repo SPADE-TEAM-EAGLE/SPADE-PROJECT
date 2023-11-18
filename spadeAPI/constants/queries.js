@@ -1149,4 +1149,4 @@ exports.insertInUserPermissionUsers =
   "INSERT INTO InvoiceCategories (landLordId, categorieName ,setTaxes ,taxable) VALUES (?,?,?,?)";
   exports.adminNotificationQuery = "INSERT INTO adminNotification (landlordId,fName,lName,planId,created_deleted,c_dTime) VALUES (?,?,?,?,?,?)";
   exports.getAdminNotificationQuery = "SELECT * FROM spade_Rent.adminNotification order by id desc";
-  
+  exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
