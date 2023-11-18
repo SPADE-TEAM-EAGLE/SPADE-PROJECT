@@ -1149,6 +1149,6 @@ exports.insertInUserPermissionUsers =
   exports.InvoiceCategoriesQuery =
   "INSERT INTO InvoiceCategories (landLordId, categorieName ,setTaxes ,taxable) VALUES (?,?,?,?)";
   exports.adminNotificationQuery = "INSERT INTO adminNotification (landlordId,fName,lName,planId,created_deleted,c_dTime) VALUES (?,?,?,?,?,?)";
-  exports.getAdminNotificationQuery = "SELECT * FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
+  exports.getAdminNotificationQuery = "SELECT *,AN.id as notificationId FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
   exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
   exports.updateAllAdminNotificationQuery = `UPDATE adminNotification SET readNotification = "1" WHERE created_deleted IN ("Deleted", "Created")`;
