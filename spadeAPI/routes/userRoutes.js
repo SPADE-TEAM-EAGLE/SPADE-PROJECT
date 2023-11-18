@@ -320,6 +320,7 @@ router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
 router.get("/adminResetEmail",superAdmin.adminResetEmail);
 router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
+router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
 router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
 router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
 

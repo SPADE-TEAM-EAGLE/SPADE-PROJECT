@@ -17,6 +17,7 @@ const {
   adminRevenueQuery,
   addResetTokenAdmin,
   updatePasswordAdmin,
+  addResetToken,
   adminNotificationQuery,
   getAdminNotificationQuery,
   updateAdminNotificationQuery
@@ -586,7 +587,8 @@ exports.adminUserPermissionRoles = async function (req, res) {
 
 //  ############################# Reset Email ############################################################
 exports.adminResetEmail = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.query;
+
   // console.log(email);
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -623,8 +625,8 @@ exports.adminResetEmail = async (req, res) => {
 
 //  ############################# Verify Reset Email Code ############################################################
 exports.adminVerifyResetEmailCode = async (req, res) => {
-  const { id, token } = req.body;
-
+  const { id, token } = req.query;
+console.log(req.query)
   try {
     const selectResult = await queryRunner(
       selectQuery("superAdmin", "id", "token"),
@@ -689,8 +691,37 @@ exports.updatePasswordAdmin = async (req, res) => {
   }
 };
 //  ############################# Update Password ############################################################
+exports.resendCodeAdmin = async (req, res) => {
+  const { id } = req.body;
+  console.log(req.body);
+  const mailSubject = "Spade Reset Email";
+  const random = Math.floor(100000 + Math.random() * 900000);
+  try {
+    const selectResult = await queryRunner(selectQuery("superAdmin", "id"), [id]);
+    if (selectResult[0].length > 0) {
+      const userid = selectResult[0][0].id;
+      const name =
+        selectResult[0][0].fName + " " + selectResult[0][0].lName;
+      // console.log(selectResult[0][0])
+      sendMail(selectResult[0][0].email, mailSubject, random, name);
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+      const updateResult = await queryRunner(addResetTokenAdmin, [
+        random,
+        formattedDate,
+        userid,
+      ]);
+      if (updateResult[0].affectedRows === 0) {
+        res.status(400).send("Error");
+      } else {
+        res.status(200).json({ message: "Sended" });
+      }
+    }
+  } catch (error) {
+    res.status(400).send("Error");
+    console.log(error);
 
-
+  }}
 
 
 
@@ -725,5 +756,4 @@ exports.updateAdminNotification = async function (req, res) {
     }
   } catch (error) {
     return res.status(400).json({ message: error.message });
-  }
-};
+  }};
