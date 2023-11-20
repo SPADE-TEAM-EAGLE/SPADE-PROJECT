@@ -80,6 +80,50 @@
             </div>
         </div>
         <!-- /GLOBAL-LOADER -->
+        <!-- Delete User Permissions popup start  -->
+    <div class="modal fade" id="delete-user-admin">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg>
+                            </span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">
+                                This will delete your User. Are
+                                you sure?
+                            </p>
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                        id="confirmDelete-user">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete User Permissions popup End  -->
         <div
             class="modal fade"
             id="myModal_warning"
@@ -917,6 +961,7 @@
                                                             <th>Purchase Date</th>
                                                             <th>date of expiry</th>
                                                             <th>reason</th>
+                                                            <th class="permissionEdit_closeLandlord">action</th>
                                                            
                                                         </tr>
                                                     </thead>
@@ -1572,7 +1617,12 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                                                         <td style="font-weight: 600;">${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</td>
                                                         <td style="font-weight: 600;">${element.deleted_at ? (element.deleted_at.split('T')[0].split('-')[1] + "/" + element.deleted_at.split('T')[0].split('-')[2] + "/" + element.deleted_at.split('T')[0].split('-')[0]) : "N/A"}</td>
                                                         <td style="font-weight: 600;"><p>${element.reason ? element.reason : "N/A"}</p></td>
-                                                        <!-- <td class="propertyAddress"><p style="font-weight: 600; color: #FB233B;" class="mb-1"><b><i class="fi fi-rs-clock-three"></i> Expired</b></p><span style="color: #1467B0;">Renew Now</span></td> -->
+                                                        <td class="permissionEdit_closeLandlord">
+                                <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
+                                <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
+                                    <li><a class="dropdown-item text-danger delete-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
+                                </ul>
+                            </td>
                                                         
                                                     </tr>
 `)
@@ -1591,6 +1641,43 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     },
                 });
             }
+            // $(document).on("click", ".delete-option-userAdmin", function () {
+            //     var userAdminId = $(this).closest("tr").attr("data-id");
+            //     $('#confirmDelete-user').attr('data-id', userAdminId)
+            //     $("#delete-user-admin").modal("show")
+            // })
+            // $(document).on("click", "#confirmDelete-user", function () {
+            //     $("#preloader").css("display", "flex")
+            //     var deleteUserId = $(this).attr('data-id');
+            //     $.ajax({
+            //         url: "http://localhost:3000/api/spade/deleteClossedLandlord",
+            //         type: "DELETE",
+            //         data: JSON.stringify({ id: deleteUserId }),
+            //         contentType: "application/json",
+            //         headers: {
+            //             Authorization: "Bearer " + localStorage.getItem("authtoken"),
+            //         },
+            //         success: function (response) {
+            //             console.log(response);
+            //             if (response.message == "Admin User Deleted Successsful") {
+            //                 $("#delete-user-admin").modal("hide")
+            //                 $("#myModal_success p").text("User deleted succesfully")
+            //                 $("#myModal_success").modal("show")
+            //                 setTimeout(function () {
+            //                     $("#myModal_success").modal("hide");
+            //                 }, 2000);
+
+            //                 getAllUserAdminData()
+            //             }
+            //             $("#preloader").css("display", "none")
+
+            //         }, error: function (xhr, status, error) {
+            //             $("#preloader").css("display", "none")
+            //             console.log(error)
+            //         }
+            //     })
+
+            // })
             getAllClosedLandlord();
             $(document).on("click", ".delete-option-userAdmin", function () {
                 var userAdminShow;
@@ -1611,11 +1698,10 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/closedLandlord",
+                    url: "http://localhost:3000/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
-                        landlordId: $('#deleteLandlordId').val(),
-                        reason: ($('#reason').val() == "Other"? $('#reasonOther').val() :  $('#reason').val() )
+                        id: deleteUserId
                     }),
                     contentType: "application/json",
                     headers: {
@@ -1630,20 +1716,11 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                             setTimeout(function () {
                                 $("#myModal_success").modal("hide");
                             }, 2000);
-                        // if (response.message == "Admin User Deleted Successsful") {
-                        //     $("#delete-user-admin").modal("hide")
-                        //     $("#myModal_success p").text("User deleted succesfully")
-                        //     $("#myModal_success").modal("show")
-                        //     setTimeout(function () {
-                        //         $("#myModal_success").modal("hide");
-                        //     }, 2000);
-                        // }
                         getAllClosedLandlord()
                         $("#preloader").css("display", "none")
 
                     }, error: function (xhr, status, error) {
                         $("#delete-user-admin").modal("hide")
-
                         $("#preloader").css("display", "none")
                         console.log(error)
                     }
