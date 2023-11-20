@@ -1142,13 +1142,13 @@ exports.insertInUserPermissionUsers =
   exports.landlordReportAdminQuery = "SELECT u.FirstName,u.id, u.LastName, u.Email, u.Phone, pl.planName, COUNT(DISTINCT p.id) as totalProperty, COUNT(DISTINCT t.id) as totalTenants, COUNT(DISTINCT tk.id) as totalTasks FROM users as u LEFT JOIN plan as pl ON u.PlanID = pl.id LEFT JOIN property as p ON u.id = p.landlordID LEFT JOIN tenants as t ON u.id = t.landlordID LEFT JOIN task as tk ON u.id = tk.landlordID GROUP BY u.FirstName, u.LastName,u.id, u.Email, u.Phone, pl.planName"; 
   exports.updateAdmin = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
   exports.adminRevenueQuery = "select sum(case when p.monthlyAnnual = 'Monthly' then plantotalAmount else 0 end) as monthly, sum(case when p.monthlyAnnual = 'Annually' then plantotalAmount else 0 end) as annually, sum(case when p.monthlyAnnual in ('Annually', 'Monthly') then plantotalAmount else 0 end) as totalRevenue from plan as p join users as u on p.id = u.PlanID where p.monthlyAnnual in ('Monthly','Annually')";
-  exports.adminPermissionQuery = "SELECT ap.userid as adminUserRole, ap.overView ,ap.customers, ap.closedAccount , ap.appearance, ap.profile FROM superAdmin as sa join adminUserPermission as ap on sa.roleId = ap.id where sa.id = ?";
+  exports.adminPermissionQuery = "SELECT ap.userid as adminUserRole, ap.overView ,ap.customers, ap.closedAccount , ap.appearance, ap.profile, ap.userManagement, ap.changePlan FROM superAdmin as sa join adminUserPermission as ap on sa.roleId = ap.id where sa.id = ?";
 
   exports.updatePasswordAdmin =
   "UPDATE superAdmin SET password = ? , updated_at = ? where id = ? AND token = ?";
   exports.InvoiceCategoriesQuery =
   "INSERT INTO InvoiceCategories (landLordId, categorieName ,setTaxes ,taxable) VALUES (?,?,?,?)";
   exports.adminNotificationQuery = "INSERT INTO adminNotification (landlordId,fName,lName,planId,created_deleted,c_dTime) VALUES (?,?,?,?,?,?)";
-  exports.getAdminNotificationQuery = "SELECT * FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
+  exports.getAdminNotificationQuery = "SELECT *,AN.id as notificationId FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
   exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
   exports.updateAllAdminNotificationQuery = `UPDATE adminNotification SET readNotification = "1" WHERE created_deleted IN ("Deleted", "Created")`;

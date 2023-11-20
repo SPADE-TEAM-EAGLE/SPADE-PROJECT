@@ -1144,7 +1144,7 @@
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overView">
+                                <li class="slide permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -1156,20 +1156,20 @@
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
+                                <li class="slide card-demo1 permissionRestrict_customers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                         <i class="side-menu__icon fi fi-rs-users"></i>
                                         <span class="side-menu__label">Customers</span>
                                     </a>
                                 </li>
                                 <li
-                                    class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
+                                    class="slide card-demo1 permissionRestrict_closedCustomers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo">
+                                <li class="slide card-demo permissionRestrict_userManagement">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
                                         <i class="side-menu__icon fi fi-rs-user-gear"></i>
                                         <span class="side-menu__label">User Management</span>
@@ -1262,11 +1262,11 @@
                                             <div class="tabs-menu1">
                                                 <!-- Tabs -->
                                                 <ul class="nav panel-tabs">
-                                                    <li class="permissionView_profile permissionRestrict_profile">
+                                                    <li class="permissionRestrict_profile">
                                                         <a href="#tab5" class="permissionRestrict_profile active" data-bs-toggle="tab">Profile</a>
                                                     </li>
                                                     <!-- <li><a href="#tab6" data-bs-toggle="tab">Security Settings</a></li> -->
-                                                    <li class="permissionView_appearance permissionRestrict_appearance">
+                                                    <li class="permissionRestrict_appearance">
                                                         <a href="#tab7" class="permissionRestrict_appearance" data-bs-toggle="tab">Appearance</a>
                                                     </li>
                                                     <!-- <li><a href="#tab8" data-bs-toggle="tab">Payment Method</a></li>
@@ -1479,7 +1479,7 @@
                                                                 <div class="valid-feedback">Looks good!</div>
                                                             </div>
                                                             <div class="col-lg-6"></div>
-                                                            <div class="col-lg-3 mt-4"
+                                                            <div class="col-lg-3 mt-4 permissionEdit_profile"
                                                                 style="display: flex; width: auto;">
                                                                 <button class="btn btn-light btn-pill m-2"
                                                                     onclick="window.location='./index.html'">Close</button>
@@ -1490,7 +1490,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane "
+                                            <div class="tab-pane"
                                                 id="tab6">
                                                 <h2 class="h2-personal-inf">Login & Password</h2>
                                                 <p class="p-personal-inf">
@@ -1630,7 +1630,7 @@
                                                                         </div> -->
                                                 </div>
                                             </div>
-                                            <div class="tab-pane mt-0 permissionView_appearance permissionRestrict_appearance" id="tab7">
+                                            <div class="tab-pane mt-0  permissionView_appearance permissionRestrict_appearance" id="tab7">
                                                 <div class="card-body">
                                                     <h2 class="h2-personal-inf text-dark mb-3">Appearance</h2>
                                                     <div class="line-responsive-center">
@@ -1638,7 +1638,7 @@
                                                             style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;">
                                                         </div>
                                                     </div>
-                                                    <div class="row" id="myDIV">
+                                                    <div class="row permissionEdit_appearance" id="myDIV">
                                                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12"
                                                             style="max-width: 100%; width: fit-content;">
                                                             <input type="radio" name="test" id="cb5">
@@ -2527,14 +2527,35 @@
         $(document).ready(function () {
             function getData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
                         permissionTypes.forEach(function (element) {
+                            if (!response.userPeremission[0][element].Edit) {
+                                $(`.permissionEdit_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].View) {
+                                $(`.permissionView_${element}`).each(function () {
+                                    $(this).empty();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Delete) {
+                                $(`.permissionDelete_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Add) {
+                                $(`.permissionAdd_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            
                             if (response.userPeremission[0][element].Restrict) {
                                 $(`.permissionRestrict_${element}`).each(function () {
                                     $(this).remove();
@@ -2734,7 +2755,7 @@
                 })
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -2788,7 +2809,7 @@
                 if (file) {
                     userForm.append("image", file)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: userForm,
                         headers: {
@@ -2801,7 +2822,7 @@
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                                url: 'http://localhost:3000/api/spade/updateAdminProfile',
                                 method: 'PUT',
                                 data: JSON.stringify(userData),
                                 contentType: 'application/json',
@@ -2836,7 +2857,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                        url: 'http://localhost:3000/api/spade/updateAdminProfile',
                         method: 'PUT',
                         data: JSON.stringify(userData),
                         contentType: 'application/json',

@@ -927,6 +927,11 @@ color: #000;
             display: flex !important;
             justify-content: left;
         }
+
+        .bg-white-black {
+            background-color: lightblue;
+        }
+        
     </style>
 </head>
 
@@ -1601,7 +1606,7 @@ color: #000;
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overView">
+                                <li class="slide permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -1613,19 +1618,19 @@ color: #000;
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
+                                <li class="slide card-demo1 permissionRestrict_customers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                         <i class="side-menu__icon fi fi-rs-users"></i>
                                         <span class="side-menu__label">Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
+                                <li class="slide card-demo1 permissionRestrict_closedCustomers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo">
+                                <li class="slide card-demo permissionRestrict_userManagement">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
                                         <i class="side-menu__icon fi fi-rs-user-gear"></i>
                                         <span class="side-menu__label">User Management</span>
@@ -1719,7 +1724,7 @@ color: #000;
                                             </div>
                                         </div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Total Revenue</h4>
-                                        <h1 class="mt-3 text-white price-super-admin-responsive" id="amount-payable">
+                                        <h1 class="mt-3 text-white price-super-admin-responsive permissionView_userManagement" id="amount-payable">
                                             $656.00
                                         </h1>
                                     </div>
@@ -1738,7 +1743,8 @@ color: #000;
                                             in between.
                                         </p>
                                     </div>
-                                    <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
+                                    <div class="permissionView_userManagement permissionAdd_userManagement">
+                                    <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button "
                                         id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal"
                                         href="#add-user-permissions" style="width: fit-content; height: 45px;">
                                         <i class="fe fe-plus me-2 text-white" style="color: white !important;"></i>
@@ -1747,6 +1753,7 @@ color: #000;
                                             USERS
                                         </strong>
                                     </button>
+                                </div>
                                 </div>
                                 <!-- Mobile screen button add property Start -->
                                 <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button"
@@ -1761,7 +1768,7 @@ color: #000;
                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                 </div>
                                 <!-- Add User Permissions popup start  -->
-                                <div class="modal fade" id="add-user-permissions" tabindex="-1" role="dialog">
+                                <div class="modal fade permissionAdd_userManagement" id="add-user-permissions" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -2117,7 +2124,7 @@ color: #000;
                                                                         <th>ACTION</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_user"></tbody>
+                                                                <tbody class="permissionView_userManagement" id="table_body_user"></tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -2260,7 +2267,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_manager">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_manager">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -2381,189 +2388,131 @@ color: #000;
                                                                             </label>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Close Customers</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Upgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Downgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
+                                                                 
+                                                                    
                                                                     <tr class="closedAccount">
                                                                         <td>
                                                                             <b>Close Account</b>
+                                                                        </td>
+                                                                        <td class="View">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5" checked="">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Add">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Edit">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Delete">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Restrict">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="userManagement">
+                                                                        <td>
+                                                                            <b>User Management</b>
+                                                                        </td>
+                                                                        <td class="View">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5" checked="">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Add">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Edit">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Delete">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Restrict">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="changePlan">
+                                                                        <td>
+                                                                            <b>Change Plan</b>
                                                                         </td>
                                                                         <td class="View">
                                                                             <label
@@ -2777,7 +2726,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_staff">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_staff">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -2898,189 +2847,131 @@ color: #000;
                                                                             </label>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Close Customers</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Upgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Downgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
+                                                                    
+                                                                    
                                                                     <tr class="closedAccount">
                                                                         <td>
                                                                             <b>Close Account</b>
+                                                                        </td>
+                                                                        <td class="View">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5" checked="">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Add">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Edit">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Delete">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Restrict">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="userManagement">
+                                                                        <td>
+                                                                            <b>User Management</b>
+                                                                        </td>
+                                                                        <td class="View">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5" checked="">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Add">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Edit">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Delete">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                        <td class="Restrict">
+                                                                            <label
+                                                                                class="custom-control custom-checkbox-md">
+                                                                                <input type="checkbox"
+                                                                                    class="custom-control-input"
+                                                                                    name="example-checkbox5"
+                                                                                    value="option5">
+                                                                                <span
+                                                                                    class="custom-control-label"></span>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="changePlan">
+                                                                        <td>
+                                                                            <b>Change Plan</b>
                                                                         </td>
                                                                         <td class="View">
                                                                             <label
@@ -3293,7 +3184,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_admin">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_admin">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -3414,186 +3305,8 @@ color: #000;
                                                                             </label>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Close Customers</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Upgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b>Downgrade Plan</b>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5" checked="">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label
-                                                                                class="custom-control custom-checkbox-md">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    name="example-checkbox5"
-                                                                                    value="option5">
-                                                                                <span
-                                                                                    class="custom-control-label"></span>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
+                                                                    
+                                                                    
                                                                     <tr class="closedAccount">
                                                                         <td>
                                                                             <b>Close Account</b>
@@ -4093,8 +3806,14 @@ color: #000;
     <script src="../assets/js/email-phone.js"></script>
     <script>
         $(document).ready(function (){
-            
-        })
+            $(document).ajaxStop(function(){
+
+                $(".overView .Add , .overView .Edit ,.overView .Delete , .overView .Restrict ,.customers .Add , .customers .Edit ,.customers .Delete,.closedAccount .Add , .closedAccount .Edit ,.closedAccount .Delete , .closedAccount .View,.profile1 .Add  ,.profile1 .Delete ,.appearance .Add  ,.appearance .Delete,.changePlan .Add , .changePlan .Edit ,.changePlan .Delete , .changePlan .View  ").each(function(){
+                    $(this).empty()
+                    $(this).text("N/A")
+                })
+            })
+        }) 
     </script>
     <script>
         $(document).ready(function () {
@@ -4269,7 +3988,7 @@ color: #000;
             }
             function getAllUserAdminData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4278,14 +3997,45 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
-                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
-                        permissionTypes.forEach(function(element)  {
-                            if (response.userPeremission[0][element].Restrict) {
-                                $(`.permissionRestrict_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                            }
-                        });
+                        $(document).ajaxStop(function(){
+
+                            const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
+                            permissionTypes.forEach(function(element)  {
+                                if (!response.userPeremission[0][element].Edit) {
+                                    $(`.permissionEdit_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].View) {
+                                    $(`.permissionView_${element}`).each(function () {
+                                        $(this).empty();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Delete) {
+                                    $(`.permissionDelete_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Add) {
+                                    $(`.permissionAdd_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (response.userPeremission[0][element].Restrict) {
+                                    $(`.permissionRestrict_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (response.userPeremission[0][element].Restrict) {
+                                        $(`.permissionRestrict_${element}`).each(function () {
+                                            $(this).remove();
+                                        });
+                                        if(element == "userManagement" && window.location.href.indexOf('user-management.html') !== -1){
+                                            history.back();
+                                        }  
+                                    }
+                            });
+                        })
                         
 //                         // overview
 //                         if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
@@ -4456,7 +4206,7 @@ color: #000;
                             image_key = response.imageKey
                         }
                         $.ajax({
-                            url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionRoles",
+                            url: "http://localhost:3000/api/spade/adminUserPermissionRoles",
                             type: "GET",
                             headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4624,6 +4374,72 @@ color: #000;
                                         } else {
                                             $('#table_body_manager  .profile1 .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
+                                        // UserManagement
+                                        if (!element.userManagement.View) {
+                                            // $('#table_body_manager  .appearance .View').empty()
+                                            $('#table_body_manager   .userManagement .View input[type="checkbox"]').prop('checked', false);
+                                        }
+                                        else {
+                                            $('#table_body_manager   .userManagement .View input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Add) {
+                                            $('#table_body_manager   .userManagement .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Add').empty()
+                                        } else {
+                                            $('#table_body_manager   .userManagement .Add input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Edit) {
+                                            $('#table_body_manager   .userManagement .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body_manager   .appearance .Edit').empty()
+                                        } else {
+                                            $('#table_body_manager   .userManagement .Edit input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Delete) {
+                                            $('#table_body_manager   .userManagement .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Delete').empty()
+                                        } else {
+                                            $('#table_body_manager   .userManagement .Delete input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Restrict) {
+                                            $('#table_body_manager   .userManagement .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Restrict').empty()
+                                        } else {
+                                            $('#table_body_manager   .userManagement .Restrict input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        // changePlan
+                                        if (!element.changePlan.View) {
+                                            // $('#table_body_manager  .appearance .View').empty()
+                                            $('#table_body_manager   .changePlan .View input[type="checkbox"]').prop('checked', false);
+                                        }
+                                        else {
+                                            $('#table_body_manager   .changePlan .View input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Add) {
+                                            $('#table_body_manager   .changePlan .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Add').empty()
+                                        } else {
+                                            $('#table_body_manager   .changePlan .Add input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Edit) {
+                                            $('#table_body_manager   .changePlan .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body_manager   .appearance .Edit').empty()
+                                        } else {
+                                            $('#table_body_manager   .changePlan .Edit input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Delete) {
+                                            $('#table_body_manager   .changePlan .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Delete').empty()
+                                        } else {
+                                            $('#table_body_manager   .changePlan .Delete input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Restrict) {
+                                            $('#table_body_manager   .changePlan .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_manager   .appearance .Restrict').empty()
+                                        } else {
+                                            $('#table_body_manager   .changePlan .Restrict input[type="checkbox"]').prop('checked', true);
+                                        }
                                     }else if(element.role == "Staff"){
 // UsersRolesId = element.id
                                         // Appearance
@@ -4782,6 +4598,72 @@ color: #000;
                                             // $('#table_body_staff   .profile1 .Restrict').empty()
                                         } else {
                                             $('#table_body_staff   .profile1 .Restrict input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        // UserManagement
+                                        if (!element.userManagement.View) {
+                                            // $('#table_body_manager  .appearance .View').empty()
+                                            $('#table_body_staff   .userManagement .View input[type="checkbox"]').prop('checked', false);
+                                        }
+                                        else {
+                                            $('#table_body_staff   .userManagement .View input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Add) {
+                                            $('#table_body_staff   .userManagement .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Add').empty()
+                                        } else {
+                                            $('#table_body_staff   .userManagement .Add input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Edit) {
+                                            $('#table_body_staff   .userManagement .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body_staff   .appearance .Edit').empty()
+                                        } else {
+                                            $('#table_body_staff   .userManagement .Edit input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Delete) {
+                                            $('#table_body_staff   .userManagement .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Delete').empty()
+                                        } else {
+                                            $('#table_body_staff   .userManagement .Delete input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.userManagement.Restrict) {
+                                            $('#table_body_staff   .userManagement .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Restrict').empty()
+                                        } else {
+                                            $('#table_body_staff   .userManagement .Restrict input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        // changePlan
+                                        if (!element.changePlan.View) {
+                                            // $('#table_body_manager  .appearance .View').empty()
+                                            $('#table_body_staff   .changePlan .View input[type="checkbox"]').prop('checked', false);
+                                        }
+                                        else {
+                                            $('#table_body_staff   .changePlan .View input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Add) {
+                                            $('#table_body_staff   .changePlan .Add input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Add').empty()
+                                        } else {
+                                            $('#table_body_staff   .changePlan .Add input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Edit) {
+                                            $('#table_body_staff   .changePlan .Edit input[type="checkbox"]').prop('checked', false);
+
+                                            // $('#table_body_staff   .appearance .Edit').empty()
+                                        } else {
+                                            $('#table_body_staff   .changePlan .Edit input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Delete) {
+                                            $('#table_body_staff   .changePlan .Delete input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Delete').empty()
+                                        } else {
+                                            $('#table_body_staff   .changePlan .Delete input[type="checkbox"]').prop('checked', true);
+                                        }
+                                        if (!element.changePlan.Restrict) {
+                                            $('#table_body_staff   .changePlan .Restrict input[type="checkbox"]').prop('checked', false);
+                                            // $('#table_body_staff   .appearance .Restrict').empty()
+                                        } else {
+                                            $('#table_body_staff   .changePlan .Restrict input[type="checkbox"]').prop('checked', true);
                                         }
                                     }else if(element.role == "Admin"){
 // UsersRolesId = element.id
@@ -4967,7 +4849,7 @@ color: #000;
                     }
                 })
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5004,7 +4886,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 })
                 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -5036,7 +4918,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     }
                 });
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allUserAdmin",
+                    url: "http://localhost:3000/api/spade/allUserAdmin",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -5090,9 +4972,9 @@ if (element.roleId == 2) {
         <td>
                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
                                 <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
-                                    <li><a class="dropdown-item text-success view-option" href="javascript:void(0)" data-bs-effect="effect-scale">View</a></li>
-                                    <li><a class="dropdown-item text-primary edit-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale">Edit</a></li>
-                                    <li><a class="dropdown-item text-danger delete-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
+                                    <li class="permissionView_userManagement"><a class="dropdown-item text-success view-option" href="javascript:void(0)" data-bs-effect="effect-scale">View</a></li>
+                                    <li class="permissionEdit_userManagement"><a class="dropdown-item text-primary edit-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale">Edit</a></li>
+                                    <li class="permissionDelete_userManagement"><a class="dropdown-item text-danger delete-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
                                 </ul>
                             </td>
     </tr>
@@ -5118,7 +5000,7 @@ if (element.roleId == 2) {
             getAllUserAdminData()
             function getAllStates() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -5164,7 +5046,7 @@ if (element.roleId == 2) {
                 console.log(checkedClasses);
                 if ($(this).closest('tr').attr("class")) {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionUpdate",
+                        url: "http://localhost:3000/api/spade/adminUserPermissionUpdate",
                         type: "PUT",
                         data: JSON.stringify({
                             role: UsersRolesId,
@@ -5216,7 +5098,7 @@ if (element.roleId == 2) {
                     console.log(selectedFiles[0]);
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -5230,14 +5112,14 @@ if (element.roleId == 2) {
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                                url: "http://localhost:3000/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
                                     lastName: capitalizeFirstLetter($("#lastName_user_update").val()),
                                     email: $("#email_user_update").val(),
                                     phone: $("#phone_user_update").val(),
-                                    // password: $("#password_user_update").val(),
+                                    //  password: $("#password_user_update").val(),
                                     roleId: $("#role_user_update").val(),
                                     address: $("#address_user_update").val(),
                                     city: $("#city_user_update").val(),
@@ -5285,7 +5167,7 @@ if (element.roleId == 2) {
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -5328,7 +5210,7 @@ if (element.roleId == 2) {
                 }
                 else {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -5448,7 +5330,7 @@ if (userAdminDataNew.roleId == 2) {
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/userAdminDelete",
+                    url: "http://localhost:3000/api/spade/userAdminDelete",
                     type: "DELETE",
                     data: JSON.stringify({ id: deleteUserId }),
                     contentType: "application/json",
@@ -5482,7 +5364,7 @@ if (userAdminDataNew.roleId == 2) {
                     var uploadFormData = new FormData();
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -5496,7 +5378,7 @@ if (userAdminDataNew.roleId == 2) {
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
+                                url: 'http://localhost:3000/api/spade/createUserAdmin',
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -5554,7 +5436,7 @@ if (userAdminDataNew.roleId == 2) {
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
+                        url: 'http://localhost:3000/api/spade/createUserAdmin',
                         type: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify({

@@ -461,6 +461,8 @@ exports.adminUserPermissionRoles = async function (req, res) {
         const closedAccount = splitAndConvertToObject(selectResult[0][i].closedAccount);
         const appearance = splitAndConvertToObject(selectResult[0][i].appearance);
         const profile = splitAndConvertToObject(selectResult[0][i].profile);
+        const userManagement = splitAndConvertToObject(selectResult[0][i].userManagement);
+        const changePlan = splitAndConvertToObject(selectResult[0][i].changePlan);
 
         dataArray.push({
           id,
@@ -469,7 +471,9 @@ exports.adminUserPermissionRoles = async function (req, res) {
           customers,
           closedAccount,
           appearance,
-          profile
+          profile,
+          userManagement,
+          changePlan
 
         });
       }
@@ -776,3 +780,22 @@ exports.updateAdminNotification = async function (req, res) {
       return res.status(400).json({ message: error.message });
     }};
   
+
+
+
+
+//  ############################# Delete clossed landlord ############################################################
+exports.deleteClossedLandlord = async function (req, res) {
+  const { id } = req.body;
+  try {
+    const deleteResult = await queryRunner(deleteQuery("closedAccount","id"),[id]);
+    if (deleteResult[0].affectedRows > 0) {
+      return res.status(200).json({ message: " Clossed Landlord is deleted"});
+    } else {
+      return res.status(500).send("Error in Clossed Landlord");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};    
+//  ############################# Delete clossed landlord ############################################################
