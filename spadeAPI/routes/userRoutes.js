@@ -323,4 +323,5 @@ router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
 router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
 router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
 router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
+router.put("/updateAllAdminNotification",verifySuperAdmin,superAdmin.updateAllAdminNotification);
 
