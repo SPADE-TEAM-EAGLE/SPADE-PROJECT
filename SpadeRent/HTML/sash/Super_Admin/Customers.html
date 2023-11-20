@@ -1276,6 +1276,8 @@
 <script src="../assets/js/index1.js"></script>
 <!-- Color Theme js -->
 <script src="../assets/js/themeColors.js"></script>
+<script src="../assets/js/getNotificationAdmin.js"></script>
+
 <!-- CUSTOM JS -->
 <!-- <script src="../assets/js/custom.js"></script> -->
 <script>
@@ -1328,6 +1330,7 @@
   return formattedDate;
 }            
 function getData(){
+    GetNotification()
                 $.ajax({
                 url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                 type: "GET",
@@ -1544,7 +1547,7 @@ row.append(tableData);
             $("#confirmDelete-user").on("click",function(){
                 $("#delete-user-admin").modal("hide")
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/closedLandlord",
+                    url: "http://localhost:3000/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: landlordId,
