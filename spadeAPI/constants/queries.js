@@ -577,6 +577,8 @@ exports.insertNotify =
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
+exports.addResetTokenAdmin =
+  "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
 exports.addResetTokenTenant =
   "UPDATE tenants SET token = ?, tenantUpdated_at = ? where id = ?";
 exports.updatePasswordLandlord =
@@ -1141,3 +1143,12 @@ exports.insertInUserPermissionUsers =
   exports.updateAdmin = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
   exports.adminRevenueQuery = "select sum(case when p.monthlyAnnual = 'Monthly' then plantotalAmount else 0 end) as monthly, sum(case when p.monthlyAnnual = 'Annually' then plantotalAmount else 0 end) as annually, sum(case when p.monthlyAnnual in ('Annually', 'Monthly') then plantotalAmount else 0 end) as totalRevenue from plan as p join users as u on p.id = u.PlanID where p.monthlyAnnual in ('Monthly','Annually')";
   exports.adminPermissionQuery = "SELECT ap.userid as adminUserRole, ap.overView ,ap.customers, ap.closedAccount , ap.appearance, ap.profile FROM superAdmin as sa join adminUserPermission as ap on sa.roleId = ap.id where sa.id = ?";
+
+  exports.updatePasswordAdmin =
+  "UPDATE superAdmin SET password = ? , updated_at = ? where id = ? AND token = ?";
+  exports.InvoiceCategoriesQuery =
+  "INSERT INTO InvoiceCategories (landLordId, categorieName ,setTaxes ,taxable) VALUES (?,?,?,?)";
+  exports.adminNotificationQuery = "INSERT INTO adminNotification (landlordId,fName,lName,planId,created_deleted,c_dTime) VALUES (?,?,?,?,?,?)";
+  exports.getAdminNotificationQuery = "SELECT * FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
+  exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
+  exports.updateAllAdminNotificationQuery = `UPDATE adminNotification SET readNotification = "1" WHERE created_deleted IN ("Deleted", "Created")`;

@@ -459,7 +459,7 @@
                                 </li>
                             </a> -->
                                 <div class="top-tabs">
-                                    <li class="slide">
+                                    <li class="slide permissionView_overview permissionRestrict_overView">
                                         <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                             <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                             <span class="side-menu__label">Overview</span>
@@ -471,19 +471,19 @@
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                    <li class="slide card-demo1">
+                                    <li class="slide card-demo1  permissionView_customers permissionRestrict_customers">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                             <i class="side-menu__icon fi fi-rs-users"></i>
                                             <span class="side-menu__label">Customers</span>
                                         </a>
                                     </li>
-                                    <li class="slide card-demo1">
+                                    <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                             <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                             <span class="side-menu__label">Closed Customers</span>
                                         </a>
                                     </li>
-                                    <li class="slide card-demo">
+                                    <li class="slide card-demo ">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
                                             <i class="side-menu__icon fi fi-rs-user-gear"></i>
                                             <span class="side-menu__label">User Management</span>
@@ -619,7 +619,7 @@
                                                             <li class="d-flex justify-content-between">
                                                                 <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">
                                                                     A-Z
-                                                                Alphabets
+                                                            Alphabets
                                                                 </a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -631,18 +631,7 @@
                                                                     >
                                                                 </div>
                                                             </li>
-                                                            <li class="d-flex justify-content-between">
-                                                                <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Expired</a>
-                                                                <div class="form-check m-0">
-                                                                    <input
-                                                                        class="form-check-input mt-2"
-                                                                        type="radio"
-                                                                        name="exampleRadios"
-                                                                        id="expired"
-                                                                        value="option1"
-                                                                    >
-                                                                </div>
-                                                            </li>
+                                                            
                                                             <li class="d-flex justify-content-between">
                                                                 <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">Ascending</a>
                                                                 <div class="form-check m-0">
@@ -670,7 +659,7 @@
                                                             <li class="d-flex justify-content-between">
                                                                 <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">
                                                                     Recently
-                                                                Added
+                                                            Added
                                                                 </a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -682,14 +671,6 @@
                                                                     >
                                                                 </div>
                                                             </li>
-                                                            <!-- <li class="d-flex justify-content-between"><a
-                                                            href="javascript:void(0)">Recently Added</a>
-                                                        <div class="form-check m-0">
-                                                            <input class="form-check-input mt-2" type="radio"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </div>
-                                                    </li> -->
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -847,15 +828,14 @@
                                                             <th></th>
                                                             <th>customer id</th>
                                                             <th class="d-none">Landlord ID</th>
-                                                            <th>First Name</th>
-                                                            <th>Last Name</th>
+                                                            <th>Name</th>
+                                                            <th>Contact</th>
                                                             <th>subscription</th>
                                                             <th>amount</th>
                                                             <th>Purchase Date</th>
                                                             <th>date of expiry</th>
                                                             <th>reason</th>
-                                                            <!-- <th>Status</th> -->
-                                                            <th>ACTION</th>
+                                                           
                                                         </tr>
                                                     </thead>
                                                     <tbody id="table_body"></tbody>
@@ -1124,6 +1104,8 @@
 <script src="../assets/js/index1.js"></script>
 <!-- Color Theme js -->
 <script src="../assets/js/themeColors.js"></script>
+<script src="../assets/js/getNotificationAdmin.js"></script>
+
 <!-- CUSTOM JS -->
 <!-- <script src="../assets/js/custom.js"></script> -->
 <script>
@@ -1185,6 +1167,163 @@
                 },
                 success: function (response) {
                     console.log(response);
+                    const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                        permissionTypes.forEach(function(element)  {
+                            if (response.userPeremission[0][element].Restrict) {
+                                $(`.permissionRestrict_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                                
+                            }
+                        });
+//                     // overview
+//                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
+
+// } else {
+//     $(".permissionView_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Add) {
+
+// } else {
+//     $(".permissionAdd_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Edit) {
+
+// } else {
+//     $(".permissionEdit_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Delete) {
+
+// } else {
+//     $(".permissionDelete_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// //customer
+// if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
+
+// } else {
+//     $(".permissionView_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Add) {
+
+// } else {
+//     $(".permissionAdd_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Edit) {
+
+// } else {
+//     $(".permissionEdit_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Delete) {
+
+// } else {
+//     $(".permissionDelete_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // closedAccount
+
+// if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
+
+// } else {
+//     $(".permissionView_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Add) {
+
+// } else {
+//     $(".permissionAdd_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Edit) {
+
+// } else {
+//     $(".permissionEdit_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Delete) {
+
+// } else {
+//     $(".permissionDelete_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // appearance
+
+// if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
+
+// } else {
+//     $(".permissionView_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Add) {
+
+// } else {
+//     $(".permissionAdd_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Edit) {
+
+// } else {
+//     $(".permissionEdit_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Delete) {
+
+// } else {
+//     $(".permissionDelete_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // profile
+
+// if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
+
+// } else {
+//     $(".permissionView_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Add) {
+
+// } else {
+//     $(".permissionAdd_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Edit) {
+
+// } else {
+//     $(".permissionEdit_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Delete) {
+
+// } else {
+//     $(".permissionDelete_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
                     $("#tenant-name").empty();
                         $("#tenant-name").append(`<span style="font-weight: 300;">Welcome </span>`+
                                                 toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
@@ -1318,25 +1457,16 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                                 }
                                 $('#table_body').append(` <tr data-id="${element.id}">
                                                         <td></td>
-                                                        <td style="font-weight: 600;">US-${element.id}</td>
-                                                        <td style="font-weight: 600;"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
+                                                        <td class="landlordId" style="font-weight: 600;">US-${element.id}</td>
+                                                        <td style="font-weight: 600;" class="landlordName"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
                                                         <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A"}</p><span>${element.phone ? element.phone : "N/A"}</span></td>
                                                         <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" ${ColorOfPlan}><i class="fi fi-rs-dot-circle me-1"></i><b>${element.planName ? element.planName : "N/A"} Plan Purchased</b></span></a></td>
-                                                        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"}/ ${element.duration ? element.duration : "N/A"}</b></p><span>Purchase Date: ${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</span></td>
+                                                        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"}/ ${element.duration ? element.duration : "N/A"}</b></p><span class='purchase-date'>Purchase Date: ${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</span></td>
                                                         <td style="font-weight: 600;">${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</td>
                                                         <td style="font-weight: 600;">${element.deleted_at ? (element.deleted_at.split('T')[0].split('-')[1] + "/" + element.deleted_at.split('T')[0].split('-')[2] + "/" + element.deleted_at.split('T')[0].split('-')[0]) : "N/A"}</td>
                                                         <td style="font-weight: 600;"><p>${element.reason ? element.reason : "N/A"}</p></td>
                                                         <!-- <td class="propertyAddress"><p style="font-weight: 600; color: #FB233B;" class="mb-1"><b><i class="fi fi-rs-clock-three"></i> Expired</b></p><span style="color: #1467B0;">Renew Now</span></td> -->
-                                                        <td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
-                                                            <ul class="dropdown-menu dropdown-menu-top">
-                                                                <!-- <li><a class="dropdown-item text-dark view-property" href="./view-property.html?property="" style="display: flex; align-items: start;"> Upgrade Annualy/Monthly</a></li>
-                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Sent Reminder</a></li>
-                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Close Account</a></li>
-                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Downgrade to Monthly (Old Plan)</a></li>
-                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;"> Upgrade to Monthly (New Plan)</a></li> -->
-                                                                <li><a class="edit-option dropdown-item text-dark" href="javascript:void(0)" style="display: flex; align-items: start;">View</a></li>
-                                                                <li><a class="delete-option-userAdmin dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: start;">Delete</a></li>
-                                                        </ul></td>
+                                                        
                                                     </tr>
 `)
                             })
@@ -1459,7 +1589,59 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     })
                 }
             })
+            function filterTable(selectedFilter) {
 
+var tableBody = $('#table_body');
+var rows = tableBody.find('tr');
+
+if (selectedFilter === 'alphabets') {
+    rows.sort(function (a, b) {
+        var textA = $(a).find('.landlordName').text().toLowerCase();
+        var textB = $(b).find('.landlordName').text().toLowerCase();
+        return textA.localeCompare(textB);
+    });
+} else if (selectedFilter === 'created-at') {
+
+    rows.sort(function (a, b) {
+        var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        console.log(idA)
+        var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        return idB - idA;
+    });
+}
+else if (selectedFilter === 'ascending') {
+    rows.sort(function (a, b) {
+        var idA = parseInt($(a).find('.landlordId').text());
+        var idB = parseInt($(b).find('.landlordId').text());
+        return idA - idB;
+    });
+}
+else if (selectedFilter === 'descending') {
+    rows.sort(function (a, b) {
+        var idA = parseInt($(a).find('.landlordId').text());
+        var idB = parseInt($(b).find('.landlordId').text());
+        return idB - idA;
+    });
+}
+
+tableBody.empty().append(rows);
+}
+
+// Filter functionality
+$('#ascending').on('click', function () {
+filterTable("ascending")
+});
+$('#descending').on('click', function () {
+filterTable("descending")
+});
+$('#alphabets').on('click', function () {
+// console.log(1)
+filterTable("alphabets")
+});
+$('#created-at').on('click', function () {
+// console.log(1)
+filterTable("created-at")
+});
         })
 </script>
 <script>
