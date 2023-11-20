@@ -1251,6 +1251,26 @@
                     console.log(response);
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
                         permissionTypes.forEach(function(element)  {
+                            if (!response.userPeremission[0][element].Edit) {
+                                $(`.permissionEdit_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].View) {
+                                $(`.permissionView_${element}`).each(function () {
+                                    $(this).empty();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Delete) {
+                                $(`.permissionDelete_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Add) {
+                                $(`.permissionAdd_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
                             if (response.userPeremission[0][element].Restrict) {
                                 $(`.permissionRestrict_${element}`).each(function () {
                                     $(this).remove();

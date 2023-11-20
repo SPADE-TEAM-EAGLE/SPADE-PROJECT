@@ -601,7 +601,7 @@
                                             </div>
                                         </div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Total Revenue</h4>
-                                        <h1 class="mt-3 text-white price-super-admin-responsive" id="amount-payable">
+                                        <h1 class="mt-3 text-white price-super-admin-responsive permissionView_customers" id="amount-payable">
                                             $656.00
                                         </h1>
                                     </div>
@@ -807,7 +807,7 @@
                                                         <th>ACTION</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="table_body">
+                                                <tbody class="permissionView_customers" id="table_body">
 
                                                 </tbody>
                                             </table>
@@ -1212,7 +1212,7 @@
   return formattedDate;
 }            
 function getData(){
-                $.ajax({
+                $.ajax({ 
                     url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
@@ -1220,17 +1220,39 @@ function getData(){
                     },
                     success: function (response) {
                         console.log(response);
-                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
-                        permissionTypes.forEach(function(element)  {
-                            if (response.userPeremission[0][element].Restrict) {
-                                $(`.permissionRestrict_${element}`).each(function () {
+                        $(document).ajaxStop(function(){
+                            const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                            permissionTypes.forEach(function(element)  {
+                                if (!response.userPeremission[0][element].Edit) {
+                                $(`.permissionEdit_${element}`).each(function () {
                                     $(this).remove();
                                 });
-                                if(element == "customers" && window.location.href.indexOf('Customers.html') !== -1){
-                                    history.back();
-                                }  
                             }
-                        });
+                            if (!response.userPeremission[0][element].View) {
+                                $(`.permissionView_${element}`).each(function () {
+                                    $(this).empty();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Delete) {
+                                $(`.permissionDelete_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                            if (!response.userPeremission[0][element].Add) {
+                                $(`.permissionAdd_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                                if (response.userPeremission[0][element].Restrict) {
+                                    $(`.permissionRestrict_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                    if(element == "customers" && window.location.href.indexOf('Customers.html') !== -1){
+                                        history.back();
+                                    }  
+                                }
+                            });
+                        })
                         // // overview
                         // if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
