@@ -428,6 +428,7 @@ const verifySuperAdmin = async (req, res, next) => {
         const profile = splitAndConvertToObject(selectResult[0][i].profile);
         const userManagement = splitAndConvertToObject(selectResult[0][i].userManagement);
         const changePlan = splitAndConvertToObject(selectResult[0][i].changePlan);
+        const closeLandlord = splitAndConvertToObject(selectResult[0][i].closeLandlord);
 
         dataArray.push({
           id,
@@ -438,7 +439,8 @@ const verifySuperAdmin = async (req, res, next) => {
           appearance,
           profile,
           userManagement,
-          changePlan
+          changePlan,
+          closeLandlord
 
         });
       }
