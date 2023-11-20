@@ -776,3 +776,22 @@ exports.updateAdminNotification = async function (req, res) {
       return res.status(400).json({ message: error.message });
     }};
   
+
+
+
+
+//  ############################# Delete clossed landlord ############################################################
+exports.deleteClossedLandlord = async function (req, res) {
+  const { id } = req.body;
+  try {
+    const deleteResult = await queryRunner(deleteQuery("closedAccount","id"),[id]);
+    if (deleteResult[0].affectedRows > 0) {
+      return res.status(200).json({ message: " Clossed Landlord is deleted"});
+    } else {
+      return res.status(500).send("Error in Clossed Landlord");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};    
+//  ############################# Delete clossed landlord ############################################################
