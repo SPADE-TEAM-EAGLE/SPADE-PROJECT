@@ -531,7 +531,7 @@
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overview">
+                                <li class="slide permissionView_overview permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -549,7 +549,8 @@
                                         <span class="side-menu__label">Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
+                                <li
+                                    class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
@@ -1955,154 +1956,167 @@
                     },
                     success: function (response) {
                         console.log("ProtectedAdmin");
+                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                        permissionTypes.forEach(function(element)  {
+                            if (response.userPeremission[0][element].Restrict) {
+                                $(`.permissionRestrict_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                                if(element == "overView" && window.location.href.indexOf('index.html') !== -1){
+                                    history.back();
+                                }  
+                            }
+                        });
+
+
                         // console.log(response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict);
-                        if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
+                        // if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
-                        } else {
-                            $(".permissionView_overview").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].overView.Add) {
+                        // } else {
+                        //     $(".permissionView_overview").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].overView.Add) {
 
-                        } else {
-                            $(".permissionAdd_overview").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].overView.Edit) {
+                        // } else {
+                        //     $(".permissionAdd_overview").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].overView.Edit) {
 
-                        } else {
-                            $(".permissionEdit_overview").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].overView.Delete) {
+                        // } else {
+                        //     $(".permissionEdit_overview").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].overView.Delete) {
 
-                        } else {
-                            $(".permissionDelete_overview").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        //customer
-                        if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
+                        // } else {
+                        //     $(".permissionDelete_overview").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // //customer
+                        // if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
 
-                        } else {
-                            $(".permissionView_customers").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].customers.Add) {
+                        // } else {
+                        //     $(".permissionView_customers").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].customers.Add) {
 
-                        } else {
-                            $(".permissionAdd_customers").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].customers.Edit) {
+                        // } else {
+                        //     $(".permissionAdd_customers").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].customers.Edit) {
 
-                        } else {
-                            $(".permissionEdit_customers").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].customers.Delete) {
+                        // } else {
+                        //     $(".permissionEdit_customers").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].customers.Delete) {
 
-                        } else {
-                            $(".permissionDelete_customers").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        // closedAccount
+                        // } else {
+                        //     $(".permissionDelete_customers").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // // closedAccount
 
-                        if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
+                        // if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
 
-                        } else {
-                            $(".permissionView_closedAccount").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].closedAccount.Add) {
+                        // } else {
+                        //     $(".permissionView_closedAccount").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].closedAccount.Add) {
 
-                        } else {
-                            $(".permissionAdd_closedAccount").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].closedAccount.Edit) {
+                        // } else {
+                        //     $(".permissionAdd_closedAccount").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].closedAccount.Edit) {
 
-                        } else {
-                            $(".permissionEdit_closedAccount").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].closedAccount.Delete) {
+                        // } else {
+                        //     $(".permissionEdit_closedAccount").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].closedAccount.Delete) {
 
-                        } else {
-                            $(".permissionDelete_closedAccount").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        // appearance
+                        // } else {
+                        //     $(".permissionDelete_closedAccount").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // // appearance
 
-                        if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
+                        // if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
 
-                        } else {
-                            $(".permissionView_appearance").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].appearance.Add) {
+                        // } else {
+                        //     $(".permissionView_appearance").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].appearance.Add) {
 
-                        } else {
-                            $(".permissionAdd_appearance").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].appearance.Edit) {
+                        // } else {
+                        //     $(".permissionAdd_appearance").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].appearance.Edit) {
 
-                        } else {
-                            $(".permissionEdit_appearance").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].appearance.Delete) {
+                        // } else {
+                        //     $(".permissionEdit_appearance").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].appearance.Delete) {
 
-                        } else {
-                            $(".permissionDelete_appearance").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        // profile
+                        // } else {
+                        //     $(".permissionDelete_appearance").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // // profile
 
-                        if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
+                        // if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
 
-                        } else {
-                            $(".permissionView_profile").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].profile.Add) {
+                        // } else {
+                        //     $(".permissionView_profile").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].profile.Add) {
 
-                        } else {
-                            $(".permissionAdd_profile").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].profile.Edit) {
+                        // } else {
+                        //     $(".permissionAdd_profile").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].profile.Edit) {
 
-                        } else {
-                            $(".permissionEdit_profile").each(function () {
-                                $(this).remove()
-                            })
-                        }
-                        if (response.userPeremission[0].profile.Delete) {
+                        // } else {
+                        //     $(".permissionEdit_profile").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
+                        // if (response.userPeremission[0].profile.Delete) {
 
-                        } else {
-                            $(".permissionDelete_profile").each(function () {
-                                $(this).remove()
-                            })
-                        }
+                        // } else {
+                        //     $(".permissionDelete_profile").each(function () {
+                        //         $(this).remove()
+                        //     })
+                        // }
                         $("#tenant-name").empty();
                         $("#tenant-name").append(`<span style="font-weight: 300;">Welcome </span>` +
                             toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))

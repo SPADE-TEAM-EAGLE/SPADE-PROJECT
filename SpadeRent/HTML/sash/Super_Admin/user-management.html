@@ -1683,7 +1683,7 @@ color: #000;
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overview">
+                                <li class="slide permissionView_overview permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -2213,7 +2213,7 @@ color: #000;
                                                 <div
                                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                                 </div>
-                                                <div class="card card-color active" data-id="Admin">
+                                                <div class="card card-color active d-none" data-id="Admin">
                                                     <div class="card-body">
                                                         <div class="row" style="align-items: center;">
                                                             <div class="col-xl-4 col-sm-4 col-md-12">
@@ -2246,7 +2246,7 @@ color: #000;
                                             <!-- cards 1 End  -->
                                             <!-- cards 2 start  -->
                                             <div class="col-lg-12 col-xl-12">
-                                                <div class="card card-color " data-id="Manager">
+                                                <div class="card card-color active" data-id="Manager">
                                                     <div class="card-body">
                                                         <div class="row" style="align-items: center;">
                                                             <div class="col-xl-4 col-sm-4 col-md-12">
@@ -2314,7 +2314,7 @@ color: #000;
                                     </div>
                                     <div class="col-lg-6">
 
-                                        <div id="Manager" class="tab-contentt1 d-none">
+                                        <div id="Manager" class="tab-contentt1">
                                             <div class="card permissions-cards-height">
                                                 <div class="card-body">
                                                     <div class="col-lg-12 col-xl-12">
@@ -3347,7 +3347,7 @@ color: #000;
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="Admin" class="tab-contentt1">
+                                        <div id="Admin" class="tab-contentt1 d-none">
                                             <div class="card permissions-cards-height">
                                                 <div class="card-body">
                                                     <div class="col-lg-12 col-xl-12">
@@ -4172,12 +4172,17 @@ color: #000;
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-phone.js"></script>
     <script>
+        $(document).ready(function (){
+            
+        })
+    </script>
+    <script>
         $(document).ready(function () {
             var selectedFiles = [];
             var userAdminData;
             var states;
             var UsersRoles;
-            var UsersRolesId = 1;
+            var UsersRolesId = 2;
             $(".card-color").on("click",function(){
                 $(".card-color").removeClass("active")
                 $(this).addClass("active")  
@@ -4353,154 +4358,163 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
-                        // overview
-                        if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
+                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                        permissionTypes.forEach(function(element)  {
+                            if (response.userPeremission[0][element].Restrict) {
+                                $(`.permissionRestrict_${element}`).each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                        });
+                        
+//                         // overview
+//                         if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
-} else {
-    $(".permissionView_overview").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].overView.Add) {
+// } else {
+//     $(".permissionView_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Add) {
 
-} else {
-    $(".permissionAdd_overview").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].overView.Edit) {
+// } else {
+//     $(".permissionAdd_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Edit) {
 
-} else {
-    $(".permissionEdit_overview").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].overView.Delete) {
+// } else {
+//     $(".permissionEdit_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].overView.Delete) {
 
-} else {
-    $(".permissionDelete_overview").each(function () {
-        $(this).remove()
-    })
-}
-//customer
-if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
+// } else {
+//     $(".permissionDelete_overview").each(function () {
+//         $(this).remove()
+//     })
+// }
+// //customer
+// if (response.userPeremission[0].customers.View && response.userPeremission[0].customers.Restrict) {
 
-} else {
-    $(".permissionView_customers").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].customers.Add) {
+// } else {
+//     $(".permissionView_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Add) {
 
-} else {
-    $(".permissionAdd_customers").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].customers.Edit) {
+// } else {
+//     $(".permissionAdd_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Edit) {
 
-} else {
-    $(".permissionEdit_customers").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].customers.Delete) {
+// } else {
+//     $(".permissionEdit_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].customers.Delete) {
 
-} else {
-    $(".permissionDelete_customers").each(function () {
-        $(this).remove()
-    })
-}
-// closedAccount
+// } else {
+//     $(".permissionDelete_customers").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // closedAccount
 
-if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
+// if (response.userPeremission[0].closedAccount.View && response.userPeremission[0].closedAccount.Restrict) {
 
-} else {
-    $(".permissionView_closedAccount").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].closedAccount.Add) {
+// } else {
+//     $(".permissionView_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Add) {
 
-} else {
-    $(".permissionAdd_closedAccount").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].closedAccount.Edit) {
+// } else {
+//     $(".permissionAdd_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Edit) {
 
-} else {
-    $(".permissionEdit_closedAccount").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].closedAccount.Delete) {
+// } else {
+//     $(".permissionEdit_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].closedAccount.Delete) {
 
-} else {
-    $(".permissionDelete_closedAccount").each(function () {
-        $(this).remove()
-    })
-}
-// appearance
+// } else {
+//     $(".permissionDelete_closedAccount").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // appearance
 
-if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
+// if (response.userPeremission[0].appearance.View && response.userPeremission[0].appearance.Restrict) {
 
-} else {
-    $(".permissionView_appearance").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].appearance.Add) {
+// } else {
+//     $(".permissionView_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Add) {
 
-} else {
-    $(".permissionAdd_appearance").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].appearance.Edit) {
+// } else {
+//     $(".permissionAdd_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Edit) {
 
-} else {
-    $(".permissionEdit_appearance").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].appearance.Delete) {
+// } else {
+//     $(".permissionEdit_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].appearance.Delete) {
 
-} else {
-    $(".permissionDelete_appearance").each(function () {
-        $(this).remove()
-    })
-}
-// profile
+// } else {
+//     $(".permissionDelete_appearance").each(function () {
+//         $(this).remove()
+//     })
+// }
+// // profile
 
-if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
+// if (response.userPeremission[0].profile.View && response.userPeremission[0].profile.Restrict) {
 
-} else {
-    $(".permissionView_profile").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].profile.Add) {
+// } else {
+//     $(".permissionView_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Add) {
 
-} else {
-    $(".permissionAdd_profile").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].profile.Edit) {
+// } else {
+//     $(".permissionAdd_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Edit) {
 
-} else {
-    $(".permissionEdit_profile").each(function () {
-        $(this).remove()
-    })
-}
-if (response.userPeremission[0].profile.Delete) {
+// } else {
+//     $(".permissionEdit_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
+// if (response.userPeremission[0].profile.Delete) {
 
-} else {
-    $(".permissionDelete_profile").each(function () {
-        $(this).remove()
-    })
-}
+// } else {
+//     $(".permissionDelete_profile").each(function () {
+//         $(this).remove()
+//     })
+// }
                         $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                         $("#firstName").val(response.firstName);
                         $("#lastName").val(response.lastName);
