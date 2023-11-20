@@ -426,6 +426,8 @@ const verifySuperAdmin = async (req, res, next) => {
         const closedAccount = splitAndConvertToObject(selectResult[0][i].closedAccount);
         const appearance = splitAndConvertToObject(selectResult[0][i].appearance);
         const profile = splitAndConvertToObject(selectResult[0][i].profile);
+        const userManagement = splitAndConvertToObject(selectResult[0][i].userManagement);
+        const changePlan = splitAndConvertToObject(selectResult[0][i].changePlan);
 
         dataArray.push({
           id,
@@ -434,7 +436,9 @@ const verifySuperAdmin = async (req, res, next) => {
           customers,
           closedAccount,
           appearance,
-          profile
+          profile,
+          userManagement,
+          changePlan
 
         });
       }
