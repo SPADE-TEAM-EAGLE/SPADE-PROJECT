@@ -550,7 +550,7 @@
                                     </a>
                                 </li>
                                 <li
-                                    class="slide card-demo1 permissionRestrict_closedCustomers">
+                                    class="slide card-demo1 permissionRestrict_closeLandlord">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
@@ -1957,7 +1957,7 @@
                     success: function (response) {
                         console.log("ProtectedAdmin");
                         $(document).ajaxStop(function(){
-                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
+                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function(element)  {
                             if (!response.userPeremission[0][element].Edit) {
                                 $(`.permissionEdit_${element}`).each(function () {
