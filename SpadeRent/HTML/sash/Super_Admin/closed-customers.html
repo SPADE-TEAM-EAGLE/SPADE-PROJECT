@@ -477,7 +477,7 @@
                                             <span class="side-menu__label">Customers</span>
                                         </a>
                                     </li>
-                                    <li class="slide card-demo1 permissionRestrict_closedCustomers">
+                                    <li class="slide card-demo1 permissionRestrict_closeLandlord">
                                         <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                             <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                             <span class="side-menu__label">Closed Customers</span>
@@ -581,7 +581,7 @@
                                                 <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
                                             </div>
                                             <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Total Revenue</h4>
-                                            <h1 class="mt-3 text-white price-super-admin-responsive" id="amount-payable">
+                                            <h1 class="mt-3 text-white price-super-admin-responsive permissionView_closeLandlord" id="amount-payable">
                                                 $656.00
                                             </h1>
                                         </div>
@@ -838,7 +838,7 @@
                                                            
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="table_body"></tbody>
+                                                    <tbody class="permissionView_closeLandlord" id="table_body"></tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -1167,7 +1167,8 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
+                    $(document).ajaxStop(function(){
+                    const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function(element)  {
                             if (!response.userPeremission[0][element].Edit) {
                                 $(`.permissionEdit_${element}`).each(function () {
@@ -1190,13 +1191,17 @@
                                 });
                             }
                             if (response.userPeremission[0][element].Restrict) {
-                                $(`.permissionRestrict_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                                
-                            }
+                                    $(`.permissionRestrict_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                    if(element == "closeLandlord" && window.location.href.indexOf('closed-customers.html') !== -1){
+                                        history.back();
+                                    }  
+                                }
                         });
-//                     // overview
+
+                    });
+                        //                     // overview
 //                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
 // } else {
