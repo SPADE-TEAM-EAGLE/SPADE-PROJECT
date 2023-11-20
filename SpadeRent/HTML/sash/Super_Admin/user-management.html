@@ -927,6 +927,7 @@ color: #000;
             display: flex !important;
             justify-content: left;
         }
+        
     </style>
 </head>
 
@@ -1683,7 +1684,7 @@ color: #000;
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overView">
+                                <li class="slide permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -1695,19 +1696,19 @@ color: #000;
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
+                                <li class="slide card-demo1 permissionRestrict_customers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                         <i class="side-menu__icon fi fi-rs-users"></i>
                                         <span class="side-menu__label">Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo1 permissionView_closedAccount permissionRestrict_closedAccount">
+                                <li class="slide card-demo1 permissionRestrict_closedCustomers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
                                         <i class="side-menu__icon fi fi-rs-delete-user"></i>
                                         <span class="side-menu__label">Closed Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo">
+                                <li class="slide card-demo permissionRestrict_userManagement">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
                                         <i class="side-menu__icon fi fi-rs-user-gear"></i>
                                         <span class="side-menu__label">User Management</span>
@@ -1801,7 +1802,7 @@ color: #000;
                                             </div>
                                         </div>
                                         <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Total Revenue</h4>
-                                        <h1 class="mt-3 text-white price-super-admin-responsive" id="amount-payable">
+                                        <h1 class="mt-3 text-white price-super-admin-responsive permissionView_userManagement" id="amount-payable">
                                             $656.00
                                         </h1>
                                     </div>
@@ -1820,7 +1821,8 @@ color: #000;
                                             in between.
                                         </p>
                                     </div>
-                                    <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button"
+                                    <div class="permissionView_userManagement permissionAdd_userManagement">
+                                    <button type="button" class="btn btn-primary btn-pill mx-2 laptop-button "
                                         id="add_property_btn" data-bs-effect="effect-scale" data-bs-toggle="modal"
                                         href="#add-user-permissions" style="width: fit-content; height: 45px;">
                                         <i class="fe fe-plus me-2 text-white" style="color: white !important;"></i>
@@ -1829,6 +1831,7 @@ color: #000;
                                             USERS
                                         </strong>
                                     </button>
+                                </div>
                                 </div>
                                 <!-- Mobile screen button add property Start -->
                                 <button type="button" class="btn btn-primary mx-2 fixed-button mobile-button"
@@ -1843,7 +1846,7 @@ color: #000;
                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                 </div>
                                 <!-- Add User Permissions popup start  -->
-                                <div class="modal fade" id="add-user-permissions" tabindex="-1" role="dialog">
+                                <div class="modal fade permissionAdd_userManagement" id="add-user-permissions" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -2199,7 +2202,7 @@ color: #000;
                                                                         <th>ACTION</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_user"></tbody>
+                                                                <tbody class="permissionView_userManagement" id="table_body_user"></tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -2342,7 +2345,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_manager">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_manager">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -2801,7 +2804,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_staff">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_staff">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -3259,7 +3262,7 @@ color: #000;
                                                                         <th>RESTRICT</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="table_body_admin">
+                                                                <tbody class="permissionView_userManagement permissionEdit_userManagement" id="table_body_admin">
                                                                     <tr class="overView">
                                                                         <td>
                                                                             <b>Overview</b>
@@ -3883,7 +3886,7 @@ color: #000;
         $(document).ready(function (){
             $(document).ajaxStop(function(){
 
-                $(".overView .Add , .overView .Edit ,.overView .Delete , .overView .Restrict ,.customers .Add , .customers .Edit ,.customers .Delete,.closedAccount .Add , .closedAccount .Edit ,.closedAccount .Delete , .closedAccount .Restrict,.profile1 .Add  ,.profile1 .Delete ,.appearance .Add  ,.appearance .Delete  ").each(function(){
+                $(".overView .Add , .overView .Edit ,.overView .Delete , .overView .Restrict ,.customers .Add , .customers .Edit ,.customers .Delete,.closedAccount .Add , .closedAccount .Edit ,.closedAccount .Delete , .closedAccount .View,.profile1 .Add  ,.profile1 .Delete ,.appearance .Add  ,.appearance .Delete,.changePlan .Add , .changePlan .Edit ,.changePlan .Delete , .changePlan .View  ").each(function(){
                     $(this).empty()
                     $(this).text("N/A")
                 })
@@ -4072,34 +4075,45 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
-                        const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
-                        permissionTypes.forEach(function(element)  {
-                            if (!response.userPeremission[0][element].Edit) {
-                                $(`.permissionEdit_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                            }
-                            if (!response.userPeremission[0][element].View) {
-                                $(`.permissionView_${element}`).each(function () {
-                                    $(this).empty();
-                                });
-                            }
-                            if (!response.userPeremission[0][element].Delete) {
-                                $(`.permissionDelete_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                            }
-                            if (!response.userPeremission[0][element].Add) {
-                                $(`.permissionAdd_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                            }
-                            if (response.userPeremission[0][element].Restrict) {
-                                $(`.permissionRestrict_${element}`).each(function () {
-                                    $(this).remove();
-                                });
-                            }
-                        });
+                        $(document).ajaxStop(function(){
+
+                            const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
+                            permissionTypes.forEach(function(element)  {
+                                if (!response.userPeremission[0][element].Edit) {
+                                    $(`.permissionEdit_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].View) {
+                                    $(`.permissionView_${element}`).each(function () {
+                                        $(this).empty();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Delete) {
+                                    $(`.permissionDelete_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Add) {
+                                    $(`.permissionAdd_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (response.userPeremission[0][element].Restrict) {
+                                    $(`.permissionRestrict_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (response.userPeremission[0][element].Restrict) {
+                                        $(`.permissionRestrict_${element}`).each(function () {
+                                            $(this).remove();
+                                        });
+                                        if(element == "userManagement" && window.location.href.indexOf('user-management.html') !== -1){
+                                            history.back();
+                                        }  
+                                    }
+                            });
+                        })
                         
 //                         // overview
 //                         if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
@@ -5036,9 +5050,9 @@ if (element.roleId == 2) {
         <td>
                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
                                 <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-23.0035px, 84px);" data-popper-placement="bottom-end">
-                                    <li><a class="dropdown-item text-success view-option" href="javascript:void(0)" data-bs-effect="effect-scale">View</a></li>
-                                    <li><a class="dropdown-item text-primary edit-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale">Edit</a></li>
-                                    <li><a class="dropdown-item text-danger delete-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
+                                    <li class="permissionView_userManagement"><a class="dropdown-item text-success view-option" href="javascript:void(0)" data-bs-effect="effect-scale">View</a></li>
+                                    <li class="permissionEdit_userManagement"><a class="dropdown-item text-primary edit-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale">Edit</a></li>
+                                    <li class="permissionDelete_userManagement"><a class="dropdown-item text-danger delete-option-userAdmin" href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a></li>
                                 </ul>
                             </td>
     </tr>

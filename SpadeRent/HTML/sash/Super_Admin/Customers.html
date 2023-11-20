@@ -483,7 +483,7 @@
                                 </li>
                             </a> -->
                             <div class="top-tabs">
-                                <li class="slide permissionView_overview permissionRestrict_overView">
+                                <li class="slide permissionRestrict_overView">
                                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
                                         <i class="side-menu__icon fi fi-rs-dashboard"></i>
                                         <span class="side-menu__label">Overview</span>
@@ -495,7 +495,7 @@
                                             class="side-menu__label">Tickets</span>
                                     </a>
                                 </li> -->
-                                <li class="slide card-demo1 permissionView_customers permissionRestrict_customers">
+                                <li class="slide card-demo1 permissionRestrict_customers">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
                                         <i class="side-menu__icon fi fi-rs-users"></i>
                                         <span class="side-menu__label">Customers</span>
@@ -507,8 +507,8 @@
                                         <span class="side-menu__label">Closed Customers</span>
                                     </a>
                                 </li>
-                                <li class="slide card-demo">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
+                                <li class="slide card-demo permissionRestrict_userManagement">
+                                    <a class="side-menu__item" class="" data-bs-toggle="slide" href="user-management.html">
                                         <i class="side-menu__icon fi fi-rs-user-gear"></i>
                                         <span class="side-menu__label">User Management</span>
                                     </a>
@@ -1221,7 +1221,7 @@ function getData(){
                     success: function (response) {
                         console.log(response);
                         $(document).ajaxStop(function(){
-                            const permissionTypes = ["overView","customers","appearance","profile","closedAccount"];
+                            const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
                             permissionTypes.forEach(function(element)  {
                                 if (!response.userPeremission[0][element].Edit) {
                                 $(`.permissionEdit_${element}`).each(function () {
@@ -1576,7 +1576,7 @@ function getData(){
 
                             var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
 
-                            dropdownMenu.append("<li><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
+                            dropdownMenu.append("<li class='permissionRestrict_changePlan'><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
 
                             dropdownMenu.append("<li class='permissionRestrict_closedAccount'><a class='close-landlord dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
 

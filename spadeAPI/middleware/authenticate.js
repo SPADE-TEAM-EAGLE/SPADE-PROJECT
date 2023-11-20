@@ -437,7 +437,7 @@ const verifySuperAdmin = async (req, res, next) => {
           closedAccount,
           appearance,
           profile,
-          // userManagement,
+          userManagement,
           changePlan
 
         });
