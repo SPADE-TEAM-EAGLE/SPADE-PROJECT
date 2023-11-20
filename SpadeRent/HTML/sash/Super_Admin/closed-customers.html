@@ -1249,6 +1249,7 @@
                 },
                 success: function (response) {
                     console.log(response);
+                    $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan"];
                         permissionTypes.forEach(function(element)  {
                             if (!response.userPeremission[0][element].Edit) {
@@ -1278,7 +1279,9 @@
                                 
                             }
                         });
-//                     // overview
+
+                    });
+                        //                     // overview
 //                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
 // } else {
