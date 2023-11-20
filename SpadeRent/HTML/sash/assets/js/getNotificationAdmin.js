@@ -204,7 +204,7 @@ $("#updateAllNotifyRead").on("click", function () {
 function updateAllNotifyRead() {
   GetNotification()
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAllAdminNotification",
+    url: "https://backend.app.spaderent.com/api/spade/updateAllAdminNotification",
     type: "PUT",
 
     contentType: "application/json",
@@ -224,7 +224,7 @@ function updateDataNotify(notificationId, type) {
   console.log(notificationId, type);
   // $('#preloader').css('display','flex')
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAdminNotification",
+    url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
     type: "PUT",
     data: JSON.stringify({
       id: notificationId,

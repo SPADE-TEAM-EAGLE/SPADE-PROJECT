@@ -1205,7 +1205,7 @@
         $(document).ready(function () {
             function getData(){
                 $.ajax({
-                url: "http://localhost:3000/api/spade/protectedAdmin",
+                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1429,7 +1429,7 @@
                 }
             })
             $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1466,7 +1466,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 })
                 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1503,7 +1503,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
             var userAdminData;
             function getAllClosedLandlord() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allClosedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/allClosedLandlord",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -1568,7 +1568,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
             //     $("#preloader").css("display", "flex")
             //     var deleteUserId = $(this).attr('data-id');
             //     $.ajax({
-            //         url: "http://localhost:3000/api/spade/deleteClossedLandlord",
+            //         url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
             //         type: "DELETE",
             //         data: JSON.stringify({ id: deleteUserId }),
             //         contentType: "application/json",
@@ -1616,7 +1616,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/deleteClossedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         id: deleteUserId

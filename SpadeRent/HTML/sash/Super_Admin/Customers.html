@@ -1128,7 +1128,7 @@
 }            
 function getData(){
                 $.ajax({ 
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1351,7 +1351,7 @@ function getData(){
                     }
                 })
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1388,7 +1388,7 @@ function getData(){
                 })
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1420,7 +1420,7 @@ function getData(){
                     }
                 });
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
                     type: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1524,7 +1524,7 @@ function getData(){
             $("#confirmDelete-user").on("click", function () {
                 $("#delete-user-admin").modal("hide")
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/closedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: landlordId,
