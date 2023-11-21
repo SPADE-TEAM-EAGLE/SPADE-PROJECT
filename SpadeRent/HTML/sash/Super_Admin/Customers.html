@@ -1431,9 +1431,10 @@ function getData(){
                         var table = $("#table_body");
                         table.empty();
                         var password = 'your-secret-password';
-
-                        // Include the encrypted value in the URL
-                        response?.data?.forEach(function (item) {
+                        if(response?.data?.length == 0){
+                            $("#table_body").append("<tr><td colspan='12' class='text-center'>No Data Found</td></tr>")
+                        }else{
+                            response?.data?.forEach(function (item) {
                             var row = $("<tr>");
 
                             row.append("<td></td>");
@@ -1490,9 +1491,11 @@ function getData(){
                             row.append("<td class='text-success'><p style='font-weight: 600;' class='mb-1'><b> " + (nextBilling) + "</b></p></td>");
 
                             var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
+                                console.log(item.userNuveiId,item.userNuveiId=="null")
+                                if (item.planName !== "Trial" || item.userNuveiId !== "null") {
+                                    dropdownMenu.append("<li class='permissionRestrict_changePlan'><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
 
-                            dropdownMenu.append("<li class='permissionRestrict_changePlan'><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
-
+                                }
                             dropdownMenu.append("<li class='permissionRestrict_closedAccount'><a class='close-landlord dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
 
 
@@ -1503,6 +1506,9 @@ function getData(){
 
                             table.append(row);
                         });
+
+                        }
+                        // Include the encrypted value in the URL
 
 
 

@@ -67,7 +67,7 @@ function GetNotification(){
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-        
+
           const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
   
           $("#notification-container").append(
@@ -88,7 +88,7 @@ function GetNotification(){
                         plans[item.planId]
                         
             }</span><br/>  <span class="text-dark"> Price > ${
-              '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+              '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
 
               
   }</span>
@@ -126,7 +126,7 @@ function GetNotification(){
                       plans[item.planId]
                       
           }</span><br/>  <span class="text-dark"> Price > ${
-            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
 
             
 }</span>
@@ -162,7 +162,7 @@ function GetNotification(){
                       plans[item.planId]
                       
           }</span><br/>  <span class="text-dark"> Price > ${
-            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (item.plantotalAmount * 12).toFixed(2)+"/ year" : item.plantotalAmount.toFixed(2)+"/ month")
+            '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
 
             
 }</span>
