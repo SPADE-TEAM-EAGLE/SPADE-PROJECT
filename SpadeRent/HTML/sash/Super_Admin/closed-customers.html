@@ -81,7 +81,7 @@
         </div>
         <!-- /GLOBAL-LOADER -->
         <!-- Delete User Permissions popup start  -->
-    <div class="modal fade" id="delete-user-admin">
+    <!-- <div class="modal fade" id="delete-user-admin">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-body p-0">
@@ -122,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Delete User Permissions popup End  -->
         <div
             class="modal fade"
@@ -1691,7 +1691,6 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 }
                 $('#deleteLandlordId').val(userAdminDataNew.DbLandlordId)
                 $('#confirmDelete-user').attr('data-id', userAdminShow)
-                // alert(userAdminId)
                 $("#delete-user-admin").modal("show")
             })
             $(document).on("click", "#confirmDelete-user", function () {
@@ -1701,7 +1700,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     url: "http://localhost:3000/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
-                        id: deleteUserId
+                        id: $('#deleteLandlordId').val()
                     }),
                     contentType: "application/json",
                     headers: {
