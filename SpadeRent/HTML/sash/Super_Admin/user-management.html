@@ -931,7 +931,9 @@ color: #000;
         .bg-white-black {
             background-color: lightblue;
         }
-        
+        .header{
+            padding-bottom: 1rem !important;
+        }
     </style>
 </head>
 
@@ -3895,12 +3897,12 @@ color: #000;
     <script defer>
         $(document).ready(function () {
             // $('.select2').select2();
-            // $('#addModal').on('shown.bs.modal', function () {
+            $('#add-user-permissions').on('shown.bs.modal', function () {
 
-            //     $('.select2-show-search').select2({
-            //         dropdownParent: $('#addModal')
-            //     });
-            // });
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#add-user-permissions')
+                });
+            });
             $('#edit-user-permissions').on('shown.bs.modal', function () {
 
                 $('.select2-show-search').select2({
@@ -4315,7 +4317,7 @@ color: #000;
                         $("#zip").val(response.zipCode);
                         $("#businessName").val(response.zipCode);
                         $("#tenant-name").empty();
-                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span>`+
+                        $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> `+
                                                 toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                         
                         $("#profile").empty();
@@ -5743,7 +5745,7 @@ if (userAdminDataNew.roleId == 2) {
                 });
                 return isValid;
             }
-            $("#add-user-permissions").on("input change", "input[required], select[required], textarea[required]", function () {
+            $("#add-user-permissions").on("input change click", "input[required], select[required], textarea[required],.delete-file", function () {
                 var isValid = validateForm();
                 $("#add-new-user-submit").prop("disabled", !isValid);
             });
@@ -5762,7 +5764,7 @@ if (userAdminDataNew.roleId == 2) {
                 });
                 return isValid;
             }
-            $("#edit-user-permissions").on("input change", "input[required], select[required], textarea[required]", function () {
+            $("#edit-user-permissions").on("input change click", "input[required], select[required], textarea[required],.delete-file", function () {
                 var isValid = validateForm2();
                 $("#update_userAdmin").prop("disabled", !isValid);
             });

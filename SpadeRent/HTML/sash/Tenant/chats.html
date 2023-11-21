@@ -3597,7 +3597,7 @@
                             const imageUrls = message.message.split(',');
                             imageUrls.forEach((imageUrl) => {
                                 if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
-                                    messs2 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+                                    messs2 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf text-dark" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
@@ -3677,7 +3677,7 @@
                             // Handle PDF files
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
-                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                                    .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf text-dark')) // Add your PDF icon class here
                             );
                         } else {
                             // Handle S3 bucket URLs for images and PDFs
@@ -3689,7 +3689,7 @@
                             } else if (file?.imageKey?.endsWith('.pdf')) {
                                 fileElement.append(
                                     $('<div>').addClass('file-preview')
-                                        .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                                        .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf text-dark'))
                                 );
                             } else {
                                 // Handle other files (you can modify this part as needed)
@@ -3913,7 +3913,7 @@
                                                             imageUrls.forEach((imageUrl) => {
                                                                 if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
 
-                                                                    messs1 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+                                                                    messs1 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf text-dark" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
@@ -3946,7 +3946,7 @@
         const imageUrls = response.data[i]['message'].split(',');
                                                             imageUrls.forEach((imageUrl) => {
                                                                 if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
-                                                                    messs1 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf" style="font-size: 115px;display: contents;"></i></a>
+                                                                    messs1 += `<a href="JavaScript:void(0);" class="text" style="text-align: center;"><i class="fi fi-rs-file-pdf text-dark" style="font-size: 115px;display: contents;"></i></a>
         <ul class="dropdown-menu dropdown-menu-top"><li><a class="dropdown-item text-danger edit-option" id="">Delete</a></li><li><a class="dropdown-item text-primary">Download</a></li></ul>
         <a class="text-primary" href="${imageUrl}">Download</a>
         `;
