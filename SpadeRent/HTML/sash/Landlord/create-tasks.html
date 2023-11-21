@@ -3547,7 +3547,7 @@
                         // Handle other files (you can modify this part as needed)
                         fileElement.append(
                             $('<div>').addClass('file-preview')
-                                .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                         );
                     }
                 }
@@ -3874,10 +3874,10 @@ $("#view-task-line-item").append(`<tr class="tr">
                     const files = data.taskImages;
                     $("#view-task-images").empty();
                     files.forEach((file) => {
-                        if (file?.Image?.endsWith(".pdf")) {
+                        if (file?.Image?.endsWith(".pdf") || file?.Image?.endsWith(".docx") || file?.Image?.endsWith(".doc")) {
                             $("#view-task-images").append(`
                 <a href="${file.Image}" download="${file.imageKey}">
-                    <i class="fi fi-rs-file-pdf" style="font-size: 100px;"></i>
+                    <i class="fi fi-rs-file-pdf" style="font-size: 50px;"></i>
                 </a>&nbsp;`);
                         } else {
                             $("#view-task-images").append(`
@@ -4583,8 +4583,9 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                                 var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                                if (task?.taskImages[0]?.imageKey?.includes('pdf')) {
-                                    var image = '<td><i style="font-size:50px" class="fi fi-rs-file-pdf"></i></td>';
+                                
+                                if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
+                                    var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
 
                                 } else {
                                     if (task?.taskImages[0]?.Image !== null) {
