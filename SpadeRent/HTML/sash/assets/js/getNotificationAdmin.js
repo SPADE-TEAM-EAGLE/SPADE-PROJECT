@@ -115,7 +115,7 @@ function GetNotification(){
             <div class="d-flex align-items-center">
             <div class="me-2">
             <span class="avatar avatar-md brround cover-image" style="background-image:url('${
-              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/bell-ring.png' )
              }')!important; ">
             </div>
             <div class="">
@@ -151,7 +151,7 @@ function GetNotification(){
             <div class="d-flex align-items-center">
             <div class="me-2">
             <span class="avatar avatar-md brround cover-image" style="background-image:url('${
-              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/icons/Group 10346.png' )
+              ( item?.Image? item?.Image?.split(",")[0] : '../assets/images/bell-ring.png' )
              }')!important; ">
             </div>
             <div class="">

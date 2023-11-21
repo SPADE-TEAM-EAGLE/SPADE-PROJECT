@@ -1100,6 +1100,7 @@
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
     <script src="../assets/plugins/chart/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+    <script src="../assets/js/getNotificationAdmin.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
     <script>
@@ -1491,9 +1492,13 @@ function getData(){
                             row.append("<td class='text-success'><p style='font-weight: 600;' class='mb-1'><b> " + (nextBilling) + "</b></p></td>");
 
                             var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
-                                console.log(item.userNuveiId,item.userNuveiId=="null")
-                                if (item.planName !== "Trial" || item.userNuveiId !== "null") {
+                                
+                                if (item.planName !== "Trial") {
+                                    if(item.userNuveiId){
+                                        console.log(item.planName,item.userNuveiId,(item.planName !== "Trial" || !item.userNuveiId))
                                     dropdownMenu.append("<li class='permissionRestrict_changePlan'><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
+
+                                    }
 
                                 }
                             dropdownMenu.append("<li class='permissionRestrict_closedAccount'><a class='close-landlord dropdown-item text-dark' href='javascript:void(0)' style='display: flex; align-items: start;'> Close Account</a></li>");
