@@ -1137,7 +1137,7 @@ exports.insertInUserPermissionUsers =
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, roleId, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
   exports.updateUserAdminQuery = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, roleId = ?, address = ?, city = ?, state = ?, zipcode = ?, images = ? , imageKey = ?, updated_at = ? WHERE id = ?"; 
-  exports.deleteLandlordQuery = "SELECT * FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
+  exports.deleteLandlordQuery = "SELECT *, ca.id as closedLandlordId FROM spade_Rent.closedAccount as ca join plan as  p on ca.planId = p.id"; 
   exports.allLandlordPlanQuery = "SELECT CASE WHEN p.planName IS NULL THEN 'Total' ELSE p.planName END AS planName, COUNT(u.id) AS userCount FROM users AS u JOIN plan AS p ON p.id = u.PlanID GROUP BY p.planName WITH ROLLUP"; 
   exports.landlordReportAdminQuery = "SELECT u.FirstName,u.id, u.LastName, u.Email, u.Phone, pl.planName, COUNT(DISTINCT p.id) as totalProperty, COUNT(DISTINCT t.id) as totalTenants, COUNT(DISTINCT tk.id) as totalTasks FROM users as u LEFT JOIN plan as pl ON u.PlanID = pl.id LEFT JOIN property as p ON u.id = p.landlordID LEFT JOIN tenants as t ON u.id = t.landlordID LEFT JOIN task as tk ON u.id = tk.landlordID GROUP BY u.FirstName, u.LastName,u.id, u.Email, u.Phone, pl.planName"; 
   exports.updateAdmin = "UPDATE superAdmin SET fName = ?, lName = ?, email = ?, phone = ?, address = ?, city = ?, state = ?, zipcode = ?,businessName=? ,images = ? , imageKey = ? WHERE id = ?";
