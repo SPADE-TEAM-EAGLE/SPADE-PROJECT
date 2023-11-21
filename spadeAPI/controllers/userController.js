@@ -1466,6 +1466,7 @@ exports.propertyUpdate = async (req, res) => {
       images,
     } = req.body;
     const { userId } = req.user;
+    // const { userId } = req.body;
     const updateData = [
       userId,
       propertyName,
