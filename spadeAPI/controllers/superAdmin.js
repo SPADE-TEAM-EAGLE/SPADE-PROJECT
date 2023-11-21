@@ -792,7 +792,7 @@ exports.deleteClossedLandlord = async function (req, res) {
   try {
     const deleteResult = await queryRunner(deleteQuery("closedAccount","id"),[id]);
     if (deleteResult[0].affectedRows > 0) {
-      return res.status(200).json({ message: " Clossed Landlord is deleted"});
+      return res.status(200).json({ message: "Clossed Landlord is deleted"});
     } else {
       return res.status(500).send("Error in Clossed Landlord");
     }

@@ -69,6 +69,9 @@
             margin-bottom: 10px;
             margin-top: 60px;
         }
+        .header{
+            padding-bottom: 1rem !important;
+        }
         </style>
     </head>
     <body class="app sidebar-mini ltr light-mode">
@@ -245,96 +248,86 @@
             </div>
         </div>
     </div> -->
-        <div
-            class="modal fade"
-            id="delete-user-admin"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title">Close
-                                <strong class="color-primary">Account</strong>
-                            </h2>
-                            <span class="">Closing your account will serve as your notice of termination of the Spade Rent (or any other Spade Rent agreement governing this account) for this account.</span>
-                        </div>
-                        <button
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            id="top-close"
-                        >
-                            <span aria-hidden="true">
-                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+    <div class="modal fade" id="myModal_success" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                        <!-- <div class="card-header border-0 pt-3">
+                            <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fi fi-rs-circle-xmark text-dark"></i></span>
+                            </button>
+                        </div> -->
+                        <div class="card-body text-center">
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                    <path fill="#13bfa6"
+                                        d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
+                                        opacity=".99" />
+                                    <path fill="#71d8c9"
+                                        d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
+                                </svg>
                             </span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div
-                            id="collapseOne"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-12">
-                                    <input type="hidden" id="deleteLandlordId">
-                                    <label for="inputState" class="form-label fw-bold">Select Reason</label>
-                                    <select
-                                        class="form-select form select2-show-search"
-                                        id="reason"
-                                        onchange="showOtherInput()"
-                                        required
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option value="No longer using the service/product">No longer using the service/product</option>
-                                        <option value="Found an alternative service/product">Found an alternative service/product</option>
-                                        <option value="Unsatisfactory customer service">Unsatisfactory customer service</option>
-                                        <option value="Technical issues or bugs">Technical issues or bugs</option>
-                                        <option value="Concerns about data privacy/security">Concerns about data privacy/security</option>
-                                        <option value="Cost-related reasons">Cost-related reasons</option>
-                                        <option value="User interface/user experience issues">User interface/user experience issues</option>
-                                        <option value="Too many advertisement">Too many advertisement</option>
-                                        <option value="Limited features or functionality">Limited features or functionality</option>
-                                        <option value="Changed personal circumstances">Changed personal circumstances</option>
-                                        <option value="Difficulty in canceling or managing the account">Difficulty in canceling or managing the account</option>
-                                        <option value="Received better offers or promotions elsewhere">Received better offers or promotions elsewhere</option>
-                                        <option value="Quality of the product/service">Quality of the product/service</option>
-                                        <option value="Account management difficulties">Account management difficulties</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <span class="text-danger d-none">Status is required!</span>
-                                </div>
-                                <div class="col-12" id="otherInputContainer" style="display: none;">
-                                    <label for="inputEmail3" id="otherInput" class="form-label fw-bold">Other</label>
-                                    <textarea
-                                        class="form-control w-100"
-                                        id="reasonOther"
-                                        name=""
-                                        id=""
-                                        rows="10"
-                                    ></textarea>
-                                </div>
-                            </form>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Success</h4>
+                            <p class="card-text text-dark">Password change successfully</p>
                         </div>
+                        <!-- <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
-                    <div class="modal-footer d-flex justify-content-end">
-                        <div class="">
-                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
-                            <!-- <a href="javascript:void(0)" class="btn btn-outline-secondary">Secondary</a> -->
-                            <a
-                                href="javascript:void(0)"
-                                class="btn text-light btn-pill button modalValid"
-                                style="background-color:#1467B0;"
-                                id="confirmDelete-user"
-                            >Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+         <!-- Delete User Permissions popup start  -->
+    <div class="modal fade" id="delete-user-admin">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-header border-0 pt-3">
+                            <button class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                    <path fill="#f07f8f"
+                                        d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
+                                    <circle cx="12" cy="17" r="1" fill="#e62a45" />
+                                    <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
+                                </svg>
+                            </span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                            <p class="card-text">
+                                This will delete your User. Are
+                                you sure?
+                            </p>
+                        </div>
+                        <div class="card-footer text-center border-0 pt-0">
+                            <div class="row">
+                                <div class="text-center">
+                                    <a href="javascript:void(0)" class="btn btn-white me-2" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                        id="confirmDelete-user">Delete</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Delete User Permissions popup End  -->
         <!-- PAGE -->
         <div class="page">
             <div class="page-main">
@@ -1525,9 +1518,9 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                                 } else {
                                     ColorOfPlan = `style="background-color: #f7c14259;color: #F7C042;"`
                                 }
-                                $('#table_body').append(` <tr data-id="${element.id}">
+                                $('#table_body').append(` <tr data-id="${element.closedLandlordId}">
                                                         <td></td>
-                                                        <td class="landlordId" style="font-weight: 600;">US-${element.id}</td>
+                                                        <td class="landlordId" style="font-weight: 600;">US-${element.closedLandlordId}</td>
                                                         <td style="font-weight: 600;" class="landlordName"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
                                                         <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A"}</p><span>${element.phone ? element.phone : "N/A"}</span></td>
                                                         <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" ${ColorOfPlan}><i class="fi fi-rs-dot-circle me-1"></i><b>${element.planName ? element.planName : "N/A"} Plan Purchased</b></span></a></td>
@@ -1602,13 +1595,13 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 userAdminShow = Number($(this).closest("tr").attr("data-id"));
                 var lengthAdmins = userAdminData.length
                 for (var i = 0; i <= lengthAdmins; i++) {
-                    if (userAdminData[i]['id'] == userAdminShow) {
+                    if (userAdminData[i]['closedLandlordId'] == userAdminShow) {
                         var userAdminDataNew = userAdminData[i];
                         break;
                     }
                 }
-                $('#deleteLandlordId').val(userAdminDataNew.DbLandlordId)
-                $('#confirmDelete-user').attr('data-id', userAdminShow)
+                // $('#deleteLandlordId').val(userAdminDataNew.closedLandlordId)
+                $('#confirmDelete-user').attr('data-id', userAdminDataNew.closedLandlordId)
                 $("#delete-user-admin").modal("show")
             })
             $(document).on("click", "#confirmDelete-user", function () {
@@ -1618,7 +1611,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
-                        id: $('#deleteLandlordId').val()
+                        id: deleteUserId
                     }),
                     contentType: "application/json",
                     headers: {
@@ -1628,12 +1621,14 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         console.log("closedLandlord");
                         console.log(response);
                         $("#delete-user-admin").modal("hide")
-                        $("#myModal_success p").text("User deleted succesfully")
-                            $("#myModal_success").modal("show")
-                            setTimeout(function () {
-                                $("#myModal_success").modal("hide");
-                            }, 2000);
-                        getAllClosedLandlord()
+                        if(response.message == "Clossed Landlord is deleted"){
+                            $("#myModal_success p").text("User deleted succesfully")
+                                $("#myModal_success").modal("show")
+                                setTimeout(function () {
+                                    $("#myModal_success").modal("hide");
+                                }, 2000);
+                            getAllClosedLandlord()
+                        }
                         $("#preloader").css("display", "none")
 
                     }, error: function (xhr, status, error) {
