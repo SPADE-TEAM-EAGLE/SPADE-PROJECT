@@ -1119,7 +1119,7 @@ exports.insertInUserPermissionUsers =
   exports.tenantStatusCountQuery = "SELECT (SELECT count(id) as currentTenant FROM tenants WHERE tenantCreated_at >= ? AND tenantCreated_at <= ? AND landlordID = ?) as currentTenant, count(id) as totalTenant FROM tenants WHERE landlordID = ?";
   exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
   exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";
-  exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant) VALUES (?,?,?,?,?,?,?,?)";
+  exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant,nickName,digits,cardBrand,cardType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   exports.updateUserBank = "UPDATE users SET nuveiId = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateUserBankRecurring = "UPDATE users SET nuveiId = ?, PlanID = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateBankAccountStatusquery = "UPDATE bankAccount SET Active = ? WHERE UPOID = ?";

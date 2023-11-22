@@ -18,7 +18,7 @@ const { deleteImageFromS3 } = require("../helper/S3Bucket");
 //  ############################# Create bank Account ############################################################
 exports.CreateBankAccount = async (req, res) => {
     const {userType} = req.user;
-    const { UPOID, accountName, description, active, userId,accountTypeTenant } = req.body;
+    const { UPOID, accountName, description, active, userId,accountTypeTenant,nickName,digits,cardBrand,cardType } = req.body;
     const currentDate = new Date();
     if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
         var status;
@@ -28,7 +28,7 @@ exports.CreateBankAccount = async (req, res) => {
             }else{
                 status="Inactive"
             }
-            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant]);
+            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant,nickName,digits,cardBrand,cardType]);
             if (createResult[0].affectedRows === 0) {
                 res.status(400).send("Error");
             } else {
