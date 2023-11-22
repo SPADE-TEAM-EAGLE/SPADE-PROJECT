@@ -33,7 +33,9 @@ const {
   checkMyAllTenantsInvoicePaidQuerytenant,
   deleteTenantAccountData,
   checkUpaidInvoiceQuery,
-  tenantStatusCountQuery
+  tenantStatusCountQuery,
+  tenantsCount,
+  tenantsIdUpdate
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -65,9 +67,9 @@ exports.createTenants = async (req, res) => {
       leaseEndDate,
       increaseRent,
       increaseRentData,
-      // notify
     } = req.body;
     const { userId } = req.user;
+    // const { userId } = req.body;
     // console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [
       email,
@@ -112,12 +114,20 @@ exports.createTenants = async (req, res) => {
           [status, propertyUnitID, propertyID]
         );
         if (propertyUnitsResult[0].affectedRows > 0) {
-          const selectTenantsResult = await queryRunner(
-            selectQuery("users", "id"),
-            [userId]
-          );
-          const landlordEmail = selectTenantsResult[0][0].Email;
-          const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
+          const tenantCountIdResult = await queryRunner(tenantsCount, [userId]);
+          // console.log(tenantCountIdResult[0][0].count)
+          let customTenantId = tenantCountIdResult[0][0].count + 1;
+          // console.log(customTenantId)
+          
+          customTenantId = lastName+customTenantId;
+          // console.log(customTenantId)
+          const tenantIdUpdateResult = await queryRunner(tenantsIdUpdate ,[customTenantId, tenantsInsert[0].insertId]);
+          // const selectTenantsResult = await queryRunner(
+          //   selectQuery("users", "id"),
+          //   [userId]
+          // );
+          // const landlordEmail = selectTenantsResult[0][0].Email;
+          // const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -314,57 +324,6 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
 };
 //  ############################# Tenant Verify Reset Email Code ############################################################
 
-//  ############################# Tenant Update Password ############################################################
-// exports.tenantAllPaidInvoice = async (req, res) => {
-//   try {
-//     const { userId } = req.user;
-//     // Check if tenant has any unpaid invoices
-//     const tenantAllPaidInvoiceResult = await queryRunner(
-//       checkTenantInvoicePaidQuery,
-//       [userId]
-//     );
-//     // No un-paid invoices found, update tenant account
-//     if (tenantAllPaidInvoiceResult[0].length === 0) {
-//       const tenantAllPaid = await queryRunner(updateTenantAccountQuery, [
-//         0,
-//         userId,
-//       ]);
-//       // updateAllStatusVacantQuery
-//       await queryRunner(updateAllStatusVacantQuery, [
-//         "Vacant",
-//         userId,
-//       ]);
-//       const getLandlordDetailed = await queryRunner(
-//         getLandlordDetailedQuery,
-//         [userId]
-//       );
-//       const mailSubject = "Tenant has paid all invoices and is now Inactive";
-//       if(getLandlordDetailed[0].length > 0){
-//         await sendMail(
-//           getLandlordDetailed[0][0].Email,
-//           mailSubject,
-//           "as",
-//           `${getLandlordDetailed[0][0].FirstName} ${getLandlordDetailed[0][0].LastName}`
-//         );
-//       }
-//         // console.log(tenantData[i].emai);
-
-//       if (tenantAllPaid[0].affectedRows > 0) {
-//         res.status(200).json({
-//           message: "Tenant has paid invoices",
-//         });
-//       }
-//     } else {
-//       res.status(200).json({
-//         message: "Tenant has unpaid invoices",
-//       });
-//     }
-//   } catch (error) {
-//     res.status(400).json({
-//       message: error.message,
-//     });
-//   }
-// };
 exports.tenantAllPaidInvoice = async (req, res) => {
   try {
     const { userId } = req.user;

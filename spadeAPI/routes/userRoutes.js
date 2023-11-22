@@ -94,7 +94,8 @@ router.get(
   verifyToken,
   userController.viewAllPropertyTenant
 );
-// router.post('/tenants',verifyToken,tenantController.createTenants);
+// router.post('/tenants',tenantController.createTenants);
+
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post("/sendInvitationLink" , tenantController.sendInvitationLink);
