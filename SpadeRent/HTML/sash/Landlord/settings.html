@@ -2206,6 +2206,26 @@ Draft</button> -->
                                             </span>
                                         </div>
                                         <div class="col-lg-6 col-xl-6">
+                                            <label for="accountName-nick" class="form-label fw-bold">
+                                                Account
+                                            Nick Name
+                                                <spnan class="text-danger">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control form"
+                                                id="accountName-nick"
+                                                placeholder="Enter a nick Name"
+                                                style="padding: 1rem 0.75rem !important;"
+                                            >
+                                            <span class="text-danger d-none">
+                                                Property
+                                            name required!
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-6 col-xl-6">
                                             <div class="field form-group">
                                                 <label class="form-label fw-bold" for="card-number-bank" data-tid="scwsdk.form.card_number_label">
                                                     Card
@@ -2218,7 +2238,7 @@ Draft</button> -->
                                                 <div class="underline"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-xl-6">
+                                        <div class="col-lg-3 col-xl-3">
                                             <div class="field form-group">
                                                 <label class="fw-bold" for="card-expiry-bank" data-tid="scwsdk.form.card_expiry_label">
                                                     Expiration
@@ -2230,7 +2250,7 @@ Draft</button> -->
                                                 <div class="underline"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-xl-6">
+                                        <div class="col-lg-3 col-xl-3">
                                             <div class="field form-group">
                                                 <label class="fw-bold" for="card-cvc-bank" data-tid="scwsdk.form.card_cvc_label">
                                                     CVV
@@ -12237,6 +12257,17 @@ Draft</button> -->
                                                                                             </div>
                                                                                         </li>
                                                                                         <li class="d-flex justify-content-between">
+                                                                                            <a class="text-dark" href="javascript:void(0)">ACCOUNT NICK NAME</a>
+                                                                                            <div class="form-check m-0">
+                                                                                                <input
+                                                                                                    type="checkbox"
+                                                                                                    class="form-check-input mt-2 customized-check"
+                                                                                                    id="exampleCheck1"
+                                                                                                    checked
+                                                                                                >
+                                                                                            </div>
+                                                                                        </li>
+                                                                                        <li class="d-flex justify-content-between">
                                                                                             <a class="text-dark" href="javascript:void(0)">DESCRIPTION</a>
                                                                                             <div class="form-check m-0">
                                                                                                 <input
@@ -12286,7 +12317,9 @@ Draft</button> -->
                                                                                             <th class="d-none">UPOID</th>
                                                                                             <th>#</th>
                                                                                             <th>CARD TYPE</th>
-                                                                                            <th>ACCOUNT-HOLDER NAME</th>
+                                                                                            <th>ACCOUNT NAME</th>
+                                                                                            <th>ACCOUNT NICK NAME</th>
+
                                                                                             <th>DESCRIPTION</th>
                                                                                         </tr>
                                                                                     </thead>
@@ -14822,7 +14855,17 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         response.data?.forEach(({ category, landLordId }, index) => {
                             counter++
 
-                            $("#add-item-container5").append(`<tr class="tr">
+                            if(index<=2){
+                                $("#add-item-container5").append(`<tr class="tr">
+                                                        <td>
+                                                            <label for=""><b>Categories</b></label>
+                                                            <input type="text" name=""
+                                                                class="form-control vendor-category" value='${category}' readonly>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>`)
+                            }else{
+                                $("#add-item-container5").append(`<tr class="tr">
                                                         <td>
                                                             <label for=""><b>Categories</b></label>
                                                             <input type="text" name=""
@@ -14835,6 +14878,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                                                     class="fi fi-rs-trash text-danger fs-5"></i>
                                                             </button></td>
                                                     </tr>`)
+                            }
                         })
 
                     },
@@ -14947,8 +14991,21 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#add-item-container1").empty()
                         response.data?.forEach(({ id, categorieName, landLordId, setTaxes, taxable }, index) => {
                             counter++
+                            if(index<=2){
+                                $("#add-item-container1").append(`<tr class="tr">
+<td>
+    <label for=""><b>Categories</b></label>
+    <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
+</td>
+<td style="width: 1px;">
+    <label for=""><b>Taxable</b></label>
+    <div class="material-switch pull-right mt-1"> <input id="someSwitchOptionInfo${counter}" class="category-tax" name="someSwitchOption${counter}" type="checkbox" ${taxable == 1 ? 'checked' : ''}> <label for="someSwitchOptionInfo` + counter + `" class="label-info"></label> </div></td>
+<td><</td>
+</tr>`)
+ 
 
-                            $("#add-item-container1").append(`<tr class="tr">
+                            }else{
+                                $("#add-item-container1").append(`<tr class="tr">
 <td>
     <label for=""><b>Categories</b></label>
     <input type="text" name="category" class="form-control category" value="${categorieName}" id="${id}">
@@ -14960,7 +15017,12 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
     <i class="fi fi-rs-trash text-danger fs-5"></i>
 </button></td>
 </tr>`)
-                            if (taxable == 1) {
+ 
+
+                            }
+
+
+if (taxable == 1) {
                                 taxableCounter++
                                 if (taxableCounter == 1) {
                                     $('#tax').val(setTaxes);
@@ -15154,7 +15216,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 row.append($("<td class='d-none upoid'>").text(entry.UPOID));
                                 row.append($("<td>").text(index + 1));
                                     row.append($("<td>").html("<img src='" + "../assets/images/SPRK.png" + "' alt='image' class='img-fluid' style='width: 220px; height: 25px;'>"));
-                                row.append($("<td>").html("<b>" + entry.accountName + "</b>"));
+                                row.append($("<td>").html("<b>" + entry.accountName +"<p class='fw-light'>Card Number: *****"+entry.digits+"</p>"+ "</b>"));
+                                    row.append($("<td>").html("<b>" + (entry.nickName?entry.nickName:"N/A") + "</b>"));
                                 row.append($("<td>").text(entry.description ? entry.description : "N/A"));
                                 
                                     
@@ -18243,18 +18306,25 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }, function (res) {
                             console.log(res.userPaymentOptionId)
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                                console.log(res)
+
                                 $.ajax({
-                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccount",
+                                    url: "http://localhost:3000/api/spade/CreateBankAccount",
                                     type: "POST",
                                     contentType: "application/json",
                                     headers: {
                                         Authorization: "Bearer " + localStorage.getItem("authtoken")
 
                                     },
+
                                     data: JSON.stringify({
                                         userId: userData.userId,
                                         UPOID: res.userPaymentOptionId,
                                         accountName: $("#accountName").val(),
+                                        nickName: $("#accountName-nick").val(),
+                                        digits:res?.last4Digits,
+                                        cardType:"",
+                                        cardBrand:"",
                                         description: $("#description-bank").val(),
                                         active: "Active",
                                         accountTypeTenant: ""
