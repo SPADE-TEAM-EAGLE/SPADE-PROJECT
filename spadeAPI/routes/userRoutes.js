@@ -328,4 +328,5 @@ router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotificat
 router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
 router.put("/updateAllAdminNotification",verifySuperAdmin,superAdmin.updateAllAdminNotification);
 router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossedLandlord);
+router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
 

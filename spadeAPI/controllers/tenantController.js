@@ -1196,3 +1196,33 @@ exports.TenantStatusCP = async (req, res) => {
 //  ############################# Tenant status CP End ############################################################
 
 
+
+
+//  ############################# Tenant Check mail Start ############################################################
+exports.checkEmailTenants = async function (req, res) {
+  const { email } = req.query;
+  // const { email } = req.body;
+  try {
+    const selectResult = await queryRunner(selectQuery("tenants","email"), [ 
+      email,
+  ]);
+
+    if (selectResult[0].length > 0 ) {
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    } 
+    else {
+      res.status(200).json({
+                 message: "New Tenant",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+//  ############################# Tenant Check mail End ############################################################
+
+
