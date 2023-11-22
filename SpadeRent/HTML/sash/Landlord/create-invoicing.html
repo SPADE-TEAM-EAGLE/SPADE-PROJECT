@@ -4095,6 +4095,17 @@
                                                                 id="exampleCheck1" checked>
                                                         </div>
                                                     </li> -->
+                                                    <li class="d-flex justify-content-between">
+                                                        <a href="javascript:void(0)" class="text-dark">ID</a>
+                                                        <div class="form-check m-0">
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input mt-2"
+                                                                id="exampleCheck1"
+                                                                checked
+                                                            >
+                                                        </div>
+                                                    </li>
                                                 <li class="d-flex justify-content-between">
                                                     <a href="javascript:void(0)" class="text-dark">TENANT NAME</a>
                                                     <div class="form-check m-0">
@@ -4232,6 +4243,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th class="d-none">INVOICE NO</th>
+                                                    <th class="">ID</th>
                                                     <th>TENANT NAME</th>
                                                     <th>MEMO/DESCRIPTION</th>
                                                     <th>INVOICE DATE</th>
@@ -5842,7 +5854,8 @@ $(".plan_remaining_days_data").each(function(){
                             response.data[0]?.forEach(function (invoice, index) {
 
                                 var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
-                                var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                                var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                                var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
 
                                 var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">' + invoice.firstName + " " + invoice.lastName + `</a><br><small>${invoice.tPhone}</small>` + '</td>';
                                 var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
@@ -5887,7 +5900,7 @@ $(".plan_remaining_days_data").each(function(){
                                                         </td>`
 
 
-                                var row = '<tr>' + serial + invoiceNumber + tenantName + memoDescription + invoiceDate +
+                                var row = '<tr>' + serial +invoiceNumberHide +invoiceNumber + tenantName + memoDescription + invoiceDate +
                                     propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
 
                                 // Append the row to the table body

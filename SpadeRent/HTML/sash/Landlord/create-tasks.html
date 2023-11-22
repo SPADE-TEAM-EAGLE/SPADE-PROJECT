@@ -2515,6 +2515,17 @@
                                                                 </a>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
+                                                                <a class="text-dark" href="javascript:void(0)">ID</a>
+                                                                <div class="form-check m-0">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input mt-2"
+                                                                        id="exampleCheck1"
+                                                                        checked
+                                                                    >
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">IMAGE</a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -2646,6 +2657,8 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
+                                                                <th>ID</th>
+
                                                                 <th>Image</th>
                                                                 <th>TASK</th>
                                                                 <th>ASSIGNED TO</th>
@@ -4583,7 +4596,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                                 var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                                
+                                var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
                                 if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
 
@@ -4701,7 +4714,7 @@ if (task.priority == 'High') {
                                     // `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${property.id}">View</a></li>` +
                                     '</ul></td>';
                                 // Create a table row and append the generated columns
-                                var row = '<tr>' + serial + image + taskName + assignTo + dueDate +
+                                var row = '<tr>' + serial+taskId + image + taskName + assignTo + dueDate +
                                     relatedTo + status + dropdownMenu + '</tr>';
 
                                 // Append the row to the table body

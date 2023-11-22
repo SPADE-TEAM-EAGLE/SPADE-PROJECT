@@ -2899,6 +2899,17 @@
                                                             </a>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
+                                                            <a class="text-dark" href="javascript:void(0)">ID</a>
+                                                            <div class="form-check m-0">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="form-check-input mt-2"
+                                                                    id="exampleCheck1"
+                                                                    checked
+                                                                >
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between">
                                                             <a class="text-dark" href="javascript:void(0)">Tenant Name</a>
                                                             <div class="form-check m-0">
                                                                 <input
@@ -3064,6 +3075,7 @@
                                                             <th>SELECT</th>
                                                             <th>#</th>
                                                             <th class="d-none">TENANT ID</th>
+                                                            <th>ID</th>
                                                             <th>TENANT NAME</th>
                                                             <th>CONTACT INFO</th>
                                                             <th>PROPERTY ADDRESS</th>
@@ -5704,7 +5716,9 @@ $(".plan_remaining_days_data").each(function(){
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                         var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check text-center"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
                         var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                        var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var tenantIdHidden = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var tenantId = '<td class="" style="font-weight: 600;">' + tenant.cTenantId + '</td>';
+                        
                         var created_at = '<td class="created-at d-none" style="font-weight: 600;">' + tenant.tenantCreated_at + '</td>';
                         // var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant
                         // .id + '</td>';
@@ -5746,7 +5760,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
 
 
-                        var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
+                        var row = '<tr>' + checkbox + serial +tenantIdHidden+ tenantId + tenantName + contactinfo + propertyAddress +
                             assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
 
                         // Append the row to the table body
