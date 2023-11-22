@@ -1287,9 +1287,9 @@ exports.property = async (req, res) => {
     const mailSubject = "New Property Added";
     await propertyMail(propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email )
     
-    const propertyCountIdResult = await queryRunner(propertyCount, [propertyResult[0].insertId]);
+    const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
     let customPropertyId = propertyCountIdResult[0][0].count + 1;
-     customPropertyId = propertyName+customPropertyId;
+    customPropertyId = propertyName+customPropertyId;
     const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
     res.status(200).json({
       message: "Property created successful!!!",
