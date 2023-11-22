@@ -2563,6 +2563,7 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th class="d-none">Landlord ID</th>
+                                                            <th class="d-none">ID</th>
                                                             <th>ID</th>
                                                             <th>IMAGE</th>
                                                             <th>NAME</th>
@@ -4016,7 +4017,7 @@ $(".plan_remaining_days_data").each(function(){
             // Toggle the visibility of the corresponding column
 
             $('table').find('tr').each(function () {
-                var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });
 
@@ -4407,8 +4408,10 @@ $(".plan_remaining_days_data").each(function(){
                             var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             var serial = `<td style="font-weight: 600;">${(index + 1)}</td>`
                             var id = `<td style="font-weight: 600;" class="d-none">${property.landlordID}</td>`
-                            var propertyId = '<td class="property-id" style="font-weight: 600;">' + property
+                            var propertyIdHide = '<td class="property-id d-none" style="font-weight: 600;">' + property
                                 .id + '</td>';
+                            var propertyId = '<td class="" style="font-weight: 600;">' + property
+                                .cPropertyId + '</td>';
                             if(property.images[0]?.imageURL){
                                 if(property.images[0]?.imageURL.includes(".pdf") || property.images[0]?.imageURL.includes(".docx") || property.images[0]?.imageURL.includes(".doc") || property.images[0]?.imageURL.includes(".xls") || property.images[0]?.imageURL.includes(".xlsx") || property.images[0]?.imageURL.includes(".ppt") || property.images[0]?.imageURL.includes(".pptx")){
                                     var image = '<td><i class="fi fi-rs-file-pdf" aria-hidden="true" style="font-size: 30px;"></i></td>';
@@ -4475,7 +4478,7 @@ $(".plan_remaining_days_data").each(function(){
                                 '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;"><i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete</a></li>'
                             '</ul></td>';
                             // Create a table row and append the generated columns
-                            var row = '<tr>' + serial + id + propertyId + image + propertyName + totalsqft +
+                            var row = '<tr>' + serial + id+propertyIdHide + propertyId + image + propertyName + totalsqft +
                                 propertyType + propertyUnits + propertyAddress + dropdownMenu + created_at + '</tr>';
 
                             // Append the row to the table body
