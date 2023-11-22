@@ -25,6 +25,8 @@ const {
   updateVendorCategory,
   taskCount,
   updateVendor,
+  taskCountId,
+  taskIdUpdate
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -405,6 +407,11 @@ exports.addTasks = async (req, res) => {
       }
       // else {
         const tasksID = TasksResult[0].insertId;
+        // for task id
+        const taskCountIdResult = await queryRunner(taskCountId, [userId]);
+        let customTaskId = taskCountIdResult[0][0].count + 1;
+        customTaskId = taskName+customTaskId;
+        const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
         if(images){
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
