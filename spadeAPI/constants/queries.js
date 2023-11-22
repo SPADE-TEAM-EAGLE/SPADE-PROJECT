@@ -1152,3 +1152,5 @@ exports.insertInUserPermissionUsers =
   exports.getAdminNotificationQuery = "SELECT *,AN.id as notificationId FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
   exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
   exports.updateAllAdminNotificationQuery = `UPDATE adminNotification SET readNotification = "1" WHERE created_deleted IN ("Deleted", "Created")`;
+  exports.propertyCount = `select count(id) as count from property where landlordID = ?`;
+  exports.propertyIdUpdate = `update property set cPropertyId = ? where id = ?`;

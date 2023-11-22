@@ -42,6 +42,7 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
+// router.post("/property",userController.property);
 router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
 router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userController.getTaskDashboardData);
 router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
