@@ -6930,9 +6930,9 @@ console.log(1)
 
 $("#owner-id").empty()
 $("#owner-id").append(`
-    <h5 class="text-black fw-bold">${userData.businessName}</h5>
+    <h5 class="text-black fw-bold">${userData.businessName?userData.businessName:"N/A"}</h5>
     <p class="text-black">
-        ${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United States<br>1-888-123-8910
+        ${userData.BusinessAddress?userData.BusinessAddress:"N/A"}<br>${userData.state?userData.state:"N/A"}, ${userData.city?userData.city:"N/A"}<br>${userData.zipCode?userData.zipCode:"N/A"}<br>United States<br>${userData.phone?userData.phone:"N/A"}
     </p>
 `);
 
