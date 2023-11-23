@@ -20,7 +20,9 @@ const {
   addVendorList,
   taskByIDQuery,
   unpaidAmountQuery,
-  updateAuthQueryTenant
+  updateAuthQueryTenant,
+  taskCountIdTenant,
+  taskIdUpdate
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -133,6 +135,8 @@ exports.getAllTaskTenant = async (req, res) => {
       res.send("Error Get Tasks" + error);
     }
   };
+
+
 // get tenant dashboard data
 exports.getTenantDashboardData = async (req, res) => {
   try {
@@ -157,62 +161,6 @@ exports.getTenantDashboardData = async (req, res) => {
     })
   }
 }
-// get tenant dashboard data
-  // exports.getAllLoggedInTenantTask = async (req, res) => {
-  //   const { userId } = req.user;
-  //   try {
-  //     // get data from task table by landlordID
-  //     const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
-  //     // if data found then
-  //     if (allTaskResult.length > 0) {
-  //       // loop through all task result
-  //       for (let i = 0; i < allTaskResult[0].length; i++) {
-  //         // get task id from task table
-  //         const taskID = allTaskResult[0][i].id;
-  //         // get data from taskassignto table by taskID
-  //         const assignToResult = await queryRunner(
-  //           selectQuery("taskassignto", "taskId"),
-  //           [taskID]
-  //         );
-  //         // if data found then get vendor id from taskassignto table
-  //         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
-  
-  //         const vendorData = [];
-  //       //  loop through vendor id 
-  //         for (let j = 0; j < vendorIDs.length; j++) {
-  //           // get data from vendor table by vendor id
-  //           const vendorResult = await queryRunner(
-  //             selectQuery("vendor", "id"),
-  //             [vendorIDs[j]]
-  //           );
-  //           // if data found then push data in vendorData array
-  //           if (vendorResult.length > 0) {
-  //             const vendor = {
-  //               ID : vendorResult[0][0].id,
-  //               name: vendorResult[0][0].firstName + " "+ vendorResult[0][0].lastName,
-  //               email: vendorResult[0][0].email,
-  //               vendorPhone:vendorResult[0][0].phone
-  //             };
-  //             vendorData.push(vendor);
-  //           }
-  //         }
-  //         // assign vendorData array to assignTo property of allTaskResult
-  //         allTaskResult[0][i].AssignTo = vendorData;
-  //       }
-  //       res.status(200).json({
-  //         data: allTaskResult,
-  //         message: "All Tasks",
-  //       });
-  //     } else {
-  //       res.status(400).json({
-  //         message: "No Tasks data found",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log("Error:", error);
-  //     res.send("Error Get Tasks");
-  //   }
-  // };
 
   exports.getTenantByID = async (req, res) => {
     try {
@@ -282,6 +230,10 @@ exports.addTasksTenant = async (req, res) => {
       }
       // else {
       const tasksID = TasksResult[0].insertId;
+      const taskCountIdResult = await queryRunner(taskCountIdTenant , [userId]);
+      let customTaskId = taskCountIdResult[0][0].count + 1;
+      customTaskId = task+customTaskId;
+      const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
       if(images){ 
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
@@ -305,17 +257,12 @@ exports.addTasksTenant = async (req, res) => {
         if (vendorResults.affectedRows === 0) {
           return res.send("Error2");
         }
-        console.log(landlordID)
         const landlordCheckResult = await queryRunner(selectQuery("users", "id"),[landlordID]);
-        // if()
-        console.log(landlordCheckResult[0])
       const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
       const landlordEmail = landlordCheckResult[0][0].Email;
       const CompanyName = landlordCheckResult[0][0].BusinessName || "N/A";
       const taskEmail = landlordCheckResult[0][0].taskEmail;
-      // const landlordName = landlordCheckResult[0][0].FirstName + " " + landlordCheckResult[0][0].LastName;
-      // const landlordContact = landlordCheckResult[0][0].Phone;
-      // const vendorNames = vendorNamearr.toString();
+      
       if (notifyLandlord.toLowerCase() === "yes") {
         await taskSendMail(
           landlordName,

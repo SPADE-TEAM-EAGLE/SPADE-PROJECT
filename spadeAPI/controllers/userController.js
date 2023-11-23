@@ -1223,7 +1223,6 @@ exports.property = async (req, res) => {
     }
     const currentDate = new Date();
     // this line check property already exist or not
-    // const propertycheckresult = await queryRunner( selectQuery("property", "propertyName", "address","landlordID" ),[propertyName, address,userId]);
     const propertycheckresult = await queryRunner( checkProperty,[propertyName, address,userId]);
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");

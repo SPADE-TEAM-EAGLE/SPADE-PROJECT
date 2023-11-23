@@ -1132,7 +1132,7 @@ exports.insertInUserPermissionUsers =
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";
   exports.allLandlordQuery = "SELECT *,u.id as landlordId,u.nuveiId as userNuveiId FROM users as u join plan as p on u.PlanID = p.id";
-  exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
+  exports.countTenantQuery = "SELECT count(id) as totalTenant FROM tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminName, adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId,landlordCreatedDate) values (?,?,?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, roleId, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
@@ -1160,3 +1160,6 @@ exports.insertInUserPermissionUsers =
   exports.taskIdUpdate = `update task set cTaskId = ? where id = ?`;
   exports.invoiceIdUpdate = `update invoice set cInvoiceId = ? where id = ?`;
   exports.invoiceCount = `select count(id) as count from invoice where landlordID = ?`;
+  exports.taskCountIdTenant = `select count(id) as count from task where tenantID = ?`;
+  exports.prospectusCount = `select count(id) as count from prospectus where landlordId = ?`;
+  exports.prospectusIdUpdate = `update prospectus set cprospectusId = ? where id = ?`;
