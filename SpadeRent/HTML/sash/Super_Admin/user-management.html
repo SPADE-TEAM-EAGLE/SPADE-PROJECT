@@ -4123,6 +4123,7 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
+                        if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
 
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -4163,6 +4164,7 @@ color: #000;
                             });
                         })
                         
+                    }
 //                         // overview
 //                         if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 

@@ -1150,6 +1150,7 @@ function getData(){
                     },
                     success: function (response) {
                         console.log(response);
+                        if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                             permissionTypes.forEach(function(element)  {
@@ -1183,6 +1184,7 @@ function getData(){
                                 }
                             });
                         })
+                    }
                         // // overview
                         // if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 

@@ -2517,6 +2517,8 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-phone.js"></script>
+
     <script>
         var image_url = " "; var image_key = " ";
         function toTitleCase(str) {
@@ -2536,6 +2538,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        if(response.userPeremission.length > 0){
                         const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function (element) {
                             if (!response.userPeremission[0][element].Edit) {
@@ -2576,6 +2579,7 @@
 
                         });
 
+                    }
                         //                     // overview
                         //                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
