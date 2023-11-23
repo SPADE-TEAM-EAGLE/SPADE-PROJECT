@@ -3941,6 +3941,14 @@ color: #000;
         }
 </script>
 <script>
+    function formatDateMDY(date){
+    var createdDateFormat = new Date(date);
+                            var day = createdDateFormat.getDate();
+                var month = createdDateFormat.getMonth() + 1;
+                var year = createdDateFormat.getFullYear();
+                var createdDateFormatComplete = month+ "-"+day+ "-"+year
+                return createdDateFormatComplete
+}
     let selectedFiles=[]
     $(document).ready(()=>{
         $.ajax({
@@ -4164,7 +4172,7 @@ $(".plan_remaining_days_data").each(function(){
 
                 
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(data.dueDate);
+                $("#dueDate_view").text(formatDateMDY(data.dueDate));
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes || "N/A");

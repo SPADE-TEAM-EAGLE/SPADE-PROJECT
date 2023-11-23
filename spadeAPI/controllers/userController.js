@@ -79,7 +79,9 @@ const {
   UnitCounts,
   UpdateUserNuveiIdQuery,
   InvoiceCategoriesQuery,
-  adminNotificationQuery
+  adminNotificationQuery,
+  propertyIdUpdate,
+  propertyCount
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -1206,6 +1208,7 @@ exports.property = async (req, res) => {
   } = req.body;
   try {
     const { userId, email,paidUnits,userName } = req.user;
+    // const { userId, email,paidUnits,userName } = req.body;
     if (
       !propertyName ||
       !address ||
@@ -1220,7 +1223,6 @@ exports.property = async (req, res) => {
     }
     const currentDate = new Date();
     // this line check property already exist or not
-    // const propertycheckresult = await queryRunner( selectQuery("property", "propertyName", "address","landlordID" ),[propertyName, address,userId]);
     const propertycheckresult = await queryRunner( checkProperty,[propertyName, address,userId]);
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
@@ -1283,6 +1285,11 @@ exports.property = async (req, res) => {
     const pAddress = address+","+city+","+state+","+zipCode;
     const mailSubject = "New Property Added";
     await propertyMail(propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email )
+    
+    const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
+    let customPropertyId = propertyCountIdResult[0][0].count + 1;
+    customPropertyId = propertyName+customPropertyId;
+    const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,

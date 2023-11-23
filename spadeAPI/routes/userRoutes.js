@@ -42,6 +42,7 @@ router.post("/updatePassword", userController.updatePassword);
 router.post("/resendCode", userController.resendCode);
 router.get("/pricingPlan", userController.pricingPlan);
 router.post("/property", verifyToken, userController.property);
+// router.post("/property",userController.property);
 router.get("/getDashPropertyData/:start/:end", verifyToken, userController.getPropertyDashboardData);
 router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userController.getTaskDashboardData);
 router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
@@ -93,7 +94,8 @@ router.get(
   verifyToken,
   userController.viewAllPropertyTenant
 );
-// router.post('/tenants',verifyToken,tenantController.createTenants);
+// router.post('/tenants',tenantController.createTenants);
+
 router.post("/tenants", verifyToken, tenantController.createTenants);
 router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationLink);
 // router.post("/sendInvitationLink" , tenantController.sendInvitationLink);
@@ -326,4 +328,5 @@ router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotificat
 router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNotification);
 router.put("/updateAllAdminNotification",verifySuperAdmin,superAdmin.updateAllAdminNotification);
 router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossedLandlord);
+router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
 

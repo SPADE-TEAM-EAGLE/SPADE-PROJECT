@@ -62,7 +62,7 @@ const verifyToken = async (req, res, next) => {
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
       const totalTenantAllow = splitAndConvertToObject(planCountResult[0][0].totalTenants);
-      const totalTenantHave = splitAndConvertToObject(countTenantResult[0][0].totalTenant);
+      const totalTenantHave = countTenantResult[0][0].totalTenant;
       const planInvoice = splitAndConvertToObject(planCountResult[0][0].invoice);
       const planPortal = splitAndConvertToObject(planCountResult[0][0].portal);
       const planReporting = splitAndConvertToObject(planCountResult[0][0].reporting);
@@ -271,7 +271,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
           daysRemaining:daysRemaining,
           // countTenantResult planCountResult
-          totalTenantAllowww : planCountResult[0][0].totalTenants,
+          totalTenantAllow : planCountResult[0][0].totalTenants,
       totalTenantHave : countTenantResult[0][0].totalTenant,
       planInvoice : planCountResult[0][0].invoice,
       planPortal : planCountResult[0][0].portal,

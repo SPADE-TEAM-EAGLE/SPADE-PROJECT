@@ -1119,7 +1119,7 @@ exports.insertInUserPermissionUsers =
   exports.tenantStatusCountQuery = "SELECT (SELECT count(id) as currentTenant FROM tenants WHERE tenantCreated_at >= ? AND tenantCreated_at <= ? AND landlordID = ?) as currentTenant, count(id) as totalTenant FROM tenants WHERE landlordID = ?";
   exports.userPermissionUpdate = "UPDATE userRoles SET ? = ? WHERE id = ?";
   exports.getUsersWithRoles="SELECT UP.id,UP.llnalordId,UP.URole,UP.UFirstName,UP.ULastName,UP.UEmail,UP.UPhone,UP.UImage,UP.UImageKey,UP.UStatus,UR.Urole AS uRole FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.llnalordId = ?";
-  exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant) VALUES (?,?,?,?,?,?,?,?)";
+  exports.insertBankAccount = "INSERT INTO bankAccount (userId, UPOID, accountName, description, Active, created_at,userType,accountTypeTenant,nickName,digits,cardBrand,cardType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   exports.updateUserBank = "UPDATE users SET nuveiId = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateUserBankRecurring = "UPDATE users SET nuveiId = ?, PlanID = ?, nuveiSubscriptionId = ?, subscriptionCreated_at = ? WHERE id = ?";
   exports.updateBankAccountStatusquery = "UPDATE bankAccount SET Active = ? WHERE UPOID = ?";
@@ -1132,7 +1132,7 @@ exports.insertInUserPermissionUsers =
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";
   exports.allLandlordQuery = "SELECT *,u.id as landlordId,u.nuveiId as userNuveiId FROM users as u join plan as p on u.PlanID = p.id";
-  exports.countTenantQuery = "SELECT count(id) as totalTenant FROM spade_Rent.tenants where landlordID = ?";
+  exports.countTenantQuery = "SELECT count(id) as totalTenant FROM tenants where landlordID = ?";
   exports.insertDeletedUserQuery = "insert into closedAccount (adminName, adminId, fName, lName, email, phone, planId, reason, deleted_at,DbLandlordId,landlordCreatedDate) values (?,?,?,?,?,?,?,?,?,?,?)";
   exports.insertUsersAdmin = "INSERT INTO superAdmin (fName, lName, email, password, phone, roleId, address, city, state, zipcode, images,imageKey,created_at) VALUES (?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?)";
 
@@ -1152,3 +1152,14 @@ exports.insertInUserPermissionUsers =
   exports.getAdminNotificationQuery = "SELECT *,AN.id as notificationId FROM spade_Rent.adminNotification as AN join plan as p on p.id = AN.planId order by AN.id desc";
   exports.updateAdminNotificationQuery = "UPDATE adminNotification SET readNotification = ? where id = ?";
   exports.updateAllAdminNotificationQuery = `UPDATE adminNotification SET readNotification = "1" WHERE created_deleted IN ("Deleted", "Created")`;
+  exports.propertyCount = `select count(id) as count from property where landlordID = ?`;
+  exports.propertyIdUpdate = `update property set cPropertyId = ? where id = ?`;
+  exports.tenantsCount = `select count(id) as count from tenants where landlordID = ?`;
+  exports.tenantsIdUpdate = `update tenants set cTenantId = ? where id = ?`;
+  exports.taskCountId = `select count(id) as count from task where landlordID = ?`;
+  exports.taskIdUpdate = `update task set cTaskId = ? where id = ?`;
+  exports.invoiceIdUpdate = `update invoice set cInvoiceId = ? where id = ?`;
+  exports.invoiceCount = `select count(id) as count from invoice where landlordID = ?`;
+  exports.taskCountIdTenant = `select count(id) as count from task where tenantID = ?`;
+  exports.prospectusCount = `select count(id) as count from prospectus where landlordId = ?`;
+  exports.prospectusIdUpdate = `update prospectus set cprospectusId = ? where id = ?`;

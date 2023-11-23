@@ -24,6 +24,8 @@ const {
   deleteInvoiceCategories,
   deleteVendorCategories,
   invoiceAmountQuery,
+  invoiceIdUpdate,
+  invoiceCount
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -52,11 +54,6 @@ exports.createInvoice = async (req, res) => {
   try {
     const { userId,userName,businessName,invoiceEmail } = req.user;
     // const { userId,userName,businessName,invoiceEmail } = req.body;
-    // console.log(req.body)
-    // console.log(userId)
-    // if (!tenantID || !invoiceType || !startDate || !endDate || !frequency || !dueDate || !dueDays || !repeatTerms || !terms || !additionalNotes || !lineItems || !sendmails || !totalAmount) {
-    //   throw new Error("Please fill all the fields");
-    // }
     const currentDate = new Date();
     const notify = 0;
     const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate]);
@@ -65,7 +62,10 @@ exports.createInvoice = async (req, res) => {
     } else {
       // select tenants
       const invoiceID = invoiceResult[0].insertId;
-      // console.log(invoiceID, "invoiceID");
+      const invoiceCountIdResult = await queryRunner(invoiceCount, [userId]);
+      let customInvoiceId = invoiceCountIdResult[0][0].count + 1;
+      customInvoiceId = "Invoice"+customInvoiceId;
+      const invoiceIdUpdateResult = await queryRunner(invoiceIdUpdate ,[customInvoiceId, invoiceID]);
       const selectTenantsResult = await queryRunner(
         selectQuery("tenants", "id"),
         [tenantID]

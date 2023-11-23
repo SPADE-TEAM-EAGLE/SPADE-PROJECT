@@ -342,8 +342,9 @@ phone.addEventListener('keyup', reset);
     if (
       email.value.match(validEmail) &&
       lastname.value.match(validname) &&
-      firstname.value.match(validname) &&
-      iti.isValidNumber()
+      firstname.value.match(validname)
+      //  &&
+      // iti.isValidNumber()
       //  &&
       // phone.value.match(validPhone)
     ) {
