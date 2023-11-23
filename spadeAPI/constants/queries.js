@@ -1160,3 +1160,6 @@ exports.insertInUserPermissionUsers =
   exports.taskIdUpdate = `update task set cTaskId = ? where id = ?`;
   exports.invoiceIdUpdate = `update invoice set cInvoiceId = ? where id = ?`;
   exports.invoiceCount = `select count(id) as count from invoice where landlordID = ?`;
+  exports.taskCountIdTenant = `select count(id) as count from task where tenantID = ?`;
+  exports.prospectusCount = `select count(id) as count from prospectus where landlordId = ?`;
+  exports.prospectusIdUpdate = `update prospectus set cprospectusId = ? where id = ?`;
