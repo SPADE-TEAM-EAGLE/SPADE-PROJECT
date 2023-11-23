@@ -595,6 +595,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex">
+                                                
                                                 <div class="btn-group">
                                                     <button type="button" class="btn font-weight-bold text-dark"
                                                         id="customize_btn" data-bs-toggle="dropdown"
@@ -667,6 +668,16 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <span class="me-2 mobile-text-hide-filer-number fw-bold" style="text-wrap: nowrap;">Filter By Price Plan:</span>
+                                                        <select class="form-control form-select" id="tablePricingPlan">
+                                                            <option value="Trial Plan">Trial Plan</option>
+                                                            <option value="Basic Plan">Basic Plan</option>
+                                                            <option value="Pro Plan">Pro Plan</option>
+                                                            <option value="Premium Plan">Premium Plan</option>
+                                                            <option value="All" selected="">All</option>
+                                                        </select>
+                                                </div>
                                                 <!-- <button type="button" class="btn btn-primary mx-2 laptop-button" id="add_property_btn"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -719,7 +730,7 @@
                                                         <th>Contact</th>
                                                         <th>subscription</th>
                                                         <th>amount</th>
-                                                        <th>Purchase Date</th>
+                                                        <th>Status</th>
                                                         <th>Next Billing</th>
                                                         <!-- <th>Status</th> -->
                                                         <th>ACTION</th>
@@ -1132,7 +1143,7 @@
 }            
 function getData(){
                 $.ajax({ 
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1355,7 +1366,7 @@ function getData(){
                     }
                 })
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1392,7 +1403,7 @@ function getData(){
                 })
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1424,7 +1435,7 @@ function getData(){
                     }
                 });
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+                    url: "http://localhost:3000/api/spade/allLandlord",
                     type: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1538,7 +1549,7 @@ function getData(){
             $("#confirmDelete-user").on("click", function () {
                 $("#delete-user-admin").modal("hide")
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/closedLandlord",
+                    url: "http://localhost:3000/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: landlordId,
@@ -1719,6 +1730,19 @@ function getData(){
                 window.open('./login_module.html', "_self")
             });
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablePricingPlan').on('change', function () {
+                var selectedPlan = $(this).val();
+                if (selectedPlan == 'All') {
+                    $('#table_body tr').removeClass("d-none");
+                } else {
+                    $('#table_body tr').addClass("d-none");
+                    $('#table_body tr:has(.propertyType:contains("' + selectedPlan + '"))').removeClass("d-none");
+                }
+            });
+        });
     </script>
 </body>
 

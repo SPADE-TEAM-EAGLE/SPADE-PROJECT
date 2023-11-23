@@ -1192,35 +1192,17 @@
                                         <h2 class="card-title recent-title" style="margin-right: 25px;">Customers
                                             <span style="color: #1467B0;">List</span>
                                         </h2>
-                                        <div class="tab-menu-heading float-right d-none"
-                                            style="background-color: #e0e0e0; border-radius: 30px; padding: 4px;">
-                                            <div class="tabs-menu">
-                                                <!-- Tabs -->
-                                                <ul class="nav panel-tabs panel-info nav-index-responsive">
-                                                    <li>
-                                                        <a href="#tab23" data-bs-toggle="tab">
-                                                            <span>
-                                                                <i class="fe fe-user me-1"></i>
-                                                            </span>Monthly
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#tab22" data-bs-toggle="tab">
-                                                            <span>
-                                                                <i class="fe fe-calendar me-1"></i>
-                                                            </span>Weekly
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#tab21" class="active" data-bs-toggle="tab">
-                                                            <span>
-                                                                <i class="fe fe-settings me-1"></i>
-                                                            </span>Today
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="me-2 mobile-text-hide-filer-number fw-bold" style="text-wrap: nowrap;">Filter By Price Plan:</span>
+                                                <select class="form-control form-select" id="tablePricingPlan">
+                                                    <option value="Trial Plan">Trial Plan</option>
+                                                    <option value="Basic Plan">Basic Plan</option>
+                                                    <option value="Pro Plan">Pro Plan</option>
+                                                    <option value="Premium Plan">Premium Plan</option>
+                                                    <option value="All" selected>All</option>
+                                                </select>
                                         </div>
+                                       
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between card-overflow">
@@ -1776,7 +1758,7 @@
         }
         $(document).ready(function () {
             $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/totalCustomer",
+                url: "http://localhost:3000/api/spade/totalCustomer",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1812,7 +1794,7 @@
                 }
             })
             $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/landlordReportAdmin",
+                url: "http://localhost:3000/api/spade/landlordReportAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1838,7 +1820,7 @@
                 <td><b>${element.LastName ? element.LastName : "N/A"}</b></td>
                 <td>${element.Email ? element.Email : "N/A"}</td>
                 <td>${element.Phone ? element.Phone : "N/A"}</td>
-                <td class="fw-bold" ${landlordPlanName}>${element.planName ? element.planName + " Plan" : "N/A"}</td>
+                <td class="fw-bold pricingPlan" ${landlordPlanName}>${element.planName ? element.planName + " Plan" : "N/A"}</td>
                 <td>${element.totalProperty}</td>
                 <td>${element.totalTenants}</td>
                 <td>${element.totalTasks}</td>
@@ -1867,7 +1849,7 @@
 
             function getData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1945,7 +1927,7 @@
                     }
                 })
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1982,7 +1964,7 @@
                 })
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -2074,6 +2056,19 @@
                 })
             }
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablePricingPlan').on('change', function () {
+                var selectedPlan = $(this).val();
+                if (selectedPlan == 'All') {
+                    $('#totalLandlord tr').removeClass("d-none");
+                } else {
+                    $('#totalLandlord tr').addClass("d-none");
+                    $('#totalLandlord tr:has(.pricingPlan:contains("' + selectedPlan + '"))').removeClass("d-none");
+                }
+            });
+        });
     </script>
 </body>
 

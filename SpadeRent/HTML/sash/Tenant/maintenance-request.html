@@ -2350,7 +2350,16 @@
 </script>
 <script src="../assets/js/completeTenantProfile.js"></script>
 <script>
+    function formatDateMDY(date){
+    var createdDateFormat = new Date(date);
+                            var day = createdDateFormat.getDate();
+                var month = createdDateFormat.getMonth() + 1;
+                var year = createdDateFormat.getFullYear();
+                var createdDateFormatComplete = month+ "-"+day+ "-"+year
+                return createdDateFormatComplete
+}
     $(document).ready(function() {
+        
         $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
@@ -2545,6 +2554,8 @@ if (task.ImageKey) {
 
 
 
+                            
+
                             var createdDate = new Date(task.created_at);
                             var currentDate = new Date();
 
@@ -2613,7 +2624,10 @@ if (task.priority == 'High') {
 } else if (task.priority == 'Moderate') {
     priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
 }
-                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+
+
+                
+                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (formatDateMDY(task.dueDate) ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                    
@@ -2984,7 +2998,7 @@ $('#fileInput').on('change', function () {
 
 
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(data.dueDate);
+                $("#dueDate_view").text(formatDateMDY(data.dueDate));
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes);
