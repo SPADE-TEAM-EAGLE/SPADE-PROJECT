@@ -5782,7 +5782,7 @@ const currentDate = new Date();
                 if (propertyData.length == 0) {
                     $("#table_body_property_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
                 } else {
-                    $("#propertySelect").append($('<option></option>').text("All").val("All"));
+                    
                     propertyData.forEach((property, index) => {
 
                         if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
@@ -6068,7 +6068,7 @@ if (task.priority == 'High') {
 
             function constructPropertyTableTenant(propertyData, id) {
                 $("#table_body_tenant_report").empty()
-                $("#tenantSelect").append($('<option></option>').text("All").val("All"));
+                
                 propertyData.forEach((tenant, index) => {
                     console.log(tenant)
                     if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
@@ -6180,6 +6180,7 @@ $(".plan_remaining_days_data").each(function(){
                         var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         $("#table_body_property_report").append(row);
                     } else {
+                        $("#propertySelect").append($('<option></option>').text("All").val("All"));
                         constructPropertyTable(propertyData)
                     }
                     if (leaseData?.length < 1) {
@@ -6200,6 +6201,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#table_body_tenant_report").append(row);
                     }
                     else {
+                        $("#tenantSelect").append($('<option></option>').text("All").val("All"));
                         constructPropertyTableTenant(tenantData)
                     }
 
@@ -6216,36 +6218,43 @@ $(".plan_remaining_days_data").each(function(){
             });
             function filterAndRenderTable(selectedValue) {
                 if (selectedValue) {
-
                     if (selectedValue == "Occupied" || selectedValue == "Vacant") {
-                        if ($("#propertySelect").val()) {
+                        console.log("inif")
+                        if ($("#propertySelect").val() && $("#propertySelect").val()!="All") {
                             var filteredData = propertyData.filter((property) => {
 
                                 return property?.occupancy_status == selectedValue && property.id == $("#propertySelect").val()
                             });
                         } else {
+                        
+                                    
                             var filteredData = propertyData.filter((property) => {
-
+                                console.log(property?.occupancy_status==selectedValue)
                                 return property?.occupancy_status == selectedValue
                             });
+                            
                         }
                         if(filteredData.length == 0){
-                            constructPropertyTable(propertyData);
+                            constructPropertyTable(filteredData);
                         }else{
 
                             constructPropertyTable(filteredData);
                         }
                     }
                     else {
-
-                        if ($("#reportTypeSelect").val()) {
+                       
+                        if ($("#reportTypeSelect").val() && $("#reportTypeSelect").val()!="All") {
                             var filteredData = propertyData.filter((property) => {
                                 return property?.occupancy_status == $("#reportTypeSelect").val() && property.id == selectedValue
                             });
                         } else {
-                            var filteredData = propertyData.filter((property) => {
+                            
+                                    var filteredData = propertyData.filter((property) => {
                                 return property.id == selectedValue
                             });
+                            
+
+                            
                         }
                         if(filteredData.length == 0){
                             constructPropertyTable(propertyData);
@@ -6289,16 +6298,11 @@ $(".plan_remaining_days_data").each(function(){
 
             }
             function checkDateRange(inputDate) {
-                var currentDate = new Date();
-                var inputDateParts = inputDate.split('/');
-                var inputMonth = parseInt(inputDateParts[0], 10) - 1; // Months in JavaScript are 0-indexed
-                var inputDay = parseInt(inputDateParts[1], 10);
-                var inputYear = parseInt(inputDateParts[2], 10);
-
-                var inputDateObj = new Date(inputYear, inputMonth, inputDay);
-
-                var daysDifference = (currentDate - inputDateObj) / (1000 * 60 * 60 * 24); // Calculate difference in days
-
+                var leaseDate = new Date(inputDate);
+                            var currentDate = new Date();
+                            var timeDiff = Math.abs(leaseDate - currentDate);
+                            daysDifference = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                            console.log(daysDifference)
                 if (daysDifference <= 15) {
                     return "15";
                 } else if (daysDifference <= 30) {
@@ -6315,7 +6319,7 @@ $(".plan_remaining_days_data").each(function(){
             function filterAndRenderTableLeads(time) {
                 if (time) {
                     if (time == "All") {
-                        constructPropertyTableLead(propertyData);
+                        constructPropertyTableLead(leaseData);
                     } else {
                         var filteredData = leaseData.filter((lease) => {
                             if (lease?.LeaseExpire !== "") {
@@ -6323,13 +6327,13 @@ $(".plan_remaining_days_data").each(function(){
                             }
 
                         });
-                        constructPropertyTableLead(filteredData);
+                        constructPropertyTableLead(leaseData);
                     }
                 }
             }
 
             function filterAndRenderTableTenant(selectedValue) {
-                if (selectedValue) {
+                if (selectedValue!=="All") {
                     var filteredData = tenantData.filter(property => property.tenantID == selectedValue);
                     constructPropertyTableTenant(filteredData);
                 }
@@ -6343,6 +6347,7 @@ $(".plan_remaining_days_data").each(function(){
 
             $("#propertySelect,#reportTypeSelect").on('change', function () {
                 var selectedValue = $(this).val();
+                console.log(selectedValue)
                 filterAndRenderTable(selectedValue);
             });
             $("#invoiceTimeSelect,#invoiceTypeSelect").on('change', function () {
@@ -6360,7 +6365,7 @@ $(".plan_remaining_days_data").each(function(){
             function isOverdue(created_at) {
                 var now = new Date();
                 var createdAt = new Date(created_at);
-
+                console.log(createdAt, now)
                 if (createdAt <= now) {
                     console.log("overdue")
                     return "overdue";
@@ -6378,7 +6383,7 @@ $(".plan_remaining_days_data").each(function(){
                 } else {
                     if (selectedValue === "overdue") {
                         var filteredData = taskData.filter((task) => {
-                            return isOverdue(task?.created_at) == selectedValue.toLowerCase()
+                            return isOverdue(task?.dueDate) == selectedValue.toLowerCase()
                         });
                     }
                     else if (selectedValue === "not assigned") {
@@ -6396,10 +6401,12 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#leaseFilterSelect").on('change', function () {
                 var selectedValue = $(this).val();
+                console.log("lease:",selectedValue)
                 filterAndRenderTableLeads(selectedValue);
             });
             $("#tenantSelect").on('change', function () {
                 var selectedValue = $(this).val();
+                console.log("tenant: ",selectedValue)
                 filterAndRenderTableTenant(selectedValue);
             });
             // $("#typehead").on('input', function () {

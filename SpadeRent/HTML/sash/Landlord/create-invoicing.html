@@ -3624,30 +3624,52 @@
                                                         </div>
                                                     </li> -->
                                                     <li class="d-flex justify-content-between">
-                                                        <a href="javascript:void(0)" class="text-dark">TENANT NAME</a>
+                                                        <a href="javascript:void(0)" class="text-dark">ID</a>
                                                         <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input mt-2"
+                                                                id="exampleCheck1"
+                                                                checked
+                                                            >
                                                         </div>
                                                     </li>
-                                                    <li class="d-flex justify-content-between">
-                                                        <a href="javascript:void(0)"
-                                                            class="text-dark">MEMO/DESCRIPTION</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between">
-                                                        <a href="javascript:void(0)" class="text-dark">INVOICE DATE</a>
-                                                        <div class="form-check m-0">
-                                                            <input type="checkbox" class="form-check-input mt-2"
-                                                                id="exampleCheck1" checked>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex justify-content-between">
-                                                        <a href="javascript:void(0)" class="text-dark">
-                                                            PROPERTY
+                                                <li class="d-flex justify-content-between">
+                                                    <a href="javascript:void(0)" class="text-dark">TENANT NAME</a>
+                                                    <div class="form-check m-0">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input mt-2"
+                                                            id="exampleCheck1"
+                                                            checked
+                                                        >
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between">
+                                                    <a href="javascript:void(0)" class="text-dark">MEMO/DESCRIPTION</a>
+                                                    <div class="form-check m-0">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input mt-2"
+                                                            id="exampleCheck1"
+                                                            checked
+                                                        >
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between">
+                                                    <a href="javascript:void(0)" class="text-dark">INVOICE DATE</a>
+                                                    <div class="form-check m-0">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input mt-2"
+                                                            id="exampleCheck1"
+                                                            checked
+                                                        >
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between">
+                                                    <a href="javascript:void(0)" class="text-dark">
+                                                        PROPERTY
                                                             NAME
                                                         </a>
                                                         <div class="form-check m-0">
@@ -3727,6 +3749,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th class="d-none">INVOICE NO</th>
+                                                        <th class="">ID</th>
                                                         <th>TENANT NAME</th>
                                                         <th>MEMO/DESCRIPTION</th>
                                                         <th>INVOICE DATE</th>
@@ -5280,16 +5303,209 @@
                     success: async function (response) {
                         categoryData = response.data
 
-                        categoryData.forEach(function (category) {
-                            $("[name='category']").append($('<option></option>').text(category.categorieName).val(category.id))
-                        })
-                    },
-                    error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                            if (response.message == "No data found") {
+                                localStorage.setItem("invoice", "false")
+                                window.location = './new-invoice.html'
+                            }
+                            tenantData = response.data[0]
+                            console.log("viewAllPropertyTenant")
+                            console.log(response)
+                            // console.log(data,user)
+                            function toTitleCase(str) {
+                                return str.replace(/\w\S*/g, function (txt) {
+                                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                                });
+                            }
+                            $("#user-name").text(toTitleCase(response.user))
+                            $("#header-user").text(toTitleCase(response.user))
+                            $("#menu").empty()
+                            $("#tenants").append($('<option></option>').text("Choose..."));
+
+                            // var tableBody = $('#table_body');
+                            response?.data[0]?.forEach(function (tenant) {
+                                // Create a new item div
+                                var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
+
+                                // Build the HTML structure for the item
+                                newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
+                                    '<img src="' + (tenant?.image?.split(",")[0] ? tenant.image.split(",")[0] : '../assets/images/icons/Group 34343434.png') + '" alt="" style="width: 65px; height: 65px;">' +
+                                    '<div class="color-text-tenant"><h3 class="mb-0 line-height: 22px;">' + (tenant.firstName + " " + tenant.lastName) + '</h3>' +
+                                    '<span style="line-height: 22px;">Email: ' + tenant.tEmail + '</span><br>' +
+                                    '<span style="line-height: 22px;">Company: ' + tenant.companyName + '</span><br>' +
+                                    '<span style="line-height: 22px;">Phone: ' + tenant.tPhoneNumber + '</span>' +
+                                    '</div></div>');
+
+                                // Append the new item to the menu
+                                $('#menu').append(newItem);
+                            });
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error)
+                            $("#myModal_warning").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning').modal('hide');
+                                window.location = '../Landlord/login_module.html';
+                            }, 2000);
+                        }
+                    });
+
+
+
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: async function (response) {
+                            categoryData = response.data
+
+                            categoryData.forEach(function (category) {
+                                $("[name='category']").append($('<option></option>').text(category.categorieName).val(category.id))
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error occurred while fetching state and city data.');
+                            console.log(xhr);
+                            console.log(error);
+                        }
+                    });
+
+
+
+
+                    function formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                        return date.toLocaleDateString('en-US', options);
                     }
-                });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/getAllInvoices',
+                        type: 'GET',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: async function (response) {
+                            if (response.message == "No data found") {
+                                localStorage.setItem("invoice", "false")
+                                window.location = './new-invoice.html'
+                            }
+                            console.log(tenantData)
+                            invoiceData = response.data[0]
+
+
+                            var tableBody = $('#table_body');
+                            tableBody.empty();
+                            // console.log(data[0])
+                            let tenantNames = []
+
+                            response.data[0]?.forEach(function (invoice, index) {
+
+                                var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
+                                var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                                var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
+
+                                var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">' + invoice.firstName + " " + invoice.lastName + `</a><br><small>${invoice.tPhone}</small>` + '</td>';
+                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+
+                                var dateObj = new Date(invoice.created_at);
+                                var day = dateObj.getDate();
+                                var month = dateObj.getMonth() + 1;
+                                var year = dateObj.getFullYear();
+                                var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
+                                var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
+                                var invoiceAmount;
+                            if(invoice.invoiceType=="One Time Invoice"){
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                            }
+                            else{
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            }
+
+                                const toShow = invoice.status
+                                var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) + '</td>';
+
+                                var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                data-bs-toggle="dropdown"></i>
+
+                                                                <ul class="dropdown-menu">
+    <li>
+        <a class="dropdown-item text-dark view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">View</a>
+    </li>
+    <li>
+        <a class="dropdown-item text-dark view-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal">View PDF Invoice</a>
+    </li>
+    <li>
+        <a class="dropdown-item text-dark edit-option" data-bs-effect="effect-scale" href="#">Edit</a>
+    </li>
+    ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#changeStatusModal">Receive Payments</a></li>' : ''}
+    <li>
+        <a class="dropdown-item text-dark resend-option" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">Resend Invoice</a>
+        <a class="dropdown-item text-danger delete-option" href="javascript:void(0)">Delete</a>
+    </li>
+</ul>
+
+                                                        </td>`
+
+
+                                var row = '<tr>' + serial +invoiceNumberHide +invoiceNumber + tenantName + memoDescription + invoiceDate +
+                                    propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
+
+                                // Append the row to the table body
+                                tableBody.append(row);
+                            });
+                            // $("#preloader").fadeOut("slow")
+                            $('.edit-option').click(function (e) {
+                                e.preventDefault();
+                                const tenantIdElement = $(this).closest("tr").find(".tenant-id");
+
+                                tenantID = tenantIdElement.text();
+                                console.log(invoiceData)
+                                const data = invoiceData.find(obj => obj.id.toString() === propertyId);
+                                // selectedFiles = data.images
+                                updateSelectedFilesContainer()
+                                $("#propertyId_update").val(data.id);
+                                $("#propertyName_update").val(data.propertyName);
+                                $("#address_update").val(data.address);
+                                $("#city_update").val(data.city);
+                                $("#state_update").val(data.state);
+                                $("#zip_update").val(data.zipCode);
+                                $("#propertyType_update").val(data.propertyType);
+                                $("#propertyTotalSF_update").val(data.propertySQFT);
+                                $("#unit_update").val(data.units);
+                                $("#property-name").text(data.propertyName)
+                                $('#myModal_edit').modal('show');
+                            });
+
+                        },
+                        error: function (xhr, status, error) {
+
+                        }
+                    });
+
+                }
+                getData()
+                function filterInvoiceData(type) {
+                    console.log(type)
+                    function formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                        return date.toLocaleDateString('en-US', options);
+                    }
+
+                    if (type == "all") {
+                        var filteredData = invoiceData
+                    } else {
+                        var filteredData = invoiceData.filter((invoice) => {
+                            if (invoice.invoiceType == type) {
+                                return invoice
+                            }
+                        })
+                    }
+                };
 
 
 
@@ -5404,7 +5620,7 @@
                     }
                 });
 
-            }
+            
             getData()
             function filterInvoiceData(type) {
                 console.log(type)
@@ -6412,12 +6628,11 @@
                 console.log("PDF VIEW");
                 console.log(userData);
 
-
-                $("#owner-id").empty()
-                $("#owner-id").append(`
-    <h5 class="text-black fw-bold">${userData.businessName}</h5>
+$("#owner-id").empty()
+$("#owner-id").append(`
+    <h5 class="text-black fw-bold">${userData.businessName?userData.businessName:"N/A"}</h5>
     <p class="text-black">
-        ${userData.BusinessAddress}<br>${userData.state}, ${userData.city}<br>${userData.zipCode}<br>United States<br>${userData.phone}
+        ${userData.BusinessAddress?userData.BusinessAddress:"N/A"}<br>${userData.state?userData.state:"N/A"}, ${userData.city?userData.city:"N/A"}<br>${userData.zipCode?userData.zipCode:"N/A"}<br>United States<br>${userData.phone?userData.phone:"N/A"}
     </p>
 `);
 
