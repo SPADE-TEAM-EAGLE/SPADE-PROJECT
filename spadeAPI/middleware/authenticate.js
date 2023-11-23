@@ -18,14 +18,14 @@ const verifyToken = async (req, res, next) => {
     // console.log(decoded.UserPermissionID);
     try {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-      console.log(decoded.UserPermissionID);
+      console.log("Token ID "+decoded.UserPermissionID);
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
-      console.log(result[0][0])
-      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].id]);
+      // console.log(result[0][0])
+      const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].llnalordId]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
       console.log("result[0][0].PlanID");
       console.log(result[0][0]);
-      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].id]);
+      const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].llnalordId]);
 
       function splitAndConvertToObject(value) {
         const resultObject = {};
@@ -41,7 +41,7 @@ const verifyToken = async (req, res, next) => {
 
         return resultObject;
       } 
-      console.log(result[0][0]);
+      // console.log(result[0][0]);
       // Example usage for different fields
       // const id = result[0][0].id;
       const role = result[0][0].Urole;
@@ -61,7 +61,7 @@ const verifyToken = async (req, res, next) => {
       const settingMUsers = splitAndConvertToObject(result[0][0].settingMUsers);
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
-      const totalTenantAllow = splitAndConvertToObject(planCountResult[0][0].totalTenants);
+      const totalTenantAllow = planCountResult[0][0].totalTenants;
       const totalTenantHave = countTenantResult[0][0].totalTenant;
       const planInvoice = splitAndConvertToObject(planCountResult[0][0].invoice);
       const planPortal = splitAndConvertToObject(planCountResult[0][0].portal);
@@ -71,7 +71,7 @@ const verifyToken = async (req, res, next) => {
       const planProspects = splitAndConvertToObject(planCountResult[0][0].prospect);
       const planNNN = splitAndConvertToObject(planCountResult[0][0].NNN);
       
-      console.log(result[0][0])
+      // console.log(result[0][0])
       if(futurePlanId[0]?.length!=0){
         
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
@@ -284,7 +284,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   
         };
       }else{
-        console.log(futurePlanId[0][futurePlanId[0].length-1]);
+        // console.log(futurePlanId[0][futurePlanId[0].length-1]);
       // console.log(result[0][0].active);
       req.user = {
         email: decoded.email,
