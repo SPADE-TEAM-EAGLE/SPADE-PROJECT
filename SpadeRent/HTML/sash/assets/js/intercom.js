@@ -1,6 +1,6 @@
 var username;
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    url: 'http://localhost:3000/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -72,7 +72,7 @@ $.ajax({
         $("#myModal_warning").modal("show");
         setTimeout(function () {
             $('#myModal_warning').modal('hide');
-            window.location = '../Landlord/login_module.html';
+            // window.location = '../Landlord/login_module.html';
         }, 2000);
         
     }

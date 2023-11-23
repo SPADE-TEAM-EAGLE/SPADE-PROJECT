@@ -356,7 +356,7 @@ function updateAllNotifyRead() {
   getNotifyData()
   let propertyID ;
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/protectedTenant",
+    url: "http://localhost:3000/api/spade/protectedTenant",
     type: "GET",
     contentType: "application/json",
     headers: {

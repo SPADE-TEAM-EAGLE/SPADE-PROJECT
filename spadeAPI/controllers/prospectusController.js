@@ -19,7 +19,9 @@ const {
     addProspectusSources,
     sourcesCampaignInsight,
     dashboardProspectusInsight,
-    prospectTimeGraphQuery
+    prospectTimeGraphQuery,
+    prospectusCount,
+    prospectusIdUpdate
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -45,18 +47,9 @@ exports.addprospectus = async (req, res) => {
     const currentDate = new Date();
     // console.log(userId)
     try {
-        // const prospectusCheckResult = await queryRunner(
-        //   selectQuery("prospectus", "email", "landlordID"),
-        //   [email, userId]
-        // );
-        // if (prospectusCheckResult[0].length > 0) {
-        //   return res.send("prospectus already exists");
-        // } else {
-        // console.log(userId)
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
-            
             lastName,
             phoneNumber,
             email,
@@ -72,6 +65,11 @@ exports.addprospectus = async (req, res) => {
         if (prospectusResult.affectedRows === 0) {
             return res.status(400).send("No data found");
         }
+        const prospectusID = prospectusResult[0].insertId;
+        const prospectusCountIdResult = await queryRunner(prospectusCount , [userId]);
+        let customProspectusId = prospectusCountIdResult[0][0].count + 1;
+        customProspectusId = lastName+customProspectusId;
+        const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
         //}
 
         res.status(200).json({

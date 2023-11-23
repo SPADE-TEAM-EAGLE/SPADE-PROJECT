@@ -61,15 +61,15 @@ const verifyToken = async (req, res, next) => {
       const settingMUsers = splitAndConvertToObject(result[0][0].settingMUsers);
       const settingEmailTs = splitAndConvertToObject(result[0][0].settingEmailT);
       const SettingInvoiceSettings = splitAndConvertToObject(result[0][0].SettingInvoiceSetting);
-      const totalTenantAllow = planCountResult[0][0].totalTenants?splitAndConvertToObject(planCountResult[0][0].totalTenants):"0";
-      const totalTenantHave = countTenantResult[0][0].totalTenant?splitAndConvertToObject(countTenantResult[0][0].totalTenant):"0";
-      const planInvoice = planCountResult[0][0].invoice?splitAndConvertToObject(planCountResult[0][0].invoice):"Available";
-      const planPortal = planCountResult[0][0].portal?splitAndConvertToObject(planCountResult[0][0].portal):"Available";
-      const planReporting = planCountResult[0][0].reporting?splitAndConvertToObject(planCountResult[0][0].reporting):"Advanced Reporting";
-      const planTask = planCountResult[0][0].task?splitAndConvertToObject(planCountResult[0][0].task):"Available";
-      const planChat = planCountResult[0][0].chat?splitAndConvertToObject(planCountResult[0][0].chat):"Available";
-      const planProspects = planCountResult[0][0].prospect?splitAndConvertToObject(planCountResult[0][0].prospect):"Available";
-      const planNNN = planCountResult[0][0].NNN?splitAndConvertToObject(planCountResult[0][0].NNN):"Available";
+      const totalTenantAllow = splitAndConvertToObject(planCountResult[0][0].totalTenants);
+      const totalTenantHave = countTenantResult[0][0].totalTenant;
+      const planInvoice = splitAndConvertToObject(planCountResult[0][0].invoice);
+      const planPortal = splitAndConvertToObject(planCountResult[0][0].portal);
+      const planReporting = splitAndConvertToObject(planCountResult[0][0].reporting);
+      const planTask = splitAndConvertToObject(planCountResult[0][0].task);
+      const planChat = splitAndConvertToObject(planCountResult[0][0].chat);
+      const planProspects = splitAndConvertToObject(planCountResult[0][0].prospect);
+      const planNNN = splitAndConvertToObject(planCountResult[0][0].NNN);
       
       console.log(result[0][0])
       if(futurePlanId[0]?.length!=0){
@@ -271,7 +271,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
           daysRemaining:daysRemaining,
           // countTenantResult planCountResult
-          totalTenantAllowww : planCountResult[0][0].totalTenants,
+          totalTenantAllow : planCountResult[0][0].totalTenants,
       totalTenantHave : countTenantResult[0][0].totalTenant,
       planInvoice : planCountResult[0][0].invoice,
       planPortal : planCountResult[0][0].portal,
