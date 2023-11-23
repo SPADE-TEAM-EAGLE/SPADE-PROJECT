@@ -2196,7 +2196,7 @@
         var unitsPermission;
         $(document).ready(function() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2244,7 +2244,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2284,7 +2284,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
             console.log(propertyId)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -2357,7 +2357,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2405,7 +2405,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2450,7 +2450,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $(".viewTenants").attr("href",`./property-tenant.html?propertyId=${propertyId}`)
             $(".viewTasks").attr("href",`./property-task.html?propertyId=${propertyId}`)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId

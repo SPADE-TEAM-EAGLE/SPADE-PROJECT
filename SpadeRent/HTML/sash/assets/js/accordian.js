@@ -16,7 +16,8 @@ $(document).ready(function() {
                 span.addClass('d-none');
             }   
        });
-       if (!isEmpty1) {
+       
+       if (!isEmpty1 && $('#email-exist').hasClass('d-none')) {
            $('#collapseOne-add-tenant').removeClass('show');
            $('#collapseTwo-add-tenant').addClass('show');
            $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");

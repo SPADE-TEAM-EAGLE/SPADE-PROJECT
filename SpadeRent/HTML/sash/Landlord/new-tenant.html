@@ -1087,6 +1087,8 @@ color: #000;
                                                 id="email"
                                                 required
                                             >
+                                            <small class="d-none" id="email-exist" style="color: red;">Email already exist!</small>
+
                                             <span class="text-danger d-none">Email is required!</span>
                                         </div>
                                         <div class="col-md-4">
@@ -3232,6 +3234,31 @@ color: #000;
                 propertyId2 = $('#property').val()
                 getData2()
             })
+            $("#email").on("input",function(){
+                $.ajax({    
+                url: 'http://localhost:3000/api/spade/checkEmailTenants',
+                type: 'GET',
+                data: {
+                    email: $("#email").val()
+                },
+                contentType: "application/json;",
+                headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                success: function (response) {
+                    if(response?.message=="Email already exists "){
+                        $("#email-exist").removeClass("d-none")
+                    }else{
+                        $("#email-exist").addClass("d-none")
+                    }
+                    
+                },error: function (xhr, status, error) {
+                    console.log(error)
+                }
+            })
+
+            })
+
             $('#addModal_units_close').click(() => {
                 // alert(1)
                 $.ajax({
