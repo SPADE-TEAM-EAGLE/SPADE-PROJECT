@@ -766,15 +766,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-xl-6">
+                                                                <div class="form-group ">
                                                                 <label class="fw-bold" for="amount" data-tid="amount">
                                                                     Amount
                                                                 </label>
-                                                                <div class="field form-group">
-                                                                    <div class="input"></div>
-                                                                    <div class="underline">
-                                                                        <input id="amount" class="input form-control111">
-                                                                    </div>
-                                                                </div>
+                                                                <div class="input-group mb-3 d-flex" style="flex-wrap: nowrap;">
+                                                                    <span class="input-group-text">$</span>
+                                                                    <input type="text" id="amount" class="form-controlll" aria-label="Amount (to the nearest dollar)">
+                                                                    
+                                                                </div></div>
                                                             </div>
                                                             <div class="col-lg-6 col-xl-6">
                                                                 <div class="field form-group">
@@ -3066,7 +3066,7 @@
 
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                url: 'http://localhost:3000/api/spade/pricingPlan',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3203,7 +3203,7 @@
                 $("#preloader").css("display", "flex")
                 $("#upgradetopro").modal("hide")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                    url: 'http://localhost:3000/api/spade/openOrder',
                     type: 'POST',
                     data: JSON.stringify({
                         amount: "0",
@@ -3233,7 +3233,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
+                                        url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3254,7 +3254,7 @@
                                         success: function (response) {
 
                                             $.ajax({
-                                                url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
+                                                url: 'http://localhost:3000/api/spade/updatePlanId',
                                                 method: 'PUT',
                                                 data: JSON.stringify({ planID: seletedPlanID }),
                                                 contentType: 'application/json',

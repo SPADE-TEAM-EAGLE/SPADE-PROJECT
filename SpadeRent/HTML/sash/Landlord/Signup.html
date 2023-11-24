@@ -774,6 +774,39 @@
         }
 
         /* payment method End  */
+
+        .SfcFields {
+    background-color: #ebef00;
+    height: 42px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #031d3d;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+.sfc-empty {
+    background-color: #1d1400 !important;
+}
+.sfc-empty.sfc-focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+    background-color: #fe8423 !important;
+}
+.sfc-focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+    background-color: #000000 !important;
+}
+.sfc-complete {
+    background-color: #34fa29 !important;
+}
+.sfc-invalid {
+    border-color: #fa755a;
+}
+.SfcFields--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+
         </style>
     </head>
     <body onload="check()">
@@ -3260,15 +3293,15 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-xl-6">
+                                                                                    <div class="form-group ">
                                                                                     <label class="fw-bold" for="amount" data-tid="amount">
                                                                                         Amount
                                                                                     </label>
-                                                                                    <div class="field form-group">
-                                                                                        <div class="input"></div>
-                                                                                        <div class="underline">
-                                                                                            <input id="amount" class="input form-control111" readonly>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    <div class="input-group mb-3 d-flex" style="flex-wrap: nowrap;">
+                                                                                        <span class="input-group-text">$</span>
+                                                                                        <input type="text" id="amount" class="form-controlll" aria-label="Amount (to the nearest dollar)">
+                                                                                        
+                                                                                    </div></div>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-xl-6">
                                                                                     <div class="field form-group">
@@ -3635,7 +3668,7 @@
             $("#email").on("change", () => {
                 var email = $("#email").val();
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                    url: "http://localhost:3000/api/spade/checkemail",
                     type: "GET",
                     contentType: "application/json",
                     data: {
@@ -3663,7 +3696,7 @@
 
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
+                url: 'http://localhost:3000/api/spade/pricingPlan',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3694,7 +3727,7 @@
                 var password = $("#id_password2").val();
                 $("#preloader").css("display", "flex");
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/Signup",
+                    url: "http://localhost:3000/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -3710,7 +3743,7 @@
                         var userId = response?.id;
 
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                                url: 'http://localhost:3000/api/spade/openOrder',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     amount: "0",
@@ -3724,7 +3757,7 @@
                                 },
                                 success: function (response) {
                                     $.ajax({
-                                        url: "https://backend.app.spaderent.com/api/spade/createUserPayment",
+                                        url: "http://localhost:3000/api/spade/createUserPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3747,7 +3780,7 @@
                                         success: function (resp) {
                                             
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/UpdateUserNuveiId",
+                                                url: "http://localhost:3000/api/spade/UpdateUserNuveiId",
                                         type: "PUT",
                                         
                                         data: JSON.stringify({
@@ -3852,11 +3885,9 @@
                 fontSize: '16px',
                 fontSmoothing: 'antialiased',
                 '::placeholder': {
-                    color: 'grey',
+                    color: 'black',
                 },
-                ':-webkit-autofill': {
-                    color: '#e39f48',
-                },
+                
             },
             invalid: {
                 color: '#E25950',
@@ -3864,6 +3895,15 @@
                     color: '#FFCCA5',
                 },
             },
+            empty: {
+                color: '#BADA55',
+                '::placeholder': {
+                    color: 'black',
+                },
+            },
+            valid: { //when the input is valid
+      color: '#48ef39'
+    }
         };
 
         var ScFieldClasses = {
@@ -3871,6 +3911,7 @@
             empty: 'empty',
             invalid: 'invalid',
             complete: 'complete',
+            
         };
         var scard = ScFields.create('ccNumber', {
             style: ScFieldStyles,
@@ -3894,7 +3935,7 @@
         function main(userId) {
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                url: 'http://localhost:3000/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -3909,7 +3950,7 @@
                 success: function (response) {
 
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/createUserPayment",
+                        url: "http://localhost:3000/api/spade/createUserPayment",
                         type: "POST",
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3946,7 +3987,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "/api/spade/createSubscriptionPayment",
+                                        url: "http://localhost:3000/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3965,7 +4006,7 @@
                                         contentType: "application/json",
                                         success: function (response) {
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountSignup",
+                                                url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 headers: {
@@ -4015,7 +4056,7 @@
                                         },
                                         error: function (xhr, status, error) {
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/deleteUser",
+                                                url: "http://localhost:3000/api/spade/deleteUser",
                                                 type: "DELETE",
                                                 contentType: "application/json",
                                                 data: JSON.stringify({
@@ -4041,7 +4082,7 @@
 
                                 } else {
                                     $.ajax({
-                                        url: "https://backend.app.spaderent.com/api/spade/deleteUser",
+                                        url: "http://localhost:3000/api/spade/deleteUser",
                                         type: "DELETE",
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -4071,7 +4112,7 @@
                             console.log(status)
                             console.log(error)
                             $.ajax({
-                                url: "https://backend.app.spaderent.com/api/spade/deleteUser",
+                                url: "http://localhost:3000/api/spade/deleteUser",
                                 type: "DELETE",
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -4104,7 +4145,7 @@
                     console.log(error)
                     console.error('Error sending data:', error);
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/deleteUser",
+                        url: "http://localhost:3000/api/spade/deleteUser",
                         type: "DELETE",
                         contentType: "application/json",
                         data: JSON.stringify({
