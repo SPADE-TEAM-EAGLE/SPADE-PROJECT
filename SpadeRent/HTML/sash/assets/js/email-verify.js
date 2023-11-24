@@ -18,8 +18,8 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         }
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/spade/protected',
-        // http://localhost:3000/api/spade/protected
+        url: 'https://backend.app.spaderent.com/api/spade/protected',
+        // https://backend.app.spaderent.com/api/spade/protected
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -57,7 +57,7 @@ $(document).ready(function () {
         }
     });
     $.ajax({
-        url: 'http://localhost:3000/api/spade/verifyMailCheck',
+        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

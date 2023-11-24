@@ -1,0 +1,3678 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
+    <meta name="author" content="Spruko Technologies Private Limited">
+    <meta name="keywords"
+        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico">
+    <link rel="stylesheet"
+        href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css">
+    <!-- TITLE -->
+    <title>Overview - SpadeRent</title>
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- STYLE CSS -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/dark-style.css" rel="stylesheet">
+    <link href="../assets/css/transparent-style.css" rel="stylesheet">
+    <link href="../assets/css/skin-modes.css" rel="stylesheet">
+    <link href="../assets/css/responsive.css" rel="stylesheet">
+    <link href="../assets/css/responsive2.css" rel="stylesheet">
+    <!--- FONT-ICONS CSS -->
+    <link href="../assets/css/icons.css" rel="stylesheet">
+    <!-- drag and drop start  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.5.2/dragula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+    <!-- drag and drop end  -->
+    <!-- demo walktrough start  -->
+    <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
+    <!-- demo walktrough End  -->
+    <!-- COLOR SKIN CSS -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
+    <script>
+        if (!localStorage.getItem("authtoken")) {
+            window.location = "./login_module.html"
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+            width: 7px;
+            /* Width of the scrollbar */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+            background-color: rgb(136, 136, 136, 0.2);
+            /* Color of the scrollbar thumb */
+            border-radius: 7px;
+            transition: all 1ms;
+            /* Rounded corners for the thumb */
+        }
+
+        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(136, 136, 136, 0.5);
+            /* Color of the scrollbar thumb on hover */
+        }
+
+        .iti {
+            margin-bottom: 0 !important;
+        }
+
+        .custom-file-input::before {
+            content: 'Select Files';
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 4px 8px;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .custom-file-input:hover::before {
+            background: #0069d9;
+        }
+
+        /* .fi-rs-calendar {
+    position: absolute;
+    top: 78%;
+    right: 24px;
+    transform: translateY(-50%);
+    background-size: cover;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #1467B0;
+} */
+
+
+        .custom-file-input:active::before {
+            background: #0062cc;
+        }
+
+        .custom-file-input.selected::before {
+            content: 'Change Files';
+            background: #28a745;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            /* display: none; */
+            background-size: cover;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1467B0;
+        }
+
+        .dark-mode .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: white !important;
+            border-radius: 50px !important;
+        }
+
+        .create-new-link {
+            background: transparent !important;
+            border: 3px solid #1467B0 !important;
+            color: black;
+            border-radius: 50px !important;
+        }
+
+        .selected-files {
+            margin-top: 10px;
+        }
+
+        .del-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+        }
+
+        .selected-files span {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 4px 8px;
+            background: #f8f9fa;
+            color: #333;
+            border-radius: 4px;
+        }
+
+        .dark-mode .selected-files span {
+            display: inline-block;
+            margin-right: 0;
+            padding: 4px 8px;
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .custom-file-input {
+            visibility: hidden;
+        }
+
+        .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: #fff;
+        }
+
+        .dark-mode .custom-file-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: transparent;
+        }
+
+        .custom-file-label i {
+            margin-bottom: 5px;
+            font-size: 3rem;
+            color: #1467B0;
+        }
+
+        .custom-file-text {
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+
+        .custom-file-text span {
+            display: block;
+            font-size: 14px;
+        }
+
+        .remove-file {
+            cursor: pointer;
+        }
+
+        .border {
+            border: 0px solid #e9edf4 !important;
+            padding: 0.75rem;
+            vertical-align: top;
+            border: 1px solid #e9edf4;
+        }
+
+        /* /* input:focus {
+            border: 3px solid #555 !important;
+        } */
+
+        */ .panel-body {
+            padding: 0px;
+        }
+
+        .accordion-item:first-of-type {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-item:last-of-type {
+            border-top-right-radius: 0.25rem;
+            border-top-left-radius: 0.25rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .table-primary th {
+            font-weight: 600 !important;
+            vertical-align: middle !important;
+        }
+
+        .border-model-line {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .selected-file {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .file-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .file-details {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .table td {
+            vertical-align: middle !important;
+        }
+
+        /* .card-header {
+        padding: 0.5rem 1rem;
+    } */
+
+        .modal-footer .button-left {
+            background-color: #1F1F1F;
+            margin: 0rem 1rem;
+            color: white;
+        }
+
+        .modal-footer button {
+            border-radius: 2.75rem;
+            padding: 4px 30px;
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.875rem;
+            font-size: 0.77rem;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+            /* identical to box height, or 120% */
+            letter-spacing: 0.0145455em;
+            /* font-size: 0.938rem; */
+        }
+
+        .modal-footer .button {
+            font-size: 0.938rem;
+        }
+
+        .accordion-button::after {
+            content: "";
+            display: inline-block;
+            /* Replace with the path to your default chevron image */
+        }
+
+        .chevron,
+        .tick,
+        .cross {
+            position: absolute;
+            right: 15px;
+        }
+
+        .tick {
+            color: green;
+            font-weight: bolder
+        }
+
+        .cross {
+            color: red;
+            font-weight: bolder
+        }
+
+        .accordion-button .chevron {
+            transition: transform 0.3s;
+            /* Transition for smooth animation */
+        }
+
+        .accordion-button[aria-expanded="true"] .chevron {
+            transform: rotate(-180deg);
+            /* Rotate the chevron when accordion is open */
+        }
+
+        .table tbody img {
+            width: 40px;
+            border: transparent;
+            border-radius: 5px;
+            height: 40px;
+        }
+
+        .rounded-pill-Single-Family {
+            color: #4A4AFF !important;
+            background: #E6E6F2 !important;
+            font-weight: bold;
+        }
+
+        .rounded-pill-Multi-Family {
+            color: #0BAAB8 !important;
+            background: #C8F3F7 !important;
+            font-weight: bold;
+        }
+
+        .rounded-pill-Multi-Commercial {
+            background: #FFF9E5 !important;
+            color: #F5CA38 !important;
+            font-weight: bold;
+        }
+
+        .table-primary {
+            background: #1467B014;
+        }
+
+        .selected-file {
+            position: relative;
+        }
+
+        .file-preview {
+            width: 100%;
+        }
+
+        .file-details {
+            padding: 10px;
+        }
+
+        .delete-file {
+            position: absolute;
+            top: -1px;
+            right: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #000;
+        }
+
+        .btn-group>.btn-group:not(:last-child)>.btn,
+        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .color-primary {
+            color: #1467B0;
+        }
+
+        .border-model-line {
+            border-left: 5px solid #1467B0;
+        }
+
+        .accordion-item:first-of-type .accordion-button {
+            border-top-right-radius: calc(0.5rem - 1px);
+            border-top-left-radius: calc(0.5rem - 1px);
+        }
+
+        .selected-files span {
+            display: inline-block;
+            margin-right: 0px;
+            padding: 0px;
+            background: none;
+            color: #333;
+            /* border-radius: 4px; */
+        }
+
+        /* .delete-file {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #000;
+    } */
+
+        button.btn-close {
+            right: 5px;
+        }
+
+        .btn-close {
+            width: 1.8rem;
+            opacity: 1;
+            position: absolute;
+            top: 5px;
+        }
+
+        .del {
+            width: 2rem !important;
+        }
+
+        .btn-close:hover,
+        .btn-close:focus {
+            color: #000;
+            text-decoration: none;
+            opacity: 1;
+        }
+
+        @media (max-width:992px) {
+            .modal-footer button {
+                border-radius: 2.75rem;
+                padding: 4px 30px;
+                font-family: 'Figtree';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 0.8rem;
+                line-height: 1.875rem;
+                /* identical to box height, or 120% */
+                letter-spacing: 0.0145455em;
+            }
+
+            .btn-close {
+                width: 2.5rem;
+                opacity: 1;
+                position: absolute;
+                top: 6px;
+            }
+
+            .del {
+                width: 2rem !important;
+            }
+
+            .btn-close:hover,
+            .btn-close:focus {
+                color: #000;
+                text-decoration: none;
+                opacity: 1;
+            }
+
+            @media (max-width:992px) {
+                .modal-footer button {
+                    border-radius: 2.75rem;
+                    padding: 4px 30px;
+                    font-family: 'Figtree';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 0.8rem;
+                    line-height: 1.875rem;
+                    /* identical to box height, or 120% */
+                    letter-spacing: 0.0145455em;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
+            }
+
+            @media (max-width:575px) {
+                .modal-footer {
+                    flex-direction: column !important;
+                    justify-content: flex-center !important;
+                }
+
+                .modal-footer .button-left {
+                    margin: auto;
+                }
+
+                .modal-footer button {
+                    width: 231px;
+                }
+
+                .border-model-line h2 {
+                    font-size: 1.6rem;
+                }
+
+                .accordion-button h3 {
+                    font-size: 15px;
+                }
+
+                #filter_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                }
+
+                /* #customize_btn {
+                    display: none;
+                } */
+                #info-head {
+                    display: none;
+                }
+
+                #add_property_btn {
+                    font-size: 12px;
+                    margin: 0 !important;
+                    display: none;
+                }
+
+                /* #typehead {
+                    display: none;
+                } */
+                #email_verification {
+                    font-size: 12px;
+                }
+
+                #top_main_image {
+                    display: none;
+                }
+
+                #top_main_card {
+                    height: 220px;
+                }
+
+                #nav_links {
+                    top: 153px;
+                }
+            }
+
+            @media (max-width:375px) {
+                .border-model-line h2 {
+                    font-size: 1.4rem;
+                }
+            }
+
+            @media (max-width:320px) {
+                .modal-footer button {
+                    width: 231px;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .file-select-area {
+                    display: block;
+                    text-align: center;
+                }
+
+                .selected-files {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+                .file-details {
+                    padding: 5px;
+                }
+            }
+
+            th,
+            td {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
+            }
+
+            .dark-mode th {
+                background: #212121 !important;
+                font-weight: bold !important;
+            }
+
+            .light-mode th {
+                background: #ECF3F9 !important;
+                font-weight: bold !important;
+            }
+        }
+
+        .btn-light {
+            border-color: #000000 !important;
+        }
+
+        /* Tabs css Start  */
+        .tabs-menu1 ul li a {
+            padding: 10px 0px 6px 0px;
+            margin-right: 30px;
+            display: block;
+            color: white;
+        }
+
+        .tabs-menu1 ul li .active {
+            border-bottom: 4px solid orange;
+        }
+
+        .nav.panel-tabs a.active {
+            color: white;
+        }
+
+        .tab-menu-heading {
+            padding: 0px;
+            border-bottom: 0px solid #e9edf4 !important;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .card-bodyy {
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 25px 25px 0px 25px;
+            margin: 0;
+            position: relative;
+        }
+
+        .h2-personal-inf {
+            color: #1467B0;
+            font-weight: 800;
+            margin-bottom: 0px;
+        }
+
+        .p-personal-inf {
+            font-size: 16px;
+        }
+
+        /* upload file start  */
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #mediaFile {
+            position: absolute;
+            top: -1000px;
+        }
+
+        #profile.dragging {
+            background-image: none !important;
+        }
+
+        #profile.dragging .dashes {
+            animation-duration: 10s;
+            animation-name: spin;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            opacity: 1 !important;
+        }
+
+        #profile.dragging label {
+            opacity: 0.5 !important;
+        }
+
+        #profile.hasImage .dashes,
+        #profile.hasImage label,
+        #profile.hasImage div .upload-imgg {
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .stat {
+            width: 50%;
+            text-align: center;
+            float: left;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .stat .label {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .stat .num {
+            font-size: 21px;
+            padding: 3px 0;
+        }
+
+        .editable {
+            position: relative;
+        }
+
+        .editable i {
+            position: absolute;
+            top: 10px;
+            right: -20px;
+            opacity: 0.3;
+        }
+
+        /* button {
+            width: 100%;
+            line-height: 40px;
+            color: #fff;
+            border: none;
+            background-color: #ea4c89;
+            margin-top: 30px;
+            font-size: 13px;
+            -webkit-font-smoothing: antialiased;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        } */
+
+        .iti input[type=text],
+        .iti input[type=tel] {
+            width: 100% !important;
+        }
+
+        .iti {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 4px;
+            width: 100%;
+        }
+
+        .col-lgg-3 {
+            -ms-flex: 0 0 20%;
+            flex: 0 0 20%;
+            max-width: 20%;
+        }
+
+        @media (max-width: 600px) {
+            /* .nav {
+                width: 1850px !important;
+            } */
+
+            .tab-menu-heading {
+                overflow-x: scroll;
+            }
+
+            .tabs-menu1 ul li a {
+                padding: 10px 0px 6px 0px !important;
+                margin-right: 20px;
+                display: block;
+                color: white;
+            }
+        }
+
+        .dark-mode .tab-menu-heading {
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+            background-color: transparent !important;
+        }
+
+        .dark-mode .nav.panel-tabs a.active {
+            color: white;
+        }
+
+        #myonoffswitch1 {
+            border-radius: 25px;
+        }
+
+        /* .activee,
+        .btnn:hover {
+            border-radius: 25px;
+            border: 5px solid #1467B0;
+        } */
+
+        .btn-actives:focus {
+            border: 2px solid black;
+        }
+
+        .btn-default:not(:disabled):not(.disabled):active,
+        .btn-default:not(:disabled):not(.disabled).active {
+            border: 2px solid #1467B0;
+        }
+
+        .btn-actives:active {
+            border: 2px solid black;
+        }
+
+        .btn-actives .active {
+            border: 2px solid black;
+        }
+
+        .card-title-primary {
+            font-size: 23px;
+            font-weight: 800;
+            color: #1467B0;
+        }
+
+        .card-title-primary1 {
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .card-holder {
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        .tab-menu-heading {
+            overflow-x: scroll;
+        }
+
+        /* .nav {
+            width: 1600px;
+        } */
+
+        /* pricing cards start  */
+        .iti {
+            width: 100%;
+        }
+
+        .main-div {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .boxes {
+            height: 100%;
+        }
+
+        .Rent-logo {
+            width: 215px;
+        }
+
+        .welcome-head h1 span,
+        .heading span {
+            color: #1467b0;
+            font-weight: bold;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .boxes a {
+            display: flex;
+            background: transparent;
+            border: 2px solid lightgrey;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: lightgrey;
+            font-weight: bold;
+            width: 80px;
+            height: 80px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .active1 {
+            display: flex;
+            background: transparent;
+            border: 2px solid #707070 !important;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: #707070 !important;
+            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shadow-active {
+            box-shadow: 0px 3px 13px rgba(0, 0, 0, 0.160784);
+        }
+
+        .complete1 {
+            display: flex;
+            padding: 20px 35px;
+            background: #1467B0 !important;
+            border: 2px solid #1467B0 !important;
+            border-radius: 20px;
+            font-size: 35px;
+            text-decoration: none;
+            color: white !important;
+            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .anchor {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* .boxes .anchor:nth-child(2) {
+            margin-right: 20px;
+            margin-left: 20px;
+        } */
+
+        .card1,
+        .card3 {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        .heading {
+            padding: 20px 0px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border-bottom: 1px solid #707070; */
+        }
+
+        .heading-confirm {
+            padding: 0px 0px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border-bottom: 1px solid #707070; */
+        }
+
+        .inputs {
+            padding: 20px;
+        }
+
+        .checker span {
+            color: #1467b0;
+            font-weight: bold;
+        }
+
+        .btnn {
+            border: transparent;
+            border-radius: 26px;
+        }
+
+        .input-inside {
+            padding: 1.7rem 0.75rem !important;
+            font-size: 1rem;
+        }
+
+        /* .input-inside1 {
+            height: 1.7rem 6.75rem!important;
+            font-size: 1rem;
+        } */
+
+        .btnstyle {
+            font-size: 1.5rem !important;
+            min-width: 2.75rem !important;
+            font-weight: 600;
+        }
+
+        #next1,
+        #next3 {
+            background: #1467B0 !important;
+        }
+
+        #gridCheck:checked {
+            background-color: #1467B0;
+        }
+
+        .pricing-tabs ul.nav-price {
+            text-align: center;
+            margin: 0;
+            display: inline-flex;
+            margin-bottom: 20px;
+            border: 1px solid #eaedf1;
+            border-radius: 50px;
+            padding: 7px;
+            background: #fff;
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .card-primary {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #1467B0;
+            border: inherit !important;
+            background-clip: border-box;
+            border-radius: 7px;
+            box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #1467B0 !important;
+        }
+
+        .btn-primary :hover {
+            background-color: #1467B0 !important;
+        }
+
+        .btn-free {
+            background: white;
+            border: transparent;
+            border-radius: 100px;
+            color: #1467B0;
+            font-weight: 500;
+        }
+
+        .border-btn {
+            border: 2px solid;
+        }
+
+        .card-boder-warning {
+            border-top: 16px solid #f7b731 !important;
+        }
+
+        .card-boder-light-green {
+            border-top: 16px solid #0CA7B6 !important;
+        }
+
+        .card-boder-light-blue {
+            border-top: 16px solid #1D80C4 !important;
+        }
+
+        .btn3-green {
+            color: #0CA7B6;
+            border: 2px solid #0CA7B6;
+        }
+
+        .text3-green {
+            color: #0CA7B6 !important;
+        }
+
+        .btn4-blue {
+            color: #1D80C4;
+            border: 2px solid #1D80C4;
+        }
+
+        .text4-blue {
+            color: #1D80C4 !important;
+        }
+
+        .card {
+            border-radius: 16px;
+            /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+        }
+
+        .card:hover {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            transition: all 0.3s ease;
+        }
+
+        .card-blue {
+            border-radius: 16px;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+
+        .p-2 {
+            padding: 0.5rem !important;
+            height: fit-content;
+        }
+
+        .card-primary {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #1467B0;
+            border: inherit !important;
+            background-clip: border-box;
+            border-radius: 7px;
+            box-shadow: 0px 4px 51px -8px rgba(0, 0, 0, 0.57) !important;
+            color: white;
+        }
+
+        /* .card:nth-child(1) {
+ 
+ border-radius: 16px;
+ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+} */
+
+        .pricing-tabs ul.nav-price li a {
+            padding: 10px 20px;
+            border-radius: 50px !important;
+            display: block;
+            background: #fff;
+            font-size: 20px;
+            border-radius: 0px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-tabs ul.nav-price li a.active {
+            color: #fff;
+            transition: all 0.3s ease;
+            background: #1467B0;
+        }
+
+        a {
+            color: black;
+        }
+
+        .card1 {
+            opacity: 1;
+            transition: all 1s ease;
+        }
+
+        .card2 {
+            opacity: 1;
+            transition: all 1s ease;
+        }
+
+        .card3 {
+            opacity: 1;
+            transition: all 1s ease;
+        }
+
+        /* .fade {
+            opacity: 0;
+        } */
+
+        #annual-basic {
+            text-decoration: line-through;
+            /* margin: 0; */
+            font-size: 19px;
+            margin-bottom: -14px;
+            /* text-align: center; */
+            margin-left: 90px;
+        }
+
+        #annual-pro {
+            text-decoration: line-through;
+            /* margin: 0; */
+            font-size: 19px;
+            margin-bottom: -14px;
+            /* text-align: center; */
+            margin-left: 100px;
+        }
+
+        #annual-pre {
+            text-decoration: line-through;
+            /* margin: 0; */
+            font-size: 17px;
+            margin-bottom: -14px;
+            /* text-align: center; */
+            margin-left: 120px;
+        }
+
+        .pri-tabs-heading {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card2-text1 {
+            text-align: center;
+        }
+
+        /* mobile */
+
+        .myaccordion {
+            max-width: 500px;
+            margin: 50px auto;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .myaccordion .card,
+        .myaccordion .card:last-child .card-header {
+            border: none;
+        }
+
+        .myaccordion .card-header {
+            border-bottom-color: #EDEFF0;
+            background: transparent;
+        }
+
+        .myaccordion .fa-stack {
+            font-size: 18px;
+        }
+
+        .myaccordion .btn {
+            width: 100%;
+            font-weight: bold;
+            color: #004987;
+            padding: 0;
+        }
+
+        .myaccordion .btn-link:hover,
+        .myaccordion .btn-link:focus {
+            text-decoration: none;
+        }
+
+        .myaccordion li+li {
+            margin-top: 10px;
+        }
+
+        .panel-group1 {
+            display: none;
+        }
+
+        /* hr {
+            border-top: 3px dashed grey;
+            clear: both;
+            display: block;
+            width: 5%;
+            align-self: center;
+            position: relative;
+            bottom: 80px;
+        }
+        
+        .hr-active {
+            border-top: 3px dashed #707070 !important;
+        } */
+        /* mobile */
+
+        .tabcontentformobile1 {
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .panel-group1 {
+                display: block;
+            }
+
+            .tabcontentformobile {
+                display: none;
+            }
+
+            .tabcontentformobile1 {
+                display: block;
+            }
+
+            .boxes a {
+                /* padding: 20px 35px; */
+                display: flex;
+                background: transparent;
+                border: 2px solid lightgrey;
+                border-radius: 20px;
+                /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+                font-size: 35px;
+                text-decoration: none;
+                color: lightgrey;
+                font-weight: bold;
+                width: 75px;
+                height: 75px;
+                /* text-align: center; */
+                justify-content: center;
+                align-items: center;
+            }
+
+            .Rent-logo {
+                width: 200px;
+            }
+
+            .boxes .anchor:nth-child(2) {
+                margin-right: 30px;
+                margin-left: 30px;
+            }
+
+            .pricing-tabs ul.nav-price li a {
+                padding: 10px 20px;
+                border-radius: 50px !important;
+                display: block;
+                background: #fff;
+                font-size: 15px;
+                border-radius: 0px;
+                transition: all 0.3s ease;
+            }
+
+            .pri-tabs-heading {
+                display: flex;
+                justify-content: center;
+            }
+
+            .card2-text1 {
+                text-align: center;
+            }
+        }
+
+        /* hr{
+  border-top: 5px dashed red;
+} */
+
+        #next1,
+        #next3 {
+            padding: 8px 10px;
+        }
+
+        .add-payment-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            float: left;
+        }
+
+        .heading-payment {
+            padding: 10px 20px 20px 20px;
+            display: flex;
+            justify-content: left;
+        }
+
+        .payment-paragraph {
+            width: 100%;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .credit-card-image1 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            height: 20px;
+        }
+
+        /* .fadein-loader
+    {
+        animation: fadein 5s;
+    }
+    @keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+} */
+
+        .panel-heading1 {
+            background-color: transparent;
+            border-radius: 14px;
+            border: none;
+            color: #fff;
+            padding: 0;
+        }
+
+        .panel-heading1 a {
+            background-color: transparent !important;
+        }
+
+        .panel-title1 a {
+            display: block;
+            color: #fff !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .trial-plan-option-1,
+        .panel-title1 .trial-plan-option-2 {
+            display: block;
+            color: #1467B0 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .basic-plan-option-1,
+        .panel-title1 .basic-plan-option-2 {
+            display: block;
+            color: #F7C042 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .pro-plan-option-1,
+        .panel-title1 .pro-plan-option-2 {
+            display: block;
+            color: #0CA7B6 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-title1 .pre-plan-option-1,
+        .panel-title1 .pre-plan-option-2 {
+            display: block;
+            color: #1D80C4 !important;
+            padding: 15px;
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+
+        .panel-group .panel,
+        .panel-group1 .panel {
+            border-radius: 5px;
+            box-shadow: none;
+            border: 1px solid transparent;
+            overflow: hidden;
+        }
+
+        .fs-50 {
+            font-size: 35px;
+        }
+
+        .btn-lg,
+        .btn-group-lg>.btn {
+            font-size: 13px;
+            min-width: 2.75rem;
+            font-weight: 400;
+            text-transform: capitalize;
+        }
+
+        /* pricing cards end  */
+
+        .border-left {
+            border-left: 1px solid black;
+        }
+
+        .settings-icon {
+            border: 0px solid transparent;
+            border-radius: 36px;
+            padding: 11px 15px;
+            font-size: 20px;
+        }
+
+        .card-color {
+            cursor: pointer;
+        }
+
+        .card-color.active {
+            background-color: #1467B0;
+            cursor: pointer;
+            color: white;
+        }
+
+        .settings-icon,
+        .border-left.active {
+            background-color: #fff;
+            border-left: 1px solid white;
+        }
+
+        .settings-icon,
+        .bg-primary-transparent,
+        .text-primary.active {
+            background-color: #f8e7e7;
+        }
+
+        .tab-contentt1 {
+            display: none;
+        }
+
+        .tab-contentt1.active {
+            display: block;
+        }
+
+        .permissions-cards-height {
+            height: 766px;
+            overflow-y: scroll;
+        }
+
+        .card-preview-templates {
+            background-color: transparent;
+            box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+        }
+
+        .card-preview-templates:hover {
+            background-color: transparent;
+            box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+        }
+
+        .card-body-preview-templates {
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        /* email template active css start  */
+        input[type="radio"][id^="cb"] {
+            display: none;
+        }
+
+        .label {
+            border: 0px solid #fff;
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .label:before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 25%;
+            border: 1px solid grey;
+            position: absolute;
+            top: 15px;
+            left: 200px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+        :checked+.label {
+            border: 5px solid #1467B0;
+            border-radius: 26px;
+        }
+
+        :checked+.label:before {
+            content: "✔";
+            background-color: #1467B0;
+            transform: scale(1);
+        }
+
+        /* email template active css end  */
+
+        .model-account-close-logo {
+            border: 4px solid orange;
+            border-radius: 50%;
+            padding: 10px 17px 10px 17px;
+        }
+
+        .model-account-request-close-logo {
+            width: 120px;
+        }
+
+        .form-row {
+            text-align: left;
+        }
+
+        .dark-mode .tab-content .btn i {
+            color: #fff;
+        }
+
+        .light-mode .tab-content .btn i {
+            color: #000;
+        }
+
+        .table> :not(caption)>*>* {
+            background: white;
+            color: #000;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+
+        .border {
+            border: 0px solid #e9edf4 !important;
+            padding: 0.75rem;
+            vertical-align: top;
+            border: 1px solid #e9edf4;
+        }
+
+        .panel-body {
+            padding: 0px;
+        }
+
+        .recent-title {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .comingsoon-heading {
+            font-size: 60px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            margin-top: 60px;
+        }
+
+        .header {
+            padding-bottom: 1rem !important;
+        }
+    </style>
+</head>
+
+<body class="app sidebar-mini ltr light-mode">
+    <!-- GLOBAL-LOADER -->
+    <div id="preloader" class="tlp-preloader">
+        <div class="animation-preloader">
+            <div class="tlp-spinner"></div>
+            <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+        </div>
+    </div>
+    <!-- /GLOBAL-LOADER -->
+
+
+
+
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div class="app-header header sticky" id="navbar-placeholder">
+                <div class="container-fluid main-container">
+                    <div class="d-flex">
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
+                            href="javascript:void(0)"></a>
+                        <!-- sidebar-toggle-->
+                        <a class="logo-horizontal " href="index.html">
+                            <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
+                                alt="logo">
+                        </a>
+                        <!-- LOGO -->
+                        <!-- <div class="main-header-center ms-3 d-none d-lg-block">
+                            <input type="text" class="form-control" id="typehead" placeholder="Search">
+                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                        </div> -->
+                        <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                            <!-- SEARCH -->
+                            <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
+                                aria-controls="navbarSupportedContent-4" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon fe fe-more-vertical"></span>
+                            </button>
+                            <div class="navbar navbar-collapse responsive-navbar p-0">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                                    <div class="d-flex order-lg-2">
+                                        <!-- <div class="dropdown d-lg-none d-flex">
+                                            <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                                                <i class="fe fe-search"></i>
+                                            </a>
+                                            <div class="dropdown-menu header-search dropdown-menu-start">
+                                                <div class="input-group w-100 p-2">
+                                                    <input type="text" class="form-control" placeholder="Search....">
+                                                    <div class="input-group-text btn btn-primary">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- LOGO -->
+                                        <!-- COUNTRY -->
+                                        <div class="d-flex country mt-1">
+                                            <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                                <span class="dark-layout text-dark">
+                                                    <i class="fe fe-moon"></i>
+                                                </span>
+                                                <span class="light-layout">
+                                                    <i class="fe fe-sun"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <!-- <div class="d-flex country mt-2">
+                                                <a class="nav-link icon text-dark customIntercomButton">
+                                                    <i class="fi fi-rs-interrogation"></i>
+                                                </a>
+                                            </div> -->
+
+                                        <div class="dropdown  d-flex notifications">
+                                            <a class="nav-link icon" data-bs-toggle="sidebar-right"
+                                                data-target=".sidebar-right">
+                                                <i class="fe fe-bell"></i>
+                                                <span class="badge bg-secondary header-badge bg-primary"
+                                                    id="count_unread">0</span>
+                                            </a>
+                                        </div>
+
+                                        <div class="dropdown d-flex profile-1 country">
+                                            <a href="javascript:void(0)" data-bs-toggle="dropdown"
+                                                class="nav-link leading-none d-flex">
+                                                <!-- <img src="../assets/images/users/21.jpg" 
+                                                    class="avatar  profile-user brround cover-image"> -->
+                                                <span class="dynamic-text-head text-dark" id="header-user"
+                                                    style="padding: 10px 10px;"></span>
+                                                <i class="fe fe-chevron-down dark-mode text-dark"
+                                                    style="font-size: 20px; font-weight: 800;"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <!-- <div class="drop-heading"> 
+                                                    <div class="text-center">
+                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
+                                                        <small class="text-muted">Senior Admin</small>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-divider m-0"></div>
+                                                <a class="dropdown-item" href="profile.html">
+                                                    <i class="dropdown-icon fe fe-user"></i> Profile
+                                                </a>
+                                                <a class="dropdown-item" href="email-inbox.html">
+                                                    <i class="dropdown-icon fe fe-mail"></i> Inbox
+                                                    <span class="badge bg-danger rounded-pill float-end">5</span>
+                                                </a>
+                                                <a class="dropdown-item" href="lockscreen.html">
+                                                    <i class="dropdown-icon fe fe-lock"></i> Lockscreen
+                                                </a> -->
+                                                <a class="dropdown-item" href="settings.html">
+                                                    <i class="dropdown-icon fe fe-settings"></i>
+                                                    Settings
+                                                </a>
+                                                <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
+                                                    <i class="dropdown-icon fe fe-alert-circle"></i>
+                                                    Sign out
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /app-Header -->
+            <!--APP-SIDEBAR-->
+            <!-- side bar -->
+            <div class="sticky" id="sidebar-placeholder">
+                <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+                <div class="app-sidebar">
+                    <div class="side-header">
+                        <a class="header-brand1" href="index.html">
+                            <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo"
+                                alt="logo">
+                            <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo"
+                                alt="logo">
+                            <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1"
+                                alt="logo">
+                        </a>
+                        <!-- LOGO -->
+                    </div>
+                    <div class="main-sidemenu">
+                        <div class="slide-left disabled" id="slide-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+                            </svg>
+                        </div>
+                        <ul class="side-menu">
+                            <li class="sub-category">
+                                <h3>
+                                    <b style="color: #1467B0;">Main</b>
+                                </h3>
+                            </li>
+                            <!-- <a href="settings.html">
+                                <li class="slide">
+                                    <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                        <div class="card-header pb-0 border-bottom-0">
+                                            <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                            <h3 class="card-title side-menu__label">&nbsp; Complete your Profile
+                                            </h3>
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="side-menu__label progress progress-md mt-5">
+                                                <div class="progress-bar bg-info" style="width: 0%;">20%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </a> -->
+                            <div class="top-tabs">
+                                <li class="slide permissionRestrict_overView">
+                                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+                                        <i class="side-menu__icon fi fi-rs-dashboard"></i>
+                                        <span class="side-menu__label">Overview</span>
+                                    </a>
+                                </li>
+                                <!-- <li class="slide card-demo">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                            class="side-menu__icon fi fi-rs-ticket"></i><span
+                                            class="side-menu__label">Tickets</span>
+                                    </a>
+                                </li> -->
+                                <li class="slide card-demo1  permissionRestrict_customers">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="Customers.html">
+                                        <i class="side-menu__icon fi fi-rs-users"></i>
+                                        <span class="side-menu__label">Customers</span>
+                                    </a>
+                                </li>
+                                <li class="slide card-demo1 permissionRestrict_closeLandlord">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="closed-customers.html">
+                                        <i class="side-menu__icon fi fi-rs-delete-user"></i>
+                                        <span class="side-menu__label">Closed Customers</span>
+                                    </a>
+                                </li>
+                                <li class="slide card-demo permissionRestrict_userManagement">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="user-management.html">
+                                        <i class="side-menu__icon fi fi-rs-user-gear"></i>
+                                        <span class="side-menu__label">User Management</span>
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="customers-reports.html">
+                                        <i class="side-menu__icon fi fi-rs-document"></i>
+                                        <span class="side-menu__label">Customers Report</span>
+                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                    </a>
+                                </li>
+                                <!-- <li class="slide card-demo1">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                            class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
+                                            class="side-menu__label">Revenue</span>
+                                    </a>
+                                </li>
+
+                                <li class="slide card-demo1">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                            class="side-menu__icon fi fi-rs-resize"></i><span
+                                            class="side-menu__label">Leads</span>
+                                    </a>
+                                </li>
+
+                                <li class="slide card-demo1">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
+                                            class="side-menu__icon fi fi-rs-document"></i><span
+                                            class="side-menu__label">Reporting</span>
+                                    </a>
+                                </li>
+
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html">
+                                        <i class="side-menu__icon fi fi-rs-comment"></i>
+                                        <span class="side-menu__label">Chats</span>
+                                        <span class="badge bg-primary side-badge" id="chatCounter"></span>
+                                    </a>
+                                </li> -->
+                            </div>
+                            <div style="position: absolute; bottom: 0; width: 94%;">
+                                <li>
+                                    <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
+                                </li>
+                                <li class="sub-category">
+                                    <h3>
+                                        <b style="color: #1467B0;">Settings</b>
+                                    </h3>
+                                </li>
+                                <li>
+                                    <a class="side-menu__item has-link" href="settings.html" target="_self">
+                                        <i class="side-menu__icon fi fi-rs-settings"></i>
+                                        <span class="side-menu__label">Settings</span>
+                                        <!-- <span
+                                               class="badge bg-green br-5 side-badge blink-text pb-1">New</span> -->
+                                    </a>
+                                </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"
+                                        onclick="logout()">
+                                        <i class="side-menu__icon fi fi-rs-sign-out-alt"></i>
+                                        <span class="side-menu__label">Logout</span>
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                        <div class="slide-right" id="slide-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-appp">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluidd" id="main">
+                        <!-- Reports start  -->
+                        <!-- PAGE-HEADER -->
+                        <div class="cardd"
+                            style="background: linear-gradient(180deg, #1467B0 0%, #1467B0 100%); border-radius: 0px;">
+                            <div class="card-bodyy">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h1 class="page-titlee text-white"
+                                            style="font-weight: 700; margin-bottom: 0px; border-radius: 40px; text-align: left;">
+                                            Customers Report
+                                        </h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class=" tab-menu-heading mt-5">
+                                            <div class="tabs-menu1">
+                                                <!-- Tabs -->
+                                                <ul class="nav panel-tabs nav-width-scroll1 reporting-tab-parent">
+                                                    <li>
+                                                        <a href="#tab55" class="active" data-bs-toggle="tab">
+                                                            Active Customers
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab66" data-bs-toggle="tab">Closed Customers</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab77" data-bs-toggle="tab">Free Trial Customers</a>
+                                                    </li>
+                                                    <!-- <li>
+                                                            <a href="#tab88" data-bs-toggle="tab">Invoice Reports</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#tab99" data-bs-toggle="tab">Task Reports</a>
+                                                        </li> -->
+                                                    <!-- <li><a href="#tab10" data-bs-toggle="tab">Users & Permissions</a>
+                                                    </li>
+                                                    <li><a href="#tab11" data-bs-toggle="tab">Email Templates</a></li>
+                                                    <li><a href="#tab12" data-bs-toggle="tab">Invoice Settings</a></li>
+                                                    <li><a href="#tab13" data-bs-toggle="tab">Merchant Services</a></li>
+                                                    <li><a href="#tab14" data-bs-toggle="tab">Vendors</a></li>
+                                                    <li><a href="#tab15" data-bs-toggle="tab">Close Account</a></li> -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PAGE-HEADER END -->
+                        <div class="cardd">
+                            <div class="card-body pt-0">
+                                <div class="panel panel-primary">
+                                    <div class="panel-body tabs-menu-body">
+                                        <div class="tab-content">
+                                            <!-- Active Customer start  -->
+                                            <div class="tab-pane active" id="tab55">
+                                                <!-- Row -->
+                                                <div class="row mt-5">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-header justify-content-between">
+                                                                <div class="d-flex">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV1()"
+                                                                        id="download_csv_reports">
+                                                                        <b class="csv_icon">
+                                                                            <i class="fi fi-rs-file-csv fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            CSV
+                                                                        </strong>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports1">
+                                                                        <b class="pdf_icon">
+                                                                            <i class="fi fi-rs-file-pdf fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            PDF
+                                                                        </strong>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="btn-group d-none">
+                                                                    <button type="button"
+                                                                        class="btn font-weight-bold text-dark"
+                                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                                        style="border: none;">
+                                                                        <strong>FILTER</strong>
+                                                                        <i class="fe fe-chevron-down ms-2"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li>
+                                                                            <a href="javascript:void(0)"
+                                                                                class="text-dark">
+                                                                                <strong>
+                                                                                    Coulmns to
+                                                                                    Show
+                                                                                </strong>
+                                                                            </a>
+                                                                        </li>
+                                                                        <!-- <li class="d-flex justify-content-between">
+                                                                                    <a class="text-dark"
+                                                                                        href="javascript:void(0)">PROPERTY ID</a>
+                                                                                    <div class="form-check m-0">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input mt-2"
+                                                                                            id="exampleCheck1" checked>
+                                                                                    </div>
+                                                                                </li> -->
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                CUSTOMER ID
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                NAME
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">EMAIL</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                PHONE
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">SUBSCRIPTION</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">AMOUNT</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PURCHASE
+                                                                                DATE</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                STATUS
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">NEXT
+                                                                                BILLING</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <div
+                                                                    class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between report-search-scroll-responsive">
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <div class="main-header-center d-nonee d-lg-block m-0"
+                                                                                style="position: relative;">
+                                                                                <button class="btn px-0">
+                                                                                    <i class="fe fe-search"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                <input type="text"
+                                                                                    class="form-control search-input-field"
+                                                                                    id="typehead1" placeholder="Search"
+                                                                                    autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="width: 220px"
+                                                                        class="d-flex justify-content-end align-items-center">
+                                                                        <span
+                                                                            class="fw-bold me-2 mobile-text-hide-filer-number">
+                                                                            Number of
+                                                                            rows
+                                                                        </span>
+                                                                        <select id="lengthSelectBox1"
+                                                                            class="form-control form-select"
+                                                                            style="width: 80px;">
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                            <option value="999999999" selected>All
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <form class="form" id="form">
+                                                                    <div class="table-responsive" id="htmlContent1">
+                                                                        <table
+                                                                            class="table border text-nowrap text-md-nowrap mb-0 property-reports1 p-0 w-100"
+                                                                            id="responsive-datatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <!-- <th></th> -->
+                                                                                    <th>customer id</th>
+
+                                                                                    <th>Name</th>
+                                                                                    <th>Email</th>
+                                                                                    <th>Phone</th>
+                                                                                    <th>subscription</th>
+                                                                                    <th>amount</th>
+                                                                                    <th>purchase date</th>
+                                                                                    <!-- <th>Status</th> -->
+                                                                                    <th>Next Billing</th>
+                                                                                    <!-- <th>Status</th> -->
+                                                                                    <!-- <th>ACTION</th> -->
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="table_body_active_report">
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row -->
+                                            </div>
+                                            <!-- Active Customer End  -->
+
+                                            <!-- Closed Customer start  -->
+                                            <div class="tab-pane" id="tab66">
+                                                <!-- Row -->
+                                                <div class="row mt-5">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-header justify-content-between">
+                                                                <div class="d-flex">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV2()"
+                                                                        id="download_csv_reports">
+                                                                        <b class="csv_icon">
+                                                                            <i class="fi fi-rs-file-csv fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            CSV
+                                                                        </strong>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports2">
+                                                                        <b class="pdf_icon">
+                                                                            <i class="fi fi-rs-file-pdf fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            PDF
+                                                                        </strong>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="btn-group d-none">
+                                                                    <button type="button"
+                                                                        class="btn font-weight-bold text-dark"
+                                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                                        style="border: none;">
+                                                                        <strong>FILTER</strong>
+                                                                        <i class="fe fe-chevron-down ms-2"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li>
+                                                                            <a href="javascript:void(0)"
+                                                                                class="text-dark">
+                                                                                <strong>
+                                                                                    Coulmns to
+                                                                                    Show
+                                                                                </strong>
+                                                                            </a>
+                                                                        </li>
+                                                                        <!-- <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY ID</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li> -->
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                CUSTOMER ID
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                NAME
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">EMAIL</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                PHONE
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">SUBSCRIPTION</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">AMOUNT</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PURCHASE
+                                                                                DATE</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                STATUS
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">NEXT
+                                                                                BILLING</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <div
+                                                                    class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between report-search-scroll-responsive">
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <div class="main-header-center d-nonee d-lg-block m-0"
+                                                                                style="position: relative;">
+                                                                                <button class="btn px-0">
+                                                                                    <i class="fe fe-search"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                <input type="text"
+                                                                                    class="form-control search-input-field"
+                                                                                    id="typehead2" placeholder="Search"
+                                                                                    autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="width: 220px"
+                                                                        class="d-flex justify-content-end align-items-center">
+                                                                        <span
+                                                                            class="fw-bold me-2 mobile-text-hide-filer-number">
+                                                                            Number of
+                                                                            rows
+                                                                        </span>
+                                                                        <select id="lengthSelectBox2"
+                                                                            class="form-control form-select"
+                                                                            style="width: 80px;">
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                            <option value="999999999" selected>All
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <form class="form" id="form">
+                                                                    <div class="table-responsive" id="htmlContent2">
+                                                                        <table
+                                                                            class="table border text-nowrap text-md-nowrap mb-0 property-reports2 p-0 w-100"
+                                                                            id="responsive-datatable">
+                                                                            <thead>
+                                                                                <tr>
+
+                                                                                    <th>customer id</th>
+
+                                                                                    <th>Name</th>
+                                                                                    <th>EMAIL</th>
+                                                                                    <th>PHONE</th>
+                                                                                    <th>subscription</th>
+                                                                                    <th>amount</th>
+                                                                                    <th>Purchase Date</th>
+                                                                                    <th>Closure Date</th>
+                                                                                    <th>reason</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="table_body_close_report">
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td class="landlordId"
+                                                                                        style="font-weight: 600;">91
+                                                                                    </td>
+                                                                                    <td class="landlordName"
+                                                                                        style="font-weight: 600;">
+                                                                                        <b>Jawad Hasan</b>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1">
+                                                                                            Jawadkareem@yahoo.com</p>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1">
+                                                                                            03432343567</p>
+                                                                                    </td>
+                                                                                    <td class="fw-bold pricingPlan"
+                                                                                        style="color: #F7C042;">Basic
+                                                                                        Plan</td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b>$49 Per
+                                                                                                Month</b></p>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b>Purchase
+                                                                                                Date: N/A</b></p>
+                                                                                    </td>
+                                                                                    <td
+                                                                                        class="propertyAddress text-success">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b> Active</b>
+                                                                                        </p>
+                                                                                    </td>
+                                                                                    <td class="text-success">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b> N/A</b></p>
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row -->
+                                            </div>
+                                            <!-- Closes Customer End  -->
+
+                                            <!-- Free Trial start  -->
+                                            <div class="tab-pane" id="tab77">
+                                                <!-- Row -->
+                                                <div class="row mt-5">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-header justify-content-between">
+                                                                <div class="d-flex">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 csv_button"
+                                                                        onclick="exportTableToCSV3()"
+                                                                        id="download_csv_reports">
+                                                                        <b class="csv_icon">
+                                                                            <i class="fi fi-rs-file-csv fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            CSV
+                                                                        </strong>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary mx-2 pdf_button"
+                                                                        id="download_pdf_reports3">
+                                                                        <b class="pdf_icon">
+                                                                            <i class="fi fi-rs-file-pdf fs-20"
+                                                                                style="vertical-align: text-top; color: white !important;"></i>
+                                                                        </b>
+                                                                        <strong>
+                                                                            Export as
+                                                                            PDF
+                                                                        </strong>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="btn-group d-none">
+                                                                    <button type="button"
+                                                                        class="btn font-weight-bold text-dark"
+                                                                        id="customize_btn" data-bs-toggle="dropdown"
+                                                                        style="border: none;">
+                                                                        <strong>FILTER</strong>
+                                                                        <i class="fe fe-chevron-down ms-2"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li>
+                                                                            <a href="javascript:void(0)"
+                                                                                class="text-dark">
+                                                                                <strong>
+                                                                                    Coulmns to
+                                                                                    Show
+                                                                                </strong>
+                                                                            </a>
+                                                                        </li>
+                                                                        <!-- <li class="d-flex justify-content-between">
+                                                                                <a class="text-dark"
+                                                                                    href="javascript:void(0)">PROPERTY ID</a>
+                                                                                <div class="form-check m-0">
+                                                                                    <input type="checkbox"
+                                                                                        class="form-check-input mt-2"
+                                                                                        id="exampleCheck1" checked>
+                                                                                </div>
+                                                                            </li> -->
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                CUSTOMER ID
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                NAME
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">EMAIL</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                PHONE
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">SUBSCRIPTION</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">AMOUNT</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">PURCHASE
+                                                                                DATE</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">
+                                                                                STATUS
+                                                                            </a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="d-flex justify-content-between">
+                                                                            <a class="text-dark"
+                                                                                href="javascript:void(0)">NEXT
+                                                                                BILLING</a>
+                                                                            <div class="form-check m-0">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input mt-2"
+                                                                                    id="exampleCheck1" checked>
+                                                                            </div>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <div
+                                                                    class="pe-5 ps-5 pt-3 pb-3 d-flex justify-content-between report-search-scroll-responsive">
+                                                                    <div class="d-flex">
+                                                                        <div>
+                                                                            <div class="main-header-center d-nonee d-lg-block m-0"
+                                                                                style="position: relative;">
+                                                                                <button class="btn px-0">
+                                                                                    <i class="fe fe-search"
+                                                                                        aria-hidden="true"></i>
+                                                                                </button>
+                                                                                <input type="text"
+                                                                                    class="form-control search-input-field"
+                                                                                    id="typehead3" placeholder="Search"
+                                                                                    autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="width: 220px"
+                                                                        class="d-flex justify-content-end align-items-center">
+                                                                        <span
+                                                                            class="fw-bold me-2 mobile-text-hide-filer-number">
+                                                                            Number of
+                                                                            rows
+                                                                        </span>
+                                                                        <select id="lengthSelectBox3"
+                                                                            class="form-control form-select"
+                                                                            style="width: 80px;">
+                                                                            <!-- <option value="1">1</option> -->
+                                                                            <option value="10">10</option>
+                                                                            <option value="25">25</option>
+                                                                            <option value="100">100</option>
+                                                                            <option value="200">200</option>
+                                                                            <option value="500">500</option>
+                                                                            <option value="999999999" selected>All
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <form class="form" id="form">
+                                                                    <div class="table-responsive" id="htmlContent3">
+                                                                        <table
+                                                                            class="table border text-nowrap text-md-nowrap mb-0 property-reports3 p-0 w-100"
+                                                                            id="responsive-datatable">
+                                                                            <thead>
+                                                                                <tr>
+
+                                                                                    <th>customer id</th>
+
+                                                                                    <th>Name</th>
+                                                                                    <th>Email</th>
+                                                                                    <th>Phone</th>
+                                                                                    <th>subscription</th>
+                                                                                    <th>amount</th>
+                                                                                    <th>purchase date</th>
+                                                                                    <!-- <th>Status</th> -->
+                                                                                    <th>Next Billing</th>
+                                                                                    <!-- <th>Status</th> -->
+                                                                                    <!-- <th>ACTION</th> -->
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="table_body_trial_report">
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td class="landlordId"
+                                                                                        style="font-weight: 600;">91
+                                                                                    </td>
+                                                                                    <td class="landlordName"
+                                                                                        style="font-weight: 600;">
+                                                                                        <b>Jawad Hasan</b>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1">
+                                                                                            Jawadkareem@yahoo.com</p>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1">
+                                                                                            03432343567</p>
+                                                                                    </td>
+                                                                                    <td class="fw-bold pricingPlan"
+                                                                                        style="color: #F7C042;">Basic
+                                                                                        Plan</td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b>$49 Per
+                                                                                                Month</b></p>
+                                                                                    </td>
+                                                                                    <td class="propertyAddress">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b>Purchase
+                                                                                                Date: N/A</b></p>
+                                                                                    </td>
+                                                                                    <td
+                                                                                        class="propertyAddress text-success">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b> Active</b>
+                                                                                        </p>
+                                                                                    </td>
+                                                                                    <td class="text-success">
+                                                                                        <p style="font-weight: 600;"
+                                                                                            class="mb-1"><b> N/A</b></p>
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row -->
+                                            </div>
+                                            <!-- Free Trial End  -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- request close account model box start  -->
+                                <div class="modal fade" id="requestcloseaccount" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">
+                                                        <img src="../assets/images/cross-circle.svg">
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center text-dark">
+                                                <img src="../assets/images/logo-preloader.png"
+                                                    class="model-account-request-close-logo mb-4" alt="">
+                                                <img src="../assets/images/request-close-user.png" alt="">
+                                                <h2 class="text-primary">
+                                                    <b>
+                                                        Your account closure request
+                                                        is initiated.
+                                                    </b>
+                                                </h2>
+                                                <p>
+                                                    Your account will be closed soon and you will
+                                                    receive email on closure.
+                                                </p>
+                                                <button class="btn btn-primary btn-pill m-2" id="form1showw"
+                                                    type="button" data-bs-dismiss="modal" aria-label="Close"
+                                                    style="width: fit-content;">
+                                                    &nbsp; Ok &nbsp;
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer"></div>
+                                        </div>
+                                    </div>
+                                    <!-- request close account model box start  -->
+                                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                                        <h3 class="card-title text-white">Recent Orders</h3>
+                                        <div class="chartjs-wrapper-demo">
+                                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                                        </div>
+                                    </div>
+                                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                                </div>
+                            </div>
+                            <!-- ROW-2 END -->
+                            <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                                <h3 class="card-title text-white">Recent Orders</h3>
+                                <div class="chartjs-wrapper-demo">
+                                    <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                                </div>
+                            </div>
+                            <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                        </div>
+                        <!-- CONTAINER END -->
+                        <!-- Reports End  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- ######### Upgrade to pro payment method form End ######### -->
+    </div>
+    <!-- ROW-2 END -->
+    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+        <h3 class="card-title text-white">Recent Orders</h3>
+        <div class="chartjs-wrapper-demo">
+            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+        </div>
+    </div>
+    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+    </div>
+    <!-- CONTAINER END -->
+    </div>
+    </div>
+    <!--app-content close-->
+    </div>
+    <!-- Sidebar-right -->
+    <div class="sidebar sidebar-right sidebar-animate">
+        <div class="panel panel-primary card mb-0 shadow-none border-0">
+            <div class="tab-menu-heading border-0 d-flex p-3">
+                <div class="card-title mb-0 text-dark fw-bold">
+                    <!-- <i class="fe fe-bell me-2"></i> -->
+                    <!-- <span class=" pulse"></span> -->
+                    Notifications
+                    <a href="javascript:void(0);" class="text-primary text-decoration-underline "
+                        id="updateAllNotifyRead">
+                        Mark all
+                        as read
+                    </a>
+                </div>
+                <div class="card-options ms-auto">
+                    <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right">
+                        <i class="fe fe-x text-dark"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                <div class="tabs-menu border-bottom">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs">
+                        <li>
+                            <a href="#side1" data-bs-toggle="tab" class="text-dark active">All
+                                <span class="all_span"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#side2" data-bs-toggle="tab" class="text-dark">Inbox
+                                <span class="inbox_span"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#side3" data-bs-toggle="tab" class="text-dark">Unread
+                                <span class="Unread_span"></span>
+                            </a>
+                        </li>
+                        <!-- <li><a href="#side4" data-bs-toggle="tab" class="text-dark">Archive <span
+                                class="archive_span"></span></a></li> -->
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="side1">
+                        <div class="list-group list-group-flush" id="notification-container"></div>
+                    </div>
+                    <div class="tab-pane " id="side2">
+                        <div class="list-group list-group-flush" id="inbox-notification-container"></div>
+                    </div>
+                    <div class="tab-pane " id="side3">
+                        <div class="list-group list-group-flush" id="unread-notification-container"></div>
+                    </div>
+                    <div class="tab-pane " id="side4">
+                        <div class="list-group list-group-flush" id="Archieve-notification-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Sidebar-right-->
+    <!-- Country-selector modal-->
+    <div class="modal fade" id="country-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title">Choose Country</h6>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="row p-3">
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/us_flag.jpg" class="me-3 language">
+                                </span>
+                                USA
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/italy_flag.jpg" class="me-3 language">
+                                </span>
+                                Italy
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/spain_flag.jpg" class="me-3 language">
+                                </span>
+                                Spain
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/india_flag.jpg" class="me-3 language">
+                                </span>
+                                India
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/french_flag.jpg" class="me-3 language">
+                                </span>
+                                French
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/russia_flag.jpg" class="me-3 language">
+                                </span>
+                                Russia
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/germany_flag.jpg" class="me-3 language">
+                                </span>
+                                Germany
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/argentina.jpg" class="me-3 language">
+                                </span>
+                                Argentina
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/malaysia.jpg" class="me-3 language">
+                                </span>
+                                Malaysia
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/turkey.jpg" class="me-3 language">
+                                </span>
+                                Turkey
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Country-selector modal-->
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-md-12 col-sm-12 text-center">
+                    Copyright ©
+                    <a href="javascript:void(0)">Spade, LLC.</a>
+                    <span id="year"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER END -->
+    </div>
+    <!-- BACK-TO-TOP -->
+    <!--<a href="#top" id="back-to-top"><i class="fe fe-chevron-up"></i></a> -->
+    <!--  -->
+    <!-- JQUERY JS -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- SPARKLINE JS-->
+    <script src="../assets/js/jquery.sparkline.min.js"></script>
+    <!-- Sticky js -->
+    <script src="../assets/js/sticky.js"></script>
+    <!-- CHART-CIRCLE JS-->
+    <script src="../assets/js/circle-progress.min.js"></script>
+    <!-- PIETY CHART JS-->
+    <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
+    <script src="../assets/plugins/peitychart/peitychart.init.js"></script>
+    <!-- SIDEBAR JS -->
+    <script src="../assets/plugins/sidebar/sidebar.js"></script>
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+    <script src="../assets/plugins/p-scroll/pscroll.js"></script>
+    <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+    <!-- INTERNAL CHARTJS CHART JS-->
+    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="../assets/plugins/chart/rounded-barchart.js"></script>
+    <script src="../assets/plugins/chart/utils.js"></script>
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="../assets/plugins/select2/select2.full.min.js"></script>
+    <!-- INTERNAL Data tables js-->
+    <script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+    <!-- INTERNAL APEXCHART JS -->
+    <script src="../assets/js/apexcharts.js"></script>
+    <script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
+    <!-- INTERNAL Flot JS -->
+    <script src="../assets/plugins/flot/jquery.flot.js"></script>
+    <script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
+    <script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
+    <script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
+    <!-- INTERNAL Vector js -->
+    <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- SIDE-MENU JS-->
+    <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+    <!-- TypeHead js -->
+    <script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+    <script src="../assets/js/typehead.js"></script>
+    <!-- INTERNAL INDEX JS -->
+    <script src="../assets/js/index1.js"></script>
+    <!-- Color Theme js -->
+    <script src="../assets/js/themeColors.js"></script>
+    <script src="../assets/js/getNotificationAdmin.js"></script>
+
+    <!-- CUSTOM JS -->
+    <!-- <script src="../assets/js/custom.js"></script> -->
+    <script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+    </script>
+    <!-- ############################################# -->
+    <!-- <script src="../assets/js/intercom-tenant.js"></script> -->
+    <!-- C3 CHART JS -->
+    <script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
+    <script src="../assets/plugins/charts-c3/c3-chart.js"></script>
+    <!-- INPUT MASK JS-->
+    <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- CHARTJS JS -->
+    <script src="../assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="../assets/plugins/chart/utils.js"></script>
+    <!-- CHART-DONUT JS -->
+    <script src="../assets/js/charts.js"></script>
+    <script>
+        $(document).ready(function () {
+            function toTitleCase(str) {
+                return str.replace(
+                    /\w\S*/g,
+                    function (txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    }
+                );
+            }
+            $.ajax({
+                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                type: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    console.log("ProtectedAdmin");
+                    if (response.userPeremission.length > 0) {
+
+                        $(document).ajaxStop(function () {
+                            const permissionTypes = ["overView", "customers", "appearance", "profile", "closedAccount", "userManagement", "changePlan", "closeLandlord"];
+                            permissionTypes.forEach(function (element) {
+                                if (!response.userPeremission[0][element].Edit) {
+                                    $(`.permissionEdit_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].View) {
+                                    $(`.permissionView_${element}`).each(function () {
+                                        $(this).empty();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Delete) {
+                                    $(`.permissionDelete_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (!response.userPeremission[0][element].Add) {
+                                    $(`.permissionAdd_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                }
+                                if (response.userPeremission[0][element].Restrict) {
+                                    $(`.permissionRestrict_${element}`).each(function () {
+                                        $(this).remove();
+                                    });
+                                    if (element == "overView" && window.location.href.indexOf('index.html') !== -1) {
+                                        history.back();
+                                    }
+                                }
+                            });
+                        });
+
+                    }
+
+
+                    // $("#tenant-name").empty();
+                    // $("#tenant-name").append(`<span style="font-weight: 300;">Welcome </span>` +
+                    //     toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                    $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
+                    // $("#firstName").val(response.firstName);
+                    // $("#lastName").val(response.lastName);
+                    // $("#email").val(response.email);
+                    // $("#phone").val(response.phone);
+                    // $("#address").val(response.address);
+                    // $("#city").val(response.city);
+                    // $("#state").val(response.state);
+                    // $("#zip").val(response.zipCode);
+                    // $("#businessName").val(response.zipCode);
+
+
+                    // $("#profile").empty();
+                    // $("#profile").css("background-image", "url(" + response.image + ")");
+                    // if (response.image) {
+                    //     image_url = response.image
+                    //     image_key = response.imageKey
+                    // }
+                },
+                error: function (xhr, status, error) {
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = './login_module.html';
+                    }, 2000);
+                    console.log('Error occurred while fetching state and city data.');
+                    console.log(xhr);
+                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                }
+            })
+
+
+            function convertDateFormat(sqlDate) {
+                const dateObj = new Date(sqlDate); // Parse the input string to a Date object
+
+                // Extract year, month, and day from the date object
+                const year = String(dateObj.getFullYear()).slice(2); // Extracting last two digits of the year
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Month starts from 0
+                const day = String(dateObj.getDate()).padStart(2, '0');
+
+                // Format the date as mm/dd/yy
+                const formattedDate = `${month}/${day}/${year}`;
+
+                return formattedDate;
+            }
+            function getActiveCustomer() {
+                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+                    type: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    contentType: "application/json",
+                    success: function (response) {
+                        // console.log(response.data);
+                        $("#table_body_active_report").empty()
+                        if (response.data.length > 0) {
+                            response?.data.forEach(element => {
+                                if (element.duration == "30 days trial") {
+                                    var elementDuration = ""
+                                } else {
+                                    var elementDuration = element.duration
+                                }
+                                var landlordPlanName = "";
+                                if (element.planName == "Basic") {
+                                    landlordPlanName = `style="color: #F7C042;"`;
+                                } else if (element.planName == "Pro") {
+                                    landlordPlanName = `style="color: #0CA7B6;"`;
+                                } else if (element.planName == "Premium") {
+                                    landlordPlanName = `style="color: #1D80C4;"`;
+                                } else if (element.planName == "Trial") {
+                                    landlordPlanName = `style="color: red;"`;
+                                }
+                                let nextBilling;
+
+                                if (element.duration === "Per Month") {
+                                    if (element.subscriptionCreated_at) {
+                                        nextBilling = moment(element.subscriptionCreated_at).add(1, 'months').format('MM/DD/YY');
+                                    }
+                                    else {
+                                        nextBilling = "N/A"
+                                    }
+                                } else {
+                                    if (element.subscriptionCreated_at) {
+                                        nextBilling = moment(element.subscriptionCreated_at).add(1, 'years').format('MM/DD/YY');
+                                    }
+                                    else {
+                                        nextBilling = "N/A"
+                                    }
+
+                                }
+                                // console.log(element);
+                                $("#table_body_active_report").append(`
+    <tr>
+        <td class="landlordId" style="font-weight: 600;">US-${element.landlordId ? element.landlordId : "N/A"}</td>
+        <td class="landlordName" style="font-weight: 600;"><b>${element.FirstName ? element.FirstName : "N/A"} ${element.LastName ? element.LastName : "N/A"}</b></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.Email ? element.Email : "N/A"}</p></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.Phone ? element.Phone : "N/A"}</p></td>
+        <td class="fw-bold pricingPlan" ${landlordPlanName}>${element.planName ? element.planName : "N/A"} Plan</td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"} ${elementDuration ? elementDuration : "N/A"}</b></p></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>${element.subscriptionCreated_at ? convertDateFormat(element.subscriptionCreated_at) : "N/A"}</b></p></td>
+        <td class="text-success"><p style="font-weight: 600;" class="mb-1"><b>${nextBilling ? nextBilling : "N/A"}</b></p></td>
+    </tr>
+`);
+
+                            });
+                        } else {
+                            $("#table_body_active_report").empty();
+                            $("#table_body_active_report").append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+                        }
+
+                        $("#table_body_trial_report").empty()
+                        if (response.data.length > 0) {
+
+
+                            response?.data.forEach(element => {
+                                if (element.planName == "Trial") {
+                                    if (element.duration == "30 days trial") {
+                                        var elementDuration = ""
+                                    } else {
+                                        var elementDuration = element.duration
+                                    }
+                                    var landlordPlanName = "";
+                                    if (element.planName == "Basic") {
+                                        landlordPlanName = `style="color: #F7C042;"`;
+                                    } else if (element.planName == "Pro") {
+                                        landlordPlanName = `style="color: #0CA7B6;"`;
+                                    } else if (element.planName == "Premium") {
+                                        landlordPlanName = `style="color: #1D80C4;"`;
+                                    } else if (element.planName == "Trial") {
+                                        landlordPlanName = `style="color: red;"`;
+                                    }
+                                    let nextBilling;
+
+                                    if (element.duration === "Per Month") {
+                                        if (element.subscriptionCreated_at) {
+                                            nextBilling = moment(element.subscriptionCreated_at).add(1, 'months').format('MM/DD/YY');
+                                        }
+                                        else {
+                                            nextBilling = "N/A"
+                                        }
+                                    } else {
+                                        if (element.subscriptionCreated_at) {
+                                            nextBilling = moment(element.subscriptionCreated_at).add(1, 'years').format('MM/DD/YY');
+                                        }
+                                        else {
+                                            nextBilling = "N/A"
+                                        }
+
+                                    }
+                                    // console.log(element);
+                                    $("#table_body_trial_report").append(`
+    <tr>
+        <td class="landlordId" style="font-weight: 600;">US-${element.landlordId ? element.landlordId : "N/A"}</td>
+        <td class="landlordName" style="font-weight: 600;"><b>${element.FirstName ? element.FirstName : "N/A"} ${element.LastName ? element.LastName : "N/A"}</b></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.Email ? element.Email : "N/A"}</p></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.Phone ? element.Phone : "N/A"}</p></td>
+        <td class="fw-bold pricingPlan" ${landlordPlanName}>${element.planName ? element.planName : "N/A"} Plan</td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"} ${elementDuration ? elementDuration : "N/A"}</b></p></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>${element.subscriptionCreated_at ? convertDateFormat(element.subscriptionCreated_at) : "N/A"}</b></p></td>
+        <td class="text-success"><p style="font-weight: 600;" class="mb-1"><b>${nextBilling ? nextBilling : "N/A"}</b></p></td>
+    </tr>
+`);
+
+                                }
+
+
+                            });
+                        } else {
+                            $("#table_body_trial_report").empty();
+                            $("#table_body_trial_report").append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+                        }
+                    },
+                    error: function () {
+                        // Handle errors here
+                    }
+                });
+            }
+            getActiveCustomer()
+            var userAdminData;
+            function getAllClosedLandlord() {
+                $.ajax({
+                    url: "https://backend.app.spaderent.com/api/spade/allClosedLandlord",
+                    type: "GET",
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        $("#table_body_close_report").empty()
+                        if (response.data) {
+                            response?.data.forEach((element, index) => {
+                                var landlordPlanName_closed = "";
+                                if (element.planName == "Basic") {
+                                    landlordPlanName_closed = `style="color: #F7C042;"`;
+                                } else if (element.planName == "Pro") {
+                                    landlordPlanName_closed = `style="color: #0CA7B6;"`;
+                                } else if (element.planName == "Premium") {
+                                    landlordPlanName_closed = `style="color: #1D80C4;"`;
+                                } else if (element.planName == "Trial") {
+                                    landlordPlanName_closed = `style="color: red;"`;
+                                }
+                                $('#table_body_close_report').append(`
+    <tr data-id="${element.closedLandlordId}">
+        <td class="landlordId" style="font-weight: 600;">US-${element.closedLandlordId}</td>
+        <td style="font-weight: 600;" class="landlordName"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A"}</p></td>
+        <td><span>${element.phone ? element.phone : "N/A"}</span></td>
+        <td class="propertyType"><span class="fw-bold" ${landlordPlanName_closed}>${element.planName} Plan</span></td>
+        <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"}/ ${element.duration ? element.duration : "N/A"}</b></p></td>
+        <td style="font-weight: 600;">${element.landlordCreatedDate ? convertDateFormat(element.landlordCreatedDate) : "N/A"}</td>
+        <td style="font-weight: 600;">${element.deleted_at ? convertDateFormat(element.deleted_at) : "N/A"}</td>
+        <td style="font-weight: 600;"><p>${element.reason ? element.reason : "N/A"}</p></td>
+    </tr>
+`);
+
+                            })
+                        } else {
+                            $("#table_body_close_report").empty();
+                            $("#table_body_close_report").append(`
+        <tr>
+            <td colspan="100" class="text-center">No data available</td>
+        </tr>
+    `);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                    },
+                });
+            }
+            getAllClosedLandlord()
+
+        })
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script>
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            //define the file type to text/csv
+            csvFile = new Blob([csv], { type: 'text/csv' });
+            downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+        function exportTableToCSV1() {
+            var csv = [];
+            var rows = document.querySelectorAll(".property-reports1 tr");
+            var headers = [];
+            var headerCols = rows[0].querySelectorAll("th");
+            for (var k = 0; k < headerCols.length; k++)
+                headers.push(headerCols[k].innerText);
+            csv.push(headers.join(","));
+            for (var i = 1; i < rows.length; i++) {
+                var row = [],
+                    cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++) {
+                    var cellContent = cols[j].innerText.trim();
+                    row.push(cellContent);
+                }
+
+                csv.push(row.join(","));
+            }
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            const filename_report = `Active_Customers_Report_${formattedDate}.csv`;
+
+            downloadCSV(csv.join("\n"), filename_report);
+        }
+
+        function exportTableToCSV2() {
+            var csv = [];
+            var rows = document.querySelectorAll(".property-reports2 tr");
+            var headers = [];
+            var headerCols = rows[0].querySelectorAll("th");
+            for (var k = 0; k < headerCols.length; k++)
+                headers.push(headerCols[k].innerText);
+            csv.push(headers.join(","));
+            for (var i = 1; i < rows.length; i++) {
+                var row = [],
+                    cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++) {
+                    var cellContent = cols[j].innerText.trim();
+                    row.push(cellContent);
+                }
+
+                csv.push(row.join(","));
+            }
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            const filename_report = `Closed_Customers_Report_${formattedDate}.csv`;
+
+            downloadCSV(csv.join("\n"), filename_report);
+        }
+        function exportTableToCSV3() {
+            var csv = [];
+            var rows = document.querySelectorAll(".property-reports3 tr");
+            var headers = [];
+            var headerCols = rows[0].querySelectorAll("th");
+            for (var k = 0; k < headerCols.length; k++)
+                headers.push(headerCols[k].innerText);
+            csv.push(headers.join(","));
+            for (var i = 1; i < rows.length; i++) {
+                var row = [],
+                    cols = rows[i].querySelectorAll("td, th");
+
+                for (var j = 0; j < cols.length; j++) {
+                    var cellContent = cols[j].innerText.trim();
+                    row.push(cellContent);
+                }
+
+                csv.push(row.join(","));
+            }
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            const filename_report = `Trial_Plan_Customers_Report_${formattedDate}.csv`;
+
+            downloadCSV(csv.join("\n"), filename_report);
+        }
+        document.getElementById("download_pdf_reports2").addEventListener("click", () => {
+            const invoice = this.document.getElementById("htmlContent2");
+            // Get the current date
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            // Modify the filename to include the current date
+            const filename = `Closed_Customers_Report_${formattedDate}.pdf`;
+            var opt = {
+                margin: 0.1,
+                filename: filename,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A2',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+        document.getElementById("download_pdf_reports1").addEventListener("click", () => {
+            const invoice = this.document.getElementById("htmlContent1");
+            // Get the current date
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            // Modify the filename to include the current date
+            const filename = `Active_Customers_Report_${formattedDate}.pdf`;
+            var opt = {
+                margin: 0.1,
+                filename: filename,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A2',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+        document.getElementById("download_pdf_reports3").addEventListener("click", () => {
+            const invoice = this.document.getElementById("htmlContent3");
+            // Get the current date
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+            // Modify the filename to include the current date
+            const filename = `Trial_Plan_Customers_Report_${formattedDate}.pdf`;
+            var opt = {
+                margin: 0.1,
+                filename: filename,
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A2',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+    </script>
+    <script>
+        $(document).change(function () {
+            if ($('#typehead1').val() == "") {
+                let count = 1;
+                $("#table_body_active_report tr").each(function (item, index) {
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+                let count = 1;
+                $("#table_body_close_report tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead3').val() == "") {
+                let count = 1;
+                $("#table_body_trial_report tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox3").val()))
+                    if (count > parseInt($("#lengthSelectBox3").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+
+
+        })
+        $(document).ajaxStop(function () {
+            if ($('#typehead1').val() == "") {
+                let count = 1;
+                $("#table_body_active_report tr").each(function (item, index) {
+                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    if (count > parseInt($("#lengthSelectBox1").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead2').val() == "") {
+                let count = 1;
+                $("#table_body_close_report tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                    if (count > parseInt($("#lengthSelectBox2").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+            if ($('#typehead3').val() == "") {
+                let count = 1;
+                $("#table_body_trial_report tr").each(function (item, index) {
+                    console.log(count, parseInt($("#lengthSelectBox3").val()))
+                    if (count > parseInt($("#lengthSelectBox3").val())) {
+                        $(this).hide()
+                    }
+                    else {
+                        $(this).show()
+                    }
+                    count++;
+                })
+            }
+
+
+        })
+        $(document).on('input', '#typehead1', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox1').val();
+
+            $('#table_body_active_report tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            });
+
+            if (searchValue === '') {
+                $('#table_body_active_report tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body_active_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
+        $(document).on('input', '#typehead2', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox2').val();
+
+            $('#table_body_close_report tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            });
+
+            if (searchValue === '') {
+                $('#table_body_close_report tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body_close_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
+        $(document).on('input', '#typehead3', function () {
+            var searchValue = $(this).val().toLowerCase();
+            var numRowsToShow = $('#lengthSelectBox3').val();
+
+            $('#table_body_trial_report tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+            });
+
+            if (searchValue === '') {
+                $('#table_body_trial_report tr:visible:lt(' + numRowsToShow + ')').show();
+                $('#table_body_trial_report tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
+            }
+        });
+    </script>
+    <script>
+        function logout() {
+            $(document).ready(function () {
+                localStorage.clear();
+                if ($('body').hasClass('dark-mode')) {
+                    localStorage.setItem("sashdarkMode", true)
+                } else if ($('body').hasClass('light-mode')) {
+                    localStorage.setItem("sashlightMode", true)
+                }
+                window.open('./login_module.html', "_self")
+            });
+        }
+    </script>
+</body>
+
+</html>

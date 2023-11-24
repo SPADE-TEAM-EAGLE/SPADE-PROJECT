@@ -2306,7 +2306,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2326,7 +2326,7 @@
                     }
                 });
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantDashData',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2350,9 +2350,18 @@
 </script>
 <script src="../assets/js/completeTenantProfile.js"></script>
 <script>
+    function formatDateMDY(date){
+    var createdDateFormat = new Date(date);
+                            var day = createdDateFormat.getDate();
+                var month = createdDateFormat.getMonth() + 1;
+                var year = createdDateFormat.getFullYear();
+                var createdDateFormatComplete = month+ "-"+day+ "-"+year
+                return createdDateFormatComplete
+}
     $(document).ready(function() {
+        
         $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2485,7 +2494,7 @@
             })
             function getData(){
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2544,6 +2553,8 @@ if (task.ImageKey) {
 }
 
 
+
+                            
 
                             var createdDate = new Date(task.created_at);
                             var currentDate = new Date();
@@ -2613,7 +2624,10 @@ if (task.priority == 'High') {
 } else if (task.priority == 'Moderate') {
     priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
 }
-                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+
+
+                
+                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (formatDateMDY(task.dueDate) ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                    
@@ -2704,7 +2718,7 @@ if (task.priority == 'High') {
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2724,7 +2738,7 @@ if (task.priority == 'High') {
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addTasksTenant',
+                                url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2772,7 +2786,7 @@ if (task.priority == 'High') {
                         // Loop through the lineItems array and add each line item to the FormData object
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addTasksTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -2984,7 +2998,7 @@ $('#fileInput').on('change', function () {
 
 
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(data.dueDate);
+                $("#dueDate_view").text(formatDateMDY(data.dueDate));
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes);
@@ -3042,7 +3056,7 @@ $('#fileInput').on('change', function () {
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType:"application/json; charset=utf-8",
                 // processData: false,
@@ -3195,7 +3209,7 @@ $('#fileInput').on('change', function () {
        function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

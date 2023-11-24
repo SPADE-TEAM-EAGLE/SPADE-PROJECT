@@ -431,6 +431,13 @@
                                         <span class="side-menu__label">User Management</span>
                                     </a>
                                 </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="customers-reports.html">
+                                        <i class="side-menu__icon fi fi-rs-document"></i>
+                                        <span class="side-menu__label">Customers Report</span>
+                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                    </a>
+                                </li>
                                 <!-- <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
@@ -595,6 +602,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex">
+                                                
                                                 <div class="btn-group">
                                                     <button type="button" class="btn font-weight-bold text-dark"
                                                         id="customize_btn" data-bs-toggle="dropdown"
@@ -667,6 +675,16 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <span class="me-2 mobile-text-hide-filer-number fw-bold" style="text-wrap: nowrap;">Filter By Price Plan:</span>
+                                                        <select class="form-control form-select" id="tablePricingPlan">
+                                                            <option value="Trial Plan">Trial Plan</option>
+                                                            <option value="Basic Plan">Basic Plan</option>
+                                                            <option value="Pro Plan">Pro Plan</option>
+                                                            <option value="Premium Plan">Premium Plan</option>
+                                                            <option value="All" selected="">All</option>
+                                                        </select>
+                                                </div>
                                                 <!-- <button type="button" class="btn btn-primary mx-2 laptop-button" id="add_property_btn"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal" href="#addModal"><i
                                                     class="fe fe-plus me-2"></i><strong>ADD NEW
@@ -719,7 +737,7 @@
                                                         <th>Contact</th>
                                                         <th>subscription</th>
                                                         <th>amount</th>
-                                                        <th>Purchase Date</th>
+                                                        <th>Status</th>
                                                         <th>Next Billing</th>
                                                         <!-- <th>Status</th> -->
                                                         <th>ACTION</th>
@@ -1132,13 +1150,14 @@
 }            
 function getData(){
                 $.ajax({ 
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
                         console.log(response);
+                        if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                             permissionTypes.forEach(function(element)  {
@@ -1172,6 +1191,7 @@ function getData(){
                                 }
                             });
                         })
+                    }
                         // // overview
                         // if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
@@ -1355,7 +1375,7 @@ function getData(){
                     }
                 })
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1392,7 +1412,7 @@ function getData(){
                 })
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1424,7 +1444,7 @@ function getData(){
                     }
                 });
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
                     type: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1538,7 +1558,7 @@ function getData(){
             $("#confirmDelete-user").on("click", function () {
                 $("#delete-user-admin").modal("hide")
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/closedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: landlordId,
@@ -1719,6 +1739,19 @@ function getData(){
                 window.open('./login_module.html', "_self")
             });
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablePricingPlan').on('change', function () {
+                var selectedPlan = $(this).val();
+                if (selectedPlan == 'All') {
+                    $('#table_body tr').removeClass("d-none");
+                } else {
+                    $('#table_body tr').addClass("d-none");
+                    $('#table_body tr:has(.propertyType:contains("' + selectedPlan + '"))').removeClass("d-none");
+                }
+            });
+        });
     </script>
 </body>
 

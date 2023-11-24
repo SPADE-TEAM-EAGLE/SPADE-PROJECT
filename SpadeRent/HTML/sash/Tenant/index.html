@@ -1681,7 +1681,7 @@
                             <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1735,7 +1735,7 @@
         var userData;
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1769,7 +1769,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
@@ -1799,7 +1799,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantDashData',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 // processData: false,
@@ -1829,7 +1829,7 @@
             });
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
-                var apiUrl = 'http://localhost:3000/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
+                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
 
                 // Make an API call to fetch all tasks
                 $.ajax({
@@ -2042,7 +2042,7 @@ if (task.priority == 'High') {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2151,7 +2151,7 @@ if (task.priority == 'High') {
             console.log(cardExpiry, cardCvc, scard)
             // $("#preloader").css("display", "flex")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -2185,7 +2185,7 @@ if (task.priority == 'High') {
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        url: "https://backend.app.spaderent.com/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
                             sessionToken: response.sessionToken,
@@ -2259,7 +2259,7 @@ if (task.priority == 'High') {
                         }, function (res) {
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                        url: "http://localhost:3000/api/spade/Payment2Payment",
+                        url: "https://backend.app.spaderent.com/api/spade/Payment2Payment",
                         type: "POST",
                         data: JSON.stringify({
                             sessionToken: response.sessionToken,
@@ -2336,7 +2336,7 @@ if (task.priority == 'High') {
             $("#upgradetopro").modal("show");
         })
         $.ajax({
-                    url: "http://localhost:3000/api/spade/GetBankAccount",
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccount",
                     type: "GET",
                     contentType: "application/json",
                     headers: {

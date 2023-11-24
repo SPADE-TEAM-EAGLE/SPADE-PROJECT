@@ -3668,7 +3668,7 @@
             $("#email").on("change", () => {
                 var email = $("#email").val();
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/checkemail",
+                    url: "https://backend.app.spaderent.com/api/spade/checkemail",
                     type: "GET",
                     contentType: "application/json",
                     data: {
@@ -3696,7 +3696,7 @@
 
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/pricingPlan',
+                url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3727,7 +3727,7 @@
                 var password = $("#id_password2").val();
                 $("#preloader").css("display", "flex");
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/Signup",
+                    url: "https://backend.app.spaderent.com/api/spade/Signup",
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -3743,7 +3743,7 @@
                         var userId = response?.id;
 
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/openOrder',
+                                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     amount: "0",
@@ -3757,7 +3757,7 @@
                                 },
                                 success: function (response) {
                                     $.ajax({
-                                        url: "http://localhost:3000/api/spade/createUserPayment",
+                                        url: "https://backend.app.spaderent.com/api/spade/createUserPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3780,7 +3780,7 @@
                                         success: function (resp) {
                                             
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/UpdateUserNuveiId",
+                                                url: "https://backend.app.spaderent.com/api/spade/UpdateUserNuveiId",
                                         type: "PUT",
                                         
                                         data: JSON.stringify({
@@ -3935,7 +3935,7 @@
         function main(userId) {
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/openOrder',
+                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
                     amount: "0",
@@ -3950,7 +3950,7 @@
                 success: function (response) {
 
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/createUserPayment",
+                        url: "https://backend.app.spaderent.com/api/spade/createUserPayment",
                         type: "POST",
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -3987,7 +3987,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "http://localhost:3000/api/spade/createSubscriptionPayment",
+                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -4006,7 +4006,7 @@
                                         contentType: "application/json",
                                         success: function (response) {
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
+                                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountSignup",
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 headers: {
@@ -4056,7 +4056,7 @@
                                         },
                                         error: function (xhr, status, error) {
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/deleteUser",
+                                                url: "https://backend.app.spaderent.com/api/spade/deleteUser",
                                                 type: "DELETE",
                                                 contentType: "application/json",
                                                 data: JSON.stringify({
@@ -4082,7 +4082,7 @@
 
                                 } else {
                                     $.ajax({
-                                        url: "http://localhost:3000/api/spade/deleteUser",
+                                        url: "https://backend.app.spaderent.com/api/spade/deleteUser",
                                         type: "DELETE",
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -4112,7 +4112,7 @@
                             console.log(status)
                             console.log(error)
                             $.ajax({
-                                url: "http://localhost:3000/api/spade/deleteUser",
+                                url: "https://backend.app.spaderent.com/api/spade/deleteUser",
                                 type: "DELETE",
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -4145,7 +4145,7 @@
                     console.log(error)
                     console.error('Error sending data:', error);
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/deleteUser",
+                        url: "https://backend.app.spaderent.com/api/spade/deleteUser",
                         type: "DELETE",
                         contentType: "application/json",
                         data: JSON.stringify({

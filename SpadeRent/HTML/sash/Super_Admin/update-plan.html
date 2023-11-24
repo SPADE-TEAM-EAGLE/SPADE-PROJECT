@@ -2796,6 +2796,13 @@
                                     class="text-primary">Perfect
                                     Plan</span> for your Business.</h2> -->
                                     <div class="pricing-tabs tabcontentformobile w-100">
+                                        <div class="container">
+                                            <div class="row py-3">
+                                                <div class="">
+                                                    <a class="btn btn-xl btn-pill bg-primary text-white fs-20" href="./Customers.html"><i class="fe fe-arrow-left me-2"></i>Go Back</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="pri-tabs-heading text-center mt-4">
                                             <ul class="nav nav-price large-nav-price">
                                                 <li>
@@ -5011,7 +5018,7 @@ var currentSelectedId;
 function getData(){
     selectedDowngrade = false
     $.ajax({
-                url: 'http://localhost:3000/api/spade/getUser',
+                url: 'https://backend.app.spaderent.com/api/spade/getUser',
                 method: 'GET',
                 data:{
                     userId:userId,
@@ -5065,7 +5072,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $(`#${response.PlanID}`).find("button").prop("disabled",true);
 
                         $.ajax({
-                url: 'http://localhost:3000/api/spade/pricingPlan',
+                url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5112,7 +5119,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
             });
             
     $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedAdmin',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedAdmin',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5147,7 +5154,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
             
             
             $.ajax({
-                    url: "http://localhost:3000/api/spade/GetBankAccountAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountAdmin",
                     type: "GET",
                     contentType: "application/json",
                     data:{
@@ -5363,7 +5370,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                 
                 $("#upgradetopro").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/openOrder',
+                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                     type: 'POST',
                     data: JSON.stringify({
                         amount: "0",
@@ -5394,7 +5401,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: 'http://localhost:3000/api/spade/cancelSubscription',
+                                        url: 'https://backend.app.spaderent.com/api/spade/cancelSubscription',
                                         type: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify({
@@ -5408,7 +5415,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                             console.log(userData)
                                             console.log(amount.value)
                                             $.ajax({
-                                                url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                                url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
                                                 headers: {
                                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -5428,7 +5435,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                                 success: function (response) {
                                                     if (!selectedDowngrade) {
                                                         $.ajax({
-                                                            url: 'http://localhost:3000/api/spade/updatePlanIdByAdmin',
+                                                            url: 'https://backend.app.spaderent.com/api/spade/updatePlanIdByAdmin',
                                                             method: 'PUT',
                                                             data: JSON.stringify({ planID: seletedPlanID,userId:userId }),
                                                             contentType: 'application/json',

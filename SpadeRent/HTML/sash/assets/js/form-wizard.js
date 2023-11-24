@@ -522,7 +522,7 @@ $(document).ready(function() {
   $("#email").on("input",()=>{
       var email = $("#email").val();
       $.ajax({
-          url: "http://localhost:3000/api/spade/checkemail",
+          url: "https://backend.app.spaderent.com/api/spade/checkemail",
           type: "GET",
           contentType: "application/json",
           data: {
@@ -583,7 +583,7 @@ function button1() {
     valid &&                     // Check if 'email-span-invalid' is hidden
     lastname.value.match(validname) &&       // Check lastname validity
     firstname.value.match(validname) &&      // Check firstname validity
-    iti.isValidNumber() &&                   // Check phone number validity using 'iti' (which is probably an instance of the International Telephone Input library)
+    // iti.isValidNumber() &&                   // Check phone number validity using 'iti' (which is probably an instance of the International Telephone Input library)
     checkbox.checked                         // Check if checkbox is checked
     // && phone.value.match(validPhone)      // You seem to have commented out this line, so it's not part of the condition
   ) {

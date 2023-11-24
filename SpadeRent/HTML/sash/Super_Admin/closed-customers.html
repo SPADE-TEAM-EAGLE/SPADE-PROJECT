@@ -526,6 +526,13 @@
                                             <span class="side-menu__label">User Management</span>
                                         </a>
                                     </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="customers-reports.html">
+                                            <i class="side-menu__icon fi fi-rs-document"></i>
+                                            <span class="side-menu__label">Customers Report</span>
+                                            <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                        </a>
+                                    </li>
                                     <!-- <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
@@ -789,7 +796,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
-                                                                <a class="text-dark" href="javascript:void(0)">DATE OF EXPIRY</a>
+                                                                <a class="text-dark" href="javascript:void(0)">ClOSURE DATE</a>
                                                                 <div class="form-check m-0">
                                                                     <input
                                                                         type="checkbox"
@@ -810,7 +817,7 @@
                                                                     >
                                                                 </div>
                                                             </li>
-                                                            <li class="d-flex justify-content-between">
+                                                            <!-- <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">STATUS</a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -820,8 +827,18 @@
                                                                         checked
                                                                     >
                                                                 </div>
-                                                            </li>
+                                                            </li> -->
                                                         </ul>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <span class="me-2 mobile-text-hide-filer-number fw-bold" style="text-wrap: nowrap;">Filter By Price Plan:</span>
+                                                            <select class="form-control form-select" id="tablePricingPlan">
+                                                                <option value="Trial Plan">Trial Plan</option>
+                                                                <option value="Basic Plan">Basic Plan</option>
+                                                                <option value="Pro Plan">Pro Plan</option>
+                                                                <option value="Premium Plan">Premium Plan</option>
+                                                                <option value="All" selected="">All</option>
+                                                            </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -870,7 +887,7 @@
                                                             <th>subscription</th>
                                                             <th>amount</th>
                                                             <th>Purchase Date</th>
-                                                            <th>date of expiry</th>
+                                                            <th>Closure Date</th>
                                                             <th>reason</th>
                                                             <th class="permissionEdit_closeLandlord">action</th>
                                                            
@@ -1198,13 +1215,14 @@
         $(document).ready(function () {
             function getData(){
                 $.ajax({
-                url: "http://localhost:3000/api/spade/protectedAdmin",
+                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
                     console.log(response);
+                    if(response.userPeremission.length > 0){
                     $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function(element)  {
@@ -1239,7 +1257,9 @@
                         });
 
                     });
-                        //                     // overview
+                      
+                }
+                    //                     // overview
 //                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
 // } else {
@@ -1422,7 +1442,7 @@
                 }
             })
             $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1459,7 +1479,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 })
                 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1496,7 +1516,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
             var userAdminData;
             function getAllClosedLandlord() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allClosedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/allClosedLandlord",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -1561,7 +1581,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
             //     $("#preloader").css("display", "flex")
             //     var deleteUserId = $(this).attr('data-id');
             //     $.ajax({
-            //         url: "http://localhost:3000/api/spade/deleteClossedLandlord",
+            //         url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
             //         type: "DELETE",
             //         data: JSON.stringify({ id: deleteUserId }),
             //         contentType: "application/json",
@@ -1608,7 +1628,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/deleteClossedLandlord",
+                    url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         id: deleteUserId
@@ -1752,6 +1772,19 @@ filterTable("created-at")
                     window.open('./login_module.html', "_self")
         });
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#tablePricingPlan').on('change', function () {
+            var selectedPlan = $(this).val();
+            if (selectedPlan == 'All') {
+                $('#table_body tr').removeClass("d-none");
+            } else {
+                $('#table_body tr').addClass("d-none");
+                $('#table_body tr:has(.propertyType:contains("' + selectedPlan + '"))').removeClass("d-none");
+            }
+        });
+    });
 </script>
 </body>
 </html>

@@ -1682,15 +1682,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputState" class="form-label fw-bold">City
-                                                <spnan class="text-danger">*
-                                                </span>
+                                                <span class="fw-light">(Optional)</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 id="city"
                                                 class="form-control form"
                                                 placeholder="Enter City"
-                                                required
                                                 pattern="[A-Za-z\s]+"
                                                 oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                                             >
@@ -1699,10 +1697,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="inputState" class="form-label fw-bold">State
-                                                    <spnan class="text-danger"> *
-                                                    </span>
+                                                    <span class="fw-light">(Optional)</span>
                                                 </label>
-                                                <select id="state" class="form-select form form-select select2-show-search" required>
+                                                <select id="state" class="form-select form form-select select2-show-search" >
                                                     <option selected>Choose...</option>
                                                 </select>
                                                 <span class="text-danger d-none">State is required!</span>
@@ -1710,8 +1707,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputPassword4" class="form-label fw-bold">Zip Code
-                                                <spnan class="text-danger">*
-                                                </span>
+                                                <span class="fw-light">(Optional)</span>
                                             </label>
                                             <input
                                                 class="form-control form"
@@ -1723,7 +1719,7 @@
                                                 maxlength="5"
                                                 minlength="5"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                required
+                                                
                                             >
                                             <span class="text-danger d-none">Zip code is required!</span>
                                         </div>
@@ -3808,7 +3804,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3838,7 +3834,7 @@
         var tenantPermissions;
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3890,20 +3886,22 @@
         var startDateInput1 = document.getElementById('leaseStart2');
         var endDateInput1 = document.getElementById('leaseEnd2');
         var middleDateInputs1 = document.getElementsByClassName('dateofRentchange');
-
+    
         startDateInput1.addEventListener("change", function () {
-            // console.log("romailllllllllllllllll");
             endDateInput1.min = startDateInput1.value;
         });
-
+    
         endDateInput1.addEventListener("change", function () {
-            for (var i = 0; i < middleDateInputs.length; i++) {
+            for (var i = 0; i < middleDateInputs1.length; i++) { // Fix the typo here
                 var middleDateInput1 = middleDateInputs1[i];
-                middleDateInput1.min = startDateInput1.value;
-                middleDateInput1.max = endDateInput1.value;
+                if (middleDateInput1) { // Check if the element exists
+                    middleDateInput1.min = startDateInput1.value;
+                    middleDateInput1.max = endDateInput1.value;
+                }
             }
         });
     </script>
+    
     <script>
         var selectedFiles = [];
         var edit = false
@@ -3924,7 +3922,7 @@
             })
             $("#email").on("input",function(){
                 $.ajax({    
-                url: 'http://localhost:3000/api/spade/checkEmailTenants',
+                url: 'https://backend.app.spaderent.com/api/spade/checkEmailTenants',
                 type: 'GET',
                 data: {
                     email: $("#email").val()
@@ -3950,7 +3948,7 @@
             $('#addModal_units_close').click(() => {
                 // alert(1)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -4026,7 +4024,7 @@
             })
             $('#addModal_units').on('hidden.bs.modal', function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -4102,7 +4100,7 @@
             });
             function getData2() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/PropertyUnits',
+                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
                     type: 'GET',
                     data: {
 
@@ -4224,7 +4222,7 @@
                         $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2
@@ -4268,7 +4266,7 @@
                             });
                             console.log(propertyId2)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     id: values[0],
@@ -4314,7 +4312,7 @@
                                 // console.log(values)
                             });
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
                                 type: 'DELETE',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2,
@@ -4375,7 +4373,7 @@
 
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -4410,7 +4408,7 @@
             let tenantIdElement
 
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -4632,7 +4630,7 @@
                 edit = true
                 tenantIdElement = $(this).closest("tr").find(".tenant-id");
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantIdElement.text()
@@ -4806,7 +4804,7 @@
                 // console.log(formData)
                 // if(selectedFiles.length>=1){
                 //     $.ajax({
-                //     url: 'http://localhost:3000/api/spade/upload',
+                //     url: 'https://backend.app.spaderent.com/api/spade/upload',
                 //     type: 'POST',
                 //     data: formData,
                 //     contentType: false,
@@ -4828,7 +4826,7 @@
                 $('#preloader').css('display', 'flex')
                 // Make the AJAX call
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/${uri}`,
+                    url: `https://backend.app.spaderent.com/api/spade/${uri}`,
                     type: method,
                     data: JSON.stringify(formData),
                     contentType: "application/json; charset=utf-8",
@@ -4897,7 +4895,7 @@
                 $("#succesModal").modal("hide")
                 console.log(tenantID)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
+                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: id
@@ -5483,7 +5481,7 @@
 
             // Send the form data to the server using AJAX
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://backend.app.spaderent.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -5554,7 +5552,7 @@
 
             formData.append("existingImages", existingImageNames)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/updateProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
 
                 type: 'PUT',
                 data: formData,
@@ -5584,7 +5582,7 @@ e.preventDefault();
 
 $('#myModal_delete_bulk').modal('hide');
 $.ajax({
-                            url: "http://localhost:3000/api/spade/allTenantDelete",
+                            url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
                             type: "DELETE",
                             contentType: "application/json;charset=utf-8",
                             data: JSON.stringify({
@@ -5611,7 +5609,7 @@ $.ajax({
 
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantDelete',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
                     "tenantID": tenantID
@@ -5653,7 +5651,7 @@ $.ajax({
             // $("#preloader").fadeIn("fast");
             // console.log(22)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5703,7 +5701,7 @@ $(".plan_remaining_days_data").each(function(){
                 return date.toLocaleDateString('en-US', options);
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -5814,7 +5812,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -6088,7 +6086,7 @@ $(".plan_remaining_days_data").each(function(){
             });
 
             $.ajax({
-                url: "http://localhost:3000/api/spade/checkUnpaidInvoices",
+                url: "https://backend.app.spaderent.com/api/spade/checkUnpaidInvoices",
                 type: "GET",
                 data: {
                     tenants: tenantToDelete
@@ -6136,7 +6134,7 @@ $(".plan_remaining_days_data").each(function(){
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -6189,7 +6187,7 @@ $(".plan_remaining_days_data").each(function(){
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -6403,5 +6401,37 @@ $(".plan_remaining_days_data").each(function(){
     });
     </script>
     <script src="../assets/js/user-sidebar-permissions.js"></script>
+    <!-- Include Flatpickr CSS -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+var dateInputs = document.querySelectorAll('input[type="date"]');
+dateInputs.forEach(function(input) {
+  input.type = "text";
+  input.placeholder = "MM-DD-YYYY"
+  flatpickr(input, {
+      enableTime: false, 
+      dateFormat: "m-d-Y", 
+      placeholder: "Custom Placeholder", 
+    });
+});
+</script> -->
+<!-- Include Flatpickr CSS -->
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        $("input[type='date']").each(function () {
+            $(this).attr("type", "text");
+            $(this).attr("placeholder", "MM/DD/YYYY");
+            $(this).datepicker({
+                dateFormat: "mm/dd/yy",
+                onSelect: function (dateText, inst) {
+                }
+            });
+        });
+    });
+</script> -->
 </body>
 </html>

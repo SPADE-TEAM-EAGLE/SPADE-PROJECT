@@ -1178,6 +1178,13 @@
                                         <span class="side-menu__label">User Management</span>
                                     </a>
                                 </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="customers-reports.html">
+                                        <i class="side-menu__icon fi fi-rs-document"></i>
+                                        <span class="side-menu__label">Customers Report</span>
+                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                    </a>
+                                </li>
                                 <!-- <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
@@ -2517,6 +2524,8 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <!-- CHART-DONUT JS -->
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/email-phone.js"></script>
+
     <script>
         var image_url = " "; var image_key = " ";
         function toTitleCase(str) {
@@ -2530,12 +2539,13 @@
         $(document).ready(function () {
             function getData() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        if(response.userPeremission.length > 0){
                         const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function (element) {
                             if (!response.userPeremission[0][element].Edit) {
@@ -2576,6 +2586,7 @@
 
                         });
 
+                    }
                         //                     // overview
                         //                     if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
@@ -2758,7 +2769,7 @@
                 })
 
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -2812,7 +2823,7 @@
                 if (file) {
                     userForm.append("image", file)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
                         type: 'POST',
                         data: userForm,
                         headers: {
@@ -2825,7 +2836,7 @@
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateAdminProfile',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
                                 method: 'PUT',
                                 data: JSON.stringify(userData),
                                 contentType: 'application/json',
@@ -2860,7 +2871,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/updateAdminProfile',
+                        url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
                         method: 'PUT',
                         data: JSON.stringify(userData),
                         contentType: 'application/json',
