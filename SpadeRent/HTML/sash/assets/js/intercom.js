@@ -72,7 +72,7 @@ $.ajax({
         $("#myModal_warning").modal("show");
         setTimeout(function () {
             $('#myModal_warning').modal('hide');
-            window.location = '../Landlord/login_module.html';
+            // window.location = '../Landlord/login_module.html';
         }, 2000);
         
     }

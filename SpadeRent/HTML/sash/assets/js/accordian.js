@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#next-add-tenant").click(() => {
        //first accordian
        var isEmpty1 = false;
-       $('#firstName, #lastName, #email, #state, #city, #zip').each(function() {
+       $('#firstName, #lastName, #email').each(function() {
            var span = $(this).siblings('.text-danger');
             if ($(this).val() === '' || $(this).val() == 'Choose...') {
                 isEmpty1 = true;
@@ -16,7 +16,8 @@ $(document).ready(function() {
                 span.addClass('d-none');
             }   
        });
-       if (!isEmpty1) {
+       
+       if (!isEmpty1 && $('#email-exist').hasClass('d-none')) {
            $('#collapseOne-add-tenant').removeClass('show');
            $('#collapseTwo-add-tenant').addClass('show');
            $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");

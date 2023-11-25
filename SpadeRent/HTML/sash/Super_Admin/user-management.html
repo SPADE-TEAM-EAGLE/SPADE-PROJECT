@@ -1638,6 +1638,13 @@ color: #000;
                                         <span class="side-menu__label">User Management</span>
                                     </a>
                                 </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="customers-reports.html">
+                                        <i class="side-menu__icon fi fi-rs-document"></i>
+                                        <span class="side-menu__label">Customers Report</span>
+                                        <!-- <i class="angle fe fe-chevron-right"></i> -->
+                                    </a>
+                                </li>
                                 <!-- <li class="slide card-demo1">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="coming-soon.html"><i
                                             class="side-menu__icon fi fi-rs-money-bill-wave"></i><span
@@ -1869,7 +1876,7 @@ color: #000;
                                                                         *
                                                                         </span>
                                                                 </label>
-                                                                <input id="phone__user" name="phone" type="tel"
+                                                                <input id="phone_user" name="phone" type="tel"
                                                                     autocomplete="off" placeholder="Enter Phone Number"
                                                                     pattern="[0-9]{5}"
                                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -2103,13 +2110,18 @@ color: #000;
                                                 <div class="card">
                                                     <div class="card-header justify-content-between">
                                                         <div class="d-flex">
-                                                            <div class="mx-2">
-                                                                <div class="form-group m-0">
-                                                                    <input type="text"
-                                                                        class="form-control dropdown-toggle"
+                                                            <div>
+                                                                <div class="main-header-center d-nonee d-lg-block m-0">
+                                                                    <button class="btn px-0 mt-0 text-end" style="width: fit-content;">
+                                                                        <i class="fe fe-search" aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <input
+                                                                        type="text"
+                                                                        class="form-control search-input-field pe-5"
                                                                         id="typehead"
-                                                                        placeholder="Search for results..."
-                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        placeholder="Search"
+                                                                        autocomplete="off"
+                                                                    >
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -4118,6 +4130,7 @@ color: #000;
                         // console.log("protectedAdmin");
                         console.log(response);
                         // UsersRoles = response.userRole == 2 ? "Manager":"Staff";
+                        if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
 
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -4158,6 +4171,7 @@ color: #000;
                             });
                         })
                         
+                    }
 //                         // overview
 //                         if (response.userPeremission[0].overView.View && response.userPeremission[0].overView.Restrict) {
 
@@ -5572,7 +5586,7 @@ if (userAdminDataNew.roleId == 2) {
                                     firstName: capitalizeFirstLetter($('#firstName_user').val()),
                                     lastName: capitalizeFirstLetter($('#lastName_user').val()),
                                     email: $('#email_user').val(),
-                                    phone: $('#phone__user').val(),
+                                    phone: $('#phone_user').val(),
                                     password: $('#password_user').val(),
                                     roleId: $('#role_user').val(),
                                     address: $('#address_user').val(),
@@ -5630,7 +5644,7 @@ if (userAdminDataNew.roleId == 2) {
                             firstName: capitalizeFirstLetter($('#firstName_user').val()),
                             lastName: capitalizeFirstLetter($('#lastName_user').val()),
                             email: $('#email_user').val(),
-                            phone: $('#phone__user').val(),
+                            phone: $('#phone_user').val(),
                             password: $('#password_user').val(),
                             roleId: $('#role_user').val(),
                             address: $('#address_user').val(),

@@ -774,6 +774,39 @@
         }
 
         /* payment method End  */
+
+        .SfcFields {
+    background-color: #ebef00;
+    height: 42px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #031d3d;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+.sfc-empty {
+    background-color: #1d1400 !important;
+}
+.sfc-empty.sfc-focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+    background-color: #fe8423 !important;
+}
+.sfc-focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+    background-color: #000000 !important;
+}
+.sfc-complete {
+    background-color: #34fa29 !important;
+}
+.sfc-invalid {
+    border-color: #fa755a;
+}
+.SfcFields--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+
+
         </style>
     </head>
     <body onload="check()">
@@ -3260,15 +3293,15 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-xl-6">
+                                                                                    <div class="form-group ">
                                                                                     <label class="fw-bold" for="amount" data-tid="amount">
                                                                                         Amount
                                                                                     </label>
-                                                                                    <div class="field form-group">
-                                                                                        <div class="input"></div>
-                                                                                        <div class="underline">
-                                                                                            <input id="amount" class="input form-control111" readonly>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    <div class="input-group mb-3 d-flex" style="flex-wrap: nowrap;">
+                                                                                        <span class="input-group-text">$</span>
+                                                                                        <input type="text" id="amount" class="form-controlll" aria-label="Amount (to the nearest dollar)">
+                                                                                        
+                                                                                    </div></div>
                                                                                 </div>
                                                                                 <div class="col-lg-6 col-xl-6">
                                                                                     <div class="field form-group">
@@ -3852,11 +3885,9 @@
                 fontSize: '16px',
                 fontSmoothing: 'antialiased',
                 '::placeholder': {
-                    color: 'grey',
+                    color: 'black',
                 },
-                ':-webkit-autofill': {
-                    color: '#e39f48',
-                },
+                
             },
             invalid: {
                 color: '#E25950',
@@ -3864,6 +3895,15 @@
                     color: '#FFCCA5',
                 },
             },
+            empty: {
+                color: '#BADA55',
+                '::placeholder': {
+                    color: 'black',
+                },
+            },
+            valid: { //when the input is valid
+      color: '#48ef39'
+    }
         };
 
         var ScFieldClasses = {
@@ -3871,6 +3911,7 @@
             empty: 'empty',
             invalid: 'invalid',
             complete: 'complete',
+            
         };
         var scard = ScFields.create('ccNumber', {
             style: ScFieldStyles,
@@ -3946,7 +3987,7 @@
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
 
                                     $.ajax({
-                                        url: "/api/spade/createSubscriptionPayment",
+                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")

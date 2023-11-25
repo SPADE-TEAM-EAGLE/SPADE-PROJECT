@@ -5149,7 +5149,7 @@ Draft</button> -->
                                                                                         class="form-control bg-white"
                                                                                         id="current_password_reset"
                                                                                         placeholder="Current Password *"
-                                                                                        required
+                                                                                        required style="color: black;"
                                                                                     >
                                                                                 </div>
                                                                             </div>
@@ -7808,15 +7808,15 @@ Draft</button> -->
                                                                                                                                 </div>
                                                                                                                             </div>
                                                                                                                             <div class="col-lg-6 col-xl-6">
+                                                                                                                                <div class="form-group ">
                                                                                                                                 <label class="fw-bold" for="amount" data-tid="amount">
                                                                                                                                     Amount
                                                                                                                                 </label>
-                                                                                                                                <div class="field form-group">
-                                                                                                                                    <div class="input"></div>
-                                                                                                                                    <div class="underline">
-                                                                                                                                        <input id="amount" class="input form-control111">
-                                                                                                                                    </div>
-                                                                                                                                </div>
+                                                                                                                                <div class="input-group mb-3 d-flex" style="flex-wrap: nowrap;">
+                                                                                                                                    <span class="input-group-text">$</span>
+                                                                                                                                    <input type="text" id="amount" class="form-controlll" aria-label="Amount (to the nearest dollar)">
+                                                                                                                                    
+                                                                                                                                </div></div>
                                                                                                                             </div>
                                                                                                                             <div class="col-lg-6 col-xl-6">
                                                                                                                                 <div class="field form-group">
@@ -7928,15 +7928,15 @@ Draft</button> -->
                                                                                                                                 </span>
                                                                                                                             </div>
                                                                                                                             <div class="col-lg-6 col-xl-6">
+                                                                                                                                <div class="form-group ">
                                                                                                                                 <label class="fw-bold" for="amount" data-tid="amount">
                                                                                                                                     Amount
                                                                                                                                 </label>
-                                                                                                                                <div class="field form-group">
-                                                                                                                                    <div class="input"></div>
-                                                                                                                                    <div class="underline">
-                                                                                                                                        <input id="amount" class="input form-control111">
-                                                                                                                                    </div>
-                                                                                                                                </div>
+                                                                                                                                <div class="input-group mb-3 d-flex" style="flex-wrap: nowrap;">
+                                                                                                                                    <span class="input-group-text">$</span>
+                                                                                                                                    <input type="text" id="amount" class="form-controlll" aria-label="Amount (to the nearest dollar)">
+                                                                                                                                    
+                                                                                                                                </div></div>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </div>
@@ -17732,7 +17732,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 data.images = imageArray
                                 $.ajax({
                                     url: 'https://backend.app.spaderent.com/api/spade/createUserPermissionUser', // Replace with your API endpoint
-                                    type: 'POST', // Adjust the HTTP method if needed
+                                    type: 'POST',
                                     contentType: 'application/json', // Set the content type
                                     data: JSON.stringify(data), // Convert data to JSON format
                                     headers: {
@@ -17792,8 +17792,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
 
                     } else {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createUserPermissionUser', // Replace with your API endpoint
-                            type: 'POST', // Adjust the HTTP method if needed
+                            url: 'https://backend.app.spaderent.com/api/spade/createUserPermissionUser', 
+                            type: 'POST',
                             contentType: 'application/json', // Set the content type
                             data: JSON.stringify(data), // Convert data to JSON format
                             headers: {
@@ -18309,7 +18309,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 console.log(res)
 
                                 $.ajax({
-                                    url: "http://localhost:3000/api/spade/CreateBankAccount",
+                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccount",
                                     type: "POST",
                                     contentType: "application/json",
                                     headers: {

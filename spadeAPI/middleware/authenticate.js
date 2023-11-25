@@ -29,8 +29,8 @@ const verifyToken = async (req, res, next) => {
 
       function splitAndConvertToObject(value) {
         const resultObject = {};
-
-        if (value.includes(',')) {
+        console.log(value);
+        if (value?.includes(',')) {
           const values = value.split(",");
           for (const item of values) {
             resultObject[item] = true;
@@ -41,7 +41,7 @@ const verifyToken = async (req, res, next) => {
 
         return resultObject;
       } 
-      // console.log(result[0][0]);
+      
       // Example usage for different fields
       // const id = result[0][0].id;
       const role = result[0][0].Urole;

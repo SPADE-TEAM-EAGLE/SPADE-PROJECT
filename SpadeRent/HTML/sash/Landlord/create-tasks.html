@@ -3825,7 +3825,10 @@ $(".plan_remaining_days_data").each(function(){
                 updateButtonStatus("_update");
             });
             // Handle change event of checkboxes
-
+function dateFormatChanger(mydate = "N/A"){
+var NewDate = (mydate != "N/A" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "N/A")
+return NewDate
+}
             $(document).on('click', ".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -3842,7 +3845,7 @@ $(".plan_remaining_days_data").each(function(){
 
                 updateSelectedFilesContainer()
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(data.dueDate);
+                $("#dueDate_view").text(dateFormatChanger(data.dueDate));
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes || "N/A");

@@ -1182,6 +1182,7 @@
                                                 data-bs-toggle="offcanvas"
                                                 data-bs-target="#offcanvasRight"
                                                 aria-controls="offcanvasRight"
+                                                id="customize-dashboard"
                                             >
                                                 <i class="fi fi-rs-settings-sliders"></i> Customized Dashboard
                                             </button>
@@ -2483,6 +2484,7 @@
         }
                     </script>
                     <script>
+                        var llDashboardObject = {};
         $(document).ready(function () {
             // Restore checkbox states and hide/show corresponding cards from local storage
             $('input[type="checkbox"]').each(function () {
@@ -3166,22 +3168,27 @@ endDateTenantFormatted = formatDate(endDateTenant);
                 localStorage.removeItem("htmlLayout")
                 window.location = '../Landlord/index.html'
             })
-            let id; let emailChange = false
+
+            let id; let emailChange = false;
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ userName, email, userId, image , planID , create_at,...rest }) {
+                success: function ({ userName, email, userId, image , planID , create_at,llDashboard,...rest }) {
                     adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
+                    console.log(rest)
+                    console.log(llDashboard)
+                    llDashboardObject=llDashboard
                     if(image!==" " && image!==null && image!== ""){
-                
+
+                        
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)
             }
@@ -4105,6 +4112,86 @@ $('#property-status').hide()
             document.head.appendChild(customScript);
         }
     });
+    $(document).ajaxStop(function () {
+        console.log("ajaxStop",llDashboardObject)
+        if(llDashboardObject){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!llDashboardObject[action]) {
+                    switch (action) {
+       
+        case "View":
+            $("#container").remove()
+            $(".roww").remove()
+            break;
+            case "Delete":
+        $("#customize-dashboard").remove()
+            $(".remove-card").each(function(){
+                $(this).remove();
+            
+            })
+            break;
+        case "Edit":
+        $("#customize-dashboard").remove()
+            $(".remove-card").each(function(){
+                console.log($(this).parent())
+                $(this).parent().closest(".fe-more-vertical").remove();
+            
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+
+
+        })
+        const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                // Check if tenantPermissions is defined
+                if(llDashboardObject){
+                const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
+            for (const action of actions) {
+                if (!llDashboardObject[action]) {
+                    switch (action) {
+        
+        case "View":
+        $("#container").remove()
+        $(".roww").remove()
+            break;
+        case "Delete":
+        $("#customize-dashboard").remove()
+            $(".remove-card").each(function(){
+                $(this).remove();
+            
+            })
+            break;
+        case "Edit":
+        $("#customize-dashboard").remove()
+            $(".remove-card").each(function(){
+                $(this).remove();
+            
+            })
+            break;
+        default:
+            break;
+    }
+                }
+    
+}
+            
+            }
+
+            }
+        });
+    });
+
                 </script>
                 <script src="../assets/js/user-sidebar-permissions.js"></script>
             </body>
