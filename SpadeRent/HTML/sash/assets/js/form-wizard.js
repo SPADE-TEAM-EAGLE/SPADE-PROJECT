@@ -522,7 +522,7 @@ $(document).ready(function() {
   $("#email").on("input",()=>{
       var email = $("#email").val();
       $.ajax({
-          url: "http://localhost:3000/api/spade/checkemail",
+          url: "https://backend.app.spaderent.com/api/spade/checkemail",
           type: "GET",
           contentType: "application/json",
           data: {
