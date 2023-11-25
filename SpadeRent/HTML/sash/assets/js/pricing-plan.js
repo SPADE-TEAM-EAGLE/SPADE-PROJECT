@@ -11,6 +11,13 @@ function adjustPlan(data){
             case "Invoicing":
                 if(data.planInvoice=="Not Available"){
                     $(this).parent().parent().remove();
+                    $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
+                        if($(this).text().trim("") == "Invoice"){
+                            
+                            $(this).parent().parent().parent().remove()
+                        }
+                    
+                    })
                     if (window.location.href.includes("create-invoicing.html") || window.location.href.includes("new-invoice.html")) {
                         window.history.back();
                     }
@@ -19,6 +26,13 @@ function adjustPlan(data){
             case "Tasks":
                 if(data.planTask=="Not Available"){
                     $(this).parent().parent().remove();
+                    $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
+                        if($(this).text().trim("") == "Tasks"){
+                            
+                            $(this).parent().parent().parent().remove()
+                        }
+                    
+                    })
                     if (window.location.href.includes("create-tasks.html") || window.location.href.includes("new-tasks.html")) {
                         window.history.back();
                     }
@@ -27,6 +41,13 @@ function adjustPlan(data){
             case "Prospects":
                 if(data.planProspects=="Not Available"){
                     $(this).parent().parent().remove();
+                    $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
+                        if($(this).text().trim("") == "Prospect"){
+                            
+                            $(this).parent().parent().parent().remove()
+                        }
+                    
+                    })
                     if (window.location.href.includes("prospects.html")) {
                         window.history.back();
                     }
