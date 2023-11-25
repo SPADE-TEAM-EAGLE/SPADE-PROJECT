@@ -145,7 +145,7 @@ exports.deleteVendor = async (req, res) => {
         });
       }else{
         res.status(400).json({
-          message: "Vendor not Deleted successful",
+          message: "Vendor not Deleted",
         });
       }     
     } catch (error) {
