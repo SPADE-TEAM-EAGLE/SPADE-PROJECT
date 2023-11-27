@@ -90,6 +90,7 @@ const messageClt = {
             }
             // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
             const  getAllMessagesCount = await queryRunner(getMessageCount, [userId])
+            console.log(getAllMessagesCount[0])
             if (getAllMessagesCount[0].length > 0) {
                 res.status(200).json({
                     message: "Messages fetched successfully",
