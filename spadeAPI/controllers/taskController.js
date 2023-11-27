@@ -238,7 +238,7 @@ exports.addTasks = async (req, res) => {
         // for task id
         const taskCountIdResult = await queryRunner(taskCountId, [userId]);
         let customTaskId = taskCountIdResult[0][0].count + 1;
-        customTaskId = taskName+customTaskId;
+        customTaskId = task+customTaskId;
         const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
         if(images){
       for (let i = 0; i < images.length; i++) {

@@ -44,7 +44,7 @@ exports.CreateBankAccount = async (req, res) => {
 };
 exports.CreateBankAccountSignup = async (req, res) => {
 const userType = "Landlord";
-    const { UPOID, accountName, description, active, userId,accountTypeTenant } = req.body;
+    const { UPOID, accountName, description, active, userId,accountTypeTenant,nickName,digits,cardBrand,cardType  } = req.body;
     const currentDate = new Date();
     if (userId !== undefined && UPOID !== undefined && accountName !== undefined && description !== undefined && active !== undefined) {
         var status;
@@ -54,7 +54,7 @@ const userType = "Landlord";
             }else{
                 status="Inactive"
             }
-            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant]);
+            const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant,nickName,digits,cardBrand,cardType ]);
             if (createResult[0].affectedRows === 0) {
                 res.status(400).send("Error");
             } else {
