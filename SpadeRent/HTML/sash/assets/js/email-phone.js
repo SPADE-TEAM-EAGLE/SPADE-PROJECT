@@ -1,6 +1,6 @@
 // Email validation
 var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
-$(document).on("input", 'input[type="email"]', function () {
+$(document).on("input", 'input[type="email"][required]', function () {
   var email = $(this).val();
   var email_span = $(this).siblings(".text-danger");
   if (!emailRegex.test(email)) {
@@ -16,7 +16,7 @@ $(document).on("input", 'input[type="email"]', function () {
 });
 $(document).on(
   "input change",
-  'input:not([type="tel"]):not(.modal *):not(#typehead,#typehead1,#typehead2,#search_input,#typehead_users), select:not(#lengthSelectBox, #lengthSelectBox1, #lengthSelectBox2, #lengthSelectBox3, #lengthSelectBox4, #lengthSelectBox5):not(.modal *)',
+  'input[required]:not([type="tel"]):not(.modal *):not(#typehead,#typehead1,#typehead2,#search_input,#typehead_users), select[required]:not(#lengthSelectBox, #lengthSelectBox1, #lengthSelectBox2, #lengthSelectBox3, #lengthSelectBox4, #lengthSelectBox5):not(.modal *)',
   function () {
     var input_select_value = $(this).val();
     var input_select_value_span = $(this).siblings(".text-danger");

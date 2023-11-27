@@ -2711,7 +2711,16 @@ if (task.dueDate) {
     var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
     var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
     var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
-    var formattedDueDate = `${month}/${day}/${year}`;
+    // Assuming month, day, and year are variables containing the respective values
+
+if (month === null || day === null || year === null || month === "NaN" || day === "NaN" || year === "NaN") {
+  var formattedDueDate = null;
+} else {
+  var formattedDueDate = `${month}/${day}/${year}`;
+}
+
+// Now, formattedDueDate will be either the formatted date or null, depending on the conditions.
+
     dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
 } else {
     dueDate = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';

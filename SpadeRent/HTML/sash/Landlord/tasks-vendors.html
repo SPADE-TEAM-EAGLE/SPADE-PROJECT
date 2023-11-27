@@ -2608,7 +2608,6 @@ color: #000;
                 $('#myModal_edit').modal('show');
             });
             $(document).on("input change", "#myModal_edit input, #myModal_edit select", function (e) {
-                e.preventDefault(); // Prevent default anchor behavior
                 var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
@@ -2779,9 +2778,9 @@ color: #000;
                 if (zipField.val().length !== 5) {
                     allFieldsFilled = false;
                 }
-                if (phoneError) {
-                    allFieldsFilled = false;
-                }
+                // if (phoneError) {
+                //     allFieldsFilled = false;
+                // }
                 return allFieldsFilled;
             }
             // Function to enable or disable buttons based on field status
@@ -3000,13 +2999,13 @@ color: #000;
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti2.getNumber(), iti2.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
                         input2.val(formattedNumbers);
                         validMsg2.removeClass("d-none");
-                        phoneError2 = false;
+                        // phoneError2 = false;
                         input2.removeClass("border-danger");
                         input2.addClass("border-green");
                     } else {
                         input2.addClass("border-danger");
                         input2.removeClass("border-green");
-                        phoneError2 = true;
+                        // phoneError2 = true;
                         input2.addClass("error");
                         const errorCode2 = iti2.getValidationError();
                         errorMsg2.html(errorMap2[errorCode2]);
@@ -3036,7 +3035,7 @@ color: #000;
             if (input3.value.trim()) {
                 if (iti3.isValidNumber()) {
                     validMsg3.classList.remove("d-none");
-                    phoneError = false
+                    // phoneError = false
                     var formattedNumbers = intlTelInputUtils.formatNumber(iti3.getNumber(), iti3.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
                     $(this).val(formattedNumbers);
                     input3.classList.remove("border-danger");
@@ -3044,7 +3043,7 @@ color: #000;
                 } else {
                     input3.classList.add("border-danger");
                     input3.classList.remove("border-green");
-                    phoneError3 = true
+                    // phoneError3 = true
                     input3.classList.add("error");
                     const errorCode3 = iti3.getValidationError();
                     errorMsg3.innerHTML = errorMap3[errorCode3];
@@ -3073,7 +3072,7 @@ color: #000;
             if (input4.value.trim()) {
                 if (iti4.isValidNumber()) {
                     validMsg4.classList.remove("d-none");
-                    phoneError = false
+                    // phoneError = false
                     var formattedNumbers = intlTelInputUtils.formatNumber(iti4.getNumber(), iti4.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
                     $(this).val(formattedNumbers);
                     input4.classList.remove("border-danger");
@@ -3081,7 +3080,7 @@ color: #000;
                 } else {
                     input4.classList.add("border-danger");
                     input4.classList.remove("border-green");
-                    phoneError4 = true
+                    // phoneError4 = true
                     input4.classList.add("error");
                     const errorCode4 = iti4.getValidationError();
                     errorMsg4.innerHTML = errorMap4[errorCode4];
@@ -3112,9 +3111,9 @@ color: #000;
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti1.getNumber(), iti1.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
                         $(this).val(formattedNumbers);
                         validMsg1.classList.remove("d-none");
-                        phoneError = false
+                        // phoneError = false
                     } else {
-                        phoneError = true
+                        // phoneError = true
                         input1.classList.add("error");
                         const errorCode1 = iti1.getValidationError();
                         errorMsg1.innerHTML = errorMap1[errorCode1];
