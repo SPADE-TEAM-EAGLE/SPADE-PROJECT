@@ -1736,7 +1736,7 @@
                                                             <strong class="text-dark">Sort by:</strong>
                                                         </a>
                                                     </li>
-                                                    <li class="d-flex justify-content-between">
+                                                    <!-- <li class="d-flex justify-content-between">
                                                         <a class="text-dark" href="javascript:void(0)" for="exampleRadio">Default</a>
                                                         <div class="form-check m-0">
                                                             <input
@@ -1785,7 +1785,7 @@
                                                                 checked
                                                             >
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                     <li class="d-flex justify-content-between">
                                                         <a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
@@ -1793,7 +1793,7 @@
                                                                 class="form-check-input mt-2"
                                                                 type="radio"
                                                                 name="exampleRadios"
-                                                                id="exampleRadios1"
+                                                                id="ascending"
                                                                 value="option1"
                                                                 checked
                                                             >
@@ -1806,7 +1806,7 @@
                                                                 class="form-check-input mt-2"
                                                                 type="radio"
                                                                 name="exampleRadios"
-                                                                id="exampleRadios1"
+                                                                id="descending"
                                                                 value="option1"
                                                                 checked
                                                             >
@@ -2565,7 +2565,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                             taskInfo = response.data[0]
                             response.data[0]?.forEach(function (task,index) {
                                 console.log(task?.taskImages[0])
-var serial='<td style="font-weight: 600;">' + (index+1) + '</td>';
+var serial='<td style="font-weight: 600;" class="serial-number">' + (index+1) + '</td>';
 if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file-pdf"></i></td>';
                                 }else{
@@ -2838,6 +2838,55 @@ if (task.dueDate) {
                 }
             });
     })
+    function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function (a, b) {
+                        var textA = $(a).find('.tenantName').text().toLowerCase();
+                        var textB = $(b).find('.tenantName').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function (a, b) {
+                        // console.log($(a).find('.rentAmount').text())
+                        
+                        const matcha = $(a).find('.serial-number').text()
+                        const matchb = $(b).find('.serial-number').text()
+
+                        // console.log(parseInt($(a).find('.serial-number').text()))
+                        var idA = parseInt(matcha);
+                        var idB = parseInt(matchb);
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function (a, b) {
+                        
+                        const matcha = $(a).find('.serial-number').text()
+                        const matchb = $(b).find('.serial-number').text()
+
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
+                        var idA = parseInt(matcha);
+                        var idB = parseInt(matchb); 
+                        return idB - idA;
+                    });
+                } else if (selectedFilter === 'created-at') {
+                    rows.sort(function (a, b) {
+                        var idA = new Date($(a).find('.created-at').text());
+                        console.log(idA)
+                        var idB = new Date($(b).find('.created-at').text());
+                        return idB - idA;
+                    });
+                }
+                tableBody.empty().append(rows);
+            }
+            $('#ascending').on('click', function () {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function () {
+                filterTable("descending")
+            });
+            
 </script>
 <script>
     $(document).ready(() => {
