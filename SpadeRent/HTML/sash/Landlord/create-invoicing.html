@@ -1701,7 +1701,7 @@
                                 </label>
                                 <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
-                                        name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse1"
+                                        name="invoice" id="recurring" data-bs-toggle="collapse" href="#collapse12"
                                         role="button" aria-expanded="false" aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
                                 </label>
@@ -1734,7 +1734,7 @@
                             <input type="date" class="form-control form" id="dueDate" placeholder="Select Due Date">
                             <!-- <span class="text-danger d-none">Due Date is required!</span> -->
                         </div>
-                        <div class="collapse row" id="collapse1">
+                        <div class="collapse row" id="collapse12">
                             <div class="col-md-6 col-lg-6">
                                 <label class="form-label fw-bold fs-18">Start Date (Optional)</label>
                                 <input type="date" class="form-control form" id="startDate"
@@ -2105,13 +2105,13 @@
                                         name="invoice_update" id="invoice_update" checked>
                                     <span class="custom-control-label">One Time Invoice</span>
                                 </label>
-                                <!-- <label class="custom-control custom-radio mb-0">
+                                <label class="custom-control custom-radio mb-0">
                                     <input class="custom-control-input" type="radio" value="Recurring Invoice"
                                         name="invoice_update" id="recurring_update" data-bs-toggle="collapse"
-                                        href="#collapse1_update" role="button" aria-expanded="false"
+                                        href="#collapse12_update" role="button" aria-expanded="false"
                                         aria-controls="collapseExample1">
                                     <span class="custom-control-label">Recurring Invoice</span>
-                                </label> -->
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-8 col-lg-6">
@@ -2131,7 +2131,7 @@
                             <input type="date" class="form-control form" id="dueDate_update" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
-                        <div class="collapse row" id="collapse1_update">
+                        <div class="collapse row" id="collapse12_update">
                             <div class="col-md-6 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Start Date</label>
                                 <input type="date" class="form-control form" id="startDate_update">
@@ -2144,7 +2144,7 @@
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Frequency</label>
-                                <select class="form-control select2 form-select" data-placeholder="Select Frequency"
+                                <select class="form-control form-select" data-placeholder="Select Frequency"
                                     id="frequency_update">
                                     <option label="Choose one"></option>
                                     <option value="Repeat Yearly">Repeat Yearly</option>
@@ -2167,7 +2167,7 @@
                             </div> -->
                             <div class="col-md-12 col-lg-4">
                                 <label class="form-label fw-bold fs-18">Terms</label>
-                                <select class="form-control select2 form-select" data-placeholder="Select Terms"
+                                <select class="form-control form-select" data-placeholder="Select Terms"
                                     id="terms_update">
                                     <option label="Choose one"></option>
                                 </select>
@@ -4829,8 +4829,8 @@
             $('input[name="invoice"],input[name="invoice_update"]').change(function () {
 
                 if ($(this).val() === 'Recurring Invoice') {
-                    if (!$('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('show');
+                    if (!$('#collapse12').hasClass('show')) {
+                        $('#collapse12').collapse('show');
                         $("#dueDate").addClass("d-none")
                         $("#dueDate").siblings("label").addClass("d-none")
 
@@ -4844,8 +4844,8 @@
 
                 } else if ($(this).val() === 'One Time Invoice') {
 
-                    if ($('#collapse1').hasClass('show')) {
-                        $('#collapse1').collapse('hide');
+                    if ($('#collapse12').hasClass('show')) {
+                        $('#collapse12').collapse('hide');
                         $("#dueDate").removeClass("d-none")
                         $("#dueDate").siblings("label").removeClass("d-none")
                     }
@@ -5303,10 +5303,7 @@
                     success: async function (response) {
                         categoryData = response.data
 
-                            if (response.message == "No data found") {
-                                localStorage.setItem("invoice", "false")
-                                window.location = './new-invoice.html'
-                            }
+                            
                             tenantData = response.data[0]
                             console.log("viewAllPropertyTenant")
                             console.log(response)
@@ -5341,12 +5338,7 @@
 
                         },
                         error: function (xhr, status, error) {
-                            console.log(error)
-                            $("#myModal_warning").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning').modal('hide');
-                                window.location = '../Landlord/login_module.html';
-                            }, 2000);
+                            
                         }
                     });
 
@@ -5404,7 +5396,7 @@
 
                             response.data[0]?.forEach(function (invoice, index) {
 
-                                var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
+                                var serial = '<td style="font-weight: 600;" class="serial-number" >' + (index + 1) + '</td>';
                                 var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                                 var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
 
@@ -5539,7 +5531,7 @@
 
                         response.data[0]?.forEach(function (invoice, index) {
 
-                            var serial = '<td style="font-weight: 600;" class="serial" >' + (index + 1) + '</td>';
+                            var serial = '<td style="font-weight: 600;" class="serial-number" >' + (index + 1) + '</td>';
                             var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
 
                             var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">' + invoice.firstName + " " + invoice.lastName + `</a><br><small>${invoice.tPhone}</small>` + '</td>';
@@ -6482,10 +6474,10 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        var idA = new Date($(a).find('.date').text());
-                        var idB = new Date($(b).find('.date').text());
-
-                        return idB - idA;
+                        var idA = new Date($(a).find('.serial-number').text());
+                        var idB = new Date($(b).find('.serial-number').text());
+                        return idA - idB;
+                        
                     });
                 }
                 else if (selectedFilter === 'recently-added') {
@@ -6498,10 +6490,10 @@
                 }
                 else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = new Date($(a).find('.date').text());
-                        var idB = new Date($(b).find('.date').text());
-
-                        return idA - idB;
+                        var idA = new Date($(a).find('.serial-number').text());
+                        var idB = new Date($(b).find('.serial-number').text());
+return idB - idA;
+                        
                     });
                 }
 
@@ -6937,7 +6929,7 @@ $("#owner-id").append(`
                     $("#invoice_update").attr('checked', 'checked')
                 } else {
                     $("#recurring_update").attr('checked', 'checked')
-                    $("#collapse1_update").addClass("show")
+                    $("#collapse12_update").addClass("show")
                     $("#startDate_update").val(data.startDate)
                     $("#endDate_update").val(data.endDate)
                     $("#frequency_update").empty()

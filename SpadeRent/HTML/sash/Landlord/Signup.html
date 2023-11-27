@@ -4006,7 +4006,7 @@
                                         contentType: "application/json",
                                         success: function (response) {
                                             $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountSignup",
+                                                url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 headers: {
@@ -4019,7 +4019,11 @@
                                                     accountName: ($("#firstname1").val() + " " + $("#lastname").val()),
                                                     description: "",
                                                     active: $("#accountActive").is(":checked"),
-                                                    accountTypeTenant: ""
+                                                    accountTypeTenant: "",
+                                                    nickName: $("#firstname1").val(),
+                                        digits:res?.last4Digits,
+                                        cardType:"",
+                                        cardBrand:"",
                                                 }),
                                                 success: function (response) {
                                                     $("#preloader").css("display", "none");

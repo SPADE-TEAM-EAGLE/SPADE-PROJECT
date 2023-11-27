@@ -5327,7 +5327,7 @@ Draft</button> -->
                                                                         </div>
                                                                     </div>
                                                                    
-                                                            </div>
+                                                            </div></div>
                                                         </div>
                                                         <div class="tab-pane mt-0" id="tab9">
                                                             <div class="mb-5 responsive-img-scroll">
@@ -15417,7 +15417,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                         
                                                     }
                                                     $.ajax({
-                                                url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountSignup",
+                                                url: "http://localhost:3000/api/spade/CreateBankAccountSignup",
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 headers: {
@@ -15432,6 +15432,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     active: true,
                                                     accountTypeTenant: "",
                                                     userId: userData.userId,
+                                                    nickName: userData.firstName,
+                                        digits:res?.last4Digits,
+                                        cardType:"",
+                                        cardBrand:"",
                                                 }),
                                                 success: function (response) {
                                                     $("#preloader").css("display", "none");

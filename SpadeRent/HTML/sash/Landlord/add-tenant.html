@@ -5266,24 +5266,24 @@
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
                         // console.log($(a).find('.rentAmount').text())
-                        const regex = /\$ (\d+)/;
-                        const matcha = $(a).find('.rentAmount').text().match(regex);
-                        const matchb = $(b).find('.rentAmount').text().match(regex);
+                        
+                        const matcha = $(a).find('.serial-number').text()
+                        const matchb = $(b).find('.serial-number').text()
 
-                        // console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt(matcha[1]);
-                        var idB = parseInt(matchb[1]);
+                        // console.log(parseInt($(a).find('.serial-number').text()))
+                        var idA = parseInt(matcha);
+                        var idB = parseInt(matchb);
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        const regex = /\$ (\d+)/;
-                        const matcha = $(a).find('.rentAmount').text().match(regex);
-                        const matchb = $(b).find('.rentAmount').text().match(regex);
+                        
+                        const matcha = $(a).find('.serial-number').text()
+                        const matchb = $(b).find('.serial-number').text()
 
                         // console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt(matcha[1]);
-                        var idB = parseInt(matchb[1]); 
+                        var idA = parseInt(matcha);
+                        var idB = parseInt(matchb); 
                         return idB - idA;
                     });
                 } else if (selectedFilter === 'created-at') {
@@ -5596,6 +5596,9 @@ $.ajax({
                                 getData()
 
                                 $("#succesModal_delete").modal("show");
+                                setInterval(function () {
+                                    $("#succesModal_delete").modal("hide");
+                                }, 2000);
                             }, error: function (xhr, status, error) {
                                 console.log(error)
                             }
@@ -5631,6 +5634,9 @@ $.ajax({
                         getData()
 
                         $("#succesModal_delete").modal("show");
+                        setInterval(function () {
+                            $("#succesModal_delete").modal("hide");
+                        }, 2000);
                     }
 
 
@@ -5739,7 +5745,7 @@ $(".plan_remaining_days_data").each(function(){
                         // var image = '<td><img src="../../../../spadeApi/uploads/' + tenant.images[0] + '" alt=""></td>';
                         // var image = '<td><img src="../../../../../../Desktop/spadeApi/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
                         var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check text-center"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
-                        var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
+                        var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                         var tenantIdHidden = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
                         var tenantId = '<td class="" style="font-weight: 600;">' + tenant.cTenantId + '</td>';
                         
@@ -6208,35 +6214,28 @@ $(".plan_remaining_days_data").each(function(){
             });
         })
     </script>
+   
     <script>
-        // Get all elements with the class name 'myCheckbox' and 'myButton'
-        const checkboxes = document.querySelectorAll('.myCheckbox');
-        const buttons = document.querySelectorAll('.myButton');
+$(document).ready(() => {
+    $("table").on("change", ".myCheckbox", function () {
+        var $myCheckboxes = $('.myCheckbox'); // Select all checkboxes
+        var $myButton = $('.myButton'); // Select the button
 
-        // Add event listeners to each checkbox
-        checkboxes.forEach((checkbox, index) => {
-            checkbox.addEventListener('change', function () {
-                // If the current checkbox is checked, show the corresponding button; otherwise, hide it
-                if (checkbox.checked) {
-                    buttons[index].style.display = 'block';
-                } else {
-                    buttons[index].style.display = 'none';
-                }
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(() => {
-            $("table").on("change", ".myCheckbox", function () {
-                if ($(this).is(":checked")) {
-                    $('.myButton').css('display', 'flex');
-                    $('.myButton').css('justify-content', 'center');
-                    $('.myButton').css('align-items', 'center');
-                } else {
-                    $('.myButton').css('display', 'none');
-                }
-            });
-        });
+        // Check if at least one checkbox is checked
+        var anyCheckboxChecked = $myCheckboxes.is(":checked");
+
+        // Toggle button visibility based on checkbox state
+        if (anyCheckboxChecked) {
+            $myButton.css('display', 'flex');
+            $myButton.css('justify-content', 'center');
+            $myButton.css('align-items', 'center');
+        } else {
+            $myButton.css('display', 'none');
+        }
+    });
+});
+
+
     </script>
     <!-- <script>
         $(document).ready(function () {

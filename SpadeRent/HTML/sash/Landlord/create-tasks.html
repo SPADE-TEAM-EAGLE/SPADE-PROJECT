@@ -4027,7 +4027,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 // Loop through the lineItems array and add each line item to the FormData object
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                                url: 'http://localhost:3000/api/spade/addTasks',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -4083,7 +4083,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         // Loop through the lineItems array and add each line item to the FormData object
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                        url: 'http://localhost:3000/api/spade/addTasks',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -4236,14 +4236,14 @@ $("#view-task-line-item").append(`<tr class="tr">
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.due-at').text());
-                        var idB = parseInt($(b).find('.due-at').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.due-at').text());
-                        var idB = parseInt($(b).find('.due-at').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idB - idA;
                     });
                 }else if (selectedFilter === 'recently-added') {
@@ -4568,7 +4568,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 $("#global-loader").fadeIn("fast")
                 // console.log(22)
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
+                    url: 'http://localhost:3000/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -4598,7 +4598,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 console.log(task?.taskImages[0])
                                 // var image = '<td><img src="../../../../spadeAPI/uploads/' + property.images[0] + '" alt=""></td>';
                                 // var image = '<td><img src="../../../../../../Desktop/spade API 2/uploads/image-1684250579662.png" alt="hhghghgh"></td>';
-                                var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
+                                var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
                                 if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
