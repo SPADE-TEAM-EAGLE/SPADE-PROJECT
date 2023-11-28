@@ -3060,7 +3060,10 @@
                     },
                     success: function (response) {
                         console.log(1111)
-                        $("#succesModal_email").modal("show")
+                        $('#succesModal').modal('show')
+                            setTimeout(function () {
+                                $('#succesModal').modal('hide')
+                            }, 2000);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr)
@@ -3197,6 +3200,9 @@
                             });
                             GetNotification();
                             $('#succesModal').modal('show')
+                            setTimeout(function () {
+                                $('#succesModal').modal('hide')
+                            }, 2000);
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
                             getData()
                             resetAccordions()

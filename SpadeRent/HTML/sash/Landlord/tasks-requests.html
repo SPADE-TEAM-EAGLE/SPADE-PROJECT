@@ -2485,7 +2485,7 @@ $(".plan_remaining_days_data").each(function(){
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
                 console.log(data)
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(formatDateMDY(data.dueDate));
+                $("#dueDate_view").text(formatDateMDY(data.dueDate) != "NaN-NaN-NaN"  ? formatDateMDY(data.dueDate) : "Not set");
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes || "N/A");
