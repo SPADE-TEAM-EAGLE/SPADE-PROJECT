@@ -2865,6 +2865,7 @@ $(".plan_remaining_days_data").each(function(){
                                         console.log("updateMessagesCountLandlord");
                                         console.log(response);
                                         $(`#chat` + tenatId).text('0')
+                                        $(`#chat` + tenatId).removeClass('bg-success').addClass('bg-primary')
                                     },
                                     error: function (xhr, status, error) {
                                         console.log(error);
@@ -3041,6 +3042,8 @@ $(".plan_remaining_days_data").each(function(){
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
                         let tenantNames = []
+                        let tenantCountFirst = []
+                        let tenantCountLast = []
                         if (response.message == "No data found") {
                             var row = '<div class="mt-5 text-dark" style="text-align: center;">No Tenant Found</div>'
                             tab_pane.append(row);
@@ -3050,23 +3053,38 @@ $(".plan_remaining_days_data").each(function(){
                                 console.log(tenant)
                                 console.log(tenant.tenantImages?.split(",")[0])
                                 var row = `
-                                <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
-                                    <div class="main-img-user">
-                                                                    <img alt="" src="` + (tenant.image != null && tenant.image != " " && tenant.image != "" ? tenant.image : randomImg1) + `">
-                                                                    <span class="bg-primary" id="chat`+ tenant.tenantID + `">` + tenant.messageCount['count(message)'] + `</span>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <div class="media-contact-name">
-                                                                        <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `</span>
-                                                                        ` + (tenant.active == 1 ? `<span class="fw-bold text-success" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-success"></span>Online</span>` : `<span class="fw-bold text-danger" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-danger"></span>Offline</span>`) + `
-                                                                        <span class="fw-bold d-none">online</span>
+                                    <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
+                                        <div class="main-img-user">
+                                                                        <img alt="" src="` + (tenant.image != null && tenant.image != " " && tenant.image != "" ? tenant.image : randomImg1) + `">
+                                                                        <span class="${(tenant.messageCount['count(message)'] > 0 ? "bg-success": "bg-primary")}" id="chat`+ tenant.tenantID + `" >` + tenant.messageCount['count(message)'] + `</span>
                                                                     </div>
-                                                                    <p>` + tenant.tEmail + `</p>
-                                                                </div>
-                                                            <span class="badge bg-primary side-badge d-none" style="top: 22px;" >`+ tenant.messageCount['count(message)'] + `</span>
-                                                            </div></a>`;
-                                tab_pane.append(row);
+                                                                    <div class="media-body">
+                                                                        <div class="media-contact-name">
+                                                                            <span class=" fw-bold">` + tenant.firstName + ` ` + tenant.lastName + `</span>
+                                                                            ` + (tenant.active == 1 ? `<span class="fw-bold text-success" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-success"></span>Online</span>` : `<span class="fw-bold text-danger" style="display: flex;justify-content: center;align-items: baseline;"><span class="dot-label bg-danger"></span>Offline</span>`) + `
+                                                                            <span class="fw-bold d-none">online</span>
+                                                                        </div>
+                                                                        <p>` + tenant.tEmail + `</p>
+                                                                    </div>
+                                                                <span class="badge bg-primary side-badge d-none" style="top: 22px;" >`+ tenant.messageCount['count(message)'] + `</span>
+                                                                </div></a>`;
+                                if(tenant.messageCount['count(message)'] > 0){
+                                    tenantCountFirst.push(row)
+                                }else{
+                                    tenantCountLast.push(row)
+                                }
+
+                                    
+                                
                             });
+                            tenantCountFirst.forEach(function(element){
+
+                                tab_pane.append(element);
+                            })
+                            tenantCountLast.forEach(function(element){
+
+tab_pane.append(element);
+})
                         }
                     },
                     error: function (xhr, status, error) {

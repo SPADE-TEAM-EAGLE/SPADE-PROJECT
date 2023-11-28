@@ -4054,6 +4054,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
+                        amount = parseInt(amount) * 12
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
@@ -4070,7 +4071,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm-yearly-text-start").text("Transfer from Annually to Mothly")
+                        $("#downgradeConfirm-yearly-text-start").text("Transfer from Annually to Monthly")
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(currentSelectedId) <= 7 && parseInt(currentSelectedId) >= 5 && parseInt(cardId) <= 4 ) {
@@ -4079,6 +4080,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        amount = parseInt(amount) * 12
                         seletedPlanID = cardId
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
@@ -4092,6 +4094,9 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
+                        if(time=="Year"){
+                            amount = parseInt(amount) * 12
+                        }
                         seletedPlanID = cardId
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)

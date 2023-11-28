@@ -374,15 +374,21 @@ function cardbtnchange1()
 console.log(document.getElementById("plan-name"))
 // document.getElementById("plan-name").innerHTML = time;
 document.getElementById("payment-month").innerHTML = time;
+console.log(time)
 console.log(document.getElementById(cardId))
 document.getElementById("plan-name").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
 document.getElementById("plan-name-card").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
 
 var amount = this.closest('.pricing-card').getElementsByClassName('amount-payable')[0].textContent;
 seletedPlanID = cardId;
+if(time=="Year"){
+  amount = parseFloat(amount) * 12;
+}
+console.log(amount)
 document.getElementById("amount").value = amount;
 document.getElementById("amount").value = amount;
 document.getElementById("payment-amount").innerHTML = amount;
+
 document.getElementById("payment-total").innerHTML = amount;
   loader.style.display = "block";
   card2.classList.add("card-fade");

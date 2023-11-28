@@ -9,9 +9,9 @@
 //     });
 
     // Get all input fields with type="tel"
-var telInputs = document.querySelectorAll('input[type="tel"]');
-telInputs.forEach(function (input) {
-    window.intlTelInput(input, {
-        utilsScript: "../assets/plugins/intl-tel-input-master/utils.js"
-    });
-});
+// var telInputs = document.querySelectorAll('input[type="tel"]');
+// telInputs.forEach(function (input) {
+//     window.intlTelInput(input, {
+//         utilsScript: "../assets/plugins/intl-tel-input-master/utils.js"
+//     });
+// });

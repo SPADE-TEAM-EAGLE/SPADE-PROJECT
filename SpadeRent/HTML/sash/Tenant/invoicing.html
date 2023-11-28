@@ -2350,9 +2350,9 @@
                 $("#tenantName").text(data.firstName + " " + data.lastName)
                 $("#invoiceType").text(data.invoiceType?data.invoiceType:"N/A")
                 if(data.invoiceType=="One Time Invoice"){
-                    $("#dueDate").text(data.dueDate?data.dueDate:"N/A")
+                    $("#dueDate").text(data.dueDate? formatDate(data.dueDate):"Not set")
                 }else{
-                    $("#dueDate").text(data1.recurringNextDate?data1.recurringNextDate:"N/A")
+                    $("#dueDate").text(data1.recurringNextDate? formatDate(data1.recurringNextDate):"Not set")
                 }
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)

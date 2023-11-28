@@ -3060,7 +3060,10 @@
                     },
                     success: function (response) {
                         console.log(1111)
-                        $("#succesModal_email").modal("show")
+                        $('#succesModal').modal('show')
+                            setTimeout(function () {
+                                $('#succesModal').modal('hide')
+                            }, 2000);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr)
@@ -3197,6 +3200,9 @@
                             });
                             GetNotification();
                             $('#succesModal').modal('show')
+                            setTimeout(function () {
+                                $('#succesModal').modal('hide')
+                            }, 2000);
                             $("#succes-text").text(`Tenant has been successfully created!!.`)
                             getData()
                             resetAccordions()
@@ -3798,6 +3804,8 @@ $.ajax({
                     adjustPlan(rest)
                     if (totalTenantHave >= totalTenantAllow) {
                         $(".add-tenant-btn").attr("disabled", true)
+                    }else{
+                        $(".add-tenant-btn").attr("disabled", false)
                     }
                     if (image !== " " && image !== null && image !== "") {
                         $("#user-img").attr("src", image)
@@ -4020,8 +4028,9 @@ $.ajax({
             tenantData.forEach(function (tenant, index) {
                 if (tenant.propertyType === propertyType) {
                     var checkbox = '<td class="checkbox" style="font-weight: 600;"><div class="form-check text-center"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>';
-                    var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                    var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                    var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
+                    var tenantIdHidden = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var tenantId = '<td class="" style="font-weight: 600;">' + tenant.cTenantId + '</td>';
                     var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
@@ -4052,7 +4061,7 @@ $.ajax({
                     } else {
                         leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
                     }
-                    var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress +
+                    var row = '<tr>' + checkbox + serial +tenantIdHidden +tenantId + tenantName + contactinfo + propertyAddress +
                         assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
                     $('#table_body').append(row);
                 }
@@ -4065,8 +4074,9 @@ $.ajax({
                 var checkbox = `
                 <td class="checkbox" style="font-weight: 600;"><div class="form-check text-center"><input class="form-check-input myCheckbox" type="checkbox" value=""><label class="form-check-label" for="flexCheckDefault"></label></div></td>
                 `;
-                var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
-                var tenantId = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
+                var tenantIdHidden = '<td class="tenant-id d-none" style="font-weight: 600;">' + tenant.tenantID + '</td>';
+                        var tenantId = '<td class="" style="font-weight: 600;">' + tenant.cTenantId + '</td>';
                 var tenantName = '<td class="tenantName" style="font-weight: 600;">' + tenant.firstName + tenant.lastName + `<br><small>${tenant.tEmail}</small>` + '</td>';
                 var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                 var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
@@ -4097,7 +4107,7 @@ $.ajax({
                 } else {
                     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
                 }
-                var row = '<tr>' + checkbox + serial + tenantId + tenantName + contactinfo + propertyAddress + assignUnit +
+                var row = '<tr>' + checkbox + serial +tenantIdHidden +tenantId + tenantName + contactinfo + propertyAddress + assignUnit +
                     rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
                 $('#table_body').append(row);
             });
