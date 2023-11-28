@@ -2108,7 +2108,7 @@ if (task.priority == 'High') {
 } else if (task.priority == 'Moderate') {
     priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
 }
-                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (formatDateMDY(task.dueDate) ||"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+                            var dueDate = '<td class="dueDate due-at" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (formatDateMDY(task.dueDate) != "NaN-NaN-NaN" && formatDateMDY(task.dueDate) != null ? formatDateMDY(task.dueDate) :"Not Set") + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                             var relatedTo = '<td class="property-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName) + '</p>' + `<span class="font-weight-normal
                     text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                     var status = '<td class="property-id" style="font-weight: 600;">' + (task.status.charAt(0).toUpperCase() + task.status.slice(1)) + '</td>';
@@ -2418,7 +2418,7 @@ $('#fileInput').on('change', function () {
                     updateSelectedFilesContainer()
                 }
                 $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(formatDateMDY(data.dueDate));
+                $("#dueDate_view").text(formatDateMDY(data.dueDate) != "NaN-NaN-NaN"  ? formatDateMDY(data.dueDate) : "Not set");
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes);

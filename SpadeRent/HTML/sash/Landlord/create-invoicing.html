@@ -5246,7 +5246,8 @@ $("#owner-id").append(`
                     var day = dateObj.getDate();
                     var month = dateObj.getMonth() + 1;
                     var year = dateObj.getFullYear();
-                    $("#dueDate-view").text(month + "-" + day + "-" + year)
+                    var formattedDateHere = month + "-" + day + "-" + year;
+                    $("#dueDate-view").text(formattedDateHere != "NaN-NaN-NaN" ? formattedDateHere : "Not set" )
                 } else {
                     console.log("mydata")
                     console.log(data)
@@ -5254,7 +5255,8 @@ $("#owner-id").append(`
                     var day = dateObj.getDate();
                     var month = dateObj.getMonth() + 1;
                     var year = dateObj.getFullYear();
-                    $("#dueDate-view").text(month + "-" + day + "-" + year)
+                    var formattedDateHere = month + "-" + day + "-" + year;
+                    $("#dueDate-view").text(formattedDateHere != "NaN-NaN-NaN" ? formattedDateHere : "Not set" )
                 }
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress + ' ,' + data.pCity + ' ,' + data.pState + ' ,' + data.pZipCode)
