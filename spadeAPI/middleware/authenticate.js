@@ -97,7 +97,7 @@ req.user = {
   lastName: result[0][0].ULastName,
   image: result[0][0].UImage,
   imageKey: result[0][0].imageKey,
-  planID: result[0][0].PlanID,
+  planID: result[0][0].PlanID, 
   isActive: result[0][0].active,
   tenantEmail: result[0][0].tenantEmail,
   auth: result[0][0].auth,

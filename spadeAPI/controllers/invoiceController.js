@@ -478,11 +478,12 @@ exports.invoiceDelete = async (req, res) => {
         [id]
       );
       if (invoiceImagecheckresult[0].length > 0) {
+        // console.log("asdfghjk");
         invoiceImages = invoiceImagecheckresult[0].map(
           (image) => image.InvoiceImage
         );
         // delete folder images
-        imageToDelete(invoiceImages);
+        // imageToDelete(invoiceImages);
         // delete folder images
         const invoiceDeleteresult = await queryRunner(
           deleteQuery("invoiceimages", "invoiceID"),
@@ -502,7 +503,7 @@ exports.invoiceDelete = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from delete Property "+error);
+    res.send("Error from delete invoice "+error);
     console.log(error);
   }
 };

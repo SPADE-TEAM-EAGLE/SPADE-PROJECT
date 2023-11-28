@@ -181,7 +181,7 @@ exports.createTenants = async (req, res) => {
 
 exports.sendInvitationLink = async (req, res) => {
   const { tenantEmail } = req.user;
-  const { tenantID} = req.body;
+  const { tenantID } = req.body;
   try {
     const selectTenantResult = await queryRunner(selectQuery("tenants", "id"), [
       tenantID,
@@ -537,28 +537,13 @@ exports.tenantDelete = async (req, res) => {
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
       tenantID,
     ]);
-    // console.log(tenantResult[0][0])
 
-    // const tenantAllPaidInvoiceResult = await queryRunner(
-    //   checkMyAllTenantsInvoicePaidQuery,
-    //   [tenantID]
-    // );
-    // // console.log(tenantAllPaidInvoiceResult[0].length);
-    // // No un-paid invoices found, update tenant account
-    // if (tenantAllPaidInvoiceResult[0].length === 0) {
-    //   res.status(200).json({
-    //     message: "Tenant Invoice is pending Kindly Paid invoice "
-    //   })
-    // }else{
-
-    // if(){}
     if (tenantResult[0].length > 0) {
       const tenantAllPaidInvoiceResult = await queryRunner(
         checkMyAllTenantsInvoicePaidQuerytenant,
         [tenantID]
       );
-      // console.log(tenantAllPaidInvoiceResult[0].length);
-      // No un-paid invoices found, update tenant account
+
       if (tenantAllPaidInvoiceResult[0].length > 0) {
         res.status(200).json({
           message: "Tenant Invoice is pending Kindly Paid invoice ",
@@ -569,7 +554,7 @@ exports.tenantDelete = async (req, res) => {
           deleteQuery("tenants", "id"),
           [tenantID]
         );
-        // console.log(tenantDeleteResult[0])
+
         if (tenantDeleteResult[0].affectedRows > 0) {
           const tenantCheckResult = await queryRunner(
             selectQuery("tenantattachfiles", "tenantID"),
@@ -598,11 +583,7 @@ exports.tenantDelete = async (req, res) => {
             );
           }
 
-          // const tenantAdditionalEmailCheckResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [tenantID]);
-          // if (tenantAdditionalEmailCheckResult[0].length > 0) {
-          // const tenantAdditionalEmailresult = await queryRunner(deleteQuery("tenantalternateemail", "tenantID"), [tenantID]);
-          // }
-
+// Delete alternate phone Number and emails
           const tenantAdditionalPhoneCheckResult = await queryRunner(
             selectQuery("tenantalternatephone", "tenantID"),
             [tenantID]

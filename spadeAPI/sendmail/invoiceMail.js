@@ -74,7 +74,7 @@ exports.invoiceHTML0 = (tenantName,address,dueDate,terms,additionalNotes,lineIte
        ">
           <br>
           <span style="font-size: 16px;margin-bottom: 10px;"><b>Connect with us: <img
-                src=".https://spades3bucket.s3.amazonaws.com/1697540932817_facebook.png" width="20px" alt=""> Facebook | <img
+                src="https://spades3bucket.s3.amazonaws.com/1697540932817_facebook.png" width="20px" alt=""> Facebook | <img
                 src="https://spades3bucket.s3.amazonaws.com/1697543322886_twiter.png" width="20px" alt=""> Twitter | <img
                 src="https://spades3bucket.s3.amazonaws.com/1697543134705_linkdin.png" width="20px" alt=""> LinkedIn</b></span>
           <br>
