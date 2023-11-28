@@ -12470,6 +12470,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
+                        amount=parseFloat(amount)*12
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
@@ -12479,6 +12480,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     else {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
+                        if(time=="Year"){
+                            amount=parseFloat(amount)*12
+                        }
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
@@ -12530,6 +12534,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
+                        amount=parseFloat(amount)*12
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
@@ -12546,7 +12551,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        $("#downgradeConfirm-yearly-text-start").text("Transfer from Annually to Mothly")
+                        $("#downgradeConfirm-yearly-text-start").text("Transfer from Annually to Monthly")
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(currentSelectedId) <= 7 && parseInt(currentSelectedId) >= 5 && parseInt(cardId) <= 4 ) {
@@ -12556,6 +12561,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
+                        amount=parseFloat(amount)*12
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
@@ -12569,6 +12575,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                         var amount = $(this).closest('.pricing-card').find('.amount-payable').text();
                         seletedPlanID = cardId
+                        if(time=="Year"){
+                            amount=parseFloat(amount)*12
+                        }
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
