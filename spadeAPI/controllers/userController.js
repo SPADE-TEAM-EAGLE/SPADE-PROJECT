@@ -830,6 +830,7 @@ exports.updateUserProfile = async function (req, res) {
 exports.updatePlanId = async function (req, res) {
   // const { userId } = req.body;
   const { userId } = req.user;
+  console.log(userId);
   try {
     const selectResult = await queryRunner(selectQuery("users", "id"), [
       userId,
@@ -1637,6 +1638,7 @@ exports.propertyUpdate = async (req, res) => {
 exports.propertyView = async (req, res) => {
   try {
     const { propertyId } = req.query;
+    // const { propertyId } = req.body;
     const propertyViewResult = await queryRunner(
       selectQuery("property", "id"),
       [propertyId]
@@ -1891,6 +1893,7 @@ exports.getPropertyTenant = async (req, res) => {
 exports.getpropertyUnits = async (req, res) => {
   try {
     const { propertyId } = req.query;
+    // const { propertyId } = req.body;
     // console.log(req.body,req.query,1)
     const property = await queryRunner(selectQuery("property", "id"), [
       propertyId,
@@ -1924,6 +1927,7 @@ exports.viewPropertyTenant = async (req, res) => {
   try {
     const { userId, userName } = req.user;
     const { id } = req.query;
+    // const { id } = req.body;
     let PropertyTenantResult;
     PropertyTenantResult = await queryRunner(selectAllTenantsProperty, [id]);
     if (PropertyTenantResult[0].length > 0) {
@@ -2490,6 +2494,7 @@ exports.getInvoiceReportData = async (req, res) => {
 exports.checkAllTenantsPaid = async (req, res) => {
   try {
     const { userId, email } = req.user;
+    // const { password } = req.body;
     const { password } = req.query;
     // console.log(req.query);
 
