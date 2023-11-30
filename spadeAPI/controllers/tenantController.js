@@ -375,7 +375,7 @@ exports.tenantAllPaidInvoice = async (req, res) => {
   }
 };
 exports.updatePasswordTenant = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { id, password, confirmpassword, token } = req.body;
   try {
     if (password === confirmpassword) {
@@ -476,7 +476,7 @@ exports.tenantAttachFile = async (req, res) => {
 //  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log(req.body)
     const { id } = req.body;
     // const { id,userId } = req.body
     const { userId } = req.user;
@@ -513,6 +513,7 @@ exports.tenantAttachFileDelete = async (req, res) => {
 //  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.query; 
+  // const { tenantID } = req.body; 
 
   try {
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
