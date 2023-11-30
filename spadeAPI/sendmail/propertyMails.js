@@ -18,41 +18,31 @@ exports.propertyHTML = (propertyName,pAddress,propertyType,propertySQFT,units,us
     rel="stylesheet">
 
   <title>Property-Email</title>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      font-size: 18px;
-      margin: 20px auto;
-      padding: 10px;
-      background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-
-    .main-div-class {
-      background-color: #fff;
-      padding: 65px;
-      border-radius: 10px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-
-    ol {
-      margin-left: -25px;
-    }
-  </style>
 
 </head>
 
-<body>
+<body style="font-family: 'Inter', sans-serif;
+width: 100%;
+height: 100%;
+background: #fff;
+font-size: 18px;
+margin: 20px auto;
+padding: 10px;
+background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
 
   <div class="container">
     <div class="row" style="display: flex; justify-content: center;">
       <!-- <div class="col-lg-2"></div> -->
-      <div class="col-lg-8 main-div-class">
-        <div class="main-div-classs" style="text-align: left;">
+      <div class="col-lg-8 main-div-class" style="background-color: #fff;
+      padding: 65px;
+      border-radius: 10px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+        <div class="main-div-classs" style="text-align: left;background-color: #fff;
+        padding: 65px;
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
        
           <img alt="Spade Rent" src="https://res.cloudinary.com/djhjn0ngj/image/upload/v1685012561/Logo_2_is7u6m.png"
             width="140" style="

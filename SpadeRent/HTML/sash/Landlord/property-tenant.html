@@ -1688,7 +1688,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             console.log(tenant)
                             var tenantID = '<td>' + tenant.tenantID + '</td>';
                             var tenantName = '<td class="tenant-id tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + '</td>';
-                            var contactInfo = '<td class="tenant-id" style="font-weight: 600;">' + `${tenant.tPhoneNumber ? tenant.tPhoneNumber : "N/A"}` + '</td>';
+                            var contactInfo = '<td class="tenant-id" style="font-weight: 600;">' + `${tenant.tPhoneNumber ? tenant.tPhoneNumber : "Not set"}` + '</td>';
                             var rentAmount = '<td class="tenant-id rentAmount" style="font-weight: 600;">' +"$ " +tenant.rentAmount + '</td>';
                             var colorClass = '';
                             var backgroundClass = '';
@@ -1713,10 +1713,10 @@ if (tenant.leaseStartDate) {
     if (daysLeft < 0) {
         Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + 'Overdue' + '</td>';
     } else {
-        Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedStartDate ? formattedStartDate : "N/A"}` + '</td>';
+        Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${formattedStartDate ? formattedStartDate : "Not set"}` + '</td>';
     }
 } else {
-    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${tenant.leaseStartDate ? tenant.leaseStartDate : "N/A"}` + '</td>';
+    Leasestartdate = '<td class="Leasestartdate" style="font-weight: 600;">' + `${tenant.leaseStartDate ? tenant.leaseStartDate : "Not set"}` + '</td>';
 }
 var leaseEndDate = '';
 if (tenant.leaseEndDate) {
@@ -1730,10 +1730,10 @@ if (tenant.leaseEndDate) {
     if (daysLeft < 0) {
         leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + 'Overdue' + '</td>';
     } else {
-        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
     }
 } else {
-    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
 }
                             var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';

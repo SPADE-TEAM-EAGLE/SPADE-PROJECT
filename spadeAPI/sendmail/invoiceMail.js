@@ -32,41 +32,31 @@ exports.invoiceHTML0 = (tenantName,address,dueDate,terms,additionalNotes,lineIte
     rel="stylesheet">
 
   <title>Document</title>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      font-size: 18px;
-      margin: 20px auto;
-      padding: 10px;
-      background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-
-    .main-div-class {
-      background-color: #fff;
-      padding: 65px;
-      border-radius: 10px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-
-    ol {
-      margin-left: -25px;
-    }
-  </style>
 
 </head>
 
-<body>
+<body style="font-family: 'Inter', sans-serif;
+width: 100%;
+height: 100%;
+background: #fff;
+font-size: 18px;
+margin: 20px auto;
+padding: 10px;
+background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
 
   <div class="container">
     <div class="row" style="display: flex; justify-content: center;">
       <!-- <div class="col-lg-2"></div> -->
-      <div class="col-lg-10 main-div-class">
-        <div class="main-div-classs" style="text-align: left;">
+      <div class="col-lg-10 main-div-class" style=" background-color: #fff;
+      padding: 65px;
+      border-radius: 10px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+        <div class="main-div-classs" style="text-align: left; background-color: #fff;
+        padding: 65px;
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
        
           <img alt="Spade Rent" src="https://res.cloudinary.com/djhjn0ngj/image/upload/v1685012561/Logo_2_is7u6m.png"
             width="140" style="
@@ -159,7 +149,7 @@ exports.invoiceHTML0 = (tenantName,address,dueDate,terms,additionalNotes,lineIte
           <div
             style="height: 7px; width: 60px; background-color: #1467B0; border-radius: 30px; margin-bottom: 20px; margin-top: 5px;">
           </div>
-          <ol>
+          <ol style="margin-left: -25px;">
             <li> Online Payment: Log in to your <b><a href="https://app.spaderent.com/HTML/sash/Tenant/login_module.html">Tenant Portal</a></b> to pay securely using your preferred payment method.</li><br>
             <li> Bank Transfer: Send the payment to our bank account.</li><br>
             <li> Check/Money Order: Addressed to <b>${LandlordName}</b>, mailed to <b>${BusinessAddress}</b>.</li><br>
