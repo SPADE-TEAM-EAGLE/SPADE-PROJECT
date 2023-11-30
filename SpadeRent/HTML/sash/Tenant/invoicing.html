@@ -2266,7 +2266,7 @@
                         <td>${month}/${day}/${year}</td>
                                                     <td>INV-10012</td>
                                                     <td>$ ${data.totalAmount}</td>
-                                                    <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
+                                                    <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "Not set"}</td>
                                                     <td>Due On Receipt</td>
                     </tr>
                     `
@@ -2348,7 +2348,7 @@
                 }
                 $("#invoice-number").text("INV-"+data.invoiceID);
                 $("#tenantName").text(data.firstName + " " + data.lastName)
-                $("#invoiceType").text(data.invoiceType?data.invoiceType:"N/A")
+                $("#invoiceType").text(data.invoiceType?data.invoiceType:"Not set")
                 if(data.invoiceType=="One Time Invoice"){
                     $("#dueDate").text(data.dueDate? formatDate(data.dueDate):"Not set")
                 }else{
@@ -2357,7 +2357,7 @@
                 $("#invoiceStatus").text(data.status)
                 $("#propertyAddress").text(data.pAddress)
                 $("#propertyUnitNumber").text(data.unitNumber)
-                $("#notes").text(data.note?data.note:"N/A")
+                $("#notes").text(data.note?data.note:"Not set")
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
                     const category = categoryData.filter((cat) => { return item.category == cat.id })
@@ -2381,7 +2381,7 @@
                                                         <p class="text-primary"><b>${categoryname}</b></p>
                                                     </td>
                                                     <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"N/A"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"Not set"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
@@ -2392,7 +2392,7 @@
                                                         <p class="text-primary"><b>${category[0]?.categorieName}</b></p>
                                                     </td>
                                                     <td><p class="text-primary"><b>${data.propertyName}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"N/A"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo?item.memo:"Not set"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount}</b></p></td>
                                                 </tr>
                 `)
@@ -2458,7 +2458,7 @@
                         let tenantNames = []
                         response.data[0]?.forEach(function (invoice) {
                             var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
-                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice.memo[0].memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice.memo[0].memo || "Not set") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
                             var dateObj = new Date(invoice.created_at);
                             var day = dateObj.getDate();
                             var month = dateObj.getMonth() + 1;
@@ -2467,10 +2467,10 @@
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var invoiceAmount;
                             if(invoice.invoiceType=="One Time Invoice"){
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "Not set" : formatDate(invoice.dueDate)) : "Not set")}</small>` + '</td>';
                             }
                             else{
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
                             }
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                             var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"

@@ -24,40 +24,31 @@ exports.taskHTML0 = (
       <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Berkshire+Swash&family=Great+Vibes&family=Inter&family=Tilt+Prism&display=swap" rel="stylesheet">
 
       <title>Document</title>
-      <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        width: 100%;
-        height: 100%;        
-        background: #fff;
-        font-size: 18px;
-        margin: 20px auto;
-        padding: 10px;    
-        background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-      }   
       
-      .main-div-class {
-        background-color: #fff;
-        padding: 35px 35px;
-        border-radius: 10px;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      }
-
-      ol {
-        margin-left: -25px;
-      }
-      </style>
       
   </head>
-  <body>
+  <body style="font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 100%;        
+  background: #fff;
+  font-size: 18px;
+  margin: 20px auto;
+  padding: 10px;    
+  background: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;">
 
     <div class="container">
       <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8 main-div-class">
-    <div class="main-div-classs" style="text-align: left;">
+        <div class="col-lg-8 main-div-class" style="background-color: #fff;
+        padding: 35px 35px;
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+    <div class="main-div-classs" style="text-align: left;background-color: #fff;
+    padding: 35px 35px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
         <img alt="Spade Rent" src="https://res.cloudinary.com/djhjn0ngj/image/upload/v1685012561/Logo_2_is7u6m.png" width="155" style="
        margin-bottom: 15px;
        ">        
@@ -82,7 +73,7 @@ exports.taskHTML0 = (
             We're committed to ensuring your comfort and safety, and our team is gearing up to resolve this issue efficiently. Here’s what to expect next:
            </p>
            
-          <ol>
+          <ol style="margin-left: -25px;">
             <li>Technician Visit: <b>${assignedTo}</b>, our skilled technician, will visit the property on the scheduled date. We kindly ask for your cooperation in granting him access to the premises.</li> <br>
             <li>Status Updates: We'll keep you informed of the progress and any updates related to this repair ticket via your Spade Rent account and email.</li><br>
             <li>Feedback Loop: After the repair, we’d love to hear your feedback! Your insights help us improve and ensure top-notch service.</li><br>

@@ -3787,7 +3787,7 @@
                     `
                 )
                 $("#memo-table").empty()
-                $("#memo-view").text(data.additionalNotes ? data.additionalNotes : "N/A")
+                $("#memo-view").text(data.additionalNotes ? data.additionalNotes : "Not set")
                 let totalTaxAmount = 0;
                 data.lineItems.forEach((item) => {
                     const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
@@ -4170,7 +4170,7 @@
                                 var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                                 var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
                                 var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">' + invoice.firstName + " " + invoice.lastName + `</a><br><small>${invoice.tPhone}</small>` + '</td>';
-                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                                var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "Not set") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
                                 var dateObj = new Date(invoice.created_at);
                                 var day = dateObj.getDate();
                                 var month = dateObj.getMonth() + 1;
@@ -4179,10 +4179,10 @@
                                 var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                                 var invoiceAmount;
                             if(invoice.invoiceType=="One Time Invoice"){
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "Not set" : formatDate(invoice.dueDate)) : "Not set")}</small>` + '</td>';
                             }
                             else{
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
                             }
                                 const toShow = invoice.status
                                 var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) + '</td>';
@@ -4279,7 +4279,7 @@
                             var serial = '<td style="font-weight: 600;" class="serial-number" >' + (index + 1) + '</td>';
                             var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                             var tenantName = '<td class="tenantName" style="font-weight: 600;"><a class="view-btnn" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#viewModal-invoice">' + invoice.firstName + " " + invoice.lastName + `</a><br><small>${invoice.tPhone}</small>` + '</td>';
-                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "N/A") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
+                            var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice?.memo[0]?.memo || "Not set") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
                             var dateObj = new Date(invoice.created_at);
                             var day = dateObj.getDate();
                             var month = dateObj.getMonth() + 1;
@@ -4288,10 +4288,10 @@
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var invoiceAmount;
                             if (invoice.invoiceType == "One Time Invoice") {
-                                invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "N/A" : formatDate(invoice.dueDate)) : "N/A")}</small>` + '</td>';
+                                invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "Not set" : formatDate(invoice.dueDate)) : "Not set")}</small>` + '</td>';
                             }
                             else {
-                                invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                                invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
                             }
                             const toShow = invoice.status
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) + '</td>';
@@ -4372,7 +4372,7 @@
                     var year = dateObj.getFullYear();
                     var invoiceDate = '<td class="date" style="font-weight: 600;">' + month + "-" + day + "-" + year + '</td>';
                     var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
-                    var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(invoice.recurringNextDate)) : "N/A")}</small>` + '</td>';
+                    var invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + invoice.totalAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
                     const toShow = invoice.status
                     var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
                     var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
@@ -5123,13 +5123,13 @@ return idB - idA;
                     ...data2
                 }
                 $("#client-id").empty()
-                let clientName = (data.firstName && data.lastName) ? `${data.firstName} ${data.lastName}` : "N/A";
-                let clientAddress = data.tAddress ? data.tAddress : "N/A";
-                let clientCity = data.tCity ? data.tCity : "N/A";
-                let clientState = data.tState ? data.tState : "N/A";
-                let clientZipcode = data.tZipcode ? data.tZipcode : "N/A";
-                let clientPhoneNumber = data.tPhoneNumber ? data.tPhoneNumber : "N/A";
-                let clientEmail = data.tEmail ? data.tEmail : "N/A";
+                let clientName = (data.firstName && data.lastName) ? `${data.firstName} ${data.lastName}` : "Not set";
+                let clientAddress = data.tAddress ? data.tAddress : "Not set";
+                let clientCity = data.tCity ? data.tCity : "Not set";
+                let clientState = data.tState ? data.tState : "Not set";
+                let clientZipcode = data.tZipcode ? data.tZipcode : "Not set";
+                let clientPhoneNumber = data.tPhoneNumber ? data.tPhoneNumber : "Not set";
+                let clientEmail = data.tEmail ? data.tEmail : "Not set";
                 $("#client-id").append(`
     <h5 class="fw-bold" style="color: #1467B0;">BILLED TO</h5>
     <p class="text-black">
@@ -5141,9 +5141,9 @@ return idB - idA;
                 console.log(userData);
 $("#owner-id").empty()
 $("#owner-id").append(`
-    <h5 class="text-black fw-bold">${userData.businessName?userData.businessName:"N/A"}</h5>
+    <h5 class="text-black fw-bold">${userData.businessName?userData.businessName:"Not set"}</h5>
     <p class="text-black">
-        ${userData.BusinessAddress?userData.BusinessAddress:"N/A"}<br>${userData.state?userData.state:"N/A"}, ${userData.city?userData.city:"N/A"}<br>${userData.zipCode?userData.zipCode:"N/A"}<br>United States<br>${userData.phone?userData.phone:"N/A"}
+        ${userData.BusinessAddress?userData.BusinessAddress:"Not set"}<br>${userData.state?userData.state:"Not set"}, ${userData.city?userData.city:"Not set"}<br>${userData.zipCode?userData.zipCode:"Not set"}<br>United States<br>${userData.phone?userData.phone:"Not set"}
     </p>
 `);
                 $("#table-body").empty()
@@ -5156,7 +5156,7 @@ $("#owner-id").append(`
         <td>${month}/${day}/${year}</td>
         <td>INV-${data.invoiceID}</td>
         <td>$ ${data.totalAmount ? data.totalAmount : 0}</td>
-        <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "N/A"}</td>
+        <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "Not set"}</td>
         <td>Due On Receipt</td>
     </tr>`
                 )
@@ -5184,10 +5184,10 @@ $("#owner-id").append(`
                     }
                     $("#memo-table").append(`
     <tr class="text-black">
-        <td style="border-bottom: 2px solid black;">${categoryname ? categoryname : "N/A"}</td>
+        <td style="border-bottom: 2px solid black;">${categoryname ? categoryname : "Not set"}</td>
             <td style="border-bottom: 2px solid black;">
                 <p style="font-weight: bold;" class="mb-1">Services</p>
-                <span>${item.memo ? item.memo : "N/A"}</span>
+                <span>${item.memo ? item.memo : "Not set"}</span>
             </td>
             <td style="border-bottom: 2px solid black;">${data.propertyName}</td>
             <td style="border-bottom: 2px solid black;"> ${item.tax !== "" ? item.tax : 0} %</td>
@@ -5222,7 +5222,7 @@ $("#owner-id").append(`
     </tr>
 `);
                 })
-                $("#memo-view").text(data.note ? data.note : "N/A")
+                $("#memo-view").text(data.note ? data.note : "Not set")
                 $("#viewModal").modal("show")
             })
             $(document).on('click', ".view-btnn", function (e) {
@@ -5278,10 +5278,10 @@ $("#owner-id").append(`
                         $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${categoryname ? categoryname : "N/A"}</b></p>
+                                                        <p class="text-primary"><b>${categoryname ? categoryname : "Not set"}</b></p>
                                                     </td>
-                                                    <td><p class="text-primary"><b>${data.propertyName ? data.propertyName : "N/A"}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo ? item.memo : "N/A"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName ? data.propertyName : "Not set"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo ? item.memo : "Not set"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount ? item.amount : "0"}</b></p></td>
                                                 </tr>
                 `)
@@ -5289,10 +5289,10 @@ $("#owner-id").append(`
                         $("#view-invoice-line-item").append(`
                 <tr>
                                                     <td>
-                                                        <p class="text-primary"><b>${category[0]?.categorieName ? category[0]?.categorieName : "N/A"}</b></p>
+                                                        <p class="text-primary"><b>${category[0]?.categorieName ? category[0]?.categorieName : "Not set"}</b></p>
                                                     </td>
-                                                    <td><p class="text-primary"><b>${data.propertyName ? data.propertyName : "N/A"}</b></p></td>
-                                                    <td><p class="text-primary"><b>${item.memo ? item.memo : "N/A"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${data.propertyName ? data.propertyName : "Not set"}</b></p></td>
+                                                    <td><p class="text-primary"><b>${item.memo ? item.memo : "Not set"}</b></p></td>
                                                     <td><p class="text-primary"><b>$ ${item.amount ? item.amount : "0"}</b></p></td>
                                                 </tr>
                 `)
@@ -5308,7 +5308,7 @@ $("#owner-id").append(`
                     })
                 } else {
                 }
-                $("#notes").text(data.note || "N/A")
+                $("#notes").text(data.note || "Not set")
                 $("#viewModal-invoice").modal("show")
             })
             $(document).on('click', '.three-dots', function () {

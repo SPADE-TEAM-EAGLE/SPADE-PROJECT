@@ -2030,7 +2030,7 @@
                                                             <li>
                                                                 <a href="javascript:void(0)">
                                                                     <strong class="text-dark">
-                                                                        Coulmns to
+                                                                        Columns to
                                                                     Show
                                                                     </strong>
                                                                 </a>
@@ -2785,8 +2785,8 @@ $(".plan_remaining_days_data").each(function(){
                 }
                 updateButtonStatus("_update");
             });
-function dateFormatChanger(mydate = "N/A"){
-var NewDate = (mydate != "N/A" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "N/A")
+function dateFormatChanger(mydate = "Not set"){
+var NewDate = (mydate != "Not set" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "Not set")
 return NewDate
 }
             $(document).on('click', ".view-task", function (e) {
@@ -2804,7 +2804,7 @@ return NewDate
                 $("#dueDate_view").text(dateFormatChanger(data.dueDate));
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
-                $("#notes_view").text(data.notes || "N/A");
+                $("#notes_view").text(data.notes || "Not set");
                 console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
                 if(data?.AssignTo?.length > 0){
@@ -2826,7 +2826,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 else{
                     $("#view-task-line-item").append(`<tr class="tr">
                             <td>
-                                <p class="text-primary"><b>${"N/A"}</b></p>
+                                <p class="text-primary"><b>${"Not set"}</b></p>
                             </td>
                             <td>
                                 <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
