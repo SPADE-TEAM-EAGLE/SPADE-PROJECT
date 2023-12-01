@@ -1166,3 +1166,4 @@ exports.insertInUserPermissionUsers =
   exports.taskCountIdTenant = `select count(id) as count from task where tenantID = ?`;
   exports.prospectusCount = `select count(id) as count from prospectus where landlordId = ?`;
   exports.prospectusIdUpdate = `update prospectus set cprospectusId = ? where id = ?`;
+  exports.messageDelete = `SELECT * FROM spade_Rent.messages where sender = ? OR receiverID = ?`;
