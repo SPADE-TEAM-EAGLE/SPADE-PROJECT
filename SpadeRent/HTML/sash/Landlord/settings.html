@@ -9659,7 +9659,7 @@
                                                                                         <li>
                                                                                             <a href="javascript:void(0)" class="text-dark">
                                                                                                 <strong>
-                                                                                                    Coulmns to
+                                                                                                    Columns to
                                                                                         Show
                                                                                                 </strong>
                                                                                             </a>
@@ -9835,7 +9835,7 @@
                                                                                         <li>
                                                                                             <a href="javascript:void(0)" class="text-dark">
                                                                                                 <strong>
-                                                                                                    Coulmns to
+                                                                                                    Columns to
                                                                                         Show
                                                                                                 </strong>
                                                                                             </a>
@@ -11665,12 +11665,12 @@ if (taxable == 1) {
 <span>Phone: ${invoice.tPhone}</span>
 `);
                                     var description = $("<td>").html(`
-<p style="font-weight: 600;" class="mb-1">${(invoice.note == "" ? "N/A" : invoice.note)}</p>
+<p style="font-weight: 600;" class="mb-1">${(invoice.note == "" ? "Not set" : invoice.note)}</p>
 <span>${invoice.invoiceType}</span>
 `);
                                     var dates = $("<td>").html(`
 <p style="font-weight: 600;" class="mb-1">${invoice.startDate}</p>
-<span>Due Date: ${invoice.dueDate ? invoice.dueDate : "N/A"}</span>
+<span>Due Date: ${invoice.dueDate ? invoice.dueDate : "Not set"}</span>
 `);
                                     var address = $("<td>").html(`<b>${invoice.propertyName}</b>`);
                                     var amount = $("<td>").html(`<p style="font-weight: 600;" class="mb-1">$ ${invoice.totalAmount ? invoice.totalAmount : 0}</p>`);
@@ -11750,8 +11750,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 row.append($("<td>").text(index + 1));
                                     row.append($("<td>").html("<img src='" + "../assets/images/SPRK.png" + "' alt='image' class='img-fluid' style='width: 220px; height: 25px;'>"));
                                 row.append($("<td>").html("<b>" + entry.accountName +"<p class='fw-light'>Card Number: *****"+entry.digits+"</p>"+ "</b>"));
-                                    row.append($("<td>").html("<b>" + (entry.nickName?entry.nickName:"N/A") + "</b>"));
-                                row.append($("<td>").text(entry.description ? entry.description : "N/A"));
+                                    row.append($("<td>").html("<b>" + (entry.nickName?entry.nickName:"Not set") + "</b>"));
+                                row.append($("<td>").text(entry.description ? entry.description : "Not set"));
                                 tbody.append(row);
                             });
                         } else {
@@ -12147,7 +12147,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         })
                     } else {
                     }
-                    $("#notes").text(data.note || "N/A")
+                    $("#notes").text(data.note || "Not set")
                     $("#viewModal-invoice").modal("show")
                 })
                 $(document).on('click', '.three-dots', function () {
@@ -13496,7 +13496,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
-                                                    }, 2000);
+                                                    }, 20000);
                                                 }
                                             })
                                                 },
@@ -13504,7 +13504,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
-                                                    }, 2000);
+                                                    }, 20000);
                                                 }
                                             })
                                         }, error: function (xhr) {
@@ -13608,7 +13608,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
-                                                    }, 2000);
+                                                    }, 20000);
                                                 }
                                             })
                                         }, error: function (xhr) {
@@ -14248,7 +14248,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         $("#myModal_warning_declined").modal("show")
                                         setTimeout(function () {
                                             $("#myModal_warning_declined").modal("hide");
-                                        }, 2000);
+                                        }, 20000);
                                     }
                                 })
                             } else {
@@ -14256,7 +14256,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 $("#myModal_warning_declined").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_warning_declined").modal("hide");
-                                }, 2000);
+                                }, 20000);
                             }
                         });
                     },
@@ -14269,7 +14269,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#myModal_warning_declined").modal("show")
                         setTimeout(function () {
                             $("#myModal_warning_declined").modal("hide");
-                        }, 2000);
+                        }, 20000);
                     }
                 });
             }
@@ -14387,7 +14387,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         $("#myModal_warning_declined").modal("show")
                                         setTimeout(function () {
                                             $("#myModal_warning_declined").modal("hide");
-                                        }, 2000);
+                                        }, 20000);
                                     }
                                 })
                             } else {
@@ -14395,7 +14395,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 $("#myModal_warning_declined").modal("show")
                                 setTimeout(function () {
                                     $("#myModal_warning_declined").modal("hide");
-                                }, 2000);
+                                }, 20000);
                             }
                         });
                     },
@@ -14408,7 +14408,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#myModal_warning_declined").modal("show")
                         setTimeout(function () {
                             $("#myModal_warning_declined").modal("hide");
-                        }, 2000);
+                        }, 20000);
                     }
                 });
             }

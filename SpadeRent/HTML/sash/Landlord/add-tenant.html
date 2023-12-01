@@ -3879,7 +3879,7 @@ $.ajax({
                         var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                         var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                         var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + tenant.rentAmount + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
+                        var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + tenant.rentAmount + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(tenant.recurringNextDate)) : "Not set")}` + '</td>';
                         var dropdownMenu =
                             '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                             '<ul class="dropdown-menu">' +
@@ -3899,12 +3899,12 @@ $.ajax({
                             var day = targetDate.getDate().toString().padStart(2, '0');
                             var formattedEndDate = `${month}/${day}/${year}`;
                             if (daysLeft < 0) {
-                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="text-danger d-block">Overdue</small>` + '</td>';
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block">Overdue</small>` + '</td>';
                             } else {
-                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
                             }
                         } else {
-                            leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                            leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
                         }
                         var row = '<tr>' + checkbox + serial + tenantIdHidden + tenantId + tenantName + contactinfo + propertyAddress +
                             assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
@@ -4035,7 +4035,7 @@ $.ajax({
                     var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                     var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                     var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
+                    var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(tenant.recurringNextDate)) : "Not set")}` + '</td>';
                     var password = 'your-secret-password';
                     var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -4057,9 +4057,9 @@ $.ajax({
                         var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
                         var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
                         var formattedEndDate = `${month}/${day}/${year}`;
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
                     } else {
-                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
                     }
                     var row = '<tr>' + checkbox + serial +tenantIdHidden +tenantId + tenantName + contactinfo + propertyAddress +
                         assignUnit + rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
@@ -4081,7 +4081,7 @@ $.ajax({
                 var contactinfo = '<td class="contactinfo" style="font-weight: 600;"><span style="color: #1467B0";">' + tenant.tPhoneNumber + '</span><br><small style="color: gray;">' + tenant.tEmail + '</small></td>';
                 var propertyAddress = '<td class="propertyAddress" style="font-weight: 600;">' + tenant.propertyName + '</span><br><small>' + tenant.pAddress + ", " + tenant.pCity + ", " + tenant.pState + ", " + tenant.pZipCode + '</small></td>';
                 var assignUnit = '<td class="assignUnit" style="font-weight: 600;">' + tenant.unitNumber + `<br><small>${tenant.unitArea} Square/Feet</small>` + '</td>';
-                var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "N/A" : formatDate(tenant.recurringNextDate)) : "N/A")}` + '</td>';
+                var rentAmount = '<td class="rentAmount" style="font-weight: 600;">' + tenant.rentAmount + '<span> $</span>' + `<br><small>Next Due Date: ${(tenant.recurringNextDate ? (formatDate(tenant.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(tenant.recurringNextDate)) : "Not set")}` + '</td>';
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, tenant.tenantID.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -4103,9 +4103,9 @@ $.ajax({
                     var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
                     var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
                     var formattedEndDate = `${month}-${day}-${year}`;
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "N/A"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
                 } else {
-                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "N/A"}` + '</td>';
+                    leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
                 }
                 var row = '<tr>' + checkbox + serial +tenantIdHidden +tenantId + tenantName + contactinfo + propertyAddress + assignUnit +
                     rentAmount + leaseEndDate + dropdownMenu + created_at + '</tr>';
