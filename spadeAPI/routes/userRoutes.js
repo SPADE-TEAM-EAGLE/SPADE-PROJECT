@@ -25,7 +25,7 @@ router.get("/userCheckTenantPaidInvoice", verifyToken, userController.checkAllTe
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
 router.get("/checkemail", userController.checkemail);
-router.get("/Signin", userController.Signin);
+router.post("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
 router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
