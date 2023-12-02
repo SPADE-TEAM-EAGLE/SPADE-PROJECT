@@ -4519,7 +4519,7 @@
             <script src="../assets/js/themeColors.js"></script>
             <script src="../assets/switcher/js/switcher.js"></script>
             <script src="../assets/js/getNotification.js"></script>
-            <script src="../assets/js/push_notification.js"></script>
+            <script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
             <script src="../assets/js/email-phone.js"></script>
             <script src="../assets/js/custom-swicher.js"></script>
             <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
@@ -5286,6 +5286,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             function filterAndRenderTable(selectedValue) {
+                console.log(selectedValue)
                 if (selectedValue) {
                     if (selectedValue == "Occupied" || selectedValue == "Vacant") {
                         
@@ -5293,7 +5294,8 @@ $(".plan_remaining_days_data").each(function(){
                             var filteredData = propertyData.filter((property) => {
                                 return property?.occupancy_status == selectedValue && property.id == $("#propertySelect").val()
                             });
-                        } else {
+                        } 
+                        else {
                             var filteredData = propertyData.filter((property) => {
                                 console.log(property?.occupancy_status==selectedValue)
                                 return property?.occupancy_status == selectedValue
@@ -5310,11 +5312,20 @@ $(".plan_remaining_days_data").each(function(){
                             var filteredData = propertyData.filter((property) => {
                                 return property?.occupancy_status == $("#reportTypeSelect").val() && property.id == selectedValue
                             });
-                        } else {
+                        } 
+                        
+                        else if ($("#reportTypeSelect").val() == "All" && $("#propertySelect").val() !== "All") {
+                            var filteredData = propertyData.filter((property) => {
+                                return property.id == $("#propertySelect").val()
+                            });
+                        }
+                        
+                        else {
                                     var filteredData = propertyData.filter((property) => {
                                 return property.id == selectedValue
                             });
                         }
+
                         if(filteredData.length == 0){
                             constructPropertyTable(propertyData);
                         }else{
@@ -5393,7 +5404,7 @@ $(".plan_remaining_days_data").each(function(){
             }
             $("#propertySelect,#reportTypeSelect").on('change', function () {
                 var selectedValue = $(this).val();
-                console.log(selectedValue)
+                console.log($(this).attr("id"), selectedValue)
                 filterAndRenderTable(selectedValue);
             });
             $("#invoiceTimeSelect,#invoiceTypeSelect").on('change', function () {

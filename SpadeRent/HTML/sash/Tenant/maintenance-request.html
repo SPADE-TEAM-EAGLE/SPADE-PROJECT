@@ -1651,6 +1651,7 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/getNotificationTenant.js"></script>
     <script src="../assets/js/email-phone.js"></script>
+    <script src="../assets/js/chnageOnlineStatusTenant.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -1852,7 +1853,7 @@
                             tableBody.append(`<tr><td colspan="12" style="text-align: center;">No Task Found</td></tr>`)
                         } else {
                             response.data[0]?.forEach(function (task,index) {
-var countIt = `<td>${index+1}</td>`;
+var countIt = `<td class="serial-number">${index+1}</td>`;
                                 var image;
                                 if (task.ImageKey) {
                                     if (task.ImageKey.includes(',')) {
@@ -2170,14 +2171,14 @@ var countIt = `<td>${index+1}</td>`;
                 });
             } else if (selectedFilter === 'ascending') {
                 rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.due-at').text());
-                    var idB = parseInt($(b).find('.due-at').text());
+                    var idA = parseInt($(a).find('.serial-number').text());
+                    var idB = parseInt($(b).find('.serial-number').text());
                     return idA - idB;
                 });
             } else if (selectedFilter === 'descending') {
                 rows.sort(function (a, b) {
-                    var idA = parseInt($(a).find('.due-at').text());
-                    var idB = parseInt($(b).find('.due-at').text());
+                    var idA = parseInt($(a).find('.serial-number').text());
+                    var idB = parseInt($(b).find('.serial-number').text());
                     return idB - idA;
                 });
             } else if (selectedFilter === 'recently-added') {

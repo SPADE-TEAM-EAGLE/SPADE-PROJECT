@@ -48,6 +48,8 @@ router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userControl
 router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
+router.put("/activeTenant", verifyTokenTenant, userController.activeTenant);
+router.put("/activeUser", verifyToken, userController.activeUser);
 
 router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);

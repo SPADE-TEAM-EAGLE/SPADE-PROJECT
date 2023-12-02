@@ -88,7 +88,7 @@ exports.getTenantById = `SELECT active As isTenantActive ,FirstName,LastName,ima
 // update user Active or Deactive
 exports.updateUserActive = `UPDATE users SET active = ? WHERE Email = ?`;
 exports.updateTenantActive = `UPDATE tenants SET active = ? WHERE email = ?`;
-
+exports.updateActiveUser = `UPDATE users SET active = ? WHERE email = ?`;
 // update all notify to 1 where landlord id = id
 exports.updateAllNotifyReadQuery = {
   property: `UPDATE property SET notify = ? WHERE landlordID = ?`,

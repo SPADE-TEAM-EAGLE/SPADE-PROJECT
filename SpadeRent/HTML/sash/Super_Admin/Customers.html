@@ -571,7 +571,7 @@
                                                 id="responsive-datatable">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
+                                                        
                                                         <th>customer id</th>
                                                         <th class="d-none">Landlord ID</th>
                                                         <th>Name</th>
@@ -1077,7 +1077,7 @@ function getData(){
                         }else{
                             response?.data?.forEach(function (item) {
                             var row = $("<tr>");
-                            row.append("<td></td>");
+                            
                             row.append("<td class='landlordId' style='font-weight: 600;'>" + item.landlordId + "</td>");
                             row.append("<td class='landlordName' style='font-weight: 600;'><b>" + item.FirstName + " " + item.LastName + "</b></td>");
                             row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'>" + item.Email + "</p><span>" + item.Phone + "</span></td>");
@@ -1176,15 +1176,16 @@ function getData(){
                 })
             })
             $('input[type="checkbox"]').change(function () {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
-                console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
-                $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
+            $('table').find('tr').each(function () {
+                console.log($(this))
+                var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                isColumnVisible ? column.show() : column.hide();
             });
+        });
             $(document).on('keyup', '#typehead', function () {
                 var searchValue = $(this).val().toLowerCase();
                 var numRowsToShow = $('#lengthSelectBox').val();

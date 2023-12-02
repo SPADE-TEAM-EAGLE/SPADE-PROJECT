@@ -1269,17 +1269,7 @@
                                                                 <strong>Filter by:</strong>
                                                             </a>
                                                         </li>
-                                                        <li class="d-flex justify-content-between">
-                                                            <a href="javascript:void(0)">Invoice No</a>
-                                                            <div class="form-check m-0">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    class="form-check-input mt-2"
-                                                                    id="exampleCheck1"
-                                                                    checked
-                                                                >
-                                                            </div>
-                                                        </li>
+                                                        
                                                         <li class="d-flex justify-content-between">
                                                             <a href="javascript:void(0)">Memo/Description</a>
                                                             <div class="form-check m-0">
@@ -1374,7 +1364,8 @@
                                                 <table class="table-hover table border text-nowrap text-md-nowrap mb-0">
                                                     <thead>
                                                         <tr>
-                                                            <th>INVOICE NO</th>
+                                                            <th class="d-none">INVOICE NO</th>
+                                                            <th>#</th>
                                                             <th>MEMO/DESCRIPTION</th>
                                                             <th>INVOICE DATE</th>
                                                             <th>PROPERTY NAME</th>
@@ -1947,6 +1938,7 @@
 <script src="../assets/js/charts.js"></script>
 <script src="../assets/js/email-verification.js"></script>
 <script src="../assets/js/getNotificationTenant.js"></script>
+<script src="../assets/js/chnageOnlineStatusTenant.js"></script>
 <script>
         $(document).ready(function () {
             $.ajax({
@@ -2151,9 +2143,9 @@
                         });
                     } else if (selectedFilter === 'ascending') {
                         rows.sort(function (a, b) {
-                            var idA = new Date($(a).find('.date').text());
-                            var idB = new Date($(b).find('.date').text());
-                            return idB - idA;
+                            var idA = $(a).find('.serial-number').text().toLowerCase();
+                            var idB = $(b).find('.serial-number').text().toLowerCase();
+                            return idA - idB;
                         });
                     }
                     else if (selectedFilter === 'recently-added') {
@@ -2165,9 +2157,10 @@
                     }
                     else if (selectedFilter === 'descending') {
                         rows.sort(function (a, b) {
-                            var idA = new Date($(a).find('.date').text());
-                            var idB = new Date($(b).find('.date').text());
-                            return idA - idB;
+                            var idA = $(a).find('.serial-number').text().toLowerCase();
+                            var idB = $(b).find('.serial-number').text().toLowerCase();
+                            console.log(idA, idB)
+                            return idB - idA;
                         });
                     }
                     tableBody.empty().append(rows);
@@ -2456,8 +2449,9 @@
                         var tableBody = $('#table_body');
                         tableBody.empty();
                         let tenantNames = []
-                        response.data[0]?.forEach(function (invoice) {
-                            var invoiceNumber = '<td class="invoice-id" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                        response.data[0]?.forEach(function (invoice,index) {
+                            var invoiceNumber = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
+                            var serial='<td class="serial-number" style="font-weight: 600;">' + (index+1) + '</td>';
                             var memoDescription = '<td class="memo" style="font-weight: 600;">' + (invoice.memo[0].memo || "Not set") + `<br><small>${invoice.invoiceType}</small>` + '</td>';
                             var dateObj = new Date(invoice.created_at);
                             var day = dateObj.getDate();
@@ -2492,7 +2486,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </td>`
-                            var row = '<tr>' + invoiceNumber + memoDescription + invoiceDate +
+                            var row = '<tr>' + invoiceNumber+serial + memoDescription + invoiceDate +
                                 propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
                             tableBody.append(row);
                         });
@@ -2517,7 +2511,7 @@
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });

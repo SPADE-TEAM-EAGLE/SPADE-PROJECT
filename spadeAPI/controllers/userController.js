@@ -81,7 +81,8 @@ const {
   InvoiceCategoriesQuery,
   adminNotificationQuery,
   propertyIdUpdate,
-  propertyCount
+  propertyCount,
+  updateActiveUser
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -2123,6 +2124,7 @@ exports.deleteMoreUnits = async (req, res) => {
 exports.getStates = async (req, res) => {
   try {
     const statesResult = await queryRunner(selectQuery("propertystates"));
+    console.log(statesResult[0]);
     if (statesResult[0].length > 0) {
       res.status(200).json({
         data: statesResult[0],
@@ -2665,8 +2667,10 @@ exports.getDashboardData = async (req, res) => {
 exports.inactiveUser = async (req, res) => {
   try {
     const { email } = req.user;
+    console.log(email);
     const inactiveUserResult = await queryRunner(updateUserActive, [0, email]);
     // if (inactiveUserResult[0].affectedRows > 0) {
+      console.log(inactiveUserResult);
     res.status(200).json({
       message: "User is inactive",
     });
@@ -2687,6 +2691,42 @@ exports.inactiveTenant = async (req, res) => {
     // if (inactiveUserResult[0].affectedRows > 0) {
     res.status(200).json({
       message: "User is inactive",
+    });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.activeTenant = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateTenantActive, [
+      1,
+      email,
+    ]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+    res.status(200).json({
+      message: "User is active",
+    });
+    // }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+exports.activeUser = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const inactiveUserResult = await queryRunner(updateActiveUser, [
+      1,
+      email,
+    ]);
+    // if (inactiveUserResult[0].affectedRows > 0) {
+    res.status(200).json({
+      message: "User is active",
     });
     // }
   } catch (error) {
