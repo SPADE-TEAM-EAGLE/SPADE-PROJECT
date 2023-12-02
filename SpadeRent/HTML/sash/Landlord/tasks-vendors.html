@@ -859,6 +859,7 @@
                                 <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+"
                                     oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')"
                                     placeholder="Enter Email" id="email" required>
+                                <small class="d-none" id="email-exist" style="color: red;">Email already exist</small>
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-md-6">
@@ -2588,6 +2589,34 @@
                             $("#myModal_warning_connection").modal("hide");
                         }, 2000);
                     }
+                })
+            })
+            $("#email").on("input",function(){
+                $.ajax({
+                    url:`http://localhost:3000/api/spade/VendorCheckEmail/${$("#email").val()}`,
+                    type:"GET",
+                    contentType: "application/json",
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        if(response.message == "Email already exists "){
+                            console.log("email already exists")
+                            $("#email").addClass("border-danger")
+                            $("#email").removeClass("border-green")
+                            $("#email-exist").removeClass("d-none")
+                            $("#next").addClass("disabled")
+                        }else{
+                            $("#email").removeClass("border-danger")
+                            $("#email").addClass("border-green")
+                            $("#email-exist").addClass("d-none")
+                            $("#next").removeClass("disabled")
+                        }
+                    },error:function(xhr,status,error){
+                        console.log(xhr)
+                        console.log(error)
+                    }
+                    
                 })
             })
             $('input[type="checkbox"]').change(function () {
