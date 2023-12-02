@@ -178,8 +178,7 @@ exports.createUser = async function (req, res) {
         
         const message = await queryRunner(messageDelete,[selectResult[0][0].id, selectResult[0][0].id]);
         if(message[0].length > 0){
-          console.log(message[0][0].id);
-
+          // console.log(message[0][0].id);
           await queryRunner(deleteQuery("messages","id"),[message[0][0].id]);
         }
 
@@ -2948,3 +2947,4 @@ exports.UpdateUserNuveiId = async(req,res)=>{
 
   }
 }
+

@@ -497,12 +497,17 @@ exports.tenantAttachFileDelete = async (req, res) => {
           data: file,
           message: " Tenant Files deleted successful",
         });
-      } else {
+      }else {
+        res.status(400).json({
+          message: "Something went wrong while deleting an attached file",
+        });
+      }
+    } else {
         res.status(400).json({
           message: "No data found",
         });
       }
-    }
+    
   } catch (error) {
     res.send("Error from delete Property ");
     console.log(error);
