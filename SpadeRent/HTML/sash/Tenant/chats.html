@@ -2315,6 +2315,7 @@
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                 <script src="../assets/js/email-phone.js"></script>
+                <script src="../assets/js/chnageOnlineStatusTenant.js"></script>
                 <script>
             $(document).ready(function() {
                 $('#input-message').on('input', function() {
@@ -2362,7 +2363,7 @@
                 $("#myModal_warning").modal("show");
                 setTimeout(function () {
                     $('#myModal_warning').modal('hide');
-                    window.location = '../Landlord/login_module.html';
+                    window.location = '../Tenant/login_module.html';
                 }, 2000);
                 console.log(error);
             }
@@ -2433,7 +2434,23 @@
                         console.log(error);
                     }
                 });
-                $('#send-text').on('click', function (ev) {
+                $.ajax({
+                        url: 'http://localhost:3000/api/spade/activeTenant',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                
+                    $('#send-text').on('click', function (ev) {
                     $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
                     if (msg_again1 !== "") {

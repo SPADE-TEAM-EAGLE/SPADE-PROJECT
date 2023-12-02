@@ -195,9 +195,9 @@
                 url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                 type: 'POST',
                 data: JSON.stringify({
-                    amount: $("#amount").val(),
+                    amount: "1.25",
                     currency: "USD",
-                    "userTokenId": "245",
+                    "userTokenId": "370",
                 }),
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -206,25 +206,65 @@
                 },
                 success: function (response) {
                     console.log(scard)
+                    // sfc.createPayment({
+                    //     sessionToken: response.sessionToken, //received from openOrder API
+                    //     clientUniqueId: "695701003",
+                    //     merchantId:"6400701569295268447",
+                    //     merchantSiteId:"244298",
+                    //     cardHolderName: "<card_holder>",
+                    //     paymentOption: {
+                    //         userPaymentOptionId: "95475308",
+                    //         card:{
+                    //         }
+                    //     },
+                    //     billingAddress: {
+                    //         email: "someone@somedomain.com",
+                    //         country: "GB"
+                    //     }
+                    // }, function (res) {
+                    //     console.log(res)
+                    // });
                     sfc.createPayment({
-                        sessionToken: response.sessionToken, //received from openOrder API
-                        clientUniqueId: "695701003",
-                        merchantId:"6400701569295268447",
-                        merchantSiteId:"244298",
-                        cardHolderName: "<card_holder>",
-                        paymentOption: {
-                            userPaymentOptionId: "95475308",
-                            card:{
-                            }
+  sessionToken: response.sessionToken,
+  paymentOption: {
+    alternativePaymentMethod: {
+      paymentMethod: "apmgw_ACH",
+      AccountNumber: "111111111",
+      RoutingNumber: "123456780"
+    }
+  },
+  deviceDetails: {
+    ipAddress: "100.128.0.0"
+  },
+  billingAddress: {
+    firstName: "John",
+    lastName: "Smith",
+    email: "john.smith@email.com",
+    phone: "6175551414",
+    address: "22 Main Street",
+    city: "Boston",
+    zip: "02460",
+    state: "MA",
+    country: "US"
+  },
+  userDetails: {
+    firstName: "John",
+    lastName: "Smith",
+    email: "john.smith@email.com",
+    phone: "6175551414",
+    address: "22 Main Street",
+    city: "Boston",
+    zip: "02460",
+    state: "MA",
+    country: "US",
+    identification: "123456789"
+  }
+}, function(res) {
+  console.log(res);
+
+})
+                
                         },
-                        billingAddress: {
-                            email: "someone@somedomain.com",
-                            country: "GB"
-                        }
-                    }, function (res) {
-                        console.log(res)
-                    });
-                },
                 error: function (xhr, status, error) {
                     console.log(xhr)
                     console.log(status)
@@ -233,5 +273,8 @@
                 }
             });
         }
+        </script>
+        <script>
+
         </script>
     </html>

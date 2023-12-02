@@ -20,6 +20,7 @@ const paymentIntegration = require("../helper/paymentIntegration");
 const { upload } = require("../middleware/imageUploads");
 
 router.post("/Signup", userController.createUser);
+router.post("/DMNS", userController.DMNS);
 router.get("/tenantAllPaidInvoice", verifyTokenTenant, tenantController.tenantAllPaidInvoice);
 router.get("/userCheckTenantPaidInvoice", verifyToken, userController.checkAllTenantsPaid);
 router.get("/protected", verifyToken, userController.getUser);
@@ -48,6 +49,8 @@ router.get('/getDashTaskData/:start/:end/:propertyId?', verifyToken, userControl
 router.get("/getDashInvoiceData/:start/:end/:propertyId?", verifyToken, userController.getInvoiceDashboardData);
 router.put("/inactiveUser", verifyToken, userController.inactiveUser);
 router.put("/inactiveTenant", verifyTokenTenant, userController.inactiveTenant);
+router.put("/activeTenant", verifyTokenTenant, userController.activeTenant);
+router.put("/activeUser", verifyToken, userController.activeUser);
 
 router.get("/getUserById/:id/:type", userController.getUserByIdData);
 // router.post("/property" ,verifyToken, userController.property);

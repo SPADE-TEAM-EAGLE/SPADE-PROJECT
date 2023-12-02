@@ -632,9 +632,9 @@
                                                 <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th></th>
+                                                            
                                                             <th>customer id</th>
-                                                            <th class="d-none">Landlord ID</th>
+                                                            
                                                             <th>Name</th>
                                                             <th>Contact</th>
                                                             <th>subscription</th>
@@ -1071,7 +1071,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                                     ColorOfPlan = `style="background-color: #f7c14259;color: #F7C042;"`
                                 }
                                 $('#table_body').append(` <tr data-id="${element.closedLandlordId}">
-                                                        <td></td>
+                                                       
                                                         <td class="landlordId" style="font-weight: 600;">US-${element.closedLandlordId}</td>
                                                         <td style="font-weight: 600;" class="landlordName"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
                                                         <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A"}</p><span>${element.phone ? element.phone : "N/A"}</span></td>
@@ -1224,6 +1224,17 @@ else if (selectedFilter === 'descending') {
 }
 tableBody.empty().append(rows);
 }
+$('input[type="checkbox"]').change(function () {
+            var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+            var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+            console.log(columnIndex, isColumnVisible)
+            console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
+            $('table').find('tr').each(function () {
+                console.log($(this))
+                var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
+                isColumnVisible ? column.show() : column.hide();
+            });
+        });
 $('#ascending').on('click', function () {
 filterTable("ascending")
 });
