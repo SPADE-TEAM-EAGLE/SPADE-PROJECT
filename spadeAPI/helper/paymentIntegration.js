@@ -5,7 +5,7 @@ const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
 // const { queryRunner } = require('./queryRunner');
-const { selectQuery, updateUserBank, insertUserBankFuture } = require('../constants/queries');
+const { selectQuery, updateUserBank, insertUserBankFuture,paymentACHQuery,paymentACHRequestQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { paymentMail } = require("../sendmail/sendmail");
 const { queryRunner } = require('./queryRunner')
@@ -998,4 +998,48 @@ exports.Payment2Payment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
+// ###################################### Payment 2 Payment #############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ###################################### Payment 2 Payment #############################################################
+exports.paymentACHVerification = async (req, res) => {
+  const { ppp_status, ppp_TransactionID, TransactionId, userid, merchant_unique_id,email, totalAmount, currency, Status } = req.body;
+  console.log("req.body");
+  console.log(req.body);
+  console.log("req.query")
+  console.log(req.query)
+  console.log("req.params")
+  console.log(req.params)
+  const currentDate = new Date();
+  try {
+    const updateRequestResult = await queryRunner(paymentACHRequestQuery,[userid,req.body,req.query,req.params,currentDate,Status]);
+    if(ppp_status == "OK"){
+      const updateUserResult=await queryRunner(paymentACHQuery,[userid, merchant_unique_id,totalAmount, Status,TransactionId, ppp_TransactionID]);
+      if(updateUserResult[0].affectedRows > 0){
+        res.status(200).json({message:"transaction status updated"})
+      }else{
+        res.status(400).json({message:"Error in update user"})
+      }
+    }else{
+      res.status(200).json({message:"transaction is not saved"})
+    }
+   
+  }catch(error){
+    console.log(error);
+    res.status(400).send(error.message);
+
+  }
+      }
+
 // ###################################### Payment 2 Payment #############################################################
