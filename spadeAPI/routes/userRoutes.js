@@ -102,7 +102,7 @@ router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationL
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
-router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
+router.post('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);

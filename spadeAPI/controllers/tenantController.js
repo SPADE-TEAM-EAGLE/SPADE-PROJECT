@@ -223,8 +223,8 @@ exports.sendInvitationLink = async (req, res) => {
 
 //  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
-  const { email } = req.query;
-  // const { email } = req.body;
+  // const { email } = req.query;
+  const { email } = req.body;
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
