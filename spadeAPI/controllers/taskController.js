@@ -970,3 +970,32 @@ exports.getAllTaskTenantRequest = async (req, res) => {
   }
 };
 //  ############################# Get ALL Task End ############################################################
+
+
+
+
+
+//  ############################# Get ALL Task End ############################################################
+exports.VendorCheckEmail = async function (req, res) {
+  const { email } = req.params;
+  try {
+    const selectResult = await queryRunner(selectQuery("vendor","email"), [ 
+      email,
+  ]);
+
+    if (selectResult[0].length > 0) {
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    } 
+    else {
+      res.status(200).json({
+                 message: "New vendor",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
