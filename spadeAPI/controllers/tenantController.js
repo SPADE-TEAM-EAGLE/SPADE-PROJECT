@@ -223,8 +223,8 @@ exports.sendInvitationLink = async (req, res) => {
 
 //  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
-  const { email } = req.query;
-  // const { email } = req.body;
+  // const { email } = req.query;
+  const { email } = req.body;
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -497,12 +497,17 @@ exports.tenantAttachFileDelete = async (req, res) => {
           data: file,
           message: " Tenant Files deleted successful",
         });
-      } else {
+      }else {
+        res.status(400).json({
+          message: "Something went wrong while deleting an attached file",
+        });
+      }
+    } else {
         res.status(400).json({
           message: "No data found",
         });
       }
-    }
+    
   } catch (error) {
     res.send("Error from delete Property ");
     console.log(error);

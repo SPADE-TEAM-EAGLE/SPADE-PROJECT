@@ -20,12 +20,13 @@ const paymentIntegration = require("../helper/paymentIntegration");
 const { upload } = require("../middleware/imageUploads");
 
 router.post("/Signup", userController.createUser);
+router.post("/DMNS", userController.DMNS);
 router.get("/tenantAllPaidInvoice", verifyTokenTenant, tenantController.tenantAllPaidInvoice);
 router.get("/userCheckTenantPaidInvoice", verifyToken, userController.checkAllTenantsPaid);
 router.get("/protected", verifyToken, userController.getUser);
 router.get("/protectedTenant", verifyTokenTenant, userController.getUser);
 router.get("/checkemail", userController.checkemail);
-router.get("/Signin", userController.Signin);
+router.post("/Signin", userController.Signin);
 router.get("/Signinall", userController.Signinall);
 router.post("/upload", verifyToken, fileUpload.fileUpload);
 router.post("/uploadTenant", verifyTokenTenant, fileUpload.fileUpload);
@@ -104,7 +105,7 @@ router.post("/sendInvitationLink", verifyToken, tenantController.sendInvitationL
 // router.post('/tenantIncreaseRent' , userController.tenantIncreaseRent);
 // router.get('/ ',verifyToken,  userController.verifyMailCheck);
 router.get('/verifyMailCheck', verifyToken, userController.verifyMailCheck);
-router.get('/resetEmailTenant', tenantController.createResetEmailTenant);
+router.post('/resetEmailTenant', tenantController.createResetEmailTenant);
 router.post('/verifyResetEmailCodeTenant', tenantController.verifyResetEmailCodeTenant);
 router.put('/updatePasswordTenant', tenantController.updatePasswordTenant);
 router.put('/resendCodeTenants', tenantController.resendCodeTenants);

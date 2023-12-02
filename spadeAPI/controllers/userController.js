@@ -82,7 +82,8 @@ const {
   adminNotificationQuery,
   propertyIdUpdate,
   propertyCount,
-  updateActiveUser
+  updateActiveUser,
+  messageDelete
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -174,6 +175,15 @@ exports.createUser = async function (req, res) {
         await queryRunner(addUserRoles,['Owner', selectResult[0][0].id]);
         await queryRunner(addUserRoles,['Manager', selectResult[0][0].id]);
         await queryRunner(addUserRoles,['Staff', selectResult[0][0].id]);
+        
+        
+        const message = await queryRunner(messageDelete,[selectResult[0][0].id, selectResult[0][0].id]);
+        if(message[0].length > 0){
+          // console.log(message[0][0].id);
+          await queryRunner(deleteQuery("messages","id"),[message[0][0].id]);
+        }
+
+
 
         return res.status(200).json({ 
           message: "User added successfully",
@@ -235,8 +245,8 @@ exports.getUser = (req, res) => {
 };
 
 exports.Signin = async function (req, res) {
-  const { email, password, tenant } = req.query;
-  // const { email, password, tenant } = req.body;
+  // const { email, password, tenant } = req.query;
+  const { email, password, tenant } = req.body;
   // const { email, password, tenant } = req.query;
   // console.log(1)
   // let selectResult;
@@ -2976,4 +2986,8 @@ exports.UpdateUserNuveiId = async(req,res)=>{
     res.status(400).send(error.message);
 
   }
+}
+
+exports.DMNS=async(req,res)=>{
+    console.log(req)
 }
