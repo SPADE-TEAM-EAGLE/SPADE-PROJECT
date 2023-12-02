@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Function to make API call using jQuery AJAX
     function callAPI() {
       $.ajax({
-        url: 'http://localhost:3000/api/spade/inactiveUser',
+        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
     type: 'PUT',
     contentType: false,
     processData: false,

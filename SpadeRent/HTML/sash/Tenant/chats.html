@@ -2411,6 +2411,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        localStorage.setItem("tenantName",response.userName)
                         function toTitleCase(str) {
                             console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
@@ -2435,7 +2436,7 @@
                     }
                 });
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/activeTenant',
+                        url: 'https://backend.app.spaderent.com/api/spade/activeTenant',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
@@ -2530,13 +2531,19 @@
                             success: function (response) {
                                 console.log(1111111)
                                 console.log(response)
+                                $(".person").removeClass("profileImage")
                                 localStorage.setItem("LandlordImg", response.data.image)
                                 if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "") {
                                     var newBgImageUrl = `url('` + localStorage.getItem("LandlordImg") + `')`;
                                     $(".person").css("background-image", newBgImageUrl);
                                 } else {
-                                    var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-                                    $(".person").css("background-image", newBgImageUrl);
+                                    // var newBgImageUrl = "url('../assets/images/users/5.jpg')";
+                                    // $(".person").css("background-image", newBgImageUrl);
+                                    $(".person").css("background-image", "");
+                                            $(".person").addClass("profileImage")
+                                            $(".person").text(
+                                                response.data.FirstName.charAt(0) + response.data.LastName.charAt(0)
+                                            );
                                 }
                                 if (response.data.isUserActive == 1) {
                                     $('#online').show()
@@ -2544,6 +2551,8 @@
                                     $('#online').hide()
                                 }
                                 $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
+                                
+                                
                                 chatTenant()
                             },
                             error: function (xhr, status, error) {
@@ -2611,7 +2620,8 @@
                         if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
                             console.log("check rec", message.message);
                             messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+                                <div class="profileImage me-1 ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase()}</div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? '' : 'd-none '}"></div>
     <div class="msg-text">`;
         if(message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')){
                             const imageUrls = message.message.split(',');
@@ -2852,6 +2862,7 @@
                                     success: function (response) {
                                         console.log("getUserById");
                                         console.log(response);
+                                        localStorage.setItem("landlordName",response.data.FirstName +" "+response.data.LastName)
                                         if (response.data.isUserActive == 1) {
                                             $('#online').show()
                                         } else {
@@ -2901,13 +2912,15 @@
                                                                 }
                                                             messs1 += `<span style="float: right;" class="text-primary">${time}</span>
     </div>
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="ms-1"></div>
+    <div class="profileImage ms-1 ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()}</div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="ms-1 ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? '' : 'd-none'}"></div>
 </div>`;
                                                         } else if (response.data[i]['userType'] == "landlord") {
                                                             const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                             const time = timeArray.slice(0, 2).join(":");
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1"></div>
+                                                                <div class="profileImage me-1 ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase()}</div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? '' : 'd-none '}"></div>
     <div class="msg-text">`;
         if(response.data[i]['message'].includes('.s3.amazonaws.com/') && response.data[i]['message'].includes('https')){
         const imageUrls = response.data[i]['message'].split(',');
@@ -3102,8 +3115,29 @@
                     timestampSpan.setAttribute('class', 'text-primary');
                     timestampSpan.innerText = formattedTime;
                     const imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('style', `width: 36px; height: 36px;border-radius: 50%;background: url(` + (localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != "" ? localStorage.getItem("tenantImg") : "../assets/images/users/5.jpg") + `);background-position: center;background-size: cover;`);
-                    imageContainer.setAttribute('class', 'ms-1');
+imageContainer.setAttribute('class', 'ms-1');
+
+if (
+  localStorage.getItem("tenantImg") != "null" &&
+  localStorage.getItem("tenantImg") != " " &&
+  localStorage.getItem("tenantImg") != ""
+) {
+  imageContainer.setAttribute(
+    'style',
+    `width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg")}); background-position: center; background-size: cover;`
+  );
+} else {
+  imageContainer.setAttribute('style', 'width: 36px; height: 36px; border-radius: 50%;');
+  // Assuming you want to add a class 'profileImage'
+  imageContainer.classList.add('profileImage');
+  imageContainer.textContent = localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() +
+    localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase();
+}
+
+// Append the imageContainer to the document or a specific parent element
+// For example, assuming you have a parentElement, you can use:
+// parentElement.appendChild(imageContainer);
+
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);
