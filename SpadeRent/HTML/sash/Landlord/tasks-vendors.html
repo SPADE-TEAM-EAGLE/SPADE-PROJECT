@@ -1256,7 +1256,7 @@
                                                 <i class="fi fi-rs-interrogation"></i>
                                             </a>
                                         </div>
-                                        <div class="dropdown  d-flex notifications">
+                                        <div class="dropdown d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right">
                                                 <i class="fe fe-bell"></i>
@@ -2420,14 +2420,7 @@
                     }
                 }
             });
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            });
-            document.addEventListener('keyup', function (e) {
-                if (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 'i')) {
-                    e.preventDefault();
-                }
-            });
+            
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
