@@ -329,4 +329,5 @@ router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNot
 router.put("/updateAllAdminNotification",verifySuperAdmin,superAdmin.updateAllAdminNotification);
 router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossedLandlord);
 router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
+router.post("/paymentACHVerification",paymentIntegration.paymentACHVerification);
 

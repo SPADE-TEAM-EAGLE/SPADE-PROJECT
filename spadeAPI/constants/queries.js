@@ -1167,3 +1167,5 @@ exports.insertInUserPermissionUsers =
   exports.prospectusCount = `select count(id) as count from prospectus where landlordId = ?`;
   exports.prospectusIdUpdate = `update prospectus set cprospectusId = ? where id = ?`;
   exports.messageDelete = `SELECT * FROM spade_Rent.messages where sender = ? OR receiverID = ?`;
+  exports.paymentACHQuery = "INSERT INTO paymentACH (tenantId,merchantUniqueId,totalAmount,Status,TransactionId, ppp_TransactionID) VALUES (?,?,?,?,?,?)";;
+  exports.paymentACHRequestQuery = "INSERT INTO paymentACHLogs (tenantId,body,query,params, date, status) VALUES (?,?,?,?,?,?)";;
