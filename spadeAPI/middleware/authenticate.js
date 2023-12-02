@@ -10,12 +10,7 @@ const verifyToken = async (req, res, next) => {
   if (!token) {
     return res.status(401).send("Access Denied");
   } else if (decoded.role) {
-    // console.log("Hello World");
 
-    // console.log(decoded.email);
-    // console.log(decoded.id);
-    // console.log(decoded.role);
-    // console.log(decoded.UserPermissionID);
     try {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
       console.log("Token ID "+decoded.UserPermissionID);
