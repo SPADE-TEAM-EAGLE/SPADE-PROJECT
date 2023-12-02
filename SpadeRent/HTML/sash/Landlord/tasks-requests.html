@@ -2215,7 +2215,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2239,7 +2239,7 @@
 <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2268,7 +2268,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2311,7 +2311,7 @@
     let selectedFiles=[]
     $(document).ready(()=>{
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2353,7 +2353,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2542,7 +2542,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenantRequest',
+                    url: 'http://localhost:3000/api/spade/getAllTaskTenantRequest',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2751,7 +2751,7 @@ if (task.dueDate) {
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'http://localhost:3000/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2774,7 +2774,7 @@ if (task.dueDate) {
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                url: 'http://localhost:3000/api/spade/updateTasks',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -2816,7 +2816,7 @@ if (task.dueDate) {
                         images: []
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        url: 'http://localhost:3000/api/spade/updateTasks',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -2896,7 +2896,7 @@ if (task.dueDate) {
 <script>
     $(document).ready(() => {
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+            url: 'http://localhost:3000/api/spade/verifyMailCheck',
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

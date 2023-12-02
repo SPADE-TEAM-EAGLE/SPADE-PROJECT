@@ -589,14 +589,14 @@
                 var email = $("#login-email").val();
                 var password = $("#id_password1").val();
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/Signin',
+                    url: 'http://localhost:3000/api/spade/Signin',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
-                    data:{
+                    data: JSON.stringify({
                         email: email,
                         password : password,
                         tenant:"tenant"
-                    },
+                    }),
                     success: function(response) {
                         if(response.message == "Successful Login" || response.message == "Email is not verified" || response.message=="Your remaining days to verify your email: 7")
                         {
@@ -651,7 +651,7 @@
         $("#verify_otp_auth").on("click",function(){
           $("#verify_otp_auth").prop("disabled",true)
           $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyAuthCode',
+            url: 'http://localhost:3000/api/spade/verifyAuthCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

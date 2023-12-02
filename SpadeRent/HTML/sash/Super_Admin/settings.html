@@ -2021,7 +2021,7 @@
         $(document).ready(function () {
             function getData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2096,7 +2096,7 @@
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -2135,7 +2135,7 @@
                 if (file) {
                     userForm.append("image", file)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: userForm,
                         headers: {
@@ -2148,7 +2148,7 @@
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                                url: 'http://localhost:3000/api/spade/updateAdminProfile',
                                 method: 'PUT',
                                 data: JSON.stringify(userData),
                                 contentType: 'application/json',
@@ -2178,7 +2178,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                        url: 'http://localhost:3000/api/spade/updateAdminProfile',
                         method: 'PUT',
                         data: JSON.stringify(userData),
                         contentType: 'application/json',
