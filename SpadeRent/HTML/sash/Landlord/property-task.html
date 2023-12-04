@@ -1156,6 +1156,7 @@
                                                     <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable">
                                                         <thead>
                                                             <tr>
+                                                                <th>#</th>
                                                                 <th>Image</th>
                                                                 <th>TASK</th>
                                                                 <th>ASSIGNED TO</th>
@@ -1741,7 +1742,7 @@ $(".plan_remaining_days_data").each(function(){
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -1805,7 +1806,8 @@ console.log(response);
                                 tableBody.append(row);
                             }
                             else{
-                                response?.data[0]?.forEach(function (task) {
+                                response?.data[0]?.forEach(function (task,index) {
+                                    var serial='<td>'+(index+1)+'</td>';
                             var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
                                 var createdDate = new Date(task.created_at);
                                 var currentDate = new Date();
@@ -1877,7 +1879,7 @@ if (task.dueDate) {
 }
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                                 var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
-                                var row = '<tr>' + image + taskName + assignTo + dueDate +
+                                var row = '<tr>'+serial + image + taskName + assignTo + dueDate +
                                     relatedTo + status + '</tr>';
                                 tableBody.append(row);})
                             }

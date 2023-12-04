@@ -1912,14 +1912,14 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function(a, b) {
                         console.log(parseInt($(a).find('.rentAmount').text()))
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function(a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idB - idA;
                     });
                 }
@@ -1973,7 +1973,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     }else{
                         $.each(data[0], function(index, item) {
                         var row = $('<tr>');
-                        row.append('<td>'+(index+1)+'</td>');
+                        row.append('<td class="serial-number">'+(index+1)+'</td>');
                         row.append('<td class="d-none">' + item.propertyID + '</td>');
                         row.append('<td><img src="' + (item?.images?.split(',')[0]?item?.images?.split(',')[0]:'../assets/images/Group-user.png') + '" alt=""></td>');
                         row.append('<td class="property-name">' + item.propertyName + '</td>');

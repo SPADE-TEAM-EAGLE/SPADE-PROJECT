@@ -1298,6 +1298,7 @@
                                         <table class="table-hover table border text-nowrap text-md-nowrap mb-0" id="myTable">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>IMAGE</th>
                                                     <th>TASK</th>
                                                     <th>ASSIGNED TO</th>
@@ -1888,7 +1889,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     $("#property_name").text(response?.data[0][0]?.propertyName)
                     var tableBody = $('#table_body');
                     tableBody.empty();
-                    response.data[0] ?.forEach(function(task) {
+                    response.data[0] ?.forEach(function(task,index) {
+                        var serial='<td class="serial-number">'+(index+1)+'</td>';
                         var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
                         var createdDate = new Date(task.created_at);
                         var currentDate = new Date();
@@ -1897,7 +1899,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         var hoursDiff = Math.floor(minutesDiff / 60);
                         var daysDiff = Math.floor(hoursDiff / 24); 
                         var vendorNames="";
-                        var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
+                        var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1 task-name">' + task.taskName + '</p>' +
                             `<span class="font-weight-normal" style="color: #9B9B9B;"> `;
                         if (daysDiff > 0) {
                             taskName += `${daysDiff} days`;
@@ -1968,7 +1970,7 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
                             '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
                             `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${task.id}">View</a></li>` +
                             '</ul></td>';
-                        var row = '<tr>' + image + taskName + assignTo + dueDate +
+                        var row = '<tr>'+serial + image + taskName + assignTo + dueDate +
                             relatedTo + status + '</tr>';
                         tableBody.append(row);
                     })}
@@ -1992,7 +1994,7 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
             console.log(columnIndex, isColumnVisible)
             console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
                     $('table').find('tr').each(function() {
-                var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
+                var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });
         });
@@ -2007,6 +2009,40 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
         $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
     }
 });
+function filterTable(selectedFilter) {
+                var tableBody = $('#table_body');
+                var rows = tableBody.find('tr');
+                if (selectedFilter === 'alphabets') {
+                    rows.sort(function(a, b) {
+                        var textA = $(a).find('.task-name').text().toLowerCase();
+                        var textB = $(b).find('.task-name').text().toLowerCase();
+                        return textA.localeCompare(textB);
+                    });
+                } else if (selectedFilter === 'ascending') {
+                    rows.sort(function(a, b) {
+                       
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
+                        return idA - idB;
+                    });
+                } else if (selectedFilter === 'descending') {
+                    rows.sort(function(a, b) {
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
+                        return idB - idA;
+                    });
+                }
+                tableBody.empty().append(rows);
+            }
+            $('#ascending').on('click', function() {
+                filterTable("ascending")
+            });
+            $('#descending').on('click', function() {
+                filterTable("descending")
+            });
+            $('#alphabets').on('click', function() {
+                filterTable("alphabets")
+            });
         });
 </script>
 <script>
