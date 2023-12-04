@@ -595,6 +595,7 @@ exports.resendEmail = async (req, res) => {
 exports.createInvoiceCategories = async (req, res) => {
   try {
     const data = req.body;
+    
     // console.log(data)
     const { userId } = req.user;
     let createInvoiceCategoriesResult;

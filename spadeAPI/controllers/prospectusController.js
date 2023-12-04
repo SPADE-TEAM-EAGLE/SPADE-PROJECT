@@ -194,7 +194,6 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
-        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -206,9 +205,11 @@ exports.updateProspectus = async (req, res) => {
         prospectusStatus,
         prospectusid
     } = req.body;
+    console.log(req.body);
     const currentDate = new Date(); 
     try {
-
+        
+        console.log(UpdateProspectusQuery);
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
             // middleName,
@@ -226,10 +227,11 @@ exports.updateProspectus = async (req, res) => {
         ]);
         if (prospectusResult.affectedRows === 0) {
             return res.status(400).send("No data found");
-        }
+        }else{
         res.status(200).json({
             message: " prospectus updated successful",
         });
+    }
     } catch (error) {
         console.log(error);
         res.status(500).json({
