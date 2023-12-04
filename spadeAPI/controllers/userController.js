@@ -2155,6 +2155,7 @@ exports.getStates = async (req, res) => {
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
   const { Id } = req.query;
+  // const { Id } = req.body;
 console.log(Id)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
@@ -2414,8 +2415,8 @@ exports.getAllProperty = async (req, res) => {
 
 exports.getTaskReportData = async (req, res) => {
   try {
-    // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
+    // const { userId } = req.body;
     const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
     // console.log(getAllPropertyData);
     res.status(200).json({
@@ -2832,21 +2833,21 @@ exports.ProfileComplete = async (req, res) => {
   }
 };
 
-exports.filterOutDashbordDataByProperty = async (req, res) => {
-  try {
-    const { propertyId } = req.params;
-    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
-      propertyId,
-    ]);
-    res.status(200).json({
-      property: getAllPropertyData[0],
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: error.message,
-    });
-  }
-};
+// exports.filterOutDashbordDataByProperty = async (req, res) => {
+//   try {
+//     const { propertyId } = req.params;
+//     const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+//       propertyId,
+//     ]);
+//     res.status(200).json({
+//       property: getAllPropertyData[0],
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: error.message,
+//     });
+//   }
+// };
 // check property etc
 exports.checkSystem = async (req, res) => {
   try {
