@@ -692,7 +692,7 @@ i.id;
 exports.resendEmailQuery =
   "SELECT *, invoice.id as invoiceId FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?";
 exports.getByIdInvoicesQuery =
-  "SELECT i.id as invoiceID,i.dueDate, i.daysDue , i.startDate, i.totalAmount, i.status,i.created_at, t.firstName AS tFName, t.lastName AS tLName, t.phoneNumber as tPhone, p.propertyName, pu.unitNumber, l.FirstName as landlordFName, l.LastName as landlordLName, l.phone as landlordPhone FROM invoice as i JOIN tenants as t ON i.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits AS pu ON t.propertyUnitID = pu.id JOIN users as l ON l.id = i.landlordID WHERE i.id = ? ";
+  "SELECT i.id as invoiceID,i.dueDate, i.daysDue , i.startDate, i.totalAmount, i.status,i.created_at, t.firstName AS tFName, t.lastName AS tLName, t.phoneNumber as tPhone, p.propertyName, pu.unitNumber, l.FirstName as landlordFName, l.LastName as landlordLName, l.phone as landlordPhone FROM invoice as i left JOIN tenants as t ON i.tenantID = t.id left JOIN property as p ON t.propertyID = p.id left JOIN propertyunits AS pu ON t.propertyUnitID = pu.id left JOIN users as l ON l.id = i.landlordID WHERE i.id = ?";
 exports.updateInvoice =
   "UPDATE invoice SET tenantID = ?, invoiceType = ? , startDate = ? , endDate = ? , frequency = ? , dueDate = ? ,daysDue=? ,repeatTerms = ? , terms = ? , totalAmount = ? , note = ? , updated_at = ? where id = ? AND landlordID = ? ";
 // invoiceType, startDate, endDate, frequency, dueDays, repeatTerms, terms,totalAmount,additionalNotes,currentDate,invoiceID,userId
