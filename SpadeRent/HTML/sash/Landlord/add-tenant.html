@@ -3801,7 +3801,7 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
+                success: function ({ image, tenants,userName, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
                     adjustPlan(rest)
