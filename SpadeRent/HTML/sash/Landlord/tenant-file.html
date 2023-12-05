@@ -1067,6 +1067,9 @@
                                             </a>
                                         </div>
                                         <div class="d-flex country">
+                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                    </div>
+                                        <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -1689,7 +1692,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1814,7 +1817,7 @@ function dragOverHandler(ev) {
             }
         $(document).ready(() => {
             $.ajax({
-                    url: 'http://localhost:3000/api/spade/protected',
+                    url: 'https://backend.app.spaderent.com/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1840,10 +1843,23 @@ $(".plan_remaining_days_data").each(function(){
                         $('.span_upgrade_now').hide()
                                     $('.span_upgrade_now_div').hide()
                         }
-                        if(response.image!==" " && response.image!==null && response.image!==""){
-                $("#user-img").attr("src", response.image)
-                $("#user-img-dark").attr("src", response.image)
-            } 
+            //             if(response.image!==" " && response.image!==null && response.image!==""){
+            //     $("#user-img").attr("src", response.image)
+            //     $("#user-img-dark").attr("src", response.image)
+            // } 
+            if (response.image !== " " && response.image !== null && response.image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
+                        $("#user-img").attr("src", response.image)
+                        $("#user-img-dark").attr("src", response.image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
+                    }
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                     },
@@ -1860,7 +1876,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1886,7 +1902,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)         
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantsByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1905,7 +1921,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             })
             function getData(){
                 $.ajax({
-                url: 'http://localhost:3000/api/spade/GettenantAttachFile',
+                url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachFile',
                 type: 'GET',
                 data: {
                     tenantID: tenantId
@@ -1934,7 +1950,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     formData.append('image', selectedFiles[i]);
                 }
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/upload',
+                    url: 'https://backend.app.spaderent.com/api/spade/upload',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -1950,7 +1966,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             images: imageArray
                         };
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/tenantAttachFile',
+                            url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',
@@ -2026,7 +2042,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/inactiveUser',
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,

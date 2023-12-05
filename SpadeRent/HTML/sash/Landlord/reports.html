@@ -2309,6 +2309,9 @@
                                                 </a>
                                             </div>
                                             <div class="d-flex country">
+                                                <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                        </div>
+                                            <div class="d-flex country">
                                                 <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                             </div>
                                             <div class="d-flex country">
@@ -4557,7 +4560,7 @@
             <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4582,7 +4585,7 @@
             let result;
             let columnsToHide = []
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5194,7 +5197,7 @@ if (task.priority == 'High') {
         .replace(/ /g, '-');;
 }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -5207,9 +5210,23 @@ if (task.priority == 'High') {
                         });
                     }
                     $("#header-user").text(toTitleCase(userName))
-                    if (image !== " " && image !== null && image!== "") {
+                    // if (image !== " " && image !== null && image!== "") {
+                    //     $("#user-img").attr("src", image)
+                    //     $("#user-img-dark").attr("src", image)
+                    // }
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     const createdDate_div = new Date(create_at);
 const currentDate_div = new Date();
@@ -5235,7 +5252,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyReport',
+                url: 'https://backend.app.spaderent.com/api/spade/propertyReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -5552,7 +5569,7 @@ $(".plan_remaining_days_data").each(function(){
                 });
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/invoiceReport',
+                url: 'https://backend.app.spaderent.com/api/spade/invoiceReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -5574,7 +5591,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllTask',
+                url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -5782,7 +5799,7 @@ $(".plan_remaining_days_data").each(function(){
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/inactiveUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,

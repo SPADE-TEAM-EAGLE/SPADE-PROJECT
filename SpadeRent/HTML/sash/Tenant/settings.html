@@ -2797,7 +2797,7 @@
                 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3250,7 +3250,7 @@
                     $("#save").click(() => {
                         console.log($("#current_password_reset").val(), $("#id_password1").val())
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/changePasswordTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/changePasswordTenant',
                             type: 'PUT',
                             data: JSON.stringify({
                                 currentPassword: $("#current_password_reset").val(),
@@ -3355,7 +3355,7 @@
                 var tenantData;
                 function getData(){
                     $.ajax({
-                    url: "http://localhost:3000/api/spade/GetBankAccountTenant",
+                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
                     type: "GET",
                     contentType: "application/json",
                     headers: {
@@ -3512,7 +3512,7 @@
                 })
                 $("#close-request").on("click", function () {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/tenantAllPaidInvoice',
+                        url: 'https://backend.app.spaderent.com/api/spade/tenantAllPaidInvoice',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3566,7 +3566,7 @@
                         console.log(file)
                         userForm.append("image", file)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/uploadTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                             type: 'POST',
                             data: userForm,
                             headers: {
@@ -3579,7 +3579,7 @@
                                 userData.Image = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -3607,7 +3607,7 @@
                         });
                     } else {
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateTenantProfile',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -3632,7 +3632,7 @@
                     }
                 })
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/protectedTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3690,7 +3690,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
            auth=0
         }
         $.ajax({
-            url:"http://localhost:3000/api/spade/updateAuthTenant",
+            url:"https://backend.app.spaderent.com/api/spade/updateAuthTenant",
             type:"PUT",
             headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3779,7 +3779,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                 function logout() {
                     $(document).ready(function () {
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/inactiveTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                             type: 'PUT',
                             contentType: false,
                             processData: false,
@@ -3891,7 +3891,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
             function main() {
                 $("#preloader").css("display", "flex")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/openOrder',
+                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                     type: 'POST',
                     data: JSON.stringify({
                         amount: "0",
@@ -3919,7 +3919,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                             console.log(res.userPaymentOptionId)
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                 $.ajax({
-                                    url: "http://localhost:3000/api/spade/CreateBankAccountTenant",
+                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountTenant",
                                     type: "POST",
                                     contentType: "application/json",
                                     headers: {
@@ -3968,7 +3968,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                 });
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantDashData',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {

@@ -9,7 +9,7 @@ $(document).ready(function() {
       //                   localStorage.setItem("sashlightMode",true)
       //               }
       $.ajax({
-        url: 'http://localhost:3000/api/spade/inactiveTenant',
+        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
     type: 'PUT',
     contentType: false,
     processData: false,

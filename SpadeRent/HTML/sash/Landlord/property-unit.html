@@ -873,6 +873,9 @@
                                                 </a>
                                             </div>
                                             <div class="d-flex country">
+                                                <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                        </div>
+                                            <div class="d-flex country">
                                                 <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                             </div>
                                             <div class="d-flex country">
@@ -1396,7 +1399,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1425,16 +1428,30 @@
         var unitsPermission;
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image,units,create_at,planID,...rest }) {
                     adjustPlan(rest)
-                    if (image !== " " && image !== null && image!== "") {
+                    // if (image !== " " && image !== null && image!== "") {
+                    //     $("#user-img").attr("src", image)
+                    //     $("#user-img-dark").attr("src", image)
+                    // }
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -1468,7 +1485,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1704,7 +1721,7 @@ $(".plan_remaining_days_data").each(function(){
                 formData.append('image', files[i]);
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/property',
+                url: 'https://backend.app.spaderent.com/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -1738,7 +1755,7 @@ $(".plan_remaining_days_data").each(function(){
         $("#add-units").click(() => {
             $("#add-units").prop("disabled", true)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/addMoreUnits',
+                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
                     "propertyID": propertyId
@@ -1762,7 +1779,7 @@ $(".plan_remaining_days_data").each(function(){
             })
         })
         $.ajax({
-            url: 'http://localhost:3000/api/spade/viewProperty',
+            url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
             type: 'GET',
             data: {
                 propertyId
@@ -1793,7 +1810,7 @@ $('#property_size').text(data.propertySQFT)
         });
         function getData() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/PropertyUnits',
+                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1906,7 +1923,7 @@ $('#property_size').text(data.propertySQFT)
                         });
                         console.log(propertyId)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
+                            url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
                             data: JSON.stringify({
                                 id: values[0],
@@ -1958,7 +1975,7 @@ $('#property_size').text(data.propertySQFT)
                     $('#confirmDelete').click(function (e) {
                         $("#myModal_delete").modal("hide");
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
+                            url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "propertyID": propertyId,
@@ -2003,7 +2020,7 @@ $('#property_size').text(data.propertySQFT)
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

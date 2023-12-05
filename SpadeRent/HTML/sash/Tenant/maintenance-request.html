@@ -1655,7 +1655,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1675,7 +1675,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantDashData',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1709,7 +1709,7 @@
         }
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protectedTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1818,7 +1818,7 @@
         })
         function getData() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2000,7 +2000,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                     formData.append('image', selectedFiles[i]);
                 }
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/uploadTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2019,7 +2019,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                             images: imageArray,
                         }
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/addTasksTenant',
+                            url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                             type: 'POST',
                             data: JSON.stringify(taskData),
                             contentType: 'application/json',
@@ -2063,7 +2063,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                     images: [],
                 }
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/addTasksTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
                     type: 'POST',
                     data: JSON.stringify(taskData),
                     contentType: 'application/json',
@@ -2293,7 +2293,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getTenantByID',
+                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2420,7 +2420,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

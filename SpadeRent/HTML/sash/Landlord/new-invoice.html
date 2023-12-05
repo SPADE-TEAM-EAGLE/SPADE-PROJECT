@@ -1688,6 +1688,9 @@
                                             </a>
                                         </div>
                                         <div class="d-flex country">
+                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                    </div>
+                                        <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
                                         <div class="d-flex country">
@@ -2197,7 +2200,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2231,7 +2234,7 @@
     });
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2448,16 +2451,30 @@ function dragOverHandler(ev) {
                 return fileName;
             }
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image,create_at,planID,...rest }) {
                     adjustPlan(rest)
-                    if (image !== " " && image !== null && image!== "") {
+                    // if (image !== " " && image !== null && image!== "") {
+                    //     $("#user-img").attr("src", image)
+                    //     $("#user-img-dark").attr("src", image)
+                    // }
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -2491,7 +2508,7 @@ $(".plan_remaining_days_data").each(function(){
             });
             $("#resend-invoice").click(() => {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/resendEmail',
+                    url: 'https://backend.app.spaderent.com/api/spade/resendEmail',
                     type: 'GET',  // Change the method to POST
                     data: { invoiceID: invoiceId },  // Send the data in the request body
                     contentType: 'application/json',  // Set the content type to JSON
@@ -2648,7 +2665,7 @@ print = true
                             uploadFormData.append('image', file);
                         }
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/upload',
+                            url: 'https://backend.app.spaderent.com/api/spade/upload',
                             type: 'POST',
                             data: uploadFormData,
                             contentType: false,
@@ -2676,7 +2693,7 @@ print = true
                                 $("#addModal").modal("hide")
                                 $('#preloader').css('display','flex')
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/createInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -2735,7 +2752,7 @@ print = true
                                 $("#addModal").modal("hide")
                                 $('#preloader').css('display','flex')
                         $.ajax({
-                                    url: 'http://localhost:3000/api/spade/createInvoice',
+                                    url: 'https://backend.app.spaderent.com/api/spade/createInvoice',
                                     type: 'POST',
                                     data: JSON.stringify(invoiceData),
                                     contentType: 'application/json',
@@ -2772,7 +2789,7 @@ print = true
             let tenantData = []; let invoiceData = [];
             function getData() {
                 $.ajax({
-                        url: 'http://localhost:3000/api/spade/invoiceCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2791,7 +2808,7 @@ print = true
                         }
                     });
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3115,7 +3132,7 @@ $('#collapse-category').on('hidden.bs.collapse', function () {
                     });
                     console.log(data)
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
+                        url: 'https://backend.app.spaderent.com/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3464,7 +3481,7 @@ function resetAccordions() {
             $(document).on("click", "#confirmDelete", () => {
                 $("#myModal_delete").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/invoiceDelete',
+                    url: 'https://backend.app.spaderent.com/api/spade/invoiceDelete',
                     type: 'DELETE',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -3616,7 +3633,7 @@ function resetAccordions() {
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/UpdateInvoice',
+                        url: 'https://backend.app.spaderent.com/api/spade/UpdateInvoice',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -3637,7 +3654,7 @@ function resetAccordions() {
             $("#update-status").click(() => {
                 $("#changeStatusModal").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/putInvoiceStatusUpdates',
+                    url: 'https://backend.app.spaderent.com/api/spade/putInvoiceStatusUpdates',
                     type: 'PUT',
                     data: JSON.stringify({
                         id: invoiceId,
@@ -3682,7 +3699,7 @@ function resetAccordions() {
 <script>
             $(document).ready(() => {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                    url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3706,7 +3723,7 @@ function resetAccordions() {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

@@ -3548,7 +3548,7 @@
     <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3592,7 +3592,7 @@
         var prospectID; var prospectusStatus;
         $(document).ready(function () {
             $.ajax({
-        url: 'http://localhost:3000/api/spade/protected',
+        url: 'https://backend.app.spaderent.com/api/spade/protected',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3626,7 +3626,7 @@
         }
     });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3798,7 +3798,7 @@
                     prospectusid: prospectID
                 }
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/updateProspectus",
+                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
                     type: "PUT",
                     data: JSON.stringify(data),
                     contentType: 'application/json',
@@ -3885,7 +3885,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                 $("#table-body-disqualified").empty()
                 $("#table-body-qualified").empty()
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getProspectus',
+                    url: 'https://backend.app.spaderent.com/api/spade/getProspectus',
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -3925,7 +3925,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                                 var newStatus = $(this).data('status');
                                 dropdownToggle.text(newStatus);
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                     type: 'PUT',
                                     data: JSON.stringify({
                                         prospectusid: prospectus?.id,
@@ -4001,7 +4001,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4015,7 +4015,7 @@ var encodedProspectId = encodeURIComponent(encryptedProspectId);
                     }
                 })
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${year}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4041,7 +4041,7 @@ createQDChart(qualified, disqualified)
             })
             $("#prospect-year").on("change",function(){
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${$(this).val()}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4064,7 +4064,7 @@ updateQDChart(qualified, disqualified)
             })
             $("#prospect-status-start-date").on("change", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4080,7 +4080,7 @@ updateQDChart(qualified, disqualified)
             })
             $("#prospect-status-end-date").on("change", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4166,7 +4166,7 @@ updateQDChart(qualified, disqualified)
                         console.log(parentId)
                         if ($(this).hasClass("qualified")) {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4186,7 +4186,7 @@ updateQDChart(qualified, disqualified)
                             });
                         } else if ($(this).hasClass("disqualified")) {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4207,7 +4207,7 @@ updateQDChart(qualified, disqualified)
                         }
                         else if ($(this).hasClass("new")) {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4227,7 +4227,7 @@ updateQDChart(qualified, disqualified)
                         }
                         else if ($(this).hasClass("engaged")) {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4247,7 +4247,7 @@ updateQDChart(qualified, disqualified)
                         }
                         else if ($(this).hasClass("nurturing")) {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4288,7 +4288,7 @@ updateQDChart(qualified, disqualified)
             $("#confirmDelete").on("click",function()
             {
                 $.ajax({
-                    url:`http://localhost:3000/api/spade/deleteProspectus/${prospectID}`,
+                    url:`https://backend.app.spaderent.com/api/spade/deleteProspectus/${prospectID}`,
                     type:"DELETE",
                     data:JSON.stringify({
                         prospectusid:prospectID
@@ -4377,7 +4377,7 @@ updateQDChart(qualified, disqualified)
                 }
                 $("#addModal").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/addprospectus',
+                    url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
                     type: 'POST',
                     data: JSON.stringify(data),
                     contentType: 'application/json',
@@ -4412,7 +4412,7 @@ updateQDChart(qualified, disqualified)
                 });
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4452,7 +4452,7 @@ updateQDChart(qualified, disqualified)
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -4486,7 +4486,7 @@ updateQDChart(qualified, disqualified)
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

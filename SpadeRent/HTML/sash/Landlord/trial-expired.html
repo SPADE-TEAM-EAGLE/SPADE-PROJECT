@@ -2250,7 +2250,7 @@
         var userData;var selectedPlanID;
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2280,7 +2280,7 @@
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/pricingPlan',
+                url: 'https://backend.app.spaderent.com/api/spade/pricingPlan',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2393,7 +2393,7 @@
                 $("#preloader").css("display", "flex")
                 $("#upgradetopro").modal("hide")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/openOrder',
+                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
                     type: 'POST',
                     data: JSON.stringify({
                         amount: "0",
@@ -2420,7 +2420,7 @@
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
+                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPaymentSetting",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")
@@ -2438,7 +2438,7 @@
                                         contentType: "application/json",
                                         success: function (response) {
                                             $.ajax({
-                                                url: 'http://localhost:3000/api/spade/updatePlanId',
+                                                url: 'https://backend.app.spaderent.com/api/spade/updatePlanId',
                                                 method: 'PUT',
                                                 data: JSON.stringify({ planID: seletedPlanID }),
                                                 contentType: 'application/json',
