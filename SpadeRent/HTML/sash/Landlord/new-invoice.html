@@ -1217,7 +1217,7 @@
                         <div class="col-12 mb-2">
                             <a href="javascript:;" class="mt-1" id="add-item1">+Add Item</a>
                         </div>
-                        <div class="col-12 mb-2">
+                        <div class="col-12 mb-2 d-none">
                             <a
                                 data-bs-toggle="collapse"
                                 href="#collapse-category"
@@ -1228,7 +1228,7 @@
                                 + Add Category
                             </a>
                         </div>
-                        <div class="collapse" id="collapse-category">
+                        <div class="collapse d-none" id="collapse-category">
                             <div class="card card-body">
                                 <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
                                 <div style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 30px;"></div>
@@ -1687,6 +1687,9 @@
                                                 <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                             </a>
                                         </div>
+                                        <div class="d-flex country">
+                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                    </div>
                                         <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
@@ -2455,9 +2458,23 @@ function dragOverHandler(ev) {
                 },
                 success: function ({ userName, image,create_at,planID,...rest }) {
                     adjustPlan(rest)
-                    if (image !== " " && image !== null && image!== "") {
+                    // if (image !== " " && image !== null && image!== "") {
+                    //     $("#user-img").attr("src", image)
+                    //     $("#user-img-dark").attr("src", image)
+                    // }
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {

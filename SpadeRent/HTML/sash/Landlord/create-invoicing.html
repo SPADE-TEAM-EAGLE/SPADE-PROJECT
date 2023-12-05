@@ -1561,13 +1561,13 @@
                         <div class="col-12 mb-2">
                             <a href="javascript:;" class="mt-1" id="add-item1">+Add Item</a>
                         </div>
-                        <div class="col-12 mb-2">
+                        <div class="col-12 mb-2 d-none">
                             <a data-bs-toggle="collapse" href="#collapse-category" role="button" aria-expanded="false"
                                 aria-controls="collapse-category">
                                 + Add Category
                             </a>
                         </div>
-                        <div class="collapse" id="collapse-category">
+                        <div class="collapse d-none" id="collapse-category">
                             <div class="card card-body">
                                 <h2 class="h2-personal-inf text-dark mb-3">Invoice Categories</h2>
                                 <div
@@ -2687,6 +2687,9 @@
                                             </a>
                                         </div>
                                         <div class="d-flex country">
+                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                    </div>
+                                        <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
@@ -3457,9 +3460,22 @@
                     adjustPlan(response)
                     userData = response
                     invoicePermissions = response.invoices
+                    // if (response.image !== " " && response.image !== null && response.image !== "") {
+                    //     $("#user-img").attr("src", response.image)
+                    //     $("#user-img-dark").attr("src", response.image)
+                    // }
                     if (response.image !== " " && response.image !== null && response.image !== "") {
+                        // $("#user-img").parent().removeClass("d-none")
+                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        // $(".profileImage").removeClass("d-none")
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     const createdDate_div = new Date(response.create_at);
                     const currentDate_div = new Date();
