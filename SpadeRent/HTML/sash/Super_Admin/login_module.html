@@ -609,15 +609,34 @@ togglePassword1.addEventListener("click", function (e) {
 });
         </script>
         <script>
-    $(document).ready(function () {
-      $("#submit-login").on("click",function(){
-        $.ajax({
-        url: "https://backend.app.spaderent.com/api/spade/signInAdmin?email="+$("#login-email").val() + "&password="+$("#id_password1").val(),
-        type: "GET",
-        contentType: "application/json",
-        success: function (response) {
-          if(response.message == "SignIn Successful"){
-            $("#login-email").addClass("is-valid").removeClass("is-invalid")
+          $(document).ready(function () {
+  $("#submit-login").on("click", function () {
+    var email = $("#login-email").val();
+    var password = $("#id_password1").val();
+
+    var requestData = {
+      email: email,
+      password: password
+    };
+
+    $.ajax({
+      url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(requestData),
+      success: function (response) {
+        handleSignInResponse(response);
+      },
+      error: function (error) {
+        handleError(error);
+      }
+    });
+  });
+
+  function handleSignInResponse(response) {
+    if (response.message == "SignIn Successful") {
+      // Handle successful sign-in
+      $("#login-email").addClass("is-valid").removeClass("is-invalid")
             $("#id_password1").addClass("is-valid").removeClass("is-invalid")
             $("#myModal_success").modal("show");
                                 localStorage.setItem("authtoken", response.token);
@@ -625,29 +644,38 @@ togglePassword1.addEventListener("click", function (e) {
                     $("#myModal_success").modal("hide");
                     window.location = "../Super_Admin/index.html";
                   }, 2000);
-          }else if(response.message == "Admin is not found"){
+    } else if (response.message == "Admin is not found") {
+      // Handle admin not found
+      $("#pass_span").hide()
             $("#login-email").addClass("is-invalid").removeClass("is-valid")
             $("#id_password1").removeClass("is-invalid").removeClass("is-valid")
-          }else if(response.message ==  "Incorrect Password"){
-            $("#login-email").addClass("is-valid").removeClass("is-invalid")
-            $("#id_password1").addClass("is-invalid").removeClass("is-valid")
-          }
-        },
-        error: function (error) {
-          $("#myModal_warning_connection").modal("show");
-                setTimeout(function () {
-                  $("#myModal_warning_connection").modal("hide");
-                }, 2000);
-          console.log(error);
-        }
-      });
-      })
-      if ($('body').hasClass('dark-mode')) {
-        $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
-      } else {
-        $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
-      }
-    });
+            $("#email_span").show()
+
+    } else if (response.message == "Incorrect Password") {
+      // Handle incorrect password
+      $("#email_span").hide()
+              $("#login-email").addClass("is-valid").removeClass("is-invalid")
+              $("#id_password1").addClass("is-invalid").removeClass("is-valid")
+              $("#pass_span").show()
+    }
+  }
+
+  function handleError(error) {
+    $("#myModal_warning_connection").modal("show");
+    setTimeout(function () {
+      $("#myModal_warning_connection").modal("hide");
+    }, 2000);
+    console.log(error);
+  }
+
+  if ($('body').hasClass('dark-mode')) {
+    $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
+  } else {
+    $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
+  }
+});
+
         </script>
+        
     </body>
 </html>

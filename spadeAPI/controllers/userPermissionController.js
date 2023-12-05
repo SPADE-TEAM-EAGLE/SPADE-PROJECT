@@ -82,6 +82,7 @@ exports.createUserPermissionUser = async function (req, res) {
 // User Check Email
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
+  // const { email } = req.body;
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
@@ -121,7 +122,8 @@ exports.userCheckEmail = async function (req, res) {
 
 // User get By Id
 exports.userPermissionGetById = async function (req, res) {
-  const { id } = req.query;
+  // const { id } = req.query;
+  const { id } = req.body;
   // const { userId } = req.user;;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "id"), [
