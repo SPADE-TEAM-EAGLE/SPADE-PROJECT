@@ -859,6 +859,7 @@
                                 <input class="form-control" type="email" pattern="[A-Za-z0-9_\.@]+"
                                     oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@+)/g, '@')"
                                     placeholder="Enter Email" id="email" required>
+                                <small class="d-none" id="email-exist" style="color: red;">Email already exist</small>
                                 <span class="text-danger d-none">This field is required!</span>
                             </div>
                             <div class="col-md-6">
@@ -1256,7 +1257,7 @@
                                                 <i class="fi fi-rs-interrogation"></i>
                                             </a>
                                         </div>
-                                        <div class="dropdown  d-flex notifications">
+                                        <div class="dropdown d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="sidebar-right"
                                                 data-target=".sidebar-right">
                                                 <i class="fe fe-bell"></i>
@@ -2433,14 +2434,7 @@
                     }
                 }
             });
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            });
-            document.addEventListener('keyup', function (e) {
-                if (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 'i')) {
-                    e.preventDefault();
-                }
-            });
+            
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
@@ -2608,6 +2602,34 @@
                             $("#myModal_warning_connection").modal("hide");
                         }, 2000);
                     }
+                })
+            })
+            $("#email").on("input",function(){
+                $.ajax({
+                    url:`https://backend.app.spaderent.com/api/spade/VendorCheckEmail/${$("#email").val()}`,
+                    type:"GET",
+                    contentType: "application/json",
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("authtoken")
+                    },
+                    success:function(response){
+                        if(response.message == "Email already exists "){
+                            console.log("email already exists")
+                            $("#email").addClass("border-danger")
+                            $("#email").removeClass("border-green")
+                            $("#email-exist").removeClass("d-none")
+                            $("#next").addClass("disabled")
+                        }else{
+                            $("#email").removeClass("border-danger")
+                            $("#email").addClass("border-green")
+                            $("#email-exist").addClass("d-none")
+                            $("#next").removeClass("disabled")
+                        }
+                    },error:function(xhr,status,error){
+                        console.log(xhr)
+                        console.log(error)
+                    }
+                    
                 })
             })
             $('input[type="checkbox"]').change(function () {

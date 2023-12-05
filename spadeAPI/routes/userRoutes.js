@@ -146,9 +146,9 @@ router.get("/getStates", userController.getStates);
 router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);
-router.delete("/deleteTask", taskController.deleteTask);
+router.delete("/deleteTask", verifyToken, taskController.deleteTask);
 // router.get("/propertyTask", verifyToken, userController.propertyTask);
-router.get("/propertyTask", userController.propertyTask);
+router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
 // router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllInvoicesTenant",verifyTokenTenant,tenantPortalController.getAllInvoicesTenant);
@@ -332,4 +332,6 @@ router.put("/updateAdminNotification",verifySuperAdmin,superAdmin.updateAdminNot
 router.put("/updateAllAdminNotification",verifySuperAdmin,superAdmin.updateAllAdminNotification);
 router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossedLandlord);
 router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
+router.post("/paymentACHVerification",paymentIntegration.paymentACHVerification);
+router.get("/VendorCheckEmail/:email", verifyToken, taskController.VendorCheckEmail);
 

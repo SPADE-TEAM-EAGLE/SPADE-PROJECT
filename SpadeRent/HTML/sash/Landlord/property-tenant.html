@@ -1218,6 +1218,7 @@
                                                     <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable">
                                                         <thead>
                                                             <tr>
+                                                                <th>#</th>
                                                                 <th>TENANT ID</th>
                                                                 <th>TENANT NAME</th>
                                                                 <th>CONTACT INFO</th>
@@ -1630,7 +1631,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -1645,14 +1646,14 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idB - idA;
                     });
                 }
@@ -1701,8 +1702,9 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     else {
                         console.log(data[0][0])
                         tableBody.empty();
-                        data[0]?.forEach(function (tenant) {
+                        data[0]?.forEach(function (tenant,index) {
                             console.log(tenant)
+                            var serial='<td class="serial-number">'+(index+1)+'</td>';
                             var tenantID = '<td>' + tenant.tenantID + '</td>';
                             var tenantName = '<td class="tenant-id tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + '</td>';
                             var contactInfo = '<td class="tenant-id" style="font-weight: 600;">' + `${tenant.tPhoneNumber ? tenant.tPhoneNumber : "Not set"}` + '</td>';
@@ -1752,7 +1754,7 @@ if (tenant.leaseEndDate) {
 } else {
     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
 }
-                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
+                            var row = '<tr>'+serial + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';
                             tableBody.append(row);
                         });

@@ -4669,9 +4669,10 @@ $(".plan_remaining_days_data").each(function(){
                             row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
-                            var originalDate = prospectus.moveDate;
-                            var dateParts = originalDate.split('-');
-                            var formattedDate = dateParts[1] + '-' + dateParts[2] + '-' + dateParts[0].substring(2);
+                            var originalDate = new Date(prospectus.createdDate);
+                                console.log(originalDate)
+                            // var dateParts = originalDate.split('-');
+                            var formattedDate = (originalDate.getMonth()+1) + '-' + originalDate.getDate() + '-' + originalDate.getFullYear();
                             row.append($('<td>').html('<span class="fw-bold">' + formattedDate + '</span>'));
                             if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
                                 var dropdownToggle = $('<span class="fw-bold text-success" data-bs-toggle="dropdown" style="cursor: pointer;">' + toTitleCase(prospectus.prospectusStatus) + '<i class="fi fi-rs-angle-small-down text-success"></i></span>');

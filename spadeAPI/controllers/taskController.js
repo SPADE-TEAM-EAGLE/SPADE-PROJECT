@@ -572,19 +572,19 @@ exports.updateTasks = async (req, res) => {
       [taskID]
     );
     // images working code start here
-    console.log(propertycheckresult[0]);
+    // console.log(propertycheckresult[0]);
     if (propertycheckresult[0].length > 0) {
       const propertyImageKeys = propertycheckresult[0].map(
         (image) => image.ImageKey
       );
       // console.log("images" ,images)
-      console.log(propertyImageKeys);
+      // console.log(propertyImageKeys);
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = propertycheckresult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
       );
       // Delete images from S3
-      console.log(imagesToDelete);
+      // console.log(imagesToDelete);
       for (let i = 0; i < imagesToDelete.length; i++) {
         deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageForTaskImages, [
@@ -612,7 +612,7 @@ exports.updateTasks = async (req, res) => {
       for (let i = 0; i < images.length - 1; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
-        console.log(taskID, image_url, image_key);
+        // console.log(taskID, image_url, image_key);
 
         const propertyImageResult = await queryRunner(insertInTaskImage, [
           taskID,
@@ -640,6 +640,8 @@ exports.updateTasks = async (req, res) => {
         return res.send("Error2");
       }
     }
+    console.log( "asdcfrtgh" + property);
+    console.log( "frfrf" + userId);
     // // Email Send
     const tenantLandlordResult = await queryRunner(getLandlordTenant, [
       userId,
@@ -896,13 +898,13 @@ exports.taskCount = async (req, res) => {
     // const { userId } = req.user;
     const { userId } = req.user;
     const { startDate, endDate } = req.body;
-    console.log("2");
+    // console.log("2");
     const taskCountResult = await queryRunner(taskCount, [
       userId,
       startDate,
       endDate,
     ]);
-    console.log("3");
+    // console.log("3");
 
     res.status(200).json({
       data: taskCountResult,
@@ -970,3 +972,32 @@ exports.getAllTaskTenantRequest = async (req, res) => {
   }
 };
 //  ############################# Get ALL Task End ############################################################
+
+
+
+
+
+//  ############################# Get ALL Task End ############################################################
+exports.VendorCheckEmail = async function (req, res) {
+  const { email } = req.params;
+  try {
+    const selectResult = await queryRunner(selectQuery("vendor","email"), [ 
+      email,
+  ]);
+
+    if (selectResult[0].length > 0) {
+      return res.status(201).json({
+          message: "Email already exists ",
+      });
+    } 
+    else {
+      res.status(200).json({
+                 message: "New vendor",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
