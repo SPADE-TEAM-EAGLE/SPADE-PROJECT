@@ -1028,13 +1028,13 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
 exports.checkUnpaidInvoices = async (req, res) => {
   const {tenants} = req.query;
   // const {tenants} = req.body;
-  console.log(tenants);
+  // console.log(tenants);
   // tenants is in array form
   try {
     const allResults = []; 
     for (let i = 0; i < tenants.length; i++) {
       const ID = tenants[i];
-      console.log(ID)
+      // console.log(ID)
       var checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [tenants[i]]);
       console.log(checkUnpaidInvoicesResult)
       if (checkUnpaidInvoicesResult[0].length === 0) {
