@@ -48,7 +48,7 @@ background-repeat: no-repeat;">
 
   <div class="container">
     <div class="row" style="display: flex; justify-content: center;">
-      <!-- <div class="col-lg-2"></div> -->
+      
       <div class="col-lg-10 main-div-class" style=" background-color: #fff;
       padding: 65px;
       border-radius: 10px;
@@ -90,7 +90,7 @@ background-repeat: no-repeat;">
           <div
             style="height: 7px; width: 60px; background-color: #1467B0; border-radius: 30px; margin-bottom: 20px; margin-top: 5px;">
           </div>
-        <!-- table start  -->
+        
         <div class="row mb-5">
             <div class="col-12">
                 <div class="table-responsive">
@@ -141,7 +141,7 @@ background-repeat: no-repeat;">
                 </div>
             </div>
         </div>
-        <!-- table End  -->
+        
 
           <div>
             <h4 style="font-weight: bold; margin-top: 2px;">Payment Instructions</h4>
@@ -226,11 +226,11 @@ background-repeat: no-repeat;">
 //     <html lang="en">
     
 //     <head>
-//         <!-- Required meta tags -->
+//         
 //         <meta charset="utf-8">
 //         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-//         <!-- Bootstrap CSS -->
+//         
 //         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 //             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
