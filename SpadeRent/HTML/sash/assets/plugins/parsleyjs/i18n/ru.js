@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('ru', {
   defaultMessage: "Некорректное значение.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('ru', {
   check:          "Выберите от %s до %s значений.",
   equalto:        "Это значение должно совпадать."
 });
-
 Parsley.setLocale('ru');

@@ -1,7 +1,5 @@
 // This is included with the Parsley library itself,
 // thus there is no use in adding it to your project.
-
-
 Parsley.addMessages('sl', {
   defaultMessage: "Podatek ne ustreza vpisnim kriterijem.",
   type: {
@@ -26,5 +24,4 @@ Parsley.addMessages('sl', {
   check:          "Število izbranih možnosti je lahko samo med %s in %s.",
   equalto:        "Vnos mora biti enak."
 });
-
 Parsley.setLocale('sl');

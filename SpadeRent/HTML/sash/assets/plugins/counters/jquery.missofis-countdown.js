@@ -8,31 +8,20 @@
  * @see http://jqueryboilerplate.com/ for this jQuery plugin boilerplate details
  */ 
 ;( function ( $, window, document, undefined ) {
-
-
-
 	'use strict';
-
-
-
 	/**
 	 * Plugin defaults
 	 */
 	var PLUGIN_NAME = 'countdown',
 	    defaults = {
-
 			from: 180, // 3 minutes (3*60)
 			to: 0, // stop at zero
 			movingUnit: 1000, // 1000 for 1 second increment/decrements
 			timerEnd: undefined,
 			outputPattern: '$day Day $hour : $minute : $second',
 			autostart: true
-
 		},
 		outputReplacement = new RegExp( '\\$day|\\$hour|\\$minute|\\$second', 'g' );
-
-
-
 	/**
 	 * Plugin constructor
 	 *
@@ -41,18 +30,14 @@
 	 * @param options
 	 */
 	function Plugin( element, options ) {
-
 		// set scope vars
 		this.element = element;
 		this.$element = $( element );
-
 		// set plugin setting
 		this.settings = $.extend( {}, defaults, options );
-
 		// set name and defaults
 		this._defaults = defaults;
 		this._name = PLUGIN_NAME;
-
 		// set counter direction (counting up/down) and timer current position
 		// _displacement is -1 for count down +1 for counting up, NaN for equality 
 		// set current interval id memory
@@ -61,138 +46,96 @@
 		this._timerAt = this.settings.from;
 		this._intervalId = undefined;
 		this._isCounting = false;
-
 		// call initialize
 		this.init();
-
 	}
-
-
-
 	/**
 	 * Plugin prototype
 	 */
 	Plugin.prototype = {
-
 		/*
 		------------------------------------------------------------
 		    PLUGIN PUBLIC API
 		------------------------------------------------------------
 		*/
-
 		/**
 		 * Plugin initialization
 		 */
 		init: function() {
-
 			// initiate timer starting text
 			this._updateTimerText();
-
 			// check autostart and start counter
 			if( this.settings.autostart ) 
 				this._start();
-
 		},
-
 		/**
 		 * Remove timer javascript counter and delete timer instance from element
 		 */
 		destroy: function() {
-
 			// clear timer 
 			window.clearInterval( this._intervalID );
-
 			//  remove plugin instance
 			$.data( this.element, 'plugin_' + PLUGIN_NAME, null );
-
 		},
-
 		/**
 		 * Resumes counter
 		 */
 		resume: function() {
-
 			// check if counter is running and return
 			if( this._isCounting )
 				return;			
-
 			// start timer
 			this._start();
-
 		},
-
 		/**
 		 * Pause counter
 		 */
 		pause: function() {
-
 			// check if counter is not running and return
 			if( ! this._isCounting )
 				return;
-
 			// set counter as stopped
 			this._isCounting = false;
-
 			// clear old interval
 			if( undefined !== this._intervalID )
 				window.clearInterval( this._intervalID );
-
 		},
-
-
-
 		/*
 		------------------------------------------------------------
 		    PLUGIN PSEUDO-PRIVATE API by "_" NAMING CONVENTION
 		------------------------------------------------------------
 		*/
-
-
 		/**
 		 * Starts counter
 		 */
 		_start: function() {
-
 			// get plugin
 			var that = this;
-
 			// clear old interval
 			if( undefined !== this._intervalID )
 				window.clearInterval( this._intervalID );
-
 			// 
 			this._isCounting = true;
-
 			// todo :: do not set an interval for from == to equality 
-
 			// 
 			this._intervalID = window.setInterval( function() {
-
 				// update timer position (fire event?)
 				that._timerAt += that._displacement;
-
 				// update timer
 				that._update();
-
 			}, that.settings.movingUnit );
-
 		},
-
 		/**
 		 * Stop and destroy counter
 		 */
 		_stop: function() {
-
 			// destroy timer
 			this.destroy();
-
 			// call timerEnd callback if defined
 			if( this.settings.timerEnd && 'function' === typeof this.settings.timerEnd ) {
-
 				// set calback functions scope to jQuery element timer being created 
 				// todo :: change context with native element instead of jQuery one
 				this.settings.timerEnd.call( this.$element );
-
 			}
 
 		},
@@ -268,7 +211,7 @@
 					}
 
 				} );
-				
+
 			} );
 
 		},
@@ -333,7 +276,7 @@
 	                $.data( this, 'plugin_' + PLUGIN_NAME, new Plugin( this, options ) );
 
 	        } );
-		
+
 		}
 		// capture any public plugin method call 
 		// skip pseudo-private function via "_" skipper

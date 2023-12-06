@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('sr', {
   defaultMessage: "Uneta vrednost nije validna.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('sr', {
   check:          "Broj izabranih opcija mora biti između %s i %s.",
   equalto:        "Unos mora biti jednak."
 });
-
 Parsley.setLocale('sr');

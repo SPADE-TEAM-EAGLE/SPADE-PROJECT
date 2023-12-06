@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('de', {
   dateiso:  "Die Eingabe muss ein gültiges Datum sein (YYYY-MM-DD).",
   minwords: "Die Eingabe ist zu kurz. Sie muss aus %s oder mehr Wörtern bestehen.",

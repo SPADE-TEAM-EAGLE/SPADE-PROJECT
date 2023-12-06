@@ -1777,10 +1777,6 @@
                     <script src="../assets/js/index-chart.js"></script>
                     <script src="../assets/js/email-verification.js"></script>
                     <script src="../assets/js/pricing-plan.js"></script>
-                    
-
-                        
-                    
                     <script>
             $(document).ready(function(){
                 $.ajax({
@@ -2960,8 +2956,6 @@ if (task.priority == 'High') {
                 validconfirmPassword1.classList.remove("border-green");
             }
         }
-                
-
     function logout() {
         $(document).ready(function () {
             $.ajax({
@@ -2993,14 +2987,12 @@ if (task.priority == 'High') {
                     console.log(error);
                 }
             });
-        
         });
     }
                 </script>
                 <script>
         var COL_WIDTH = 62;
         var GUTTER_WIDTH = 30;
-
         var COL_WIDTHS = {
             750: 62,
             970: 81,
@@ -3016,11 +3008,9 @@ if (task.priority == 'High') {
                     return $(el).hasClass('ui-resizable-handle');
                 }
             });
-
             $('.row').each(function () {
                 d.containers.push(this);
             });
-
             $('.card').resizable({
                 grid: COL_WIDTH - GUTTER_WIDTH,
                 handles: 'se',
@@ -3034,13 +3024,11 @@ if (task.priority == 'High') {
                         .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)));
                 }
             });
-
             var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
             $(window).resize(function () {
                 colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
                 console.log('set colWidth to', colWidth, $('.main-container').width());
             });
-
             d.on('dragend', function () {
                 var htmlLayout = $('#container').html();
                 localStorage.setItem('htmlLayout', htmlLayout);

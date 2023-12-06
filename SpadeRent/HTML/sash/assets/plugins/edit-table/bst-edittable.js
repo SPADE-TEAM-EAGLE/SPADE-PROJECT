@@ -5,12 +5,9 @@
  * @version 1.0
  * @author Thomas Rokicki (CraftingGamerTom), Tito Hinostroza (t-edson)
  */
-
 "use strict";
-
 /** @class BSTable class that represents an editable bootstrap table. */
 class BSTable {
-
     /**
      * Creates an instance of BSTable.
      *
@@ -20,7 +17,6 @@ class BSTable {
      * @param {options} options The desired options for the editable table.
      */
     constructor(tableId, options) {
-
         var defaults = {
             editableColumns: null, // Index to editable columns. If null all td will be editable. Ex.: "1,2,3,4,5"
             $addButton: null, // Jquery object of "Add" button
@@ -46,26 +42,20 @@ class BSTable {
             </div>`
             }
         };
-
         this.table = $('#' + tableId);
         this.options = $.extend(true, defaults, options);
-
         /** @private */
         this.actionsColumnHTML = '<td name="bstable-actions">' + this.options.advanced.buttonHTML + '</td>';
-
         //Process "editableColumns" parameter. Sets the columns that will be editable
         if (this.options.editableColumns != null) {
             // console.log("[DEBUG] editable columns: ", this.options.editableColumns);
-
             //Extract felds
             this.options.editableColumns = this.options.editableColumns.split(',');
         }
     }
-
     // --------------------------------------------------
     // -- Public Functions
     // --------------------------------------------------
-
     /**
      * Initializes the editable table. Creates the actions column.
      * @since 1.0.0
@@ -73,9 +63,7 @@ class BSTable {
     init() {
         this.table.find('thead tr').append('<th name="bstable-actions">' + this.options.advanced.columnLabel + '</th>'); // Append column to header
         this.table.find('tbody tr').append(this.actionsColumnHTML);
-
         this._addOnClickEventsToActions(); // Add onclick events to each action button in all rows
-
         // Process "addButton" parameter
         if (this.options.$addButton != null) {
             let _this = this;
@@ -85,7 +73,6 @@ class BSTable {
             });
         }
     }
-
     /**
      * Destroys the editable table. Removes the actions column.
      * @since 1.0.0
@@ -94,7 +81,6 @@ class BSTable {
         this.table.find('th[name="bstable-actions"]').remove(); //remove header
         this.table.find('td[name="bstable-actions"]').remove(); //remove body rows
     }
-
     /**
      * Refreshes the editable table. 
      *
@@ -105,11 +91,9 @@ class BSTable {
         this.destroy();
         this.init();
     }
-
     // --------------------------------------------------
     // -- 'Static' Functions
     // --------------------------------------------------
-
     /**
      * Returns whether the provided row is currently being edited.
      *
@@ -125,11 +109,9 @@ class BSTable {
             return false;
         }
     }
-
     // --------------------------------------------------
     // -- Button Mode Functions
     // --------------------------------------------------
-
     _actionsModeNormal(button) {
         $(button).parent().find('#bAcep').hide();
         $(button).parent().find('#bCanc').hide();
@@ -146,11 +128,9 @@ class BSTable {
         let $currentRow = $(button).parents('tr'); // get the row
         $currentRow.attr('data-status', 'editing'); // indicate the editing status
     }
-
     // --------------------------------------------------
     // -- Private Event Functions
     // --------------------------------------------------
-
     _rowEdit(button) {
         // Indicate user is editing the row
         let $currentRow = $(button).parents('tr'); // access the row
@@ -181,7 +161,6 @@ class BSTable {
         console.log($currentRow);
         let $cols = $currentRow.find('td'); // read fields
         if (!this.currentlyEditingRow($currentRow)) return; // not currently editing, return
-
         // Finish editing the row & save edits
         this._modifyEachColumn(this.options.editableColumns, $cols, function($td) { // modify each column
             let cont = $td.find('input').val(); // read through each input
@@ -195,7 +174,6 @@ class BSTable {
         let $currentRow = $(button).parents('tr'); // access the row
         let $cols = $currentRow.find('td'); // read fields
         if (!this.currentlyEditingRow($currentRow)) return; // not currently editing, return
-
         // Finish editing the row & delete changes
         this._modifyEachColumn(this.options.editableColumns, $cols, function($td) { // modify each column
             let cont = $td.find('div').html(); // read div content
@@ -205,7 +183,6 @@ class BSTable {
     }
     _actionAddRow() {
         // Add row to this table
-
         let $allRows = this.table.find('tbody tr');
         if ($allRows.length == 0) { // there are no rows. we must create them
             let $currentRow = this.table.find('thead tr'); // find header
@@ -238,11 +215,9 @@ class BSTable {
         this._addOnClickEventsToActions(); // Add onclick events to each action button in all rows
         this.options.onAdd();
     }
-
     // --------------------------------------------------
     // -- Helper Functions
     // --------------------------------------------------
-
     _modifyEachColumn($editableColumns, $cols, howToModify) {
         // Go through each editable field and perform the howToModifyFunction function
         let n = 0;
@@ -253,8 +228,6 @@ class BSTable {
             howToModify($(this)); // If editable, call the provided function
         });
         // console.log("Number of modified columns: " + n); // debug log
-
-
         function isEditableColumn(columnIndex) {
             // Indicates if the column is editable, based on configuration
             if ($editableColumns == null) { // option not defined
@@ -268,7 +241,6 @@ class BSTable {
             }
         }
     }
-
     _addOnClickEventsToActions() {
         let _this = this;
         // Add onclick events to each action button
@@ -289,17 +261,14 @@ class BSTable {
             button.onclick = function() { _this._rowCancel(button) }
         });
     }
-
     // --------------------------------------------------
     // -- Conversion Functions
     // --------------------------------------------------
-
     convertTableToCSV(separator) {
         // Convert table to CSV
         let _this = this;
         let $currentRowValues = '';
         let tableValues = '';
-
         _this.table.find('tbody tr').each(function() {
             // force edits to complete if in progress
             if (_this.currentlyEditingRow($(this))) {
@@ -321,5 +290,4 @@ class BSTable {
         });
         return tableValues;
     }
-
 }

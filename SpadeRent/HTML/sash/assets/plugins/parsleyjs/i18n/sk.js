@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('sk', {
   defaultMessage: "Prosím zadajte správnu hodnotu.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('sk', {
   check:          "Je nutné vybrať od %s do %s z možností.",
   equalto:        "Prosím zadajte rovnakú hodnotu."
 });
-
 Parsley.setLocale('sk');

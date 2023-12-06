@@ -2,10 +2,8 @@
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 15px;
-
   > h1 {
     text-align: center;
-
     span {
       border-bottom: 2px solid $primary-1;
       display: inline-block;
@@ -15,22 +13,18 @@
     }
   }
 }
-
 .tab_wrapper {
   display: inline-block;
   width: 100%;
   position: relative;
-
   * {
     box-sizing: border-box;
   }
-
   > ul {
     clear: both;
     display: inline-block;
     width: 100%;
     margin-bottom: 0;
-
     li {
       float: left;
       cursor: pointer;
@@ -44,10 +38,8 @@
       border-top: 1px solid $border;
       margin: 0 5px 0 0;
       border-radius: 5px 5px 0px 0px;
-
       &.active {
         color: #fff;
-
         &:after {
           content: "";
           position: absolute;
@@ -60,7 +52,6 @@
       }
     }
   }
-
   .controller {
     display: block;
     overflow: hidden;
@@ -68,21 +59,18 @@
     position: absolute;
     top: 0;
     right: 0;
-
     span {
       padding: 8px 22px;
       background: $primary-1;
       color: #fff;
       text-transform: uppercase;
       display: inline-block;
-
       &.next {
         float: right;
         margin-left: 10px;
       }
     }
   }
-
   .content_wrapper {
     float: left;
     width: 100%;
@@ -90,16 +78,13 @@
     box-sizing: border-box;
     position: relative;
     top: -5px;
-
     .tab_content {
       display: none;
       padding: 15px 20px;
-
       .error {
         color: red;
       }
     }
-
     .accordian_header {
       display: none;
       padding: 10px 20px;
@@ -109,11 +94,9 @@
       border-bottom: 1px solid #fff;
       position: relative;
       cursor: pointer;
-
       &.active {
         color: $primary-1;
         border: 1px solid #eee;
-
         &:after {
           position: absolute;
           top: 0;
@@ -124,7 +107,6 @@
           background: $primary-1;
         }
       }
-
       .arrow {
         float: right;
         display: inline-block;
@@ -137,7 +119,6 @@
         border-top: 3px solid #ccc;
         border-left: 3px solid #ccc;
       }
-
       &.active .arrow {
         transform: rotate(45deg);
         margin-top: 5px;
@@ -146,13 +127,11 @@
       }
     }
   }
-
   &.left_side {
     > ul {
       width: 25%;
       float: left;
       border-bottom: 1px solid #ccc;
-
       li {
         width: 100%;
         box-sizing: border-box;
@@ -161,7 +140,6 @@
         border-width: 1px;
         border-right: 0;
         border-left: 0;
-
         &:after {
           left: 0;
           top: 0;
@@ -171,10 +149,8 @@
           height: 100%;
           background: #ccc;
         }
-
         &.active {
           border-color: #ccc;
-
           &:after {
             left: 0;
             top: 0;
@@ -182,7 +158,6 @@
             height: 100%;
             background: $primary-1;
           }
-
           &:before {
             right: -1px;
             position: absolute;
@@ -195,24 +170,20 @@
         }
       }
     }
-
     .content_wrapper {
       width: 75%;
       border: 1px solid $border;
       float: left;
     }
-
     .controller {
       top: -50px;
     }
   }
-
   &.right_side {
     > ul {
       width: 25%;
       float: right;
       border-bottom: 1px solid $border;
-
       li {
         width: 100%;
         box-sizing: border-box;
@@ -222,7 +193,6 @@
         border-right: 0;
         border-left: 1px solid $border;
         text-align: right;
-
         &:after {
           right: 0;
           left: inherit;
@@ -233,10 +203,8 @@
           height: 100%;
           background: $border;
         }
-
         &.active {
           border-color: #d7e7ff;
-
           &:after {
             right: 0;
             left: inherit;
@@ -245,7 +213,6 @@
             height: 100%;
             content: "";
           }
-
           &:before {
             left: -2px;
             right: inherit;
@@ -259,32 +226,26 @@
         }
       }
     }
-
     .content_wrapper {
       width: 75%;
       float: left;
       border: 1px solid $border;
     }
-
     .controller {
       top: -50px;
     }
   }
-
   &.accordion {
     .content_wrapper {
       border-color: #eee;
-
       .accordian_header {
         display: block;
       }
     }
-
     > ul {
       display: none;
     }
   }
-
   .active_tab {
     display: none;
     position: relative;
@@ -295,7 +256,6 @@
     color: #fff;
     cursor: pointer;
     border-radius: 30px;
-
     .arrow {
       width: 30px;
       height: 30px;
@@ -308,7 +268,6 @@
       border-radius: 50%;
       top: 50%;
       transform: translateY(-50%);
-
       &:after {
         content: "";
         width: 10px;
@@ -324,44 +283,36 @@
         margin-top: -8px;
       }
     }
-
     .text {
       text-indent: 39px;
       display: block;
     }
   }
 }
-
 @media only screen and (min-width: 768px) {
   .tab_wrapper.right_side .content_wrapper {
     border-right: 0;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .tab_wrapper {
     > ul {
       display: none;
     }
-
     .content_wrapper {
       border: 0;
-
       .accordian_header {
         display: block;
       }
     }
-
     &.left_side .content_wrapper,
     &.right_side .content_wrapper {
       width: 100%;
       border-top: 0;
     }
-
     .controller {
       display: none;
     }
-
     &.show-as-dropdown {
       > .tab_list {
         border: 0;
@@ -371,7 +322,6 @@
         background: #fff;
         border-radius: 5px;
         margin-top: 15px;
-
         &:before {
           content: "";
           position: absolute;
@@ -384,27 +334,22 @@
           box-shadow: -3px -4px 5px #efefef;
           margin-left: -7px;
         }
-
         li {
           border: 0;
           border-bottom: 1px solid #ccc;
-
           &.active:after {
             display: none;
           }
         }
       }
-
       .active_tab {
         display: block;
       }
-
       > {
         .tab_list,
         .content_wrapper > .accordian_header {
           display: none;
         }
-
         .tab_list li {
           display: block;
           float: none;
@@ -414,12 +359,10 @@
     }
   }
 }
-
 @media only screen and (min-width: 769px) {
   .tab_wrapper.show-as-dropdown > .tab_list {
     display: block !important;
     overflow: hidden;
   }
 }
-
 /*# sourceMappingURL=style.css.map */

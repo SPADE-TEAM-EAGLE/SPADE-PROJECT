@@ -8,13 +8,11 @@ var Transfer = (function ($) {
     var currentTimeStr = (new Date()).getTime() + parseInt(10000 * Math.random());
     // input 的 id
     var inputId = "";
-
     /**
      * 构造穿梭框
      * @param settings 设置项
      */
     function transfer(settings) {
-
         inputId = settings.inputId;
         // 数据项的名称
         var itemName = settings.itemName;
@@ -30,42 +28,34 @@ var Transfer = (function ($) {
         var callable = settings.callable;
         // 穿梭框
         var transferId = "#transfer_double_" + inputId;
-
         // 接收选中项文本框
         var selectInputId = "#" + inputId;
-
         // 列表数据
         var data = settings.data || [];
         // 分组列表数据
         var groupData = settings.groupData || [];
-
         // 数据项总个数
         var total_num = settings.data.length;
         // 总个数显示文本
         var total_num_str = settings.data.length + " Items";
-
         // 分组总个数
         var total_group_num = getGroupNum(groupData, groupListName);
         // 分组总个数显示文本
         var total_group_num_str = total_group_num + " Items";
-
         // 新的总个数
         var new_total_num = 0;
         // 新的分组总个数
         var new_group_total_num = 0;
-
         // 标签页
         var tabItemName = ".tab-item-name-" + currentTimeStr;
         // 标签页内容
         var transferDoubleList = ".transfer-double-list-" + currentTimeStr;
-
         // 左侧搜索框 id
         var listSearchId = "#listSearch_" + currentTimeStr;
         // 左侧分组搜索框 id
         var groupListSearchId = "#groupListSearch_" + currentTimeStr;
         // 右侧搜索框 id
         var selectedListSearchId = "#selectedListSearch_" + currentTimeStr;
-
         // 左侧未选中项内容
         var tabContentFirst = ".tab-content-first-" + currentTimeStr;
         // 左侧未选中项列表 ul
@@ -80,7 +70,6 @@ var Transfer = (function ($) {
         var totalNum = ".total_num_" + currentTimeStr;
         // 左侧未选中项列表全选 id
         var selectAllId = "#selectAll_" + currentTimeStr;
-
         // 左侧分组列表 ul
         var transferDoubleGroupListUl = ".transfer-double-group-list-ul-" + currentTimeStr;
         // 左侧分组列表 li
@@ -101,7 +90,6 @@ var Transfer = (function ($) {
         var groupTotalNum = ".group_total_num_" + currentTimeStr;
         // 左侧未选中分组列表全选 id
         var groupsSelectAllId = "#groupsSelectAll_" + currentTimeStr;
-
         // 右侧列表 ul
         var transferDoubleSelectedListUl = ".transfer-double-selected-list-ul-" + currentTimeStr;
         // 右侧列表 li
@@ -114,16 +102,12 @@ var Transfer = (function ($) {
         var selectedAllId = "#selectedAll_" + currentTimeStr;
         // 右侧总个数显示元素
         var selectedTotalNum = ".selected_total_num_" + currentTimeStr;
-
         // 往右添加按钮
         var addSelected = "#add_selected_" + currentTimeStr;
         // 往左添加按钮
         var deleteSelected = "#delete_selected_" + currentTimeStr;
-
-
         // 穿梭框渲染
         $(container).append(generateTransfer(inputId, currentTimeStr));
-
         /**
          * 数据渲染
          */
@@ -131,12 +115,10 @@ var Transfer = (function ($) {
         $(transferId).find(transferDoubleListUl).append(generateLeftList(currentTimeStr, data, itemName, valueName));
         $(transferId).find(totalNum).empty();
         $(transferId).find(totalNum).append(total_num_str);
-
         $(transferId).find(transferDoubleGroupListUl).empty();
         $(transferId).find(transferDoubleGroupListUl).append(generateLeftGroupList(currentTimeStr, groupData, itemName, groupListName, groupItemName, valueName));
         $(transferId).find(groupTotalNum).empty();
         $(transferId).find(groupTotalNum).append(total_group_num_str);
-
         /**
          * 点击标签页切换
          */
@@ -160,20 +142,16 @@ var Transfer = (function ($) {
                     $(transferId).find(groupCheckboxItem).each(function () {
                         $(this).prop("checked", false);
                     });
-
                     $(transferId).find(selectAllId).prop("disabled", "");
-
                     $(transferId).find(groupTotalNum).empty();
                     $(transferId).find(groupTotalNum).append($(transferId).find(transferDoubleGroupListLiUlLi).length + " Items");
                 } else {
                     // 分组
-
                     // 清空 disabled
                     for (var j = 0; j < $(transferId).find(groupSelectAll).length; j++) {
                         $(transferId).find(groupSelectAll).eq(j).prop("disabled", "");
                     }
                     $(transferId).find(groupsSelectAllId).prop("disabled", "");
-
                     $(transferId).find(transferDoubleListLi).each(function () {
                         $(this).css('display', 'block');
                     });
@@ -190,7 +168,6 @@ var Transfer = (function ($) {
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
         });
-
         /**
          * 监听左侧未选中项 checkBox 是否被选中
          */
@@ -207,7 +184,6 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-
         /**
          * 监听左侧分组 checkBox 是否被选中
          */
@@ -224,7 +200,6 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-
         // 监听右侧未选中项 checkBox 是否被选中
         $(transferId).on("click", checkboxSelectedItem, function () {
             var deleted_num = 0;
@@ -239,7 +214,6 @@ var Transfer = (function ($) {
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
         });
-
         // 选中或者反选分组中的所有未选中项
         $(groupSelectAll).on("click", function () {
             // 分组索引
@@ -283,7 +257,6 @@ var Transfer = (function ($) {
                 }
             }
         });
-
         /**
          * 列表全选
          */
@@ -305,7 +278,6 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-
         /**
          * 分组全选
          */
@@ -333,7 +305,6 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-
         /**
          * 将选中项添加至右侧
          */
@@ -418,7 +389,6 @@ var Transfer = (function ($) {
             // 数据变化触发回调
             callable.call(this, getSelected(), getSelectedName());
         });
-
         /**
          * 删除选中项，回到左侧
          */
@@ -490,7 +460,6 @@ var Transfer = (function ($) {
             // 数据变化触发回调
             callable.call(this, getSelected(), getSelectedName());
         });
-
         /**
          * 左侧模糊查询
          */
@@ -506,10 +475,8 @@ var Transfer = (function ($) {
                 }
                 return;
             }
-
             // 如果填了，先将所有的选项隐藏
             $(transferId).find(transferDoubleListLi).css('display', 'none');
-
             for (var j = 0; j < $(transferId).find(transferDoubleListLi).length; j++) {
                 // 模糊匹配，将所有匹配项显示
                 if (!$(transferId).find(checkboxItem).eq(j).is(':checked')
@@ -519,7 +486,6 @@ var Transfer = (function ($) {
                 }
             }
         });
-
         /**
          * 左侧分组模糊查询
          */
@@ -538,11 +504,9 @@ var Transfer = (function ($) {
                 }
                 return;
             }
-
             // 如果填了，先将所有的选项隐藏
             $(transferId).find(transferDoubleGroupListLi).css('display', 'none');
             $(transferId).find(transferDoubleGroupListLiUlLi).css('display', 'none');
-
             for (var j = 0; j < $(transferId).find(transferDoubleGroupListLiUlLi).length; j++) {
                 // 模糊匹配，将所有匹配项显示
                 if (!$(transferId).find(groupCheckboxItem).eq(j).is(':checked')
@@ -554,21 +518,18 @@ var Transfer = (function ($) {
                 }
             }
         });
-
         /**
          * 右侧模糊查询
          */
         $(selectedListSearchId).keyup(function () {
             // 只要输入就显示列表框
             $(transferId).find(transferDoubleSelectedListUl).css('display', 'block');
-
             // 如果什么都没填,保持全部显示状态
             if ($(selectedListSearchId).val() == "") {
                 $(transferId).find(transferDoubleSelectedListLi).css('display', 'block');
                 return;
             }
             $(transferId).find(transferDoubleSelectedListLi).css('display', 'none');
-
             for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
                 // 模糊匹配，将所有匹配项显示
                 if ($(transferId).find(transferDoubleSelectedListLi).eq(i).text()
@@ -578,7 +539,6 @@ var Transfer = (function ($) {
             }
         });
     }
-
     /**
      * 左侧列表渲染
      * @param currentTimeStr
@@ -598,7 +558,6 @@ var Transfer = (function ($) {
         }
         return listHtmlStr;
     }
-
     /**
      * 左侧分组列表渲染
      * @param currentTimeStr
@@ -632,7 +591,6 @@ var Transfer = (function ($) {
         }
         return listHtmlStr;
     }
-
     /**
      * 获取分组中项个数
      * @param data
@@ -648,8 +606,6 @@ var Transfer = (function ($) {
         }
         return total_group_num;
     }
-
-
     /**
      * 返回选中的项目 value 数组
      * @returns {Array}
@@ -659,7 +615,6 @@ var Transfer = (function ($) {
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
-
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
             // 模糊匹配，将所有匹配项显示
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("input").val();
@@ -667,7 +622,6 @@ var Transfer = (function ($) {
         }
         return selected;
     }
-
     /**
      * 返回选中的项目名称数组
      * @returns {Array}
@@ -677,7 +631,6 @@ var Transfer = (function ($) {
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
-
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
             // 模糊匹配，将所有匹配项显示
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("label").text();
@@ -685,7 +638,6 @@ var Transfer = (function ($) {
         }
         return selected;
     }
-
     /**
      * 渲染穿梭框
      * @param inputId
@@ -702,7 +654,6 @@ var Transfer = (function ($) {
             + '<div class="tab-item-name tab-item-name-' + currentTimeStr + ' tab-active">Groups</div>'
             + '<div class="tab-item-name tab-item-name-' + currentTimeStr + '">Items</div>'
             + '</div>'
-
             + '<div class="transfer-double-list transfer-double-list-' + currentTimeStr + ' tab-content-first-' + currentTimeStr + ' tab-content-active">'
             + '<div class="transfer-double-list-header">'
             + '<div class="transfer-double-list-search">'
@@ -721,7 +672,6 @@ var Transfer = (function ($) {
             + '</div>'
             + '</div>'
             + '</div>'
-
             + '<div class="transfer-double-list transfer-double-list-' + currentTimeStr + '">'
             + '<div class="transfer-double-list-header">'
             + '<div class="transfer-double-list-search">'
@@ -741,7 +691,6 @@ var Transfer = (function ($) {
             + '</div>'
             + '</div>'
             + '</div>'
-
             + '<div class="transfer-double-content-middle">'
             + '<div class="btn-select-arrow" id="add_selected_' + currentTimeStr + '"><i class="iconfont icon-forward"></i></div>'
             + '<div class="btn-select-arrow" id="delete_selected_' + currentTimeStr + '"><i class="iconfont icon-back"></i></div>'
@@ -773,7 +722,6 @@ var Transfer = (function ($) {
             + '</div>';
         return htmlStr;
     }
-
     return {
         transfer: transfer
     }

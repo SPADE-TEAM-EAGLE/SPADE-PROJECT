@@ -4099,7 +4099,6 @@ $(".plan_remaining_days_data").each(function(){
                 console.log(selectedValue)
                 if (selectedValue) {
                     if (selectedValue == "Occupied" || selectedValue == "Vacant") {
-                        
                         if ($("#propertySelect").val() && $("#propertySelect").val()!="All") {
                             var filteredData = propertyData.filter((property) => {
                                 return property?.occupancy_status == selectedValue && property.id == $("#propertySelect").val()
@@ -4123,19 +4122,16 @@ $(".plan_remaining_days_data").each(function(){
                                 return property?.occupancy_status == $("#reportTypeSelect").val() && property.id == selectedValue
                             });
                         } 
-                        
                         else if ($("#reportTypeSelect").val() == "All" && $("#propertySelect").val() !== "All") {
                             var filteredData = propertyData.filter((property) => {
                                 return property.id == $("#propertySelect").val()
                             });
                         }
-                        
                         else {
                                     var filteredData = propertyData.filter((property) => {
                                 return property.id == selectedValue
                             });
                         }
-
                         if(filteredData.length == 0){
                             constructPropertyTable(propertyData);
                         }else{

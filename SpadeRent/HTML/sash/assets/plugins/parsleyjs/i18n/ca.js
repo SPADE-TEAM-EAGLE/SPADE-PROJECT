@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('ca', {
   defaultMessage: "Aquest valor sembla ser invàlid.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('ca', {
   check:          "Has de marcar entre %s i %s opcions.",
   equalto:        "Aquest valor ha de ser el mateix."
 });
-
 Parsley.setLocale('ca');

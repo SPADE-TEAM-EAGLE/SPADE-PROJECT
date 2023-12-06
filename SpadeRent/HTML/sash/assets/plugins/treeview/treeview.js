@@ -1,9 +1,7 @@
 $.fn.extend({
     treed: function (o) {
-      
       var openedClass = 'si si-minus';
       var closedClass = 'si si-plus';
-      
       if (typeof o != 'undefined'){
         if (typeof o.openedClass != 'undefined'){
         openedClass = o.openedClass;
@@ -12,7 +10,6 @@ $.fn.extend({
         closedClass = o.closedClass;
         }
       };
-      
         //initialize each of the top levels
         var tree = $(this);
         tree.addClass("tree");
@@ -51,17 +48,10 @@ $.fn.extend({
         });
     }
 });
-
 //Initialization of treeviews
-
 $('#treeview1').treed();
-
 $('#treeview2').treed();
-
 $('#treeview3').treed();
-
 $('#tree1').treed();
-
 $('#tree2').treed({openedClass:'si si-folder-alt', closedClass:'si si-folder'});
-
 $('#tree3').treed({openedClass:'si si-arrow-right-circle', closedClass:'si si-arrow-down-circle'});

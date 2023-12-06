@@ -1443,7 +1443,6 @@ var dataSeries = [
     }
   ]
 ]
-
 var dataSeries = [
   [{
       "date": "2014-01-01",

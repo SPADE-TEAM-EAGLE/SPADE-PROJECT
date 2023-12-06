@@ -26,9 +26,7 @@
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
-
     "use strict";
-    
     $.extend(true, Mapael,
         {
             maps :  {
@@ -42,7 +40,6 @@
                         var yfactor = -2.8112860731578;
                         var yoffset = 235.89691962022;
                         var y = (lat * yfactor) + yoffset;
-                            
                         return {'x' : x, 'y' : y};
                     },
                     'elems': {
@@ -227,7 +224,5 @@
             }
         }
     );
-
     return Mapael;
-
 }));

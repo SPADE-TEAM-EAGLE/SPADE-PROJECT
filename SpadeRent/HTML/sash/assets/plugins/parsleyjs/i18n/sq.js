@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('sq', {
   defaultMessage: "Kjo vlere eshte e pasakte.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('sq', {
   check:          "Ju mund te zgjidhni midis %s dhe %s vlerash.",
   equalto:        "Kjo vlere duhet te jete e njejte."
 });
-
 Parsley.setLocale('sq');

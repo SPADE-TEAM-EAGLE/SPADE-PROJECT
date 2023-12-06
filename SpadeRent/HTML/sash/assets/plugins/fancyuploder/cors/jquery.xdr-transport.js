@@ -11,9 +11,7 @@
  * Based on Julian Aubourg's ajaxHooks xdr.js:
  * https://github.com/jaubourg/ajaxHooks/
  */
-
 /* global define, require, window, XDomainRequest */
-
 ;(function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {

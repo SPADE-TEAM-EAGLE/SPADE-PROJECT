@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('lv', {
   defaultMessage: "Šis ieraksts veikts nekorekti.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('lv', {
   check:          "Jāizvēlas no %s līdz %s variantiem.",
   equalto:        "Šai vērtībai jāsakrīt."
 });
-
 Parsley.setLocale('lv');

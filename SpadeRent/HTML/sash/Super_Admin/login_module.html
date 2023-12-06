@@ -31,7 +31,6 @@
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <title>Spade Rent | Super Admin | Login</title>
         <link rel="stylesheet" href="../assets/pageCss/superCss/login_module.css">
-
     </head>
     <body>
         <div
@@ -386,7 +385,6 @@
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="../assets/plugins/sidemenu/sidemenu.js"></script>
         <script>
-    
 const togglePassword1 = document.querySelector("#togglePassword1");
 const password1 = document.querySelector("#id_password1");
 togglePassword1.addEventListener("click", function (e) {
@@ -400,12 +398,10 @@ togglePassword1.addEventListener("click", function (e) {
   $("#submit-login").on("click", function () {
     var email = $("#login-email").val();
     var password = $("#id_password1").val();
-
     var requestData = {
       email: email,
       password: password
     };
-
     $.ajax({
       url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
       type: "POST",
@@ -419,7 +415,6 @@ togglePassword1.addEventListener("click", function (e) {
       }
     });
   });
-
   function handleSignInResponse(response) {
     if (response.message == "SignIn Successful") {
       // Handle successful sign-in
@@ -437,7 +432,6 @@ togglePassword1.addEventListener("click", function (e) {
             $("#login-email").addClass("is-invalid").removeClass("is-valid")
             $("#id_password1").removeClass("is-invalid").removeClass("is-valid")
             $("#email_span").show()
-
     } else if (response.message == "Incorrect Password") {
       // Handle incorrect password
       $("#email_span").hide()
@@ -446,7 +440,6 @@ togglePassword1.addEventListener("click", function (e) {
               $("#pass_span").show()
     }
   }
-
   function handleError(error) {
     $("#myModal_warning_connection").modal("show");
     setTimeout(function () {
@@ -454,15 +447,12 @@ togglePassword1.addEventListener("click", function (e) {
     }, 2000);
     console.log(error);
   }
-
   if ($('body').hasClass('dark-mode')) {
     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
   } else {
     $('.Rent-logo').attr('src', '../assets/images/Artboard GÇô 1.svg');
   }
 });
-
         </script>
-        
     </body>
 </html>

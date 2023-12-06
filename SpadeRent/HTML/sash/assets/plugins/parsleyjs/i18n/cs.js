@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('cs', {
   defaultMessage: "Tato položka je neplatná.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('cs', {
   check:          "Je nutné vybrat od %s do %s možností.",
   equalto:        "Tato položka musí být stejná."
 });
-
 Parsley.setLocale('cs');

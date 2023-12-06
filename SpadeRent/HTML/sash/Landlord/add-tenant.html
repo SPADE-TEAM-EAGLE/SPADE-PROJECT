@@ -3073,10 +3073,8 @@
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
                         // console.log($(a).find('.rentAmount').text())
-                        
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
                         // console.log(parseInt($(a).find('.serial-number').text()))
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb);
@@ -3084,10 +3082,8 @@
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
                         // console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb); 
@@ -3270,12 +3266,8 @@
                 }
             });
         });
-        
-
                         $(document).on('click', '#confirmDelete-bulk', function (e) {
-
 e.preventDefault();
-
 $('#myModal_delete_bulk').modal('hide');
 $.ajax({
                             url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
@@ -3290,7 +3282,6 @@ $.ajax({
                             success: function (response) {
                                 tenantToDelete = []
                                 getData()
-
                                 $("#succesModal_delete").modal("show");
                                 setInterval(function () {
                                     $("#succesModal_delete").modal("hide");
@@ -3298,12 +3289,9 @@ $.ajax({
                             }, error: function (xhr, status, error) {
                                 console.log(error)
                             }
-
                         })
 })
-
         $(document).on('click', '#confirmDelete', function (e) {
-
             e.preventDefault();
             $('#myModal_delete').modal('hide');
             $.ajax({
@@ -3795,16 +3783,13 @@ $.ajax({
             });
         })
     </script>
-   
     <script>
 $(document).ready(() => {
     $("table").on("change", ".myCheckbox", function () {
         var $myCheckboxes = $('.myCheckbox'); // Select all checkboxes
         var $myButton = $('.myButton'); // Select the button
-
         // Check if at least one checkbox is checked
         var anyCheckboxChecked = $myCheckboxes.is(":checked");
-
         // Toggle button visibility based on checkbox state
         if (anyCheckboxChecked) {
             $myButton.css('display', 'flex');
@@ -3815,8 +3800,6 @@ $(document).ready(() => {
         }
     });
 });
-
-
     </script>
     <script>
         $(document).change(function () {

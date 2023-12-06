@@ -12,17 +12,14 @@
   }
 }(function ($) {
   'use strict';
-
   // Helper variable to create unique names for the transport iframes:
   var counter = 0,
       jsonAPI = $,
       jsonParse = 'parseJSON';
-
   if ('JSON' in window && 'parse' in JSON) {
     jsonAPI = JSON;
     jsonParse = 'parse';
   }
-
   // The iframe transport accepts four additional options:
   // options.fileInput: a jQuery collection of file input fields
   // options.paramName: the parameter name for the file form data,
@@ -174,7 +171,6 @@
           };
       }
   });
-
   // The iframe transport returns the iframe content document as response.
   // The following adds converters from iframe to text, json, html, xml
   // and script.
@@ -207,5 +203,4 @@
           }
       }
   });
-
 }));

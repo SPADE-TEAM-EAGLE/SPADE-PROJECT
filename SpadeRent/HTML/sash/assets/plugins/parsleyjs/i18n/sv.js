@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('sv', {
   defaultMessage: "Ogiltigt värde.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('sv', {
   check:          "Mellan %s och %s val måste göras.",
   equalto:        "Värdena måste vara lika."
 });
-
 Parsley.setLocale('sv');

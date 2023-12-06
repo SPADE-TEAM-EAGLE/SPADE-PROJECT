@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('tr', {
   defaultMessage: "Girdiğiniz değer geçerli değil.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('tr', {
   check:          "Bu alan için en az %s, en fazla %s seçim yapmalısınız.",
   equalto:        "Bu alanın değeri aynı olmalı."
 });
-
 Parsley.setLocale('tr');
