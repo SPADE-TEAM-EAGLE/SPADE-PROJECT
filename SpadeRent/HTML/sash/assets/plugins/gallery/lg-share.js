@@ -18,21 +18,17 @@
     }
 })(this, function () {
     'use strict';
-
     var _extends = Object.assign || function (target) {
         for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];
-
             for (var key in source) {
                 if (Object.prototype.hasOwnProperty.call(source, key)) {
                     target[key] = source[key];
                 }
             }
         }
-
         return target;
     };
-
     var shareSefaults = {
         share: true,
         facebook: true,
@@ -44,27 +40,20 @@
         pinterest: true,
         pinterestDropdownText: 'Pinterest'
     };
-
     function toCamelCase(input) {
         return input.toLowerCase().replace(/-(.)/g, function (match, group1) {
             return group1.toUpperCase();
         });
     }
-
     var Share = function Share(element) {
-
         this.el = element;
-
         this.core = window.lgData[this.el.getAttribute('lg-uid')];
         this.core.s = _extends({}, shareSefaults, this.core.s);
-
         if (this.core.s.share) {
             this.init();
         }
-
         return this;
     };
-
     Share.prototype.init = function () {
         var _this = this;
         var shareHtml = '<span id="lg-share" class="lg-icon">' + '<ul class="lg-dropdown" style="position: absolute;">';
@@ -73,7 +62,6 @@
         shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
         shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
         shareHtml += '</ul></span>';
-
         this.core.outer.querySelector('.lg-toolbar').insertAdjacentHTML('beforeend', shareHtml);
         this.core.outer.querySelector('.lg').insertAdjacentHTML('beforeend', '<div id="lg-dropdown-overlay"></div>');
         utils.on(document.getElementById('lg-share'), 'click.lg', function () {
@@ -83,13 +71,10 @@
                 utils.addClass(_this.core.outer, 'lg-dropdown-active');
             }
         });
-
         utils.on(document.getElementById('lg-dropdown-overlay'), 'click.lg', function () {
             utils.removeClass(_this.core.outer, 'lg-dropdown-active');
         });
-
         utils.on(_this.core.el, 'onAfterSlide.lgtm', function (event) {
-
             setTimeout(function () {
                 if (_this.core.s.facebook) {
                     document.getElementById('lg-share-facebook').setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=' + _this.getSharePropsUrl(event.detail.index, 'data-facebook-share-url'));
@@ -106,7 +91,6 @@
             }, 100);
         });
     };
-
     Share.prototype.getSharePropsUrl = function (index, prop) {
         var shareProp = this.getShareProps(index, prop);
         if (!shareProp) {
@@ -114,7 +98,6 @@
         }
         return encodeURIComponent(shareProp);
     };
-
     Share.prototype.getShareProps = function (index, prop) {
         var shareProp = '';
         if (this.core.s.dynamic) {
@@ -124,11 +107,8 @@
         }
         return shareProp;
     };
-
     Share.prototype.destroy = function () {};
-
     window.lgModules.share = Share;
 });
-
 },{}]},{},[1])(1)
 });

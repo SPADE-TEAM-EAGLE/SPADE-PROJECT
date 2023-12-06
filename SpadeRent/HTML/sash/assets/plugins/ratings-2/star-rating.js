@@ -1,13 +1,10 @@
-
 $(function() {
-
   // basic use comes with defaults values
   $(".my-rating").starRating({
     initialRating: 4.0,
     starSize: 35,
     strokeWidth: 0,
   });
-
   $(".my-rating-2").starRating({
     totalStars: 5,
     starSize: 35,
@@ -18,7 +15,6 @@ $(function() {
     strokeWidth: 0,
     useGradient: false
   });
-
   // example grabing rating from markup, and custom colors
   $(".my-rating-4").starRating({
     totalStars: 5,
@@ -29,7 +25,6 @@ $(function() {
     activeColor: '#f1c40f',
     useGradient: false
   });
-
   // specify the gradient start and end for the selected stars
   $(".my-rating-5").starRating({
     starSize: 35,
@@ -41,7 +36,6 @@ $(function() {
       end: '#f8f42e'
     },
   });
-
   $(".my-rating-6").starRating({
     starSize: 35,
     totalStars: 5,
@@ -57,7 +51,6 @@ $(function() {
       console.log('DOM Element ', $el);
     }
   });
-
   $(".my-rating-7").starRating({
     starSize: 35,
     initialRating: 4,
@@ -65,13 +58,11 @@ $(function() {
     readOnly: true,
     starShape: 'rounded'
   });
-
   $(".my-rating-8").starRating({
     starSize: 35,
     useFullStars: true,
     strokeWidth: 0,
   });
-
   $(".my-rating-9").starRating({
     initialRating: 3.5,
     strokeWidth: 0,
@@ -85,7 +76,6 @@ $(function() {
       $('.live-rating').text(currentRating);
     }
   });
-
   $(".my-rating-10").starRating({
     initialRating: 2,
     starSize: 35,
@@ -93,5 +83,4 @@ $(function() {
     strokeColor: 'black',
     ratedColors: ['#92db31', '#31cbdb', '#316ddb', '#b931db', '#db3131']
   });
-
 });

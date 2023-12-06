@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('fa', {
   defaultMessage: "این مقدار صحیح نمی باشد",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('fa', {
   check:          "باید بین %s و %s مورد انتخاب کنید",
   equalto:        "این مقدار باید یکسان باشد"
 });
-
 Parsley.setLocale('fa');

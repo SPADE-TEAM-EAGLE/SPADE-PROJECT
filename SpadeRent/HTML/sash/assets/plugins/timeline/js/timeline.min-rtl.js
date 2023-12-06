@@ -27,7 +27,6 @@ var _slicedToArray = function(e, t) {
     }(e, t);
     throw new TypeError("Invalid attempt to destructure non-iterable instance")
 };
-
 function timeline(e, v) {
     var g = [],
         p = "Timeline:",
@@ -71,11 +70,9 @@ function timeline(e, v) {
                 defaultValue: 3
             }
         };
-
     function n(e, t, i) {
         t.classList.add(i), e.parentNode.insertBefore(t, e), t.appendChild(e)
     }
-
     function l(e, t) {
         var i = e.getBoundingClientRect(),
             n = window.innerHeight || document.documentElement.clientHeight,
@@ -90,16 +87,13 @@ function timeline(e, v) {
         }
         return "px" === a ? s = parseInt(s - r, 10) : "%" === a && (s = parseInt(s * ((100 - r) / 100), 10)), i.top <= s && i.left <= (window.innerWidth || document.documentElement.clientWidth) && 0 <= i.top + i.height && 0 <= i.left + i.width
     }
-
     function d(e, t) {
         e.style.webkitTransform = t, e.style.msTransform = t, e.style.transform = t
     }
-
     function c(e) {
         var t = "translate3d(0, 0," + e.items[o].offsetRight + "px)";
         d(e.scroller, t)
     }
-
     function a(e) {
         var a, t, i, n, l, r, s;
         o = e.settings.startIndex, e.timelineEl.classList.add("timeline--horizontal"), a = e, window.innerWidth > a.settings.forceVerticalMode && (a.itemWidth = a.wrap.offsetWidth / a.settings.visibleItems, a.items.forEach(function(e) {
@@ -137,7 +131,6 @@ function timeline(e, v) {
                 })
             })
     }
-
     function r() {
         g.forEach(function(e) {
             e.timelineEl.style.opacity = 0, e.timelineEl.classList.contains("timeline--loaded") || e.items.forEach(function(e) {

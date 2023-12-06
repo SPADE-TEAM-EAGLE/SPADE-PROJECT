@@ -2,35 +2,27 @@
 	p {
 		margin: 0;
 	}
-
 	width: 200px;
 }
-
 .SelectBox {
 	padding: 5px 8px;
 }
-
 .sumoStopScroll {
 	overflow: hidden;
 }
-
 /* Filtering style */
-
 .SumoSelect {
 	.hidden {
 		display: none;
 	}
-
 	.search-txt {
 		display: none;
 		outline: none;
 	}
-
 	.no-match {
 		display: none;
 		padding: 6px;
 	}
-
 	&.open {
 		.search-txt {
 			display: inline-block;
@@ -46,7 +38,6 @@
 			box-sizing: border-box;
 			border-radius: 5px;
 		}
-
 		> .search > {
 			span,
 			label {
@@ -55,9 +46,7 @@
 		}
 	}
 }
-
 /*this is applied on that hidden select. DO NOT USE display:none; or visiblity:hidden; and Do not override any of these properties. */
-
 .SelectClass,
 .SumoUnder {
 	position: absolute;
@@ -76,11 +65,9 @@
 	-khtml-opacity: 0;
 	opacity: 0;
 }
-
 .SelectClass {
 	z-index: 1;
 }
-
 .SumoSelect {
 	> {
 		.optWrapper > .options li.opt label,
@@ -92,7 +79,6 @@
 			-webkit-user-select: none;
 		}
 	}
-
 	.select-all > label {
 		user-select: none;
 		-o-user-select: none;
@@ -100,12 +86,10 @@
 		-khtml-user-select: none;
 		-webkit-user-select: none;
 	}
-
 	display: inline-block;
 	position: relative;
 	outline: none;
 	width: 100%;
-
 	> {
 		.CaptionCont {
 			position: relative;
@@ -120,7 +104,6 @@
 			line-height: 30px;
 			padding: 6px 17px;
 			border-radius: 7px;
-
 			> {
 				span {
 					display: block;
@@ -129,20 +112,17 @@
 					white-space: nowrap;
 					overflow: hidden;
 					cursor: default;
-
 					&.placeholder {
 						color: #9999b5;
 						font-style: italic;
 					}
 				}
-
 				label {
 					position: absolute;
 					top: 0;
 					right: 0;
 					bottom: 0;
 					width: 30px;
-
 					> i:before {
 						display: inline-block;
 						width: 0;
@@ -160,7 +140,6 @@
 				}
 			}
 		}
-
 		.optWrapper {
 			display: none;
 			z-index: 1;
@@ -177,21 +156,18 @@
 			overflow: hidden;
 		}
 	}
-
 	&.open > .optWrapper {
 		top: 35px;
 		display: block;
 		box-shadow: 0px 16px 18px rgba(104, 113, 123, 0.2);
 		background: #fff;
 		border-radius: 0 0 7px 7px;
-
 		&.up {
 			top: auto;
 			bottom: 100%;
 			margin-bottom: 5px;
 		}
 	}
-
 	> .optWrapper {
 		ul {
 			list-style: none;
@@ -200,49 +176,38 @@
 			margin: 0;
 			overflow: auto;
 		}
-
 		> .options {
 			border-radius: 2px;
 			position: relative;
-
 			/*Set the height of pop up here (only for desktop mode)*/
 			max-height: 250px;
-
 			/*height*/
 		}
-
 		&.okCancelInMulti > .options {
 			border-radius: 2px 2px 0 0;
 		}
-
 		&.selall {
 			> .options {
 				border-radius: 0 0 2px 2px;
 			}
-
 			&.okCancelInMulti > .options {
 				border-radius: 0;
 			}
 		}
-
 		> .options li {
 			&.group.disabled > label {
 				opacity: 0.5;
 			}
-
 			ul li.opt {
 				padding-left: 22px;
 			}
 		}
-
 		&.multiple > .options li ul li.opt {
 			padding-left: 50px;
 		}
-
 		&.isFloating > .options {
 			max-height: 100%;
 		}
-
 		> .options {
 			li.opt {
 				padding: 0px 16px;
@@ -251,41 +216,33 @@
 				height: 40px;
 				line-height: 40px;
 			}
-
 			> li.opt:first-child {
 				border-radius: 2px 2px 0 0;
 			}
 		}
-
 		&.selall > .options > li.opt:first-child {
 			border-radius: 0;
 		}
-
 		> .options > li.opt:last-child {
 			border-radius: 0 0 2px 2px;
 			border-bottom: none;
 		}
-
 		&.okCancelInMulti > .options > li.opt:last-child {
 			border-radius: 0;
 		}
-
 		> .options li.opt {
 			&:hover {
 				background-color: #f4f5fb;
 			}
-
 			&.sel {
 				background-color: #a1c0e4;
 			}
 		}
 	}
-
 	.select-all {
 		&.sel {
 			background-color: #a1c0e4;
 		}
-
 		> span {
 			position: absolute;
 			display: block;
@@ -294,7 +251,6 @@
 			bottom: 0;
 			margin-left: -35px;
 		}
-
 		> span i {
 			position: absolute;
 			margin: auto;
@@ -308,7 +264,6 @@
 			border-radius: 2px;
 			background-color: #fff;
 		}
-
 		&.selected > span i,
 		&.partial > span i {
 			background-color: $primary-1;
@@ -319,7 +274,6 @@
 			background-position: center center;
 		}
 	}
-
 	> .optWrapper {
 		> .options li {
 			label {
@@ -330,18 +284,15 @@
 				cursor: pointer;
 				margin-bottom: 0 !important;
 			}
-
 			span {
 				display: none;
 			}
-
 			&.group > label {
 				cursor: default;
 				padding: 8px 6px;
 				font-weight: bold;
 			}
 		}
-
 		&.isFloating {
 			position: fixed;
 			top: 0;
@@ -352,32 +303,24 @@
 			margin: auto;
 			max-height: 90%;
 		}
-
 		> .options li.opt.disabled {
 			background-color: inherit;
 			pointer-events: none;
-
 			* {
 				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-
 				/* IE 5-7 */
 				filter: alpha(opacity = 50);
-
 				/* Netscape */
 				-moz-opacity: 0.5;
-
 				/* Safari 1.x */
 				-khtml-opacity: 0.5;
-
 				/* Good browsers */
 				opacity: 0.5;
 			}
 		}
-
 		&.multiple > .options li.opt {
 			padding-left: 35px;
 			cursor: pointer;
-
 			span {
 				position: absolute;
 				display: block;
@@ -388,7 +331,6 @@
 			}
 		}
 	}
-
 	> .optWrapper.multiple > .options li.opt span i {
 		position: absolute;
 		margin: auto;
@@ -402,7 +344,6 @@
 		border-radius: 2px;
 		background-color: #fff;
 	}
-
 	> .optWrapper {
 		> .MultiControls {
 			display: none;
@@ -410,7 +351,6 @@
 			background-color: #fff;
 			border-radius: 0 0 3px 3px;
 		}
-
 		&.multiple {
 			&.isFloating > .MultiControls {
 				display: block;
@@ -419,13 +359,10 @@
 				bottom: 0;
 				width: 100%;
 			}
-
 			&.okCancelInMulti > .MultiControls {
 				display: block;
-
 				> p {
 					padding: 6px;
-
 					&:focus {
 						border-color: $primary-1;
 						outline: none;
@@ -433,7 +370,6 @@
 					}
 				}
 			}
-
 			> .MultiControls > p {
 				display: inline-block;
 				cursor: pointer;
@@ -441,35 +377,28 @@
 				width: 50%;
 				box-sizing: border-box;
 				text-align: center;
-
 				&:hover {
 					background-color: #f4f5fb;
 				}
-
 				&.btnOk {
 					border-right: 1px solid $border;
 					border-radius: 0 0 0 3px;
 				}
-
 				&.btnCancel {
 					border-radius: 0 0 3px 0;
 				}
 			}
 		}
-
 		&.isFloating > .options li.opt {
 			padding: 12px 6px;
 		}
-
 		&.multiple {
 			&.isFloating {
 				> .options li.opt {
 					padding-left: 35px;
 				}
-
 				padding-bottom: 43px;
 			}
-
 			> .options li.opt.selected span i {
 				background-color: $primary-1;
 				box-shadow: none;
@@ -480,18 +409,15 @@
 			}
 		}
 	}
-
 	&.disabled {
 		opacity: 0.7;
 		cursor: not-allowed;
-
 		> .CaptionCont {
 			border-color: #d3dfea;
 			box-shadow: none;
 			background: #f4f5f9;
 		}
 	}
-
 	.select-all {
 		border-radius: 3px 3px 0 0;
 		position: relative;
@@ -500,19 +426,16 @@
 		padding: 8px 0 3px 35px;
 		height: 36px;
 		cursor: pointer;
-
 		> {
 			label,
 			span i {
 				cursor: pointer;
 			}
 		}
-
 		&.partial > span i {
 			background-color: $border;
 		}
 	}
-
 	> .optWrapper > .options li.optGroup {
 		padding-left: 5px;
 		text-decoration: underline;

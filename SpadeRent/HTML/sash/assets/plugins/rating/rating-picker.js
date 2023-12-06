@@ -1,18 +1,14 @@
-
-    
     $.ratePicker("#rating-1", {
         rate : function (stars){
             alert('Sample 3\'s Rate is ' + stars);
         }
     });
-
     $.ratePicker("#rating-2", {
         rate : function (stars){
             alert('Sample 3\'s Rate is ' + stars);
         },
         indicator:"fa-heart"
     });
-
     $.ratePicker("#rating-3", {
         max :10,
         rgbOn:"#e74c3c",
@@ -34,7 +30,6 @@
         },
         indicator:"fa-heart"
     });
-
     $.ratePicker("#rating-4", {
         max :10,
         rgbOn:"#efad0cdb",
@@ -55,4 +50,3 @@
         },
         indicator:"fa-thumbs-up"
     });
-

@@ -1,7 +1,6 @@
 /*! DataTables styling wrapper for AutoFill
  * ©2018 SpryMedia Ltd - datatables.net/license
  */
-
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
@@ -15,15 +14,12 @@
 			if ( ! root ) {
 				root = window;
 			}
-
 			if ( ! $ || ! $.fn.dataTable ) {
 				$ = require('datatables.net-dt')(root, $).$;
 			}
-
 			if ( ! $.fn.dataTable.AutoFill ) {
 				require('datatables.net-autofill')(root, $);
 			}
-
 			return factory( $, root, root.document );
 		};
 	}
@@ -32,7 +28,5 @@
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
-
 return $.fn.dataTable;
-
 }));

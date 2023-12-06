@@ -1598,7 +1598,6 @@
                             console.log(error);
                         }
                     });
-                
                     $('#send-text').on('click', function (ev) {
                     $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
@@ -1699,8 +1698,6 @@
                                     $('#online').hide()
                                 }
                                 $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
-                                
-                                
                                 chatTenant()
                             },
                             error: function (xhr, status, error) {
@@ -2264,7 +2261,6 @@
                     timestampSpan.innerText = formattedTime;
                     const imageContainer = document.createElement('div');
 imageContainer.setAttribute('class', 'ms-1');
-
 if (
   localStorage.getItem("tenantImg") != "null" &&
   localStorage.getItem("tenantImg") != " " &&
@@ -2281,11 +2277,9 @@ if (
   imageContainer.textContent = localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() +
     localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase();
 }
-
 // Append the imageContainer to the document or a specific parent element
 // For example, assuming you have a parentElement, you can use:
 // parentElement.appendChild(imageContainer);
-
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);

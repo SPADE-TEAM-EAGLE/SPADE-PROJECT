@@ -5,7 +5,6 @@
  * By Kelvin Luck ( http://www.kelvinluck.com/ )
  * Thanks for permission! 
  **/
-
 // DEMO Swticher Base
 jQuery('.demo-icon').click(function() {
     if ($('.demo_changer').hasClass("active")) {
@@ -18,14 +17,11 @@ jQuery('.demo-icon').click(function() {
         });
     }
 });
-
 //p-scroll bar
 const ps5 = new PerfectScrollbar('.sidebar-right1', {
     useBothWheelAxes: true,
     suppressScrollX: true,
 });
-
-
 // Switcher Close //
 $(document).on("click", ".app-content", function() {
     if ($('.demo_changer').hasClass("active")) {

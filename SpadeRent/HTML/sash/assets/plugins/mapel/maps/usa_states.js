@@ -22,9 +22,7 @@
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
-
     "use strict";
-
     $.extend(true, Mapael,
         {
             maps :{
@@ -35,7 +33,6 @@
                         var pi =Math.PI;
                         var midLat = (phi1 + phi2) / 2;
                         var n, tmp1, tmp2, tmp3, x, y, p;
-
                         n = (Math.sin(phi1 / 180 * pi) + Math.sin(phi2 / 180 * pi)) / 2;
                         tmp1 = Math.sqrt(Math.cos(phi1 / 180 * pi)) + 2 * n * Math.sin(phi1 / 180 * pi);
                         tmp2 = scale * Math.pow(tmp1 - 2 * n * Math.sin(midLat / 180 * pi),0.5) / n;
@@ -43,7 +40,6 @@
                         p = scale * Math.pow(tmp1 - 2 * n * Math.sin(lat / 180 * pi),0.5) / n;
                         x = p * Math.sin(tmp3 / 180 * pi);
                         y = tmp2 - p * Math.cos(tmp3 / 180 * pi);
-
                         return([x,y]);
                     },
                     getCoords : function (lat, lon) {
@@ -66,7 +62,6 @@
                             yOffset = 543;
                             scaleX= 1;
                             scaleY= -1;
-
                         } else if (lon < -140) { // hawaii
                             phi1= 0;
                             phi2= 26;
@@ -82,7 +77,6 @@
                             yOffset = -22;
                             scaleX = 10.05;
                             scaleY = 6.26;
-
                             coords[0] = 50.0 + 124.03149777329222 * ((1.9694462586094064-(lat* Math.PI / 180)) * Math.sin(0.6010514667026994 * (lon + 96) * Math.PI / 180));
                             coords[1] = 50.0 + 1.6155950752393982 * 124.03149777329222 * 0.02613325650382181 - 1.6155950752393982* 124.03149777329222 * (1.3236744353715044- (1.9694462586094064-(lat* Math.PI / 180)) * Math.cos(0.6010514667026994 * (lon + 96) * Math.PI / 180));
                         }
@@ -145,7 +139,5 @@
             }
         }
     );
-
     return Mapael;
-
 }));

@@ -1,8 +1,6 @@
 (function () {
     "use strict";
-
     var slideMenu = $('.side-menu');
-
     // Toggle Sidebar
     $(document).on('click', '[data-bs-toggle="sidebar"]', function (event) {
         event.preventDefault();
@@ -13,7 +11,6 @@
    $("[data-bs-toggle='slide']").off('click');
    $("[data-bs-toggle='sub-slide']").off('click');
    $("[data-bs-toggle='sub-slide2']").off('click');
-
    // initiating the click function
    $("[data-bs-toggle='slide']").on('click', function (e) {
        var $this = $(this);
@@ -40,7 +37,6 @@
            e.preventDefault();
        }
    });
-
    // Activate sidebar slide toggle
    $("[data-bs-toggle='sub-slide']").on('click', function (e) {
        var $this = $(this);
@@ -67,7 +63,6 @@
            e.preventDefault();
        }
    });
-
    // Activate sidebar slide toggle
    $("[data-bs-toggle='sub-slide2']").on('click', function (e) {
        var $this = $(this);
@@ -94,7 +89,6 @@
            e.preventDefault();
        }
    });
-
    // To close the sub menu dropdown by clicking on inner content
    $('.hor-content').on('click', function () {
        $('.side-menu li').each(function () {
@@ -107,12 +101,10 @@
            $(this).parent().parent().parent().parent().parent().removeClass("is-expanded");
        })
    })
-
     var position = window.location.pathname.split('/');
     $(".app-sidebar li a").each(function () {
         var $this = $(this);
         var pageUrl = $this.attr("href");
-
         if (pageUrl) {
             if (position[position.length - 1] == pageUrl) {
                 $(this).addClass("active");
@@ -140,8 +132,6 @@
             scrollTop: $('a.sub-slide-item.active').offset().top - 600
         }, 600);
     }
-
-
     var toggleSidebar = function () {
         var w = $(window);
         if (w.outerWidth() <= 1024) {
@@ -159,7 +149,6 @@
     }
     toggleSidebar();
     $(window).resize(toggleSidebar());
-
     //sticky-header
     $(window).on("scroll", function (e) {
         if ($(window).scrollTop() >= 70) {
@@ -170,7 +159,6 @@
             $('.app-header').removeClass('visible-title');
         }
     });
-
     $(window).on("scroll", function (e) {
         if ($(window).scrollTop() >= 70) {
             $('.horizontal-main').addClass('fixed-header');
@@ -181,7 +169,6 @@
         }
     });
 })();
-
 function responsive() {
     if (window.innerWidth >= 992) {
         if (document.querySelector("body").classList.contains("sidenav-toggled") && document.querySelector("body").classList.contains("horizontal")) {
@@ -189,9 +176,7 @@ function responsive() {
         }
     }
 }
-
 // function hovermenu() {
-
 //     $(".app-sidebar").hover(function () {
 //         if ($('.app').hasClass('sidenav-toggled')) {
 //             $('.app').addClass('sidenav-toggled-open');
@@ -202,8 +187,6 @@ function responsive() {
 //         }
 //     });
 // }
-
-
 //________________Horizontal js
 jQuery(function () {
     'use strict';
@@ -212,14 +195,10 @@ jQuery(function () {
         jQuery('body').wrapInner('<div class="horizontalMenucontainer" />');
     });
 }());
-
 // for Icon-text Menu
 //icontext(); 
-
 // default layout
 hovermenu();
-
-
 // ______________HOVER JS start
 // function hovermenu() {
 //     $(".app-sidebar").hover(function () {
@@ -233,14 +212,11 @@ hovermenu();
 //     });
 // }
 // ______________HOVER JS end
-
 // ______________ICON-OVERLAY JS start
 function iconoverlay() {
-
     $(document).on('click', ".app-content", function (event) {
         $('body').removeClass('sidenav-toggled-open');
     });
-
     //Mobile menu 
     var alterClass = function () {
         var ww = document.body.clientWidth;
@@ -255,26 +231,19 @@ function iconoverlay() {
     });
     //Fire it when the page first loads:
     alterClass();
-
 }
-
 // ______________ICON-OVERLAY JS end
-
-
 // ______________ICON-TEXT JS start
 function icontext() {
     $(".app-sidebar").off("mouseenter mouseleave");
-
     $(document).on('click', ".app-sidebar", function (event) {
         if ($('body').hasClass('sidenav-toggled') == true) {
             $('body').addClass('sidenav-toggled-open');
         }
     });
-
     $(document).on('click', ".app-content", function (event) {
         $('body').removeClass('sidenav-toggled-open');
     });
-
     //Mobile menu 
     var alterClass = function () {
         var ww = document.body.clientWidth;
@@ -289,19 +258,14 @@ function icontext() {
     });
     //Fire it when the page first loads:
     alterClass();
-
 }
-
 // ______________ICON-TEXT JS end
-
-
 let slideLeft = document.querySelector(".slide-left");
 let slideRight = document.querySelector(".slide-right");
 slideLeft.addEventListener("click", () => {
     slideClick()
 }, true)
 slideRight.addEventListener("click", () => { slideClick() }, true)
-
 // used to remove is-expanded class and remove class on clicking arrow buttons
 function slideClick() {
     let slide = document.querySelectorAll(".slide");
@@ -318,14 +282,11 @@ function slideClick() {
         }
     });
 }
-
 // horizontal arrows
 var sideMenu = $(".side-menu");
 var slide = "100px";
-
 let menuWidth = document.querySelector('.horizontal-main')
 let menuItems = document.querySelector('.side-menu')
-
 let prevWidth = [window.innerWidth]
 $(window).resize(
     () => {
@@ -371,8 +332,6 @@ $(window).resize(
         }
         checkHoriMenu();
         responsive();
-
-
         prevWidth.push(window.innerWidth)
         if(prevWidth.length > 3){
             prevWidth.shift()
@@ -399,9 +358,7 @@ $(window).resize(
         }
     }
 )
-
 function ActiveSubmenu(){
-
     var position = window.location.pathname.split('/');
     $(".app-sidebar li a").each(function () {
         var $this = $(this);
@@ -433,7 +390,6 @@ function ActiveSubmenu(){
         }, 100); 
     });
 }
-
 function checkHoriMenu() {
     setTimeout(()=>{
         let menuWidth = document.querySelector('.horizontal-main')
@@ -443,14 +399,12 @@ function checkHoriMenu() {
         let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]);
         let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]);
         let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
-
         if ($('body').hasClass('ltr')) {
             menuItems.style.marginRight = 0
         }
         else {
             menuItems.style.marginLeft = 0;
         }
-
         if(menuItems.scrollWidth - 2 < (menuWidth?.offsetWidth - menuContainerWidth)){
             $("#slide-right").addClass("d-none");
             $("#slide-left").addClass("d-none");
@@ -476,7 +430,6 @@ $(document).on("click", ".ltr #slide-left", function () {
     let mainSidemenuWidth = document.querySelector('.main-sidemenu')    
     let menuContainerWidth = menuWidth?.offsetWidth - mainSidemenuWidth?.offsetWidth
     let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]) + 100;
-
     if (marginLeftValue < 0) {
         sideMenu.stop(false, true).animate({
             // marginRight : 0,
@@ -491,7 +444,6 @@ $(document).on("click", ".ltr #slide-left", function () {
     else{
     	$("#slide-left").addClass("d-none");
     }
-
     if (marginLeftValue >= 0) {
         sideMenu.stop(false, true).animate({
             // marginRight : 0,
@@ -499,7 +451,6 @@ $(document).on("click", ".ltr #slide-left", function () {
         }, {
             duration: 400
         })
-        
         if(menuWidth?.offsetWidth < menuItems.scrollWidth){
             // $("#slide-left").addClass("d-none");
         }
@@ -539,10 +490,8 @@ $(document).on("click", ".ltr #slide-right", function () {
         }, {
             duration: 400
         });
-
         $("#slide-right").addClass("d-none");
     }
-
     if (marginLeftValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
@@ -557,14 +506,12 @@ $(document).on("click", ".ltr #slide-right", function () {
     })
     //
 });
-
 $(document).on("click", ".rtl #slide-left", function () {
     let menuWidth = document.querySelector('.horizontal-main')
     let menuItems = document.querySelector('.side-menu')
     let mainSidemenuWidth = document.querySelector('.main-sidemenu')    
     let menuContainerWidth = menuWidth?.offsetWidth - mainSidemenuWidth?.offsetWidth
     let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]) + 100;
-
     if (marginRightValue < 0) {
         sideMenu.stop(false, true).animate({
             // marginRight : 0,
@@ -580,7 +527,6 @@ $(document).on("click", ".rtl #slide-left", function () {
     else {
         $("#slide-left").addClass("d-none");
     }
-
     if (marginRightValue >= 0) {
         $("#slide-left").addClass("d-none");
         sideMenu.stop(false, true).animate({
@@ -616,7 +562,6 @@ $(document).on("click", ".rtl #slide-right", function () {
         }, {
             duration: 400
         })
-
     }
     else {
         sideMenu.stop(false, true).animate({
@@ -628,7 +573,6 @@ $(document).on("click", ".rtl #slide-right", function () {
         })
         $("#slide-right").addClass("d-none");
     }
-
     if (marginRightValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
@@ -641,12 +585,9 @@ $(document).on("click", ".rtl #slide-right", function () {
     subNav.forEach((e) => {
         e.style.display = '';
     })
-
 });
-
 // FOOTER
 document.getElementById("year").innerHTML = new Date().getFullYear();
-
 document.querySelector('.main-content').addEventListener('click', ()=>{
     if (document.querySelector('body').classList.contains('horizontal')) {
         let li = document.querySelectorAll('.side-menu li')

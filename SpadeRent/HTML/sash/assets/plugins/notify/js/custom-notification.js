@@ -5,7 +5,6 @@
       title: "Growl",
       message: "Hi I'm Sash"
     });
-
 	 $('.error').click(function (event) {
       event.preventDefault();
       event.stopPropagation();

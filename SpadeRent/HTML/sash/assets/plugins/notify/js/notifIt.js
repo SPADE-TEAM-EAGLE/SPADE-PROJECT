@@ -13,8 +13,6 @@
         root.notif_prompt = package.notif_prompt;
     }
 }(this, function() {
-
-
     // Notification
     function notif(config) {
         // Util stuff
@@ -348,7 +346,6 @@
             'dismiss': dismiss
         }
     }
-
     // Confirm
     function notif_confirm(config) {
         var $ = jQuery
@@ -362,7 +359,6 @@
         var settings = $.extend({}, _config, config)
         var $confirm = $('.notifit_confirm')[0] ? $('.notifit_confirm') : null;
         var $bg = $('.notifit_confirm_bg')[0] ? $('.notifit_confirm_bg') : null;
-
         function _create() {
             if ($confirm !== null) {
                 return $confirm
@@ -389,7 +385,6 @@
             $bg = $('<div>', { 'class': 'notifit_confirm_bg' })
             return $confirm
         }
-
         function _show() {
             if ($confirm) {
                 if (settings.fullscreen) {
@@ -414,7 +409,6 @@
                 }
             }
         }
-
         function _hide() {
             if ($confirm) {
                 $confirm.slideUp('fast', function() {
@@ -427,7 +421,6 @@
                 })
             }
         }
-
         function _callback() {
             _hide()
             var response = null
@@ -441,17 +434,14 @@
             }
             return response
         }
-
         function _setListeners() {
             $('html').one('click', '.notifit_confirm_accept, .notifit_confirm_cancel', _callback)
         }
-
         // Get the party started! \o/
         _create()
         _show()
         _setListeners()
     }
-
     // Prompt
     function notif_prompt(config) {
         var $ = jQuery
@@ -466,7 +456,6 @@
         var settings = $.extend({}, _config, config)
         var $prompt = $('.notifit_prompt')[0] ? $('.notifit_prompt') : null;
         var $bg = $('.notifit_prompt_bg')[0] ? $('.notifit_prompt_bg') : null;
-
         function _create() {
             if ($prompt !== null) { return $prompt }
             var $acceptButton = $('<button>', {
@@ -497,7 +486,6 @@
             $bg = $('<div>', { 'class': 'notifit_prompt_bg' })
             return $prompt
         }
-
         function _show() {
             if ($prompt) {
                 if (settings.fullscreen) {
@@ -522,7 +510,6 @@
                 }
             }
         }
-
         function _hide() {
             if ($prompt) {
                 $prompt.slideUp('fast', function() {
@@ -535,7 +522,6 @@
                 })
             }
         }
-
         function _callback() {
             _hide()
             var response = null
@@ -549,18 +535,14 @@
             }
             return response
         }
-
         function _setListeners() {
             $('html').one('click', '.notifit_prompt_accept, .notifit_prompt_cancel', _callback)
         }
-
         // Get the party started! Again! \o/
         _create()
         _show()
         _setListeners()
     }
-
-
     return {
         notif: notif,
         notif_confirm: notif_confirm,

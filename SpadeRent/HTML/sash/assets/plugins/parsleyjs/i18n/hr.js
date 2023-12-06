@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('hr', {
   defaultMessage: "Neispravan unos.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('hr', {
   check: "Treba odabrati između %s i %s izbora.",
   equalto: "Ova vrijednost treba biti ista."
 });
-
 Parsley.setLocale('hr');

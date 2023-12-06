@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -31,7 +30,6 @@
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/chats.css">
 </head>
-
 <body class="app sidebar-mini ltr light-mode sidenav-toggledd">
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
@@ -1410,8 +1408,6 @@
                         console.log(error);
                     }
                 });
-
-
                 $('#send-text').on('click', function (ev) {
                     $('#input-message').removeClass('border-red').removeClass('border-green').removeClass('text-danger');
                     const msg_again1 = $('#input-message').val().trim();
@@ -1770,7 +1766,6 @@
                                                 var newBgImageUrl = `url('` + localStorage.getItem("tenantImg") + `')`;
                                                 $(".person").css("background-image", newBgImageUrl);
                                             } else {
-
                                                 // var newBgImageUrl = "url('../assets/images/users/5.jpg')";
                                                 // $(".person").css("background-image", newBgImageUrl);
                                                 $(".person").css("background-image", "");
@@ -1779,10 +1774,8 @@
                                                     localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() +
                                                     localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()
                                                 );
-
                                             }
                                         } else {
-
                                             localStorage.setItem("tenantImg", null)
                                             // var newBgImageUrl = "url('../assets/images/users/5.jpg')";
                                             // $(".person").css("background-image", newBgImageUrl);
@@ -1791,7 +1784,6 @@
                                             $(".person").text(
                                                 localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()
                                             );
-
                                         }
                                         if (response.data.isTenantActive == 1) {
                                             $('#online').show()
@@ -1956,7 +1948,6 @@
                                         <div class="main-img-user">
                                             <div class="profileImage ` + (tenant.image == null || tenant.image == " " || tenant.image == "" ? '' : 'd-none') + `">` + tenant.firstName.charAt(0).toUpperCase() + tenant.lastName.charAt(0).toUpperCase() + `</div>
                                             <img class="` + (tenant.image == null || tenant.image == " " || tenant.image == "" ? 'd-none' : '') + `" alt="" src="` + (tenant.image != null && tenant.image != " " && tenant.image != "" ? tenant.image : randomImg1) + `">
-
                                                                         <span class="${(tenant.messageCount['count(message)'] > 0 ? "bg-success" : "bg-primary")} fs-12" id="chat` + tenant.tenantID + `" >` + tenant.messageCount['count(message)'] + `</span>
                                                                     </div>
                                                                     <div class="media-body">
@@ -1979,7 +1970,6 @@
                                 tab_pane.append(element);
                             })
                             tenantCountLast.forEach(function (element) {
-
                                 tab_pane.append(element);
                             })
                         }
@@ -2128,7 +2118,6 @@
                     timestampSpan.innerText = formattedTime;
                     const imageContainer = document.createElement('div');
                     imageContainer.setAttribute('class', 'ms-1');
-
                     if (
                         localStorage.getItem("LandlordImg") != "null" &&
                         localStorage.getItem("LandlordImg") != " " &&
@@ -2145,11 +2134,9 @@
                         imageContainer.textContent = localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
                             localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase();
                     }
-
                     // Append the imageContainer to the document or a specific parent element
                     // For example, assuming you have a parentElement, you can use:
                     // parentElement.appendChild(imageContainer);
-
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);
@@ -2179,5 +2166,4 @@
         </script>
         <script src="../assets/js/user-sidebar-permissions.js"></script>
 </body>
-
 </html>

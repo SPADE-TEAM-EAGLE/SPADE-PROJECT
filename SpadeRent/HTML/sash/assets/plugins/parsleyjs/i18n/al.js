@@ -1,6 +1,4 @@
 // Validation errors messages for Parsley
-
-
 Parsley.addMessages('al', {
   defaultMessage: "Kjo vlerë është invalide.",
   type: {
@@ -25,5 +23,4 @@ Parsley.addMessages('al', {
   check:          "Ju duhet të zgjedhni në mes të %s dhe %s zgjedhjeve.",
   equalto:        "Kjo vlerë duhet të jetë e njejtë."
 });
-
 Parsley.setLocale('al');

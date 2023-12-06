@@ -3235,7 +3235,6 @@
                         amount.prop('required', true)
                     })
                 } else if ($(this).val() === 'One Time Invoice') {
-
                     if ($('#collapse12').hasClass('show')) {
                         $('#collapse12').collapse('hide');
                         $("#dueDate").removeClass("d-none")
@@ -3623,8 +3622,6 @@
                     },
                     success: async function (response) {
                         categoryData = response.data
-
-                            
                             tenantData = response.data[0]
                             console.log("viewAllPropertyTenant")
                             console.log(response)
@@ -3650,7 +3647,6 @@
                             });
                         },
                         error: function (xhr, status, error) {
-                            
                         }
                     });
                     $.ajax({
@@ -3695,7 +3691,6 @@
                             tableBody.empty();
                             let tenantNames = []
                             response.data[0]?.forEach(function (invoice, index) {
-
                                 var serial = '<td style="font-weight: 600;" class="serial-number" >' + (index + 1) + '</td>';
                                 var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                                 var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
@@ -3805,7 +3800,6 @@
                         tableBody.empty();
                         let tenantNames = []
                         response.data[0]?.forEach(function (invoice, index) {
-
                             var serial = '<td style="font-weight: 600;" class="serial-number" >' + (index + 1) + '</td>';
                             var invoiceNumberHide = '<td class="invoice-id d-none" style="font-weight: 600;">' + invoice.invoiceID + '</td>';
                                 var invoiceNumber = '<td class="" style="font-weight: 600;">' + invoice.cInvoiceId + '</td>';
@@ -4553,7 +4547,6 @@
                         var idA = new Date($(a).find('.serial-number').text());
                         var idB = new Date($(b).find('.serial-number').text());
                         return idA - idB;
-                        
                     });
                 }
                 else if (selectedFilter === 'recently-added') {
@@ -4568,7 +4561,6 @@
                         var idA = new Date($(a).find('.serial-number').text());
                         var idB = new Date($(b).find('.serial-number').text());
 return idB - idA;
-                        
                     });
                 }
                 tableBody.empty().append(rows);

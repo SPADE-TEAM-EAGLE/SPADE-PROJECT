@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('el', {
   dateiso:  "Η τιμή πρέπει να είναι μια έγκυρη ημερομηνία (YYYY-MM-DD).",
   minwords: "Το κείμενο είναι πολύ μικρό. Πρέπει να έχει %s ή και περισσότερες λέξεις.",

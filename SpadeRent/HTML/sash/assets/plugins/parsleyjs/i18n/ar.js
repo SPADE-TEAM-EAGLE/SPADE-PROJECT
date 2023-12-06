@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('ar', {
   defaultMessage: "تأكد من صحة القيمة المدخل",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('ar', {
   check:          "يجب اختيار بين %s و %s خيار.",
   equalto:        "تأكد من تطابق القيمتين المدخلة."
 });
-
 Parsley.setLocale('ar');

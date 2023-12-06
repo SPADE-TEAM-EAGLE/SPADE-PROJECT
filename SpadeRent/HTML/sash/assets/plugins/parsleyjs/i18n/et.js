@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('et', {
   defaultMessage: "See väärtus ei sobi.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('et', {
   check: "Valik peab olema vahemikus %s ja %s .",
   equalto: "See väärtus peab olema sama."
 });
-
 Parsley.setLocale('et');

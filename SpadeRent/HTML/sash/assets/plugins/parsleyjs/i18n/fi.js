@@ -1,6 +1,5 @@
 // Validation errors messages for Parsley
 // Load this after Parsley
-
 Parsley.addMessages('fi', {
   defaultMessage: "Sy&ouml;tetty arvo on virheellinen.",
   type: {
@@ -25,5 +24,4 @@ Parsley.addMessages('fi', {
   check:          "Valitse %s-%s vaihtoehtoa.",
   equalto:        "Salasanat eiv&auml;t t&auml;sm&auml;&auml;."
 });
-
 Parsley.setLocale('fi');

@@ -3,7 +3,6 @@
  * ©2020 SpryMedia Ltd, all rights reserved.
  * License: MIT datatables.net/license/mit
  */
-
 table.dataTable {
     clear: both;
     margin-top: 6px !important;
@@ -11,18 +10,15 @@ table.dataTable {
     max-width: none !important;
     border-collapse: separate !important;
     border-spacing: 0;
-
     td,
     th {
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
     }
-
     td.dataTables_empty,
     th.dataTables_empty {
         text-align: center;
     }
-
     &.nowrap {
         th,
         td {
@@ -30,7 +26,6 @@ table.dataTable {
         }
     }
 }
-
 div.dataTables_wrapper div {
     &.dataTables_length {
         label {
@@ -38,22 +33,18 @@ div.dataTables_wrapper div {
             text-align: left;
             white-space: nowrap;
         }
-
         select {
             width: auto;
             display: inline-block;
         }
     }
-
     &.dataTables_filter {
         text-align: right;
-
         label {
             font-weight: normal;
             white-space: nowrap;
             text-align: left;
         }
-
         input {
             margin-left: 0.5em;
             display: inline-block;
@@ -61,23 +52,19 @@ div.dataTables_wrapper div {
             margin-top: 2px;
         }
     }
-
     &.dataTables_info {
         padding-top: 0.85em;
     }
-
     &.dataTables_paginate {
         margin: 0;
         white-space: nowrap;
         text-align: right;
-
         ul.pagination {
             margin: 2px 0;
             white-space: nowrap;
             justify-content: flex-end;
         }
     }
-
     &.dataTables_processing {
         position: absolute;
         top: 50%;
@@ -89,20 +76,17 @@ div.dataTables_wrapper div {
         padding: 1em 0;
     }
 }
-
 table.dataTable > thead {
     > tr > {
         th:active,
         td:active {
             outline: none;
         }
-
         th:not(.sorting_disabled),
         td:not(.sorting_disabled) {
             padding-right: 30px;
         }
     }
-
     .sorting,
     .sorting_asc,
     .sorting_desc,
@@ -111,7 +95,6 @@ table.dataTable > thead {
         cursor: pointer;
         position: relative;
     }
-
     .sorting {
         &:before,
         &:after {
@@ -121,7 +104,6 @@ table.dataTable > thead {
             opacity: 0.3;
         }
     }
-
     .sorting_asc {
         &:before,
         &:after {
@@ -131,7 +113,6 @@ table.dataTable > thead {
             opacity: 0.3;
         }
     }
-
     .sorting_desc {
         &:before,
         &:after {
@@ -141,7 +122,6 @@ table.dataTable > thead {
             opacity: 0.3;
         }
     }
-
     .sorting_asc_disabled {
         &:before,
         &:after {
@@ -151,7 +131,6 @@ table.dataTable > thead {
             opacity: 0.3;
         }
     }
-
     .sorting_desc_disabled {
         &:before,
         &:after {
@@ -161,7 +140,6 @@ table.dataTable > thead {
             opacity: 0.3;
         }
     }
-
     .sorting:before,
     .sorting_asc:before,
     .sorting_desc:before,
@@ -170,7 +148,6 @@ table.dataTable > thead {
         right: 1em;
         content: "↑";
     }
-
     .sorting:after,
     .sorting_asc:after,
     .sorting_desc:after,
@@ -179,28 +156,23 @@ table.dataTable > thead {
         right: 0.5em;
         content: "↓";
     }
-
     .sorting_asc:before,
     .sorting_desc:after {
         opacity: 1;
     }
-
     .sorting_asc_disabled:before,
     .sorting_desc_disabled:after {
         opacity: 0;
     }
 }
-
 div {
     &.dataTables_scrollHead table.dataTable {
         margin-bottom: 0 !important;
     }
-
     &.dataTables_scrollBody table {
         border-top: none;
         margin-top: 0 !important;
         margin-bottom: 0 !important;
-
         thead {
             .sorting:before,
             .sorting_asc:before,
@@ -211,7 +183,6 @@ div {
                 display: none;
             }
         }
-
         tbody tr:first-child {
             th,
             td {
@@ -219,17 +190,14 @@ div {
             }
         }
     }
-
     &.dataTables_scrollFoot > .dataTables_scrollFootInner {
         box-sizing: content-box;
-
         > table {
             margin-top: 0 !important;
             border-top: none;
         }
     }
 }
-
 @media screen and (max-width: 767px) {
     div.dataTables_wrapper div {
         &.dataTables_length,
@@ -237,94 +205,77 @@ div {
         &.dataTables_info {
             text-align: center !important;
         }
-
         &.dataTables_paginate {
             text-align: center !important;
-
             ul.pagination {
                 justify-content: center !important;
             }
         }
     }
 }
-
 table {
     &.dataTable.table-sm {
         > thead > tr > th:not(.sorting_disabled) {
             padding-right: 20px;
         }
-
         .sorting:before,
         .sorting_asc:before,
         .sorting_desc:before {
             top: 5px;
             right: 0.85em;
         }
-
         .sorting:after,
         .sorting_asc:after,
         .sorting_desc:after {
             top: 5px;
         }
     }
-
     &.table-bordered.dataTable {
         border-right-width: 0;
-
         thead tr:first-child {
             th,
             td {
                 border-top-width: 1px;
             }
         }
-
         th,
         td {
             border-left-width: 0;
         }
-
         th:first-child,
         td:first-child {
             border-left-width: 0px;
         }
-
         th:last-child,
         td:last-child {
             border-right-width: 1px;
         }
-
         th,
         td {
             border-bottom-width: 0px;
         }
     }
 }
-
 div {
     &.dataTables_scrollHead table.table-bordered {
         border-bottom-width: 0;
     }
-
     &.table-responsive > div.dataTables_wrapper > div.row {
         margin: 0;
-
         > div[class^="col-"] {
             &:first-child {
                 padding-left: 0;
             }
-
             &:last-child {
                 padding-right: 0;
             }
         }
     }
 }
-
 .dataTables_wrapper .selected {
     background: #f6f6fb;
     cursor: pointer;
 }
-
 #delete-datatable tr {
     cursor: pointer;
 }
