@@ -303,15 +303,15 @@ router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
 
 //                                             superAdmin
 
-router.get("/signInAdmin", superAdmin.signInAdmin);
+router.post("/signInAdmin", superAdmin.signInAdmin);
 // router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
-router.get("/allLandlord",superAdmin.allLandlord);
+router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
 // router.delete("/closedLandlord", superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 // router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
 // router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
-router.post("/createUserAdmin", superAdmin.createUserAdmin);
+router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
 router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);

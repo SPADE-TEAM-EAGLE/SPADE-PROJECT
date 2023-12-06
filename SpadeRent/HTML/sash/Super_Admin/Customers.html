@@ -550,7 +550,6 @@
                                                     <tr>
                                                         
                                                         <th>customer id</th>
-                                                        <th class="d-none">Landlord ID</th>
                                                         <th>Name</th>
                                                         <th>Contact</th>
                                                         <th>subscription</th>
@@ -1159,7 +1158,7 @@ function getData(){
             console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             $('table').find('tr').each(function () {
                 console.log($(this))
-                var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });
         });

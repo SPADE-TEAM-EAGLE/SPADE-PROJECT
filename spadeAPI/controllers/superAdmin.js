@@ -33,8 +33,8 @@ const config = process.env;
 
 // ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
+    const { email,password }=req.body;
     // const { email,password }=req.query;
-    const { email,password }=req.query;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
@@ -269,22 +269,22 @@ exports.userAdminGetById = async function (req, res) {
 
 
 // ######################################## user Admin Edit ########################################
-exports.updateAdminUser = async function (req, res) {
-  const { firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, id } = req.body;
-  const currentDate = new Date();
-  try {
-    const insertResult = await queryRunner(updateUserAdminQuery, [
-      firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, currentDate, id]);
-    if (insertResult[0].affectedRows > 0) {
-      return res.status(200).json({ message: "User Updated Successfully" });
-    } else {
-      return res.status(500).send("Failed to Update User Permission User");
-    }
-  } catch (error) {
-    console.log(error)
-    return res.status(400).json({ message: error.message });
-  }
-};
+// exports.updateAdminUser = async function (req, res) {
+//   const { firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, id } = req.body;
+//   const currentDate = new Date();
+//   try {
+//     const insertResult = await queryRunner(updateUserAdminQuery, [
+//       firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, currentDate, id]);
+//     if (insertResult[0].affectedRows > 0) {
+//       return res.status(200).json({ message: "User Updated Successfully" });
+//     } else {
+//       return res.status(500).send("Failed to Update User Permission User");
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 // ######################################## user Admin Edit ########################################
 
 
@@ -595,6 +595,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
 //  ############################# Reset Email ############################################################
 exports.adminResetEmail = async (req, res) => {
   const { email } = req.query;
+  // const { email } = req.body;
 
   // console.log(email);
   const mailSubject = "Spade Reset Email";
@@ -633,7 +634,8 @@ exports.adminResetEmail = async (req, res) => {
 //  ############################# Verify Reset Email Code ############################################################
 exports.adminVerifyResetEmailCode = async (req, res) => {
   const { id, token } = req.query;
-console.log(req.query)
+  // const { id, token } = req.body;
+// console.log(req.query)
   try {
     const selectResult = await queryRunner(
       selectQuery("superAdmin", "id", "token"),
