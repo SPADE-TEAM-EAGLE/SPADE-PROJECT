@@ -391,6 +391,15 @@ td {
 * {
   box-sizing: border-box;
 }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #000 80;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #000 cc;
+}
 hr {
   width: 75%;
   height: 1px;
@@ -490,6 +499,16 @@ hr {
   background: #edf3f9;
   padding: 0.5em;
 }
+.dark-mode .chat .conversation .head {
+  width: 100%;
+  min-height: 4em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  background: black;
+  color: white;
+  padding: 0.5em;
+}
 .chat .conversation .head .buttons {
   display: flex;
   align-items: center;
@@ -504,6 +523,9 @@ hr {
   gap: 0.25em;
   padding: 1em;
   overflow: auto;
+}
+.dark-mode .chat .conversation .messages {
+  background: #212121;
 }
 .chat .conversation .messages .time {
   width: fit-content;
@@ -520,12 +542,11 @@ hr {
 }
 .chat .conversation .messages .msg-text .text {
   display: block;
-  padding: 1em;
+  padding: 0.5em;
   border-radius: 0.75em;
   background: #f8f8f8;
   box-shadow: 0 2px 0 #000 20;
-}
-.chat .conversation .messages .msg-text.owner {
+  font-size: 18px;
 }
 .chat .conversation .messages .msg-text.owner .text {
   color: #fff;
@@ -541,6 +562,9 @@ hr {
   gap: 0.5em;
   padding: 0.25em 0.5em;
   transition: all ease 0.5s;
+}
+.dark-mode .chat .conversation .field {
+  background-color: black;
 }
 .chat .conversation .field .input-message {
   font-weight: bold;
@@ -772,23 +796,7 @@ hr {
   text-decoration: none;
 }
 #chat {
-  height: calc(100vh - 250px);
-}
-.dark-mode .chat .conversation .field {
-  background-color: black;
-}
-.dark-mode .chat .conversation .messages {
-  background: #212121;
-}
-.dark-mode .chat .conversation .head {
-  width: 100%;
-  min-height: 4em;
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  background: black;
-  color: white;
-  padding: 0.5em;
+  height: calc(100vh - 100px);
 }
 @media screen and (max-width: 768px) {
   .chat .conversation,
@@ -813,14 +821,4 @@ hr {
   padding: 5px;
   background: #edf3f9;
   bottom: 7px;
-}
-@media (max-width: 480px) {
-  .tabs-menu1 ul li a {
-    padding: 10px 20px 11px 20px !important;
-    display: block;
-    color: white;
-  }
-  .tabs-menu1 ul li:last-child {
-    margin-bottom: 0;
-  }
 }

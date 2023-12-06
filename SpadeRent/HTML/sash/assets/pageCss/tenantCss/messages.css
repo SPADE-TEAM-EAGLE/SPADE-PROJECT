@@ -2,6 +2,18 @@
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
+.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+  width: 7px;
+}
+.modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  background-color: rgb(136, 136, 136, 0.2);
+  border-radius: 7px;
+  transition: all 1ms;
+}
+.modal-dialog.modal-dialog-scrollable
+  .modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(136, 136, 136, 0.5);
+}
 .custom-file-input::before {
   content: "Select Files";
   display: inline-block;
@@ -23,13 +35,20 @@
   content: "Change Files";
   background: #28a745;
 }
+.dark-mode .create-new-link {
+  background: transparent !important;
+  border: 3px solid #1467b0 !important;
+  color: white !important;
+  border-radius: 50px !important;
+}
+.create-new-link {
+  background: transparent !important;
+  border: 3px solid #1467b0 !important;
+  color: black;
+  border-radius: 50px !important;
+}
 .selected-files {
   margin-top: 10px;
-}
-.image-container {
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
 }
 .selected-files span {
   display: inline-block;
@@ -37,6 +56,14 @@
   padding: 4px 8px;
   background: #f8f9fa;
   color: #333;
+  border-radius: 4px;
+}
+.dark-mode .selected-files span {
+  display: inline-block;
+  margin-right: 0;
+  padding: 4px 8px;
+  background: transparent;
+  color: white;
   border-radius: 4px;
 }
 .custom-file-input {
@@ -51,10 +78,18 @@
   padding: 6px 12px;
   background-color: #fff;
 }
+.dark-mode .custom-file-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background-color: transparent;
+}
 .custom-file-label i {
   margin-bottom: 5px;
   font-size: 3rem;
-  color: #1467b0;
 }
 .custom-file-text {
   text-align: center;
@@ -73,6 +108,9 @@
   padding: 0.75rem;
   vertical-align: top;
   border: 1px solid #e9edf4;
+}
+input:focus {
+  border: 3px solid #555 !important;
 }
 .panel-body {
   padding: 0px;
@@ -125,10 +163,6 @@
 .table td {
   vertical-align: middle !important;
 }
-.card {
-  border-radius: 22px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
 .modal-footer .button-left {
   background-color: #1f1f1f;
   margin: 0rem 1rem;
@@ -140,10 +174,13 @@
   font-family: "Figtree";
   font-style: normal;
   font-weight: 600;
-  font-size: 0.938rem;
   line-height: 1.875rem;
+  font-size: 0.77rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
   letter-spacing: 0.0145455em;
+}
+.modal-footer .button {
+  font-size: 0.938rem;
 }
 .accordion-button::after {
   content: "";
@@ -201,11 +238,11 @@
 }
 .delete-file {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: -1px;
+  right: 4px;
   cursor: pointer;
-  font-size: 18px;
-  color: #ff0000;
+  font-size: 11px;
+  color: #000;
 }
 .btn-group > .btn-group:not(:last-child) > .btn,
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
@@ -229,22 +266,17 @@
   background: none;
   color: #333;
 }
-.delete-file {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  cursor: pointer;
-  font-size: 13px;
-  color: #000;
-}
 button.btn-close {
   right: -7px;
 }
 .btn-close {
-  width: 2.5rem !important;
+  width: 2.5rem;
   opacity: 1;
   position: absolute;
-  top: 6px;
+  top: -11px;
+}
+.del {
+  width: 2rem !important;
 }
 .btn-close:hover,
 .btn-close:focus {
@@ -266,8 +298,11 @@ button.btn-close {
   #top_main_image {
     display: none;
   }
+  #top_main_card {
+    height: 220px;
+  }
   #nav_links {
-    top: 153px;
+    top: 165px;
   }
 }
 @media (max-width: 425px) {
@@ -304,13 +339,12 @@ button.btn-close {
   #top_main_image {
     display: none;
   }
-  #nav_links {
-    top: 153px;
+  #top_main_card {
+    height: 220px;
   }
-}
-.card-header {
-  padding: 0.6rem 1.5rem;
-  border-radius: 28px 28px 0px 0px !important;
+  #nav_links {
+    top: 165px;
+  }
 }
 @media (max-width: 375px) {
   .border-model-line h2 {
@@ -331,4 +365,24 @@ button.btn-close {
   .file-details {
     padding: 5px;
   }
+}
+th,
+td {
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.dark-mode th {
+  background: #212121 !important;
+}
+.light-mode th {
+  background: #ecf3f9 !important;
+}
+.btn-light {
+  border-color: #000000 !important;
+}
+.send-button {
+  padding: 5px 10px 0px 10px;
+}
+.send-button-icon {
+  font-size: 18px;
 }
