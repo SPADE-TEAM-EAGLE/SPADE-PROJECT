@@ -80,8 +80,10 @@ exports.addVendors = async (req, res) => {
       message: " Vendor created successful",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 
@@ -127,8 +129,10 @@ exports.updateVendor = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 // delete vendor by id
@@ -149,8 +153,10 @@ exports.deleteVendor = async (req, res) => {
         });
       }     
     } catch (error) {
-      console.log(error);
-      res.status(400).send(error);
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
     }
 }
 //  #############################  ADD VENDOR ENDS HERE ##################################################
@@ -344,7 +350,10 @@ exports.addTasks = async (req, res) => {
     return res.send("Created");
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
@@ -398,8 +407,10 @@ exports.getAllTask = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  ############################# Get ALL Task End ############################################################
@@ -469,8 +480,10 @@ exports.taskByID = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks");
+    return res.status(500).json({
+      message: "Error Get Tasks",
+      error: error.message,
+  });  
   }
 };
 
@@ -496,7 +509,10 @@ exports.getVendorCategory = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get category ");
+    return res.status(500).json({
+      message: "Error Get category ",
+      error: error.message,
+  });
     console.log(error);
   }
 };
@@ -524,8 +540,11 @@ exports.getVendorAssignTo = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get vendor list ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get vendor list ",
+      error: error.message,
+  });
+
   }
 };
 //  #############################  Task Assign to ENDS HERE ##################################################
@@ -747,8 +766,11 @@ exports.deleteTask = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get delete task  ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get delete task",
+      error: error.message,
+  });
+
   }
 };
 //  #############################  Delete Task ENDS HERE ##################################################
@@ -880,8 +902,10 @@ exports.addVendorCategory = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Error",
+      error: error.message,
+  });
   }
 };
 
@@ -967,8 +991,11 @@ exports.getAllTaskTenantRequest = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Error Get task",
+      error: error.message,
+  });
+
   }
 };
 //  ############################# Get ALL Task End ############################################################

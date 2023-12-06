@@ -172,7 +172,7 @@ exports.createTenants = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error occurs in creating Tenants  " + error);
+    return res.status(500).json({ message: "Error occurs in creating Tenants", error: error.message });
   }
 };
 //  ############################# Create tenants END ############################################################
@@ -215,7 +215,7 @@ exports.sendInvitationLink = async (req, res) => {
       return res.status(400).send("Tenant is not exists");
     }
   } catch (error) {
-    res.send("Error occurs in Sending Tenants welcome email " + error.message); // Sending error response
+    return res.status(500).json({ message: "Error occurs in Sending Tenants welcome email", error: error.message });
   }
 };
 
@@ -252,7 +252,8 @@ exports.createResetEmailTenant = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    res.status(400).send("Error"+error.message);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
 //  ############################# Tenant Reset Email ############################################################
@@ -283,8 +284,8 @@ exports.resendCodeTenants = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    return res.status(500).json({ message: "Error", error: error.message });
+    
   }
 };
 //  ############################# resend Code ############################################################
@@ -319,7 +320,8 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    return res.status(500).json({ message: "Error", error: error.message });
+
   }
 };
 //  ############################# Tenant Verify Reset Email Code ############################################################
@@ -399,8 +401,8 @@ exports.updatePasswordTenant = async (req, res) => {
       res.status(201).send("Password Does not match ");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error");
+    return res.status(500).json({ message: "Error", error: error.message });
+
   }
 };
 //  ############################# Tenant Update Password ############################################################
@@ -429,8 +431,8 @@ exports.addAlternateEmailPhone = async (req, res) => {
         message: "Email and phone number successfully saved",
       });
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
 
@@ -467,8 +469,8 @@ exports.tenantAttachFile = async (req, res) => {
       message: " Tenant Files save successful",
     });
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
 //  ############################# Add Tenant Attach File End ############################################################
@@ -509,7 +511,8 @@ exports.tenantAttachFileDelete = async (req, res) => {
       }
     
   } catch (error) {
-    res.send("Error from delete Property ");
+    return res.status(500).json({ message: "Error from delete Property", error: error.message });
+
     console.log(error);
   }
 };
@@ -530,7 +533,7 @@ exports.GettenantAttachFile = async (req, res) => {
       data : GettenantAttachFileResult[0]
     });
   } catch (error) {
-    res.status(400).send("Error4" + error);
+    return res.status(500).json({ message: "Error ", error: error.message });
     console.log(error);
   }
 };
@@ -637,8 +640,7 @@ exports.tenantDelete = async (req, res) => {
     // }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete tenants ", error);
-    // console.log(req.body)
+    return res.status(500).json({ message: "Error from delete tenants", error: error.message });
   }
 };
 //  ############################# Delete Tenant End ############################################################
@@ -662,8 +664,8 @@ exports.getTenantsByID = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Tenants By ID" + error );
-    console.log(error);
+    return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
+
   }
 };
 //  ############################# Get tenant ByID End ############################################################
@@ -794,7 +796,7 @@ exports.updateTenants = async (req, res) => {
     // }
   } catch (error) {
     console.log(error);
-    res.send("Error occurs in updating Tenants  " + error);
+    return res.status(500).json({ message: "Error occurs in updating Tenants", error: error.message });
   }
 };
 //  ############################# Update tenants END ############################################################
@@ -923,8 +925,7 @@ exports.tenantTask = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get tenant Task");
+    return res.status(500).json({ message: "Error Get tenant Task", error: error.message });
   }
 };
 exports.updateTenantProfile = async (req, res) => {
@@ -975,8 +976,7 @@ exports.updateTenantProfile = async (req, res) => {
       }
     }
   } catch (error) {
-    res.send("Error Get Tenants By ID");
-    console.log(error);
+    return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
   }
 };
 //  ############################# Task tenant ############################################################
@@ -1007,8 +1007,7 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
       }
 
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+    return res.status(500).json({ message: "Error ", error: error.message });
   }
 };
 //  ############################# Add Tenant Attach File End ############################################################
@@ -1052,8 +1051,8 @@ exports.checkUnpaidInvoices = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error: " + error.message);
-    res.status(400).send("Error: " + error.message);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
 
@@ -1139,7 +1138,7 @@ exports.allTenantDelete = async (req, res) => {
     console.log(error);
     res.status(400).json({
       message:"Error from delete tenants ",
-      error
+      error:error.message
   });
   }
 };
@@ -1178,7 +1177,7 @@ exports.TenantStatusCP = async (req, res) => {
     console.log(error);
     res.status(400).json({
       message:"Error tenants Dashboard ",
-      error
+      error : error.message
   });
   }
 };

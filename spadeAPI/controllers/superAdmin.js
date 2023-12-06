@@ -52,8 +52,11 @@ exports.signInAdmin = async(req,res)=>{
         res.status(201).json({message:"Incorrect Password"})
       }
     }catch(error){
-        console.log(error);
-        res.status(400).send(error.message);
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
+
   
     }
   } 
@@ -74,9 +77,10 @@ exports.allLandlord = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
-
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 }
 // ######################################## All Landlord ########################################
@@ -129,7 +133,11 @@ exports.deleteLandlord = async (req, res) => {
     } else {
       res.status(400).json({ message: "Landlord is not found" })
     }
-  } catch {
+  } catch(error) {
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 }
 // ######################################## All Landlord Delete ########################################
@@ -151,8 +159,10 @@ exports.allClosedLandlord = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
 
   }
 }
@@ -209,8 +219,10 @@ exports.allUserAdmin = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
 
   }
 }
@@ -488,7 +500,10 @@ exports.adminUserPermissionRoles = async function (req, res) {
       });
     }
   } catch (error) {
-    console.log(error)
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   };
   };
 
@@ -521,7 +536,10 @@ exports.adminUserPermissionRoles = async function (req, res) {
           res.status(200).send("No user found");
         }
       } catch (error) {
-        res.status(400).send(error)
+        return res.status(500).json({
+          message: "Internal server Error",
+          error: error.message,
+      });
       }
     }
     exports.updatePlanIdByAdmin = async function (req, res) {
@@ -569,7 +587,10 @@ exports.adminUserPermissionRoles = async function (req, res) {
         return res.status(500).send("Failed to Update User Permission User");
       }
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
     }
   };
 
@@ -625,8 +646,10 @@ exports.adminResetEmail = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error");
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  ############################# Reset Email ############################################################
@@ -662,7 +685,10 @@ exports.adminVerifyResetEmailCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 
@@ -695,8 +721,10 @@ exports.updatePasswordAdmin = async (req, res) => {
       res.status(201).send("Password Does not match ");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error" + error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  ############################# Update Password ############################################################
@@ -727,8 +755,10 @@ exports.resendCodeAdmin = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
 
   }}
 

@@ -67,7 +67,7 @@ const config = process.env;
           }
         } catch (error) {
           console.log(error)
-          res.send('Error in All Invoice ' , error)
+          return res.status(500).json({ message: "Error in All Invoice", error: error.message });
         }
       }
       //  ############################# View All Invoice Tenant End ############################################################
@@ -132,7 +132,7 @@ exports.getAllTaskTenant = async (req, res) => {
       }
     } catch (error) {
       console.log("Error:", error);
-      res.send("Error Get Tasks" + error);
+      return res.status(500).json({ message: "Error Get Tasks", error: error.message });
     }
   };
 
@@ -182,7 +182,8 @@ exports.getTenantDashboardData = async (req, res) => {
         })
       }
     } catch (error) {
-      res.send('Error Get Tenants By ID')
+      return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
+
       console.log(error)
     }
   }
@@ -282,8 +283,8 @@ exports.addTasksTenant = async (req, res) => {
     }
     return res.send("Task Created Successfully");
   } catch (error) {
-    console.log(error)
-    res.status(400).send(error);
+    return res.status(500).json({ message: "Error in creating a task", error: error.message });
+
   }
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
@@ -353,8 +354,8 @@ exports.taskByIDTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks",error);
+    return res.status(500).json({ message: "Error Get Tasks", error: error.message });
+
   }
 };
 
@@ -480,7 +481,6 @@ exports.getInvoiceCategoriesTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("Error from create invoice categories"+error);
+    return res.status(500).json({ message: "Error from create invoice categories", error: error.message });
   }
 };

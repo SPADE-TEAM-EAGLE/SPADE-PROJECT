@@ -1015,11 +1015,11 @@ exports.Payment2Payment = async (req, res) => {
 // ###################################### Payment 2 Payment #############################################################
 exports.paymentACHVerification = async (req, res) => {
   const { ppp_status, ppp_TransactionID, TransactionId, userid, merchant_unique_id,email, totalAmount, currency, Status } = req.body;
-  console.log("req.body");
+  // console.log("req.body");
   console.log(req.body);
-  console.log("req.query")
+  // console.log("req.query")
   console.log(req.query)
-  console.log("req.params")
+  // console.log("req.params")
   console.log(req.params)
   const currentDate = new Date();
   try {

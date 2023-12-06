@@ -157,8 +157,8 @@ exports.createInvoice = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json({"Error":error});
+    // console.log(error);
+    return res.status(400).json({ message: "Error", error: error.message });
   }
  };
 //  ############################# Create Invoice END ############################################################
@@ -190,8 +190,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("Error Invoice Status update"+error);
+   return res.status(500).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# update Invoice Status End ############################################################
@@ -235,8 +234,7 @@ exports.getAllInvoices = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("All Invoice "+error);
+   return res.status(500).json({ message: "Error in All Invoice", error: error.message });
   }
 };
 //  ############################# View All Invoice  End ############################################################
@@ -287,8 +285,7 @@ exports.getByIdInvoices = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("Error occur in Invoice by ID"+error);
+   return res.status(400).json({ message: "Error occur in Invoice by ID", error: error.message });
   }
 };
 //  ############################# Invoice By ID End ############################################################
@@ -459,8 +456,8 @@ exports.UpdateInvoice = async (req, res) => {
     }
 
   } catch (error) {
-    console.log(error);
-    return res.status(400).send("Error occurred while updating invoice"+error);
+    // console.log(error);
+    return res.status(400).json({ message: "Error occurred while updating invoice", error: error.message });
   }
 };
 //  ############################# Update Invoice END ############################################################
@@ -503,8 +500,8 @@ exports.invoiceDelete = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from delete invoice "+error);
-    console.log(error);
+    return res.status(400).json({ message: "Error from delete invoice ", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# Delete invoice End ############################################################
@@ -567,8 +564,9 @@ exports.resendEmail = async (req, res) => {
       message: " Resend Email successful",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error"+error);
+    
+    return res.status(400).json({ message: "Error Resend email ", error: error.message });
+    
   }
 };
 //  ############################# Resend Email Invoice END ############################################################
@@ -668,7 +666,7 @@ exports.createInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories"+error);
+    return res.status(400).json({ message: "Error from create invoice categories ", error: error.message });
   }
 };
 // ############################# create invoice categories ############################################################
@@ -693,9 +691,10 @@ exports.updateInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from update invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
+
 exports.getInvoiceCategories = async (req, res) => {
   try {
     const { userId } = req.user;
@@ -714,7 +713,7 @@ exports.getInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
 exports.getInvoiceCategoriesText = async (req, res) => {
@@ -731,8 +730,9 @@ exports.getInvoiceCategoriesText = async (req, res) => {
         data: invoiceImagecheckresult[0][0],
       });
     }
-  } catch {
-    res.send("Error from create invoice categories");
+  } catch(error) {
+    return res.status(400).json({ message: "Error ", error: error.message });
+
   }
 };
 exports.deleteInCategories = async (req, res) => {
@@ -754,7 +754,7 @@ exports.deleteInCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
 
@@ -790,7 +790,8 @@ exports.deleteVendCategories = async (req, res) => {
   }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete Vendor categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
+
   }
 };
 

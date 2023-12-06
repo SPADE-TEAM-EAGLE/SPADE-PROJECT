@@ -142,7 +142,7 @@ router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTen
 // router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
-router.get("/getStates", userController.getStates);
+router.get("/getStates",userController.getStates);
 router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);

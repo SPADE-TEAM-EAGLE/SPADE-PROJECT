@@ -76,8 +76,10 @@ exports.addprospectus = async (req, res) => {
             message: " prospectus created successful",
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+       return res.status(400).json({
+            message: "Error",
+            error: error.message,
+          });
     }
 };
 
@@ -124,7 +126,7 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Internal Server Error",
             error: error.message,
         });
@@ -179,7 +181,7 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Internal Server Error",
             error: error.message,
         });
@@ -234,7 +236,7 @@ exports.updateProspectus = async (req, res) => {
     }
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus",
             error : error.message
         });
@@ -269,7 +271,7 @@ exports.updateProspectusStatus = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus status",
             error : error.message
         });
@@ -298,7 +300,7 @@ exports.prospectusInsightQD = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Qualified and Disqualified",
             error : error.message
         });
@@ -329,7 +331,7 @@ exports.prospectusInsightEN = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
@@ -360,8 +362,11 @@ exports.deleteProspectus = async (req, res) => {
         });
       }
     } catch (error) {
-      res.send("Error Get delete prospectus  ");
-      console.log(error);
+        return res.status(400).json({
+        message: "Error Get delete prospectus",
+        error: error.message,
+      });
+    //   console.log(error);
     }
   };
   //  #############################  Delete prospectus ENDS HERE ##################################################
@@ -389,8 +394,11 @@ exports.prospectusTime = async (req, res) => {
         });
       }
     } catch (error) {
-      res.send("Error Get Prospectus time  ");
-      console.log(error);
+        return res.status(400).json({
+            message: "Error Get Prospectus time ",
+            error: error.message,
+          });
+
     }
   };
   //  ############################# Prospectus time ENDS HERE ##################################################
@@ -440,7 +448,11 @@ exports.prospectusTime = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        return res.status(400).json({
+            message: "Error ",
+            error: error.message,
+          });
+
     }
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
@@ -468,8 +480,11 @@ exports.prospectusTime = async (req, res) => {
             }
 
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+        return res.status(400).json({
+            message: "Error ",
+            error: error.message,
+          });
+
     }
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
@@ -496,7 +511,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
@@ -528,7 +543,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+       return res.status(500).json({
             message: "Error occur in Dashboard prospectus Insight",
             error : error.message
         });
@@ -572,7 +587,7 @@ exports.prospectTimeGraph = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus time",
             error: error.message,
         });

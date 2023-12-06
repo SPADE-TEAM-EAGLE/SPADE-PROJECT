@@ -36,7 +36,8 @@ exports.CreateBankAccount = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
+            
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
@@ -62,7 +63,7 @@ const userType = "Landlord";
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
@@ -87,7 +88,7 @@ exports.GetBankAccount = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
 
@@ -106,7 +107,7 @@ exports.GetBankAccountAdmin = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Create bank Account ############################################################
@@ -124,7 +125,7 @@ exports.updateBankAccountStatus = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Update bank Account Status ############################################################
@@ -145,7 +146,7 @@ exports.updateBankAccountTenant = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Update bank Account ############################################################
@@ -187,7 +188,7 @@ exports.updateBankAccountTenant = async (req, res) => {
                 }
             } catch (error) {
                 console.log(error);
-                res.status(400).send("Error");
+                res.status(500).json({ message: "Error", error: error.message });
             }
     };
       //  ############################# Property Account ############################################################

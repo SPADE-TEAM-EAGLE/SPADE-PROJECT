@@ -71,9 +71,9 @@ exports.createUserPermissionUser = async function (req, res) {
     if (insertResult[0].affectedRows > 0) {
       console.log(email + " " + mailSubject + " " + name)
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "Users Permission User added successfully" });
+      return res.status(200).json({ message: "Users Permission User added successfully " });
     } else {
-      return res.status(500).send("Failed to add User Permission User");
+      return res.status(500).send("Failed to add User Permission User ");
     }
   } catch (error) {
     return res.status(400).json({ message: error.message });
@@ -85,7 +85,7 @@ exports.userCheckEmail = async function (req, res) {
   // const { email } = req.body;
   const { userId } = req.user;
   try {
-    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
+    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail "), [
       userId,
       email,
     ]);

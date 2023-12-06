@@ -58,7 +58,10 @@ exports.changePasssword = async function (req, res) {
           res.status(401).json({ error: "Incorrect Password" });
         }  
     } catch (error) {
-      res.status(400).send(error.message);
+      return res.status(400).json({
+        message: "Error ",
+        error: error.message,
+      });
     }
   };
   //  ############################# Update Setting Password END ############################################################
@@ -102,8 +105,10 @@ exports.changePasswordTenant = async function (req, res) {
         res.status(400).send("Incorrect Password");
       }  
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
 //  ############################# Update Setting tennant Password END ############################################################
@@ -123,8 +128,9 @@ exports.emailtemplates = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      message: error.message,
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
     });
   }
 };
@@ -156,8 +162,10 @@ exports.updateBusinessLogo = async (req, res) => {
       }
 
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
 //  ############################# Landlord business logo End ############################################################
@@ -200,8 +208,11 @@ exports.changeEmail = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error" });
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
+
   }
 };
 // ####################################### Change Email ##########################################
@@ -234,7 +245,7 @@ exports.changeEmailVerifyToken = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error",error : error });
+    return res.status(500).json({ message: "Internal Server Error",error : error.message });
   }
 };
 // ####################################### Change Email ##########################################
@@ -274,7 +285,7 @@ const Image=req.files[0];
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error", error: error });
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 // ####################################### Base64 END ##########################################

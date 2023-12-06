@@ -192,7 +192,11 @@ exports.createUser = async function (req, res) {
 
       }catch (error){
         console.log(error)
-        return res.status(500).send("Failed to add user");
+        return res.status(500).json({
+          message : "Failed to add user",
+          error : error.message
+        })
+        // send("Failed to add user");
       }
       
       
@@ -200,7 +204,10 @@ exports.createUser = async function (req, res) {
       return res.status(500).send("Failed to add user");
     }
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({
+      message : "Failed to add user",
+       message: error.message 
+      });
   }
 };
 exports.checkemail = async function (req, res) {
@@ -764,7 +771,7 @@ exports.Signinall = async function (req, res) {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({message:"Error", error:error.message});
   }
 };
 exports.updateUserProfile = async function (req, res) {
@@ -893,7 +900,7 @@ exports.createResetEmail = async (req, res) => {
         userid,
       ]);
       if (updateResult[0].affectedRows === 0) {
-        res.status(400).send("Errorqqq");
+        res.status(400).send("Error");
       } else {
         res.status(200).json({ message: "Sended", id: userid });
       }
@@ -902,7 +909,7 @@ exports.createResetEmail = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Reset Email ############################################################
@@ -938,7 +945,7 @@ exports.verifyResetEmailCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 
@@ -982,7 +989,7 @@ exports.verifyAuthCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Verify Reset Email Code ############################################################
@@ -1016,7 +1023,7 @@ exports.updatePassword = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error" + error);
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Update Password ############################################################
@@ -1049,8 +1056,8 @@ exports.resendCode = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    res.status(400).json({ message: "Error", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# resend Code ############################################################
@@ -1811,6 +1818,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
     console.error(error);
     res.status(500).json({
       message: "Error occurred while getting property units tenant",
+     error: error.message
     });
   }
 };
@@ -1894,6 +1902,7 @@ exports.getPropertyTenant = async (req, res) => {
     console.error(error);
     res.status(500).json({
       message: "Error occurred while getting property units tenant",
+      error: error.message
     });
   }
 };
@@ -2075,8 +2084,8 @@ exports.addMoreUnits = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    // console.error("Error:", error);
+    res.status(500).json({ message: "Error", error: error.message });;
   }
 };
 
@@ -2124,8 +2133,8 @@ exports.deleteMoreUnits = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    // console.error("Error:", error);
+    res.status(500).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Delete property units End ############################################################
@@ -2146,8 +2155,8 @@ exports.getStates = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get states ");
-    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# Get Property States End ############################################################
@@ -2226,8 +2235,7 @@ console.log(Id)
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get property Task");
+    res.status(500).json({ message: "Error", error: error.message });
 }
 };
 
@@ -2284,7 +2292,7 @@ exports.verifyMailCheck = async (req, res) => {
       return res.status(400).send("landlord is not found");
     }
   } catch (error) {
-    res.send("Error occurred while verifying the landlord's email: " + error);
+    res.status(500).json({ message: "Error occurred while verifying the landlord's email", error: error.message });
   }
 };
 
@@ -2315,7 +2323,7 @@ exports.emailUpdate = async (req, res) => {
       return res.send("User is not found");
     }
   } catch (error) {
-    res.send("Error Get Email updated landlord  " + error);
+    res.status(500).json({ message: "Error Get Email updated landlord", error: error.message });
     console.log(error);
   }
 };
@@ -2359,8 +2367,7 @@ exports.verifyEmailUpdate = async (req, res) => {
       return res.send("User is not found");
     }
   } catch (error) {
-    res.send("Error Get Email Verified updated landlord  " + error);
-    console.log(error);
+    res.status(500).json({ message: "Error Get Email Verified updated landlord", error: error.message });
   }
 };
 //  ############################# verify Email Update End ############################################################
@@ -2966,7 +2973,8 @@ exports.deleteUser=async(req,res)=>{
     }else{
       res.status(400).json({message:"Error in deleting user"})
     }
-  }catch{
+  }catch(error){
+    res.status(500).json({ message: "Error", error: error.message });
 
   }
 }
@@ -2984,7 +2992,7 @@ exports.UpdateUserNuveiId = async(req,res)=>{
     }
   }catch(error){
     console.log(error);
-    res.status(400).send(error.message);
+    res.status(500).json({ message: "Error", error: error.message });
 
   }
 }
