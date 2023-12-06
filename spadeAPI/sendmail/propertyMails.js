@@ -34,7 +34,7 @@ background-repeat: no-repeat;">
 
   <div class="container">
     <div class="row" style="display: flex; justify-content: center;">
-      <!-- <div class="col-lg-2"></div> -->
+      
       <div class="col-lg-8 main-div-class" style="background-color: #fff;
       padding: 65px;
       border-radius: 10px;

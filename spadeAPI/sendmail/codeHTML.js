@@ -11,9 +11,9 @@ exports.codeHTML = (name, random) => {
     background: #FEFEFE;
     color: #585858;
   ">
-    <!-- Preivew text -->
+    
     <span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;border-collapse: collapse;border: 0px;"></span> 
-    <!-- Carpool logo -->
+    
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="	font-size: 15px;
     line-height: 23px;
     max-width: 500px;
@@ -31,7 +31,7 @@ exports.codeHTML = (name, random) => {
   margin: 30px auto;">
         </td>
       </tr>
-      <!-- Header -->
+      
       <tr>
         <td class="sectionlike imageless_section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -40,7 +40,7 @@ exports.codeHTML = (name, random) => {
     padding-bottom: 10px;
   padding-bottom: 20px;"></td>
       </tr>
-      <!-- Content -->
+      
       <tr>
         <td class="section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -88,7 +88,7 @@ exports.codeHTML = (name, random) => {
           </tbody></table>
         </td>
       </tr>
-      <!-- Signature -->
+      
       <tr>
         <td class="section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -115,7 +115,7 @@ exports.codeHTML = (name, random) => {
           </tbody></table>
         </td>
       </tr>
-      <!-- Footer -->
+      
       <tr>
         <td class="section dummy_row" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -171,7 +171,7 @@ exports.codeHTML = (name, random) => {
           </tbody></table>
         </td>
       </tr>
-      <!-- Legal footer -->
+      
       <tr>
         <td style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -199,7 +199,7 @@ exports.codeHTML = (name, random) => {
 exports.welcomeHTML = (email, password, name) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
+    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Nunito);
     
       /* Take care of image borders and formatting */
@@ -356,7 +356,7 @@ exports.welcomeHTML = (email, password, name) => {
 exports.welcomeHTMLLANDLORD = (email, name) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
+    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Nunito);
     
       /* Take care of image borders and formatting */

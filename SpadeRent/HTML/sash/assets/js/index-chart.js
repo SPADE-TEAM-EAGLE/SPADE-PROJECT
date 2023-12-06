@@ -300,9 +300,9 @@ function updatePropertyStatus(data)
    //////// //  Property Status chart ///////////////
 
 
-// // <!-- date start  -->
+// // 
 //     $('.date').datepicker({
 //         multidate: true,
 //         format: 'dd-mm-yyyy '
 //     });
-// // <!-- date End  -->
+// // 
