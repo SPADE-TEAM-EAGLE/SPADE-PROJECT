@@ -18,42 +18,30 @@
     }
 })(this, function () {
     'use strict';
-
     var _extends = Object.assign || function (target) {
         for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];
-
             for (var key in source) {
                 if (Object.prototype.hasOwnProperty.call(source, key)) {
                     target[key] = source[key];
                 }
             }
         }
-
         return target;
     };
-
     var fullscreenDefaults = {
         fullScreen: true
     };
-
     var Fullscreen = function Fullscreen(element) {
-
         this.el = element;
-
         this.core = window.lgData[this.el.getAttribute('lg-uid')];
         this.core.s = _extends({}, fullscreenDefaults, this.core.s);
-
         this.init();
-
         return this;
     };
-
     Fullscreen.prototype.init = function () {
         var fullScreen = '';
         if (this.core.s.fullScreen) {
-
-            // check for fullscreen browser support
             if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled && !document.mozFullScreenEnabled && !document.msFullscreenEnabled) {
                 return;
             } else {
@@ -63,7 +51,6 @@
             }
         }
     };
-
     Fullscreen.prototype.requestFullscreen = function () {
         var el = document.documentElement;
         if (el.requestFullscreen) {
@@ -76,7 +63,6 @@
             el.webkitRequestFullscreen();
         }
     };
-
     Fullscreen.prototype.exitFullscreen = function () {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -88,11 +74,8 @@
             document.webkitExitFullscreen();
         }
     };
-
-    // https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode
     Fullscreen.prototype.fullScreen = function () {
         var _this = this;
-
         utils.on(document, 'fullscreenchange.lgfullscreen webkitfullscreenchange.lgfullscreen mozfullscreenchange.lgfullscreen MSFullscreenChange.lgfullscreen', function () {
             if (utils.hasClass(_this.core.outer, 'lg-fullscreen-on')) {
                 utils.removeClass(_this.core.outer, 'lg-fullscreen-on');
@@ -100,7 +83,6 @@
                 utils.addClass(_this.core.outer, 'lg-fullscreen-on');
             }
         });
-
         utils.on(this.core.outer.querySelector('.lg-fullscreen'), 'click.lg', function () {
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
                 _this.requestFullscreen();
@@ -109,19 +91,14 @@
             }
         });
     };
-
     Fullscreen.prototype.destroy = function () {
-
-        // exit from fullscreen if activated
         if(document.querySelector('.lg-outer').classList.contains('lg-fullscreen-on')){
             console.log('triggered');
             this.exitFullscreen();
         }
         utils.off(document, '.lgfullscreen');
     };
-
     window.lgModules.fullscreen = Fullscreen;
 });
-
 },{}]},{},[1])(1)
 });

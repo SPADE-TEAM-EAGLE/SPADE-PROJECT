@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('lt', {
   defaultMessage: "Šis įrašas neteisingas.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('lt', {
   check:          "Jūs turite pasirinkti tarp %s ir %s pasirinkimų.",
   equalto:        "Ši reikšmė turėtų būti vienoda."
 });
-
 Parsley.setLocale('lt');

@@ -1,15 +1,6 @@
-// Hello.
 //
-// This is JSHint, a tool that helps to detect errors and potential
-// problems in your JavaScript code.
 //
-// To start, simply enter some JavaScript anywhere on this page. Your
-// report will appear on the right side.
 //
-// Additionally, you can toggle specific options in the Configure
-// menu.
-
-
 var flotSampleData1 = [
 	[0, 52.0372905861701],
 	[1, 51.6784633777384],
@@ -1153,7 +1144,6 @@ var flotSampleData11 = [
 	[148, 29.502272077881898],
 	[149, 26.1165859635503]
 ];
-
 var dashData2 = [
   [0,27.23664159018842],
   [1,29.950034069379143],
@@ -1236,5 +1226,3 @@ var dashData2 = [
   [78,2.917574438953957],
   [79,6.405517005560797]
 ];
-
-

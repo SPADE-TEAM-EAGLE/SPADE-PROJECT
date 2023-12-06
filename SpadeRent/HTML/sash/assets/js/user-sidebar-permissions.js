@@ -4,18 +4,7 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                
     success: function (response) {
-        // if(response.llDashboard.Restrict){
-        //     if (window.location.href.indexOf('index.html') > -1) {
-        //         $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
-        //         window.location.href = "properties-all.html";
-        //     }else{
-        //         $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
-
-        //     }
-            
-        // }
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(0))
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(1))
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(2))
@@ -23,20 +12,12 @@ $.ajax({
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(4))
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(5))
         if(response?.llDashboard?.Restrict){
-            
             if (window.location.href.indexOf('index.html') !== -1) {
                 $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
-                
-                
-
                 history.back();
             }   
-            
             else{
                 $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
-                
-                
-
             }
         }
         if(response?.properties?.Restrict){
@@ -47,12 +28,9 @@ $.ajax({
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
                 history.back();
             }   
             if (window.location.href.indexOf('new-property.html') !== -1) {
@@ -61,12 +39,9 @@ $.ajax({
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
                 history.back();
             }
             else{
@@ -75,18 +50,13 @@ $.ajax({
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
             }
         }
         if(response?.units?.Restrict){
-            
             if (window.location.href.indexOf('property-unit.html') !== -1) {
-                
                 history.back();}   
         }
         if(response?.tenants?.Restrict){
@@ -94,36 +64,27 @@ $.ajax({
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tenant"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
                 history.back();
             }   
             if (window.location.href.indexOf('new-tenant.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tenant"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
                 history.back();
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='add-tenant.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tenant"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
             }
         }
         if(response?.tasks?.Restrict){
@@ -131,10 +92,8 @@ $.ajax({
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tasks"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
                 history.back();
             }   
@@ -142,24 +101,18 @@ $.ajax({
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tasks"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
                 history.back();
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='create-tasks.html']").parent().hide();
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
                     if($(this).text().trim("") == "Tasks"){
-                        
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
             }
         }
         if(response?.invoices?.Restrict){
@@ -170,7 +123,6 @@ $.ajax({
                         console
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
                 history.back();
             }   
@@ -181,7 +133,6 @@ $.ajax({
                         console
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
                 history.back();
             }
@@ -192,7 +143,6 @@ $.ajax({
                         console
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
             }
         }
@@ -207,7 +157,6 @@ $.ajax({
                         console
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
             }
             else{
@@ -217,30 +166,20 @@ $.ajax({
                         console
                         $(this).parent().parent().parent().remove()
                     }
-                
                 })
-
             }
-            
         }
         if(response?.settingProfiles?.Restrict && response?.settingCPasswords?.Restrict && response?.settingNotifications?.Restrict && response?.settingCTheme?.Restrict && response?.settingSubscription?.Restrict && response?.settingMUsers?.Restrict && response?.settingEmailT?.Restrict && response?.SettingInvoiceSetting?.Restrict){
             if (window.location.href.indexOf('settings.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='settings.html']").parent().hide();
-                
                 history.back();
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='settings.html']").parent().hide();
-                
             }
-            
         }
-        
-        
-        
     },
     error: function (error) {
         console.log(error);
     }
-
 })

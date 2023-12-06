@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('tk', {
   defaultMessage: "Bu maglumat nädogry.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('tk', {
   check:          "Iň az %s, iň köp %s sanysyny saýlamaly.",
   equalto:        "Bu maglumat deň bolmaly."
 });
-
 Parsley.setLocale('tk');

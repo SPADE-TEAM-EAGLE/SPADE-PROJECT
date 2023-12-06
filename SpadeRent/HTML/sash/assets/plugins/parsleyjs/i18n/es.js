@@ -1,7 +1,3 @@
-// ParsleyConfig definition if not already set
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('es', {
   defaultMessage: "Este valor parece ser inválido.",
   type: {
@@ -26,5 +22,4 @@ Parsley.addMessages('es', {
   check:          "Debe seleccionar entre %s y %s opciones.",
   equalto:        "Este valor debe ser idéntico."
 });
-
 Parsley.setLocale('es');

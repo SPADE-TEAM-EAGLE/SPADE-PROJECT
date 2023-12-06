@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,460 +28,7 @@
             window.location = "./login_module.html"
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            border-radius: 7px;
-            transition: all 1ms;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-        }
-        div.dataTables_wrapper div.dataTables_length label {
-            margin: 20px;
-        }
-        .iti {
-            margin-bottom: 0 !important;
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .dark-mode .link-text {
-            color: #000;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            background-size: cover;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: #1467B0;
-        }
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .del-btn {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        .dark-mode .btn-close {
-            color: white;
-        }
-        .dark-mode .iti input[type=tel],
-        .dark-mode .iti input[type=text] {
-            border-color: rgba(255, 255, 255, 0.1);
-            background-color: transparent;
-            border-right-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        */ .panel-body {
-            padding: 0px;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            letter-spacing: 0.0145455em;
-        }
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: green;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-        .succes-modal-dialog {
-            max-width: 544px;
-            margin: 1.75rem auto;
-        }
-        .succes-modal-dialog .shadow-lg {
-            background-color: white;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-        }
-        button.btn-close {
-            right: 6px;
-        }
-        .btn-close {
-            width: 1.8rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .del {
-            width: 2rem !important;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        #info-head {
-            display: flex;
-        }
-        @media (max-width: 1300px) {
-            #info-head {
-                display: none;
-            }
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                letter-spacing: 0.0145455em;
-            }
-            .btn-close {
-                width: 2.5rem;
-                opacity: 1;
-                position: absolute;
-                top: 6px;
-            }
-            .del {
-                width: 2rem !important;
-            }
-            .btn-close:hover,
-            .btn-close:focus {
-                color: #000;
-                text-decoration: none;
-                opacity: 1;
-            }
-            @media (max-width:992px) {
-                .modal-footer button {
-                    border-radius: 2.75rem;
-                    padding: 4px 30px;
-                    font-family: 'Figtree';
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 0.8rem;
-                    line-height: 1.875rem;
-                    letter-spacing: 0.0145455em;
-                }
-                #top_main_image {
-                    display: none;
-                }
-                #top_main_card {
-                    height: 220px;
-                }
-                #nav_links {
-                    top: 153px;
-                }
-            }
-            @media (max-width:575px) {
-                .modal-footer {
-                    flex-direction: column !important;
-                    justify-content: flex-center !important;
-                }
-                .modal-footer .button-left {
-                    margin: auto;
-                }
-                .border-model-line h2 {
-                    font-size: 1.6rem;
-                }
-                .accordion-button h3 {
-                    font-size: 15px;
-                }
-                #filter_btn {
-                    font-size: 12px;
-                    margin: 0 !important;
-                }
-                #info-head {
-                    display: none;
-                }
-                #add_property_btn {
-                    font-size: 12px;
-                    margin: 0 !important;
-                }
-                #email_verification {
-                    font-size: 12px;
-                }
-                #top_main_image {
-                    display: none;
-                }
-                #top_main_card {
-                    height: 220px;
-                }
-                #nav_links {
-                    top: 153px;
-                }
-            }
-            @media (max-width:375px) {
-                .border-model-line h2 {
-                    font-size: 1.4rem;
-                }
-            }
-            @media (max-width: 767px) {
-                .file-select-area {
-                    display: block;
-                    text-align: center;
-                }
-                .selected-files {
-                    margin-top: 10px;
-                    text-align: center;
-                }
-                .file-details {
-                    padding: 5px;
-                }
-            }
-            th,
-            td {
-                border-left-color: transparent !important;
-                border-right-color: transparent !important;
-            }
-            .dark-mode th {
-                background: #212121 !important;
-                font-weight: bold !important;
-            }
-            .light-mode th {
-                background: #ECF3F9 !important;
-                font-weight: bold !important;
-            }
-        }
-        .btn-delete-checkbox {
-            border: 1px solid #000;
-            width: fit-content;
-            margin: 7px 0px 12px 25px;
-            padding: 6px 7px 3px 7px;
-            border-radius: 6px;
-            align-items: center;
-            background: #fff;
-        }
-        .myButton {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/pageCss/landlordCss/add-tenant.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
@@ -2416,7 +1963,7 @@
     </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
     <script src="../assets/js/email-phone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
     <script>
@@ -3525,23 +3072,16 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        // console.log($(a).find('.rentAmount').text())
-                        
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
-                        // console.log(parseInt($(a).find('.serial-number').text()))
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb);
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
-                        // console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb); 
                         return idB - idA;
@@ -3723,12 +3263,8 @@
                 }
             });
         });
-        
-
                         $(document).on('click', '#confirmDelete-bulk', function (e) {
-
 e.preventDefault();
-
 $('#myModal_delete_bulk').modal('hide');
 $.ajax({
                             url: "https://backend.app.spaderent.com/api/spade/allTenantDelete",
@@ -3743,7 +3279,6 @@ $.ajax({
                             success: function (response) {
                                 tenantToDelete = []
                                 getData()
-
                                 $("#succesModal_delete").modal("show");
                                 setInterval(function () {
                                     $("#succesModal_delete").modal("hide");
@@ -3751,12 +3286,9 @@ $.ajax({
                             }, error: function (xhr, status, error) {
                                 console.log(error)
                             }
-
                         })
 })
-
         $(document).on('click', '#confirmDelete', function (e) {
-
             e.preventDefault();
             $('#myModal_delete').modal('hide');
             $.ajax({
@@ -3801,7 +3333,7 @@ $.ajax({
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
-                success: function ({ image, tenants, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
+                success: function ({ image, tenants,userName, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
                     adjustPlan(rest)
@@ -3810,19 +3342,12 @@ $.ajax({
                     }else{
                         $(".add-tenant-btn").attr("disabled", false)
                     }
-                    // if (image !== " " && image !== null && image !== "") {
-                    //     $("#user-img").attr("src", image)
-                    //     $("#user-img-dark").attr("src", image)
-                    // }
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-                        // $("#user-img").parent().removeClass("d-none")
-                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-                        // $(".profileImage").removeClass("d-none")
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -4248,17 +3773,12 @@ $.ajax({
             });
         })
     </script>
-   
     <script>
 $(document).ready(() => {
     $("table").on("change", ".myCheckbox", function () {
         var $myCheckboxes = $('.myCheckbox'); // Select all checkboxes
         var $myButton = $('.myButton'); // Select the button
-
-        // Check if at least one checkbox is checked
         var anyCheckboxChecked = $myCheckboxes.is(":checked");
-
-        // Toggle button visibility based on checkbox state
         if (anyCheckboxChecked) {
             $myButton.css('display', 'flex');
             $myButton.css('justify-content', 'center');
@@ -4268,8 +3788,6 @@ $(document).ready(() => {
         }
     });
 });
-
-
     </script>
     <script>
         $(document).change(function () {

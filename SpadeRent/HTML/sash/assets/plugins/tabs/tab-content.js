@@ -6,12 +6,10 @@ $(function(e) {
         active_tab: "3",
         controllers: "true"
     });
-
     $(".second_tab").champ({
         plugin_type: "tab",
         side: "right",
         active_tab: "1",
         controllers: "false"
     });
-
 });

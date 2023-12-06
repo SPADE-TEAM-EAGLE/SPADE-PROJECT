@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('nl', {
   defaultMessage: "Deze waarde lijkt onjuist.",
   type: {
@@ -22,5 +19,4 @@ Parsley.addMessages('nl', {
   length:         "Deze waarde moet tussen %s en %s karakters lang zijn.",
   equalto:        "Deze waardes moeten identiek zijn."
 });
-
 Parsley.setLocale('nl');

@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('no', {
   defaultMessage: "Verdien er ugyldig.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('no', {
   check:          "Du må velge mellom %s og %s alternativer.",
   equalto:        "Verdien må være lik."
 });
-
 Parsley.setLocale('no');

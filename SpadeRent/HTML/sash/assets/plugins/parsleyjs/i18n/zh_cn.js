@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('zh-cn', {
   defaultMessage: "不正确的值",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('zh-cn', {
   check:          "请选择 %s 到 %s 个选项",
   equalto:        "输入值不同"
 });
-
 Parsley.setLocale('zh-cn');

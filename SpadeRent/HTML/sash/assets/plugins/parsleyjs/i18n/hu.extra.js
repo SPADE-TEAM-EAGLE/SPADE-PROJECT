@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('hu', {
   dateiso:  "A mező értéke csak érvényes dátum lehet (YYYY-MM-DD).",
   minwords: "Minimum %s szó megadása szükséges.",

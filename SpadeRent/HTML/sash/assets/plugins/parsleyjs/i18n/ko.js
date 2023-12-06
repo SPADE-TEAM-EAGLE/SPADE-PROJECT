@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('ko', {
   defaultMessage: "입력하신 내용이 올바르지 않습니다.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('ko', {
   check:          "선택하신 내용이 %s보다 크거나 %s보다 작아야 합니다.",
   equalto:        "같은 값을 입력하여 주십시오."
 });
-
 Parsley.setLocale('ko');

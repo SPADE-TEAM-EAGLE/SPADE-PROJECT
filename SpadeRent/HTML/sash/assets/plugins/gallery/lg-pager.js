@@ -18,48 +18,36 @@
     }
 })(this, function () {
     'use strict';
-
     var _extends = Object.assign || function (target) {
         for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];
-
             for (var key in source) {
                 if (Object.prototype.hasOwnProperty.call(source, key)) {
                     target[key] = source[key];
                 }
             }
         }
-
         return target;
     };
-
     var pagerDefaults = {
         pager: false
     };
-
     var Pager = function Pager(element) {
-
         this.el = element;
-
         this.core = window.lgData[this.el.getAttribute('lg-uid')];
         this.core.s = _extends({}, pagerDefaults, this.core.s);
-
         if (this.core.s.pager && this.core.items.length > 1) {
             this.init();
         }
-
         return this;
     };
-
     Pager.prototype.init = function () {
         var _this = this;
         var pagerList = '';
         var $pagerCont;
         var $pagerOuter;
         var timeout;
-
         _this.core.outer.querySelector('.lg').insertAdjacentHTML('beforeend', '<div class="lg-pager-outer"></div>');
-
         if (_this.core.s.dynamic) {
             for (var j = 0; j < _this.core.s.dynamicEl.length; j++) {
                 pagerList += '<span class="lg-pager-cont"> <span class="lg-pager"></span><div class="lg-pager-thumb-cont"><span class="lg-caret"></span> <img src="' + _this.core.s.dynamicEl[j].thumb + '" /></div></span>';
@@ -73,14 +61,10 @@
                 }
             }
         }
-
         $pagerOuter = _this.core.outer.querySelector('.lg-pager-outer');
-
         $pagerOuter.innerHTML = pagerList;
-
         $pagerCont = _this.core.outer.querySelectorAll('.lg-pager-cont');
         for (var k = 0; k < $pagerCont.length; k++) {
-
             /*jshint loopfunc: true */
             (function (index) {
                 utils.on($pagerCont[index], 'click.lg touchend.lg', function () {
@@ -89,18 +73,15 @@
                 });
             })(k);
         }
-
         utils.on($pagerOuter, 'mouseover.lg', function () {
             clearTimeout(timeout);
             utils.addClass($pagerOuter, 'lg-pager-hover');
         });
-
         utils.on($pagerOuter, 'mouseout.lg', function () {
             timeout = setTimeout(function () {
                 utils.removeClass($pagerOuter, 'lg-pager-hover');
             });
         });
-
         utils.on(_this.core.el, 'onBeforeSlide.lgtm', function (e) {
             for (var n = 0; n < $pagerCont.length; n++) {
                 utils.removeClass($pagerCont[n], 'lg-pager-active');
@@ -110,11 +91,8 @@
             }
         });
     };
-
     Pager.prototype.destroy = function () {};
-
     window.lgModules.pager = Pager;
 });
-
 },{}]},{},[1])(1)
 });

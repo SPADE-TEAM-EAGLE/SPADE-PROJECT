@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('da', {
   defaultMessage: "Indtast venligst en korrekt værdi.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('da', {
   check:          "Vælg mellem %s og %s muligheder.",
   equalto:        "De to felter er ikke ens."
 });
-
 Parsley.setLocale('da');

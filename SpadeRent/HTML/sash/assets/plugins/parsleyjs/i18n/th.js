@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('th', {
   defaultMessage: "ค่านี้ดูเหมือนว่าจะไม่ถูกต้อง",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('th', {
   check:          "คุณควรเลือกระหว่าง %s และ %s ตัวเลือก",
   equalto:        "ค่านี้ควรจะเหมือนกัน"
 });
-
 Parsley.setLocale('th');

@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('bg', {
   defaultMessage: "Невалидна стойност.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('bg', {
   check:          "Трябва да изберете между %s и %s стойности.",
   equalto:        "Стойността трябва да съвпада."
 });
-
 Parsley.setLocale('bg');

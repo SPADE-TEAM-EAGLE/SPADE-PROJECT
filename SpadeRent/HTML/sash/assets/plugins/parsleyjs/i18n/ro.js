@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('ro', {
   defaultMessage: "Acest câmp nu este completat corect.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('ro', {
   check:          "Trebuie să alegi între %s sau %s.",
   equalto:        "Trebuie să fie la fel."
 });
-
 Parsley.setLocale('ro');

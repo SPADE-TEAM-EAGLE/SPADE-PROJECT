@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('en', {
   dateiso:  "This value should be a valid date (YYYY-MM-DD).",
   minwords: "This value is too short. It should have %s words or more.",

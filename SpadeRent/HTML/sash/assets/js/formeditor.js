@@ -1,6 +1,5 @@
 (function($) {
 	"use strict";
-
     if($("#elm1").length > 0){
 		tinymce.init({
 			selector: "textarea#elm1",
@@ -23,5 +22,4 @@
 			]
 		});
 	}
-	
 })(jQuery);

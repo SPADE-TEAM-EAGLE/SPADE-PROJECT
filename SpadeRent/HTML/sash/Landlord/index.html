@@ -34,98 +34,7 @@
                 window.location="./login_module.html"
             }
         </script>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        .panel-body {
-            padding: 0px;
-        }
-        .divider {
-            border-top: 1px solid;
-            margin: 10px 0 20px 0;
-        }
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        .custom-switch-input:checked~.custom-switch-indicator {
-            background: #11D247;
-        }
-        .form-select {
-            border-radius: 45px;
-        }
-        .counter-card-hover:hover {
-            border: 3px solid #1467B0 !important;
-        }
-        #chat-bot-btn {
-            color: #fff;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            display: none;
-            text-align: center;
-            z-index: 50;
-            height: 50px;
-            width: 50px;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 50%;
-            background: var(--primary-bg-color);
-            font-size: 25px;
-        }
-        .dark-mode .font-counter-chart {
-            margin: 0px;
-            font-size: 30px;
-            font-weight: 800;
-            color: #fff;
-        }
-        .font-counter-chart {
-            margin: 0px;
-            font-size: 30px;
-            font-weight: 800;
-            color: #1467B0;
-        }
-        .dark-mode .chart-counter-number {
-            color: #fff;
-        }
-        .chart-counter-number {
-            color: #1467B0;
-        }
-        .chart-paragraph {
-            color: #1467B0;
-        }
-        .dark-mode .chart-paragraph {
-            color: #fff;
-        }
-        .chart-number-fonttt {
-            color: #1467B0;
-        }
-        .dark-mode .chart-number-fonttt {
-            color: #fff;
-        }
-        .ui-resizable-handle {
-            display: none !important;
-        }
-        .select2-container .select2-selection--single{
-            width: 200px;
-        }
-        .tabs-menu-body .select2-container .select2-selection--single{
-            width: 80px;
-        }
-        .tabs-menu-body .select2{
-            width: 80px !important;
-        }
-        .tabs-menu-body .selection{
-            width: 80px;
-        }
-        </style>
+        <link rel="stylesheet" href="../assets/pageCss/landlordCss/index.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
         <div
@@ -1863,15 +1772,11 @@
                     <script src="../assets/plugins/chart/utils.js"></script>
                     <script src="../assets/js/charts.js"></script>
                     <script src="../assets/js/getNotification.js"></script>
-                    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+                    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
                     <script src="../assets/js/email-phone.js"></script>
                     <script src="../assets/js/index-chart.js"></script>
                     <script src="../assets/js/email-verification.js"></script>
                     <script src="../assets/js/pricing-plan.js"></script>
-                    
-
-                        
-                    
                     <script>
             $(document).ready(function(){
                 $.ajax({
@@ -2522,19 +2427,12 @@ endDateTenantFormatted = formatDate(endDateTenant);
                     console.log(rest)
                     console.log(llDashboard)
                     llDashboardObject=llDashboard
-            //         if(image!==" " && image!==null && image!== ""){
-            //     $("#user-img").attr("src", image)
-            //     $("#user-img-dark").attr("src", image)
-            // }
             localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-                        // $("#user-img").parent().removeClass("d-none")
-                        // $("#user-img-dark").parent().removeClass("d-none")
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-                        // $(".profileImage").removeClass("d-none")
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -3051,8 +2949,6 @@ if (task.priority == 'High') {
                 validconfirmPassword1.classList.remove("border-green");
             }
         }
-                
-
     function logout() {
         $(document).ready(function () {
             $.ajax({
@@ -3084,14 +2980,12 @@ if (task.priority == 'High') {
                     console.log(error);
                 }
             });
-        
         });
     }
                 </script>
                 <script>
         var COL_WIDTH = 62;
         var GUTTER_WIDTH = 30;
-
         var COL_WIDTHS = {
             750: 62,
             970: 81,
@@ -3107,11 +3001,9 @@ if (task.priority == 'High') {
                     return $(el).hasClass('ui-resizable-handle');
                 }
             });
-
             $('.row').each(function () {
                 d.containers.push(this);
             });
-
             $('.card').resizable({
                 grid: COL_WIDTH - GUTTER_WIDTH,
                 handles: 'se',
@@ -3125,13 +3017,11 @@ if (task.priority == 'High') {
                         .addClass('col-sm-' + Math.max(1, Math.round(ui.size.width / COL_WIDTH)));
                 }
             });
-
             var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
             $(window).resize(function () {
                 colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
                 console.log('set colWidth to', colWidth, $('.main-container').width());
             });
-
             d.on('dragend', function () {
                 var htmlLayout = $('#container').html();
                 localStorage.setItem('htmlLayout', htmlLayout);
