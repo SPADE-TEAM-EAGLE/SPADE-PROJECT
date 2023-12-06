@@ -13,7 +13,7 @@ const ac = new Autocomplete(field, {
     }
 });
 
-// later, when you need to change the dataset
+
 
 ac.setData([
     {label: 'New York JFK', value: 'JFK'},
@@ -78,7 +78,7 @@ A callback function to execute on user input.
 
 **onSelectItem**:  
 A callback that is fired every time an item is selected. It receives an object in following format:
-    
+
     {label: <label>, value: <value>}
 
 **showValue**:  

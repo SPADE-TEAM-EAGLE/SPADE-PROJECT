@@ -217,11 +217,11 @@ timezone: -60
 			this._serverSyncs = [];
 			var now = (typeof Date.now === 'function' ? Date.now : function() { return new Date().getTime(); });
 			var perfAvail = (window.performance && typeof window.performance.now === 'function');
-			// Shared timer for all countdowns
+
 			function timerCallBack(timestamp) {
 				var drawStart = (timestamp < 1e12 ? // New HTML5 high resolution timer
 					(perfAvail ? (window.performance.now() + window.performance.timing.navigationStart) : now()) :
-					// Integer milliseconds since unix epoch
+
 					timestamp || now());
 				if (drawStart - animationStartTime >= 1000) {
 					self._updateElems();
@@ -232,11 +232,11 @@ timezone: -60
 			var requestAnimationFrame = window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
 				window.oRequestAnimationFrame || window.msRequestAnimationFrame || null;
-				// This is when we expect a fall-back to setInterval as it's much more fluid
+
 			var animationStartTime = 0;
 			if (!requestAnimationFrame || $.noRequestAnimationFrame) {
 				$.noRequestAnimationFrame = null;
-				// Fall back to good old setInterval
+
 				$.countdown._timer = setInterval(function() { self._updateElems(); }, 1000);
 			}
 			else {
@@ -637,10 +637,10 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			@return {string} The new HTML for the countdown display. */
 		_generateHTML: function(inst) {
 			var self = this;
-			// Determine what to show
+
 			inst._periods = (inst._hold ? inst._periods :
 				this._calculatePeriods(inst, inst._show, inst.options.significant, new Date()));
-			// Show all 'asNeeded' after first non-zero value
+
 			var shownNonZero = false;
 			var showCount = 0;
 			var sigCount = inst.options.significant;
@@ -693,7 +693,7 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._minDigits(inst, inst._periods[M], 2) : '') +
 				(show[S] ? (show[H] || show[M] ? inst.options.timeSeparator : '') +
 				this._minDigits(inst, inst._periods[S], 2) : '') :
-				// Full version
+
 				'<span class="' + this._rowClass + ' ' + this._showClass + (inst.options.significant || showCount) +
 				(inst._hold ? ' ' + this._holdingClass : '') + '">' +
 				showFull(Y) + showFull(O) + showFull(W) + showFull(D) +
@@ -757,14 +757,14 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				s10: digit(inst._periods[S], 10), s100: digit(inst._periods[S], 100),
 				s1000: digit(inst._periods[S], 1000)};
 			var html = layout;
-			// Replace period containers: {p<}...{p>}
+
 			for (var i = Y; i <= S; i++) {
 				var period = 'yowdhms'.charAt(i);
 				var re = new RegExp('\\{' + period + '<\\}([\\s\\S]*)\\{' + period + '>\\}', 'g');
 				html = html.replace(re, ((!significant && show[i]) ||
 					(significant && showSignificant[i]) ? '$1' : ''));
 			}
-			// Replace period values: {pn}
+
 			$.each(subs, function(n, v) {
 				var re = new RegExp('\\{' + n + '\\}', 'g');
 				html = html.replace(re, v);
@@ -821,7 +821,7 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			@return {number[]} The current time periods (always positive)
 					by year, month, week, day, hour, minute, second. */
 		_calculatePeriods: function(inst, show, significant, now) {
-			// Find endpoints
+
 			inst._now = now;
 			inst._now.setMilliseconds(0);
 			var until = new Date(inst._now.getTime());
@@ -839,10 +839,10 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 					inst._now = now = until;
 				}
 			}
-			// Calculate differences by period
+
 			var periods = [0, 0, 0, 0, 0, 0, 0];
 			if (show[Y] || show[O]) {
-				// Treat end of months as the same
+
 				var lastNow = this._getDaysInMonth(now.getFullYear(), now.getMonth());
 				var lastUntil = this._getDaysInMonth(until.getFullYear(), until.getMonth());
 				var sameDay = (until.getDate() === now.getDate() ||
@@ -857,7 +857,7 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 					(sameDay && getSecs(until) < getSecs(now)) ? -1 : 0));
 				periods[Y] = (show[Y] ? Math.floor(months / 12) : 0);
 				periods[O] = (show[O] ? months - periods[Y] * 12 : 0);
-				// Adjust for months difference and end of month if necessary
+
 				now = new Date(now.getTime());
 				var wasLastDay = (now.getDate() === lastNow);
 				var lastDay = this._getDaysInMonth(now.getFullYear() + periods[Y],

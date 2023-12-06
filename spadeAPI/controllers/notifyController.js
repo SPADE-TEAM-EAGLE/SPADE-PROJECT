@@ -31,7 +31,7 @@ const notifyController = {
         [userId]
       );
       if (getNotifyResult[0].length > 0) {
-        // update notifTable
+
         const updateNotifyResult = await queryRunner(updateNotify, [
           isEmailNotify,
           isPushNotify,
@@ -51,7 +51,7 @@ const notifyController = {
           });
         }
       } else {
-        // create notifTable and insert data
+
         const insertNotifyResult = await queryRunner(insertNotify, [
           userId,
           isEmailNotify,
@@ -79,7 +79,7 @@ const notifyController = {
   },
   getCheckedNotify: async (req, res) => {
     try {
-      // find notifTable by userId
+
       const { userId } = req.user;
       const getNotifyResult = await queryRunner(
         selectQuery("notification", "landlordID"),
@@ -105,13 +105,13 @@ const notifyController = {
     //get property , tenants , task invoice from tables individually
     const { userId } = req.user;
     try {
-      // get data from property table
+
       const getTenantsNotify = await queryRunner(getTenantNotify, [userId]);
       const property = await queryRunner(getPropertyNotify, [userId]);
-      // get data from task table
+
       const task = await queryRunner(getTaskNotify, [userId]);
-      // add all above steps on my video
-      // get data from invoice table
+
+
       const invoice = await queryRunner(getInvoiceNotify, [userId]);
       res.status(200).json({
         tenantNotify: getTenantsNotify[0],
@@ -130,9 +130,9 @@ const notifyController = {
     const { userId } = req.user;
     try {
       const property = await queryRunner(getTenantPropertyNotify, [userId]);
-      // get data from task table
+
       const task = await queryRunner(getTenantTaskNotify, [userId]);
-      // // get data from invoice table
+
       const invoice = await queryRunner(getTenantInvoiceNotify, [userId]);
       res.status(200).json({
         propertyNotify: property[0],
@@ -196,7 +196,7 @@ updatetTenantAllReadNotify: async (req, res) => {
   try {
     const { userId } = req.user;
     const { notify , propertyID } = req.body;
-    // console.log(req.body);
+
     const updateData = [notify, userId];
 
     const invoice = await queryRunner(

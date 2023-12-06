@@ -15,13 +15,13 @@
 ;(function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-        // Register as an anonymous AMD module:
+
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
-        // Node/CommonJS:
+
         factory(require('jquery'));
     } else {
-        // Browser globals:
+
         factory(window.jQuery);
     }
 }(function ($) {
@@ -43,7 +43,7 @@
                             completeCallback(status, statusText, responses, responseHeaders);
                         }
                         xdr = new XDomainRequest();
-                        // XDomainRequest only supports GET and POST:
+
                         if (s.type === 'DELETE') {
                             s.url = s.url + addParamChar + '_method=DELETE';
                             s.type = 'POST';

@@ -14,13 +14,13 @@ const chatsController = {
     const senderId = req.user.userId;
     const { recieverId } = req.body;
     try {
-      // check if chat already exists
+
       const isChat = await queryRunner(checkChatQuery, [recieverId , senderId, senderId ,recieverId]);
         console.log(isChat[0])
-      // const isChat = await queryRunner(
-      //     selectQuery("chats", "senderId", "receiverID"),
-      //     [senderId, recieverId]
-      // );
+
+
+
+
       const created_at = new Date()
         .toISOString()
         .slice(0, 19)
@@ -28,7 +28,7 @@ const chatsController = {
       if (isChat[0].length > 0) {
         res.send(isChat[0]);
       } else {
-        // insert into chats table if chat does not exist
+
         await queryRunner(insertChat, [senderId, recieverId, created_at]);
         const isChat = await queryRunner(
           selectQuery("chats", "senderId", "receiverID"),
@@ -46,15 +46,15 @@ const chatsController = {
     const senderId = req.user.userId;
     const { recieverId } = req.body;
     try {
-      // check if chat already exists
-      // const isChat = await queryRunner(checkChatQuery, [recieverId , senderId, senderId ,recieverId]);
+
+
       const isChat = await queryRunner(checkTenantsChatQuery, [recieverId , senderId, senderId ,recieverId]);
 
         console.log(isChat[0])
-      // const isChat = await queryRunner(
-      //     selectQuery("chats", "senderId", "receiverID"),
-      //     [senderId, recieverId]
-      // );
+
+
+
+
       const created_at = new Date()
         .toISOString()
         .slice(0, 19)
@@ -62,7 +62,7 @@ const chatsController = {
       if (isChat[0].length > 0) {
         res.send(isChat[0]);
       } else {
-        // insert into chats table if chat does not exist
+
         await queryRunner(insertChat, [senderId, recieverId, created_at]);
         const isChat = await queryRunner(
           selectQuery("chats", "senderId", "receiverID"),

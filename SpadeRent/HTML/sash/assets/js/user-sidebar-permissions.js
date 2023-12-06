@@ -6,16 +6,16 @@ $.ajax({
                 },
                 
     success: function (response) {
-        // if(response.llDashboard.Restrict){
-        //     if (window.location.href.indexOf('index.html') > -1) {
-        //         $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
-        //         window.location.href = "properties-all.html";
-        //     }else{
-        //         $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
 
-        //     }
+
+
+
+
+
+
+
             
-        // }
+
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(0))
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(1))
         console.log($("#offcanvasExample .offcanvas-body .row").children().eq(2))

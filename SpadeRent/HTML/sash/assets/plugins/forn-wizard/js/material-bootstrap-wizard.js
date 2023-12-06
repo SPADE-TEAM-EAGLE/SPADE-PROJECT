@@ -8,7 +8,7 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-// Material Bootstrap Wizard Functions
+
 var searchVisible = 0;
 var transparent = true;
 var mobile_device = false;
@@ -16,7 +16,7 @@ $(document).ready(function(){
     $.material.init();
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
-    // Code for the Validator
+
     var $validator = $('.wizard-card form').validate({
 		  rules: {
 		    firstname: {
@@ -36,7 +36,7 @@ $(document).ready(function(){
             $(element).parent('div').addClass('has-error');
          }
 	});
-    // Wizard Initialization
+
   	$('.wizard-card').bootstrapWizard({
         'tabClass': 'nav nav-pills',
         'nextSelector': '.btn-next',
@@ -70,7 +70,7 @@ $(document).ready(function(){
             var $total = navigation.find('li').length;
             var $current = index+1;
             var $wizard = navigation.closest('.wizard-card');
-            // If it's the last tab then hide the last button and show the finish instead
+
             if($current >= $total) {
                 $($wizard).find('.btn-next').hide();
                 $($wizard).find('.btn-finish').show();
@@ -98,7 +98,7 @@ $(document).ready(function(){
             refreshAnimation($wizard, index);
         }
   	});
-    // Prepare the preview for profile picture
+
     $("#wizard-picture").change(function(){
         readURL(this);
     });

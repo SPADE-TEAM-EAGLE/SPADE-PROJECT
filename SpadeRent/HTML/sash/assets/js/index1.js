@@ -1,7 +1,7 @@
 $(function(e) {
     'use strict'
 
-    // FLOAT CHART
+
     $.plot('#flotback-chart', [{
         data: dashData10,
         color: 'rgba(255,255,255, 0.2)',
@@ -65,7 +65,7 @@ $(function(e) {
         }
     });
 
-    // RECENT ORDERS
+
     var myCanvas = document.getElementById("recentorders");
     myCanvas.height = "225";
     var myChart = new Chart(myCanvas, {
@@ -160,7 +160,7 @@ $(function(e) {
         }
     });
 
-    // SALES CHART
+
     var ctx = document.getElementById('saleschart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -238,9 +238,9 @@ $(function(e) {
         }
     });
 
-    // CHARTJS SALES CHART CLOSED
 
-    // LEADS CHART
+
+
     var ctx = document.getElementById('leadschart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -294,9 +294,9 @@ $(function(e) {
             },
         }
     });
-    // CHARTJS LEADS CHART CLOSED
 
-    // PROFIT CHART 
+
+
     var ctx = document.getElementById('profitchart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -357,9 +357,9 @@ $(function(e) {
             },
         }
     });
-    // PROFIT CHART CLOSED
 
-    // COST CHART 
+
+
     var ctx = document.getElementById('costchart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -413,9 +413,9 @@ $(function(e) {
             },
         }
     });
-    // COST CHART CLOSED
 
-    // DATA TABLE
+
+
     $('#data-table').DataTable({
         "order": [
             [0, "desc"]
@@ -428,12 +428,12 @@ $(function(e) {
         }
     });
 
-    // SELECT2
+
     $('.select2').select2({
         minimumResultsForSearch: Infinity
     });
 
-    // WORLD MAP MARKER
+
     $('#world-map-markers1').vectorMap({
         map: 'world_mill_en',
         scaleColors: ['#6c5ffc', '#e82646', '#05c3fb'],
@@ -494,14 +494,14 @@ function getCssValuePrefix() {
     var retuenValue = ''; //default to standard syntax
     var prefixes = ['-o-', '-ms-', '-moz-', '-webkit-'];
 
-    // Create a temporary DOM object for testing
+
     var dom = document.createElement('div');
 
     for (var i = 0; i < prefixes.length; i++) {
-        // Attempt to set the style
+
         dom.style.background = prefixes[i] + 'linear-gradient(#ffffff, #000000)';
 
-        // Detect if the style was successfully set
+
         if (dom.style.background) {
             retuenValue = prefixes[i];
         }
@@ -516,7 +516,7 @@ function getCssValuePrefix() {
 function index() {
     'use strict'
 
-    // TRANSACTIONS
+
     var myCanvas = document.getElementById("transactions");
     myCanvas.height = "330";
 

@@ -13,13 +13,13 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-        // CommonJS
+
         module.exports = factory(require('jquery'), require('jquery-mapael'));
     } else if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
+
         define(['jquery', 'mapael'], factory);
     } else {
-        // Browser globals
+
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
@@ -31,17 +31,17 @@
                  * map-specific constants
                  * (set by user)
                  */
-                // Width of the map, in pixel
+
                 width : 700.9375,
-                // Height of the map, in pixel
+
                 height : 337.375,
-                // Longitude of the left side of the map, in degree
+
                 leftLongitude: -175.0,
-                // Longitude of the right side of the map, in degree
+
                 rightLongitude: 190.0,
-                // Latitude of the top of the map, in degree
+
                 topLatitude: 84.0,
-                // Latitude of the bottom of the map, in degree
+
                 bottomLatitude: -56.0,
                 /*
                  * Transform a longitude coordinate into projection-specific x' coordinate
@@ -51,7 +51,7 @@
                  * @return x' projection-specific value
                  */
                 _projectLongitude: function (lon) {
-                    // Compute longitude in radian
+
                     return lon * Math.PI / 180;
                 },
                 /*
@@ -62,7 +62,7 @@
                  * @return y' projection-specific value
                  */
                 _projectLatitude: function (lat) {
-                    // Compute latitude in radian
+
                     var latRad = lat * Math.PI / 180;
                     return 1.25 * Math.log( Math.tan( Math.PI / 4 + 0.4 * latRad ) );
                 },
@@ -82,15 +82,15 @@
                  */
                 getCoords: function (lat, lon) {
                     var self = this;
-                    // Project map boundaries with projection (only once for performance)
+
                     if (self._xLeftPrime === undefined) self._xLeftPrime = self._projectLongitude(self.leftLongitude);
                     if (self._xRightPrime === undefined) self._xRightPrime = self._projectLongitude(self.rightLongitude);
                     if (self._yTopPrime === undefined) self._yTopPrime = self._projectLatitude(self.topLatitude);
                     if (self._yBottomPrime === undefined) self._yBottomPrime = self._projectLatitude(self.bottomLatitude);
-                    // Compute x' and y' (projection-specific value)
+
                     var xPrime = self._projectLongitude(lon);
                     var yPrime = self._projectLatitude(lat);
-                    // Compute x and y
+
                     var x = (xPrime - self._xLeftPrime) * (self.width / (self._xRightPrime - self._xLeftPrime));
                     var y = (self._yTopPrime - yPrime) * (self.height / (self._yTopPrime - self._yBottomPrime));
                     return {x: x, y: y};

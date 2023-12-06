@@ -47,9 +47,9 @@ The plugin supports these options:
 More detail and specific examples can be found in the included HTML file.
 */
 (function($) {
-	// Maximum redraw attempts when fitting labels within the plot
+
 	var REDRAW_ATTEMPTS = 10;
-	// Factor by which to shrink the pie when fitting labels within the plot
+
 	var REDRAW_SHRINK = 0.95;
 	function init(plot) {
 		var canvas = null,
@@ -60,13 +60,13 @@ More detail and specific examples can be found in the included HTML file.
 			centerTop = null,
 			processed = false,
 			ctx = null;
-		// interactive variables
+
 		var highlights = [];
-		// add hook to determine if pie plugin in enabled, and then perform necessary operations
+
 		plot.hooks.processOptions.push(function(plot, options) {
 			if (options.series.pie.show) {
 				options.grid.show = false;
-				// set labels.show
+
 				if (options.series.pie.label.show == "auto") {
 					if (options.legend.show) {
 						options.series.pie.label.show = false;
@@ -74,7 +74,7 @@ More detail and specific examples can be found in the included HTML file.
 						options.series.pie.label.show = true;
 					}
 				}
-				// set radius
+
 				if (options.series.pie.radius == "auto") {
 					if (options.series.pie.label.show) {
 						options.series.pie.radius = 3/4;
@@ -82,7 +82,7 @@ More detail and specific examples can be found in the included HTML file.
 						options.series.pie.radius = 1;
 					}
 				}
-				// ensure sane tilt
+
 				if (options.series.pie.tilt > 1) {
 					options.series.pie.tilt = 1;
 				} else if (options.series.pie.tilt < 0) {
@@ -134,19 +134,19 @@ More detail and specific examples can be found in the included HTML file.
 				numCombined = 0,
 				color = options.series.pie.combine.color,
 				newdata = [];
-			// Fix up the raw data from Flot, ensuring the data is numeric
+
 			for (var i = 0; i < data.length; ++i) {
 				var value = data[i].data;
-				// If the data is an array, we'll assume that it's a standard
-				// Flot x-y pair, and are concerned only with the second value.
-				// Note how we use the original array, rather than creating a
-				// new one; this is more efficient and preserves any extra data
-				// that the user may have stored in higher indexes.
+
+
+
+
+
 				if ($.isArray(value) && value.length == 1) {
     				value = value[0];
 				}
 				if ($.isArray(value)) {
-					// Equivalent to $.isNumeric() but compatible with jQuery < 1.7
+
 					if (!isNaN(parseFloat(value[1])) && isFinite(value[1])) {
 						value[1] = +value[1];
 					} else {
@@ -159,12 +159,12 @@ More detail and specific examples can be found in the included HTML file.
 				}
 				data[i].data = [value];
 			}
-			// Sum up all the slices, so we can calculate percentages for each
+
 			for (var i = 0; i < data.length; ++i) {
 				total += data[i].data[0][1];
 			}
-			// Count the number of slices with percentages below the combine
-			// threshold; if it turns out to be just one, we won't combine.
+
+
 			for (var i = 0; i < data.length; ++i) {
 				var value = data[i].data[0][1];
 				if (value / total <= options.series.pie.combine.threshold) {
@@ -209,24 +209,24 @@ More detail and specific examples can be found in the included HTML file.
 				canvasHeight = plot.getPlaceholder().height(),
 				legendWidth = target.children().filter(".legend").children().width() || 0;
 			ctx = newCtx;
-			// WARNING: HACK! REWRITE THIS CODE AS SOON AS POSSIBLE!
-			// When combining smaller slices into an 'other' slice, we need to
-			// add a new series.  Since Flot gives plugins no way to modify the
-			// list of series, the pie plugin uses a hack where the first call
-			// to processDatapoints results in a call to setData with the new
-			// list of series, then subsequent processDatapoints do nothing.
-			// The plugin-global 'processed' flag is used to control this hack;
-			// it starts out false, and is set to true after the first call to
-			// processDatapoints.
-			// Unfortunately this turns future setData calls into no-ops; they
-			// call processDatapoints, the flag is true, and nothing happens.
-			// To fix this we'll set the flag back to false here in draw, when
-			// all series have been processed, so the next sequence of calls to
-			// processDatapoints once again starts out with a slice-combine.
-			// This is really a hack; in 0.9 we need to give plugins a proper
-			// way to modify series before any processing begins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			processed = false;
-			// calculate maximum radius and center point
+
 			maxRadius =  Math.min(canvasWidth, canvasHeight / options.series.pie.tilt) / 2;
 			centerTop = canvasHeight / 2 + options.series.pie.offset.top;
 			centerLeft = canvasWidth / 2;
@@ -246,8 +246,8 @@ More detail and specific examples can be found in the included HTML file.
 			}
 			var slices = plot.getData(),
 				attempts = 0;
-			// Keep shrinking the pie's radius until drawPie returns true,
-			// indicating that all the labels fit, or we try too many times.
+
+
 			do {
 				if (attempts > 0) {
 					maxRadius *= REDRAW_SHRINK;
@@ -266,7 +266,7 @@ More detail and specific examples can be found in the included HTML file.
 				plot.setSeries(slices);
 				plot.insertLegend();
 			}
-			// we're actually done at this point, just defining internal functions at this point
+
 			function clear() {
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 				target.children().filter(".pieLabel, .pieLabelBackground").remove();
@@ -284,7 +284,7 @@ More detail and specific examples can be found in the included HTML file.
 				ctx.translate(shadowLeft,shadowTop);
 				ctx.globalAlpha = alpha;
 				ctx.fillStyle = "#000";
-				// center and rotate to starting position
+
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//radius -= edge;
@@ -299,12 +299,12 @@ More detail and specific examples can be found in the included HTML file.
 			function drawPie() {
 				var startAngle = Math.PI * options.series.pie.startAngle;
 				var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
-				// center and rotate to starting position
+
 				ctx.save();
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//ctx.rotate(startAngle); // start at top; -- This doesn't work properly in Opera
-				// draw slices
+
 				ctx.save();
 				var currentAngle = startAngle;
 				for (var i = 0; i < slices.length; ++i) {
@@ -312,7 +312,7 @@ More detail and specific examples can be found in the included HTML file.
 					drawSlice(slices[i].angle, slices[i].color, true);
 				}
 				ctx.restore();
-				// draw slice outlines
+
 				if (options.series.pie.stroke.width > 0) {
 					ctx.save();
 					ctx.lineWidth = options.series.pie.stroke.width;
@@ -322,10 +322,10 @@ More detail and specific examples can be found in the included HTML file.
 					}
 					ctx.restore();
 				}
-				// draw donut hole
+
 				drawDonutHole(ctx);
 				ctx.restore();
-				// Draw the labels, returning true if they fit within the plot
+
 				if (options.series.pie.label.show) {
 					return drawLabels();
 				} else return true;
@@ -371,7 +371,7 @@ More detail and specific examples can be found in the included HTML file.
 						if (slice.data[0][1] == 0) {
 							return true;
 						}
-						// format label text
+
 						var lf = options.legend.labelFormatter, text, plf = options.series.pie.label.formatter;
 						if (lf) {
 							text = lf(slice.label, slice);
@@ -391,12 +391,12 @@ More detail and specific examples can be found in the included HTML file.
 						var labelLeft = (x - label.width() / 2);
 						label.css("top", labelTop);
 						label.css("left", labelLeft);
-						// check to make sure that the label is not outside the canvas
+
 						if (0 - labelTop > 0 || 0 - labelLeft > 0 || canvasHeight - (labelTop + label.height()) < 0 || canvasWidth - (labelLeft + label.width()) < 0) {
 							return false;
 						}
 						if (options.series.pie.label.background.opacity != 0) {
-							// put in the transparent background separately to avoid blended labels and label boxes
+
 							var c = options.series.pie.label.background.color;
 							if (c == null) {
 								c = slice.color;
@@ -411,10 +411,10 @@ More detail and specific examples can be found in the included HTML file.
 				} // end drawLabels function
 			} // end drawPie function
 		} // end draw function
-		// Placed here because it needs to be accessed from multiple locations
+
 		function drawDonutHole(layer) {
 			if (options.series.pie.innerRadius > 0) {
-				// subtract the center
+
 				layer.save();
 				var innerRadius = options.series.pie.innerRadius > 1 ? options.series.pie.innerRadius : maxRadius * options.series.pie.innerRadius;
 				layer.globalCompositeOperation = "destination-out"; // this does not work with excanvas, but it will fall back to using the stroke color
@@ -424,7 +424,7 @@ More detail and specific examples can be found in the included HTML file.
 				layer.fill();
 				layer.closePath();
 				layer.restore();
-				// add inner stroke
+
 				layer.save();
 				layer.beginPath();
 				layer.strokeStyle = options.series.pie.stroke.color;
@@ -432,7 +432,7 @@ More detail and specific examples can be found in the included HTML file.
 				layer.stroke();
 				layer.closePath();
 				layer.restore();
-				// TODO: add extra shadow inside hole (with a mask) if the pie is tilted.
+
 			}
 		}
 		//-- Additional Interactive related functions --
@@ -471,7 +471,7 @@ More detail and specific examples can be found in the included HTML file.
 							};
 						}
 					} else {
-						// excanvas for IE doesn;t support isPointInPath, this is a workaround.
+
 						var p1X = radius * Math.cos(s.startAngle),
 							p1Y = radius * Math.sin(s.startAngle),
 							p2X = radius * Math.cos(s.startAngle + s.angle / 4),
@@ -484,7 +484,7 @@ More detail and specific examples can be found in the included HTML file.
 							p5Y = radius * Math.sin(s.startAngle + s.angle),
 							arrPoly = [[0, 0], [p1X, p1Y], [p2X, p2Y], [p3X, p3Y], [p4X, p4Y], [p5X, p5Y]],
 							arrPoint = [x, y];
-						// TODO: perhaps do some mathmatical trickery here with the Y-coordinate to compensate for pie tilt?
+
 						if (isPointInPoly(arrPoly, arrPoint)) {
 							ctx.restore();
 							return {
@@ -506,14 +506,14 @@ More detail and specific examples can be found in the included HTML file.
 		function onClick(e) {
 			triggerClickHoverEvent("plotclick", e);
 		}
-		// trigger click or hover event (they send the same parameters so we share their code)
+
 		function triggerClickHoverEvent(eventname, e) {
 			var offset = plot.offset();
 			var canvasX = parseInt(e.pageX - offset.left);
 			var canvasY =  parseInt(e.pageY - offset.top);
 			var item = findNearbySlice(canvasX, canvasY);
 			if (options.grid.autoHighlight) {
-				// clear auto-highlights
+
 				for (var i = 0; i < highlights.length; ++i) {
 					var h = highlights[i];
 					if (h.auto == eventname && !(item && h.series == item.series)) {
@@ -521,17 +521,17 @@ More detail and specific examples can be found in the included HTML file.
 					}
 				}
 			}
-			// highlight the slice
+
 			if (item) {
 				highlight(item.series, eventname);
 			}
-			// trigger any hover bind events
+
 			var pos = { pageX: e.pageX, pageY: e.pageY };
 			target.trigger(eventname, [pos, item]);
 		}
 		function highlight(s, auto) {
 			//if (typeof s == "number") {
-			//	s = series[s];
+
 			//}
 			var i = indexOfHighlight(s);
 			if (i == -1) {
@@ -547,7 +547,7 @@ More detail and specific examples can be found in the included HTML file.
 				plot.triggerRedrawOverlay();
 			}
 			//if (typeof s == "number") {
-			//	s = series[s];
+
 			//}
 			var i = indexOfHighlight(s);
 			if (i != -1) {
@@ -591,7 +591,7 @@ More detail and specific examples can be found in the included HTML file.
 			}
 		}
 	} // end init (plugin body)
-	// define pie specific options and their default values
+
 	var options = {
 		series: {
 			pie: {

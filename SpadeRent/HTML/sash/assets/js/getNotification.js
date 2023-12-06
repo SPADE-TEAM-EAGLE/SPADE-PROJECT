@@ -43,13 +43,13 @@ function GetNotification(){
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
-      // filter out based on data notification.notify = 0 then unread else read
+
       const unread = notification.filter((item) => item.notify === 0);
       const read = notification.filter((item) => item.notify === 1);
       console.log(unread, "unread");
       console.log(read, "read");
       console.log(notification, "all");
-      // all
+
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -57,7 +57,7 @@ function GetNotification(){
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-        // read-notification-container 
+
         if (item.invoiceID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
   
@@ -184,7 +184,7 @@ function GetNotification(){
       });
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
-        // read-notification-container
+
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
@@ -309,7 +309,7 @@ function GetNotification(){
       });
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
-        // read-notification-container
+
         if (item.invoiceID) {
           $("#unread-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
@@ -449,7 +449,7 @@ function GetNotification(){
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
+
     },
   });
 
@@ -475,7 +475,7 @@ function getNotifyData(){
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
+
     },
   });
 }
@@ -501,7 +501,7 @@ function updateAllNotifyRead() {
 }
 
 function updateDataNotify(notificationId, type) {
-  // $('#preloader').css('display','flex')
+
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
@@ -515,7 +515,7 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      // alert(type)
+
       if(type == "property"){
         window.location.href="./properties-all.html";
       }else if(type == "task"){
@@ -526,12 +526,12 @@ function updateDataNotify(notificationId, type) {
         window.location.href="./add-tenant.html";
         
       }
-      // $('#preloader').css('display','none')
-      // GetNotification();
+
+
       console.log(response);
     },
     error: function (xhr, status, error) {
-      // $('#preloader').css('display','none')
+
 
       console.log("Error: " + error);
     },

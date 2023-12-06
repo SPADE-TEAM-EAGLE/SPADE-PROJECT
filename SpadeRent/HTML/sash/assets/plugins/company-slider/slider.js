@@ -170,9 +170,9 @@
 
             _.instanceUid = instanceUid++;
 
-            // A simple way to check for HTML strings
-            // Strict HTML recognition (must start with <)
-            // Extracted from jQuery v1.11 source
+
+
+
             _.htmlExpr = /^(?:\s*(<[\w\W]+>)[^>]*)$/;
 
 
@@ -669,7 +669,7 @@
                 }
             }
 
-            // only trigger breakpoints during an actual break. not on initialize.
+
             if( !initial && triggerBreakpoint !== false ) {
                 _.$slider.trigger('breakpoint', [_, triggerBreakpoint]);
             }
@@ -683,12 +683,12 @@
             $target = $(event.currentTarget),
             indexOffset, slideOffset, unevenOffset;
 
-        // If target is a link, prevent default action.
+
         if($target.is('a')) {
             event.preventDefault();
         }
 
-        // If target is not the <li> element (ie: a child), find the <li>.
+
         if(!$target.is('li')) {
             $target = $target.closest('li');
         }
@@ -1709,13 +1709,13 @@
 
         lastVisibleIndex = _.slideCount - _.options.slidesToShow;
 
-        // in non-infinite sliders, we don't want to go past the
-        // last visible index.
+
+
         if( !_.options.infinite && ( _.currentSlide > lastVisibleIndex )) {
             _.currentSlide = lastVisibleIndex;
         }
 
-        // if less slides than to show, go to start.
+
         if ( _.slideCount <= _.options.slidesToShow ) {
             _.currentSlide = 0;
 
@@ -1758,8 +1758,8 @@
 
                 if (responsiveSettings.hasOwnProperty(breakpoint)) {
 
-                    // loop through the breakpoints and cut out any existing
-                    // ones with the same breakpoint number, we don't want dupes.
+
+
                     while( l >= 0 ) {
                         if( _.breakpoints[l] && _.breakpoints[l] === currentBreakpoint ) {
                             _.breakpoints.splice(l,1);
@@ -2061,7 +2061,7 @@
 
                     l = _.options.responsive.length-1;
 
-                    // loop through the responsive object and splice out duplicates.
+
                     while( l >= 0 ) {
 
                         if( _.options.responsive[l].breakpoint === value[item].breakpoint ) {

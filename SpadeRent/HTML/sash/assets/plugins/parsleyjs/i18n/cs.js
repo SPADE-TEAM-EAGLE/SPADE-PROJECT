@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('cs', {
   defaultMessage: "Tato položka je neplatná.",
   type: {

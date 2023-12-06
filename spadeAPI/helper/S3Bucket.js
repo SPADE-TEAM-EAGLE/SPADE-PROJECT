@@ -41,10 +41,10 @@ const deleteImageFromS3 = (key) => {
     s3.deleteObject(params, (err, data) => {
       if (err) {
         console.error('Error deleting image from S3:', err);
-        // Handle the error accordingly
+
       } else {
         console.log('Image deleted successfully from S3');
-        // Perform any desired actions after successful deletion
+
       }
     });
   };

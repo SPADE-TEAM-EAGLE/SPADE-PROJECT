@@ -1,18 +1,18 @@
 $(function(e) {
     'use strict'
 
-    // TOGGLES
+
     $('.toggle').toggles({
         on: true,
         height: 26
     });
 
-    // INPUT MASKS
+
     $('#dateMask').mask('99/99/9999');
     $('#phoneMask').mask('(999) 999-9999');
     $('#ssnMask').mask('999-99-9999');
 
-    // TIME PICKER
+
     $('#tpBasic').timepicker();
     $('#tp2').timepicker({
         'scrollDefault': 'now'
@@ -25,7 +25,7 @@ $(function(e) {
     });
 
 
-    // COLOR PICKER
+
     $('#colorpicker').spectrum({
         color: '#0061da'
     });
@@ -43,10 +43,10 @@ $(function(e) {
         ]
     });
 
-    // DATE RANGE PICKER
+
     $('#reservation').daterangepicker();
 
-    // DATEPICKER
+
     $('.fc-datepicker').datepicker({
         showOtherMonths: true,
         selectOtherMonths: true
@@ -59,7 +59,7 @@ $(function(e) {
     });
 
 
-    // BOOTSTRAP DATEPICKER
+
     $('#datepicker-date').bootstrapdatepicker({
         format: "dd",
         viewMode: "date",
@@ -67,7 +67,7 @@ $(function(e) {
         multidateSeparator: "-",
     })
 
-    // MONTH PICKER
+
     $('#datepicker-month').bootstrapdatepicker({
         format: "MM",
         viewMode: "months",
@@ -76,7 +76,7 @@ $(function(e) {
         multidateSeparator: "-",
     })
 
-    // YEAR PICKER
+
     $('#datepicker-year').bootstrapdatepicker({
         format: "yyyy",
         viewMode: "year",

@@ -33,26 +33,26 @@ function GetNotification() {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      // invoice.created_at
+
       console.log("TenantNotify");
       console.log(response);
       const notification = [
         ...response.invoiceNotify,
         ...response.propertyNotify,
         ...response.taskNotify,
-        //   ...response.tenantNotify,
+
       ];
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
-      // alert(1)
-      // filter out based on data notification.notify = 0 then unread else read
+
+
       const unread = notification.filter((item) => item.tenantNotify === 0);
       const read = notification.filter((item) => item.tenantNotify === 1);
       console.log(unread, "unread");
       console.log(read, "read");
       console.log(notification, "all");
-      // all
+
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -60,7 +60,7 @@ function GetNotification() {
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-        // read-notification-container
+
         if (item.invoiceID) {
           const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
@@ -142,7 +142,7 @@ function GetNotification() {
       });
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
-        // read-notification-container
+
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID
@@ -226,7 +226,7 @@ function GetNotification() {
       });
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
-        // read-notification-container
+
         if (item.invoiceID) {
           $("#unread-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID
@@ -323,7 +323,7 @@ function GetNotification() {
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
+
     },
   });
 
@@ -348,7 +348,7 @@ function getNotifyData() {
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
+
     },
   });
 }
@@ -366,7 +366,7 @@ function updateAllNotifyRead() {
       console.log("protectedTenant");
       console.log(response);
       propertyID = Number(response.propertyID);
-      // console.log(typeof landlordID);
+
       $.ajax({
         url: "https://backend.app.spaderent.com/api/spade/updateAllTenantNotifyRead",
         type: "PUT",

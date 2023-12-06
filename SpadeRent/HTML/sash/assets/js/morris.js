@@ -197,7 +197,7 @@ $(function(e) {
         graph.setData(data(5 * nReloads));
         $('#reloadStatus').text(nReloads + ' reloads');
     }
-    // setInterval(update, 100);
+
 
     /*---- morrisBar7----*/
     var day_data = [{

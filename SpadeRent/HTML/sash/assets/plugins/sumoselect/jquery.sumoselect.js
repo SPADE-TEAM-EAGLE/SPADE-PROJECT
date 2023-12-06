@@ -19,7 +19,7 @@
 })(function ($) {
     'namespace sumo';
     $.fn.SumoSelect = function (options) {
-        // This is the easiest way to have default options.
+
         var settings = $.extend({
             placeholder: 'Select Here',   // Dont change it here.
             csvDispCount: 3,              // display no. of items in multiselect. 0 to display all.
@@ -72,7 +72,7 @@
                         .attr('style', O.E.attr('style'))
                         .prepend(O.caption);
                     O.select.append(O.CaptionCont);
-                    // default turn off if no multiselect
+
                     if (!O.is_multi) settings.okCancelInMulti = false
                     if (O.E.attr('disabled'))
                         O.select.addClass('disabled').removeAttr('tabindex');
@@ -80,7 +80,7 @@
                     if (settings.outputAsCSV && O.is_multi && O.E.attr('name')) {
                         //create a hidden field to store csv value.
                         O.select.append($('<input class="HEMANT123" type="hidden" />').attr('name', O.E.attr('name')).val(O.getSelStr()));
-                        // so it can not post the original select.
+
                         O.E.removeAttr('name');
                     }
                     //break for mobile rendring.. if forceCustomRendering is false
@@ -88,7 +88,7 @@
                         O.setNativeMobile();
                         return;
                     }
-                    // if there is a name attr in select add a class to container div
+
                     if (O.E.attr('name')) O.select.addClass('sumo_' + O.E.attr('name').replace(/\[\]/, ''))
                     //hide original select
                     O.E.addClass('SumoUnder').attr('tabindex', '-1');
@@ -99,9 +99,9 @@
                     //Creating the markup for the available options
                     O.ul = $('<ul class="options">');
                     O.optDiv.append(O.ul);
-                    // Select all functionality
+
                     if (settings.selectAll && O.is_multi) O.SelAll();
-                    // search functionality
+
                     if (settings.search) O.Search();
                     O.ul.append(O.prepItems(O.E.children()));
                     //if multiple then add the class multiple and add OK / CANCEL button
@@ -147,7 +147,7 @@
                 },
                 //## Returns the selected items as string in a Multiselect.
                 getSelStr: function () {
-                    // get the pre selected items.
+
                     var sopt = [];
                     this.E.find('option:selected').each(function () { sopt.push($(this).val()); });
                     return sopt.join(settings.csvSepChar);
@@ -167,7 +167,7 @@
                     });
                     var btns = O.okbtn.add(O.cancelBtn);
                     O.optDiv.append($('<div class="MultiControls">').append(btns));
-                    // handling keyboard navigation on ok cancel buttons.
+
                     btns.on('keydown.sumo', function (e) {
                         var el = $(this);
                         switch (e.which) {
@@ -229,7 +229,7 @@
                     });
                     O.optDiv.prepend(O.selAll);
                 },
-                // search module (can be removed if not required.)
+
                 Search: function () {
                     var O = this,
                         cc = O.CaptionCont.addClass('search'),
@@ -276,7 +276,7 @@
                     O.E.trigger('sumo:opened', O);
                     if (O.ftxt) O.ftxt.focus();
                     else O.select.focus();
-                    // hide options on click outside.
+
                     $(document).on('click.sumo', function (e) {
                         if (!O.select.is(e.target)                  // if the target of the click isn't the container...
                             && O.select.has(e.target).length === 0) { // ... nor a descendant of the container
@@ -303,7 +303,7 @@
                     var O = this;
                     if (O.is_multi && (O.is_floating || settings.okCancelInMulti)) {
                         O.Pstate = [];
-                        // assuming that find returns elements in tree order
+
                         O.E.find('option').each(function (i, e) { if (e.selected) O.Pstate.push(i); });
                     }
                 },
@@ -320,7 +320,7 @@
                         $(document).off('click.sumo');
                         O.select.focus();
                         $('body').removeClass('sumoStopScroll');
-                        // clear the search
+
                         if (settings.search) {
                             O.ftxt.val('');
                             O.ftxt.trigger('keyup.sumo');
@@ -351,7 +351,7 @@
                         else return; // if no items before or after
                         sel.removeClass('sel');
                         sel = c.addClass('sel');
-                        // setting sel item to visible view.
+
                         var ul = O.ul,
                             st = ul.scrollTop(),
                             t = sel.position().top + st;
@@ -437,7 +437,7 @@
                         if (!O.is_multi) O.hideOpts(); //if its not a multiselect then hide on single select.
                     });
                 },
-                // fixed some variables that were not explicitly typed (michc)
+
                 setText: function () {
                     var O = this;
                     O.placeholder = "";
@@ -478,9 +478,9 @@
                     return O.placeholder;
                 },
                 isMobile: function () {
-                    // Adapted from http://www.detectmobilebrowsers.com
+
                     var ua = navigator.userAgent || navigator.vendor || window.opera;
-                    // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
+
                     for (var i = 0; i < settings.nativeOnDevice.length; i++) if (ua.toString().toLowerCase().indexOf(settings.nativeOnDevice[i].toLowerCase()) > 0) return settings.nativeOnDevice[i];
                     return false;
                 },
@@ -505,7 +505,7 @@
                     O.optDiv.toggleClass('okCancelInMulti', settings.okCancelInMulti && !O.is_floating);
                 },
                 //HELPERS FOR OUTSIDERS
-                // validates range of given item operations
+
                 vRange: function (i) {
                     var O = this;
                     var opts = O.E.find('option');
@@ -542,7 +542,7 @@
                     if (!O.mob) O.optDiv.find('ul.options li').eq(i).toggleClass('disabled', c).removeClass('selected');
                     O.setText();
                 },
-                // toggle disable/enable on complete select control
+
                 toggSumo: function (val) {
                     var O = this;
                     O.enabled = val;
@@ -557,8 +557,8 @@
                     }
                     return O;
                 },
-                // toggles all option on c as boolean.
-                // set direct=false/0 bypasses okCancelInMulti behaviour.
+
+
                 toggSelAll: function (c, direct) {
                     var O = this;
                     O.E.find('option:not(:disabled,:hidden)')
@@ -624,7 +624,7 @@
                     if (!O.mob) O.optDiv.find('ul.options li').eq(i).remove();
                     O.setText();
                 },
-                // removes all but the selected one
+
                 removeAll: function () {
                     var O = this;
                     var options = O.E.find('option');

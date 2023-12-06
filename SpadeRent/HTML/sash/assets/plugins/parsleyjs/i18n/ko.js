@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('ko', {
   defaultMessage: "입력하신 내용이 올바르지 않습니다.",
   type: {

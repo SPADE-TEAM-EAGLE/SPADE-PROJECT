@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('fi', {
   defaultMessage: "Sy&ouml;tetty arvo on virheellinen.",
   type: {

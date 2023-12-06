@@ -42,7 +42,7 @@
     Fullscreen.prototype.init = function () {
         var fullScreen = '';
         if (this.core.s.fullScreen) {
-            // check for fullscreen browser support
+
             if (!document.fullscreenEnabled && !document.webkitFullscreenEnabled && !document.mozFullScreenEnabled && !document.msFullscreenEnabled) {
                 return;
             } else {
@@ -75,7 +75,7 @@
             document.webkitExitFullscreen();
         }
     };
-    // https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode
+
     Fullscreen.prototype.fullScreen = function () {
         var _this = this;
         utils.on(document, 'fullscreenchange.lgfullscreen webkitfullscreenchange.lgfullscreen mozfullscreenchange.lgfullscreen MSFullscreenChange.lgfullscreen', function () {
@@ -94,7 +94,7 @@
         });
     };
     Fullscreen.prototype.destroy = function () {
-        // exit from fullscreen if activated
+
         if(document.querySelector('.lg-outer').classList.contains('lg-fullscreen-on')){
             console.log('triggered');
             this.exitFullscreen();

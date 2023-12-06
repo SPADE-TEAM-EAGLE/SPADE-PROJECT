@@ -3,13 +3,13 @@
  */
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
-		// AMD
+
 		define( ['jquery', 'datatables.net-se', 'datatables.net-autofill'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
 	else if ( typeof exports === 'object' ) {
-		// CommonJS
+
 		module.exports = function (root, $) {
 			if ( ! root ) {
 				root = window;
@@ -24,7 +24,7 @@
 		};
 	}
 	else {
-		// Browser
+
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {

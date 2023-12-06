@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('el', {
   defaultMessage: "Η τιμή φαίνεται να είναι μη έγκυρη.",
   type: {

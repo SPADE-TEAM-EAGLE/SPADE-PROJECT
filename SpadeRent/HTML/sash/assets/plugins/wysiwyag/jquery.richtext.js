@@ -1,22 +1,22 @@
 (function($) {
     $.fn.richText = function(options) {
-        // set default options
-        // and merge them with the parameter options
+
+
         var settings = $.extend({
-            // text formatting
+
             bold: true,
             italic: true,
             underline: true,
-            // text alignment
+
             leftAlign: true,
             centerAlign: true,
             rightAlign: true,
-            // lists
+
             ol: true,
             ul: true,
-            // title
+
             heading: true,
-            // fonts
+
             fonts: true,
             fontList: ["Arial",
                 "Arial Black",
@@ -33,24 +33,24 @@
             ],
             fontColor: true,
             fontSize: true,
-            // uploads
+
             imageUpload: true,
             fileUpload: true,
-            // media
+
             videoEmbed: true,
-            // link
+
             urls: true,
-            // tables
+
             table: true,
-            // code
+
             removeStyles: true,
             code: true,
-            // colors
+
             colors: [],
-            // dropdowns
+
             fileHTML: '',
             imageHTML: '',
-            // translations
+
             translations: {
                 'title': 'Title',
                 'white': 'White',
@@ -114,9 +114,9 @@
                 'redo': 'Redo',
                 'close': 'Close'
             },
-            // privacy
+
             youtubeCookies: false,
-            // dev settings
+
             useSingleQuotes: false,
             height: 0,
             heightPercentage: 0,
@@ -252,10 +252,10 @@
         var $imageForm = $form.clone().attr("id", "richText-Image").attr("data-editor", editorID);
         if (settings.imageHTML &&
             ($(settings.imageHTML).find('#imageURL').length > 0 || $(settings.imageHTML).attr("id") === "imageURL")) {
-            // custom image form
+
             $imageForm.html(settings.imageHTML);
         } else {
-            // default image form
+
             $imageForm.append(
                 $formItem.clone()
                 .append($formLabel.clone().text(settings.translations.imageURL).attr("for", "imageURL"))
@@ -281,10 +281,10 @@
         var $fileForm = $form.clone().attr("id", "richText-File").attr("data-editor", editorID);
         if (settings.fileHTML &&
             ($(settings.fileHTML).find('#fileURL').length > 0 || $(settings.fileHTML).attr("id") === "fileURL")) {
-            // custom file form
+
             $fileForm.html(settings.fileHTML);
         } else {
-            // default file form
+
             $fileForm.append(
                 $formItem.clone()
                 .append($formLabel.clone().text(settings.translations.fileURL).attr("for", "fileURL"))
@@ -319,16 +319,16 @@
         function init() {
             var value, attributes, attributes_html = '';
             if (settings.useParagraph !== false) {
-                // set default tag when pressing ENTER to <p> instead of <div>
+
                 document.execCommand("DefaultParagraphSeparator", false, 'p');
             }
-            // reformat $inputElement to textarea
+
             if ($inputElement.prop("tagName") === "TEXTAREA") {
-                // everything perfect
+
             } else if ($inputElement.val()) {
                 value = $inputElement.val();
                 attributes = $inputElement.prop("attributes");
-                // loop through <select> attributes and apply them on <div>
+
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -340,7 +340,7 @@
             } else if ($inputElement.html()) {
                 value = $inputElement.html();
                 attributes = $inputElement.prop("attributes");
-                // loop through <select> attributes and apply them on <div>
+
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -351,7 +351,7 @@
                 $inputElement.removeAttr("data-richtext");
             } else {
                 attributes = $inputElement.prop("attributes");
-                // loop through <select> attributes and apply them on <div>
+
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -432,13 +432,13 @@
             if (settings.code === true) {
                 $toolbarList.append($toolbarElement.clone().append($btnCode));
             }
-            // set current textarea value to editor
+
             $editorView.html($inputElement.val());
             $editor.append($toolbar);
             $editor.append($editorView);
             $editor.append($inputElement.clone().hide());
             $inputElement.replaceWith($editor);
-            // append bottom toolbar
+
             $editor.append(
                 $('<div />', { class: 'richText-toolbar' })
                 .append($('<a />', { class: 'richText-undo is-disabled', html: '<span class="fa fa-undo"></span>', 'title': settings.translations.undo }))
@@ -446,10 +446,10 @@
                 .append($('<a />', { class: 'richText-help', html: '' }))
             );
             if (settings.height && settings.height > 0) {
-                // set custom editor height
+
                 $editor.children(".richText-editor, .richText-initial").css({ 'min-height': settings.height + 'px', 'height': settings.height + 'px' });
             } else if (settings.heightPercentage && settings.heightPercentage > 0) {
-                // set custom editor height in percentage
+
                 var parentHeight = $editor.parent().innerHeight(); // get editor parent height
                 var height = (settings.heightPercentage / 100) * parentHeight; // calculate pixel value from percentage
                 height -= $toolbar.outerHeight() * 2; // remove toolbar size
@@ -459,22 +459,22 @@
                 height -= parseInt($editor.find(".richText-editor").css("padding-bottom")); // remove paddings
                 $editor.children(".richText-editor, .richText-initial").css({ 'min-height': height + 'px', 'height': height + 'px' });
             }
-            // add custom class
+
             if (settings.class) {
                 $editor.addClass(settings.class);
             }
             if (settings.id) {
                 $editor.attr("id", settings.id);
             }
-            // fix the first line
+
             fixFirstLine();
-            // save history
+
             history.push($editor.find("textarea").val());
         }
-        // initialize editor
+
         init();
         /** EVENT HANDLERS */
-        // undo / redo
+
         $(document).on("click", ".richText-undo, .richText-redo", function(e) {
             var $this = $(this);
             if ($this.hasClass("richText-undo") && !$this.hasClass("is-disabled")) {
@@ -483,10 +483,10 @@
                 redo();
             }
         });
-        // Saving changes from editor to textarea
+
         $(document).on("input change blur keydown keyup", ".richText-editor", function(e) {
             if ((e.keyCode === 9 || e.keyCode === "9") && e.type === "keydown") {
-                // tab through table cells
+
                 e.preventDefault();
                 tabifyEditableTable(window, e);
                 return false;
@@ -495,11 +495,11 @@
             updateTextarea();
             doSave($(this).attr("id"));
         });
-        // add context menu to several Node elements
+
         $(document).on('contextmenu', '.richText-editor', function(e) {
             var $list = $('<ul />', { 'class': 'list-rightclick richText-list' });
             var $li = $('<li />');
-            // remove Node selection
+
             $('.richText-editor').find('.richText-editNode').removeClass('richText-editNode');
             var $target = $(e.target);
             var $richText = $target.parents('.richText');
@@ -511,7 +511,7 @@
                 'left': positionX
             });
             if ($target.prop("tagName") === "A") {
-                // edit URL
+
                 e.preventDefault();
                 $list.append($li.clone().html('<span class="fa fa-link"></span>'));
                 $target.parents('.richText').append($list);
@@ -526,7 +526,7 @@
                 });
                 return false;
             } else if ($target.prop("tagName") === "IMG") {
-                // edit image
+
                 e.preventDefault();
                 $list.append($li.clone().html('<span class="fa fa-image"></span>'));
                 $target.parents('.richText').append($list);
@@ -547,7 +547,7 @@
                 return false;
             }
         });
-        // Saving changes from textarea to editor
+
         $(document).on("input change blur", ".richText-initial", function() {
             if (settings.useSingleQuotes === true) {
                 $(this).val(changeAttributeQuotes($(this).val()));
@@ -556,22 +556,22 @@
             updateEditor(editorID);
             doSave(editorID);
         });
-        // Save selection seperately (mainly needed for Safari)
+
         $(document).on("dblclick mouseup", ".richText-editor", function() {
             var editorID = $(this).attr("id");
             doSave(editorID);
         });
-        // embedding video
+
         $(document).on("click", "#richText-Video button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-                // only for the currently selected editor
+
                 var url = $form.find('input#videoURL').val();
                 var size = $form.find('select#size').val();
                 if (!url) {
-                    // no url set
+
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseEnterURL }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -580,7 +580,7 @@
                         });
                     }, 5000);
                 } else {
-                    // write html in editor
+
                     var html = '';
                     html = getVideoCode(url, size);
                     if (!html) {
@@ -598,18 +598,18 @@
                         restoreSelection(editorID, true);
                         pasteHTMLAtCaret(html);
                         updateTextarea();
-                        // reset input values
+
                         $form.find('input#videoURL').val('');
                         $('.richText-toolbar li.is-selected').removeClass("is-selected");
                     }
                 }
             }
         });
-        // Resize images
+
         $(document).on('mousedown', function(e) {
             var $target = $(e.target);
             if (!$target.hasClass('richText-list') && $target.parents('.richText-list').length === 0) {
-                // remove context menu
+
                 $('.richText-list.list-rightclick').remove();
                 if (!$target.hasClass('richText-form') && $target.parents('.richText-form').length === 0) {
                     $('.richText-editNode').each(function() {
@@ -633,21 +633,21 @@
                 var resize = false;
                 $target.css({ 'cursor': 'default' });
                 if (startY <= bottom && startY >= bottom - 20 && startX >= right - 20 && startX <= right) {
-                    // bottom right corner
+
                     $resizeImage = $target;
                     $resizeImage.css({ 'cursor': 'nwse-resize' });
                     resize = true;
                 }
                 if ((resize === true || $resizeImage) && !$resizeImage.data("width")) {
-                    // set initial image size and prevent dragging image while resizing
+
                     $resizeImage.data("width", $target.parents("#" + editorID).innerWidth());
                     $resizeImage.data("height", $target.parents("#" + editorID).innerHeight() * 3);
                     e.preventDefault();
                 } else if (resize === true || $resizeImage) {
-                    // resizing active, prevent other events
+
                     e.preventDefault();
                 } else {
-                    // resizing disabled, allow dragging image
+
                     $resizeImage = null;
                 }
             }
@@ -666,28 +666,28 @@
                     var maxHeight = $resizeImage.data('height');
                     var currentHeight = $resizeImage.height();
                     if ((startW + e.pageX - startX) <= maxWidth && (startH + e.pageY - startY) <= maxHeight) {
-                        // only resize if new size is smaller than the original image size
+
                         $resizeImage.innerWidth(startW + e.pageX - startX); // only resize width to adapt height proportionally
-                        // $box.innerHeight(startH + e.pageY-startY);
+
                         updateTextarea();
                     } else if ((startW + e.pageX - startX) <= currentWidth && (startH + e.pageY - startY) <= currentHeight) {
-                        // only resize if new size is smaller than the previous size
+
                         $resizeImage.innerWidth(startW + e.pageX - startX); // only resize width to adapt height proportionally
                         updateTextarea();
                     }
                 }
             });
-        // adding URL
+
         $(document).on("click", "#richText-URL button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-                // only for currently selected editor
+
                 var url = $form.find('input#url').val();
                 var text = $form.find('input#urlText').val();
                 var target = $form.find('#openIn').val();
-                // set default values
+
                 if (!target) {
                     target = '_self';
                 }
@@ -695,7 +695,7 @@
                     text = url;
                 }
                 if (!url) {
-                    // no url set
+
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseEnterURL }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -704,7 +704,7 @@
                         });
                     }, 5000);
                 } else {
-                    // write html in editor
+
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         html = "<a href='" + url + "' target='" + target + "'>" + text + "</a>";
@@ -724,28 +724,28 @@
                     } else {
                         pasteHTMLAtCaret(html);
                     }
-                    // reset input values
+
                     $form.find('input#url').val('');
                     $form.find('input#urlText').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-        // adding image
+
         $(document).on("click", "#richText-Image button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-                // only for currently selected editor
+
                 var url = $form.find('#imageURL').val();
                 var align = $form.find('select#align').val();
-                // set default values
+
                 if (!align) {
                     align = 'center';
                 }
                 if (!url) {
-                    // no url set
+
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseSelectImage }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -754,7 +754,7 @@
                         });
                     }, 5000);
                 } else {
-                    // write html in editor
+
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         if (align === "center") {
@@ -789,27 +789,27 @@
                     } else {
                         pasteHTMLAtCaret(html);
                     }
-                    // reset input values
+
                     $form.find('input#imageURL').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-        // adding file
+
         $(document).on("click", "#richText-File button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-                // only for currently selected editor
+
                 var url = $form.find('#fileURL').val();
                 var text = $form.find('#fileText').val();
-                // set default values
+
                 if (!text) {
                     text = url;
                 }
                 if (!url) {
-                    // no url set
+
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseSelectFile }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -818,7 +818,7 @@
                         });
                     }, 5000);
                 } else {
-                    // write html in editor
+
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         html = "<a href='" + url + "' target='_blank'>" + text + "</a>";
@@ -827,30 +827,30 @@
                     }
                     restoreSelection(editorID, true);
                     pasteHTMLAtCaret(html);
-                    // reset input values
+
                     $form.find('input#fileURL').val('');
                     $form.find('input#fileText').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-        // adding table
+
         $(document).on("click", "#richText-Table button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-                // only for currently selected editor
+
                 var rows = $form.find('input#tableRows').val();
                 var columns = $form.find('input#tableColumns').val();
-                // set default values
+
                 if (!rows || rows <= 0) {
                     rows = 2;
                 }
                 if (!columns || columns <= 0) {
                     columns = 2;
                 }
-                // generate table
+
                 var html = '';
                 if (settings.useSingleQuotes === true) {
                     html = "<table class='table-1'><tbody>";
@@ -858,44 +858,44 @@
                     html = '<table class="table-hover table-1"><tbody>';
                 }
                 for (var i = 1; i <= rows; i++) {
-                    // start new row
+
                     html += '<tr>';
                     for (var n = 1; n <= columns; n++) {
-                        // start new column in row
+
                         html += '<td> </td>';
                     }
                     html += '</tr>';
                 }
                 html += '</tbody></table>';
-                // write html in editor
+
                 restoreSelection(editorID, true);
                 pasteHTMLAtCaret(html);
-                // reset input values
+
                 $form.find('input#tableColumns').val('');
                 $form.find('input#tableRows').val('');
                 $('.richText-toolbar li.is-selected').removeClass("is-selected");
             }
         });
-        // opening / closing toolbar dropdown
+
         $(document).on("click", function(event) {
             var $clickedElement = $(event.target);
             if ($clickedElement.parents('.richText-toolbar').length === 0) {
-                // element not in toolbar
-                // ignore
+
+
             } else if ($clickedElement.hasClass("richText-dropdown-outer")) {
-                // closing dropdown by clicking inside the editor
+
                 $clickedElement.parent('a').parent('li').removeClass("is-selected");
             } else if ($clickedElement.find(".richText").length > 0) {
-                // closing dropdown by clicking outside of the editor
+
                 $('.richText-toolbar li').removeClass("is-selected");
             } else if ($clickedElement.parent().hasClass("richText-dropdown-close")) {
-                // closing dropdown by clicking on the close button
+
                 $('.richText-toolbar li').removeClass("is-selected");
             } else if ($clickedElement.hasClass("richText-btn") && $(event.target).children('.richText-dropdown-outer').length > 0) {
-                // opening dropdown by clicking on toolbar button
+
                 $clickedElement.parent('li').addClass("is-selected");
                 if ($clickedElement.children('.fa,svg').hasClass("fa-link")) {
-                    // put currently selected text in URL form to replace it
+
                     restoreSelection(editorID, false, true);
                     var selectedText = getSelectedText();
                     $clickedElement.find("input#urlText").val('');
@@ -904,11 +904,11 @@
                         $clickedElement.find("input#urlText").val(selectedText);
                     }
                 } else if ($clickedElement.hasClass("fa-image")) {
-                    // image
+
                 }
             }
         });
-        // Executing editor commands
+
         $(document).on("click", ".richText-toolbar a[data-command]", function(event) {
             var $button = $(this);
             var $toolbar = $button.closest('.richText-toolbar');
@@ -929,9 +929,9 @@
                     }
                     formatText(command, option, id);
                     if (command === "removeFormat") {
-                        // remove HTML/CSS formatting
+
                         $editor.find('*').each(function() {
-                            // remove all, but very few, attributes from the nodes
+
                             var keepAttributes = [
                                 "id", "class",
                                 "name", "action", "method",
@@ -949,7 +949,7 @@
                                 }
                             });
                             if (element.prop('tagName') === "A") {
-                                // remove empty URL tags
+
                                 element.replaceWith(function() {
                                     return $('<span />', { html: $(this).html() });
                                 });
@@ -957,12 +957,12 @@
                         });
                         formatText('formatBlock', 'div', id);
                     }
-                    // clean up empty tags, which can be created while replacing formatting or when copy-pasting from other tools
+
                     $editor.find('div:empty,p:empty,li:empty,h1:empty,h2:empty,h3:empty,h4:empty,h5:empty,h6:empty').remove();
                     $editor.find('h1,h2,h3,h4,h5,h6').unwrap('h1,h2,h3,h4,h5,h6');
                 }
             }
-            // close dropdown after click
+
             $button.parents('li.is-selected').removeClass('is-selected');
         });
         /** INTERNAL METHODS **/
@@ -977,14 +977,14 @@
             if (typeof option === "undefined") {
                 option = null;
             }
-            // restore selection from before clicking on any button
+
             doRestore(editorID);
-            // Temporarily enable designMode so that
-            // document.execCommand() will work
-            // document.designMode = "ON";
-            // Execute the command
+
+
+
+
             if (command === "heading" && getSelectedText()) {
-                // IE workaround
+
                 pasteHTMLAtCaret('<' + option + '>' + getSelectedText() + '</' + option + '>');
             } else if (command === "fontSize" && parseInt(option) > 0) {
                 var selection = getSelectedText();
@@ -994,8 +994,8 @@
             } else {
                 document.execCommand(command, false, option);
             }
-            // Disable designMode
-            // document.designMode = "OFF";
+
+
         }
         /**
          * Update textarea when updating editor
@@ -1059,7 +1059,7 @@
             var containerEl = document.getElementById(editorID);
             var savedSel = savedSelection;
             if (!savedSel) {
-                // fix selection if editor has not been focused
+
                 savedSel = {
                     'start': 0,
                     'end': 0,
@@ -1248,7 +1248,7 @@
                         e.preventDefault();
                         return true;
                     } else if (textNode === null && direction === "next" && sel.focusNode.nodeName === "TD") {
-                        // add new row on TAB if arrived at the end of the row
+
                         var $table = $(sel.focusNode).parents("table");
                         var cellsPerLine = $table.find("tr").first().children("td").length;
                         var $tr = $("<tr />");
@@ -1257,7 +1257,7 @@
                             $tr.append($td.clone());
                         }
                         $table.append($tr);
-                        // simulate tabing through table
+
                         tabifyEditableTable(window, { keyCode: 9, shiftKey: false, preventDefault: function() {} });
                     }
                 }
@@ -1348,17 +1348,17 @@
          * @private
          */
         function pasteHTMLAtCaret(html) {
-            // add HTML code for Internet Explorer
+
             var sel, range;
             if (window.getSelection) {
-                // IE9 and non-IE
+
                 sel = window.getSelection();
                 if (sel.getRangeAt && sel.rangeCount) {
                     range = sel.getRangeAt(0);
                     range.deleteContents();
-                    // Range.createContextualFragment() would be useful here but is
-                    // only relatively recently standardized and is not supported in
-                    // some browsers (IE9, for one)
+
+
+
                     var el = document.createElement("div");
                     el.innerHTML = html;
                     var frag = document.createDocumentFragment(),
@@ -1367,7 +1367,7 @@
                         lastNode = frag.appendChild(node);
                     }
                     range.insertNode(frag);
-                    // Preserve the selection
+
                     if (lastNode) {
                         range = range.cloneRange();
                         range.setStartAfter(lastNode);
@@ -1377,7 +1377,7 @@
                     }
                 }
             } else if (document.selection && document.selection.type !== "Control") {
-                // IE < 9
+
                 document.selection.createRange().pasteHTML(html);
             }
         }
@@ -1448,10 +1448,10 @@
         function toggleCode(editorID) {
             doRestore(editorID);
             if ($editor.find('.richText-editor').is(":visible")) {
-                // show code
+
                 $editor.find('.richText-initial').show();
                 $editor.find('.richText-editor').hide();
-                // disable non working buttons
+
                 $('.richText-toolbar').find('.richText-btn').each(function() {
                     if ($(this).children('.fa-code').length === 0) {
                         $(this).parent('li').attr("data-disable", "true");
@@ -1459,11 +1459,11 @@
                 });
                 convertCaretPosition(editorID, savedSelection);
             } else {
-                // show editor
+
                 $editor.find('.richText-initial').hide();
                 $editor.find('.richText-editor').show();
                 convertCaretPosition(editorID, savedSelection, true);
-                // enable all buttons again
+
                 $('.richText-toolbar').find('li').removeAttr("data-disable");
             }
         }
@@ -1489,7 +1489,7 @@
             var states = { start: false, end: false, tag: false, isTag: false, tagsCount: 0, isHighlight: (selection.start !== selection.end) };
             for (var i = 0; i < code.length; i++) {
                 if (code[i] === "<") {
-                    // HTML tag starts
+
                     states.isTag = true;
                     states.tag = false;
                     states.tagsCount++;
@@ -1554,7 +1554,7 @@
             var responsive = false,
                 success = false;
             if (!video) {
-                // video URL not supported
+
                 return false;
             }
             if (!size) {
@@ -1637,14 +1637,14 @@
          */
         function fixFirstLine() {
             if ($editor && !$editor.find(".richText-editor").html()) {
-                // set first line with the right tags
+
                 if (settings.useParagraph !== false) {
                     $editor.find(".richText-editor").html('<p><br></p>');
                 } else {
                     $editor.find(".richText-editor").html('<div><br></div>');
                 }
             } else {
-                // replace tags, to force <div> or <p> tags and fix issues
+
                 if (settings.useParagraph !== false) {
                     $editor.find(".richText-editor").find('div').replaceWith(function() {
                         return $('<p />', { html: $(this).html() });
@@ -1660,8 +1660,8 @@
         return $(this);
     };
     $.fn.unRichText = function(options) {
-        // set default options
-        // and merge them with the parameter options
+
+
         var settings = $.extend({
             delay: 0 // delay in ms
         }, options);
@@ -1677,13 +1677,13 @@
                 $main = $el.parents('.richText');
             }
             if (!$main) {
-                // node element does not correspond to RichText elements
+
                 return false;
             }
             $editor = $main.find('.richText-editor');
             $textarea = $main.find('.richText-initial');
             if (parseInt(settings.delay) > 0) {
-                // a delay has been set
+
                 setTimeout(remove, parseInt(settings.delay));
             } else {
                 remove();

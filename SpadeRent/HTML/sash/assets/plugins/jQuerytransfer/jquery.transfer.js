@@ -2,11 +2,11 @@
  * 穿梭框
  */
 var Transfer = (function ($) {
-    // 全局变量，已选择项个数
+
     var selected_total_num = 0;
-    // 当前时间，作为 id 使用
+
     var currentTimeStr = (new Date()).getTime() + parseInt(10000 * Math.random());
-    // input 的 id
+
     var inputId = "";
     /**
      * 构造穿梭框
@@ -14,99 +14,99 @@ var Transfer = (function ($) {
      */
     function transfer(settings) {
         inputId = settings.inputId;
-        // 数据项的名称
+
         var itemName = settings.itemName;
-        // 分组的名称
+
         var groupItemName = settings.groupItemName;
-        // 分组的列表名称
+
         var groupListName = settings.groupListName;
-        // 值的名称
+
         var valueName = settings.valueName;
-        // 容器
+
         var container = "." + settings.container;
-        // 数据变化的回调函数
+
         var callable = settings.callable;
-        // 穿梭框
+
         var transferId = "#transfer_double_" + inputId;
-        // 接收选中项文本框
+
         var selectInputId = "#" + inputId;
-        // 列表数据
+
         var data = settings.data || [];
-        // 分组列表数据
+
         var groupData = settings.groupData || [];
-        // 数据项总个数
+
         var total_num = settings.data.length;
-        // 总个数显示文本
+
         var total_num_str = settings.data.length + " Items";
-        // 分组总个数
+
         var total_group_num = getGroupNum(groupData, groupListName);
-        // 分组总个数显示文本
+
         var total_group_num_str = total_group_num + " Items";
-        // 新的总个数
+
         var new_total_num = 0;
-        // 新的分组总个数
+
         var new_group_total_num = 0;
-        // 标签页
+
         var tabItemName = ".tab-item-name-" + currentTimeStr;
-        // 标签页内容
+
         var transferDoubleList = ".transfer-double-list-" + currentTimeStr;
-        // 左侧搜索框 id
+
         var listSearchId = "#listSearch_" + currentTimeStr;
-        // 左侧分组搜索框 id
+
         var groupListSearchId = "#groupListSearch_" + currentTimeStr;
-        // 右侧搜索框 id
+
         var selectedListSearchId = "#selectedListSearch_" + currentTimeStr;
-        // 左侧未选中项内容
+
         var tabContentFirst = ".tab-content-first-" + currentTimeStr;
-        // 左侧未选中项列表 ul
+
         var transferDoubleListUl = ".transfer-double-list-ul-" + currentTimeStr;
-        // 左侧未选中项列表 li
+
         var transferDoubleListLi = ".transfer-double-list-li-" + currentTimeStr;
-        // 左侧列表项 checkbox
+
         var checkboxItem = ".checkbox-item-" + currentTimeStr;
-        // 左侧列表项名称
+
         var checkboxName = ".checkbox-name-" + currentTimeStr;
-        // 左侧总个数显示元素
+
         var totalNum = ".total_num_" + currentTimeStr;
-        // 左侧未选中项列表全选 id
+
         var selectAllId = "#selectAll_" + currentTimeStr;
-        // 左侧分组列表 ul
+
         var transferDoubleGroupListUl = ".transfer-double-group-list-ul-" + currentTimeStr;
-        // 左侧分组列表 li
+
         var transferDoubleGroupListLi = ".transfer-double-group-list-li-" + currentTimeStr;
-        // 左侧分组列表分组全选，是分组全选，不是全选
+
         var groupSelectAll = ".group-select-all-" + currentTimeStr;
-        // 左侧分组列表分组名称
+
         var groupName = ".group-name-" + currentTimeStr;
-        // 左侧不同分组 ul
+
         var transferDoubleGroupListLiUl = ".transfer-double-group-list-li-ul-" + currentTimeStr;
-        // 左侧不同分组 li
+
         var transferDoubleGroupListLiUlLi = ".transfer-double-group-list-li-ul-li-" + currentTimeStr;
-        // 左侧不同分组 checkbox
+
         var groupCheckboxItem = ".group-checkbox-item-" + currentTimeStr;
-        // 左侧不同分组选项名称
+
         var groupCheckboxName = ".group-checkbox-name-" + currentTimeStr;
-        // 左侧分组总个数显示元素
+
         var groupTotalNum = ".group_total_num_" + currentTimeStr;
-        // 左侧未选中分组列表全选 id
+
         var groupsSelectAllId = "#groupsSelectAll_" + currentTimeStr;
-        // 右侧列表 ul
+
         var transferDoubleSelectedListUl = ".transfer-double-selected-list-ul-" + currentTimeStr;
-        // 右侧列表 li
+
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
-        // 右侧列表选中项
+
         var checkboxSelectedItem = ".checkbox-selected-item-" + currentTimeStr;
-        // 右侧列表选中项名称
+
         var checkboxSelectedName = ".checkbox-selected-name-" + currentTimeStr;
-        // 右侧全选 id，留待后续使用
+
         var selectedAllId = "#selectedAll_" + currentTimeStr;
-        // 右侧总个数显示元素
+
         var selectedTotalNum = ".selected_total_num_" + currentTimeStr;
-        // 往右添加按钮
+
         var addSelected = "#add_selected_" + currentTimeStr;
-        // 往左添加按钮
+
         var deleteSelected = "#delete_selected_" + currentTimeStr;
-        // 穿梭框渲染
+
         $(container).append(generateTransfer(inputId, currentTimeStr));
         /**
          * 数据渲染
@@ -132,9 +132,9 @@ var Transfer = (function ($) {
                 });
                 $(addSelected).removeClass("btn-arrow-active");
                 $(transferId).find(transferDoubleSelectedListUl).empty();
-                // 清空右侧数量
+
                 $(transferId).find(selectedTotalNum).text("0 Items");
-                // 未选中项
+
                 if ($(transferId).find(tabContentFirst).css("display") != "none") {
                     $(transferId).find(transferDoubleGroupListLiUlLi).each(function () {
                         $(this).css('display', 'block');
@@ -146,8 +146,8 @@ var Transfer = (function ($) {
                     $(transferId).find(groupTotalNum).empty();
                     $(transferId).find(groupTotalNum).append($(transferId).find(transferDoubleGroupListLiUlLi).length + " Items");
                 } else {
-                    // 分组
-                    // 清空 disabled
+
+
                     for (var j = 0; j < $(transferId).find(groupSelectAll).length; j++) {
                         $(transferId).find(groupSelectAll).eq(j).prop("disabled", "");
                     }
@@ -161,9 +161,9 @@ var Transfer = (function ($) {
                     $(transferId).find(totalNum).empty();
                     $(transferId).find(totalNum).append($(transferId).find(transferDoubleListLi).length + " Items");
                 }
-                // 数据变化触发回调
+
                 callable.call(this, getSelected(), getSelectedName());
-                // 标签切换按钮修改为未激活
+
                 $(addSelected).removeClass("btn-arrow-active");
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
@@ -200,7 +200,7 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-        // 监听右侧未选中项 checkBox 是否被选中
+
         $(transferId).on("click", checkboxSelectedItem, function () {
             var deleted_num = 0;
             for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length; i++) {
@@ -214,17 +214,17 @@ var Transfer = (function ($) {
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
         });
-        // 选中或者反选分组中的所有未选中项
+
         $(groupSelectAll).on("click", function () {
-            // 分组索引
+
             var groupIndex = ($(this).attr("id")).split("_")[1];
-            // 某个分组被选中
+
             if ($(this).is(':checked')) {
-                // 激活按钮
+
                 $(addSelected).addClass("btn-arrow-active");
                 for (var i = 0; i < $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).length; i++) {
                     if (!$(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).is(':checked') && $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).parent().parent().css("display") != "none") {
-                        // 此处如果用 attr，会出现第三次失效的情况
+
                         $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).prop("checked", true);
                     }
                 }
@@ -285,7 +285,7 @@ var Transfer = (function ($) {
             if ($(this).is(':checked')) {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if ($(transferId).find(transferDoubleGroupListLiUlLi).eq(i).css('display') != "none" && !$(transferId).find(groupCheckboxItem).eq(i).is(':checked')) {
-                        // 此处如果用 attr，会出现第三次失效的情况
+
                         $(transferId).find(groupCheckboxItem).eq(i).prop("checked", true);
                     }
                     if (!$(transferId).find(groupSelectAll).eq(i).is(':checked')) {
@@ -311,7 +311,7 @@ var Transfer = (function ($) {
         $(addSelected).on("click", function () {
             var listHtmlStr = "";
             var selectedItemNum = 0;
-            // 分组
+
             if ($(transferId).find(tabContentFirst).css("display") != "none") {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if ($(transferId).find(groupCheckboxItem).eq(i).is(':checked')) {
@@ -337,21 +337,21 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(groupTotalNum).empty();
-                // 计算左侧总数
+
                 new_group_total_num = total_group_num - selectedItemNum;
-                // 计算右侧总数
+
                 selected_total_num = selectedItemNum;
                 var new_total_num_str = new_group_total_num + " Items";
-                // 左侧数量
+
                 $(transferId).find(groupTotalNum).append(new_total_num_str);
-                // 右侧数量
+
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if (new_group_total_num == 0) {
                     $(groupsSelectAllId).prop("checked", true);
                     $(groupsSelectAllId).prop("disabled", "disabled");
                 }
             } else {
-                // 未选中项
+
                 for (var i = 0; i < $(transferId).find(checkboxItem).length; i++) {
                     if ($(transferId).find(checkboxItem).eq(i).is(':checked')) {
                         var checkboxItemId = $(transferId).find(checkboxItem).eq(i).attr("id");
@@ -369,14 +369,14 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(totalNum).empty();
-                // 计算新的左侧总数
+
                 new_total_num = total_num - selectedItemNum;
-                // 计算右侧总数
+
                 selected_total_num = selectedItemNum;
                 var new_total_num_str = new_total_num + " Items";
-                // 左侧数量
+
                 $(transferId).find(totalNum).append(new_total_num_str);
-                // 右侧数量
+
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if (new_total_num == 0) {
                     $(selectAllId).prop("checked", true);
@@ -386,7 +386,7 @@ var Transfer = (function ($) {
             $(addSelected).removeClass("btn-arrow-active");
             $(transferId).find(transferDoubleSelectedListUl).empty();
             $(transferId).find(transferDoubleSelectedListUl).append(listHtmlStr);
-            // 数据变化触发回调
+
             callable.call(this, getSelected(), getSelectedName());
         });
         /**
@@ -394,7 +394,7 @@ var Transfer = (function ($) {
          */
         $(deleteSelected).on("click", function () {
             var deleteItemNum = 0;
-            // 分组
+
             if ($(transferId).find(tabContentFirst).css("display") != "none") {
                 for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length;) {
                     if ($(transferId).find(checkboxSelectedItem).eq(i).is(':checked')) {
@@ -413,21 +413,21 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(groupTotalNum).empty();
-                // 计算左侧总数
+
                 new_group_total_num = new_group_total_num + deleteItemNum;
-                // 计算右侧总数
+
                 selected_total_num -= deleteItemNum;
                 var new_total_num_str = new_group_total_num + " Items";
-                // 左侧总数
+
                 $(transferId).find(groupTotalNum).append(new_total_num_str);
-                // 右侧总数
+
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if ($(groupsSelectAllId).is(':checked')) {
                     $(groupsSelectAllId).prop("checked", false);
                     $(groupsSelectAllId).removeAttr("disabled");
                 }
             } else {
-                // 未选中项
+
                 for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length;) {
                     if ($(transferId).find(checkboxSelectedItem).eq(i).is(':checked')) {
                         var checkboxSelectedItemId = $(transferId).find(checkboxSelectedItem).eq(i).attr("id");
@@ -442,14 +442,14 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(totalNum).empty();
-                // 计算左侧总数
+
                 new_total_num = new_total_num + deleteItemNum;
-                // 计算右侧总数
+
                 selected_total_num -= deleteItemNum;
                 var new_total_num_str = new_total_num + " Items";
-                // 左侧总数
+
                 $(transferId).find(totalNum).append(new_total_num_str);
-                // 右侧总数
+
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if ($(selectAllId).is(':checked')) {
                     $(selectAllId).prop("checked", false);
@@ -457,16 +457,16 @@ var Transfer = (function ($) {
                 }
             }
             $(deleteSelected).removeClass("btn-arrow-active");
-            // 数据变化触发回调
+
             callable.call(this, getSelected(), getSelectedName());
         });
         /**
          * 左侧模糊查询
          */
         $(listSearchId).on("keyup", function () {
-            // 只要输入就显示列表框
+
             $(transferId).find(transferDoubleListUl).css('display', 'block');
-            // 如果什么都没填，保持全部显示状态
+
             if ($(listSearchId).val() == "") {
                 for (var i = 0; i < $(transferId).find(checkboxItem).length; i++) {
                     if (!$(transferId).find(checkboxItem).eq(i).is(':checked')) {
@@ -475,10 +475,10 @@ var Transfer = (function ($) {
                 }
                 return;
             }
-            // 如果填了，先将所有的选项隐藏
+
             $(transferId).find(transferDoubleListLi).css('display', 'none');
             for (var j = 0; j < $(transferId).find(transferDoubleListLi).length; j++) {
-                // 模糊匹配，将所有匹配项显示
+
                 if (!$(transferId).find(checkboxItem).eq(j).is(':checked')
                     && $(transferId).find(transferDoubleListLi).eq(j).text()
                         .substr(0, $(listSearchId).val().length).toLowerCase() == $(listSearchId).val().toLowerCase()) {
@@ -490,29 +490,29 @@ var Transfer = (function ($) {
          * 左侧分组模糊查询
          */
         $(groupListSearchId).on("keyup", function () {
-            // 只要输入就显示列表框
+
             $(transferId).find(transferDoubleGroupListUl).css('display', 'block');
-            // 如果什么都没填，保持全部显示状态
+
             if ($(groupListSearchId).val() == "") {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if (!$(transferId).find(checkboxItem).eq(i).is(':checked')) {
-                        // 分组 li 改为显示
+
                         $(transferId).find(transferDoubleGroupListLiUlLi).eq(i).parent().parent().css('display', 'block');
-                        // 分组下每个 li 改为显示
+
                         $(transferId).find(transferDoubleGroupListLiUlLi).eq(i).css('display', 'block');
                     }
                 }
                 return;
             }
-            // 如果填了，先将所有的选项隐藏
+
             $(transferId).find(transferDoubleGroupListLi).css('display', 'none');
             $(transferId).find(transferDoubleGroupListLiUlLi).css('display', 'none');
             for (var j = 0; j < $(transferId).find(transferDoubleGroupListLiUlLi).length; j++) {
-                // 模糊匹配，将所有匹配项显示
+
                 if (!$(transferId).find(groupCheckboxItem).eq(j).is(':checked')
                     && $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).text()
                         .substr(0, $(groupListSearchId).val().length).toLowerCase() == $(groupListSearchId).val().toLowerCase()) {
-                    // 分组 li 改为显示
+
                     $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).parent().parent().css('display', 'block');
                     $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).css('display', 'block');
                 }
@@ -522,16 +522,16 @@ var Transfer = (function ($) {
          * 右侧模糊查询
          */
         $(selectedListSearchId).keyup(function () {
-            // 只要输入就显示列表框
+
             $(transferId).find(transferDoubleSelectedListUl).css('display', 'block');
-            // 如果什么都没填,保持全部显示状态
+
             if ($(selectedListSearchId).val() == "") {
                 $(transferId).find(transferDoubleSelectedListLi).css('display', 'block');
                 return;
             }
             $(transferId).find(transferDoubleSelectedListLi).css('display', 'none');
             for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-                // 模糊匹配，将所有匹配项显示
+
                 if ($(transferId).find(transferDoubleSelectedListLi).eq(i).text()
                         .substr(0, $(selectedListSearchId).val().length).toLowerCase() == $(selectedListSearchId).val().toLowerCase()) {
                     $(transferId).find(transferDoubleSelectedListLi).eq(i).css('display', 'block');
@@ -611,12 +611,12 @@ var Transfer = (function ($) {
      * @returns {Array}
      */
     function getSelected() {
-        // 穿梭框
+
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-            // 模糊匹配，将所有匹配项显示
+
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("input").val();
             selected.push(value);
         }
@@ -627,12 +627,12 @@ var Transfer = (function ($) {
      * @returns {Array}
      */
     function getSelectedName() {
-        // 穿梭框
+
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-            // 模糊匹配，将所有匹配项显示
+
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("label").text();
             selected.push(value);
         }

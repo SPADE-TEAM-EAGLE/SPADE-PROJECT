@@ -1,5 +1,5 @@
-// jQuery plugin to display a custom jQuery File Uploader interface.
-// (C) 2017 CubicleSoft.  All Rights Reserved.
+
+
 (function($) {
 	var EscapeHTML = function (text) {
 		var map = {
@@ -79,7 +79,7 @@
 	$.fn.FancyFileUpload = function(options) {
 		this.each(function() {
 			var $this = $(this);
-			// Remove the previous file uploader.
+
 			if ($this.data('fancy-fileupload') && typeof($this.data('fancy-fileupload')) === 'object')
 			{
 				$this.removeClass('ff_fileupload_hidden');
@@ -92,21 +92,21 @@
 		if (!$('.ff_fileupload_hidden').length)  $(document).off('drop.fancy_fileupload dragover.fancy_fileupload');
 		if (typeof(options) === 'string' && options === 'destroy')  return this;
 		var settings = $.extend({}, $.fn.FancyFileUpload.defaults, options);
-		// Prevent default file drag-and-drop operations.
+
 		/*$(document).off('drop.fancy_fileupload dragover.fancy_fileupload');
 		$(document).on('drop.fancy_fileupload dragover.fancy_fileupload', function (e) {
 			e.preventDefault();
 		});*/
-		// Some useful functions.
+
 		var Translate = function(str) {
 			return (settings.langmap[str] ? settings.langmap[str] : str);
 		};
-		// Prevent the user from leaving the page if there is an active upload.
+
 		var activeuploads = 0;
 		$(window).on('beforeunload', function(e) {
 			if (activeuploads > 0)  return Translate('There is a file upload still in progress.  Leaving the page will cancel the upload.\n\nAre you sure you want to leave this page?');
 		});
-		// Create some extra DOM nodes for preview checking.
+
 		var audioelem = document.createElement('audio');
 		var videoelem = document.createElement('video');
 		var AddFile = function(uploads, e, data) {
@@ -117,7 +117,7 @@
 			var alphanum = 'abcdefghijklmnopqrstuvwxyz0123456789';
 			pos = (fileext == '' ? -1 : alphanum.indexOf(fileext.charAt(0)));
 			var fileextclass = alphanum.charAt((pos > -1 ? pos : Math.floor(Math.random() * alphanum.length)));
-			// Initialize necessary callback options.
+
 			data.ff_info = {};
 			data.ff_info.errors = [];
 			data.ff_info.retries = 0;
@@ -127,10 +127,10 @@
 			data.ff_info.inforow = inforow;
 			data.ff_info.displayfilesize = GetDisplayFilesize(data.files[0].size, settings.adjustprecision, settings.displayunits);
 			data.context = inforow;
-			// A couple of functions for handling actions.
+
 			var StartUpload = function(e) {
 				e.preventDefault();
-				// Set filename.
+
 				if (settings.edit && !data.ff_info.errors.length)
 				{
 					var fileinput = inforow.find('.ff_fileupload_filename input');
@@ -142,18 +142,18 @@
 						data.files[0].uploadName = newfilename;
 					}
 				}
-				// Remove start upload buttons.
+
 				inforow.find('button.ff_fileupload_start_upload').remove();
-				// Reset hover status.
+
 				inforow.find('.ff_fileupload_fileinfo').removeClass('ff_fileupload_hidden');
 				inforow.find('.ff_fileupload_buttoninfo').addClass('ff_fileupload_hidden');
-				// Set the status.
+
 				inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + ' | ' + Translate('Starting upload...'));
-				// Display progress bar.
+
 				inforow.find('.ff_fileupload_progress_background').removeClass('ff_fileupload_hidden');
-				// Alter remove buttons.
+
 				inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Cancel upload and remove from list'));
-				// Begin the actual upload.
+
 				var SubmitUpload = function() {
 					activeuploads++;
 					data.ff_info.uploading = true;
@@ -188,7 +188,7 @@
 					delete data.ff_info;
 				}
 			};
-			// Thumbnail preview.
+
 			var haspreview = false;
 			var preview;
 			var hasimage = false;
@@ -231,7 +231,7 @@
 				});
 			}
 			if (!hasimage)  inforow.find('.ff_fileupload_preview_image').addClass('ff_fileupload_preview_text_with_color').addClass('ff_fileupload_preview_text_' + fileextclass).text(fileext);
-			// Validate inputs.
+
 			if (settings.accept)
 			{
 				var found = false;
@@ -242,11 +242,11 @@
 				if (!found)  data.ff_info.errors.push(Translate('Invalid file extension.'));
 			}
 			if (settings.maxfilesize > -1 && data.files[0].size > settings.maxfilesize)  data.ff_info.errors.push(FormatStr(Translate('File is too large.  Maximum file size is {0}.'), GetDisplayFilesize(settings.maxfilesize, settings.adjustprecision, settings.displayunits)));
-			// Filename text field/display.
+
 			if (settings.edit && !data.ff_info.errors.length)
 			{
 				inforow.find('.ff_fileupload_filename').append($('<input>').attr('type', 'text').val(filename).keydown(function(e) {
-					// Start uploading if someone presses enter.
+
 					if (e.keyCode == 13)  StartUpload(e);
 				}));
 			}
@@ -254,11 +254,11 @@
 			{
 				inforow.find('.ff_fileupload_filename').text(data.files[0].name);
 			}
-			// File/Upload information.
+
 			inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + (hasimage && settings.edit && !data.ff_info.errors.length ? ' | .' + fileext : ''));
-			// Errors.
+
 			if (data.ff_info.errors.length)  inforow.find('.ff_fileupload_errors').html(data.ff_info.errors.join('<br>')).removeClass('ff_fileupload_hidden');
-			// Action buttons.
+
 			if (!data.ff_info.errors.length)
 			{
 				inforow.find('.ff_fileupload_actions').append($('<button>').addClass('ff_fileupload_start_upload').attr('type', 'button').attr('aria-label', Translate('Start uploading')).click(StartUpload));
@@ -266,9 +266,9 @@
 			}
 			inforow.find('.ff_fileupload_actions').append($('<button>').addClass('ff_fileupload_remove_file').attr('type', 'button').attr('aria-label', Translate('Remove from list')).click(RemoveFile));
 			inforow.find('.ff_fileupload_actions_mobile').append($('<button>').addClass('ff_fileupload_remove_file').attr('type', 'button').attr('aria-label', Translate('Remove from list')).click(RemoveFile));
-			// Handle button hover.
+
 			InitShowAriaLabelInfo(inforow);
-			// Improve progress bar performance during upload.
+
 			data.ff_info.fileinfo = inforow.find('.ff_fileupload_fileinfo');
 			data.ff_info.progressbar = inforow.find('.ff_fileupload_progress_bar');
 			uploads.append(inforow);
@@ -302,14 +302,14 @@
 			}
 			else
 			{
-				// Set the error info.
+
 				if (data.errorThrown === 'abort')  data.ff_info.errors.push(Translate('The upload was cancelled.'));
 				else if (data.errorThrown === 'failed_with_msg')  data.ff_info.errors.push(FormatStr(Translate('The upload failed.  {0} ({1})'), EscapeHTML(data.result.error), EscapeHTML(data.result.errorcode)));
 				else  data.ff_info.errors.push(Translate('The upload failed.'));
 				data.ff_info.inforow.find('.ff_fileupload_errors').html(data.ff_info.errors.join('<br>')).removeClass('ff_fileupload_hidden');
-				// Hide the progress bar.
+
 				data.ff_info.inforow.find('.ff_fileupload_progress_background').addClass('ff_fileupload_hidden');
-				// Alter remove buttons.
+
 				data.ff_info.inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Remove from list'));
 			}
 		};
@@ -333,36 +333,36 @@
 			}
 			else
 			{
-				// Set the status.
+
 				data.ff_info.inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + ' | ' + Translate('Upload completed'));
-				// Hide the progress bar.
+
 				data.ff_info.inforow.find('.ff_fileupload_progress_background').addClass('ff_fileupload_hidden');
-				// Alter remove buttons.
+
 				data.ff_info.inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Remove from list'));
 			}
 		};
 		var UploadChunkDone = function(e, data) {
-			// Reset retries for successful chunked uploads.
+
 			data.ff_info.retries = 0;
 			data.ff_info.retrydelay = settings.retrydelay;
 			if (!data.result.success)  data.abort();
 		};
 		return this.each(function() {
 			var $this = $(this);
-			// Calculate the action URL.
+
 			if (settings.url === '')
 			{
 				var url = $this.closest('form').attr('action');
 				if (url)  settings.url = url;
 			}
-			// Create a separate, hidden form on the page for handling file uploads.
+
 			var form = $('<form>').addClass('ff_fileupload_hidden').attr({
 				'action' : settings.url,
 				'method' : 'post',
 				'enctype' : 'multipart/form-data'
 			});
 			$('body').append(form);
-			// Append hidden input elements.
+
 			for (var x in settings.params)
 			{
 				if (settings.params.hasOwnProperty(x))
@@ -375,14 +375,14 @@
 					form.append(input);
 				}
 			}
-			// Append a file input element.
+
 			var fileinputname = $this.attr('name');
 			var fileinput = $('<input>').attr({
 				'type' : 'file',
 				'name' : (fileinputname ? fileinputname : 'file')
 			});
 			if ($this.prop('multiple'))  fileinput.prop('multiple', true);
-			// Process the accepted file extensions.
+
 			if ($this.attr('accept'))
 			{
 				fileinput.attr('accept', $this.attr('accept'));
@@ -398,10 +398,10 @@
 				}
 			}
 			form.append(fileinput);
-			// Insert the widget wrapper.
+
 			var fileuploadwrap = $('<div>').addClass('ff_fileupload_wrap');
 			$this.after(fileuploadwrap);
-			// Insert a new dropzone.  Using a button allows for standard keyboard and mouse navigation to the element.  The wrapper is for paste support.
+
 			var dropzonewrap = $('<div>').addClass('ff_fileupload_dropzone_wrap');
 			var dropzone = $('<button>').addClass('ff_fileupload_dropzone').attr('type', 'button').attr('aria-label', Translate('Browse, drag-and-drop, or paste files to upload'));
 			dropzonewrap.append(dropzone);
@@ -410,19 +410,19 @@
 				e.preventDefault();
 				form.find('input[type=file]').click();
 			});
-			// Add a table to track unprocessed and in-progress uploads.
+
 			var uploads = $('<table>').addClass('ff_fileupload_uploads');
 			fileuploadwrap.append(uploads);
-			// Hide the starting element.
+
 			$this.addClass('ff_fileupload_hidden');
-			// Initialize jQuery File Upload using the hidden form and visible dropzone.
+
 			var baseoptions = {
 				url: url,
 				dataType: 'json',
 				pasteZone: dropzonewrap,
 				limitConcurrentUploads: 2
 			};
-			// Immutable options.
+
 			var immutableoptions = {
 				singleFileUploads: true,
 				dropZone: dropzone,
@@ -432,9 +432,9 @@
 				done: UploadDone,
 				chunkdone: UploadChunkDone
 			};
-			// The user interface requires certain options to be set correctly.
+
 			fileinput.fileupload($.extend(baseoptions, settings.fileupload, immutableoptions));
-			// Save necessary information in case the uploader is destroyed later.
+
 			$this.data('fancy-fileupload', {
 				'fileuploadwrap' : fileuploadwrap,
 				'form' : form

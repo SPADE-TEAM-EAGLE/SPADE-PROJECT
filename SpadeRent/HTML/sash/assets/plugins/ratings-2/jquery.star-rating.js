@@ -8,7 +8,7 @@
  */
 ;(function ( $, window, document, undefined ) {
   'use strict';
-  // Create the defaults once
+
   var pluginName = 'starRating';
   var noop = function(){};
   var defaults = {
@@ -35,7 +35,7 @@
     onHover: noop,
     onLeave: noop
   };
-	// The actual plugin constructor
+
   var Plugin = function( element, options ) {
     var _rating;
     var newRating;
@@ -43,17 +43,17 @@
     this.element = element;
     this.$el = $(element);
     this.settings = $.extend( {}, defaults, options );
-    // grab rating if defined on the element
+
     _rating = this.$el.data('rating') || this.settings.initialRating;
-    // round to the nearest half
+
     roundFn = this.settings.forceRoundUp ? Math.ceil : Math.round;
     newRating = (roundFn( _rating * 2 ) / 2).toFixed(1);
     this._state = {
       rating: newRating
     };
-    // create unique id for stars
+
     this._uid = Math.floor( Math.random() * 999 );
-    // override gradient if not used
+
     if( !options.starGradient && !this.settings.useGradient ){
       this.settings.starGradient.start = this.settings.starGradient.end = this.settings.activeColor;
     }
@@ -73,13 +73,13 @@
       this.$stars.on('mouseout', this.restoreState.bind(this));
       this.$stars.on('click', this.handleRating.bind(this));
     },
-    // apply styles to hovered stars
+
     hoverRating: function(e){
       var index = this.getIndex(e);
       this.paintStars(index, 'hovered');
       this.settings.onHover(index + 1, this._state.rating, this.$el);
     },
-    // clicked on a rate, apply style and state
+
     handleRating: function(e){
       var index = this.getIndex(e);
       var rating = index + 1;
@@ -91,7 +91,7 @@
     },
     applyRating: function(rating){
       var index = rating - 1;
-      // paint selected and remove hovered color
+
       this.paintStars(index, 'rated');
       this._state.rating = index + 1;
       this._state.rated = true;
@@ -99,7 +99,7 @@
     restoreState: function(e){
       var index = this.getIndex(e);
       var rating = this._state.rating || -1;
-      // determine star color depending on manually rated
+
       var colorType = this._state.rated ? 'rated' : 'active';
       this.paintStars(rating - 1, colorType);
       this.settings.onLeave(index + 1, this._state.rating, this.$el);
@@ -109,14 +109,14 @@
       var width = $target.width();
       var side = $(e.target).attr('data-side');
       var minRating = this.settings.minRating;
-      // hovered outside the star, calculate by pixel instead
+
       side = (!side) ? this.getOffsetByPixel(e, $target, width) : side;
       side = (this.settings.useFullStars) ? 'right' : side ;
-      // get index for half or whole star
+
       var index = $target.index() - ((side === 'left') ? 0.5 : 0);
-      // pointer is way to the left, rating should be none
+
       index = ( index < 0.5 && (e.offsetX < width / 4) ) ? -1 : index;
-      // force minimum rating
+
       index = ( minRating && minRating <= this.settings.totalStars && index < minRating ) ? minRating - 1 : index;
       return index;
     },
@@ -137,11 +137,11 @@
         $polygonLeft = $(star).find('[data-side="left"]');
         $polygonRight = $(star).find('[data-side="right"]');
         leftClass = rightClass = (index <= endIndex) ? stateClass : 'empty';
-        // has another half rating, add half star
+
         leftClass = ( index - endIndex === 0.5 ) ? stateClass : leftClass;
         $polygonLeft.attr('class', 'svg-'  + leftClass + '-' + this._uid);
         $polygonRight.attr('class', 'svg-'  + rightClass + '-' + this._uid);
-        // get color for level
+
         var ratedColorsIndex = endIndex >= 0 ? Math.ceil(endIndex) : 0;
         var ratedColor;
         if (s.ratedColors && s.ratedColors.length && s.ratedColors[ratedColorsIndex]) {
@@ -149,9 +149,9 @@
         } else {
           ratedColor = this._defaults.ratedColor;
         }
-        // only override colors in rated stars and when rated number is valid
+
         if (stateClass === 'rated' && endIndex > -1) {
-          // limit to painting only to rated stars, and specific case for half star
+
           if (index <= Math.ceil(endIndex) || (index < 1 && endIndex < 0)) {
             $polygonLeft.attr('style', 'fill:'+ratedColor);
           }
@@ -164,7 +164,7 @@
     renderMarkup: function () {
       var s = this.settings;
       var baseUrl = s.baseUrl ? location.href.split('#')[0] : '';
-      // inject an svg manually to have control over attributes
+
       var star = '<div class="jq-star" style="width:' + s.starSize+ 'px;  height:' + s.starSize + 'px;"><svg version="1.0" class="jq-star-svg" shape-rendering="geometricPrecision" xmlns="http://www.w3.org/2000/svg" ' + this.getSvgDimensions(s.starShape) +  ' stroke-width:' + s.strokeWidth + 'px;" xml:space="preserve"><style type="text/css">.svg-empty-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_1_);}.svg-hovered-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_2_);}.svg-active-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_3_);}.svg-rated-' + this._uid + '{fill:' + s.ratedColor + ';}</style>' +
       this.getLinearGradient(this._uid + '_SVGID_1_', s.emptyColor, s.emptyColor, s.starShape) +
       this.getLinearGradient(this._uid + '_SVGID_2_', s.hoverColor, s.hoverColor, s.starShape) +
@@ -175,7 +175,7 @@
         strokeColor: s.strokeColor
       } ) +
       '</svg></div>';
-      // inject svg markup
+
       var starsMarkup = '';
       for( var i = 0; i < s.totalStars; i++){
         starsMarkup += star;
@@ -261,10 +261,10 @@
       }
     }
   };
-  // Avoid Plugin.prototype conflicts
+
   $.extend(Plugin.prototype, methods);
   $.fn[ pluginName ] = function ( options ) {
-    // if options is a public method
+
     if( !$.isPlainObject(options) ){
       if( publicMethods.hasOwnProperty(options) ){
         return publicMethods[options].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -273,7 +273,7 @@
       }
     }
     return this.each(function() {
-      // preventing against multiple instantiations
+
       if ( !$.data( this, 'plugin_' + pluginName ) ) {
         $.data( this, 'plugin_' + pluginName, new Plugin( this, options ) );
       }

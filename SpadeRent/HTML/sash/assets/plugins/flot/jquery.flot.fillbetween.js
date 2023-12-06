@@ -69,13 +69,13 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 				}
 				l = newpoints.length;
 				if ( points[ i ] == null ) {
-					// copy gaps
+
 					for ( m = 0; m < ps; ++m ) {
 						newpoints.push( points[ i + m ] );
 					}
 					i += ps;
 				} else if ( j >= otherpoints.length ) {
-					// for lines, we can't use the rest of the points
+
 					if ( !withlines ) {
 						for ( m = 0; m < ps; ++m ) {
 							newpoints.push( points[ i + m ] );
@@ -83,14 +83,14 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 					}
 					i += ps;
 				} else if ( otherpoints[ j ] == null ) {
-					// oops, got a gap
+
 					for ( m = 0; m < ps; ++m ) {
 						newpoints.push( null );
 					}
 					fromgap = true;
 					j += otherps;
 				} else {
-					// cases where we actually got two points
+
 					px = points[ i ];
 					py = points[ i + 1 ];
 					qx = otherpoints[ j ];
@@ -105,8 +105,8 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 						i += ps;
 						j += otherps;
 					} else if ( px > qx ) {
-						// we got past point below, might need to
-						// insert interpolated extra point
+
+
 						if ( withlines && i > 0 && points[ i - ps ] != null ) {
 							intery = py + ( points[ i - ps + 1 ] - py ) * ( qx - px ) / ( points[ i - ps ] - px );
 							newpoints.push( qx );
@@ -118,7 +118,7 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 						}
 						j += otherps;
 					} else { // px < qx
-						// if we come from a gap, we just skip this point
+
 						if ( fromgap && withlines ) {
 							i += ps;
 							continue;
@@ -126,8 +126,8 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 						for ( m = 0; m < ps; ++m ) {
 							newpoints.push( points[ i + m ] );
 						}
-						// we might be able to interpolate a point below,
-						// this can give us a better y
+
+
 						if ( withlines && j > 0 && otherpoints[ j - otherps ] != null ) {
 							bottom = qy + ( otherpoints[ j - otherps + 1 ] - qy ) * ( px - qx ) / ( otherpoints[ j - otherps ] - qx );
 						}
@@ -139,7 +139,7 @@ jquery.flot.stack.js plugin, possibly some code could be shared.
 						newpoints[ l + 2 ] = bottom;
 					}
 				}
-				// maintain the line steps invariant
+
 				if ( withsteps && l !== newpoints.length && l > 0 &&
 					newpoints[ l ] !== null &&
 					newpoints[ l ] !== newpoints[ l - ps ] &&

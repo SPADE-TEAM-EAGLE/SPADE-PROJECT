@@ -1,8 +1,8 @@
 const { selectQuery } = require("../constants/queries");
 const { queryRunner } = require("./queryRunner");
-// const {
-//   selectQuery,
-// } = require("../constants/queries");
+
+
+
 
 const verifyMailCheck = async (email) => {
   try {

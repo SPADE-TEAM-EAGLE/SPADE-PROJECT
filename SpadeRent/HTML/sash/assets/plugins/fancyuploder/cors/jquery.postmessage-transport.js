@@ -12,13 +12,13 @@
 ;(function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-        // Register as an anonymous AMD module:
+
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
-        // Node/CommonJS:
+
         factory(require('jquery'));
     } else {
-        // Browser globals:
+
         factory(window.jQuery);
     }
 }(function ($) {
@@ -59,9 +59,9 @@
                 loc = $('<a>').prop('href', options.postMessage)[0],
                 target = loc.protocol + '//' + loc.host,
                 xhrUpload = options.xhr().upload;
-            // IE always includes the port for the host property of a link
-            // element, but not in the location.host or origin property for the
-            // default http port 80 and https port 443, so we strip it:
+
+
+
             if (/^(http:\/\/.+:80)|(https:\/\/.+:443)$/.test(target)) {
               target = target.replace(/:(80|443)$/, '');
             }

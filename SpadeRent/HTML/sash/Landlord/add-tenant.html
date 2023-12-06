@@ -3072,10 +3072,10 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        // console.log($(a).find('.rentAmount').text())
+
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-                        // console.log(parseInt($(a).find('.serial-number').text()))
+
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb);
                         return idA - idB;
@@ -3084,7 +3084,7 @@
                     rows.sort(function (a, b) {
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-                        // console.log(parseInt($(a).find('.rentAmount').text()))
+
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb); 
                         return idB - idA;
@@ -3345,19 +3345,19 @@ $.ajax({
                     }else{
                         $(".add-tenant-btn").attr("disabled", false)
                     }
-                    // if (image !== " " && image !== null && image !== "") {
-                    //     $("#user-img").attr("src", image)
-                    //     $("#user-img-dark").attr("src", image)
-                    // }
+
+
+
+
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-                        // $("#user-img").parent().removeClass("d-none")
-                        // $("#user-img-dark").parent().removeClass("d-none")
+
+
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-                        // $(".profileImage").removeClass("d-none")
+
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -3788,9 +3788,9 @@ $(document).ready(() => {
     $("table").on("change", ".myCheckbox", function () {
         var $myCheckboxes = $('.myCheckbox'); // Select all checkboxes
         var $myButton = $('.myButton'); // Select the button
-        // Check if at least one checkbox is checked
+
         var anyCheckboxChecked = $myCheckboxes.is(":checked");
-        // Toggle button visibility based on checkbox state
+
         if (anyCheckboxChecked) {
             $myButton.css('display', 'flex');
             $myButton.css('justify-content', 'center');

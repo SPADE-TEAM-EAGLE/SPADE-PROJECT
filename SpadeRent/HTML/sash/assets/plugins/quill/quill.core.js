@@ -173,7 +173,7 @@ function create(input, value) {
     }
     var BlotClass = match;
     var node = 
-    // @ts-ignore
+
     input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
     return new BlotClass(node, value);
 }
@@ -182,7 +182,7 @@ function find(node, bubble) {
     if (bubble === void 0) { bubble = false; }
     if (node == null)
         return null;
-    // @ts-ignore
+
     if (node[exports.DATA_KEY] != null)
         return node[exports.DATA_KEY].blot;
     if (bubble)
@@ -195,7 +195,7 @@ function query(query, scope) {
     var match;
     if (typeof query === 'string') {
         match = types[query] || attributes[query];
-        // @ts-ignore
+
     }
     else if (query instanceof Text || query['nodeType'] === Node.TEXT_NODE) {
         match = types['text'];
@@ -219,7 +219,7 @@ function query(query, scope) {
     }
     if (match == null)
         return null;
-    // @ts-ignore
+
     if (scope & Scope.LEVEL & match.scope && scope & Scope.TYPE & match.scope)
         return match;
     return null;
@@ -279,7 +279,7 @@ var extend = __webpack_require__(3);
 var op = __webpack_require__(20);
 var NULL_CHARACTER = String.fromCharCode(0);  // Placeholder char for embed in diff()
 var Delta = function (ops) {
-  // Assume we are given a well formed ops
+
   if (Array.isArray(ops)) {
     this.ops = ops;
   } else if (ops != null && Array.isArray(ops.ops)) {
@@ -318,8 +318,8 @@ Delta.prototype.push = function (newOp) {
       this.ops[index - 1] = { 'delete': lastOp['delete'] + newOp['delete'] };
       return this;
     }
-    // Since it does not matter if we insert before or after deleting at the same index,
-    // always prefer to insert first
+
+
     if (typeof lastOp['delete'] === 'number' && newOp.insert != null) {
       index -= 1;
       lastOp = this.ops[index - 1];
@@ -427,12 +427,12 @@ Delta.prototype.compose = function (other) {
         } else {
           newOp.insert = thisOp.insert;
         }
-        // Preserve null when composing with a retain, otherwise remove it for inserts
+
         var attributes = op.attributes.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');
         if (attributes) newOp.attributes = attributes;
         delta.push(newOp);
-      // Other op should be delete, we could be an insert or retain
-      // Insert + delete cancels out
+
+
       } else if (typeof otherOp['delete'] === 'number' && typeof thisOp.retain === 'number') {
         delta.push(otherOp);
       }
@@ -540,12 +540,12 @@ Delta.prototype.transform = function (other, priority) {
       var thisOp = thisIter.next(length);
       var otherOp = otherIter.next(length);
       if (thisOp['delete']) {
-        // Our delete either makes their delete redundant or removes their retain
+
         continue;
       } else if (otherOp['delete']) {
         delta.push(otherOp);
       } else {
-        // We retain either their retain or insert
+
         delta.retain(length, op.attributes.transform(thisOp.attributes, otherOp.attributes, priority));
       }
     }
@@ -589,12 +589,12 @@ var isPlainObject = function isPlainObject(obj) {
 	}
 	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
 	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
-	// Not own constructor property must be Object
+
 	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
 		return false;
 	}
-	// Own properties are enumerated firstly, so to speed up,
-	// if last one is own, then all properties are own.
+
+
 	var key;
 	for (key in obj) { /**/ }
 	return typeof key === 'undefined' || hasOwn.call(obj, key);
@@ -605,11 +605,11 @@ module.exports = function extend() {
 	var i = 1;
 	var length = arguments.length;
 	var deep = false;
-	// Handle a deep copy situation
+
 	if (typeof target === 'boolean') {
 		deep = target;
 		target = arguments[1] || {};
-		// skip the boolean and the target
+
 		i = 2;
 	}
 	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
@@ -617,15 +617,15 @@ module.exports = function extend() {
 	}
 	for (; i < length; ++i) {
 		options = arguments[i];
-		// Only deal with non-null/undefined values
+
 		if (options != null) {
-			// Extend the base object
+
 			for (name in options) {
 				src = target[name];
 				copy = options[name];
-				// Prevent never-ending loop
+
 				if (target !== copy) {
-					// Recurse if we're merging plain objects or arrays
+
 					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
 						if (copyIsArray) {
 							copyIsArray = false;
@@ -633,9 +633,9 @@ module.exports = function extend() {
 						} else {
 							clone = src && isPlainObject(src) ? src : {};
 						}
-						// Never move original objects, clone them
+
 						target[name] = extend(deep, clone, copy);
-					// Don't bring in undefined values
+
 					} else if (typeof copy !== 'undefined') {
 						target[name] = copy;
 					}
@@ -643,7 +643,7 @@ module.exports = function extend() {
 			}
 		}
 	}
-	// Return the modified object
+
 	return target;
 };
 /***/ }),
@@ -718,7 +718,7 @@ var BlockEmbed = function (_Parchment$Embed) {
   return BlockEmbed;
 }(_parchment2.default.Embed);
 BlockEmbed.scope = _parchment2.default.Scope.BLOCK_BLOT;
-// It is important for cursor behavior BlockEmbeds use tags that are block level elements
+
 var Block = function (_Parchment$Block) {
   _inherits(Block, _Parchment$Block);
   function Block(domNode) {
@@ -927,7 +927,7 @@ var Quill = function () {
       if (typeof path !== 'string') {
         var name = path.attrName || path.blotName;
         if (typeof name === 'string') {
-          // register(Blot | Attributor, overwrite)
+
           this.register('formats/' + name, path, target);
         } else {
           Object.keys(path).forEach(function (key) {
@@ -1347,7 +1347,7 @@ Quill.DEFAULTS = {
 };
 Quill.events = _emitter4.default.events;
 Quill.sources = _emitter4.default.sources;
-// eslint-disable-next-line no-undef
+
 Quill.version =  false ? 'dev' : "1.3.6";
 Quill.imports = {
   'delta': _quillDelta2.default,
@@ -1391,7 +1391,7 @@ function expandConfig(container, userConfig) {
     }
     return config;
   }, {});
-  // Special case toolbar shorthand
+
   if (userConfig.modules != null && userConfig.modules.toolbar && userConfig.modules.toolbar.constructor !== Object) {
     userConfig.modules.toolbar = {
       container: userConfig.modules.toolbar
@@ -1411,8 +1411,8 @@ function expandConfig(container, userConfig) {
   }, {});
   return userConfig;
 }
-// Handle selection preservation and TEXT_CHANGE emission
-// common to modification APIs
+
+
 function modify(modifier, source, index, shift) {
   if (this.options.strict && !this.isEnabled() && source === _emitter4.default.sources.USER) {
     return new _quillDelta2.default();
@@ -1443,7 +1443,7 @@ function modify(modifier, source, index, shift) {
 function overload(index, length, name, value, source) {
   var formats = {};
   if (typeof index.index === 'number' && typeof index.length === 'number') {
-    // Allow for throwaway end (used by insertText/insertEmbed)
+
     if (typeof length !== 'number') {
       source = value, value = name, name = length, length = index.length, index = index.index;
     } else {
@@ -1452,7 +1452,7 @@ function overload(index, length, name, value, source) {
   } else if (typeof length !== 'number') {
     source = value, value = name, name = length, length = 0;
   }
-  // Handle format being object, two format name/value strings or excluded
+
   if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
     formats = name;
     source = value;
@@ -1463,7 +1463,7 @@ function overload(index, length, name, value, source) {
       source = name;
     }
   }
-  // Handle optional source
+
   source = source || _emitter4.default.sources.API;
   return [index, length, formats, source];
 }
@@ -1560,7 +1560,7 @@ var Inline = function (_Parchment$Inline) {
   return Inline;
 }(_parchment2.default.Inline);
 Inline.allowedChildren = [Inline, _parchment2.default.Embed, _text2.default];
-// Lower index means deeper in the DOM tree, since not found (-1) is for embeds
+
 Inline.order = ['cursor', 'inline', // Must be lower
 'underline', 'strike', 'italic', 'bold', 'script', 'link', 'code' // Must be higher
 ];
@@ -1612,7 +1612,7 @@ EVENTS.forEach(function (eventName) {
       args[_key] = arguments[_key];
     }
     [].slice.call(document.querySelectorAll('.ql-container')).forEach(function (node) {
-      // TODO use WeakMap
+
       if (node.__quill && node.__quill.emitter) {
         var _node$__quill$emitter;
         (_node$__quill$emitter = node.__quill.emitter).handleDOM.apply(_node$__quill$emitter, args);
@@ -1726,21 +1726,21 @@ var objectKeys = __webpack_require__(52);
 var isArguments = __webpack_require__(53);
 var deepEqual = module.exports = function (actual, expected, opts) {
   if (!opts) opts = {};
-  // 7.1. All identical values are equivalent, as determined by ===.
+
   if (actual === expected) {
     return true;
   } else if (actual instanceof Date && expected instanceof Date) {
     return actual.getTime() === expected.getTime();
-  // 7.3. Other pairs that do not both pass typeof value == 'object',
-  // equivalence is determined by ==.
+
+
   } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
     return opts.strict ? actual === expected : actual == expected;
-  // 7.4. For all other Object pairs, including Array objects, equivalence is
-  // determined by having the same number of owned properties (as verified
-  // with Object.prototype.hasOwnProperty.call), the same set of keys
-  // (although not necessarily the same order), equivalent values for every
-  // corresponding key, and an identical 'prototype' property. Note: this
-  // accounts for both named and indexed properties on Arrays.
+
+
+
+
+
+
   } else {
     return objEquiv(actual, expected, opts);
   }
@@ -1760,10 +1760,10 @@ function objEquiv(a, b, opts) {
   var i, key;
   if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
     return false;
-  // an identical 'prototype' property.
+
   if (a.prototype !== b.prototype) return false;
   //~~~I've managed to break Object.keys through screwy arguments passing.
-  //   Converting to array solves the problem.
+
   if (isArguments(a)) {
     if (!isArguments(b)) {
       return false;
@@ -1788,8 +1788,8 @@ function objEquiv(a, b, opts) {
   } catch (e) {//happens when one is a string literal and the other isn't
     return false;
   }
-  // having the same number of owned properties (keys incorporates
-  // hasOwnProperty)
+
+
   if (ka.length != kb.length)
     return false;
   //the same set of keys (although not necessarily the same order),
@@ -1821,7 +1821,7 @@ var Attributor = /** @class */ (function () {
         this.keyName = keyName;
         var attributeBit = Registry.Scope.TYPE & Registry.Scope.ATTRIBUTE;
         if (options.scope != null) {
-            // Ignore type bits, force attribute bit
+
             this.scope = (options.scope & Registry.Scope.LEVEL) | attributeBit;
         }
         else {
@@ -1914,7 +1914,7 @@ var CodeBlock = function (_Block) {
       var _this3 = this;
       var text = this.domNode.textContent;
       if (text.endsWith('\n')) {
-        // Should always be true
+
         text = text.slice(0, -1);
       }
       return text.split('\n').reduce(function (delta, frag) {
@@ -2279,7 +2279,7 @@ var Editor = function () {
       var cursorIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
       var oldDelta = this.delta;
       if (mutations.length === 1 && mutations[0].type === 'characterData' && mutations[0].target.data.match(ASCII) && _parchment2.default.find(mutations[0].target)) {
-        // Optimization for character changes
+
         var textBlot = _parchment2.default.find(mutations[0].target);
         var formats = (0, _block.bubbleFormats)(textBlot);
         var index = textBlot.offset(this.scroll);
@@ -2385,7 +2385,7 @@ var Selection = function () {
     this.mouseDown = false;
     this.root = this.scroll.domNode;
     this.cursor = _parchment2.default.create('cursor', this);
-    // savedRange is last non-null range
+
     this.lastRange = this.savedRange = new Range(0, 0);
     this.handleComposition();
     this.handleDragging();
@@ -2404,7 +2404,7 @@ var Selection = function () {
       var native = _this.getNativeRange();
       if (native == null) return;
       if (native.start.node === _this.cursor.textNode) return; // cursor.restore() will handle
-      // TODO unclear if this has negative side effects
+
       _this.emitter.once(_emitter4.default.events.SCROLL_UPDATE, function () {
         try {
           _this.setNativeRange(native.start.node, native.start.offset, native.end.node, native.end.offset);
@@ -2470,7 +2470,7 @@ var Selection = function () {
       if (nativeRange.start.node !== this.cursor.textNode) {
         var blot = _parchment2.default.find(nativeRange.start.node, false);
         if (blot == null) return;
-        // TODO Give blot ability to not split
+
         if (blot instanceof _parchment2.default.Leaf) {
           var after = blot.split(nativeRange.start.offset);
           blot.parent.insertBefore(this.cursor, after);
@@ -2756,13 +2756,13 @@ var Selection = function () {
 }();
 function contains(parent, descendant) {
   try {
-    // Firefox inserts inaccessible nodes around video elements
+
     descendant.parentNode;
   } catch (e) {
     return false;
   }
-  // IE11 has bug with Text nodes
-  // https://connect.microsoft.com/IE/feedback/details/780874/node-contains-is-incorrect
+
+
   if (descendant instanceof Text) {
     descendant = descendant.parentNode;
   }
@@ -2858,7 +2858,7 @@ var ContainerBlot = /** @class */ (function (_super) {
     ContainerBlot.prototype.build = function () {
         var _this = this;
         this.children = new linked_list_1.default();
-        // Need to be reversed for if DOM nodes already in order
+
         [].slice
             .call(this.domNode.childNodes)
             .reverse()
@@ -3018,11 +3018,11 @@ var ContainerBlot = /** @class */ (function (_super) {
             }
         });
         removedNodes.forEach(function (node) {
-            // Check node has actually been removed
-            // One exception is Chrome does not immediately remove IFRAMEs
-            // from DOM but MutationRecord is correct in its reported removal
+
+
+
             if (node.parentNode != null &&
-                // @ts-ignore
+
                 node.tagName !== 'IFRAME' &&
                 document.body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
                 return;
@@ -3071,7 +3071,7 @@ function makeBlot(node) {
         catch (e) {
             blot = Registry.create(Registry.Scope.INLINE);
             [].slice.call(node.childNodes).forEach(function (child) {
-                // @ts-ignore
+
                 blot.domNode.appendChild(child);
             });
             if (node.parentNode) {
@@ -3301,7 +3301,7 @@ Iterator.prototype.next = function (length) {
       } else if (typeof nextOp.insert === 'string') {
         retOp.insert = nextOp.insert.substr(offset, length);
       } else {
-        // offset should === 0, length should === 1
+
         retOp.insert = nextOp.insert;
       }
       return retOp;
@@ -3315,7 +3315,7 @@ Iterator.prototype.peek = function () {
 };
 Iterator.prototype.peekLength = function () {
   if (this.ops[this.index]) {
-    // Should never return 0 if our index is being managed correctly
+
     return lib.length(this.ops[this.index]) - this.offset;
   } else {
     return Infinity;
@@ -3346,8 +3346,8 @@ var nativeMap;
 try {
   nativeMap = Map;
 } catch(_) {
-  // maybe a reference error because no `Map`. Give it a dummy value that no
-  // value will ever be an instanceof.
+
+
   nativeMap = function() {};
 }
 var nativeSet;
@@ -3390,8 +3390,8 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     includeNonEnumerable = circular.includeNonEnumerable;
     circular = circular.circular;
   }
-  // maintain two arrays for circular references, where corresponding parents
-  // and children have the same index
+
+
   var allParents = [];
   var allChildren = [];
   var useBuffer = typeof Buffer != 'undefined';
@@ -3399,9 +3399,9 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     circular = true;
   if (typeof depth == 'undefined')
     depth = Infinity;
-  // recurse this function so we don't reset allParents and allChildren
+
   function _clone(parent, depth) {
-    // cloning null always returns null
+
     if (parent === null)
       return null;
     if (depth === 0)
@@ -3480,8 +3480,8 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(parent);
       for (var i = 0; i < symbols.length; i++) {
-        // Don't need to worry about cloning a symbol because it is a primitive,
-        // like a number or string.
+
+
         var symbol = symbols[i];
         var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
         if (descriptor && !descriptor.enumerable && !includeNonEnumerable) {
@@ -3527,7 +3527,7 @@ clone.clonePrototype = function clonePrototype(parent) {
   c.prototype = parent;
   return new c();
 };
-// private utility functions
+
 function __objToStr(o) {
   return Object.prototype.toString.call(o);
 }
@@ -3598,7 +3598,7 @@ var Scroll = function (_Parchment$Scroll) {
         return whitelist;
       }, {});
     }
-    // Some reason fixes composition issues with character languages in Windows/Chrome, Safari
+
     _this.domNode.addEventListener('DOMNodeInserted', function () {});
     _this.optimize();
     _this.enable();
@@ -3838,7 +3838,7 @@ var Keyboard = function (_Module) {
     _this.addBinding({ key: Keyboard.keys.ENTER, shiftKey: null }, handleEnter);
     _this.addBinding({ key: Keyboard.keys.ENTER, metaKey: null, ctrlKey: null, altKey: null }, function () {});
     if (/Firefox/i.test(navigator.userAgent)) {
-      // Need to handle delete and backspace for Firefox in the general case #1171
+
       _this.addBinding({ key: Keyboard.keys.BACKSPACE }, { collapsed: true }, handleBackspace);
       _this.addBinding({ key: Keyboard.keys.DELETE }, { collapsed: true }, handleDelete);
     } else {
@@ -3910,14 +3910,14 @@ var Keyboard = function (_Module) {
           if (binding.empty != null && binding.empty !== curContext.empty) return false;
           if (binding.offset != null && binding.offset !== curContext.offset) return false;
           if (Array.isArray(binding.format)) {
-            // any format is present
+
             if (binding.format.every(function (name) {
               return curContext.format[name] == null;
             })) {
               return false;
             }
           } else if (_typeof(binding.format) === 'object') {
-            // all formats must match
+
             if (!Object.keys(binding.format).every(function (name) {
               if (binding.format[name] === true) return curContext.format[name] != null;
               if (binding.format[name] === false) return curContext.format[name] == null;
@@ -3955,7 +3955,7 @@ Keyboard.DEFAULTS = {
     'italic': makeFormatHandler('italic'),
     'underline': makeFormatHandler('underline'),
     'indent': {
-      // highlight tab or tab at beginning of list, indent or blockquote
+
       key: Keyboard.keys.TAB,
       format: ['blockquote', 'indent', 'list'],
       handler: function handler(range, context) {
@@ -3967,7 +3967,7 @@ Keyboard.DEFAULTS = {
       key: Keyboard.keys.TAB,
       shiftKey: true,
       format: ['blockquote', 'indent', 'list'],
-      // highlight tab or tab at beginning of list, indent or blockquote
+
       handler: function handler(range, context) {
         if (context.collapsed && context.offset !== 0) return true;
         this.quill.format('indent', '-1', _quill2.default.sources.USER);
@@ -4158,7 +4158,7 @@ function handleBackspace(range, context) {
       formats = _op2.default.attributes.diff(curFormats, prevFormats) || {};
     }
   }
-  // Check for astral symbols
+
   var length = /[\uD800-\uDBFF][\uDC00-\uDFFF]$/.test(context.prefix) ? 2 : 1;
   this.quill.deleteText(range.index - length, length, _quill2.default.sources.USER);
   if (Object.keys(formats).length > 0) {
@@ -4167,7 +4167,7 @@ function handleBackspace(range, context) {
   this.quill.focus();
 }
 function handleDelete(range, context) {
-  // Check for astral symbols
+
   var length = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/.test(context.suffix) ? 2 : 1;
   if (range.index >= this.quill.getLength() - length) return;
   var formats = {},
@@ -4218,8 +4218,8 @@ function handleEnter(range, context) {
     return lineFormats;
   }, {});
   this.quill.insertText(range.index, '\n', lineFormats, _quill2.default.sources.USER);
-  // Earlier scroll.deleteAt might have messed up our selection,
-  // so insertText's built in selection preservation is not reliable
+
+
   this.quill.setSelection(range.index + 1, _quill2.default.sources.SILENT);
   this.quill.focus();
   Object.keys(context.format).forEach(function (name) {
@@ -4344,7 +4344,7 @@ var Cursor = function (_Parchment$Embed) {
   _createClass(Cursor, [{
     key: 'detach',
     value: function detach() {
-      // super.detach() will also clear domNode.__blot
+
       if (this.parent != null) this.parent.removeChild(this);
     }
   }, {
@@ -4403,7 +4403,7 @@ var Cursor = function (_Parchment$Embed) {
         start = _ref[1];
         end = _ref[2];
       }
-      // Link format will insert text outside of anchor tag
+
       while (this.domNode.lastChild != null && this.domNode.lastChild !== this.textNode) {
         this.domNode.parentNode.insertBefore(this.domNode.lastChild, this.domNode);
       }
@@ -4590,11 +4590,11 @@ var Registry = __webpack_require__(1);
 var ShadowBlot = /** @class */ (function () {
     function ShadowBlot(domNode) {
         this.domNode = domNode;
-        // @ts-ignore
+
         this.domNode[Registry.DATA_KEY] = { blot: this };
     }
     Object.defineProperty(ShadowBlot.prototype, "statics", {
-        // Hack for accessing inherited static methods
+
         get: function () {
             return this.constructor;
         },
@@ -4643,7 +4643,7 @@ var ShadowBlot = /** @class */ (function () {
     ShadowBlot.prototype.detach = function () {
         if (this.parent != null)
             this.parent.removeChild(this);
-        // @ts-ignore
+
         delete this.domNode[Registry.DATA_KEY];
     };
     ShadowBlot.prototype.deleteAt = function (index, length) {
@@ -4698,10 +4698,10 @@ var ShadowBlot = /** @class */ (function () {
         return this.parent.children.offset(this) + this.parent.offset(root);
     };
     ShadowBlot.prototype.optimize = function (context) {
-        // TODO clean up once we use WeakMap
-        // @ts-ignore
+
+
         if (this.domNode[Registry.DATA_KEY] != null) {
-            // @ts-ignore
+
             delete this.domNode[Registry.DATA_KEY].mutations;
         }
     };
@@ -4726,7 +4726,7 @@ var ShadowBlot = /** @class */ (function () {
         return index === 0 ? this : this.next;
     };
     ShadowBlot.prototype.update = function (mutations, context) {
-        // Nothing to do by default
+
     };
     ShadowBlot.prototype.wrap = function (name, value) {
         var wrapper = typeof name === 'string' ? Registry.create(name, value) : name;
@@ -4756,7 +4756,7 @@ var AttributorStore = /** @class */ (function () {
         this.build();
     }
     AttributorStore.prototype.attribute = function (attribute, value) {
-        // verb
+
         if (value) {
             if (attribute.add(this.domNode, value)) {
                 if (attribute.value(this.domNode) != null) {
@@ -4912,19 +4912,19 @@ var StyleAttributor = /** @class */ (function (_super) {
     StyleAttributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value))
             return false;
-        // @ts-ignore
+
         node.style[camelize(this.keyName)] = value;
         return true;
     };
     StyleAttributor.prototype.remove = function (node) {
-        // @ts-ignore
+
         node.style[camelize(this.keyName)] = '';
         if (!node.getAttribute('style')) {
             node.removeAttribute('style');
         }
     };
     StyleAttributor.prototype.value = function (node) {
-        // @ts-ignore
+
         var value = node.style[camelize(this.keyName)];
         return this.canAdd(node, value) ? value : '';
     };
@@ -5416,7 +5416,7 @@ var LinkedList = /** @class */ (function () {
     };
     LinkedList.prototype.iterator = function (curNode) {
         if (curNode === void 0) { curNode = this.head; }
-        // TODO use yield when we can
+
         return function () {
             var ret = curNode;
             if (curNode != null)
@@ -5540,33 +5540,33 @@ var ScrollBlot = /** @class */ (function (_super) {
         if (mutations === void 0) { mutations = []; }
         if (context === void 0) { context = {}; }
         _super.prototype.optimize.call(this, context);
-        // We must modify mutations directly, cannot make copy and then modify
+
         var records = [].slice.call(this.observer.takeRecords());
-        // Array.push currently seems to be implemented by a non-tail recursive function
-        // so we cannot just mutations.push.apply(mutations, this.observer.takeRecords());
+
+
         while (records.length > 0)
             mutations.push(records.pop());
-        // TODO use WeakMap
+
         var mark = function (blot, markParent) {
             if (markParent === void 0) { markParent = true; }
             if (blot == null || blot === _this)
                 return;
             if (blot.domNode.parentNode == null)
                 return;
-            // @ts-ignore
+
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-                // @ts-ignore
+
                 blot.domNode[Registry.DATA_KEY].mutations = [];
             }
             if (markParent)
                 mark(blot.parent);
         };
         var optimize = function (blot) {
-            // Post-order traversal
+
             if (
-            // @ts-ignore
+
             blot.domNode[Registry.DATA_KEY] == null ||
-                // @ts-ignore
+
                 blot.domNode[Registry.DATA_KEY].mutations == null) {
                 return;
             }
@@ -5614,20 +5614,20 @@ var ScrollBlot = /** @class */ (function (_super) {
         var _this = this;
         if (context === void 0) { context = {}; }
         mutations = mutations || this.observer.takeRecords();
-        // TODO use WeakMap
+
         mutations
             .map(function (mutation) {
             var blot = Registry.find(mutation.target, true);
             if (blot == null)
                 return null;
-            // @ts-ignore
+
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-                // @ts-ignore
+
                 blot.domNode[Registry.DATA_KEY].mutations = [mutation];
                 return blot;
             }
             else {
-                // @ts-ignore
+
                 blot.domNode[Registry.DATA_KEY].mutations.push(mutation);
                 return null;
             }
@@ -5638,12 +5638,12 @@ var ScrollBlot = /** @class */ (function (_super) {
                 //@ts-ignore
                 blot.domNode[Registry.DATA_KEY] == null)
                 return;
-            // @ts-ignore
+
             blot.update(blot.domNode[Registry.DATA_KEY].mutations || [], context);
         });
-        // @ts-ignore
+
         if (this.domNode[Registry.DATA_KEY].mutations != null) {
-            // @ts-ignore
+
             _super.prototype.update.call(this, this.domNode[Registry.DATA_KEY].mutations, context);
         }
         this.optimize(mutations, context);
@@ -5672,13 +5672,13 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var format_1 = __webpack_require__(18);
 var Registry = __webpack_require__(1);
-// Shallow object comparison
+
 function isEqual(obj1, obj2) {
     if (Object.keys(obj1).length !== Object.keys(obj2).length)
         return false;
-    // @ts-ignore
+
     for (var prop in obj1) {
-        // @ts-ignore
+
         if (obj1[prop] !== obj2[prop])
             return false;
     }
@@ -5785,7 +5785,7 @@ var BlockBlot = /** @class */ (function (_super) {
     };
     BlockBlot.prototype.insertAt = function (index, value, def) {
         if (def == null || Registry.query(value, Registry.Scope.INLINE) != null) {
-            // Insert text or inline
+
             _super.prototype.insertAt.call(this, index, value, def);
         }
         else {
@@ -5833,9 +5833,9 @@ var EmbedBlot = /** @class */ (function (_super) {
         return undefined;
     };
     EmbedBlot.prototype.format = function (name, value) {
-        // super.formatAt wraps, which is what we want in general,
-        // but this allows subclasses to overwrite for formats
-        // that just apply to particular embeds
+
+
+
         _super.prototype.formatAt.call(this, 0, this.length(), name, value);
     };
     EmbedBlot.prototype.formatAt = function (index, length, name, value) {
@@ -5881,7 +5881,7 @@ var TextBlot = /** @class */ (function (_super) {
     };
     TextBlot.value = function (domNode) {
         var text = domNode.data;
-        // @ts-ignore
+
         if (text['normalize'])
             text = text['normalize']();
         return text;
@@ -6008,9 +6008,9 @@ if (!Array.prototype.find) {
   });
 }
 document.addEventListener("DOMContentLoaded", function () {
-  // Disable resizing in Firefox
+
   document.execCommand("enableObjectResizing", false, false);
-  // Disable automatic linkifying in IE11
+
   document.execCommand("autoUrlDetect", false, false);
 });
 /***/ }),
@@ -6057,30 +6057,30 @@ var DIFF_EQUAL = 0;
  * @return {Array} Array of diff tuples.
  */
 function diff_main(text1, text2, cursor_pos) {
-  // Check for equality (speedup).
+
   if (text1 == text2) {
     if (text1) {
       return [[DIFF_EQUAL, text1]];
     }
     return [];
   }
-  // Check cursor_pos within bounds
+
   if (cursor_pos < 0 || text1.length < cursor_pos) {
     cursor_pos = null;
   }
-  // Trim off common prefix (speedup).
+
   var commonlength = diff_commonPrefix(text1, text2);
   var commonprefix = text1.substring(0, commonlength);
   text1 = text1.substring(commonlength);
   text2 = text2.substring(commonlength);
-  // Trim off common suffix (speedup).
+
   commonlength = diff_commonSuffix(text1, text2);
   var commonsuffix = text1.substring(text1.length - commonlength);
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
-  // Compute the diff on the middle block.
+
   var diffs = diff_compute_(text1, text2);
-  // Restore the prefix and suffix.
+
   if (commonprefix) {
     diffs.unshift([DIFF_EQUAL, commonprefix]);
   }
@@ -6104,45 +6104,45 @@ function diff_main(text1, text2, cursor_pos) {
 function diff_compute_(text1, text2) {
   var diffs;
   if (!text1) {
-    // Just add some text (speedup).
+
     return [[DIFF_INSERT, text2]];
   }
   if (!text2) {
-    // Just delete some text (speedup).
+
     return [[DIFF_DELETE, text1]];
   }
   var longtext = text1.length > text2.length ? text1 : text2;
   var shorttext = text1.length > text2.length ? text2 : text1;
   var i = longtext.indexOf(shorttext);
   if (i != -1) {
-    // Shorter text is inside the longer text (speedup).
+
     diffs = [[DIFF_INSERT, longtext.substring(0, i)],
              [DIFF_EQUAL, shorttext],
              [DIFF_INSERT, longtext.substring(i + shorttext.length)]];
-    // Swap insertions for deletions if diff is reversed.
+
     if (text1.length > text2.length) {
       diffs[0][0] = diffs[2][0] = DIFF_DELETE;
     }
     return diffs;
   }
   if (shorttext.length == 1) {
-    // Single character string.
-    // After the previous speedup, the character can't be an equality.
+
+
     return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
   }
-  // Check to see if the problem can be split in two.
+
   var hm = diff_halfMatch_(text1, text2);
   if (hm) {
-    // A half-match was found, sort out the return data.
+
     var text1_a = hm[0];
     var text1_b = hm[1];
     var text2_a = hm[2];
     var text2_b = hm[3];
     var mid_common = hm[4];
-    // Send both pairs off for separate processing.
+
     var diffs_a = diff_main(text1_a, text2_a);
     var diffs_b = diff_main(text1_b, text2_b);
-    // Merge the results.
+
     return diffs_a.concat([[DIFF_EQUAL, mid_common]], diffs_b);
   }
   return diff_bisect_(text1, text2);
@@ -6157,7 +6157,7 @@ function diff_compute_(text1, text2) {
  * @private
  */
 function diff_bisect_(text1, text2) {
-  // Cache the text lengths to prevent multiple calls.
+
   var text1_length = text1.length;
   var text2_length = text2.length;
   var max_d = Math.ceil((text1_length + text2_length) / 2);
@@ -6165,8 +6165,8 @@ function diff_bisect_(text1, text2) {
   var v_length = 2 * max_d;
   var v1 = new Array(v_length);
   var v2 = new Array(v_length);
-  // Setting all elements to -1 is faster in Chrome & Firefox than mixing
-  // integers and undefined.
+
+
   for (var x = 0; x < v_length; x++) {
     v1[x] = -1;
     v2[x] = -1;
@@ -6174,17 +6174,17 @@ function diff_bisect_(text1, text2) {
   v1[v_offset + 1] = 0;
   v2[v_offset + 1] = 0;
   var delta = text1_length - text2_length;
-  // If the total number of characters is odd, then the front path will collide
-  // with the reverse path.
+
+
   var front = (delta % 2 != 0);
-  // Offsets for start and end of k loop.
-  // Prevents mapping of space beyond the grid.
+
+
   var k1start = 0;
   var k1end = 0;
   var k2start = 0;
   var k2end = 0;
   for (var d = 0; d < max_d; d++) {
-    // Walk the front path one step.
+
     for (var k1 = -d + k1start; k1 <= d - k1end; k1 += 2) {
       var k1_offset = v_offset + k1;
       var x1;
@@ -6201,24 +6201,24 @@ function diff_bisect_(text1, text2) {
       }
       v1[k1_offset] = x1;
       if (x1 > text1_length) {
-        // Ran off the right of the graph.
+
         k1end += 2;
       } else if (y1 > text2_length) {
-        // Ran off the bottom of the graph.
+
         k1start += 2;
       } else if (front) {
         var k2_offset = v_offset + delta - k1;
         if (k2_offset >= 0 && k2_offset < v_length && v2[k2_offset] != -1) {
-          // Mirror x2 onto top-left coordinate system.
+
           var x2 = text1_length - v2[k2_offset];
           if (x1 >= x2) {
-            // Overlap detected.
+
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
-    // Walk the reverse path one step.
+
     for (var k2 = -d + k2start; k2 <= d - k2end; k2 += 2) {
       var k2_offset = v_offset + k2;
       var x2;
@@ -6236,28 +6236,28 @@ function diff_bisect_(text1, text2) {
       }
       v2[k2_offset] = x2;
       if (x2 > text1_length) {
-        // Ran off the left of the graph.
+
         k2end += 2;
       } else if (y2 > text2_length) {
-        // Ran off the top of the graph.
+
         k2start += 2;
       } else if (!front) {
         var k1_offset = v_offset + delta - k2;
         if (k1_offset >= 0 && k1_offset < v_length && v1[k1_offset] != -1) {
           var x1 = v1[k1_offset];
           var y1 = v_offset + x1 - k1_offset;
-          // Mirror x2 onto top-left coordinate system.
+
           x2 = text1_length - x2;
           if (x1 >= x2) {
-            // Overlap detected.
+
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
   }
-  // Diff took too long and hit the deadline or
-  // number of diffs equals number of characters, no commonality at all.
+
+
   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
 };
 /**
@@ -6274,7 +6274,7 @@ function diff_bisectSplit_(text1, text2, x, y) {
   var text2a = text2.substring(0, y);
   var text1b = text1.substring(x);
   var text2b = text2.substring(y);
-  // Compute both diffs serially.
+
   var diffs = diff_main(text1a, text2a);
   var diffsb = diff_main(text1b, text2b);
   return diffs.concat(diffsb);
@@ -6287,12 +6287,12 @@ function diff_bisectSplit_(text1, text2, x, y) {
  *     string.
  */
 function diff_commonPrefix(text1, text2) {
-  // Quick check for common null cases.
+
   if (!text1 || !text2 || text1.charAt(0) != text2.charAt(0)) {
     return 0;
   }
-  // Binary search.
-  // Performance analysis: http://neil.fraser.name/news/2007/10/09/
+
+
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -6316,13 +6316,13 @@ function diff_commonPrefix(text1, text2) {
  * @return {number} The number of characters common to the end of each string.
  */
 function diff_commonSuffix(text1, text2) {
-  // Quick check for common null cases.
+
   if (!text1 || !text2 ||
       text1.charAt(text1.length - 1) != text2.charAt(text2.length - 1)) {
     return 0;
   }
-  // Binary search.
-  // Performance analysis: http://neil.fraser.name/news/2007/10/09/
+
+
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -6368,7 +6368,7 @@ function diff_halfMatch_(text1, text2) {
    * @private
    */
   function diff_halfMatchI_(longtext, shorttext, i) {
-    // Start with a 1/4 length substring at position i as a seed.
+
     var seed = longtext.substring(i, i + Math.floor(longtext.length / 4));
     var j = -1;
     var best_common = '';
@@ -6394,10 +6394,10 @@ function diff_halfMatch_(text1, text2) {
       return null;
     }
   }
-  // First check if the second quarter is the seed for a half-match.
+
   var hm1 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 4));
-  // Check again based on the third quarter.
+
   var hm2 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 2));
   var hm;
@@ -6408,10 +6408,10 @@ function diff_halfMatch_(text1, text2) {
   } else if (!hm1) {
     hm = hm2;
   } else {
-    // Both matched.  Select the longest.
+
     hm = hm1[4].length > hm2[4].length ? hm1 : hm2;
   }
-  // A half-match was found, sort out the return data.
+
   var text1_a, text1_b, text2_a, text2_b;
   if (text1.length > text2.length) {
     text1_a = hm[0];
@@ -6453,10 +6453,10 @@ function diff_cleanupMerge(diffs) {
         pointer++;
         break;
       case DIFF_EQUAL:
-        // Upon reaching an equality, check for prior redundancies.
+
         if (count_delete + count_insert > 1) {
           if (count_delete !== 0 && count_insert !== 0) {
-            // Factor out any common prefixies.
+
             commonlength = diff_commonPrefix(text_insert, text_delete);
             if (commonlength !== 0) {
               if ((pointer - count_delete - count_insert) > 0 &&
@@ -6472,7 +6472,7 @@ function diff_cleanupMerge(diffs) {
               text_insert = text_insert.substring(commonlength);
               text_delete = text_delete.substring(commonlength);
             }
-            // Factor out any common suffixies.
+
             commonlength = diff_commonSuffix(text_insert, text_delete);
             if (commonlength !== 0) {
               diffs[pointer][1] = text_insert.substring(text_insert.length -
@@ -6483,7 +6483,7 @@ function diff_cleanupMerge(diffs) {
                   commonlength);
             }
           }
-          // Delete the offending records and add the merged ones.
+
           if (count_delete === 0) {
             diffs.splice(pointer - count_insert,
                 count_delete + count_insert, [DIFF_INSERT, text_insert]);
@@ -6498,7 +6498,7 @@ function diff_cleanupMerge(diffs) {
           pointer = pointer - count_delete - count_insert +
                     (count_delete ? 1 : 0) + (count_insert ? 1 : 0) + 1;
         } else if (pointer !== 0 && diffs[pointer - 1][0] == DIFF_EQUAL) {
-          // Merge this equality with the previous one.
+
           diffs[pointer - 1][1] += diffs[pointer][1];
           diffs.splice(pointer, 1);
         } else {
@@ -6514,19 +6514,19 @@ function diff_cleanupMerge(diffs) {
   if (diffs[diffs.length - 1][1] === '') {
     diffs.pop();  // Remove the dummy entry at the end.
   }
-  // Second pass: look for single edits surrounded on both sides by equalities
-  // which can be shifted sideways to eliminate an equality.
-  // e.g: A<ins>BA</ins>C -> <ins>AB</ins>AC
+
+
+
   var changes = false;
   pointer = 1;
-  // Intentionally ignore the first and last element (don't need checking).
+
   while (pointer < diffs.length - 1) {
     if (diffs[pointer - 1][0] == DIFF_EQUAL &&
         diffs[pointer + 1][0] == DIFF_EQUAL) {
-      // This is a single edit surrounded by equalities.
+
       if (diffs[pointer][1].substring(diffs[pointer][1].length -
           diffs[pointer - 1][1].length) == diffs[pointer - 1][1]) {
-        // Shift the edit over the previous equality.
+
         diffs[pointer][1] = diffs[pointer - 1][1] +
             diffs[pointer][1].substring(0, diffs[pointer][1].length -
                                         diffs[pointer - 1][1].length);
@@ -6535,7 +6535,7 @@ function diff_cleanupMerge(diffs) {
         changes = true;
       } else if (diffs[pointer][1].substring(0, diffs[pointer + 1][1].length) ==
           diffs[pointer + 1][1]) {
-        // Shift the edit over the next equality.
+
         diffs[pointer - 1][1] += diffs[pointer + 1][1];
         diffs[pointer][1] =
             diffs[pointer][1].substring(diffs[pointer + 1][1].length) +
@@ -6546,7 +6546,7 @@ function diff_cleanupMerge(diffs) {
     }
     pointer++;
   }
-  // If shifts were made, the diff needs reordering and another shift sweep.
+
   if (changes) {
     diff_cleanupMerge(diffs);
   }
@@ -6579,9 +6579,9 @@ function cursor_normalize_diff (diffs, cursor_pos) {
       if (cursor_pos === next_pos) {
         return [i + 1, diffs];
       } else if (cursor_pos < next_pos) {
-        // copy to prevent side effects
+
         diffs = diffs.slice();
-        // split d into two diff changes
+
         var split_pos = cursor_pos - current_pos;
         var d_left = [d[0], d[1].slice(0, split_pos)];
         var d_right = [d[0], d[1].slice(split_pos)];
@@ -6619,24 +6619,24 @@ function fix_cursor (diffs, cursor_pos) {
   var d = ndiffs[cursor_pointer];
   var d_next = ndiffs[cursor_pointer + 1];
   if (d == null) {
-    // Text was deleted from end of original string,
-    // cursor is now out of bounds in new string
+
+
     return diffs;
   } else if (d[0] !== DIFF_EQUAL) {
-    // A modification happened at the cursor location.
-    // This is the expected outcome, so we can return the original diff.
+
+
     return diffs;
   } else {
     if (d_next != null && d[1] + d_next[1] === d_next[1] + d[1]) {
-      // Case 1)
-      // It is possible to perform a naive shift
+
+
       ndiffs.splice(cursor_pointer, 2, d_next, d)
       return merge_tuples(ndiffs, cursor_pointer, 2)
     } else if (d_next != null && d_next[1].indexOf(d[1]) === 0) {
-      // Case 2)
-      // d[1] is a prefix of d_next[1]
-      // We can assume that d_next[0] !== 0, since d[0] === 0
-      // Shift edit locations..
+
+
+
+
       ndiffs.splice(cursor_pointer, 2, [d_next[0], d[1]], [0, d[1]]);
       var suffix = d_next[1].slice(d[1].length);
       if (suffix.length > 0) {
@@ -6644,7 +6644,7 @@ function fix_cursor (diffs, cursor_pos) {
       }
       return merge_tuples(ndiffs, cursor_pointer, 3)
     } else {
-      // Not possible to perform any modification
+
       return diffs;
     }
   }
@@ -6696,7 +6696,7 @@ function fix_emoji (diffs) {
  * @return {Array} Array of merged diff tuples.
  */
 function merge_tuples (diffs, start, length) {
-  // Check from (start-1) to (start+length).
+
   for (var i = start + length - 1; i >= 0 && i >= start - 1; i--) {
     if (i + 1 < diffs.length) {
       var left_d = diffs[i];
@@ -6754,17 +6754,17 @@ var has = Object.prototype.hasOwnProperty
  */
 function Events() {}
 //
-// We try to not inherit from `Object.prototype`. In some engines creating an
-// instance in this way is faster than calling `Object.create(null)` directly.
-// If `Object.create(null)` is not supported we prefix the event names with a
-// character to make sure that the built-in object properties are not
-// overridden or used as an attack vector.
+
+
+
+
+
 //
 if (Object.create) {
   Events.prototype = Object.create(null);
   //
-  // This hack is needed because the `__proto__` property is still inherited in
-  // some old browsers like Android 4, iPhone 5.1, Opera 11 and Safari 5.
+
+
   //
   if (!new Events().__proto__) prefix = false;
 }
@@ -6953,7 +6953,7 @@ EventEmitter.prototype.removeListener = function removeListener(event, fn, conte
       }
     }
     //
-    // Reset the array, or remove it completely if we have no more listeners.
+
     //
     if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
     else if (--this._eventsCount === 0) this._events = new Events();
@@ -6983,26 +6983,26 @@ EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
   return this;
 };
 //
-// Alias methods names because people roll like that.
+
 //
 EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
 EventEmitter.prototype.addListener = EventEmitter.prototype.on;
 //
-// This function doesn't apply anymore.
+
 //
 EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
   return this;
 };
 //
-// Expose the prefix.
+
 //
 EventEmitter.prefixed = prefix;
 //
-// Allow `EventEmitter` to be imported as module namespace.
+
 //
 EventEmitter.EventEmitter = EventEmitter;
 //
-// Expose the module.
+
 //
 if ('undefined' !== typeof module) {
   module.exports = EventEmitter;
@@ -7096,7 +7096,7 @@ var Clipboard = function (_Module) {
           elementMatchers = _prepareMatching2[0],
           textMatchers = _prepareMatching2[1];
       var delta = traverse(this.container, elementMatchers, textMatchers);
-      // Remove trailing newline
+
       if (deltaEndsWith(delta, '\n') && delta.ops[delta.ops.length - 1].attributes == null) {
         delta = delta.compose(new _quillDelta2.default().retain(delta.length() - 1).delete(1));
       }
@@ -7130,7 +7130,7 @@ var Clipboard = function (_Module) {
       setTimeout(function () {
         delta = delta.concat(_this2.convert()).delete(range.length);
         _this2.quill.updateContents(delta, _quill2.default.sources.USER);
-        // range.length contributes to delta.length()
+
         _this2.quill.setSelection(delta.length() - range.length, _quill2.default.sources.SILENT);
         _this2.quill.scrollingContainer.scrollTop = scrollTop;
         _this2.quill.focus();
@@ -7155,7 +7155,7 @@ var Clipboard = function (_Module) {
             break;
           default:
             [].forEach.call(_this3.container.querySelectorAll(selector), function (node) {
-              // TODO use weakmap
+
               node[DOM_KEY] = node[DOM_KEY] || [];
               node[DOM_KEY].push(matcher);
             });
@@ -7206,7 +7206,7 @@ function isLine(node) {
   return ['block', 'list-item'].indexOf(style.display) > -1;
 }
 function traverse(node, elementMatchers, textMatchers) {
-  // Post-order
+
   if (node.nodeType === node.TEXT_NODE) {
     return textMatchers.reduce(function (delta, matcher) {
       return matcher(node, delta);
@@ -7327,14 +7327,14 @@ function matchStyles(node, delta) {
     delta = applyFormat(delta, formats);
   }
   if (parseFloat(style.textIndent || 0) > 0) {
-    // Could be 0.5in
+
     delta = new _quillDelta2.default().insert('\t').concat(delta);
   }
   return delta;
 }
 function matchText(node, delta) {
   var text = node.data;
-  // Word represents empty line with <o:p>&nbsp;</o:p>
+
   if (node.parentNode.tagName === 'O:P') {
     return delta.insert(text.trim());
   }
@@ -7342,7 +7342,7 @@ function matchText(node, delta) {
     return delta;
   }
   if (!computeStyle(node.parentNode).whiteSpace.startsWith('pre')) {
-    // eslint-disable-next-line func-style
+
     var replacer = function replacer(collapse, match) {
       match = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
       return match.length < 1 && collapse ? ' ' : match;

@@ -23,7 +23,7 @@ function dynamicPrimaryColor(primaryColor) {
             const cssPropName9 = `--transparentprimary-${e.target.getAttribute('data-id9')}`;
             handleThemeUpdate({
                 [cssPropName]: e.target.value,
-                // 95 is used as the opacity 0.95  
+
                 [cssPropName1]: e.target.value + 95,
                 [cssPropName2]: e.target.value,
                 [cssPropName3]: e.target.value,
@@ -41,35 +41,35 @@ function dynamicPrimaryColor(primaryColor) {
 (function() {
     'use strict'
 
-    // Light theme color picker
-    // const LightThemeSwitchers = document.querySelectorAll('.light-mode .switch_section span');
+
+
     const dynamicPrimaryLight = document.querySelectorAll('input.color-primary-light');
 
-    // themeSwitch(LightThemeSwitchers);
+
     dynamicPrimaryColor(dynamicPrimaryLight);
 
-    // dark theme color picker
 
-    // const DarkThemeSwitchers = document.querySelectorAll('.dark-mode .switch_section span')
+
+
     const DarkDynamicPrimaryLight = document.querySelectorAll('input.color-primary-dark');
 
-    // themeSwitch(DarkThemeSwitchers);
+
     dynamicPrimaryColor(DarkDynamicPrimaryLight);
 
-    // tranparent theme color picker
 
-    // const transparentThemeSwitchers = document.querySelectorAll('.transparent-mode .switch_section span')
+
+
     const transparentDynamicPrimaryLight = document.querySelectorAll('input.color-primary-transparent');
 
-    // themeSwitch(transparentThemeSwitchers);
+
     dynamicPrimaryColor(transparentDynamicPrimaryLight);
 
-    // tranparent theme bgcolor picker
 
-    // const transparentBgThemeSwitchers = document.querySelectorAll('.transparent-mode .switch_section span')
+
+
     const transparentDynamicPBgLight = document.querySelectorAll('input.color-bg-transparent');
 
-    // themeSwitch(transparentBgThemeSwitchers);
+
     dynamicPrimaryColor(transparentDynamicPBgLight);
 
     localStorageBackup();
@@ -125,10 +125,10 @@ function dynamicPrimaryColor(primaryColor) {
 function localStorageBackup() {
     'use strict'
 
-    // if there is a value stored, update color picker and background color
-    // Used to retrive the data from local storage
+
+
     if (localStorage.sashprimaryColor) {
-        // document.getElementById('colorID').value = localStorage.sashprimaryColor;
+
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashprimaryColor);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashprimaryHoverColor);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashprimaryBorderColor);
@@ -143,7 +143,7 @@ function localStorageBackup() {
     }
 
     if (localStorage.sashdarkPrimary) {
-        // document.getElementById('darkPrimaryColorID').value = localStorage.sashdarkPrimary;
+
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashdarkPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashdarkPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashdarkPrimary);
@@ -159,7 +159,7 @@ function localStorageBackup() {
 
 
     if (localStorage.sashtransparentPrimary) {
-        // document.getElementById('transparentPrimaryColorID').value = localStorage.sashtransparentPrimary;
+
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashtransparentPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashtransparentPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashtransparentPrimary);
@@ -173,7 +173,7 @@ function localStorageBackup() {
     }
 
     if (localStorage.sashtransparentBgImgPrimary) {
-		// document.getElementById('transparentBgImgPrimaryColorID').value = localStorage.sashtransparentBgImgPrimary;
+
 		document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashtransparentBgImgPrimary);
 		document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashtransparentBgImgPrimary);
 		document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashtransparentBgImgPrimary);
@@ -187,7 +187,7 @@ function localStorageBackup() {
 	}
     
     if (localStorage.sashtransparentBgColor) {
-        // document.getElementById('transparentBgColorID').value = localStorage.sashtransparentBgColor;
+
         document.querySelector('html').style.setProperty('--transparent-body', localStorage.sashtransparentBgColor);
         document.querySelector('html').style.setProperty('--transparent-mode', localStorage.sashtransparentThemeColor);
         document.querySelector('html').style.setProperty('--transparentprimary-transparentcolor', localStorage.sashtransparentprimaryTransparent);
@@ -245,7 +245,7 @@ function localStorageBackup() {
     }
 }
 
-// triggers on changing the color picker
+
 function changePrimaryColor() {
     'use strict'
 
@@ -255,12 +255,12 @@ function changePrimaryColor() {
 
     var userColor = document.getElementById('colorID').value;
     localStorage.setItem('sashprimaryColor', userColor);
-    // to store value as opacity 0.95 we use 95
+
     localStorage.setItem('sashprimaryHoverColor', userColor + 95);
     localStorage.setItem('sashprimaryBorderColor', userColor);
     localStorage.setItem('sashprimaryTransparent', userColor + 20);
 
-    // removing dark theme properties
+
     localStorage.removeItem('sashdarkPrimary')
     localStorage.removeItem('sashtransparentBgColor');
     localStorage.removeItem('sashtransparentThemeColor');
@@ -291,7 +291,7 @@ function darkPrimaryColor() {
     $('#myonoffswitch8').prop('checked', true);
     checkOptions();
 
-    // removing light theme data 
+
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
     localStorage.removeItem('sashprimaryBorderColor')
@@ -328,7 +328,7 @@ function transparentPrimaryColor() {
     localStorage.setItem('sashtransparentPrimary', userColor);
     localStorage.setItem('sashtransparentprimaryTransparent', userColor + 20);
 
-    // removing light theme data 
+
     localStorage.removeItem('sashdarkPrimary');
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
@@ -372,7 +372,7 @@ function transparentBgImgPrimaryColor() {
 		document.querySelector('body')?.classList.add('bg-img1');
         localStorage.setItem('sashBgImage', 'bg-img1')
 	}
-    // removing light theme data 
+
 	localStorage.removeItem('sashdarkPrimary');
 	localStorage.removeItem('sashprimaryColor')
 	localStorage.removeItem('sashprimaryHoverColor')
@@ -409,7 +409,7 @@ function transparentBgColor() {
     localStorage.removeItem('sashtransparentBgImgPrimary');
 	localStorage.removeItem('sashtransparentBgImgprimaryTransparent');
 
-    // removing light theme data 
+
     localStorage.removeItem('sashdarkPrimary');
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
@@ -443,7 +443,7 @@ function bgImage(e) {
 	let imgID = e.getAttribute('class');
 	localStorage.setItem('sashBgImage', imgID);
     
-    // removing light theme data 
+
 	localStorage.removeItem('sashdarkPrimary');
 	localStorage.removeItem('sashprimaryColor')
 	localStorage.removeItem('sashtransparentBgColor');
@@ -461,13 +461,13 @@ function bgImage(e) {
     localStorage.removeItem('sashdarkMode');
 }
 
-// to check the value is hexa or not
+
 const isValidHex = (hexValue) => /^#([A-Fa-f0-9]{3,4}){1,2}$/.test(hexValue)
 
 const getChunksFromString = (st, chunkSize) => st.match(new RegExp(`.{${chunkSize}}`, "g"))
-    // convert hex value to 256
+
 const convertHexUnitTo256 = (hexStr) => parseInt(hexStr.repeat(2 / hexStr.length), 16)
-    // get alpha value is equla to 1 if there was no value is asigned to alpha in function
+
 const getAlphafloat = (a, alpha) => {
         if (typeof a !== "undefined") { return a / 255 }
         if ((typeof alpha != "number") || alpha < 0 || alpha > 1) {
@@ -475,7 +475,7 @@ const getAlphafloat = (a, alpha) => {
         }
         return alpha
     }
-    // convertion of hex code to rgba code 
+
 function hexToRgba(hexValue, alpha) {
     'use strict'
 

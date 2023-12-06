@@ -27,7 +27,7 @@ const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
 const { log } = require("console");
 
-//  #############################  ADD prospectus Start ##################################################
+
 exports.addprospectus = async (req, res) => {
     const {
         firstName,
@@ -43,9 +43,9 @@ exports.addprospectus = async (req, res) => {
         prospectusStatus,
     } = req.body;
     const { userId } = req.user;
-    // const { userId } = req.body;
+
     const currentDate = new Date();
-    // console.log(userId)
+
     try {
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
@@ -81,13 +81,13 @@ exports.addprospectus = async (req, res) => {
     }
 };
 
-//  #############################  ADD prospectus END ##################################################
 
 
-//  #############################  GET prospectus START ##################################################
+
+
 exports.getProspectus = async (req, res) => {
     const { userId } = req.user;
-    // const { userId } = req.body;
+
     try {
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [userId]);
         if (getProspectusResult[0].length === 0) {
@@ -102,7 +102,7 @@ exports.getProspectus = async (req, res) => {
             const unitInfo = getProspectusResult[0][i].unitInfo;
             const sourceID = getProspectusResult[0][i].sourceCampaign;
             console.log(sourceID);
-            // console.log(propertyInfo + " " + unitInfo);
+
             const firstProspectusResult = getProspectusResult[0][i];
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
@@ -130,14 +130,14 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     }
 };
-//  #############################  GET prospectus END ##################################################
 
 
-//  #############################  GET prospectus By ID START ##################################################
+
+
 exports.getProspectusByID = async (req, res) => {
     const { prospectusId } = req.query;
-    // const { prospectusId } = req.body;
-    // console.log(req.query)
+
+
     try {
 
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
@@ -157,11 +157,11 @@ exports.getProspectusByID = async (req, res) => {
         const sourceID = firstProspectusResult.sourceCampaign;
 
 
-        // ##############################################################################
+
 
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
-        // ##############################################################################
+
 
         const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
 
@@ -185,12 +185,12 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     }
 };
-//  #############################  GET prospectus By ID END ##################################################
 
 
 
 
-//  #############################  Update prospectus Start ##################################################
+
+
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
@@ -212,7 +212,7 @@ exports.updateProspectus = async (req, res) => {
         console.log(UpdateProspectusQuery);
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
-            // middleName,
+
             lastName,
             phoneNumber,
             email,
@@ -241,12 +241,12 @@ exports.updateProspectus = async (req, res) => {
     }
 };
 
-//  #############################  Update prospectus END ##################################################
 
 
 
 
-//  #############################  Update prospectus Status Start ##################################################
+
+
 exports.updateProspectusStatus = async (req, res) => {
     
     const {
@@ -276,15 +276,15 @@ exports.updateProspectusStatus = async (req, res) => {
     }
 };
 
-//  #############################  Update prospectus Status END ##################################################
 
 
 
-//  #############################  Insight Qualified & disQuilified Start ##################################################
+
+
 exports.prospectusInsightQD = async (req, res) => {
     
     const {year} = req.params;
-    // const { userId } = req.body;
+
     const { userId } = req.user;
     try {
         
@@ -305,13 +305,13 @@ exports.prospectusInsightQD = async (req, res) => {
     }
 };
 
-//  #############################  Insight Qualified & disQuilified END ##################################################
 
 
-//  #############################  Insight Count Engaged Nurture Start ##################################################
+
+
 exports.prospectusInsightEN = async (req, res) => {
     const {startDate,endDate} = req.params;
-    // const { userId } = req.body;
+
     const { userId } = req.user;
     try {
         
@@ -328,7 +328,7 @@ exports.prospectusInsightEN = async (req, res) => {
             data : prospectusResult[0][0]
         });
     } catch (error) {
-        // console.log(error);
+
         res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
@@ -336,22 +336,22 @@ exports.prospectusInsightEN = async (req, res) => {
     }
 };
 
-//  #############################  Insight Engaged and Nurturing END ##################################################
 
 
 
-//  #############################  Delete prospectus Start HERE ##################################################
+
+
 
 exports.deleteProspectus = async (req, res) => {
     try {
       const { prospectusID } = req.params;
-    //   console.log(prospectusID);
+
       const deleteprospectusResult = await queryRunner(deleteQuery("prospectus", "id"), [
         prospectusID,
       ]);
       if (deleteprospectusResult[0].affectedRows > 0) {
         res.status(200).json({
-          // data: vendorResult[0],
+
           message: "prospectus Deleted Successful",
         });
       } else {
@@ -364,12 +364,12 @@ exports.deleteProspectus = async (req, res) => {
       console.log(error);
     }
   };
-  //  #############################  Delete prospectus ENDS HERE ##################################################
+
   
 
 
 
-  //  #############################  Prospectus time Start HERE ##################################################
+
 exports.prospectusTime = async (req, res) => {
     try {
       const { startDate, endDate } = req.params;
@@ -393,14 +393,14 @@ exports.prospectusTime = async (req, res) => {
       console.log(error);
     }
   };
-  //  ############################# Prospectus time ENDS HERE ##################################################
+
 
   
-  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+
   
   exports.prospectusSources = async (req, res) => {
     const { Sourcess } = req.body;
-    // const { userId } = req.body;
+
     const { userId } = req.user;
     try {
         const SourcesResult = [];
@@ -443,10 +443,10 @@ exports.prospectusTime = async (req, res) => {
         res.status(400).send(error);
     }
 };
-  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+
   
 
-  //  ############################# Prospectus Sources Campaign Start HERE ##################################################
+
   exports.getProspectusSources = async (req, res) => {
     
     const { userId } = req.user;
@@ -472,13 +472,13 @@ exports.prospectusTime = async (req, res) => {
         res.status(400).send(error);
     }
 };
-  //  ############################# Prospectus Sources Campaign END HERE ##################################################
+
   
 
-  //  #############################  Insight Sources Start ##################################################
+
 exports.sourcesCampaignInsight = async (req, res) => {
     const {startDate,endDate} = req.params;
-    // const {startDate,endDate, userId } = req.body;
+
     const { userId } = req.user;
     try {
         
@@ -495,22 +495,22 @@ exports.sourcesCampaignInsight = async (req, res) => {
             data : sourcesCampaignInsightResult[0]
         });
     } catch (error) {
-        // console.log(error);
+
         res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
     }
 };
-//  #############################  Insight Sources END ##################################################
 
 
 
 
-  //  #############################  Dashboard prospectus Insight Start ##################################################
+
+
   exports.dashboardProspectusInsight = async (req, res) => {
     const {startDate,endDate} = req.params;
-    // const {startDate,endDate, userId } = req.body;
+
     const { userId } = req.user;
     try {
         
@@ -527,14 +527,14 @@ exports.sourcesCampaignInsight = async (req, res) => {
             data : dashboardProspectusInsightResult[0]
         });
     } catch (error) {
-        // console.log(error);
+
         res.status(500).json({
             message: "Error occur in Dashboard prospectus Insight",
             error : error.message
         });
     }
 };
-//  #############################  Dashboard prospectus Insight END ##################################################
+
 
 
 
@@ -571,7 +571,7 @@ exports.prospectTimeGraph = async (req, res) => {
             data: prospects,
         });
     } catch (error) {
-        // console.log(error);
+
         res.status(500).json({
             message: "Error occur in prospectus time",
             error: error.message,
@@ -621,25 +621,24 @@ exports.prospectTimeGraph = async (req, res) => {
 
 
 
-// //  #############################  Insight Qualified & disQuilified Start ##################################################
-// exports.prospectusImage = async (req, res) => {
-    
-//     const fileName = req.files;
-//     const userId = "asdfg";
-//     try {
-//        console.log(fileName);
-//        console.log(req.files[0].filename);
-//         res.status(200).json({
-//             message: " prospectus successful",
-//             data : userId
-//         });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({
-//             message: "Error occur in prospectus Insight Qualified and Disqualified",
-//             error : error.message
-//         });
-//     }
-// };
 
-// //  #############################  Insight Qualified & disQuilified END ##################################################
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

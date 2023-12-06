@@ -42,7 +42,7 @@ window.chartColors = {
 	var Color = global.Color;
 
 	Samples.utils = {
-		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+
 		srand: function(seed) {
 			this._seed = seed;
 		},
@@ -123,12 +123,12 @@ window.chartColors = {
 		}
 	};
 
-	// DEPRECATED
+
 	window.randomScalingFactor = function() {
 		return Math.round(Samples.utils.rand(-100, 100));
 	};
 
-	// INITIALIZATION
+
 
 	Samples.utils.srand(Date.now());
 
