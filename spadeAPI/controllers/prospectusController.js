@@ -26,8 +26,6 @@ const {
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
 const { log } = require("console");
-
-
 exports.addprospectus = async (req, res) => {
     const {
         firstName,
@@ -43,9 +41,7 @@ exports.addprospectus = async (req, res) => {
         prospectusStatus,
     } = req.body;
     const { userId } = req.user;
-
     const currentDate = new Date();
-
     try {
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
@@ -71,7 +67,6 @@ exports.addprospectus = async (req, res) => {
         customProspectusId = lastName+customProspectusId;
         const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
         //}
-
         res.status(200).json({
             message: " prospectus created successful",
         });
@@ -80,14 +75,8 @@ exports.addprospectus = async (req, res) => {
         res.status(400).send(error);
     }
 };
-
-
-
-
-
 exports.getProspectus = async (req, res) => {
     const { userId } = req.user;
-
     try {
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "landlordId"), [userId]);
         if (getProspectusResult[0].length === 0) {
@@ -102,11 +91,9 @@ exports.getProspectus = async (req, res) => {
             const unitInfo = getProspectusResult[0][i].unitInfo;
             const sourceID = getProspectusResult[0][i].sourceCampaign;
             console.log(sourceID);
-
             const firstProspectusResult = getProspectusResult[0][i];
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
-
             const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
             const property = getPropertyResult[0].length > 0 ? getPropertyResult[0][0] : [];
             const prospectusData = {
@@ -115,13 +102,11 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
                 Source: Source,
             };
             prospectusDataArray.push(prospectusData);
-
         }
         res.status(200).json({
             message: "Get prospectus",
             data: prospectusDataArray,
         });
-
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -130,49 +115,30 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     }
 };
-
-
-
-
 exports.getProspectusByID = async (req, res) => {
     const { prospectusId } = req.query;
-
-
     try {
-
         const getProspectusResult = await queryRunner(selectQuery("prospectus", "id"), [prospectusId]);
-
         if (getProspectusResult[0].length === 0) {
             return res.status(404).json({
                 message: "No Prospectus Data Found",
                 data: null,
             });
         }
-
         const prospectusDataArray = [];
-
         const firstProspectusResult = getProspectusResult[0][0];
         const propertyInfo = firstProspectusResult.propertyInfo;
         const unitInfo = firstProspectusResult.unitInfo;
         const sourceID = firstProspectusResult.sourceCampaign;
-
-
-
-
 const getSourceResult = await queryRunner(selectQuery("prospectusSources", "id"), [sourceID]);
 const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
-
-
         const getPropertyResult = await queryRunner(getProspectusByIdQuery, [propertyInfo, unitInfo]);
-
         const prospectusData = {
             prospectus: firstProspectusResult,
             property: getPropertyResult[0][0],
             Source: Source,
         };
-
         prospectusDataArray.push(prospectusData);
-
         res.status(200).json({
             message: "Get prospectus",
             data: prospectusDataArray,
@@ -185,12 +151,6 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     }
 };
-
-
-
-
-
-
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
@@ -208,11 +168,9 @@ exports.updateProspectus = async (req, res) => {
     console.log(req.body);
     const currentDate = new Date(); 
     try {
-        
         console.log(UpdateProspectusQuery);
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
-
             lastName,
             phoneNumber,
             email,
@@ -240,22 +198,13 @@ exports.updateProspectus = async (req, res) => {
         });
     }
 };
-
-
-
-
-
-
-
 exports.updateProspectusStatus = async (req, res) => {
-    
     const {
         prospectusStatus,
         prospectusid
     } = req.body;
     const currentDate = new Date(); 
     try {
-        
         const prospectusResult = await queryRunner(UpdateProspectusStatusQuery, [
             prospectusStatus,
             currentDate,
@@ -275,19 +224,10 @@ exports.updateProspectusStatus = async (req, res) => {
         });
     }
 };
-
-
-
-
-
-
 exports.prospectusInsightQD = async (req, res) => {
-    
     const {year} = req.params;
-
     const { userId } = req.user;
     try {
-        
         const prospectusResult = await queryRunner(prospectusInsightQD, [year,userId]);
         if (prospectusResult[0].length === 0) {
             return res.status(400).send("No data found");
@@ -304,17 +244,10 @@ exports.prospectusInsightQD = async (req, res) => {
         });
     }
 };
-
-
-
-
-
 exports.prospectusInsightEN = async (req, res) => {
     const {startDate,endDate} = req.params;
-
     const { userId } = req.user;
     try {
-        
         const prospectusResult = await queryRunner(prospectusInsightEN, [
             userId,
             startDate,
@@ -328,30 +261,20 @@ exports.prospectusInsightEN = async (req, res) => {
             data : prospectusResult[0][0]
         });
     } catch (error) {
-
         res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
     }
 };
-
-
-
-
-
-
-
 exports.deleteProspectus = async (req, res) => {
     try {
       const { prospectusID } = req.params;
-
       const deleteprospectusResult = await queryRunner(deleteQuery("prospectus", "id"), [
         prospectusID,
       ]);
       if (deleteprospectusResult[0].affectedRows > 0) {
         res.status(200).json({
-
           message: "prospectus Deleted Successful",
         });
       } else {
@@ -364,12 +287,6 @@ exports.deleteProspectus = async (req, res) => {
       console.log(error);
     }
   };
-
-  
-
-
-
-
 exports.prospectusTime = async (req, res) => {
     try {
       const { startDate, endDate } = req.params;
@@ -393,14 +310,8 @@ exports.prospectusTime = async (req, res) => {
       console.log(error);
     }
   };
-
-
-  
-
-  
   exports.prospectusSources = async (req, res) => {
     const { Sourcess } = req.body;
-
     const { userId } = req.user;
     try {
         const SourcesResult = [];
@@ -443,12 +354,7 @@ exports.prospectusTime = async (req, res) => {
         res.status(400).send(error);
     }
 };
-
-  
-
-
   exports.getProspectusSources = async (req, res) => {
-    
     const { userId } = req.user;
     try {
             const prospectusSourcesResult = await queryRunner(
@@ -459,29 +365,21 @@ exports.prospectusTime = async (req, res) => {
                 res.status(200).json({
                                 message: " prospectus data not found",
                             });
-               
             }else{
                 res.status(200).json({
                                 message: " prospectus get successful",
                                 data : prospectusSourcesResult[0]
                             });
             }
-
     } catch (error) {
         console.log(error);
         res.status(400).send(error);
     }
 };
-
-  
-
-
 exports.sourcesCampaignInsight = async (req, res) => {
     const {startDate,endDate} = req.params;
-
     const { userId } = req.user;
     try {
-        
         const sourcesCampaignInsightResult = await queryRunner(sourcesCampaignInsight, [
             userId,
             startDate,
@@ -495,25 +393,16 @@ exports.sourcesCampaignInsight = async (req, res) => {
             data : sourcesCampaignInsightResult[0]
         });
     } catch (error) {
-
         res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
     }
 };
-
-
-
-
-
-
   exports.dashboardProspectusInsight = async (req, res) => {
     const {startDate,endDate} = req.params;
-
     const { userId } = req.user;
     try {
-        
         const dashboardProspectusInsightResult = await queryRunner(dashboardProspectusInsight, [
             userId,
             startDate,
@@ -527,18 +416,12 @@ exports.sourcesCampaignInsight = async (req, res) => {
             data : dashboardProspectusInsightResult[0]
         });
     } catch (error) {
-
         res.status(500).json({
             message: "Error occur in Dashboard prospectus Insight",
             error : error.message
         });
     }
 };
-
-
-
-
-
 exports.prospectTimeGraph = async (req, res) => {
     const { startDate, endDate } = req.params;
     const { userId } = req.user;
@@ -554,7 +437,6 @@ exports.prospectTimeGraph = async (req, res) => {
         const prospects = prospectTimeGraphResult[0].map(row => {
             const isAfter15th = new Date(row.createdDate).getDate() > 15;
             const isEndAfter15th = row.updatedDate ? new Date(row.updatedDate).getDate() > 15 : false;
-
             const prospectDetail = {
               prospect_detail: row,
               startMonth: row.startMonth,
@@ -562,83 +444,16 @@ exports.prospectTimeGraph = async (req, res) => {
               createdAfter15th: isAfter15th ? '1/2' : '',
               endAfter15th: isEndAfter15th ? '1/2' : '',
             };
-          
             return prospectDetail;
           });
-        
         res.status(200).json({
             message: "prospectus time get successful",
             data: prospects,
         });
     } catch (error) {
-
         res.status(500).json({
             message: "Error occur in prospectus time",
             error: error.message,
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

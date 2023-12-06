@@ -1,8 +1,6 @@
 (function($) {
 	"use strict";
-
     /*---Owl-carousel----*/
-
     /*--- Owl-carousel-icons ---*/
     var owl = $('.owl-carousel-icons2');
     owl.owlCarousel({
@@ -34,12 +32,9 @@
         }
     })
     owlRtl()
-
 })(jQuery);
-
 function owlRtl() {
 	"use strict";
-    
     //RTL Owl-carousel
     var carousel = $('.rtl .owl-carousel');
     $.each(carousel, function(index, element) {

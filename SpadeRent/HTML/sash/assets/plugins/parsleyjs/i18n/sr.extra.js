@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sr', {
   dateiso:  "Unesite validan datum u formatu YYYY-MM-DD.",
   minwords: "Potrebno je da unesete %s ili više reči.",

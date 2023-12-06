@@ -3349,7 +3349,6 @@
 							}), this.button({
 								className: "dropdown-toggle",
 								contents: this.ui.dropdownButtonContents("", this.options),
-
 								data: {
 									toggle: "dropdown"
 								}
@@ -3363,7 +3362,6 @@
 											colorsName: r.options.colorsName,
 											eventName: n.data("event"),
 											container: r.options.container,
-
 										}).render())
 									}));
 									var e = [
@@ -3376,7 +3374,6 @@
 											colorsName: e,
 											eventName: o.data("event"),
 											container: r.options.container,
-
 										}).render())
 									})), t.find("input[type=color]").each((function(e, n) {
 										i()(n).change((function() {
@@ -5231,18 +5228,6 @@
 						},
 						button: function(e, n) {
 							return r.a.create('<button type="button" class="note-btn btn btn-default btn-sm" tabindex="-1">', (function(e, n) {
-
-
-
-
-
-
-
-
-
-
-
-
 								 n && n.codeviewButton && e.addClass("note-codeview-keep")
 							}))(e, n)
 						},

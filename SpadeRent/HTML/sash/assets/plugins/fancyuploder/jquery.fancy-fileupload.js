@@ -1,5 +1,3 @@
-
-
 (function($) {
 	var EscapeHTML = function (text) {
 		var map = {
@@ -79,7 +77,6 @@
 	$.fn.FancyFileUpload = function(options) {
 		this.each(function() {
 			var $this = $(this);
-
 			if ($this.data('fancy-fileupload') && typeof($this.data('fancy-fileupload')) === 'object')
 			{
 				$this.removeClass('ff_fileupload_hidden');
@@ -92,21 +89,17 @@
 		if (!$('.ff_fileupload_hidden').length)  $(document).off('drop.fancy_fileupload dragover.fancy_fileupload');
 		if (typeof(options) === 'string' && options === 'destroy')  return this;
 		var settings = $.extend({}, $.fn.FancyFileUpload.defaults, options);
-
 		/*$(document).off('drop.fancy_fileupload dragover.fancy_fileupload');
 		$(document).on('drop.fancy_fileupload dragover.fancy_fileupload', function (e) {
 			e.preventDefault();
 		});*/
-
 		var Translate = function(str) {
 			return (settings.langmap[str] ? settings.langmap[str] : str);
 		};
-
 		var activeuploads = 0;
 		$(window).on('beforeunload', function(e) {
 			if (activeuploads > 0)  return Translate('There is a file upload still in progress.  Leaving the page will cancel the upload.\n\nAre you sure you want to leave this page?');
 		});
-
 		var audioelem = document.createElement('audio');
 		var videoelem = document.createElement('video');
 		var AddFile = function(uploads, e, data) {
@@ -117,7 +110,6 @@
 			var alphanum = 'abcdefghijklmnopqrstuvwxyz0123456789';
 			pos = (fileext == '' ? -1 : alphanum.indexOf(fileext.charAt(0)));
 			var fileextclass = alphanum.charAt((pos > -1 ? pos : Math.floor(Math.random() * alphanum.length)));
-
 			data.ff_info = {};
 			data.ff_info.errors = [];
 			data.ff_info.retries = 0;
@@ -127,10 +119,8 @@
 			data.ff_info.inforow = inforow;
 			data.ff_info.displayfilesize = GetDisplayFilesize(data.files[0].size, settings.adjustprecision, settings.displayunits);
 			data.context = inforow;
-
 			var StartUpload = function(e) {
 				e.preventDefault();
-
 				if (settings.edit && !data.ff_info.errors.length)
 				{
 					var fileinput = inforow.find('.ff_fileupload_filename input');
@@ -142,18 +132,12 @@
 						data.files[0].uploadName = newfilename;
 					}
 				}
-
 				inforow.find('button.ff_fileupload_start_upload').remove();
-
 				inforow.find('.ff_fileupload_fileinfo').removeClass('ff_fileupload_hidden');
 				inforow.find('.ff_fileupload_buttoninfo').addClass('ff_fileupload_hidden');
-
 				inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + ' | ' + Translate('Starting upload...'));
-
 				inforow.find('.ff_fileupload_progress_background').removeClass('ff_fileupload_hidden');
-
 				inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Cancel upload and remove from list'));
-
 				var SubmitUpload = function() {
 					activeuploads++;
 					data.ff_info.uploading = true;
@@ -188,7 +172,6 @@
 					delete data.ff_info;
 				}
 			};
-
 			var haspreview = false;
 			var preview;
 			var hasimage = false;
@@ -231,7 +214,6 @@
 				});
 			}
 			if (!hasimage)  inforow.find('.ff_fileupload_preview_image').addClass('ff_fileupload_preview_text_with_color').addClass('ff_fileupload_preview_text_' + fileextclass).text(fileext);
-
 			if (settings.accept)
 			{
 				var found = false;
@@ -242,11 +224,9 @@
 				if (!found)  data.ff_info.errors.push(Translate('Invalid file extension.'));
 			}
 			if (settings.maxfilesize > -1 && data.files[0].size > settings.maxfilesize)  data.ff_info.errors.push(FormatStr(Translate('File is too large.  Maximum file size is {0}.'), GetDisplayFilesize(settings.maxfilesize, settings.adjustprecision, settings.displayunits)));
-
 			if (settings.edit && !data.ff_info.errors.length)
 			{
 				inforow.find('.ff_fileupload_filename').append($('<input>').attr('type', 'text').val(filename).keydown(function(e) {
-
 					if (e.keyCode == 13)  StartUpload(e);
 				}));
 			}
@@ -254,11 +234,8 @@
 			{
 				inforow.find('.ff_fileupload_filename').text(data.files[0].name);
 			}
-
 			inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + (hasimage && settings.edit && !data.ff_info.errors.length ? ' | .' + fileext : ''));
-
 			if (data.ff_info.errors.length)  inforow.find('.ff_fileupload_errors').html(data.ff_info.errors.join('<br>')).removeClass('ff_fileupload_hidden');
-
 			if (!data.ff_info.errors.length)
 			{
 				inforow.find('.ff_fileupload_actions').append($('<button>').addClass('ff_fileupload_start_upload').attr('type', 'button').attr('aria-label', Translate('Start uploading')).click(StartUpload));
@@ -266,9 +243,7 @@
 			}
 			inforow.find('.ff_fileupload_actions').append($('<button>').addClass('ff_fileupload_remove_file').attr('type', 'button').attr('aria-label', Translate('Remove from list')).click(RemoveFile));
 			inforow.find('.ff_fileupload_actions_mobile').append($('<button>').addClass('ff_fileupload_remove_file').attr('type', 'button').attr('aria-label', Translate('Remove from list')).click(RemoveFile));
-
 			InitShowAriaLabelInfo(inforow);
-
 			data.ff_info.fileinfo = inforow.find('.ff_fileupload_fileinfo');
 			data.ff_info.progressbar = inforow.find('.ff_fileupload_progress_bar');
 			uploads.append(inforow);
@@ -302,14 +277,11 @@
 			}
 			else
 			{
-
 				if (data.errorThrown === 'abort')  data.ff_info.errors.push(Translate('The upload was cancelled.'));
 				else if (data.errorThrown === 'failed_with_msg')  data.ff_info.errors.push(FormatStr(Translate('The upload failed.  {0} ({1})'), EscapeHTML(data.result.error), EscapeHTML(data.result.errorcode)));
 				else  data.ff_info.errors.push(Translate('The upload failed.'));
 				data.ff_info.inforow.find('.ff_fileupload_errors').html(data.ff_info.errors.join('<br>')).removeClass('ff_fileupload_hidden');
-
 				data.ff_info.inforow.find('.ff_fileupload_progress_background').addClass('ff_fileupload_hidden');
-
 				data.ff_info.inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Remove from list'));
 			}
 		};
@@ -333,36 +305,29 @@
 			}
 			else
 			{
-
 				data.ff_info.inforow.find('.ff_fileupload_fileinfo').text(data.ff_info.displayfilesize + ' | ' + Translate('Upload completed'));
-
 				data.ff_info.inforow.find('.ff_fileupload_progress_background').addClass('ff_fileupload_hidden');
-
 				data.ff_info.inforow.find('button.ff_fileupload_remove_file').attr('aria-label', Translate('Remove from list'));
 			}
 		};
 		var UploadChunkDone = function(e, data) {
-
 			data.ff_info.retries = 0;
 			data.ff_info.retrydelay = settings.retrydelay;
 			if (!data.result.success)  data.abort();
 		};
 		return this.each(function() {
 			var $this = $(this);
-
 			if (settings.url === '')
 			{
 				var url = $this.closest('form').attr('action');
 				if (url)  settings.url = url;
 			}
-
 			var form = $('<form>').addClass('ff_fileupload_hidden').attr({
 				'action' : settings.url,
 				'method' : 'post',
 				'enctype' : 'multipart/form-data'
 			});
 			$('body').append(form);
-
 			for (var x in settings.params)
 			{
 				if (settings.params.hasOwnProperty(x))
@@ -375,14 +340,12 @@
 					form.append(input);
 				}
 			}
-
 			var fileinputname = $this.attr('name');
 			var fileinput = $('<input>').attr({
 				'type' : 'file',
 				'name' : (fileinputname ? fileinputname : 'file')
 			});
 			if ($this.prop('multiple'))  fileinput.prop('multiple', true);
-
 			if ($this.attr('accept'))
 			{
 				fileinput.attr('accept', $this.attr('accept'));
@@ -398,10 +361,8 @@
 				}
 			}
 			form.append(fileinput);
-
 			var fileuploadwrap = $('<div>').addClass('ff_fileupload_wrap');
 			$this.after(fileuploadwrap);
-
 			var dropzonewrap = $('<div>').addClass('ff_fileupload_dropzone_wrap');
 			var dropzone = $('<button>').addClass('ff_fileupload_dropzone').attr('type', 'button').attr('aria-label', Translate('Browse, drag-and-drop, or paste files to upload'));
 			dropzonewrap.append(dropzone);
@@ -410,19 +371,15 @@
 				e.preventDefault();
 				form.find('input[type=file]').click();
 			});
-
 			var uploads = $('<table>').addClass('ff_fileupload_uploads');
 			fileuploadwrap.append(uploads);
-
 			$this.addClass('ff_fileupload_hidden');
-
 			var baseoptions = {
 				url: url,
 				dataType: 'json',
 				pasteZone: dropzonewrap,
 				limitConcurrentUploads: 2
 			};
-
 			var immutableoptions = {
 				singleFileUploads: true,
 				dropZone: dropzone,
@@ -432,9 +389,7 @@
 				done: UploadDone,
 				chunkdone: UploadChunkDone
 			};
-
 			fileinput.fileupload($.extend(baseoptions, settings.fileupload, immutableoptions));
-
 			$this.data('fancy-fileupload', {
 				'fileuploadwrap' : fileuploadwrap,
 				'form' : form

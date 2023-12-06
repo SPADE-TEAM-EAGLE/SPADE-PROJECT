@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ms', {
   dateiso:  "Nilai hendaklah berbentuk tarikh yang sah (YYYY-MM-DD).",
   minwords: "Ayat terlalu pendek. Ianya perlu sekurang-kurangnya %s patah perkataan.",

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('nl', {
   defaultMessage: "Deze waarde lijkt onjuist.",
   type: {

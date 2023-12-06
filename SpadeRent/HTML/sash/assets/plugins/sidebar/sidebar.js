@@ -6,8 +6,6 @@
  * ======================================================================== */
 + function($) {
     'use strict';
-
-
     var Sidebar = function(element, options) {
         this.$element = $(element)
         this.options = $.extend({}, Sidebar.DEFAULTS, options)

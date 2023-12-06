@@ -11,28 +11,22 @@
  */
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
-
 		define( ['jquery', 'datatables.net'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
 	else if ( typeof exports === 'object' ) {
-
 		module.exports = function (root, $) {
 			if ( ! root ) {
 				root = window;
 			}
 			if ( ! $ || ! $.fn.dataTable ) {
-
-
-
 				$ = require('datatables.net')(root, $).$;
 			}
 			return factory( $, root, root.document );
 		};
 	}
 	else {
-
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
@@ -132,14 +126,8 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 			}
 		}
 	};
-
-
 	var activeEl;
 	try {
-
-
-
-
 		activeEl = $(host).find(document.activeElement).data('dt-idx');
 	}
 	catch (e) {}

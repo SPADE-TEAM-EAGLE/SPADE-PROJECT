@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sq', {
   defaultMessage: "Kjo vlere eshte e pasakte.",
   type: {

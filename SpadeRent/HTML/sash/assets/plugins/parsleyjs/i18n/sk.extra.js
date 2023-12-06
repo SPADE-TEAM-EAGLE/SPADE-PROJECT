@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sk', {
   dateiso:  "Prosím zadajte dátum vo formáte RRRR-MM-DD.",
   minwords: "Prosím zadajte hodnotu dlhú %s slov a viacej.",

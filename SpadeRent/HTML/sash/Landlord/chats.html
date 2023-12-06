@@ -1360,19 +1360,12 @@
                             $('.span_upgrade_now').hide()
                             $('.span_upgrade_now_div').hide()
                         }
-
-
-
-
                         localStorage.setItem("landlordName",response.userName)
                     if (response.image !== " " && response.image !== null && response.image !== "") {
-
-
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -1766,8 +1759,6 @@
                                                 var newBgImageUrl = `url('` + localStorage.getItem("tenantImg") + `')`;
                                                 $(".person").css("background-image", newBgImageUrl);
                                             } else {
-
-
                                                 $(".person").css("background-image", "");
                                                 $(".person").addClass("profileImage")
                                                 $(".person").text(
@@ -1777,8 +1768,6 @@
                                             }
                                         } else {
                                             localStorage.setItem("tenantImg", null)
-
-
                                             $(".person").css("background-image", "");
                                             $(".person").addClass("profileImage") 
                                             $(".person").text(
@@ -2134,9 +2123,6 @@
                         imageContainer.textContent = localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
                             localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase();
                     }
-
-
-
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('zh-cn', {
   defaultMessage: "不正确的值",
   type: {

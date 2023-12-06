@@ -9,15 +9,12 @@ const propertyMails = require("./propertyMails.js");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery } = require("../constants/queries");
 const constants = process.env;
-
 exports.sendMail = async (email, mailSubject, random, name, emailTemplate) => {
   if(mailSubject == "Spade Welcome Email"){
-
 if(emailTemplate == '0'){
   var emailHTML = tenantMail.tenantWelcomeHTML0(email, random, name)
 }else{
   var emailHTML = tenantMail.tenantWelcomeHTML1(email, random, name)
-
 }
   }else{
     var emailHTML = codeHTML.codeHTML(name, random)
@@ -27,34 +24,26 @@ if(emailTemplate == '0'){
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: email,
-
       subject: mailSubject,
       html: emailHTML,
-
-
-
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };
-
 exports.sendMailLandlord = async (email, mailSubject , name) => {
   try {
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: email,
-
       subject: mailSubject,
       html: codeHTML.welcomeHTMLLANDLORD(email , name) ,
     };
@@ -62,17 +51,13 @@ exports.sendMailLandlord = async (email, mailSubject , name) => {
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };
-
-
 exports.invoiceSendMail = async (
   tenantName,
   address,
@@ -87,7 +72,6 @@ exports.invoiceSendMail = async (
   landlordID
 ) => {
   try {
-
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       landlordID
     ]);
@@ -105,23 +89,15 @@ exports.invoiceSendMail = async (
         landlordResult[0][0].BAState + "," +
         landlordResult[0][0].BAZipcode;
     }
-    
-
     if (islandlordNotify[0][0].emailNotification === "no") {
       console.log("email notification is off");
       return;
     }
-
       var emailHTML = invoiceMail.invoiceHTML0(tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,LandlordName,LandlordPhone,BusinessAddress)
-
-
-
-
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: tenantEmail,
-
       subject: mailSubject,
       html: emailHTML,
     };
@@ -129,16 +105,13 @@ exports.invoiceSendMail = async (
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };
-
 exports.taskSendMail = async (
   tenantName,
   mailSubject,
@@ -154,57 +127,29 @@ exports.taskSendMail = async (
   taskTemplate
 ) => {
   try {
-
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       id
     ]);
     console.log(islandlordNotify[0])
-
-
-
-
-
-
       var emailHTML = taskMail.taskHTML0(tenantName,dueDays,taskName,assignedTo,priority,landlordName,companyName,contactLandlord)
-
-
-    
-
     let transpoter = await createTransporter();
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: email,
-
       subject: mailSubject,
-
       html: emailHTML,
-
-
-
-
-
-
-
-
-
-
-
     };
     transpoter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };
-
-
 exports.paymentMail = async (
   Name,subscriptionDate,Amount,email,planName,mailSubject
 ) => {
@@ -214,7 +159,6 @@ exports.paymentMail = async (
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: email,
-
       subject: mailSubject,
       html: emailHTML,
     };
@@ -222,17 +166,13 @@ exports.paymentMail = async (
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };
-
-
 exports.propertyMail = async (
   propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email
 ) => {
@@ -242,7 +182,6 @@ exports.propertyMail = async (
     var mailOptions = {
       from: constants.EMAIL_HOST,
       to: email,
-
       subject: mailSubject,
       html: emailHTML,
     };
@@ -250,12 +189,10 @@ exports.propertyMail = async (
       if (error) {
         console.log("Error occur to send email" + error);
       } else {
-
         console.log("email send sucessfully");
       }
     });
   } catch (error) {
-
     console.log(error);
   }
 };

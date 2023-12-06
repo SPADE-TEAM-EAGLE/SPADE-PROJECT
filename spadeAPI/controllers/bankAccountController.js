@@ -1,6 +1,3 @@
-
-
-
 const user = require("../models/user");
 const { sendMail, taskSendMail } = require("../sendmail/sendmail");
 const jwt = require("jsonwebtoken");
@@ -12,10 +9,6 @@ const { serialize } = require("cookie");
 const { insertBankAccount, selectQuery, updateBankAccountStatusquery,updateBankAccountquery,insertUserBankFuture,updatePropertyBankAccountQuery } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
-
-
-
-
 exports.CreateBankAccount = async (req, res) => {
     const {userType} = req.user;
     const { UPOID, accountName, description, active, userId,accountTypeTenant,nickName,digits,cardBrand,cardType } = req.body;
@@ -68,14 +61,9 @@ const userType = "Landlord";
         res.status(400).send("One or more parameters are undefined.");
     }
 };
-
- 
-  
-
 exports.GetBankAccount = async (req, res) => {
     const { userId,userType } = req.user;
     console.log(req.user)
-
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -90,11 +78,9 @@ exports.GetBankAccount = async (req, res) => {
             res.status(400).send("Error");
         }
 };
-
 exports.GetBankAccountAdmin = async (req, res) => {
     const { userId,userType } = req.query;
     console.log(req.query)
-
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -109,11 +95,7 @@ exports.GetBankAccountAdmin = async (req, res) => {
             res.status(400).send("Error");
         }
 };
-
- 
-
 exports.updateBankAccountStatus = async (req, res) => {
-
     const { id,Active } = req.body;
         try {
             const getResult = await queryRunner(updateBankAccountStatusquery,[Active,id]); 
@@ -127,12 +109,6 @@ exports.updateBankAccountStatus = async (req, res) => {
             res.status(400).send("Error");
         }
 };
-
-
-
-
-
-
 exports.updateBankAccountTenant = async (req, res) => {
     const { id,UPOID,accountName,description,Active } = req.body;
     const currentDate = new Date();
@@ -148,34 +124,6 @@ exports.updateBankAccountTenant = async (req, res) => {
             res.status(400).send("Error");
         }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   
-   
-
     exports.updatePropertyBankAccount = async (req, res) => {
         const { id, UPOID, accountName} = req.body;
             try {
@@ -190,5 +138,4 @@ exports.updateBankAccountTenant = async (req, res) => {
                 res.status(400).send("Error");
             }
     };
-
     

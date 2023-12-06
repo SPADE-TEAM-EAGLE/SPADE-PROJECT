@@ -1,22 +1,15 @@
 (function($) {
     $.fn.richText = function(options) {
-
-
         var settings = $.extend({
-
             bold: true,
             italic: true,
             underline: true,
-
             leftAlign: true,
             centerAlign: true,
             rightAlign: true,
-
             ol: true,
             ul: true,
-
             heading: true,
-
             fonts: true,
             fontList: ["Arial",
                 "Arial Black",
@@ -33,24 +26,16 @@
             ],
             fontColor: true,
             fontSize: true,
-
             imageUpload: true,
             fileUpload: true,
-
             videoEmbed: true,
-
             urls: true,
-
             table: true,
-
             removeStyles: true,
             code: true,
-
             colors: [],
-
             fileHTML: '',
             imageHTML: '',
-
             translations: {
                 'title': 'Title',
                 'white': 'White',
@@ -114,9 +99,7 @@
                 'redo': 'Redo',
                 'close': 'Close'
             },
-
             youtubeCookies: false,
-
             useSingleQuotes: false,
             height: 0,
             heightPercentage: 0,
@@ -252,10 +235,8 @@
         var $imageForm = $form.clone().attr("id", "richText-Image").attr("data-editor", editorID);
         if (settings.imageHTML &&
             ($(settings.imageHTML).find('#imageURL').length > 0 || $(settings.imageHTML).attr("id") === "imageURL")) {
-
             $imageForm.html(settings.imageHTML);
         } else {
-
             $imageForm.append(
                 $formItem.clone()
                 .append($formLabel.clone().text(settings.translations.imageURL).attr("for", "imageURL"))
@@ -281,10 +262,8 @@
         var $fileForm = $form.clone().attr("id", "richText-File").attr("data-editor", editorID);
         if (settings.fileHTML &&
             ($(settings.fileHTML).find('#fileURL').length > 0 || $(settings.fileHTML).attr("id") === "fileURL")) {
-
             $fileForm.html(settings.fileHTML);
         } else {
-
             $fileForm.append(
                 $formItem.clone()
                 .append($formLabel.clone().text(settings.translations.fileURL).attr("for", "fileURL"))
@@ -319,16 +298,12 @@
         function init() {
             var value, attributes, attributes_html = '';
             if (settings.useParagraph !== false) {
-
                 document.execCommand("DefaultParagraphSeparator", false, 'p');
             }
-
             if ($inputElement.prop("tagName") === "TEXTAREA") {
-
             } else if ($inputElement.val()) {
                 value = $inputElement.val();
                 attributes = $inputElement.prop("attributes");
-
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -340,7 +315,6 @@
             } else if ($inputElement.html()) {
                 value = $inputElement.html();
                 attributes = $inputElement.prop("attributes");
-
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -351,7 +325,6 @@
                 $inputElement.removeAttr("data-richtext");
             } else {
                 attributes = $inputElement.prop("attributes");
-
                 $.each(attributes, function() {
                     if (this.name) {
                         attributes_html += ' ' + this.name + '="' + this.value + '"';
@@ -432,13 +405,11 @@
             if (settings.code === true) {
                 $toolbarList.append($toolbarElement.clone().append($btnCode));
             }
-
             $editorView.html($inputElement.val());
             $editor.append($toolbar);
             $editor.append($editorView);
             $editor.append($inputElement.clone().hide());
             $inputElement.replaceWith($editor);
-
             $editor.append(
                 $('<div />', { class: 'richText-toolbar' })
                 .append($('<a />', { class: 'richText-undo is-disabled', html: '<span class="fa fa-undo"></span>', 'title': settings.translations.undo }))
@@ -446,10 +417,8 @@
                 .append($('<a />', { class: 'richText-help', html: '' }))
             );
             if (settings.height && settings.height > 0) {
-
                 $editor.children(".richText-editor, .richText-initial").css({ 'min-height': settings.height + 'px', 'height': settings.height + 'px' });
             } else if (settings.heightPercentage && settings.heightPercentage > 0) {
-
                 var parentHeight = $editor.parent().innerHeight(); // get editor parent height
                 var height = (settings.heightPercentage / 100) * parentHeight; // calculate pixel value from percentage
                 height -= $toolbar.outerHeight() * 2; // remove toolbar size
@@ -459,22 +428,17 @@
                 height -= parseInt($editor.find(".richText-editor").css("padding-bottom")); // remove paddings
                 $editor.children(".richText-editor, .richText-initial").css({ 'min-height': height + 'px', 'height': height + 'px' });
             }
-
             if (settings.class) {
                 $editor.addClass(settings.class);
             }
             if (settings.id) {
                 $editor.attr("id", settings.id);
             }
-
             fixFirstLine();
-
             history.push($editor.find("textarea").val());
         }
-
         init();
         /** EVENT HANDLERS */
-
         $(document).on("click", ".richText-undo, .richText-redo", function(e) {
             var $this = $(this);
             if ($this.hasClass("richText-undo") && !$this.hasClass("is-disabled")) {
@@ -483,10 +447,8 @@
                 redo();
             }
         });
-
         $(document).on("input change blur keydown keyup", ".richText-editor", function(e) {
             if ((e.keyCode === 9 || e.keyCode === "9") && e.type === "keydown") {
-
                 e.preventDefault();
                 tabifyEditableTable(window, e);
                 return false;
@@ -495,11 +457,9 @@
             updateTextarea();
             doSave($(this).attr("id"));
         });
-
         $(document).on('contextmenu', '.richText-editor', function(e) {
             var $list = $('<ul />', { 'class': 'list-rightclick richText-list' });
             var $li = $('<li />');
-
             $('.richText-editor').find('.richText-editNode').removeClass('richText-editNode');
             var $target = $(e.target);
             var $richText = $target.parents('.richText');
@@ -511,7 +471,6 @@
                 'left': positionX
             });
             if ($target.prop("tagName") === "A") {
-
                 e.preventDefault();
                 $list.append($li.clone().html('<span class="fa fa-link"></span>'));
                 $target.parents('.richText').append($list);
@@ -526,7 +485,6 @@
                 });
                 return false;
             } else if ($target.prop("tagName") === "IMG") {
-
                 e.preventDefault();
                 $list.append($li.clone().html('<span class="fa fa-image"></span>'));
                 $target.parents('.richText').append($list);
@@ -547,7 +505,6 @@
                 return false;
             }
         });
-
         $(document).on("input change blur", ".richText-initial", function() {
             if (settings.useSingleQuotes === true) {
                 $(this).val(changeAttributeQuotes($(this).val()));
@@ -556,22 +513,18 @@
             updateEditor(editorID);
             doSave(editorID);
         });
-
         $(document).on("dblclick mouseup", ".richText-editor", function() {
             var editorID = $(this).attr("id");
             doSave(editorID);
         });
-
         $(document).on("click", "#richText-Video button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-
                 var url = $form.find('input#videoURL').val();
                 var size = $form.find('select#size').val();
                 if (!url) {
-
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseEnterURL }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -580,7 +533,6 @@
                         });
                     }, 5000);
                 } else {
-
                     var html = '';
                     html = getVideoCode(url, size);
                     if (!html) {
@@ -598,18 +550,15 @@
                         restoreSelection(editorID, true);
                         pasteHTMLAtCaret(html);
                         updateTextarea();
-
                         $form.find('input#videoURL').val('');
                         $('.richText-toolbar li.is-selected').removeClass("is-selected");
                     }
                 }
             }
         });
-
         $(document).on('mousedown', function(e) {
             var $target = $(e.target);
             if (!$target.hasClass('richText-list') && $target.parents('.richText-list').length === 0) {
-
                 $('.richText-list.list-rightclick').remove();
                 if (!$target.hasClass('richText-form') && $target.parents('.richText-form').length === 0) {
                     $('.richText-editNode').each(function() {
@@ -633,21 +582,17 @@
                 var resize = false;
                 $target.css({ 'cursor': 'default' });
                 if (startY <= bottom && startY >= bottom - 20 && startX >= right - 20 && startX <= right) {
-
                     $resizeImage = $target;
                     $resizeImage.css({ 'cursor': 'nwse-resize' });
                     resize = true;
                 }
                 if ((resize === true || $resizeImage) && !$resizeImage.data("width")) {
-
                     $resizeImage.data("width", $target.parents("#" + editorID).innerWidth());
                     $resizeImage.data("height", $target.parents("#" + editorID).innerHeight() * 3);
                     e.preventDefault();
                 } else if (resize === true || $resizeImage) {
-
                     e.preventDefault();
                 } else {
-
                     $resizeImage = null;
                 }
             }
@@ -666,28 +611,22 @@
                     var maxHeight = $resizeImage.data('height');
                     var currentHeight = $resizeImage.height();
                     if ((startW + e.pageX - startX) <= maxWidth && (startH + e.pageY - startY) <= maxHeight) {
-
                         $resizeImage.innerWidth(startW + e.pageX - startX); // only resize width to adapt height proportionally
-
                         updateTextarea();
                     } else if ((startW + e.pageX - startX) <= currentWidth && (startH + e.pageY - startY) <= currentHeight) {
-
                         $resizeImage.innerWidth(startW + e.pageX - startX); // only resize width to adapt height proportionally
                         updateTextarea();
                     }
                 }
             });
-
         $(document).on("click", "#richText-URL button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-
                 var url = $form.find('input#url').val();
                 var text = $form.find('input#urlText').val();
                 var target = $form.find('#openIn').val();
-
                 if (!target) {
                     target = '_self';
                 }
@@ -695,7 +634,6 @@
                     text = url;
                 }
                 if (!url) {
-
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseEnterURL }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -704,7 +642,6 @@
                         });
                     }, 5000);
                 } else {
-
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         html = "<a href='" + url + "' target='" + target + "'>" + text + "</a>";
@@ -724,28 +661,23 @@
                     } else {
                         pasteHTMLAtCaret(html);
                     }
-
                     $form.find('input#url').val('');
                     $form.find('input#urlText').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-
         $(document).on("click", "#richText-Image button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-
                 var url = $form.find('#imageURL').val();
                 var align = $form.find('select#align').val();
-
                 if (!align) {
                     align = 'center';
                 }
                 if (!url) {
-
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseSelectImage }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -754,7 +686,6 @@
                         });
                     }, 5000);
                 } else {
-
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         if (align === "center") {
@@ -789,27 +720,22 @@
                     } else {
                         pasteHTMLAtCaret(html);
                     }
-
                     $form.find('input#imageURL').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-
         $(document).on("click", "#richText-File button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-
                 var url = $form.find('#fileURL').val();
                 var text = $form.find('#fileText').val();
-
                 if (!text) {
                     text = url;
                 }
                 if (!url) {
-
                     $form.prepend($('<div />', { style: 'color:red;display:none;', class: 'form-item is-error', text: settings.translations.pleaseSelectFile }));
                     $form.children('.form-item.is-error').slideDown();
                     setTimeout(function() {
@@ -818,7 +744,6 @@
                         });
                     }, 5000);
                 } else {
-
                     var html = '';
                     if (settings.useSingleQuotes === true) {
                         html = "<a href='" + url + "' target='_blank'>" + text + "</a>";
@@ -827,30 +752,25 @@
                     }
                     restoreSelection(editorID, true);
                     pasteHTMLAtCaret(html);
-
                     $form.find('input#fileURL').val('');
                     $form.find('input#fileText').val('');
                     $('.richText-toolbar li.is-selected').removeClass("is-selected");
                 }
             }
         });
-
         $(document).on("click", "#richText-Table button.btn", function(event) {
             event.preventDefault();
             var $button = $(this);
             var $form = $button.parent('.richText-form-item').parent('.richText-form');
             if ($form.attr("data-editor") === editorID) {
-
                 var rows = $form.find('input#tableRows').val();
                 var columns = $form.find('input#tableColumns').val();
-
                 if (!rows || rows <= 0) {
                     rows = 2;
                 }
                 if (!columns || columns <= 0) {
                     columns = 2;
                 }
-
                 var html = '';
                 if (settings.useSingleQuotes === true) {
                     html = "<table class='table-1'><tbody>";
@@ -858,44 +778,32 @@
                     html = '<table class="table-hover table-1"><tbody>';
                 }
                 for (var i = 1; i <= rows; i++) {
-
                     html += '<tr>';
                     for (var n = 1; n <= columns; n++) {
-
                         html += '<td> </td>';
                     }
                     html += '</tr>';
                 }
                 html += '</tbody></table>';
-
                 restoreSelection(editorID, true);
                 pasteHTMLAtCaret(html);
-
                 $form.find('input#tableColumns').val('');
                 $form.find('input#tableRows').val('');
                 $('.richText-toolbar li.is-selected').removeClass("is-selected");
             }
         });
-
         $(document).on("click", function(event) {
             var $clickedElement = $(event.target);
             if ($clickedElement.parents('.richText-toolbar').length === 0) {
-
-
             } else if ($clickedElement.hasClass("richText-dropdown-outer")) {
-
                 $clickedElement.parent('a').parent('li').removeClass("is-selected");
             } else if ($clickedElement.find(".richText").length > 0) {
-
                 $('.richText-toolbar li').removeClass("is-selected");
             } else if ($clickedElement.parent().hasClass("richText-dropdown-close")) {
-
                 $('.richText-toolbar li').removeClass("is-selected");
             } else if ($clickedElement.hasClass("richText-btn") && $(event.target).children('.richText-dropdown-outer').length > 0) {
-
                 $clickedElement.parent('li').addClass("is-selected");
                 if ($clickedElement.children('.fa,svg').hasClass("fa-link")) {
-
                     restoreSelection(editorID, false, true);
                     var selectedText = getSelectedText();
                     $clickedElement.find("input#urlText").val('');
@@ -904,11 +812,9 @@
                         $clickedElement.find("input#urlText").val(selectedText);
                     }
                 } else if ($clickedElement.hasClass("fa-image")) {
-
                 }
             }
         });
-
         $(document).on("click", ".richText-toolbar a[data-command]", function(event) {
             var $button = $(this);
             var $toolbar = $button.closest('.richText-toolbar');
@@ -929,9 +835,7 @@
                     }
                     formatText(command, option, id);
                     if (command === "removeFormat") {
-
                         $editor.find('*').each(function() {
-
                             var keepAttributes = [
                                 "id", "class",
                                 "name", "action", "method",
@@ -949,7 +853,6 @@
                                 }
                             });
                             if (element.prop('tagName') === "A") {
-
                                 element.replaceWith(function() {
                                     return $('<span />', { html: $(this).html() });
                                 });
@@ -957,12 +860,10 @@
                         });
                         formatText('formatBlock', 'div', id);
                     }
-
                     $editor.find('div:empty,p:empty,li:empty,h1:empty,h2:empty,h3:empty,h4:empty,h5:empty,h6:empty').remove();
                     $editor.find('h1,h2,h3,h4,h5,h6').unwrap('h1,h2,h3,h4,h5,h6');
                 }
             }
-
             $button.parents('li.is-selected').removeClass('is-selected');
         });
         /** INTERNAL METHODS **/
@@ -977,14 +878,8 @@
             if (typeof option === "undefined") {
                 option = null;
             }
-
             doRestore(editorID);
-
-
-
-
             if (command === "heading" && getSelectedText()) {
-
                 pasteHTMLAtCaret('<' + option + '>' + getSelectedText() + '</' + option + '>');
             } else if (command === "fontSize" && parseInt(option) > 0) {
                 var selection = getSelectedText();
@@ -994,8 +889,6 @@
             } else {
                 document.execCommand(command, false, option);
             }
-
-
         }
         /**
          * Update textarea when updating editor
@@ -1059,7 +952,6 @@
             var containerEl = document.getElementById(editorID);
             var savedSel = savedSelection;
             if (!savedSel) {
-
                 savedSel = {
                     'start': 0,
                     'end': 0,
@@ -1248,7 +1140,6 @@
                         e.preventDefault();
                         return true;
                     } else if (textNode === null && direction === "next" && sel.focusNode.nodeName === "TD") {
-
                         var $table = $(sel.focusNode).parents("table");
                         var cellsPerLine = $table.find("tr").first().children("td").length;
                         var $tr = $("<tr />");
@@ -1257,7 +1148,6 @@
                             $tr.append($td.clone());
                         }
                         $table.append($tr);
-
                         tabifyEditableTable(window, { keyCode: 9, shiftKey: false, preventDefault: function() {} });
                     }
                 }
@@ -1348,17 +1238,12 @@
          * @private
          */
         function pasteHTMLAtCaret(html) {
-
             var sel, range;
             if (window.getSelection) {
-
                 sel = window.getSelection();
                 if (sel.getRangeAt && sel.rangeCount) {
                     range = sel.getRangeAt(0);
                     range.deleteContents();
-
-
-
                     var el = document.createElement("div");
                     el.innerHTML = html;
                     var frag = document.createDocumentFragment(),
@@ -1367,7 +1252,6 @@
                         lastNode = frag.appendChild(node);
                     }
                     range.insertNode(frag);
-
                     if (lastNode) {
                         range = range.cloneRange();
                         range.setStartAfter(lastNode);
@@ -1377,7 +1261,6 @@
                     }
                 }
             } else if (document.selection && document.selection.type !== "Control") {
-
                 document.selection.createRange().pasteHTML(html);
             }
         }
@@ -1448,10 +1331,8 @@
         function toggleCode(editorID) {
             doRestore(editorID);
             if ($editor.find('.richText-editor').is(":visible")) {
-
                 $editor.find('.richText-initial').show();
                 $editor.find('.richText-editor').hide();
-
                 $('.richText-toolbar').find('.richText-btn').each(function() {
                     if ($(this).children('.fa-code').length === 0) {
                         $(this).parent('li').attr("data-disable", "true");
@@ -1459,11 +1340,9 @@
                 });
                 convertCaretPosition(editorID, savedSelection);
             } else {
-
                 $editor.find('.richText-initial').hide();
                 $editor.find('.richText-editor').show();
                 convertCaretPosition(editorID, savedSelection, true);
-
                 $('.richText-toolbar').find('li').removeAttr("data-disable");
             }
         }
@@ -1489,7 +1368,6 @@
             var states = { start: false, end: false, tag: false, isTag: false, tagsCount: 0, isHighlight: (selection.start !== selection.end) };
             for (var i = 0; i < code.length; i++) {
                 if (code[i] === "<") {
-
                     states.isTag = true;
                     states.tag = false;
                     states.tagsCount++;
@@ -1554,7 +1432,6 @@
             var responsive = false,
                 success = false;
             if (!video) {
-
                 return false;
             }
             if (!size) {
@@ -1637,14 +1514,12 @@
          */
         function fixFirstLine() {
             if ($editor && !$editor.find(".richText-editor").html()) {
-
                 if (settings.useParagraph !== false) {
                     $editor.find(".richText-editor").html('<p><br></p>');
                 } else {
                     $editor.find(".richText-editor").html('<div><br></div>');
                 }
             } else {
-
                 if (settings.useParagraph !== false) {
                     $editor.find(".richText-editor").find('div').replaceWith(function() {
                         return $('<p />', { html: $(this).html() });
@@ -1660,8 +1535,6 @@
         return $(this);
     };
     $.fn.unRichText = function(options) {
-
-
         var settings = $.extend({
             delay: 0 // delay in ms
         }, options);
@@ -1677,13 +1550,11 @@
                 $main = $el.parents('.richText');
             }
             if (!$main) {
-
                 return false;
             }
             $editor = $main.find('.richText-editor');
             $textarea = $main.find('.richText-initial');
             if (parseInt(settings.delay) > 0) {
-
                 setTimeout(remove, parseInt(settings.delay));
             } else {
                 remove();

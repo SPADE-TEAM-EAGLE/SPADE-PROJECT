@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('no', {
   defaultMessage: "Verdien er ugyldig.",
   type: {

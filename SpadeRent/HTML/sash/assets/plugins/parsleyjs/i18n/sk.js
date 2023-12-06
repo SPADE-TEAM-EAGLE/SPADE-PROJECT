@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sk', {
   defaultMessage: "Prosím zadajte správnu hodnotu.",
   type: {

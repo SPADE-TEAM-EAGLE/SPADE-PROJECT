@@ -8,7 +8,6 @@ $(function(e) {
             sSearch: '',
         }
     });
-    
      //______Basic Data Table
      $('#lineItemsTable').DataTable({
         language: {
@@ -28,25 +27,6 @@ $(function(e) {
         ],
     });
      //______Basic Data Table
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
      $('#myTable').DataTable({
         language: {
             searchPlaceholder: 'Search...',
@@ -82,8 +62,6 @@ $(function(e) {
             }
         ],
     });
-    
-    
     $('#responsive-datatable2').DataTable({
         language: {
             searchPlaceholder: 'Search...',
@@ -135,7 +113,6 @@ $(function(e) {
             }
         ],
     });
-
     //______File-Export Data Table
     var table = $('#file-datatable').DataTable({
         buttons: ['copy', 'excel', 'pdf', 'colvis'],
@@ -147,7 +124,6 @@ $(function(e) {
     });
     table.buttons().container()
         .appendTo('#file-datatable_wrapper .col-md-6:eq(0)');
-
     //______Delete Data Table
     var table = $('#delete-datatable').DataTable({
         language: {
@@ -189,11 +165,5 @@ $(function(e) {
 			lengthMenu: '_MENU_ items/page',
 		}
 	});
-	
-
     //______Select2 
-
-
-
-
 });

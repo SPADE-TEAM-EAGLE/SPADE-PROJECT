@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('hr', {
   dateiso:  "Ovo polje treba sadržavati ispravno unešen datum (GGGG-MM-DD).",
   minwords: "Unos je prekratak. Treba sadržavati %s ili više riječi.",

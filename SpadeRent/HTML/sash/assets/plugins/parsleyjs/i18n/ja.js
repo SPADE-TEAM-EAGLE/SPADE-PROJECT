@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ja', {
   defaultMessage: "無効な値です。",
   type: {

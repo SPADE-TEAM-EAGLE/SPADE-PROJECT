@@ -1325,7 +1325,6 @@
                                                             <strong class="text-dark">Sort by:</strong>
                                                         </a>
                                                     </li>
-
                                                     <li class="d-flex justify-content-between">
                                                         <a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
@@ -1858,19 +1857,12 @@
                 },
                 success: function ({ userName, image,create_at,planID,...rest }) {
                     adjustPlan(rest)
-
-
-
-
             localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -2201,7 +2193,6 @@ if (task.dueDate) {
     var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
     var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
     var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
-
     if (month === null || day === null || year === null || month === "NaN" || day === "NaN" || year === "NaN" ) {
   var formattedDueDate = null;
 } else {
@@ -2408,23 +2399,16 @@ if (task.dueDate) {
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-
-
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
-
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb);
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
-
-
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb); 
                         return idB - idA;
@@ -2445,7 +2429,6 @@ if (task.dueDate) {
             $('#descending').on('click', function () {
                 filterTable("descending")
             });
-
 </script>
 <script>
     $(document).ready(() => {

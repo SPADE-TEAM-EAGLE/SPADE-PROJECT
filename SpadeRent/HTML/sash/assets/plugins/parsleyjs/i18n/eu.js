@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('eu', {
   defaultMessage: "Balio hau baliogabekoa dirudi.",
   type: {

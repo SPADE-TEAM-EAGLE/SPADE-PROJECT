@@ -2,21 +2,15 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
         return `
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree&display=swap" rel="stylesheet">
-
-  
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-apple-disable-message-reformatting">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    
     <title>Email</title>
-
 </head>
   <body style="font-family: 'Figtree'; text-align: left; margin: 0;padding-top: 10px;padding-bottom: 10px;padding-left: 0;padding-right: 0;-webkit-text-size-adjust: 100%;background-color: #f2f4f6;color: #000000;background-image: url(https://spades3bucket.s3.amazonaws.com/1697540494792_Frame-2.jpg);background-repeat: no-repeat;">
   <div style="text-align: left;">
@@ -39,24 +33,13 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
      </b></span>
     <br>
     <br>
-
   </td>
-    
 		</tr>
     </table>
-    
-
-    
-    
-    
-
-    
     <div style="max-width: 100%; margin: 0 auto;">
-    
             <table align="center" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; text-align: left; vertical-align: top; width: 100%; max-width: 600px; background-color: #ffffff; border-radius: 0 0 20px 20px;">
               <tbody>
                   <tr>
-            
           <td style="width: 100%; vertical-align: top; padding: 30px;">
             <h1 style="font-size: 20px; line-height: 24px; font-family: 'Figtree'; font-weight: 600; text-decoration: none; color: #000000; text-align: start;">Dear ${Name},</h1>
             <p style="font-size: 15px; line-height: 24px; font-family: 'Figtree'; font-weight: 400; text-decoration: none; color: black; text-align: start;">We're thrilled to welcome you to the <b>Spade Rent</b> family! Thank you for subscribing to our amazing service.</p>
@@ -87,7 +70,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           ">  ${planName} </h3>
             </td>
           </tr>
-
           <tr>
             <td style="
             display: flex;
@@ -98,9 +80,7 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           ">  ${Amount} </h3>
             </td>
           </tr>
-
           </tr>
-
           <tr>
             <td>
               <h1 style="
@@ -118,11 +98,9 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           </tr>
           <tr>
             <td>
-              
               <br>  
               <br>  
               <br>  
-                    
               <table style="width: 100%; border-collapse: collapse; margin: 0; padding: 0;">
                 <thead>
                     <tr>
@@ -141,8 +119,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
                     </tr>
                 </tbody>
             </table>
-                
-            
             </td>
           </tr>
           <tr>
@@ -155,7 +131,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
               <br>
             </td>
           </tr>
-
           <tr>
             <td style="
             display: flex;
@@ -169,7 +144,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           ">  ${Amount} </h3>
             </td>
           </tr>
-
           <tr>
             <td style="
             display: flex;
@@ -183,7 +157,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           ">  $0 </h3>
             </td>
           </tr>
-
           <tr>
             <td style="
             display: flex;
@@ -221,7 +194,6 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
           ">  ${Amount} </h3>
             </td>
           </tr>
-
           <tr>
             <td style="
             text-align: left;
@@ -253,11 +225,7 @@ exports.paymentHTML = (Name,subscriptionDate,Amount,planName) => {
         </tbody>
       </table>
     </div>
-      
-
   </div>
-
   </body>
-
 </html>`
     };

@@ -12,13 +12,10 @@
 ;(function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
-
         factory(require('jquery'));
     } else {
-
         factory(window.jQuery);
     }
 }(function ($) {
@@ -59,9 +56,6 @@
                 loc = $('<a>').prop('href', options.postMessage)[0],
                 target = loc.protocol + '//' + loc.host,
                 xhrUpload = options.xhr().upload;
-
-
-
             if (/^(http:\/\/.+:80)|(https:\/\/.+:443)$/.test(target)) {
               target = target.replace(/:(80|443)$/, '');
             }

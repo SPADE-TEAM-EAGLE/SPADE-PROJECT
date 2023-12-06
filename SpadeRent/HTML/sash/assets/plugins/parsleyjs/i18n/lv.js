@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('lv', {
   defaultMessage: "Šis ieraksts veikts nekorekti.",
   type: {

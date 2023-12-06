@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sl', {
   dateiso:  "Vnesite datum v ISO obliki (YYYY-MM-DD).",
   minwords: "Vpis je prekratek. Vpisati morate najmnaj %s besed.",

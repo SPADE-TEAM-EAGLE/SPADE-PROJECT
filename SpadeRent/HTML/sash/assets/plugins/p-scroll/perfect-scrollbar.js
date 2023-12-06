@@ -141,7 +141,6 @@
     var ee = this.eventElement(element);
     ee.unbind(eventName, handler);
     if (ee.isEmpty) {
-
       this.eventElements.splice(this.eventElements.indexOf(ee), 1);
     }
   };
@@ -213,13 +212,10 @@
     if ( useScrollingClass === void 0 ) useScrollingClass = true;
     if ( forceFireReachEvent === void 0 ) forceFireReachEvent = false;
     var element = i.element;
-
     i.reach[y] = null;
-
     if (element[scrollTop] < 1) {
       i.reach[y] = 'start';
     }
-
     if (element[scrollTop] > i[contentHeight] - i[containerHeight] - 1) {
       i.reach[y] = 'end';
     }
@@ -284,13 +280,11 @@
     i.contentWidth = element.scrollWidth;
     i.contentHeight = element.scrollHeight;
     if (!element.contains(i.scrollbarXRail)) {
-
       queryChildren(element, cls.element.rail('x')).forEach(function (el) { return remove(el); }
       );
       element.appendChild(i.scrollbarXRail);
     }
     if (!element.contains(i.scrollbarYRail)) {
-
       queryChildren(element, cls.element.rail('y')).forEach(function (el) { return remove(el); }
       );
       element.appendChild(i.scrollbarYRail);
@@ -574,7 +568,6 @@
         if (activeElement.tagName === 'IFRAME') {
           activeElement = activeElement.contentDocument.activeElement;
         } else {
-
           while (activeElement.shadowRoot) {
             activeElement = activeElement.shadowRoot.activeElement;
           }
@@ -669,7 +662,6 @@
       var isRight =
         element.scrollLeft + element.offsetWidth === element.scrollWidth;
       var hitsBound;
-
       if (Math.abs(deltaY) > Math.abs(deltaX)) {
         hitsBound = isTop || isBottom;
       } else {
@@ -681,28 +673,23 @@
       var deltaX = e.deltaX;
       var deltaY = -1 * e.deltaY;
       if (typeof deltaX === 'undefined' || typeof deltaY === 'undefined') {
-
         deltaX = (-1 * e.wheelDeltaX) / 6;
         deltaY = e.wheelDeltaY / 6;
       }
       if (e.deltaMode && e.deltaMode === 1) {
-
         deltaX *= 10;
         deltaY *= 10;
       }
       if (deltaX !== deltaX && deltaY !== deltaY /* NaN checks */) {
-
         deltaX = 0;
         deltaY = e.wheelDelta;
       }
       if (e.shiftKey) {
-
         return [-deltaY, -deltaX];
       }
       return [deltaX, deltaY];
     }
     function shouldBeConsumedByChild(target, deltaX, deltaY) {
-
       if (!env.isWebKit && element.querySelector('select:focus')) {
         return true;
       }
@@ -715,7 +702,6 @@
           return true;
         }
         var style = get(cursor);
-
         if (deltaY && style.overflowY.match(/(scroll|auto)/)) {
           var maxScrollTop = cursor.scrollHeight - cursor.clientHeight;
           if (maxScrollTop > 0) {
@@ -727,7 +713,6 @@
             }
           }
         }
-
         if (deltaX && style.overflowX.match(/(scroll|auto)/)) {
           var maxScrollLeft = cursor.scrollWidth - cursor.clientWidth;
           if (maxScrollLeft > 0) {
@@ -752,13 +737,9 @@
       }
       var shouldPrevent = false;
       if (!i.settings.useBothWheelAxes) {
-
-
         element.scrollTop -= deltaY * i.settings.wheelSpeed;
         element.scrollLeft += deltaX * i.settings.wheelSpeed;
       } else if (i.scrollbarYActive && !i.scrollbarXActive) {
-
-
         if (deltaY) {
           element.scrollTop -= deltaY * i.settings.wheelSpeed;
         } else {
@@ -766,8 +747,6 @@
         }
         shouldPrevent = true;
       } else if (i.scrollbarXActive && !i.scrollbarYActive) {
-
-
         if (deltaX) {
           element.scrollLeft += deltaX * i.settings.wheelSpeed;
         } else {
@@ -799,16 +778,13 @@
       var magnitudeX = Math.abs(deltaX);
       var magnitudeY = Math.abs(deltaY);
       if (magnitudeY > magnitudeX) {
-
         if (
           (deltaY < 0 && scrollTop === i.contentHeight - i.containerHeight) ||
           (deltaY > 0 && scrollTop === 0)
         ) {
-
           return window.scrollY === 0 && deltaY > 0 && env.isChrome;
         }
       } else if (magnitudeX > magnitudeY) {
-
         if (
           (deltaX < 0 && scrollLeft === i.contentWidth - i.containerWidth) ||
           (deltaX > 0 && scrollLeft === 0)
@@ -831,7 +807,6 @@
       if (e.targetTouches) {
         return e.targetTouches[0];
       } else {
-
         return e;
       }
     }
@@ -873,7 +848,6 @@
           return true;
         }
         var style = get(cursor);
-
         if (deltaY && style.overflowY.match(/(scroll|auto)/)) {
           var maxScrollTop = cursor.scrollHeight - cursor.clientHeight;
           if (maxScrollTop > 0) {
@@ -885,7 +859,6 @@
             }
           }
         }
-
         if (deltaX && style.overflowX.match(/(scroll|auto)/)) {
           var maxScrollLeft = cursor.scrollWidth - cursor.clientWidth;
           if (maxScrollLeft > 0) {
@@ -1045,7 +1018,6 @@
     }
     this.railBorderXWidth =
       toInt(railXStyle.borderLeftWidth) + toInt(railXStyle.borderRightWidth);
-
     set(this.scrollbarXRail, { display: 'block' });
     this.railXMarginWidth =
       toInt(railXStyle.marginLeft) + toInt(railXStyle.marginRight);
@@ -1104,11 +1076,9 @@
     if (!this.isAlive) {
       return;
     }
-
     this.negativeScrollAdjustment = this.isNegativeScroll
       ? this.element.scrollWidth - this.element.clientWidth
       : 0;
-
     set(this.scrollbarXRail, { display: 'block' });
     set(this.scrollbarYRail, { display: 'block' });
     this.railXMarginWidth =
@@ -1117,7 +1087,6 @@
     this.railYMarginHeight =
       toInt(get(this.scrollbarYRail).marginTop) +
       toInt(get(this.scrollbarYRail).marginBottom);
-
     set(this.scrollbarXRail, { display: 'none' });
     set(this.scrollbarYRail, { display: 'none' });
     updateGeometry(this);
@@ -1150,7 +1119,6 @@
     remove(this.scrollbarXRail);
     remove(this.scrollbarYRail);
     this.removePsClasses();
-
     this.element = null;
     this.scrollbarX = null;
     this.scrollbarY = null;

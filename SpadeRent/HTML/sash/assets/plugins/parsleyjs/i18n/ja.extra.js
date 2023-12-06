@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ja', {
   dateiso:  "有効な日付を入力してください。 (YYYY-MM-DD).",
   minwords: "語句が短すぎます。 %s 語以上で入力してください。",

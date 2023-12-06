@@ -16,13 +16,10 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-
         module.exports = factory(require('jquery'), require('jquery-mapael'));
     } else if (typeof define === 'function' && define.amd) {
-
         define(['jquery', 'mapael'], factory);
     } else {
-
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {

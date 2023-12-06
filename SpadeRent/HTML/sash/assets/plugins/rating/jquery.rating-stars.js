@@ -38,14 +38,11 @@ jQuery.fn.ratingStars = function( options ) {
         onStarEnter: function(starElement, container) {
             var me = this;
             var elementIndex = $(starElement).index();
-
             var i = 0;
             $.each($(container).children(settings.starsSelector).children(settings.starSelector), function(index, element) {
                 if(i <= elementIndex) {
-
                     $(element).addClass(settings.selectors.starHoverClass);
                 } else {
-
                     $(element).addClass(settings.selectors.starNoHoverClass);
                 }
                 i++;
@@ -57,7 +54,6 @@ jQuery.fn.ratingStars = function( options ) {
         onStarLeave: function(starElement, container) {
             var me = this;
             var elementIndex = $(starElement).index();
-
             $(container).children(settings.starsSelector).children(settings.starSelector).removeClass(settings.selectors.starHoverClass);
             $(container).children(settings.starsSelector).children(settings.starSelector).removeClass(settings.selectors.starNoHoverClass);
             $(container).trigger("ratingOnLeave", {
@@ -67,9 +63,7 @@ jQuery.fn.ratingStars = function( options ) {
         onStarSelected: function(starElement, container) {
             var me = this;
             var elementIndex = $(starElement).index();
-
             $(container).children(settings.starsSelector).children(settings.starSelector).removeClass(settings.selectors.starActiveClass);
-
             var i = 0;
             $.each($(container).children(settings.starsSelector).children(settings.starSelector), function(index, element) {
                 if(i <= elementIndex) {
@@ -77,7 +71,6 @@ jQuery.fn.ratingStars = function( options ) {
                 }
                 i++;
             });
-
             $(container).children(settings.selectors.targetFormElementSelector).val(elementIndex + 1);
             $(container).trigger("ratingChanged", {
                 ratingValue: (elementIndex + 1)

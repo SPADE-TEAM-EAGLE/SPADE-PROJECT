@@ -30,8 +30,6 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
-
-
 exports.addVendors = async (req, res) => {
   const {
     firstName,
@@ -47,7 +45,6 @@ exports.addVendors = async (req, res) => {
     categoryID,
   } = req.body;
   const { userId } = req.user;
-
   try {
     const vendorCheckResult = await queryRunner(
       selectQuery("vendor", "email", "landlordID"),
@@ -56,7 +53,6 @@ exports.addVendors = async (req, res) => {
     if (vendorCheckResult[0].length > 0) {
       return res.send("Vendor already exists");
     } else {
-
       const vendorResult = await queryRunner(addVendor, [
         firstName,
         lastName,
@@ -75,7 +71,6 @@ exports.addVendors = async (req, res) => {
         return res.status(400).send("Error1");
       }
     }
-
     res.status(200).json({
       message: " Vendor created successful",
     });
@@ -84,7 +79,6 @@ exports.addVendors = async (req, res) => {
     res.status(400).send(error);
   }
 };
-
 exports.updateVendor = async (req, res) => {
   const {
     vendId,
@@ -101,7 +95,6 @@ exports.updateVendor = async (req, res) => {
     categoryID,
   } = req.body;
   const { userId } = req.user;
-
   try {
     const updateVendorResult = await queryRunner(updateVendor, [
       firstName,
@@ -131,7 +124,6 @@ exports.updateVendor = async (req, res) => {
     res.status(400).send(error);
   }
 };
-
 exports.deleteVendor = async (req, res) => {
     try {
       const { vendorID } = req.params;
@@ -153,15 +145,10 @@ exports.deleteVendor = async (req, res) => {
       res.status(400).send(error);
     }
 }
-
-
-
 exports.getAllVendors = async (req, res) => {
   const { userId, userName } = req.user;
-
   try {
     const getVendorAPI = await queryRunner(getVendors, [userId]);
-
     if (getVendorAPI[0].length > 0) {
       res.status(200).json({
         data: getVendorAPI,
@@ -181,10 +168,6 @@ exports.getAllVendors = async (req, res) => {
     });
   }
 };
-
-
-
-
 exports.addTasks = async (req, res) => {
   const {
     task,
@@ -197,18 +180,11 @@ exports.addTasks = async (req, res) => {
     notifyTenant,
     notifyVendor,
     images,
-
-
-
   } = req.body;
-
   const vendorID = assignee;
   const { userId, userName,taskEmail } = req.user;
-
-
   const currentDate = new Date();
   try {
-
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
       [task, property]
@@ -216,7 +192,6 @@ exports.addTasks = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
-
       const TasksResult = await queryRunner(addTasksQuery, [
         task,
         property,
@@ -233,9 +208,7 @@ exports.addTasks = async (req, res) => {
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
       }
-
         const tasksID = TasksResult[0].insertId;
-
         const taskCountIdResult = await queryRunner(taskCountId, [userId]);
         let customTaskId = taskCountIdResult[0][0].count + 1;
         customTaskId = task+customTaskId;
@@ -249,13 +222,11 @@ exports.addTasks = async (req, res) => {
           image_url,
           image_key,
         ]);
-
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
       }
     }
-
       for (let i = 0; i < vendorID.length; i++) {
         const Vendorid = vendorID[i];
         const vendorResults = await queryRunner(addVendorList, [
@@ -266,7 +237,6 @@ exports.addTasks = async (req, res) => {
           return res.send("Error2");
         }
       }
-
       const tenantLandlordResult = await queryRunner(getLandlordTenant, [
         userId,
         property,
@@ -290,7 +260,6 @@ exports.addTasks = async (req, res) => {
           return res.send("Vendor not found");
         }
       }
-
       const tenantName =
         tenantLandlordResult[0][0].firstName +
         " " +
@@ -302,9 +271,7 @@ exports.addTasks = async (req, res) => {
         " " +
         tenantLandlordResult[0][0].LastName;
       const landlordContact = tenantLandlordResult[0][0].Phone;
-
       const vendorNames = vendorNamearr.toString();
-
       if (notifyTenant.toLowerCase() === "yes") {
       await taskSendMail(
         tenantName,
@@ -323,7 +290,6 @@ exports.addTasks = async (req, res) => {
       }
       if (notifyVendor.toLowerCase() === "yes") {
       for (let i = 0; i < vendorEmailarr.length > 0; i++) {
-
         await taskSendMail(
           tenantName,
           "Property Maintenance: " + task,
@@ -347,15 +313,10 @@ exports.addTasks = async (req, res) => {
     res.status(400).send(error);
   }
 };
-
-
-
 exports.getAllTask = async (req, res) => {
   const { userId } = req.user;
-
   try {
     const allTaskResult = await queryRunner(Alltasks, [userId]);
-
     if (allTaskResult.length > 0) {
       for (let i = 0; i < allTaskResult[0].length; i++) {
         const taskID = allTaskResult[0][i].id;
@@ -364,14 +325,11 @@ exports.getAllTask = async (req, res) => {
           [taskID]
         );
         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
-
         const vendorData = [];
-
         for (let j = 0; j < vendorIDs.length; j++) {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vendorIDs[j],
           ]);
-
           if (vendorResult[0].length > 0) {
             const vendor = {
               ID: vendorResult[0][0].id,
@@ -387,7 +345,6 @@ exports.getAllTask = async (req, res) => {
         }
         allTaskResult[0][i].AssignTo = vendorData;
       }
-
       res.status(200).json({
         data: allTaskResult,
         message: "All Tasks",
@@ -402,9 +359,6 @@ exports.getAllTask = async (req, res) => {
     res.send("Error Get Tasks" + error);
   }
 };
-
-
-
 exports.taskByID = async (req, res) => {
   const { Id } = req.body;
   try {
@@ -473,13 +427,8 @@ exports.taskByID = async (req, res) => {
     res.send("Error Get Tasks");
   }
 };
-
-
-
-
 exports.getVendorCategory = async (req, res) => {
   try {
-
     const { userId } = req.user;
     const categoryResult = await queryRunner(
       selectQuery("vendorcategory", "landLordId"),
@@ -500,14 +449,9 @@ exports.getVendorCategory = async (req, res) => {
     console.log(error);
   }
 };
-
-
-
-
 exports.getVendorAssignTo = async (req, res) => {
   try {
     const { userId, userName } = req.user;
-
     const vendorResult = await queryRunner(
       selectQuery("vendor", "LandlordID"),
       [userId]
@@ -528,26 +472,20 @@ exports.getVendorAssignTo = async (req, res) => {
     console.log(error);
   }
 };
-
-
-
 exports.updateTasks = async (req, res) => {
   const {
     property,
     taskName,
-
     taskID,
     dueDate,
     status,
     priority,
-
     assignee,
     notifyTenant,
     notifyVendor,
     message,
     images,
   } = req.body;
-
   try {
     const currentDate = new Date();
     const { userId,taskEmail } = req.user;
@@ -564,34 +502,25 @@ exports.updateTasks = async (req, res) => {
       taskID,
     ]);
     if (TasksResult[0].affectedRows === 0) {
-
       res.send("Error1");
     }
     const propertycheckresult = await queryRunner(
       selectQuery("taskimages", "taskID"),
       [taskID]
     );
-
-
     if (propertycheckresult[0].length > 0) {
       const propertyImageKeys = propertycheckresult[0].map(
         (image) => image.ImageKey
       );
-
-
-
       const imagesToDelete = propertycheckresult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
       );
-
-
       for (let i = 0; i < imagesToDelete.length; i++) {
         deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageForTaskImages, [
           imagesToDelete[i].ImageKey,
         ]);
       }
-
       const imagesToInsert = images.filter(
         (image) => !propertyImageKeys.includes(image.imageKey)
       );
@@ -603,7 +532,6 @@ exports.updateTasks = async (req, res) => {
           image_url,
           image_key,
         ]);
-
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
@@ -612,14 +540,11 @@ exports.updateTasks = async (req, res) => {
       for (let i = 0; i < images.length - 1; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
-
-
         const propertyImageResult = await queryRunner(insertInTaskImage, [
           taskID,
           image_url,
           image_key,
         ]);
-
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
@@ -642,12 +567,10 @@ exports.updateTasks = async (req, res) => {
     }
     console.log( "asdcfrtgh" + property);
     console.log( "frfrf" + userId);
-
     const tenantLandlordResult = await queryRunner(getLandlordTenant, [
       userId,
       property,
     ]);
-
     let vendorEmailarr = [];
     let vendorNamearr = [];
     for (let i = 0; i < vendorID.length; i++) {
@@ -678,10 +601,7 @@ exports.updateTasks = async (req, res) => {
       tenantLandlordResult[0][0].LastName;
     const landlordContact = tenantLandlordResult[0][0].Phone;
     const landlordEmail = tenantLandlordResult[0][0].Email;
-
     const vendorNames = vendorNamearr.toString();
-
-
     await taskSendMail(
       tenantName,
       "Property Maintenance: " + taskName,
@@ -696,8 +616,6 @@ exports.updateTasks = async (req, res) => {
       tenantEmail,
       taskEmail
     );
-
-
     for (let i = 0; i < vendorEmailarr.length > 0; i++) {
       console.log("vendor2");
       await taskSendMail(
@@ -714,7 +632,6 @@ exports.updateTasks = async (req, res) => {
         vendorEmailarr[i],
         taskEmail
       );
-
     }
     return res.status(200).json({
       message: " task updated successful ",
@@ -726,10 +643,6 @@ exports.updateTasks = async (req, res) => {
     });
   }
 };
-
-
-
-
 exports.deleteTask = async (req, res) => {
   try {
     const { taskID } = req.body;
@@ -738,7 +651,6 @@ exports.deleteTask = async (req, res) => {
     ]);
     if (deleteTaskResult[0].affectedRows > 0) {
       res.status(200).json({
-
         message: "task Deleted Successful",
       });
     } else {
@@ -751,90 +663,25 @@ exports.deleteTask = async (req, res) => {
     console.log(error);
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
- 
-
-
   const { userId } = req.user;
-
   let insertedId;
-
   try {
     const categoryCheckResult = await queryRunner(selectQuery("vendorcategory", "landLordId"), [userId]);
     const existingCategories = categoryCheckResult[0];
-
     if (!Array.isArray(categories)) {
       console.log("fsdjksdjfksdfksdkjsdkjfksdjjsdfsdjsd")
       console.log(categories);
       const categoryToInsert = existingCategories.find(category => 
         category.categories && category.categories.toLowerCase() === categories.categories.toLowerCase()
       );
-
       if (!categoryToInsert) {
         insertedId = await queryRunner(addVendorCategory, [
           categories.categories.toLowerCase(),
           userId,
         ]);
         console.log(insertedId[0]?.insertId);
-
         res.status(200).json({
           message: "Categories added/updated successfully",
           categoryID: insertedId[0]?.insertId,
@@ -846,13 +693,11 @@ exports.addVendorCategory = async (req, res) => {
         });
       }
     } else if (Array.isArray(categories)) {
-      
       const categoryToInsert = categories.filter(category => 
         !existingCategories.some(existingCategory =>
           existingCategory.category && existingCategory.category.toLowerCase() === category.category.toLowerCase()
         )
       );
-
       const categoryToDelete = existingCategories.filter(existingCategory => 
         !categories.some(category =>
           category.category && category.category.toLowerCase() === existingCategory.category.toLowerCase()
@@ -865,8 +710,6 @@ exports.addVendorCategory = async (req, res) => {
             })
           );
       if (categoryCheckResult[0].length !== 0) {
-        
-
         await Promise.all(
           categoryToDelete.map(async (item) => {
             console.log(item);
@@ -874,7 +717,6 @@ exports.addVendorCategory = async (req, res) => {
           })
         );
       }
-
       res.status(200).json({
         message: "Categories added/updated successfully",
       });
@@ -884,47 +726,28 @@ exports.addVendorCategory = async (req, res) => {
     res.status(400).send(error);
   }
 };
-
-
-
-
-
-
-
-
-
 exports.taskCount = async (req, res) => {
   try {
-
     const { userId } = req.user;
     const { startDate, endDate } = req.body;
-
     const taskCountResult = await queryRunner(taskCount, [
       userId,
       startDate,
       endDate,
     ]);
-
-
     res.status(200).json({
       data: taskCountResult,
     });
-
   } catch (error) {
     res.status(400).json({
       message: error.message,
     });
   }
 };
-
-
-
 exports.getAllTaskTenantRequest = async (req, res) => {
-
   const { userId } = req.user;
   try {
     const allTaskResult = await queryRunner(AlltasksTenantsLandlord, [userId]);
-
     if (allTaskResult.length > 0) {
       for (let i = 0; i < allTaskResult[0].length; i++) {
         const taskID = allTaskResult[0][i].id;
@@ -933,14 +756,11 @@ exports.getAllTaskTenantRequest = async (req, res) => {
           [taskID]
         );
         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
-
         const vendorData = [];
-
         for (let j = 0; j < vendorIDs.length; j++) {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vendorIDs[j],
           ]);
-
           if (vendorResult[0].length > 0) {
             const vendor = {
               ID: vendorResult[0][0].id,
@@ -956,7 +776,6 @@ exports.getAllTaskTenantRequest = async (req, res) => {
         }
         allTaskResult[0][i].AssignTo = vendorData;
       }
-
       res.status(200).json({
         data: allTaskResult,
         message: "All Tasks",
@@ -971,20 +790,12 @@ exports.getAllTaskTenantRequest = async (req, res) => {
     res.send("Error Get Tasks" + error);
   }
 };
-
-
-
-
-
-
-
 exports.VendorCheckEmail = async function (req, res) {
   const { email } = req.params;
   try {
     const selectResult = await queryRunner(selectQuery("vendor","email"), [ 
       email,
   ]);
-
     if (selectResult[0].length > 0) {
       return res.status(201).json({
           message: "Email already exists ",

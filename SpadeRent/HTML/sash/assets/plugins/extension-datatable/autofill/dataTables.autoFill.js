@@ -21,13 +21,11 @@
  */
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
-
 		define( ['jquery', 'datatables.net'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
 	else if ( typeof exports === 'object' ) {
-
 		module.exports = function (root, $) {
 			if ( ! root ) {
 				root = window;
@@ -39,7 +37,6 @@
 		};
 	}
 	else {
-
 		factory( jQuery, window, document );
 	}
 }(function( $, window, document, undefined ) {
@@ -59,7 +56,6 @@ var AutoFill = function( dt, opts )
 	if ( ! DataTable.versionCheck || ! DataTable.versionCheck( '1.10.8' ) ) {
 		throw( "Warning: AutoFill requires DataTables 1.10.8 or greater");
 	}
-
 	this.c = $.extend( true, {},
 		DataTable.defaults.autoFill,
 		AutoFill.defaults,
@@ -157,11 +153,9 @@ $.extend( AutoFill.prototype, {
 		var that = this;
 		var dt = this.s.dt;
 		var dtScroll = $('div.dataTables_scrollBody', this.s.dt.table().container());
-
 		dt.settings()[0].autoFill = this;
 		if ( dtScroll.length ) {
 			this.dom.dtScroll = dtScroll;
-
 			if ( dtScroll.css('position') === 'static' ) {
 				dtScroll.css( 'position', 'relative' );
 			}
@@ -194,17 +188,13 @@ $.extend( AutoFill.prototype, {
 			return;
 		}
 		if ( ! this.dom.offsetParent ) {
-
 			this.dom.offsetParent = $( dt.table().node() ).offsetParent();
 		}
 		if ( ! handleDim.height || ! handleDim.width ) {
-
-
 			handle.appendTo( 'body' );
 			handleDim.height = handle.outerHeight();
 			handleDim.width = handle.outerWidth();
 		}
-
 		var offset = this._getPosition( node, this.dom.offsetParent );
 		this.dom.attachedTo = node;
 		handle
@@ -228,21 +218,17 @@ $.extend( AutoFill.prototype, {
 		var dt = this.s.dt;
 		var actions = AutoFill.actions;
 		var available = [];
-
 		$.each( actions, function ( key, action ) {
 			if ( action.available( dt, cells ) ) {
 				available.push( key );
 			}
 		} );
 		if ( available.length === 1 && this.c.alwaysAsk === false ) {
-
 			var result = actions[ available[0] ].execute( dt, cells );
 			this._update( result, cells );
 		}
 		else if ( available.length > 1 ) {
-
 			var list = this.dom.list.children('ul').empty();
-
 			available.push( 'cancel' );
 			$.each( available, function ( i, name ) {
 				list.append( $('<li/>')
@@ -290,7 +276,6 @@ $.extend( AutoFill.prototype, {
 	 */
 	_drawSelection: function ( target, e )
 	{
-
 		var dt = this.s.dt;
 		var start = this.s.start;
 		var startCell = $(this.dom.start);
@@ -305,11 +290,9 @@ $.extend( AutoFill.prototype, {
 		var colIndx = dt.column.index( 'toData', end.column );
 		var endRow =  dt.row( ':eq('+end.row+')', { page: 'current' } ); // Workaround for M581
 		var endCell = $( dt.cell( endRow.index(), colIndx ).node() );
-
 		if ( ! dt.cell( endCell ).any() ) {
 			return;
 		}
-
 		if ( dt.columns( this.c.columns ).indexes().indexOf( colIndx ) === -1 ) {
 			return;
 		}
@@ -360,21 +343,16 @@ $.extend( AutoFill.prototype, {
 		if ( ! editor ) {
 			return;
 		}
-
 		var idValues = {};
 		var nodes = [];
 		var fields = editor.fields();
 		for ( var i=0, ien=cells.length ; i<ien ; i++ ) {
 			for ( var j=0, jen=cells[i].length ; j<jen ; j++ ) {
 				var cell = cells[i][j];
-
 				var col = dt.settings()[0].aoColumns[ cell.index.column ];
 				var fieldName = col.editField;
 				if ( fieldName === undefined ) {
 					var dataSrc = col.mData;
-
-
-
 					for ( var k=0, ken=fields.length ; k<ken ; k++ ) {
 						var field = editor.field( fields[k] );
 						if ( field.dataSrc() === dataSrc ) {
@@ -392,13 +370,9 @@ $.extend( AutoFill.prototype, {
 				}
 				var id = dt.row( cell.index.row ).id();
 				idValues[ fieldName ][ id ] = cell.set;
-
-
 				nodes.push( cell.index );
 			}
 		}
-
-
 		editor
 			.bubble( nodes, false )
 			.multiSet( idValues )
@@ -433,8 +407,6 @@ $.extend( AutoFill.prototype, {
 			dt.init().keys || dt.settings()[0].keytable ?
 				'focus' :
 				'hover';
-
-
 		if ( focus === 'focus' ) {
 			dt
 				.on( 'key-focus.autoFill', function ( e, dt, cell ) {
@@ -493,15 +465,11 @@ $.extend( AutoFill.prototype, {
 			targetParent = $( $( this.s.dt.table().node() )[0].offsetParent );
 		}
 		do {
-
-
 			var positionTop = currNode.offsetTop;
 			var positionLeft = currNode.offsetLeft;
-
 			currOffsetParent = $( currNode.offsetParent );
 			top += positionTop + parseInt( currOffsetParent.css('border-top-width') || 0 ) * 1;
 			left += positionLeft + parseInt( currOffsetParent.css('border-left-width') || 0 ) * 1;
-
 			if ( currNode.nodeName.toLowerCase() === 'body' ) {
 				break;
 			}
@@ -543,9 +511,6 @@ $.extend( AutoFill.prototype, {
 		select.bottom.appendTo( offsetParent );
 		this._drawSelection( this.dom.start, e );
 		this.dom.handle.css( 'display', 'none' );
-
-
-
 		var scrollWrapper = this.dom.dtScroll;
 		this.s.scroll = {
 			windowHeight: $(window).height(),
@@ -591,16 +556,12 @@ $.extend( AutoFill.prototype, {
 		select.right.remove();
 		select.bottom.remove();
 		this.dom.handle.css( 'display', 'block' );
-
 		var start = this.s.start;
 		var end = this.s.end;
-
 		if ( start.row === end.row && start.column === end.column ) {
 			return;
 		}
 		var startDt = dt.cell( ':eq('+start.row+')', start.column+':visible', {page:'current'} );
-
-
 		if ( $('div.DTE', startDt.node()).length ) {
 			var editor = dt.editor();
 			editor
@@ -613,20 +574,15 @@ $.extend( AutoFill.prototype, {
 				.on( 'submitComplete.dtaf preSubmitCancelled.dtaf close.dtaf', function () {
 					editor.off( '.dtaf');
 				} );
-
 			editor.submit();
 			return;
 		}
-
 		var rows       = this._range( start.row, end.row );
 		var columns    = this._range( start.column, end.column );
 		var selected   = [];
 		var dtSettings = dt.settings()[0];
 		var dtColumns  = dtSettings.aoColumns;
 		var enabledColumns = dt.columns( this.c.columns ).indexes();
-
-
-
 		for ( var rowIdx=0 ; rowIdx<rows.length ; rowIdx++ ) {
 			selected.push(
 				$.map( columns, function (column) {
@@ -651,7 +607,6 @@ $.extend( AutoFill.prototype, {
 			);
 		}
 		this._actionSelector( selected );
-
 		clearInterval( this.s.scrollInterval );
 		this.s.scrollInterval = null;
 	},
@@ -703,8 +658,6 @@ $.extend( AutoFill.prototype, {
 			windowX = e.pageX - document.body.scrollLeft,
 			windowVert, windowHoriz,
 			dtVert, dtHoriz;
-
-
 		if ( windowY < buffer ) {
 			windowVert = scrollSpeed * -1;
 		}
@@ -717,8 +670,6 @@ $.extend( AutoFill.prototype, {
 		else if ( windowX > scroll.windowWidth - buffer ) {
 			windowHoriz = scrollSpeed;
 		}
-
-
 		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
 			dtVert = scrollSpeed * -1;
 		}
@@ -731,14 +682,6 @@ $.extend( AutoFill.prototype, {
 		else if ( scroll.dtLeft !== null && e.pageX > scroll.dtLeft + scroll.dtWidth - buffer ) {
 			dtHoriz = scrollSpeed;
 		}
-
-
-
-
-
-
-
-
 		if ( windowVert || windowHoriz || dtVert || dtHoriz ) {
 			scroll.windowVert = windowVert;
 			scroll.windowHoriz = windowHoriz;
@@ -747,23 +690,17 @@ $.extend( AutoFill.prototype, {
 			runInterval = true;
 		}
 		else if ( this.s.scrollInterval ) {
-
 			clearInterval( this.s.scrollInterval );
 			this.s.scrollInterval = null;
 		}
-
-
 		if ( ! this.s.scrollInterval && runInterval ) {
 			this.s.scrollInterval = setInterval( function () {
-
-
 				if ( scroll.windowVert ) {
 					document.body.scrollTop += scroll.windowVert;
 				}
 				if ( scroll.windowHoriz ) {
 					document.body.scrollLeft += scroll.windowHoriz;
 				}
-
 				if ( scroll.dtVert || scroll.dtHoriz ) {
 					var scroller = that.dom.dtScroll[0];
 					if ( scroll.dtVert ) {
@@ -788,19 +725,14 @@ $.extend( AutoFill.prototype, {
 	 */
 	_update: function ( result, cells )
 	{
-
 		if ( result === false ) {
 			return;
 		}
 		var dt = this.s.dt;
 		var cell;
 		var columns = dt.columns( this.c.columns ).indexes();
-
 		this._emitEvent( 'preAutoFill', [ dt, cells ] );
 		this._editor( cells );
-
-
-
 		var update = this.c.update !== null ?
 			this.c.update :
 			this.c.editor ?
@@ -832,7 +764,6 @@ AutoFill.actions = {
 	increment: {
 		available: function ( dt, cells ) {
 			var d = cells[0][0].label;
-
 			return !isNaN( d - parseFloat( d ) );
 		},
 		option: function ( dt, cells ) {
@@ -898,9 +829,6 @@ AutoFill.actions = {
 			}
 		}
 	},
-
-
-
 	cancel: {
 		available: function () {
 			return false;
@@ -956,7 +884,6 @@ AutoFill.classes = {
  * API
  */
 var Api = $.fn.dataTable.Api;
-
 Api.register( 'autoFill()', function () {
 	return this;
 } );
@@ -980,8 +907,6 @@ Api.register( 'autoFill().disable()', function () {
 		}
 	} );
 } );
-
-
 $(document).on( 'preInit.dt.autofill', function (e, settings, json) {
 	if ( e.namespace !== 'dt' ) {
 		return;
@@ -995,7 +920,6 @@ $(document).on( 'preInit.dt.autofill', function (e, settings, json) {
 		}
 	}
 } );
-
 DataTable.AutoFill = AutoFill;
 DataTable.AutoFill = AutoFill;
 return AutoFill;

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('et', {
   defaultMessage: "See väärtus ei sobi.",
   type: {

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('tk', {
   defaultMessage: "Bu maglumat nädogry.",
   type: {

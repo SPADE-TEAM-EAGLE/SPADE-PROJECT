@@ -1,14 +1,12 @@
 function convertTimestamp(timestamp) {
   var date = new Date(timestamp);
   var now = new Date();
-
   var timeDifference = now.getTime() - date.getTime();
   var seconds = Math.floor(timeDifference / 1000);
   var minutes = Math.floor(seconds / 60);
   var hours = Math.floor(minutes / 60);
   var days = Math.floor(hours / 24);
   var months = Math.floor(days / 30);
-
   if (months > 0) {
     return months + (months === 1 ? " month ago" : " months ago");
   } else if (days > 0) {
@@ -21,10 +19,6 @@ function convertTimestamp(timestamp) {
     return (seconds<=0?1:seconds) + (seconds === 1 ? " second ago" : " seconds ago");
   }
 }
-
-
-
-
 function GetNotification(){
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/notify",
@@ -43,13 +37,11 @@ function GetNotification(){
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
-
       const unread = notification.filter((item) => item.notify === 0);
       const read = notification.filter((item) => item.notify === 1);
       console.log(unread, "unread");
       console.log(read, "read");
       console.log(notification, "all");
-
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -57,10 +49,8 @@ function GetNotification(){
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-
         if (item.invoiceID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
-  
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
               item.invoiceID
@@ -139,7 +129,6 @@ function GetNotification(){
                       <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                   </a>
               </div>
-              
           </div><div class="">
           <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
@@ -168,7 +157,6 @@ function GetNotification(){
                       <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                   </a>
               </div>
-              
           </div><div class="">
           <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.tenantCreated_at
@@ -184,7 +172,6 @@ function GetNotification(){
       });
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
-
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
@@ -262,7 +249,6 @@ function GetNotification(){
                       <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                   </a>
               </div>
-              
           </div><div class="">
           <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
@@ -295,7 +281,6 @@ function GetNotification(){
                     <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                 </a>
             </div>
-            
         </div><div class="">
         <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(item.created_at)}</span>
         </div></div>`
@@ -309,7 +294,6 @@ function GetNotification(){
       });
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
-
         if (item.invoiceID) {
           $("#unread-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
@@ -397,7 +381,6 @@ function GetNotification(){
                       <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                   </a>
               </div>
-              
           </div><div class="">
           <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.created_at
@@ -430,7 +413,6 @@ function GetNotification(){
                       <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
                   </a>
               </div>
-              
           </div><div class="">
           <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
             item.tenantCreated_at
@@ -449,14 +431,10 @@ function GetNotification(){
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-
     },
   });
-
 }  
 GetNotification();
-
-
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
   GetNotification();
@@ -469,13 +447,11 @@ function getNotifyData(){
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-
     },
     error: function (xhr, status, error) {
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-
     },
   });
 }
@@ -499,9 +475,7 @@ function updateAllNotifyRead() {
     },
   });
 }
-
 function updateDataNotify(notificationId, type) {
-
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
@@ -515,7 +489,6 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-
       if(type == "property"){
         window.location.href="./properties-all.html";
       }else if(type == "task"){
@@ -524,15 +497,10 @@ function updateDataNotify(notificationId, type) {
         window.location.href="./create-invoicing.html";
       }else if(type == "tenant"){
         window.location.href="./add-tenant.html";
-        
       }
-
-
       console.log(response);
     },
     error: function (xhr, status, error) {
-
-
       console.log("Error: " + error);
     },
   });

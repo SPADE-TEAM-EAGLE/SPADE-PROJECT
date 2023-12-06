@@ -2169,19 +2169,12 @@
                 },
                 success: function ({ userName, image,tasks,create_at,planID,...rest }) {
                     adjustPlan(rest)
-
-
-
-
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -2906,8 +2899,6 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                             console.log
                             response.data[0]?.forEach(function (task, index) {
                                 console.log(task?.taskImages[0])
-
-
                                 var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
                                 if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {

@@ -1,13 +1,11 @@
 (function($) {
 	"use strict";
-
 	var btnFinish = $('<button></button>').text('Finish')
 		.addClass('btn btn-primary')
 		.on('click', function(){ alert('Finish Clicked'); });
 	var btnCancel = $('<button></button>').text('Cancel')
 		.addClass('btn btn-secondary')
 		.on('click', function(){ $('#smartwizard-3').smartWizard("reset"); });
-
 	$('#smartwizard').smartWizard({
 			selected: 0,
 			theme: 'default',
@@ -18,7 +16,6 @@
 							  toolbarExtraButtons: [btnFinish, btnCancel]
 							}
 	});
-
 	$('#smartwizard-1').smartWizard({
 			selected: 0,
 			theme: 'arrows',
@@ -28,7 +25,6 @@
 							  toolbarExtraButtons: [btnFinish, btnCancel]
 							}
 	});
-
 	$('#smartwizard-2').smartWizard({
 			selected: 0,
 			theme: 'circles',
@@ -38,7 +34,6 @@
 							  toolbarExtraButtons: [btnFinish, btnCancel]
 							}
 	});
-
 	$('#smartwizard-3').smartWizard({
 			selected: 0,
 			theme: 'dots',

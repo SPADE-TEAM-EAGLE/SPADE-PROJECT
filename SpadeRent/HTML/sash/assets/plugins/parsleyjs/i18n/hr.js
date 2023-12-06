@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('hr', {
   defaultMessage: "Neispravan unos.",
   type: {

@@ -1,14 +1,11 @@
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3-v2");
-
-
 aws.config.update({
     accessKeyId: "AKIA5HKBWH6Q3F2PKPMK",
     secretAccessKey: "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"
 });
 const s3 = new aws.S3();
-
 const fileFilter = (req, file, cb) => {
     if (
         file.mimetype.startsWith("audio/") ||
@@ -24,7 +21,6 @@ const fileFilter = (req, file, cb) => {
         );
     }
 };
-
 const upload = multer({
     fileFilter,
     limits: { fileSize: 25 * 1024 * 1024 },
@@ -44,5 +40,4 @@ const upload = multer({
         ContentType: "image/jpeg/png/jpg video/mp4 application/pdf audio/mpeg audio/aac",
     }),
 });
-
 module.exports = upload;

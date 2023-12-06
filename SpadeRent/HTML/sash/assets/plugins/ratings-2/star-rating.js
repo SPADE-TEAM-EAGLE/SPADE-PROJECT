@@ -1,5 +1,4 @@
 $(function() {
-
   $(".my-rating").starRating({
     initialRating: 4.0,
     starSize: 35,
@@ -15,7 +14,6 @@ $(function() {
     strokeWidth: 0,
     useGradient: false
   });
-
   $(".my-rating-4").starRating({
     totalStars: 5,
     starShape: 'rounded',
@@ -25,7 +23,6 @@ $(function() {
     activeColor: '#f1c40f',
     useGradient: false
   });
-
   $(".my-rating-5").starRating({
     starSize: 35,
     strokeWidth: 0,

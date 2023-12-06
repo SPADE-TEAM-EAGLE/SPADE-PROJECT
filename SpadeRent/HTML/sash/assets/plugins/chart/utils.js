@@ -1,5 +1,4 @@
 'use strict';
-
 window.chartColors = {
 	red: 'rgb(250, 98, 107)',
 	orange: 'rgb(255, 159, 64)',
@@ -9,7 +8,6 @@ window.chartColors = {
 	purple: 'rgb(159, 120, 255)',
 	grey: 'rgb(201, 203, 207)'
 };
-
 (function(global) {
 	var Months = [
 		'January',
@@ -25,7 +23,6 @@ window.chartColors = {
 		'November',
 		'December'
 	];
-
 	var COLORS = [
 		'#4dc9f6',
 		'#f67019',
@@ -37,16 +34,12 @@ window.chartColors = {
 		'#58595b',
 		'#8549ba'
 	];
-
 	var Samples = global.Samples || (global.Samples = {});
 	var Color = global.Color;
-
 	Samples.utils = {
-
 		srand: function(seed) {
 			this._seed = seed;
 		},
-
 		rand: function(min, max) {
 			var seed = this._seed;
 			min = min === undefined ? 0 : min;
@@ -54,7 +47,6 @@ window.chartColors = {
 			this._seed = (seed * 9301 + 49297) % 233280;
 			return min + (this._seed / 233280) * (max - min);
 		},
-
 		numbers: function(config) {
 			var cfg = config || {};
 			var min = cfg.min || 0;
@@ -66,7 +58,6 @@ window.chartColors = {
 			var dfactor = Math.pow(10, decimals) || 0;
 			var data = [];
 			var i, value;
-
 			for (i = 0; i < count; ++i) {
 				value = (from[i] || 0) + this.rand(min, max);
 				if (this.rand() <= continuity) {
@@ -75,10 +66,8 @@ window.chartColors = {
 					data.push(null);
 				}
 			}
-
 			return data;
 		},
-
 		labels: function(config) {
 			var cfg = config || {};
 			var min = cfg.min || 0;
@@ -90,46 +79,33 @@ window.chartColors = {
 			var prefix = cfg.prefix || '';
 			var values = [];
 			var i;
-
 			for (i = min; i < max; i += step) {
 				values.push(prefix + Math.round(dfactor * i) / dfactor);
 			}
-
 			return values;
 		},
-
 		months: function(config) {
 			var cfg = config || {};
 			var count = cfg.count || 12;
 			var section = cfg.section;
 			var values = [];
 			var i, value;
-
 			for (i = 0; i < count; ++i) {
 				value = Months[Math.ceil(i) % 12];
 				values.push(value.substring(0, section));
 			}
-
 			return values;
 		},
-
 		color: function(index) {
 			return COLORS[index % COLORS.length];
 		},
-
 		transparentize: function(color, opacity) {
 			var alpha = opacity === undefined ? 0.5 : 1 - opacity;
 			return Color(color).alpha(alpha).rgbString();
 		}
 	};
-
-
 	window.randomScalingFactor = function() {
 		return Math.round(Samples.utils.rand(-100, 100));
 	};
-
-
-
 	Samples.utils.srand(Date.now());
-
 }(this));

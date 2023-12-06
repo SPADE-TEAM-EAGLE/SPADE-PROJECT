@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sv', {
   defaultMessage: "Ogiltigt värde.",
   type: {

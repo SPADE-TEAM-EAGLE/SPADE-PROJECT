@@ -1429,18 +1429,11 @@ $(".plan_remaining_days_data").each(function(){
                         }
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
-
-
-
-
             if (response.image !== " " && response.image !== null && response.image !== "") {
-
-
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -1675,7 +1668,6 @@ function filterTable(selectedFilter) {
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function(a, b) {
-
                         var idA = parseInt($(a).find('.serial-number').text());
                         var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;

@@ -17,11 +17,9 @@ if (typeof jQuery === 'undefined'){
 		var stars = typeof $(target).data('stars') == 'undefined' ? 0 : $(target).data('stars');
 		$(target).css('cursor', options.cursor);
 		$(target).append($("<input>", {type : "hidden", name : target.replace("#", ""), value : stars}));
-
 		for (var i = 1; i <= options.max; i++){
 			$(target).append($("<i>", {class : options.indicator, style : "color:" + (i <= stars ? options.rgbOn : options.rgbOff)}));
 		}
-
 		$.each($(target + " > i"), function (index, item){
 			$(item).click(function (){
 				$("[name=" + target.replace("#", "") + "]").val(index);

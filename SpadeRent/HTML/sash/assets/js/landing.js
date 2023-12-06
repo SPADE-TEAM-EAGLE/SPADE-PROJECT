@@ -1,23 +1,15 @@
 (function ($) {
   "use strict";
-
-
   $(window).on("load", function (e) {
     $("#global-loader").fadeOut("slow");
   });
-
-
   const DIV_CARD = "div.card";
-
-
   $(document).on("click", '[data-bs-toggle="card-collapse"]', function (e) {
     let $card = $(this).closest(DIV_CARD);
     $card.toggleClass("card-collapsed");
     e.preventDefault();
     return false;
   });
-
-
   $(window).on("scroll", function (e) {
     if ($(this).scrollTop() > 0) {
       $("#back-to-top").fadeIn("slow");
@@ -34,7 +26,6 @@
     );
     return false;
   });
-
   $(".testimonial-carousel").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -58,7 +49,6 @@
       },
     ],
   });
-
   $(".feature-logos").slick({
     slidesToShow: 6,
     slidesToScroll: 1,
@@ -82,7 +72,6 @@
       },
     ],
   });
-
   $(document).on("click", ".page", function () {
     if ($(".demo_changer").hasClass("active")) {
       $(".demo_changer").animate({ right: "-270px" }, function () {
@@ -90,8 +79,6 @@
       });
     }
   });
-
-
   $("#myonoffswitch24").on("click", function () {
     if (this.checked) {
       $("body").addClass("rtl");
@@ -107,7 +94,6 @@
         );
       var carousel = $(".owl-carousel");
       $.each(carousel, function (index, element) {
-
         var carouselData = $(element).data("owl.carousel");
         carouselData.settings.rtl = true; //don't know if both are necessary
         carouselData.options.rtl = true;
@@ -117,10 +103,6 @@
       localStorage.removeItem("sashltr");
     }
   });
-
-
-
-
   $("#myonoffswitch23").on("click", function () {
     if (this.checked) {
       $("body").addClass("ltr");
@@ -136,7 +118,6 @@
         );
       var carousel = $(".owl-carousel");
       $.each(carousel, function (index, element) {
-
         var carouselData = $(element).data("owl.carousel");
         carouselData.settings.rtl = false; //don't know if both are necessary
         carouselData.options.rtl = false;
@@ -146,9 +127,6 @@
       localStorage.removeItem("sashrtl");
     }
   });
-
-
-
   $(document).on("click", "#myonoffswitch1", function () {
     if (this.checked) {
       $("body").removeClass("dark-mode");
@@ -158,22 +136,15 @@
       localStorage.removeItem("sashdarkMode");
     }
   });
-
-
-
   $(document).on("click", "#myonoffswitch2", function () {
     if (this.checked) {
       $("body").addClass("dark-mode");
       $("body").removeClass("light-mode");
-
       $("#myonoffswitch5").prop("checked", true);
       $("#myonoffswitch8").prop("checked", true);
       localStorage.setItem("sashdarkMode", true);
     }
   });
-
-
-
   function landingPageLocalstorage() {
     if (localStorage.getItem("sashrtl")) {
       $("body").addClass("rtl");
@@ -183,7 +154,6 @@
     }
   }
   landingPageLocalstorage();
-
   if ($("body").hasClass("rtl")) {
     $(".slick-slider").slick("slickSetOption", "rtl", true);
     $("#slide-left").removeClass("d-none");
@@ -199,47 +169,33 @@
       );
     var carousel = $(".owl-carousel");
     $.each(carousel, function (index, element) {
-
       var carouselData = $(element).data("owl.carousel");
       carouselData.settings.rtl = true; //don't know if both are necessary
       carouselData.options.rtl = true;
       $(element).trigger("refresh.owl.carousel");
     });
-
     $("#myonoffswitch24").prop("checked", true);
   }
   if ($("body").hasClass("dark-mode")) {
     $("body").removeClass("light-mode");
-
     $("#myonoffswitch2").prop("checked", true);
   }
-
   $(document).on("click", '[data-bs-toggle="sidebar"]', function (event) {
     event.preventDefault();
     $(".app").toggleClass("sidenav-toggled");
   });
-  
   if (window.innerWidth <= 992) {
     $("body").removeClass("sidenav-toggled");
   }
-  
 })(jQuery);
-
-
 document.getElementById("year").innerHTML = new Date().getFullYear();
-
 window.addEventListener("scroll", reveal);
-
 function reveal() {
   var reveals = document.querySelectorAll(".reveal");
-
   for (var i = 0; i < reveals.length; i++) {
     var windowHeight = window.innerHeight;
     var cardTop = reveals[i].getBoundingClientRect().top;
     var cardRevealPoint = 150;
-
-
-
     if (cardTop < windowHeight - cardRevealPoint) {
       reveals[i].classList.add("active");
     } else {
@@ -247,12 +203,8 @@ function reveal() {
     }
   }
 }
-
 reveal();
-
-
 const pageLink = document.querySelectorAll(".side-menu__item");
-
 pageLink.forEach((elem) => {
   elem.addEventListener("click", (e) => {
     e.preventDefault();
@@ -262,15 +214,12 @@ pageLink.forEach((elem) => {
     });
   });
 });
-
-
 function onScroll(event) {
   const sections = document.querySelectorAll(".side-menu__item");
   const scrollPos =
     window.pageYOffset ||
     document.documentElement.scrollTop ||
     document.body.scrollTop;
-
   sections.forEach((elem) => {
     const val = elem.getAttribute("href");
     const refElement = document.querySelector(val);
@@ -285,9 +234,7 @@ function onScroll(event) {
     }
   });
 }
-
 window.document.addEventListener("scroll", onScroll);
-
 jQuery(".demo-icon").click(function () {
   if ($(".demo_changer").hasClass("active")) {
     $(".demo_changer").animate({ right: "-270px" }, function () {
@@ -299,8 +246,6 @@ jQuery(".demo-icon").click(function () {
     });
   }
 });
-
-
 function resetData() {
     $('#myonoffswitch23').prop('checked', true);
     $('#myonoffswitch1').prop('checked', true);
@@ -312,7 +257,6 @@ function resetData() {
     (document.getElementById("style").setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.min.css"));
     var carousel = $('.owl-carousel');
     $.each(carousel, function (index, element) {
-
         var carouselData = $(element).data('owl.carousel');
         carouselData.settings.rtl = false; //don't know if both are necessary
         carouselData.options.rtl = false;
@@ -324,4 +268,3 @@ function resetData() {
     $('#myonoffswitch6').prop('checked', true);
     localStorage.clear()
 }
-    

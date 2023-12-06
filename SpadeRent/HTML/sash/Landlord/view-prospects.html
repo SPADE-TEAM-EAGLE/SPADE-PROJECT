@@ -1490,18 +1490,11 @@ $(".plan_remaining_days_data").each(function(){
                         }
                         localStorage.setItem("LandlordImg", response.image)
                         localStorage.setItem("landlordId", response.userId)
-
-
-
-
             if (response.image !== " " && response.image !== null && response.image !== "") {
-
-
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -1558,7 +1551,6 @@ $.ajax({
         $("#prospect-detail").text(response.data[0].prospectus.prospectDetail)
         $("#prospect-source").text(response.data[0].Source.sourcesCampaign)
         $("#prospect-amount").text("$ "+response.data[0].prospectus.rentAmount)
-
         $("#prospect-movein").text(response.data[0].prospectus.moveDate)
         $("#user-address").text(response.data[0].property.address+" | "+response.data[0].property.city+" | "+response.data[0].property.state+" | "+response.data[0].property.zipCode)
     },

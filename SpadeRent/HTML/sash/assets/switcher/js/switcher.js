@@ -1,11 +1,9 @@
-
 /**
  * Styleswitch stylesheet switcher built on jQuery
  * Under an Attribution, Share Alike License
  * By Kelvin Luck ( http://www.kelvinluck.com/ )
  * Thanks for permission! 
  **/
-
 jQuery('.demo-icon').click(function() {
     if ($('.demo_changer').hasClass("active")) {
         $('.demo_changer').animate({ "right": "-270px" }, function() {
@@ -22,7 +20,6 @@ const ps5 = new PerfectScrollbar('.sidebar-right1', {
     useBothWheelAxes: true,
     suppressScrollX: true,
 });
-
 $(document).on("click", ".app-content", function() {
     if ($('.demo_changer').hasClass("active")) {
         $('.demo_changer').animate({ "right": "-270px" }, function() {

@@ -50,9 +50,7 @@
         this.core.s = _extends({}, zoomDefaults, this.core.s);
         if (this.core.s.zoom && this.core.doCss()) {
             this.init();
-
             this.zoomabletimeout = false;
-
             this.pageX = window.innerWidth / 2;
             this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
         }
@@ -70,16 +68,11 @@
             utils.addClass(_this.core.outer, 'lg-use-transition-for-zoom');
         }
         this.core.outer.querySelector('.lg-toolbar').insertAdjacentHTML('beforeend', zoomIcons);
-
         utils.on(_this.core.el, 'onSlideItemLoad.lgtmzoom', function (event) {
-
             var _speed = _this.core.s.enableZoomAfter + event.detail.delay;
-
             if (utils.hasClass(document.body, 'lg-from-hash') && event.detail.delay) {
-
                 _speed = 0;
             } else {
-
                 utils.removeClass(document.body, 'lg-from-hash');
             }
             _this.zoomabletimeout = setTimeout(function () {
@@ -97,7 +90,6 @@
             var image = _this.core.outer.querySelector('.lg-current .lg-image');
             var _x;
             var _y;
-
             var offsetX = (window.innerWidth - image.clientWidth) / 2;
             var offsetY = (window.innerHeight - image.clientHeight) / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
             _x = _this.pageX - offsetX;
@@ -157,10 +149,8 @@
             }, 10);
         };
         var tapped = false;
-
         utils.on(_this.core.el, 'onAferAppendSlide.lgtmzoom', function (event) {
             var index = event.detail.index;
-
             var image = _this.core.___slide[index].querySelector('.lg-image');
             if (!_this.core.isTouch) {
                 utils.on(image, 'dblclick', function (event) {
@@ -182,7 +172,6 @@
                 });
             }
         });
-
         utils.on(window, 'resize.lgzoom scroll.lgzoom orientationchange.lgzoom', function () {
             _this.pageX = window.innerWidth / 2;
             _this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
@@ -203,12 +192,10 @@
         utils.on(document.getElementById('lg-actual-size'), 'click.lg', function (event) {
             actualSize(event, _this.core.___slide[_this.core.index].querySelector('.lg-image'), _this.core.index, true);
         });
-
         utils.on(_this.core.el, 'onBeforeSlide.lgtm', function () {
             scale = 1;
             _this.resetZoom();
         });
-
         if (!_this.core.isTouch) {
             _this.zoomDrag();
         }
@@ -216,7 +203,6 @@
             _this.zoomSwipe();
         }
     };
-
     Zoom.prototype.resetZoom = function () {
         utils.removeClass(this.core.outer, 'lg-zoomed');
         for (var i = 0; i < this.core.___slide.length; i++) {
@@ -232,7 +218,6 @@
                 this.core.___slide[j].querySelector('.lg-image').removeAttribute('data-scale');
             }
         }
-
         this.pageX = window.innerWidth / 2;
         this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
     };
@@ -241,9 +226,7 @@
         var startCoords = {};
         var endCoords = {};
         var isMoved = false;
-
         var allowX = false;
-
         var allowY = false;
         for (var i = 0; i < _this.core.___slide.length; i++) {
             /*jshint loopfunc: true */
@@ -275,7 +258,6 @@
                         x: e.targetTouches[0].pageX,
                         y: e.targetTouches[0].pageY
                     };
-
                     utils.addClass(_this.core.outer, 'lg-zoom-dragging');
                     if (allowY) {
                         distanceY = -Math.abs(_el.getAttribute('data-y')) + (endCoords.y - startCoords.y);
@@ -317,14 +299,11 @@
         var endCoords = {};
         var isDraging = false;
         var isMoved = false;
-
         var allowX = false;
-
         var allowY = false;
         for (var i = 0; i < _this.core.___slide.length; i++) {
             /*jshint loopfunc: true */
             utils.on(_this.core.___slide[i], 'mousedown.lgzoom', function (e) {
-
                 var image = _this.core.___slide[_this.core.index].querySelector('.lg-object');
                 allowY = image.offsetHeight * image.getAttribute('data-scale') > _this.core.outer.querySelector('.lg').clientHeight;
                 allowX = image.offsetWidth * image.getAttribute('data-scale') > _this.core.outer.querySelector('.lg').clientWidth;
@@ -336,7 +315,6 @@
                             y: e.pageY
                         };
                         isDraging = true;
-
                         _this.core.outer.scrollLeft += 1;
                         _this.core.outer.scrollLeft -= 1;
                         utils.removeClass(_this.core.outer, 'lg-grab');
@@ -355,7 +333,6 @@
                     x: e.pageX,
                     y: e.pageY
                 };
-
                 utils.addClass(_this.core.outer, 'lg-zoom-dragging');
                 if (allowY) {
                     distanceY = -Math.abs(_el.getAttribute('data-y')) + (endCoords.y - startCoords.y);
@@ -379,7 +356,6 @@
             if (isDraging) {
                 isDraging = false;
                 utils.removeClass(_this.core.outer, 'lg-zoom-dragging');
-
                 if (isMoved && (startCoords.x !== endCoords.x || startCoords.y !== endCoords.y)) {
                     endCoords = {
                         x: e.pageX,
@@ -438,7 +414,6 @@
     };
     Zoom.prototype.destroy = function () {
         var _this = this;
-
         utils.off(_this.core.el, '.lgzoom');
         utils.off(window, '.lgzoom');
         for (var i = 0; i < _this.core.___slide.length; i++) {

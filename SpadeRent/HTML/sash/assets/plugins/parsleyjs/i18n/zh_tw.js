@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('zh-tw', {
   defaultMessage: "這個值似乎是無效的。",
   type: {

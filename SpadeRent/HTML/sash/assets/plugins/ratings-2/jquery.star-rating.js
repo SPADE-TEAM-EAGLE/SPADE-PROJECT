@@ -8,7 +8,6 @@
  */
 ;(function ( $, window, document, undefined ) {
   'use strict';
-
   var pluginName = 'starRating';
   var noop = function(){};
   var defaults = {
@@ -35,7 +34,6 @@
     onHover: noop,
     onLeave: noop
   };
-
   var Plugin = function( element, options ) {
     var _rating;
     var newRating;
@@ -43,17 +41,13 @@
     this.element = element;
     this.$el = $(element);
     this.settings = $.extend( {}, defaults, options );
-
     _rating = this.$el.data('rating') || this.settings.initialRating;
-
     roundFn = this.settings.forceRoundUp ? Math.ceil : Math.round;
     newRating = (roundFn( _rating * 2 ) / 2).toFixed(1);
     this._state = {
       rating: newRating
     };
-
     this._uid = Math.floor( Math.random() * 999 );
-
     if( !options.starGradient && !this.settings.useGradient ){
       this.settings.starGradient.start = this.settings.starGradient.end = this.settings.activeColor;
     }
@@ -73,13 +67,11 @@
       this.$stars.on('mouseout', this.restoreState.bind(this));
       this.$stars.on('click', this.handleRating.bind(this));
     },
-
     hoverRating: function(e){
       var index = this.getIndex(e);
       this.paintStars(index, 'hovered');
       this.settings.onHover(index + 1, this._state.rating, this.$el);
     },
-
     handleRating: function(e){
       var index = this.getIndex(e);
       var rating = index + 1;
@@ -91,7 +83,6 @@
     },
     applyRating: function(rating){
       var index = rating - 1;
-
       this.paintStars(index, 'rated');
       this._state.rating = index + 1;
       this._state.rated = true;
@@ -99,7 +90,6 @@
     restoreState: function(e){
       var index = this.getIndex(e);
       var rating = this._state.rating || -1;
-
       var colorType = this._state.rated ? 'rated' : 'active';
       this.paintStars(rating - 1, colorType);
       this.settings.onLeave(index + 1, this._state.rating, this.$el);
@@ -109,14 +99,10 @@
       var width = $target.width();
       var side = $(e.target).attr('data-side');
       var minRating = this.settings.minRating;
-
       side = (!side) ? this.getOffsetByPixel(e, $target, width) : side;
       side = (this.settings.useFullStars) ? 'right' : side ;
-
       var index = $target.index() - ((side === 'left') ? 0.5 : 0);
-
       index = ( index < 0.5 && (e.offsetX < width / 4) ) ? -1 : index;
-
       index = ( minRating && minRating <= this.settings.totalStars && index < minRating ) ? minRating - 1 : index;
       return index;
     },
@@ -137,11 +123,9 @@
         $polygonLeft = $(star).find('[data-side="left"]');
         $polygonRight = $(star).find('[data-side="right"]');
         leftClass = rightClass = (index <= endIndex) ? stateClass : 'empty';
-
         leftClass = ( index - endIndex === 0.5 ) ? stateClass : leftClass;
         $polygonLeft.attr('class', 'svg-'  + leftClass + '-' + this._uid);
         $polygonRight.attr('class', 'svg-'  + rightClass + '-' + this._uid);
-
         var ratedColorsIndex = endIndex >= 0 ? Math.ceil(endIndex) : 0;
         var ratedColor;
         if (s.ratedColors && s.ratedColors.length && s.ratedColors[ratedColorsIndex]) {
@@ -149,9 +133,7 @@
         } else {
           ratedColor = this._defaults.ratedColor;
         }
-
         if (stateClass === 'rated' && endIndex > -1) {
-
           if (index <= Math.ceil(endIndex) || (index < 1 && endIndex < 0)) {
             $polygonLeft.attr('style', 'fill:'+ratedColor);
           }
@@ -164,7 +146,6 @@
     renderMarkup: function () {
       var s = this.settings;
       var baseUrl = s.baseUrl ? location.href.split('#')[0] : '';
-
       var star = '<div class="jq-star" style="width:' + s.starSize+ 'px;  height:' + s.starSize + 'px;"><svg version="1.0" class="jq-star-svg" shape-rendering="geometricPrecision" xmlns="http://www.w3.org/2000/svg" ' + this.getSvgDimensions(s.starShape) +  ' stroke-width:' + s.strokeWidth + 'px;" xml:space="preserve"><style type="text/css">.svg-empty-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_1_);}.svg-hovered-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_2_);}.svg-active-' + this._uid + '{fill:url(' + baseUrl + '#' + this._uid + '_SVGID_3_);}.svg-rated-' + this._uid + '{fill:' + s.ratedColor + ';}</style>' +
       this.getLinearGradient(this._uid + '_SVGID_1_', s.emptyColor, s.emptyColor, s.starShape) +
       this.getLinearGradient(this._uid + '_SVGID_2_', s.hoverColor, s.hoverColor, s.starShape) +
@@ -175,7 +156,6 @@
         strokeColor: s.strokeColor
       } ) +
       '</svg></div>';
-
       var starsMarkup = '';
       for( var i = 0; i < s.totalStars; i++){
         starsMarkup += star;
@@ -261,10 +241,8 @@
       }
     }
   };
-
   $.extend(Plugin.prototype, methods);
   $.fn[ pluginName ] = function ( options ) {
-
     if( !$.isPlainObject(options) ){
       if( publicMethods.hasOwnProperty(options) ){
         return publicMethods[options].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -273,7 +251,6 @@
       }
     }
     return this.each(function() {
-
       if ( !$.data( this, 'plugin_' + pluginName ) ) {
         $.data( this, 'plugin_' + pluginName, new Plugin( this, options ) );
       }

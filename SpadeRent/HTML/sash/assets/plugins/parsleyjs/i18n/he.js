@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('he', {
   defaultMessage: "נראה כי ערך זה אינו תקף.",
   type: {

@@ -3510,19 +3510,12 @@
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-
-
-
-
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -3952,7 +3945,6 @@ $(".plan_remaining_days_data").each(function(){
                             row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
                             var originalDate = new Date(prospectus.createdDate);
                                 console.log(originalDate)
-
                             var formattedDate = (originalDate.getMonth()+1) + '-' + originalDate.getDate() + '-' + originalDate.getFullYear();
                             row.append($('<td>').html('<span class="fw-bold">' + formattedDate + '</span>'));
                             if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {

@@ -6,7 +6,6 @@
             elapse: false,
             defer: false
         };
-
     /* 
      * Countdown Timer Class Definition
      */
@@ -33,7 +32,6 @@
             this.start();
         }
     };
-
     /* 
      * Countdown Timer Methods
      */
@@ -47,13 +45,11 @@
             self.update.call(self);
         }, this.options.precision);
     }
-
     Countdown.prototype.stop = function () {
         clearInterval(this.interval);
         this.interval = null;
         this.dispatchEvent("stoped");
     }
-
     Countdown.prototype.toggle = function () {
         if (this.interval) {
             this.stop();
@@ -61,25 +57,20 @@
             this.start();
         }
     }
-
     Countdown.prototype.pause = function () {
         this.stop();
     }
-
     Countdown.prototype.resume = function () {
         this.start();
     }
-
     Countdown.prototype.remove = function () {
         this.stop.call(this);
         instances[this.instanceNumber] = null;
         delete this.$el.data().countdownInstance;
     }
-
     Countdown.prototype.setFinalDate = function (value) {
         this.finalDate = parseDateString(value);
     }
-
     Countdown.prototype.update = function () {
         if (this.$el.closest("html").length === 0) {
             this.remove();
@@ -120,7 +111,6 @@
             this.dispatchEvent("update");
         }
     }
-
     Countdown.prototype.dispatchEvent = function (eventName) {
         var event = $.Event(eventName + ".countdown");
         event.finalDate = this.finalDate;
@@ -129,8 +119,6 @@
         event.strftime = strftime(this.offset);
         this.$el.trigger(event);
     }
-
-
     /* 
      * Utility Functions
      */
@@ -141,12 +129,10 @@
             throw new Error("Couldn't cast `" + dateString + "` to a date object.");
         }
     }
-
     function escapedRegExp(str) {
         var sanitize = str.toString().replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
         return new RegExp(sanitize);
     }
-
     function strftime(offsetObject) {
         var DIRECTIVE_KEY_MAP = {
             Y: "years",
@@ -194,7 +180,6 @@
             return format;
         };
     }
-
     function pluralize(format, count) {
         var plural = "s",
             singular = "";
@@ -213,7 +198,6 @@
             return singular;
         }
     }
-
     /* 
      * Countdown Timer Plugin Definition
      */

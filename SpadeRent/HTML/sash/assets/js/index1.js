@@ -1,7 +1,5 @@
 $(function(e) {
     'use strict'
-
-
     $.plot('#flotback-chart', [{
         data: dashData10,
         color: 'rgba(255,255,255, 0.2)',
@@ -64,8 +62,6 @@ $(function(e) {
             reserveSpace: false
         }
     });
-
-
     var myCanvas = document.getElementById("recentorders");
     myCanvas.height = "225";
     var myChart = new Chart(myCanvas, {
@@ -146,7 +142,6 @@ $(function(e) {
                         color: "rgba(142, 156, 173,0.1)",
                         display: false
                     },
-
                 }]
             },
             legend: {
@@ -159,8 +154,6 @@ $(function(e) {
             }
         }
     });
-
-
     var ctx = document.getElementById('saleschart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -237,10 +230,6 @@ $(function(e) {
             }
         }
     });
-
-
-
-
     var ctx = document.getElementById('leadschart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -294,9 +283,6 @@ $(function(e) {
             },
         }
     });
-
-
-
     var ctx = document.getElementById('profitchart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -357,9 +343,6 @@ $(function(e) {
             },
         }
     });
-
-
-
     var ctx = document.getElementById('costchart').getContext('2d');
     ctx.height = 10;
     var myChart = new Chart(ctx, {
@@ -413,9 +396,6 @@ $(function(e) {
             },
         }
     });
-
-
-
     $('#data-table').DataTable({
         "order": [
             [0, "desc"]
@@ -427,27 +407,17 @@ $(function(e) {
             sSearch: '',
         }
     });
-
-
     $('.select2').select2({
         minimumResultsForSearch: Infinity
     });
-
-
     $('#world-map-markers1').vectorMap({
         map: 'world_mill_en',
         scaleColors: ['#6c5ffc', '#e82646', '#05c3fb'],
-
         normalizeFunction: 'polynomial',
-
         hoverOpacity: 0.7,
-
         hoverColor: false,
-
         regionStyle: {
-
             initial: {
-
                 fill: '#edf0f5'
             }
         },
@@ -460,7 +430,6 @@ $(function(e) {
                 'stroke-width': 9,
                 'stroke-opacity': 0.2
             },
-
             hover: {
                 'stroke': '#fff',
                 'fill-opacity': 1,
@@ -485,53 +454,36 @@ $(function(e) {
             name: 'Malta'
         }, ]
     });
-
 });
-
 function getCssValuePrefix() {
     'use strict'
-
     var retuenValue = ''; //default to standard syntax
     var prefixes = ['-o-', '-ms-', '-moz-', '-webkit-'];
-
-
     var dom = document.createElement('div');
-
     for (var i = 0; i < prefixes.length; i++) {
-
         dom.style.background = prefixes[i] + 'linear-gradient(#ffffff, #000000)';
-
-
         if (dom.style.background) {
             retuenValue = prefixes[i];
         }
     }
-
     dom = null;
     dom.remove();
-
     return retuenValue;
 }
-
 function index() {
     'use strict'
-
-
     var myCanvas = document.getElementById("transactions");
     myCanvas.height = "330";
-
     var myCanvasContext = myCanvas.getContext("2d");
     var gradientStroke1 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
     gradientStroke1.addColorStop(0, hexToRgba(myVarVal, 0.8) || 'rgba(108, 95, 252, 0.8)');
     gradientStroke1.addColorStop(1, hexToRgba(myVarVal, 0.2) || 'rgba(108, 95, 252, 0.2) ');
-
     var gradientStroke2 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
     gradientStroke2.addColorStop(0, hexToRgba(myVarVal1, 0.8) || 'rgba(5, 195, 251, 0.8)');
     gradientStroke2.addColorStop(1, hexToRgba(myVarVal1, 0.8) || 'rgba(5, 195, 251, 0.2) ');
     document.getElementById('transactions').innerHTML = ''; 
     var myChart;
     myChart = new Chart(myCanvas, {
-
         type: 'line',
         data: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -564,7 +516,6 @@ function index() {
                 pointHoverRadius: 0,
                 borderWidth: 3,
                 fill: 'origin',
-
             }]
         },
         options: {

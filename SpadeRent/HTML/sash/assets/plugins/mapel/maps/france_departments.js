@@ -14,13 +14,10 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-
         module.exports = factory(require('jquery'), require('jquery-mapael'));
     } else if (typeof define === 'function' && define.amd) {
-
         define(['jquery', 'mapael'], factory);
     } else {
-
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
@@ -38,7 +35,6 @@
                             yoffset,
                             x,
                             y;
-
                         if (lat < 43.15710 && lon > 8.17199) {
                             xfactor = 43.64246;
                             xoffset = 181.34520;

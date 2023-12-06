@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('fi', {
   defaultMessage: "Sy&ouml;tetty arvo on virheellinen.",
   type: {

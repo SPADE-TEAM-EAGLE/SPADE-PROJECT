@@ -1,14 +1,5 @@
-
-
-
-
 //
-
-
 //
-
-
-
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], function ($) {
@@ -19,10 +10,7 @@
     }
 } (function ($, document, window, navigator, undefined) {
     "use strict";
-
-
     var plugin_count = 0;
-
     var is_old_ie = (function () {
         var n = navigator.userAgent,
             r = /msie\s\d+/i,
@@ -96,8 +84,6 @@
             return -1;
         };
     }
-
-
     var base_html =
         '<span class="irs">' +
         '<span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span>' +
@@ -117,8 +103,6 @@
         '<span class="irs-slider to"></span>';
     var disable_html =
         '<span class="irs-disable-mask"></span>';
-
-
     /**
      * Main plugin constructor
      *
@@ -148,7 +132,6 @@
         this.is_active = false;
         this.is_resize = false;
         this.is_click = false;
-
         this.$cache = {
             win: $(window),
             body: $(document.body),
@@ -172,16 +155,12 @@
             grid: null,
             grid_labels: []
         };
-
         this.coords = {
-
             x_gap: 0,
             x_pointer: 0,
-
             w_rs: 0,
             w_rs_old: 0,
             w_handle: 0,
-
             p_gap: 0,
             p_gap_left: 0,
             p_gap_right: 0,
@@ -196,7 +175,6 @@
             p_to_real: 0,
             p_bar_x: 0,
             p_bar_w: 0,
-
             grid_gap: 0,
             big_num: 0,
             big: [],
@@ -204,15 +182,12 @@
             big_p: [],
             big_x: []
         };
-
         this.labels = {
-
             w_min: 0,
             w_max: 0,
             w_from: 0,
             w_to: 0,
             w_single: 0,
-
             p_min: 0,
             p_max: 0,
             p_from_fake: 0,
@@ -228,7 +203,6 @@
         var $inp = this.$cache.input,
             val = $inp.prop("value"),
             config, config_from_data, prop;
-
         config = {
             type: "single",
             min: 10,
@@ -273,7 +247,6 @@
             onFinish: null,
             onUpdate: null
         };
-
         config_from_data = {
             type: $inp.data("type"),
             min: $inp.data("min"),
@@ -320,7 +293,6 @@
                 }
             }
         }
-
         if (val) {
             val = val.split(config_from_data.input_values_separator || options.input_values_separator || ";");
             if (val[0] && val[0] == +val[0]) {
@@ -337,14 +309,10 @@
                 config.to = val[1] && +val[1];
             }
         }
-
         $.extend(config, options);
-
         $.extend(config, config_from_data);
         this.options = config;
-
         this.validate();
-
         this.result = {
             input: this.$cache.input,
             slider: null,
@@ -375,12 +343,10 @@
             if (is_update) {
                 this.force_redraw = true;
                 this.calc(true);
-
                 this.callOnUpdate();
             } else {
                 this.force_redraw = true;
                 this.calc(true);
-
                 this.callOnStart();
             }
             this.updateScene();
@@ -602,7 +568,6 @@
             }
             this.updateScene();
             this.restoreOriginalMinInterval();
-
             if ($.contains(this.$cache.cont[0], e.target) || this.dragging) {
                 this.is_finish = true;
                 this.callOnFinish();
@@ -753,8 +718,6 @@
                 this.old_min_interval = null;
             }
         },
-
-
         /**
          * All calculations and measures start here
          *
@@ -1002,8 +965,6 @@
                 this.labels.p_single_left = this.checkEdges(this.labels.p_single_left, this.labels.p_single_fake);
             }
         },
-
-
         /**
          * Main function called in request animation frame
          * to update everything
@@ -1091,7 +1052,6 @@
                 }
                 this.old_from = this.result.from;
                 this.old_to = this.result.to;
-
                 if (!this.is_resize && !this.is_update && !this.is_start && !this.is_finish) {
                     this.callOnChange();
                 }
@@ -1269,8 +1229,6 @@
                 }
             }
         },
-
-
         callOnStart: function () {
             if (this.options.onStart && typeof this.options.onStart === "function") {
                 this.options.onStart(this.result);
@@ -1291,8 +1249,6 @@
                 this.options.onUpdate(this.result);
             }
         },
-
-
         toggleInput: function () {
             this.$cache.input.toggleClass("irs-hidden-input");
         },
@@ -1635,8 +1591,6 @@
             this.updateFrom();
             this.updateTo();
         },
-
-
         appendGrid: function () {
             if (!this.options.grid) {
                 return;
@@ -1743,8 +1697,6 @@
                 label.style.marginLeft = -this.coords.big_x[i] + "%";
             }
         },
-
-
         calcGridCollision: function (step, start, finish) {
             var i, next_i, label,
                 num = this.coords.big_num;
@@ -1779,8 +1731,6 @@
             this.$cache.grid[0].style.width = this.toFixed(100 - this.coords.p_handle) + "%";
             this.$cache.grid[0].style.left = this.coords.grid_gap + "%";
         },
-
-
         update: function (options) {
             if (!this.input) {
                 return;
@@ -1821,11 +1771,6 @@
             }
         });
     };
-
-
-
-
-
     (function() {
         var lastTime = 0;
         var plugins = ['ms', 'moz', 'webkit', 'o'];

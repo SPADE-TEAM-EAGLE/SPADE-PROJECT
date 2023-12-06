@@ -1,14 +1,12 @@
 function convertTimestamp(timestamp) {
   var date = new Date(timestamp);
   var now = new Date();
-
   var timeDifference = now.getTime() - date.getTime();
   var seconds = Math.floor(timeDifference / 1000);
   var minutes = Math.floor(seconds / 60);
   var hours = Math.floor(minutes / 60);
   var days = Math.floor(hours / 24);
   var months = Math.floor(days / 30);
-
   if (months > 0) {
     return months + (months === 1 ? " month ago" : " months ago");
   } else if (days > 0) {
@@ -21,10 +19,6 @@ function convertTimestamp(timestamp) {
     return seconds + (seconds === 1 ? " second ago" : " seconds ago");
   }
 }
-
-
-
-
 function GetNotification(){
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/getAdminNotification",
@@ -43,23 +37,11 @@ function GetNotification(){
       }
       console.log(response);
       const notification = response.Notification
-
-
-
-
-
-
-
-
-
-
-
       const unread = notification.filter((item) => item.readNotification == 0);
       const read = notification.filter((item) => item.readNotification == 1);
       console.log(unread, "unread");
       console.log(read, "read");
       console.log(notification, "all");
-
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -67,9 +49,7 @@ function GetNotification(){
       $(".archive_span").text(`(${notification.length})`);
       $("#notification-container").empty();
       notification?.forEach((item) => {
-
           const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
-  
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
               item.notificationId
@@ -86,11 +66,8 @@ function GetNotification(){
                         item.fName
                       }</div> <span class="text-dark"> Plan > ${
                         plans[item.planId]
-                        
             }</span><br/>  <span class="text-dark"> Price > ${
               '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
-
-              
   }</span>
                       <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                   </a>
@@ -101,13 +78,10 @@ function GetNotification(){
           )}</span>
             </div></div>`
           );
-        
       });
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
-
         const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
-  
         $("#inbox-notification-container").append(
           `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
             item.notificationId
@@ -124,11 +98,8 @@ function GetNotification(){
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
                       plans[item.planId]
-                      
           }</span><br/>  <span class="text-dark"> Price > ${
             '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
-
-            
 }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                 </a>
@@ -143,7 +114,6 @@ function GetNotification(){
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
         const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
-  
         $("#unread-notification-container").append(
           `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
             item.notificationId
@@ -160,11 +130,8 @@ function GetNotification(){
                       item.fName
                     }</div> <span class="text-dark"> Plan > ${
                       plans[item.planId]
-                      
           }</span><br/>  <span class="text-dark"> Price > ${
             '$ ' + (item.planId >= 2 && item.planId <= 4 ? (parseFloat(item.plantotalAmount) * 12).toFixed(2)+"/ year" : parseFloat(item.plantotalAmount).toFixed(2)+"/ month")
-
-            
 }</span>
                     <p class="mb-0 fw-bold text-dark fs-15 created-deleted"> ${item.created_deleted} </p>
                 </a>
@@ -176,7 +143,6 @@ function GetNotification(){
           </div></div>`
         );
       });
-
       $(".notification-item").on("click", function () {
         const itemId = $(this).data("id");
         const type=$(this).find(".created-deleted").text().trim().toLowerCase()=="created"?"Customers":"closed-customers";
@@ -188,25 +154,19 @@ function GetNotification(){
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-
     },
   });
-
 }  
 GetNotification();
-
-
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
   GetNotification();
 });
-
 function updateAllNotifyRead() {
   GetNotification()
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateAllAdminNotification",
     type: "PUT",
-
     contentType: "application/json",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -219,10 +179,8 @@ function updateAllNotifyRead() {
     },
   });
 }
-
 function updateDataNotify(notificationId, type) {
   console.log(notificationId, type);
-
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
     type: "PUT",
@@ -234,7 +192,6 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-
       if(type == "Customers"){
         window.location.href="./Customers.html";
       }else{
@@ -245,8 +202,6 @@ function updateDataNotify(notificationId, type) {
       console.log(response);
     },
     error: function (xhr, status, error) {
-
-
       console.log("Error: " + error);
     },
   });

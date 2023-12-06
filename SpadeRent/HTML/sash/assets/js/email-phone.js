@@ -1,4 +1,3 @@
-
 var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
 $(document).on("input", 'input[type="email"]', function () {
   var email = $(this).val();
@@ -9,7 +8,6 @@ $(document).on("input", 'input[type="email"]', function () {
     email_span.removeClass("d-none");
   } else {
     console.log("email  ok");
-
     $(this).addClass("border-green").removeClass("border-danger");
     email_span.addClass("d-none");
   }
@@ -29,7 +27,6 @@ $(document).on(
     }
   }
 );
-
 const errorMap = [
   "Invalid number",
   "Invalid country code",
@@ -37,7 +34,6 @@ const errorMap = [
   "Too long",
   "Invalid number",
 ];
-
 $('input[type="tel"]').each(function () {
   const input = $(this);
   const errorMsg = input
@@ -46,18 +42,15 @@ $('input[type="tel"]').each(function () {
   const validMsg = input
     .next(".valid-msg")
     .add(input.closest("div").siblings(".valid-msg"));
-
   const iti = window.intlTelInput(this, {
     utilsScript: "/intl-tel-input/js/utils.js?1684676252775",
   });
-
   const reset = () => {
     input.removeClass("error");
     errorMsg.html("");
     errorMsg.addClass("d-none");
     validMsg.addClass("d-none");
   };
-
   input.on("input", () => {
     reset();
     if (input.val().trim()) {
@@ -69,7 +62,6 @@ $('input[type="tel"]').each(function () {
         );
         input.val(formattedNumber);
         console.log("Valid phone. Formatted number:", formattedNumber);
-
         validMsg.removeClass("d-none");
         input.removeClass("border-danger");
         input.addClass("border-green");
@@ -85,43 +77,14 @@ $('input[type="tel"]').each(function () {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(function () {
   var modalOpen = false;
-
   $(".modal").on("shown.bs.modal", function () {
     modalOpen = true;
   });
-
   $(".modal").on("hidden.bs.modal", function () {
     modalOpen = false;
   });
-
   $('.modal input[required]:not([type="tel"]), .modal select[required]').on(
     "input change",
     function () {
@@ -148,14 +111,6 @@ $(document).ready(function () {
     }
   );
 });
-
-
-
-
-
-
-
-
 $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
   "hidden.bs.modal",
   function () {
@@ -165,8 +120,6 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
       $("#error-msg" + indexx).addClass("d-none");
       $("#valid-msg" + indexx).addClass("d-none");
     }
-
-
     $(this)
       .find('input:not([type="radio"]), select:not(#assignee_update),textarea')
       .each(function () {
@@ -182,25 +135,3 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
       });
   }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

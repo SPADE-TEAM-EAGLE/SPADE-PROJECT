@@ -4,10 +4,7 @@ let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
         email_verify_password.addEventListener('keyup', confirmPasswordValidation1_verify);
-
-
         function confirmPasswordValidation1_verify() {
-
             if ($("#token").val() !== " " && email_verify_password.value.match(password_varify_match)) {
                 email_verify_password.classList.add("border-green");
                 $("#verify-btn").removeClass("disabled")
@@ -19,7 +16,6 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
 $(document).ready(function () {
     $.ajax({
         url: 'https://backend.app.spaderent.com/api/spade/protected',
-
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -31,12 +27,9 @@ $(document).ready(function () {
                 });
             }
             if(image!==" " && image!==null && image!== ""){
-                
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)
             }
-
-
             $("#user-name").text(toTitleCase(userName))
             $("#header-user").text(toTitleCase(userName))
             userEmail = email
@@ -53,7 +46,6 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-
         }
     });
     $.ajax({
@@ -63,7 +55,6 @@ $(document).ready(function () {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
         },
         success: function (response) {
-            
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -75,7 +66,6 @@ $(document).ready(function () {
                 $("#user-email").val(userEmail)
                 $("#modaldemo00").modal("show")
             } else if (response.message == "Email is verified") {
-               
                 $("#account-text").addClass("d-none")
                 $("#email_verification").remove()
             }
@@ -84,13 +74,8 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-
         }
     });
-
-   
-    
-    
     $('#email_verification').on('click', function() {
         if ($('body').hasClass('dark-mode')) {
             $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
