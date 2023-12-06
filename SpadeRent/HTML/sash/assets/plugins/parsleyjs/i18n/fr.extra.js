@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('fr', {
   dateiso:    "Cette valeur n'est pas une date valide (YYYY-MM-DD).",
   minwords:   "Cette valeur est trop courte. Elle doit contenir au moins %s mots.",

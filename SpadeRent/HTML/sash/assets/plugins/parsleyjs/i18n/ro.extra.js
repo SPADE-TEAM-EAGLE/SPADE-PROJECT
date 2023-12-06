@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ro', {
   dateiso:    "Trebuie să fie o dată corectă (YYYY-MM-DD).",
   minwords:   "Textul e prea scurt. Trebuie să aibă cel puțin %s cuvinte.",

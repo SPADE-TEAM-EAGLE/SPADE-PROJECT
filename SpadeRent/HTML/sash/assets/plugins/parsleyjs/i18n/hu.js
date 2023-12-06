@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('hu', {
   defaultMessage: "Érvénytelen mező.",
   type: {

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ms', {
   defaultMessage: "Nilai tidak sah.",
   type: {

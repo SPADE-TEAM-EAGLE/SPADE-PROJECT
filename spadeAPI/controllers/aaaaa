@@ -46,12 +46,10 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           const minute = String(currentDate.getMinutes()).padStart(2, '0');
           const second = String(currentDate.getSeconds()).padStart(2, '0');
           const recurringNextDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-
           const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
           } else {
-
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
             if (selectTenantsResult[0].length > 0) {
@@ -72,24 +70,20 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               }
             }    // Insert END 
             //Line item END 
-
             console.log("invoice Image");
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])
             if (invoiceImagesResult[0].length > 0) {
               console.log("invoice Image 2 ");
-
               for (let j = 0; j < invoiceImagesResult[0].length; j++) {
                 const image_url = invoiceImagesResult[0][j].Image;
                 const image_key = invoiceImagesResult[0][j].ImageKey;
                 console.log(image_url, image_key);
                 const propertyImageResult = await queryRunner(insertInvoiceImage, [invoiceID, image_url, image_key]);
-
                 console.log(image_url, image_key);
               }
             }
             console.log(image_url, image_key);
             console.log("image_url, image_key");
-
           } //invoiceResult else END
         }
       }

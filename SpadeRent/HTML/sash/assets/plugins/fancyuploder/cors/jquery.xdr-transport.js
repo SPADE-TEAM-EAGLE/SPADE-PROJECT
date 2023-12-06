@@ -15,13 +15,10 @@
 ;(function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
-
         factory(require('jquery'));
     } else {
-
         factory(window.jQuery);
     }
 }(function ($) {
@@ -43,7 +40,6 @@
                             completeCallback(status, statusText, responses, responseHeaders);
                         }
                         xdr = new XDomainRequest();
-
                         if (s.type === 'DELETE') {
                             s.url = s.url + addParamChar + '_method=DELETE';
                             s.type = 'POST';

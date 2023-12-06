@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('el', {
   defaultMessage: "Η τιμή φαίνεται να είναι μη έγκυρη.",
   type: {

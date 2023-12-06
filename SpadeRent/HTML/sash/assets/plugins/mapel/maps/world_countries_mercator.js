@@ -13,13 +13,10 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-
         module.exports = factory(require('jquery'), require('jquery-mapael'));
     } else if (typeof define === 'function' && define.amd) {
-
         define(['jquery', 'mapael'], factory);
     } else {
-
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
@@ -31,17 +28,11 @@
                  * map-specific constants
                  * (set by user)
                  */
-
                 width: 1008.77,
-
                 height: 651.44,
-
                 leftLongitude: -169.6,
-
                 rightLongitude: 190.25,
-
                 topLatitude: 83.68,
-
                 bottomLatitude: -55.55,
                 /*
                  * Transform a longitude coordinate into projection-specific x' coordinate
@@ -51,7 +42,6 @@
                  * @return x' projection-specific value
                  */
                 _projectLongitude: function (lon) {
-
                     return lon * Math.PI / 180;
                 },
                 /*
@@ -62,7 +52,6 @@
                  * @return y' projection-specific value
                  */
                 _projectLatitude: function (lat) {
-
                     var latRadSinus = Math.sin(lat * Math.PI / 180);
                     return 0.5 * Math.log((1 + latRadSinus) / (1 - latRadSinus));
                 },
@@ -82,15 +71,12 @@
                  */
                 getCoords: function (lat, lon) {
                     var self = this;
-
                     if (self._xLeftPrime === undefined) self._xLeftPrime = self._projectLongitude(self.leftLongitude);
                     if (self._xRightPrime === undefined) self._xRightPrime = self._projectLongitude(self.rightLongitude);
                     if (self._yTopPrime === undefined) self._yTopPrime = self._projectLatitude(self.topLatitude);
                     if (self._yBottomPrime === undefined) self._yBottomPrime = self._projectLatitude(self.bottomLatitude);
-
                     var xPrime = self._projectLongitude(lon);
                     var yPrime = self._projectLatitude(lat);
-
                     var x = (xPrime - self._xLeftPrime) * (self.width / (self._xRightPrime - self._xLeftPrime));
                     var y = (self._yTopPrime - yPrime) * (self.height / (self._yTopPrime - self._yBottomPrime));
                     return {x: x, y: y};

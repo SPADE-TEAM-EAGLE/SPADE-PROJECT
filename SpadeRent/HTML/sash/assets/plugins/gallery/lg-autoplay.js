@@ -44,19 +44,14 @@
     var Autoplay = function Autoplay(element) {
         this.el = element;
         this.core = window.lgData[this.el.getAttribute('lg-uid')];
-
         if (this.core.items.length < 2) {
             return false;
         }
         this.core.s = _extends({}, autoplayDefaults, this.core.s);
         this.interval = false;
-
         this.fromAuto = true;
-
         this.canceledOnTouch = false;
-
         this.fourceAutoplayTemp = this.core.s.fourceAutoplay;
-
         if (!this.core.doCss()) {
             this.core.s.progressBar = false;
         }
@@ -65,28 +60,22 @@
     };
     Autoplay.prototype.init = function () {
         var _this = this;
-
         if (_this.core.s.autoplayControls) {
             _this.controls();
         }
-
         if (_this.core.s.progressBar) {
             _this.core.outer.querySelector('.lg').insertAdjacentHTML('beforeend', '<div class="lg-progress-bar"><div class="lg-progress"></div></div>');
         }
-
         _this.progress();
-
         if (_this.core.s.autoplay) {
             _this.startlAuto();
         }
-
         utils.on(_this.el, 'onDragstart.lgtm touchstart.lgtm', function () {
             if (_this.interval) {
                 _this.cancelAuto();
                 _this.canceledOnTouch = true;
             }
         });
-
         utils.on(_this.el, 'onDragend.lgtm touchend.lgtm onSlideClick.lgtm', function () {
             if (!_this.interval && _this.canceledOnTouch) {
                 _this.startlAuto();
@@ -99,7 +88,6 @@
         var _progressBar;
         var _progress;
         utils.on(_this.el, 'onBeforeSlide.lgtm', function () {
-
             if (_this.core.s.progressBar && _this.fromAuto) {
                 _progressBar = _this.core.outer.querySelector('.lg-progress-bar');
                 _progress = _this.core.outer.querySelector('.lg-progress');
@@ -112,18 +100,15 @@
                     }, 20);
                 }
             }
-
             if (!_this.fromAuto && !_this.core.s.fourceAutoplay) {
                 _this.cancelAuto();
             }
             _this.fromAuto = false;
         });
     };
-
     Autoplay.prototype.controls = function () {
         var _this = this;
         var _html = '<span class="lg-autoplay-button lg-icon"></span>';
-
         _this.core.outer.querySelector(this.core.s.appendAutoplayControlsTo).insertAdjacentHTML('beforeend', _html);
         utils.on(_this.core.outer.querySelector('.lg-autoplay-button'), 'click.lg', function () {
             if (utils.hasClass(_this.core.outer, 'lg-show-autoplay')) {
@@ -137,7 +122,6 @@
             }
         });
     };
-
     Autoplay.prototype.startlAuto = function () {
         var _this = this;
         utils.setVendor(_this.core.outer.querySelector('.lg-progress'), 'Transition', 'width ' + (_this.core.s.speed + _this.core.s.pause) + 'ms ease 0s');
@@ -153,7 +137,6 @@
             _this.core.slide(_this.core.index, false, false);
         }, _this.core.s.speed + _this.core.s.pause);
     };
-
     Autoplay.prototype.cancelAuto = function () {
         clearInterval(this.interval);
         this.interval = false;

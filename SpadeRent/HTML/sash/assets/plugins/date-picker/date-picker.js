@@ -1,7 +1,3 @@
-
-
-
-
 (function (factory) {
     "use strict";
     if (typeof define === 'function' && define.amd) { // AMD
@@ -16,13 +12,11 @@
 })(function($, undefined) {
     "use strict";
     var defaultOpts = {
-
         beforeShow: noop,
         move: noop,
         change: noop,
         show: noop,
         hide: noop,
-
         color: false,
         flat: false,
         showInput: false,
@@ -73,8 +67,6 @@
         "</div>"
     ].join(''),
     markup = (function () {
-
-
         var gradientFix = "";
         if (IE) {
             for (var i = 1; i <= 6; i++) {
@@ -285,9 +277,7 @@
             if(boundElement.is(":disabled") || (opts.disabled === true)) {
                 disable();
             }
-
             container.click(stopPropagation);
-
             textInput.change(setFromTextInput);
             textInput.on("paste", function () {
                 setTimeout(setFromTextInput, 1);
@@ -328,11 +318,6 @@
                 e.stopPropagation();
                 e.preventDefault();
                 opts.showPaletteOnly = !opts.showPaletteOnly;
-
-
-
-
-
                 if (!opts.showPaletteOnly && !flat) {
                     container.css('left', '-=' + (pickerContainer.outerWidth(true) + 5));
                 }
@@ -355,7 +340,6 @@
                 move();
             }, dragStart, dragStop);
             draggable(dragger, function (dragX, dragY, e) {
-
                 if (!e.shiftKey) {
                     shiftMovementDirection = null;
                 }
@@ -381,8 +365,6 @@
             }, dragStart, dragStop);
             if (!!initialColor) {
                 set(initialColor);
-
-
                 updateUI();
                 currentPreferredFormat = opts.preferredFormat || tinycolor(initialColor).format;
                 addColorToSelectionPalette(initialColor);
@@ -401,8 +383,6 @@
                 else {
                     set($(e.target).closest(".sp-thumb-el").data("color"));
                     move();
-
-
                     if (opts.hideAfterPaletteSelect) {
                         updateOriginalInput(true);
                         hide();
@@ -418,7 +398,6 @@
         }
         function updateSelectionPaletteFromStorage() {
             if (localStorageKey && window.localStorage) {
-
                 try {
                     var oldPalette = window.localStorage[localStorageKey].split(",#");
                     if (oldPalette.length > 1) {
@@ -548,16 +527,12 @@
             boundElement.trigger('show.spectrum', [ colorOnShow ]);
         }
         function onkeydown(e) {
-
             if (e.keyCode === 27) {
                 hide();
             }
         }
         function clickout(e) {
-
             if (e.button == 2) { return; }
-
-
             if (isDragging) { return; }
             if (clickoutFiresChange) {
                 updateOriginalInput(true);
@@ -568,7 +543,6 @@
             hide();
         }
         function hide() {
-
             if (!visible || flat) { return; }
             visible = false;
             $(doc).off("keydown.spectrum", onkeydown);
@@ -585,8 +559,6 @@
         }
         function set(color, ignoreFormatChange) {
             if (tinycolor.equals(color, get())) {
-
-
                 updateUI();
                 return;
             }
@@ -630,10 +602,8 @@
         function updateUI() {
             textInput.removeClass("sp-validation-error");
             updateHelperLocations();
-
             var flatColor = tinycolor.fromRatio({ h: currentHue, s: 1, v: 1 });
             dragger.css("background-color", flatColor.toHexString());
-
             var format = currentPreferredFormat;
             if (currentAlpha < 1 && !(currentAlpha === 0 && format === "name")) {
                 if (format === "hex" || format === "hex3" || format === "hex6" || format === "name") {
@@ -646,13 +616,11 @@
             previewElement.removeClass("sp-clear-display");
             previewElement.css('background-color', 'transparent');
             if (!realColor && allowEmpty) {
-
                 previewElement.addClass("sp-clear-display");
             }
             else {
                 var realHex = realColor.toHexString(),
                     realRgb = realColor.toRgbString();
-
                 if (rgbaSupport || realColor.alpha === 1) {
                     previewElement.css("background-color", realRgb);
                 }
@@ -672,14 +640,12 @@
                         alphaSliderInner.css("background", "-webkit-" + gradient);
                         alphaSliderInner.css("background", "-moz-" + gradient);
                         alphaSliderInner.css("background", "-ms-" + gradient);
-
                         alphaSliderInner.css("background",
                             "linear-gradient(to right, " + realAlpha + ", " + realHex + ")");
                     }
                 }
                 displayColor = realColor.toString(format);
             }
-
             if (opts.showInput) {
                 textInput.val(displayColor);
             }
@@ -702,7 +668,6 @@
                 alphaSlideHelper.show();
                 slideHelper.show();
                 dragHelper.show();
-
                 var dragX = s * dragWidth;
                 var dragY = dragHeight - (v * dragHeight);
                 dragX = Math.max(
@@ -721,7 +686,6 @@
                 alphaSlideHelper.css({
                     "left": (alphaX - (alphaSlideHelperWidth / 2)) + "px"
                 });
-
                 var slideY = (currentHue) * slideHeight;
                 slideHelper.css({
                     "top": (slideY - slideHelperHeight) + "px"
@@ -734,7 +698,6 @@
                 hasChanged = !tinycolor.equals(color, colorOnShow);
             if (color) {
                 displayColor = color.toString(currentPreferredFormat);
-
                 addColorToSelectionPalette(color);
             }
             if (isInput) {
@@ -911,7 +874,6 @@
         }
         function move(e) {
             if (dragging) {
-
                 if (IE && doc.documentMode < 9 && !e.button) {
                     return stop();
                 }
@@ -921,7 +883,6 @@
                 var dragX = Math.max(0, Math.min(pageX - offset.left, maxWidth));
                 var dragY = Math.max(0, Math.min(pageY - offset.top, maxHeight));
                 if (hasTouch) {
-
                     prevent(e);
                 }
                 onmove.apply(element, [dragX, dragY, e]);
@@ -946,8 +907,6 @@
             if (dragging) {
                 $(doc).off(duringDragEvents);
                 $(doc.body).removeClass("sp-dragging");
-
-
                 setTimeout(function() {
                     onstop.apply(element, arguments);
                 }, 0);
@@ -1006,7 +965,6 @@
             });
             return returnValue;
         }
-
         return this.spectrum("destroy").each(function () {
             var options = $.extend({}, $(this).data(), opts);
             var spect = spectrum(this, options);
@@ -1035,9 +993,6 @@
             });
         }
     };
-
-
-
     (function() {
     var trimLeft = /^[\s,#]+/,
         trimRight = /\s+$/,
@@ -1050,11 +1005,9 @@
     var tinycolor = function(color, opts) {
         color = (color) ? color : '';
         opts = opts || { };
-
         if (color instanceof tinycolor) {
            return color;
         }
-
         if (!(this instanceof tinycolor)) {
             return new tinycolor(color, opts);
         }
@@ -1067,10 +1020,6 @@
         this._roundA = mathRound(1000 * this._a) / 1000;
         this._format = opts.format || rgb.format;
         this._gradientType = opts.gradientType;
-
-
-
-
         if (this._r < 1) { this._r = mathRound(this._r); }
         if (this._g < 1) { this._g = mathRound(this._g); }
         if (this._b < 1) { this._b = mathRound(this._b); }
@@ -1181,8 +1130,6 @@
             var hasAlpha = this._a < 1 && this._a >= 0;
             var needsAlphaFormat = !formatSet && hasAlpha && (format === "hex" || format === "hex6" || format === "hex3" || format === "name");
             if (needsAlphaFormat) {
-
-
                 if (format === "name" && this._a === 0) {
                     return this.toName();
                 }
@@ -1265,8 +1212,6 @@
             return this._applyCombination(tetrad, arguments);
         }
     };
-
-
     tinycolor.fromRatio = function(color, opts) {
         if (typeof color == "object") {
             var newColor = {};
@@ -1284,20 +1229,7 @@
         }
         return tinycolor(color, opts);
     };
-
-
     //
-
-
-
-
-
-
-
-
-
-
-
     //
     function inputToRGB(color) {
         var rgb = { r: 0, g: 0, b: 0 };
@@ -1341,15 +1273,6 @@
             a: a
         };
     }
-
-
-
-
-
-
-
-
-
     function rgbToRgb(r, g, b){
         return {
             r: bound01(r, 255) * 255,
@@ -1357,10 +1280,6 @@
             b: bound01(b, 255) * 255
         };
     }
-
-
-
-
     function rgbToHsl(r, g, b) {
         r = bound01(r, 255);
         g = bound01(g, 255);
@@ -1382,10 +1301,6 @@
         }
         return { h: h, s: s, l: l };
     }
-
-
-
-
     function hslToRgb(h, s, l) {
         var r, g, b;
         h = bound01(h, 360);
@@ -1411,10 +1326,6 @@
         }
         return { r: r * 255, g: g * 255, b: b * 255 };
     }
-
-
-
-
     function rgbToHsv(r, g, b) {
         r = bound01(r, 255);
         g = bound01(g, 255);
@@ -1436,10 +1347,6 @@
         }
         return { h: h, s: s, v: v };
     }
-
-
-
-
      function hsvToRgb(h, s, v) {
         h = bound01(h, 360) * 6;
         s = bound01(s, 100);
@@ -1455,26 +1362,17 @@
             b = [p, p, t, v, v, q][mod];
         return { r: r * 255, g: g * 255, b: b * 255 };
     }
-
-
-
-
     function rgbToHex(r, g, b, allow3Char) {
         var hex = [
             pad2(mathRound(r).toString(16)),
             pad2(mathRound(g).toString(16)),
             pad2(mathRound(b).toString(16))
         ];
-
         if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
             return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
         }
         return hex.join("");
     }
-
-
-
-
         function rgbaToHex(r, g, b, a) {
             var hex = [
                 pad2(convertDecimalToHex(a)),
@@ -1484,8 +1382,6 @@
             ];
             return hex.join("");
         }
-
-
     tinycolor.equals = function (color1, color2) {
         if (!color1 || !color2) { return false; }
         return tinycolor(color1).toRgbString() == tinycolor(color2).toRgbString();
@@ -1497,10 +1393,6 @@
             b: mathRandom()
         });
     };
-
-
-
-
     function desaturate(color, amount) {
         amount = (amount === 0) ? 0 : (amount || 10);
         var hsl = tinycolor(color).toHsl();
@@ -1540,18 +1432,12 @@
         hsl.l = clamp01(hsl.l);
         return tinycolor(hsl);
     }
-
-
     function spin(color, amount) {
         var hsl = tinycolor(color).toHsl();
         var hue = (mathRound(hsl.h) + amount) % 360;
         hsl.h = hue < 0 ? 360 + hue : hue;
         return tinycolor(hsl);
     }
-
-
-
-
     function complement(color) {
         var hsl = tinycolor(color).toHsl();
         hsl.h = (hsl.h + 180) % 360;
@@ -1609,8 +1495,6 @@
         }
         return ret;
     }
-
-
     tinycolor.mix = function(color1, color2, amount) {
         amount = (amount === 0) ? 0 : (amount || 50);
         var rgb1 = tinycolor(color1).toRgb();
@@ -1634,13 +1518,6 @@
         };
         return tinycolor(rgba);
     };
-
-
-
-
-
-
-
     tinycolor.readability = function(color1, color2) {
         var c1 = tinycolor(color1);
         var c2 = tinycolor(color2);
@@ -1658,27 +1535,15 @@
             color: colorDiff
         };
     };
-
-
-
-
-
     tinycolor.isReadable = function(color1, color2) {
         var readability = tinycolor.readability(color1, color2);
         return readability.brightness > 125 && readability.color > 500;
     };
-
-
-
-
-
     tinycolor.mostReadable = function(baseColor, colorList) {
         var bestColor = null;
         var bestScore = 0;
         var bestIsReadable = false;
         for (var i=0; i < colorList.length; i++) {
-
-
             var readability = tinycolor.readability(baseColor, colorList[i]);
             var readable = readability.brightness > 125 && readability.color > 500;
             var score = 3 * (readability.brightness / 125) + (readability.color / 500);
@@ -1692,9 +1557,6 @@
         }
         return bestColor;
     };
-
-
-
     var names = tinycolor.names = {
         aliceblue: "f0f8ff",
         antiquewhite: "faebd7",
@@ -1846,11 +1708,7 @@
         yellow: "ff0",
         yellowgreen: "9acd32"
     };
-
     var hexNames = tinycolor.hexNames = flip(names);
-
-
-
     function flip(o) {
         var flipped = { };
         for (var i in o) {
@@ -1860,7 +1718,6 @@
         }
         return flipped;
     }
-
     function boundAlpha(a) {
         a = parseFloat(a);
         if (isNaN(a) || a < 0 || a > 1) {
@@ -1868,68 +1725,49 @@
         }
         return a;
     }
-
     function bound01(n, max) {
         if (isOnePointZero(n)) { n = "100%"; }
         var processPercent = isPercentage(n);
         n = mathMin(max, mathMax(0, parseFloat(n)));
-
         if (processPercent) {
             n = parseInt(n * max, 10) / 100;
         }
-
         if ((math.abs(n - max) < 0.000001)) {
             return 1;
         }
-
         return (n % max) / parseFloat(max);
     }
-
     function clamp01(val) {
         return mathMin(1, mathMax(0, val));
     }
-
     function parseIntFromHex(val) {
         return parseInt(val, 16);
     }
-
-
     function isOnePointZero(n) {
         return typeof n == "string" && n.indexOf('.') != -1 && parseFloat(n) === 1;
     }
-
     function isPercentage(n) {
         return typeof n === "string" && n.indexOf('%') != -1;
     }
-
     function pad2(c) {
         return c.length == 1 ? '0' + c : '' + c;
     }
-
     function convertToPercentage(n) {
         if (n <= 1) {
             n = (n * 100) + "%";
         }
         return n;
     }
-
     function convertDecimalToHex(d) {
         return Math.round(parseFloat(d) * 255).toString(16);
     }
-
     function convertHexToDecimal(h) {
         return (parseIntFromHex(h) / 255);
     }
     var matchers = (function() {
-
         var CSS_INTEGER = "[-\\+]?\\d+%?";
-
         var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
-
         var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
-
-
-
         var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
         var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
         return {
@@ -1944,9 +1782,6 @@
             hex8: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
         };
     })();
-
-
-
     function stringInputToObject(color) {
         color = color.replace(trimLeft,'').replace(trimRight, '').toLowerCase();
         var named = false;
@@ -1957,10 +1792,6 @@
         else if (color == 'transparent') {
             return { r: 0, g: 0, b: 0, a: 0, format: "name" };
         }
-
-
-
-
         var match;
         if ((match = matchers.rgb.exec(color))) {
             return { r: match[1], g: match[2], b: match[3] };

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('uk', {
   defaultMessage: "Некоректне значення.",
   type: {

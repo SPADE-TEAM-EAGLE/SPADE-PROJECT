@@ -1,45 +1,31 @@
 ;(function (factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-
       define([
           'jquery',
           'jquery-ui/ui/widget'
       ], factory);
   } else if (typeof exports === 'object') {
-
       factory(
           require('jquery'),
           require('./vendor/jquery.ui.widget')
       );
   } else {
-
       factory(window.jQuery);
   }
 }(function ($) {
   'use strict';
-
-
   $.support.fileInput = !(new RegExp(
-
       '(Android (1\\.[0156]|2\\.[01]))' +
           '|(Windows Phone (OS 7|8\\.0))|(XBLWP)|(ZuneWP)|(WPDesktop)' +
           '|(w(eb)?OSBrowser)|(webOS)' +
           '|(Kindle/(1\\.0|2\\.[05]|3\\.0))'
   ).test(window.navigator.userAgent) ||
-
       $('<input type="file">').prop('disabled'));
-
-
-
-
-
   $.support.xhrFileUpload = !!(window.ProgressEvent && window.FileReader);
   $.support.xhrFormDataFileUpload = !!window.FormData;
-
   $.support.blobSlice = window.Blob && (Blob.prototype.slice ||
       Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
-
   function getDragHandler(type) {
       var isDragOver = type === 'dragover';
       return function (e) {
@@ -57,100 +43,33 @@
           }
       };
   }
-
-
-
-
-
-
-
-
   $.widget('blueimp.fileupload', {
       options: {
-
-
           dropZone: $(document),
-
-
           pasteZone: undefined,
-
-
-
-
           fileInput: undefined,
-
-
-
-
           replaceFileInput: true,
-
-
-
-
           paramName: undefined,
-
-
-
           singleFileUploads: true,
-
-
           limitMultiFileUploads: undefined,
-
-
-
           limitMultiFileUploadSize: undefined,
-
-
-
           limitMultiFileUploadSizeOverhead: 512,
-
-
           sequentialUploads: false,
-
-
           limitConcurrentUploads: undefined,
-
           forceIframeTransport: false,
-
-
           redirect: undefined,
-
-
           redirectParamName: undefined,
-
-
           postMessage: undefined,
-
-
-
           multipart: true,
-
-
-
-
           maxChunkSize: undefined,
-
-
-
-
-
           uploadedBytes: undefined,
-
-
-
           recalculateProgress: true,
-
           progressInterval: 100,
-
           bitrateInterval: 500,
-
           autoUpload: true,
-
           messages: {
               uploadedBytes: 'Uploaded bytes exceed file size'
           },
-
-
           i18n: function (message, context) {
               message = this.messages[message] || message.toString();
               if (context) {
@@ -160,30 +79,12 @@
               }
               return message;
           },
-
-
-
-
-
           formData: function (form) {
               return form.serializeArray();
           },
-
-
-
-
-
           //
-
-
-
           //
-
-
           //
-
-
-
           add: function (e, data) {
               if (e.isDefaultPrevented()) {
                   return false;
@@ -195,50 +96,11 @@
                   });
               }
           },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           processData: false,
           contentType: false,
           cache: false,
           timeout: 0
       },
-
-
       _specialOptions: [
           'fileInput',
           'dropZone',
@@ -330,8 +192,6 @@
               loaded = Math.floor(
                   e.loaded / e.total * (data.chunkSize || data._progress.total)
               ) + (data.uploadedBytes || 0);
-
-
               this._progress.loaded += (loaded - data._progress.loaded);
               this._progress.bitrate = this._bitrateTimer.getBitrate(
                   now,
@@ -344,16 +204,11 @@
                   loaded,
                   data.bitrateInterval
               );
-
-
-
               this._trigger(
                   'progress',
                   $.Event('progress', {delegatedEvent: e}),
                   data
               );
-
-
               this._trigger(
                   'progressall',
                   $.Event('progressall', {delegatedEvent: e}),
@@ -364,12 +219,9 @@
       _initProgressListener: function (options) {
           var that = this,
               xhr = options.xhr ? options.xhr() : $.ajaxSettings.xhr();
-
-
           if (xhr.upload) {
               $(xhr.upload).bind('progress', function (e) {
                   var oe = e.originalEvent;
-
                   e.lengthComputable = oe.lengthComputable;
                   e.loaded = oe.loaded;
                   e.total = oe.total;
@@ -381,14 +233,12 @@
           }
       },
       _isInstanceOf: function (type, obj) {
-
           return Object.prototype.toString.call(obj) === '[object ' + type + ']';
       },
       _initXHRData: function (options) {
           var that = this,
               formData,
               file = options.files[0],
-
               multipart = options.multipart || !$.support.xhrFileUpload,
               paramName = $.type(options.paramName) === 'array' ?
                   options.paramName[0] : options.paramName;
@@ -405,10 +255,6 @@
               options.data = options.blob || file;
           } else if ($.support.xhrFormDataFileUpload) {
               if (options.postMessage) {
-
-
-
-
                   formData = this._getFormData(options);
                   if (options.blob) {
                       formData.push({
@@ -437,8 +283,6 @@
                       formData.append(paramName, options.blob, file.name);
                   } else {
                       $.each(options.files, function (index, file) {
-
-
                           if (that._isInstanceOf('File', file) ||
                                   that._isInstanceOf('Blob', file)) {
                               formData.append(
@@ -453,16 +297,12 @@
               }
               options.data = formData;
           }
-
           options.blob = null;
       },
       _initIframeSettings: function (options) {
           var targetHost = $('<a></a>').prop('href', options.url).prop('host');
-
           options.dataType = 'iframe ' + (options.dataType || '');
-
           options.formData = this._getFormData(options);
-
           if (options.redirect && targetHost && targetHost !== location.host) {
               options.formData.push({
                   name: options.redirectParamName || 'redirect',
@@ -479,8 +319,6 @@
                   this._initProgressListener(options);
               }
               if (options.postMessage) {
-
-
                   options.dataType = 'postmessage ' + (options.dataType || '');
               }
           } else {
@@ -510,12 +348,8 @@
           return paramName;
       },
       _initFormSettings: function (options) {
-
-
           if (!options.form || !options.form.length) {
               options.form = $(options.fileInput.prop('form'));
-
-
               if (!options.form.length) {
                   options.form = $(this.options.fileInput.prop('form'));
               }
@@ -524,7 +358,6 @@
           if (!options.url) {
               options.url = options.form.prop('action') || location.href;
           }
-
           options.type = (options.type ||
               ($.type(options.form.prop('method')) === 'string' &&
                   options.form.prop('method')) || ''
@@ -543,8 +376,6 @@
           this._initDataSettings(options);
           return options;
       },
-
-
       _getDeferredState: function (deferred) {
           if (deferred.state) {
               return deferred.state();
@@ -557,16 +388,12 @@
           }
           return 'pending';
       },
-
-
       _enhancePromise: function (promise) {
           promise.success = promise.done;
           promise.error = promise.fail;
           promise.complete = promise.always;
           return promise;
       },
-
-
       _getXHRPromise: function (resolveOrReject, context, args) {
           var dfd = $.Deferred(),
               promise = dfd.promise();
@@ -579,7 +406,6 @@
           promise.abort = dfd.promise;
           return this._enhancePromise(promise);
       },
-
       _addConvenienceMethods: function (e, data) {
           var that = this,
               getPromise = function (args) {
@@ -638,8 +464,6 @@
               return this._response;
           };
       },
-
-
       _getUploadedBytes: function (jqXHR) {
           var range = jqXHR.getResponseHeader('Range'),
               parts = range && range.split('-'),
@@ -647,11 +471,6 @@
                   parseInt(parts[1], 10);
           return upperBytesPos && upperBytesPos + 1;
       },
-
-
-
-
-
       _chunkedUpload: function (options, testOnly) {
           options.uploadedBytes = options.uploadedBytes || 0;
           var that = this,
@@ -679,9 +498,7 @@
                   [null, 'error', file.error]
               );
           }
-
           upload = function () {
-
               var o = $.extend({}, options),
                   currentLoaded = o._progress.loaded;
               o.blob = slice.call(
@@ -690,24 +507,16 @@
                   ub + ($.type(mcs) === 'function' ? mcs(o) : mcs),
                   file.type
               );
-
-
               o.chunkSize = o.blob.size;
-
               o.contentRange = 'bytes ' + ub + '-' +
                   (ub + o.chunkSize - 1) + '/' + fs;
-
               that._initXHRData(o);
-
               that._initProgressListener(o);
               jqXHR = ((that._trigger('chunksend', null, o) !== false && $.ajax(o)) ||
                       that._getXHRPromise(false, o.context))
                   .done(function (result, textStatus, jqXHR) {
                       ub = that._getUploadedBytes(jqXHR) ||
                           (ub + o.chunkSize);
-
-
-
                       if (currentLoaded + o.chunkSize - o._progress.loaded) {
                           that._onProgress($.Event('progress', {
                               lengthComputable: true,
@@ -722,8 +531,6 @@
                       that._trigger('chunkdone', null, o);
                       that._trigger('chunkalways', null, o);
                       if (ub < fs) {
-
-
                           upload();
                       } else {
                           dfd.resolveWith(
@@ -753,26 +560,17 @@
       },
       _beforeSend: function (e, data) {
           if (this._active === 0) {
-
-
-
               this._trigger('start');
-
               this._bitrateTimer = new this._BitrateTimer();
-
               this._progress.loaded = this._progress.total = 0;
               this._progress.bitrate = 0;
           }
-
-
-
           this._initResponseObject(data);
           this._initProgressObject(data);
           data._progress.loaded = data.loaded = data.uploadedBytes || 0;
           data._progress.total = data.total = this._getTotal(data.files) || 1;
           data._progress.bitrate = data.bitrate = 0;
           this._active += 1;
-
           this._progress.loaded += data.loaded;
           this._progress.total += data.total;
       },
@@ -780,8 +578,6 @@
           var total = options._progress.total,
               response = options._response;
           if (options._progress.loaded < total) {
-
-
               this._onProgress($.Event('progress', {
                   lengthComputable: true,
                   loaded: total,
@@ -796,8 +592,6 @@
       _onFail: function (jqXHR, textStatus, errorThrown, options) {
           var response = options._response;
           if (options.recalculateProgress) {
-
-
               this._progress.loaded -= options._progress.loaded;
               this._progress.total -= options._progress.total;
           }
@@ -807,8 +601,6 @@
           this._trigger('fail', null, options);
       },
       _onAlways: function (jqXHRorResult, textStatus, jqXHRorError, options) {
-
-
           this._trigger('always', null, options);
       },
       _onSend: function (e, data) {
@@ -823,7 +615,6 @@
               options = that._getAJAXSettings(data),
               send = function () {
                   that._sending += 1;
-
                   options._bitrateTimer = new that._BitrateTimer();
                   jqXHR = jqXHR || (
                       ((aborted || that._trigger(
@@ -848,8 +639,6 @@
                       that._active -= 1;
                       if (options.limitConcurrentUploads &&
                               options.limitConcurrentUploads > that._sending) {
-
-
                           var nextSlot = that._slots.shift();
                           while (nextSlot) {
                               if (that._getDeferredState(nextSlot) === 'pending') {
@@ -860,8 +649,6 @@
                           }
                       }
                       if (that._active === 0) {
-
-
                           that._trigger('stop');
                       }
                   });
@@ -879,9 +666,6 @@
                   this._sequence = this._sequence.then(send, send);
                   pipe = this._sequence;
               }
-
-
-
               pipe.abort = function () {
                   aborted = [undefined, 'abort', 'abort'];
                   if (!jqXHR) {
@@ -975,30 +759,19 @@
           var input = data.fileInput,
               inputClone = input.clone(true),
               restoreFocus = input.is(document.activeElement);
-
           data.fileInputClone = inputClone;
           $('<form></form>').append(inputClone)[0].reset();
-
-
           input.after(inputClone).detach();
-
-
           if (restoreFocus) {
               inputClone.focus();
           }
-
           $.cleanData(input.unbind('remove'));
-
-
-
           this.options.fileInput = this.options.fileInput.map(function (i, el) {
               if (el === input[0]) {
                   return inputClone[0];
               }
               return el;
           });
-
-
           if (input[0] === this.element[0]) {
               this.element = inputClone;
           }
@@ -1012,10 +785,6 @@
                   if (e && !e.entry) {
                       e.entry = entry;
                   }
-
-
-
-
                   dfd.resolve([e]);
               },
               successHandler = function (entries) {
@@ -1039,7 +808,6 @@
           path = path || '';
           if (entry.isFile) {
               if (entry._file) {
-
                   entry._file.relativePath = path;
                   dfd.resolve(entry._file);
               } else {
@@ -1052,8 +820,6 @@
               dirReader = entry.createReader();
               readEntries();
           } else {
-
-
               dfd.resolve([]);
           }
           return dfd.promise();
@@ -1083,7 +849,6 @@
                       if (item.webkitGetAsEntry) {
                           entry = item.webkitGetAsEntry();
                           if (entry) {
-
                               entry._file = item.getAsFile();
                           }
                           return entry;
@@ -1111,12 +876,8 @@
               if (!value) {
                   return $.Deferred().resolve([]).promise();
               }
-
-
-
               files = [{name: value.replace(/^.*\\/, '')}];
           } else if (files[0].name === undefined && files[0].fileName) {
-
               $.each(files, function (index, file) {
                   file.name = file.fileName;
                   file.size = file.fileSize;
@@ -1205,9 +966,7 @@
               this._on(this.options.dropZone, {
                   dragover: this._onDragOver,
                   drop: this._onDrop,
-
                   dragenter: this._onDragEnter,
-
                   dragleave: this._onDragLeave
               });
               this._on(this.options.pasteZone, {
@@ -1268,14 +1027,12 @@
           var that = this,
               options = this.options,
               data = this.element.data();
-
           $.each(
               this.element[0].attributes,
               function (index, attr) {
                   var key = attr.name.toLowerCase(),
                       value;
                   if (/^data-/.test(key)) {
-
                       key = key.slice(5).replace(/-[a-z]/g, function (str) {
                           return str.charAt(1).toUpperCase();
                       });
@@ -1297,22 +1054,12 @@
           this._initProgressObject(this);
           this._initEventHandlers();
       },
-
-
       active: function () {
           return this._active;
       },
-
-
-
-
       progress: function () {
           return this._progress;
       },
-
-
-
-
       add: function (data) {
           var that = this;
           if (!data || this.options.disabled) {
@@ -1328,11 +1075,6 @@
               this._onAdd(null, data);
           }
       },
-
-
-
-
-
       send: function (data) {
           if (data && !this.options.disabled) {
               if (data.fileInput && !data.files) {

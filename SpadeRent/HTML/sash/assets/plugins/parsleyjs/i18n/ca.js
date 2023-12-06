@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ca', {
   defaultMessage: "Aquest valor sembla ser invàlid.",
   type: {

@@ -1675,13 +1675,10 @@
                     }
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -2020,7 +2017,6 @@
                     }
                 }
             });
-
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
@@ -2215,7 +2211,6 @@
                         console.log(xhr)
                         console.log(error)
                     }
-
                 })
             })
             $('input[type="checkbox"]').change(function () {
@@ -2282,9 +2277,6 @@
                 if (zipField.val().length !== 5) {
                     allFieldsFilled = false;
                 }
-
-
-
                 return allFieldsFilled;
             }
             function updateButtonStatus() {

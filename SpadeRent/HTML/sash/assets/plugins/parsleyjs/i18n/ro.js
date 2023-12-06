@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ro', {
   defaultMessage: "Acest câmp nu este completat corect.",
   type: {

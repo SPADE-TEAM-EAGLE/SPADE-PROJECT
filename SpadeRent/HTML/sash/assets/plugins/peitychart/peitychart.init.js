@@ -2,7 +2,6 @@
  "use strict"; // Start of use strict
 $(function() {
     "use strict";
-
     $("span.pie").peity("pie",{
         width: '50',
         height: '50'
@@ -52,9 +51,7 @@ $(function() {
         width: '100',
         height: '100'
     })
-
     $(".data-attributes span").peity("donut")
-
     $("select").change(function() {
         var text = $(this).val() + "/" + 5
         $(this)
@@ -64,7 +61,6 @@ $(function() {
         $("#notice").text("Chart updated: " + text)
     }).change()
     $("span.graph").peity("pie")
-
     var updatingChart = $(".updating-chart").peity("line", { width: "100%",height:150 })
     setInterval(function() {
         var random = Math.round(Math.random() * 20)

@@ -3,7 +3,6 @@ const {
   sendMail,
   taskSendMail,
   sendMailLandlord,
-
 } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -20,19 +19,13 @@ const {
   userPermissionUpdate,
   getUsersWithRoles
 } = require("../constants/queries");
-
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const config = process.env;
-
-
-
 exports.createUserPermissionUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, Ustatus, role, images } = req.body;
   const { userId } = req.user;
-
   const currentDate = new Date();
-
   try {
     let image_url = "";
     let image_key = "";
@@ -48,7 +41,6 @@ exports.createUserPermissionUser = async function (req, res) {
       return res.status(201).send("Email already exists");
     }
     const hashPassword = await hashedPassword(password);
-
     const salt = bcrypt.genSaltSync(10);
     const id = bcrypt
       .hashSync(lastName + new Date().getTime().toString(), salt)
@@ -79,10 +71,8 @@ exports.createUserPermissionUser = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
-
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
-
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
@@ -119,12 +109,8 @@ exports.userCheckEmail = async function (req, res) {
     });
   }
 };
-
-
 exports.userPermissionGetById = async function (req, res) {
-
   const { id } = req.body;
-
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "id"), [
       id,
@@ -144,8 +130,6 @@ exports.userPermissionGetById = async function (req, res) {
     });
   }
 };
-
-
 exports.updateUserPermissionUsers = async function (req, res) {
   const { firstName, lastName, email, phone, Ustatus, role, id, images } = req.body;
   console.log(req.body)
@@ -185,8 +169,6 @@ exports.updateUserPermissionUsers = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
-
-
 exports.userPermissionUsersDelete = async function (req, res) {
   const { id } = req.body;
   try {
@@ -208,10 +190,7 @@ exports.userPermissionUsersDelete = async function (req, res) {
     });
   }
 };
-
-
 exports.userPermissionGetAll = async function (req, res) {
-
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(getUsersWithRoles, [
@@ -234,13 +213,10 @@ exports.userPermissionGetAll = async function (req, res) {
     });
   }
 };
-
 exports.userPermissionRoles = async function (req, res) {
   const { userId } = req.user;
-
   function splitAndConvertToObject(value) {
     const resultObject = {};
-
     if (value.includes(',')) {
       const values = value.split(",");
       for (const item of values) {
@@ -249,18 +225,14 @@ exports.userPermissionRoles = async function (req, res) {
     } else {
       resultObject[value] = true;
     }
-
     return resultObject;
   }
   try {
     const selectResult = await queryRunner(selectQuery("userRoles", "userId"), [userId]);
     if (selectResult[0].length > 0) {
       const dataArray = [];
-
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
-
-
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].Urole;
         const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
@@ -279,7 +251,6 @@ exports.userPermissionRoles = async function (req, res) {
         const settingMUsers = splitAndConvertToObject(selectResult[0][i].settingMUsers);
         const settingEmailT = splitAndConvertToObject(selectResult[0][i].settingEmailT);
         const SettingInvoiceSetting = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
-
         dataArray.push({
           id,
           role,
@@ -316,11 +287,8 @@ exports.userPermissionRoles = async function (req, res) {
     });
   }
 };
-
-
 exports.userPermissionUpdate = async function (req, res) {
   const { role, columnName, permission } = req.body;
-
   try {
     const updateResult = await queryRunner(`UPDATE userRoles SET ${columnName} = "${permission}" WHERE id = ${role}`);
     if (updateResult[0].affectedRows > 0) {

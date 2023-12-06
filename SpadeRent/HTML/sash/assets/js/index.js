@@ -1,12 +1,9 @@
 (function ($) {
     "use strict";
-
-
     var chart = c3.generate({
         bindto: '#chart-area-spline2', // id of chart wrapper
         data: {
             columns: [
-
                 ['data1', 0, 8, 10, 12, 20, 18, 15, 10, 18, 10, 20, 10],
                 ['data2', 0, 12, 8, 20, 10, 13, 10, 20, 10, 19, 8, 19]
             ],
@@ -16,7 +13,6 @@
                 data2: '#26eda2'
             },
             names: {
-
                 'data1': 'Profit',
                 'data2': 'Sales'
             }
@@ -65,13 +61,10 @@
             show: false
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-area-spline1', // id of chart wrapper
         data: {
             columns: [
-
                 ['data1', 0, 8, 10, 12, 20, 18, 15, 10, 18, 10, 20, 10],
                 ['data2', 0, 12, 8, 20, 10, 13, 10, 20, 10, 19, 8, 19]
             ],
@@ -81,7 +74,6 @@
                 data2: '#5797fc'
             },
             names: {
-
                 'data1': 'data1',
                 'data2': 'data2'
             }
@@ -89,7 +81,6 @@
         axis: {
             x: {
                 type: 'category',
-
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             },
         },
@@ -101,8 +92,6 @@
             top: 0
         },
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-visitors',
         padding: {
@@ -161,13 +150,10 @@
             pattern: ['#c21a1a', '#4ecc48', '#867efc',]
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-tasks', // id of chart wrapper
         data: {
             columns: [
-
                 ['data1', 0, 0, 1, 2, 21, 9, 12, 10, 31, 13, 65, 10, 12, 6, 4, 3, 0],
                 ['data2', 0, 0, 1, 2, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 2, 2, 0],
                 ['data3', 0, 0, 1, 0, 2, 0, 1, 0, 2, 3, 0, 2, 3, 2, 1, 0, 0]
@@ -187,7 +173,6 @@
                 data3: '#09ad95'
             },
             names: {
-
                 'data1': 'Profit',
                 'data2': 'Sales',
                 'data3': 'Gain'
@@ -237,13 +222,10 @@
             show: false
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-donut', // id of chart wrapper
         data: {
             columns: [
-
                 ['data1', 78],
                 ['data2', 95],
                 ['data3', 25],
@@ -255,7 +237,6 @@
                 data3: '#f66d9b'
             },
             names: {
-
                 'data1': 'sales1',
                 'data2': 'sales2',
                 'data3': 'sales3'
@@ -270,13 +251,10 @@
             top: 0
         },
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-pie', // id of chart wrapper
         data: {
             columns: [
-
                 ['data1', 98],
                 ['data2', 76],
                 ['data3', 45],
@@ -288,7 +266,6 @@
                 data3: '#ff7088'
             },
             names: {
-
                 'data1': 'profit1',
                 'data2': 'profit2',
                 'data3': 'profit3'
@@ -303,8 +280,6 @@
             top: 0
         },
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-bg-users-1',
         padding: {
@@ -362,8 +337,6 @@
             pattern: ['#8543f6']
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-bg-users-2',
         padding: {
@@ -421,8 +394,6 @@
             pattern: ['#ff7088']
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-bg-users-3',
         padding: {
@@ -480,8 +451,6 @@
             pattern: ['#fc7303']
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-bg-users-4',
         padding: {
@@ -539,8 +508,6 @@
             pattern: ['#4ecc48']
         }
     });
-
-
     var chart = c3.generate({
         bindto: '#chart-browsers',
         data: {
@@ -564,8 +531,6 @@
             show: true
         }
     });
-    
-
     var chart = c3.generate({
         bindto: '#chart-emails',
         padding: {
@@ -599,8 +564,6 @@
             show: true
         },
     });
-
     $('.resp-tabs-list .home-hogo').addClass('active');
     $('.second-sidemenu .home-hogo').addClass('resp-tab-content-active');
-
 })(jQuery);

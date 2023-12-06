@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('fa', {
   defaultMessage: "این مقدار صحیح نمی باشد",
   type: {

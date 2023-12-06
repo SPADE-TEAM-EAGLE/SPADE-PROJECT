@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('en', {
   defaultMessage: "This value seems to be invalid.",
   type: {

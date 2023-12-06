@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('lv', {
   dateiso:  "Šai vērtībai jābūt korekti noformētam datumam (YYYY-MM-DD).",
   minwords: "Šī vērtība ir par īsu. Tai jābūt vismaz %s vārdus garai.",

@@ -17,7 +17,6 @@ $.ajax({
         console.log('Error occurred while fetching state and city data.');
         console.log(xhr);
         console.log(error);
-
     }
 });
 function checkFieldsStatus(accordionId) {
@@ -26,7 +25,6 @@ function checkFieldsStatus(accordionId) {
     var hasEmptyFields = false;
     var hasErrorFields = false;
     var hasFilledFields = false;
-
     accordionFields.each(function () {
         var $field = $(this);
         if ($field.val() === '' || $field.val() === 'Choose...' || $("#zip").val().length!==5) {
@@ -44,7 +42,6 @@ function checkFieldsStatus(accordionId) {
     } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
         return 2;
     } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-
         return 3;
     } else {
         return 0;
@@ -64,12 +61,10 @@ function checkFieldsFilled(id) {
         if (field.value === "" || field.value === "Choose...") {
             allFieldsFilled = false;
         }
-
     });
     const chevronIcon = accordionItem.querySelector(".icon");
     switch (status) {
         case 0:
-
             break;
         case 1:
             chevronIcon.classList.remove("fi-rs-check-circle");
@@ -88,7 +83,6 @@ function checkFieldsFilled(id) {
             console.log(2)
             chevronIcon.classList.remove("fi-rs-exclamation");
             chevronIcon.classList.add("chevron");
-
             chevronIcon.classList.remove("cross");
             chevronIcon.classList.remove("tick");
             break;
@@ -99,14 +93,9 @@ function checkFieldsFilled(id) {
 var selectedFiles = [];
 function dropHandler(ev) {
 console.log("File(s) dropped");
-
-
 ev.preventDefault();
-
 if (ev.dataTransfer.items) {
-
 [...ev.dataTransfer.items].forEach((item, i) => {
-
 if (item.kind === "file") {
 const file = item.getAsFile();
 file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
@@ -114,7 +103,6 @@ updateSelectedFilesContainer()
 }
 });
 } else {
-
 [...ev.dataTransfer.files].forEach((file, i) => {
 console.log(`… file[${i}].name = ${file.name}`);
 });
@@ -122,35 +110,27 @@ console.log(`… file[${i}].name = ${file.name}`);
 }
 function dragOverHandler(ev) {
 console.log("File(s) in drop zone");
-
-
 ev.preventDefault();
 }
-
 function updateSelectedFilesContainer() {
 var selectedFilesContainer = $('.file-grid');
 selectedFilesContainer.empty();
-
 selectedFiles.forEach(function (file, index) {
 console.log(selectedFiles.length)
 console.log(file)
 var fileElement = $('<div>')
 .addClass('selected-file');
-
 if (file.type && file.type.includes('image')) {
-
 fileElement.append(
 $('<div>').addClass('file-preview')
     .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
 );
 } else if (file.type && file.type.includes('pdf')) {
-
 fileElement.append(
 $('<div>').addClass('file-preview')
     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
 );
 } else {
-
 if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
 fileElement.append(
     $('<div>').addClass('file-preview')
@@ -162,7 +142,6 @@ fileElement.append(
         .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
 );
 } else {
-
 fileElement.append(
     $('<div>').addClass('file-preview')
         .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
@@ -200,49 +179,32 @@ fileElement
 .appendTo(selectedFilesContainer);
 }
 }
-
 });
 }
 $(document).ready(function () {
-
-
-
     $.ajax({
-
         url: 'https://backend.app.spaderent.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
-
             console.log(data)
-
             var stateDropdown = $('#state');
             var stateDropdown1 = $('#state1');
-
-
-
-
-
                 states=data
-
             data.forEach(function(state) {
                 console.log(stateDropdown)
                 stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                 stateDropdown1.append($('<option></option>').text(state.states).val(state.states));
-
             });
-
         },
         error: function(xhr, status, error) {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-
         }
     });
     function areAllFieldsFilled() {
         var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
         var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-
         var allFieldsFilled = accordion1Fields.filter(function () {
             return $(this).val() === '' || $(this).val() === 'Choose...';
         }).length === 0 && accordion2Fields.filter(function () {
@@ -254,44 +216,27 @@ $(document).ready(function () {
         }
         return allFieldsFilled;
     }
-
-
     function updateButtonStatus() {
         var accordion1Fields = $('#accordion-item1 input[type="text"], #accordion-item1 select');
         var accordion2Fields = $('#accordion-item2 input[type="text"], #accordion-item2 select');
-
-
         var isAccordion1FieldsEmpty = accordion1Fields.filter(function () {
             return $(this).val() !== '' || $(this).val() === 'Choose...';
         }).length === 0;
-
         var isAccordion2FieldsEmpty = accordion2Fields.filter(function () {
             return $(this).val() !== '' || $(this).val() === 'Choose...';
         }).length === 0;
-
-
-
-
         if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty) {
             $('#draft').removeAttr('disabled');
         } else {
             $('#draft').attr('disabled', 'disabled');
         }
-
         var allFieldsFilled = areAllFieldsFilled();
-
-
         if (allFieldsFilled) {
             $('#next').removeClass("disabled");
-
         } else {
             $('#next').addClass("disabled");
-
-
         }
     }
-
-
     $('#accordion-item1 input, #accordion-item1 select, #accordion-item2 input, #accordion-item2 select').on('input change', function () {
         var $field = $(this);
         var $errorMessage = $field.next('.text-danger');
@@ -316,68 +261,47 @@ $(document).ready(function () {
         }
         updateButtonStatus();
     });
-
-
-
     $('#fileInput').on('change', function () {
-        
         var files = Array.from($(this)[0].files);
         console.log(files)
         files.forEach(function (file) {
             file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
         });
-        
         updateSelectedFilesContainer(); // Update the selected files container
     });
     $('#fileInput_update').on('change', function () {
-
         var files = Array.from($(this)[0].files);
-
         files.forEach(function (file) {
             file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
         });
-
         updateSelectedFilesContainer(); // Update the selected files container
     });
-
     $(document).on('click', '.delete-file', function () {
         var index = $(this).data('index');
         selectedFiles.splice(index, 1); // Remove the selected file from the array
         updateSelectedFilesContainer(); // Update the selected files container
     });
-
 function resetAccordions() {
-
     $('.accordion-item').each(function () {
         var accordionId = $(this).attr('id');
         var accordionFields = $('#' + accordionId + ' input[type="text"], #' + accordionId + ' select');
         var imageField = $('#' + accordionId + ' input[type="file"]');
         var accordionButton = $('#' + accordionId + ' button.accordion-button');
-
-
         accordionFields.val('');
-
-
         accordionFields.removeClass('border-danger');
-
-
         accordionFields.siblings('span.text-danger').addClass('d-none');
-
-
         if (imageField.length) {
             imageField.val('');
             imageField.siblings('label.custom-file-label').find('.custom-file-text span').first().text('Upload Photo here');
             imageField.siblings('.selected-files').find('.file-grid').empty();
         }
         $('#accordion-item1').find('.file-grid').empty();
-
         accordionButton.find('.fi-rs-exclamation').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-exclamation').removeClass("cross");
         accordionButton.find('.fi-rs-check-circle').addClass('fi-rs-angle-circle-down').addClass("chevron").removeClass('fi-rs-check-circle').removeClass("tick");
         $('#next').addClass("disabled");
         $('#draft').attr("disabled", "disabled");
     });
 }
-
 $('#close,#top-close').on('click', function (e) {
     e.preventDefault()
     resetAccordions()
@@ -385,7 +309,6 @@ $('#close,#top-close').on('click', function (e) {
 })
 $(document).on('click', '#next', function(e) {
     e.preventDefault();
-
     var propertyName = $("#propertyName").val();
     var address = $("#address").val();
     var city = $("#city").val();
@@ -394,8 +317,6 @@ $(document).on('click', '#next', function(e) {
     var propertyType = $("#propertyType").val();
     var propertySQFT = $("#propertyTotalSF").val();
     var units = $("#units").val();
-
-
     if (selectedFiles.length >= 1) {
         var uploadFormData = new FormData();
         for (var i = 0; i < selectedFiles.length; i++) {
@@ -425,7 +346,6 @@ $('#preloader').css('display','flex')
                     units: units,
                     images: imageArray
                 };
-
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
@@ -435,16 +355,12 @@ $('#preloader').css('display','flex')
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
-                        
-
                         var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                                 $("#unit-link").attr("href", `./bank-account.html?property=${encodedPropertyId}`);
                 resetAccordions()
                 $('#addModal').modal('hide')
-                        
                 if (response.message === "Property Already Exist") {
                     $('#preloader').fadeOut('slow', function() {
                         $(this).hide();
@@ -458,8 +374,6 @@ $('#preloader').css('display','flex')
                     $('#succesModal').modal('show');
                     localStorage.setItem("property","true")
                 }
-            
-
                     },
                     error: function (xhr, status, error) {
                         if(xhr.responseJSON.error==='Property Already Exist'){
@@ -473,7 +387,6 @@ $('#preloader').css('display','flex')
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function() {
                             $('#myModal_warning_connection').modal('hide');
-
                         }, 2000);
                        }
                         console.log('Error: ' + error);
@@ -485,7 +398,6 @@ $('#preloader').css('display','flex')
                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
-
                             }, 2000);
                             console.log('Error: ' + error);
             }
@@ -515,13 +427,10 @@ $('#preloader').css('display','flex')
             success: function (response) {
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
-                
-
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                         $("#unit-link").attr("href", `./bank-account.html?property=${encodedPropertyId}`);
         resetAccordions()
         $('#addModal').modal('hide')
-    
         if (response.message === "Property Already Exist") {
             $('#preloader').fadeOut('slow', function() {
                 $(this).hide();
@@ -535,8 +444,6 @@ $('#preloader').css('display','flex')
             $('#succesModal').modal('show');
             localStorage.setItem("property","true")
         }
-    
-
             },
             error: function (xhr, status, error) {
                 if(xhr.responseJSON.error==='Property Already Exist'){

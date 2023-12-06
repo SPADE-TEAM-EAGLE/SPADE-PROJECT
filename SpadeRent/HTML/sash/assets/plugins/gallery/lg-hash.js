@@ -45,15 +45,12 @@
     Hash.prototype.init = function () {
         var _this = this;
         var _hash;
-
         utils.on(_this.core.el, 'onAfterSlide.lgtm', function (event) {
             window.location.hash = 'lg=' + _this.core.s.galleryId + '&slide=' + event.detail.index;
         });
-
         utils.on(window, 'hashchange.lghash', function () {
             _hash = window.location.hash;
             var _idx = parseInt(_hash.split('&slide=')[1], 10);
-
             if (_hash.indexOf('lg=' + _this.core.s.galleryId) > -1) {
                 _this.core.slide(_idx, false, false);
             } else if (_this.core.lGalleryOn) {
@@ -65,7 +62,6 @@
         if (!this.core.s.hash) {
             return;
         }
-
         if (this.oldHash && this.oldHash.indexOf('lg=' + this.core.s.galleryId) < 0) {
             window.location.hash = this.oldHash;
         } else {

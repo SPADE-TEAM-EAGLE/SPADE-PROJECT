@@ -1,6 +1,5 @@
 $(function () {
     "use strict";
-
 	/* Circle-progress */
 	$('#circle').circleProgress({
 		value: 0.85,
@@ -10,7 +9,6 @@ $(function () {
 		}
     });
 	/* Circle-progress closed */
-
 	/* Circle-progress-1 */
 	$('#circle-1').circleProgress({
 		value: 0.64,
@@ -20,7 +18,6 @@ $(function () {
 		}
 	});
 	/* Circle-progress-1 closed */
-
 	/* Circle-progress-2 */
 	$('#circle-2').circleProgress({
 		value: 0.74,
@@ -30,7 +27,6 @@ $(function () {
 		}
     });
     /* Circle-progress-2 closed */
-
 	/* Circle-progress-3 */
 	$('#circle-3').circleProgress({
 		value: 0.55,
@@ -40,10 +36,8 @@ $(function () {
 		}
     });
 	/* Circle-progress-3 closed */
-
 	/* Chartjs (#areaChart1) */
 	var ctx = document.getElementById('areaChart1').getContext('2d');
-
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
@@ -115,10 +109,8 @@ $(function () {
         }
     });
 	/* Chartjs (#areaChart1) closed */
-
 	/* Chartjs (#areaChart2) */
 	var ctx = document.getElementById('areaChart2').getContext('2d');
-
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
@@ -140,7 +132,6 @@ $(function () {
             }, ]
         },
         options: {
-
             maintainAspectRatio: false,
             legend: {
                 display: false
@@ -191,10 +182,8 @@ $(function () {
         }
     });
 	/* Chartjs (#areaChart2) closed */
-
 	/* Chartjs (#areaChart3) */
 	var ctx = document.getElementById('areaChart3').getContext('2d');
-
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
@@ -216,7 +205,6 @@ $(function () {
             }, ]
         },
         options: {
-
             maintainAspectRatio: false,
             legend: {
                 display: false
@@ -267,10 +255,8 @@ $(function () {
         }
     });
 	/* Chartjs (#areaChart3) closed */
-
 	/* Chartjs (#areaChart4) */
 	var ctx = document.getElementById('areaChart4').getContext('2d');
-
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
@@ -292,7 +278,6 @@ $(function () {
             }, ]
         },
         options: {
-
             maintainAspectRatio: false,
             legend: {
                 display: false
@@ -343,10 +328,4 @@ $(function () {
         }
     });
 	/* Chartjs (#areaChart4) closed */
-
 });
-
-
-
-
-

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('lt', {
   defaultMessage: "Šis įrašas neteisingas.",
   type: {

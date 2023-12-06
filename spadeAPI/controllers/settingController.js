@@ -22,16 +22,10 @@ const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { log } = require("console");
 const config = process.env;
- 
-
 exports.changePasssword = async function (req, res) {
-
     const {currentPassword, NewPassword } = req.body;
-
-
     const {userId}=req.user
     const currentDate = new Date();
-
     try {
         const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
         if (selectResult[0].length === 0) {
@@ -48,7 +42,6 @@ exports.changePasssword = async function (req, res) {
                 const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                   expiresIn: "3h",
                 });
-                
                 res.status(200).json({
                   token: token,
                     message: "Successful password Change",
@@ -61,21 +54,11 @@ exports.changePasssword = async function (req, res) {
       res.status(400).send(error.message);
     }
   };
-
- 
- 
- 
-
-
 exports.changePasswordTenant = async function (req, res) {
-
   const {currentPassword, NewPassword } = req.body;
-
   const {userId}=req.user
   const currentDate = new Date();
-
   try {
-    
       const selectResult = await queryRunner(selectQuery("tenants", "id"), [userId]);
       if (selectResult[0].length === 0) {
         res.status(400).send("User Not Found");
@@ -85,14 +68,12 @@ exports.changePasswordTenant = async function (req, res) {
           const hashPassword = await hashedPassword(NewPassword);
           const updateResult = await queryRunner(updatePasswordTenantSetting, [hashPassword,currentDate,userId]);
             if (updateResult[0].affectedRows === 0) {
-              
               res.status(400).send("Error");
             } else {
               const email = selectResult[0][0].email;
               const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                 expiresIn: "3h",
               });
-              
               res.status(200).json({
                 token: token,
                   message: "Successful password Change",
@@ -106,14 +87,9 @@ exports.changePasswordTenant = async function (req, res) {
     res.status(400).send(error.message);
   }
 };
-
-
-
-
 exports.emailtemplates = async (req, res) => {
   const { tenantEmail, invoiceEmail, taskEmail, userEmail = 0 } = req.body;
   const { userId } = req.user;
-
   try {
     const updateEmailResult = await queryRunner(updateEmailTemplates, [tenantEmail, invoiceEmail, taskEmail, userEmail,userId,]);
     if (updateEmailResult[0].affectedRows > 0) {
@@ -128,41 +104,28 @@ exports.emailtemplates = async (req, res) => {
     });
   }
 };
-
-
-
 exports.updateBusinessLogo = async (req, res) => {
-
   const { userId } = req.body; 
-
   console.log("req.files"); 
   const image  = req.files[0].filename; 
-
-
   console.log(image);
   try {
     console.log(image);
-
       const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image,userId]);
       if (updateBusinessLogoResult[0].affectedRows > 0) {
         res.status(200).json({
           message: " Business Logo save successful",
-
         });        
       }else{
         res.status(400).json({
           message: " Something went wrong in  Business Logo ",
         });        
       }
-
   } catch (error) {
     res.status(400).send("Error4" + error);
     console.log(error);
   }
 };
-
-
-
 exports.changeEmail = async (req, res) => { 
   const { email } = req.body;
   const { userId } = req.user;
@@ -178,19 +141,13 @@ exports.changeEmail = async (req, res) => {
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
     const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
-
     if (selectResult[0].length > 0) {
       const name =
         selectResult[0][0].FirstName + " " + selectResult[0][0].LastName;
-
-      
       sendMail(email, mailSubject, random, name);
-
       const now = new Date();
       const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
-
       const updateResult = await queryRunner(addResetToken, [random, formattedDate, userId]);
-
       if (updateResult[0].affectedRows === 0) {
         return res.status(400).json({ message: "Error in changing Email" });
       } else {
@@ -204,24 +161,14 @@ exports.changeEmail = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-
-
 exports.changeEmailVerifyToken = async (req, res) => { 
-
   const { token,email } = req.body;
-
   const { userId } = req.user;
   try {
-    
     const currentDate = new Date();
     const selectResult = await queryRunner(selectQuery("users", "id", "token"),[userId,token]);
     if (selectResult[0].length > 0) {
-
-
       const updateResult = await queryRunner(updateUserEmail, [email, currentDate, userId]);
-
       if (updateResult[0].affectedRows === 0) {
         return res.status(400).json({ message: "Error in verify token" });
       } else {
@@ -237,36 +184,16 @@ exports.changeEmailVerifyToken = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error",error : error });
   }
 };
-
-
-
-
-
-
-
-
-
-
 exports.ImageToBase64 = async (req, res) => {
   const { userId } = req.user;
 const Image=req.files[0];
-
   try {
     const imageBuffer = req.files[0].buffer;
-
     const resizedImageBuffer = await sharp(imageBuffer)
       .resize({ width: 50 }) // Adjust the width as needed
       .toBuffer();
-
     const base64String = resizedImageBuffer.toString('base64');
-
-
-
-
-
-
     const updateResult = await queryRunner(updateBusinessLogoImage, [base64String, userId]);
-
     if (updateResult[0].affectedRows === 0) {
       return res.status(400).json({ message: "Error in Base64" });
     } else {

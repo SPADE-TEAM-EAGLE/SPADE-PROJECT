@@ -15,8 +15,6 @@ var version = "1.3.4";
  */
 var freeze = Object.freeze;
 Object.freeze = function (obj) { return obj; };
-
-
 function extend(dest) {
 	var i, j, len, src;
 	for (j = 1, len = arguments.length; j < len; j++) {
@@ -27,8 +25,6 @@ function extend(dest) {
 	}
 	return dest;
 }
-
-
 var create = Object.create || (function () {
 	function F() {}
 	return function (proto) {
@@ -36,9 +32,6 @@ var create = Object.create || (function () {
 		return new F();
 	};
 })();
-
-
-
 function bind(fn, obj) {
 	var slice = Array.prototype.slice;
 	if (fn.bind) {
@@ -49,28 +42,16 @@ function bind(fn, obj) {
 		return fn.apply(obj, args.length ? args.concat(slice.call(arguments)) : arguments);
 	};
 }
-
-
 var lastId = 0;
-
-
 function stamp(obj) {
 	/*eslint-disable */
 	obj._leaflet_id = obj._leaflet_id || ++lastId;
 	return obj._leaflet_id;
 	/* eslint-enable */
 }
-
-
-
-
-
-
-
 function throttle(fn, time, context) {
 	var lock, args, wrapperFn, later;
 	later = function () {
-
 		lock = false;
 		if (args) {
 			wrapperFn.apply(context, args);
@@ -79,10 +60,8 @@ function throttle(fn, time, context) {
 	};
 	wrapperFn = function () {
 		if (lock) {
-
 			args = arguments;
 		} else {
-
 			fn.apply(context, arguments);
 			setTimeout(later, time);
 			lock = true;
@@ -90,37 +69,23 @@ function throttle(fn, time, context) {
 	};
 	return wrapperFn;
 }
-
-
-
-
 function wrapNum(x, range, includeMax) {
 	var max = range[1],
 	    min = range[0],
 	    d = max - min;
 	return x === max && includeMax ? x : ((x - min) % d + d) % d + min;
 }
-
-
 function falseFn() { return false; }
-
-
 function formatNum(num, digits) {
 	var pow = Math.pow(10, (digits === undefined ? 6 : digits));
 	return Math.round(num * pow) / pow;
 }
-
-
 function trim(str) {
 	return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
 }
-
-
 function splitWords(str) {
 	return trim(str).split(/\s+/);
 }
-
-
 function setOptions(obj, options) {
 	if (!obj.hasOwnProperty('options')) {
 		obj.options = obj.options ? create(obj.options) : {};
@@ -130,11 +95,6 @@ function setOptions(obj, options) {
 	}
 	return obj.options;
 }
-
-
-
-
-
 function getParamString(obj, existingUrl, uppercase) {
 	var params = [];
 	for (var i in obj) {
@@ -143,11 +103,6 @@ function getParamString(obj, existingUrl, uppercase) {
 	return ((!existingUrl || existingUrl.indexOf('?') === -1) ? '?' : '&') + params.join('&');
 }
 var templateRe = /\{ *([\w_-]+) *\}/g;
-
-
-
-
-
 function template(str, data) {
 	return str.replace(templateRe, function (str, key) {
 		var value = data[key];
@@ -159,30 +114,20 @@ function template(str, data) {
 		return value;
 	});
 }
-
-
 var isArray = Array.isArray || function (obj) {
 	return (Object.prototype.toString.call(obj) === '[object Array]');
 };
-
-
 function indexOf(array, el) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i] === el) { return i; }
 	}
 	return -1;
 }
-
-
-
-
 var emptyImageUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-
 function getPrefixed(name) {
 	return window['webkit' + name] || window['moz' + name] || window['ms' + name];
 }
 var lastTime = 0;
-
 function timeoutDefer(fn) {
 	var time = +new Date(),
 	    timeToCall = Math.max(0, 16 - (time - lastTime));
@@ -192,12 +137,6 @@ function timeoutDefer(fn) {
 var requestFn = window.requestAnimationFrame || getPrefixed('RequestAnimationFrame') || timeoutDefer;
 var cancelFn = window.cancelAnimationFrame || getPrefixed('CancelAnimationFrame') ||
 		getPrefixed('CancelRequestAnimationFrame') || function (id) { window.clearTimeout(id); };
-
-
-
-
-
-
 function requestAnimFrame(fn, context, immediate) {
 	if (immediate && requestFn === timeoutDefer) {
 		fn.call(context);
@@ -205,8 +144,6 @@ function requestAnimFrame(fn, context, immediate) {
 		return requestFn.call(window, bind(fn, context));
 	}
 }
-
-
 function cancelAnimFrame(id) {
 	if (id) {
 		cancelFn.call(window, id);
@@ -236,53 +173,37 @@ var Util = (Object.freeze || Object)({
 	requestAnimFrame: requestAnimFrame,
 	cancelAnimFrame: cancelAnimFrame
 });
-
-
-
-
-
 function Class() {}
 Class.extend = function (props) {
-
-
-
 	var NewClass = function () {
-
 		if (this.initialize) {
 			this.initialize.apply(this, arguments);
 		}
-
 		this.callInitHooks();
 	};
 	var parentProto = NewClass.__super__ = this.prototype;
 	var proto = create(parentProto);
 	proto.constructor = NewClass;
 	NewClass.prototype = proto;
-
 	for (var i in this) {
 		if (this.hasOwnProperty(i) && i !== 'prototype' && i !== '__super__') {
 			NewClass[i] = this[i];
 		}
 	}
-
 	if (props.statics) {
 		extend(NewClass, props.statics);
 		delete props.statics;
 	}
-
 	if (props.includes) {
 		checkDeprecatedMixinEvents(props.includes);
 		extend.apply(null, [proto].concat(props.includes));
 		delete props.includes;
 	}
-
 	if (proto.options) {
 		props.options = extend(create(proto.options), props.options);
 	}
-
 	extend(proto, props);
 	proto._initHooks = [];
-
 	proto.callInitHooks = function () {
 		if (this._initHooksCalled) { return; }
 		if (parentProto.callInitHooks) {
@@ -295,20 +216,14 @@ Class.extend = function (props) {
 	};
 	return NewClass;
 };
-
-
 Class.include = function (props) {
 	extend(this.prototype, props);
 	return this;
 };
-
-
 Class.mergeOptions = function (options) {
 	extend(this.prototype.options, options);
 	return this;
 };
-
-
 Class.addInitHook = function (fn) { // (Function) || (String, args...)
 	var args = Array.prototype.slice.call(arguments, 1);
 	var init = typeof fn === 'function' ? fn : function () {
@@ -362,15 +277,11 @@ var Events = {
 	 * Adds a set of type/listener pairs, e.g. `{click: onClick, mousemove: onMouseMove}`
 	 */
 	on: function (types, fn, context) {
-
 		if (typeof types === 'object') {
 			for (var type in types) {
-
-
 				this._on(type, types[type], fn);
 			}
 		} else {
-
 			types = splitWords(types);
 			for (var i = 0, len = types.length; i < len; i++) {
 				this._on(types[i], fn, context);
@@ -391,7 +302,6 @@ var Events = {
 	 */
 	off: function (types, fn, context) {
 		if (!types) {
-
 			delete this._events;
 		} else if (typeof types === 'object') {
 			for (var type in types) {
@@ -405,7 +315,6 @@ var Events = {
 		}
 		return this;
 	},
-
 	_on: function (type, fn, context) {
 		this._events = this._events || {};
 		/* get/init listeners for type */
@@ -415,12 +324,10 @@ var Events = {
 			this._events[type] = typeListeners;
 		}
 		if (context === this) {
-
 			context = undefined;
 		}
 		var newListener = {fn: fn, ctx: context},
 		    listeners = typeListeners;
-
 		for (var i = 0, len = listeners.length; i < len; i++) {
 			if (listeners[i].fn === fn && listeners[i].ctx === context) {
 				return;
@@ -438,11 +345,9 @@ var Events = {
 			return;
 		}
 		if (!fn) {
-
 			for (i = 0, len = listeners.length; i < len; i++) {
 				listeners[i].fn = falseFn;
 			}
-
 			delete this._events[type];
 			return;
 		}
@@ -450,12 +355,10 @@ var Events = {
 			context = undefined;
 		}
 		if (listeners) {
-
 			for (i = 0, len = listeners.length; i < len; i++) {
 				var l = listeners[i];
 				if (l.ctx !== context) { continue; }
 				if (l.fn === fn) {
-
 					l.fn = falseFn;
 					if (this._firingCount) {
 						/* copy array in case events are being fired */
@@ -467,10 +370,6 @@ var Events = {
 			}
 		}
 	},
-
-
-
-
 	fire: function (type, data, propagate) {
 		if (!this.listens(type, propagate)) { return this; }
 		var event = extend({}, data, {
@@ -490,26 +389,20 @@ var Events = {
 			}
 		}
 		if (propagate) {
-
 			this._propagateEvent(event);
 		}
 		return this;
 	},
-
-
 	listens: function (type, propagate) {
 		var listeners = this._events && this._events[type];
 		if (listeners && listeners.length) { return true; }
 		if (propagate) {
-
 			for (var id in this._eventParents) {
 				if (this._eventParents[id].listens(type, propagate)) { return true; }
 			}
 		}
 		return false;
 	},
-
-
 	once: function (types, fn, context) {
 		if (typeof types === 'object') {
 			for (var type in types) {
@@ -522,20 +415,15 @@ var Events = {
 			    .off(types, fn, context)
 			    .off(types, handler, context);
 		}, this);
-
 		return this
 		    .on(types, fn, context)
 		    .on(types, handler, context);
 	},
-
-
 	addEventParent: function (obj) {
 		this._eventParents = this._eventParents || {};
 		this._eventParents[stamp(obj)] = obj;
 		return this;
 	},
-
-
 	removeEventParent: function (obj) {
 		if (this._eventParents) {
 			delete this._eventParents[stamp(obj)];
@@ -551,23 +439,10 @@ var Events = {
 		}
 	}
 };
-
-
-
 Events.addEventListener = Events.on;
-
-
-
-
 Events.removeEventListener = Events.clearAllEventListeners = Events.off;
-
-
 Events.addOneTimeEventListener = Events.once;
-
-
 Events.fireEvent = Events.fire;
-
-
 Events.hasEventListeners = Events.listens;
 var Evented = Class.extend(Events);
 /*
@@ -594,34 +469,24 @@ var Evented = Class.extend(Events);
  * can't be added to it with the `include` function.
  */
 function Point(x, y, round) {
-
 	this.x = (round ? Math.round(x) : x);
-
 	this.y = (round ? Math.round(y) : y);
 }
 var trunc = Math.trunc || function (v) {
 	return v > 0 ? Math.floor(v) : Math.ceil(v);
 };
 Point.prototype = {
-
-
 	clone: function () {
 		return new Point(this.x, this.y);
 	},
-
-
 	add: function (point) {
-
 		return this.clone()._add(toPoint(point));
 	},
 	_add: function (point) {
-
 		this.x += point.x;
 		this.y += point.y;
 		return this;
 	},
-
-
 	subtract: function (point) {
 		return this.clone()._subtract(toPoint(point));
 	},
@@ -630,8 +495,6 @@ Point.prototype = {
 		this.y -= point.y;
 		return this;
 	},
-
-
 	divideBy: function (num) {
 		return this.clone()._divideBy(num);
 	},
@@ -640,8 +503,6 @@ Point.prototype = {
 		this.y /= num;
 		return this;
 	},
-
-
 	multiplyBy: function (num) {
 		return this.clone()._multiplyBy(num);
 	},
@@ -650,22 +511,12 @@ Point.prototype = {
 		this.y *= num;
 		return this;
 	},
-
-
-
-
-
 	scaleBy: function (point) {
 		return new Point(this.x * point.x, this.y * point.y);
 	},
-
-
-
 	unscaleBy: function (point) {
 		return new Point(this.x / point.x, this.y / point.y);
 	},
-
-
 	round: function () {
 		return this.clone()._round();
 	},
@@ -674,8 +525,6 @@ Point.prototype = {
 		this.y = Math.round(this.y);
 		return this;
 	},
-
-
 	floor: function () {
 		return this.clone()._floor();
 	},
@@ -684,8 +533,6 @@ Point.prototype = {
 		this.y = Math.floor(this.y);
 		return this;
 	},
-
-
 	ceil: function () {
 		return this.clone()._ceil();
 	},
@@ -694,8 +541,6 @@ Point.prototype = {
 		this.y = Math.ceil(this.y);
 		return this;
 	},
-
-
 	trunc: function () {
 		return this.clone()._trunc();
 	},
@@ -704,44 +549,28 @@ Point.prototype = {
 		this.y = trunc(this.y);
 		return this;
 	},
-
-
 	distanceTo: function (point) {
 		point = toPoint(point);
 		var x = point.x - this.x,
 		    y = point.y - this.y;
 		return Math.sqrt(x * x + y * y);
 	},
-
-
 	equals: function (point) {
 		point = toPoint(point);
 		return point.x === this.x &&
 		       point.y === this.y;
 	},
-
-
 	contains: function (point) {
 		point = toPoint(point);
 		return Math.abs(point.x) <= Math.abs(this.x) &&
 		       Math.abs(point.y) <= Math.abs(this.y);
 	},
-
-
 	toString: function () {
 		return 'Point(' +
 		        formatNum(this.x) + ', ' +
 		        formatNum(this.y) + ')';
 	}
 };
-
-
-
-
-
-
-
-
 function toPoint(x, y, round) {
 	if (x instanceof Point) {
 		return x;
@@ -789,14 +618,8 @@ function Bounds(a, b) {
 	}
 }
 Bounds.prototype = {
-
-
 	extend: function (point) { // (Point)
 		point = toPoint(point);
-
-
-
-
 		if (!this.min && !this.max) {
 			this.min = point.clone();
 			this.max = point.clone();
@@ -808,43 +631,26 @@ Bounds.prototype = {
 		}
 		return this;
 	},
-
-
 	getCenter: function (round) {
 		return new Point(
 		        (this.min.x + this.max.x) / 2,
 		        (this.min.y + this.max.y) / 2, round);
 	},
-
-
 	getBottomLeft: function () {
 		return new Point(this.min.x, this.max.y);
 	},
-
-
 	getTopRight: function () { // -> Point
 		return new Point(this.max.x, this.min.y);
 	},
-
-
 	getTopLeft: function () {
 		return this.min; // left, top
 	},
-
-
 	getBottomRight: function () {
 		return this.max; // right, bottom
 	},
-
-
 	getSize: function () {
 		return this.max.subtract(this.min);
 	},
-
-
-
-
-
 	contains: function (obj) {
 		var min, max;
 		if (typeof obj[0] === 'number' || obj instanceof Point) {
@@ -863,9 +669,6 @@ Bounds.prototype = {
 		       (min.y >= this.min.y) &&
 		       (max.y <= this.max.y);
 	},
-
-
-
 	intersects: function (bounds) { // (Bounds) -> Boolean
 		bounds = toBounds(bounds);
 		var min = this.min,
@@ -876,9 +679,6 @@ Bounds.prototype = {
 		    yIntersects = (max2.y >= min.y) && (min2.y <= max.y);
 		return xIntersects && yIntersects;
 	},
-
-
-
 	overlaps: function (bounds) { // (Bounds) -> Boolean
 		bounds = toBounds(bounds);
 		var min = this.min,
@@ -893,11 +693,6 @@ Bounds.prototype = {
 		return !!(this.min && this.max);
 	}
 };
-
-
-
-
-
 function toBounds(a, b) {
 	if (!a || a instanceof Bounds) {
 		return a;
@@ -941,11 +736,6 @@ function LatLngBounds(corner1, corner2) { // (LatLng, LatLng) or (LatLng[])
 	}
 }
 LatLngBounds.prototype = {
-
-
-
-
-
 	extend: function (obj) {
 		var sw = this._southWest,
 		    ne = this._northEast,
@@ -971,10 +761,6 @@ LatLngBounds.prototype = {
 		}
 		return this;
 	},
-
-
-
-
 	pad: function (bufferRatio) {
 		var sw = this._southWest,
 		    ne = this._northEast,
@@ -984,58 +770,35 @@ LatLngBounds.prototype = {
 		        new LatLng(sw.lat - heightBuffer, sw.lng - widthBuffer),
 		        new LatLng(ne.lat + heightBuffer, ne.lng + widthBuffer));
 	},
-
-
 	getCenter: function () {
 		return new LatLng(
 		        (this._southWest.lat + this._northEast.lat) / 2,
 		        (this._southWest.lng + this._northEast.lng) / 2);
 	},
-
-
 	getSouthWest: function () {
 		return this._southWest;
 	},
-
-
 	getNorthEast: function () {
 		return this._northEast;
 	},
-
-
 	getNorthWest: function () {
 		return new LatLng(this.getNorth(), this.getWest());
 	},
-
-
 	getSouthEast: function () {
 		return new LatLng(this.getSouth(), this.getEast());
 	},
-
-
 	getWest: function () {
 		return this._southWest.lng;
 	},
-
-
 	getSouth: function () {
 		return this._southWest.lat;
 	},
-
-
 	getEast: function () {
 		return this._northEast.lng;
 	},
-
-
 	getNorth: function () {
 		return this._northEast.lat;
 	},
-
-
-
-
-
 	contains: function (obj) { // (LatLngBounds) or (LatLng) -> Boolean
 		if (typeof obj[0] === 'number' || obj instanceof LatLng || 'lat' in obj) {
 			obj = toLatLng(obj);
@@ -1054,8 +817,6 @@ LatLngBounds.prototype = {
 		return (sw2.lat >= sw.lat) && (ne2.lat <= ne.lat) &&
 		       (sw2.lng >= sw.lng) && (ne2.lng <= ne.lng);
 	},
-
-
 	intersects: function (bounds) {
 		bounds = toLatLngBounds(bounds);
 		var sw = this._southWest,
@@ -1066,8 +827,6 @@ LatLngBounds.prototype = {
 		    lngIntersects = (ne2.lng >= sw.lng) && (sw2.lng <= ne.lng);
 		return latIntersects && lngIntersects;
 	},
-
-
 	overlaps: function (bounds) {
 		bounds = toLatLngBounds(bounds);
 		var sw = this._southWest,
@@ -1078,31 +837,19 @@ LatLngBounds.prototype = {
 		    lngOverlaps = (ne2.lng > sw.lng) && (sw2.lng < ne.lng);
 		return latOverlaps && lngOverlaps;
 	},
-
-
 	toBBoxString: function () {
 		return [this.getWest(), this.getSouth(), this.getEast(), this.getNorth()].join(',');
 	},
-
-
 	equals: function (bounds, maxMargin) {
 		if (!bounds) { return false; }
 		bounds = toLatLngBounds(bounds);
 		return this._southWest.equals(bounds.getSouthWest(), maxMargin) &&
 		       this._northEast.equals(bounds.getNorthEast(), maxMargin);
 	},
-
-
 	isValid: function () {
 		return !!(this._southWest && this._northEast);
 	}
 };
-
-
-
-
-
-
 function toLatLngBounds(a, b) {
 	if (a instanceof LatLngBounds) {
 		return a;
@@ -1137,21 +884,13 @@ function LatLng(lat, lng, alt) {
 	if (isNaN(lat) || isNaN(lng)) {
 		throw new Error('Invalid LatLng object: (' + lat + ', ' + lng + ')');
 	}
-
-
 	this.lat = +lat;
-
-
 	this.lng = +lng;
-
-
 	if (alt !== undefined) {
 		this.alt = +alt;
 	}
 }
 LatLng.prototype = {
-
-
 	equals: function (obj, maxMargin) {
 		if (!obj) { return false; }
 		obj = toLatLng(obj);
@@ -1160,25 +899,17 @@ LatLng.prototype = {
 		        Math.abs(this.lng - obj.lng));
 		return margin <= (maxMargin === undefined ? 1.0E-9 : maxMargin);
 	},
-
-
 	toString: function (precision) {
 		return 'LatLng(' +
 		        formatNum(this.lat, precision) + ', ' +
 		        formatNum(this.lng, precision) + ')';
 	},
-
-
 	distanceTo: function (other) {
 		return Earth.distance(this, toLatLng(other));
 	},
-
-
 	wrap: function () {
 		return Earth.wrapLatLng(this);
 	},
-
-
 	toBounds: function (sizeInMeters) {
 		var latAccuracy = 180 * sizeInMeters / 40075017,
 		    lngAccuracy = latAccuracy / Math.cos((Math.PI / 180) * this.lat);
@@ -1190,14 +921,6 @@ LatLng.prototype = {
 		return new LatLng(this.lat, this.lng, this.alt);
 	}
 };
-
-
-
-
-
-
-
-
 function toLatLng(a, b, c) {
 	if (a instanceof LatLng) {
 		return a;
@@ -1239,48 +962,28 @@ function toLatLng(a, b, c) {
  * and methods can't be added to them with the `include` function.
  */
 var CRS = {
-
-
 	latLngToPoint: function (latlng, zoom) {
 		var projectedPoint = this.projection.project(latlng),
 		    scale = this.scale(zoom);
 		return this.transformation._transform(projectedPoint, scale);
 	},
-
-
-
 	pointToLatLng: function (point, zoom) {
 		var scale = this.scale(zoom),
 		    untransformedPoint = this.transformation.untransform(point, scale);
 		return this.projection.unproject(untransformedPoint);
 	},
-
-
-
 	project: function (latlng) {
 		return this.projection.project(latlng);
 	},
-
-
-
 	unproject: function (point) {
 		return this.projection.unproject(point);
 	},
-
-
-
-
 	scale: function (zoom) {
 		return 256 * Math.pow(2, zoom);
 	},
-
-
-
 	zoom: function (scale) {
 		return Math.log(scale / 256) / Math.LN2;
 	},
-
-
 	getProjectedBounds: function (zoom) {
 		if (this.infinite) { return null; }
 		var b = this.projection.bounds,
@@ -1289,36 +992,15 @@ var CRS = {
 		    max = this.transformation.transform(b.max, s);
 		return new Bounds(min, max);
 	},
-
-
-
-
 	//
-
-
-
-
 	//
-
-
-
-
-
-
 	infinite: false,
-
-
-
 	wrapLatLng: function (latlng) {
 		var lng = this.wrapLng ? wrapNum(latlng.lng, this.wrapLng, true) : latlng.lng,
 		    lat = this.wrapLat ? wrapNum(latlng.lat, this.wrapLat, true) : latlng.lat,
 		    alt = latlng.alt;
 		return new LatLng(lat, lng, alt);
 	},
-
-
-
-
 	wrapLatLngBounds: function (bounds) {
 		var center = bounds.getCenter(),
 		    newCenter = this.wrapLatLng(center),
@@ -1345,11 +1027,7 @@ var CRS = {
  */
 var Earth = extend({}, CRS, {
 	wrapLng: [-180, 180],
-
-
-
 	R: 6371000,
-
 	distance: function (latlng1, latlng2) {
 		var rad = Math.PI / 180,
 		    lat1 = latlng1.lat * rad,
@@ -1409,11 +1087,8 @@ var SphericalMercator = {
  * 	p3 = transformation.untransform(p2); //  L.point(1, 2)
  * ```
  */
-
-
 function Transformation(a, b, c, d) {
 	if (isArray(a)) {
-
 		this._a = a[0];
 		this._b = a[1];
 		this._c = a[2];
@@ -1426,22 +1101,15 @@ function Transformation(a, b, c, d) {
 	this._d = d;
 }
 Transformation.prototype = {
-
-
-
 	transform: function (point, scale) { // (Point, Number) -> Point
 		return this._transform(point.clone(), scale);
 	},
-
 	_transform: function (point, scale) {
 		scale = scale || 1;
 		point.x = scale * (this._a * point.x + this._b);
 		point.y = scale * (this._c * point.y + this._d);
 		return point;
 	},
-
-
-
 	untransform: function (point, scale) {
 		scale = scale || 1;
 		return new Point(
@@ -1449,13 +1117,6 @@ Transformation.prototype = {
 		        (point.y / scale - this._d) / this._c);
 	}
 };
-
-
-
-
-
-
-
 function toTransformation(a, b, c, d) {
 	return new Transformation(a, b, c, d);
 }
@@ -1478,18 +1139,9 @@ var EPSG3857 = extend({}, Earth, {
 var EPSG900913 = extend({}, EPSG3857, {
 	code: 'EPSG:900913'
 });
-
-
-
-
-
-
 function svgCreate(name) {
 	return document.createElementNS('http://www.w3.org/2000/svg', name);
 }
-
-
-
 function pointsToPath(rings, closed) {
 	var str = '',
 	i, j, len, len2, points, p;
@@ -1499,10 +1151,8 @@ function pointsToPath(rings, closed) {
 			p = points[j];
 			str += (j ? 'L' : 'M') + p.x + ' ' + p.y;
 		}
-
 		str += closed ? (svg ? 'z' : 'x') : '';
 	}
-
 	return str || 'M0 0';
 }
 /*
@@ -1520,85 +1170,40 @@ function pointsToPath(rings, closed) {
  * ```
  */
 var style$1 = document.documentElement.style;
-
 var ie = 'ActiveXObject' in window;
-
 var ielt9 = ie && !document.addEventListener;
-
 var edge = 'msLaunchUri' in navigator && !('documentMode' in document);
-
-
 var webkit = userAgentContains('webkit');
-
-
 var android = userAgentContains('android');
-
 var android23 = userAgentContains('android 2') || userAgentContains('android 3');
 /* See https://stackoverflow.com/a/17961266 for details on detecting stock Android */
 var webkitVer = parseInt(/WebKit\/([0-9]+)|$/.exec(navigator.userAgent)[1], 10); // also matches AppleWebKit
-
 var androidStock = android && userAgentContains('Google') && webkitVer < 537 && !('AudioNode' in window);
-
 var opera = !!window.opera;
-
 var chrome = userAgentContains('chrome');
-
 var gecko = userAgentContains('gecko') && !webkit && !opera && !ie;
-
 var safari = !chrome && userAgentContains('safari');
 var phantom = userAgentContains('phantom');
-
-
 var opera12 = 'OTransition' in style$1;
-
 var win = navigator.platform.indexOf('Win') === 0;
-
 var ie3d = ie && ('transition' in style$1);
-
 var webkit3d = ('WebKitCSSMatrix' in window) && ('m11' in new window.WebKitCSSMatrix()) && !android23;
-
 var gecko3d = 'MozPerspective' in style$1;
-
-
 var any3d = !window.L_DISABLE_3D && (ie3d || webkit3d || gecko3d) && !opera12 && !phantom;
-
 var mobile = typeof orientation !== 'undefined' || userAgentContains('mobile');
-
 var mobileWebkit = mobile && webkit;
-
-
 var mobileWebkit3d = mobile && webkit3d;
-
-
 var msPointer = !window.PointerEvent && window.MSPointerEvent;
-
-
 var pointer = !!(window.PointerEvent || msPointer);
-
-
-
-
-
 var touch = !window.L_NO_TOUCH && (pointer || 'ontouchstart' in window ||
 		(window.DocumentTouch && document instanceof window.DocumentTouch));
-
 var mobileOpera = mobile && opera;
-
-
 var mobileGecko = mobile && gecko;
-
-
 var retina = (window.devicePixelRatio || (window.screen.deviceXDPI / window.screen.logicalXDPI)) > 1;
-
-
 var canvas = (function () {
 	return !!document.createElement('canvas').getContext;
 }());
-
-
 var svg = !!(document.createElementNS && svgCreate('svg').createSVGRect);
-
-
 var vml = !svg && (function () {
 	try {
 		var div = document.createElement('div');
@@ -1655,10 +1260,7 @@ var POINTER_CANCEL = msPointer ? 'MSPointerCancel' : 'pointercancel';
 var TAG_WHITE_LIST = ['INPUT', 'SELECT', 'OPTION'];
 var _pointers = {};
 var _pointerDocListener = false;
-
 var _pointersCount = 0;
-
-
 function addPointerListener(obj, type, handler, id) {
 	if (type === 'touchstart') {
 		_addPointerStart(obj, handler, id);
@@ -1684,9 +1286,6 @@ function removePointerListener(obj, type, id) {
 function _addPointerStart(obj, handler, id) {
 	var onDown = bind(function (e) {
 		if (e.pointerType !== 'mouse' && e.MSPOINTER_TYPE_MOUSE && e.pointerType !== e.MSPOINTER_TYPE_MOUSE) {
-
-
-
 			if (TAG_WHITE_LIST.indexOf(e.target.tagName) < 0) {
 				preventDefault(e);
 			} else {
@@ -1697,9 +1296,7 @@ function _addPointerStart(obj, handler, id) {
 	});
 	obj['_leaflet_touchstart' + id] = onDown;
 	obj.addEventListener(POINTER_DOWN, onDown, {passive: false});
-
 	if (!_pointerDocListener) {
-
 		document.documentElement.addEventListener(POINTER_DOWN, _globalPointerDown, {passive: true});
 		document.documentElement.addEventListener(POINTER_MOVE, _globalPointerMove, {passive: true});
 		document.documentElement.addEventListener(POINTER_UP, _globalPointerUp, {passive: true});
@@ -1730,7 +1327,6 @@ function _handlePointer(e, handler) {
 }
 function _addPointerMove(obj, handler, id) {
 	var onMove = function (e) {
-
 		if ((e.pointerType === e.MSPOINTER_TYPE_MOUSE || e.pointerType === 'mouse') && e.buttons === 0) { return; }
 		_handlePointer(e, handler);
 	};
@@ -1751,7 +1347,6 @@ function _addPointerEnd(obj, handler, id) {
 var _touchstart = msPointer ? 'MSPointerDown' : pointer ? 'pointerdown' : 'touchstart';
 var _touchend = msPointer ? 'MSPointerUp' : pointer ? 'pointerup' : 'touchend';
 var _pre = '_leaflet_';
-
 function addDoubleTapListener(obj, handler, id) {
 	var last, touch$$1,
 	    doubleTap = false,
@@ -1775,7 +1370,6 @@ function addDoubleTapListener(obj, handler, id) {
 		if (doubleTap && !touch$$1.cancelBubble) {
 			if (pointer) {
 				if ((!edge) || e.pointerType === 'mouse') { return; }
-
 				var newTouch = {},
 				    prop, i;
 				for (i in touch$$1) {
@@ -1794,10 +1388,6 @@ function addDoubleTapListener(obj, handler, id) {
 	obj[_pre + 'dblclick' + id] = handler;
 	obj.addEventListener(_touchstart, onTouchStart, {passive: false});
 	obj.addEventListener(_touchend, onTouchEnd, {passive: false});
-
-
-
-
 	obj.addEventListener('dblclick', handler, {passive: false});
 	return this;
 }
@@ -1822,29 +1412,15 @@ function removeDoubleTapListener(obj, id) {
  * SVG elements. The only difference is that classes refer to CSS classes
  * in HTML and SVG classes in SVG.
  */
-
-
 var TRANSFORM = testProp(
 	['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform']);
-
-
-
-
 var TRANSITION = testProp(
 	['webkitTransition', 'transition', 'OTransition', 'MozTransition', 'msTransition']);
-
-
 var TRANSITION_END =
 	TRANSITION === 'webkitTransition' || TRANSITION === 'OTransition' ? TRANSITION + 'End' : 'transitionend';
-
-
-
 function get(id) {
 	return typeof id === 'string' ? document.getElementById(id) : id;
 }
-
-
-
 function getStyle(el, style) {
 	var value = el.style[style] || (el.currentStyle && el.currentStyle[style]);
 	if ((!value || value === 'auto') && document.defaultView) {
@@ -1853,8 +1429,6 @@ function getStyle(el, style) {
 	}
 	return value === 'auto' ? null : value;
 }
-
-
 function create$1(tagName, className, container) {
 	var el = document.createElement(tagName);
 	el.className = className || '';
@@ -1863,39 +1437,29 @@ function create$1(tagName, className, container) {
 	}
 	return el;
 }
-
-
 function remove(el) {
 	var parent = el.parentNode;
 	if (parent) {
 		parent.removeChild(el);
 	}
 }
-
-
 function empty(el) {
 	while (el.firstChild) {
 		el.removeChild(el.firstChild);
 	}
 }
-
-
 function toFront(el) {
 	var parent = el.parentNode;
 	if (parent.lastChild !== el) {
 		parent.appendChild(el);
 	}
 }
-
-
 function toBack(el) {
 	var parent = el.parentNode;
 	if (parent.firstChild !== el) {
 		parent.insertBefore(el, parent.firstChild);
 	}
 }
-
-
 function hasClass(el, name) {
 	if (el.classList !== undefined) {
 		return el.classList.contains(name);
@@ -1903,8 +1467,6 @@ function hasClass(el, name) {
 	var className = getClass(el);
 	return className.length > 0 && new RegExp('(^|\\s)' + name + '(\\s|$)').test(className);
 }
-
-
 function addClass(el, name) {
 	if (el.classList !== undefined) {
 		var classes = splitWords(name);
@@ -1916,8 +1478,6 @@ function addClass(el, name) {
 		setClass(el, (className ? className + ' ' : '') + name);
 	}
 }
-
-
 function removeClass(el, name) {
 	if (el.classList !== undefined) {
 		el.classList.remove(name);
@@ -1925,24 +1485,16 @@ function removeClass(el, name) {
 		setClass(el, trim((' ' + getClass(el) + ' ').replace(' ' + name + ' ', ' ')));
 	}
 }
-
-
 function setClass(el, name) {
 	if (el.className.baseVal === undefined) {
 		el.className = name;
 	} else {
-
 		el.className.baseVal = name;
 	}
 }
-
-
 function getClass(el) {
 	return el.className.baseVal === undefined ? el.className : el.className.baseVal;
 }
-
-
-
 function setOpacity(el, value) {
 	if ('opacity' in el.style) {
 		el.style.opacity = value;
@@ -1953,12 +1505,9 @@ function setOpacity(el, value) {
 function _setOpacityIE(el, value) {
 	var filter = false,
 	    filterName = 'DXImageTransform.Microsoft.Alpha';
-
 	try {
 		filter = el.filters.item(filterName);
 	} catch (e) {
-
-
 		if (value === 1) { return; }
 	}
 	value = Math.round(value * 100);
@@ -1969,10 +1518,6 @@ function _setOpacityIE(el, value) {
 		el.style.filter += ' progid:' + filterName + '(opacity=' + value + ')';
 	}
 }
-
-
-
-
 function testProp(props) {
 	var style = document.documentElement.style;
 	for (var i = 0; i < props.length; i++) {
@@ -1982,10 +1527,6 @@ function testProp(props) {
 	}
 	return false;
 }
-
-
-
-
 function setTransform(el, offset, scale) {
 	var pos = offset || new Point(0, 0);
 	el.style[TRANSFORM] =
@@ -1994,10 +1535,6 @@ function setTransform(el, offset, scale) {
 			'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)') +
 		(scale ? ' scale(' + scale + ')' : '');
 }
-
-
-
-
 function setPosition(el, point) {
 	/*eslint-disable */
 	el._leaflet_pos = point;
@@ -2009,20 +1546,9 @@ function setPosition(el, point) {
 		el.style.top = point.y + 'px';
 	}
 }
-
-
 function getPosition(el) {
-
-
 	return el._leaflet_pos || new Point(0, 0);
 }
-
-
-
-
-
-
-
 var disableTextSelection;
 var enableTextSelection;
 var _userSelect;
@@ -2050,24 +1576,14 @@ if ('onselectstart' in document) {
 		}
 	};
 }
-
-
-
 function disableImageDrag() {
 	on(window, 'dragstart', preventDefault);
 }
-
-
 function enableImageDrag() {
 	off(window, 'dragstart', preventDefault);
 }
 var _outlineElement;
 var _outlineStyle;
-
-
-
-
-
 function preventOutline(element) {
 	while (element.tabIndex === -1) {
 		element = element.parentNode;
@@ -2079,8 +1595,6 @@ function preventOutline(element) {
 	element.style.outline = 'none';
 	on(window, 'keydown', restoreOutline);
 }
-
-
 function restoreOutline() {
 	if (!_outlineElement) { return; }
 	_outlineElement.style.outline = _outlineStyle;
@@ -2088,18 +1602,12 @@ function restoreOutline() {
 	_outlineStyle = undefined;
 	off(window, 'keydown', restoreOutline);
 }
-
-
 function getSizedParentNode(element) {
 	do {
 		element = element.parentNode;
 	} while ((!element.offsetWidth || !element.offsetHeight) && element !== document.body);
 	return element;
 }
-
-
-
-
 function getScale(element) {
 	var rect = element.getBoundingClientRect(); // Read-only in old browsers.
 	return {
@@ -2142,15 +1650,6 @@ var DomUtil = (Object.freeze || Object)({
  * @namespace DomEvent
  * Utility functions to work with the [DOM events](https://developer.mozilla.org/docs/Web/API/Event), used by Leaflet internally.
  */
-
-
-
-
-
-
-
-
-
 function on(obj, types, fn, context) {
 	if (typeof types === 'object') {
 		for (var type in types) {
@@ -2165,13 +1664,6 @@ function on(obj, types, fn, context) {
 	return this;
 }
 var eventsKey = '_leaflet_events';
-
-
-
-
-
-
-
 function off(obj, types, fn, context) {
 	if (typeof types === 'object') {
 		for (var type in types) {
@@ -2198,12 +1690,9 @@ function addOne(obj, type, fn, context) {
 	};
 	var originalHandler = handler;
 	if (pointer && type.indexOf('touch') === 0) {
-
 		addPointerListener(obj, type, handler, id);
 	} else if (touch && (type === 'dblclick') && addDoubleTapListener &&
 	           !(pointer && chrome)) {
-
-
 		addDoubleTapListener(obj, handler, id);
 	} else if ('addEventListener' in obj) {
 		if (type === 'mousewheel') {
@@ -2252,13 +1741,6 @@ function removeOne(obj, type, fn, context) {
 	}
 	obj[eventsKey][id] = null;
 }
-
-
-
-
-
-
-
 function stopPropagation(e) {
 	if (e.stopPropagation) {
 		e.stopPropagation();
@@ -2270,25 +1752,15 @@ function stopPropagation(e) {
 	skipped(e);
 	return this;
 }
-
-
 function disableScrollPropagation(el) {
 	addOne(el, 'mousewheel', stopPropagation);
 	return this;
 }
-
-
-
 function disableClickPropagation(el) {
 	on(el, 'mousedown touchstart dblclick', stopPropagation);
 	addOne(el, 'click', fakeStop);
 	return this;
 }
-
-
-
-
-
 function preventDefault(e) {
 	if (e.preventDefault) {
 		e.preventDefault();
@@ -2297,16 +1769,11 @@ function preventDefault(e) {
 	}
 	return this;
 }
-
-
 function stop(e) {
 	preventDefault(e);
 	stopPropagation(e);
 	return this;
 }
-
-
-
 function getMousePosition(e, container) {
 	if (!container) {
 		return new Point(e.clientX, e.clientY);
@@ -2314,22 +1781,13 @@ function getMousePosition(e, container) {
 	var scale = getScale(container),
 	    offset = scale.boundingClientRect; // left and top  values are in page scale (like the event clientX/Y)
 	return new Point(
-
-
 		(e.clientX - offset.left) / scale.x - container.clientLeft,
 		(e.clientY - offset.top) / scale.y - container.clientTop
 	);
 }
-
-
 var wheelPxFactor =
 	(win && chrome) ? 2 * window.devicePixelRatio :
 	gecko ? window.devicePixelRatio : 1;
-
-
-
-
-
 function getWheelDelta(e) {
 	return (edge) ? e.wheelDeltaY / 2 : // Don't trust window-geometry-based delta
 	       (e.deltaY && e.deltaMode === 0) ? -e.deltaY / wheelPxFactor : // Pixels
@@ -2343,16 +1801,13 @@ function getWheelDelta(e) {
 }
 var skipEvents = {};
 function fakeStop(e) {
-
 	skipEvents[e.type] = true;
 }
 function skipped(e) {
 	var events = skipEvents[e.type];
-
 	skipEvents[e.type] = false;
 	return events;
 }
-
 function isExternalTarget(el, e) {
 	var related = e.relatedTarget;
 	if (!related) { return true; }
@@ -2366,14 +1821,9 @@ function isExternalTarget(el, e) {
 	return (related !== el);
 }
 var lastClick;
-
 function filterClick(e, handler) {
 	var timeStamp = (e.timeStamp || (e.originalEvent && e.originalEvent.timeStamp)),
 	    elapsed = lastClick && (timeStamp - lastClick);
-
-
-
-
 	if ((elapsed && elapsed > 100 && elapsed < 500) || (e.target._simulatedClick && !e._simulated)) {
 		stop(e);
 		return;
@@ -2414,11 +1864,6 @@ var DomEvent = (Object.freeze || Object)({
  *
  */
 var PosAnimation = Evented.extend({
-
-
-
-
-
 	run: function (el, newPos, duration, easeLinearity) {
 		this.stop();
 		this._el = el;
@@ -2428,20 +1873,15 @@ var PosAnimation = Evented.extend({
 		this._startPos = getPosition(el);
 		this._offset = newPos.subtract(this._startPos);
 		this._startTime = +new Date();
-
-
 		this.fire('start');
 		this._animate();
 	},
-
-
 	stop: function () {
 		if (!this._inProgress) { return; }
 		this._step(true);
 		this._complete();
 	},
 	_animate: function () {
-
 		this._animId = requestAnimFrame(this._animate, this);
 		this._step();
 	},
@@ -2461,15 +1901,11 @@ var PosAnimation = Evented.extend({
 			pos._round();
 		}
 		setPosition(this._el, pos);
-
-
 		this.fire('step');
 	},
 	_complete: function () {
 		cancelAnimFrame(this._animId);
 		this._inProgress = false;
-
-
 		this.fire('end');
 	},
 	_easeOut: function (t) {
@@ -2496,85 +1932,27 @@ var PosAnimation = Evented.extend({
  */
 var Map = Evented.extend({
 	options: {
-
-
-
-
 		crs: EPSG3857,
-
-
 		center: undefined,
-
-
 		zoom: undefined,
-
-
-
-
 		minZoom: undefined,
-
-
-
-
 		maxZoom: undefined,
-
-
 		layers: [],
-
-
-
-
-
 		maxBounds: undefined,
-
-
-
 		renderer: undefined,
-
-
-
-
 		zoomAnimation: true,
-
-
 		zoomAnimationThreshold: 4,
-
-
-
 		fadeAnimation: true,
-
-
-
-
 		markerZoomAnimation: true,
-
-
-
-
 		transform3DLimit: 8388608, // Precision limit of a 32-bit float
-
-
-
-
-
-
-
 		zoomSnap: 1,
-
-
-
-
-
 		zoomDelta: 1,
-
-
 		trackResize: true
 	},
 	initialize: function (id, options) { // (HTMLElement or String, Object)
 		options = setOptions(this, options);
 		this._initContainer(id);
 		this._initLayout();
-
 		this._onResize = bind(this._onResize, this);
 		this._initEvents();
 		if (options.maxBounds) {
@@ -2591,21 +1969,14 @@ var Map = Evented.extend({
 		this._zoomBoundLayers = {};
 		this._sizeChanged = true;
 		this.callInitHooks();
-
 		this._zoomAnimated = TRANSITION && any3d && !mobileOpera &&
 				this.options.zoomAnimation;
-
-
 		if (this._zoomAnimated) {
 			this._createAnimProxy();
 			on(this._proxy, TRANSITION_END, this._catchTransitionEnd, this);
 		}
 		this._addLayers(this.options.layers);
 	},
-
-
-
-
 	setView: function (center, zoom, options) {
 		zoom = zoom === undefined ? this._zoom : this._limitZoom(zoom);
 		center = this._limitCenter(toLatLng(center), zoom, this.options.maxBounds);
@@ -2616,22 +1987,17 @@ var Map = Evented.extend({
 				options.zoom = extend({animate: options.animate}, options.zoom);
 				options.pan = extend({animate: options.animate, duration: options.duration}, options.pan);
 			}
-
 			var moved = (this._zoom !== zoom) ?
 				this._tryAnimatedZoom && this._tryAnimatedZoom(center, zoom, options.zoom) :
 				this._tryAnimatedPan(center, options.pan);
 			if (moved) {
-
 				clearTimeout(this._sizeTimer);
 				return this;
 			}
 		}
-
 		this._resetView(center, zoom);
 		return this;
 	},
-
-
 	setZoom: function (zoom, options) {
 		if (!this._loaded) {
 			this._zoom = zoom;
@@ -2639,24 +2005,14 @@ var Map = Evented.extend({
 		}
 		return this.setView(this.getCenter(), zoom, {zoom: options});
 	},
-
-
 	zoomIn: function (delta, options) {
 		delta = delta || (any3d ? this.options.zoomDelta : 1);
 		return this.setZoom(this._zoom + delta, options);
 	},
-
-
 	zoomOut: function (delta, options) {
 		delta = delta || (any3d ? this.options.zoomDelta : 1);
 		return this.setZoom(this._zoom - delta, options);
 	},
-
-
-
-
-
-
 	setZoomAround: function (latlng, zoom, options) {
 		var scale = this.getZoomScale(zoom),
 		    viewHalf = this.getSize().divideBy(2),
@@ -2687,9 +2043,6 @@ var Map = Evented.extend({
 			zoom: zoom
 		};
 	},
-
-
-
 	fitBounds: function (bounds, options) {
 		bounds = toLatLngBounds(bounds);
 		if (!bounds.isValid()) {
@@ -2698,27 +2051,18 @@ var Map = Evented.extend({
 		var target = this._getBoundsCenterZoom(bounds, options);
 		return this.setView(target.center, target.zoom, options);
 	},
-
-
-
 	fitWorld: function (options) {
 		return this.fitBounds([[-90, -180], [90, 180]], options);
 	},
-
-
 	panTo: function (center, options) { // (LatLng)
 		return this.setView(center, this._zoom, {pan: options});
 	},
-
-
 	panBy: function (offset, options) {
 		offset = toPoint(offset).round();
 		options = options || {};
 		if (!offset.x && !offset.y) {
 			return this.fire('moveend');
 		}
-
-
 		if (options.animate !== true && !this.getSize().contains(offset)) {
 			this._resetView(this.unproject(this.project(this.getCenter()).add(offset)), this.getZoom());
 			return this;
@@ -2730,11 +2074,9 @@ var Map = Evented.extend({
 				'end': this._onPanTransitionEnd
 			}, this);
 		}
-
 		if (!options.noMoveStart) {
 			this.fire('movestart');
 		}
-
 		if (options.animate !== false) {
 			addClass(this._mapPane, 'leaflet-pan-anim');
 			var newPos = this._getMapPanePos().subtract(offset).round();
@@ -2745,9 +2087,6 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
-
-
 	flyTo: function (targetCenter, targetZoom, options) {
 		options = options || {};
 		if (options.animate === false || !any3d) {
@@ -2772,8 +2111,6 @@ var Map = Evented.extend({
 			    b1 = 2 * s2 * rho2 * u1,
 			    b = t1 / b1,
 			    sq = Math.sqrt(b * b + 1) - b;
-
-
 			    var log = sq < 0.000000001 ? -18 : Math.log(sq);
 			return log;
 		}
@@ -2806,15 +2143,10 @@ var Map = Evented.extend({
 		frame.call(this);
 		return this;
 	},
-
-
-
 	flyToBounds: function (bounds, options) {
 		var target = this._getBoundsCenterZoom(bounds, options);
 		return this.flyTo(target.center, target.zoom, options);
 	},
-
-
 	setMaxBounds: function (bounds) {
 		bounds = toLatLngBounds(bounds);
 		if (!bounds.isValid()) {
@@ -2829,8 +2161,6 @@ var Map = Evented.extend({
 		}
 		return this.on('moveend', this._panInsideMaxBounds);
 	},
-
-
 	setMinZoom: function (zoom) {
 		var oldZoom = this.options.minZoom;
 		this.options.minZoom = zoom;
@@ -2842,8 +2172,6 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
-
 	setMaxZoom: function (zoom) {
 		var oldZoom = this.options.maxZoom;
 		this.options.maxZoom = zoom;
@@ -2855,8 +2183,6 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
-
 	panInsideBounds: function (bounds, options) {
 		this._enforcingBounds = true;
 		var center = this.getCenter(),
@@ -2867,18 +2193,6 @@ var Map = Evented.extend({
 		this._enforcingBounds = false;
 		return this;
 	},
-
-
-
-
-
-
-
-
-
-
-
-
 	invalidateSize: function (options) {
 		if (!this._loaded) { return this; }
 		options = extend({
@@ -2907,17 +2221,11 @@ var Map = Evented.extend({
 				this.fire('moveend');
 			}
 		}
-
-
-
 		return this.fire('resize', {
 			oldSize: oldSize,
 			newSize: newSize
 		});
 	},
-
-
-
 	stop: function () {
 		this.setZoom(this._limitZoom(this._zoom));
 		if (!this.options.zoomSnap) {
@@ -2925,23 +2233,10 @@ var Map = Evented.extend({
 		}
 		return this._stop();
 	},
-
-
-
-
-
-
-
-
-
 	locate: function (options) {
 		options = this._locateOptions = extend({
 			timeout: 10000,
 			watch: false
-
-
-
-
 		}, options);
 		if (!('geolocation' in navigator)) {
 			this._handleGeolocationError({
@@ -2960,10 +2255,6 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
-
-
-
 	stopLocate: function () {
 		if (navigator.geolocation && navigator.geolocation.clearWatch) {
 			navigator.geolocation.clearWatch(this._locationWatchId);
@@ -2981,9 +2272,6 @@ var Map = Evented.extend({
 		if (this._locateOptions.setView && !this._loaded) {
 			this.fitWorld();
 		}
-
-
-
 		this.fire('locationerror', {
 			code: c,
 			message: 'Geolocation error: ' + message + '.'
@@ -3009,15 +2297,8 @@ var Map = Evented.extend({
 				data[i] = pos.coords[i];
 			}
 		}
-
-
-
 		this.fire('locationfound', data);
 	},
-
-
-
-
 	addHandler: function (name, HandlerClass) {
 		if (!HandlerClass) { return this; }
 		var handler = this[name] = new HandlerClass(this);
@@ -3027,15 +2308,12 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
-
 	remove: function () {
 		this._initEvents(true);
 		if (this._containerId !== this._container._leaflet_id) {
 			throw new Error('Map container is being reused by another instance');
 		}
 		try {
-
 			delete this._container._leaflet_id;
 			delete this._containerId;
 		} catch (e) {
@@ -3058,9 +2336,6 @@ var Map = Evented.extend({
 		}
 		this._clearHandlers();
 		if (this._loaded) {
-
-
-
 			this.fire('unload');
 		}
 		var i;
@@ -3076,11 +2351,6 @@ var Map = Evented.extend({
 		delete this._renderer;
 		return this;
 	},
-
-
-
-
-
 	createPane: function (name, container) {
 		var className = 'leaflet-pane' + (name ? ' leaflet-' + name.replace('Pane', '') + '-pane' : ''),
 		    pane = create$1('div', className, container || this._mapPane);
@@ -3089,9 +2359,6 @@ var Map = Evented.extend({
 		}
 		return pane;
 	},
-
-
-
 	getCenter: function () {
 		this._checkIfLoaded();
 		if (this._lastCenter && !this._moved()) {
@@ -3099,36 +2366,23 @@ var Map = Evented.extend({
 		}
 		return this.layerPointToLatLng(this._getCenterLayerPoint());
 	},
-
-
 	getZoom: function () {
 		return this._zoom;
 	},
-
-
 	getBounds: function () {
 		var bounds = this.getPixelBounds(),
 		    sw = this.unproject(bounds.getBottomLeft()),
 		    ne = this.unproject(bounds.getTopRight());
 		return new LatLngBounds(sw, ne);
 	},
-
-
 	getMinZoom: function () {
 		return this.options.minZoom === undefined ? this._layersMinZoom || 0 : this.options.minZoom;
 	},
-
-
 	getMaxZoom: function () {
 		return this.options.maxZoom === undefined ?
 			(this._layersMaxZoom === undefined ? Infinity : this._layersMaxZoom) :
 			this.options.maxZoom;
 	},
-
-
-
-
-
 	getBoundsZoom: function (bounds, inside, padding) { // (LatLngBounds[, Boolean, Point]) -> Number
 		bounds = toLatLngBounds(bounds);
 		padding = toPoint(padding || [0, 0]);
@@ -3150,8 +2404,6 @@ var Map = Evented.extend({
 		}
 		return Math.max(min, Math.min(max, zoom));
 	},
-
-
 	getSize: function () {
 		if (!this._size || this._sizeChanged) {
 			this._size = new Point(
@@ -3161,163 +2413,84 @@ var Map = Evented.extend({
 		}
 		return this._size.clone();
 	},
-
-
-
 	getPixelBounds: function (center, zoom) {
 		var topLeftPoint = this._getTopLeftPoint(center, zoom);
 		return new Bounds(topLeftPoint, topLeftPoint.add(this.getSize()));
 	},
-
-
-
-
-
-
 	getPixelOrigin: function () {
 		this._checkIfLoaded();
 		return this._pixelOrigin;
 	},
-
-
-
 	getPixelWorldBounds: function (zoom) {
 		return this.options.crs.getProjectedBounds(zoom === undefined ? this.getZoom() : zoom);
 	},
-
-
-
 	getPane: function (pane) {
 		return typeof pane === 'string' ? this._panes[pane] : pane;
 	},
-
-
-
 	getPanes: function () {
 		return this._panes;
 	},
-
-
 	getContainer: function () {
 		return this._container;
 	},
-
-
-
-
 	getZoomScale: function (toZoom, fromZoom) {
-
 		var crs = this.options.crs;
 		fromZoom = fromZoom === undefined ? this._zoom : fromZoom;
 		return crs.scale(toZoom) / crs.scale(fromZoom);
 	},
-
-
-
-
 	getScaleZoom: function (scale, fromZoom) {
 		var crs = this.options.crs;
 		fromZoom = fromZoom === undefined ? this._zoom : fromZoom;
 		var zoom = crs.zoom(scale * crs.scale(fromZoom));
 		return isNaN(zoom) ? Infinity : zoom;
 	},
-
-
-
-
-
 	project: function (latlng, zoom) {
 		zoom = zoom === undefined ? this._zoom : zoom;
 		return this.options.crs.latLngToPoint(toLatLng(latlng), zoom);
 	},
-
-
 	unproject: function (point, zoom) {
 		zoom = zoom === undefined ? this._zoom : zoom;
 		return this.options.crs.pointToLatLng(toPoint(point), zoom);
 	},
-
-
-
 	layerPointToLatLng: function (point) {
 		var projectedPoint = toPoint(point).add(this.getPixelOrigin());
 		return this.unproject(projectedPoint);
 	},
-
-
-
 	latLngToLayerPoint: function (latlng) {
 		var projectedPoint = this.project(toLatLng(latlng))._round();
 		return projectedPoint._subtract(this.getPixelOrigin());
 	},
-
-
-
-
-
-
 	wrapLatLng: function (latlng) {
 		return this.options.crs.wrapLatLng(toLatLng(latlng));
 	},
-
-
-
-
-
-
 	wrapLatLngBounds: function (latlng) {
 		return this.options.crs.wrapLatLngBounds(toLatLngBounds(latlng));
 	},
-
-
-
 	distance: function (latlng1, latlng2) {
 		return this.options.crs.distance(toLatLng(latlng1), toLatLng(latlng2));
 	},
-
-
-
 	containerPointToLayerPoint: function (point) { // (Point)
 		return toPoint(point).subtract(this._getMapPanePos());
 	},
-
-
-
 	layerPointToContainerPoint: function (point) { // (Point)
 		return toPoint(point).add(this._getMapPanePos());
 	},
-
-
-
 	containerPointToLatLng: function (point) {
 		var layerPoint = this.containerPointToLayerPoint(toPoint(point));
 		return this.layerPointToLatLng(layerPoint);
 	},
-
-
-
 	latLngToContainerPoint: function (latlng) {
 		return this.layerPointToContainerPoint(this.latLngToLayerPoint(toLatLng(latlng)));
 	},
-
-
-
 	mouseEventToContainerPoint: function (e) {
 		return getMousePosition(e, this._container);
 	},
-
-
-
 	mouseEventToLayerPoint: function (e) {
 		return this.containerPointToLayerPoint(this.mouseEventToContainerPoint(e));
 	},
-
-
-
 	mouseEventToLatLng: function (e) { // (MouseEvent)
 		return this.layerPointToLatLng(this.mouseEventToLayerPoint(e));
 	},
-
 	_initContainer: function (id) {
 		var container = this._container = get(id);
 		if (!container) {
@@ -3349,44 +2522,22 @@ var Map = Evented.extend({
 	_initPanes: function () {
 		var panes = this._panes = {};
 		this._paneRenderers = {};
-
 		//
-
-
-
-
 		//
-
 		//
-
-
 		this._mapPane = this.createPane('mapPane', this._container);
 		setPosition(this._mapPane, new Point(0, 0));
-
-
 		this.createPane('tilePane');
-
-
 		this.createPane('shadowPane');
-
-
 		this.createPane('overlayPane');
-
-
 		this.createPane('markerPane');
-
-
 		this.createPane('tooltipPane');
-
-
 		this.createPane('popupPane');
 		if (!this.options.markerZoomAnimation) {
 			addClass(panes.markerPane, 'leaflet-zoom-hide');
 			addClass(panes.shadowPane, 'leaflet-zoom-hide');
 		}
 	},
-
-
 	_resetView: function (center, zoom) {
 		setPosition(this._mapPane, new Point(0, 0));
 		var loading = !this._loaded;
@@ -3398,22 +2549,12 @@ var Map = Evented.extend({
 			._moveStart(zoomChanged, false)
 			._move(center, zoom)
 			._moveEnd(zoomChanged);
-
-
-
 		this.fire('viewreset');
-
-
-
 		if (loading) {
 			this.fire('load');
 		}
 	},
 	_moveStart: function (zoomChanged, noMoveStart) {
-
-
-
-
 		if (zoomChanged) {
 			this.fire('zoomstart');
 		}
@@ -3430,26 +2571,15 @@ var Map = Evented.extend({
 		this._zoom = zoom;
 		this._lastCenter = center;
 		this._pixelOrigin = this._getNewPixelOrigin(center);
-
-
-
 		if (zoomChanged || (data && data.pinch)) {	// Always fire 'zoom' if pinching because #3530
 			this.fire('zoom', data);
 		}
-
-
-
 		return this.fire('move', data);
 	},
 	_moveEnd: function (zoomChanged) {
-
-
 		if (zoomChanged) {
 			this.fire('zoomend');
 		}
-
-
-
 		return this.fire('moveend');
 	},
 	_stop: function () {
@@ -3475,33 +2605,10 @@ var Map = Evented.extend({
 			throw new Error('Set map center and zoom first.');
 		}
 	},
-
-
 	_initEvents: function (remove$$1) {
 		this._targets = {};
 		this._targets[stamp(this._container)] = this;
 		var onOff = remove$$1 ? off : on;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		onOff(this._container, 'click dblclick mousedown mouseup ' +
 			'mouseover mouseout mousemove contextmenu keypress', this._handleDOMEvent, this);
 		if (this.options.trackResize) {
@@ -3523,8 +2630,6 @@ var Map = Evented.extend({
 	_onMoveEnd: function () {
 		var pos = this._getMapPanePos();
 		if (Math.max(Math.abs(pos.x), Math.abs(pos.y)) >= this.options.transform3DLimit) {
-
-
 			this._resetView(this.getCenter(), this.getZoom());
 		}
 	},
@@ -3537,7 +2642,6 @@ var Map = Evented.extend({
 		while (src) {
 			target = this._targets[stamp(src)];
 			if (target && (type === 'click' || type === 'preclick') && !e._simulated && this._draggableMoved(target)) {
-
 				dragging = true;
 				break;
 			}
@@ -3558,7 +2662,6 @@ var Map = Evented.extend({
 		if (!this._loaded || skipped(e)) { return; }
 		var type = e.type;
 		if (type === 'mousedown' || type === 'keypress') {
-
 			preventOutline(e.target || e.srcElement);
 		}
 		this._fireDOMEvent(e, type);
@@ -3566,17 +2669,11 @@ var Map = Evented.extend({
 	_mouseEvents: ['click', 'dblclick', 'mouseover', 'mouseout', 'contextmenu'],
 	_fireDOMEvent: function (e, type, targets) {
 		if (e.type === 'click') {
-
-
-
-
-
 			var synth = extend({}, e);
 			synth.type = 'preclick';
 			this._fireDOMEvent(synth, synth.type, targets);
 		}
 		if (e._stopped) { return; }
-
 		targets = (targets || []).concat(this._findEventTargets(e, type));
 		if (!targets.length) { return; }
 		var target = targets[0];
@@ -3608,11 +2705,6 @@ var Map = Evented.extend({
 			this._handlers[i].disable();
 		}
 	},
-
-
-
-
-
 	whenReady: function (callback, context) {
 		if (this._loaded) {
 			callback.call(context || this, {target: this});
@@ -3621,7 +2713,6 @@ var Map = Evented.extend({
 		}
 		return this;
 	},
-
 	_getMapPanePos: function () {
 		return getPosition(this._mapPane) || new Point(0, 0);
 	},
@@ -3652,37 +2743,29 @@ var Map = Evented.extend({
 			this.project(latLngBounds.getNorthEast(), zoom)._subtract(topLeft)
 		]);
 	},
-
 	_getCenterLayerPoint: function () {
 		return this.containerPointToLayerPoint(this.getSize()._divideBy(2));
 	},
-
 	_getCenterOffset: function (latlng) {
 		return this.latLngToLayerPoint(latlng).subtract(this._getCenterLayerPoint());
 	},
-
 	_limitCenter: function (center, zoom, bounds) {
 		if (!bounds) { return center; }
 		var centerPoint = this.project(center, zoom),
 		    viewHalf = this.getSize().divideBy(2),
 		    viewBounds = new Bounds(centerPoint.subtract(viewHalf), centerPoint.add(viewHalf)),
 		    offset = this._getBoundsOffset(viewBounds, bounds, zoom);
-
-
-
 		if (offset.round().equals([0, 0])) {
 			return center;
 		}
 		return this.unproject(centerPoint.add(offset), zoom);
 	},
-
 	_limitOffset: function (offset, bounds) {
 		if (!bounds) { return offset; }
 		var viewBounds = this.getPixelBounds(),
 		    newBounds = new Bounds(viewBounds.min.add(offset), viewBounds.max.add(offset));
 		return offset.add(this._getBoundsOffset(newBounds, bounds));
 	},
-
 	_getBoundsOffset: function (pxBounds, maxBounds, zoom) {
 		var projectedMaxBounds = toBounds(
 		        this.project(maxBounds.getNorthEast(), zoom),
@@ -3716,9 +2799,7 @@ var Map = Evented.extend({
 		this.fire('moveend');
 	},
 	_tryAnimatedPan: function (center, options) {
-
 		var offset = this._getCenterOffset(center)._trunc();
-
 		if ((options && options.animate) !== true && !this.getSize().contains(offset)) { return false; }
 		this.panBy(offset, options);
 		return true;
@@ -3730,7 +2811,6 @@ var Map = Evented.extend({
 			var prop = TRANSFORM,
 			    transform = this._proxy.style[prop];
 			setTransform(this._proxy, this.project(e.center, e.zoom), this.getZoomScale(e.zoom, 1));
-
 			if (transform === this._proxy.style[prop] && this._animatingZoom) {
 				this._onZoomTransitionEnd();
 			}
@@ -3757,13 +2837,10 @@ var Map = Evented.extend({
 	_tryAnimatedZoom: function (center, zoom, options) {
 		if (this._animatingZoom) { return true; }
 		options = options || {};
-
 		if (!this._zoomAnimated || options.animate === false || this._nothingToAnimate() ||
 		        Math.abs(zoom - this._zoom) > this.options.zoomAnimationThreshold) { return false; }
-
 		var scale = this.getZoomScale(zoom),
 		    offset = this._getCenterOffset(center)._divideBy(1 - 1 / scale);
-
 		if (options.animate !== true && !this.getSize().contains(offset)) { return false; }
 		requestAnimFrame(function () {
 			this
@@ -3776,19 +2853,15 @@ var Map = Evented.extend({
 		if (!this._mapPane) { return; }
 		if (startAnim) {
 			this._animatingZoom = true;
-
 			this._animateToCenter = center;
 			this._animateToZoom = zoom;
 			addClass(this._mapPane, 'leaflet-zoom-anim');
 		}
-
-
 		this.fire('zoomanim', {
 			center: center,
 			zoom: zoom,
 			noUpdate: noUpdate
 		});
-
 		setTimeout(bind(this._onZoomTransitionEnd, this), 250);
 	},
 	_onZoomTransitionEnd: function () {
@@ -3798,21 +2871,12 @@ var Map = Evented.extend({
 		}
 		this._animatingZoom = false;
 		this._move(this._animateToCenter, this._animateToZoom);
-
 		requestAnimFrame(function () {
 			this._moveEnd(true);
 		}, this);
 	}
 });
-
-
-
-
 //
-
-
-
-
 function createMap(id, options) {
 	return new Map(id, options);
 }
@@ -3825,12 +2889,7 @@ function createMap(id, options) {
  * All other controls extend from this class.
  */
 var Control = Class.extend({
-
-
 	options: {
-
-
-
 		position: 'topright'
 	},
 	initialize: function (options) {
@@ -3845,8 +2904,6 @@ var Control = Class.extend({
 	getPosition: function () {
 		return this.options.position;
 	},
-
-
 	setPosition: function (position) {
 		var map = this._map;
 		if (map) {
@@ -3858,13 +2915,9 @@ var Control = Class.extend({
 		}
 		return this;
 	},
-
-
 	getContainer: function () {
 		return this._container;
 	},
-
-
 	addTo: function (map) {
 		this.remove();
 		this._map = map;
@@ -3879,8 +2932,6 @@ var Control = Class.extend({
 		}
 		return this;
 	},
-
-
 	remove: function () {
 		if (!this._map) {
 			return this;
@@ -3893,7 +2944,6 @@ var Control = Class.extend({
 		return this;
 	},
 	_refocusOnMap: function (e) {
-
 		if (this._map && e && e.screenX > 0 && e.screenY > 0) {
 			this._map.getContainer().focus();
 		}
@@ -3917,14 +2967,10 @@ var control = function (options) {
  * @section Methods for Layers and Controls
  */
 Map.include({
-
-
 	addControl: function (control) {
 		control.addTo(this);
 		return this;
 	},
-
-
 	removeControl: function (control) {
 		control.remove();
 		return this;
@@ -3991,29 +3037,12 @@ Map.include({
  * ```
  */
 var Layers = Control.extend({
-
-
 	options: {
-
-
 		collapsed: true,
 		position: 'topright',
-
-
 		autoZIndex: true,
-
-
 		hideSingleBase: false,
-
-
-
 		sortLayers: false,
-
-
-
-
-
-
 		sortFunction: function (layerA, layerB, nameA, nameB) {
 			return nameA < nameB ? -1 : (nameB < nameA ? 1 : 0);
 		}
@@ -4043,7 +3072,6 @@ var Layers = Control.extend({
 	},
 	addTo: function (map) {
 		Control.prototype.addTo.call(this, map);
-
 		return this._expandIfNotCollapsed();
 	},
 	onRemove: function () {
@@ -4052,20 +3080,14 @@ var Layers = Control.extend({
 			this._layers[i].layer.off('add remove', this._onLayerChange, this);
 		}
 	},
-
-
 	addBaseLayer: function (layer, name) {
 		this._addLayer(layer, name);
 		return (this._map) ? this._update() : this;
 	},
-
-
 	addOverlay: function (layer, name) {
 		this._addLayer(layer, name, true);
 		return (this._map) ? this._update() : this;
 	},
-
-
 	removeLayer: function (layer) {
 		layer.off('add remove', this._onLayerChange, this);
 		var obj = this._getLayer(stamp(layer));
@@ -4074,8 +3096,6 @@ var Layers = Control.extend({
 		}
 		return (this._map) ? this._update() : this;
 	},
-
-
 	expand: function () {
 		addClass(this._container, 'leaflet-control-layers-expanded');
 		this._form.style.height = null;
@@ -4089,8 +3109,6 @@ var Layers = Control.extend({
 		this._checkDisabledLayers();
 		return this;
 	},
-
-
 	collapse: function () {
 		removeClass(this._container, 'leaflet-control-layers-expanded');
 		return this;
@@ -4099,7 +3117,6 @@ var Layers = Control.extend({
 		var className = 'leaflet-control-layers',
 		    container = this._container = create$1('div', className),
 		    collapsed = this.options.collapsed;
-
 		container.setAttribute('aria-haspopup', true);
 		disableClickPropagation(container);
 		disableScrollPropagation(container);
@@ -4170,7 +3187,6 @@ var Layers = Control.extend({
 			baseLayersPresent = baseLayersPresent || !obj.overlay;
 			baseLayersCount += !obj.overlay ? 1 : 0;
 		}
-
 		if (this.options.hideSingleBase) {
 			baseLayersPresent = baseLayersPresent && baseLayersCount > 1;
 			this._baseLayersList.style.display = baseLayersPresent ? '' : 'none';
@@ -4183,15 +3199,6 @@ var Layers = Control.extend({
 			this._update();
 		}
 		var obj = this._getLayer(stamp(e.target));
-
-
-
-
-
-
-
-
-
 		var type = obj.overlay ?
 			(e.type === 'add' ? 'overlayadd' : 'overlayremove') :
 			(e.type === 'add' ? 'baselayerchange' : null);
@@ -4199,7 +3206,6 @@ var Layers = Control.extend({
 			this._map.fire(type, obj);
 		}
 	},
-
 	_createRadioElement: function (name, checked) {
 		var radioHtml = '<input type="radio" class="leaflet-control-layers-selector" name="' +
 				name + '"' + (checked ? ' checked="checked"' : '') + '/>';
@@ -4224,8 +3230,6 @@ var Layers = Control.extend({
 		on(input, 'click', this._onInputClick, this);
 		var name = document.createElement('span');
 		name.innerHTML = ' ' + obj.name;
-
-
 		var holder = document.createElement('div');
 		label.appendChild(holder);
 		holder.appendChild(input);
@@ -4250,7 +3254,6 @@ var Layers = Control.extend({
 				removedLayers.push(layer);
 			}
 		}
-
 		for (i = 0; i < removedLayers.length; i++) {
 			if (this._map.hasLayer(removedLayers[i])) {
 				this._map.removeLayer(removedLayers[i]);
@@ -4283,16 +3286,12 @@ var Layers = Control.extend({
 		return this;
 	},
 	_expand: function () {
-
 		return this.expand();
 	},
 	_collapse: function () {
-
 		return this.collapse();
 	}
 });
-
-
 var layers = function (baseLayers, overlays, options) {
 	return new Layers(baseLayers, overlays, options);
 };
@@ -4304,21 +3303,11 @@ var layers = function (baseLayers, overlays, options) {
  * A basic zoom control with two buttons (zoom in and zoom out). It is put on the map by default unless you set its [`zoomControl` option](#map-zoomcontrol) to `false`. Extends `Control`.
  */
 var Zoom = Control.extend({
-
-
 	options: {
 		position: 'topleft',
-
-
 		zoomInText: '+',
-
-
 		zoomInTitle: 'Zoom in',
-
-
 		zoomOutText: '&#x2212;',
-
-
 		zoomOutTitle: 'Zoom out'
 	},
 	onAdd: function (map) {
@@ -4385,26 +3374,15 @@ var Zoom = Control.extend({
 		}
 	}
 });
-
-
-
-
 Map.mergeOptions({
 	zoomControl: true
 });
 Map.addInitHook(function () {
 	if (this.options.zoomControl) {
-
-
-
-
 		this.zoomControl = new Zoom();
 		this.addControl(this.zoomControl);
 	}
 });
-
-
-
 var zoom = function (options) {
 	return new Zoom(options);
 };
@@ -4422,21 +3400,11 @@ var zoom = function (options) {
  * ```
  */
 var Scale = Control.extend({
-
-
 	options: {
 		position: 'bottomleft',
-
-
 		maxWidth: 100,
-
-
 		metric: true,
-
-
 		imperial: true
-
-
 	},
 	onAdd: function (map) {
 		var className = 'leaflet-control-scale',
@@ -4505,8 +3473,6 @@ var Scale = Control.extend({
 		return pow10 * d;
 	}
 });
-
-
 var scale = function (options) {
 	return new Scale(options);
 };
@@ -4518,12 +3484,8 @@ var scale = function (options) {
  * The attribution control allows you to display attribution data in a small text box on a map. It is put on the map by default unless you set its [`attributionControl` option](#map-attributioncontrol) to `false`, and it fetches attribution texts from layers with the [`getAttribution` method](#layer-getattribution) automatically. Extends Control.
  */
 var Attribution = Control.extend({
-
-
 	options: {
 		position: 'bottomright',
-
-
 		prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
 	},
 	initialize: function (options) {
@@ -4534,7 +3496,6 @@ var Attribution = Control.extend({
 		map.attributionControl = this;
 		this._container = create$1('div', 'leaflet-control-attribution');
 		disableClickPropagation(this._container);
-
 		for (var i in map._layers) {
 			if (map._layers[i].getAttribution) {
 				this.addAttribution(map._layers[i].getAttribution());
@@ -4543,15 +3504,11 @@ var Attribution = Control.extend({
 		this._update();
 		return this._container;
 	},
-
-
 	setPrefix: function (prefix) {
 		this.options.prefix = prefix;
 		this._update();
 		return this;
 	},
-
-
 	addAttribution: function (text) {
 		if (!text) { return this; }
 		if (!this._attributions[text]) {
@@ -4561,8 +3518,6 @@ var Attribution = Control.extend({
 		this._update();
 		return this;
 	},
-
-
 	removeAttribution: function (text) {
 		if (!text) { return this; }
 		if (this._attributions[text]) {
@@ -4589,10 +3544,6 @@ var Attribution = Control.extend({
 		this._container.innerHTML = prefixAndAttribs.join(' | ');
 	}
 });
-
-
-
-
 Map.mergeOptions({
 	attributionControl: true
 });
@@ -4601,9 +3552,6 @@ Map.addInitHook(function () {
 		new Attribution().addTo(this);
 	}
 });
-
-
-
 var attribution = function (options) {
 	return new Attribution(options);
 };
@@ -4619,44 +3567,26 @@ control.attribution = attribution;
 	L.Handler is a base class for handler classes that are used internally to inject
 	interaction features like dragging to classes like Map and Marker.
 */
-
-
-
 var Handler = Class.extend({
 	initialize: function (map) {
 		this._map = map;
 	},
-
-
 	enable: function () {
 		if (this._enabled) { return this; }
 		this._enabled = true;
 		this.addHooks();
 		return this;
 	},
-
-
 	disable: function () {
 		if (!this._enabled) { return this; }
 		this._enabled = false;
 		this.removeHooks();
 		return this;
 	},
-
-
 	enabled: function () {
 		return !!this._enabled;
 	}
-
-
-
-
-
-
 });
-
-
-
 Handler.addTo = function (map, name) {
 	map.addHandler(name, this);
 	return this;
@@ -4692,34 +3622,21 @@ var MOVE = {
 };
 var Draggable = Evented.extend({
 	options: {
-
-
-
-
-
 		clickTolerance: 3
 	},
-
-
 	initialize: function (element, dragStartTarget, preventOutline$$1, options) {
 		setOptions(this, options);
 		this._element = element;
 		this._dragStartTarget = dragStartTarget || element;
 		this._preventOutline = preventOutline$$1;
 	},
-
-
 	enable: function () {
 		if (this._enabled) { return; }
 		on(this._dragStartTarget, START, this._onDown, this);
 		this._enabled = true;
 	},
-
-
 	disable: function () {
 		if (!this._enabled) { return; }
-
-
 		if (Draggable._dragging === this) {
 			this.finishDrag();
 		}
@@ -4728,11 +3645,6 @@ var Draggable = Evented.extend({
 		this._moved = false;
 	},
 	_onDown: function (e) {
-
-
-
-
-
 		if (e._simulated || !this._enabled) { return; }
 		this._moved = false;
 		if (hasClass(this._element, 'leaflet-zoom-anim')) { return; }
@@ -4744,23 +3656,15 @@ var Draggable = Evented.extend({
 		disableImageDrag();
 		disableTextSelection();
 		if (this._moving) { return; }
-
-
 		this.fire('down');
 		var first = e.touches ? e.touches[0] : e,
 		    sizedParent = getSizedParentNode(this._element);
 		this._startPoint = new Point(first.clientX, first.clientY);
-
 		this._parentScale = getScale(sizedParent);
 		on(document, MOVE[e.type], this._onMove, this);
 		on(document, END[e.type], this._onUp, this);
 	},
 	_onMove: function (e) {
-
-
-
-
-
 		if (e._simulated || !this._enabled) { return; }
 		if (e.touches && e.touches.length > 1) {
 			this._moved = true;
@@ -4770,22 +3674,15 @@ var Draggable = Evented.extend({
 		    offset = new Point(first.clientX, first.clientY)._subtract(this._startPoint);
 		if (!offset.x && !offset.y) { return; }
 		if (Math.abs(offset.x) + Math.abs(offset.y) < this.options.clickTolerance) { return; }
-
-
-
 		offset.x /= this._parentScale.x;
 		offset.y /= this._parentScale.y;
 		preventDefault(e);
 		if (!this._moved) {
-
-
 			this.fire('dragstart');
 			this._moved = true;
 			this._startPos = getPosition(this._element).subtract(offset);
 			addClass(document.body, 'leaflet-dragging');
 			this._lastTarget = e.target || e.srcElement;
-
-
 			if ((window.SVGElementInstance) && (this._lastTarget instanceof SVGElementInstance)) {
 				this._lastTarget = this._lastTarget.correspondingUseElement;
 			}
@@ -4799,21 +3696,11 @@ var Draggable = Evented.extend({
 	},
 	_updatePosition: function () {
 		var e = {originalEvent: this._lastEvent};
-
-
-
 		this.fire('predrag', e);
 		setPosition(this._element, this._newPos);
-
-
 		this.fire('drag', e);
 	},
 	_onUp: function (e) {
-
-
-
-
-
 		if (e._simulated || !this._enabled) { return; }
 		this.finishDrag();
 	},
@@ -4830,10 +3717,7 @@ var Draggable = Evented.extend({
 		enableImageDrag();
 		enableTextSelection();
 		if (this._moved && this._moving) {
-
 			cancelAnimFrame(this._animRequest);
-
-
 			this.fire('dragend', {
 				distance: this._newPos.distanceTo(this._startPos)
 			});
@@ -4847,38 +3731,21 @@ var Draggable = Evented.extend({
  *
  * Various utility functions for polyline points processing, used by Leaflet internally to make polylines lightning-fast.
  */
-
-
-
-
-
-
-
-
-
-
 function simplify(points, tolerance) {
 	if (!tolerance || !points.length) {
 		return points.slice();
 	}
 	var sqTolerance = tolerance * tolerance;
-
 	    points = _reducePoints(points, sqTolerance);
-
 	    points = _simplifyDP(points, sqTolerance);
 	return points;
 }
-
-
 function pointToSegmentDistance(p, p1, p2) {
 	return Math.sqrt(_sqClosestPointOnSegment(p, p1, p2, true));
 }
-
-
 function closestPointOnSegment(p, p1, p2) {
 	return _sqClosestPointOnSegment(p, p1, p2);
 }
-
 function _simplifyDP(points, sqTolerance) {
 	var len = points.length,
 	    ArrayConstructor = typeof Uint8Array !== undefined + '' ? Uint8Array : Array,
@@ -4910,7 +3777,6 @@ function _simplifyDPStep(points, markers, sqTolerance, first, last) {
 		_simplifyDPStep(points, markers, sqTolerance, index, last);
 	}
 }
-
 function _reducePoints(points, sqTolerance) {
 	var reducedPoints = [points[0]];
 	for (var i = 1, prev = 0, len = points.length; i < len; i++) {
@@ -4925,27 +3791,18 @@ function _reducePoints(points, sqTolerance) {
 	return reducedPoints;
 }
 var _lastCode;
-
-
-
-
-
 function clipSegment(a, b, bounds, useLastCode, round) {
 	var codeA = useLastCode ? _lastCode : _getBitCode(a, bounds),
 	    codeB = _getBitCode(b, bounds),
 	    codeOut, p, newCode;
-
 	    _lastCode = codeB;
 	while (true) {
-
 		if (!(codeA | codeB)) {
 			return [a, b];
 		}
-
 		if (codeA & codeB) {
 			return false;
 		}
-
 		codeOut = codeA || codeB;
 		p = _getEdgeIntersection(a, b, codeOut, bounds, round);
 		newCode = _getBitCode(p, bounds);
@@ -4993,13 +3850,11 @@ function _getBitCode(p, bounds) {
 	}
 	return code;
 }
-
 function _sqDist(p1, p2) {
 	var dx = p2.x - p1.x,
 	    dy = p2.y - p1.y;
 	return dx * dx + dy * dy;
 }
-
 function _sqClosestPointOnSegment(p, p1, p2, sqDist) {
 	var x = p1.x,
 	    y = p1.y,
@@ -5021,8 +3876,6 @@ function _sqClosestPointOnSegment(p, p1, p2, sqDist) {
 	dy = p.y - y;
 	return sqDist ? dx * dx + dy * dy : new Point(x, y);
 }
-
-
 function isFlat(latlngs) {
 	return !isArray(latlngs[0]) || (typeof latlngs[0][0] !== 'object' && typeof latlngs[0][0] !== 'undefined');
 }
@@ -5060,23 +3913,19 @@ function clipPolygon(points, bounds, round) {
 	for (i = 0, len = points.length; i < len; i++) {
 		points[i]._code = _getBitCode(points[i], bounds);
 	}
-
 	for (k = 0; k < 4; k++) {
 		edge = edges[k];
 		clippedPoints = [];
 		for (i = 0, len = points.length, j = len - 1; i < len; j = i++) {
 			a = points[i];
 			b = points[j];
-
 			if (!(a._code & edge)) {
-
 				if (b._code & edge) {
 					p = _getEdgeIntersection(b, a, edge, bounds, round);
 					p._code = _getBitCode(p, bounds);
 					clippedPoints.push(p);
 				}
 				clippedPoints.push(a);
-
 			} else if (!(b._code & edge)) {
 				p = _getEdgeIntersection(b, a, edge, bounds, round);
 				p._code = _getBitCode(p, bounds);
@@ -5255,13 +4104,8 @@ CRS.Simple = Simple;
  * Fired after the layer is removed from a map
  */
 var Layer = Evented.extend({
-
 	options: {
-
-
 		pane: 'overlayPane',
-
-
 		attribution: null,
 		bubblingMouseEvents: true
 	},
@@ -5275,21 +4119,15 @@ var Layer = Evented.extend({
 		map.addLayer(this);
 		return this;
 	},
-
-
 	remove: function () {
 		return this.removeFrom(this._map || this._mapToAdd);
 	},
-
-
 	removeFrom: function (obj) {
 		if (obj) {
 			obj.removeLayer(this);
 		}
 		return this;
 	},
-
-
 	getPane: function (name) {
 		return this._map.getPane(name ? (this.options[name] || name) : this.options.pane);
 	},
@@ -5301,14 +4139,11 @@ var Layer = Evented.extend({
 		delete this._map._targets[stamp(targetEl)];
 		return this;
 	},
-
-
 	getAttribution: function () {
 		return this.options.attribution;
 	},
 	_layerAdd: function (e) {
 		var map = e.target;
-
 		if (!map.hasLayer(this)) { return; }
 		this._map = map;
 		this._zoomAnimated = map._zoomAnimated;
@@ -5359,8 +4194,6 @@ var Layer = Evented.extend({
  * @section Methods for Layers and Controls
  */
 Map.include({
-
-
 	addLayer: function (layer) {
 		if (!layer._layerAdd) {
 			throw new Error('The provided object is not a Layer.');
@@ -5375,8 +4208,6 @@ Map.include({
 		this.whenReady(layer._layerAdd, layer);
 		return this;
 	},
-
-
 	removeLayer: function (layer) {
 		var id = stamp(layer);
 		if (!this._layers[id]) { return this; }
@@ -5394,8 +4225,6 @@ Map.include({
 		layer._map = layer._mapToAdd = null;
 		return this;
 	},
-
-
 	hasLayer: function (layer) {
 		return !!layer && (stamp(layer) in this._layers);
 	},
@@ -5443,10 +4272,6 @@ Map.include({
 		}
 		this._layersMaxZoom = maxZoom === -Infinity ? undefined : maxZoom;
 		this._layersMinZoom = minZoom === Infinity ? undefined : minZoom;
-
-
-
-
 		if (oldZoomSpan !== this._getZoomSpan()) {
 			this.fire('zoomlevelschange');
 		}
@@ -5486,8 +4311,6 @@ var LayerGroup = Layer.extend({
 			}
 		}
 	},
-
-
 	addLayer: function (layer) {
 		var id = this.getLayerId(layer);
 		this._layers[id] = layer;
@@ -5496,11 +4319,6 @@ var LayerGroup = Layer.extend({
 		}
 		return this;
 	},
-
-
-
-
-
 	removeLayer: function (layer) {
 		var id = layer in this._layers ? layer : this.getLayerId(layer);
 		if (this._map && this._layers[id]) {
@@ -5509,23 +4327,12 @@ var LayerGroup = Layer.extend({
 		delete this._layers[id];
 		return this;
 	},
-
-
-
-
-
 	hasLayer: function (layer) {
 		return !!layer && (layer in this._layers || this.getLayerId(layer) in this._layers);
 	},
-
-
 	clearLayers: function () {
 		return this.eachLayer(this.removeLayer, this);
 	},
-
-
-
-
 	invoke: function (methodName) {
 		var args = Array.prototype.slice.call(arguments, 1),
 		    i, layer;
@@ -5543,44 +4350,27 @@ var LayerGroup = Layer.extend({
 	onRemove: function (map) {
 		this.eachLayer(map.removeLayer, map);
 	},
-
-
-
-
-
-
-
 	eachLayer: function (method, context) {
 		for (var i in this._layers) {
 			method.call(context, this._layers[i]);
 		}
 		return this;
 	},
-
-
 	getLayer: function (id) {
 		return this._layers[id];
 	},
-
-
 	getLayers: function () {
 		var layers = [];
 		this.eachLayer(layers.push, layers);
 		return layers;
 	},
-
-
 	setZIndex: function (zIndex) {
 		return this.invoke('setZIndex', zIndex);
 	},
-
-
 	getLayerId: function (layer) {
 		return stamp(layer);
 	}
 });
-
-
 var layerGroup = function (layers, options) {
 	return new LayerGroup(layers, options);
 };
@@ -5612,8 +4402,6 @@ var FeatureGroup = LayerGroup.extend({
 		}
 		layer.addEventParent(this);
 		LayerGroup.prototype.addLayer.call(this, layer);
-
-
 		return this.fire('layeradd', {layer: layer});
 	},
 	removeLayer: function (layer) {
@@ -5625,27 +4413,17 @@ var FeatureGroup = LayerGroup.extend({
 		}
 		layer.removeEventParent(this);
 		LayerGroup.prototype.removeLayer.call(this, layer);
-
-
 		return this.fire('layerremove', {layer: layer});
 	},
-
-
 	setStyle: function (style) {
 		return this.invoke('setStyle', style);
 	},
-
-
 	bringToFront: function () {
 		return this.invoke('bringToFront');
 	},
-
-
 	bringToBack: function () {
 		return this.invoke('bringToBack');
 	},
-
-
 	getBounds: function () {
 		var bounds = new LatLngBounds();
 		for (var id in this._layers) {
@@ -5655,8 +4433,6 @@ var FeatureGroup = LayerGroup.extend({
 		return bounds;
 	}
 });
-
-
 var featureGroup = function (layers) {
 	return new FeatureGroup(layers);
 };
@@ -5734,14 +4510,9 @@ var Icon = Class.extend({
 	initialize: function (options) {
 		setOptions(this, options);
 	},
-
-
-
 	createIcon: function (oldIcon) {
 		return this._createIcon('icon', oldIcon);
 	},
-
-
 	createShadow: function (oldIcon) {
 		return this._createIcon('shadow', oldIcon);
 	},
@@ -5785,8 +4556,6 @@ var Icon = Class.extend({
 		return retina && this.options[name + 'RetinaUrl'] || this.options[name + 'Url'];
 	}
 });
-
-
 function icon(options) {
 	return new Icon(options);
 }
@@ -5820,10 +4589,6 @@ var IconDefault = Icon.extend({
 		if (!IconDefault.imagePath) {	// Deprecated, backwards-compatibility only
 			IconDefault.imagePath = this._detectIconPath();
 		}
-
-
-
-
 		return (this.options.imagePath || IconDefault.imagePath) + Icon.prototype._getIconUrl.call(this, name);
 	},
 	_detectIconPath: function () {
@@ -5898,7 +4663,6 @@ var MarkerDrag = Handler.extend({
 			bounds.max._subtract(origin).subtract(padding)
 		);
 		if (!panBounds.contains(iconPos)) {
-
 			var movement = toPoint(
 				(Math.max(panBounds.max.x, iconPos.x) - panBounds.max.x) / (bounds.max.x - panBounds.max.x) -
 				(Math.min(panBounds.min.x, iconPos.x) - panBounds.min.x) / (bounds.min.x - panBounds.min.x),
@@ -5914,11 +4678,6 @@ var MarkerDrag = Handler.extend({
 		}
 	},
 	_onDragStart: function () {
-
-
-
-
-
 		this._oldLatLng = this._marker.getLatLng();
 		this._marker
 		    .closePopup()
@@ -5936,25 +4695,18 @@ var MarkerDrag = Handler.extend({
 		    shadow = marker._shadow,
 		    iconPos = getPosition(marker._icon),
 		    latlng = marker._map.layerPointToLatLng(iconPos);
-
 		if (shadow) {
 			setPosition(shadow, iconPos);
 		}
 		marker._latlng = latlng;
 		e.latlng = latlng;
 		e.oldLatLng = this._oldLatLng;
-
-
 		marker
 		    .fire('move', e)
 		    .fire('drag', e);
 	},
 	_onDragEnd: function (e) {
-
-
 		 cancelAnimFrame(this._panRequest);
-
-
 		delete this._oldLatLng;
 		this._marker
 		    .fire('moveend')
@@ -5974,57 +4726,21 @@ var MarkerDrag = Handler.extend({
  * ```
  */
 var Marker = Layer.extend({
-
-
 	options: {
-
-
-
-
 		icon: new IconDefault(),
-
 		interactive: true,
-
-
 		keyboard: true,
-
-
 		title: '',
-
-
 		alt: '',
-
-
 		zIndexOffset: 0,
-
-
 		opacity: 1,
-
-
 		riseOnHover: false,
-
-
 		riseOffset: 250,
-
-
 		pane: 'markerPane',
-
-
-
 		bubblingMouseEvents: false,
-
-
-
 		draggable: false,
-
-
 		autoPan: false,
-
-
-
 		autoPanPadding: [50, 50],
-
-
 		autoPanSpeed: 10
 	},
 	/* @section
@@ -6061,29 +4777,19 @@ var Marker = Layer.extend({
 			viewreset: this.update
 		};
 	},
-
-
 	getLatLng: function () {
 		return this._latlng;
 	},
-
-
 	setLatLng: function (latlng) {
 		var oldLatLng = this._latlng;
 		this._latlng = toLatLng(latlng);
 		this.update();
-
-
 		return this.fire('move', {oldLatLng: oldLatLng, latlng: this._latlng});
 	},
-
-
 	setZIndexOffset: function (offset) {
 		this.options.zIndexOffset = offset;
 		return this.update();
 	},
-
-
 	setIcon: function (icon) {
 		this.options.icon = icon;
 		if (this._map) {
@@ -6110,7 +4816,6 @@ var Marker = Layer.extend({
 		    classToAdd = 'leaflet-zoom-' + (this._zoomAnimated ? 'animated' : 'hide');
 		var icon = options.icon.createIcon(this._icon),
 		    addIcon = false;
-
 		if (icon !== this._icon) {
 			if (this._icon) {
 				this._removeIcon();
@@ -6204,8 +4909,6 @@ var Marker = Layer.extend({
 			}
 		}
 	},
-
-
 	setOpacity: function (opacity) {
 		this.options.opacity = opacity;
 		if (this._map) {
@@ -6233,9 +4936,6 @@ var Marker = Layer.extend({
 		return this.options.icon.options.tooltipAnchor;
 	}
 });
-
-
-
 function marker(latlng, options) {
 	return new Marker(latlng, options);
 }
@@ -6248,56 +4948,23 @@ function marker(latlng, options) {
  * overlays (Polygon, Polyline, Circle). Do not use it directly. Extends `Layer`.
  */
 var Path = Layer.extend({
-
-
 	options: {
-
-
 		stroke: true,
-
-
 		color: '#3388ff',
-
-
 		weight: 3,
-
-
 		opacity: 1,
-
-
 		lineCap: 'round',
-
-
 		lineJoin: 'round',
-
-
 		dashArray: null,
-
-
 		dashOffset: null,
-
-
 		fill: false,
-
-
 		fillColor: null,
-
-
 		fillOpacity: 0.2,
-
-
 		fillRule: 'evenodd',
-
-
 		interactive: true,
-
-
-
 		bubblingMouseEvents: true
 	},
 	beforeAdd: function (map) {
-
-
 		this._renderer = map.getRenderer(this);
 	},
 	onAdd: function () {
@@ -6308,16 +4975,12 @@ var Path = Layer.extend({
 	onRemove: function () {
 		this._renderer._removePath(this);
 	},
-
-
 	redraw: function () {
 		if (this._map) {
 			this._renderer._updatePath(this);
 		}
 		return this;
 	},
-
-
 	setStyle: function (style) {
 		setOptions(this, style);
 		if (this._renderer) {
@@ -6325,16 +4988,12 @@ var Path = Layer.extend({
 		}
 		return this;
 	},
-
-
 	bringToFront: function () {
 		if (this._renderer) {
 			this._renderer._bringToFront(this);
 		}
 		return this;
 	},
-
-
 	bringToBack: function () {
 		if (this._renderer) {
 			this._renderer._bringToBack(this);
@@ -6345,12 +5004,10 @@ var Path = Layer.extend({
 		return this._path;
 	},
 	_reset: function () {
-
 		this._project();
 		this._update();
 	},
 	_clickTolerance: function () {
-
 		return (this.options.stroke ? this.options.weight / 2 : 0) + this._renderer.options.tolerance;
 	}
 });
@@ -6362,12 +5019,8 @@ var Path = Layer.extend({
  * A circle of a fixed size with radius specified in pixels. Extends `Path`.
  */
 var CircleMarker = Path.extend({
-
-
 	options: {
 		fill: true,
-
-
 		radius: 10
 	},
 	initialize: function (latlng, options) {
@@ -6375,26 +5028,18 @@ var CircleMarker = Path.extend({
 		this._latlng = toLatLng(latlng);
 		this._radius = this.options.radius;
 	},
-
-
 	setLatLng: function (latlng) {
 		this._latlng = toLatLng(latlng);
 		this.redraw();
 		return this.fire('move', {latlng: this._latlng});
 	},
-
-
 	getLatLng: function () {
 		return this._latlng;
 	},
-
-
 	setRadius: function (radius) {
 		this.options.radius = this._radius = radius;
 		return this.redraw();
 	},
-
-
 	getRadius: function () {
 		return this._radius;
 	},
@@ -6426,13 +5071,10 @@ var CircleMarker = Path.extend({
 	_empty: function () {
 		return this._radius && !this._renderer._bounds.intersects(this._pxBounds);
 	},
-
 	_containsPoint: function (p) {
 		return p.distanceTo(this._point) <= this._radius + this._clickTolerance();
 	}
 });
-
-
 function circleMarker(latlng, options) {
 	return new CircleMarker(latlng, options);
 }
@@ -6454,30 +5096,20 @@ function circleMarker(latlng, options) {
 var Circle = CircleMarker.extend({
 	initialize: function (latlng, options, legacyOptions) {
 		if (typeof options === 'number') {
-
 			options = extend({}, legacyOptions, {radius: options});
 		}
 		setOptions(this, options);
 		this._latlng = toLatLng(latlng);
 		if (isNaN(this.options.radius)) { throw new Error('Circle radius cannot be NaN'); }
-
-
-
 		this._mRadius = this.options.radius;
 	},
-
-
 	setRadius: function (radius) {
 		this._mRadius = radius;
 		return this.redraw();
 	},
-
-
 	getRadius: function () {
 		return this._mRadius;
 	},
-
-
 	getBounds: function () {
 		var half = [this._radius, this._radiusY || this._radius];
 		return new LatLngBounds(
@@ -6513,13 +5145,6 @@ var Circle = CircleMarker.extend({
 		this._updateBounds();
 	}
 });
-
-
-
-
-
-
-
 function circle(latlng, options, legacyOptions) {
 	return new Circle(latlng, options, legacyOptions);
 }
@@ -6561,39 +5186,24 @@ function circle(latlng, options, legacyOptions) {
  * ```
  */
 var Polyline = Path.extend({
-
-
 	options: {
-
-
-
 		smoothFactor: 1.0,
-
-
 		noClip: false
 	},
 	initialize: function (latlngs, options) {
 		setOptions(this, options);
 		this._setLatLngs(latlngs);
 	},
-
-
 	getLatLngs: function () {
 		return this._latlngs;
 	},
-
-
 	setLatLngs: function (latlngs) {
 		this._setLatLngs(latlngs);
 		return this.redraw();
 	},
-
-
 	isEmpty: function () {
 		return !this._latlngs.length;
 	},
-
-
 	closestLayerPoint: function (p) {
 		var minDistance = Infinity,
 		    minPoint = null,
@@ -6616,10 +5226,7 @@ var Polyline = Path.extend({
 		}
 		return minPoint;
 	},
-
-
 	getCenter: function () {
-
 		if (!this._map) {
 			throw new Error('Must add layer to map before using getCenter()');
 		}
@@ -6627,11 +5234,9 @@ var Polyline = Path.extend({
 		    points = this._rings[0],
 		    len = points.length;
 		if (!len) { return null; }
-
 		for (i = 0, halfDist = 0; i < len - 1; i++) {
 			halfDist += points[i].distanceTo(points[i + 1]) / 2;
 		}
-
 		if (halfDist === 0) {
 			return this._map.layerPointToLatLng(points[0]);
 		}
@@ -6649,15 +5254,9 @@ var Polyline = Path.extend({
 			}
 		}
 	},
-
-
 	getBounds: function () {
 		return this._bounds;
 	},
-
-
-
-
 	addLatLng: function (latlng, latlngs) {
 		latlngs = latlngs || this._defaultShape();
 		latlng = toLatLng(latlng);
@@ -6672,7 +5271,6 @@ var Polyline = Path.extend({
 	_defaultShape: function () {
 		return isFlat(this._latlngs) ? this._latlngs : this._latlngs[0];
 	},
-
 	_convertLatLngs: function (latlngs) {
 		var result = [],
 		    flat = isFlat(latlngs);
@@ -6698,7 +5296,6 @@ var Polyline = Path.extend({
 			this._pxBounds = pxBounds;
 		}
 	},
-
 	_projectLatlngs: function (latlngs, result, projectedBounds) {
 		var flat = latlngs[0] instanceof LatLng,
 		    len = latlngs.length,
@@ -6716,7 +5313,6 @@ var Polyline = Path.extend({
 			}
 		}
 	},
-
 	_clipPoints: function () {
 		var bounds = this._renderer._bounds;
 		this._parts = [];
@@ -6736,7 +5332,6 @@ var Polyline = Path.extend({
 				if (!segment) { continue; }
 				parts[k] = parts[k] || [];
 				parts[k].push(segment[0]);
-
 				if ((segment[1] !== points[j + 1]) || (j === len2 - 2)) {
 					parts[k].push(segment[1]);
 					k++;
@@ -6744,7 +5339,6 @@ var Polyline = Path.extend({
 			}
 		}
 	},
-
 	_simplifyPoints: function () {
 		var parts = this._parts,
 		    tolerance = this.options.smoothFactor;
@@ -6761,12 +5355,10 @@ var Polyline = Path.extend({
 	_updatePath: function () {
 		this._renderer._updatePoly(this);
 	},
-
 	_containsPoint: function (p, closed) {
 		var i, j, k, len, len2, part,
 		    w = this._clickTolerance();
 		if (!this._pxBounds || !this._pxBounds.contains(p)) { return false; }
-
 		for (i = 0, len = this._parts.length; i < len; i++) {
 			part = this._parts[i];
 			for (j = 0, len2 = part.length, k = len2 - 1; j < len2; k = j++) {
@@ -6779,15 +5371,9 @@ var Polyline = Path.extend({
 		return false;
 	}
 });
-
-
-
-
-
 function polyline(latlngs, options) {
 	return new Polyline(latlngs, options);
 }
-
 Polyline._flat = _flat;
 /*
  * @class Polygon
@@ -6842,7 +5428,6 @@ var Polygon = Polyline.extend({
 		return !this._latlngs.length || !this._latlngs[0].length;
 	},
 	getCenter: function () {
-
 		if (!this._map) {
 			throw new Error('Must add layer to map before using getCenter()');
 		}
@@ -6850,7 +5435,6 @@ var Polygon = Polyline.extend({
 		    points = this._rings[0],
 		    len = points.length;
 		if (!len) { return null; }
-
 		area = x = y = 0;
 		for (i = 0, j = len - 1; i < len; j = i++) {
 			p1 = points[i];
@@ -6861,7 +5445,6 @@ var Polygon = Polyline.extend({
 			area += f * 3;
 		}
 		if (area === 0) {
-
 			center = points[0];
 		} else {
 			center = [x / area, y / area];
@@ -6871,7 +5454,6 @@ var Polygon = Polyline.extend({
 	_convertLatLngs: function (latlngs) {
 		var result = Polyline.prototype._convertLatLngs.call(this, latlngs),
 		    len = result.length;
-
 		if (len >= 2 && result[0] instanceof LatLng && result[0].equals(result[len - 1])) {
 			result.pop();
 		}
@@ -6887,11 +5469,9 @@ var Polygon = Polyline.extend({
 		return isFlat(this._latlngs[0]) ? this._latlngs[0] : this._latlngs[0][0];
 	},
 	_clipPoints: function () {
-
 		var bounds = this._renderer._bounds,
 		    w = this.options.weight,
 		    p = new Point(w, w);
-
 		bounds = new Bounds(bounds.min.subtract(p), bounds.max.add(p));
 		this._parts = [];
 		if (!this._pxBounds || !this._pxBounds.intersects(bounds)) {
@@ -6911,12 +5491,10 @@ var Polygon = Polyline.extend({
 	_updatePath: function () {
 		this._renderer._updatePoly(this, true);
 	},
-
 	_containsPoint: function (p) {
 		var inside = false,
 		    part, p1, p2, i, j, k, len, len2;
 		if (!this._pxBounds || !this._pxBounds.contains(p)) { return false; }
-
 		for (i = 0, len = this._parts.length; i < len; i++) {
 			part = this._parts[i];
 			for (j = 0, len2 = part.length, k = len2 - 1; j < len2; k = j++) {
@@ -6927,11 +5505,9 @@ var Polygon = Polyline.extend({
 				}
 			}
 		}
-
 		return inside || Polyline.prototype._containsPoint.call(this, p, true);
 	}
 });
-
 function polygon(latlngs, options) {
 	return new Polygon(latlngs, options);
 }
@@ -7009,14 +5585,11 @@ var GeoJSON = FeatureGroup.extend({
 			this.addData(geojson);
 		}
 	},
-
-
 	addData: function (geojson) {
 		var features = isArray(geojson) ? geojson : geojson.features,
 		    i, len, feature;
 		if (features) {
 			for (i = 0, len = features.length; i < len; i++) {
-
 				feature = features[i];
 				if (feature.geometries || feature.geometry || feature.features || feature.coordinates) {
 					this.addData(feature);
@@ -7038,16 +5611,11 @@ var GeoJSON = FeatureGroup.extend({
 		}
 		return this.addLayer(layer);
 	},
-
-
 	resetStyle: function (layer) {
-
 		layer.options = extend({}, layer.defaultOptions);
 		this._setLayerStyle(layer, this.options.style);
 		return this;
 	},
-
-
 	setStyle: function (style) {
 		return this.eachLayer(function (layer) {
 			this._setLayerStyle(layer, style);
@@ -7062,12 +5630,6 @@ var GeoJSON = FeatureGroup.extend({
 		}
 	}
 });
-
-
-
-
-
-
 function geometryToLayer(geojson, options) {
 	var geometry = geojson.type === 'Feature' ? geojson.geometry : geojson,
 	    coords = geometry ? geometry.coordinates : null,
@@ -7112,16 +5674,9 @@ function geometryToLayer(geojson, options) {
 		throw new Error('Invalid GeoJSON object.');
 	}
 }
-
-
-
 function coordsToLatLng(coords) {
 	return new LatLng(coords[1], coords[0], coords[2]);
 }
-
-
-
-
 function coordsToLatLngs(coords, levelsDeep, _coordsToLatLng) {
 	var latlngs = [];
 	for (var i = 0, len = coords.length, latlng; i < len; i++) {
@@ -7132,17 +5687,12 @@ function coordsToLatLngs(coords, levelsDeep, _coordsToLatLng) {
 	}
 	return latlngs;
 }
-
-
 function latLngToCoords(latlng, precision) {
 	precision = typeof precision === 'number' ? precision : 6;
 	return latlng.alt !== undefined ?
 		[formatNum(latlng.lng, precision), formatNum(latlng.lat, precision), formatNum(latlng.alt, precision)] :
 		[formatNum(latlng.lng, precision), formatNum(latlng.lat, precision)];
 }
-
-
-
 function latLngsToCoords(latlngs, levelsDeep, closed, precision) {
 	var coords = [];
 	for (var i = 0, len = latlngs.length; i < len; i++) {
@@ -7160,8 +5710,6 @@ function getFeature(layer, newGeometry) {
 		extend({}, layer.feature, {geometry: newGeometry}) :
 		asFeature(newGeometry);
 }
-
-
 function asFeature(geojson) {
 	if (geojson.type === 'Feature' || geojson.type === 'FeatureCollection') {
 		return geojson;
@@ -7180,18 +5728,9 @@ var PointToGeoJSON = {
 		});
 	}
 };
-
-
-
 Marker.include(PointToGeoJSON);
-
-
-
 Circle.include(PointToGeoJSON);
 CircleMarker.include(PointToGeoJSON);
-
-
-
 Polyline.include({
 	toGeoJSON: function (precision) {
 		var multi = !isFlat(this._latlngs);
@@ -7202,9 +5741,6 @@ Polyline.include({
 		});
 	}
 });
-
-
-
 Polygon.include({
 	toGeoJSON: function (precision) {
 		var holes = !isFlat(this._latlngs),
@@ -7219,7 +5755,6 @@ Polygon.include({
 		});
 	}
 });
-
 LayerGroup.include({
 	toMultiPoint: function (precision) {
 		var coords = [];
@@ -7231,8 +5766,6 @@ LayerGroup.include({
 			coordinates: coords
 		});
 	},
-
-
 	toGeoJSON: function (precision) {
 		var type = this.feature && this.feature.geometry && this.feature.geometry.type;
 		if (type === 'MultiPoint') {
@@ -7247,7 +5780,6 @@ LayerGroup.include({
 					jsons.push(json.geometry);
 				} else {
 					var feature = asFeature(json);
-
 					if (feature.type === 'FeatureCollection') {
 						jsons.push.apply(jsons, feature.features);
 					} else {
@@ -7268,15 +5800,9 @@ LayerGroup.include({
 		};
 	}
 });
-
-
-
-
-
 function geoJSON(geojson, options) {
 	return new GeoJSON(geojson, options);
 }
-
 var geoJson = geoJSON;
 /*
  * @class ImageOverlay
@@ -7294,31 +5820,13 @@ var geoJson = geoJSON;
  * ```
  */
 var ImageOverlay = Layer.extend({
-
-
 	options: {
-
-
 		opacity: 1,
-
-
 		alt: '',
-
-
 		interactive: false,
-
-
-
-
 		crossOrigin: false,
-
-
 		errorOverlayUrl: '',
-
-
 		zIndex: 1,
-
-
 		className: ''
 	},
 	initialize: function (url, bounds, options) { // (String, LatLngBounds, Object)
@@ -7346,8 +5854,6 @@ var ImageOverlay = Layer.extend({
 			this.removeInteractiveTarget(this._image);
 		}
 	},
-
-
 	setOpacity: function (opacity) {
 		this.options.opacity = opacity;
 		if (this._image) {
@@ -7361,24 +5867,18 @@ var ImageOverlay = Layer.extend({
 		}
 		return this;
 	},
-
-
 	bringToFront: function () {
 		if (this._map) {
 			toFront(this._image);
 		}
 		return this;
 	},
-
-
 	bringToBack: function () {
 		if (this._map) {
 			toBack(this._image);
 		}
 		return this;
 	},
-
-
 	setUrl: function (url) {
 		this._url = url;
 		if (this._image) {
@@ -7386,8 +5886,6 @@ var ImageOverlay = Layer.extend({
 		}
 		return this;
 	},
-
-
 	setBounds: function (bounds) {
 		this._bounds = toLatLngBounds(bounds);
 		if (this._map) {
@@ -7405,21 +5903,14 @@ var ImageOverlay = Layer.extend({
 		}
 		return events;
 	},
-
-
 	setZIndex: function (value) {
 		this.options.zIndex = value;
 		this._updateZIndex();
 		return this;
 	},
-
-
 	getBounds: function () {
 		return this._bounds;
 	},
-
-
-
 	getElement: function () {
 		return this._image;
 	},
@@ -7431,8 +5922,6 @@ var ImageOverlay = Layer.extend({
 		if (this.options.className) { addClass(img, this.options.className); }
 		img.onselectstart = falseFn;
 		img.onmousemove = falseFn;
-
-
 		img.onload = bind(this.fire, this, 'load');
 		img.onerror = bind(this._overlayOnError, this, 'error');
 		if (this.options.crossOrigin || this.options.crossOrigin === '') {
@@ -7472,8 +5961,6 @@ var ImageOverlay = Layer.extend({
 		}
 	},
 	_overlayOnError: function () {
-
-
 		this.fire('error');
 		var errorUrl = this.options.errorOverlayUrl;
 		if (errorUrl && this._url !== errorUrl) {
@@ -7482,9 +5969,6 @@ var ImageOverlay = Layer.extend({
 		}
 	}
 });
-
-
-
 var imageOverlay = function (url, bounds, options) {
 	return new ImageOverlay(url, bounds, options);
 };
@@ -7507,14 +5991,8 @@ var imageOverlay = function (url, bounds, options) {
  * ```
  */
 var VideoOverlay = ImageOverlay.extend({
-
-
 	options: {
-
-
 		autoplay: true,
-
-
 		loop: true
 	},
 	_initImage: function () {
@@ -7524,8 +6002,6 @@ var VideoOverlay = ImageOverlay.extend({
 		if (this._zoomAnimated) { addClass(vid, 'leaflet-zoom-animated'); }
 		vid.onselectstart = falseFn;
 		vid.onmousemove = falseFn;
-
-
 		vid.onloadeddata = bind(this.fire, this, 'load');
 		if (wasElementSupplied) {
 			var sourceElements = vid.getElementsByTagName('source');
@@ -7545,13 +6021,7 @@ var VideoOverlay = ImageOverlay.extend({
 			vid.appendChild(source);
 		}
 	}
-
-
-
 });
-
-
-
 function videoOverlay(video, bounds, options) {
 	return new VideoOverlay(video, bounds, options);
 }
@@ -7561,20 +6031,10 @@ function videoOverlay(video, bounds, options) {
  * @aka L.DivOverlay
  * Base model for L.Popup and L.Tooltip. Inherit from it for custom popup like plugins.
  */
-
 var DivOverlay = Layer.extend({
-
-
 	options: {
-
-
-
 		offset: [0, 7],
-
-
 		className: '',
-
-
 		pane: 'popupPane'
 	},
 	initialize: function (options, source) {
@@ -7605,14 +6065,9 @@ var DivOverlay = Layer.extend({
 			remove(this._container);
 		}
 	},
-
-
-
 	getLatLng: function () {
 		return this._latlng;
 	},
-
-
 	setLatLng: function (latlng) {
 		this._latlng = toLatLng(latlng);
 		if (this._map) {
@@ -7621,25 +6076,17 @@ var DivOverlay = Layer.extend({
 		}
 		return this;
 	},
-
-
 	getContent: function () {
 		return this._content;
 	},
-
-
 	setContent: function (content) {
 		this._content = content;
 		this.update();
 		return this;
 	},
-
-
 	getElement: function () {
 		return this._container;
 	},
-
-
 	update: function () {
 		if (!this._map) { return; }
 		this._container.style.visibility = 'hidden';
@@ -7659,21 +6106,15 @@ var DivOverlay = Layer.extend({
 		}
 		return events;
 	},
-
-
 	isOpen: function () {
 		return !!this._map && this._map.hasLayer(this);
 	},
-
-
 	bringToFront: function () {
 		if (this._map) {
 			toFront(this._container);
 		}
 		return this;
 	},
-
-
 	bringToBack: function () {
 		if (this._map) {
 			toBack(this._container);
@@ -7706,7 +6147,6 @@ var DivOverlay = Layer.extend({
 		}
 		var bottom = this._containerBottom = -offset.y,
 		    left = this._containerLeft = -Math.round(this._containerWidth / 2) + offset.x;
-
 		this._container.style.bottom = bottom + 'px';
 		this._container.style.left = left + 'px';
 	},
@@ -7739,80 +6179,30 @@ var DivOverlay = Layer.extend({
  * 	.openOn(map);
  * ```
  */
-
 var Popup = DivOverlay.extend({
-
-
 	options: {
-
-
 		maxWidth: 300,
-
-
 		minWidth: 50,
-
-
-
 		maxHeight: null,
-
-
-
 		autoPan: true,
-
-
-
 		autoPanPaddingTopLeft: null,
-
-
-
 		autoPanPaddingBottomRight: null,
-
-
 		autoPanPadding: [5, 5],
-
-
-
 		keepInView: false,
-
-
 		closeButton: true,
-
-
-
 		autoClose: true,
-
-
-
 		closeOnEscapeKey: true,
-
-
-
-
-
 		className: ''
 	},
-
-
-
 	openOn: function (map) {
 		map.openPopup(this);
 		return this;
 	},
 	onAdd: function (map) {
 		DivOverlay.prototype.onAdd.call(this, map);
-
-
-
-
 		map.fire('popupopen', {popup: this});
 		if (this._source) {
-
-
-
-
 			this._source.fire('popupopen', {popup: this}, true);
-
-
 			if (!(this._source instanceof Path)) {
 				this._source.on('preclick', stopPropagation);
 			}
@@ -7820,16 +6210,8 @@ var Popup = DivOverlay.extend({
 	},
 	onRemove: function (map) {
 		DivOverlay.prototype.onRemove.call(this, map);
-
-
-
-
 		map.fire('popupclose', {popup: this});
 		if (this._source) {
-
-
-
-
 			this._source.fire('popupclose', {popup: this}, true);
 			if (!(this._source instanceof Path)) {
 				this._source.off('preclick', stopPropagation);
@@ -7924,10 +6306,6 @@ var Popup = DivOverlay.extend({
 		if (containerPos.y - dy - paddingTL.y < 0) { // top
 			dy = containerPos.y - paddingTL.y;
 		}
-
-
-
-
 		if (dx || dy) {
 			map
 			    .fire('autopanstart')
@@ -7939,13 +6317,9 @@ var Popup = DivOverlay.extend({
 		stop(e);
 	},
 	_getAnchor: function () {
-
 		return toPoint(this._source && this._source._getPopupAnchor ? this._source._getPopupAnchor() : [0, 0]);
 	}
 });
-
-
-
 var popup = function (options, source) {
 	return new Popup(options, source);
 };
@@ -7957,14 +6331,7 @@ var popup = function (options, source) {
 Map.mergeOptions({
 	closePopupOnClick: true
 });
-
-
 Map.include({
-
-
-
-
-
 	openPopup: function (popup, latlng, options) {
 		if (!(popup instanceof Popup)) {
 			popup = new Popup(options).setContent(popup);
@@ -7981,8 +6348,6 @@ Map.include({
 		this._popup = popup;
 		return this.addLayer(popup);
 	},
-
-
 	closePopup: function (popup) {
 		if (!popup || popup === this._popup) {
 			popup = this._popup;
@@ -8008,12 +6373,7 @@ Map.include({
  *
  * Popups will also be automatically opened when the layer is clicked on and closed when the layer is removed from the map or another popup is opened.
  */
-
 Layer.include({
-
-
-
-
 	bindPopup: function (content, options) {
 		if (content instanceof Popup) {
 			setOptions(content, options);
@@ -8036,8 +6396,6 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	unbindPopup: function () {
 		if (this._popup) {
 			this.off({
@@ -8051,8 +6409,6 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	openPopup: function (layer, latlng) {
 		if (!(layer instanceof Layer)) {
 			latlng = layer;
@@ -8068,25 +6424,18 @@ Layer.include({
 			latlng = layer.getCenter ? layer.getCenter() : layer.getLatLng();
 		}
 		if (this._popup && this._map) {
-
 			this._popup._source = layer;
-
 			this._popup.update();
-
 			this._map.openPopup(this._popup, latlng);
 		}
 		return this;
 	},
-
-
 	closePopup: function () {
 		if (this._popup) {
 			this._popup._close();
 		}
 		return this;
 	},
-
-
 	togglePopup: function (target) {
 		if (this._popup) {
 			if (this._popup._map) {
@@ -8097,21 +6446,15 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	isPopupOpen: function () {
 		return (this._popup ? this._popup.isOpen() : false);
 	},
-
-
 	setPopupContent: function (content) {
 		if (this._popup) {
 			this._popup.setContent(content);
 		}
 		return this;
 	},
-
-
 	getPopup: function () {
 		return this._popup;
 	},
@@ -8123,16 +6466,11 @@ Layer.include({
 		if (!this._map) {
 			return;
 		}
-
 		stop(e);
-
-
 		if (layer instanceof Path) {
 			this.openPopup(e.layer || e.target, e.latlng);
 			return;
 		}
-
-
 		if (this._map.hasLayer(this._popup) && this._popup._source === layer) {
 			this.closePopup();
 		} else {
@@ -8167,64 +6505,28 @@ Layer.include({
  * - the `tooltipAnchor` Icon option: this will only be considered for Marker. You
  *   should adapt this value if you use a custom icon.
  */
-
 var Tooltip = DivOverlay.extend({
-
-
 	options: {
-
-
 		pane: 'tooltipPane',
-
-
 		offset: [0, 0],
-
-
-
-
-
 		direction: 'auto',
-
-
 		permanent: false,
-
-
 		sticky: false,
-
-
 		interactive: false,
-
-
 		opacity: 0.9
 	},
 	onAdd: function (map) {
 		DivOverlay.prototype.onAdd.call(this, map);
 		this.setOpacity(this.options.opacity);
-
-
-
-
 		map.fire('tooltipopen', {tooltip: this});
 		if (this._source) {
-
-
-
-
 			this._source.fire('tooltipopen', {tooltip: this}, true);
 		}
 	},
 	onRemove: function (map) {
 		DivOverlay.prototype.onRemove.call(this, map);
-
-
-
-
 		map.fire('tooltipclose', {tooltip: this});
 		if (this._source) {
-
-
-
-
 			this._source.fire('tooltipclose', {tooltip: this}, true);
 		}
 	},
@@ -8292,24 +6594,13 @@ var Tooltip = DivOverlay.extend({
 		this._setPosition(pos);
 	},
 	_getAnchor: function () {
-
 		return toPoint(this._source && this._source._getTooltipAnchor && !this.options.sticky ? this._source._getTooltipAnchor() : [0, 0]);
 	}
 });
-
-
-
 var tooltip = function (options, source) {
 	return new Tooltip(options, source);
 };
-
-
 Map.include({
-
-
-
-
-
 	openTooltip: function (tooltip, latlng, options) {
 		if (!(tooltip instanceof Tooltip)) {
 			tooltip = new Tooltip(options).setContent(tooltip);
@@ -8322,8 +6613,6 @@ Map.include({
 		}
 		return this.addLayer(tooltip);
 	},
-
-
 	closeTooltip: function (tooltip) {
 		if (tooltip) {
 			this.removeLayer(tooltip);
@@ -8343,12 +6632,7 @@ Map.include({
  * layer.closeTooltip();
  * ```
  */
-
 Layer.include({
-
-
-
-
 	bindTooltip: function (content, options) {
 		if (content instanceof Tooltip) {
 			setOptions(content, options);
@@ -8366,8 +6650,6 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	unbindTooltip: function () {
 		if (this._tooltip) {
 			this._initTooltipInteractions(true);
@@ -8398,8 +6680,6 @@ Layer.include({
 		this[onOff](events);
 		this._tooltipHandlersAdded = !remove$$1;
 	},
-
-
 	openTooltip: function (layer, latlng) {
 		if (!(layer instanceof Layer)) {
 			latlng = layer;
@@ -8415,14 +6695,9 @@ Layer.include({
 			latlng = layer.getCenter ? layer.getCenter() : layer.getLatLng();
 		}
 		if (this._tooltip && this._map) {
-
 			this._tooltip._source = layer;
-
 			this._tooltip.update();
-
 			this._map.openTooltip(this._tooltip, latlng);
-
-
 			if (this._tooltip.options.interactive && this._tooltip._container) {
 				addClass(this._tooltip._container, 'leaflet-clickable');
 				this.addInteractiveTarget(this._tooltip._container);
@@ -8430,8 +6705,6 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	closeTooltip: function () {
 		if (this._tooltip) {
 			this._tooltip._close();
@@ -8442,8 +6715,6 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	toggleTooltip: function (target) {
 		if (this._tooltip) {
 			if (this._tooltip._map) {
@@ -8454,21 +6725,15 @@ Layer.include({
 		}
 		return this;
 	},
-
-
 	isTooltipOpen: function () {
 		return this._tooltip.isOpen();
 	},
-
-
 	setTooltipContent: function (content) {
 		if (this._tooltip) {
 			this._tooltip.setContent(content);
 		}
 		return this;
 	},
-
-
 	getTooltip: function () {
 		return this._tooltip;
 	},
@@ -8509,16 +6774,8 @@ Layer.include({
  */
 var DivIcon = Icon.extend({
 	options: {
-
-
 		iconSize: [12, 12], // also can be set through CSS
-
-
-
-
 		html: false,
-
-
 		bgPos: null,
 		className: 'leaflet-div-icon'
 	},
@@ -8537,8 +6794,6 @@ var DivIcon = Icon.extend({
 		return null;
 	}
 });
-
-
 function divIcon(options) {
 	return new DivIcon(options);
 }
@@ -8608,64 +6863,21 @@ Icon.Default = IconDefault;
  * @section
  */
 var GridLayer = Layer.extend({
-
-
 	options: {
-
-
 		tileSize: 256,
-
-
 		opacity: 1,
-
-
-
-
-
 		updateWhenIdle: mobile,
-
-
 		updateWhenZooming: true,
-
-
 		updateInterval: 200,
-
-
 		zIndex: 1,
-
-
 		bounds: null,
-
-
 		minZoom: 0,
-
-
 		maxZoom: undefined,
-
-
-
-
 		maxNativeZoom: undefined,
-
-
-
-
 		minNativeZoom: undefined,
-
-
-
-
-
-
 		noWrap: false,
-
-
 		pane: 'tilePane',
-
-
 		className: '',
-
-
 		keepBuffer: 2
 	},
 	initialize: function (options) {
@@ -8688,8 +6900,6 @@ var GridLayer = Layer.extend({
 		this._container = null;
 		this._tileZoom = undefined;
 	},
-
-
 	bringToFront: function () {
 		if (this._map) {
 			toFront(this._container);
@@ -8697,8 +6907,6 @@ var GridLayer = Layer.extend({
 		}
 		return this;
 	},
-
-
 	bringToBack: function () {
 		if (this._map) {
 			toBack(this._container);
@@ -8706,32 +6914,22 @@ var GridLayer = Layer.extend({
 		}
 		return this;
 	},
-
-
 	getContainer: function () {
 		return this._container;
 	},
-
-
 	setOpacity: function (opacity) {
 		this.options.opacity = opacity;
 		this._updateOpacity();
 		return this;
 	},
-
-
 	setZIndex: function (zIndex) {
 		this.options.zIndex = zIndex;
 		this._updateZIndex();
 		return this;
 	},
-
-
 	isLoading: function () {
 		return this._loading;
 	},
-
-
 	redraw: function () {
 		if (this._map) {
 			this._removeAllTiles();
@@ -8747,7 +6945,6 @@ var GridLayer = Layer.extend({
 			moveend: this._onMoveEnd
 		};
 		if (!this.options.updateWhenIdle) {
-
 			if (!this._onMove) {
 				this._onMove = throttle(this._onMoveEnd, this.options.updateInterval, this);
 			}
@@ -8758,18 +6955,9 @@ var GridLayer = Layer.extend({
 		}
 		return events;
 	},
-
-
-
-
-
-
 	createTile: function () {
 		return document.createElement('div');
 	},
-
-
-
 	getTileSize: function () {
 		var s = this.options.tileSize;
 		return s instanceof Point ? s : new Point(s, s);
@@ -8780,7 +6968,6 @@ var GridLayer = Layer.extend({
 		}
 	},
 	_setAutoZIndex: function (compare) {
-
 		var layers = this.getPane().children,
 		    edgeZIndex = -compare(-Infinity, Infinity); // -Infinity for max, Infinity for min
 		for (var i = 0, len = layers.length, zIndex; i < len; i++) {
@@ -8796,7 +6983,6 @@ var GridLayer = Layer.extend({
 	},
 	_updateOpacity: function () {
 		if (!this._map) { return; }
-
 		if (ielt9) { return; }
 		setOpacity(this._container, this.options.opacity);
 		var now = +new Date(),
@@ -8858,7 +7044,6 @@ var GridLayer = Layer.extend({
 			level.origin = map.project(map.unproject(map.getPixelOrigin()), zoom).round();
 			level.zoom = zoom;
 			this._setZoomTransform(level, map.getCenter(), map.getZoom());
-
 			falseFn(level.el.offsetWidth);
 			this._onCreateLevel(level);
 		}
@@ -8995,8 +7180,6 @@ var GridLayer = Layer.extend({
 			if (!noPrune) {
 				this._pruneTiles();
 			}
-
-
 			this._noPrune = !!noPrune;
 		}
 		this._setZoomTransforms(center, zoom);
@@ -9046,7 +7229,6 @@ var GridLayer = Layer.extend({
 		    halfSize = map.getSize().divideBy(scale * 2);
 		return new Bounds(pixelCenter.subtract(halfSize), pixelCenter.add(halfSize));
 	},
-
 	_update: function (center) {
 		var map = this._map;
 		if (!map) { return; }
@@ -9060,7 +7242,6 @@ var GridLayer = Layer.extend({
 		    margin = this.options.keepBuffer,
 		    noPruneRange = new Bounds(tileRange.getBottomLeft().subtract([margin, -margin]),
 		                              tileRange.getTopRight().add([margin, -margin]));
-
 		if (!(isFinite(tileRange.min.x) &&
 		      isFinite(tileRange.min.y) &&
 		      isFinite(tileRange.max.x) &&
@@ -9071,10 +7252,7 @@ var GridLayer = Layer.extend({
 				this._tiles[key].current = false;
 			}
 		}
-
-
 		if (Math.abs(zoom - this._tileZoom) > 1) { this._setView(center, zoom); return; }
-
 		for (var j = tileRange.min.y; j <= tileRange.max.y; j++) {
 			for (var i = tileRange.min.x; i <= tileRange.max.x; i++) {
 				var coords = new Point(i, j);
@@ -9088,19 +7266,14 @@ var GridLayer = Layer.extend({
 				}
 			}
 		}
-
 		queue.sort(function (a, b) {
 			return a.distanceTo(tileCenter) - b.distanceTo(tileCenter);
 		});
 		if (queue.length !== 0) {
-
 			if (!this._loading) {
 				this._loading = true;
-
-
 				this.fire('loading');
 			}
-
 			var fragment = document.createDocumentFragment();
 			for (i = 0; i < queue.length; i++) {
 				this._addTile(queue[i], fragment);
@@ -9111,13 +7284,11 @@ var GridLayer = Layer.extend({
 	_isValidTile: function (coords) {
 		var crs = this._map.options.crs;
 		if (!crs.infinite) {
-
 			var bounds = this._globalTileRange;
 			if ((!crs.wrapLng && (coords.x < bounds.min.x || coords.x > bounds.max.x)) ||
 			    (!crs.wrapLat && (coords.y < bounds.min.y || coords.y > bounds.max.y))) { return false; }
 		}
 		if (!this.options.bounds) { return true; }
-
 		var tileBounds = this._tileCoordsToBounds(coords);
 		return toLatLngBounds(this.options.bounds).overlaps(tileBounds);
 	},
@@ -9133,7 +7304,6 @@ var GridLayer = Layer.extend({
 		    se = map.unproject(sePoint, coords.z);
 		return [nw, se];
 	},
-
 	_tileCoordsToBounds: function (coords) {
 		var bp = this._tileCoordsToNwSe(coords),
 		    bounds = new LatLngBounds(bp[0], bp[1]);
@@ -9142,11 +7312,9 @@ var GridLayer = Layer.extend({
 		}
 		return bounds;
 	},
-
 	_tileCoordsToKey: function (coords) {
 		return coords.x + ':' + coords.y + ':' + coords.z;
 	},
-
 	_keyToTileCoords: function (key) {
 		var k = key.split(':'),
 		    coords = new Point(+k[0], +k[1]);
@@ -9158,8 +7326,6 @@ var GridLayer = Layer.extend({
 		if (!tile) { return; }
 		remove(tile.el);
 		delete this._tiles[key];
-
-
 		this.fire('tileunload', {
 			tile: tile.el,
 			coords: this._keyToTileCoords(key)
@@ -9172,12 +7338,9 @@ var GridLayer = Layer.extend({
 		tile.style.height = tileSize.y + 'px';
 		tile.onselectstart = falseFn;
 		tile.onmousemove = falseFn;
-
 		if (ielt9 && this.options.opacity < 1) {
 			setOpacity(tile, this.options.opacity);
 		}
-
-
 		if (android && !android23) {
 			tile.style.WebkitBackfaceVisibility = 'hidden';
 		}
@@ -9187,22 +7350,16 @@ var GridLayer = Layer.extend({
 		    key = this._tileCoordsToKey(coords);
 		var tile = this.createTile(this._wrapCoords(coords), bind(this._tileReady, this, coords));
 		this._initTile(tile);
-
-
 		if (this.createTile.length < 2) {
-
 			requestAnimFrame(bind(this._tileReady, this, coords, null, tile));
 		}
 		setPosition(tile, tilePos);
-
 		this._tiles[key] = {
 			el: tile,
 			coords: coords,
 			current: true
 		};
 		container.appendChild(tile);
-
-
 		this.fire('tileloadstart', {
 			tile: tile,
 			coords: coords
@@ -9210,8 +7367,6 @@ var GridLayer = Layer.extend({
 	},
 	_tileReady: function (coords, err, tile) {
 		if (err) {
-
-
 			this.fire('tileerror', {
 				error: err,
 				tile: tile,
@@ -9232,8 +7387,6 @@ var GridLayer = Layer.extend({
 		}
 		if (!err) {
 			addClass(tile.el, 'leaflet-tile-loaded');
-
-
 			this.fire('tileload', {
 				tile: tile.el,
 				coords: coords
@@ -9241,14 +7394,10 @@ var GridLayer = Layer.extend({
 		}
 		if (this._noTilesToLoad()) {
 			this._loading = false;
-
-
 			this.fire('load');
 			if (ielt9 || !this._map._fadeAnimated) {
 				requestAnimFrame(this._pruneTiles, this);
 			} else {
-
-
 				setTimeout(bind(this._pruneTiles, this), 250);
 			}
 		}
@@ -9276,8 +7425,6 @@ var GridLayer = Layer.extend({
 		return true;
 	}
 });
-
-
 function gridLayer(options) {
 	return new GridLayer(options);
 }
@@ -9311,43 +7458,20 @@ function gridLayer(options) {
  * ```
  */
 var TileLayer = GridLayer.extend({
-
-
 	options: {
-
-
 		minZoom: 0,
-
-
 		maxZoom: 18,
-
-
 		subdomains: 'abc',
-
-
 		errorTileUrl: '',
-
-
 		zoomOffset: 0,
-
-
 		tms: false,
-
-
 		zoomReverse: false,
-
-
 		detectRetina: false,
-
-
-
-
 		crossOrigin: false
 	},
 	initialize: function (url, options) {
 		this._url = url;
 		options = setOptions(this, options);
-
 		if (options.detectRetina && retina && options.maxZoom > 0) {
 			options.tileSize = Math.floor(options.tileSize / 2);
 			if (!options.zoomReverse) {
@@ -9362,13 +7486,10 @@ var TileLayer = GridLayer.extend({
 		if (typeof options.subdomains === 'string') {
 			options.subdomains = options.subdomains.split('');
 		}
-
 		if (!android) {
 			this.on('tileunload', this._onTileRemove);
 		}
 	},
-
-
 	setUrl: function (url, noRedraw) {
 		this._url = url;
 		if (!noRedraw) {
@@ -9376,10 +7497,6 @@ var TileLayer = GridLayer.extend({
 		}
 		return this;
 	},
-
-
-
-
 	createTile: function (coords, done) {
 		var tile = document.createElement('img');
 		on(tile, 'load', bind(this._tileOnLoad, this, done, tile));
@@ -9400,12 +7517,6 @@ var TileLayer = GridLayer.extend({
 		tile.src = this.getTileUrl(coords);
 		return tile;
 	},
-
-
-
-
-
-
 	getTileUrl: function (coords) {
 		var data = {
 			r: retina ? '@2x' : '',
@@ -9424,7 +7535,6 @@ var TileLayer = GridLayer.extend({
 		return template(this._url, extend(data, this.options));
 	},
 	_tileOnLoad: function (done, tile) {
-
 		if (ielt9) {
 			setTimeout(bind(done, this, null, tile), 0);
 		} else {
@@ -9455,7 +7565,6 @@ var TileLayer = GridLayer.extend({
 		var index = Math.abs(tilePoint.x + tilePoint.y) % this.options.subdomains.length;
 		return this.options.subdomains[index];
 	},
-
 	_abortLoading: function () {
 		var i, tile;
 		for (i in this._tiles) {
@@ -9474,9 +7583,6 @@ var TileLayer = GridLayer.extend({
 	_removeTile: function (key) {
 		var tile = this._tiles[key];
 		if (!tile) { return; }
-
-
-
 		if (!androidStock) {
 			tile.el.setAttribute('src', emptyImageUrl);
 		}
@@ -9489,8 +7595,6 @@ var TileLayer = GridLayer.extend({
 		return GridLayer.prototype._tileReady.call(this, coords, err, tile);
 	}
 });
-
-
 function tileLayer(url, options) {
 	return new TileLayer(url, options);
 }
@@ -9512,43 +7616,22 @@ function tileLayer(url, options) {
  * ```
  */
 var TileLayerWMS = TileLayer.extend({
-
-
-
-
-
 	defaultWmsParams: {
 		service: 'WMS',
 		request: 'GetMap',
-
-
 		layers: '',
-
-
 		styles: '',
-
-
 		format: 'image/jpeg',
-
-
 		transparent: false,
-
-
 		version: '1.1.1'
 	},
 	options: {
-
-
-
 		crs: null,
-
-
 		uppercase: false
 	},
 	initialize: function (url, options) {
 		this._url = url;
 		var wmsParams = extend({}, this.defaultWmsParams);
-
 		for (var i in options) {
 			if (!(i in this.options)) {
 				wmsParams[i] = options[i];
@@ -9582,8 +7665,6 @@ var TileLayerWMS = TileLayer.extend({
 			getParamString(this.wmsParams, url, this.options.uppercase) +
 			(this.options.uppercase ? '&BBOX=' : '&bbox=') + bbox;
 	},
-
-
 	setParams: function (params, noRedraw) {
 		extend(this.wmsParams, params);
 		if (!noRedraw) {
@@ -9592,8 +7673,6 @@ var TileLayerWMS = TileLayer.extend({
 		return this;
 	}
 });
-
-
 function tileLayerWMS(url, options) {
 	return new TileLayerWMS(url, options);
 }
@@ -9619,15 +7698,8 @@ tileLayer.wms = tileLayerWMS;
  * its map has moved
  */
 var Renderer = Layer.extend({
-
-
 	options: {
-
-
-
 		padding: 0.1,
-
-
 		tolerance : 0
 	},
 	initialize: function (options) {
@@ -9700,8 +7772,6 @@ var Renderer = Layer.extend({
 		}
 	},
 	_update: function () {
-
-
 		var p = this.options.padding,
 		    size = this._map.getSize(),
 		    min = this._map.containerPointToLayerPoint(size.multiplyBy(-p)).round();
@@ -9748,13 +7818,10 @@ var Canvas = Renderer.extend({
 		return events;
 	},
 	_onViewPreReset: function () {
-
 		this._postponeUpdatePaths = true;
 	},
 	onAdd: function () {
 		Renderer.prototype.onAdd.call(this);
-
-
 		this._draw();
 	},
 	_initContainer: function () {
@@ -9790,7 +7857,6 @@ var Canvas = Renderer.extend({
 		    size = b.getSize(),
 		    m = retina ? 2 : 1;
 		setPosition(container, b.min);
-
 		container.width = m * size.x;
 		container.height = m * size.y;
 		container.style.width = size.x + 'px';
@@ -9798,9 +7864,7 @@ var Canvas = Renderer.extend({
 		if (retina) {
 			this._ctx.scale(2, 2);
 		}
-
 		this._ctx.translate(-b.min.x, -b.min.y);
-
 		this.fire('update');
 	},
 	_reset: function () {
@@ -9845,13 +7909,9 @@ var Canvas = Renderer.extend({
 		this._requestRedraw(layer);
 	},
 	_updatePath: function (layer) {
-
-
 		this._extendRedrawBounds(layer);
 		layer._project();
 		layer._update();
-
-
 		this._requestRedraw(layer);
 	},
 	_updateStyle: function (layer) {
@@ -9941,7 +8001,6 @@ var Canvas = Renderer.extend({
 			}
 		}
 		this._fillStroke(ctx, layer);
-
 	},
 	_updateCircle: function (layer) {
 		if (!this._drawing || layer._empty()) { return; }
@@ -9980,8 +8039,6 @@ var Canvas = Renderer.extend({
 			ctx.stroke();
 		}
 	},
-
-
 	_onClick: function (e) {
 		var point = this._map.mouseEventToLayerPoint(e), layer, clickedLayer;
 		for (var order = this._drawFirst; order; order = order.next) {
@@ -10003,7 +8060,6 @@ var Canvas = Renderer.extend({
 	_handleMouseOut: function (e) {
 		var layer = this._hoveredLayer;
 		if (layer) {
-
 			removeClass(this._container, 'leaflet-interactive');
 			this._fireEvent([layer], e, 'mouseout');
 			this._hoveredLayer = null;
@@ -10039,14 +8095,11 @@ var Canvas = Renderer.extend({
 		if (next) {
 			next.prev = prev;
 		} else {
-
 			return;
 		}
 		if (prev) {
 			prev.next = next;
 		} else if (next) {
-
-
 			this._drawFirst = next;
 		}
 		order.prev = this._drawLast;
@@ -10062,14 +8115,11 @@ var Canvas = Renderer.extend({
 		if (prev) {
 			prev.next = next;
 		} else {
-
 			return;
 		}
 		if (next) {
 			next.prev = prev;
 		} else if (prev) {
-
-
 			this._drawLast = prev;
 		}
 		order.prev = null;
@@ -10079,8 +8129,6 @@ var Canvas = Renderer.extend({
 		this._requestRedraw(layer);
 	}
 });
-
-
 function canvas$1(options) {
 	return canvas ? new Canvas(options) : null;
 }
@@ -10107,7 +8155,6 @@ var vmlCreate = (function () {
  * VML was deprecated in 2012, which means VML functionality exists only for backwards compatibility
  * with old versions of Internet Explorer.
  */
-
 var vmlMixin = {
 	_initContainer: function () {
 		this._container = create$1('div', 'leaflet-vml-container');
@@ -10240,7 +8287,6 @@ var SVG = Renderer.extend({
 	},
 	_initContainer: function () {
 		this._container = create$2('svg');
-
 		this._container.setAttribute('pointer-events', 'none');
 		this._rootGroup = create$2('g');
 		this._container.appendChild(this._rootGroup);
@@ -10253,9 +8299,6 @@ var SVG = Renderer.extend({
 		delete this._svgSize;
 	},
 	_onZoomStart: function () {
-
-
-
 		this._update();
 	},
 	_update: function () {
@@ -10264,23 +8307,17 @@ var SVG = Renderer.extend({
 		var b = this._bounds,
 		    size = b.getSize(),
 		    container = this._container;
-
 		if (!this._svgSize || !this._svgSize.equals(size)) {
 			this._svgSize = size;
 			container.setAttribute('width', size.x);
 			container.setAttribute('height', size.y);
 		}
-
 		setPosition(container, b.min);
 		container.setAttribute('viewBox', [b.min.x, b.min.y, size.x, size.y].join(' '));
 		this.fire('update');
 	},
-
 	_initPath: function (layer) {
 		var path = layer._path = create$2('path');
-
-
-
 		if (layer.options.className) {
 			addClass(path, layer.options.className);
 		}
@@ -10343,7 +8380,6 @@ var SVG = Renderer.extend({
 		    r = Math.max(Math.round(layer._radius), 1),
 		    r2 = Math.max(Math.round(layer._radiusY), 1) || r,
 		    arc = 'a' + r + ',' + r2 + ' 0 1,0 ';
-
 		var d = layer._empty() ? 'M0 0' :
 			'M' + (p.x - r) + ',' + p.y +
 			arc + (r * 2) + ',0 ' +
@@ -10353,7 +8389,6 @@ var SVG = Renderer.extend({
 	_setPath: function (layer, path) {
 		layer._path.setAttribute('d', path);
 	},
-
 	_bringToFront: function (layer) {
 		toFront(layer._path);
 	},
@@ -10364,21 +8399,11 @@ var SVG = Renderer.extend({
 if (vml) {
 	SVG.include(vmlMixin);
 }
-
-
-
 function svg$1(options) {
 	return svg || vml ? new SVG(options) : null;
 }
 Map.include({
-
-
-
-
 	getRenderer: function (layer) {
-
-
-
 		var renderer = layer.options.renderer || this._getPaneRenderer(layer.options.pane) || this.options.renderer || this._renderer;
 		if (!renderer) {
 			renderer = this._renderer = this._createRenderer();
@@ -10400,9 +8425,6 @@ Map.include({
 		return renderer;
 	},
 	_createRenderer: function (options) {
-
-
-
 		return (this.options.preferCanvas && canvas$1(options)) || svg$1(options);
 	}
 });
@@ -10434,8 +8456,6 @@ var Rectangle = Polygon.extend({
 	initialize: function (latLngBounds, options) {
 		Polygon.prototype.initialize.call(this, this._boundsToLatLngs(latLngBounds), options);
 	},
-
-
 	setBounds: function (latLngBounds) {
 		return this.setLatLngs(this._boundsToLatLngs(latLngBounds));
 	},
@@ -10449,7 +8469,6 @@ var Rectangle = Polygon.extend({
 		];
 	}
 });
-
 function rectangle(latLngBounds, options) {
 	return new Rectangle(latLngBounds, options);
 }
@@ -10466,12 +8485,7 @@ GeoJSON.asFeature = asFeature;
  * L.Handler.BoxZoom is used to add shift-drag zoom interaction to the map
  * (zoom to a selected bounding box), enabled by default.
  */
-
-
 Map.mergeOptions({
-
-
-
 	boxZoom: true
 });
 var BoxZoom = Handler.extend({
@@ -10507,8 +8521,6 @@ var BoxZoom = Handler.extend({
 	},
 	_onMouseDown: function (e) {
 		if (!e.shiftKey || ((e.which !== 1) && (e.button !== 1))) { return false; }
-
-
 		this._clearDeferredResetState();
 		this._resetState();
 		disableTextSelection();
@@ -10553,8 +8565,6 @@ var BoxZoom = Handler.extend({
 		if ((e.which !== 1) && (e.button !== 1)) { return; }
 		this._finish();
 		if (!this._moved) { return; }
-
-
 		this._clearDeferredResetState();
 		this._resetStateTimeout = setTimeout(bind(this._resetState, this), 0);
 		var bounds = new LatLngBounds(
@@ -10570,21 +8580,11 @@ var BoxZoom = Handler.extend({
 		}
 	}
 });
-
-
-
 Map.addInitHook('addHandler', 'boxZoom', BoxZoom);
 /*
  * L.Handler.DoubleClickZoom is used to handle double-click zoom on the map, enabled by default.
  */
-
-
 Map.mergeOptions({
-
-
-
-
-
 	doubleClickZoom: true
 });
 var DoubleClickZoom = Handler.extend({
@@ -10606,55 +8606,20 @@ var DoubleClickZoom = Handler.extend({
 		}
 	}
 });
-
 //
-
-
-
 //
-
-
-
 //
-
-
 Map.addInitHook('addHandler', 'doubleClickZoom', DoubleClickZoom);
 /*
  * L.Handler.MapDrag is used to make the map draggable (with panning inertia), enabled by default.
  */
-
-
 Map.mergeOptions({
-
-
 	dragging: true,
-
-
-
-
-
-
 	inertia: !android23,
-
-
 	inertiaDeceleration: 3400, // px/s^2
-
-
 	inertiaMaxSpeed: Infinity, // px/s
-
 	easeLinearity: 0.2,
-
-
-
-
-
 	worldCopyJump: false,
-
-
-
-
-
-
 	maxBoundsViscosity: 0.0
 });
 var Drag = Handler.extend({
@@ -10749,7 +8714,6 @@ var Drag = Handler.extend({
 		this._draggable._newPos = this._draggable._startPos.add(offset);
 	},
 	_onPreDragWrap: function () {
-
 		var worldWidth = this._worldWidth,
 		    halfWidth = Math.round(worldWidth / 2),
 		    dx = this._initialWorldOffset,
@@ -10794,22 +8758,12 @@ var Drag = Handler.extend({
 		}
 	}
 });
-
-
-
 Map.addInitHook('addHandler', 'dragging', Drag);
 /*
  * L.Map.Keyboard is handling keyboard interaction with the map, enabled by default.
  */
-
-
 Map.mergeOptions({
-
-
-
 	keyboard: true,
-
-
 	keyboardPanDelta: 80
 });
 var Keyboard = Handler.extend({
@@ -10828,7 +8782,6 @@ var Keyboard = Handler.extend({
 	},
 	addHooks: function () {
 		var container = this._map._container;
-
 		if (container.tabIndex <= 0) {
 			container.tabIndex = '0';
 		}
@@ -10931,30 +8884,13 @@ var Keyboard = Handler.extend({
 		stop(e);
 	}
 });
-
-
-
-
 Map.addInitHook('addHandler', 'keyboard', Keyboard);
 /*
  * L.Handler.ScrollWheelZoom is used by L.Map to enable mouse scroll wheel zoom on the map.
  */
-
-
 Map.mergeOptions({
-
-
-
-
 	scrollWheelZoom: true,
-
-
-
 	wheelDebounceTime: 40,
-
-
-
-
 	wheelPxPerZoomLevel: 60
 });
 var ScrollWheelZoom = Handler.extend({
@@ -10983,7 +8919,6 @@ var ScrollWheelZoom = Handler.extend({
 		    zoom = map.getZoom(),
 		    snap = this._map.options.zoomSnap || 0;
 		map._stop(); // stop panning and fly animations if any
-
 		var d2 = this._delta / (this._map.options.wheelPxPerZoomLevel * 4),
 		    d3 = 4 * Math.log(2 / (1 + Math.exp(-Math.abs(d2)))) / Math.LN2,
 		    d4 = snap ? Math.ceil(d3 / snap) * snap : d3,
@@ -10998,24 +8933,12 @@ var ScrollWheelZoom = Handler.extend({
 		}
 	}
 });
-
-
-
 Map.addInitHook('addHandler', 'scrollWheelZoom', ScrollWheelZoom);
 /*
  * L.Map.Tap is used to enable mobile hacks like quick taps and long hold.
  */
-
-
 Map.mergeOptions({
-
-
-
-
 	tap: true,
-
-
-
 	tapTolerance: 15
 });
 var Tap = Handler.extend({
@@ -11029,7 +8952,6 @@ var Tap = Handler.extend({
 		if (!e.touches) { return; }
 		preventDefault(e);
 		this._fireClick = true;
-
 		if (e.touches.length > 1) {
 			this._fireClick = false;
 			clearTimeout(this._holdTimeout);
@@ -11038,11 +8960,9 @@ var Tap = Handler.extend({
 		var first = e.touches[0],
 		    el = first.target;
 		this._startPos = this._newPos = new Point(first.clientX, first.clientY);
-
 		if (el.tagName && el.tagName.toLowerCase() === 'a') {
 			addClass(el, 'leaflet-active');
 		}
-
 		this._holdTimeout = setTimeout(bind(function () {
 			if (this._isTapValid()) {
 				this._fireClick = false;
@@ -11069,7 +8989,6 @@ var Tap = Handler.extend({
 				removeClass(el, 'leaflet-active');
 			}
 			this._simulateEvent('mouseup', first);
-
 			if (this._isTapValid()) {
 				this._simulateEvent('click', first);
 			}
@@ -11095,28 +9014,14 @@ var Tap = Handler.extend({
 		e.target.dispatchEvent(simulatedEvent);
 	}
 });
-
-
-
 if (touch && !pointer) {
 	Map.addInitHook('addHandler', 'tap', Tap);
 }
 /*
  * L.Handler.TouchZoom is used by L.Map to add pinch zoom on supported mobile browsers.
  */
-
-
 Map.mergeOptions({
-
-
-
-
-
-
 	touchZoom: touch && !android23,
-
-
-
 	bounceAtZoomLimits: true
 });
 var TouchZoom = Handler.extend({
@@ -11163,7 +9068,6 @@ var TouchZoom = Handler.extend({
 			this._center = this._startLatLng;
 			if (scale === 1) { return; }
 		} else {
-
 			var delta = p1._add(p2)._divideBy(2)._subtract(this._centerPoint);
 			if (scale === 1 && delta.x === 0 && delta.y === 0) { return; }
 			this._center = map.unproject(map.project(this._pinchStartLatLng, this._zoom).subtract(delta), this._zoom);
@@ -11186,7 +9090,6 @@ var TouchZoom = Handler.extend({
 		cancelAnimFrame(this._animRequest);
 		off(document, 'touchmove', this._onTouchMove);
 		off(document, 'touchend', this._onTouchEnd);
-
 		if (this._map.options.zoomAnimation) {
 			this._map._animateZoom(this._center, this._map._limitZoom(this._zoom), true, this._map.options.zoomSnap);
 		} else {
@@ -11194,9 +9097,6 @@ var TouchZoom = Handler.extend({
 		}
 	}
 });
-
-
-
 Map.addInitHook('addHandler', 'touchZoom', TouchZoom);
 Map.BoxZoom = BoxZoom;
 Map.DoubleClickZoom = DoubleClickZoom;
@@ -11287,6 +9187,5 @@ exports.noConflict = function() {
 	window.L = oldL;
 	return this;
 }
-
 window.L = exports;
 })));

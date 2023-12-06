@@ -1,8 +1,6 @@
-
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery, userPermissionProtected, userPermissionAuth, countTenantQuery, adminPermissionQuery } = require("../constants/queries");
-
 const config = process.env;
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
@@ -10,18 +8,15 @@ const verifyToken = async (req, res, next) => {
   if (!token) {
     return res.status(401).send("Access Denied");
   } else if (decoded.role) {
-
     try {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
       console.log("Token ID "+decoded.UserPermissionID);
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
-
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].llnalordId]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
       console.log("result[0][0].PlanID");
       console.log(result[0][0]);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0].llnalordId]);
-
       function splitAndConvertToObject(value) {
         const resultObject = {};
         console.log(value);
@@ -33,12 +28,8 @@ const verifyToken = async (req, res, next) => {
         } else {
           resultObject[value] = true;
         }
-
         return resultObject;
       } 
-      
-
-
       const role = result[0][0].Urole;
       const llDashboard = splitAndConvertToObject(result[0][0].llDashboard);
       const properties = splitAndConvertToObject(result[0][0].properties);
@@ -65,19 +56,10 @@ const verifyToken = async (req, res, next) => {
       const planChat = splitAndConvertToObject(planCountResult[0][0].chat);
       const planProspects = splitAndConvertToObject(planCountResult[0][0].prospect);
       const planNNN = splitAndConvertToObject(planCountResult[0][0].NNN);
-      
-
       if(futurePlanId[0]?.length!=0){
-        
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
-
-
 const currentDate = new Date();
-
-
 const timeDifference = targetDate - currentDate;
-
-
 const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 req.user = {
   email: decoded.email,
@@ -138,7 +120,6 @@ req.user = {
   planChat,
   planProspects,
   planNNN,
-
 };
 }else{
   req.user = {
@@ -172,7 +153,6 @@ req.user = {
     nuveiSubscriptionId: result[0][0].nuveiSubscriptionId,
     nuveiUPOID: result[0][0].nuveiUPOID,
     create_at: result[0][0].created_at,
-
     role,
     llDashboard,
     properties,
@@ -199,10 +179,8 @@ req.user = {
   planChat,
   planProspects,
   planNNN,
-
   };
 }
-      
       next();
     } catch (err) {
       console.log(err);
@@ -210,27 +188,17 @@ req.user = {
     }
   } else {
     try {
-
       const result = await queryRunner(selectQuery("users", "Email"), [
         decoded.email,
       ]);
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0]?.id]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0]?.PlanID]);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0]?.id]);
-
       if(futurePlanId[0]?.length!=0){
-        
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
-
-
 const currentDate = new Date();
-
-
 const timeDifference = targetDate - currentDate;
-
-
 const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-
         req.user = {
           email: decoded.email,
           userId: result[0][0].id,
@@ -265,7 +233,6 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           create_at: result[0][0].created_at,
           futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
           daysRemaining:daysRemaining,
-
           totalTenantAllow : planCountResult[0][0].totalTenants,
       totalTenantHave : countTenantResult[0][0].totalTenant,
       planInvoice : planCountResult[0][0].invoice,
@@ -275,12 +242,8 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
       planChat : planCountResult[0][0].chat,
       planProspects : planCountResult[0][0].prospect,
       planNNN : planCountResult[0][0].NNN,
-  
-  
         };
       }else{
-
-
       req.user = {
         email: decoded.email,
         userId: result[0][0].id,
@@ -315,7 +278,6 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
         create_at: result[0][0].created_at,
         totalTenantHave : countTenantResult[0][0].totalTenant,
         totalTenantAllow : planCountResult[0][0].totalTenants,
-
       planInvoice : planCountResult[0][0].invoice,
       planPortal : planCountResult[0][0].portal,
       planReporting : planCountResult[0][0].reporting,
@@ -323,23 +285,17 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
       planChat : planCountResult[0][0].chat,
       planProspects : planCountResult[0][0].prospect,
       planNNN : planCountResult[0][0].NNN,
-
       };
       }
-      
       next();
-
     } catch (err) {
       console.log(err);
       return res.status(400).send("Invalid Token");
     }
   }
 };
-
-
 const verifyTokenTenant = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
-
   if (!token) {
     return res.status(401).send("Access Denied");
   }
@@ -348,7 +304,6 @@ const verifyTokenTenant = async (req, res, next) => {
     const result = await queryRunner(selectQuery("tenants", "email"), [
       decoded.email,
     ]);
-
     req.user = {
       email: decoded.email,
       userId: result[0][0].id,
@@ -376,9 +331,6 @@ const verifyTokenTenant = async (req, res, next) => {
     return res.status(400).send("Invalid Token");
   }
 }; 
-
-
-
 const verifySuperAdmin = async (req, res, next) => {
   const token = req?.headers?.authorization.split(" ")[1];
   if (!token) {
@@ -386,7 +338,6 @@ const verifySuperAdmin = async (req, res, next) => {
   }
   function splitAndConvertToObject(value) {
     const resultObject = {};
-
     if (value.includes(',')) {
       const values = value.split(",");
       for (const item of values) {
@@ -395,24 +346,16 @@ const verifySuperAdmin = async (req, res, next) => {
     } else {
       resultObject[value] = true;
     }
-
     return resultObject;
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
     const result = await queryRunner(selectQuery("superAdmin", "email"), [decoded.email]);
-
-
-
-
-
     const selectResult = await queryRunner(adminPermissionQuery,[result[0][0].id]);
     let dataArray = [];
     if (selectResult[0].length > 0) {
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
-
-
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].userid;
         const overView = splitAndConvertToObject(selectResult[0][i].overView);
@@ -423,7 +366,6 @@ const verifySuperAdmin = async (req, res, next) => {
         const userManagement = splitAndConvertToObject(selectResult[0][i].userManagement);
         const changePlan = splitAndConvertToObject(selectResult[0][i].changePlan);
         const closeLandlord = splitAndConvertToObject(selectResult[0][i].closeLandlord);
-
         dataArray.push({
           id,
           role,
@@ -435,15 +377,9 @@ const verifySuperAdmin = async (req, res, next) => {
           userManagement,
           changePlan,
           closeLandlord
-
         });
       }
-
     }
-
-
-
-
     req.user = {
       email: result[0][0].email,
       userId: result[0][0].id,

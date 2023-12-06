@@ -1,5 +1,3 @@
-
-
 /* Prospect chart-bar*/
 var ctx1 = document.getElementById("chartBar21").getContext('2d');
 var myChartProspect;
@@ -18,7 +16,6 @@ function createProspectChart(labels, data){
                 borderColor: [ '#2086C8','#F82649','#09AD95'],
                 borderWidth: 2.0,
                 pointBackgroundColor: '#ffffff',
-
             }],
             labels: labels,
         },
@@ -54,7 +51,6 @@ function createProspectChart(labels, data){
                     }
                 }]
             },
-
             legend: {
                 labels: {
                     fontColor: "#9ba6b5"
@@ -68,14 +64,10 @@ function updateProspectChart(labels, data){
     myChartProspect.data.datasets[0].data = data;
     myChartProspect.update();
 }
-
-
     var myChartInvoice;
 /* invoice chart */
 function createInvoiceChart(data){
-
     var ctx2 = document.getElementById("chartPolarr");
-
     myChartInvoice = new Chart(ctx2, {
         type: 'polarArea',
         data: {
@@ -108,15 +100,11 @@ function updateInvoiceChart(data){
     myChartInvoice.data.datasets[0].data = data;
     myChartInvoice.update();
 }
-
-
-
 /*Banking stats chart-bar*/
 var chart = c3.generate({
     bindto: '#chart-barr', // id of chart wrapper
     data: {
         columns: [
-
             ['data1', 11, 8, 15, 18, 19, 17, 15, 11, 9, 16, 17, 13],
             ['data2', 7, 7, 5, 7, 9, 12, 11, 9, 14, 12, 14, 10]
         ],
@@ -126,7 +114,6 @@ var chart = c3.generate({
             data2: '#1467B0'
         },
         names: {
-
             'data1': 'Maximum',
             'data2': 'Minimum'
         }
@@ -134,7 +121,6 @@ var chart = c3.generate({
     axis: {
         x: {
             type: 'category',
-
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
     },
@@ -149,14 +135,9 @@ var chart = c3.generate({
         top: 0
     },
 });
-
-
-
  /* Account status chart-donut*/
   /*---- morrisBar8----*/
   var donutChartInstance;
-
-
   function createDonutChart(data){
     console.log(data)
     donutChartInstance = new Morris.Donut({
@@ -178,7 +159,6 @@ var chart = c3.generate({
     donutChartInstance.setData(data);
   }
  /* Account status chart-donut*/
-
      /* Amount Status Chart*/
      var ctx = document.getElementById("chartAreaa");
      var myChart = new Chart(ctx, {
@@ -238,7 +218,6 @@ var chart = c3.generate({
          }
      });
      /////////////////
-
 //////////////  Property Status chart ///////////////
 var myPieChart6;
 function createPropertyStatus(data){
@@ -250,8 +229,6 @@ function createPropertyStatus(data){
             hoverBackgroundColor: ['#DACECE', '#529EE0', '#1467B0']
         }]
     };
-
-
     var optionpie = {
         responsive: true,
         maintainAspectRatio: false,
@@ -276,20 +253,15 @@ function createPropertyStatus(data){
             return x + "%"
         }
     };
-
-
     var canvas = document.getElementById('donutchartt');
     canvas.width = 280;
     canvas.height = 280;
-
-
     var ctx6 = canvas.getContext('2d');
     myPieChart6 = new Chart(ctx6, {
         type: 'doughnut',
         data: datapie,
         options: optionpie
     });
-
 }
 function updatePropertyStatus(data)
 {
@@ -298,11 +270,3 @@ function updatePropertyStatus(data)
     myPieChart6.update();
 }
    //////// //  Property Status chart ///////////////
-
-
-
-
-
-
-
-

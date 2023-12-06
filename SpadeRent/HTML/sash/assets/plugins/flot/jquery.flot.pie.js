@@ -47,9 +47,7 @@ The plugin supports these options:
 More detail and specific examples can be found in the included HTML file.
 */
 (function($) {
-
 	var REDRAW_ATTEMPTS = 10;
-
 	var REDRAW_SHRINK = 0.95;
 	function init(plot) {
 		var canvas = null,
@@ -60,13 +58,10 @@ More detail and specific examples can be found in the included HTML file.
 			centerTop = null,
 			processed = false,
 			ctx = null;
-
 		var highlights = [];
-
 		plot.hooks.processOptions.push(function(plot, options) {
 			if (options.series.pie.show) {
 				options.grid.show = false;
-
 				if (options.series.pie.label.show == "auto") {
 					if (options.legend.show) {
 						options.series.pie.label.show = false;
@@ -74,7 +69,6 @@ More detail and specific examples can be found in the included HTML file.
 						options.series.pie.label.show = true;
 					}
 				}
-
 				if (options.series.pie.radius == "auto") {
 					if (options.series.pie.label.show) {
 						options.series.pie.radius = 3/4;
@@ -82,7 +76,6 @@ More detail and specific examples can be found in the included HTML file.
 						options.series.pie.radius = 1;
 					}
 				}
-
 				if (options.series.pie.tilt > 1) {
 					options.series.pie.tilt = 1;
 				} else if (options.series.pie.tilt < 0) {
@@ -134,19 +127,12 @@ More detail and specific examples can be found in the included HTML file.
 				numCombined = 0,
 				color = options.series.pie.combine.color,
 				newdata = [];
-
 			for (var i = 0; i < data.length; ++i) {
 				var value = data[i].data;
-
-
-
-
-
 				if ($.isArray(value) && value.length == 1) {
     				value = value[0];
 				}
 				if ($.isArray(value)) {
-
 					if (!isNaN(parseFloat(value[1])) && isFinite(value[1])) {
 						value[1] = +value[1];
 					} else {
@@ -159,12 +145,9 @@ More detail and specific examples can be found in the included HTML file.
 				}
 				data[i].data = [value];
 			}
-
 			for (var i = 0; i < data.length; ++i) {
 				total += data[i].data[0][1];
 			}
-
-
 			for (var i = 0; i < data.length; ++i) {
 				var value = data[i].data[0][1];
 				if (value / total <= options.series.pie.combine.threshold) {
@@ -209,24 +192,7 @@ More detail and specific examples can be found in the included HTML file.
 				canvasHeight = plot.getPlaceholder().height(),
 				legendWidth = target.children().filter(".legend").children().width() || 0;
 			ctx = newCtx;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			processed = false;
-
 			maxRadius =  Math.min(canvasWidth, canvasHeight / options.series.pie.tilt) / 2;
 			centerTop = canvasHeight / 2 + options.series.pie.offset.top;
 			centerLeft = canvasWidth / 2;
@@ -246,8 +212,6 @@ More detail and specific examples can be found in the included HTML file.
 			}
 			var slices = plot.getData(),
 				attempts = 0;
-
-
 			do {
 				if (attempts > 0) {
 					maxRadius *= REDRAW_SHRINK;
@@ -266,7 +230,6 @@ More detail and specific examples can be found in the included HTML file.
 				plot.setSeries(slices);
 				plot.insertLegend();
 			}
-
 			function clear() {
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 				target.children().filter(".pieLabel, .pieLabelBackground").remove();
@@ -284,7 +247,6 @@ More detail and specific examples can be found in the included HTML file.
 				ctx.translate(shadowLeft,shadowTop);
 				ctx.globalAlpha = alpha;
 				ctx.fillStyle = "#000";
-
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//radius -= edge;
@@ -299,12 +261,10 @@ More detail and specific examples can be found in the included HTML file.
 			function drawPie() {
 				var startAngle = Math.PI * options.series.pie.startAngle;
 				var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
-
 				ctx.save();
 				ctx.translate(centerLeft,centerTop);
 				ctx.scale(1, options.series.pie.tilt);
 				//ctx.rotate(startAngle); // start at top; -- This doesn't work properly in Opera
-
 				ctx.save();
 				var currentAngle = startAngle;
 				for (var i = 0; i < slices.length; ++i) {
@@ -312,7 +272,6 @@ More detail and specific examples can be found in the included HTML file.
 					drawSlice(slices[i].angle, slices[i].color, true);
 				}
 				ctx.restore();
-
 				if (options.series.pie.stroke.width > 0) {
 					ctx.save();
 					ctx.lineWidth = options.series.pie.stroke.width;
@@ -322,10 +281,8 @@ More detail and specific examples can be found in the included HTML file.
 					}
 					ctx.restore();
 				}
-
 				drawDonutHole(ctx);
 				ctx.restore();
-
 				if (options.series.pie.label.show) {
 					return drawLabels();
 				} else return true;
@@ -371,7 +328,6 @@ More detail and specific examples can be found in the included HTML file.
 						if (slice.data[0][1] == 0) {
 							return true;
 						}
-
 						var lf = options.legend.labelFormatter, text, plf = options.series.pie.label.formatter;
 						if (lf) {
 							text = lf(slice.label, slice);
@@ -391,12 +347,10 @@ More detail and specific examples can be found in the included HTML file.
 						var labelLeft = (x - label.width() / 2);
 						label.css("top", labelTop);
 						label.css("left", labelLeft);
-
 						if (0 - labelTop > 0 || 0 - labelLeft > 0 || canvasHeight - (labelTop + label.height()) < 0 || canvasWidth - (labelLeft + label.width()) < 0) {
 							return false;
 						}
 						if (options.series.pie.label.background.opacity != 0) {
-
 							var c = options.series.pie.label.background.color;
 							if (c == null) {
 								c = slice.color;
@@ -411,10 +365,8 @@ More detail and specific examples can be found in the included HTML file.
 				} // end drawLabels function
 			} // end drawPie function
 		} // end draw function
-
 		function drawDonutHole(layer) {
 			if (options.series.pie.innerRadius > 0) {
-
 				layer.save();
 				var innerRadius = options.series.pie.innerRadius > 1 ? options.series.pie.innerRadius : maxRadius * options.series.pie.innerRadius;
 				layer.globalCompositeOperation = "destination-out"; // this does not work with excanvas, but it will fall back to using the stroke color
@@ -424,7 +376,6 @@ More detail and specific examples can be found in the included HTML file.
 				layer.fill();
 				layer.closePath();
 				layer.restore();
-
 				layer.save();
 				layer.beginPath();
 				layer.strokeStyle = options.series.pie.stroke.color;
@@ -432,7 +383,6 @@ More detail and specific examples can be found in the included HTML file.
 				layer.stroke();
 				layer.closePath();
 				layer.restore();
-
 			}
 		}
 		//-- Additional Interactive related functions --
@@ -471,7 +421,6 @@ More detail and specific examples can be found in the included HTML file.
 							};
 						}
 					} else {
-
 						var p1X = radius * Math.cos(s.startAngle),
 							p1Y = radius * Math.sin(s.startAngle),
 							p2X = radius * Math.cos(s.startAngle + s.angle / 4),
@@ -484,7 +433,6 @@ More detail and specific examples can be found in the included HTML file.
 							p5Y = radius * Math.sin(s.startAngle + s.angle),
 							arrPoly = [[0, 0], [p1X, p1Y], [p2X, p2Y], [p3X, p3Y], [p4X, p4Y], [p5X, p5Y]],
 							arrPoint = [x, y];
-
 						if (isPointInPoly(arrPoly, arrPoint)) {
 							ctx.restore();
 							return {
@@ -506,14 +454,12 @@ More detail and specific examples can be found in the included HTML file.
 		function onClick(e) {
 			triggerClickHoverEvent("plotclick", e);
 		}
-
 		function triggerClickHoverEvent(eventname, e) {
 			var offset = plot.offset();
 			var canvasX = parseInt(e.pageX - offset.left);
 			var canvasY =  parseInt(e.pageY - offset.top);
 			var item = findNearbySlice(canvasX, canvasY);
 			if (options.grid.autoHighlight) {
-
 				for (var i = 0; i < highlights.length; ++i) {
 					var h = highlights[i];
 					if (h.auto == eventname && !(item && h.series == item.series)) {
@@ -521,17 +467,14 @@ More detail and specific examples can be found in the included HTML file.
 					}
 				}
 			}
-
 			if (item) {
 				highlight(item.series, eventname);
 			}
-
 			var pos = { pageX: e.pageX, pageY: e.pageY };
 			target.trigger(eventname, [pos, item]);
 		}
 		function highlight(s, auto) {
 			//if (typeof s == "number") {
-
 			//}
 			var i = indexOfHighlight(s);
 			if (i == -1) {
@@ -547,7 +490,6 @@ More detail and specific examples can be found in the included HTML file.
 				plot.triggerRedrawOverlay();
 			}
 			//if (typeof s == "number") {
-
 			//}
 			var i = indexOfHighlight(s);
 			if (i != -1) {
@@ -591,7 +533,6 @@ More detail and specific examples can be found in the included HTML file.
 			}
 		}
 	} // end init (plugin body)
-
 	var options = {
 		series: {
 			pie: {

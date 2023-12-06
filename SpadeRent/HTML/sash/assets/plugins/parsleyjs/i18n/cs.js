@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('cs', {
   defaultMessage: "Tato položka je neplatná.",
   type: {

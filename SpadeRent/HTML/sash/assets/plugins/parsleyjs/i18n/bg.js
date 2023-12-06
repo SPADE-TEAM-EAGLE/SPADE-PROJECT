@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('bg', {
   defaultMessage: "Невалидна стойност.",
   type: {

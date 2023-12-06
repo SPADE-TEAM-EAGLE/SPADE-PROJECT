@@ -8,7 +8,6 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-
 var searchVisible = 0;
 var transparent = true;
 var mobile_device = false;
@@ -16,7 +15,6 @@ $(document).ready(function(){
     $.material.init();
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
-
     var $validator = $('.wizard-card form').validate({
 		  rules: {
 		    firstname: {
@@ -36,7 +34,6 @@ $(document).ready(function(){
             $(element).parent('div').addClass('has-error');
          }
 	});
-
   	$('.wizard-card').bootstrapWizard({
         'tabClass': 'nav nav-pills',
         'nextSelector': '.btn-next',
@@ -70,7 +67,6 @@ $(document).ready(function(){
             var $total = navigation.find('li').length;
             var $current = index+1;
             var $wizard = navigation.closest('.wizard-card');
-
             if($current >= $total) {
                 $($wizard).find('.btn-next').hide();
                 $($wizard).find('.btn-finish').show();
@@ -98,7 +94,6 @@ $(document).ready(function(){
             refreshAnimation($wizard, index);
         }
   	});
-
     $("#wizard-picture").change(function(){
         readURL(this);
     });

@@ -13,20 +13,15 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-
         module.exports = factory(require('jquery'), require('raphael'), require('jquery-mousewheel'));
     } else if (typeof define === 'function' && define.amd) {
-
         define(['jquery', 'raphael', 'mousewheel'], factory);
     } else {
-
         factory(jQuery, Raphael, jQuery.fn.mousewheel);
     }
 }(function ($, Raphael, mousewheel, undefined) {
     "use strict";
-
     var pluginName = "mapael";
-
     var version = "2.2.0";
     /*
      * Mapael constructor
@@ -36,20 +31,13 @@
      */
     var Mapael = function (container, options) {
         var self = this;
-
         self.container = container;
-
         self.$container = $(container);
-
         self.options = self.extendDefaultOptions(options);
-
         self.zoomTO = 0;
-
         self.zoomCenterX = 0;
         self.zoomCenterY = 0;
-
         self.previousPinchDist = 0;
-
         self.zoomData = {
             zoomLevel: 0,
             zoomX: 0,
@@ -60,33 +48,20 @@
         self.currentViewBox = {
             x: 0, y: 0, w: 0, h: 0
         };
-
         self.panning = false;
-
         self.zoomAnimID = null; // Interval handler (used to set and clear)
         self.zoomAnimStartTime = null; // Animation start time
         self.zoomAnimCVBTarget = null; // Current ViewBox target
-
         self.$map = $("." + self.options.map.cssClass, self.container);
-
         self.initialMapHTMLContent = self.$map.html();
-
         self.$tooltip = {};
-
         self.paper = {};
-
         self.areas = {};
-
         self.plots = {};
-
         self.links = {};
-
         self.legends = {};
-
         self.mapConf = {};
-
         self.customEventHandlers = {};
-
         self.init();
     };
     /*
@@ -116,20 +91,14 @@
          */
         init: function () {
             var self = this;
-
             if (self.options.map.cssClass === "" || $("." + self.options.map.cssClass, self.container).length === 0) {
                 throw new Error("The map class `" + self.options.map.cssClass + "` doesn't exists");
             }
-
             self.$tooltip = $("<div>").addClass(self.options.map.tooltip.cssClass).css("display", "none");
-
             self.$map.empty().append(self.$tooltip);
-
             if ($[pluginName] && $[pluginName].maps && $[pluginName].maps[self.options.map.name]) {
-
                 self.mapConf = $[pluginName].maps[self.options.map.name];
             } else if ($.fn[pluginName] && $.fn[pluginName].maps && $.fn[pluginName].maps[self.options.map.name]) {
-
                 self.mapConf = $.fn[pluginName].maps[self.options.map.name];
                 if (window.console && window.console.warn) {
                     window.console.warn("Extending $.fn.mapael is deprecated (map '" + self.options.map.name + "')");
@@ -137,83 +106,58 @@
             } else {
                 throw new Error("Unknown map '" + self.options.map.name + "'");
             }
-
             self.paper = new Raphael(self.$map[0], self.mapConf.width, self.mapConf.height);
-
             if (self.isRaphaelBBoxBugPresent() === true) {
                 self.destroy();
                 throw new Error("Can't get boundary box for text (is your container hidden? See #135)");
             }
-
             self.$container.addClass(pluginName);
             if (self.options.map.tooltip.css) self.$tooltip.css(self.options.map.tooltip.css);
             self.setViewBox(0, 0, self.mapConf.width, self.mapConf.height);
-
             if (self.options.map.width) {
-
                 self.paper.setSize(self.options.map.width, self.mapConf.height * (self.options.map.width / self.mapConf.width));
             } else {
-
                 self.initResponsiveSize();
             }
-
             $.each(self.mapConf.elems, function (id) {
-
                 self.areas[id] = {};
-
                 self.areas[id].options = self.getElemOptions(
                     self.options.map.defaultArea,
                     (self.options.areas[id] ? self.options.areas[id] : {}),
                     self.options.legend.area
                 );
-
                 self.areas[id].mapElem = self.paper.path(self.mapConf.elems[id]);
             });
-
             if (self.options.map.beforeInit) self.options.map.beforeInit(self.$container, self.paper, self.options);
-
-
             $.each(self.mapConf.elems, function (id) {
                 self.initElem(id, 'area', self.areas[id]);
             });
-
             self.links = self.drawLinksCollection(self.options.links);
-
             $.each(self.options.plots, function (id) {
                 self.plots[id] = self.drawPlot(id);
             });
-
             self.$container.on("zoom." + pluginName, function (e, zoomOptions) {
                 self.onZoomEvent(e, zoomOptions);
             });
             if (self.options.map.zoom.enabled) {
-
                 self.initZoom(self.mapConf.width, self.mapConf.height, self.options.map.zoom);
             }
-
             if (self.options.map.zoom.init !== undefined) {
                 if (self.options.map.zoom.init.animDuration === undefined) {
                     self.options.map.zoom.init.animDuration = 0;
                 }
                 self.$container.trigger("zoom", self.options.map.zoom.init);
             }
-
             self.createLegends("area", self.areas, 1);
-
             self.createLegends("plot", self.plots, self.paper.width / self.mapConf.width);
-
             self.$container.on("update." + pluginName, function (e, opt) {
                 self.onUpdateEvent(e, opt);
             });
-
             self.$container.on("showElementsInRange." + pluginName, function (e, opt) {
                 self.onShowElementsInRange(e, opt);
             });
-
             self.initDelegatedMapEvents();
-
             self.initDelegatedCustomEvents();
-
             if (self.options.map.afterInit) self.options.map.afterInit(self.$container, self.paper, self.areas, self.plots, self.options);
             $(self.paper.desc).append(" and Mapael " + self.version + " (https://www.vincentbroute.fr/mapael/)");
         },
@@ -231,16 +175,11 @@
          */
         destroy: function () {
             var self = this;
-
             self.$container.off("." + pluginName);
             self.$map.off("." + pluginName);
-
             if (self.onResizeEvent) $(window).off("resize." + pluginName, self.onResizeEvent);
-
             self.$map.empty();
-
             self.$map.html(self.initialMapHTMLContent);
-
             $.each(self.legends, function(legendType) {
                 $.each(self.legends[legendType], function(legendIndex) {
                     var legend = self.legends[legendType][legendIndex];
@@ -248,11 +187,8 @@
                     legend.container.html(legend.initialHTMLContent);
                 });
             });
-
             self.$container.removeClass(pluginName);
-
             self.$container.removeData(pluginName);
-
             self.container = undefined;
             self.$container = undefined;
             self.options = undefined;
@@ -268,31 +204,23 @@
         initResponsiveSize: function () {
             var self = this;
             var resizeTO = null;
-
             var handleResize = function(isInit) {
                 var containerWidth = self.$map.width();
                 if (self.paper.width !== containerWidth) {
                     var newScale = containerWidth / self.mapConf.width;
-
                     self.paper.setSize(containerWidth, self.mapConf.height * newScale);
-
-
                     if (isInit !== true && self.options.legend.redrawOnResize) {
                         self.createLegends("plot", self.plots, newScale);
                     }
                 }
             };
             self.onResizeEvent = function() {
-
                 clearTimeout(resizeTO);
-
                 resizeTO = setTimeout(function () {
                     handleResize();
                 }, self.resizeFilteringTO);
             };
-
             $(window).on("resize." + pluginName, self.onResizeEvent);
-
             handleResize(true);
         },
         /*
@@ -301,9 +229,7 @@
          * @return new options object
          */
         extendDefaultOptions: function (options) {
-
             options = $.extend(true, {}, Mapael.prototype.defaultOptions, options);
-
             $.each(['area', 'plot'], function (key, type) {
                 if ($.isArray(options.legend[type])) {
                     for (var i = 0; i < options.legend[type].length; ++i)
@@ -322,9 +248,6 @@
          */
         initDelegatedMapEvents: function() {
             var self = this;
-
-
-
             var dataTypeToElementMapping = {
                 'area'  : self.areas,
                 'area-text' : self.areas,
@@ -377,7 +300,6 @@
              */
             self.$container.on("mouseout." + pluginName, "[data-id]", function () {
                 var elem = this;
-
                 clearTimeout(mapMouseOverTimeoutID);
                 clearTimeout(mapMouseMoveTimeoutID);
                 var $elem = $(elem);
@@ -413,8 +335,6 @@
         initDelegatedCustomEvents: function() {
             var self = this;
             $.each(self.customEventHandlers, function(eventName) {
-
-
                 var fullEventName = eventName + '.' + pluginName + ".custom";
                 self.$container.off(fullEventName).on(fullEventName, "[data-id]", function (e) {
                     var $elem = $(this);
@@ -424,9 +344,7 @@
                         self.customEventHandlers[eventName][type] !== undefined &&
                         self.customEventHandlers[eventName][type][id] !== undefined)
                     {
-
                         var elem = self.customEventHandlers[eventName][type][id];
-
                         elem.options.eventHandlers[eventName](e, id, elem.mapElem, elem.textElem, elem.options);
                     }
                 });
@@ -442,14 +360,11 @@
         initElem: function (id, type, elem) {
             var self = this;
             var $mapElem = $(elem.mapElem.node);
-
             if (elem.options.href) {
                 elem.options.attrs.cursor = "pointer";
                 if (elem.options.text) elem.options.text.attrs.cursor = "pointer";
             }
-
             elem.mapElem.attr(elem.options.attrs);
-
             $mapElem.attr({
                 "data-id": id,
                 "data-type": type
@@ -457,29 +372,21 @@
             if (elem.options.cssClass !== undefined) {
                 $mapElem.addClass(elem.options.cssClass);
             }
-
             if (elem.options.text && elem.options.text.content !== undefined) {
-
                 var textPosition = self.getTextPosition(elem.mapElem.getBBox(), elem.options.text.position, elem.options.text.margin);
                 elem.options.text.attrs.text = elem.options.text.content;
                 elem.options.text.attrs.x = textPosition.x;
                 elem.options.text.attrs.y = textPosition.y;
                 elem.options.text.attrs['text-anchor'] = textPosition.textAnchor;
-
                 elem.textElem = self.paper.text(textPosition.x, textPosition.y, elem.options.text.content);
-
                 elem.textElem.attr(elem.options.text.attrs);
-
                 $(elem.textElem.node).attr({
                     "data-id": id,
                     "data-type": type + '-text'
                 });
             }
-
             if (elem.options.eventHandlers) self.setEventHandlers(id, type, elem);
-
             self.setHoverOptions(elem.mapElem, elem.options.attrs, elem.options.attrsHover);
-
             if (elem.textElem) self.setHoverOptions(elem.textElem, elem.options.text.attrs, elem.options.text.attrsHover);
         },
         /*
@@ -504,25 +411,19 @@
                     self.$container.trigger("zoom", {"level": -1});
                 }
             };
-
             $.extend(self.zoomData, {
                 zoomLevel: 0,
                 panX: 0,
                 panY: 0
             });
-
             $.each(zoomOptions.buttons, function(type, opt) {
                 if (fnZoomButtons[type] === undefined) throw new Error("Unknown zoom button '" + type + "'");
-
                 var $button = $("<div>").addClass(opt.cssClass)
                     .html(opt.content)
                     .attr("title", opt.title);
-
                 $button.on("click." + pluginName, fnZoomButtons[type]);
-
                 self.$map.append($button);
             });
-
             if (self.options.map.zoom.mousewheel) {
                 self.$map.on("mousewheel." + pluginName, function (e) {
                     var zoomLevel = (e.deltaY > 0) ? 1 : -1;
@@ -536,7 +437,6 @@
                     e.preventDefault();
                 });
             }
-
             if (self.options.map.zoom.touch) {
                 self.$map.on("touchstart." + pluginName, function (e) {
                     if (e.originalEvent.touches.length === 2) {
@@ -565,11 +465,9 @@
                     }
                 });
             }
-
             self.$map.on("dragstart", function() {
                 return false;
             });
-
             var panningMouseUpTO = null;
             var panningMouseMoveTO = null;
             $("body").on("mouseup." + pluginName + (zoomOptions.touch ? " touchend." + pluginName : ""), function () {
@@ -692,15 +590,11 @@
          */
         onZoomEvent: function (e, zoomOptions) {
             var self = this;
-
             var panX;
             var panY;
-
             var panWidth;
             var panHeight;
-
             var zoomLevel = self.zoomData.zoomLevel;
-
             var previousRelativeZoomLevel = 1 + self.zoomData.zoomLevel * self.options.map.zoom.step;
             var relativeZoomLevel;
             var animDuration = (zoomOptions.animDuration !== undefined) ? zoomOptions.animDuration : self.options.map.zoom.animDuration;
@@ -713,32 +607,22 @@
                 var areaBBox = self.areas[zoomOptions.area].mapElem.getBBox();
                 var areaFullWidth = areaBBox.width + 2 * areaMargin;
                 var areaFullHeight = areaBBox.height + 2 * areaMargin;
-
                 zoomOptions.x = areaBBox.cx;
                 zoomOptions.y = areaBBox.cy;
-
-
                 zoomLevel = Math.min(Math.floor((self.mapConf.width / areaFullWidth - 1) / self.options.map.zoom.step),
                                      Math.floor((self.mapConf.height / areaFullHeight - 1) / self.options.map.zoom.step));
             } else {
-
                 if (zoomOptions.level !== undefined) {
                     if (typeof zoomOptions.level === "string") {
-
                         if ((zoomOptions.level.slice(0, 1) === '+') || (zoomOptions.level.slice(0, 1) === '-')) {
-
                             zoomLevel = self.zoomData.zoomLevel + parseInt(zoomOptions.level, 10);
                         } else {
-
                             zoomLevel = parseInt(zoomOptions.level, 10);
                         }
                     } else {
-
                         if (zoomOptions.level < 0) {
-
                             zoomLevel = self.zoomData.zoomLevel + zoomOptions.level;
                         } else {
-
                             zoomLevel = zoomOptions.level;
                         }
                     }
@@ -761,11 +645,8 @@
                     }
                 }
             }
-
             zoomLevel = Math.min(Math.max(zoomLevel, self.options.map.zoom.minLevel), self.options.map.zoom.maxLevel);
-
             relativeZoomLevel = 1 + zoomLevel * self.options.map.zoom.step;
-
             panWidth = self.mapConf.width / relativeZoomLevel;
             panHeight = self.mapConf.height / relativeZoomLevel;
             if (zoomLevel === 0) {
@@ -779,11 +660,9 @@
                     panX = zoomOptions.x - panWidth / 2;
                     panY = zoomOptions.y - panHeight / 2;
                 }
-
                 panX = Math.min(Math.max(0, panX), self.mapConf.width - panWidth);
                 panY = Math.min(Math.max(0, panY), self.mapConf.height - panHeight);
             }
-
             if (relativeZoomLevel === previousRelativeZoomLevel && panX === self.zoomData.panX && panY === self.zoomData.panY) return;
             if (animDuration > 0) {
                 self.animateViewBox(panX, panY, panWidth, panHeight, animDuration, self.options.map.zoom.animEasing);
@@ -835,27 +714,21 @@
          */
         onShowElementsInRange: function(e, opt) {
             var self = this;
-
             if (opt.animDuration === undefined) {
                 opt.animDuration = 0;
             }
-
             if (opt.hiddenOpacity === undefined) {
                 opt.hiddenOpacity = 0.3;
             }
-
             if (opt.ranges && opt.ranges.area) {
                 self.showElemByRange(opt.ranges.area, self.areas, opt.hiddenOpacity, opt.animDuration);
             }
-
             if (opt.ranges && opt.ranges.plot) {
                 self.showElemByRange(opt.ranges.plot, self.plots, opt.hiddenOpacity, opt.animDuration);
             }
-
             if (opt.ranges && opt.ranges.link) {
                 self.showElemByRange(opt.ranges.link, self.links, opt.hiddenOpacity, opt.animDuration);
             }
-
             if (opt.afterShowRange) opt.afterShowRange();
         },
         /*
@@ -867,43 +740,31 @@
          */
         showElemByRange: function(ranges, elems, hiddenOpacity, animDuration) {
             var self = this;
-
-
             var elemsFinalOpacity = {};
-
             if (ranges.min !== undefined || ranges.max !== undefined) {
                 ranges = {0: ranges};
             }
-
             $.each(ranges, function (valueIndex) {
                 var range = ranges[valueIndex];
-
                 if (range.min === undefined && range.max === undefined) {
                     return true; // skip this iteration (each loop), goto next range
                 }
-
                 $.each(elems, function (id) {
                     var elemValue = elems[id].options.value;
-
                     if (typeof elemValue !== "object") {
                         elemValue = [elemValue];
                     }
-
                     if (elemValue[valueIndex] === undefined) {
                         return true; // skip this iteration (each loop), goto next element
                     }
-
                     if ((range.min !== undefined && elemValue[valueIndex] < range.min) ||
                         (range.max !== undefined && elemValue[valueIndex] > range.max)) {
-
                         elemsFinalOpacity[id] = hiddenOpacity;
                     } else {
-
                         elemsFinalOpacity[id] = 1;
                     }
                 });
             });
-
             $.each(elemsFinalOpacity, function (id) {
                 self.setElementOpacity(elems[id], elemsFinalOpacity[id], animDuration);
             });
@@ -917,20 +778,16 @@
          */
         setElementOpacity: function(elem, opacity, animDuration) {
             var self = this;
-
             //elem.mapElem.stop();
             //if (elem.textElem) elem.textElem.stop();
-
             if (opacity > 0) {
                 elem.mapElem.show();
                 if (elem.textElem) elem.textElem.show();
             }
             self.animate(elem.mapElem, {"opacity": opacity}, animDuration, function () {
-
                 if (opacity === 0) elem.mapElem.hide();
             });
             self.animate(elem.textElem, {"opacity": opacity}, animDuration, function () {
-
                 if (opacity === 0) elem.textElem.hide();
             });
         },
@@ -951,12 +808,9 @@
          */
         onUpdateEvent: function (e, opt) {
             var self = this;
-
             if (typeof opt !== "object")  return;
             var i = 0;
             var animDuration = (opt.animDuration) ? opt.animDuration : 0;
-
-
             var fnRemoveElement = function (elem) {
                 self.animate(elem.mapElem, {"opacity": 0}, animDuration, function () {
                     elem.mapElem.remove();
@@ -965,13 +819,9 @@
                     elem.textElem.remove();
                 });
             };
-
-
             var fnShowElement = function (elem) {
-
                 elem.mapElem.attr({opacity: 0});
                 if (elem.textElem) elem.textElem.attr({opacity: 0});
-
                 self.setElementOpacity(
                     elem,
                     (elem.mapElem.originalAttrs.opacity !== undefined) ? elem.mapElem.originalAttrs.opacity : 1,
@@ -981,17 +831,14 @@
             if (typeof opt.mapOptions === "object") {
                 if (opt.replaceOptions === true) self.options = self.extendDefaultOptions(opt.mapOptions);
                 else $.extend(true, self.options, opt.mapOptions);
-
                 if (opt.mapOptions.areas !== undefined || opt.mapOptions.plots !== undefined || opt.mapOptions.legend !== undefined) {
                     $("[data-type='legend-elem']", self.$container).each(function (id, elem) {
                         if ($(elem).attr('data-hidden') === "1") {
-
                             $(elem).trigger("click", {hideOtherElems: false, animDuration: animDuration});
                         }
                     });
                 }
             }
-
             if (typeof opt.deletePlotKeys === "object") {
                 for (; i < opt.deletePlotKeys.length; i++) {
                     if (self.plots[opt.deletePlotKeys[i]] !== undefined) {
@@ -999,15 +846,12 @@
                         delete self.plots[opt.deletePlotKeys[i]];
                     }
                 }
-
             } else if (opt.deletePlotKeys === "all") {
                 $.each(self.plots, function (id, elem) {
                     fnRemoveElement(elem);
                 });
-
                 self.plots = {};
             }
-
             if (typeof opt.deleteLinkKeys === "object") {
                 for (i = 0; i < opt.deleteLinkKeys.length; i++) {
                     if (self.links[opt.deleteLinkKeys[i]] !== undefined) {
@@ -1015,15 +859,12 @@
                         delete self.links[opt.deleteLinkKeys[i]];
                     }
                 }
-
             } else if (opt.deleteLinkKeys === "all") {
                 $.each(self.links, function (id, elem) {
                     fnRemoveElement(elem);
                 });
-
                 self.links = {};
             }
-
             if (typeof opt.newPlots === "object") {
                 $.each(opt.newPlots, function (id) {
                     if (self.plots[id] === undefined) {
@@ -1035,7 +876,6 @@
                     }
                 });
             }
-
             if (typeof opt.newLinks === "object") {
                 var newLinks = self.drawLinksCollection(opt.newLinks);
                 $.extend(self.links, newLinks);
@@ -1046,9 +886,7 @@
                     });
                 }
             }
-
             $.each(self.areas, function (id) {
-
                 if ((typeof opt.mapOptions === "object" &&
                     (
                         (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultArea === "object") ||
@@ -1064,9 +902,7 @@
                     self.updateElem(self.areas[id], animDuration);
                 }
             });
-
             $.each(self.plots, function (id) {
-
                 if ((typeof opt.mapOptions ==="object" &&
                     (
                         (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultPlot === "object") ||
@@ -1084,9 +920,7 @@
                     self.updateElem(self.plots[id], animDuration);
                 }
             });
-
             $.each(self.links, function (id) {
-
                 if ((typeof opt.mapOptions === "object" &&
                     (
                         (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultLink === "object") ||
@@ -1101,13 +935,11 @@
                     self.updateElem(self.links[id], animDuration);
                 }
             });
-
             if (opt.mapOptions && (
                     (typeof opt.mapOptions.legend === "object") ||
                     (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultArea === "object") ||
                     (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultPlot === "object")
                 )) {
-
                 $("[data-type='legend-elem']", self.$container).each(function (id, elem) {
                     if ($(elem).attr('data-hidden') === "1") {
                         $(elem).trigger("click", {hideOtherElems: false, animDuration: animDuration});
@@ -1120,39 +952,27 @@
                     self.createLegends("plot", self.plots, (self.$map.width() / self.mapConf.width));
                 }
             }
-
-
-
-
             if (typeof opt.setLegendElemsState === "object") {
-
                 $.each(opt.setLegendElemsState, function (legendCSSClass, action) {
-
                     var $legend = self.$container.find("." + legendCSSClass)[0];
                     if ($legend !== undefined) {
-
                         $("[data-type='legend-elem']", $legend).each(function (id, elem) {
                             if (($(elem).attr('data-hidden') === "0" && action === "hide") ||
                                 ($(elem).attr('data-hidden') === "1" && action === "show")) {
-
                                 $(elem).trigger("click", {hideOtherElems: false, animDuration: animDuration});
                             }
                         });
                     }
                 });
             } else {
-
-
                 var action = (opt.setLegendElemsState === "hide") ? "hide" : "show";
                 $("[data-type='legend-elem']", self.$container).each(function (id, elem) {
                     if (($(elem).attr('data-hidden') === "0" && action === "hide") ||
                         ($(elem).attr('data-hidden') === "1" && action === "show")) {
-
                         $(elem).trigger("click", {hideOtherElems: false, animDuration: animDuration});
                     }
                 });
             }
-
             self.initDelegatedCustomEvents();
             if (opt.afterUpdate) opt.afterUpdate(self.$container, self.paper, self.areas, self.plots, self.options, self.links);
         },
@@ -1196,16 +1016,12 @@
                 plot.options.attrs.y = plot.coords.y - (plot.options.height / 2);
             } else if (plot.options.type === "svg") {
                 plot.options.attrs.path = plot.options.path;
-
                 if (plot.options.attrs.transform === undefined) {
                     plot.options.attrs.transform = "";
                 }
-
                 if (plot.mapElem.originalBBox === undefined) {
                     plot.mapElem.originalBBox = plot.mapElem.getBBox();
                 }
-
-
                 plot.mapElem.baseTransform = "m" + (plot.options.width / plot.mapElem.originalBBox.width) + ",0,0," +
                                                    (plot.options.height / plot.mapElem.originalBBox.height) + "," +
                                                    (plot.coords.x - plot.options.width / 2) + "," +
@@ -1277,28 +1093,17 @@
             var link = {
                 options: elemOptions
             };
-
-
             var xc = (xa + xb) / 2;
             var yc = (ya + yb) / 2;
-
             var acd = -1 / ((yb - ya) / (xb - xa));
             var bcd = yc - acd * xc;
-
             var abDist = Math.sqrt((xb - xa) * (xb - xa) + (yb - ya) * (yb - ya));
-
-
-
-
-
-
             var a = 1 + acd * acd;
             var b = -2 * xc + 2 * acd * bcd - 2 * acd * yc;
             var c = xc * xc + bcd * bcd - bcd * yc - yc * bcd + yc * yc - ((elemOptions.factor * abDist) * (elemOptions.factor * abDist));
             var delta = b * b - 4 * a * c;
             var x = 0;
             var y = 0;
-
             if (elemOptions.factor > 0) {
                 x = (-b + Math.sqrt(delta)) / (2 * a);
                 y = acd * x + bcd;
@@ -1332,22 +1137,17 @@
             if (elem.options.toFront === true) {
                 elem.mapElem.toFront();
             }
-
             if (elem.options.href !== undefined) {
                 elem.options.attrs.cursor = "pointer";
                 if (elem.options.text) elem.options.text.attrs.cursor = "pointer";
             } else {
-
                 if (elem.mapElem.attrs.cursor === 'pointer') {
                     elem.options.attrs.cursor = "auto";
                     if (elem.options.text) elem.options.text.attrs.cursor = "auto";
                 }
             }
-
             if (elem.textElem) {
-
                 elem.options.text.attrs.text = elem.options.text.content;
-
                 mapElemBBox = elem.mapElem.getBBox();
                 if (elem.options.size || (elem.options.width && elem.options.height)) {
                     if (elem.options.type === "image" || elem.options.type === "svg") {
@@ -1362,23 +1162,19 @@
                     mapElemBBox.y -= plotOffsetY;
                     mapElemBBox.y2 += plotOffsetY;
                 }
-
                 var textPosition = self.getTextPosition(mapElemBBox, elem.options.text.position, elem.options.text.margin);
                 elem.options.text.attrs.x = textPosition.x;
                 elem.options.text.attrs.y = textPosition.y;
                 elem.options.text.attrs['text-anchor'] = textPosition.textAnchor;
-
                 self.setHoverOptions(elem.textElem, elem.options.text.attrs, elem.options.text.attrsHover);
                 if (self.isAttrsChanged(elem.textElem.attrs, elem.options.text.attrs)) {
                     self.animate(elem.textElem, elem.options.text.attrs, animDuration);
                 }
             }
-
             self.setHoverOptions(elem.mapElem, elem.options.attrs, elem.options.attrsHover);
             if (self.isAttrsChanged(elem.mapElem.attrs, elem.options.attrs)) {
                 self.animate(elem.mapElem, elem.options.attrs, animDuration);
             }
-
             if (elem.options.cssClass !== undefined) {
                 $(elem.mapElem.node).removeClass().addClass(elem.options.cssClass);
             }
@@ -1389,21 +1185,16 @@
         drawPlot: function (id) {
             var self = this;
             var plot = {};
-
             plot.options = self.getElemOptions(
                 self.options.map.defaultPlot,
                 (self.options.plots[id] ? self.options.plots[id] : {}),
                 self.options.legend.plot
             );
-
             self.setPlotCoords(plot);
-
             if (plot.options.type === "svg") {
                 plot.mapElem = self.paper.path(plot.options.path);
             }
-
             self.setPlotAttributes(plot);
-
             if (plot.options.type === "square") {
                 plot.mapElem = self.paper.rect(
                     plot.options.attrs.x,
@@ -1420,9 +1211,7 @@
                     plot.options.attrs.height
                 );
             } else if (plot.options.type === "svg") {
-
             } else {
-
                 plot.mapElem = self.paper.circle(
                     plot.options.attrs.x,
                     plot.options.attrs.y,
@@ -1468,14 +1257,11 @@
             var yCenter = 0;
             var sliceOptions = [];
             $legend = $("." + legendOptions.cssClass, self.$container);
-
             var initialHTMLContent = $legend.html();
             $legend.empty();
             legendPaper = new Raphael($legend.get(0));
-
             $(legendPaper.canvas).attr({"data-legend-type": legendType, "data-legend-id": legendIndex});
             height = width = 0;
-
             if (legendOptions.title && legendOptions.title !== "") {
                 title = legendPaper.text(legendOptions.marginLeftTitle, 0, legendOptions.title).attr(legendOptions.titleAttrs);
                 titleBBox = title.getBBox();
@@ -1483,7 +1269,6 @@
                 width = legendOptions.marginLeftTitle + titleBBox.width;
                 height += legendOptions.marginBottomTitle + titleBBox.height;
             }
-
             for (i = 0; i < legendOptions.slices.length; ++i) {
                 var yCenterCurrent = 0;
                 sliceOptions[i] = $.extend(true, {}, (legendType === "plot") ? self.options.map.defaultPlot : self.options.map.defaultArea, legendOptions.slices[i]);
@@ -1510,9 +1295,7 @@
                     if (sliceOptions[i].attrs.r === undefined)
                         sliceOptions[i].attrs.r = sliceOptions[i].size / 2;
                 }
-
                 yCenterCurrent = legendOptions.marginBottomTitle;
-
                 if (title) {
                     yCenterCurrent += titleBBox.height;
                 }
@@ -1521,13 +1304,11 @@
                 } else {
                     yCenterCurrent += scale * sliceOptions[i].attrs.height / 2;
                 }
-
                 yCenter = Math.max(yCenter, yCenterCurrent);
             }
             if (legendOptions.mode === "horizontal") {
                 width = legendOptions.marginLeft;
             }
-
             for (i = 0; i < sliceOptions.length; ++i) {
                 var legendElem = {};
                 var legendElemBBox = {};
@@ -1580,13 +1361,11 @@
                         }
                         legendElem = legendPaper.circle(x, y, scale * (sliceOptions[i].attrs.r));
                     }
-
                     delete sliceOptions[i].attrs.width;
                     delete sliceOptions[i].attrs.height;
                     delete sliceOptions[i].attrs.r;
                     legendElem.attr(sliceOptions[i].attrs);
                     legendElemBBox = legendElem.getBBox();
-
                     if (legendOptions.mode === "horizontal") {
                         x = width + legendOptions.marginLeft + legendElemBBox.width + legendOptions.marginLeftLabel;
                         y = yCenter;
@@ -1595,14 +1374,12 @@
                         y = height + (legendElemBBox.height / 2);
                     }
                     legendLabel = legendPaper.text(x, y, sliceOptions[i].label).attr(legendOptions.labelAttrs);
-
                     if (legendOptions.mode === "horizontal") {
                         var currentHeight = legendOptions.marginBottom + legendElemBBox.height;
                         width += legendOptions.marginLeft + legendElemBBox.width + legendOptions.marginLeftLabel + legendLabel.getBBox().width;
                         if (sliceOptions[i].type !== "image" && legendType !== "area") {
                             currentHeight += legendOptions.marginBottomTitle;
                         }
-
                         if (title) {
                             currentHeight += titleBBox.height;
                         }
@@ -1611,7 +1388,6 @@
                         width = Math.max(width, legendOptions.marginLeft + legendElemBBox.width + legendOptions.marginLeftLabel + legendLabel.getBBox().width);
                         height += legendOptions.marginBottom + legendElemBBox.height;
                     }
-
                     $(legendElem.node).attr({
                         "data-legend-id": legendIndex,
                         "data-legend-type": legendType,
@@ -1626,15 +1402,11 @@
                         "data-id": i,
                         "data-hidden": 0
                     });
-
-
                     legendElems[i] = {
                         mapElem: legendElem,
                         textElem: legendLabel
                     };
-
                     if (legendOptions.hideElemsOnClick.enabled) {
-
                         legendLabel.attr({cursor: "pointer"});
                         legendElem.attr({cursor: "pointer"});
                         self.setHoverOptions(legendElem, sliceOptions[i].attrs, sliceOptions[i].attrs);
@@ -1645,8 +1417,6 @@
                     }
                 }
             }
-
-
             if (Raphael.type !== "SVG" && legendOptions.VMLWidth)
                 width = legendOptions.VMLWidth;
             legendPaper.setSize(width, height);
@@ -1681,7 +1451,6 @@
             var $legendLabel = $(legendLabel.node);
             var sliceOptions = legendOptions.slices[id];
             var mapElems = legendType === 'area' ? self.areas : self.plots;
-
             var animDuration = opts.animDuration !== undefined ? opts.animDuration : legendOptions.hideElemsOnClick.animDuration ;
             var hidden = $legendElem.attr('data-hidden');
             var hiddenNewAttr = (hidden === '0') ? {"data-hidden": '1'} : {"data-hidden": '0'};
@@ -1692,25 +1461,19 @@
             }
             $.each(mapElems, function (y) {
                 var elemValue;
-
-
                 var hiddenBy = mapElems[y].mapElem.data('hidden-by');
-
                 if (hiddenBy === undefined) hiddenBy = {};
                 if ($.isArray(mapElems[y].options.value)) {
                     elemValue = mapElems[y].options.value[legendIndex];
                 } else {
                     elemValue = mapElems[y].options.value;
                 }
-
                 if (self.getLegendSlice(elemValue, legendOptions) === sliceOptions) {
                     if (hidden === '0') { // we want to hide this element
                         hiddenBy[legendIndex] = true; // add legendIndex to the data object for later use
                         self.setElementOpacity(mapElems[y], legendOptions.hideElemsOnClick.opacity, animDuration);
                     } else { // We want to show this element
                         delete hiddenBy[legendIndex]; // Remove this legendIndex from object
-
-
                         if ($.isEmptyObject(hiddenBy)) {
                             self.setElementOpacity(
                                 mapElems[y],
@@ -1719,7 +1482,6 @@
                             );
                         }
                     }
-
                     mapElems[y].mapElem.data('hidden-by', hiddenBy);
                 }
             });
@@ -1762,7 +1524,6 @@
          * @param attrsHover the attributes to set on mouseover event
          */
         setHoverOptions: function (elem, originalAttrs, attrsHover) {
-
             if (Raphael.type !== "SVG") delete attrsHover.transform;
             elem.attrsHover = attrsHover;
             if (elem.attrsHover.transform) elem.originalAttrs = $.extend({transform: "s1"}, originalAttrs);
@@ -1787,11 +1548,8 @@
             /* Handle tooltip init */
             if (elem.options && elem.options.tooltip !== undefined) {
                 var content = '';
-
                 self.$tooltip.removeClass().addClass(self.options.map.tooltip.cssClass);
-
                 if (elem.options.tooltip.content !== undefined) {
-
                     if (typeof elem.options.tooltip.content === "function") content = elem.options.tooltip.content(elem.mapElem);
                     else content = elem.options.tooltip.content;
                 }
@@ -1800,7 +1558,6 @@
                 }
                 self.$tooltip.html(content).css("display", "block");
             }
-
             if (elem.mapElem !== undefined || elem.textElem !== undefined) {
                 if (self.paper.safari) self.paper.safari();
             }
@@ -1867,7 +1624,6 @@
                     'left': -1000
                 });
             }
-
             if (elem.mapElem !== undefined || elem.textElem !== undefined) {
                 if (self.paper.safari) self.paper.safari();
             }
@@ -1991,67 +1747,36 @@
             var dw = targetW - cw;
             var ch = self.currentViewBox.h;
             var dh = targetH - ch;
-
             if (!self.zoomAnimCVBTarget) {
                 self.zoomAnimCVBTarget = {
                     x: targetX, y: targetY, w: targetW, h: targetH
                 };
             }
-
             var zoomDir = (cw > targetW) ? 'in' : 'out';
             var easingFormula = Raphael.easing_formulas[easingFunction || "linear"];
-
             var durationWithMargin = duration - (duration * 2 / 100);
-
             var oldZoomAnimStartTime = self.zoomAnimStartTime;
             self.zoomAnimStartTime = (new Date()).getTime();
             /* Actual function to animate the ViewBox
              * Uses requestAnimationFrame to schedule itself again until animation is over
              */
             var computeNextStep = function () {
-
-
-
-
                 self.cancelAnimationFrame(self.zoomAnimID);
-
                 var elapsed = (new Date()).getTime() - self.zoomAnimStartTime;
-
                 if (elapsed < durationWithMargin) {
-
                     var x, y, w, h;
-
-
-
                     //
-
-
                     //
-
-
                     //
-
-
                     //
-
                     //
-
-
-
                     if (oldZoomAnimStartTime && self.zoomAnimCVBTarget && self.zoomAnimCVBTarget.w !== targetW) {
-
                         var realElapsed = (new Date()).getTime() - oldZoomAnimStartTime;
-
                         var realRatio = easingFormula(realElapsed / duration);
-
-
-
-
                         x = cx + (self.zoomAnimCVBTarget.x - cx) * realRatio;
                         y = cy + (self.zoomAnimCVBTarget.y - cy) * realRatio;
                         w = cw + (self.zoomAnimCVBTarget.w - cw) * realRatio;
                         h = ch + (self.zoomAnimCVBTarget.h - ch) * realRatio;
-
                         cx = x;
                         dx = targetX - cx;
                         cy = y;
@@ -2060,52 +1785,35 @@
                         dw = targetW - cw;
                         ch = h;
                         dh = targetH - ch;
-
                         self.zoomAnimCVBTarget = {
                             x: targetX, y: targetY, w: targetW, h: targetH
                         };
                     } else {
-
-
                         var ratio = easingFormula(elapsed / duration);
-
                         x = cx + dx * ratio;
                         y = cy + dy * ratio;
                         w = cw + dw * ratio;
                         h = ch + dh * ratio;
                     }
-
                     if (zoomDir === 'in' && (w > self.currentViewBox.w || w < targetW)) {
-
-
-
                     } else if (zoomDir === 'out' && (w < self.currentViewBox.w || w > targetW)) {
-
-
-
                     } else {
-
                         self.setViewBox(x, y, w, h);
                     }
-
                     self.zoomAnimID = self.requestAnimationFrame(computeNextStep);
                 } else {
                     /* Zoom animation done ! */
-
                     self.zoomAnimStartTime = null;
                     self.zoomAnimCVBTarget = null;
-
                     if (self.currentViewBox.w !== targetW) {
                         self.setViewBox(targetX, targetY, targetW, targetH);
                     }
-
                     self.$map.trigger("afterZoom", {
                         x1: targetX, y1: targetY,
                         x2: (targetX + targetW), y2: (targetY + targetH)
                     });
                 }
             };
-
             computeNextStep();
         },
         /*
@@ -2117,28 +1825,21 @@
          * But requestAnimationFrame and cancelAnimationFrame shall be called since
          * in order to be in window context
          */
-
         requestAnimationFrame: function(callback) {
             return this._requestAnimationFrameFn.call(window, callback);
         },
-
         cancelAnimationFrame: function(id) {
             this._cancelAnimationFrameFn.call(window, id);
         },
-
-
         _requestAnimationFrameFn: (function () {
             var polyfill = (function () {
                 var clock = (new Date()).getTime();
                 return function (callback) {
                     var currentTime = (new Date()).getTime();
-
-
                     if (currentTime - clock > 16) {
                         clock = currentTime;
                         callback(currentTime);
                     } else {
-
                         return setTimeout(function () {
                             polyfill(callback);
                         }, 0);
@@ -2152,8 +1853,6 @@
                 window.oRequestAnimationFrame ||
                 polyfill;
         })(),
-
-
         _cancelAnimationFrameFn: (function () {
             return window.cancelAnimationFrame ||
                 window.webkitCancelAnimationFrame ||
@@ -2175,12 +1874,10 @@
          */
         setViewBox: function(x, y, w, h) {
             var self = this;
-
             self.currentViewBox.x = x;
             self.currentViewBox.y = y;
             self.currentViewBox.w = w;
             self.currentViewBox.h = h;
-
             self.paper.setViewBox(x, y, w, h, false);
         },
         /*
@@ -2193,8 +1890,6 @@
          * If duration is set to 0 (or not set), no animation are performed
          * and attributes are directly set (and the callback directly called)
          */
-
-
         _nonAnimatedAttrs: [
             "arrow-end", "arrow-start", "gradient",
             "class", "cursor", "text-anchor",
@@ -2210,11 +1905,8 @@
          */
         animate: function(element, attrs, duration, callback) {
             var self = this;
-
             if (!element) return;
             if (duration > 0) {
-
-
                 var attrsNonAnimated = {};
                 for (var i=0 ; i < self._nonAnimatedAttrs.length ; i++) {
                     var attrName = self._nonAnimatedAttrs[i];
@@ -2222,16 +1914,12 @@
                         attrsNonAnimated[attrName] = attrs[attrName];
                     }
                 }
-
                 element.attr(attrsNonAnimated);
-
                 element.animate(attrs, duration, 'linear', function() {
                     if (callback) callback();
                 });
             } else {
-
                 element.attr(attrs);
-
                 if (callback) callback();
             }
         },
@@ -2245,15 +1933,11 @@
          */
         isRaphaelBBoxBugPresent: function() {
             var self = this;
-
             var textElem = self.paper.text(-50, -50, "TEST");
             var textElemBBox = textElem.getBBox();
-
             textElem.remove();
-
             return (textElemBBox.width === 0 && textElemBBox.height === 0);
         },
-
         defaultOptions: {
             map: {
                 cssClass: "map",
@@ -2375,7 +2059,6 @@
             plots: {},
             links: {}
         },
-
         legendDefaultOptions: {
             area: {
                 cssClass: "areaLegend",
@@ -2439,21 +2122,13 @@
             }
         }
     };
-
-
     Mapael.version = version;
-
     if ($[pluginName] === undefined) $[pluginName] = Mapael;
-
     $.fn[pluginName] = function (options) {
-
         return this.each(function () {
-
             if ($.data(this, pluginName)) {
                 $.data(this, pluginName).destroy();
             }
-
-
             $.data(this, pluginName, new Mapael(this, options));
         });
     };

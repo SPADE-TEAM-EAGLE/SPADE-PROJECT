@@ -5,10 +5,8 @@ const handleThemeUpdate = (cssVars) => {
         root.style.setProperty(key, cssVars[key]);
     });
 }
-
 function dynamicPrimaryColor(primaryColor) {
     'use strict'
-    
     primaryColor.forEach((item) => {
         item.addEventListener('input', (e) => {
             const cssPropName = `--primary-${e.target.getAttribute('data-id')}`;
@@ -23,7 +21,6 @@ function dynamicPrimaryColor(primaryColor) {
             const cssPropName9 = `--transparentprimary-${e.target.getAttribute('data-id9')}`;
             handleThemeUpdate({
                 [cssPropName]: e.target.value,
-
                 [cssPropName1]: e.target.value + 95,
                 [cssPropName2]: e.target.value,
                 [cssPropName3]: e.target.value,
@@ -37,43 +34,17 @@ function dynamicPrimaryColor(primaryColor) {
         });
     });
 }
-
 (function() {
     'use strict'
-
-
-
     const dynamicPrimaryLight = document.querySelectorAll('input.color-primary-light');
-
-
     dynamicPrimaryColor(dynamicPrimaryLight);
-
-
-
-
     const DarkDynamicPrimaryLight = document.querySelectorAll('input.color-primary-dark');
-
-
     dynamicPrimaryColor(DarkDynamicPrimaryLight);
-
-
-
-
     const transparentDynamicPrimaryLight = document.querySelectorAll('input.color-primary-transparent');
-
-
     dynamicPrimaryColor(transparentDynamicPrimaryLight);
-
-
-
-
     const transparentDynamicPBgLight = document.querySelectorAll('input.color-bg-transparent');
-
-
     dynamicPrimaryColor(transparentDynamicPBgLight);
-
     localStorageBackup();
-
     $('#myonoffswitch1').on('click', function(){
         document.querySelector('body')?.classList.remove('dark-mode');
         document.querySelector('body')?.classList.remove('transparent-mode');
@@ -81,10 +52,8 @@ function dynamicPrimaryColor(primaryColor) {
         document.querySelector('body')?.classList.remove('bg-img2');
         document.querySelector('body')?.classList.remove('bg-img3');
         document.querySelector('body')?.classList.remove('bg-img4');
-        
         localStorage.removeItem('sashBgImage');
         $('#myonoffswitch1').prop('checked', true);
-
         localStorage.setItem('sashlightMode', true);
         localStorage.removeItem('sashdarkMode');
         localStorage.removeItem('sashtransparentMode');
@@ -96,11 +65,9 @@ function dynamicPrimaryColor(primaryColor) {
     document.querySelector('body')?.classList.remove('bg-img2');
     document.querySelector('body')?.classList.remove('bg-img3');
     document.querySelector('body')?.classList.remove('bg-img4');
-    
     localStorage.setItem('sashdarkMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashtransparentMode');
-    
     localStorage.removeItem('sashBgImage');
     $('#myonoffswitch2').prop('checked', true);
     })
@@ -111,24 +78,16 @@ function dynamicPrimaryColor(primaryColor) {
     document.querySelector('body')?.classList.remove('bg-img2');
     document.querySelector('body')?.classList.remove('bg-img3');
     document.querySelector('body')?.classList.remove('bg-img4');
-    
     localStorage.removeItem('sashBgImage');
     $('#myonoffswitchTransparent').prop('checked', true);
-    
     localStorage.setItem('sashtransparentMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashdarkMode');
     })
-        
 })();
-
 function localStorageBackup() {
     'use strict'
-
-
-
     if (localStorage.sashprimaryColor) {
-
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashprimaryColor);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashprimaryHoverColor);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashprimaryBorderColor);
@@ -136,14 +95,11 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add('light-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('transparent-mode');
-
         $('#myonoffswitch3').prop('checked', true);
         $('#myonoffswitch6').prop('checked', true);
         $('#myonoffswitch1').prop('checked', true);
     }
-
     if (localStorage.sashdarkPrimary) {
-
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashdarkPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashdarkPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashdarkPrimary);
@@ -152,14 +108,9 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
 		document.querySelector('body')?.classList.remove('transparent-mode');
-
         $('#myonoffswitch2').prop('checked', true);
-
     }
-
-
     if (localStorage.sashtransparentPrimary) {
-
         document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashtransparentPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashtransparentPrimary);
         document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashtransparentPrimary);
@@ -168,12 +119,9 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add('transparent-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
-
         $('#myonoffswitchTransparent').prop('checked', true);
     }
-
     if (localStorage.sashtransparentBgImgPrimary) {
-
 		document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.sashtransparentBgImgPrimary);
 		document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.sashtransparentBgImgPrimary);
 		document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.sashtransparentBgImgPrimary);
@@ -182,20 +130,15 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add('transparent-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
-		
 		$('#myonoffswitchTransparent').prop('checked', true);
 	}
-    
     if (localStorage.sashtransparentBgColor) {
-
         document.querySelector('html').style.setProperty('--transparent-body', localStorage.sashtransparentBgColor);
         document.querySelector('html').style.setProperty('--transparent-mode', localStorage.sashtransparentThemeColor);
         document.querySelector('html').style.setProperty('--transparentprimary-transparentcolor', localStorage.sashtransparentprimaryTransparent);
         document.querySelector('body').classList.add('transparent-mode');
         document.querySelector('body').classList.remove('dark-mode');
         document.querySelector('body').classList.remove('light-mode');
-
-
         $('#myonoffswitchTransparent').prop('checked', true);
     }
 	if (localStorage.sashBgImage) {
@@ -204,10 +147,8 @@ function localStorageBackup() {
 		document.querySelector('body')?.classList.add(bgImg);
 		document.querySelector('body')?.classList.remove('dark-mode');
 		document.querySelector('body')?.classList.remove('light-mode');
-		
 		$('#myonoffswitchTransparent').prop('checked', true);
 	}
-
     if(localStorage.sashlightMode){
         document.querySelector('body')?.classList.add('light-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
@@ -244,23 +185,16 @@ function localStorageBackup() {
         document.querySelector('body').classList.add('rtl')
     }
 }
-
-
 function changePrimaryColor() {
     'use strict'
-
     $('#myonoffswitch3').prop('checked', true);
     $('#myonoffswitch6').prop('checked', true);
     checkOptions();
-
     var userColor = document.getElementById('colorID').value;
     localStorage.setItem('sashprimaryColor', userColor);
-
     localStorage.setItem('sashprimaryHoverColor', userColor + 95);
     localStorage.setItem('sashprimaryBorderColor', userColor);
     localStorage.setItem('sashprimaryTransparent', userColor + 20);
-
-
     localStorage.removeItem('sashdarkPrimary')
     localStorage.removeItem('sashtransparentBgColor');
     localStorage.removeItem('sashtransparentThemeColor');
@@ -272,63 +206,48 @@ function changePrimaryColor() {
     document.querySelector('body').classList.remove('transparent-mode');
     document.querySelector('body').classList.remove('dark-mode');
 	localStorage.removeItem('sashBgImage');
-
     $('#myonoffswitch1').prop('checked', true);
     names()
-    
     localStorage.setItem('sashlightMode', true);
     localStorage.removeItem('sashdarkMode');
     localStorage.removeItem('sashtransparentMode');
 }
-
 function darkPrimaryColor() {
     'use strict'
-
     var userColor = document.getElementById('darkPrimaryColorID').value;
     localStorage.setItem('sashdarkPrimary', userColor);
     localStorage.setItem('sashdarkprimaryTransparent', userColor + 20);
     $('#myonoffswitch5').prop('checked', true);
     $('#myonoffswitch8').prop('checked', true);
     checkOptions();
-
-
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
     localStorage.removeItem('sashprimaryBorderColor')
     localStorage.removeItem('sashprimaryTransparent');
     localStorage.removeItem('sashtransparentBgImgPrimary');
 	localStorage.removeItem('sashtransparentBgImgprimaryTransparent');
-
     localStorage.removeItem('sashtransparentBgColor');
     localStorage.removeItem('sashtransparentThemeColor');
     localStorage.removeItem('sashtransparentPrimary');
 	localStorage.removeItem('sashBgImage');
-
     document.querySelector('body').classList.add('dark-mode');
     document.querySelector('body').classList.remove('light-mode');
     document.querySelector('body').classList.remove('transparent-mode');
-
     $('#myonoffswitch2').prop('checked', true);
     names()
-
     localStorage.setItem('sashdarkMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashtransparentMode');
 }
-
 function transparentPrimaryColor() {
     'use strict'
-    
     $('#myonoffswitch3').prop('checked', false);
     $('#myonoffswitch6').prop('checked', false);
     $('#myonoffswitch5').prop('checked', false);
     $('#myonoffswitch8').prop('checked', false);
-
     var userColor = document.getElementById('transparentPrimaryColorID').value;
     localStorage.setItem('sashtransparentPrimary', userColor);
     localStorage.setItem('sashtransparentprimaryTransparent', userColor + 20);
-
-
     localStorage.removeItem('sashdarkPrimary');
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
@@ -343,19 +262,15 @@ function transparentPrimaryColor() {
 	document.querySelector('body')?.classList.remove('bg-img2');
 	document.querySelector('body')?.classList.remove('bg-img3');
 	document.querySelector('body')?.classList.remove('bg-img4');
-
     $('#myonoffswitchTransparent').prop('checked', true);
     checkOptions();
     names()
-
     localStorage.setItem('sashtransparentMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashdarkMode');
 }
-
 function transparentBgImgPrimaryColor() {
     'use strict'
-
     $('#myonoffswitch3').prop('checked', false);
     $('#myonoffswitch6').prop('checked', false);
     $('#myonoffswitch5').prop('checked', false);
@@ -372,7 +287,6 @@ function transparentBgImgPrimaryColor() {
 		document.querySelector('body')?.classList.add('bg-img1');
         localStorage.setItem('sashBgImage', 'bg-img1')
 	}
-
 	localStorage.removeItem('sashdarkPrimary');
 	localStorage.removeItem('sashprimaryColor')
 	localStorage.removeItem('sashprimaryHoverColor')
@@ -384,20 +298,15 @@ function transparentBgImgPrimaryColor() {
 	document.querySelector('body').classList.add('transparent-mode');
 	document.querySelector('body')?.classList.remove('light-mode');
 	document.querySelector('body')?.classList.remove('dark-mode');
-
 	$('#myonoffswitchTransparent').prop('checked', true);
     checkOptions();
 	names();
-    
     localStorage.setItem('sashtransparentMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashdarkMode');
 }
-
-
 function transparentBgColor() {
     'use strict'
-
     $('#myonoffswitch3').prop('checked', false);
     $('#myonoffswitch6').prop('checked', false);
     $('#myonoffswitch5').prop('checked', false);
@@ -408,8 +317,6 @@ function transparentBgColor() {
     localStorage.setItem('sashtransparentprimaryTransparent', userColor + 20);
     localStorage.removeItem('sashtransparentBgImgPrimary');
 	localStorage.removeItem('sashtransparentBgImgprimaryTransparent');
-
-
     localStorage.removeItem('sashdarkPrimary');
     localStorage.removeItem('sashprimaryColor')
     localStorage.removeItem('sashprimaryHoverColor')
@@ -423,27 +330,20 @@ function transparentBgColor() {
 	document.querySelector('body')?.classList.remove('bg-img2');
 	document.querySelector('body')?.classList.remove('bg-img3');
 	document.querySelector('body')?.classList.remove('bg-img4');
-
     $('#myonoffswitchTransparent').prop('checked', true);
     checkOptions();
-    
     localStorage.setItem('sashtransparentMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashdarkMode');
 }
-
-
 function bgImage(e) {
     'use strict'
-
     $('#myonoffswitch3').prop('checked', false);
     $('#myonoffswitch6').prop('checked', false);
     $('#myonoffswitch5').prop('checked', false);
     $('#myonoffswitch8').prop('checked', false);
 	let imgID = e.getAttribute('class');
 	localStorage.setItem('sashBgImage', imgID);
-    
-
 	localStorage.removeItem('sashdarkPrimary');
 	localStorage.removeItem('sashprimaryColor')
 	localStorage.removeItem('sashtransparentBgColor');
@@ -452,22 +352,15 @@ function bgImage(e) {
 	document.querySelector('body').classList.add('transparent-mode');
 	document.querySelector('body')?.classList.remove('light-mode');
 	document.querySelector('body')?.classList.remove('dark-mode');
-
 	$('#myonoffswitchTransparent').prop('checked', true);
     checkOptions();
-    
     localStorage.setItem('sashtransparentMode', true);
     localStorage.removeItem('sashlightMode');
     localStorage.removeItem('sashdarkMode');
 }
-
-
 const isValidHex = (hexValue) => /^#([A-Fa-f0-9]{3,4}){1,2}$/.test(hexValue)
-
 const getChunksFromString = (st, chunkSize) => st.match(new RegExp(`.{${chunkSize}}`, "g"))
-
 const convertHexUnitTo256 = (hexStr) => parseInt(hexStr.repeat(2 / hexStr.length), 16)
-
 const getAlphafloat = (a, alpha) => {
         if (typeof a !== "undefined") { return a / 255 }
         if ((typeof alpha != "number") || alpha < 0 || alpha > 1) {
@@ -475,53 +368,37 @@ const getAlphafloat = (a, alpha) => {
         }
         return alpha
     }
-
 function hexToRgba(hexValue, alpha) {
     'use strict'
-
     if (!isValidHex(hexValue)) { return null }
     const chunkSize = Math.floor((hexValue.length - 1) / 3)
     const hexArr = getChunksFromString(hexValue.slice(1), chunkSize)
     const [r, g, b, a] = hexArr.map(convertHexUnitTo256)
     return `rgba(${r}, ${g}, ${b}, ${getAlphafloat(a, alpha)})`
 }
-
-
 let myVarVal, myVarVal1, myVarVal2, myVarVal3
-
 function names() {
     'use strict'
-
     let primaryColorVal = getComputedStyle(document.documentElement).getPropertyValue('--primary-bg-color').trim();
-
     //get variable
     myVarVal = localStorage.getItem("sashprimaryColor") || localStorage.getItem("sashdarkPrimary") || localStorage.getItem("sashtransparentPrimary") || localStorage.getItem("sashtransparentBgImgPrimary")  || primaryColorVal;
     myVarVal1 = localStorage.getItem("sashprimaryColor") || localStorage.getItem("sashdarkPrimary") || localStorage.getItem("sashtransparentPrimary") || localStorage.getItem("sashtransparentBgImgPrimary")  || "#05c3fb";
     myVarVal2 = localStorage.getItem("sashprimaryColor") || localStorage.getItem("sashdarkPrimary") || localStorage.getItem("sashtransparentPrimary") || localStorage.getItem("sashtransparentBgImgPrimary")  || null;
     myVarVal3 = localStorage.getItem("sashprimaryColor") || localStorage.getItem("sashdarkPrimary") || localStorage.getItem("sashtransparentPrimary") || localStorage.getItem("sashtransparentBgImgPrimary") || null;
-
     if(document.querySelector('#transactions') !== null){
         index();
     }
-    
     let colorData = hexToRgba(myVarVal || "#6c5ffc", 0.1)
     document.querySelector('html').style.setProperty('--primary01', colorData);
-
     let colorData1 = hexToRgba(myVarVal || "#6c5ffc", 0.2)
     document.querySelector('html').style.setProperty('--primary02', colorData1);
-
     let colorData2 = hexToRgba(myVarVal || "#6c5ffc", 0.3)
     document.querySelector('html').style.setProperty('--primary03', colorData2);
-
     let colorData3 = hexToRgba(myVarVal || "#6c5ffc", 0.6)
     document.querySelector('html').style.setProperty('--primary06', colorData3);
-
     let colorData4 = hexToRgba(myVarVal || "#6c5ffc", 0.9)
     document.querySelector('html').style.setProperty('--primary09', colorData4);
-
     let colorData5 = hexToRgba(myVarVal || "#6c5ffc", 0.05)
     document.querySelector('html').style.setProperty('--primary005', colorData5);
-
 }
 names()
-

@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ar', {
   defaultMessage: "تأكد من صحة القيمة المدخل",
   type: {

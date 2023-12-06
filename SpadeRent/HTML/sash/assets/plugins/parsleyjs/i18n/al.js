@@ -1,4 +1,3 @@
-
 Parsley.addMessages('al', {
   defaultMessage: "Kjo vlerë është invalide.",
   type: {

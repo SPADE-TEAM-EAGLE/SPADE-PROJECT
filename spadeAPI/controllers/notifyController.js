@@ -20,7 +20,6 @@ const {
   updateAllTenantNotifyReadQuery,
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
-
 const notifyController = {
   updateNotifyData: async (req, res) => {
     const { isEmailNotify, isPushNotify, textNotification } = req.body;
@@ -31,7 +30,6 @@ const notifyController = {
         [userId]
       );
       if (getNotifyResult[0].length > 0) {
-
         const updateNotifyResult = await queryRunner(updateNotify, [
           isEmailNotify,
           isPushNotify,
@@ -51,7 +49,6 @@ const notifyController = {
           });
         }
       } else {
-
         const insertNotifyResult = await queryRunner(insertNotify, [
           userId,
           isEmailNotify,
@@ -79,7 +76,6 @@ const notifyController = {
   },
   getCheckedNotify: async (req, res) => {
     try {
-
       const { userId } = req.user;
       const getNotifyResult = await queryRunner(
         selectQuery("notification", "landlordID"),
@@ -105,13 +101,9 @@ const notifyController = {
     //get property , tenants , task invoice from tables individually
     const { userId } = req.user;
     try {
-
       const getTenantsNotify = await queryRunner(getTenantNotify, [userId]);
       const property = await queryRunner(getPropertyNotify, [userId]);
-
       const task = await queryRunner(getTaskNotify, [userId]);
-
-
       const invoice = await queryRunner(getInvoiceNotify, [userId]);
       res.status(200).json({
         tenantNotify: getTenantsNotify[0],
@@ -130,9 +122,7 @@ const notifyController = {
     const { userId } = req.user;
     try {
       const property = await queryRunner(getTenantPropertyNotify, [userId]);
-
       const task = await queryRunner(getTenantTaskNotify, [userId]);
-
       const invoice = await queryRunner(getTenantInvoiceNotify, [userId]);
       res.status(200).json({
         propertyNotify: property[0],
@@ -196,9 +186,7 @@ updatetTenantAllReadNotify: async (req, res) => {
   try {
     const { userId } = req.user;
     const { notify , propertyID } = req.body;
-
     const updateData = [notify, userId];
-
     const invoice = await queryRunner(
       updateAllTenantNotifyReadQuery.invoice,
       updateData
@@ -208,7 +196,6 @@ updatetTenantAllReadNotify: async (req, res) => {
       [notify, propertyID]
     );
     const task = await queryRunner(updateAllTenantNotifyReadQuery.task, updateData);
-
     if (
       invoice[0].affectedRows ||
       property[0].affectedRows ||
@@ -229,7 +216,6 @@ updatetTenantAllReadNotify: async (req, res) => {
       const { userId } = req.user;
       const { notify } = req.body;
       const updateData = [notify, userId];
-
       const invoice = await queryRunner(
         updateAllNotifyReadQuery.invoice,
         updateData
@@ -260,9 +246,7 @@ updatetTenantAllReadNotify: async (req, res) => {
     }
   },
 };
-
 module.exports = notifyController;
-
 async function updateQueryReadUnRead(queryFun, updateData, res) {
   const updatedNotifyData = await queryRunner(queryFun, updateData);
   if (updatedNotifyData[0].affectedRows) {

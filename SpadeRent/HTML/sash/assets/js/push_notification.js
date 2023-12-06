@@ -12,7 +12,6 @@ function notificationIconDisplay(){
                 if(response.push == "yes"){
                     $(".notifications").removeClass("d-none")
                     $(".notifications").addClass("d-flex")
-    
                 }else{
                     $(".notifications").removeClass("d-flex")
                     $(".notifications").addClass("d-none")

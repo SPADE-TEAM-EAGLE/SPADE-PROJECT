@@ -12,29 +12,17 @@ $.ajax({
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",
           name:username, // Full name
-    
         };
-      
-
         function openIntercomPopup() {
             const articleid=8210506
-
         window.Intercom('showSpace', 'help');
-
-          
         }
-      
-
         document.querySelectorAll('.customIntercomButton').forEach(element => {
     element.addEventListener('click', openIntercomPopup);
 });
-
-        
-
         (function() {
           var w = window;
           var ic = w.Intercom;
-          
           if (typeof ic === "function") {
             ic('reattach_activator');
             ic('update', w.intercomSettings);
@@ -50,7 +38,6 @@ $.ajax({
             w.Intercom = i;
             var l = function() {
               var s = d.createElement('script');
-              
               s.type = 'text/javascript';
               s.async = true;
               s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
@@ -73,7 +60,5 @@ $.ajax({
             $('#myModal_warning').modal('hide');
             window.location = '../Landlord/login_module.html';
         }, 2000);
-        
     }
 });
-        

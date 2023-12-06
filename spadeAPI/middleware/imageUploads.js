@@ -1,19 +1,7 @@
-
 const multer = require('multer');
 const Path = require('path');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).array('image');
-
-
-
-
-
-
-
-
-
-
-
 const uploadExistingFiles = async (req, res, next) => {
     try {
         existingImages=existingImages.split(",")

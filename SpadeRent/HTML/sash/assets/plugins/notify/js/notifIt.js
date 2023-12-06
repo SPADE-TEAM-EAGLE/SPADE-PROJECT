@@ -3,19 +3,15 @@
  */
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
-
         define(factory);
     } else {
-
         var package = factory(root.b);
         root.notif = package.notif;
         root.notif_confirm = package.notif_confirm;
         root.notif_prompt = package.notif_prompt;
     }
 }(this, function() {
-
     function notif(config) {
-
         var create_close_button = function() {
             return $('<span>', {
                 'id': 'notifIt_close',
@@ -32,7 +28,6 @@
                 div.append(p);
                 return div;
             }
-
         var $ = jQuery;
         var destroy = function() {
             $("#ui_notifIt").remove();
@@ -41,7 +36,6 @@
         var dismiss = function() {
             clearTimeout(window.notifit_timeout);
             if (!defaults.fade) {
-
                 if (defaults.animations &&
                     defaults.animations[defaults.animation] &&
                     defaults.animations[defaults.animation][defaults.position] &&
@@ -60,7 +54,6 @@
                 } else {
                     throw new Error('Invalid animation')
                 }
-
                 $("#ui_notifIt").animate(animation1, 100, function() {
                     $("#ui_notifIt").animate(animation2, 100, function() {
                         $("#ui_notifIt").remove();
@@ -70,7 +63,6 @@
                     });
                 });
             } else {
-
                 $("#ui_notifIt").fadeOut("slow", function() {
                     $("#ui_notifIt").remove();
                     if (defaults.callback) {
@@ -80,13 +72,9 @@
             }
         }
         destroy()
-
         window.notifit_timeout = null;
-
         var mid = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) / 2;
-
         var available_positions = ['left', 'center', 'right', 'bottom'];
-
         var defaults = {
             type: "default",
             width: 400,
@@ -106,12 +94,8 @@
             clickable: false,
             animation: 'slide'
         };
-
         $.extend(defaults, config);
-
-
         defaults.animations = {}
-
         defaults.animations.slide = {
             'center': {
                 'css_start': {
@@ -182,7 +166,6 @@
                 }
             }
         };
-
         defaults.animations.zoom = {
             'center': { // Not working well
                 'css_start': {
@@ -257,7 +240,6 @@
                 }
             }
         };
-
         defaults.available_animations = Object.keys(defaults.animations)
         if (!defaults.available_animations.length) {
             throw new Error('No animations')
@@ -271,11 +253,9 @@
         if (defaults.available_animations.indexOf(defaults.animation) === -1) {
             defaults.animation = defaults.available_animations[0]
         }
-
         if (typeof defaults.callback !== 'function') {
             defaults.callback = null;
         }
-
         if (defaults.width > 0) {
             defaults.width = defaults.width;
         } else if (defaults.width === "all") {
@@ -286,25 +266,20 @@
         if (defaults.height > 100 || defaults.height < 0) {
             defaults.height = 60;
         }
-
         var div = create_notification()
-
         if (defaults.clickable) {
             div.append(create_close_button())
         }
         $("body").append(div);
-
         if (defaults.zindex) {
             $("#ui_notifIt").css("z-index", defaults.zindex);
         }
-
         if (defaults.multiline) {
             $("#ui_notifIt").css("padding", 15);
         } else {
             $("#ui_notifIt").css("height", defaults.height);
             $("#ui_notifIt p").css("line-height", defaults.height + "px");
         }
-
         $("#ui_notifIt").css({
             "width": defaults.width,
             "opacity": defaults.opacity,
@@ -314,17 +289,13 @@
         $("#ui_notifIt p").css({
                 "color": defaults.color
             })
-
         $("#ui_notifIt").addClass(defaults.type);
-
         if (defaults.animations[defaults.animation][defaults.position].css_start) {
             $("#ui_notifIt").css(defaults.animations[defaults.animation][defaults.position].css_start);
         } else {
             $("#ui_notifIt").css(defaults.animations[defaults.available_animations[0]][defaults.position].css_start);
         }
-
         $("#ui_notifIt").animate(defaults.animations[defaults.animation][defaults.position].in);
-
         if (!defaults.clickable) {
             $("#ui_notifIt").click(function(e) {
                 e.stopPropagation();
@@ -346,7 +317,6 @@
             'dismiss': dismiss
         }
     }
-
     function notif_confirm(config) {
         var $ = jQuery
         var _config = {
@@ -437,12 +407,10 @@
         function _setListeners() {
             $('html').one('click', '.notifit_confirm_accept, .notifit_confirm_cancel', _callback)
         }
-
         _create()
         _show()
         _setListeners()
     }
-
     function notif_prompt(config) {
         var $ = jQuery
         var _config = {
@@ -538,7 +506,6 @@
         function _setListeners() {
             $('html').one('click', '.notifit_prompt_accept, .notifit_prompt_cancel', _callback)
         }
-
         _create()
         _show()
         _setListeners()

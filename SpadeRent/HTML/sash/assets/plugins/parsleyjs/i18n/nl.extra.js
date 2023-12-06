@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('nl', {
   dateiso:  "Deze waarde moet een datum in het volgende formaat zijn: (YYYY-MM-DD).",
   minwords: "Deze waarde moet minstens %s woorden bevatten.",

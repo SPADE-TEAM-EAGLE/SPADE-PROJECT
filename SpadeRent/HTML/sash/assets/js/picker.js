@@ -4,8 +4,6 @@ const pickrContainer1 = document.querySelector('.pickr-container1');
 const themeContainer1 = document.querySelector('.theme-container1');
 const pickrContainer2 = document.querySelector('.pickr-container2');
 const themeContainer2 = document.querySelector('.theme-container2');
-
-
 const themes = [
     [
         'classic',
@@ -26,12 +24,10 @@ const themes = [
                 'rgba(255, 235, 59, 0.95)',
                 'rgba(255, 193, 7, 1)'
             ],
-
             components: {
                 preview: true,
                 opacity: true,
                 hue: true,
-
                 interaction: {
                     hex: true,
                     rgba: true,
@@ -44,37 +40,26 @@ const themes = [
         }
     ],
 ];
-
 const buttons = [];
 let pickr = null;
-
 for (const [theme, config] of themes) {
     const button = document.createElement('button');
     button.innerHTML = theme;
     buttons.push(button);
-
     button.addEventListener('click', () => {
         const el = document.createElement('p');
         pickrContainer.appendChild(el);
-
-
         if (pickr) {
             pickr.destroyAndRemove();
         }
-
-
         for (const btn of buttons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
-
-
         pickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#6c5ffc'
         }, config));
-
-
         pickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {
@@ -95,13 +80,9 @@ for (const [theme, config] of themes) {
             console.log('Event: "swatchselect"', color, instance);
         });
     });
-
     themeContainer.appendChild(button);
 }
-
 buttons[0].click();
-
-
 const monolithThemes = [
     [
         'monolith',
@@ -115,13 +96,11 @@ const monolithThemes = [
                 'rgba(33, 150, 243, 0.75)',
                 'rgba(3, 169, 244, 0.7)'
             ],
-
             defaultRepresentation: 'HEXA',
             components: {
                 preview: true,
                 opacity: true,
                 hue: true,
-
                 interaction: {
                     hex: false,
                     rgba: false,
@@ -134,37 +113,26 @@ const monolithThemes = [
         }
     ]
 ];
-
 const monolithButtons = [];
 let monolithPickr = null;
-
 for (const [theme, config] of monolithThemes) {
     const button = document.createElement('button');
     button.innerHTML = theme;
     monolithButtons.push(button);
-
     button.addEventListener('click', () => {
         const el = document.createElement('p');
         pickrContainer1.appendChild(el);
-
-
         if (monolithPickr) {
             monolithPickr.destroyAndRemove();
         }
-
-
         for (const btn of monolithButtons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
-
-
         monolithPickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#fc5296'
         }, config));
-
-
         monolithPickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {
@@ -185,13 +153,9 @@ for (const [theme, config] of monolithThemes) {
             console.log('Event: "swatchselect"', color, instance);
         });
     });
-
     themeContainer1.appendChild(button);
 }
-
 monolithButtons[0].click();
-
-
 const nanoThemes = [
     [
         'nano',
@@ -205,13 +169,11 @@ const nanoThemes = [
                 'rgba(33, 150, 243, 0.75)',
                 'rgba(3, 169, 244, 0.7)'
             ],
-
             defaultRepresentation: 'HEXA',
             components: {
                 preview: true,
                 opacity: true,
                 hue: true,
-
                 interaction: {
                     hex: false,
                     rgba: false,
@@ -224,37 +186,26 @@ const nanoThemes = [
         }
     ]
 ];
-
 const nanoButtons = [];
 let nanoPickr = null;
-
 for (const [theme, config] of nanoThemes) {
     const button = document.createElement('button');
     button.innerHTML = theme;
     nanoButtons.push(button);
-
     button.addEventListener('click', () => {
         const el = document.createElement('p');
         pickrContainer2.appendChild(el);
-
-
         if (nanoPickr) {
             nanoPickr.destroyAndRemove();
         }
-
-
         for (const btn of nanoButtons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
-
-
         nanoPickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#05c3fb'
         }, config));
-
-
         nanoPickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {
@@ -275,8 +226,6 @@ for (const [theme, config] of nanoThemes) {
             console.log('Event: "swatchselect"', color, instance);
         });
     });
-
     themeContainer2.appendChild(button);
 }
-
 nanoButtons[0].click();

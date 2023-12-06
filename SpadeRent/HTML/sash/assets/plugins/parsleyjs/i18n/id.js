@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('id', {
   defaultMessage: "tidak valid",
   type: {

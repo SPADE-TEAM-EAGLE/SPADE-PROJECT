@@ -11,7 +11,6 @@
  */
 ;(function ($, window, document, undefined) {
     "use strict";
-
     var defaults = {
         selected: 0, // Initial selected step, 0 = first step
         keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
@@ -49,42 +48,26 @@
         transitionEffect: 'none', // Effect on navigation, none/slide/fade
         transitionSpeed: '400'
     };
-
     function SmartWizard(element, options) {
-
         this.options = $.extend(true, {}, defaults, options);
-
         this.main = $(element);
-
         this.nav = this.main.children('ul');
-
         this.steps = $("li > a", this.nav);
-
         this.container = this.main.children('div');
-
         this.pages = this.container.children('div');
-
         this.current_index = null;
-
         this.options.toolbarSettings.toolbarButtonPosition = this.options.toolbarSettings.toolbarButtonPosition === 'right' ? 'end' : this.options.toolbarSettings.toolbarButtonPosition;
         this.options.toolbarSettings.toolbarButtonPosition = this.options.toolbarSettings.toolbarButtonPosition === 'left' ? 'start' : this.options.toolbarSettings.toolbarButtonPosition;
-
         this.options.theme = this.options.theme === null || this.options.theme === '' ? 'default' : this.options.theme;
-
         this.init();
     }
     $.extend(SmartWizard.prototype, {
         init: function () {
-
             this._setElements();
-
             this._setToolbar();
-
             this._setEvents();
             var idx = this.options.selected;
-
             if (this.options.useURLhash) {
-
                 var hash = window.location.hash;
                 if (hash && hash.length > 0) {
                     var elm = $("a[href*='" + hash + "']", this.nav);
@@ -95,40 +78,29 @@
                 }
             }
             if (idx > 0 && this.options.anchorSettings.markDoneStep && this.options.anchorSettings.markAllPreviousStepsAsDone) {
-
                 this.steps.eq(idx).parent('li').prevAll().addClass("done");
             }
-
             this._showStep(idx);
         },
-
         _setElements: function () {
-
             this.main.addClass('sw-main sw-theme-' + this.options.theme);
-
             this.nav.addClass('nav nav-tabs step-anchor').children('li').addClass('nav-item').children('a').addClass('nav-link'); // nav-justified  nav-pills
-
             if (this.options.anchorSettings.enableAllAnchors !== false && this.options.anchorSettings.anchorClickable !== false) {
                 this.steps.parent('li').addClass('clickable');
             }
-
             this.container.addClass('sw-container tab-content');
-
             this.pages.addClass('tab-pane step-content');
-
             var mi = this;
             if (this.options.disabledSteps && this.options.disabledSteps.length > 0) {
                 $.each(this.options.disabledSteps, function (i, n) {
                     mi.steps.eq(n).parent('li').addClass('disabled');
                 });
             }
-
             if (this.options.errorSteps && this.options.errorSteps.length > 0) {
                 $.each(this.options.errorSteps, function (i, n) {
                     mi.steps.eq(n).parent('li').addClass('danger');
                 });
             }
-
             if (this.options.hiddenSteps && this.options.hiddenSteps.length > 0) {
                 $.each(this.options.hiddenSteps, function (i, n) {
                     mi.steps.eq(n).parent('li').addClass('hidden');
@@ -137,15 +109,12 @@
             return true;
         },
         _setToolbar: function () {
-
             if (this.options.toolbarSettings.toolbarPosition === 'none') {
                 return true;
             }
-
             var btnNext = this.options.toolbarSettings.showNextButton !== false ? $('<button></button>').text(this.options.lang.next).addClass('btn btn-success sw-btn-next').attr('type', 'button') : null;
             var btnPrevious = this.options.toolbarSettings.showPreviousButton !== false ? $('<button></button>').text(this.options.lang.previous).addClass('btn btn-danger sw-btn-prev').attr('type', 'button') : null;
             var btnGroup = $('<div></div>').addClass('btn-group me-2 sw-btn-group').attr('role', 'group').append(btnPrevious, btnNext);
-
             var btnGroupExtra = null;
             if (this.options.toolbarSettings.toolbarExtraButtons && this.options.toolbarSettings.toolbarExtraButtons.length > 0) {
                 btnGroupExtra = $('<div></div>').addClass('btn-group me-2 sw-btn-group-extra').attr('role', 'group');
@@ -154,7 +123,6 @@
                 });
             }
             var toolbarTop, toolbarBottom;
-
             switch (this.options.toolbarSettings.toolbarPosition) {
                 case 'top':
                     toolbarTop = $('<div></div>').addClass('btn-toolbar sw-toolbar sw-toolbar-top justify-content-' + this.options.toolbarSettings.toolbarButtonPosition);
@@ -210,7 +178,6 @@
             return true;
         },
         _setEvents: function () {
-
             var mi = this;
             $(this.steps).on("click", function (e) {
                 e.preventDefault();
@@ -231,23 +198,19 @@
                     }
                 }
             });
-
             $('.sw-btn-next', this.main).on("click", function (e) {
                 e.preventDefault();
                 mi._showNext();
             });
-
             $('.sw-btn-prev', this.main).on("click", function (e) {
                 e.preventDefault();
                 mi._showPrevious();
             });
-
             if (this.options.keyNavigation) {
                 $(document).keyup(function (e) {
                     mi._keyNav(e);
                 });
             }
-
             if (this.options.backButtonSupport) {
                 $(window).on('hashchange', function (e) {
                     if (!mi.options.useURLhash) {
@@ -266,7 +229,6 @@
         },
         _showNext: function () {
             var si = this.current_index + 1;
-
             for (var i = si; i < this.steps.length; i++) {
                 if (!this.steps.eq(i).parent('li').hasClass('disabled') && !this.steps.eq(i).parent('li').hasClass('hidden')) {
                     si = i;
@@ -284,7 +246,6 @@
         },
         _showPrevious: function () {
             var si = this.current_index - 1;
-
             for (var i = si; i >= 0; i--) {
                 if (!this.steps.eq(i).parent('li').hasClass('disabled') && !this.steps.eq(i).parent('li').hasClass('hidden')) {
                     si = i;
@@ -301,39 +262,31 @@
             return true;
         },
         _showStep: function (idx) {
-
             if (!this.steps.eq(idx)) {
                 return false;
             }
-
             if (idx == this.current_index) {
                 return false;
             }
-
             if (this.steps.eq(idx).parent('li').hasClass('disabled') || this.steps.eq(idx).parent('li').hasClass('hidden')) {
                 return false;
             }
-
             this._loadStepContent(idx);
             return true;
         },
         _loadStepContent: function (idx) {
             var mi = this;
-
             var curTab = this.steps.eq(this.current_index);
-
             var stepDirection = '';
             var elm = this.steps.eq(idx);
             var contentURL = elm.data('content-url') && elm.data('content-url').length > 0 ? elm.data('content-url') : this.options.contentURL;
             if (this.current_index !== null && this.current_index !== idx) {
                 stepDirection = this.current_index < idx ? "forward" : "backward";
             }
-
             if (this.current_index !== null && this._triggerEvent("leaveStep", [curTab, this.current_index, stepDirection]) === false) {
                 return false;
             }
             if (contentURL && contentURL.length > 0 && (!elm.data('has-content') || !this.options.contentCache)) {
-
                 var selPage = elm.length > 0 ? $(elm.attr("href"), this.main) : null;
                 var ajaxSettings = $.extend(true, {}, {
                     url: contentURL,
@@ -358,20 +311,16 @@
                 }, this.options.ajaxSettings);
                 $.ajax(ajaxSettings);
             } else {
-
                 this._transitPage(idx);
             }
             return true;
         },
         _transitPage: function (idx) {
             var mi = this;
-
             var curTab = this.steps.eq(this.current_index);
             var curPage = curTab.length > 0 ? $(curTab.attr("href"), this.main) : null;
-
             var selTab = this.steps.eq(idx);
             var selPage = selTab.length > 0 ? $(selTab.attr("href"), this.main) : null;
-
             var stepDirection = '';
             if (this.current_index !== null && this.current_index !== idx) {
                 stepDirection = this.current_index < idx ? "forward" : "backward";
@@ -385,7 +334,6 @@
             this.options.transitionEffect = this.options.transitionEffect.toLowerCase();
             this.pages.finish();
             if (this.options.transitionEffect === 'slide') {
-
                 if (curPage && curPage.length > 0) {
                     curPage.slideUp('fast', this.options.transitionEasing, function () {
                         selPage.slideDown(mi.options.transitionSpeed, mi.options.transitionEasing);
@@ -394,7 +342,6 @@
                     selPage.slideDown(this.options.transitionSpeed, this.options.transitionEasing);
                 }
             } else if (this.options.transitionEffect === 'fade') {
-
                 if (curPage && curPage.length > 0) {
                     curPage.fadeOut('fast', this.options.transitionEasing, function () {
                         selPage.fadeIn('fast', mi.options.transitionEasing, function () {
@@ -412,22 +359,15 @@
                 }
                 selPage.show();
             }
-
             this._setURLHash(selTab.attr("href"));
-
             this._setAnchor(idx);
-
             this._setButtons(idx);
-
             this._fixHeight(idx);
-
             this.current_index = idx;
-
             this._triggerEvent("showStep", [selTab, this.current_index, stepDirection, stepPosition]);
             return true;
         },
         _setAnchor: function (idx) {
-
             this.steps.eq(this.current_index).parent('li').removeClass("active");
             if (this.options.anchorSettings.markDoneStep !== false && this.current_index !== null) {
                 this.steps.eq(this.current_index).parent('li').addClass("done");
@@ -435,12 +375,10 @@
                     this.steps.eq(idx).parent('li').nextAll().removeClass("done");
                 }
             }
-
             this.steps.eq(idx).parent('li').removeClass("done").addClass("active");
             return true;
         },
         _setButtons: function (idx) {
-
             if (!this.options.cycleSteps) {
                 if (0 >= idx) {
                     $('.sw-btn-prev', this.main).addClass("disabled");
@@ -455,18 +393,14 @@
             }
             return true;
         },
-
         _keyNav: function (e) {
             var mi = this;
-
             switch (e.which) {
                 case 37:
-
                     mi._showPrevious();
                     e.preventDefault();
                     break;
                 case 39:
-
                     mi._showNext();
                     e.preventDefault();
                     break;
@@ -475,7 +409,6 @@
             }
         },
         _fixHeight: function (idx) {
-
             if (this.options.autoAdjustHeight) {
                 var selPage = this.steps.eq(idx).length > 0 ? $(this.steps.eq(idx).attr("href"), this.main) : null;
                 this.container.finish().animate({ minHeight: selPage.outerHeight() }, this.options.transitionSpeed, function () {});
@@ -483,7 +416,6 @@
             return true;
         },
         _triggerEvent: function (name, params) {
-
             var e = $.Event(name);
             this.main.trigger(e, params);
             if (e.isDefaultPrevented()) {
@@ -508,7 +440,6 @@
                     this.main.toggleClass('sw-loading');
             }
         },
-
         theme: function (v) {
             if (this.options.theme === v) {
                 return false;
@@ -516,7 +447,6 @@
             this.main.removeClass('sw-theme-' + this.options.theme);
             this.options.theme = v;
             this.main.addClass('sw-theme-' + this.options.theme);
-
             this._triggerEvent("themeChanged", [this.options.theme]);
         },
         next: function () {
@@ -526,11 +456,9 @@
             this._showPrevious();
         },
         reset: function () {
-
             if (this._triggerEvent("beginReset") === false) {
                 return false;
             }
-
             this.container.stop(true);
             this.pages.stop(true);
             this.pages.hide();
@@ -541,7 +469,6 @@
             this.steps.parents('li').removeClass();
             this.steps.data('has-content', false);
             this.init();
-
             this._triggerEvent("endReset");
         },
         stepState: function (stepArray, state) {
@@ -574,7 +501,6 @@
             }
         }
     });
-
     $.fn.smartWizard = function (options) {
         var args = arguments;
         var instance;

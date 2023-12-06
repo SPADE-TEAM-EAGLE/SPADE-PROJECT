@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('pl', {
   defaultMessage: "Wartość wygląda na nieprawidłową",
   type: {

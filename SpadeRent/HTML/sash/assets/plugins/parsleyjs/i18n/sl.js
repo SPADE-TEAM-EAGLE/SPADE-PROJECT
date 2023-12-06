@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sl', {
   defaultMessage: "Podatek ne ustreza vpisnim kriterijem.",
   type: {

@@ -1526,19 +1526,12 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function ({ userName, image,units,create_at,planID,...rest }) {
                     adjustPlan(rest)
                     unitsPermission = units;
-
-
-
-
             localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-
-
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +

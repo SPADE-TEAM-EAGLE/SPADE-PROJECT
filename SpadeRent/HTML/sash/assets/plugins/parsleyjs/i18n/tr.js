@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('tr', {
   defaultMessage: "Girdiğiniz değer geçerli değil.",
   type: {

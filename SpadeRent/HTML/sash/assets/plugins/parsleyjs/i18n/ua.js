@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('ua', {
   defaultMessage: "Некоректне значення.",
   type: {

@@ -173,7 +173,6 @@ function create(input, value) {
     }
     var BlotClass = match;
     var node = 
-
     input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
     return new BlotClass(node, value);
 }
@@ -182,7 +181,6 @@ function find(node, bubble) {
     if (bubble === void 0) { bubble = false; }
     if (node == null)
         return null;
-
     if (node[exports.DATA_KEY] != null)
         return node[exports.DATA_KEY].blot;
     if (bubble)
@@ -195,7 +193,6 @@ function query(query, scope) {
     var match;
     if (typeof query === 'string') {
         match = types[query] || attributes[query];
-
     }
     else if (query instanceof Text || query['nodeType'] === Node.TEXT_NODE) {
         match = types['text'];
@@ -219,7 +216,6 @@ function query(query, scope) {
     }
     if (match == null)
         return null;
-
     if (scope & Scope.LEVEL & match.scope && scope & Scope.TYPE & match.scope)
         return match;
     return null;
@@ -279,7 +275,6 @@ var extend = __webpack_require__(3);
 var op = __webpack_require__(20);
 var NULL_CHARACTER = String.fromCharCode(0);  // Placeholder char for embed in diff()
 var Delta = function (ops) {
-
   if (Array.isArray(ops)) {
     this.ops = ops;
   } else if (ops != null && Array.isArray(ops.ops)) {
@@ -318,8 +313,6 @@ Delta.prototype.push = function (newOp) {
       this.ops[index - 1] = { 'delete': lastOp['delete'] + newOp['delete'] };
       return this;
     }
-
-
     if (typeof lastOp['delete'] === 'number' && newOp.insert != null) {
       index -= 1;
       lastOp = this.ops[index - 1];
@@ -427,12 +420,9 @@ Delta.prototype.compose = function (other) {
         } else {
           newOp.insert = thisOp.insert;
         }
-
         var attributes = op.attributes.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');
         if (attributes) newOp.attributes = attributes;
         delta.push(newOp);
-
-
       } else if (typeof otherOp['delete'] === 'number' && typeof thisOp.retain === 'number') {
         delta.push(otherOp);
       }
@@ -540,12 +530,10 @@ Delta.prototype.transform = function (other, priority) {
       var thisOp = thisIter.next(length);
       var otherOp = otherIter.next(length);
       if (thisOp['delete']) {
-
         continue;
       } else if (otherOp['delete']) {
         delta.push(otherOp);
       } else {
-
         delta.retain(length, op.attributes.transform(thisOp.attributes, otherOp.attributes, priority));
       }
     }
@@ -589,12 +577,9 @@ var isPlainObject = function isPlainObject(obj) {
 	}
 	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
 	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
-
 	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
 		return false;
 	}
-
-
 	var key;
 	for (key in obj) { /**/ }
 	return typeof key === 'undefined' || hasOwn.call(obj, key);
@@ -605,11 +590,9 @@ module.exports = function extend() {
 	var i = 1;
 	var length = arguments.length;
 	var deep = false;
-
 	if (typeof target === 'boolean') {
 		deep = target;
 		target = arguments[1] || {};
-
 		i = 2;
 	}
 	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
@@ -617,15 +600,11 @@ module.exports = function extend() {
 	}
 	for (; i < length; ++i) {
 		options = arguments[i];
-
 		if (options != null) {
-
 			for (name in options) {
 				src = target[name];
 				copy = options[name];
-
 				if (target !== copy) {
-
 					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
 						if (copyIsArray) {
 							copyIsArray = false;
@@ -633,9 +612,7 @@ module.exports = function extend() {
 						} else {
 							clone = src && isPlainObject(src) ? src : {};
 						}
-
 						target[name] = extend(deep, clone, copy);
-
 					} else if (typeof copy !== 'undefined') {
 						target[name] = copy;
 					}
@@ -643,7 +620,6 @@ module.exports = function extend() {
 			}
 		}
 	}
-
 	return target;
 };
 /***/ }),
@@ -718,7 +694,6 @@ var BlockEmbed = function (_Parchment$Embed) {
   return BlockEmbed;
 }(_parchment2.default.Embed);
 BlockEmbed.scope = _parchment2.default.Scope.BLOCK_BLOT;
-
 var Block = function (_Parchment$Block) {
   _inherits(Block, _Parchment$Block);
   function Block(domNode) {
@@ -927,7 +902,6 @@ var Quill = function () {
       if (typeof path !== 'string') {
         var name = path.attrName || path.blotName;
         if (typeof name === 'string') {
-
           this.register('formats/' + name, path, target);
         } else {
           Object.keys(path).forEach(function (key) {
@@ -1347,7 +1321,6 @@ Quill.DEFAULTS = {
 };
 Quill.events = _emitter4.default.events;
 Quill.sources = _emitter4.default.sources;
-
 Quill.version =  false ? 'dev' : "1.3.6";
 Quill.imports = {
   'delta': _quillDelta2.default,
@@ -1391,7 +1364,6 @@ function expandConfig(container, userConfig) {
     }
     return config;
   }, {});
-
   if (userConfig.modules != null && userConfig.modules.toolbar && userConfig.modules.toolbar.constructor !== Object) {
     userConfig.modules.toolbar = {
       container: userConfig.modules.toolbar
@@ -1411,8 +1383,6 @@ function expandConfig(container, userConfig) {
   }, {});
   return userConfig;
 }
-
-
 function modify(modifier, source, index, shift) {
   if (this.options.strict && !this.isEnabled() && source === _emitter4.default.sources.USER) {
     return new _quillDelta2.default();
@@ -1443,7 +1413,6 @@ function modify(modifier, source, index, shift) {
 function overload(index, length, name, value, source) {
   var formats = {};
   if (typeof index.index === 'number' && typeof index.length === 'number') {
-
     if (typeof length !== 'number') {
       source = value, value = name, name = length, length = index.length, index = index.index;
     } else {
@@ -1452,7 +1421,6 @@ function overload(index, length, name, value, source) {
   } else if (typeof length !== 'number') {
     source = value, value = name, name = length, length = 0;
   }
-
   if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
     formats = name;
     source = value;
@@ -1463,7 +1431,6 @@ function overload(index, length, name, value, source) {
       source = name;
     }
   }
-
   source = source || _emitter4.default.sources.API;
   return [index, length, formats, source];
 }
@@ -1560,7 +1527,6 @@ var Inline = function (_Parchment$Inline) {
   return Inline;
 }(_parchment2.default.Inline);
 Inline.allowedChildren = [Inline, _parchment2.default.Embed, _text2.default];
-
 Inline.order = ['cursor', 'inline', // Must be lower
 'underline', 'strike', 'italic', 'bold', 'script', 'link', 'code' // Must be higher
 ];
@@ -1612,7 +1578,6 @@ EVENTS.forEach(function (eventName) {
       args[_key] = arguments[_key];
     }
     [].slice.call(document.querySelectorAll('.ql-container')).forEach(function (node) {
-
       if (node.__quill && node.__quill.emitter) {
         var _node$__quill$emitter;
         (_node$__quill$emitter = node.__quill.emitter).handleDOM.apply(_node$__quill$emitter, args);
@@ -1726,21 +1691,12 @@ var objectKeys = __webpack_require__(52);
 var isArguments = __webpack_require__(53);
 var deepEqual = module.exports = function (actual, expected, opts) {
   if (!opts) opts = {};
-
   if (actual === expected) {
     return true;
   } else if (actual instanceof Date && expected instanceof Date) {
     return actual.getTime() === expected.getTime();
-
-
   } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
     return opts.strict ? actual === expected : actual == expected;
-
-
-
-
-
-
   } else {
     return objEquiv(actual, expected, opts);
   }
@@ -1760,10 +1716,8 @@ function objEquiv(a, b, opts) {
   var i, key;
   if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
     return false;
-
   if (a.prototype !== b.prototype) return false;
   //~~~I've managed to break Object.keys through screwy arguments passing.
-
   if (isArguments(a)) {
     if (!isArguments(b)) {
       return false;
@@ -1788,8 +1742,6 @@ function objEquiv(a, b, opts) {
   } catch (e) {//happens when one is a string literal and the other isn't
     return false;
   }
-
-
   if (ka.length != kb.length)
     return false;
   //the same set of keys (although not necessarily the same order),
@@ -1821,7 +1773,6 @@ var Attributor = /** @class */ (function () {
         this.keyName = keyName;
         var attributeBit = Registry.Scope.TYPE & Registry.Scope.ATTRIBUTE;
         if (options.scope != null) {
-
             this.scope = (options.scope & Registry.Scope.LEVEL) | attributeBit;
         }
         else {
@@ -1914,7 +1865,6 @@ var CodeBlock = function (_Block) {
       var _this3 = this;
       var text = this.domNode.textContent;
       if (text.endsWith('\n')) {
-
         text = text.slice(0, -1);
       }
       return text.split('\n').reduce(function (delta, frag) {
@@ -2279,7 +2229,6 @@ var Editor = function () {
       var cursorIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
       var oldDelta = this.delta;
       if (mutations.length === 1 && mutations[0].type === 'characterData' && mutations[0].target.data.match(ASCII) && _parchment2.default.find(mutations[0].target)) {
-
         var textBlot = _parchment2.default.find(mutations[0].target);
         var formats = (0, _block.bubbleFormats)(textBlot);
         var index = textBlot.offset(this.scroll);
@@ -2385,7 +2334,6 @@ var Selection = function () {
     this.mouseDown = false;
     this.root = this.scroll.domNode;
     this.cursor = _parchment2.default.create('cursor', this);
-
     this.lastRange = this.savedRange = new Range(0, 0);
     this.handleComposition();
     this.handleDragging();
@@ -2404,7 +2352,6 @@ var Selection = function () {
       var native = _this.getNativeRange();
       if (native == null) return;
       if (native.start.node === _this.cursor.textNode) return; // cursor.restore() will handle
-
       _this.emitter.once(_emitter4.default.events.SCROLL_UPDATE, function () {
         try {
           _this.setNativeRange(native.start.node, native.start.offset, native.end.node, native.end.offset);
@@ -2470,7 +2417,6 @@ var Selection = function () {
       if (nativeRange.start.node !== this.cursor.textNode) {
         var blot = _parchment2.default.find(nativeRange.start.node, false);
         if (blot == null) return;
-
         if (blot instanceof _parchment2.default.Leaf) {
           var after = blot.split(nativeRange.start.offset);
           blot.parent.insertBefore(this.cursor, after);
@@ -2756,13 +2702,10 @@ var Selection = function () {
 }();
 function contains(parent, descendant) {
   try {
-
     descendant.parentNode;
   } catch (e) {
     return false;
   }
-
-
   if (descendant instanceof Text) {
     descendant = descendant.parentNode;
   }
@@ -2858,7 +2801,6 @@ var ContainerBlot = /** @class */ (function (_super) {
     ContainerBlot.prototype.build = function () {
         var _this = this;
         this.children = new linked_list_1.default();
-
         [].slice
             .call(this.domNode.childNodes)
             .reverse()
@@ -3018,11 +2960,7 @@ var ContainerBlot = /** @class */ (function (_super) {
             }
         });
         removedNodes.forEach(function (node) {
-
-
-
             if (node.parentNode != null &&
-
                 node.tagName !== 'IFRAME' &&
                 document.body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
                 return;
@@ -3071,7 +3009,6 @@ function makeBlot(node) {
         catch (e) {
             blot = Registry.create(Registry.Scope.INLINE);
             [].slice.call(node.childNodes).forEach(function (child) {
-
                 blot.domNode.appendChild(child);
             });
             if (node.parentNode) {
@@ -3301,7 +3238,6 @@ Iterator.prototype.next = function (length) {
       } else if (typeof nextOp.insert === 'string') {
         retOp.insert = nextOp.insert.substr(offset, length);
       } else {
-
         retOp.insert = nextOp.insert;
       }
       return retOp;
@@ -3315,7 +3251,6 @@ Iterator.prototype.peek = function () {
 };
 Iterator.prototype.peekLength = function () {
   if (this.ops[this.index]) {
-
     return lib.length(this.ops[this.index]) - this.offset;
   } else {
     return Infinity;
@@ -3346,8 +3281,6 @@ var nativeMap;
 try {
   nativeMap = Map;
 } catch(_) {
-
-
   nativeMap = function() {};
 }
 var nativeSet;
@@ -3390,8 +3323,6 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     includeNonEnumerable = circular.includeNonEnumerable;
     circular = circular.circular;
   }
-
-
   var allParents = [];
   var allChildren = [];
   var useBuffer = typeof Buffer != 'undefined';
@@ -3399,9 +3330,7 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     circular = true;
   if (typeof depth == 'undefined')
     depth = Infinity;
-
   function _clone(parent, depth) {
-
     if (parent === null)
       return null;
     if (depth === 0)
@@ -3480,8 +3409,6 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(parent);
       for (var i = 0; i < symbols.length; i++) {
-
-
         var symbol = symbols[i];
         var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
         if (descriptor && !descriptor.enumerable && !includeNonEnumerable) {
@@ -3527,7 +3454,6 @@ clone.clonePrototype = function clonePrototype(parent) {
   c.prototype = parent;
   return new c();
 };
-
 function __objToStr(o) {
   return Object.prototype.toString.call(o);
 }
@@ -3598,7 +3524,6 @@ var Scroll = function (_Parchment$Scroll) {
         return whitelist;
       }, {});
     }
-
     _this.domNode.addEventListener('DOMNodeInserted', function () {});
     _this.optimize();
     _this.enable();
@@ -3838,7 +3763,6 @@ var Keyboard = function (_Module) {
     _this.addBinding({ key: Keyboard.keys.ENTER, shiftKey: null }, handleEnter);
     _this.addBinding({ key: Keyboard.keys.ENTER, metaKey: null, ctrlKey: null, altKey: null }, function () {});
     if (/Firefox/i.test(navigator.userAgent)) {
-
       _this.addBinding({ key: Keyboard.keys.BACKSPACE }, { collapsed: true }, handleBackspace);
       _this.addBinding({ key: Keyboard.keys.DELETE }, { collapsed: true }, handleDelete);
     } else {
@@ -3910,14 +3834,12 @@ var Keyboard = function (_Module) {
           if (binding.empty != null && binding.empty !== curContext.empty) return false;
           if (binding.offset != null && binding.offset !== curContext.offset) return false;
           if (Array.isArray(binding.format)) {
-
             if (binding.format.every(function (name) {
               return curContext.format[name] == null;
             })) {
               return false;
             }
           } else if (_typeof(binding.format) === 'object') {
-
             if (!Object.keys(binding.format).every(function (name) {
               if (binding.format[name] === true) return curContext.format[name] != null;
               if (binding.format[name] === false) return curContext.format[name] == null;
@@ -3955,7 +3877,6 @@ Keyboard.DEFAULTS = {
     'italic': makeFormatHandler('italic'),
     'underline': makeFormatHandler('underline'),
     'indent': {
-
       key: Keyboard.keys.TAB,
       format: ['blockquote', 'indent', 'list'],
       handler: function handler(range, context) {
@@ -3967,7 +3888,6 @@ Keyboard.DEFAULTS = {
       key: Keyboard.keys.TAB,
       shiftKey: true,
       format: ['blockquote', 'indent', 'list'],
-
       handler: function handler(range, context) {
         if (context.collapsed && context.offset !== 0) return true;
         this.quill.format('indent', '-1', _quill2.default.sources.USER);
@@ -4158,7 +4078,6 @@ function handleBackspace(range, context) {
       formats = _op2.default.attributes.diff(curFormats, prevFormats) || {};
     }
   }
-
   var length = /[\uD800-\uDBFF][\uDC00-\uDFFF]$/.test(context.prefix) ? 2 : 1;
   this.quill.deleteText(range.index - length, length, _quill2.default.sources.USER);
   if (Object.keys(formats).length > 0) {
@@ -4167,7 +4086,6 @@ function handleBackspace(range, context) {
   this.quill.focus();
 }
 function handleDelete(range, context) {
-
   var length = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/.test(context.suffix) ? 2 : 1;
   if (range.index >= this.quill.getLength() - length) return;
   var formats = {},
@@ -4218,8 +4136,6 @@ function handleEnter(range, context) {
     return lineFormats;
   }, {});
   this.quill.insertText(range.index, '\n', lineFormats, _quill2.default.sources.USER);
-
-
   this.quill.setSelection(range.index + 1, _quill2.default.sources.SILENT);
   this.quill.focus();
   Object.keys(context.format).forEach(function (name) {
@@ -4344,7 +4260,6 @@ var Cursor = function (_Parchment$Embed) {
   _createClass(Cursor, [{
     key: 'detach',
     value: function detach() {
-
       if (this.parent != null) this.parent.removeChild(this);
     }
   }, {
@@ -4403,7 +4318,6 @@ var Cursor = function (_Parchment$Embed) {
         start = _ref[1];
         end = _ref[2];
       }
-
       while (this.domNode.lastChild != null && this.domNode.lastChild !== this.textNode) {
         this.domNode.parentNode.insertBefore(this.domNode.lastChild, this.domNode);
       }
@@ -4590,11 +4504,9 @@ var Registry = __webpack_require__(1);
 var ShadowBlot = /** @class */ (function () {
     function ShadowBlot(domNode) {
         this.domNode = domNode;
-
         this.domNode[Registry.DATA_KEY] = { blot: this };
     }
     Object.defineProperty(ShadowBlot.prototype, "statics", {
-
         get: function () {
             return this.constructor;
         },
@@ -4643,7 +4555,6 @@ var ShadowBlot = /** @class */ (function () {
     ShadowBlot.prototype.detach = function () {
         if (this.parent != null)
             this.parent.removeChild(this);
-
         delete this.domNode[Registry.DATA_KEY];
     };
     ShadowBlot.prototype.deleteAt = function (index, length) {
@@ -4698,10 +4609,7 @@ var ShadowBlot = /** @class */ (function () {
         return this.parent.children.offset(this) + this.parent.offset(root);
     };
     ShadowBlot.prototype.optimize = function (context) {
-
-
         if (this.domNode[Registry.DATA_KEY] != null) {
-
             delete this.domNode[Registry.DATA_KEY].mutations;
         }
     };
@@ -4726,7 +4634,6 @@ var ShadowBlot = /** @class */ (function () {
         return index === 0 ? this : this.next;
     };
     ShadowBlot.prototype.update = function (mutations, context) {
-
     };
     ShadowBlot.prototype.wrap = function (name, value) {
         var wrapper = typeof name === 'string' ? Registry.create(name, value) : name;
@@ -4756,7 +4663,6 @@ var AttributorStore = /** @class */ (function () {
         this.build();
     }
     AttributorStore.prototype.attribute = function (attribute, value) {
-
         if (value) {
             if (attribute.add(this.domNode, value)) {
                 if (attribute.value(this.domNode) != null) {
@@ -4912,19 +4818,16 @@ var StyleAttributor = /** @class */ (function (_super) {
     StyleAttributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value))
             return false;
-
         node.style[camelize(this.keyName)] = value;
         return true;
     };
     StyleAttributor.prototype.remove = function (node) {
-
         node.style[camelize(this.keyName)] = '';
         if (!node.getAttribute('style')) {
             node.removeAttribute('style');
         }
     };
     StyleAttributor.prototype.value = function (node) {
-
         var value = node.style[camelize(this.keyName)];
         return this.canAdd(node, value) ? value : '';
     };
@@ -5416,7 +5319,6 @@ var LinkedList = /** @class */ (function () {
     };
     LinkedList.prototype.iterator = function (curNode) {
         if (curNode === void 0) { curNode = this.head; }
-
         return function () {
             var ret = curNode;
             if (curNode != null)
@@ -5540,33 +5442,24 @@ var ScrollBlot = /** @class */ (function (_super) {
         if (mutations === void 0) { mutations = []; }
         if (context === void 0) { context = {}; }
         _super.prototype.optimize.call(this, context);
-
         var records = [].slice.call(this.observer.takeRecords());
-
-
         while (records.length > 0)
             mutations.push(records.pop());
-
         var mark = function (blot, markParent) {
             if (markParent === void 0) { markParent = true; }
             if (blot == null || blot === _this)
                 return;
             if (blot.domNode.parentNode == null)
                 return;
-
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-
                 blot.domNode[Registry.DATA_KEY].mutations = [];
             }
             if (markParent)
                 mark(blot.parent);
         };
         var optimize = function (blot) {
-
             if (
-
             blot.domNode[Registry.DATA_KEY] == null ||
-
                 blot.domNode[Registry.DATA_KEY].mutations == null) {
                 return;
             }
@@ -5614,20 +5507,16 @@ var ScrollBlot = /** @class */ (function (_super) {
         var _this = this;
         if (context === void 0) { context = {}; }
         mutations = mutations || this.observer.takeRecords();
-
         mutations
             .map(function (mutation) {
             var blot = Registry.find(mutation.target, true);
             if (blot == null)
                 return null;
-
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-
                 blot.domNode[Registry.DATA_KEY].mutations = [mutation];
                 return blot;
             }
             else {
-
                 blot.domNode[Registry.DATA_KEY].mutations.push(mutation);
                 return null;
             }
@@ -5638,12 +5527,9 @@ var ScrollBlot = /** @class */ (function (_super) {
                 //@ts-ignore
                 blot.domNode[Registry.DATA_KEY] == null)
                 return;
-
             blot.update(blot.domNode[Registry.DATA_KEY].mutations || [], context);
         });
-
         if (this.domNode[Registry.DATA_KEY].mutations != null) {
-
             _super.prototype.update.call(this, this.domNode[Registry.DATA_KEY].mutations, context);
         }
         this.optimize(mutations, context);
@@ -5672,13 +5558,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var format_1 = __webpack_require__(18);
 var Registry = __webpack_require__(1);
-
 function isEqual(obj1, obj2) {
     if (Object.keys(obj1).length !== Object.keys(obj2).length)
         return false;
-
     for (var prop in obj1) {
-
         if (obj1[prop] !== obj2[prop])
             return false;
     }
@@ -5785,7 +5668,6 @@ var BlockBlot = /** @class */ (function (_super) {
     };
     BlockBlot.prototype.insertAt = function (index, value, def) {
         if (def == null || Registry.query(value, Registry.Scope.INLINE) != null) {
-
             _super.prototype.insertAt.call(this, index, value, def);
         }
         else {
@@ -5833,9 +5715,6 @@ var EmbedBlot = /** @class */ (function (_super) {
         return undefined;
     };
     EmbedBlot.prototype.format = function (name, value) {
-
-
-
         _super.prototype.formatAt.call(this, 0, this.length(), name, value);
     };
     EmbedBlot.prototype.formatAt = function (index, length, name, value) {
@@ -5881,7 +5760,6 @@ var TextBlot = /** @class */ (function (_super) {
     };
     TextBlot.value = function (domNode) {
         var text = domNode.data;
-
         if (text['normalize'])
             text = text['normalize']();
         return text;
@@ -6008,9 +5886,7 @@ if (!Array.prototype.find) {
   });
 }
 document.addEventListener("DOMContentLoaded", function () {
-
   document.execCommand("enableObjectResizing", false, false);
-
   document.execCommand("autoUrlDetect", false, false);
 });
 /***/ }),
@@ -6057,30 +5933,24 @@ var DIFF_EQUAL = 0;
  * @return {Array} Array of diff tuples.
  */
 function diff_main(text1, text2, cursor_pos) {
-
   if (text1 == text2) {
     if (text1) {
       return [[DIFF_EQUAL, text1]];
     }
     return [];
   }
-
   if (cursor_pos < 0 || text1.length < cursor_pos) {
     cursor_pos = null;
   }
-
   var commonlength = diff_commonPrefix(text1, text2);
   var commonprefix = text1.substring(0, commonlength);
   text1 = text1.substring(commonlength);
   text2 = text2.substring(commonlength);
-
   commonlength = diff_commonSuffix(text1, text2);
   var commonsuffix = text1.substring(text1.length - commonlength);
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
-
   var diffs = diff_compute_(text1, text2);
-
   if (commonprefix) {
     diffs.unshift([DIFF_EQUAL, commonprefix]);
   }
@@ -6104,45 +5974,35 @@ function diff_main(text1, text2, cursor_pos) {
 function diff_compute_(text1, text2) {
   var diffs;
   if (!text1) {
-
     return [[DIFF_INSERT, text2]];
   }
   if (!text2) {
-
     return [[DIFF_DELETE, text1]];
   }
   var longtext = text1.length > text2.length ? text1 : text2;
   var shorttext = text1.length > text2.length ? text2 : text1;
   var i = longtext.indexOf(shorttext);
   if (i != -1) {
-
     diffs = [[DIFF_INSERT, longtext.substring(0, i)],
              [DIFF_EQUAL, shorttext],
              [DIFF_INSERT, longtext.substring(i + shorttext.length)]];
-
     if (text1.length > text2.length) {
       diffs[0][0] = diffs[2][0] = DIFF_DELETE;
     }
     return diffs;
   }
   if (shorttext.length == 1) {
-
-
     return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
   }
-
   var hm = diff_halfMatch_(text1, text2);
   if (hm) {
-
     var text1_a = hm[0];
     var text1_b = hm[1];
     var text2_a = hm[2];
     var text2_b = hm[3];
     var mid_common = hm[4];
-
     var diffs_a = diff_main(text1_a, text2_a);
     var diffs_b = diff_main(text1_b, text2_b);
-
     return diffs_a.concat([[DIFF_EQUAL, mid_common]], diffs_b);
   }
   return diff_bisect_(text1, text2);
@@ -6157,7 +6017,6 @@ function diff_compute_(text1, text2) {
  * @private
  */
 function diff_bisect_(text1, text2) {
-
   var text1_length = text1.length;
   var text2_length = text2.length;
   var max_d = Math.ceil((text1_length + text2_length) / 2);
@@ -6165,8 +6024,6 @@ function diff_bisect_(text1, text2) {
   var v_length = 2 * max_d;
   var v1 = new Array(v_length);
   var v2 = new Array(v_length);
-
-
   for (var x = 0; x < v_length; x++) {
     v1[x] = -1;
     v2[x] = -1;
@@ -6174,17 +6031,12 @@ function diff_bisect_(text1, text2) {
   v1[v_offset + 1] = 0;
   v2[v_offset + 1] = 0;
   var delta = text1_length - text2_length;
-
-
   var front = (delta % 2 != 0);
-
-
   var k1start = 0;
   var k1end = 0;
   var k2start = 0;
   var k2end = 0;
   for (var d = 0; d < max_d; d++) {
-
     for (var k1 = -d + k1start; k1 <= d - k1end; k1 += 2) {
       var k1_offset = v_offset + k1;
       var x1;
@@ -6201,24 +6053,19 @@ function diff_bisect_(text1, text2) {
       }
       v1[k1_offset] = x1;
       if (x1 > text1_length) {
-
         k1end += 2;
       } else if (y1 > text2_length) {
-
         k1start += 2;
       } else if (front) {
         var k2_offset = v_offset + delta - k1;
         if (k2_offset >= 0 && k2_offset < v_length && v2[k2_offset] != -1) {
-
           var x2 = text1_length - v2[k2_offset];
           if (x1 >= x2) {
-
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
-
     for (var k2 = -d + k2start; k2 <= d - k2end; k2 += 2) {
       var k2_offset = v_offset + k2;
       var x2;
@@ -6236,28 +6083,22 @@ function diff_bisect_(text1, text2) {
       }
       v2[k2_offset] = x2;
       if (x2 > text1_length) {
-
         k2end += 2;
       } else if (y2 > text2_length) {
-
         k2start += 2;
       } else if (!front) {
         var k1_offset = v_offset + delta - k2;
         if (k1_offset >= 0 && k1_offset < v_length && v1[k1_offset] != -1) {
           var x1 = v1[k1_offset];
           var y1 = v_offset + x1 - k1_offset;
-
           x2 = text1_length - x2;
           if (x1 >= x2) {
-
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
   }
-
-
   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
 };
 /**
@@ -6274,7 +6115,6 @@ function diff_bisectSplit_(text1, text2, x, y) {
   var text2a = text2.substring(0, y);
   var text1b = text1.substring(x);
   var text2b = text2.substring(y);
-
   var diffs = diff_main(text1a, text2a);
   var diffsb = diff_main(text1b, text2b);
   return diffs.concat(diffsb);
@@ -6287,12 +6127,9 @@ function diff_bisectSplit_(text1, text2, x, y) {
  *     string.
  */
 function diff_commonPrefix(text1, text2) {
-
   if (!text1 || !text2 || text1.charAt(0) != text2.charAt(0)) {
     return 0;
   }
-
-
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -6316,13 +6153,10 @@ function diff_commonPrefix(text1, text2) {
  * @return {number} The number of characters common to the end of each string.
  */
 function diff_commonSuffix(text1, text2) {
-
   if (!text1 || !text2 ||
       text1.charAt(text1.length - 1) != text2.charAt(text2.length - 1)) {
     return 0;
   }
-
-
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -6368,7 +6202,6 @@ function diff_halfMatch_(text1, text2) {
    * @private
    */
   function diff_halfMatchI_(longtext, shorttext, i) {
-
     var seed = longtext.substring(i, i + Math.floor(longtext.length / 4));
     var j = -1;
     var best_common = '';
@@ -6394,10 +6227,8 @@ function diff_halfMatch_(text1, text2) {
       return null;
     }
   }
-
   var hm1 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 4));
-
   var hm2 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 2));
   var hm;
@@ -6408,10 +6239,8 @@ function diff_halfMatch_(text1, text2) {
   } else if (!hm1) {
     hm = hm2;
   } else {
-
     hm = hm1[4].length > hm2[4].length ? hm1 : hm2;
   }
-
   var text1_a, text1_b, text2_a, text2_b;
   if (text1.length > text2.length) {
     text1_a = hm[0];
@@ -6453,10 +6282,8 @@ function diff_cleanupMerge(diffs) {
         pointer++;
         break;
       case DIFF_EQUAL:
-
         if (count_delete + count_insert > 1) {
           if (count_delete !== 0 && count_insert !== 0) {
-
             commonlength = diff_commonPrefix(text_insert, text_delete);
             if (commonlength !== 0) {
               if ((pointer - count_delete - count_insert) > 0 &&
@@ -6472,7 +6299,6 @@ function diff_cleanupMerge(diffs) {
               text_insert = text_insert.substring(commonlength);
               text_delete = text_delete.substring(commonlength);
             }
-
             commonlength = diff_commonSuffix(text_insert, text_delete);
             if (commonlength !== 0) {
               diffs[pointer][1] = text_insert.substring(text_insert.length -
@@ -6483,7 +6309,6 @@ function diff_cleanupMerge(diffs) {
                   commonlength);
             }
           }
-
           if (count_delete === 0) {
             diffs.splice(pointer - count_insert,
                 count_delete + count_insert, [DIFF_INSERT, text_insert]);
@@ -6498,7 +6323,6 @@ function diff_cleanupMerge(diffs) {
           pointer = pointer - count_delete - count_insert +
                     (count_delete ? 1 : 0) + (count_insert ? 1 : 0) + 1;
         } else if (pointer !== 0 && diffs[pointer - 1][0] == DIFF_EQUAL) {
-
           diffs[pointer - 1][1] += diffs[pointer][1];
           diffs.splice(pointer, 1);
         } else {
@@ -6514,19 +6338,13 @@ function diff_cleanupMerge(diffs) {
   if (diffs[diffs.length - 1][1] === '') {
     diffs.pop();  // Remove the dummy entry at the end.
   }
-
-
-
   var changes = false;
   pointer = 1;
-
   while (pointer < diffs.length - 1) {
     if (diffs[pointer - 1][0] == DIFF_EQUAL &&
         diffs[pointer + 1][0] == DIFF_EQUAL) {
-
       if (diffs[pointer][1].substring(diffs[pointer][1].length -
           diffs[pointer - 1][1].length) == diffs[pointer - 1][1]) {
-
         diffs[pointer][1] = diffs[pointer - 1][1] +
             diffs[pointer][1].substring(0, diffs[pointer][1].length -
                                         diffs[pointer - 1][1].length);
@@ -6535,7 +6353,6 @@ function diff_cleanupMerge(diffs) {
         changes = true;
       } else if (diffs[pointer][1].substring(0, diffs[pointer + 1][1].length) ==
           diffs[pointer + 1][1]) {
-
         diffs[pointer - 1][1] += diffs[pointer + 1][1];
         diffs[pointer][1] =
             diffs[pointer][1].substring(diffs[pointer + 1][1].length) +
@@ -6546,7 +6363,6 @@ function diff_cleanupMerge(diffs) {
     }
     pointer++;
   }
-
   if (changes) {
     diff_cleanupMerge(diffs);
   }
@@ -6579,9 +6395,7 @@ function cursor_normalize_diff (diffs, cursor_pos) {
       if (cursor_pos === next_pos) {
         return [i + 1, diffs];
       } else if (cursor_pos < next_pos) {
-
         diffs = diffs.slice();
-
         var split_pos = cursor_pos - current_pos;
         var d_left = [d[0], d[1].slice(0, split_pos)];
         var d_right = [d[0], d[1].slice(split_pos)];
@@ -6619,24 +6433,14 @@ function fix_cursor (diffs, cursor_pos) {
   var d = ndiffs[cursor_pointer];
   var d_next = ndiffs[cursor_pointer + 1];
   if (d == null) {
-
-
     return diffs;
   } else if (d[0] !== DIFF_EQUAL) {
-
-
     return diffs;
   } else {
     if (d_next != null && d[1] + d_next[1] === d_next[1] + d[1]) {
-
-
       ndiffs.splice(cursor_pointer, 2, d_next, d)
       return merge_tuples(ndiffs, cursor_pointer, 2)
     } else if (d_next != null && d_next[1].indexOf(d[1]) === 0) {
-
-
-
-
       ndiffs.splice(cursor_pointer, 2, [d_next[0], d[1]], [0, d[1]]);
       var suffix = d_next[1].slice(d[1].length);
       if (suffix.length > 0) {
@@ -6644,7 +6448,6 @@ function fix_cursor (diffs, cursor_pos) {
       }
       return merge_tuples(ndiffs, cursor_pointer, 3)
     } else {
-
       return diffs;
     }
   }
@@ -6696,7 +6499,6 @@ function fix_emoji (diffs) {
  * @return {Array} Array of merged diff tuples.
  */
 function merge_tuples (diffs, start, length) {
-
   for (var i = start + length - 1; i >= 0 && i >= start - 1; i--) {
     if (i + 1 < diffs.length) {
       var left_d = diffs[i];
@@ -6754,17 +6556,10 @@ var has = Object.prototype.hasOwnProperty
  */
 function Events() {}
 //
-
-
-
-
-
 //
 if (Object.create) {
   Events.prototype = Object.create(null);
   //
-
-
   //
   if (!new Events().__proto__) prefix = false;
 }
@@ -6953,7 +6748,6 @@ EventEmitter.prototype.removeListener = function removeListener(event, fn, conte
       }
     }
     //
-
     //
     if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
     else if (--this._eventsCount === 0) this._events = new Events();
@@ -6983,26 +6777,21 @@ EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
   return this;
 };
 //
-
 //
 EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
 EventEmitter.prototype.addListener = EventEmitter.prototype.on;
 //
-
 //
 EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
   return this;
 };
 //
-
 //
 EventEmitter.prefixed = prefix;
 //
-
 //
 EventEmitter.EventEmitter = EventEmitter;
 //
-
 //
 if ('undefined' !== typeof module) {
   module.exports = EventEmitter;
@@ -7096,7 +6885,6 @@ var Clipboard = function (_Module) {
           elementMatchers = _prepareMatching2[0],
           textMatchers = _prepareMatching2[1];
       var delta = traverse(this.container, elementMatchers, textMatchers);
-
       if (deltaEndsWith(delta, '\n') && delta.ops[delta.ops.length - 1].attributes == null) {
         delta = delta.compose(new _quillDelta2.default().retain(delta.length() - 1).delete(1));
       }
@@ -7130,7 +6918,6 @@ var Clipboard = function (_Module) {
       setTimeout(function () {
         delta = delta.concat(_this2.convert()).delete(range.length);
         _this2.quill.updateContents(delta, _quill2.default.sources.USER);
-
         _this2.quill.setSelection(delta.length() - range.length, _quill2.default.sources.SILENT);
         _this2.quill.scrollingContainer.scrollTop = scrollTop;
         _this2.quill.focus();
@@ -7155,7 +6942,6 @@ var Clipboard = function (_Module) {
             break;
           default:
             [].forEach.call(_this3.container.querySelectorAll(selector), function (node) {
-
               node[DOM_KEY] = node[DOM_KEY] || [];
               node[DOM_KEY].push(matcher);
             });
@@ -7206,7 +6992,6 @@ function isLine(node) {
   return ['block', 'list-item'].indexOf(style.display) > -1;
 }
 function traverse(node, elementMatchers, textMatchers) {
-
   if (node.nodeType === node.TEXT_NODE) {
     return textMatchers.reduce(function (delta, matcher) {
       return matcher(node, delta);
@@ -7327,14 +7112,12 @@ function matchStyles(node, delta) {
     delta = applyFormat(delta, formats);
   }
   if (parseFloat(style.textIndent || 0) > 0) {
-
     delta = new _quillDelta2.default().insert('\t').concat(delta);
   }
   return delta;
 }
 function matchText(node, delta) {
   var text = node.data;
-
   if (node.parentNode.tagName === 'O:P') {
     return delta.insert(text.trim());
   }
@@ -7342,7 +7125,6 @@ function matchText(node, delta) {
     return delta;
   }
   if (!computeStyle(node.parentNode).whiteSpace.startsWith('pre')) {
-
     var replacer = function replacer(collapse, match) {
       match = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
       return match.length < 1 && collapse ? ' ' : match;

@@ -1,18 +1,6 @@
-
 var calendars = {};
-
 $(function() {
-
-
-
-
-
-
-
-
-
     var thisMonth = moment().format('YYYY-MM');
-
     var eventArray = [
         {
             title: 'Multi-Day Event',
@@ -27,12 +15,6 @@ $(function() {
             title: 'Single Day Event'
         }
     ];
-
-
-
-
-
-
     calendars.clndr1 = $('.cal1').clndr({
         events: eventArray,
         clickEvents: {
@@ -78,6 +60,4 @@ $(function() {
         showAdjacentMonths: true,
         adjacentDaysChangeMonth: false
     });
-
-
 });

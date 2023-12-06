@@ -28,23 +28,10 @@ const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { file } = require("googleapis/build/src/apis/file");
 const config = process.env;
-
- 
-
-
-
-
-
     exports.getAllInvoicesTenant = async (req, res) => {
         try {
-
         const {userId} = req.user;
-
-
           const getAllInvoicesResult = await queryRunner(getAllInvoiceTenantQuery, [userId]);
-
-
-
           if (getAllInvoicesResult[0].length > 0) {
             for (let i = 0; i < getAllInvoicesResult[0].length; i++){
                 const invoiceID = getAllInvoicesResult[0][i].invoiceID;
@@ -70,44 +57,24 @@ const config = process.env;
           res.send('Error in All Invoice ' , error)
         }
       }
-
-    
-    
-
-
-
-
-
-
 exports.getAllTaskTenant = async (req, res) => {
-
     const { userId } = req.user;
     try {
-
       const allTaskResult = await queryRunner(AlltasksTenantsQuery, [userId]);
-
       if (allTaskResult.length > 0) {
-
         for (let i = 0; i < allTaskResult[0].length; i++) {
-
           const taskID = allTaskResult[0][i].id;
-
           const assignToResult = await queryRunner(
             selectQuery("taskassignto", "taskId"),
             [taskID]
           );
-
           const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
-  
           const vendorData = [];
-
           for (let j = 0; j < vendorIDs.length; j++) {
-
             const vendorResult = await queryRunner(
               selectQuery("vendor", "id"),
               [vendorIDs[j]]
             );
-
             if (vendorResult[0].length > 0) {
               const vendor = {
                 ID : vendorResult[0][0].id || "N/A",
@@ -118,7 +85,6 @@ exports.getAllTaskTenant = async (req, res) => {
               vendorData.push(vendor);
             }
           }
-
           allTaskResult[0][i].AssignTo = vendorData;
         }
         res.status(200).json({
@@ -135,9 +101,6 @@ exports.getAllTaskTenant = async (req, res) => {
       res.send("Error Get Tasks" + error);
     }
   };
-
-
-
 exports.getTenantDashboardData = async (req, res) => {
   try {
     const { userId } = req.user;
@@ -161,17 +124,13 @@ exports.getTenantDashboardData = async (req, res) => {
     })
   }
 }
-
   exports.getTenantByID = async (req, res) => {
     try {
-
       const { userId } = req.user;
-
       console.log(userId)
       const TenantsByIDResult = await queryRunner(getTenantsById, [userId])
       if (TenantsByIDResult[0].length > 0) {
         const data = JSON.parse(JSON.stringify(TenantsByIDResult))
-
         res.status(200).json({
           data: data[0][0],
           message: 'Tenants By ID'
@@ -186,9 +145,6 @@ exports.getTenantDashboardData = async (req, res) => {
       console.log(error)
     }
   }
-
-
-
 exports.addTasksTenant = async (req, res) => {
   const {
     task,
@@ -197,15 +153,10 @@ exports.addTasksTenant = async (req, res) => {
     note,
     notifyLandlord,
     images,
-    
   } = req.body;
-
-
   const { userId, userName, landlordID,phoneNumber, email } = req.user;
   const currentDate = new Date();
-  
   try {
-
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
       [task, userId]
@@ -228,7 +179,6 @@ exports.addTasksTenant = async (req, res) => {
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
       }
-
       const tasksID = TasksResult[0].insertId;
       const taskCountIdResult = await queryRunner(taskCountIdTenant , [userId]);
       let customTaskId = taskCountIdResult[0][0].count + 1;
@@ -248,7 +198,6 @@ exports.addTasksTenant = async (req, res) => {
         }
       }
       }
-
         const Vendorid = "Not Assigned";
         const vendorResults = await queryRunner(addVendorList, [
           tasksID,
@@ -262,7 +211,6 @@ exports.addTasksTenant = async (req, res) => {
       const landlordEmail = landlordCheckResult[0][0].Email;
       const CompanyName = landlordCheckResult[0][0].BusinessName || "N/A";
       const taskEmail = landlordCheckResult[0][0].taskEmail;
-      
       if (notifyLandlord.toLowerCase() === "yes") {
         await taskSendMail(
           landlordName,
@@ -286,11 +234,7 @@ exports.addTasksTenant = async (req, res) => {
     res.status(400).send(error);
   }
 };
-
-
-
 exports.taskByIDTenant = async (req, res) => {
-
   const { Id } = req.user;
   try {
     const taskByIDResult = await queryRunner(taskByIDQuery, [Id]);
@@ -341,8 +285,6 @@ exports.taskByIDTenant = async (req, res) => {
       }else{
         taskByIDResult[0][0].vendor = ["No vendor data found"];
       }
-
-      
       res.status(200).json({
         data: taskByIDResult,
         message: "Task data retrieved successfully",
@@ -357,17 +299,9 @@ exports.taskByIDTenant = async (req, res) => {
     res.send("Error Get Tasks",error);
   }
 };
-
-
-
-
-
-
-
 exports.ProfileCompleteTenant = async (req, res) => {
   try {
     const { userId } = req.user;
-
     const tenantCheckResult = await queryRunner(selectQuery("tenants", "id"), [
       userId,
     ]);
@@ -394,9 +328,6 @@ exports.ProfileCompleteTenant = async (req, res) => {
       if (tenantCheckResult[0][0].Address) {
         count += 10;
       }
-
-
-
       if (tenantCheckResult[0][0].city) {
         count += 10;
       }
@@ -407,7 +338,6 @@ exports.ProfileCompleteTenant = async (req, res) => {
         count += 10;
       }
       res.status(200).json({
-
         count: count,
       });
     }
@@ -417,17 +347,10 @@ exports.ProfileCompleteTenant = async (req, res) => {
     });
   }
 };
-
-
-
-
-
 exports.unpaidAmountTenant = async (req, res) => {
   try {
     const { userId } = req.user;
-
     const tenantAmountResult = await queryRunner(unpaidAmountQuery, [userId]);
-
     if (tenantAmountResult[0][0].length > 0) {
       res.status(200).json({
         data : tenantAmountResult[0][0].totalAmount,
@@ -444,7 +367,6 @@ exports.unpaidAmountTenant = async (req, res) => {
     });
   }
 };
-
 exports.updateAuthTenant = async (req, res) => {
   try {
     const { auth } = req.body;
@@ -465,7 +387,6 @@ exports.updateAuthTenant = async (req, res) => {
 exports.getInvoiceCategoriesTenant = async (req, res) => {
   try {
     const { landlordID } = req.user;
-   
     const invoiceImagecheckresult = await queryRunner(
       selectQuery("InvoiceCategories", "landLordId"),
       [landlordID]

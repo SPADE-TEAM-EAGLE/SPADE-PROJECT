@@ -1,12 +1,9 @@
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
-
 		define([ "jquery" ], factory );
 	} else if ( typeof exports === "object" ) {
-
 		factory( require( "jquery" ) );
 	} else {
-
 		factory( jQuery );
 	}
 }(function( $ ) {
@@ -17,12 +14,10 @@ $.cleanData = (function( orig ) {
 		var events, elem, i;
 		for ( i = 0; (elem = elems[i]) != null; i++ ) {
 			try {
-
 				events = $._data( elem, "events" );
 				if ( events && events.remove ) {
 					$( elem ).triggerHandler( "remove" );
 				}
-
 			} catch ( e ) {}
 		}
 		orig( elems );
@@ -30,8 +25,6 @@ $.cleanData = (function( orig ) {
 })( $.cleanData );
 $.widget = function( name, base, prototype ) {
 	var fullName, existingConstructor, constructor, basePrototype,
-
-
 		proxiedPrototype = {},
 		namespace = name.split( "." )[ 0 ];
 	name = name.split( "." )[ 1 ];
@@ -40,37 +33,25 @@ $.widget = function( name, base, prototype ) {
 		prototype = base;
 		base = $.Widget;
 	}
-
 	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
 	$[ namespace ] = $[ namespace ] || {};
 	existingConstructor = $[ namespace ][ name ];
 	constructor = $[ namespace ][ name ] = function( options, element ) {
-
 		if ( !this._createWidget ) {
 			return new constructor( options, element );
 		}
-
-
 		if ( arguments.length ) {
 			this._createWidget( options, element );
 		}
 	};
-
 	$.extend( constructor, existingConstructor, {
 		version: prototype.version,
-
-
 		_proto: $.extend( {}, prototype ),
-
-
 		_childConstructors: []
 	});
 	basePrototype = new base();
-
-
-
 	basePrototype.options = $.widget.extend( {}, basePrototype.options );
 	$.each( prototype, function( prop, value ) {
 		if ( !$.isFunction( value ) ) {
@@ -98,9 +79,6 @@ $.widget = function( name, base, prototype ) {
 		})();
 	});
 	constructor.prototype = $.widget.extend( basePrototype, {
-
-
-
 		widgetEventPrefix: existingConstructor ? (basePrototype.widgetEventPrefix || name) : name
 	}, proxiedPrototype, {
 		constructor: constructor,
@@ -108,19 +86,11 @@ $.widget = function( name, base, prototype ) {
 		widgetName: name,
 		widgetFullName: fullName
 	});
-
-
-
-
 	if ( existingConstructor ) {
 		$.each( existingConstructor._childConstructors, function( i, child ) {
 			var childPrototype = child.prototype;
-
-
 			$.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto );
 		});
-
-
 		delete existingConstructor._childConstructors;
 	} else {
 		base._childConstructors.push( constructor );
@@ -138,13 +108,10 @@ $.widget.extend = function( target ) {
 		for ( key in input[ inputIndex ] ) {
 			value = input[ inputIndex ][ key ];
 			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
-
 				if ( $.isPlainObject( value ) ) {
 					target[ key ] = $.isPlainObject( target[ key ] ) ?
 						$.widget.extend( {}, target[ key ], value ) :
-
 						$.widget.extend( {}, value );
-
 				} else {
 					target[ key ] = value;
 				}
@@ -183,7 +150,6 @@ $.widget.bridge = function( name, object ) {
 				}
 			});
 		} else {
-
 			if ( args.length ) {
 				options = $.widget.extend.apply( null, [ options ].concat(args) );
 			}
@@ -210,7 +176,6 @@ $.Widget.prototype = {
 	defaultElement: "<div>",
 	options: {
 		disabled: false,
-
 		create: null
 	},
 	_createWidget: function( options, element ) {
@@ -231,9 +196,7 @@ $.Widget.prototype = {
 				}
 			});
 			this.document = $( element.style ?
-
 				element.ownerDocument :
-
 				element.document || element );
 			this.window = $( this.document[0].defaultView || this.document[0].parentWindow );
 		}
@@ -251,13 +214,9 @@ $.Widget.prototype = {
 	_init: $.noop,
 	destroy: function() {
 		this._destroy();
-
-
 		this.element
 			.unbind( this.eventNamespace )
 			.removeData( this.widgetFullName )
-
-
 			.removeData( $.camelCase( this.widgetFullName ) );
 		this.widget()
 			.unbind( this.eventNamespace )
@@ -265,7 +224,6 @@ $.Widget.prototype = {
 			.removeClass(
 				this.widgetFullName + "-disabled " +
 				"ui-state-disabled" );
-
 		this.bindings.unbind( this.eventNamespace );
 		this.hoverable.removeClass( "ui-state-hover" );
 		this.focusable.removeClass( "ui-state-focus" );
@@ -280,11 +238,9 @@ $.Widget.prototype = {
 			curOption,
 			i;
 		if ( arguments.length === 0 ) {
-
 			return $.widget.extend( {}, this.options );
 		}
 		if ( typeof key === "string" ) {
-
 			options = {};
 			parts = key.split( "." );
 			key = parts.shift();
@@ -321,7 +277,6 @@ $.Widget.prototype = {
 		if ( key === "disabled" ) {
 			this.widget()
 				.toggleClass( this.widgetFullName + "-disabled", !!value );
-
 			if ( value ) {
 				this.hoverable.removeClass( "ui-state-hover" );
 				this.focusable.removeClass( "ui-state-focus" );
@@ -338,13 +293,11 @@ $.Widget.prototype = {
 	_on: function( suppressDisabledCheck, element, handlers ) {
 		var delegateElement,
 			instance = this;
-
 		if ( typeof suppressDisabledCheck !== "boolean" ) {
 			handlers = element;
 			element = suppressDisabledCheck;
 			suppressDisabledCheck = false;
 		}
-
 		if ( !handlers ) {
 			handlers = element;
 			element = this.element;
@@ -355,9 +308,6 @@ $.Widget.prototype = {
 		}
 		$.each( handlers, function( event, handler ) {
 			function handlerProxy() {
-
-
-
 				if ( !suppressDisabledCheck &&
 						( instance.options.disabled === true ||
 							$( this ).hasClass( "ui-state-disabled" ) ) ) {
@@ -366,7 +316,6 @@ $.Widget.prototype = {
 				return ( typeof handler === "string" ? instance[ handler ] : handler )
 					.apply( instance, arguments );
 			}
-
 			if ( typeof handler !== "string" ) {
 				handlerProxy.guid = handler.guid =
 					handler.guid || handlerProxy.guid || $.guid++;
@@ -385,7 +334,6 @@ $.Widget.prototype = {
 		eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) +
 			this.eventNamespace;
 		element.unbind( eventName ).undelegate( eventName );
-
 		this.bindings = $( this.bindings.not( element ).get() );
 		this.focusable = $( this.focusable.not( element ).get() );
 		this.hoverable = $( this.hoverable.not( element ).get() );
@@ -428,10 +376,7 @@ $.Widget.prototype = {
 		event.type = ( type === this.widgetEventPrefix ?
 			type :
 			this.widgetEventPrefix + type ).toLowerCase();
-
-
 		event.target = this.element[ 0 ];
-
 		orig = event.originalEvent;
 		if ( orig ) {
 			for ( prop in orig ) {

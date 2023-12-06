@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('th', {
   defaultMessage: "ค่านี้ดูเหมือนว่าจะไม่ถูกต้อง",
   type: {

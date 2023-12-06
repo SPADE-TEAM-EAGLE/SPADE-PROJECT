@@ -1,7 +1,6 @@
 /*---- placeholder1----*/
 $(function() {
     'use strict'
-
     var sin = [],
         cos = [];
     for (var i = 0; i < 14; i += 0.1) {
@@ -49,13 +48,10 @@ $(function() {
             tickLength: 0
         }
     });
-    
 });
-
 /*---- placeholder2----*/
 $(function() {
     'use strict'
-
     var sin = [],
         cos = [];
     for (var i = 0; i < 14; i += 0.5) {
@@ -95,22 +91,14 @@ $(function() {
         }
     });
 });
-
-
 /*---- placeholder4----*/
 $(function() {
     'use strict'
-
-
-
     var data = [],
         totalPoints = 300;
-
     function getRandomData() {
     'use strict'
-
         if (data.length > 0) data = data.slice(1);
-
         while (data.length < totalPoints) {
             var prev = data.length > 0 ? data[data.length - 1] : 50,
                 y = prev + Math.random() * 10 - 5;
@@ -158,7 +146,6 @@ $(function() {
             show: false
         }
     });
-
     function update() {
     'use strict'
         plot.setData([getRandomData()]);
@@ -167,11 +154,9 @@ $(function() {
     }
     update();
 });
-
 /*---- placeholder6----*/
 $(function() {
     'use strict'
-
     var d1 = [];
     for (var i = 0; i <= 10; i += 1) {
         d1.push([i, parseInt(Math.random() * 30)]);
@@ -188,10 +173,8 @@ $(function() {
         bars = true,
         lines = false,
         steps = false;
-
     function plotWithOptions() {
     'use strict'
-
         $.plot("#placeholder6", [d1, d2, d3], {
             series: {
                 stack: stack,
@@ -232,10 +215,8 @@ $(function() {
         plotWithOptions();
     });
 });
-
 $(function() {
     'use strict'
-    
     var data = [],
         series = Math.floor(Math.random() * 4) + 3;
     for (var i = 0; i < series; i++) {
@@ -486,8 +467,6 @@ $(function() {
     });
     $("#example-1").click();
 });
-
-
 function labelFormatter(label, series) {
 	'use strict'
     return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";

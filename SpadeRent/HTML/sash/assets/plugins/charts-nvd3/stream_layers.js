@@ -1,4 +1,3 @@
-
 /* Inspired by Lee Byron's test data generator. */
 function stream_layers(n, m, o) {
   if (arguments.length < 3) o = 0;
@@ -18,7 +17,6 @@ function stream_layers(n, m, o) {
       return a.map(stream_index);
     });
 }
-
 /* Another layer generator using gamma distributions. */
 function stream_waves(n, m) {
   return d3.range(n).map(function(i) {
@@ -28,8 +26,6 @@ function stream_waves(n, m) {
       }).map(stream_index);
     });
 }
-
 function stream_index(d, i) {
   return {x: i, y: Math.max(0, d)};
 }
-

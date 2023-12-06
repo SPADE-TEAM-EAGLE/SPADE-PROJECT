@@ -1,17 +1,14 @@
 (function () {
     "use strict";
     var slideMenu = $('.side-menu');
-
     $(document).on('click', '[data-bs-toggle="sidebar"]', function (event) {
         event.preventDefault();
         $('.app').toggleClass('sidenav-toggled');
     });
     responsive();
-
    $("[data-bs-toggle='slide']").off('click');
    $("[data-bs-toggle='sub-slide']").off('click');
    $("[data-bs-toggle='sub-slide2']").off('click');
-
    $("[data-bs-toggle='slide']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -37,7 +34,6 @@
            e.preventDefault();
        }
    });
-
    $("[data-bs-toggle='sub-slide']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -63,7 +59,6 @@
            e.preventDefault();
        }
    });
-
    $("[data-bs-toggle='sub-slide2']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -89,7 +84,6 @@
            e.preventDefault();
        }
    });
-
    $('.hor-content').on('click', function () {
        $('.side-menu li').each(function () {
            $('.side-menu ul.open').slideUp(300)
@@ -176,17 +170,6 @@ function responsive() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 //________________Horizontal js
 jQuery(function () {
     'use strict';
@@ -195,24 +178,8 @@ jQuery(function () {
         jQuery('body').wrapInner('<div class="horizontalMenucontainer" />');
     });
 }());
-
 //icontext(); 
-
 hovermenu();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function iconoverlay() {
     $(document).on('click', ".app-content", function (event) {
         $('body').removeClass('sidenav-toggled-open');
@@ -232,8 +199,6 @@ function iconoverlay() {
     //Fire it when the page first loads:
     alterClass();
 }
-
-
 function icontext() {
     $(".app-sidebar").off("mouseenter mouseleave");
     $(document).on('click', ".app-sidebar", function (event) {
@@ -259,14 +224,12 @@ function icontext() {
     //Fire it when the page first loads:
     alterClass();
 }
-
 let slideLeft = document.querySelector(".slide-left");
 let slideRight = document.querySelector(".slide-right");
 slideLeft.addEventListener("click", () => {
     slideClick()
 }, true)
 slideRight.addEventListener("click", () => { slideClick() }, true)
-
 function slideClick() {
     let slide = document.querySelectorAll(".slide");
     let slideMenu = document.querySelectorAll(".slide-menu");
@@ -282,7 +245,6 @@ function slideClick() {
         }
     });
 }
-
 var sideMenu = $(".side-menu");
 var slide = "100px";
 let menuWidth = document.querySelector('.horizontal-main')
@@ -297,7 +259,6 @@ $(window).resize(
         let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]);
         let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]);
         let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
-
         if ($('body').hasClass('ltr')) {
             if (marginLeftValue > -check == false && (menuWidth?.offsetWidth - menuContainerWidth) < menuItems.scrollWidth) {
                 sideMenu.stop(false, true).animate({
@@ -344,7 +305,6 @@ $(window).resize(
                     e.classList.remove('is-expanded')
                 })
                 var animationSpeed = 300;
-
                 var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
                 var ul = parent.find('ul:visible').slideUp(animationSpeed);
                 ul.removeClass('open');
@@ -432,7 +392,6 @@ $(document).on("click", ".ltr #slide-left", function () {
     let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]) + 100;
     if (marginLeftValue < 0) {
         sideMenu.stop(false, true).animate({
-
             marginLeft: "+=" + slide
         }, {
             duration: 400
@@ -446,16 +405,13 @@ $(document).on("click", ".ltr #slide-left", function () {
     }
     if (marginLeftValue >= 0) {
         sideMenu.stop(false, true).animate({
-
             marginLeft: 0
         }, {
             duration: 400
         })
         if(menuWidth?.offsetWidth < menuItems.scrollWidth){
-
         }
     }
-
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -475,7 +431,6 @@ $(document).on("click", ".ltr #slide-right", function () {
     let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
     if (marginLeftValue > -check) {
         sideMenu.stop(false, true).animate({
-
             marginLeft: "-=" + slide,
             marginRight: 0,
         }, {
@@ -484,7 +439,6 @@ $(document).on("click", ".ltr #slide-right", function () {
     }
     else {
         sideMenu.stop(false, true).animate({
-
             marginRight: 0,
             marginLeft: -check
         }, {
@@ -495,7 +449,6 @@ $(document).on("click", ".ltr #slide-right", function () {
     if (marginLeftValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
-
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -514,7 +467,6 @@ $(document).on("click", ".rtl #slide-left", function () {
     let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]) + 100;
     if (marginRightValue < 0) {
         sideMenu.stop(false, true).animate({
-
             marginLeft: 0,
             marginRight: "+=" + slide
         }, {
@@ -530,13 +482,11 @@ $(document).on("click", ".rtl #slide-left", function () {
     if (marginRightValue >= 0) {
         $("#slide-left").addClass("d-none");
         sideMenu.stop(false, true).animate({
-
             marginLeft: 0
         }, {
             duration: 400
         })
     }
-
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -556,7 +506,6 @@ $(document).on("click", ".rtl #slide-right", function () {
     let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
     if (marginRightValue > -check) {
         sideMenu.stop(false, true).animate({
-
             marginLeft: 0,
             marginRight: "-=" + slide
         }, {
@@ -565,7 +514,6 @@ $(document).on("click", ".rtl #slide-right", function () {
     }
     else {
         sideMenu.stop(false, true).animate({
-
             marginLeft: 0,
             marginRight: -check
         }, {
@@ -576,7 +524,6 @@ $(document).on("click", ".rtl #slide-right", function () {
     if (marginRightValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
-
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -586,7 +533,6 @@ $(document).on("click", ".rtl #slide-right", function () {
         e.style.display = '';
     })
 });
-
 document.getElementById("year").innerHTML = new Date().getFullYear();
 document.querySelector('.main-content').addEventListener('click', ()=>{
     if (document.querySelector('body').classList.contains('horizontal')) {
@@ -595,7 +541,6 @@ document.querySelector('.main-content').addEventListener('click', ()=>{
             e.classList.remove('is-expanded')
         })
         var animationSpeed = 300;
-
         var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
         var ul = parent.find('ul:visible').slideUp(animationSpeed);
         ul.removeClass('open');

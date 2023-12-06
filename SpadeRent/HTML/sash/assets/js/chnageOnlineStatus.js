@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     function callAPI() {
       $.ajax({
         url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
@@ -17,29 +16,21 @@ $(document).ready(function() {
         }
       });
     }
-  
     let pageReloaded = false;
-  
-
     setTimeout(function() {
       pageReloaded = false;
       console.log(pageReloaded)
     }, 5000);
-  
-
     let navigationEntries = window.performance.getEntriesByType('navigation');
     if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
       pageReloaded = true;
     }
   console.log(pageReloaded)
-
     $(window).on('unload', function(event) {
       if (!pageReloaded) {
-
         console.log(pageReloaded)
         callAPI();
         alert('API call made');
       }
     });
   });
- 

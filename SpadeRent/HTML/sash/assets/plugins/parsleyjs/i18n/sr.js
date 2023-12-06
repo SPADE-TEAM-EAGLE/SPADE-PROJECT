@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('sr', {
   defaultMessage: "Uneta vrednost nije validna.",
   type: {

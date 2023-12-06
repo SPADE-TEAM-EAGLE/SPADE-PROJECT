@@ -6,7 +6,6 @@
  */
 (function ($) {
     'use strict';
-
     var sprintf = function (str) {
         var args = arguments,
             flag = true,
@@ -117,19 +116,15 @@
         var that = this,
             name = $el.attr('name') || options.name || '';
         this.options = options;
-
         this.$el = $el.hide();
-
         this.$label = this.$el.closest('label');
         if (this.$label.length === 0 && this.$el.attr('id')) {
             this.$label = $(sprintf('label[for="%s"]', this.$el.attr('id').replace(/:/g, '\\:')));
         }
-
         this.$parent = $(sprintf(
             '<div class="ms-parent %s" %s/>',
             $el.attr('class') || '',
             sprintf('title="%s"', $el.attr('title'))));
-
         this.$choice = $(sprintf([
                 '<button type="button" class="ms-choice">',
                 '<span class="placeholder">%s</span>',
@@ -137,7 +132,6 @@
                 '</button>'
             ].join(''),
             this.options.placeholder));
-
         this.$drop = $(sprintf('<div class="ms-drop %s"%s></div>',
             this.options.position,
             sprintf(' style="width: %s"', this.options.dropWidth)));
@@ -294,13 +288,10 @@
                 }
             });
             this.$searchInput.off('keydown').on('keydown',function (e) {
-
                 if (e.keyCode === 9 && e.shiftKey) {
                     that.close();
                 }
             }).off('keyup').on('keyup', function (e) {
-
-
                 if (that.options.filterAcceptOnEnter && (e.which === 13 || e.which == 32) && that.$searchInput.val()) {
                     that.$selectAll.click();
                     that.close();
@@ -367,10 +358,8 @@
             this.options.isOpen = true;
             this.$choice.find('>div').addClass('open');
             this.$drop[this.animateMethod('show')]();
-
             this.$selectAll.parent().show();
             this.$noResults.hide();
-
             if (!this.$el.children().length) {
                 this.$selectAll.parent().hide();
                 this.$noResults.show();
@@ -437,14 +426,11 @@
             if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
             }
-
             this.$el.val(this.getSelects()).trigger('change');
-
             this.$drop.find('li').removeClass('selected');
             this.$drop.find('input:checked').each(function () {
                 $(this).parents('li').first().addClass('selected');
             });
-
             if (!isInit) {
                 this.$el.trigger('change');
             }

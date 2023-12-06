@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('lt', {
   dateiso:  "Šis įrašas turi būti teisingo formato data (YYYY-MM-DD).",
   minwords: "Šis įrašas turi turėti ne mažiau kaip %s žodžių.",

@@ -19,26 +19,17 @@
  * Licensed under the MIT license
  */
 (function (factory) {
-
-
-
     if (typeof define === 'function' && define.amd) {
-
         define(['jquery', 'moment'], factory);
     }
     else if (typeof exports === 'object') {
-
         factory(require('jquery'), require('moment'));
     }
     else {
-
         factory(jQuery, moment);
     }
 }(function ($, moment) {
-
     var pluginName = 'clndr';
-
-
     var clndrTemplate =
         "<div class='clndr-controls'>" +
             "<div class='clndr-control-button'>" +
@@ -70,8 +61,6 @@
             "<% } %>" +
             "</tbody>" +
         "</table>";
-
-
     var defaults = {
         events: [],
         ready: null,
@@ -130,7 +119,6 @@
             adjacentMonth: "adjacent-month"
         },
     };
-
     /**
      * The actual plugin constructor.
      * Parses the events and lengthOfTime options to build a calendar of day
@@ -140,18 +128,11 @@
         var dayDiff;
         var constraintEnd;
         var constraintStart;
-
         this.element = element;
-
-
         this.options = $.extend(true, {}, defaults, options);
-
-
         if (this.options.moment) {
             moment = this.options.moment;
         }
-
-
         this.constraints = {
             next: true,
             today: true,
@@ -159,12 +140,6 @@
             nextYear: true,
             previousYear: true
         };
-
-
-
-
-
-
         if (this.options.events.length) {
             if (this.options.multiDayEvents) {
                 this.options.events =
@@ -174,19 +149,9 @@
                     this.addMomentObjectToEvents(this.options.events);
             }
         }
-
-
-
-
-
         if (this.options.lengthOfTime.months || this.options.lengthOfTime.days) {
-
-
             if (this.options.lengthOfTime.months) {
-
                 this.options.lengthOfTime.days = null;
-
-
                 if (this.options.lengthOfTime.startDate) {
                     this.intervalStart =
                         moment(this.options.lengthOfTime.startDate)
@@ -198,16 +163,12 @@
                 } else {
                     this.intervalStart = moment().startOf('month');
                 }
-
-
-
                 this.intervalEnd = moment(this.intervalStart)
                     .add(this.options.lengthOfTime.months, 'months')
                     .subtract(1, 'days');
                 this.month = this.intervalStart.clone();
             }
             else if (this.options.lengthOfTime.days) {
-
                 if (this.options.lengthOfTime.startDate) {
                     this.intervalStart =
                         moment(this.options.lengthOfTime.startDate)
@@ -215,20 +176,16 @@
                 } else {
                     this.intervalStart = moment().weekday(0).startOf('day');
                 }
-
                 this.intervalEnd = moment(this.intervalStart)
                     .add(this.options.lengthOfTime.days - 1, 'days')
                     .endOf('day');
                 this.month = this.intervalStart.clone();
             }
-
-
         } else {
             this.month = moment().startOf('month');
             this.intervalStart = moment(this.month);
             this.intervalEnd = moment(this.month).endOf('month');
         }
-
         if (this.options.startWithMonth) {
             this.month = moment(this.options.startWithMonth).startOf('month');
             this.intervalStart = moment(this.month);
@@ -238,24 +195,14 @@
                     .endOf('day')
                 : moment(this.month).endOf('month');
         }
-
-
         if (this.options.constraints) {
-
             if (this.options.constraints.startDate) {
                 constraintStart = moment(this.options.constraints.startDate);
-
-
-
                 if (this.options.lengthOfTime.days) {
                     if (this.intervalStart.isBefore(constraintStart, 'week')) {
                         this.intervalStart = constraintStart.startOf('week');
                     }
-
-
-
                     dayDiff = this.intervalStart.diff(this.intervalEnd, 'days');
-
                     if (dayDiff < this.options.lengthOfTime.days
                         || this.intervalEnd.isBefore(this.intervalStart))
                     {
@@ -267,7 +214,6 @@
                 }
                 else {
                     if (this.intervalStart.isBefore(constraintStart, 'month')) {
-
                         this.intervalStart
                             .set('month', constraintStart.month())
                             .set('year', constraintStart.year());
@@ -275,8 +221,6 @@
                             .set('month', constraintStart.month())
                             .set('year', constraintStart.year());
                     }
-
-
                     if (this.intervalEnd.isBefore(constraintStart, 'month')) {
                         this.intervalEnd
                             .set('month', constraintStart.month())
@@ -284,15 +228,9 @@
                     }
                 }
             }
-
-
             if (this.options.constraints.endDate) {
                 constraintEnd = moment(this.options.constraints.endDate);
-
-
-
                 if (this.options.lengthOfTime.days) {
-
                     if (this.intervalStart.isAfter(constraintEnd, 'week')) {
                         this.intervalStart = moment(constraintEnd)
                             .endOf('week')
@@ -312,8 +250,6 @@
                             .set('month', constraintEnd.month())
                             .set('year', constraintEnd.year());
                     }
-
-
                     if (this.intervalStart.isAfter(constraintEnd, 'month')) {
                         this.intervalStart
                             .set('month', constraintEnd.month())
@@ -322,123 +258,78 @@
                 }
             }
         }
-
         this._defaults = defaults;
         this._name = pluginName;
-
-
-
-
         this.init();
     }
-
     /**
      * Calendar initialization.
      * Sets up the days of the week, the rendering function, binds all of the
      * events to the rendered calendar, and then stores the node locally.
      */
     Clndr.prototype.init = function () {
-
         this.daysOfTheWeek = this.options.daysOfTheWeek || [];
-
         if (!this.options.daysOfTheWeek) {
             this.daysOfTheWeek = [];
-
             for (var i = 0; i < 7; i++) {
                 this.daysOfTheWeek.push(
                     moment().weekday(i).format('dd').charAt(0));
             }
         }
-
-
         if (this.options.weekOffset) {
             this.daysOfTheWeek = this.shiftWeekdayLabels(this.options.weekOffset);
         }
-
-
         if (!$.isFunction(this.options.render)) {
             this.options.render = null;
-
             if (typeof _ === 'undefined') {
                 throw new Error(
                     "Underscore was not found. Please include underscore.js " +
                     "OR provide a custom render function.");
             } else {
-
-
                 this.compiledClndrTemplate = _.template(this.options.template);
             }
         }
-
-
-
         $(this.element).html("<div class='clndr'></div>");
         this.calendarContainer = $('.clndr', this.element);
-
-
         this.bindEvents();
-
-
         this.render();
-
-
         if (this.options.ready) {
             this.options.ready.apply(this, []);
         }
     };
-
     Clndr.prototype.shiftWeekdayLabels = function (offset) {
         var days = this.daysOfTheWeek;
-
         for (var i = 0; i < offset; i++) {
             days.push(days.shift());
         }
-
         return days;
     };
-
     /**
      * This is where the magic happens. Given a starting date and ending date,
      * an array of calendarDay objects is constructed that contains appropriate
      * events and classes depending on the circumstance.
      */
     Clndr.prototype.createDaysObject = function (startDate, endDate) {
-
-
         var daysArray = [],
             date = startDate.clone(),
             lengthOfInterval = endDate.diff(startDate, 'days'),
             startOfLastMonth, endOfLastMonth, startOfNextMonth,
             endOfNextMonth, diff, dateIterator;
-
-
-
         this._currentIntervalStart = startDate.clone();
-
-
-
         this.eventsLastMonth = [];
         this.eventsNextMonth = [];
         this.eventsThisInterval = [];
-
-
         if (this.options.events.length) {
-
-
-
-
             this.eventsThisInterval = $(this.options.events).filter(
                 function () {
                     var afterEnd = this._clndrStartDateObject.isAfter(endDate),
                         beforeStart = this._clndrEndDateObject.isBefore(startDate);
-
                     if (beforeStart || afterEnd) {
                         return false;
                     } else {
                         return true;
                     }
                 }).toArray();
-
             if (this.options.showAdjacentMonths) {
                 startOfLastMonth = startDate.clone()
                     .subtract(1, 'months')
@@ -448,28 +339,24 @@
                     .add(1, 'months')
                     .startOf('month');
                 endOfNextMonth = startOfNextMonth.clone().endOf('month');
-
                 this.eventsLastMonth = $(this.options.events).filter(
                     function () {
                         var beforeStart = this._clndrEndDateObject
                             .isBefore(startOfLastMonth);
                         var afterEnd = this._clndrStartDateObject
                             .isAfter(endOfLastMonth);
-
                         if (beforeStart || afterEnd) {
                             return false;
                         } else {
                             return true;
                         }
                     }).toArray();
-
                 this.eventsNextMonth = $(this.options.events).filter(
                     function () {
                         var beforeStart = this._clndrEndDateObject
                             .isBefore(startOfNextMonth);
                         var afterEnd = this._clndrStartDateObject
                             .isAfter(endOfNextMonth);
-
                         if (beforeStart || afterEnd) {
                             return false;
                         } else {
@@ -478,19 +365,11 @@
                     }).toArray();
             }
         }
-
-
-
-
-
-
         if (!this.options.lengthOfTime.days) {
             diff = date.weekday() - this.options.weekOffset;
-
             if (diff < 0) {
                 diff += 7;
             }
-
             if (this.options.showAdjacentMonths) {
                 for (var i = 1; i <= diff; i++) {
                     var day = moment([
@@ -514,10 +393,7 @@
                 }
             }
         }
-
-
         dateIterator = startDate.clone();
-
         while (dateIterator.isBefore(endDate) || dateIterator.isSame(endDate, 'day')) {
             daysArray.push(
                 this.createDayObject(
@@ -526,10 +402,6 @@
                 ));
             dateIterator.add(1, 'days');
         }
-
-
-
-
         if (!this.options.lengthOfTime.days) {
             while (daysArray.length % 7 !== 0) {
                 if (this.options.showAdjacentMonths) {
@@ -548,10 +420,6 @@
                 dateIterator.add(1, 'days');
             }
         }
-
-
-
-
         if (this.options.forceSixRows && daysArray.length !== 42) {
             while (daysArray.length < 42) {
                 if (this.options.showAdjacentMonths) {
@@ -570,10 +438,8 @@
                 }
             }
         }
-
         return daysArray;
     };
-
     Clndr.prototype.createDayObject = function (day, monthEvents) {
         var j = 0,
             self = this,
@@ -586,46 +452,32 @@
                 isAdjacentMonth: false
             },
             startMoment, endMoment, selectedMoment;
-
-
         if (!day.isValid() && day.hasOwnProperty('_d') && day._d != undefined) {
             day = moment(day._d);
         }
-
         for (j; j < monthEvents.length; j++) {
-
-
-
             var start = monthEvents[j]._clndrStartDateObject,
                 end = monthEvents[j]._clndrEndDateObject;
-
-
-
             if ( (day.isSame(start, 'day') || day.isAfter(start, 'day'))
                 && (day.isSame(end, 'day') || day.isBefore(end, 'day')) )
             {
                 eventsToday.push( monthEvents[j] );
             }
         }
-
         if (now.format("YYYY-MM-DD") == day.format("YYYY-MM-DD")) {
             extraClasses += (" " + this.options.classes.today);
             properties.isToday = true;
         }
-
         if (day.isBefore(now, 'day')) {
             extraClasses += (" " + this.options.classes.past);
         }
-
         if (eventsToday.length) {
             extraClasses += (" " + this.options.classes.event);
         }
-
         if (!this.options.lengthOfTime.days) {
             if (this._currentIntervalStart.month() > day.month()) {
                 extraClasses += (" " + this.options.classes.adjacentMonth);
                 properties.isAdjacentMonth = true;
-
                 this._currentIntervalStart.year() === day.year()
                     ? extraClasses += (" " + this.options.classes.lastMonth)
                     : extraClasses += (" " + this.options.classes.nextMonth);
@@ -633,49 +485,32 @@
             else if (this._currentIntervalStart.month() < day.month()) {
                 extraClasses += (" " + this.options.classes.adjacentMonth);
                 properties.isAdjacentMonth = true;
-
                 this._currentIntervalStart.year() === day.year()
                     ? extraClasses += (" " + this.options.classes.nextMonth)
                     : extraClasses += (" " + this.options.classes.lastMonth);
             }
         }
-
-
-
         if (this.options.constraints) {
             endMoment = moment(this.options.constraints.endDate);
             startMoment = moment(this.options.constraints.startDate);
-
             if (this.options.constraints.startDate && day.isBefore(startMoment)) {
                 extraClasses += (" " + this.options.classes.inactive);
                 properties.isInactive = true;
             }
-
             if (this.options.constraints.endDate && day.isAfter(endMoment)) {
                 extraClasses += (" " + this.options.classes.inactive);
                 properties.isInactive = true;
             }
         }
-
-
         if (!day.isValid() && day.hasOwnProperty('_d') && day._d != undefined) {
             day = moment(day._d);
         }
-
-
         selectedMoment = moment(this.options.selectedDate);
-
         if (this.options.selectedDate && day.isSame(selectedMoment, 'day')) {
             extraClasses += (" " + this.options.classes.selected);
         }
-
-
-
-
         extraClasses += " calendar-day-" + day.format("YYYY-MM-DD");
-
         extraClasses += " calendar-dow-" + day.weekday();
-
         return this.calendarDay({
             date: day,
             day: day.date(),
@@ -684,14 +519,7 @@
             classes: this.options.targets.day + extraClasses
         });
     };
-
     Clndr.prototype.render = function () {
-
-
-
-
-
-
         var data = {},
             end = null,
             start = null,
@@ -700,7 +528,6 @@
             days, months, currentMonth, eventsThisInterval,
             numberOfRows;
         this.calendarContainer.empty();
-
         if (this.options.lengthOfTime.days) {
             days = this.createDaysObject(
                 this.intervalStart.clone(),
@@ -725,7 +552,6 @@
             months = [];
             numberOfRows = 0;
             eventsThisInterval = [];
-
             for (i = 0; i < this.options.lengthOfTime.months; i++) {
                 var currentIntervalStart = this.intervalStart
                     .clone()
@@ -736,20 +562,15 @@
                 var days = this.createDaysObject(
                     currentIntervalStart,
                     currentIntervalEnd);
-
-
                 eventsThisInterval.push(this.eventsThisInterval);
                 months.push({
                     days: days,
                     month: currentIntervalStart
                 });
             }
-
-
             for (i = 0; i < months.length; i++) {
                 numberOfRows += Math.ceil(months[i].days.length / 7);
             }
-
             data = {
                 days: [],
                 year: null,
@@ -767,14 +588,10 @@
             };
         }
         else {
-
             days = this.createDaysObject(
                 this.month.clone().startOf('month'),
                 this.month.clone().endOf('month'));
-
-
             currentMonth = this.month;
-
             data = {
                 days: days,
                 months: [],
@@ -791,9 +608,6 @@
                 eventsThisMonth: this.eventsThisInterval
             };
         }
-
-
-
         if ( !this.options.render) {
             this.calendarContainer.html(
                 this.compiledClndrTemplate(data));
@@ -801,12 +615,7 @@
             this.calendarContainer.html(
                 this.options.render.apply(this, [data]));
         }
-
-
-
         if (this.options.constraints) {
-
-
             for (var target in this.options.targets) {
                 if (target != this.options.targets.day) {
                     this.element.find('.' + this.options.targets[target])
@@ -815,22 +624,15 @@
                             false);
                 }
             }
-
-
-
             for (var i in this.constraints) {
                 this.constraints[i] = true;
             }
-
             if (this.options.constraints.startDate) {
                 start = moment(this.options.constraints.startDate);
             }
-
             if (this.options.constraints.endDate) {
                 end = moment(this.options.constraints.endDate);
             }
-
-
             if (start
                 && (start.isAfter(this.intervalStart)
                     || start.isSame(this.intervalStart, 'day')))
@@ -839,8 +641,6 @@
                     .toggleClass(this.options.classes.inactive, true);
                 this.constraints.previous = !this.constraints.previous;
             }
-
-
             if (end
                 && (end.isBefore(this.intervalEnd)
                     || end.isSame(this.intervalEnd, 'day')))
@@ -849,23 +649,16 @@
                     .toggleClass(this.options.classes.inactive, true);
                 this.constraints.next = !this.constraints.next;
             }
-
-
             if (start && start.isAfter(oneYearAgo)) {
                 this.element.find('.' + this.options.targets.previousYearButton)
                     .toggleClass(this.options.classes.inactive, true);
                 this.constraints.previousYear = !this.constraints.previousYear;
             }
-
-
             if (end && end.isBefore(oneYearFromEnd)) {
                 this.element.find('.' + this.options.targets.nextYearButton)
                     .toggleClass(this.options.classes.inactive, true);
                 this.constraints.nextYear = !this.constraints.nextYear;
             }
-
-
-
             if ( (start && start.isAfter( moment(), 'month' ))
                 || (end && end.isBefore( moment(), 'month' )) )
             {
@@ -874,12 +667,10 @@
                 this.constraints.today = !this.constraints.today;
             }
         }
-
         if (this.options.doneRendering) {
             this.options.doneRendering.apply(this, []);
         }
     };
-
     Clndr.prototype.bindEvents = function () {
         var data = {},
             self = this,
@@ -890,8 +681,6 @@
                 ? 'touchstart'
                 : 'click',
             eventName = eventType + '.clndr';
-
-
         $container
             .off(eventName, '.' + targets.day)
             .off(eventName, '.' + targets.empty)
@@ -900,19 +689,13 @@
             .off(eventName, '.' + targets.previousButton)
             .off(eventName, '.' + targets.nextYearButton)
             .off(eventName, '.' + targets.previousYearButton);
-
-
         $container.on(eventName, '.' + targets.day, function (event) {
             var target,
                 $currentTarget = $(event.currentTarget);
-
             if (self.options.clickEvents.click) {
                 target = self.buildTargetObject(event.currentTarget, true);
                 self.options.clickEvents.click.apply(self, [target]);
             }
-
-
-
             if (self.options.adjacentDaysChangeMonth) {
                 if ($currentTarget.is('.' + classes.lastMonth)) {
                     self.backActionWithContext(self);
@@ -921,36 +704,26 @@
                     self.forwardActionWithContext(self);
                 }
             }
-
-
             if (self.options.trackSelectedDate) {
                 if (self.options.ignoreInactiveDaysInSelection
                     && $currentTarget.hasClass(classes.inactive))
                 {
                     return;
                 }
-
-
                 self.options.selectedDate =
                     self.getTargetDateString(event.currentTarget);
-
-
                 $container.find('.' + classes.selected)
                     .removeClass(classes.selected);
                 $currentTarget.addClass(classes.selected);
             }
         });
-
-
         $container.on(eventName, '.' + targets.empty, function (event) {
             var target,
                 $eventTarget = $(event.currentTarget);
-
             if (self.options.clickEvents.click) {
                 target = self.buildTargetObject(event.currentTarget, false);
                 self.options.clickEvents.click.apply(self, [target]);
             }
-
             if (self.options.adjacentDaysChangeMonth) {
                 if ($eventTarget.is('.' + classes.lastMonth)) {
                     self.backActionWithContext(self);
@@ -960,13 +733,9 @@
                 }
             }
         });
-
-
-
         data = {
             context: this
         };
-
         $container
             .on(eventName, '.' + targets.todayButton, data, this.todayAction)
             .on(eventName, '.' + targets.nextButton, data, this.forwardAction)
@@ -974,7 +743,6 @@
             .on(eventName, '.' + targets.nextYearButton, data, this.nextYearAction)
             .on(eventName, '.' + targets.previousYearButton, data, this.previousYearAction);
     };
-
     /**
      * If the user provided a click callback we'd like to give them something
      * nice to work with. buildTargetObject takes the DOM element that was
@@ -983,25 +751,18 @@
      * be nice to use a data- attribute in the future.
      */
     Clndr.prototype.buildTargetObject = function (currentTarget, targetWasDay) {
-
-
         var target = {
             date: null,
             events: [],
             element: currentTarget
         };
         var dateString, filterFn;
-
-
         if (targetWasDay) {
             dateString = this.getTargetDateString(currentTarget);
             target.date = (dateString)
                 ? moment(dateString)
                 : null;
-
-
             if (this.options.events) {
-
                 if (this.options.multiDayEvents) {
                     filterFn = function () {
                         var isSameStart = target.date.isSame(
@@ -1027,36 +788,25 @@
                         return startString == dateString;
                     };
                 }
-
-
                 target.events = $.makeArray(
                     $(this.options.events).filter(filterFn));
             }
         }
-
         return target;
     };
-
     /**
      * Get moment date object of the date associated with the given target.
      * This method is meant to be called on ".day" elements.
      */
     Clndr.prototype.getTargetDateString = function (target) {
-
         var classNameIndex = target.className.indexOf('calendar-day-');
-
         if (classNameIndex !== -1) {
-
-
-
             return target.className.substring(
                 classNameIndex + 13,
                 classNameIndex + 23);
         }
-
         return null;
     };
-
     /**
      * Triggers any applicable events given a change in the calendar's start
      * and end dates. ctx contains the current (changed) start and end date,
@@ -1077,9 +827,6 @@
             nextYear, prevYear, yearChanged,
             nextMonth, prevMonth, monthChanged,
             nextInterval, prevInterval, intervalChanged;
-
-
-
         nextMonth = newInt.start.isAfter( orig.start )
             && (Math.abs(newInt.start.month() - orig.start.month()) == 1
                 || orig.start.month() === 11 && newInt.start.month() === 0);
@@ -1093,53 +840,41 @@
         prevYear = orig.start.year() - newInt.start.year() === 1
             || orig.end.year() - newInt.end.year() === 1;
         yearChanged = newInt.start.year() !== orig.start.year();
-
-
         if (timeOpt.days || timeOpt.months) {
             nextInterval = newInt.start.isAfter(orig.start);
             prevInterval = newInt.start.isBefore(orig.start);
             intervalChanged = nextInterval || prevInterval;
-
             if (nextInterval && eventsOpt.nextInterval) {
                 eventsOpt.nextInterval.apply(ctx, intervalArg);
             }
-
             if (prevInterval && eventsOpt.previousInterval) {
                 eventsOpt.previousInterval.apply(ctx, intervalArg);
             }
-
             if (intervalChanged && eventsOpt.onIntervalChange) {
                 eventsOpt.onIntervalChange.apply(ctx, intervalArg);
             }
         }
-
         else {
             if (nextMonth && eventsOpt.nextMonth) {
                 eventsOpt.nextMonth.apply(ctx, monthArg);
             }
-
             if (prevMonth && eventsOpt.previousMonth) {
                 eventsOpt.previousMonth.apply(ctx, monthArg);
             }
-
             if (monthChanged && eventsOpt.onMonthChange) {
                 eventsOpt.onMonthChange.apply(ctx, monthArg);
             }
-
             if (nextYear && eventsOpt.nextYear) {
                 eventsOpt.nextYear.apply(ctx, monthArg);
             }
-
             if (prevYear && eventsOpt.previousYear) {
                 eventsOpt.previousYear.apply(ctx, monthArg);
             }
-
             if (yearChanged && eventsOpt.onYearChange) {
                 eventsOpt.onYearChange.apply(ctx, monthArg);
             }
         }
     };
-
     /**
      * Main action to go backward one period. Other methods call these, like
      * backAction which proxies jQuery events, and backActionWithContext which
@@ -1158,17 +893,11 @@
                 end: ctx.intervalEnd.clone(),
                 start: ctx.intervalStart.clone()
             };
-
-
         options = $.extend(true, {}, defaults, options);
-
-
         if (!ctx.constraints.previous) {
             return ctx;
         }
-
         if (!timeOpt.days) {
-
             ctx.intervalStart
                 .subtract(timeOpt.interval, 'months')
                 .startOf('month');
@@ -1179,42 +908,32 @@
             ctx.month = ctx.intervalStart.clone();
         }
         else {
-
             ctx.intervalStart
                 .subtract(timeOpt.interval, 'days')
                 .startOf('day');
             ctx.intervalEnd = ctx.intervalStart.clone()
                 .add(timeOpt.days - 1, 'days')
                 .endOf('day');
-
             ctx.month = ctx.intervalStart.clone();
         }
-
         ctx.render();
-
         if (options.withCallbacks) {
             ctx.triggerEvents(ctx, orig);
         }
-
         return ctx;
     };
-
     Clndr.prototype.backAction = function (event) {
         var ctx = event.data.context;
         ctx.backActionWithContext(ctx);
     };
-
     Clndr.prototype.backActionWithContext = function (ctx) {
         ctx.back({
             withCallbacks: true
         }, ctx);
     };
-
     Clndr.prototype.previous = function (options) {
-
         return this.back(options);
     };
-
     /**
      * Main action to go forward one period. Other methods call these, like
      * forwardAction which proxies jQuery events, and backActionWithContext
@@ -1232,28 +951,20 @@
                 end: ctx.intervalEnd.clone(),
                 start: ctx.intervalStart.clone()
             };
-
-
         options = $.extend(true, {}, defaults, options);
-
-
         if (!ctx.constraints.next) {
             return ctx;
         }
-
         if (ctx.options.lengthOfTime.days) {
-
             ctx.intervalStart
                 .add(timeOpt.interval, 'days')
                 .startOf('day');
             ctx.intervalEnd = ctx.intervalStart.clone()
                 .add(timeOpt.days - 1, 'days')
                 .endOf('day');
-
             ctx.month = ctx.intervalStart.clone();
         }
         else {
-
             ctx.intervalStart
                 .add(timeOpt.interval, 'months')
                 .startOf('month');
@@ -1263,32 +974,24 @@
                 .endOf('month');
             ctx.month = ctx.intervalStart.clone();
         }
-
         ctx.render();
-
         if (options.withCallbacks) {
             ctx.triggerEvents(ctx, orig);
         }
-
         return ctx;
     };
-
     Clndr.prototype.forwardAction = function (event) {
         var ctx = event.data.context;
         ctx.forwardActionWithContext(ctx);
     };
-
     Clndr.prototype.forwardActionWithContext = function (ctx) {
         ctx.forward({
             withCallbacks: true
         }, ctx);
     };
-
     Clndr.prototype.next = function (options) {
-
         return this.forward(options);
     };
-
     /**
      * Main action to go back one year.
      */
@@ -1303,34 +1006,25 @@
                 end: ctx.intervalEnd.clone(),
                 start: ctx.intervalStart.clone()
             };
-
-
         options = $.extend(true, {}, defaults, options);
-
-
         if (!ctx.constraints.previousYear) {
             return ctx;
         }
-
         ctx.month.subtract(1, 'year');
         ctx.intervalStart.subtract(1, 'year');
         ctx.intervalEnd.subtract(1, 'year');
         ctx.render();
-
         if (options.withCallbacks) {
             ctx.triggerEvents(ctx, orig);
         }
-
         return ctx;
     };
-
     Clndr.prototype.previousYearAction = function (event) {
         var ctx = event.data.context;
         ctx.previousYear({
             withCallbacks: true
         }, ctx);
     };
-
     /**
      * Main action to go forward one year.
      */
@@ -1345,34 +1039,25 @@
                 end: ctx.intervalEnd.clone(),
                 start: ctx.intervalStart.clone()
             };
-
-
         options = $.extend(true, {}, defaults, options);
-
-
         if (!ctx.constraints.nextYear) {
             return ctx;
         }
-
         ctx.month.add(1, 'year');
         ctx.intervalStart.add(1, 'year');
         ctx.intervalEnd.add(1, 'year');
         ctx.render();
-
         if (options.withCallbacks) {
             ctx.triggerEvents(ctx, orig);
         }
-
         return ctx;
     };
-
     Clndr.prototype.nextYearAction = function (event) {
         var ctx = event.data.context;
         ctx.nextYear({
             withCallbacks: true
         }, ctx);
     };
-
     Clndr.prototype.today = function (options /*, ctx */) {
         var ctx = (arguments.length > 1)
                 ? arguments[1]
@@ -1385,16 +1070,9 @@
                 end: ctx.intervalEnd.clone(),
                 start: ctx.intervalStart.clone()
             };
-
-
         options = $.extend(true, {}, defaults, options);
-
         ctx.month = moment().startOf('month');
-
         if (timeOpt.days) {
-
-
-
             if (timeOpt.startDate) {
                 ctx.intervalStart = moment()
                     .weekday(timeOpt.startDate.weekday())
@@ -1402,44 +1080,35 @@
             } else {
                 ctx.intervalStart = moment().weekday(0).startOf('day');
             }
-
             ctx.intervalEnd = ctx.intervalStart.clone()
                 .add(timeOpt.days - 1, 'days')
                 .endOf('day');
         }
         else {
-
             ctx.intervalStart = moment().startOf('month');
             ctx.intervalEnd = ctx.intervalStart.clone()
                 .add(timeOpt.months || timeOpt.interval, 'months')
                 .subtract(1, 'days')
                 .endOf('month');
         }
-
-
         if (!ctx.intervalStart.isSame(orig.start)
             || !ctx.intervalEnd.isSame(orig.end))
         {
             ctx.render();
         }
-
-
         if (options.withCallbacks) {
             if (ctx.options.clickEvents.today) {
                 ctx.options.clickEvents.today.apply(ctx, [moment(ctx.month)]);
             }
-
             ctx.triggerEvents(ctx, orig);
         }
     };
-
     Clndr.prototype.todayAction = function (event) {
         var ctx = event.data.context;
         ctx.today({
             withCallbacks: true
         }, ctx);
     };
-
     /**
      * Changes the month. Accepts 0-11 or a full/partial month name e.g. "Jan",
      * "February", "Mar", etc.
@@ -1450,44 +1119,35 @@
                 end: this.intervalEnd.clone(),
                 start: this.intervalStart.clone()
             };
-
         if (timeOpt.days || timeOpt.months) {
             console.log(
                 'You are using a custom date interval. Use ' +
                 'Clndr.setIntervalStart(startDate) instead.');
             return this;
         }
-
         this.month.month(newMonth);
         this.intervalStart = this.month.clone().startOf('month');
         this.intervalEnd = this.intervalStart.clone().endOf('month');
         this.render();
-
         if (options && options.withCallbacks) {
             this.triggerEvents(this, orig);
         }
-
         return this;
     };
-
     Clndr.prototype.setYear = function (newYear, options) {
         var orig = {
             end: this.intervalEnd.clone(),
             start: this.intervalStart.clone()
         };
-
         this.month.year(newYear);
         this.intervalEnd.year(newYear);
         this.intervalStart.year(newYear);
         this.render();
-
         if (options && options.withCallbacks) {
             this.triggerEvents(this, orig);
         }
-
         return this;
     };
-
     /**
      * Sets the start of the time period according to newDate. newDate can be
      * a string or a moment object.
@@ -1498,14 +1158,12 @@
                 end: this.intervalEnd.clone(),
                 start: this.intervalStart.clone()
             };
-
         if (!timeOpt.days && !timeOpt.months) {
             console.log(
                 'You are using a custom date interval. Use ' +
                 'Clndr.setIntervalStart(startDate) instead.');
             return this;
         }
-
         if (timeOpt.days) {
             this.intervalStart = moment(newDate).startOf('day');
             this.intervalEnd = this.intervalStart.clone()
@@ -1518,17 +1176,13 @@
                 .subtract(1, 'days')
                 .endOf('month');
         }
-
         this.month = this.intervalStart.clone();
         this.render();
-
         if (options && options.withCallbacks) {
             this.triggerEvents(this, orig);
         }
-
         return this;
     };
-
     /**
      * Overwrites extras in the calendar and triggers a render.
      */
@@ -1537,22 +1191,18 @@
         this.render();
         return this;
     };
-
     /**
      * Overwrites events in the calendar and triggers a render.
      */
     Clndr.prototype.setEvents = function (events) {
-
         if (this.options.multiDayEvents) {
             this.options.events = this.addMultiDayMomentObjectsToEvents(events);
         } else {
             this.options.events = this.addMomentObjectToEvents(events);
         }
-
         this.render();
         return this;
     };
-
     /**
      * Adds additional events to the calendar and triggers a render.
      */
@@ -1560,8 +1210,6 @@
         var reRender = (arguments.length > 1)
             ? arguments[1]
             : true;
-
-
         if (this.options.multiDayEvents) {
             this.options.events = $.merge(
                 this.options.events,
@@ -1571,14 +1219,11 @@
                 this.options.events,
                 this.addMomentObjectToEvents(events));
         }
-
         if (reRender) {
             this.render();
         }
-
         return this;
     };
-
     /**
      * Passes all events through a matching function. Any that pass a truth
      * test will be removed from the calendar's events. This triggers a render.
@@ -1589,53 +1234,40 @@
                 this.options.events.splice(i, 1);
             }
         }
-
         this.render();
         return this;
     };
-
     Clndr.prototype.addMomentObjectToEvents = function (events) {
         var i = 0,
             self = this;
-
         for (i; i < events.length; i++) {
-
-
             events[i]._clndrStartDateObject =
                 moment(events[i][self.options.dateParameter]);
             events[i]._clndrEndDateObject =
                 moment(events[i][self.options.dateParameter]);
         }
-
         return events;
     };
-
     Clndr.prototype.addMultiDayMomentObjectsToEvents = function (events) {
         var i = 0,
             self = this,
             multiEvents = self.options.multiDayEvents;
-
         for (i; i < events.length; i++) {
             var end = events[i][multiEvents.endDate],
                 start = events[i][multiEvents.startDate];
-
-
             if (!end && !start) {
                 events[i]._clndrEndDateObject =
                     moment(events[i][multiEvents.singleDay]);
                 events[i]._clndrStartDateObject =
                     moment(events[i][multiEvents.singleDay]);
             }
-
             else {
                 events[i]._clndrEndDateObject = moment(end || start);
                 events[i]._clndrStartDateObject = moment(start || end);
             }
         }
-
         return events;
     };
-
     Clndr.prototype.calendarDay = function (options) {
         var defaults = {
             day: "",
@@ -1643,10 +1275,8 @@
             events: [],
             classes: this.options.targets.empty
         };
-
         return $.extend({}, defaults, options);
     };
-
     Clndr.prototype.destroy = function () {
         var $container = $(this.calendarContainer);
         $container.parent().data('plugin_clndr', null);
@@ -1654,27 +1284,22 @@
         $container.empty().remove();
         this.element = null;
     };
-
     $.fn.clndr = function (options) {
         var clndrInstance;
-
         if (this.length > 1) {
             throw new Error(
                 "CLNDR does not support multiple elements yet. Make sure " +
                 "your clndr selector returns only one element.");
         }
-
         if (!this.length) {
             throw new Error(
                 "CLNDR cannot be instantiated on an empty selector.");
         }
-
         if (!this.data('plugin_clndr')) {
             clndrInstance = new Clndr(this, options);
             this.data('plugin_clndr', clndrInstance);
             return clndrInstance;
         }
-
         return this.data('plugin_clndr');
     };
 }));

@@ -1,6 +1,5 @@
 $(function() {
 	"use strict";
-
     /*LIne-Chart */
     var ctx = document.getElementById("chartLine").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -30,7 +29,6 @@ $(function() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-
             scales: {
                 xAxes: [{
                     ticks: {
@@ -63,7 +61,6 @@ $(function() {
             },
         }
     });
-
     /* Bar-Chart1 */
     var ctx = document.getElementById("chartBar1").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -78,7 +75,6 @@ $(function() {
                 borderColor: '#6c5ffc',
                 borderWidth: 2.0,
                 pointBackgroundColor: '#ffffff',
-
             }]
         },
         options: {
@@ -120,7 +116,6 @@ $(function() {
             },
         }
     });
-
     /* Bar-Chart2*/
     var ctx = document.getElementById("chartBar2");
     var myChart = new Chart(ctx, {
@@ -174,7 +169,6 @@ $(function() {
             },
         }
     });
-
     /* Area Chart*/
     var ctx = document.getElementById("chartArea");
     var myChart = new Chart(ctx, {
@@ -233,7 +227,6 @@ $(function() {
             },
         }
     });
-
     /* Pie Chart*/
     var datapie = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -253,7 +246,6 @@ $(function() {
             animateRotate: true
         }
     };
-
     /* Doughbut Chart*/
     var ctx6 = document.getElementById('chartPie');
     var myPieChart6 = new Chart(ctx6, {
@@ -261,7 +253,6 @@ $(function() {
         data: datapie,
         options: optionpie
     });
-
     /* Pie Chart*/
     var ctx7 = document.getElementById('chartDonut');
     var myPieChart7 = new Chart(ctx7, {
@@ -269,20 +260,16 @@ $(function() {
         data: datapie,
         options: optionpie
     });
-
     /* Radar chart*/
     var ctx = document.getElementById("chartRadar");
     var myChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: [
-
                 ["Eating", "Dinner"],
                 ["Drinking", "Water"], "Sleeping", ["Designing", "Graphics"], "Coding", "Cycling", "Running",
-
             ],
             datasets: [{
-
                 label: "Data1",
                 data: [65, 59, 66, 45, 56, 55, 40],
                 borderColor: "rgba(108, 95, 252, .8)",
@@ -314,10 +301,8 @@ $(function() {
                     fontColor: '#9ba6b5',
                 },
             },
-
         }
     });
-
     /* polar chart */
     var ctx = document.getElementById("chartPolar");
     var myChart = new Chart(ctx, {
@@ -346,5 +331,4 @@ $(function() {
             },
         }
     });
-
 });

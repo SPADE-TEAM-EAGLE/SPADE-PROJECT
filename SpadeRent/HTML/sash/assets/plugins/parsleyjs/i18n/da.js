@@ -1,5 +1,3 @@
-
-
 Parsley.addMessages('da', {
   defaultMessage: "Indtast venligst en korrekt værdi.",
   type: {

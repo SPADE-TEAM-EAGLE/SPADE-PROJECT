@@ -1,9 +1,5 @@
 const { selectQuery } = require("../constants/queries");
 const { queryRunner } = require("./queryRunner");
-
-
-
-
 const verifyMailCheck = async (email) => {
   try {
     const selectTenantResult = await queryRunner(selectQuery("users", "Email"), [email]);
@@ -11,13 +7,10 @@ const verifyMailCheck = async (email) => {
       const createdDate = new Date(selectTenantResult[0][0].created_at);
       const newDate = new Date(createdDate.getTime());
       newDate.setDate(newDate.getDate() + 7); // Adding 7 days to the createdDate
-
       const currentDate = new Date();
-      
       if (currentDate <= newDate) {
         const differenceInMilliseconds = newDate - currentDate;
         const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-
         if (differenceInDays === 0) {
           return {
             status: 200,
@@ -53,7 +46,6 @@ const verifyMailCheck = async (email) => {
     };
   }
 };
-
 module.exports = {
   verifyMailCheck,
 };

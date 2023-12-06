@@ -2,11 +2,8 @@
  * 穿梭框
  */
 var Transfer = (function ($) {
-
     var selected_total_num = 0;
-
     var currentTimeStr = (new Date()).getTime() + parseInt(10000 * Math.random());
-
     var inputId = "";
     /**
      * 构造穿梭框
@@ -14,99 +11,52 @@ var Transfer = (function ($) {
      */
     function transfer(settings) {
         inputId = settings.inputId;
-
         var itemName = settings.itemName;
-
         var groupItemName = settings.groupItemName;
-
         var groupListName = settings.groupListName;
-
         var valueName = settings.valueName;
-
         var container = "." + settings.container;
-
         var callable = settings.callable;
-
         var transferId = "#transfer_double_" + inputId;
-
         var selectInputId = "#" + inputId;
-
         var data = settings.data || [];
-
         var groupData = settings.groupData || [];
-
         var total_num = settings.data.length;
-
         var total_num_str = settings.data.length + " Items";
-
         var total_group_num = getGroupNum(groupData, groupListName);
-
         var total_group_num_str = total_group_num + " Items";
-
         var new_total_num = 0;
-
         var new_group_total_num = 0;
-
         var tabItemName = ".tab-item-name-" + currentTimeStr;
-
         var transferDoubleList = ".transfer-double-list-" + currentTimeStr;
-
         var listSearchId = "#listSearch_" + currentTimeStr;
-
         var groupListSearchId = "#groupListSearch_" + currentTimeStr;
-
         var selectedListSearchId = "#selectedListSearch_" + currentTimeStr;
-
         var tabContentFirst = ".tab-content-first-" + currentTimeStr;
-
         var transferDoubleListUl = ".transfer-double-list-ul-" + currentTimeStr;
-
         var transferDoubleListLi = ".transfer-double-list-li-" + currentTimeStr;
-
         var checkboxItem = ".checkbox-item-" + currentTimeStr;
-
         var checkboxName = ".checkbox-name-" + currentTimeStr;
-
         var totalNum = ".total_num_" + currentTimeStr;
-
         var selectAllId = "#selectAll_" + currentTimeStr;
-
         var transferDoubleGroupListUl = ".transfer-double-group-list-ul-" + currentTimeStr;
-
         var transferDoubleGroupListLi = ".transfer-double-group-list-li-" + currentTimeStr;
-
         var groupSelectAll = ".group-select-all-" + currentTimeStr;
-
         var groupName = ".group-name-" + currentTimeStr;
-
         var transferDoubleGroupListLiUl = ".transfer-double-group-list-li-ul-" + currentTimeStr;
-
         var transferDoubleGroupListLiUlLi = ".transfer-double-group-list-li-ul-li-" + currentTimeStr;
-
         var groupCheckboxItem = ".group-checkbox-item-" + currentTimeStr;
-
         var groupCheckboxName = ".group-checkbox-name-" + currentTimeStr;
-
         var groupTotalNum = ".group_total_num_" + currentTimeStr;
-
         var groupsSelectAllId = "#groupsSelectAll_" + currentTimeStr;
-
         var transferDoubleSelectedListUl = ".transfer-double-selected-list-ul-" + currentTimeStr;
-
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
-
         var checkboxSelectedItem = ".checkbox-selected-item-" + currentTimeStr;
-
         var checkboxSelectedName = ".checkbox-selected-name-" + currentTimeStr;
-
         var selectedAllId = "#selectedAll_" + currentTimeStr;
-
         var selectedTotalNum = ".selected_total_num_" + currentTimeStr;
-
         var addSelected = "#add_selected_" + currentTimeStr;
-
         var deleteSelected = "#delete_selected_" + currentTimeStr;
-
         $(container).append(generateTransfer(inputId, currentTimeStr));
         /**
          * 数据渲染
@@ -132,9 +82,7 @@ var Transfer = (function ($) {
                 });
                 $(addSelected).removeClass("btn-arrow-active");
                 $(transferId).find(transferDoubleSelectedListUl).empty();
-
                 $(transferId).find(selectedTotalNum).text("0 Items");
-
                 if ($(transferId).find(tabContentFirst).css("display") != "none") {
                     $(transferId).find(transferDoubleGroupListLiUlLi).each(function () {
                         $(this).css('display', 'block');
@@ -146,8 +94,6 @@ var Transfer = (function ($) {
                     $(transferId).find(groupTotalNum).empty();
                     $(transferId).find(groupTotalNum).append($(transferId).find(transferDoubleGroupListLiUlLi).length + " Items");
                 } else {
-
-
                     for (var j = 0; j < $(transferId).find(groupSelectAll).length; j++) {
                         $(transferId).find(groupSelectAll).eq(j).prop("disabled", "");
                     }
@@ -161,9 +107,7 @@ var Transfer = (function ($) {
                     $(transferId).find(totalNum).empty();
                     $(transferId).find(totalNum).append($(transferId).find(transferDoubleListLi).length + " Items");
                 }
-
                 callable.call(this, getSelected(), getSelectedName());
-
                 $(addSelected).removeClass("btn-arrow-active");
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
@@ -200,7 +144,6 @@ var Transfer = (function ($) {
                 $(addSelected).removeClass("btn-arrow-active");
             }
         });
-
         $(transferId).on("click", checkboxSelectedItem, function () {
             var deleted_num = 0;
             for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length; i++) {
@@ -214,17 +157,12 @@ var Transfer = (function ($) {
                 $(deleteSelected).removeClass("btn-arrow-active");
             }
         });
-
         $(groupSelectAll).on("click", function () {
-
             var groupIndex = ($(this).attr("id")).split("_")[1];
-
             if ($(this).is(':checked')) {
-
                 $(addSelected).addClass("btn-arrow-active");
                 for (var i = 0; i < $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).length; i++) {
                     if (!$(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).is(':checked') && $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).parent().parent().css("display") != "none") {
-
                         $(transferId).find(".belongs-group-" + groupIndex + "-" + currentTimeStr).eq(i).prop("checked", true);
                     }
                 }
@@ -285,7 +223,6 @@ var Transfer = (function ($) {
             if ($(this).is(':checked')) {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if ($(transferId).find(transferDoubleGroupListLiUlLi).eq(i).css('display') != "none" && !$(transferId).find(groupCheckboxItem).eq(i).is(':checked')) {
-
                         $(transferId).find(groupCheckboxItem).eq(i).prop("checked", true);
                     }
                     if (!$(transferId).find(groupSelectAll).eq(i).is(':checked')) {
@@ -311,7 +248,6 @@ var Transfer = (function ($) {
         $(addSelected).on("click", function () {
             var listHtmlStr = "";
             var selectedItemNum = 0;
-
             if ($(transferId).find(tabContentFirst).css("display") != "none") {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if ($(transferId).find(groupCheckboxItem).eq(i).is(':checked')) {
@@ -337,21 +273,16 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(groupTotalNum).empty();
-
                 new_group_total_num = total_group_num - selectedItemNum;
-
                 selected_total_num = selectedItemNum;
                 var new_total_num_str = new_group_total_num + " Items";
-
                 $(transferId).find(groupTotalNum).append(new_total_num_str);
-
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if (new_group_total_num == 0) {
                     $(groupsSelectAllId).prop("checked", true);
                     $(groupsSelectAllId).prop("disabled", "disabled");
                 }
             } else {
-
                 for (var i = 0; i < $(transferId).find(checkboxItem).length; i++) {
                     if ($(transferId).find(checkboxItem).eq(i).is(':checked')) {
                         var checkboxItemId = $(transferId).find(checkboxItem).eq(i).attr("id");
@@ -369,14 +300,10 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(totalNum).empty();
-
                 new_total_num = total_num - selectedItemNum;
-
                 selected_total_num = selectedItemNum;
                 var new_total_num_str = new_total_num + " Items";
-
                 $(transferId).find(totalNum).append(new_total_num_str);
-
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if (new_total_num == 0) {
                     $(selectAllId).prop("checked", true);
@@ -386,7 +313,6 @@ var Transfer = (function ($) {
             $(addSelected).removeClass("btn-arrow-active");
             $(transferId).find(transferDoubleSelectedListUl).empty();
             $(transferId).find(transferDoubleSelectedListUl).append(listHtmlStr);
-
             callable.call(this, getSelected(), getSelectedName());
         });
         /**
@@ -394,7 +320,6 @@ var Transfer = (function ($) {
          */
         $(deleteSelected).on("click", function () {
             var deleteItemNum = 0;
-
             if ($(transferId).find(tabContentFirst).css("display") != "none") {
                 for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length;) {
                     if ($(transferId).find(checkboxSelectedItem).eq(i).is(':checked')) {
@@ -413,21 +338,16 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(groupTotalNum).empty();
-
                 new_group_total_num = new_group_total_num + deleteItemNum;
-
                 selected_total_num -= deleteItemNum;
                 var new_total_num_str = new_group_total_num + " Items";
-
                 $(transferId).find(groupTotalNum).append(new_total_num_str);
-
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if ($(groupsSelectAllId).is(':checked')) {
                     $(groupsSelectAllId).prop("checked", false);
                     $(groupsSelectAllId).removeAttr("disabled");
                 }
             } else {
-
                 for (var i = 0; i < $(transferId).find(checkboxSelectedItem).length;) {
                     if ($(transferId).find(checkboxSelectedItem).eq(i).is(':checked')) {
                         var checkboxSelectedItemId = $(transferId).find(checkboxSelectedItem).eq(i).attr("id");
@@ -442,14 +362,10 @@ var Transfer = (function ($) {
                     }
                 }
                 $(transferId).find(totalNum).empty();
-
                 new_total_num = new_total_num + deleteItemNum;
-
                 selected_total_num -= deleteItemNum;
                 var new_total_num_str = new_total_num + " Items";
-
                 $(transferId).find(totalNum).append(new_total_num_str);
-
                 $(transferId).find(selectedTotalNum).text(selected_total_num + " Items");
                 if ($(selectAllId).is(':checked')) {
                     $(selectAllId).prop("checked", false);
@@ -457,16 +373,13 @@ var Transfer = (function ($) {
                 }
             }
             $(deleteSelected).removeClass("btn-arrow-active");
-
             callable.call(this, getSelected(), getSelectedName());
         });
         /**
          * 左侧模糊查询
          */
         $(listSearchId).on("keyup", function () {
-
             $(transferId).find(transferDoubleListUl).css('display', 'block');
-
             if ($(listSearchId).val() == "") {
                 for (var i = 0; i < $(transferId).find(checkboxItem).length; i++) {
                     if (!$(transferId).find(checkboxItem).eq(i).is(':checked')) {
@@ -475,10 +388,8 @@ var Transfer = (function ($) {
                 }
                 return;
             }
-
             $(transferId).find(transferDoubleListLi).css('display', 'none');
             for (var j = 0; j < $(transferId).find(transferDoubleListLi).length; j++) {
-
                 if (!$(transferId).find(checkboxItem).eq(j).is(':checked')
                     && $(transferId).find(transferDoubleListLi).eq(j).text()
                         .substr(0, $(listSearchId).val().length).toLowerCase() == $(listSearchId).val().toLowerCase()) {
@@ -490,29 +401,22 @@ var Transfer = (function ($) {
          * 左侧分组模糊查询
          */
         $(groupListSearchId).on("keyup", function () {
-
             $(transferId).find(transferDoubleGroupListUl).css('display', 'block');
-
             if ($(groupListSearchId).val() == "") {
                 for (var i = 0; i < $(transferId).find(groupCheckboxItem).length; i++) {
                     if (!$(transferId).find(checkboxItem).eq(i).is(':checked')) {
-
                         $(transferId).find(transferDoubleGroupListLiUlLi).eq(i).parent().parent().css('display', 'block');
-
                         $(transferId).find(transferDoubleGroupListLiUlLi).eq(i).css('display', 'block');
                     }
                 }
                 return;
             }
-
             $(transferId).find(transferDoubleGroupListLi).css('display', 'none');
             $(transferId).find(transferDoubleGroupListLiUlLi).css('display', 'none');
             for (var j = 0; j < $(transferId).find(transferDoubleGroupListLiUlLi).length; j++) {
-
                 if (!$(transferId).find(groupCheckboxItem).eq(j).is(':checked')
                     && $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).text()
                         .substr(0, $(groupListSearchId).val().length).toLowerCase() == $(groupListSearchId).val().toLowerCase()) {
-
                     $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).parent().parent().css('display', 'block');
                     $(transferId).find(transferDoubleGroupListLiUlLi).eq(j).css('display', 'block');
                 }
@@ -522,16 +426,13 @@ var Transfer = (function ($) {
          * 右侧模糊查询
          */
         $(selectedListSearchId).keyup(function () {
-
             $(transferId).find(transferDoubleSelectedListUl).css('display', 'block');
-
             if ($(selectedListSearchId).val() == "") {
                 $(transferId).find(transferDoubleSelectedListLi).css('display', 'block');
                 return;
             }
             $(transferId).find(transferDoubleSelectedListLi).css('display', 'none');
             for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-
                 if ($(transferId).find(transferDoubleSelectedListLi).eq(i).text()
                         .substr(0, $(selectedListSearchId).val().length).toLowerCase() == $(selectedListSearchId).val().toLowerCase()) {
                     $(transferId).find(transferDoubleSelectedListLi).eq(i).css('display', 'block');
@@ -611,12 +512,10 @@ var Transfer = (function ($) {
      * @returns {Array}
      */
     function getSelected() {
-
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("input").val();
             selected.push(value);
         }
@@ -627,12 +526,10 @@ var Transfer = (function ($) {
      * @returns {Array}
      */
     function getSelectedName() {
-
         var transferId = "#transfer_double_" + inputId;
         var selected = [];
         var transferDoubleSelectedListLi = ".transfer-double-selected-list-li-" + currentTimeStr;
         for (var i = 0; i < $(transferId).find(transferDoubleSelectedListLi).length; i++) {
-
             var value = $(transferId).find(transferDoubleSelectedListLi).eq(i).find(".checkbox-group").find("label").text();
             selected.push(value);
         }

@@ -4,10 +4,8 @@
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
-
 		define([ "jquery" ], factory );
 	} else {
-
 		factory( jQuery );
 	}
 }(function( $ ) {
@@ -33,12 +31,10 @@ $.cleanData = ( function( orig ) {
 		var events, elem, i;
 		for ( i = 0; ( elem = elems[ i ] ) != null; i++ ) {
 			try {
-
 				events = $._data( elem, "events" );
 				if ( events && events.remove ) {
 					$( elem ).triggerHandler( "remove" );
 				}
-
 			} catch ( e ) {}
 		}
 		orig( elems );
@@ -46,8 +42,6 @@ $.cleanData = ( function( orig ) {
 } )( $.cleanData );
 $.widget = function( name, base, prototype ) {
 	var existingConstructor, constructor, basePrototype;
-
-
 	var proxiedPrototype = {};
 	var namespace = name.split( "." )[ 0 ];
 	name = name.split( "." )[ 1 ];
@@ -59,37 +53,25 @@ $.widget = function( name, base, prototype ) {
 	if ( $.isArray( prototype ) ) {
 		prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
 	}
-
 	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
 	$[ namespace ] = $[ namespace ] || {};
 	existingConstructor = $[ namespace ][ name ];
 	constructor = $[ namespace ][ name ] = function( options, element ) {
-
 		if ( !this._createWidget ) {
 			return new constructor( options, element );
 		}
-
-
 		if ( arguments.length ) {
 			this._createWidget( options, element );
 		}
 	};
-
 	$.extend( constructor, existingConstructor, {
 		version: prototype.version,
-
-
 		_proto: $.extend( {}, prototype ),
-
-
 		_childConstructors: []
 	} );
 	basePrototype = new base();
-
-
-
 	basePrototype.options = $.widget.extend( {}, basePrototype.options );
 	$.each( prototype, function( prop, value ) {
 		if ( !$.isFunction( value ) ) {
@@ -117,9 +99,6 @@ $.widget = function( name, base, prototype ) {
 		} )();
 	} );
 	constructor.prototype = $.widget.extend( basePrototype, {
-
-
-
 		widgetEventPrefix: existingConstructor ? ( basePrototype.widgetEventPrefix || name ) : name
 	}, proxiedPrototype, {
 		constructor: constructor,
@@ -127,20 +106,12 @@ $.widget = function( name, base, prototype ) {
 		widgetName: name,
 		widgetFullName: fullName
 	} );
-
-
-
-
 	if ( existingConstructor ) {
 		$.each( existingConstructor._childConstructors, function( i, child ) {
 			var childPrototype = child.prototype;
-
-
 			$.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor,
 				child._proto );
 		} );
-
-
 		delete existingConstructor._childConstructors;
 	} else {
 		base._childConstructors.push( constructor );
@@ -158,13 +129,10 @@ $.widget.extend = function( target ) {
 		for ( key in input[ inputIndex ] ) {
 			value = input[ inputIndex ][ key ];
 			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
-
 				if ( $.isPlainObject( value ) ) {
 					target[ key ] = $.isPlainObject( target[ key ] ) ?
 						$.widget.extend( {}, target[ key ], value ) :
-
 						$.widget.extend( {}, value );
-
 				} else {
 					target[ key ] = value;
 				}
@@ -180,8 +148,6 @@ $.widget.bridge = function( name, object ) {
 		var args = widgetSlice.call( arguments, 1 );
 		var returnValue = this;
 		if ( isMethodCall ) {
-
-
 			if ( !this.length && options === "instance" ) {
 				returnValue = undefined;
 			} else {
@@ -211,7 +177,6 @@ $.widget.bridge = function( name, object ) {
 				} );
 			}
 		} else {
-
 			if ( args.length ) {
 				options = $.widget.extend.apply( null, [ options ].concat( args ) );
 			}
@@ -239,7 +204,6 @@ $.Widget.prototype = {
 	options: {
 		classes: {},
 		disabled: false,
-
 		create: null
 	},
 	_createWidget: function( options, element ) {
@@ -261,9 +225,7 @@ $.Widget.prototype = {
 				}
 			} );
 			this.document = $( element.style ?
-
 				element.ownerDocument :
-
 				element.document || element );
 			this.window = $( this.document[ 0 ].defaultView || this.document[ 0 ].parentWindow );
 		}
@@ -290,15 +252,12 @@ $.Widget.prototype = {
 		$.each( this.classesElementLookup, function( key, value ) {
 			that._removeClass( value, key );
 		} );
-
-
 		this.element
 			.off( this.eventNamespace )
 			.removeData( this.widgetFullName );
 		this.widget()
 			.off( this.eventNamespace )
 			.removeAttr( "aria-disabled" );
-
 		this.bindings.off( this.eventNamespace );
 	},
 	_destroy: $.noop,
@@ -311,11 +270,9 @@ $.Widget.prototype = {
 		var curOption;
 		var i;
 		if ( arguments.length === 0 ) {
-
 			return $.widget.extend( {}, this.options );
 		}
 		if ( typeof key === "string" ) {
-
 			options = {};
 			parts = key.split( "." );
 			key = parts.shift();
@@ -366,16 +323,8 @@ $.Widget.prototype = {
 					!currentElements.length ) {
 				continue;
 			}
-
-
-
-
 			elements = $( currentElements.get() );
 			this._removeClass( currentElements, classKey );
-
-
-
-
 			elements.addClass( this._classes( {
 				element: elements,
 				keys: classKey,
@@ -386,7 +335,6 @@ $.Widget.prototype = {
 	},
 	_setOptionDisabled: function( value ) {
 		this._toggleClass( this.widget(), this.widgetFullName + "-disabled", null, !!value );
-
 		if ( value ) {
 			this._removeClass( this.hoverable, null, "ui-state-hover" );
 			this._removeClass( this.focusable, null, "ui-state-focus" );
@@ -461,13 +409,11 @@ $.Widget.prototype = {
 	_on: function( suppressDisabledCheck, element, handlers ) {
 		var delegateElement;
 		var instance = this;
-
 		if ( typeof suppressDisabledCheck !== "boolean" ) {
 			handlers = element;
 			element = suppressDisabledCheck;
 			suppressDisabledCheck = false;
 		}
-
 		if ( !handlers ) {
 			handlers = element;
 			element = this.element;
@@ -478,9 +424,6 @@ $.Widget.prototype = {
 		}
 		$.each( handlers, function( event, handler ) {
 			function handlerProxy() {
-
-
-
 				if ( !suppressDisabledCheck &&
 						( instance.options.disabled === true ||
 						$( this ).hasClass( "ui-state-disabled" ) ) ) {
@@ -489,7 +432,6 @@ $.Widget.prototype = {
 				return ( typeof handler === "string" ? instance[ handler ] : handler )
 					.apply( instance, arguments );
 			}
-
 			if ( typeof handler !== "string" ) {
 				handlerProxy.guid = handler.guid =
 					handler.guid || handlerProxy.guid || $.guid++;
@@ -508,7 +450,6 @@ $.Widget.prototype = {
 		eventName = ( eventName || "" ).split( " " ).join( this.eventNamespace + " " ) +
 			this.eventNamespace;
 		element.off( eventName ).off( eventName );
-
 		this.bindings = $( this.bindings.not( element ).get() );
 		this.focusable = $( this.focusable.not( element ).get() );
 		this.hoverable = $( this.hoverable.not( element ).get() );
@@ -551,10 +492,7 @@ $.Widget.prototype = {
 		event.type = ( type === this.widgetEventPrefix ?
 			type :
 			this.widgetEventPrefix + type ).toLowerCase();
-
-
 		event.target = this.element[ 0 ];
-
 		orig = event.originalEvent;
 		if ( orig ) {
 			for ( prop in orig ) {
@@ -723,7 +661,6 @@ $.fn.position = function( options ) {
 	if ( !options || !options.of ) {
 		return _position.apply( this, arguments );
 	}
-
 	options = $.extend( {}, options );
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
 		target = $( options.of ),
@@ -733,16 +670,12 @@ $.fn.position = function( options ) {
 		offsets = {};
 	dimensions = getDimensions( target );
 	if ( target[ 0 ].preventDefault ) {
-
 		options.at = "left top";
 	}
 	targetWidth = dimensions.width;
 	targetHeight = dimensions.height;
 	targetOffset = dimensions.offset;
-
 	basePosition = $.extend( {}, targetOffset );
-
-
 	$.each( [ "my", "at" ], function() {
 		var pos = ( options[ this ] || "" ).split( " " ),
 			horizontalOffset,
@@ -756,20 +689,17 @@ $.fn.position = function( options ) {
 		}
 		pos[ 0 ] = rhorizontal.test( pos[ 0 ] ) ? pos[ 0 ] : "center";
 		pos[ 1 ] = rvertical.test( pos[ 1 ] ) ? pos[ 1 ] : "center";
-
 		horizontalOffset = roffset.exec( pos[ 0 ] );
 		verticalOffset = roffset.exec( pos[ 1 ] );
 		offsets[ this ] = [
 			horizontalOffset ? horizontalOffset[ 0 ] : 0,
 			verticalOffset ? verticalOffset[ 0 ] : 0
 		];
-
 		options[ this ] = [
 			rposition.exec( pos[ 0 ] )[ 0 ],
 			rposition.exec( pos[ 1 ] )[ 0 ]
 		];
 	} );
-
 	if ( collision.length === 1 ) {
 		collision[ 1 ] = collision[ 0 ];
 	}
@@ -834,7 +764,6 @@ $.fn.position = function( options ) {
 			}
 		} );
 		if ( options.using ) {
-
 			using = function( props ) {
 				var left = targetOffset.left - position.left,
 					right = left + targetWidth - elemWidth,
@@ -885,17 +814,13 @@ $.ui.position = {
 				overLeft = withinOffset - collisionPosLeft,
 				overRight = collisionPosLeft + data.collisionWidth - outerWidth - withinOffset,
 				newOverRight;
-
 			if ( data.collisionWidth > outerWidth ) {
-
 				if ( overLeft > 0 && overRight <= 0 ) {
 					newOverRight = position.left + overLeft + data.collisionWidth - outerWidth -
 						withinOffset;
 					position.left += overLeft - newOverRight;
-
 				} else if ( overRight > 0 && overLeft <= 0 ) {
 					position.left = withinOffset;
-
 				} else {
 					if ( overLeft > overRight ) {
 						position.left = withinOffset + outerWidth - data.collisionWidth;
@@ -903,13 +828,10 @@ $.ui.position = {
 						position.left = withinOffset;
 					}
 				}
-
 			} else if ( overLeft > 0 ) {
 				position.left += overLeft;
-
 			} else if ( overRight > 0 ) {
 				position.left -= overRight;
-
 			} else {
 				position.left = max( position.left - collisionPosLeft, position.left );
 			}
@@ -922,17 +844,13 @@ $.ui.position = {
 				overTop = withinOffset - collisionPosTop,
 				overBottom = collisionPosTop + data.collisionHeight - outerHeight - withinOffset,
 				newOverBottom;
-
 			if ( data.collisionHeight > outerHeight ) {
-
 				if ( overTop > 0 && overBottom <= 0 ) {
 					newOverBottom = position.top + overTop + data.collisionHeight - outerHeight -
 						withinOffset;
 					position.top += overTop - newOverBottom;
-
 				} else if ( overBottom > 0 && overTop <= 0 ) {
 					position.top = withinOffset;
-
 				} else {
 					if ( overTop > overBottom ) {
 						position.top = withinOffset + outerHeight - data.collisionHeight;
@@ -940,13 +858,10 @@ $.ui.position = {
 						position.top = withinOffset;
 					}
 				}
-
 			} else if ( overTop > 0 ) {
 				position.top += overTop;
-
 			} else if ( overBottom > 0 ) {
 				position.top -= overBottom;
-
 			} else {
 				position.top = max( position.top - collisionPosTop, position.top );
 			}
@@ -1057,7 +972,6 @@ var data = $.extend( $.expr[ ":" ], {
 				return !!$.data( elem, dataName );
 			};
 		} ) :
-
 		function( elem, i, match ) {
 			return !!$.data( elem, match[ 3 ] );
 		}
@@ -1074,7 +988,6 @@ var data = $.extend( $.expr[ ":" ], {
 //>>group: Core
 //>>description: Disable selection of text content within the set of matched elements.
 //>>docs: http://api.jqueryui.com/disableSelection/
-
 var disableSelection = $.fn.extend( {
 	disableSelection: ( function() {
 		var eventType = "onselectstart" in document.createElement( "div" ) ?
@@ -1100,16 +1013,12 @@ var disableSelection = $.fn.extend( {
  */
 //>>label: Effects Core
 //>>group: Effects
-
 //>>description: Extends the internal jQuery effects. Includes morphing and easing. Required by all other effects.
-
 //>>docs: http://api.jqueryui.com/category/effects-core/
 //>>demos: http://jqueryui.com/effect/
 var dataSpace = "ui-effects-",
 	dataSpaceStyle = "ui-effects-style",
 	dataSpaceAnimated = "ui-effects-animated",
-
-
 	jQuery = $;
 $.effects = {
 	effect: {}
@@ -1127,9 +1036,7 @@ $.effects = {
 ( function( jQuery, undefined ) {
 	var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor " +
 		"borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
-
 	rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
-
 	stringParsers = [ {
 			re: /rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
 			parse: function( execResult ) {
@@ -1151,7 +1058,6 @@ $.effects = {
 				];
 			}
 		}, {
-
 			re: /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,
 			parse: function( execResult ) {
 				return [
@@ -1161,7 +1067,6 @@ $.effects = {
 				];
 			}
 		}, {
-
 			re: /#([a-f0-9])([a-f0-9])([a-f0-9])/,
 			parse: function( execResult ) {
 				return [
@@ -1182,7 +1087,6 @@ $.effects = {
 				];
 			}
 		} ],
-
 	color = jQuery.Color = function( color, green, blue, alpha ) {
 		return new jQuery.Color.fn.parse( color, green, blue, alpha );
 	},
@@ -1234,17 +1138,11 @@ $.effects = {
 		}
 	},
 	support = color.support = {},
-
 	supportElem = jQuery( "<p>" )[ 0 ],
-
 	colors,
-
 	each = jQuery.each;
-
 supportElem.style.cssText = "background-color:rgba(1,1,1,.5)";
 support.rgba = supportElem.style.backgroundColor.indexOf( "rgba" ) > -1;
-
-
 each( spaces, function( spaceName, space ) {
 	space.cache = "_" + spaceName;
 	space.props.alpha = {
@@ -1258,19 +1156,13 @@ function clamp( value, prop, allowEmpty ) {
 	if ( value == null ) {
 		return ( allowEmpty || !prop.def ) ? null : prop.def;
 	}
-
 	value = type.floor ? ~~value : parseFloat( value );
-
-
 	if ( isNaN( value ) ) {
 		return prop.def;
 	}
 	if ( type.mod ) {
-
-
 		return ( value + type.mod ) % type.mod;
 	}
-
 	return 0 > value ? 0 : type.max < value ? type.max : value;
 }
 function stringParse( string ) {
@@ -1284,24 +1176,17 @@ function stringParse( string ) {
 			spaceName = parser.space || "rgba";
 		if ( values ) {
 			parsed = inst[ spaceName ]( values );
-
-
 			inst[ spaces[ spaceName ].cache ] = parsed[ spaces[ spaceName ].cache ];
 			rgba = inst._rgba = parsed._rgba;
-
 			return false;
 		}
 	} );
-
 	if ( rgba.length ) {
-
-
 		if ( rgba.join() === "0,0,0,0" ) {
 			jQuery.extend( rgba, colors.transparent );
 		}
 		return inst;
 	}
-
 	return colors[ string ];
 }
 color.fn = jQuery.extend( color.prototype, {
@@ -1317,7 +1202,6 @@ color.fn = jQuery.extend( color.prototype, {
 		var inst = this,
 			type = jQuery.type( red ),
 			rgba = this._rgba = [];
-
 		if ( green !== undefined ) {
 			red = [ red, green, blue, alpha ];
 			type = "array";
@@ -1342,23 +1226,16 @@ color.fn = jQuery.extend( color.prototype, {
 				each( spaces, function( spaceName, space ) {
 					var cache = space.cache;
 					each( space.props, function( key, prop ) {
-
 						if ( !inst[ cache ] && space.to ) {
-
-
 							if ( key === "alpha" || red[ key ] == null ) {
 								return;
 							}
 							inst[ cache ] = space.to( inst._rgba );
 						}
-
-
 						inst[ cache ][ prop.idx ] = clamp( red[ key ], prop, true );
 					} );
-
 					if ( inst[ cache ] &&
 							jQuery.inArray( null, inst[ cache ].slice( 0, 3 ) ) < 0 ) {
-
 						inst[ cache ][ 3 ] = 1;
 						if ( space.from ) {
 							inst._rgba = space.from( inst[ cache ] );
@@ -1412,11 +1289,9 @@ color.fn = jQuery.extend( color.prototype, {
 				startValue = start[ index ],
 				endValue = end[ index ],
 				type = propTypes[ prop.type ] || {};
-
 			if ( endValue === null ) {
 				return;
 			}
-
 			if ( startValue === null ) {
 				result[ index ] = endValue;
 			} else {
@@ -1433,7 +1308,6 @@ color.fn = jQuery.extend( color.prototype, {
 		return this[ spaceName ]( result );
 	},
 	blend: function( opaque ) {
-
 		if ( this._rgba[ 3 ] === 1 ) {
 			return this;
 		}
@@ -1461,7 +1335,6 @@ color.fn = jQuery.extend( color.prototype, {
 				if ( v == null ) {
 					v = i > 2 ? 1 : 0;
 				}
-
 				if ( i && i < 3 ) {
 					v = Math.round( v * 100 ) + "%";
 				}
@@ -1480,7 +1353,6 @@ color.fn = jQuery.extend( color.prototype, {
 			rgba.push( ~~( alpha * 255 ) );
 		}
 		return "#" + jQuery.map( rgba, function( v ) {
-
 			v = ( v || 0 ).toString( 16 );
 			return v.length === 1 ? "0" + v : v;
 		} ).join( "" );
@@ -1490,8 +1362,6 @@ color.fn = jQuery.extend( color.prototype, {
 	}
 } );
 color.fn.parse.prototype = color.fn;
-
-
 function hue2rgb( p, q, h ) {
 	h = ( h + 1 ) % 1;
 	if ( h * 6 < 1 ) {
@@ -1528,8 +1398,6 @@ spaces.hsla.to = function( rgba ) {
 	} else {
 		h = ( 60 * ( r - g ) / diff ) + 240;
 	}
-
-
 	if ( diff === 0 ) {
 		s = 0;
 	} else if ( l <= 0.5 ) {
@@ -1561,9 +1429,7 @@ each( spaces, function( spaceName, space ) {
 		cache = space.cache,
 		to = space.to,
 		from = space.from;
-
 	color.fn[ spaceName ] = function( value ) {
-
 		if ( to && !this[ cache ] ) {
 			this[ cache ] = to( this._rgba );
 		}
@@ -1589,9 +1455,7 @@ each( spaces, function( spaceName, space ) {
 			return color( local );
 		}
 	};
-
 	each( props, function( key, prop ) {
-
 		if ( color.fn[ key ] ) {
 			return;
 		}
@@ -1622,8 +1486,6 @@ each( spaces, function( spaceName, space ) {
 		};
 	} );
 } );
-
-
 color.hook = function( hook ) {
 	var hooks = hook.split( " " );
 	each( hooks, function( i, hook ) {
@@ -1655,8 +1517,6 @@ color.hook = function( hook ) {
 				try {
 					elem.style[ hook ] = value;
 				} catch ( e ) {
-
-
 				}
 			}
 		};
@@ -1680,11 +1540,7 @@ jQuery.cssHooks.borderColor = {
 		return expanded;
 	}
 };
-
-
-
 colors = jQuery.Color.names = {
-
 	aqua: "#00ffff",
 	black: "#000000",
 	blue: "#0000ff",
@@ -1701,7 +1557,6 @@ colors = jQuery.Color.names = {
 	teal: "#008080",
 	white: "#ffffff",
 	yellow: "#ffff00",
-
 	transparent: [ null, null, null, 0 ],
 	_default: "#ffffff"
 };
@@ -1747,7 +1602,6 @@ function getElementStyles( elem ) {
 				styles[ $.camelCase( key ) ] = style[ key ];
 			}
 		}
-
 	} else {
 		for ( key in style ) {
 			if ( typeof style[ key ] === "string" ) {
@@ -1772,7 +1626,6 @@ function styleDifference( oldStyle, newStyle ) {
 	}
 	return diff;
 }
-
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
 		return this.add( selector == null ?
@@ -1787,7 +1640,6 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 			baseClass = animated.attr( "class" ) || "",
 			applyClassChange,
 			allAnimations = o.children ? animated.find( "*" ).addBack() : animated;
-
 		allAnimations = allAnimations.map( function() {
 			var el = $( this );
 			return {
@@ -1795,7 +1647,6 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 				start: getElementStyles( this )
 			};
 		} );
-
 		applyClassChange = function() {
 			$.each( classAnimationActions, function( i, action ) {
 				if ( value[ action ] ) {
@@ -1804,15 +1655,12 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 			} );
 		};
 		applyClassChange();
-
 		allAnimations = allAnimations.map( function() {
 			this.end = getElementStyles( this.el[ 0 ] );
 			this.diff = styleDifference( this.start, this.end );
 			return this;
 		} );
-
 		animated.attr( "class", baseClass );
-
 		allAnimations = allAnimations.map( function() {
 			var styleInfo = this,
 				dfd = $.Deferred(),
@@ -1825,20 +1673,14 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 			this.el.animate( this.diff, opts );
 			return dfd.promise();
 		} );
-
 		$.when.apply( $, allAnimations.get() ).done( function() {
-
 			applyClassChange();
-
-
 			$.each( arguments, function() {
 				var el = this.el;
 				$.each( this.diff, function( key ) {
 					el.css( key, "" );
 				} );
 			} );
-
-
 			o.complete.call( animated[ 0 ] );
 		} );
 	} );
@@ -1864,7 +1706,6 @@ $.fn.extend( {
 		return function( classNames, force, speed, easing, callback ) {
 			if ( typeof force === "boolean" || force === undefined ) {
 				if ( !speed ) {
-
 					return orig.apply( this, arguments );
 				} else {
 					return $.effects.animateClass.call( this,
@@ -1872,7 +1713,6 @@ $.fn.extend( {
 						speed, easing, callback );
 				}
 			} else {
-
 				return $.effects.animateClass.call( this,
 					{ toggle: classNames }, force, speed, easing );
 			}
@@ -1899,7 +1739,6 @@ if ( $.expr && $.expr.filters && $.expr.filters.animated ) {
 }
 if ( $.uiBackCompat !== false ) {
 	$.extend( $.effects, {
-
 		save: function( element, set ) {
 			var i = 0, length = set.length;
 			for ( ; i < length; i++ ) {
@@ -1908,7 +1747,6 @@ if ( $.uiBackCompat !== false ) {
 				}
 			}
 		},
-
 		restore: function( element, set ) {
 			var val, i = 0, length = set.length;
 			for ( ; i < length; i++ ) {
@@ -1924,13 +1762,10 @@ if ( $.uiBackCompat !== false ) {
 			}
 			return mode;
 		},
-
 		createWrapper: function( element ) {
-
 			if ( element.parent().is( ".ui-effects-wrapper" ) ) {
 				return element.parent();
 			}
-
 			var props = {
 					width: element.outerWidth( true ),
 					height: element.outerHeight( true ),
@@ -1945,29 +1780,21 @@ if ( $.uiBackCompat !== false ) {
 						margin: 0,
 						padding: 0
 					} ),
-
 				size = {
 					width: element.width(),
 					height: element.height()
 				},
 				active = document.activeElement;
-
-
-
 			try {
 				active.id;
 			} catch ( e ) {
 				active = document.body;
 			}
 			element.wrap( wrapper );
-
 			if ( element[ 0 ] === active || $.contains( element[ 0 ], active ) ) {
 				$( active ).trigger( "focus" );
 			}
-
-
 			wrapper = element.parent();
-
 			if ( element.css( "position" ) === "static" ) {
 				wrapper.css( { position: "relative" } );
 				element.css( { position: "relative" } );
@@ -1997,7 +1824,6 @@ if ( $.uiBackCompat !== false ) {
 			var active = document.activeElement;
 			if ( element.parent().is( ".ui-effects-wrapper" ) ) {
 				element.parent().replaceWith( element );
-
 				if ( element[ 0 ] === active || $.contains( element[ 0 ], active ) ) {
 					$( active ).trigger( "focus" );
 				}
@@ -2043,7 +1869,6 @@ $.extend( $.effects, {
 			top: animation.clip.top
 		};
 	},
-
 	unshift: function( element, queueLength, count ) {
 		var queue = element.queue();
 		if ( queueLength > 1 ) {
@@ -2069,7 +1894,6 @@ $.extend( $.effects, {
 		}
 		return mode;
 	},
-
 	getBaseline: function( origin, original ) {
 		var y, x;
 		switch ( origin[ 0 ] ) {
@@ -2103,15 +1927,10 @@ $.extend( $.effects, {
 			y: y
 		};
 	},
-
 	createPlaceholder: function( element ) {
 		var placeholder,
 			cssPosition = element.css( "position" ),
 			position = element.position();
-
-
-
-
 		element.css( {
 			marginTop: element.css( "marginTop" ),
 			marginBottom: element.css( "marginBottom" ),
@@ -2123,13 +1942,10 @@ $.extend( $.effects, {
 		if ( /^(static|relative)/.test( cssPosition ) ) {
 			cssPosition = "absolute";
 			placeholder = $( "<" + element[ 0 ].nodeName + ">" ).insertAfter( element ).css( {
-
-
 				display: /^(inline|ruby)/.test( element.css( "display" ) ) ?
 					"inline-block" :
 					"block",
 				visibility: "hidden",
-
 				marginTop: element.css( "marginTop" ),
 				marginBottom: element.css( "marginBottom" ),
 				marginLeft: element.css( "marginLeft" ),
@@ -2156,8 +1972,6 @@ $.extend( $.effects, {
 			element.removeData( dataKey );
 		}
 	},
-
-
 	cleanUp: function( element ) {
 		$.effects.restoreStyle( element );
 		$.effects.removePlaceholder( element );
@@ -2173,37 +1987,29 @@ $.extend( $.effects, {
 		return value;
 	}
 } );
-
 function _normalizeArguments( effect, options, speed, callback ) {
-
 	if ( $.isPlainObject( effect ) ) {
 		options = effect;
 		effect = effect.effect;
 	}
-
 	effect = { effect: effect };
-
 	if ( options == null ) {
 		options = {};
 	}
-
 	if ( $.isFunction( options ) ) {
 		callback = options;
 		speed = null;
 		options = {};
 	}
-
 	if ( typeof options === "number" || $.fx.speeds[ options ] ) {
 		callback = speed;
 		speed = options;
 		options = {};
 	}
-
 	if ( $.isFunction( speed ) ) {
 		callback = speed;
 		speed = null;
 	}
-
 	if ( options ) {
 		$.extend( effect, options );
 	}
@@ -2216,23 +2022,18 @@ function _normalizeArguments( effect, options, speed, callback ) {
 	return effect;
 }
 function standardAnimationOption( option ) {
-
 	if ( !option || typeof option === "number" || $.fx.speeds[ option ] ) {
 		return true;
 	}
-
 	if ( typeof option === "string" && !$.effects.effect[ option ] ) {
 		return true;
 	}
-
 	if ( $.isFunction( option ) ) {
 		return true;
 	}
-
 	if ( typeof option === "object" && !option.effect ) {
 		return true;
 	}
-
 	return false;
 }
 $.fn.extend( {
@@ -2248,13 +2049,8 @@ $.fn.extend( {
 			prefilter = function( next ) {
 				var el = $( this ),
 					normalizedMode = $.effects.mode( el, mode ) || defaultMode;
-
 				el.data( dataSpaceAnimated, true );
-
-
-
 				modes.push( normalizedMode );
-
 				if ( defaultMode && ( normalizedMode === "show" ||
 						( normalizedMode === defaultMode && normalizedMode === "hide" ) ) ) {
 					el.show();
@@ -2267,7 +2063,6 @@ $.fn.extend( {
 				}
 			};
 		if ( $.fx.off || !effectMethod ) {
-
 			if ( mode ) {
 				return this[ mode ]( args.duration, complete );
 			} else {
@@ -2296,12 +2091,9 @@ $.fn.extend( {
 					next();
 				}
 			}
-
-
 			args.mode = modes.shift();
 			if ( $.uiBackCompat !== false && !defaultMode ) {
 				if ( elem.is( ":hidden" ) ? mode === "hide" : mode === "show" ) {
-
 					elem[ mode ]();
 					done();
 				} else {
@@ -2309,7 +2101,6 @@ $.fn.extend( {
 				}
 			} else {
 				if ( args.mode === "none" ) {
-
 					elem[ mode ]();
 					done();
 				} else {
@@ -2317,9 +2108,6 @@ $.fn.extend( {
 				}
 			}
 		}
-
-
-
 		return queue === false ?
 			this.each( prefilter ).each( run ) :
 			this.queue( queueName, prefilter ).queue( queueName, run );
@@ -2439,7 +2227,6 @@ $.fx.step.clip = function( fx ) {
 /*********************************** EASING ***********************************/
 /******************************************************************************/
 ( function() {
-
 var baseEasings = {};
 $.each( [ "Quad", "Cubic", "Quart", "Quint", "Expo" ], function( i, name ) {
 	baseEasings[ name ] = function( p ) {
@@ -2541,45 +2328,37 @@ var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, d
 var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) {
 	var upAnim, downAnim, refValue,
 		element = $( this ),
-
 		mode = options.mode,
 		hide = mode === "hide",
 		show = mode === "show",
 		direction = options.direction || "up",
 		distance = options.distance,
 		times = options.times || 5,
-
 		anims = times * 2 + ( show || hide ? 1 : 0 ),
 		speed = options.duration / anims,
 		easing = options.easing,
-
 		ref = ( direction === "up" || direction === "down" ) ? "top" : "left",
 		motion = ( direction === "up" || direction === "left" ),
 		i = 0,
 		queuelen = element.queue().length;
 	$.effects.createPlaceholder( element );
 	refValue = element.css( ref );
-
 	if ( !distance ) {
 		distance = element[ ref === "top" ? "outerHeight" : "outerWidth" ]() / 3;
 	}
 	if ( show ) {
 		downAnim = { opacity: 1 };
 		downAnim[ ref ] = refValue;
-
-
 		element
 			.css( "opacity", 0 )
 			.css( ref, motion ? -distance * 2 : distance * 2 )
 			.animate( downAnim, speed, easing );
 	}
-
 	if ( hide ) {
 		distance = distance / Math.pow( 2, times - 1 );
 	}
 	downAnim = {};
 	downAnim[ ref ] = refValue;
-
 	for ( ; i < times; i++ ) {
 		upAnim = {};
 		upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
@@ -2588,7 +2367,6 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 			.animate( downAnim, speed, easing );
 		distance = hide ? distance * 2 : distance / 2;
 	}
-
 	if ( hide ) {
 		upAnim = { opacity: 0 };
 		upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
@@ -2671,7 +2449,6 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 		animation[ ref ] = oppositeMotion + distance;
 		animation.opacity = 1;
 	}
-
 	element.animate( animation, {
 		queue: false,
 		duration: options.duration,
@@ -2689,9 +2466,7 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
  */
 //>>label: Explode Effect
 //>>group: Effects
-
 //>>description: Explodes an element in all directions into n pieces. Implodes an element to its original wholeness.
-
 //>>docs: http://api.jqueryui.com/explode-effect/
 //>>demos: http://jqueryui.com/effect/
 var effectsEffectExplode = $.effects.define( "explode", "hide", function( options, done ) {
@@ -2701,28 +2476,22 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 		element = $( this ),
 		mode = options.mode,
 		show = mode === "show",
-
 		offset = element.show().css( "visibility", "hidden" ).offset(),
-
 		width = Math.ceil( element.outerWidth() / cells ),
 		height = Math.ceil( element.outerHeight() / rows ),
 		pieces = [];
-
 	function childComplete() {
 		pieces.push( this );
 		if ( pieces.length === rows * cells ) {
 			animComplete();
 		}
 	}
-
 	for ( i = 0; i < rows; i++ ) { // ===>
 		top = offset.top + i * height;
 		my = i - ( rows - 1 ) / 2;
 		for ( j = 0; j < cells; j++ ) { // |||
 			left = offset.left + j * width;
 			mx = j - ( cells - 1 ) / 2;
-
-
 			element
 				.clone()
 				.appendTo( "body" )
@@ -2733,8 +2502,6 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 					left: -j * width,
 					top: -i * height
 				} )
-
-
 				.parent()
 					.addClass( "ui-effects-explode" )
 					.css( {
@@ -2801,7 +2568,6 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 //>>docs: http://api.jqueryui.com/fold-effect/
 //>>demos: http://jqueryui.com/effect/
 var effectsEffectFold = $.effects.define( "fold", "hide", function( options, done ) {
-
 	var element = $( this ),
 		mode = options.mode,
 		show = mode === "show",
@@ -2830,7 +2596,6 @@ var effectsEffectFold = $.effects.define( "fold", "hide", function( options, don
 		}
 		animation2.clip = start;
 	}
-
 	element
 		.queue( function( next ) {
 			if ( placeholder ) {
@@ -2893,14 +2658,11 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 //>>docs: http://api.jqueryui.com/size-effect/
 //>>demos: http://jqueryui.com/effect/
 var effectsEffectSize = $.effects.define( "size", function( options, done ) {
-
 	var baseline, factor, temp,
 		element = $( this ),
-
 		cProps = [ "fontSize" ],
 		vProps = [ "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom" ],
 		hProps = [ "borderLeftWidth", "borderRightWidth", "paddingLeft", "paddingRight" ],
-
 		mode = options.mode,
 		restore = mode !== "effect",
 		scale = options.scale || "both",
@@ -2916,7 +2678,6 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 		from = to;
 		to = temp;
 	}
-
 	factor = {
 		from: {
 			y: from.height / original.height,
@@ -2927,28 +2688,22 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 			x: to.width / original.width
 		}
 	};
-
 	if ( scale === "box" || scale === "both" ) {
-
 		if ( factor.from.y !== factor.to.y ) {
 			from = $.effects.setTransition( element, vProps, factor.from.y, from );
 			to = $.effects.setTransition( element, vProps, factor.to.y, to );
 		}
-
 		if ( factor.from.x !== factor.to.x ) {
 			from = $.effects.setTransition( element, hProps, factor.from.x, from );
 			to = $.effects.setTransition( element, hProps, factor.to.x, to );
 		}
 	}
-
 	if ( scale === "content" || scale === "both" ) {
-
 		if ( factor.from.y !== factor.to.y ) {
 			from = $.effects.setTransition( element, cProps, factor.from.y, from );
 			to = $.effects.setTransition( element, cProps, factor.to.y, to );
 		}
 	}
-
 	if ( origin ) {
 		baseline = $.effects.getBaseline( origin, original );
 		from.top = ( original.outerHeight - from.outerHeight ) * baseline.y + pos.top;
@@ -2957,12 +2712,9 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 		to.left = ( original.outerWidth - to.outerWidth ) * baseline.x + pos.left;
 	}
 	element.css( from );
-
 	if ( scale === "content" || scale === "both" ) {
 		vProps = vProps.concat( [ "marginTop", "marginBottom" ] ).concat( cProps );
 		hProps = hProps.concat( [ "marginLeft", "marginRight" ] );
-
-
 		element.find( "*[width]" ).each( function() {
 			var child = $( this ),
 				childOriginal = $.effects.scaledDimensions( child ),
@@ -2978,12 +2730,10 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 					outerHeight: childOriginal.height * factor.to.y,
 					outerWidth: childOriginal.width * factor.to.x
 				};
-
 			if ( factor.from.y !== factor.to.y ) {
 				childFrom = $.effects.setTransition( child, vProps, factor.from.y, childFrom );
 				childTo = $.effects.setTransition( child, vProps, factor.to.y, childTo );
 			}
-
 			if ( factor.from.x !== factor.to.x ) {
 				childFrom = $.effects.setTransition( child, hProps, factor.from.x, childFrom );
 				childTo = $.effects.setTransition( child, hProps, factor.to.x, childTo );
@@ -2991,17 +2741,14 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 			if ( restore ) {
 				$.effects.saveStyle( child );
 			}
-
 			child.css( childFrom );
 			child.animate( childTo, options.duration, options.easing, function() {
-
 				if ( restore ) {
 					$.effects.restoreStyle( child );
 				}
 			} );
 		} );
 	}
-
 	element.animate( to, {
 		queue: false,
 		duration: options.duration,
@@ -3015,8 +2762,6 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 				element
 					.css( "position", position === "static" ? "relative" : position )
 					.offset( offset );
-
-
 				$.effects.saveStyle( element );
 			}
 			done();
@@ -3037,7 +2782,6 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 //>>docs: http://api.jqueryui.com/scale-effect/
 //>>demos: http://jqueryui.com/effect/
 var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
-
 	var el = $( this ),
 		mode = options.mode,
 		percent = parseInt( options.percent, 10 ) ||
@@ -3047,7 +2791,6 @@ var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 			to: $.effects.scaledDimensions( el, percent, options.direction || "both" ),
 			origin: options.origin || [ "middle", "center" ]
 		}, options );
-
 	if ( options.fade ) {
 		newOptions.from.opacity = 1;
 		newOptions.to.opacity = 0;
@@ -3093,7 +2836,6 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 		show = mode === "show",
 		hide = mode === "hide",
 		showhide = show || hide,
-
 		anims = ( ( options.times || 5 ) * 2 ) + ( showhide ? 1 : 0 ),
 		duration = options.duration / anims,
 		animateTo = 0,
@@ -3103,7 +2845,6 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 		element.css( "opacity", 0 ).show();
 		animateTo = 1;
 	}
-
 	for ( ; i < anims; i++ ) {
 		element.animate( { opacity: animateTo }, duration, options.easing );
 		animateTo = 1 - animateTo;
@@ -3140,13 +2881,10 @@ var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
 		animation2 = {},
 		queuelen = element.queue().length;
 	$.effects.createPlaceholder( element );
-
 	animation[ ref ] = ( positiveMotion ? "-=" : "+=" ) + distance;
 	animation1[ ref ] = ( positiveMotion ? "+=" : "-=" ) + distance * 2;
 	animation2[ ref ] = ( positiveMotion ? "-=" : "+=" ) + distance * 2;
-
 	element.animate( animation, speed, options.easing );
-
 	for ( ; i < times; i++ ) {
 		element
 			.animate( animation1, speed, options.easing )
@@ -3190,18 +2928,15 @@ var effectsEffectSlide = $.effects.define( "slide", "show", function( options, d
 	$.effects.createPlaceholder( element );
 	startClip = element.cssClip();
 	startRef = element.position()[ ref ];
-
 	animation[ ref ] = ( positiveMotion ? -1 : 1 ) * distance + startRef;
 	animation.clip = element.cssClip();
 	animation.clip[ map[ direction ][ 1 ] ] = animation.clip[ map[ direction ][ 0 ] ];
-
 	if ( mode === "show" ) {
 		element.cssClip( animation.clip );
 		element.css( ref, animation[ ref ] );
 		animation.clip = startClip;
 		animation[ ref ] = startRef;
 	}
-
 	element.animate( animation, {
 		queue: false,
 		duration: options.duration,
@@ -3241,7 +2976,6 @@ var effectsEffectTransfer = effect;
 //>>group: Core
 //>>description: Selects elements which can be focused.
 //>>docs: http://api.jqueryui.com/focusable-selector/
-
 $.ui.focusable = function( element, hasTabindex ) {
 	var map, mapName, img, focusableIfVisible, fieldset,
 		nodeName = element.nodeName.toLowerCase();
@@ -3257,10 +2991,6 @@ $.ui.focusable = function( element, hasTabindex ) {
 	if ( /^(input|select|textarea|button|object)$/.test( nodeName ) ) {
 		focusableIfVisible = !element.disabled;
 		if ( focusableIfVisible ) {
-
-
-
-
 			fieldset = $( element ).closest( "fieldset" )[ 0 ];
 			if ( fieldset ) {
 				focusableIfVisible = !fieldset.disabled;
@@ -3273,8 +3003,6 @@ $.ui.focusable = function( element, hasTabindex ) {
 	}
 	return focusableIfVisible && $( element ).is( ":visible" ) && visible( $( element ) );
 };
-
-
 function visible( element ) {
 	var visibility = element.css( "visibility" );
 	while ( visibility === "inherit" ) {
@@ -3289,9 +3017,6 @@ $.extend( $.expr[ ":" ], {
 	}
 } );
 var focusable = $.ui.focusable;
-
-
-
 var form = $.fn.form = function() {
 	return typeof this[ 0 ].form === "string" ? this.closest( "form" ) : $( this[ 0 ].form );
 };
@@ -3310,7 +3035,6 @@ var form = $.fn.form = function() {
 var formResetMixin = $.ui.formResetMixin = {
 	_formResetHandler: function() {
 		var form = $( this );
-
 		setTimeout( function() {
 			var instances = form.data( "ui-form-reset-instances" );
 			$.each( instances, function() {
@@ -3325,7 +3049,6 @@ var formResetMixin = $.ui.formResetMixin = {
 		}
 		var instances = this.form.data( "ui-form-reset-instances" ) || [];
 		if ( !instances.length ) {
-
 			this.form.on( "reset.ui-form-reset", this._formResetHandler );
 		}
 		instances.push( this );
@@ -3358,16 +3081,7 @@ var formResetMixin = $.ui.formResetMixin = {
 //>>label: jQuery 1.7 Support
 //>>group: Core
 //>>description: Support version 1.7.x of jQuery core
-
-
-
-
-
-
 if ( $.fn.jquery.substring( 0, 3 ) === "1.7" ) {
-
-
-
 	$.each( [ "Width", "Height" ], function( i, name ) {
 		var side = name === "Width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ],
 			type = name.toLowerCase(),
@@ -3443,7 +3157,6 @@ var keycode = $.ui.keyCode = {
 	TAB: 9,
 	UP: 38
 };
-
 var escapeSelector = $.ui.escapeSelector = ( function() {
 	var selectorEscape = /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g;
 	return function( selector ) {
@@ -3464,27 +3177,17 @@ var escapeSelector = $.ui.escapeSelector = ( function() {
 //>>docs: http://api.jqueryui.com/labels/
 var labels = $.fn.labels = function() {
 	var ancestor, selector, id, labels, ancestors;
-
 	if ( this[ 0 ].labels && this[ 0 ].labels.length ) {
 		return this.pushStack( this[ 0 ].labels );
 	}
-
-
-
 	labels = this.eq( 0 ).parents( "label" );
-
 	id = this.attr( "id" );
 	if ( id ) {
-
-
 		ancestor = this.eq( 0 ).parents().last();
-
 		ancestors = ancestor.add( ancestor.length ? ancestor.siblings() : this.siblings() );
-
 		selector = "label[for='" + $.ui.escapeSelector( id ) + "']";
 		labels = labels.add( ancestors.find( selector ).addBack( selector ) );
 	}
-
 	return this.pushStack( labels );
 };
 /*!
@@ -3575,9 +3278,7 @@ var uniqueId = $.fn.extend( {
  */
 //>>label: Accordion
 //>>group: Widgets
-
 //>>description: Displays collapsible content panels for presenting information in a limited amount of space.
-
 //>>docs: http://api.jqueryui.com/accordion/
 //>>demos: http://jqueryui.com/accordion/
 //>>css.structure: ../../themes/base/core.css
@@ -3601,7 +3302,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			activeHeader: "ui-icon-triangle-1-s",
 			header: "ui-icon-triangle-1-e"
 		},
-
 		activate: null,
 		beforeActivate: null
 	},
@@ -3624,12 +3324,10 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 		this.prevShow = this.prevHide = $();
 		this._addClass( "ui-accordion", "ui-widget ui-helper-reset" );
 		this.element.attr( "role", "tablist" );
-
 		if ( !options.collapsible && ( options.active === false || options.active == null ) ) {
 			options.active = 0;
 		}
 		this._processPanels();
-
 		if ( options.active < 0 ) {
 			options.active += this.headers.length;
 		}
@@ -3660,14 +3358,11 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	},
 	_destroy: function() {
 		var contents;
-
 		this.element.removeAttr( "role" );
-
 		this.headers
 			.removeAttr( "role aria-expanded aria-selected aria-controls tabIndex" )
 			.removeUniqueId();
 		this._destroyIcons();
-
 		contents = this.headers.next()
 			.css( "display", "" )
 			.removeAttr( "role aria-hidden aria-labelledby" )
@@ -3678,7 +3373,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	},
 	_setOption: function( key, value ) {
 		if ( key === "active" ) {
-
 			this._activate( value );
 			return;
 		}
@@ -3689,7 +3383,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			this._setupEvents( value );
 		}
 		this._super( key, value );
-
 		if ( key === "collapsible" && !value && this.options.active === false ) {
 			this._activate( 0 );
 		}
@@ -3703,9 +3396,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	_setOptionDisabled: function( value ) {
 		this._super( value );
 		this.element.attr( "aria-disabled", value );
-
-
-
 		this._toggleClass( null, "ui-state-disabled", !!value );
 		this._toggleClass( this.headers.add( this.headers.next() ), null, "ui-state-disabled",
 			!!value );
@@ -3753,27 +3443,20 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	refresh: function() {
 		var options = this.options;
 		this._processPanels();
-
 		if ( ( options.active === false && options.collapsible === true ) ||
 				!this.headers.length ) {
 			options.active = false;
 			this.active = $();
-
 		} else if ( options.active === false ) {
 			this._activate( 0 );
-
 		} else if ( this.active.length && !$.contains( this.element[ 0 ], this.active[ 0 ] ) ) {
-
 			if ( this.headers.length === this.headers.find( ".ui-state-disabled" ).length ) {
 				options.active = false;
 				this.active = $();
-
 			} else {
 				this._activate( Math.max( 0, options.active - 1 ) );
 			}
-
 		} else {
-
 			options.active = this.headers.index( this.active );
 		}
 		this._destroyIcons();
@@ -3787,7 +3470,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			"ui-state-default" );
 		this.panels = this.headers.next().filter( ":not(.ui-accordion-content-active)" ).hide();
 		this._addClass( this.panels, "ui-accordion-content", "ui-helper-reset ui-widget-content" );
-
 		if ( prevPanels ) {
 			this._off( prevHeaders.not( this.headers ) );
 			this._off( prevPanels.not( this.panels ) );
@@ -3827,7 +3509,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 						"aria-hidden": "true"
 					} )
 					.hide();
-
 		if ( !this.active.length ) {
 			this.headers.eq( 0 ).attr( "tabIndex", 0 );
 		} else {
@@ -3880,11 +3561,9 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	},
 	_activate: function( index ) {
 		var active = this._findActive( index )[ 0 ];
-
 		if ( active === this.active[ 0 ] ) {
 			return;
 		}
-
 		active = active || this.active[ 0 ];
 		this._eventHandler( {
 			target: active,
@@ -3927,19 +3606,13 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			};
 		event.preventDefault();
 		if (
-
 				( clickedIsActive && !options.collapsible ) ||
-
 				( this._trigger( "beforeActivate", event, eventData ) === false ) ) {
 			return;
 		}
 		options.active = collapsing ? false : this.headers.index( clicked );
-
-
 		this.active = clickedIsActive ? $() : clicked;
 		this._toggle( eventData );
-
-
 		this._removeClass( active, "ui-accordion-header-active", "ui-state-active" );
 		if ( options.icons ) {
 			activeChildren = active.children( ".ui-accordion-header-icon" );
@@ -3960,7 +3633,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 	_toggle: function( data ) {
 		var toShow = data.newPanel,
 			toHide = this.prevShow.length ? this.prevShow : data.oldPanel;
-
 		this.prevShow.add( this.prevHide ).stop( true, true );
 		this.prevShow = toShow;
 		this.prevHide = toHide;
@@ -3978,9 +3650,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			"aria-selected": "false",
 			"aria-expanded": "false"
 		} );
-
-
-
 		if ( toShow.length && toHide.length ) {
 			toHide.prev().attr( {
 				"tabIndex": -1,
@@ -4019,7 +3688,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 		if ( typeof options === "string" ) {
 			easing = options;
 		}
-
 		easing = easing || options.easing || animate.easing;
 		duration = duration || options.duration || animate.duration;
 		if ( !toHide.length ) {
@@ -4061,7 +3729,6 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 		this._removeClass( toHide, "ui-accordion-content-active" );
 		this._removeClass( prev, "ui-accordion-header-active" )
 			._addClass( prev, "ui-accordion-header-collapsed" );
-
 		if ( toHide.length ) {
 			toHide.parent()[ 0 ].className = toHide.parent()[ 0 ].className;
 		}
@@ -4070,22 +3737,14 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 } );
 var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 	var activeElement;
-
-
 	try {
 		activeElement = document.activeElement;
 	} catch ( error ) {
 		activeElement = document.body;
 	}
-
-
-
 	if ( !activeElement ) {
 		activeElement = document.body;
 	}
-
-
-
 	if ( !activeElement.nodeName ) {
 		activeElement = document.body;
 	}
@@ -4122,15 +3781,12 @@ var widgetsMenu = $.widget( "ui.menu", {
 			at: "right top"
 		},
 		role: "menu",
-
 		blur: null,
 		focus: null,
 		select: null
 	},
 	_create: function() {
 		this.activeMenu = this.element;
-
-
 		this.mouseHandled = false;
 		this.element
 			.uniqueId()
@@ -4140,8 +3796,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			} );
 		this._addClass( "ui-menu", "ui-widget ui-widget-content" );
 		this._on( {
-
-
 			"mousedown .ui-menu-item": function( event ) {
 				event.preventDefault();
 			},
@@ -4150,19 +3804,14 @@ var widgetsMenu = $.widget( "ui.menu", {
 				var active = $( $.ui.safeActiveElement( this.document[ 0 ] ) );
 				if ( !this.mouseHandled && target.not( ".ui-state-disabled" ).length ) {
 					this.select( event );
-
 					if ( !event.isPropagationStopped() ) {
 						this.mouseHandled = true;
 					}
-
 					if ( target.has( ".ui-menu" ).length ) {
 						this.expand( event );
 					} else if ( !this.element.is( ":focus" ) &&
 							active.closest( ".ui-menu" ).length ) {
-
 						this.element.trigger( "focus", [ true ] );
-
-
 						if ( this.active && this.active.parents( ".ui-menu" ).length === 1 ) {
 							clearTimeout( this.timer );
 						}
@@ -4170,20 +3819,14 @@ var widgetsMenu = $.widget( "ui.menu", {
 				}
 			},
 			"mouseenter .ui-menu-item": function( event ) {
-
-
-
 				if ( this.previousFilter ) {
 					return;
 				}
 				var actualTarget = $( event.target ).closest( ".ui-menu-item" ),
 					target = $( event.currentTarget );
-
 				if ( actualTarget[ 0 ] !== target[ 0 ] ) {
 					return;
 				}
-
-
 				this._removeClass( target.siblings().children( ".ui-state-active" ),
 					null, "ui-state-active" );
 				this.focus( event, target );
@@ -4191,8 +3834,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			mouseleave: "collapseAll",
 			"mouseleave .ui-menu": "collapseAll",
 			focus: function( event, keepActiveItem ) {
-
-
 				var item = this.active || this.element.find( this.options.items ).eq( 0 );
 				if ( !keepActiveItem ) {
 					this.focus( event, item );
@@ -4212,13 +3853,11 @@ var widgetsMenu = $.widget( "ui.menu", {
 			keydown: "_keydown"
 		} );
 		this.refresh();
-
 		this._on( this.document, {
 			click: function( event ) {
 				if ( this._closeOnDocumentClick( event ) ) {
 					this.collapseAll( event );
 				}
-
 				this.mouseHandled = false;
 			}
 		} );
@@ -4229,7 +3868,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			submenus = items.children( ".ui-menu-item-wrapper" )
 				.removeUniqueId()
 				.removeAttr( "tabIndex role aria-haspopup" );
-
 		this.element
 			.removeAttr( "aria-activedescendant" )
 			.find( ".ui-menu" ).addBack()
@@ -4285,7 +3923,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			preventDefault = false;
 			prev = this.previousFilter || "";
 			skip = false;
-
 			character = event.keyCode >= 96 && event.keyCode <= 105 ?
 				( event.keyCode - 96 ).toString() : String.fromCharCode( event.keyCode );
 			clearTimeout( this.filterTimer );
@@ -4298,8 +3935,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			match = skip && match.index( this.active.next() ) !== -1 ?
 				this.active.nextAll( ".ui-menu-item" ) :
 				match;
-
-
 			if ( !match.length ) {
 				character = String.fromCharCode( event.keyCode );
 				match = this._filterMenuItems( character );
@@ -4333,7 +3968,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			icon = this.options.icons.submenu,
 			submenus = this.element.find( this.options.menus );
 		this._toggleClass( "ui-menu-icons", null, !!this.element.find( ".ui-icon" ).length );
-
 		newSubmenus = submenus.filter( ":not(.ui-menu)" )
 			.hide()
 			.attr( {
@@ -4354,14 +3988,12 @@ var widgetsMenu = $.widget( "ui.menu", {
 		this._addClass( newSubmenus, "ui-menu", "ui-widget ui-widget-content ui-front" );
 		menus = submenus.add( this.element );
 		items = menus.find( this.options.items );
-
 		items.not( ".ui-menu-item" ).each( function() {
 			var item = $( this );
 			if ( that._isDivider( item ) ) {
 				that._addClass( item, "ui-menu-divider", "ui-widget-content" );
 			}
 		} );
-
 		newItems = items.not( ".ui-menu-item, .ui-menu-divider" );
 		newWrappers = newItems.children()
 			.not( ".ui-menu" )
@@ -4372,9 +4004,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 				} );
 		this._addClass( newItems, "ui-menu-item" )
 			._addClass( newWrappers, "ui-menu-item-wrapper" );
-
 		items.filter( ".ui-state-disabled" ).attr( "aria-disabled", "true" );
-
 		if ( this.active && !$.contains( this.element[ 0 ], this.active[ 0 ] ) ) {
 			this.blur();
 		}
@@ -4405,12 +4035,9 @@ var widgetsMenu = $.widget( "ui.menu", {
 		this.active = item.first();
 		focused = this.active.children( ".ui-menu-item-wrapper" );
 		this._addClass( focused, null, "ui-state-active" );
-
-
 		if ( this.options.role ) {
 			this.element.attr( "aria-activedescendant", focused.attr( "id" ) );
 		}
-
 		activeParent = this.active
 			.parent()
 				.closest( ".ui-menu-item" )
@@ -4460,8 +4087,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 	},
 	_startOpening: function( submenu ) {
 		clearTimeout( this.timer );
-
-
 		if ( submenu.attr( "aria-hidden" ) !== "true" ) {
 			return;
 		}
@@ -4487,23 +4112,17 @@ var widgetsMenu = $.widget( "ui.menu", {
 	collapseAll: function( event, all ) {
 		clearTimeout( this.timer );
 		this.timer = this._delay( function() {
-
 			var currentMenu = all ? this.element :
 				$( event && event.target ).closest( this.element.find( ".ui-menu" ) );
-
-
 			if ( !currentMenu.length ) {
 				currentMenu = this.element;
 			}
 			this._close( currentMenu );
 			this.blur( event );
-
 			this._removeClass( currentMenu.find( ".ui-state-active" ), null, "ui-state-active" );
 			this.activeMenu = currentMenu;
 		}, this.delay );
 	},
-
-
 	_close: function( startMenu ) {
 		if ( !startMenu ) {
 			startMenu = this.active ? this.active.parent() : this.element;
@@ -4517,7 +4136,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 		return !$( event.target ).closest( ".ui-menu" ).length;
 	},
 	_isDivider: function( item ) {
-
 		return !/[^\-\u2014\u2013\s]/.test( item.text() );
 	},
 	collapse: function( event ) {
@@ -4536,7 +4154,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 						.first();
 		if ( newItem && newItem.length ) {
 			this._open( newItem.parent() );
-
 			this._delay( function() {
 				this.focus( event, newItem );
 			} );
@@ -4619,8 +4236,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 		return this.element.outerHeight() < this.element.prop( "scrollHeight" );
 	},
 	select: function( event ) {
-
-
 		this.active = this.active || $( event.target ).closest( ".ui-menu-item" );
 		var ui = { item: this.active };
 		if ( !this.active.has( ".ui-menu" ).length ) {
@@ -4633,7 +4248,6 @@ var widgetsMenu = $.widget( "ui.menu", {
 			regex = new RegExp( "^" + escapedCharacter, "i" );
 		return this.activeMenu
 			.find( this.options.items )
-
 				.filter( ".ui-menu-item" )
 					.filter( function() {
 						return regex.test(
@@ -4671,7 +4285,6 @@ $.widget( "ui.autocomplete", {
 			collision: "none"
 		},
 		source: null,
-
 		change: null,
 		close: null,
 		focus: null,
@@ -4683,21 +4296,10 @@ $.widget( "ui.autocomplete", {
 	requestIndex: 0,
 	pending: 0,
 	_create: function() {
-
-
-
-
-
-
-
 		var suppressKeyPress, suppressKeyPressRepeat, suppressInput,
 			nodeName = this.element[ 0 ].nodeName.toLowerCase(),
 			isTextarea = nodeName === "textarea",
 			isInput = nodeName === "input";
-
-
-
-
 		this.isMultiLine = isTextarea || !isInput && this._isContentEditable( this.element );
 		this.valueMethod = this.element[ isTextarea || isInput ? "val" : "text" ];
 		this.isNewMenu = true;
@@ -4733,10 +4335,7 @@ $.widget( "ui.autocomplete", {
 					this._keyEvent( "next", event );
 					break;
 				case keyCode.ENTER:
-
 					if ( this.menu.active ) {
-
-
 						suppressKeyPress = true;
 						event.preventDefault();
 						this.menu.select( event );
@@ -4753,15 +4352,11 @@ $.widget( "ui.autocomplete", {
 							this._value( this.term );
 						}
 						this.close( event );
-
-
-
 						event.preventDefault();
 					}
 					break;
 				default:
 					suppressKeyPressRepeat = true;
-
 					this._searchTimeout( event );
 					break;
 				}
@@ -4777,7 +4372,6 @@ $.widget( "ui.autocomplete", {
 				if ( suppressKeyPressRepeat ) {
 					return;
 				}
-
 				var keyCode = $.ui.keyCode;
 				switch ( event.keyCode ) {
 				case keyCode.PAGE_UP:
@@ -4820,7 +4414,6 @@ $.widget( "ui.autocomplete", {
 		this.menu = $( "<ul>" )
 			.appendTo( this._appendTo() )
 			.menu( {
-
 				role: null
 			} )
 			.hide()
@@ -4828,19 +4421,10 @@ $.widget( "ui.autocomplete", {
 		this._addClass( this.menu.element, "ui-autocomplete", "ui-front" );
 		this._on( this.menu.element, {
 			mousedown: function( event ) {
-
 				event.preventDefault();
-
-
 				this.cancelBlur = true;
 				this._delay( function() {
 					delete this.cancelBlur;
-
-
-
-
-
-
 					if ( this.element[ 0 ] !== $.ui.safeActiveElement( this.document[ 0 ] ) ) {
 						this.element.trigger( "focus" );
 					}
@@ -4848,8 +4432,6 @@ $.widget( "ui.autocomplete", {
 			},
 			menufocus: function( event, ui ) {
 				var label, item;
-
-
 				if ( this.isNewMenu ) {
 					this.isNewMenu = false;
 					if ( event.originalEvent && /^mouse/.test( event.originalEvent.type ) ) {
@@ -4862,12 +4444,10 @@ $.widget( "ui.autocomplete", {
 				}
 				item = ui.item.data( "ui-autocomplete-item" );
 				if ( false !== this._trigger( "focus", event, { item: item } ) ) {
-
 					if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
 						this._value( item.value );
 					}
 				}
-
 				label = ui.item.attr( "aria-label" ) || item.value;
 				if ( label && $.trim( label ).length ) {
 					this.liveRegion.children().hide();
@@ -4877,13 +4457,9 @@ $.widget( "ui.autocomplete", {
 			menuselect: function( event, ui ) {
 				var item = ui.item.data( "ui-autocomplete-item" ),
 					previous = this.previous;
-
 				if ( this.element[ 0 ] !== $.ui.safeActiveElement( this.document[ 0 ] ) ) {
 					this.element.trigger( "focus" );
 					this.previous = previous;
-
-
-
 					this._delay( function() {
 						this.previous = previous;
 						this.selectedItem = item;
@@ -4892,8 +4468,6 @@ $.widget( "ui.autocomplete", {
 				if ( false !== this._trigger( "select", event, { item: item } ) ) {
 					this._value( item.value );
 				}
-
-
 				this.term = this._value();
 				this.close( event );
 				this.selectedItem = item;
@@ -4906,9 +4480,6 @@ $.widget( "ui.autocomplete", {
 		} )
 			.appendTo( this.document[ 0 ].body );
 		this._addClass( this.liveRegion, null, "ui-helper-hidden-accessible" );
-
-
-
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -4992,7 +4563,6 @@ $.widget( "ui.autocomplete", {
 	_searchTimeout: function( event ) {
 		clearTimeout( this.searching );
 		this.searching = this._delay( function() {
-
 			var equalValues = this.term === this._value(),
 				menuVisible = this.menu.element.is( ":visible" ),
 				modifierKey = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
@@ -5004,7 +4574,6 @@ $.widget( "ui.autocomplete", {
 	},
 	search: function( value, event ) {
 		value = value != null ? value : this._value();
-
 		this.term = this._value();
 		if ( value.length < this.options.minLength ) {
 			return this.close( event );
@@ -5041,7 +4610,6 @@ $.widget( "ui.autocomplete", {
 			this._suggest( content );
 			this._trigger( "open" );
 		} else {
-
 			this._close();
 		}
 	},
@@ -5050,7 +4618,6 @@ $.widget( "ui.autocomplete", {
 		this._close( event );
 	},
 	_close: function( event ) {
-
 		this._off( this.document, "mousedown" );
 		if ( this.menu.element.is( ":visible" ) ) {
 			this.menu.element.hide();
@@ -5065,7 +4632,6 @@ $.widget( "ui.autocomplete", {
 		}
 	},
 	_normalize: function( items ) {
-
 		if ( items.length && items[ 0 ].label && items[ 0 ].value ) {
 			return items;
 		}
@@ -5087,7 +4653,6 @@ $.widget( "ui.autocomplete", {
 		this._renderMenu( ul, items );
 		this.isNewMenu = true;
 		this.menu.refresh();
-
 		ul.show();
 		this._resizeMenu();
 		ul.position( $.extend( {
@@ -5096,7 +4661,6 @@ $.widget( "ui.autocomplete", {
 		if ( this.options.autoFocus ) {
 			this.menu.next();
 		}
-
 		this._on( this.document, {
 			mousedown: "_closeOnClickOutside"
 		} );
@@ -5104,8 +4668,6 @@ $.widget( "ui.autocomplete", {
 	_resizeMenu: function() {
 		var ul = this.menu.element;
 		ul.outerWidth( Math.max(
-
-
 			ul.width( "" ).outerWidth() + 1,
 			this.element.outerWidth()
 		) );
@@ -5148,14 +4710,9 @@ $.widget( "ui.autocomplete", {
 	_keyEvent: function( keyEvent, event ) {
 		if ( !this.isMultiLine || this.menu.element.is( ":visible" ) ) {
 			this._move( keyEvent, event );
-
 			event.preventDefault();
 		}
 	},
-
-
-
-
 	_isContentEditable: function( element ) {
 		if ( !element.length ) {
 			return false;
@@ -5178,9 +4735,6 @@ $.extend( $.ui.autocomplete, {
 		} );
 	}
 } );
-
-
-
 $.widget( "ui.autocomplete", $.ui.autocomplete, {
 	options: {
 		messages: {
@@ -5242,7 +4796,6 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 	_create: function() {
 		this._enhance();
 	},
-
 	_enhance: function() {
 		this.element.attr( "role", "toolbar" );
 		this.refresh();
@@ -5261,11 +4814,9 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 	_initWidgets: function() {
 		var that = this,
 			childWidgets = [];
-
 		$.each( this.options.items, function( widget, selector ) {
 			var labels;
 			var options = {};
-
 			if ( !selector ) {
 				return;
 			}
@@ -5283,32 +4834,23 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 				childWidgets = childWidgets.concat( labels.get() );
 				return;
 			}
-
 			if ( !$.fn[ widget ] ) {
 				return;
 			}
-
-
 			if ( that[ "_" + widget + "Options" ] ) {
 				options = that[ "_" + widget + "Options" ]( "middle" );
 			} else {
 				options = { classes: {} };
 			}
-
 			that.element
 				.find( selector )
 				.each( function() {
 					var element = $( this );
 					var instance = element[ widget ]( "instance" );
-
-
 					var instanceOptions = $.widget.extend( {}, options );
-
-
 					if ( widget === "button" && element.parent( ".ui-spinner" ).length ) {
 						return;
 					}
-
 					if ( !instance ) {
 						instance = element[ widget ]()[ widget ]( "instance" );
 					}
@@ -5317,8 +4859,6 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 							that._resolveClassesValues( instanceOptions.classes, instance );
 					}
 					element[ widget ]( instanceOptions );
-
-
 					var widgetElement = element[ widget ]( "widget" );
 					$.data( widgetElement[ 0 ], "ui-controlgroup-data",
 						instance ? instance : element[ widget ]( "instance" ) );
@@ -5421,13 +4961,10 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 		}
 		this._initWidgets();
 		children = this.childWidgets;
-
 		if ( this.options.onlyVisible ) {
 			children = children.filter( ":visible" );
 		}
 		if ( children.length ) {
-
-
 			$.each( [ "first", "last" ], function( index, value ) {
 				var instance = children[ value ]().data( "ui-controlgroup-data" );
 				if ( instance && that[ "_" + instance.widgetName + "Options" ] ) {
@@ -5440,7 +4977,6 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 					that._updateCornerClass( children[ value ](), value );
 				}
 			} );
-
 			this._callChildMethod( "refresh" );
 		}
 	}
@@ -5477,25 +5013,16 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		var disabled, labels;
 		var that = this;
 		var options = this._super() || {};
-
-
-
 		this._readType();
 		labels = this.element.labels();
-
 		this.label = $( labels[ labels.length - 1 ] );
 		if ( !this.label.length ) {
 			$.error( "No label found for checkboxradio widget" );
 		}
 		this.originalLabel = "";
-
-
 		this.label.contents().not( this.element[ 0 ] ).each( function() {
-
-
 			that.originalLabel += this.nodeType === 3 ? $( this ).text() : this.outerHTML;
 		} );
-
 		if ( this.originalLabel ) {
 			options.label = this.originalLabel;
 		}
@@ -5547,7 +5074,6 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 				" and element.type=" + this.type );
 		}
 	},
-
 	_enhance: function() {
 		this._updateIcon( this.element[ 0 ].checked );
 	},
@@ -5564,7 +5090,6 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		if ( this.form.length ) {
 			group = $( this.form[ 0 ].elements ).filter( nameSelector );
 		} else {
-
 			group = $( nameSelector ).filter( function() {
 				return $( this ).form().length === 0;
 			} );
@@ -5597,7 +5122,6 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		}
 	},
 	_setOption: function( key, value ) {
-
 		if ( key === "label" && !value ) {
 			return;
 		}
@@ -5605,7 +5129,6 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		if ( key === "disabled" ) {
 			this._toggleClass( this.label, null, "ui-state-disabled", value );
 			this.element[ 0 ].disabled = value;
-
 			return;
 		}
 		this.refresh();
@@ -5636,7 +5159,6 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		}
 	},
 	_updateLabel: function() {
-
 		var contents = this.label.contents().not( this.element[ 0 ] );
 		if ( this.icon ) {
 			contents = contents.not( this.icon[ 0 ] );
@@ -5692,8 +5214,6 @@ $.widget( "ui.button", {
 	},
 	_getCreateOptions: function() {
 		var disabled,
-
-
 			options = this._super() || {};
 		this.isInput = this.element.is( "input" );
 		disabled = this.element[ 0 ].disabled;
@@ -5710,14 +5230,10 @@ $.widget( "ui.button", {
 		if ( !this.option.showLabel & !this.options.icon ) {
 			this.options.showLabel = true;
 		}
-
-
-
 		if ( this.options.disabled == null ) {
 			this.options.disabled = this.element[ 0 ].disabled || false;
 		}
 		this.hasTitle = !!this.element.attr( "title" );
-
 		if ( this.options.label && this.options.label !== this.originalLabel ) {
 			if ( this.isInput ) {
 				this.element.val( this.options.label );
@@ -5733,9 +5249,6 @@ $.widget( "ui.button", {
 				"keyup": function( event ) {
 					if ( event.keyCode === $.ui.keyCode.SPACE ) {
 						event.preventDefault();
-
-
-
 						if ( this.element[ 0 ].click ) {
 							this.element[ 0 ].click();
 						} else {
@@ -5765,7 +5278,6 @@ $.widget( "ui.button", {
 		var icon = option !== "iconPosition",
 			position = icon ? this.options.iconPosition : value,
 			displayBlock = position === "top" || position === "bottom";
-
 		if ( !this.icon ) {
 			this.icon = $( "<span>" );
 			this._addClass( this.icon, "ui-button-icon", "ui-icon" );
@@ -5773,24 +5285,18 @@ $.widget( "ui.button", {
 				this._addClass( "ui-button-icon-only" );
 			}
 		} else if ( icon ) {
-
 			this._removeClass( this.icon, null, this.options.icon );
 		}
-
 		if ( icon ) {
 			this._addClass( this.icon, null, value );
 		}
 		this._attachIcon( position );
-
-
 		if ( displayBlock ) {
 			this._addClass( this.icon, null, "ui-widget-icon-block" );
 			if ( this.iconSpace ) {
 				this.iconSpace.remove();
 			}
 		} else {
-
-
 			if ( !this.iconSpace ) {
 				this.iconSpace = $( "<span> </span>" );
 				this._addClass( this.iconSpace, "ui-button-icon-space" );
@@ -5841,7 +5347,6 @@ $.widget( "ui.button", {
 		if ( key === "iconPosition" ) {
 			this._updateIcon( key, value );
 		}
-
 		if ( key === "showLabel" ) {
 				this._toggleClass( "ui-button-icon-only", null, !value );
 				this._updateTooltip();
@@ -5850,8 +5355,6 @@ $.widget( "ui.button", {
 			if ( this.isInput ) {
 				this.element.val( value );
 			} else {
-
-
 				this.element.html( value );
 				if ( this.icon ) {
 					this._attachIcon( this.options.iconPosition );
@@ -5869,8 +5372,6 @@ $.widget( "ui.button", {
 		}
 	},
 	refresh: function() {
-
-
 		var isDisabled = this.element.is( "input, button" ) ?
 			this.element[ 0 ].disabled : this.element.hasClass( "ui-button-disabled" );
 		if ( isDisabled !== this.options.disabled ) {
@@ -5879,9 +5380,7 @@ $.widget( "ui.button", {
 		this._updateTooltip();
 	}
 } );
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.button", $.ui.button, {
 		options: {
 			text: true,
@@ -5972,7 +5471,6 @@ if ( $.uiBackCompat !== false ) {
 	};
 }
 var widgetsButton = $.ui.button;
-
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 /*!
  * jQuery UI Datepicker 1.12.1
@@ -5995,15 +5493,8 @@ var datepicker_instActive;
 function datepicker_getZindex( elem ) {
 	var position, value;
 	while ( elem.length && elem[ 0 ] !== document ) {
-
-
-
 		position = elem.css( "position" );
 		if ( position === "absolute" || position === "relative" || position === "fixed" ) {
-
-
-
-
 			value = parseInt( elem.css( "zIndex" ), 10 );
 			if ( !isNaN( value ) && value !== 0 ) {
 				return value;
@@ -6053,40 +5544,29 @@ function Datepicker() {
 	};
 	this._defaults = { // Global defaults for all the date picker instances
 		showOn: "focus", // "focus" for popup on focus,
-
 		showAnim: "fadeIn", // Name of jQuery animation for popup
 		showOptions: {}, // Options for enhanced animations
 		defaultDate: null, // Used when field is blank: actual date,
-
 		appendText: "", // Display text following the input box, e.g. showing the format
 		buttonText: "...", // Text for trigger button
 		buttonImage: "", // URL for trigger button image
 		buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
 		hideIfNoPrevNext: false, // True to hide next/previous month links
-
 		navigationAsDateFormat: false, // True if date formatting applied to prev/today/next links
 		gotoCurrent: false, // True if today link goes back to current selection instead
 		changeMonth: false, // True if month can be selected directly, false if only prev/next
 		changeYear: false, // True if year can be selected directly, false if only prev/next
 		yearRange: "c-10:c+10", // Range of years to display in drop-down,
-
-
 		showOtherMonths: false, // True to show dates in other months, false to leave blank
 		selectOtherMonths: false, // True to allow selection of dates in other months, false for unselectable
 		showWeek: false, // True to show week of the year, false to not show it
 		calculateWeek: this.iso8601Week, // How to calculate the week of the year,
-
 		shortYearCutoff: "+10", // Short year values < this are in the current century,
-
-
 		minDate: null, // The earliest selectable date, or null for no limit
 		maxDate: null, // The latest selectable date, or null for no limit
 		duration: "fast", // Duration of display/closure
 		beforeShowDay: null, // Function that takes a date and returns an array with
-
-
 		beforeShow: null, // Function that takes an input field and
-
 		onSelect: null, // Define a callback function when a date is selected
 		onChangeMonthYear: null, // Define a callback function when the month or year is changed
 		onClose: null, // Define a callback function when the datepicker is closed
@@ -6111,7 +5591,6 @@ $.extend( Datepicker.prototype, {
 	markerClassName: "hasDatepicker",
 	//Keep track of the maximum number of rows displayed (see #7043)
 	maxRows: 4,
-
 	_widgetDatepicker: function() {
 		return this.dpDiv;
 	},
@@ -6255,8 +5734,6 @@ $.extend( Datepicker.prototype, {
 		if ( inst.settings.disabled ) {
 			this._disableDatepicker( target );
 		}
-
-
 		inst.dpDiv.css( "display", "block" );
 	},
 	/* Pop-up the date picker in a "dialog" box.
@@ -6295,7 +5772,6 @@ $.extend( Datepicker.prototype, {
 			this._pos = // should use actual width/height below
 				[ ( browserWidth / 2 ) - 100 + scrollX, ( browserHeight / 2 ) - 150 + scrollY ];
 		}
-
 		this._dialogInput.css( "left", ( this._pos[ 0 ] + 20 ) + "px" ).css( "top", this._pos[ 1 ] + "px" );
 		inst.settings.onSelect = onSelect;
 		this._inDialog = true;
@@ -6443,7 +5919,6 @@ $.extend( Datepicker.prototype, {
 			minDate = this._getMinMaxDate( inst, "min" );
 			maxDate = this._getMinMaxDate( inst, "max" );
 			datepicker_extendRemove( inst.settings, settings );
-
 			if ( minDate !== null && settings.dateFormat !== undefined && settings.minDate === undefined ) {
 				inst.settings.minDate = this._formatDate( inst, minDate );
 			}
@@ -6464,7 +5939,6 @@ $.extend( Datepicker.prototype, {
 			this._updateDatepicker( inst );
 		}
 	},
-
 	_changeDatepicker: function( target, name, value ) {
 		this._optionDatepicker( target, name, value );
 	},
@@ -6521,7 +5995,6 @@ $.extend( Datepicker.prototype, {
 						onSelect = $.datepicker._get( inst, "onSelect" );
 						if ( onSelect ) {
 							dateStr = $.datepicker._formatDate( inst );
-
 							onSelect.apply( ( inst.input ? inst.input[ 0 ] : null ), [ dateStr, inst ] );
 						} else {
 							$.datepicker._hideDatepicker();
@@ -6551,13 +6024,11 @@ $.extend( Datepicker.prototype, {
 							$.datepicker._adjustDate( event.target, ( isRTL ? +1 : -1 ), "D" );
 						}
 						handled = event.ctrlKey || event.metaKey;
-
 						if ( event.originalEvent.altKey ) {
 							$.datepicker._adjustDate( event.target, ( event.ctrlKey ?
 								-$.datepicker._get( inst, "stepBigMonths" ) :
 								-$.datepicker._get( inst, "stepMonths" ) ), "M" );
 						}
-
 						break;
 				case 38: if ( event.ctrlKey || event.metaKey ) {
 							$.datepicker._adjustDate( event.target, -7, "D" );
@@ -6568,13 +6039,11 @@ $.extend( Datepicker.prototype, {
 							$.datepicker._adjustDate( event.target, ( isRTL ? -1 : +1 ), "D" );
 						}
 						handled = event.ctrlKey || event.metaKey;
-
 						if ( event.originalEvent.altKey ) {
 							$.datepicker._adjustDate( event.target, ( event.ctrlKey ?
 								+$.datepicker._get( inst, "stepBigMonths" ) :
 								+$.datepicker._get( inst, "stepMonths" ) ), "M" );
 						}
-
 						break;
 				case 40: if ( event.ctrlKey || event.metaKey ) {
 							$.datepicker._adjustDate( event.target, +7, "D" );
@@ -6670,11 +6139,8 @@ $.extend( Datepicker.prototype, {
 		$.datepicker._pos = null;
 		//to avoid flashes on Firefox
 		inst.dpDiv.empty();
-
 		inst.dpDiv.css( { position: "absolute", display: "block", top: "-1000px" } );
 		$.datepicker._updateDatepicker( inst );
-
-
 		offset = $.datepicker._checkOffset( inst, offset, isFixed );
 		inst.dpDiv.css( { position: ( $.datepicker._inDialog && $.blockUI ?
 			"static" : ( isFixed ? "fixed" : "absolute" ) ), display: "none",
@@ -6720,7 +6186,6 @@ $.extend( Datepicker.prototype, {
 		if ( inst === $.datepicker._curInst && $.datepicker._datepickerShowing && $.datepicker._shouldFocusInput( inst ) ) {
 			inst.input.trigger( "focus" );
 		}
-
 		if ( inst.yearshtml ) {
 			origyearshtml = inst.yearshtml;
 			setTimeout( function() {
@@ -6732,9 +6197,6 @@ $.extend( Datepicker.prototype, {
 			}, 0 );
 		}
 	},
-
-
-
 	_shouldFocusInput: function( inst ) {
 		return inst.input && inst.input.is( ":visible" ) && !inst.input.is( ":disabled" ) && !inst.input.is( ":focus" );
 	},
@@ -6749,7 +6211,6 @@ $.extend( Datepicker.prototype, {
 		offset.left -= ( this._get( inst, "isRTL" ) ? ( dpWidth - inputWidth ) : 0 );
 		offset.left -= ( isFixed && offset.left === inst.input.offset().left ) ? $( document ).scrollLeft() : 0;
 		offset.top -= ( isFixed && offset.top === ( inst.input.offset().top + inputHeight ) ) ? $( document ).scrollTop() : 0;
-
 		offset.left -= Math.min( offset.left, ( offset.left + dpWidth > viewWidth && viewWidth > dpWidth ) ?
 			Math.abs( offset.left + dpWidth - viewWidth ) : 0 );
 		offset.top -= Math.min( offset.top, ( offset.top + dpHeight > viewHeight && viewHeight > dpHeight ) ?
@@ -6782,7 +6243,6 @@ $.extend( Datepicker.prototype, {
 			postProcess = function() {
 				$.datepicker._tidyDialog( inst );
 			};
-
 			if ( $.effects && ( $.effects.effect[ showAnim ] || $.effects[ showAnim ] ) ) {
 				inst.dpDiv.hide( showAnim, $.datepicker._get( inst, "showOptions" ), duration, postProcess );
 			} else {
@@ -6940,7 +6400,6 @@ $.extend( Datepicker.prototype, {
 	iso8601Week: function( date ) {
 		var time,
 			checkDate = new Date( date.getTime() );
-
 		checkDate.setDate( checkDate.getDate() + 4 - ( checkDate.getDay() || 7 ) );
 		time = checkDate.getTime();
 		checkDate.setMonth( 0 ); // Compare with Jan 1
@@ -6983,7 +6442,6 @@ $.extend( Datepicker.prototype, {
 			doy = -1,
 			literal = false,
 			date,
-
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {
@@ -6991,7 +6449,6 @@ $.extend( Datepicker.prototype, {
 				}
 				return matches;
 			},
-
 			getNumber = function( match ) {
 				var isDoubled = lookAhead( match ),
 					size = ( match === "@" ? 14 : ( match === "!" ? 20 :
@@ -7005,7 +6462,6 @@ $.extend( Datepicker.prototype, {
 				iValue += num[ 0 ].length;
 				return parseInt( num[ 0 ], 10 );
 			},
-
 			getName = function( match, shortNames, longNames ) {
 				var index = -1,
 					names = $.map( lookAhead( match ) ? longNames : shortNames, function( v, k ) {
@@ -7027,7 +6483,6 @@ $.extend( Datepicker.prototype, {
 					throw "Unknown name at position " + iValue;
 				}
 			},
-
 			checkLiteral = function() {
 				if ( value.charAt( iValue ) !== format.charAt( iFormat ) ) {
 					throw "Unexpected literal at position " + iValue;
@@ -7167,7 +6622,6 @@ $.extend( Datepicker.prototype, {
 			dayNames = ( settings ? settings.dayNames : null ) || this._defaults.dayNames,
 			monthNamesShort = ( settings ? settings.monthNamesShort : null ) || this._defaults.monthNamesShort,
 			monthNames = ( settings ? settings.monthNames : null ) || this._defaults.monthNames,
-
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {
@@ -7175,7 +6629,6 @@ $.extend( Datepicker.prototype, {
 				}
 				return matches;
 			},
-
 			formatNumber = function( match, value, len ) {
 				var num = "" + value;
 				if ( lookAhead( match ) ) {
@@ -7185,7 +6638,6 @@ $.extend( Datepicker.prototype, {
 				}
 				return num;
 			},
-
 			formatName = function( match, value, shortNames, longNames ) {
 				return ( lookAhead( match ) ? longNames[ value ] : shortNames[ value ] );
 			},
@@ -7247,7 +6699,6 @@ $.extend( Datepicker.prototype, {
 		var iFormat,
 			chars = "",
 			literal = false,
-
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {
@@ -7329,7 +6780,6 @@ $.extend( Datepicker.prototype, {
 						offset, $.datepicker._getFormatConfig( inst ) );
 				}
 				catch ( e ) {
-
 				}
 				var date = ( offset.toLowerCase().match( /^c/ ) ?
 					$.datepicker._getDate( inst ) : null ) || new Date(),
@@ -7580,7 +7030,6 @@ $.extend( Datepicker.prototype, {
 							( otherMonth ? " ui-datepicker-other-month" : "" ) + // highlight days from other months
 							( ( printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent ) || // user pressed key
 							( defaultDate.getTime() === printDate.getTime() && defaultDate.getTime() === selectedDate.getTime() ) ?
-
 							" " + this._dayOverClass : "" ) + // highlight selected day
 							( unselectable ? " " + this._unselectableClass + " ui-state-disabled" : "" ) +  // highlight unselectable days
 							( otherMonth && !showOtherMonths ? "" : " " + daySettings[ 1 ] + // highlight custom dates
@@ -7623,7 +7072,6 @@ $.extend( Datepicker.prototype, {
 			showMonthAfterYear = this._get( inst, "showMonthAfterYear" ),
 			html = "<div class='ui-datepicker-title'>",
 			monthHtml = "";
-
 		if ( secondary || !changeMonth ) {
 			monthHtml += "<span class='ui-datepicker-month'>" + monthNames[ drawMonth ] + "</span>";
 		} else {
@@ -7642,13 +7090,11 @@ $.extend( Datepicker.prototype, {
 		if ( !showMonthAfterYear ) {
 			html += monthHtml + ( secondary || !( changeMonth && changeYear ) ? "&#xa0;" : "" );
 		}
-
 		if ( !inst.yearshtml ) {
 			inst.yearshtml = "";
 			if ( secondary || !changeYear ) {
 				html += "<span class='ui-datepicker-year'>" + drawYear + "</span>";
 			} else {
-
 				years = this._get( inst, "yearRange" ).split( ":" );
 				thisYear = new Date().getFullYear();
 				determineYear = function( value ) {
@@ -7860,7 +7306,6 @@ $.datepicker.initialized = false;
 $.datepicker.uuid = new Date().getTime();
 $.datepicker.version = "1.12.1";
 var widgetsDatepicker = $.datepicker;
-
 var ie = $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 /*!
  * jQuery UI Mouse 1.12.1
@@ -7900,8 +7345,6 @@ var widgetsMouse = $.widget( "ui.mouse", {
 			} );
 		this.started = false;
 	},
-
-
 	_mouseDestroy: function() {
 		this.element.off( "." + this.widgetName );
 		if ( this._mouseMoveDelegate ) {
@@ -7911,18 +7354,14 @@ var widgetsMouse = $.widget( "ui.mouse", {
 		}
 	},
 	_mouseDown: function( event ) {
-
 		if ( mouseHandled ) {
 			return;
 		}
 		this._mouseMoved = false;
-
 		( this._mouseStarted && this._mouseUp( event ) );
 		this._mouseDownEvent = event;
 		var that = this,
 			btnIsLeft = ( event.which === 1 ),
-
-
 			elIsCancel = ( typeof this.options.cancel === "string" && event.target.nodeName ?
 				$( event.target ).closest( this.options.cancel ).length : false );
 		if ( !btnIsLeft || elIsCancel || !this._mouseCapture( event ) ) {
@@ -7941,11 +7380,9 @@ var widgetsMouse = $.widget( "ui.mouse", {
 				return true;
 			}
 		}
-
 		if ( true === $.data( event.target, this.widgetName + ".preventClickEvent" ) ) {
 			$.removeData( event.target, this.widgetName + ".preventClickEvent" );
 		}
-
 		this._mouseMoveDelegate = function( event ) {
 			return that._mouseMove( event );
 		};
@@ -7960,20 +7397,11 @@ var widgetsMouse = $.widget( "ui.mouse", {
 		return true;
 	},
 	_mouseMove: function( event ) {
-
-
-
-
 		if ( this._mouseMoved ) {
-
 			if ( $.ui.ie && ( !document.documentMode || document.documentMode < 9 ) &&
 					!event.button ) {
 				return this._mouseUp( event );
-
 			} else if ( !event.which ) {
-
-
-
 				if ( event.originalEvent.altKey || event.originalEvent.ctrlKey ||
 						event.originalEvent.metaKey || event.originalEvent.shiftKey ) {
 					this.ignoreMissingWhich = true;
@@ -8025,13 +7453,11 @@ var widgetsMouse = $.widget( "ui.mouse", {
 	_mouseDelayMet: function( /* event */ ) {
 		return this.mouseDelayMet;
 	},
-
 	_mouseStart: function( /* event */ ) {},
 	_mouseDrag: function( /* event */ ) {},
 	_mouseStop: function( /* event */ ) {},
 	_mouseCapture: function( /* event */ ) { return true; }
 } );
-
 var plugin = $.ui.plugin = {
 	add: function( module, option, set ) {
 		var i,
@@ -8059,8 +7485,6 @@ var plugin = $.ui.plugin = {
 	}
 };
 var safeBlur = $.ui.safeBlur = function( element ) {
-
-
 	if ( element && element.nodeName.toLowerCase() !== "body" ) {
 		$( element ).trigger( "blur" );
 	}
@@ -8107,7 +7531,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		snapTolerance: 20,
 		stack: false,
 		zIndex: false,
-
 		drag: null,
 		start: null,
 		stop: null
@@ -8139,7 +7562,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 	},
 	_mouseCapture: function( event ) {
 		var o = this.options;
-
 		if ( this.helper || o.disabled ||
 				$( event.target ).closest( ".ui-resizable-handle" ).length > 0 ) {
 			return false;
@@ -8173,13 +7595,9 @@ $.widget( "ui.draggable", $.ui.mouse, {
 	_blurActiveElement: function( event ) {
 		var activeElement = $.ui.safeActiveElement( this.document[ 0 ] ),
 			target = $( event.target );
-
-
-
 		if ( target.closest( activeElement ).length ) {
 			return;
 		}
-
 		$.ui.safeBlur( activeElement );
 	},
 	_mouseStart: function( event ) {
@@ -8228,11 +7646,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		if ( $.ui.ddmanager && !o.dropBehaviour ) {
 			$.ui.ddmanager.prepareOffsets( this, event );
 		}
-
-
 		this._mouseDrag( event, true );
-
-
 		if ( $.ui.ddmanager ) {
 			$.ui.ddmanager.dragStart( this, event );
 		}
@@ -8252,7 +7666,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		};
 	},
 	_mouseDrag: function( event, noPropagation ) {
-
 		if ( this.hasFixedAncestor ) {
 			this.offset.parent = this._getParentOffset();
 		}
@@ -8310,15 +7723,10 @@ $.widget( "ui.draggable", $.ui.mouse, {
 	},
 	_mouseUp: function( event ) {
 		this._unblockFrames();
-
-
 		if ( $.ui.ddmanager ) {
 			$.ui.ddmanager.dragStop( this, event );
 		}
-
 		if ( this.handleElement.is( event.target ) ) {
-
-
 			this.element.trigger( "focus" );
 		}
 		return $.ui.mouse.prototype._mouseUp.call( this, event );
@@ -8357,9 +7765,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 				this.element[ 0 ].parentNode :
 				o.appendTo ) );
 		}
-
-
-
 		if ( helperIsFunction && helper[ 0 ] === this.element[ 0 ] ) {
 			this._setPositionRelative();
 		}
@@ -8401,13 +7806,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		//Get the offsetParent and cache its position
 		var po = this.offsetParent.offset(),
 			document = this.document[ 0 ];
-
-
-
-
-
-
-
 		if ( this.cssPosition === "absolute" && this.scrollParent[ 0 ] !== document &&
 				$.contains( this.scrollParent[ 0 ], this.offsetParent[ 0 ] ) ) {
 			po.left += this.scrollParent.scrollLeft();
@@ -8520,22 +7918,16 @@ $.widget( "ui.draggable", $.ui.mouse, {
 			scrollIsRootNode = this._isRootNode( this.scrollParent[ 0 ] );
 		return {
 			top: (
-
 				pos.top	+
-
 				this.offset.relative.top * mod +
-
 				this.offset.parent.top * mod -
 				( ( this.cssPosition === "fixed" ?
 					-this.offset.scroll.top :
 					( scrollIsRootNode ? 0 : this.offset.scroll.top ) ) * mod )
 			),
 			left: (
-
 				pos.left +
-
 				this.offset.relative.left * mod +
-
 				this.offset.parent.left * mod	-
 				( ( this.cssPosition === "fixed" ?
 					-this.offset.scroll.left :
@@ -8549,7 +7941,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 			scrollIsRootNode = this._isRootNode( this.scrollParent[ 0 ] ),
 			pageX = event.pageX,
 			pageY = event.pageY;
-
 		if ( !scrollIsRootNode || !this.offset.scroll ) {
 			this.offset.scroll = {
 				top: this.scrollParent.scrollTop(),
@@ -8560,7 +7951,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		 * - Position constraining -
 		 * Constrain the position to a mix of grid, containment.
 		 */
-
 		if ( constrainPosition ) {
 			if ( this.containment ) {
 				if ( this.relativeContainer ) {
@@ -8589,7 +7979,6 @@ $.widget( "ui.draggable", $.ui.mouse, {
 			}
 			if ( o.grid ) {
 				//Check for grid elements set to 0 to prevent divide by 0 error causing invalid
-
 				top = o.grid[ 1 ] ? this.originalPageY + Math.round( ( pageY -
 					this.originalPageY ) / o.grid[ 1 ] ) * o.grid[ 1 ] : this.originalPageY;
 				pageY = containment ? ( ( top - this.offset.click.top >= containment[ 1 ] ||
@@ -8615,26 +8004,18 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		}
 		return {
 			top: (
-
 				pageY -
-
 				this.offset.click.top -
-
 				this.offset.relative.top -
-
 				this.offset.parent.top +
 				( this.cssPosition === "fixed" ?
 					-this.offset.scroll.top :
 					( scrollIsRootNode ? 0 : this.offset.scroll.top ) )
 			),
 			left: (
-
 				pageX -
-
 				this.offset.click.left -
-
 				this.offset.relative.left -
-
 				this.offset.parent.left +
 				( this.cssPosition === "fixed" ?
 					-this.offset.scroll.left :
@@ -8653,11 +8034,9 @@ $.widget( "ui.draggable", $.ui.mouse, {
 			this.destroy();
 		}
 	},
-
 	_trigger: function( type, event, ui ) {
 		ui = ui || this._uiHash();
 		$.ui.plugin.call( this, type, [ event, ui, this ], true );
-
 		if ( /^(drag|start|stop)/.test( type ) ) {
 			this.positionAbs = this._convertPositionTo( "absolute" );
 			ui.offset = this.positionAbs;
@@ -8684,9 +8063,6 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 			var sortable = $( this ).sortable( "instance" );
 			if ( sortable && !sortable.options.disabled ) {
 				draggable.sortables.push( sortable );
-
-
-
 				sortable.refreshPositions();
 				sortable._trigger( "activate", event, uiSortable );
 			}
@@ -8701,25 +8077,16 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 			var sortable = this;
 			if ( sortable.isOver ) {
 				sortable.isOver = 0;
-
 				draggable.cancelHelperRemoval = true;
 				sortable.cancelHelperRemoval = false;
-
-
-
 				sortable._storedCSS = {
 					position: sortable.placeholder.css( "position" ),
 					top: sortable.placeholder.css( "top" ),
 					left: sortable.placeholder.css( "left" )
 				};
 				sortable._mouseStop( event );
-
-
 				sortable.options.helper = sortable.options._helper;
 			} else {
-
-
-
 				sortable.cancelHelperRemoval = true;
 				sortable._trigger( "deactivate", event, uiSortable );
 			}
@@ -8729,14 +8096,12 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 		$.each( draggable.sortables, function() {
 			var innermostIntersecting = false,
 				sortable = this;
-
 			sortable.positionAbs = draggable.positionAbs;
 			sortable.helperProportions = draggable.helperProportions;
 			sortable.offset.click = draggable.offset.click;
 			if ( sortable._intersectsWith( sortable.containerCache ) ) {
 				innermostIntersecting = true;
 				$.each( draggable.sortables, function() {
-
 					this.positionAbs = draggable.positionAbs;
 					this.helperProportions = draggable.helperProportions;
 					this.offset.click = draggable.offset.click;
@@ -8749,27 +8114,19 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				} );
 			}
 			if ( innermostIntersecting ) {
-
-
 				if ( !sortable.isOver ) {
 					sortable.isOver = 1;
-
 					draggable._parent = ui.helper.parent();
 					sortable.currentItem = ui.helper
 						.appendTo( sortable.element )
 						.data( "ui-sortable-item", true );
-
 					sortable.options._helper = sortable.options.helper;
 					sortable.options.helper = function() {
 						return ui.helper[ 0 ];
 					};
-
-
 					event.target = sortable.currentItem[ 0 ];
 					sortable._mouseCapture( event, true );
 					sortable._mouseStart( event, true, true );
-
-
 					sortable.offset.click.top = draggable.offset.click.top;
 					sortable.offset.click.left = draggable.offset.click.left;
 					sortable.offset.parent.left -= draggable.offset.parent.left -
@@ -8777,55 +8134,35 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 					sortable.offset.parent.top -= draggable.offset.parent.top -
 						sortable.offset.parent.top;
 					draggable._trigger( "toSortable", event );
-
-
 					draggable.dropped = sortable.element;
-
-
 					$.each( draggable.sortables, function() {
 						this.refreshPositions();
 					} );
-
 					draggable.currentItem = draggable.element;
 					sortable.fromOutside = draggable;
 				}
 				if ( sortable.currentItem ) {
 					sortable._mouseDrag( event );
-
-
-
 					ui.position = sortable.position;
 				}
 			} else {
-
-
-
 				if ( sortable.isOver ) {
 					sortable.isOver = 0;
 					sortable.cancelHelperRemoval = true;
-
-
 					sortable.options._revert = sortable.options.revert;
 					sortable.options.revert = false;
 					sortable._trigger( "out", event, sortable._uiHash( sortable ) );
 					sortable._mouseStop( event, true );
-
-
 					sortable.options.revert = sortable.options._revert;
 					sortable.options.helper = sortable.options._helper;
 					if ( sortable.placeholder ) {
 						sortable.placeholder.remove();
 					}
-
-
 					ui.helper.appendTo( draggable._parent );
 					draggable._refreshOffsets( event );
 					ui.position = draggable._generatePosition( event, true );
 					draggable._trigger( "fromSortable", event );
-
 					draggable.dropped = false;
-
-
 					$.each( draggable.sortables, function() {
 						this.refreshPositions();
 					} );
@@ -9112,9 +8449,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		maxWidth: null,
 		minHeight: 10,
 		minWidth: 10,
-
 		zIndex: 90,
-
 		resize: null,
 		start: null,
 		stop: null
@@ -9134,9 +8469,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		if ( el[ scroll ] > 0 ) {
 			return true;
 		}
-
-
-
 		el[ scroll ] = 1;
 		has = ( el[ scroll ] > 0 );
 		el[ scroll ] = 0;
@@ -9154,7 +8486,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 			_proportionallyResizeElements: [],
 			_helper: o.helper || o.ghost || o.animate ? o.helper || "ui-resizable-helper" : null
 		} );
-
 		if ( this.element[ 0 ].nodeName.match( /^(canvas|textarea|input|select|button|img)$/i ) ) {
 			this.element.wrap(
 				$( "<div class='ui-wrapper' style='overflow: hidden;'></div>" ).css( {
@@ -9177,8 +8508,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 			};
 			this.element.css( margins );
 			this.originalElement.css( "margin", 0 );
-
-
 			this.originalResizeStyle = this.originalElement.css( "resize" );
 			this.originalElement.css( "resize", "none" );
 			this._proportionallyResizeElements.push( this.originalElement.css( {
@@ -9186,8 +8515,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 				zoom: 1,
 				display: "block"
 			} ) );
-
-
 			this.originalElement.css( margins );
 			this._proportionallyResize();
 		}
@@ -9224,7 +8551,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 					.find( ".ui-resizable-handle" )
 						.remove();
 			};
-
 		if ( this.elementIsWrapper ) {
 			_destroy( this.element );
 			wrapper = this.element;
@@ -9311,7 +8637,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 				this._handles = this._handles.add( this.handles[ i ] );
 			}
 		};
-
 		this._renderAxis( this.element );
 		this._handles = this._handles.add( this.element.find( ".ui-resizable-handle" ) );
 		this._handles.disableSelection();
@@ -9573,7 +8898,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		if ( ismaxh && ch ) {
 			data.top = dh - o.maxHeight;
 		}
-
 		if ( !data.width && !data.height && !data.left && data.top ) {
 			data.top = null;
 		} else if ( !data.width && !data.height && !data.top && data.left ) {
@@ -9614,8 +8938,6 @@ $.widget( "ui.resizable", $.ui.mouse, {
 			element = this.helper || this.element;
 		for ( ; i < this._proportionallyResizeElements.length; i++ ) {
 			prel = this._proportionallyResizeElements[ i ];
-
-
 			if ( !this.outerDimensions ) {
 				this.outerDimensions = this._getPaddingPlusBorderDimensions( prel );
 			}
@@ -9728,7 +9050,6 @@ $.ui.plugin.add( "resizable", "animate", {
 					if ( pr && pr.length ) {
 						$( pr[ 0 ] ).css( { width: data.width, height: data.height } );
 					}
-
 					that._updateCache( data );
 					that._propagate( "resize", event );
 				}
@@ -9950,10 +9271,7 @@ $.ui.plugin.add( "resizable", "ghost", {
 			top: 0
 		} );
 		that._addClass( that.ghost, "ui-resizable-ghost" );
-
-
 		if ( $.uiBackCompat !== false && typeof that.options.ghost === "string" ) {
-
 			that.ghost.addClass( this.options.ghost );
 		}
 		that.ghost.appendTo( that.helper );
@@ -10084,7 +9402,6 @@ $.widget( "ui.dialog", {
 			at: "center",
 			of: window,
 			collision: "fit",
-
 			using: function( pos ) {
 				var topOffset = $( this ).css( pos ).offset().top;
 				if ( topOffset < 0 ) {
@@ -10096,7 +9413,6 @@ $.widget( "ui.dialog", {
 		show: null,
 		title: null,
 		width: 300,
-
 		beforeClose: null,
 		close: null,
 		drag: null,
@@ -10139,7 +9455,6 @@ $.widget( "ui.dialog", {
 		if ( this.options.title == null && this.originalTitle != null ) {
 			this.options.title = this.originalTitle;
 		}
-
 		if ( this.options.disabled ) {
 			this.options.disabled = false;
 		}
@@ -10180,14 +9495,12 @@ $.widget( "ui.dialog", {
 		this.element
 			.removeUniqueId()
 			.css( this.originalCss )
-
 			.detach();
 		this.uiDialog.remove();
 		if ( this.originalTitle ) {
 			this.element.attr( "title", this.originalTitle );
 		}
 		next = originalPosition.parent.children().eq( originalPosition.index );
-
 		if ( next.length && next[ 0 ] !== this.element[ 0 ] ) {
 			next.before( this.element );
 		} else {
@@ -10209,9 +9522,6 @@ $.widget( "ui.dialog", {
 		this._destroyOverlay();
 		this._untrackInstance();
 		if ( !this.opener.filter( ":focusable" ).trigger( "focus" ).length ) {
-
-
-
 			$.ui.safeBlur( $.ui.safeActiveElement( this.document[ 0 ] ) );
 		}
 		this._hide( this.uiDialog, this.options.hide, function() {
@@ -10253,9 +9563,6 @@ $.widget( "ui.dialog", {
 		this._position();
 		this._createOverlay();
 		this._moveToTop( null, true );
-
-
-
 		if ( this.overlay ) {
 			this.overlay.css( "z-index", this.uiDialog.css( "z-index" ) - 1 );
 		}
@@ -10263,20 +9570,10 @@ $.widget( "ui.dialog", {
 			that._focusTabbable();
 			that._trigger( "focus" );
 		} );
-
-
-
 		this._makeFocusTarget();
 		this._trigger( "open" );
 	},
 	_focusTabbable: function() {
-
-
-
-
-
-
-
 		var hasFocus = this._focusedElement;
 		if ( !hasFocus ) {
 			hasFocus = this.element.find( "[autofocus]" );
@@ -10306,16 +9603,12 @@ $.widget( "ui.dialog", {
 		}
 		event.preventDefault();
 		checkFocus.call( this );
-
-
-
 		this._delay( checkFocus );
 	},
 	_createWrapper: function() {
 		this.uiDialog = $( "<div>" )
 			.hide()
 			.attr( {
-
 				tabIndex: -1,
 				role: "dialog"
 			} )
@@ -10329,7 +9622,6 @@ $.widget( "ui.dialog", {
 					this.close( event );
 					return;
 				}
-
 				if ( event.keyCode !== $.ui.keyCode.TAB || event.isDefaultPrevented() ) {
 					return;
 				}
@@ -10356,9 +9648,6 @@ $.widget( "ui.dialog", {
 				}
 			}
 		} );
-
-
-
 		if ( !this.element.find( "[aria-describedby]" ).length ) {
 			this.uiDialog.attr( {
 				"aria-describedby": this.element.uniqueId().attr( "id" )
@@ -10372,18 +9661,11 @@ $.widget( "ui.dialog", {
 			"ui-dialog-titlebar", "ui-widget-header ui-helper-clearfix" );
 		this._on( this.uiDialogTitlebar, {
 			mousedown: function( event ) {
-
-
-
 				if ( !$( event.target ).closest( ".ui-dialog-titlebar-close" ) ) {
-
 					this.uiDialog.trigger( "focus" );
 				}
 			}
 		} );
-
-
-
 		this.uiDialogTitlebarClose = $( "<button type='button'></button>" )
 			.button( {
 				label: $( "<a>" ).text( this.options.closeText ).html(),
@@ -10425,7 +9707,6 @@ $.widget( "ui.dialog", {
 	_createButtons: function() {
 		var that = this,
 			buttons = this.options.buttons;
-
 		this.uiDialogButtonPane.remove();
 		this.uiButtonSet.empty();
 		if ( $.isEmptyObject( buttons ) || ( $.isArray( buttons ) && !buttons.length ) ) {
@@ -10437,15 +9718,12 @@ $.widget( "ui.dialog", {
 			props = $.isFunction( props ) ?
 				{ click: props, text: name } :
 				props;
-
 			props = $.extend( { type: "button" }, props );
-
 			click = props.click;
 			buttonOptions = {
 				icon: props.icon,
 				iconPosition: props.iconPosition,
 				showLabel: props.showLabel,
-
 				icons: props.icons,
 				text: props.text
 			};
@@ -10453,7 +9731,6 @@ $.widget( "ui.dialog", {
 			delete props.icon;
 			delete props.iconPosition;
 			delete props.showLabel;
-
 			delete props.icons;
 			if ( typeof props.text === "boolean" ) {
 				delete props.text;
@@ -10508,8 +9785,6 @@ $.widget( "ui.dialog", {
 		var that = this,
 			options = this.options,
 			handles = options.resizable,
-
-
 			position = this.uiDialog.css( "position" ),
 			resizeHandles = typeof handles === "string" ?
 				handles :
@@ -10592,7 +9867,6 @@ $.widget( "ui.dialog", {
 			Math.min( options.minHeight, options.height );
 	},
 	_position: function() {
-
 		var isVisible = this.uiDialog.is( ":visible" );
 		if ( !isVisible ) {
 			this.uiDialog.show();
@@ -10638,7 +9912,6 @@ $.widget( "ui.dialog", {
 		}
 		if ( key === "closeText" ) {
 			this.uiDialogTitlebarClose.button( {
-
 				label: $( "<a>" ).text( "" + this.options.closeText ).html()
 			} );
 		}
@@ -10655,16 +9928,13 @@ $.widget( "ui.dialog", {
 			this._position();
 		}
 		if ( key === "resizable" ) {
-
 			isResizable = uiDialog.is( ":data(ui-resizable)" );
 			if ( isResizable && !value ) {
 				uiDialog.resizable( "destroy" );
 			}
-
 			if ( isResizable && typeof value === "string" ) {
 				uiDialog.resizable( "option", "handles", value );
 			}
-
 			if ( !isResizable && value !== false ) {
 				this._makeResizable();
 			}
@@ -10674,11 +9944,8 @@ $.widget( "ui.dialog", {
 		}
 	},
 	_size: function() {
-
-
 		var nonContentHeight, minContentHeight, maxContentHeight,
 			options = this.options;
-
 		this.element.show().css( {
 			width: "auto",
 			minHeight: 0,
@@ -10688,8 +9955,6 @@ $.widget( "ui.dialog", {
 		if ( options.minWidth > options.width ) {
 			options.width = options.minWidth;
 		}
-
-
 		nonContentHeight = this.uiDialog.css( {
 			height: "auto",
 			width: options.width
@@ -10735,24 +10000,17 @@ $.widget( "ui.dialog", {
 		if ( $( event.target ).closest( ".ui-dialog" ).length ) {
 			return true;
 		}
-
-
 		return !!$( event.target ).closest( ".ui-datepicker" ).length;
 	},
 	_createOverlay: function() {
 		if ( !this.options.modal ) {
 			return;
 		}
-
-
 		var isOpening = true;
 		this._delay( function() {
 			isOpening = false;
 		} );
 		if ( !this.document.data( "ui-dialog-overlays" ) ) {
-
-
-
 			this._on( this.document, {
 				focusin: function( event ) {
 					if ( isOpening ) {
@@ -10791,10 +10049,7 @@ $.widget( "ui.dialog", {
 		}
 	}
 } );
-
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.dialog", $.ui.dialog, {
 		options: {
 			dialogClass: ""
@@ -10836,7 +10091,6 @@ $.widget( "ui.droppable", {
 		greedy: false,
 		scope: "default",
 		tolerance: "intersect",
-
 		activate: null,
 		deactivate: null,
 		drop: null,
@@ -10854,10 +10108,8 @@ $.widget( "ui.droppable", {
 		};
 		this.proportions = function( /* valueToWrite */ ) {
 			if ( arguments.length ) {
-
 				proportions = arguments[ 0 ];
 			} else {
-
 				return proportions ?
 					proportions :
 					proportions = {
@@ -10870,7 +10122,6 @@ $.widget( "ui.droppable", {
 		o.addClasses && this._addClass( "ui-droppable" );
 	},
 	_addToManager: function( scope ) {
-
 		$.ui.ddmanager.droppables[ scope ] = $.ui.ddmanager.droppables[ scope ] || [];
 		$.ui.ddmanager.droppables[ scope ].push( this );
 	},
@@ -10914,7 +10165,6 @@ $.widget( "ui.droppable", {
 	},
 	_over: function( event ) {
 		var draggable = $.ui.ddmanager.current;
-
 		if ( !draggable || ( draggable.currentItem ||
 				draggable.element )[ 0 ] === this.element[ 0 ] ) {
 			return;
@@ -10927,7 +10177,6 @@ $.widget( "ui.droppable", {
 	},
 	_out: function( event ) {
 		var draggable = $.ui.ddmanager.current;
-
 		if ( !draggable || ( draggable.currentItem ||
 				draggable.element )[ 0 ] === this.element[ 0 ] ) {
 			return;
@@ -10941,7 +10190,6 @@ $.widget( "ui.droppable", {
 	_drop: function( event, custom ) {
 		var draggable = custom || $.ui.ddmanager.current,
 			childrenIntersection = false;
-
 		if ( !draggable || ( draggable.currentItem ||
 				draggable.element )[ 0 ] === this.element[ 0 ] ) {
 			return false;
@@ -10987,8 +10235,6 @@ $.widget( "ui.droppable", {
 			offset: c.positionAbs
 		};
 	},
-
-
 	_addHoverClass: function() {
 		this._addClass( "ui-droppable-hover" );
 	},
@@ -11058,12 +10304,10 @@ $.ui.ddmanager = {
 			type = event ? event.type : null, // workaround for #2317
 			list = ( t.currentItem || t.element ).find( ":data(ui-droppable)" ).addBack();
 		droppablesLoop: for ( i = 0; i < m.length; i++ ) {
-
 			if ( m[ i ].options.disabled || ( t && !m[ i ].accept.call( m[ i ].element[ 0 ],
 					( t.currentItem || t.element ) ) ) ) {
 				continue;
 			}
-
 			for ( j = 0; j < list.length; j++ ) {
 				if ( list[ j ] === m[ i ].element[ 0 ] ) {
 					m[ i ].proportions().height = 0;
@@ -11074,7 +10318,6 @@ $.ui.ddmanager = {
 			if ( !m[ i ].visible ) {
 				continue;
 			}
-
 			if ( type === "mousedown" ) {
 				m[ i ]._activate.call( m[ i ], event );
 			}
@@ -11087,7 +10330,6 @@ $.ui.ddmanager = {
 	},
 	drop: function( draggable, event ) {
 		var dropped = false;
-
 		$.each( ( $.ui.ddmanager.droppables[ draggable.options.scope ] || [] ).slice(), function() {
 			if ( !this.options ) {
 				return;
@@ -11106,8 +10348,6 @@ $.ui.ddmanager = {
 		return dropped;
 	},
 	dragStart: function( draggable, event ) {
-
-
 		draggable.element.parentsUntil( "body" ).on( "scroll.droppable", function() {
 			if ( !draggable.options.refreshPositions ) {
 				$.ui.ddmanager.prepareOffsets( draggable, event );
@@ -11115,12 +10355,9 @@ $.ui.ddmanager = {
 		} );
 	},
 	drag: function( draggable, event ) {
-
-
 		if ( draggable.options.refreshPositions ) {
 			$.ui.ddmanager.prepareOffsets( draggable, event );
 		}
-
 		$.each( $.ui.ddmanager.droppables[ draggable.options.scope ] || [], function() {
 			if ( this.options.disabled || this.greedyChild || !this.visible ) {
 				return;
@@ -11134,7 +10371,6 @@ $.ui.ddmanager = {
 				return;
 			}
 			if ( this.options.greedy ) {
-
 				scope = this.options.scope;
 				parent = this.element.parents( ":data(ui-droppable)" ).filter( function() {
 					return $( this ).droppable( "instance" ).options.scope === scope;
@@ -11144,7 +10380,6 @@ $.ui.ddmanager = {
 					parentInstance.greedyChild = ( c === "isover" );
 				}
 			}
-
 			if ( parentInstance && c === "isover" ) {
 				parentInstance.isover = false;
 				parentInstance.isout = true;
@@ -11153,7 +10388,6 @@ $.ui.ddmanager = {
 			this[ c ] = true;
 			this[ c === "isout" ? "isover" : "isout" ] = false;
 			this[ c === "isover" ? "_over" : "_out" ].call( this, event );
-
 			if ( parentInstance && c === "isout" ) {
 				parentInstance.isout = false;
 				parentInstance.isover = true;
@@ -11163,17 +10397,12 @@ $.ui.ddmanager = {
 	},
 	dragStop: function( draggable, event ) {
 		draggable.element.parentsUntil( "body" ).off( "scroll.droppable" );
-
-
 		if ( !draggable.options.refreshPositions ) {
 			$.ui.ddmanager.prepareOffsets( draggable, event );
 		}
 	}
 };
-
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.droppable", $.ui.droppable, {
 		options: {
 			hoverClass: false,
@@ -11216,9 +10445,7 @@ var widgetsDroppable = $.ui.droppable;
  */
 //>>label: Progressbar
 //>>group: Widgets
-
 //>>description: Displays a status indicator for loading state, standard percentage, and other progress indicators.
-
 //>>docs: http://api.jqueryui.com/progressbar/
 //>>demos: http://jqueryui.com/progressbar/
 //>>css.structure: ../../themes/base/core.css
@@ -11239,11 +10466,8 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 	},
 	min: 0,
 	_create: function() {
-
 		this.oldValue = this.options.value = this._constrainedValue();
 		this.element.attr( {
-
-
 			role: "progressbar",
 			"aria-valuemin": this.min
 		} );
@@ -11268,7 +10492,6 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 			newValue = this.options.value;
 		}
 		this.indeterminate = newValue === false;
-
 		if ( typeof newValue !== "number" ) {
 			newValue = 0;
 		}
@@ -11276,7 +10499,6 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 			Math.min( this.options.max, Math.max( this.min, newValue ) );
 	},
 	_setOptions: function( options ) {
-
 		var value = options.value;
 		delete options.value;
 		this._super( options );
@@ -11285,7 +10507,6 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 	},
 	_setOption: function( key, value ) {
 		if ( key === "max" ) {
-
 			value = Math.max( this.min, value );
 		}
 		this._super( key, value );
@@ -11357,7 +10578,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 		distance: 0,
 		filter: "*",
 		tolerance: "touch",
-
 		selected: null,
 		selecting: null,
 		start: null,
@@ -11369,7 +10589,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 		var that = this;
 		this._addClass( "ui-selectable" );
 		this.dragged = false;
-
 		this.refresh = function() {
 			that.elementPos = $( that.element[ 0 ] ).offset();
 			that.selectees = $( that.options.filter, that.element[ 0 ] );
@@ -11415,7 +10634,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 		this.selectees = $( options.filter, this.element[ 0 ] );
 		this._trigger( "start", event );
 		$( options.appendTo ).append( this.helper );
-
 		this.helper.css( {
 			"left": event.pageX,
 			"top": event.pageY,
@@ -11433,7 +10651,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 				selectee.selected = false;
 				that._addClass( selectee.$element, "ui-unselecting" );
 				selectee.unselecting = true;
-
 				that._trigger( "unselecting", event, {
 					unselecting: selectee.element
 				} );
@@ -11450,7 +10667,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 				selectee.unselecting = !doSelect;
 				selectee.selecting = doSelect;
 				selectee.selected = doSelect;
-
 				if ( doSelect ) {
 					that._trigger( "selecting", event, {
 						selecting: selectee.element
@@ -11499,7 +10715,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
                     offset.bottom < y2 );
 			}
 			if ( hit ) {
-
 				if ( selectee.selected ) {
 					that._removeClass( selectee.$element, "ui-selected" );
 					selectee.selected = false;
@@ -11511,13 +10726,11 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 				if ( !selectee.selecting ) {
 					that._addClass( selectee.$element, "ui-selecting" );
 					selectee.selecting = true;
-
 					that._trigger( "selecting", event, {
 						selecting: selectee.element
 					} );
 				}
 			} else {
-
 				if ( selectee.selecting ) {
 					if ( ( event.metaKey || event.ctrlKey ) && selectee.startselected ) {
 						that._removeClass( selectee.$element, "ui-selecting" );
@@ -11531,7 +10744,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 							that._addClass( selectee.$element, "ui-unselecting" );
 							selectee.unselecting = true;
 						}
-
 						that._trigger( "unselecting", event, {
 							unselecting: selectee.element
 						} );
@@ -11543,7 +10755,6 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 						selectee.selected = false;
 						that._addClass( selectee.$element, "ui-unselecting" );
 						selectee.unselecting = true;
-
 						that._trigger( "unselecting", event, {
 							unselecting: selectee.element
 						} );
@@ -11591,9 +10802,7 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
  */
 //>>label: Selectmenu
 //>>group: Widgets
-
 //>>description: Duplicates and extends the functionality of a native HTML select element, allowing it to be customizable in behavior and appearance far beyond the limitations of a native select.
-
 //>>docs: http://api.jqueryui.com/selectmenu/
 //>>demos: http://jqueryui.com/selectmenu/
 //>>css.structure: ../../themes/base/core.css
@@ -11618,7 +10827,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			collision: "none"
 		},
 		width: false,
-
 		change: null,
 		close: null,
 		focus: null,
@@ -11645,7 +10853,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				this.element.find( "option:selected" ),
 				this.element[ 0 ].selectedIndex
 			);
-
 		this.labels = this.element.labels().attr( "for", this.ids.button );
 		this._on( this.labels, {
 			click: function( event ) {
@@ -11653,9 +10860,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				event.preventDefault();
 			}
 		} );
-
 		this.element.hide();
-
 		this.button = $( "<span>", {
 			tabindex: this.options.disabled ? -1 : 0,
 			id: this.ids.button,
@@ -11678,8 +10883,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		}
 		this._on( this.button, this._buttonEvents );
 		this.button.one( "focusin", function() {
-
-
 			if ( !that._rendered ) {
 				that._refreshMenu();
 			}
@@ -11687,17 +10890,14 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	},
 	_drawMenu: function() {
 		var that = this;
-
 		this.menu = $( "<ul>", {
 			"aria-hidden": "true",
 			"aria-labelledby": this.ids.button,
 			id: this.ids.menu
 		} );
-
 		this.menuWrap = $( "<div>" ).append( this.menu );
 		this._addClass( this.menuWrap, "ui-selectmenu-menu", "ui-front" );
 		this.menuWrap.appendTo( this._appendTo() );
-
 		this.menuInstance = this.menu
 			.menu( {
 				classes: {
@@ -11706,15 +10906,11 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				role: "listbox",
 				select: function( event, ui ) {
 					event.preventDefault();
-
-
-
 					that._setSelection();
 					that._select( ui.item.data( "ui-selectmenu-item" ), event );
 				},
 				focus: function( event, ui ) {
 					var item = ui.item.data( "ui-selectmenu-item" );
-
 					if ( that.focusIndex != null && item.index !== that.focusIndex ) {
 						that._trigger( "focus", event, { item: item } );
 						if ( !that.isOpen ) {
@@ -11727,13 +10923,10 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				}
 			} )
 			.menu( "instance" );
-
 		this.menuInstance._off( this.menu, "mouseleave" );
-
 		this.menuInstance._closeOnDocumentClick = function() {
 			return false;
 		};
-
 		this.menuInstance._isDivider = function() {
 			return false;
 		};
@@ -11742,7 +10935,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		this._refreshMenu();
 		this.buttonItem.replaceWith(
 			this.buttonItem = this._renderButtonItem(
-
 				this._getSelectedItem().data( "ui-selectmenu-item" ) || {}
 			)
 		);
@@ -11765,25 +10957,20 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			return;
 		}
 		item = this._getSelectedItem();
-
 		this.menuInstance.focus( null, item );
 		this._setAria( item.data( "ui-selectmenu-item" ) );
-
 		this._setOption( "disabled", this.element.prop( "disabled" ) );
 	},
 	open: function( event ) {
 		if ( this.options.disabled ) {
 			return;
 		}
-
 		if ( !this._rendered ) {
 			this._refreshMenu();
 		} else {
-
 			this._removeClass( this.menu.find( ".ui-state-active" ), null, "ui-state-active" );
 			this.menuInstance.focus( null, this._getSelectedItem() );
 		}
-
 		if ( !this.menuItems.length ) {
 			return;
 		}
@@ -11892,13 +11079,9 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			selection = window.getSelection();
 			selection.removeAllRanges();
 			selection.addRange( this.range );
-
 		} else {
 			this.range.select();
 		}
-
-
-
 		this.button.focus();
 	},
 	_documentClick: {
@@ -11913,7 +11096,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		}
 	},
 	_buttonEvents: {
-
 		mousedown: function() {
 			var selection;
 			if ( window.getSelection ) {
@@ -11921,7 +11103,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				if ( selection.rangeCount ) {
 					this.range = selection.getRangeAt( 0 );
 				}
-
 			} else {
 				this.range = document.selection.createRange();
 			}
@@ -11995,7 +11176,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	},
 	_select: function( item, event ) {
 		var oldIndex = this.element[ 0 ].selectedIndex;
-
 		this.element[ 0 ].selectedIndex = item.index;
 		this.buttonItem.replaceWith( this.buttonItem = this._renderButtonItem( item ) );
 		this._setAria( item );
@@ -12057,9 +11237,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	},
 	_toggleAttr: function() {
 		this.button.attr( "aria-expanded", this.isOpen );
-
-
-
 		this._removeClass( this.button, "ui-selectmenu-button-" +
 			( this.isOpen ? "closed" : "open" ) )
 			._addClass( this.button, "ui-selectmenu-button-" +
@@ -12069,12 +11246,10 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	},
 	_resizeButton: function() {
 		var width = this.options.width;
-
 		if ( width === false ) {
 			this.button.css( "width", "" );
 			return;
 		}
-
 		if ( width === null ) {
 			width = this.element.show().outerWidth();
 			this.element.hide();
@@ -12084,9 +11259,6 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	_resizeMenu: function() {
 		this.menu.outerWidth( Math.max(
 			this.button.outerWidth(),
-
-
-
 			this.menu.width( "" ).outerWidth() + 1
 		) );
 	},
@@ -12147,8 +11319,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 		classes: {
 			"ui-slider": "ui-corner-all",
 			"ui-slider-handle": "ui-corner-all",
-
-
 			"ui-slider-range": "ui-corner-all ui-widget-header"
 		},
 		distance: 0,
@@ -12159,14 +11329,11 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 		step: 1,
 		value: 0,
 		values: null,
-
 		change: null,
 		slide: null,
 		start: null,
 		stop: null
 	},
-
-
 	numPages: 5,
 	_create: function() {
 		this._keySliding = false;
@@ -12228,7 +11395,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 				this._addClass( this.range, "ui-slider-range" );
 			} else {
 				this._removeClass( this.range, "ui-slider-range-min ui-slider-range-max" );
-
 				this.range.css( {
 					"left": "",
 					"bottom": ""
@@ -12391,7 +11557,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 			return;
 		}
 		allowed = this._trigger( "slide", event, this._uiHash( index, newVal, newValues ) );
-
 		if ( allowed === false ) {
 			return;
 		}
@@ -12475,7 +11640,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 				if ( this.options.range ) {
 					this._refreshRange( value );
 				}
-
 				this.handles.css( value === "horizontal" ? "bottom" : "left", "" );
 				break;
 			case "value":
@@ -12487,7 +11651,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 			case "values":
 				this._animateOff = true;
 				this._refreshValue();
-
 				for ( i = valsLength - 1; i >= 0; i-- ) {
 					this._change( null, i );
 				}
@@ -12513,15 +11676,12 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 		this._toggleClass( null, "ui-state-disabled", !!value );
 	},
 	//internal value getter
-
 	_value: function() {
 		var val = this.options.value;
 		val = this._trimAlignValue( val );
 		return val;
 	},
 	//internal values getter
-
-
 	_values: function( index ) {
 		var val,
 			vals,
@@ -12531,8 +11691,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 			val = this._trimAlignValue( val );
 			return val;
 		} else if ( this._hasMultipleValues() ) {
-
-
 			vals = this.options.values.slice();
 			for ( i = 0; i < vals.length; i += 1 ) {
 				vals[ i ] = this._trimAlignValue( vals[ i ] );
@@ -12542,7 +11700,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 			return [];
 		}
 	},
-
 	_trimAlignValue: function( val ) {
 		if ( val <= this._valueMin() ) {
 			return this._valueMin();
@@ -12556,8 +11713,6 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 		if ( Math.abs( valModStep ) * 2 >= step ) {
 			alignValue += ( valModStep > 0 ) ? step : ( -step );
 		}
-
-
 		return parseFloat( alignValue.toFixed( 5 ) );
 	},
 	_calculateNewMax: function() {
@@ -12790,7 +11945,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		scope: "default",
 		tolerance: "intersect",
 		zIndex: 1000,
-
 		activate: null,
 		beforeStop: null,
 		change: null,
@@ -12893,7 +12047,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			o = this.options;
 		this.currentContainer = this;
 		//We only need to call refreshPositions, because the refreshItems call has been moved to
-
 		this.refreshPositions();
 		//Create and append the visible helper
 		this.helper = this._createHelper( event );
@@ -12919,12 +12072,8 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 				top: event.pageY - this.offset.top
 			},
 			parent: this._getParentOffset(),
-
-
 			relative: this._getRelativeOffset()
 		} );
-
-
 		this.helper.css( "position", "absolute" );
 		this.cssPosition = this.helper.css( "position" );
 		//Generate the original position
@@ -12938,8 +12087,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			prev: this.currentItem.prev()[ 0 ],
 			parent: this.currentItem.parent()[ 0 ]
 		};
-
-
 		if ( this.helper[ 0 ] !== this.currentItem[ 0 ] ) {
 			this.currentItem.hide();
 		}
@@ -12951,7 +12098,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 		if ( o.cursor && o.cursor !== "auto" ) { // cursor option
 			body = this.document.find( "body" );
-
 			this.storedCursor = body.css( "cursor" );
 			body.css( "cursor", o.cursor );
 			this.storedStylesheet =
@@ -12995,8 +12141,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 		this.dragging = true;
 		this._addClass( this.helper, "ui-sortable-helper" );
-
-
 		this._mouseDrag( event );
 		return true;
 	},
@@ -13070,19 +12214,10 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			if ( !intersection ) {
 				continue;
 			}
-
-
-
-
 			//
-
-
 			if ( item.instance !== this.currentContainer ) {
 				continue;
 			}
-
-
-
 			if ( itemElement !== this.currentItem[ 0 ] &&
 				this.placeholder[ intersection === 1 ? "next" : "prev" ]()[ 0 ] !== itemElement &&
 				!$.contains( this.placeholder[ 0 ], itemElement ) &&
@@ -13172,7 +12307,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 		if ( this.placeholder ) {
 			//$(this.placeholder[0]).remove(); would have been the jQuery way - unfortunately,
-
 			if ( this.placeholder[ 0 ].parentNode ) {
 				this.placeholder[ 0 ].parentNode.removeChild( this.placeholder[ 0 ] );
 			}
@@ -13380,7 +12514,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			_queries = queries[ i ][ 0 ];
 			for ( j = 0, queriesLength = _queries.length; j < queriesLength; j++ ) {
 				item = $( _queries[ j ] );
-
 				item.data( this.widgetName + "-item", targetData );
 				items.push( {
 					item: item,
@@ -13392,12 +12525,10 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 	},
 	refreshPositions: function( fast ) {
-
 		this.floating = this.items.length ?
 			this.options.axis === "x" || this._isFloating( this.items[ 0 ].item ) :
 			false;
 		//This has to be redone because due to the item being moved out/into the offsetParent,
-
 		if ( this.offsetParent && this.helper ) {
 			this.offset.parent = this._getParentOffset();
 		}
@@ -13464,15 +12595,10 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 					return element;
 				},
 				update: function( container, p ) {
-
-
-
-
 					if ( className && !o.forcePlaceholderSize ) {
 						return;
 					}
 					//If the element doesn't have a actual height by itself (without styles coming
-
 					if ( !p.height() ) {
 						p.height(
 							that.currentItem.innerHeight() -
@@ -13508,14 +12634,11 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			floating, axis,
 			innermostContainer = null,
 			innermostIndex = null;
-
 		for ( i = this.containers.length - 1; i >= 0; i-- ) {
-
 			if ( $.contains( this.currentItem[ 0 ], this.containers[ i ].element[ 0 ] ) ) {
 				continue;
 			}
 			if ( this._intersectsWith( this.containers[ i ].containerCache ) ) {
-
 				if ( innermostContainer &&
 						$.contains(
 							this.containers[ i ].element[ 0 ],
@@ -13525,26 +12648,21 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 				innermostContainer = this.containers[ i ];
 				innermostIndex = i;
 			} else {
-
 				if ( this.containers[ i ].containerCache.over ) {
 					this.containers[ i ]._trigger( "out", event, this._uiHash( this ) );
 					this.containers[ i ].containerCache.over = 0;
 				}
 			}
 		}
-
 		if ( !innermostContainer ) {
 			return;
 		}
-
 		if ( this.containers.length === 1 ) {
 			if ( !this.containers[ innermostIndex ].containerCache.over ) {
 				this.containers[ innermostIndex ]._trigger( "over", event, this._uiHash( this ) );
 				this.containers[ innermostIndex ].containerCache.over = 1;
 			}
 		} else {
-
-
 			dist = 10000;
 			itemWithLeastDistance = null;
 			floating = innermostContainer.floating || this._isFloating( this.currentItem );
@@ -13646,20 +12764,11 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		//Get the offsetParent and cache its position
 		this.offsetParent = this.helper.offsetParent();
 		var po = this.offsetParent.offset();
-
-
-
-
-
-
-
 		if ( this.cssPosition === "absolute" && this.scrollParent[ 0 ] !== this.document[ 0 ] &&
 				$.contains( this.scrollParent[ 0 ], this.offsetParent[ 0 ] ) ) {
 			po.left += this.scrollParent.scrollLeft();
 			po.top += this.scrollParent.scrollTop();
 		}
-
-
 		if ( this.offsetParent[ 0 ] === this.document[ 0 ].body ||
 				( this.offsetParent[ 0 ].tagName &&
 				this.offsetParent[ 0 ].tagName.toLowerCase() === "html" && $.ui.ie ) ) {
@@ -13747,22 +12856,16 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			scrollIsRootNode = ( /(html|body)/i ).test( scroll[ 0 ].tagName );
 		return {
 			top: (
-
 				pos.top	+
-
 				this.offset.relative.top * mod +
-
 				this.offset.parent.top * mod -
 				( ( this.cssPosition === "fixed" ?
 					-this.scrollParent.scrollTop() :
 					( scrollIsRootNode ? 0 : scroll.scrollTop() ) ) * mod )
 			),
 			left: (
-
 				pos.left +
-
 				this.offset.relative.left * mod +
-
 				this.offset.parent.left * mod	-
 				( ( this.cssPosition === "fixed" ?
 					-this.scrollParent.scrollLeft() : scrollIsRootNode ? 0 :
@@ -13781,10 +12884,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 					this.offsetParent :
 					this.scrollParent,
 				scrollIsRootNode = ( /(html|body)/i ).test( scroll[ 0 ].tagName );
-
-
-
-
 		if ( this.cssPosition === "relative" && !( this.scrollParent[ 0 ] !== this.document[ 0 ] &&
 				this.scrollParent[ 0 ] !== this.offsetParent[ 0 ] ) ) {
 			this.offset.relative = this._getRelativeOffset();
@@ -13831,26 +12930,18 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 		return {
 			top: (
-
 				pageY -
-
 				this.offset.click.top -
-
 				this.offset.relative.top -
-
 				this.offset.parent.top +
 				( ( this.cssPosition === "fixed" ?
 					-this.scrollParent.scrollTop() :
 					( scrollIsRootNode ? 0 : scroll.scrollTop() ) ) )
 			),
 			left: (
-
 				pageX -
-
 				this.offset.click.left -
-
 				this.offset.relative.left -
-
 				this.offset.parent.left +
 				( ( this.cssPosition === "fixed" ?
 					-this.scrollParent.scrollLeft() :
@@ -13863,11 +12954,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			i.item[ 0 ].parentNode.insertBefore( this.placeholder[ 0 ],
 				( this.direction === "down" ? i.item[ 0 ] : i.item[ 0 ].nextSibling ) );
 		//Various things done here to improve the performance:
-
-
-
-
-
 		this.counter = this.counter ? ++this.counter : 1;
 		var counter = this.counter;
 		this._delay( function() {
@@ -13879,13 +12965,8 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 	},
 	_clear: function( event, noPropagation ) {
 		this.reverting = false;
-
-
 		var i,
 			delayedTriggers = [];
-
-
-
 		if ( !this._noFinalSort && this.currentItem.parent().length ) {
 			this.placeholder.before( this.currentItem );
 		}
@@ -13910,13 +12991,10 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 				this.domPosition.prev !==
 				this.currentItem.prev().not( ".ui-sortable-helper" )[ 0 ] ||
 				this.domPosition.parent !== this.currentItem.parent()[ 0 ] ) && !noPropagation ) {
-
 			delayedTriggers.push( function( event ) {
 				this._trigger( "update", event, this._uiHash() );
 			} );
 		}
-
-
 		if ( this !== this.currentContainer ) {
 			if ( !noPropagation ) {
 				delayedTriggers.push( function( event ) {
@@ -13965,7 +13043,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			this._trigger( "beforeStop", event, this._uiHash() );
 		}
 		//$(this.placeholder[0]).remove(); would have been the jQuery way - unfortunately,
-
 		this.placeholder[ 0 ].parentNode.removeChild( this.placeholder[ 0 ] );
 		if ( !this.cancelHelperRemoval ) {
 			if ( this.helper[ 0 ] !== this.currentItem[ 0 ] ) {
@@ -13975,7 +13052,6 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		}
 		if ( !noPropagation ) {
 			for ( i = 0; i < delayedTriggers.length; i++ ) {
-
 				delayedTriggers[ i ].call( this, event );
 			}
 			this._trigger( "stop", event, this._uiHash() );
@@ -14054,22 +13130,15 @@ $.widget( "ui.spinner", {
 		stop: null
 	},
 	_create: function() {
-
 		this._setOption( "max", this.options.max );
 		this._setOption( "min", this.options.min );
 		this._setOption( "step", this.options.step );
-
-
 		if ( this.value() !== "" ) {
-
 			this._value( this.element.val(), true );
 		}
 		this._draw();
 		this._on( this._events );
 		this._refresh();
-
-
-
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -14126,11 +13195,6 @@ $.widget( "ui.spinner", {
 		},
 		"mousedown .ui-spinner-button": function( event ) {
 			var previous;
-
-
-
-
-
 			previous = this.element[ 0 ] === $.ui.safeActiveElement( this.document[ 0 ] ) ?
 				this.previous : this.element.val();
 			function checkFocus() {
@@ -14138,21 +13202,13 @@ $.widget( "ui.spinner", {
 				if ( !isActive ) {
 					this.element.trigger( "focus" );
 					this.previous = previous;
-
-
-
 					this._delay( function() {
 						this.previous = previous;
 					} );
 				}
 			}
-
 			event.preventDefault();
 			checkFocus.call( this );
-
-
-
-
 			this.cancelBlur = true;
 			this._delay( function() {
 				delete this.cancelBlur;
@@ -14166,7 +13222,6 @@ $.widget( "ui.spinner", {
 		},
 		"mouseup .ui-spinner-button": "_stop",
 		"mouseenter .ui-spinner-button": function( event ) {
-
 			if ( !$( event.currentTarget ).hasClass( "ui-state-active" ) ) {
 				return;
 			}
@@ -14176,18 +13231,13 @@ $.widget( "ui.spinner", {
 			this._repeat( null, $( event.currentTarget )
 				.hasClass( "ui-spinner-up" ) ? 1 : -1, event );
 		},
-
-
-
 		"mouseleave .ui-spinner-button": "_stop"
 	},
-
 	_enhance: function() {
 		this.uiSpinner = this.element
 			.attr( "autocomplete", "off" )
 			.wrap( "<span>" )
 			.parent()
-
 				.append(
 					"<a></a><a></a>"
 				);
@@ -14197,7 +13247,6 @@ $.widget( "ui.spinner", {
 		this._addClass( this.uiSpinner, "ui-spinner", "ui-widget ui-widget-content" );
 		this._addClass( "ui-spinner-input" );
 		this.element.attr( "role", "spinbutton" );
-
 		this.buttons = this.uiSpinner.children( "a" )
 			.attr( "tabIndex", -1 )
 			.attr( "aria-hidden", true )
@@ -14206,7 +13255,6 @@ $.widget( "ui.spinner", {
 					"ui-button": ""
 				}
 			} );
-
 		this._removeClass( this.buttons, "ui-corner-all" );
 		this._addClass( this.buttons.first(), "ui-spinner-button ui-spinner-up" );
 		this._addClass( this.buttons.last(), "ui-spinner-button ui-spinner-down" );
@@ -14218,8 +13266,6 @@ $.widget( "ui.spinner", {
 			"icon": this.options.icons.down,
 			"showLabel": false
 		} );
-
-
 		if ( this.buttons.height() > Math.ceil( this.uiSpinner.height() * 0.5 ) &&
 				this.uiSpinner.height() > 0 ) {
 			this.uiSpinner.height( this.uiSpinner.height() );
@@ -14297,17 +13343,11 @@ $.widget( "ui.spinner", {
 	_adjustValue: function( value ) {
 		var base, aboveMin,
 			options = this.options;
-
-
 		base = options.min !== null ? options.min : 0;
 		aboveMin = value - base;
-
 		aboveMin = Math.round( aboveMin / options.step ) * options.step;
-
 		value = base + aboveMin;
-
 		value = parseFloat( value.toFixed( this._precision() ) );
-
 		if ( options.max !== null && value > options.max ) {
 			return options.max;
 		}
@@ -14377,20 +13417,16 @@ $.widget( "ui.spinner", {
 		this.element.attr( {
 			"aria-valuemin": this.options.min,
 			"aria-valuemax": this.options.max,
-
 			"aria-valuenow": this._parse( this.element.val() )
 		} );
 	},
 	isValid: function() {
 		var value = this.value();
-
 		if ( value === null ) {
 			return false;
 		}
-
 		return value === this._adjustValue( value );
 	},
-
 	_value: function( value, allowAny ) {
 		var parsed;
 		if ( value !== "" ) {
@@ -14445,17 +13481,13 @@ $.widget( "ui.spinner", {
 		return this.uiSpinner;
 	}
 } );
-
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.spinner", $.ui.spinner, {
 		_enhance: function() {
 			this.uiSpinner = this.element
 				.attr( "autocomplete", "off" )
 				.wrap( this._uiSpinnerHtml() )
 				.parent()
-
 					.append( this._buttonHtml() );
 		},
 		_uiSpinnerHtml: function() {
@@ -14499,7 +13531,6 @@ $.widget( "ui.tabs", {
 		heightStyle: "content",
 		hide: null,
 		show: null,
-
 		activate: null,
 		beforeActivate: null,
 		beforeLoad: null,
@@ -14511,7 +13542,6 @@ $.widget( "ui.tabs", {
 			var anchorUrl, locationUrl;
 			anchorUrl = anchor.href.replace( rhash, "" );
 			locationUrl = location.href.replace( rhash, "" );
-
 			try {
 				anchorUrl = decodeURIComponent( anchorUrl );
 			} catch ( error ) {}
@@ -14529,8 +13559,6 @@ $.widget( "ui.tabs", {
 		this._toggleClass( "ui-tabs-collapsible", null, options.collapsible );
 		this._processTabs();
 		options.active = this._initialActive();
-
-
 		if ( $.isArray( options.disabled ) ) {
 			options.disabled = $.unique( options.disabled.concat(
 				$.map( this.tabs.filter( ".ui-state-disabled" ), function( li ) {
@@ -14538,7 +13566,6 @@ $.widget( "ui.tabs", {
 				} )
 			) ).sort();
 		}
-
 		if ( this.options.active !== false && this.anchors.length ) {
 			this.active = this._findActive( options.active );
 		} else {
@@ -14554,7 +13581,6 @@ $.widget( "ui.tabs", {
 			collapsible = this.options.collapsible,
 			locationHash = location.hash.substring( 1 );
 		if ( active === null ) {
-
 			if ( locationHash ) {
 				this.tabs.each( function( i, tab ) {
 					if ( $( tab ).attr( "aria-controls" ) === locationHash ) {
@@ -14563,23 +13589,19 @@ $.widget( "ui.tabs", {
 					}
 				} );
 			}
-
 			if ( active === null ) {
 				active = this.tabs.index( this.tabs.filter( ".ui-tabs-active" ) );
 			}
-
 			if ( active === null || active === -1 ) {
 				active = this.tabs.length ? 0 : false;
 			}
 		}
-
 		if ( active !== false ) {
 			active = this.tabs.index( this.tabs.eq( active ) );
 			if ( active === -1 ) {
 				active = collapsible ? false : 0;
 			}
 		}
-
 		if ( !collapsible && active === false && this.anchors.length ) {
 			active = 0;
 		}
@@ -14615,30 +13637,22 @@ $.widget( "ui.tabs", {
 			selectedIndex = 0;
 			break;
 		case $.ui.keyCode.SPACE:
-
 			event.preventDefault();
 			clearTimeout( this.activating );
 			this._activate( selectedIndex );
 			return;
 		case $.ui.keyCode.ENTER:
-
 			event.preventDefault();
 			clearTimeout( this.activating );
-
 			this._activate( selectedIndex === this.options.active ? false : selectedIndex );
 			return;
 		default:
 			return;
 		}
-
 		event.preventDefault();
 		clearTimeout( this.activating );
 		selectedIndex = this._focusNextTab( selectedIndex, goingForward );
-
 		if ( !event.ctrlKey && !event.metaKey ) {
-
-
-
 			focusedTab.attr( "aria-selected", "false" );
 			this.tabs.eq( selectedIndex ).attr( "aria-selected", "true" );
 			this.activating = this._delay( function() {
@@ -14650,13 +13664,11 @@ $.widget( "ui.tabs", {
 		if ( this._handlePageNav( event ) ) {
 			return;
 		}
-
 		if ( event.ctrlKey && event.keyCode === $.ui.keyCode.UP ) {
 			event.preventDefault();
 			this.active.trigger( "focus" );
 		}
 	},
-
 	_handlePageNav: function( event ) {
 		if ( event.altKey && event.keyCode === $.ui.keyCode.PAGE_UP ) {
 			this._activate( this._focusNextTab( this.options.active - 1, false ) );
@@ -14690,14 +13702,12 @@ $.widget( "ui.tabs", {
 	},
 	_setOption: function( key, value ) {
 		if ( key === "active" ) {
-
 			this._activate( value );
 			return;
 		}
 		this._super( key, value );
 		if ( key === "collapsible" ) {
 			this._toggleClass( "ui-tabs-collapsible", null, value );
-
 			if ( !value && this.options.active === false ) {
 				this._activate( 0 );
 			}
@@ -14715,29 +13725,21 @@ $.widget( "ui.tabs", {
 	refresh: function() {
 		var options = this.options,
 			lis = this.tablist.children( ":has(a[href])" );
-
-
 		options.disabled = $.map( lis.filter( ".ui-state-disabled" ), function( tab ) {
 			return lis.index( tab );
 		} );
 		this._processTabs();
-
 		if ( options.active === false || !this.anchors.length ) {
 			options.active = false;
 			this.active = $();
-
 		} else if ( this.active.length && !$.contains( this.tablist[ 0 ], this.active[ 0 ] ) ) {
-
 			if ( this.tabs.length === options.disabled.length ) {
 				options.active = false;
 				this.active = $();
-
 			} else {
 				this._activate( this._findNextTab( Math.max( 0, options.active - 1 ), false ) );
 			}
-
 		} else {
-
 			options.active = this.tabs.index( this.active );
 		}
 		this._refresh();
@@ -14756,7 +13758,6 @@ $.widget( "ui.tabs", {
 			.attr( {
 				"aria-hidden": "true"
 			} );
-
 		if ( !this.active.length ) {
 			this.tabs.eq( 0 ).attr( "tabIndex", 0 );
 		} else {
@@ -14782,19 +13783,12 @@ $.widget( "ui.tabs", {
 		this.tablist = this._getList().attr( "role", "tablist" );
 		this._addClass( this.tablist, "ui-tabs-nav",
 			"ui-helper-reset ui-helper-clearfix ui-widget-header" );
-
 		this.tablist
 			.on( "mousedown" + this.eventNamespace, "> li", function( event ) {
 				if ( $( this ).is( ".ui-state-disabled" ) ) {
 					event.preventDefault();
 				}
 			} )
-
-
-
-
-
-
 			.on( "focus" + this.eventNamespace, ".ui-tabs-anchor", function() {
 				if ( $( this ).closest( "li" ).is( ".ui-state-disabled" ) ) {
 					this.blur();
@@ -14820,15 +13814,11 @@ $.widget( "ui.tabs", {
 				anchorId = $( anchor ).uniqueId().attr( "id" ),
 				tab = $( anchor ).closest( "li" ),
 				originalAriaControls = tab.attr( "aria-controls" );
-
 			if ( that._isLocal( anchor ) ) {
 				selector = anchor.hash;
 				panelId = selector.substring( 1 );
 				panel = that.element.find( that._sanitizeSelector( selector ) );
-
 			} else {
-
-
 				panelId = tab.attr( "aria-controls" ) || $( {} ).uniqueId()[ 0 ].id;
 				selector = "#" + panelId;
 				panel = that.element.find( selector );
@@ -14852,14 +13842,12 @@ $.widget( "ui.tabs", {
 		} );
 		this.panels.attr( "role", "tabpanel" );
 		this._addClass( this.panels, "ui-tabs-panel", "ui-widget-content" );
-
 		if ( prevTabs ) {
 			this._off( prevTabs.not( this.tabs ) );
 			this._off( prevAnchors.not( this.anchors ) );
 			this._off( prevPanels.not( this.panels ) );
 		}
 	},
-
 	_getList: function() {
 		return this.tablist || this.element.find( "ol, ul" ).eq( 0 );
 	},
@@ -14877,7 +13865,6 @@ $.widget( "ui.tabs", {
 				disabled = true;
 			}
 		}
-
 		for ( i = 0; ( li = this.tabs[ i ] ); i++ ) {
 			currentItem = $( li );
 			if ( disabled === true || $.inArray( i, disabled ) !== -1 ) {
@@ -14900,7 +13887,6 @@ $.widget( "ui.tabs", {
 			} );
 		}
 		this._off( this.anchors.add( this.tabs ).add( this.panels ) );
-
 		this._on( true, this.anchors, {
 			click: function( event ) {
 				event.preventDefault();
@@ -14958,13 +13944,9 @@ $.widget( "ui.tabs", {
 			};
 		event.preventDefault();
 		if ( tab.hasClass( "ui-state-disabled" ) ||
-
 				tab.hasClass( "ui-tabs-loading" ) ||
-
 				this.running ||
-
 				( clickedIsActive && !options.collapsible ) ||
-
 				( this._trigger( "beforeActivate", event, eventData ) === false ) ) {
 			return;
 		}
@@ -14981,7 +13963,6 @@ $.widget( "ui.tabs", {
 		}
 		this._toggle( event, eventData );
 	},
-
 	_toggle: function( event, eventData ) {
 		var that = this,
 			toShow = eventData.newPanel,
@@ -15000,7 +13981,6 @@ $.widget( "ui.tabs", {
 				complete();
 			}
 		}
-
 		if ( toHide.length && this.options.hide ) {
 			this._hide( toHide, this.options.hide, function() {
 				that._removeClass( eventData.oldTab.closest( "li" ),
@@ -15018,9 +13998,6 @@ $.widget( "ui.tabs", {
 			"aria-selected": "false",
 			"aria-expanded": "false"
 		} );
-
-
-
 		if ( toShow.length && toHide.length ) {
 			eventData.oldTab.attr( "tabIndex", -1 );
 		} else if ( toShow.length ) {
@@ -15039,11 +14016,9 @@ $.widget( "ui.tabs", {
 	_activate: function( index ) {
 		var anchor,
 			active = this._findActive( index );
-
 		if ( active[ 0 ] === this.active[ 0 ] ) {
 			return;
 		}
-
 		if ( !active.length ) {
 			active = this.active;
 		}
@@ -15058,7 +14033,6 @@ $.widget( "ui.tabs", {
 		return index === false ? $() : this.tabs.eq( index );
 	},
 	_getIndex: function( index ) {
-
 		if ( typeof index === "string" ) {
 			index = this.anchors.index( this.anchors.filter( "[href$='" +
 				$.ui.escapeSelector( index ) + "']" ) );
@@ -15160,21 +14134,15 @@ $.widget( "ui.tabs", {
 					delete that.xhr;
 				}
 			};
-
 		if ( this._isLocal( anchor[ 0 ] ) ) {
 			return;
 		}
 		this.xhr = $.ajax( this._ajaxSettings( anchor, event, eventData ) );
-
-
-
 		if ( this.xhr && this.xhr.statusText !== "canceled" ) {
 			this._addClass( tab, "ui-tabs-loading" );
 			panel.attr( "aria-busy", "true" );
 			this.xhr
 				.done( function( response, status, jqXHR ) {
-
-
 					setTimeout( function() {
 						panel.html( response );
 						that._trigger( "load", event, eventData );
@@ -15182,8 +14150,6 @@ $.widget( "ui.tabs", {
 					}, 1 );
 				} )
 				.fail( function( jqXHR, status ) {
-
-
 					setTimeout( function() {
 						complete( jqXHR, status );
 					}, 1 );
@@ -15193,8 +14159,6 @@ $.widget( "ui.tabs", {
 	_ajaxSettings: function( anchor, event, eventData ) {
 		var that = this;
 		return {
-
-
 			url: anchor.attr( "href" ).replace( /#.*$/, "" ),
 			beforeSend: function( jqXHR, settings ) {
 				return that._trigger( "beforeLoad", event,
@@ -15207,10 +14171,7 @@ $.widget( "ui.tabs", {
 		return this.element.find( this._sanitizeSelector( "#" + id ) );
 	}
 } );
-
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.tabs", $.ui.tabs, {
 		_processTabs: function() {
 			this._superApply( arguments );
@@ -15242,14 +14203,10 @@ $.widget( "ui.tooltip", {
 			"ui-tooltip": "ui-corner-all ui-widget-shadow"
 		},
 		content: function() {
-
-
 			var title = $( this ).attr( "title" ) || "";
-
 			return $( "<a>" ).text( title ).html();
 		},
 		hide: true,
-
 		items: "[title]:not([disabled])",
 		position: {
 			my: "left top+15",
@@ -15258,7 +14215,6 @@ $.widget( "ui.tooltip", {
 		},
 		show: true,
 		track: false,
-
 		close: null,
 		open: null
 	},
@@ -15289,11 +14245,8 @@ $.widget( "ui.tooltip", {
 			mouseover: "open",
 			focusin: "open"
 		} );
-
 		this.tooltips = {};
-
 		this.parents = {};
-
 		this.liveRegion = $( "<div>" )
 			.attr( {
 				role: "log",
@@ -15318,13 +14271,11 @@ $.widget( "ui.tooltip", {
 	},
 	_disable: function() {
 		var that = this;
-
 		$.each( this.tooltips, function( id, tooltipData ) {
 			var event = $.Event( "blur" );
 			event.target = event.currentTarget = tooltipData.element[ 0 ];
 			that.close( event, true );
 		} );
-
 		this.disabledTitles = this.disabledTitles.add(
 			this.element.find( this.options.items ).addBack()
 				.filter( function() {
@@ -15338,7 +14289,6 @@ $.widget( "ui.tooltip", {
 		);
 	},
 	_enable: function() {
-
 		this.disabledTitles.each( function() {
 			var element = $( this );
 			if ( element.data( "ui-tooltip-title" ) ) {
@@ -15350,10 +14300,7 @@ $.widget( "ui.tooltip", {
 	open: function( event ) {
 		var that = this,
 			target = $( event ? event.target : this.element )
-
-
 				.closest( this.options.items );
-
 		if ( !target.length || target.data( "ui-tooltip-id" ) ) {
 			return;
 		}
@@ -15361,7 +14308,6 @@ $.widget( "ui.tooltip", {
 			target.data( "ui-tooltip-title", target.attr( "title" ) );
 		}
 		target.data( "ui-tooltip-open", true );
-
 		if ( event && event.type === "mouseover" ) {
 			target.parents().each( function() {
 				var parent = $( this ),
@@ -15394,18 +14340,10 @@ $.widget( "ui.tooltip", {
 			return this._open( event, target, contentOption );
 		}
 		content = contentOption.call( target[ 0 ], function( response ) {
-
-
 			that._delay( function() {
-
 				if ( !target.data( "ui-tooltip-open" ) ) {
 					return;
 				}
-
-
-
-
-
 				if ( event ) {
 					event.type = eventType;
 				}
@@ -15422,20 +14360,12 @@ $.widget( "ui.tooltip", {
 		if ( !content ) {
 			return;
 		}
-
-
 		tooltipData = this._find( target );
 		if ( tooltipData ) {
 			tooltipData.tooltip.find( ".ui-tooltip-content" ).html( content );
 			return;
 		}
-
-
-
 		//
-
-
-
 		if ( target.is( "[title]" ) ) {
 			if ( event && event.type === "mouseover" ) {
 				target.attr( "title", "" );
@@ -15447,9 +14377,6 @@ $.widget( "ui.tooltip", {
 		tooltip = tooltipData.tooltip;
 		this._addDescribedBy( target, tooltip.attr( "id" ) );
 		tooltip.find( ".ui-tooltip-content" ).html( content );
-
-
-
 		this.liveRegion.children().hide();
 		a11yContent = $( "<div>" ).html( tooltip.find( ".ui-tooltip-content" ).html() );
 		a11yContent.removeAttr( "name" ).find( "[name]" ).removeAttr( "name" );
@@ -15466,7 +14393,6 @@ $.widget( "ui.tooltip", {
 			this._on( this.document, {
 				mousemove: position
 			} );
-
 			position( event );
 		} else {
 			tooltip.position( $.extend( {
@@ -15475,10 +14401,6 @@ $.widget( "ui.tooltip", {
 		}
 		tooltip.hide();
 		this._show( tooltip, this.options.show );
-
-
-
-
 		if ( this.options.track && this.options.show && this.options.show.delay ) {
 			delayedShow = this.delayedShow = setInterval( function() {
 				if ( tooltip.is( ":visible" ) ) {
@@ -15499,8 +14421,6 @@ $.widget( "ui.tooltip", {
 				}
 			}
 		};
-
-
 		if ( target[ 0 ] !== this.element[ 0 ] ) {
 			events.remove = function() {
 				this._removeTooltip( this._find( target ).tooltip );
@@ -15519,25 +14439,15 @@ $.widget( "ui.tooltip", {
 			that = this,
 			target = $( event ? event.currentTarget : this.element ),
 			tooltipData = this._find( target );
-
 		if ( !tooltipData ) {
-
-
-
-
 			target.removeData( "ui-tooltip-open" );
 			return;
 		}
 		tooltip = tooltipData.tooltip;
-
-
 		if ( tooltipData.closing ) {
 			return;
 		}
-
 		clearInterval( this.delayedShow );
-
-
 		if ( target.data( "ui-tooltip-title" ) && !target.attr( "title" ) ) {
 			target.attr( "title", target.data( "ui-tooltip-title" ) );
 		}
@@ -15549,7 +14459,6 @@ $.widget( "ui.tooltip", {
 		} );
 		target.removeData( "ui-tooltip-open" );
 		this._off( target, "mouseleave focusout keyup" );
-
 		if ( target[ 0 ] !== this.element[ 0 ] ) {
 			this._off( target, "remove" );
 		}
@@ -15595,19 +14504,13 @@ $.widget( "ui.tooltip", {
 	},
 	_destroy: function() {
 		var that = this;
-
 		$.each( this.tooltips, function( id, tooltipData ) {
-
 			var event = $.Event( "blur" ),
 				element = tooltipData.element;
 			event.target = event.currentTarget = element[ 0 ];
 			that.close( event, true );
-
-
 			$( "#" + id ).remove();
-
 			if ( element.data( "ui-tooltip-title" ) ) {
-
 				if ( !element.attr( "title" ) ) {
 					element.attr( "title", element.data( "ui-tooltip-title" ) );
 				}
@@ -15617,10 +14520,7 @@ $.widget( "ui.tooltip", {
 		this.liveRegion.remove();
 	}
 } );
-
-
 if ( $.uiBackCompat !== false ) {
-
 	$.widget( "ui.tooltip", $.ui.tooltip, {
 		options: {
 			tooltipClass: null
