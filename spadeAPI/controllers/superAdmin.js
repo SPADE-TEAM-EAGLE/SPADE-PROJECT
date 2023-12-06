@@ -28,8 +28,13 @@ const { queryRunner } = require("../helper/queryRunner");
 const { sendMailLandlord, sendMail } = require("../sendmail/sendmail.js");
 const { updateUser } = require("safecharge");
 const config = process.env;
+
+
+
+// ######################################## Super Admin SignIn ######################################## 
 exports.signInAdmin = async(req,res)=>{
     const { email,password }=req.body;
+    // const { email,password }=req.query;
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
@@ -47,10 +52,19 @@ exports.signInAdmin = async(req,res)=>{
         res.status(201).json({message:"Incorrect Password"})
       }
     }catch(error){
-        console.log(error);
-        res.status(400).send(error.message);
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
+
+  
     }
   } 
+// ######################################## Super Admin SignIn ########################################
+
+
+
+// ######################################## All Landlord ########################################
 exports.allLandlord = async (req, res) => {
   try {
     const allLandlordCheckResult = await queryRunner(allLandlordQuery);
@@ -63,12 +77,22 @@ exports.allLandlord = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 }
+// ######################################## All Landlord ########################################
+
+
+
+
+
+// ######################################## All Landlord Delete ########################################
 exports.deleteLandlord = async (req, res) => {
   const { landlordId, reason } = req.body;
+  // const {userId, userName } = req.body;
   const { userId, userName } = req.user;
   const deleted_at = new Date();
   try {
@@ -84,7 +108,9 @@ exports.deleteLandlord = async (req, res) => {
       const deleteUserResult = await queryRunner(deleteQuery("users", "id"), [landlordId]);
       if (deleteUserResult[0].affectedRows > 0) {
         const insertLandlordResult = await queryRunner(insertDeletedUserQuery, [userName, userId, fName, lName, email, phone, planId, reason, deleted_at, landlordId, landlordCreated_at]);
+              // add Admin Notification
               await queryRunner(adminNotificationQuery, [landlordId, fName, lName, planId,"Deleted",deleted_at]);
+      
         const deleteUserBankAccountResult = await queryRunner(deleteQuery("bankAccount", "userId"), [landlordId]);
         const deleteUserChatSResult = await queryRunner(deleteQuery("chats", "senderId"), [landlordId]);
         const deleteUserChatRResult = await queryRunner(deleteQuery("chats", "receiverID"), [landlordId]);
@@ -100,14 +126,27 @@ exports.deleteLandlord = async (req, res) => {
         const deleteUsertenantsResult = await queryRunner(deleteQuery("tenants", "landlordID"), [landlordId]);
         const deleteUserUserPUsersResult = await queryRunner(deleteQuery("userPUsers", "llnalordId"), [landlordId]);
         const deleteUserVendorResult = await queryRunner(deleteQuery("vendor", "LandlordID"), [landlordId]);
+
         res.status(200).json({ message: "Landlord All Information Is Deleted" })
+
       }
     } else {
       res.status(400).json({ message: "Landlord is not found" })
     }
-  } catch {
+  } catch(error) {
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 }
+// ######################################## All Landlord Delete ########################################
+
+
+
+
+
+// ######################################## All Closed Landlord ########################################
 exports.allClosedLandlord = async (req, res) => {
   try {
     const allClosedLandlordResult = await queryRunner(deleteLandlordQuery);
@@ -120,10 +159,19 @@ exports.allClosedLandlord = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
+
   }
 }
+// ######################################## All Closed Landlord ########################################
+
+
+
+// ######################################## All Closed Landlord ########################################
+
   exports.createUserAdmin = async function (req, res) {
     const { firstName, lastName, email, phone, password, roleId, address,city,state,zipcode,image,imageKey } = req.body;
     const currentDate = new Date();
@@ -135,6 +183,11 @@ exports.allClosedLandlord = async (req, res) => {
         return res.status(201).send("Email already exists");
       }
       const hashPassword = await hashedPassword(password);
+      // // generate a unique identifier for the user
+      // const salt = bcrypt.genSaltSync(10);
+      // const id = bcrypt
+      //   .hashSync(lastName + new Date().getTime().toString(), salt)
+      //   .substring(0, 10);
       const insertResult = await queryRunner(insertUsersAdmin, [firstName, lastName, email, hashPassword, phone, roleId, address,city,state,zipcode,image,imageKey,currentDate]);
       const name = firstName + " " + lastName;
       const mailSubject = "Spade Admin Welcome Email";
@@ -148,7 +201,12 @@ exports.allClosedLandlord = async (req, res) => {
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
+    
 };
+// ######################################## All Closed Landlord ########################################
+
+
+// ######################################## All Closed Landlord ########################################
 exports.allUserAdmin = async (req, res) => {
   try {
     const allUserAdminResult = await queryRunner(selectQuery("superAdmin"));
@@ -161,10 +219,19 @@ exports.allUserAdmin = async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
+
   }
 }
+// ######################################## All Closed Landlord ########################################
+
+
+
+
+// ######################################## user Admin By Id ########################################
 exports.userAdminGetById = async function (req, res) {
   const { id } = req.query;
   try {
@@ -186,6 +253,12 @@ exports.userAdminGetById = async function (req, res) {
     });
   }
 };
+    // ######################################## user Admin By Id ########################################
+    
+    
+    
+    
+    // ######################################## user Admin Edit ########################################
     exports.updateAdminUser = async function (req, res) {
       const {  firstName, lastName, email, phone, roleId, address,city,state,zipcode,image,imageKey, id } = req.body;
       const currentDate = new Date();
@@ -202,6 +275,32 @@ exports.userAdminGetById = async function (req, res) {
         return res.status(400).json({ message: error.message });
       }
     };
+      // ######################################## user Admin Edit ########################################
+
+
+
+
+// ######################################## user Admin Edit ########################################
+// exports.updateAdminUser = async function (req, res) {
+//   const { firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, id } = req.body;
+//   const currentDate = new Date();
+//   try {
+//     const insertResult = await queryRunner(updateUserAdminQuery, [
+//       firstName, lastName, email, phone, roleId, address, city, state, zipcode, image, imageKey, currentDate, id]);
+//     if (insertResult[0].affectedRows > 0) {
+//       return res.status(200).json({ message: "User Updated Successfully" });
+//     } else {
+//       return res.status(500).send("Failed to Update User Permission User");
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
+// ######################################## user Admin Edit ########################################
+
+
+// ######################################## user Admin delete ########################################
 exports.userAdminDelete = async function (req, res) {
   const { id } = req.body;
   try {
@@ -223,6 +322,10 @@ exports.userAdminDelete = async function (req, res) {
     });
   }
 };
+// ######################################## user Admin delete ########################################
+
+
+// ######################################## total Customer ########################################
 exports.totalCustomer = async function (req, res) {
   const { id } = req.body;
   try {
@@ -242,6 +345,7 @@ exports.totalCustomer = async function (req, res) {
     });
   }
 };
+// ######################################## total Customer ########################################
 exports.getAdmin = (req, res) => {
   res.status(200).json(req.user);
 };
@@ -258,6 +362,7 @@ exports.updateAdminProfile = async function (req, res) {
     address,
     imageUrl,
     imageKey
+
   } = req.body;
   const { userId } = req.user;
   console.log(req.body);
@@ -266,9 +371,13 @@ exports.updateAdminProfile = async function (req, res) {
     const selectResult = await queryRunner(selectQuery("superAdmin", "id"), [
       userId,
     ]);
+    // current date
     const now = new Date();
+    // const created_at = now.toISOString().slice(0, 19).replace("T", " ");
+
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
+      // throw new Error("User not found");
       res.status(200).json({
         message: "User not found",
       });
@@ -302,6 +411,8 @@ exports.updateAdminProfile = async function (req, res) {
     });
   }
 };
+
+             // ######################################## landlord Dashboard ########################################
              exports.landlordReportAdmin = async function (req, res) {
               const { id } = req.body;
               try {
@@ -321,9 +432,19 @@ exports.updateAdminProfile = async function (req, res) {
                 });
               }
             };
+              // ######################################## landlord Dashboard ########################################
+
+
+
+// ######################################## Get User Roles ########################################
+
+// Get User Roles
 exports.adminUserPermissionRoles = async function (req, res) {
+  // const { userId, userRole } = req.user;
+  // const { userId, userRole } = req.user;
   function splitAndConvertToObject(value) {
     const resultObject = {};
+
     if (value.includes(',')) {
       const values = value.split(",");
       for (const item of values) {
@@ -332,14 +453,19 @@ exports.adminUserPermissionRoles = async function (req, res) {
     } else {
       resultObject[value] = true;
     }
+
     return resultObject;
   }
   try {
+    // const selectResult = await queryRunner(selectQuery("adminUserPermission", "id"), [userRole]);
     const selectResult = await queryRunner(selectQuery("adminUserPermission"));
     if (selectResult[0].length > 0) {
       const dataArray = [];
+
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
+
+        // Example usage for different fields
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].userid;
         const overView = splitAndConvertToObject(selectResult[0][i].overView);
@@ -350,6 +476,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
         const userManagement = splitAndConvertToObject(selectResult[0][i].userManagement);
         const changePlan = splitAndConvertToObject(selectResult[0][i].changePlan);
         const closeLandlord = splitAndConvertToObject(selectResult[0][i].closeLandlord);
+
         dataArray.push({
           id,
           role,
@@ -361,6 +488,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
           userManagement,
           changePlan,
           closeLandlord
+
         });
       }
       return res.status(200).json({
@@ -372,9 +500,13 @@ exports.adminUserPermissionRoles = async function (req, res) {
       });
     }
   } catch (error) {
-    console.log(error)
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   };
   };
+
     exports.getUserforAdmin = async function (req, res) {
       const { userId } = req.query;
       try {
@@ -384,30 +516,44 @@ exports.adminUserPermissionRoles = async function (req, res) {
         const futurePlanId = await queryRunner(selectQuery("futurePlanUser", "landlordId"), [userId]);
         const planCountResult = await queryRunner(selectQuery("plan", "id"), [selectResult[0][0]?.PlanID]);
         if (futurePlanId[0]?.length != 0) {
+
           const targetDate = new Date(futurePlanId[0][futurePlanId[0].length - 1].fsubscriptionCreated_at);
+
+          // Get the current date
           const currentDate = new Date();
+
+          // Calculate the time difference in milliseconds
           const timeDifference = targetDate - currentDate;
+
+          // Convert the time difference to days
           const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           selectResult[0][0].daysRemaining = daysRemaining;
         }
         if (selectResult[0].length >= 1) {
+
           res.status(200).json({ ...futurePlanId[0][futurePlanId[0].length - 1], ...planCountResult[0][0], ...selectResult[0][0] });
         } else {
           res.status(200).send("No user found");
         }
       } catch (error) {
-        res.status(400).send(error)
+        return res.status(500).json({
+          message: "Internal server Error",
+          error: error.message,
+      });
       }
     }
     exports.updatePlanIdByAdmin = async function (req, res) {
+      // const { userId } = req.body;
       const { userId } = req.body;
       console.log(userId)
       try {
         const selectResult = await queryRunner(selectQuery("users", "id"), [
           userId,
         ]);
+        // current date
         const isUserExist = selectResult[0][0];
         if (!isUserExist) {
+          // throw new Error("User not found");
           res.status(200).json({
             message: "User not found",
           });
@@ -428,8 +574,11 @@ exports.adminUserPermissionRoles = async function (req, res) {
         });
       }
     };
+    // ######################################## Get User Roles ########################################
+
   exports.adminUserPermissionUpdate = async function (req, res) {
     const { role, columnName, permission } = req.body;
+    // const currentDate = new Date();
     try {
       const updateResult = await queryRunner(`UPDATE adminUserPermission SET ${columnName} = "${permission}" WHERE id = ${role}`);
       if (updateResult[0].affectedRows > 0) {
@@ -438,10 +587,19 @@ exports.adminUserPermissionRoles = async function (req, res) {
         return res.status(500).send("Failed to Update User Permission User");
       }
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
     }
   };
+
+
+
+
+
   exports.getAdminRevenue = async function (req, res) {
+    // const {} = req.body;
     try {
       const updateResult = await queryRunner(adminRevenueQuery);
       if (updateResult[0].length > 0) {
@@ -453,8 +611,14 @@ exports.adminUserPermissionRoles = async function (req, res) {
       return res.status(400).json({ message: error.message });
     }
   };
+
+
+//  ############################# Reset Email ############################################################
 exports.adminResetEmail = async (req, res) => {
   const { email } = req.query;
+  // const { email } = req.body;
+
+  // console.log(email);
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
@@ -474,6 +638,7 @@ exports.adminResetEmail = async (req, res) => {
       ]);
       if (updateResult[0].affectedRows === 0) {
         res.status(400).send("Error");
+
       } else {
         res.status(200).json({ message: "Sended", id: userid });
       }
@@ -481,12 +646,19 @@ exports.adminResetEmail = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error");
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+//  ############################# Reset Email ############################################################
+
+//  ############################# Verify Reset Email Code ############################################################
 exports.adminVerifyResetEmailCode = async (req, res) => {
   const { id, token } = req.query;
+  // const { id, token } = req.body;
+// console.log(req.query)
   try {
     const selectResult = await queryRunner(
       selectQuery("superAdmin", "id", "token"),
@@ -513,11 +685,20 @@ exports.adminVerifyResetEmailCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+
+//  ############################# Verify Reset Email Code ############################################################
+
+//  ############################# Update Password ############################################################
+
 exports.updatePasswordAdmin = async (req, res) => {
   const { id, password, confirmpassword, token } = req.body;
+
   try {
     if (password === confirmpassword) {
       const hashPassword = await hashedPassword(password);
@@ -540,10 +721,13 @@ exports.updatePasswordAdmin = async (req, res) => {
       res.status(201).send("Password Does not match ");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error" + error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+//  ############################# Update Password ############################################################
 exports.resendCodeAdmin = async (req, res) => {
   const { id } = req.body;
   console.log(req.body);
@@ -555,6 +739,7 @@ exports.resendCodeAdmin = async (req, res) => {
       const userid = selectResult[0][0].id;
       const name =
         selectResult[0][0].fName + " " + selectResult[0][0].lName;
+      // console.log(selectResult[0][0])
       sendMail(selectResult[0][0].email, mailSubject, random, name);
       const now = new Date();
       const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
@@ -570,9 +755,18 @@ exports.resendCodeAdmin = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
+
   }}
+
+
+
+
+
+//  ############################# get Admin Notification ############################################################
 exports.getAdminNotification = async function (req, res) {
   const { id } = req.body;
   try {
@@ -586,6 +780,10 @@ exports.getAdminNotification = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
+
+
+
+//  ############################# Update Admin Notification ############################################################
 exports.updateAdminNotification = async function (req, res) {
   const { id } = req.body;
   try {
@@ -598,7 +796,13 @@ exports.updateAdminNotification = async function (req, res) {
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }};
+
+
+
+
+  //  ############################# Update All Admin Notification ############################################################
   exports.updateAllAdminNotification = async function (req, res) {
+    // const {} = req.body;
     try {
       const updateAllResult = await queryRunner(updateAllAdminNotificationQuery);
       if (updateAllResult[0].affectedRows > 0) {
@@ -609,6 +813,12 @@ exports.updateAdminNotification = async function (req, res) {
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }};
+  
+
+
+
+
+//  ############################# Delete clossed landlord ############################################################
 exports.deleteClossedLandlord = async function (req, res) {
   const { id } = req.body;
   try {
@@ -622,3 +832,4 @@ exports.deleteClossedLandlord = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };    
+//  ############################# Delete clossed landlord ############################################################

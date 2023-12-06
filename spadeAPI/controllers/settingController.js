@@ -22,10 +22,16 @@ const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { log } = require("console");
 const config = process.env;
+ 
+  //  ############################# Update Setting Password Start ############################################################ 
 exports.changePasssword = async function (req, res) {
+    // const {currentPassword, NewPassword } = req.query;
     const {currentPassword, NewPassword } = req.body;
+    // const {userId}=req.user
+    // console.log(req.query,req.body)
     const {userId}=req.user
     const currentDate = new Date();
+
     try {
         const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
         if (selectResult[0].length === 0) {
@@ -42,6 +48,7 @@ exports.changePasssword = async function (req, res) {
                 const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                   expiresIn: "3h",
                 });
+                
                 res.status(200).json({
                   token: token,
                     message: "Successful password Change",
@@ -51,14 +58,27 @@ exports.changePasssword = async function (req, res) {
           res.status(401).json({ error: "Incorrect Password" });
         }  
     } catch (error) {
-      res.status(400).send(error.message);
+      return res.status(400).json({
+        message: "Error ",
+        error: error.message,
+      });
     }
   };
+  //  ############################# Update Setting Password END ############################################################
+ 
+ 
+ 
+
+    //  ############################# Update Setting tennant Password Start ############################################################ 
 exports.changePasswordTenant = async function (req, res) {
+  // const {currentPassword, NewPassword } = req.query;
   const {currentPassword, NewPassword } = req.body;
+  // const {userId}=req.user
   const {userId}=req.user
   const currentDate = new Date();
+
   try {
+    
       const selectResult = await queryRunner(selectQuery("tenants", "id"), [userId]);
       if (selectResult[0].length === 0) {
         res.status(400).send("User Not Found");
@@ -68,12 +88,14 @@ exports.changePasswordTenant = async function (req, res) {
           const hashPassword = await hashedPassword(NewPassword);
           const updateResult = await queryRunner(updatePasswordTenantSetting, [hashPassword,currentDate,userId]);
             if (updateResult[0].affectedRows === 0) {
+              
               res.status(400).send("Error");
             } else {
               const email = selectResult[0][0].email;
               const token = jwt.sign({ email, NewPassword }, config.JWT_SECRET_KEY, {
                 expiresIn: "3h",
               });
+              
               res.status(200).json({
                 token: token,
                   message: "Successful password Change",
@@ -83,13 +105,20 @@ exports.changePasswordTenant = async function (req, res) {
         res.status(400).send("Incorrect Password");
       }  
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
+//  ############################# Update Setting tennant Password END ############################################################
+
+
+//  ############################# Email templates Start ############################################################
 exports.emailtemplates = async (req, res) => {
   const { tenantEmail, invoiceEmail, taskEmail, userEmail = 0 } = req.body;
   const { userId } = req.user;
+  // const { userId } = req.body;
   try {
     const updateEmailResult = await queryRunner(updateEmailTemplates, [tenantEmail, invoiceEmail, taskEmail, userEmail,userId,]);
     if (updateEmailResult[0].affectedRows > 0) {
@@ -99,33 +128,49 @@ exports.emailtemplates = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      message: error.message,
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
     });
   }
 };
+//  ############################# Email templates END ############################################################
+
+//  ############################# Landlord business logo Start ############################################################
 exports.updateBusinessLogo = async (req, res) => {
+  // const { userId } = req.user; 
   const { userId } = req.body; 
+
   console.log("req.files"); 
   const image  = req.files[0].filename; 
+
+
   console.log(image);
   try {
     console.log(image);
+      // const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image, imageKey,userId]);
       const updateBusinessLogoResult = await queryRunner(updateBusinessLogo, [image,userId]);
       if (updateBusinessLogoResult[0].affectedRows > 0) {
         res.status(200).json({
           message: " Business Logo save successful",
+          // data : updateBusinessLogoResult[0]
         });        
       }else{
         res.status(400).json({
           message: " Something went wrong in  Business Logo ",
         });        
       }
+
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
+//  ############################# Landlord business logo End ############################################################
+
+// ####################################### Change Email ##########################################
 exports.changeEmail = async (req, res) => { 
   const { email } = req.body;
   const { userId } = req.user;
@@ -141,13 +186,19 @@ exports.changeEmail = async (req, res) => {
   const random = Math.floor(100000 + Math.random() * 900000);
   try {
     const selectResult = await queryRunner(selectQuery("users", "id"), [userId]);
+
     if (selectResult[0].length > 0) {
       const name =
         selectResult[0][0].FirstName + " " + selectResult[0][0].LastName;
+      // console.log(`Email: ${email}, Subject: ${mailSubject}, Random: ${random}, Name: ${name}`);
+      
       sendMail(email, mailSubject, random, name);
+
       const now = new Date();
       const formattedDate = now.toISOString().slice(0, 19).replace("T", " ");
+
       const updateResult = await queryRunner(addResetToken, [random, formattedDate, userId]);
+
       if (updateResult[0].affectedRows === 0) {
         return res.status(400).json({ message: "Error in changing Email" });
       } else {
@@ -157,18 +208,31 @@ exports.changeEmail = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error" });
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
+
   }
 };
+// ####################################### Change Email ##########################################
+
+
+// ####################################### Verify token ##########################################
 exports.changeEmailVerifyToken = async (req, res) => { 
+  // console.log(req);
   const { token,email } = req.body;
+  // console.log(token + " " + email)
   const { userId } = req.user;
   try {
+    
     const currentDate = new Date();
     const selectResult = await queryRunner(selectQuery("users", "id", "token"),[userId,token]);
     if (selectResult[0].length > 0) {
+      // const token = selectResult[0][0].token;
+
       const updateResult = await queryRunner(updateUserEmail, [email, currentDate, userId]);
+
       if (updateResult[0].affectedRows === 0) {
         return res.status(400).json({ message: "Error in verify token" });
       } else {
@@ -181,19 +245,39 @@ exports.changeEmailVerifyToken = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error",error : error });
+    return res.status(500).json({ message: "Internal Server Error",error : error.message });
   }
 };
+// ####################################### Change Email ##########################################
+
+
+
+
+
+
+
+// ####################################### Base64 Start ##########################################
+
 exports.ImageToBase64 = async (req, res) => {
   const { userId } = req.user;
 const Image=req.files[0];
+
   try {
     const imageBuffer = req.files[0].buffer;
+
     const resizedImageBuffer = await sharp(imageBuffer)
       .resize({ width: 50 }) // Adjust the width as needed
       .toBuffer();
+
     const base64String = resizedImageBuffer.toString('base64');
+    // console.log(base64String)
+
+    // if (base64String.length > 240) {
+    //   return res.status(400).json({ message: "Base64 string exceeds 240 characters" });
+    // }
+    // Example: Storing the base64 string in a database
     const updateResult = await queryRunner(updateBusinessLogoImage, [base64String, userId]);
+
     if (updateResult[0].affectedRows === 0) {
       return res.status(400).json({ message: "Error in Base64" });
     } else {
@@ -201,6 +285,7 @@ const Image=req.files[0];
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error", error: error });
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+// ####################################### Base64 END ##########################################

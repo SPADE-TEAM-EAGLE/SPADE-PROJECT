@@ -1,3 +1,6 @@
+// const {  } = require("../constants/queries");
+// const { queryRunner } = require("../helper/queryRunner");
+
 const user = require("../models/user");
 const { sendMail, taskSendMail } = require("../sendmail/sendmail");
 const jwt = require("jsonwebtoken");
@@ -9,6 +12,10 @@ const { serialize } = require("cookie");
 const { insertBankAccount, selectQuery, updateBankAccountStatusquery,updateBankAccountquery,insertUserBankFuture,updatePropertyBankAccountQuery } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
+
+
+
+//  ############################# Create bank Account ############################################################
 exports.CreateBankAccount = async (req, res) => {
     const {userType} = req.user;
     const { UPOID, accountName, description, active, userId,accountTypeTenant,nickName,digits,cardBrand,cardType } = req.body;
@@ -29,7 +36,8 @@ exports.CreateBankAccount = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
+            
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
@@ -55,15 +63,20 @@ const userType = "Landlord";
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
     }
 };
+  //  ############################# Create bank Account ############################################################
+ 
+  
+  //  ############################# Create bank Account ############################################################
 exports.GetBankAccount = async (req, res) => {
     const { userId,userType } = req.user;
     console.log(req.user)
+    // const { userId } = req.body;
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -75,12 +88,14 @@ exports.GetBankAccount = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
+
 exports.GetBankAccountAdmin = async (req, res) => {
     const { userId,userType } = req.query;
     console.log(req.query)
+    // const { userId } = req.body;
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -92,10 +107,14 @@ exports.GetBankAccountAdmin = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
+  //  ############################# Create bank Account ############################################################
+ 
+    //  ############################# Update bank Account Status ############################################################
 exports.updateBankAccountStatus = async (req, res) => {
+    // const { userId } = req.user;
     const { id,Active } = req.body;
         try {
             const getResult = await queryRunner(updateBankAccountStatusquery,[Active,id]); 
@@ -106,9 +125,15 @@ exports.updateBankAccountStatus = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
+  //  ############################# Update bank Account Status ############################################################
+
+
+
+
+      //  ############################# Update bank Account ############################################################
 exports.updateBankAccountTenant = async (req, res) => {
     const { id,UPOID,accountName,description,Active } = req.body;
     const currentDate = new Date();
@@ -121,9 +146,37 @@ exports.updateBankAccountTenant = async (req, res) => {
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
+  //  ############################# Update bank Account ############################################################
+
+
+
+      //  ############################# dummy ############################################################
+    //   exports.dummy = async (req, res) => {
+    //     console.log("object")
+    //     const { userId,userNuveiId,planId,subscriptionId,userTokenId } = req.body;
+    //     const subscriptionDate = new Date();
+    //         try {
+    //             const result = await queryRunner(insertUserBankFuture, [userId,userNuveiId,planId,subscriptionId,userTokenId,subscriptionDate]);
+    //             if (result[0].affectedRows == 1) {
+    //               res.status(200).json({
+    //                 message:"asddsdcsdc"
+    //               });
+    //             } else {
+    //                 res.status(201).send("Bank Account data is not updated");
+    //             }
+    //         } catch (error) {
+    //             console.log(error);
+    //             res.status(400).send("Error");
+    //         }
+    // };
+      //  ############################# dummy ############################################################
+    
+   
+   
+      //  ############################# Update bank Account Status ############################################################
     exports.updatePropertyBankAccount = async (req, res) => {
         const { id, UPOID, accountName} = req.body;
             try {
@@ -135,7 +188,8 @@ exports.updateBankAccountTenant = async (req, res) => {
                 }
             } catch (error) {
                 console.log(error);
-                res.status(400).send("Error");
+                res.status(500).json({ message: "Error", error: error.message });
             }
     };
+      //  ############################# Property Account ############################################################
     

@@ -3,6 +3,7 @@ const {
   sendMail,
   taskSendMail,
   sendMailLandlord,
+
 } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -19,13 +20,19 @@ const {
   userPermissionUpdate,
   getUsersWithRoles
 } = require("../constants/queries");
+
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const config = process.env;
+
+
+
 exports.createUserPermissionUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, Ustatus, role, images } = req.body;
   const { userId } = req.user;
+  // const { userId } = req.body;
   const currentDate = new Date();
+
   try {
     let image_url = "";
     let image_key = "";
@@ -41,6 +48,7 @@ exports.createUserPermissionUser = async function (req, res) {
       return res.status(201).send("Email already exists");
     }
     const hashPassword = await hashedPassword(password);
+    // generate a unique identifier for the user
     const salt = bcrypt.genSaltSync(10);
     const id = bcrypt
       .hashSync(lastName + new Date().getTime().toString(), salt)
@@ -63,19 +71,21 @@ exports.createUserPermissionUser = async function (req, res) {
     if (insertResult[0].affectedRows > 0) {
       console.log(email + " " + mailSubject + " " + name)
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "Users Permission User added successfully" });
+      return res.status(200).json({ message: "Users Permission User added successfully " });
     } else {
-      return res.status(500).send("Failed to add User Permission User");
+      return res.status(500).send("Failed to add User Permission User ");
     }
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 };
+// User Check Email
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
+  // const { email } = req.body;
   const { userId } = req.user;
   try {
-    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
+    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail "), [
       userId,
       email,
     ]);
@@ -109,8 +119,12 @@ exports.userCheckEmail = async function (req, res) {
     });
   }
 };
+
+// User get By Id
 exports.userPermissionGetById = async function (req, res) {
+  // const { id } = req.query;
   const { id } = req.body;
+  // const { userId } = req.user;;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "id"), [
       id,
@@ -130,6 +144,8 @@ exports.userPermissionGetById = async function (req, res) {
     });
   }
 };
+
+// update User 
 exports.updateUserPermissionUsers = async function (req, res) {
   const { firstName, lastName, email, phone, Ustatus, role, id, images } = req.body;
   console.log(req.body)
@@ -169,6 +185,8 @@ exports.updateUserPermissionUsers = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
+
+// User Permission Delete
 exports.userPermissionUsersDelete = async function (req, res) {
   const { id } = req.body;
   try {
@@ -190,7 +208,10 @@ exports.userPermissionUsersDelete = async function (req, res) {
     });
   }
 };
+
+// User get All Users
 exports.userPermissionGetAll = async function (req, res) {
+
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(getUsersWithRoles, [
@@ -213,10 +234,13 @@ exports.userPermissionGetAll = async function (req, res) {
     });
   }
 };
+// Get User Roles
 exports.userPermissionRoles = async function (req, res) {
   const { userId } = req.user;
+  // const { userId } = req.body;
   function splitAndConvertToObject(value) {
     const resultObject = {};
+
     if (value.includes(',')) {
       const values = value.split(",");
       for (const item of values) {
@@ -225,14 +249,18 @@ exports.userPermissionRoles = async function (req, res) {
     } else {
       resultObject[value] = true;
     }
+
     return resultObject;
   }
   try {
     const selectResult = await queryRunner(selectQuery("userRoles", "userId"), [userId]);
     if (selectResult[0].length > 0) {
       const dataArray = [];
+
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
+
+        // Example usage for different fields
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].Urole;
         const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
@@ -251,6 +279,7 @@ exports.userPermissionRoles = async function (req, res) {
         const settingMUsers = splitAndConvertToObject(selectResult[0][i].settingMUsers);
         const settingEmailT = splitAndConvertToObject(selectResult[0][i].settingEmailT);
         const SettingInvoiceSetting = splitAndConvertToObject(selectResult[0][i].SettingInvoiceSetting);
+
         dataArray.push({
           id,
           role,
@@ -287,8 +316,11 @@ exports.userPermissionRoles = async function (req, res) {
     });
   }
 };
+
+// Tenant status CP Start 
 exports.userPermissionUpdate = async function (req, res) {
   const { role, columnName, permission } = req.body;
+  // const currentDate = new Date();
   try {
     const updateResult = await queryRunner(`UPDATE userRoles SET ${columnName} = "${permission}" WHERE id = ${role}`);
     if (updateResult[0].affectedRows > 0) {

@@ -12,7 +12,9 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const cron = require('node-cron');
+
 const task = cron.schedule('0 9,20 * * *', async () => {
+  // const task = cron.schedule('* * * * *', async () => {
   console.log("run");
   const currentDate = new Date();
   const selectTenantsResult = await queryRunner(recurringInvoice)
@@ -36,14 +38,19 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const recurringNextDate = selectTenantsResult[0][i].recurringNextDate;
       const created_atPrevious = selectTenantsResult[0][i].created_at;
       const notify = selectTenantsResult[0][i].notify;
+      // console.log("2");
       const recurringInvoiceCheckResult = await queryRunner(recurringInvoiceCheck, [landlordID, tenantID, invoiceType]);
+      // console.log("3");
       if (recurringInvoiceCheckResult[0].length > 0) {
         console.log("user Exist")
       }
       else {
         if (frequency == "monthly") {
+          // console.log("4");
+          // Calculate the next date
           const nextDate = new Date(currentDate);
           if (currentDate.getMonth() === 11) {
+            // If current month is December, move to January of the next year
             nextDate.setFullYear(currentDate.getFullYear() + 1);
             nextDate.setMonth(0); // January (month index 0)
           } else {
@@ -56,11 +63,18 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           const minute = String(nextDate.getMinutes()).padStart(2, '0');
           const second = String(nextDate.getSeconds()).padStart(2, '0');
           const recurringNextDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+
           console.log("ready");
+          // ############################################################# MONthly Rest of the code remains the same...
+          // Recurring Next Date END 
           const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
           if (invoiceResult.affectedRows === 0) {
             res.status(400).send('Error occur in creating invoice');
+            // console.log("object");
           } else {
+            // console.log("object2")
+
+            // Invoice Email Start
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
             let tenantEmail;
@@ -73,6 +87,7 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               const landlordID = selectTenantsResult[0][0].landlordID;
               const propertyID = selectTenantsResult[0][0].propertyID;
               tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
+              // console.log("1234")
               const selectPropertyResult = await queryRunner(selectQuery('property', 'id'), [propertyID])
               address = selectPropertyResult[0][0].address;
               const selectLandlordResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
@@ -80,6 +95,10 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
               invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
               mailSubject = "Invoice From " + userName;
+              // await invoiceSendMail(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, userName, landlordID, BusinessName, invoiceEmail); landlordID,invoiceEmail
+
+              // console.log("1234222")
+              // console.log(tenantName, tenantEmail, mailSubject, dueDays, invoiceID, frequency)
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             const lineItems = lineItemsResult[0];
@@ -93,20 +112,29 @@ const task = cron.schedule('0 9,20 * * *', async () => {
                 const memo = lineItemsResult[0][j].memo;
                 const amount = lineItemsResult[0][j].amount;
                 const invoiceLineItemsResult = await queryRunner(insertLineItems, [invoiceID, category, property, memo, amount])
+                // console.log("line item");
               }
             }
+
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])
             if (invoiceImagesResult[0].length > 0) {
+              // console.log("invoice Image 2 ");
+
               for (let j = 0; j < invoiceImagesResult[0].length; j++) {
                 const image_url = invoiceImagesResult[0][j].Image;
                 const image_key = invoiceImagesResult[0][j].ImageKey;
                 console.log(image_url, image_key);
                 const propertyImageResult = await queryRunner(insertInvoiceImage, [invoiceID, image_url, image_key]);
+
                 console.log(image_url, image_key);
               }
             }
+
           } //invoiceResult else END
+          // ############################################################# MONthly Rest of the code remains the same...
         } else if (frequency == "yearly") {
+          // Calculate the next date
+          // console.log("5");
           const nextDate = new Date(currentDate);
           nextDate.setFullYear(currentDate.getFullYear() + 1);
           const year = nextDate.getFullYear();
@@ -116,11 +144,20 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           const minute = String(nextDate.getMinutes()).padStart(2, '0');
           const second = String(nextDate.getSeconds()).padStart(2, '0');
           const recurringNextDate = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+          //   ################################################# Yearly Rest of the code remains the same...
+          // Recurring Next Date END 
+          // console.log("6");
+          // console.log(landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate);
+
           const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
+
           console.log(invoiceResult);
           if (invoiceResult.affectedRows === 0) {
+            // console.log("7");
             res.status(400).send('Error occur in creating invoice');
           } else {
+            // console.log("8");
+            // Invoice Email Start
             const invoiceID = invoiceResult[0].insertId;
             const selectTenantsResult = await queryRunner(selectQuery('tenants', 'id'), [tenantID])
             let tenantEmail;
@@ -132,14 +169,18 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               tenantEmail = selectTenantsResult[0][0].email;
               tenantName = selectTenantsResult[0][0].firstName + " " + selectTenantsResult[0][0].lastName;
               const propertyID = selectTenantsResult[0][0].propertyID;
+              // console.log("1234")
               const selectPropertyResult = await queryRunner(selectQuery('property', 'id'), [propertyID])
               address = selectPropertyResult[0][0].address;
               const landlordID = selectTenantsResult[0][0].landlordID;
+              // const mailSubject = invoiceID + " From " + frequency;
+              // const mailSubject = "Invoice From " + userName;
               const selectLandlordResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
               const BusinessName = selectLandlordResult[0][0].BusinessName || "N/A";
               const userName = selectLandlordResult[0][0].FirstName + " " + selectLandlordResult[0][0].LastName;
               invoiceEmail = selectLandlordResult[0][0].invoiceEmail;
               mailSubject = "Invoice From " + userName;
+              // tenantName,address,dueDate,terms,additionalNotes,lineItems,totalAmount,mailSubject,tenantEmail
             }
             const lineItemsResult = await queryRunner(selectQuery('invoicelineitems', 'invoiceID'), [PreviousInvoiceID])
             const lineItems = lineItemsResult[0];
@@ -157,21 +198,26 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               }
             }    // Insert END 
             //Line item END 
+            // Invoice Images Start
             console.log("invoice Image");
             const invoiceImagesResult = await queryRunner(selectQuery('invoiceimages', 'invoiceID'), [PreviousInvoiceID])
             if (invoiceImagesResult[0].length > 0) {
               console.log("invoice Image 2 ");
+
               for (let j = 0; j < invoiceImagesResult[0].length; j++) {
                 const image_url = invoiceImagesResult[0][j].Image;
                 const image_key = invoiceImagesResult[0][j].ImageKey;
                 console.log(image_url, image_key);
                 const propertyImageResult = await queryRunner(insertInvoiceImage, [invoiceID, image_url, image_key]);
+
                 console.log(image_url, image_key);
               }
             }
             console.log(image_url, image_key);
             console.log("image_url, image_key");
+            // Invoice Images END 
           } //invoiceResult else END
+          //   ################################################# Yearly Rest of the code remains the same...
         }
       }
     }
@@ -182,6 +228,8 @@ const task = cron.schedule('0 9,20 * * *', async () => {
 }, {
   scheduled: false
 });
+
+// Plan check 
 const Plan = cron.schedule('1 0 * * *', async () => {
   console.log("Plan run");
   const currentDate = new Date();
@@ -197,8 +245,11 @@ const Plan = cron.schedule('1 0 * * *', async () => {
       const fsubscriptionCreated_at = selectPlanResult[0][i].fsubscriptionCreated_at;
       const result = await queryRunner(updateUserBankRecurring, [fuserNuveiId, fplanId, fsubscriptionId, fsubscriptionCreated_at, fuserTokenId]);
       if (result[0].affectedRows == 1) {
+        // const DeleteResult = await queryRunner(deleteQuery("futurePlanUser", "id"),[id]);
+
       }
     }
   }
+
 });
 module.exports = task, Plan;

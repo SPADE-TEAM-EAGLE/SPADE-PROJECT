@@ -11,7 +11,9 @@ exports.codeHTML = (name, random) => {
     background: #FEFEFE;
     color: #585858;
   ">
+    <!-- Preivew text -->
     <span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;border-collapse: collapse;border: 0px;"></span> 
+    <!-- Carpool logo -->
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="	font-size: 15px;
     line-height: 23px;
     max-width: 500px;
@@ -23,11 +25,13 @@ exports.codeHTML = (name, random) => {
     vertical-align: top;
       border: none !important;
   ">
+  
           <img alt="Spade Rent" src="https://res.cloudinary.com/djhjn0ngj/image/upload/v1685012561/Logo_2_is7u6m.png" class="carpool_logo" width="232" style="	display: block;
     margin: 0 auto;
   margin: 30px auto;">
         </td>
       </tr>
+      <!-- Header -->
       <tr>
         <td class="sectionlike imageless_section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -36,6 +40,7 @@ exports.codeHTML = (name, random) => {
     padding-bottom: 10px;
   padding-bottom: 20px;"></td>
       </tr>
+      <!-- Content -->
       <tr>
         <td class="section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -77,11 +82,13 @@ exports.codeHTML = (name, random) => {
     letter-spacing: 20px; 
     text-decoration: none;
   " > <span >${random}</span></div>
+                 
               </td>
             </tr>
           </tbody></table>
         </td>
       </tr>
+      <!-- Signature -->
       <tr>
         <td class="section" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -108,6 +115,7 @@ exports.codeHTML = (name, random) => {
           </tbody></table>
         </td>
       </tr>
+      <!-- Footer -->
       <tr>
         <td class="section dummy_row" style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -156,12 +164,14 @@ exports.codeHTML = (name, random) => {
     line-height: initial;
     color: #005750;
   ">
+
   </table>
               </td>
             </tr>
           </tbody></table>
         </td>
       </tr>
+      <!-- Legal footer -->
       <tr>
         <td style="	font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     vertical-align: top;
@@ -176,19 +186,24 @@ exports.codeHTML = (name, random) => {
           If you did not enter this email address when signing up for Spade Rent service, disregard this message.<br><br>
           © 2017 Google Inc. 1600 Amphitheatre Parkway, Mountain View, CA 94043
   <br><br>
+  
   This is a mandatory service email from Spade Rent.
   </p>
         </td>
       </tr>
     </tbody></table>
+  
   </body>`;
 };
+
 exports.welcomeHTML = (email, password, name) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><style type="text/css">
+    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Nunito);
+    
       /* Take care of image borders and formatting */
+    
       img {
         max-width: 600px;
         outline: none;
@@ -199,23 +214,29 @@ exports.welcomeHTML = (email, password, name) => {
         margin: 0;
         padding:0;
       }
+    
       a {
         text-decoration: none;
         border: 0;
         outline: none;
         color: #bbbbbb;
       }
+    
       a img {
         border: none;
       }
+    
       /* General styling */
+    
       td, h1, h2, h3  {
         font-family: figtree;
         font-weight: 400;
       }
+    
       td {
         text-align: center;
       }
+    
       body {
         -webkit-font-smoothing:antialiased;
         -webkit-text-size-adjust:none;
@@ -229,16 +250,21 @@ exports.welcomeHTML = (email, password, name) => {
         padding: 0px;
         margin: 0px;
       }
+    
        table {
         border-collapse: collapse !important;
       }
+    
       .headline {
         color: #444;
         font-size: 36px;
       }
+    
      .force-full-width {
       width: 100% !important;
      }
+    
+    
       </style><style media="screen" type="text/css">
           @media screen {
             td, h1, h2, h3 {
@@ -248,12 +274,14 @@ exports.welcomeHTML = (email, password, name) => {
       </style><style media="only screen and (max-width: 480px)" type="text/css">
         /* Mobile styles */
         @media only screen and (max-width: 480px) {
+    
           table[class="w320"] {
             width: 320px !important;
           }
         }
       </style>
       <style type="text/css"></style>
+      
       </head>
       <body bgcolor="#fff" class="body" style="padding:20px; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
     <table align="center" cellpadding="0" cellspacing="0" height="100%" width="100%">
@@ -300,15 +328,19 @@ exports.welcomeHTML = (email, password, name) => {
     </td>
     </tr>
     </tbody>
+      
       </table>
+    
     <table bgcolor="#fff" cellpadding="0" cellspacing="0" class="force-full-width" style="margin: 0 auto; margin-bottom: 5px">
     <tbody>
     <tr>
     <td class="" style="color:#444;
                         ">
     <p>The password was auto-generated, however feel free to change it 
+      
         <a href="#" style="text-decoration: underline;">
           here</a>
+      
       </p>
       </td>
     </tr>
@@ -320,12 +352,15 @@ exports.welcomeHTML = (email, password, name) => {
     </tbody></table>
     </body></html>`;
 };
+
 exports.welcomeHTMLLANDLORD = (email, name) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><style type="text/css">
+    <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Spade Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Nunito);
+    
       /* Take care of image borders and formatting */
+    
       img {
         max-width: 600px;
         outline: none;
@@ -336,23 +371,29 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
         margin: 0;
         padding:0;
       }
+    
       a {
         text-decoration: none;
         border: 0;
         outline: none;
         color: #bbbbbb;
       }
+    
       a img {
         border: none;
       }
+    
       /* General styling */
+    
       td, h1, h2, h3  {
         font-family: figtree;
         font-weight: 400;
       }
+    
       td {
         text-align: center;
       }
+    
       body {
         -webkit-font-smoothing:antialiased;
         -webkit-text-size-adjust:none;
@@ -366,16 +407,21 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
         padding: 0px;
         margin: 0px;
       }
+    
        table {
         border-collapse: collapse !important;
       }
+    
       .headline {
         color: #444;
         font-size: 36px;
       }
+    
      .force-full-width {
       width: 100% !important;
      }
+    
+    
       </style><style media="screen" type="text/css">
           @media screen {
             td, h1, h2, h3 {
@@ -385,12 +431,14 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
       </style><style media="only screen and (max-width: 480px)" type="text/css">
         /* Mobile styles */
         @media only screen and (max-width: 480px) {
+    
           table[class="w320"] {
             width: 320px !important;
           }
         }
       </style>
       <style type="text/css"></style>
+      
       </head>
       <body bgcolor="#fff" class="body" style="padding:20px; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
     <table align="center" cellpadding="0" cellspacing="0" height="100%" width="100%">
@@ -417,6 +465,7 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
      A property management application that helps you manage your real estate portfolio with ease and efficiency. <br><br>
       You have successfully been registered to use Spade Rent as a <em>Landlord</em><br>
      <br>
+
     <br><br>  
     <br></td>
     </tr>
@@ -432,12 +481,15 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
     </td>
     </tr>
     </tbody>
+      
       </table>
+    
     <table bgcolor="#fff" cellpadding="0" cellspacing="0" class="force-full-width" style="margin: 0 auto; margin-bottom: 5px">
     <tbody>
     <tr>
     <td class="" style="color:#444;
                         ">
+    
       </td>
     </tr>
     </tbody></table></td>
@@ -448,6 +500,7 @@ exports.welcomeHTMLLANDLORD = (email, name) => {
     </tbody></table>
     </body></html>`;
 };
+
 exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName,businessName) => {
   return `<!DOCTYPE html>
   <html lang="en">
@@ -462,13 +515,16 @@ exports.invoiceHTML = (tenantName, dueDays, invoiceID, landlordName,businessName
       <br>
       <p>Please find attached your rent and Due Date: <b>${dueDays}</b> If you have any questions,
             please let us know. </p>
+  
             <p>Have a great day and thank you for your business<b>!</b></p>
+  
             <p>Sincerely</p>
             <h4>${landlordName}</h4> 
             <p>${businessName}</p>
   </body>
   </html>`;
 };
+
 exports.taskHTML = (
   mailSubject,
   tenantName,
@@ -501,15 +557,18 @@ exports.taskHTML = (
         padding: 10px;    
         font-weight: 600;    
       }   
+      
       div {
         background-color: aliceblue;
         padding: 20px 10px;
         border-radius: 10px;
       }
+
       ol {
         margin-left: -25px;
       }
       </style>
+      
   </head>
   <body>
   <div>
@@ -545,6 +604,7 @@ exports.taskHTML = (
       <p>
       Best regards,
       </p>
+
       <h4><span style="  color: #1467B0; ">${landlordName},</span></h4>
       <h4><span style="  color: #1467B0; ">${companyName},</span></h4>
     </div>

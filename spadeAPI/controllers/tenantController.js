@@ -1,4 +1,5 @@
 const user = require("../models/user");
+// const {sendMail} = require('../sendmail/sendmail.js');
 const { sendMail, invoiceSendMail } = require("../sendmail/sendmail.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -39,10 +40,14 @@ const {
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
 const { file } = require("googleapis/build/src/apis/file");
+
 const config = process.env;
+
+//  ############################# Create tenants Start ############################################################
 exports.createTenants = async (req, res) => {
   try {
     const {
+      // landlordID,
       firstName,
       lastName,
       companyName,
@@ -64,6 +69,8 @@ exports.createTenants = async (req, res) => {
       increaseRentData,
     } = req.body;
     const { userId } = req.user;
+    // const { userId } = req.body;
+    // console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [
       email,
     ]);
@@ -99,6 +106,7 @@ exports.createTenants = async (req, res) => {
         hashPassword,
         currentDate,
       ]);
+
       if (tenantsInsert[0].affectedRows > 0) {
         const status = "Occupied";
         const propertyUnitsResult = await queryRunner(
@@ -107,9 +115,19 @@ exports.createTenants = async (req, res) => {
         );
         if (propertyUnitsResult[0].affectedRows > 0) {
           const tenantCountIdResult = await queryRunner(tenantsCount, [userId]);
+          // console.log(tenantCountIdResult[0][0].count)
           let customTenantId = tenantCountIdResult[0][0].count + 1;
+          // console.log(customTenantId)
+          
           customTenantId = lastName+customTenantId;
+          // console.log(customTenantId)
           const tenantIdUpdateResult = await queryRunner(tenantsIdUpdate ,[customTenantId, tenantsInsert[0].insertId]);
+          // const selectTenantsResult = await queryRunner(
+          //   selectQuery("users", "id"),
+          //   [userId]
+          // );
+          // const landlordEmail = selectTenantsResult[0][0].Email;
+          // const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -125,6 +143,7 @@ exports.createTenants = async (req, res) => {
               for (let i = 0; i < increaseRentData.length; i++) {
                 const increaseDate = increaseRentData[i].date;
                 const increaseRentAmount = increaseRentData[i].amount;
+                // console.log(increaseDate,increaseRentAmount,propertyID)
                 const increaseRentDataResult = await queryRunner(
                   insertincreaseRentData,
                   [tenantID, propertyID, increaseDate, increaseRentAmount]
@@ -137,12 +156,15 @@ exports.createTenants = async (req, res) => {
               tenantId: tenantsInsert[0].insertId,
             });
           }
+          // insert increase rent amount END
         } else {
+          // console.log(111)
           res.status(400).json({
             message: "Error occur in update tenant property unit",
           });
         }
       } else {
+        // console.log(22222)
         res.status(400).json({
           message: "data not save",
         });
@@ -150,9 +172,13 @@ exports.createTenants = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error occurs in creating Tenants  " + error);
+    return res.status(500).json({ message: "Error occurs in creating Tenants", error: error.message });
   }
 };
+//  ############################# Create tenants END ############################################################
+
+//  ############################# tenant email send Start  ############################################################
+
 exports.sendInvitationLink = async (req, res) => {
   const { tenantEmail } = req.user;
   const { tenantID } = req.body;
@@ -168,6 +194,7 @@ exports.sendInvitationLink = async (req, res) => {
       const tenantPassword = "Spade" + ran;
       const hashPassword = await hashedPassword(tenantPassword);
       const mailSubject = "Spade Welcome Email";
+
       const tenantsInsert = await queryRunner(UpdateTenants, [
         hashPassword,
         currentDate,
@@ -188,10 +215,15 @@ exports.sendInvitationLink = async (req, res) => {
       return res.status(400).send("Tenant is not exists");
     }
   } catch (error) {
-    res.send("Error occurs in Sending Tenants welcome email " + error.message); // Sending error response
+    return res.status(500).json({ message: "Error occurs in Sending Tenants welcome email", error: error.message });
   }
 };
+
+//  ############################# tenant email send END  ############################################################
+
+//  ############################# Tenant Reset Email ############################################################
 exports.createResetEmailTenant = async (req, res) => {
+  // const { email } = req.query;
   const { email } = req.body;
   const mailSubject = "Spade Reset Email";
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -220,9 +252,13 @@ exports.createResetEmailTenant = async (req, res) => {
       res.status(400).send("Email not found");
     }
   } catch (error) {
-    res.status(400).send("Error"+error.message);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
+//  ############################# Tenant Reset Email ############################################################
+
+//  ############################# resend Code ############################################################
 exports.resendCodeTenants = async (req, res) => {
   const { id } = req.body;
   const mailSubject = "Spade Reset Email";
@@ -248,12 +284,16 @@ exports.resendCodeTenants = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    return res.status(500).json({ message: "Error", error: error.message });
+    
   }
 };
+//  ############################# resend Code ############################################################
+
+//  ############################# Tenant Verify Reset Email Code ############################################################
 exports.verifyResetEmailCodeTenant = async (req, res) => {
   const { id, token } = req.body;
+  // console.log(req.body)
   try {
     const selectResult = await queryRunner(
       selectQuery("tenants", "id", "token"),
@@ -280,21 +320,27 @@ exports.verifyResetEmailCodeTenant = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    return res.status(500).json({ message: "Error", error: error.message });
+
   }
 };
+//  ############################# Tenant Verify Reset Email Code ############################################################
+
 exports.tenantAllPaidInvoice = async (req, res) => {
   try {
     const { userId } = req.user;
+    // Check if tenant has any unpaid invoices
     const tenantAllPaidInvoiceResult = await queryRunner(
       checkTenantInvoicePaidQuery,
       [userId]
     );
+    // No un-paid invoices found, update tenant account
     if (tenantAllPaidInvoiceResult[0].length === 0) {
       const tenantAllPaid = await queryRunner(updateTenantAccountQuery, [
         0,
         userId,
       ]);
+      // updateAllStatusVacantQuery
       await queryRunner(updateAllStatusVacantQuery, ["Vacant", userId]);
       const getLandlordDetailed = await queryRunner(getLandlordDetailedQuery, [
         userId,
@@ -302,6 +348,7 @@ exports.tenantAllPaidInvoice = async (req, res) => {
       await queryRunner(deleteTenantAccountData.invoice, [userId]);
       await queryRunner(deleteTenantAccountData.task, [userId]);
       await queryRunner(deleteTenantAccountData.deleteTenantData, [userId]);
+
       const mailSubject = "Tenant has paid all invoices and is now Inactive";
       if (getLandlordDetailed[0].length > 0) {
         await sendMail(
@@ -311,6 +358,8 @@ exports.tenantAllPaidInvoice = async (req, res) => {
           `${getLandlordDetailed[0][0].FirstName} ${getLandlordDetailed[0][0].LastName}`
         );
       }
+      // console.log(tenantData[i].emai);
+
       if (tenantAllPaid[0].affectedRows > 0) {
         res.status(200).json({
           message: "Tenant has paid invoices",
@@ -328,11 +377,13 @@ exports.tenantAllPaidInvoice = async (req, res) => {
   }
 };
 exports.updatePasswordTenant = async (req, res) => {
+  // console.log(req.body);
   const { id, password, confirmpassword, token } = req.body;
   try {
     if (password === confirmpassword) {
       const now = new Date();
       const hashPassword = await hashedPassword(password);
+
       const selectResult = await queryRunner(updatePasswordTenant, [
         hashPassword,
         now,
@@ -350,10 +401,13 @@ exports.updatePasswordTenant = async (req, res) => {
       res.status(201).send("Password Does not match ");
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error");
+    return res.status(500).json({ message: "Error", error: error.message });
+
   }
 };
+//  ############################# Tenant Update Password ############################################################
+
+//  ############################# Add Alternate Email and Phone Start ############################################################
 exports.addAlternateEmailPhone = async (req, res) => {
   const { tenantID, alternatePhone, alternateEmail } = req.body;
   try {
@@ -377,18 +431,28 @@ exports.addAlternateEmailPhone = async (req, res) => {
         message: "Email and phone number successfully saved",
       });
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
+
+
+//  ############################# Add Alternate Email and Phone End ############################################################
+
+//  ############################# Add Tenant Attach File Start ############################################################
 exports.tenantAttachFile = async (req, res) => {
+  // console.log(1)
   const { tenantID, images } = req.body;
+
   const { userId } = req.user;
+  // const { userId } = req.body;
   const currentDate = new Date();
   try {
     for (let i = 0; i < images.length; i++) {
       const { image_url } = images[i];
       const { image_key } = images[i];
+
+
       const propertyImageResult = await queryRunner(insertTenantAttachFile, [
         userId,
         tenantID,
@@ -396,6 +460,7 @@ exports.tenantAttachFile = async (req, res) => {
         image_key,
         currentDate
       ]);
+      // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
         throw new Error("data doesn't inserted in property image table");
       }
@@ -404,19 +469,27 @@ exports.tenantAttachFile = async (req, res) => {
       message: " Tenant Files save successful",
     });
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
+//  ############################# Add Tenant Attach File End ############################################################
+
+//  ############################# Delete Tenant Attach File Start ############################################################
 exports.tenantAttachFileDelete = async (req, res) => {
   try {
+    // console.log(req.body)
     const { id } = req.body;
+    // const { id,userId } = req.body
     const { userId } = req.user;
     const attachFileResult = await queryRunner(
       selectQuery("tenantattachfiles", "id"), [id]);
     if (attachFileResult[0].length > 0) {
       const file = attachFileResult[0][0].ImageKey;
+      // delete folder images Start
+      // imageToDelete([file]);
       deleteImageFromS3(file);
+      // delete folder images End
       const PropertyDeleteResult = await queryRunner(
         deleteQuery("tenantattachfiles", "id", "landlordID"),
         [id, userId]
@@ -436,13 +509,20 @@ exports.tenantAttachFileDelete = async (req, res) => {
           message: "No data found",
         });
       }
+    
   } catch (error) {
-    res.send("Error from delete Property ");
+    return res.status(500).json({ message: "Error from delete Property", error: error.message });
+
     console.log(error);
   }
 };
+//  ############################# Delete Tenant Attach File End ############################################################
+
+//  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachFile = async (req, res) => {
   const { tenantID } = req.query; 
+  // const { tenantID } = req.body; 
+
   try {
       const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
       if (GettenantAttachFileResult[0].length === 0) {
@@ -453,21 +533,26 @@ exports.GettenantAttachFile = async (req, res) => {
       data : GettenantAttachFileResult[0]
     });
   } catch (error) {
-    res.status(400).send("Error4" + error);
+    return res.status(500).json({ message: "Error ", error: error.message });
     console.log(error);
   }
 };
+//  ############################# Add Tenant Attach File End ############################################################
+
+//  ############################# Delete Tenant Start ############################################################
 exports.tenantDelete = async (req, res) => {
   try {
     const { tenantID } = req.body;
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
       tenantID,
     ]);
+
     if (tenantResult[0].length > 0) {
       const tenantAllPaidInvoiceResult = await queryRunner(
         checkMyAllTenantsInvoicePaidQuerytenant,
         [tenantID]
       );
+
       if (tenantAllPaidInvoiceResult[0].length > 0) {
         res.status(200).json({
           message: "Tenant Invoice is pending Kindly Paid invoice ",
@@ -478,6 +563,7 @@ exports.tenantDelete = async (req, res) => {
           deleteQuery("tenants", "id"),
           [tenantID]
         );
+
         if (tenantDeleteResult[0].affectedRows > 0) {
           const tenantCheckResult = await queryRunner(
             selectQuery("tenantattachfiles", "tenantID"),
@@ -487,12 +573,14 @@ exports.tenantDelete = async (req, res) => {
             const tenantimages = tenantCheckResult[0].map(
               (image) => image.fileName
             );
+            // delete folder images
             imageToDelete(tenantimages);
             const tenantFileDeleteresult = await queryRunner(
               deleteQuery("tenantattachfiles", "tenantID"),
               [tenantID]
             );
           }
+
           const tenantAdditionalEmailCheckResult = await queryRunner(
             selectQuery("tenantalternateemail", "tenantID"),
             [tenantID]
@@ -503,6 +591,8 @@ exports.tenantDelete = async (req, res) => {
               [tenantID]
             );
           }
+
+// Delete alternate phone Number and emails
           const tenantAdditionalPhoneCheckResult = await queryRunner(
             selectQuery("tenantalternatephone", "tenantID"),
             [tenantID]
@@ -513,6 +603,7 @@ exports.tenantDelete = async (req, res) => {
               [tenantID]
             );
           }
+
           const tenantIncreaseRentCheckResult = await queryRunner(
             selectQuery("tenantincreaserent", "tenantID"),
             [tenantID]
@@ -523,33 +614,43 @@ exports.tenantDelete = async (req, res) => {
               [tenantID]
             );
           }
+
           const status = "Vacant";
           const propertyUnitsResult = await queryRunner(updateUnitsTenant, [
             status,
             propertyUnitID,
           ]);
+
           res.status(200).json({
             message: " tenant deleted successfully",
           });
         } else {
+          // tenantCheckResult
           res.status(200).json({
             message: "Error occur in delete tenant ",
           });
         }
       }
     } else {
+      // tenantCheckResult
       res.status(200).json({
         message: "No tenant found ",
       });
     }
+    // }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete tenants ", error);
+    return res.status(500).json({ message: "Error from delete tenants", error: error.message });
   }
 };
+//  ############################# Delete Tenant End ############################################################
+
+//  ############################# Get tenant ByID Start ############################################################
 exports.getTenantsByID = async (req, res) => {
   try {
+    // con
     const { id } = req.query;
+    // const { id } = req.body;
     const TenantsByIDResult = await queryRunner(getTenantsById, [id]);
     if (TenantsByIDResult.length > 0) {
       const data = JSON.parse(JSON.stringify(TenantsByIDResult));
@@ -563,10 +664,13 @@ exports.getTenantsByID = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get Tenants By ID" + error );
-    console.log(error);
+    return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
+
   }
 };
+//  ############################# Get tenant ByID End ############################################################
+
+//  ############################# Update tenants Start ############################################################
 exports.updateTenants = async (req, res) => {
   try {
     const {
@@ -591,6 +695,8 @@ exports.updateTenants = async (req, res) => {
       increaseRent,
       increaseRentData,
     } = req.body;
+    // console.log(req)
+    // const {userId}=req.user
     const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [
       tenantID,
     ]);
@@ -641,6 +747,8 @@ exports.updateTenants = async (req, res) => {
           updatePropertyUnitsTenant,
           [status, propertyUnitID, propertyID]
         );
+        // console.log("11");
+        // console.log(propertyUnitsResult);
         if (propertyUnitsResult[0].affectedRows > 0) {
           if (increaseRent == "No") {
             res.status(200).json({
@@ -649,6 +757,7 @@ exports.updateTenants = async (req, res) => {
               tenantId: tenantsInsert[0].insertId,
             });
           } else {
+            // const tenantID = tenantsInsert[0].insertId;
             if (
               increaseRentData.length >= 1 &&
               increaseRentData[0].date !== ""
@@ -668,6 +777,7 @@ exports.updateTenants = async (req, res) => {
               tenantId: tenantsInsert[0].insertId,
             });
           }
+          // insert increase rent amount END
         } else {
           res.status(400).json({
             message: "Error occur in update tenant property unit",
@@ -683,11 +793,65 @@ exports.updateTenants = async (req, res) => {
         message: "tenant not Updated",
       });
     }
+    // }
   } catch (error) {
     console.log(error);
-    res.send("Error occurs in updating Tenants  " + error);
+    return res.status(500).json({ message: "Error occurs in updating Tenants", error: error.message });
   }
 };
+//  ############################# Update tenants END ############################################################
+// exports.updateTenantProfile = async (req, res) => {
+//   try {
+//     const { userId } = req.user;
+//     const {
+//       firstName,
+//       lastName,
+//       companyName,
+//       email,
+//       phoneNumber,
+//       address,
+//       city,
+//       state,
+//       zipcode,
+//       Image,
+//       imageKey,
+//     } = req.body;
+//     const tenantcheckresult = await queryRunner(selectQuery("tenants", "id"), [
+//       userId,
+//     ]);
+//     if (tenantcheckresult[0].length > 0) {
+//       const tenantsInsert = await queryRunner(updateTenantsProfile, [
+//         firstName,
+//         lastName,
+//         companyName,
+//         email,
+//         phoneNumber,
+//         address,
+//         city,
+//         state,
+//         zipcode,
+//         Image,
+//         imageKey,
+//         userId,
+//       ]);
+//       if (tenantsInsert[0].affectedRows > 0) {
+//         res.status(200).json({
+//           message: "Tenants save Successful",
+//           data: tenantsInsert[0],
+//         });
+//       } else {
+//         res.status(200).json({
+//           message: "Tenants is not found",
+//         });
+//       }
+//     }
+//   } catch (error) {
+//     res.send("Error Get Tenants By ID");
+//     console.log(error);
+//   }
+// };
+
+//  ############################# Task tenant ############################################################
 exports.tenantTask = async (req, res) => {
   const { Id } = req.query;
   try {
@@ -715,18 +879,21 @@ exports.tenantTask = async (req, res) => {
           (vendorID) => vendorID.vendorId
         );
         const vendorData = [];
+        
         for (let i = 0; i < vendorIDs.length; i++) {
           const vID = vendorIDs[i];
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vID,
           ]);
           let VendorCategoryResult;
+          
           if (vendorResult[0].length > 0) {
             const categoryIDs = vendorResult[0][0].categoryID;
             VendorCategoryResult = await queryRunner(
               selectQuery("vendorcategory", "id"),
               [categoryIDs]
             );
+
             if (VendorCategoryResult[0].length > 0) {
               const vendorDataObject = {
                 name:
@@ -758,13 +925,14 @@ exports.tenantTask = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get tenant Task");
+    return res.status(500).json({ message: "Error Get tenant Task", error: error.message });
   }
 };
 exports.updateTenantProfile = async (req, res) => {
   try {
     const { userId } = req.user;
+    // console.log(userId);
+    // console.log(req.body);
     const {
       firstName,
       lastName,
@@ -808,12 +976,17 @@ exports.updateTenantProfile = async (req, res) => {
       }
     }
   } catch (error) {
-    res.send("Error Get Tenants By ID");
-    console.log(error);
+    return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
   }
 };
+//  ############################# Task tenant ############################################################
+
+//  ############################# get all Tenant Attach File Start ############################################################
 exports.GettenantAttachEmailPhone = async (req, res) => {
+  // const { tenantID } = req.query; 
   const { tenantID } = req.query; 
+  // const { tenantID } = req.body; 
+
   try {
     const tenantAlternateEmailResult = await queryRunner(selectQuery("tenantalternateemail", "tenantID"), [
       tenantID,
@@ -822,7 +995,9 @@ exports.GettenantAttachEmailPhone = async (req, res) => {
       tenantID,
     ]);
       if (tenantAlternateEmailResult[0].length === 0 && tenantAlternatePhoneResult[0].length === 0) {
+        // throw new Error("No data Found in tenant attach file");
 return res.status(201).json({ Info: "No data found in tenant attach file" });
+
       }else{
         res.status(200).json({
           message: " Alternate get successful",
@@ -830,17 +1005,35 @@ return res.status(201).json({ Info: "No data found in tenant attach file" });
           Phone : tenantAlternatePhoneResult[0]
         });
       }
+
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+    return res.status(500).json({ message: "Error ", error: error.message });
   }
 };
+//  ############################# Add Tenant Attach File End ############################################################
+
+// const tenantAllPaidInvoiceResult = await queryRunner(
+  //   checkMyAllTenantsInvoicePaidQuerytenant,
+  //   [tenantID]
+  // );
+  // console.log(tenantAllPaidInvoiceResult[0].length);
+  // No un-paid invoices found, update tenant account
+  // if (tenantAllPaidInvoiceResult[0].length > 0) {
+  //   res.status(200).json({
+  //     message: "Tenant Invoice is pending Kindly Paid invoice ",
+  //   });
+  // }
+//  ############################# Check unpaid invoices Start ############################################################
 exports.checkUnpaidInvoices = async (req, res) => {
   const {tenants} = req.query;
+  // const {tenants} = req.body;
+  // console.log(tenants);
+  // tenants is in array form
   try {
     const allResults = []; 
     for (let i = 0; i < tenants.length; i++) {
       const ID = tenants[i];
+      // console.log(ID)
       var checkUnpaidInvoicesResult = await queryRunner(checkUpaidInvoiceQuery, [tenants[i]]);
       console.log(checkUnpaidInvoicesResult)
       if (checkUnpaidInvoicesResult[0].length === 0) {
@@ -858,13 +1051,19 @@ exports.checkUnpaidInvoices = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error: " + error.message);
-    res.status(400).send("Error: " + error.message);
+    return res.status(500).json({ message: "Error ", error: error.message });
+
   }
 };
+
+
+//  ############################# Check unpaid invoices End ############################################################
+
+//  ############################# Delete All Tenant Start ############################################################
 exports.allTenantDelete = async (req, res) => {
   try {
     let { id } = req.body;
+   
   for(let i = 0; i < id.length; i++ ){
    const tenantID = id[i];
     const tenantResult = await queryRunner(selectQuery("tenants", "id"), [
@@ -885,12 +1084,14 @@ exports.allTenantDelete = async (req, res) => {
         const tenantimages = tenantCheckResult[0].map(
           (image) => image.fileName
         );
+        // delete folder images
         imageToDelete(tenantimages);
         const tenantFileDeleteresult = await queryRunner(
           deleteQuery("tenantattachfiles", "tenantID"),
           [tenantID]
         );
       }
+
       const tenantAdditionalEmailCheckResult = await queryRunner(
         selectQuery("tenantalternateemail", "tenantID"),
         [tenantID]
@@ -911,6 +1112,7 @@ exports.allTenantDelete = async (req, res) => {
           [tenantID]
         );
       }
+
       const tenantIncreaseRentCheckResult = await queryRunner(
         selectQuery("tenantincreaserent", "tenantID"),
         [tenantID]
@@ -936,10 +1138,14 @@ exports.allTenantDelete = async (req, res) => {
     console.log(error);
     res.status(400).json({
       message:"Error from delete tenants ",
-      error
+      error:error.message
   });
   }
 };
+//  ############################# Delete All Tenant End ############################################################
+
+
+//  #############################  Tenant status CP Start ############################################################
 exports.TenantStatusCP = async (req, res) => {
   try {
     let { startDate, endDate } = req.params;
@@ -971,16 +1177,24 @@ exports.TenantStatusCP = async (req, res) => {
     console.log(error);
     res.status(400).json({
       message:"Error tenants Dashboard ",
-      error
+      error : error.message
   });
   }
 };
+//  ############################# Tenant status CP End ############################################################
+
+
+
+
+//  ############################# Tenant Check mail Start ############################################################
 exports.checkEmailTenants = async function (req, res) {
   const { email } = req.query;
+  // const { email } = req.body;
   try {
     const selectResult = await queryRunner(selectQuery("tenants","email"), [ 
       email,
   ]);
+
     if (selectResult[0].length > 0 ) {
       return res.status(201).json({
           message: "Email already exists ",
@@ -997,3 +1211,6 @@ exports.checkEmailTenants = async function (req, res) {
     });
   }
 };
+//  ############################# Tenant Check mail End ############################################################
+
+

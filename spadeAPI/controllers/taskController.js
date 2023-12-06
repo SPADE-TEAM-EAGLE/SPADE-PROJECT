@@ -30,6 +30,8 @@ const {
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
+
+//  #############################  ADD VENDOR ##################################################
 exports.addVendors = async (req, res) => {
   const {
     firstName,
@@ -45,6 +47,7 @@ exports.addVendors = async (req, res) => {
     categoryID,
   } = req.body;
   const { userId } = req.user;
+  // console.log(userId)
   try {
     const vendorCheckResult = await queryRunner(
       selectQuery("vendor", "email", "landlordID"),
@@ -53,6 +56,7 @@ exports.addVendors = async (req, res) => {
     if (vendorCheckResult[0].length > 0) {
       return res.send("Vendor already exists");
     } else {
+      // console.log(userId)
       const vendorResult = await queryRunner(addVendor, [
         firstName,
         lastName,
@@ -71,14 +75,18 @@ exports.addVendors = async (req, res) => {
         return res.status(400).send("Error1");
       }
     }
+
     res.status(200).json({
       message: " Vendor created successful",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+
 exports.updateVendor = async (req, res) => {
   const {
     vendId,
@@ -95,6 +103,7 @@ exports.updateVendor = async (req, res) => {
     categoryID,
   } = req.body;
   const { userId } = req.user;
+  // console.log(userId)
   try {
     const updateVendorResult = await queryRunner(updateVendor, [
       firstName,
@@ -120,10 +129,13 @@ exports.updateVendor = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+// delete vendor by id
 exports.deleteVendor = async (req, res) => {
     try {
       const { vendorID } = req.params;
@@ -141,14 +153,21 @@ exports.deleteVendor = async (req, res) => {
         });
       }     
     } catch (error) {
-      console.log(error);
-      res.status(400).send(error);
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
     }
 }
+//  #############################  ADD VENDOR ENDS HERE ##################################################
+
+//  #############################  All VENDOR Start HERE ##################################################
 exports.getAllVendors = async (req, res) => {
   const { userId, userName } = req.user;
+  // console.log(userId)
   try {
     const getVendorAPI = await queryRunner(getVendors, [userId]);
+    // console.log(getVendorAPI)
     if (getVendorAPI[0].length > 0) {
       res.status(200).json({
         data: getVendorAPI,
@@ -168,6 +187,10 @@ exports.getAllVendors = async (req, res) => {
     });
   }
 };
+//  #############################  All VENDOR ENDS HERE ##################################################
+
+
+//  #############################  ADD TASK Start HERE ##################################################
 exports.addTasks = async (req, res) => {
   const {
     task,
@@ -180,11 +203,18 @@ exports.addTasks = async (req, res) => {
     notifyTenant,
     notifyVendor,
     images,
+
+    // created_at,
+    // created_by,
   } = req.body;
+  // console.log(req.body);
   const vendorID = assignee;
   const { userId, userName,taskEmail } = req.user;
+  // const { userId, userName,taskEmail } = req.body;
+
   const currentDate = new Date();
   try {
+    // console.log(1);
     const addTasksCheckResult = await queryRunner(
       selectQuery("task", "taskName", "tenantID"),
       [task, property]
@@ -192,6 +222,7 @@ exports.addTasks = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
+      // taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID
       const TasksResult = await queryRunner(addTasksQuery, [
         task,
         property,
@@ -208,7 +239,9 @@ exports.addTasks = async (req, res) => {
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
       }
+      // else {
         const tasksID = TasksResult[0].insertId;
+        // for task id
         const taskCountIdResult = await queryRunner(taskCountId, [userId]);
         let customTaskId = taskCountIdResult[0][0].count + 1;
         customTaskId = task+customTaskId;
@@ -222,11 +255,13 @@ exports.addTasks = async (req, res) => {
           image_url,
           image_key,
         ]);
+        // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
       }
     }
+      //   //  add vendor
       for (let i = 0; i < vendorID.length; i++) {
         const Vendorid = vendorID[i];
         const vendorResults = await queryRunner(addVendorList, [
@@ -237,6 +272,7 @@ exports.addTasks = async (req, res) => {
           return res.send("Error2");
         }
       }
+      // get data from database for email send
       const tenantLandlordResult = await queryRunner(getLandlordTenant, [
         userId,
         property,
@@ -260,6 +296,7 @@ exports.addTasks = async (req, res) => {
           return res.send("Vendor not found");
         }
       }
+      // console.log(tenantLandlordResult[0])
       const tenantName =
         tenantLandlordResult[0][0].firstName +
         " " +
@@ -271,7 +308,9 @@ exports.addTasks = async (req, res) => {
         " " +
         tenantLandlordResult[0][0].LastName;
       const landlordContact = tenantLandlordResult[0][0].Phone;
+
       const vendorNames = vendorNamearr.toString();
+
       if (notifyTenant.toLowerCase() === "yes") {
       await taskSendMail(
         tenantName,
@@ -290,6 +329,7 @@ exports.addTasks = async (req, res) => {
       }
       if (notifyVendor.toLowerCase() === "yes") {
       for (let i = 0; i < vendorEmailarr.length > 0; i++) {
+        // console.log("vendor2");
         await taskSendMail(
           tenantName,
           "Property Maintenance: " + task,
@@ -310,13 +350,21 @@ exports.addTasks = async (req, res) => {
     return res.send("Created");
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+//  #############################  ADD TASK ENDS HERE ##################################################
+
+//  ############################# Get ALL Task Start ############################################################
 exports.getAllTask = async (req, res) => {
   const { userId } = req.user;
+  // const { userId } = req.user;
   try {
     const allTaskResult = await queryRunner(Alltasks, [userId]);
+
     if (allTaskResult.length > 0) {
       for (let i = 0; i < allTaskResult[0].length; i++) {
         const taskID = allTaskResult[0][i].id;
@@ -325,11 +373,14 @@ exports.getAllTask = async (req, res) => {
           [taskID]
         );
         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
+
         const vendorData = [];
+
         for (let j = 0; j < vendorIDs.length; j++) {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vendorIDs[j],
           ]);
+
           if (vendorResult[0].length > 0) {
             const vendor = {
               ID: vendorResult[0][0].id,
@@ -345,6 +396,7 @@ exports.getAllTask = async (req, res) => {
         }
         allTaskResult[0][i].AssignTo = vendorData;
       }
+      // console.log(allTaskResult)
       res.status(200).json({
         data: allTaskResult,
         message: "All Tasks",
@@ -355,10 +407,15 @@ exports.getAllTask = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
+//  ############################# Get ALL Task End ############################################################
+
+//  ############################# Task By ID Start ############################################################
 exports.taskByID = async (req, res) => {
   const { Id } = req.body;
   try {
@@ -423,12 +480,19 @@ exports.taskByID = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks");
+    return res.status(500).json({
+      message: "Error Get Tasks",
+      error: error.message,
+  });  
   }
 };
+
+//  ############################# Task By ID End ############################################################
+
+//  ############################# Get vendor category End ############################################################
 exports.getVendorCategory = async (req, res) => {
   try {
+    // const landlordID = req.userid;
     const { userId } = req.user;
     const categoryResult = await queryRunner(
       selectQuery("vendorcategory", "landLordId"),
@@ -445,13 +509,21 @@ exports.getVendorCategory = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get category ");
+    return res.status(500).json({
+      message: "Error Get category ",
+      error: error.message,
+  });
     console.log(error);
   }
 };
+//  ############################# Get vendor category End ############################################################
+
+//  #############################  Task Assign to Start HERE ##################################################
+
 exports.getVendorAssignTo = async (req, res) => {
   try {
     const { userId, userName } = req.user;
+    // const {userId}=req.body
     const vendorResult = await queryRunner(
       selectQuery("vendor", "LandlordID"),
       [userId]
@@ -468,24 +540,33 @@ exports.getVendorAssignTo = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get vendor list ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get vendor list ",
+      error: error.message,
+  });
+
   }
 };
+//  #############################  Task Assign to ENDS HERE ##################################################
+
+//  #############################  Update TASK Start HERE ##################################################
 exports.updateTasks = async (req, res) => {
   const {
     property,
     taskName,
+    // assignee,
     taskID,
     dueDate,
     status,
     priority,
+    // notes,
     assignee,
     notifyTenant,
     notifyVendor,
     message,
     images,
   } = req.body;
+
   try {
     const currentDate = new Date();
     const { userId,taskEmail } = req.user;
@@ -502,25 +583,34 @@ exports.updateTasks = async (req, res) => {
       taskID,
     ]);
     if (TasksResult[0].affectedRows === 0) {
+      // throw new Error("data doesn't inserted in task table");
       res.send("Error1");
     }
     const propertycheckresult = await queryRunner(
       selectQuery("taskimages", "taskID"),
       [taskID]
     );
+    // images working code start here
+    // console.log(propertycheckresult[0]);
     if (propertycheckresult[0].length > 0) {
       const propertyImageKeys = propertycheckresult[0].map(
         (image) => image.ImageKey
       );
+      // console.log("images" ,images)
+      // console.log(propertyImageKeys);
+      // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = propertycheckresult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
       );
+      // Delete images from S3
+      // console.log(imagesToDelete);
       for (let i = 0; i < imagesToDelete.length; i++) {
         deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageForTaskImages, [
           imagesToDelete[i].ImageKey,
         ]);
       }
+      // Find the images to insert into the database (present in images but not in propertycheckresult)
       const imagesToInsert = images.filter(
         (image) => !propertyImageKeys.includes(image.imageKey)
       );
@@ -532,6 +622,7 @@ exports.updateTasks = async (req, res) => {
           image_url,
           image_key,
         ]);
+        // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
@@ -540,11 +631,14 @@ exports.updateTasks = async (req, res) => {
       for (let i = 0; i < images.length - 1; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
+        // console.log(taskID, image_url, image_key);
+
         const propertyImageResult = await queryRunner(insertInTaskImage, [
           taskID,
           image_url,
           image_key,
         ]);
+        // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
         }
@@ -567,10 +661,12 @@ exports.updateTasks = async (req, res) => {
     }
     console.log( "asdcfrtgh" + property);
     console.log( "frfrf" + userId);
+    // // Email Send
     const tenantLandlordResult = await queryRunner(getLandlordTenant, [
       userId,
       property,
     ]);
+    // console.log(tenantLandlordResult)
     let vendorEmailarr = [];
     let vendorNamearr = [];
     for (let i = 0; i < vendorID.length; i++) {
@@ -601,7 +697,10 @@ exports.updateTasks = async (req, res) => {
       tenantLandlordResult[0][0].LastName;
     const landlordContact = tenantLandlordResult[0][0].Phone;
     const landlordEmail = tenantLandlordResult[0][0].Email;
+
     const vendorNames = vendorNamearr.toString();
+
+    // if (notifyTenant.toLowerCase() === "yes") {
     await taskSendMail(
       tenantName,
       "Property Maintenance: " + taskName,
@@ -616,6 +715,8 @@ exports.updateTasks = async (req, res) => {
       tenantEmail,
       taskEmail
     );
+    // }
+    // if (notifyVendor.toLowerCase() === "yes") {
     for (let i = 0; i < vendorEmailarr.length > 0; i++) {
       console.log("vendor2");
       await taskSendMail(
@@ -632,6 +733,7 @@ exports.updateTasks = async (req, res) => {
         vendorEmailarr[i],
         taskEmail
       );
+      // }
     }
     return res.status(200).json({
       message: " task updated successful ",
@@ -643,6 +745,10 @@ exports.updateTasks = async (req, res) => {
     });
   }
 };
+//  #############################  Update TASK ENDS HERE ##################################################
+
+//  #############################  Delete Task Start HERE ##################################################
+
 exports.deleteTask = async (req, res) => {
   try {
     const { taskID } = req.body;
@@ -651,6 +757,7 @@ exports.deleteTask = async (req, res) => {
     ]);
     if (deleteTaskResult[0].affectedRows > 0) {
       res.status(200).json({
+        // data: vendorResult[0],
         message: "task Deleted Successful",
       });
     } else {
@@ -659,29 +766,97 @@ exports.deleteTask = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get delete task  ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get delete task",
+      error: error.message,
+  });
+
   }
 };
+//  #############################  Delete Task ENDS HERE ##################################################
+
+// add vendor category
+// exports.addVendorCategory = async (req, res) => {
+//   const categories = req.body;
+//   const { userId } = req.user;
+//   try {
+//     const categoryCheckResult = await queryRunner(
+//       selectQuery("vendorcategory", "landLordId"),
+//       [userId]
+//     );
+//     const existingCategories = categoryCheckResult[0];
+
+//     // Prepare arrays for updates and insertions
+//     const categoriesToDelete = [];
+//     const categoriesToInsert = [];
+
+//     for (const obj1 of existingCategories) {
+//       // Check if there's a corresponding object in array2 with the same properties
+//       const obj2 = categories.find((obj) => obj.category.toLowerCase() === obj1.category.toLowerCase());
+//       if (!obj2) {
+//         await queryRunner(
+//           deleteQuery("vendorcategory", "id"),
+//           [obj1.id]
+//         );
+//       }
+//     }
+
+//     for (const obj1 of categories) {
+//       // Check if there's a corresponding object in existingCategories with the same properties
+//       const obj2 = existingCategories.find((obj) => obj.category.toLowerCase() === obj1.category.toLowerCase());
+
+//       if (!obj2) {
+//         // Insert the category and get the inserted ID
+//         const insertedCategory = await queryRunner(addVendorCategory, [
+//           obj1.category.toLowerCase(),
+//           userId,
+//         ]);
+
+//         categoriesToInsert.push(insertedCategory);
+//       }
+//     }
+
+//     res.status(200).json({
+//       message: "Categories added/updated successfully",
+//       insertedCategories: categoriesToInsert, // Include inserted IDs in the response
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).send(error);
+//   }
+// };
+
+
+// add vendor category 19/9/23
+// const { queryRunner } = require('your-query-runner-library'); // Import your queryRunner library here
+
 exports.addVendorCategory = async (req, res) => {
   const categories = req.body;
+ 
+
+
   const { userId } = req.user;
+  // const { userId } = req.body;
   let insertedId;
+
   try {
     const categoryCheckResult = await queryRunner(selectQuery("vendorcategory", "landLordId"), [userId]);
     const existingCategories = categoryCheckResult[0];
+
     if (!Array.isArray(categories)) {
       console.log("fsdjksdjfksdfksdkjsdkjfksdjjsdfsdjsd")
       console.log(categories);
       const categoryToInsert = existingCategories.find(category => 
         category.categories && category.categories.toLowerCase() === categories.categories.toLowerCase()
       );
+
       if (!categoryToInsert) {
         insertedId = await queryRunner(addVendorCategory, [
           categories.categories.toLowerCase(),
           userId,
         ]);
         console.log(insertedId[0]?.insertId);
+
         res.status(200).json({
           message: "Categories added/updated successfully",
           categoryID: insertedId[0]?.insertId,
@@ -693,11 +868,13 @@ exports.addVendorCategory = async (req, res) => {
         });
       }
     } else if (Array.isArray(categories)) {
+      
       const categoryToInsert = categories.filter(category => 
         !existingCategories.some(existingCategory =>
           existingCategory.category && existingCategory.category.toLowerCase() === category.category.toLowerCase()
         )
       );
+
       const categoryToDelete = existingCategories.filter(existingCategory => 
         !categories.some(category =>
           category.category && category.category.toLowerCase() === existingCategory.category.toLowerCase()
@@ -710,6 +887,8 @@ exports.addVendorCategory = async (req, res) => {
             })
           );
       if (categoryCheckResult[0].length !== 0) {
+        
+
         await Promise.all(
           categoryToDelete.map(async (item) => {
             console.log(item);
@@ -717,37 +896,59 @@ exports.addVendorCategory = async (req, res) => {
           })
         );
       }
+
       res.status(200).json({
         message: "Categories added/updated successfully",
       });
     }
   } catch (error) {
-    console.error(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Error",
+      error: error.message,
+  });
   }
 };
+
+
+
+
+
+
+
+// ####################################### Task Count ################################################
+
 exports.taskCount = async (req, res) => {
   try {
+    // const { userId } = req.user;
     const { userId } = req.user;
     const { startDate, endDate } = req.body;
+    // console.log("2");
     const taskCountResult = await queryRunner(taskCount, [
       userId,
       startDate,
       endDate,
     ]);
+    // console.log("3");
+
     res.status(200).json({
       data: taskCountResult,
     });
+    // }
   } catch (error) {
     res.status(400).json({
       message: error.message,
     });
   }
 };
+// ####################################### Task Count ################################################
+
+//  ############################# Get ALL Task Start ############################################################
 exports.getAllTaskTenantRequest = async (req, res) => {
+  // const { userId } = req.body;
   const { userId } = req.user;
   try {
     const allTaskResult = await queryRunner(AlltasksTenantsLandlord, [userId]);
+
     if (allTaskResult.length > 0) {
       for (let i = 0; i < allTaskResult[0].length; i++) {
         const taskID = allTaskResult[0][i].id;
@@ -756,11 +957,14 @@ exports.getAllTaskTenantRequest = async (req, res) => {
           [taskID]
         );
         const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
+
         const vendorData = [];
+
         for (let j = 0; j < vendorIDs.length; j++) {
           const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
             vendorIDs[j],
           ]);
+
           if (vendorResult[0].length > 0) {
             const vendor = {
               ID: vendorResult[0][0].id,
@@ -776,6 +980,7 @@ exports.getAllTaskTenantRequest = async (req, res) => {
         }
         allTaskResult[0][i].AssignTo = vendorData;
       }
+      // console.log(allTaskResult)
       res.status(200).json({
         data: allTaskResult,
         message: "All Tasks",
@@ -786,16 +991,27 @@ exports.getAllTaskTenantRequest = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Error Get task",
+      error: error.message,
+  });
+
   }
 };
+//  ############################# Get ALL Task End ############################################################
+
+
+
+
+
+//  ############################# Get ALL Task End ############################################################
 exports.VendorCheckEmail = async function (req, res) {
   const { email } = req.params;
   try {
     const selectResult = await queryRunner(selectQuery("vendor","email"), [ 
       email,
   ]);
+
     if (selectResult[0].length > 0) {
       return res.status(201).json({
           message: "Email already exists ",

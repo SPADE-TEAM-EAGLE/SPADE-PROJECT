@@ -1,5 +1,8 @@
 const { createLead } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
+
+
+
 const leadsClt = {
     createNewLead: async (req, res) => {
         try {
@@ -39,5 +42,7 @@ const leadsClt = {
             })
         }
     },
+
 }
+
 module.exports = leadsClt;
