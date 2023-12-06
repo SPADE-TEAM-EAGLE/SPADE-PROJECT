@@ -1,8 +1,8 @@
 const { google } = require('googleapis');
-// const dotenv = require('dotenv');
+
 const nodemailer=require('nodemailer')
-// const constants=require('../../constants')
-// dotenv.config()
+
+
 const constants=process.env
 const OAuth2 = google.auth.OAuth2;
 exports.createTransporter = async () => {

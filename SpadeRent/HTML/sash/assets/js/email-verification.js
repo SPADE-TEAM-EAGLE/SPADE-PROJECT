@@ -1,10 +1,10 @@
 //js code
-// $("#save-email").addClass("disabled")
+
 let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
         email_verify_password.addEventListener('keyup', confirmPasswordValidation1_verify);
-        // var spantag11 = document.getElementById("passnotmatch1");
+
 
         function confirmPasswordValidation1_verify() {
 
@@ -52,7 +52,7 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+
         }
     });
     $.ajax({
@@ -83,7 +83,7 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+
         }
     });
     $("#modaldemo00").on("hidden.bs.modal", () => {
@@ -138,15 +138,15 @@ $(document).ready(function () {
                 },
             });
         }
-        // if ($("#user-email").val() !== userEmail) {
-        //     $("#save-email").removeClass("disabled")
-        // } else {
-        //     $("#save-email").addClass("disabled")
-        // }
+
+
+
+
+
     })
     $(document).on("click", "#save-email", () => {
         emailChange = true
-        // console.log(id)
+
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
             type: 'PUT',
@@ -163,7 +163,7 @@ $(document).ready(function () {
                 $("#save-email").addClass("d-none")
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
+
                 console.error(xhr.responseText);
             }
         });
@@ -182,7 +182,7 @@ $(document).ready(function () {
                 $("#modaldemo8").modal("show")
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
+
                 console.error(xhr.responseText);
             }
         });
@@ -207,15 +207,15 @@ $(document).ready(function () {
                     $("#succesModal_verify").modal("show")
                     $("#account-text").empty()
                     $("#email_verification").remove()
-                    //   window.location="./index.html"
+
                 } else if (response.message == " token code is not match ") {
-                    // $("#modaldemo8").modal("hide")
-                    //   $("#info-text").text(response.message || response)
+
+
                     $("#infoModal_verify").modal("show")
                 }
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
+
                 document.getElementById("verification-spans").style.display = "block";
                 $("#verification").addClass("is-invalid")
                 console.error(xhr.responseText);

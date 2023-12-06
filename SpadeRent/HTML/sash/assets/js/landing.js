@@ -1,15 +1,15 @@
 (function ($) {
   "use strict";
 
-  // PAGE LOADING
+
   $(window).on("load", function (e) {
     $("#global-loader").fadeOut("slow");
   });
 
-  // CARD
+
   const DIV_CARD = "div.card";
 
-  // FUNCTIONS FOR COLLAPSED CARD
+
   $(document).on("click", '[data-bs-toggle="card-collapse"]', function (e) {
     let $card = $(this).closest(DIV_CARD);
     $card.toggleClass("card-collapsed");
@@ -17,7 +17,7 @@
     return false;
   });
 
-  // BACK TO TOP BUTTON
+
   $(window).on("scroll", function (e) {
     if ($(this).scrollTop() > 0) {
       $("#back-to-top").fadeIn("slow");
@@ -91,7 +91,7 @@
     }
   });
 
-  // RTL STYLE START
+
   $("#myonoffswitch24").on("click", function () {
     if (this.checked) {
       $("body").addClass("rtl");
@@ -107,7 +107,7 @@
         );
       var carousel = $(".owl-carousel");
       $.each(carousel, function (index, element) {
-        // element == this
+
         var carouselData = $(element).data("owl.carousel");
         carouselData.settings.rtl = true; //don't know if both are necessary
         carouselData.options.rtl = true;
@@ -118,9 +118,9 @@
     }
   });
 
-  // RTL STYLE END
 
-  // LTR STYLE START
+
+
   $("#myonoffswitch23").on("click", function () {
     if (this.checked) {
       $("body").addClass("ltr");
@@ -136,7 +136,7 @@
         );
       var carousel = $(".owl-carousel");
       $.each(carousel, function (index, element) {
-        // element == this
+
         var carouselData = $(element).data("owl.carousel");
         carouselData.settings.rtl = false; //don't know if both are necessary
         carouselData.options.rtl = false;
@@ -146,9 +146,9 @@
       localStorage.removeItem("sashrtl");
     }
   });
-  // LTR STYLE END
 
-  // LIGHT THEME START
+
+
   $(document).on("click", "#myonoffswitch1", function () {
     if (this.checked) {
       $("body").removeClass("dark-mode");
@@ -158,9 +158,9 @@
       localStorage.removeItem("sashdarkMode");
     }
   });
-  // LIGHT THEME END
 
-  // DARK THEME START
+
+
   $(document).on("click", "#myonoffswitch2", function () {
     if (this.checked) {
       $("body").addClass("dark-mode");
@@ -171,7 +171,7 @@
       localStorage.setItem("sashdarkMode", true);
     }
   });
-  // DARK THEME END
+
 
 
   function landingPageLocalstorage() {
@@ -199,7 +199,7 @@
       );
     var carousel = $(".owl-carousel");
     $.each(carousel, function (index, element) {
-      // element == this
+
       var carouselData = $(element).data("owl.carousel");
       carouselData.settings.rtl = true; //don't know if both are necessary
       carouselData.options.rtl = true;
@@ -225,7 +225,7 @@
   
 })(jQuery);
 
-// FOOTER
+
 document.getElementById("year").innerHTML = new Date().getFullYear();
 
 window.addEventListener("scroll", reveal);
@@ -238,7 +238,7 @@ function reveal() {
     var cardTop = reveals[i].getBoundingClientRect().top;
     var cardRevealPoint = 150;
 
-    //   console.log('condition', windowHeight - cardRevealPoint)
+
 
     if (cardTop < windowHeight - cardRevealPoint) {
       reveals[i].classList.add("active");
@@ -250,7 +250,7 @@ function reveal() {
 
 reveal();
 
-// ==== for menu scroll
+
 const pageLink = document.querySelectorAll(".side-menu__item");
 
 pageLink.forEach((elem) => {
@@ -263,7 +263,7 @@ pageLink.forEach((elem) => {
   });
 });
 
-// section menu active
+
 function onScroll(event) {
   const sections = document.querySelectorAll(".side-menu__item");
   const scrollPos =
@@ -300,7 +300,7 @@ jQuery(".demo-icon").click(function () {
   }
 });
 
-// RESET SWITCHER TO DEFAULT
+
 function resetData() {
     $('#myonoffswitch23').prop('checked', true);
     $('#myonoffswitch1').prop('checked', true);
@@ -312,7 +312,7 @@ function resetData() {
     (document.getElementById("style").setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.min.css"));
     var carousel = $('.owl-carousel');
     $.each(carousel, function (index, element) {
-        // element == this
+
         var carouselData = $(element).data('owl.carousel');
         carouselData.settings.rtl = false; //don't know if both are necessary
         carouselData.options.rtl = false;

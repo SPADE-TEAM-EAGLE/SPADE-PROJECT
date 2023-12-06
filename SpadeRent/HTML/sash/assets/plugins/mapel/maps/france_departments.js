@@ -14,13 +14,13 @@
  */
 (function (factory) {
     if (typeof exports === 'object') {
-        // CommonJS
+
         module.exports = factory(require('jquery'), require('jquery-mapael'));
     } else if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
+
         define(['jquery', 'mapael'], factory);
     } else {
-        // Browser globals
+
         factory(jQuery, jQuery.mapael);
     }
 }(function ($, Mapael) {
@@ -38,7 +38,7 @@
                             yoffset,
                             x,
                             y;
-                        // Corse
+
                         if (lat < 43.15710 && lon > 8.17199) {
                             xfactor = 43.64246;
                             xoffset = 181.34520;

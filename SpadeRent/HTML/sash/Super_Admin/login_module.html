@@ -417,7 +417,7 @@ togglePassword1.addEventListener("click", function (e) {
   });
   function handleSignInResponse(response) {
     if (response.message == "SignIn Successful") {
-      // Handle successful sign-in
+
       $("#login-email").addClass("is-valid").removeClass("is-invalid")
             $("#id_password1").addClass("is-valid").removeClass("is-invalid")
             $("#myModal_success").modal("show");
@@ -427,13 +427,13 @@ togglePassword1.addEventListener("click", function (e) {
                     window.location = "../Super_Admin/index.html";
                   }, 2000);
     } else if (response.message == "Admin is not found") {
-      // Handle admin not found
+
       $("#pass_span").hide()
             $("#login-email").addClass("is-invalid").removeClass("is-valid")
             $("#id_password1").removeClass("is-invalid").removeClass("is-valid")
             $("#email_span").show()
     } else if (response.message == "Incorrect Password") {
-      // Handle incorrect password
+
       $("#email_span").hide()
               $("#login-email").addClass("is-valid").removeClass("is-invalid")
               $("#id_password1").addClass("is-invalid").removeClass("is-valid")

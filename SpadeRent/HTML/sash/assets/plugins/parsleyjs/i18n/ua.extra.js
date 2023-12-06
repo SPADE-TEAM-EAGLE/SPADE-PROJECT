@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('ua', {
   dateiso:  "Це значення повинно бути коректною датою (РРРР-ММ-ДД).",
   minwords: "Це значення повинно містити не менше %s слів.",

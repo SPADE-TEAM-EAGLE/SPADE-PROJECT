@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('sq', {
   defaultMessage: "Kjo vlere eshte e pasakte.",
   type: {

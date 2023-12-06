@@ -6,7 +6,7 @@
  */
 (function ($) {
     'use strict';
-    // it only does '%s', and return '' when arguments are undefined
+
     var sprintf = function (str) {
         var args = arguments,
             flag = true,
@@ -117,19 +117,19 @@
         var that = this,
             name = $el.attr('name') || options.name || '';
         this.options = options;
-        // hide select element
+
         this.$el = $el.hide();
-        // label element
+
         this.$label = this.$el.closest('label');
         if (this.$label.length === 0 && this.$el.attr('id')) {
             this.$label = $(sprintf('label[for="%s"]', this.$el.attr('id').replace(/:/g, '\\:')));
         }
-        // restore class and title from select element
+
         this.$parent = $(sprintf(
             '<div class="ms-parent %s" %s/>',
             $el.attr('class') || '',
             sprintf('title="%s"', $el.attr('title'))));
-        // add placeholder to choice button
+
         this.$choice = $(sprintf([
                 '<button type="button" class="ms-choice">',
                 '<span class="placeholder">%s</span>',
@@ -137,7 +137,7 @@
                 '</button>'
             ].join(''),
             this.options.placeholder));
-        // default position is bottom
+
         this.$drop = $(sprintf('<div class="ms-drop %s"%s></div>',
             this.options.position,
             sprintf(' style="width: %s"', this.options.dropWidth)));
@@ -294,13 +294,13 @@
                 }
             });
             this.$searchInput.off('keydown').on('keydown',function (e) {
-                // Ensure shift-tab causes lost focus from filter as with clicking away
+
                 if (e.keyCode === 9 && e.shiftKey) {
                     that.close();
                 }
             }).off('keyup').on('keyup', function (e) {
-                // enter or space
-                // Avoid selecting/deselecting if no choices made
+
+
                 if (that.options.filterAcceptOnEnter && (e.which === 13 || e.which == 32) && that.$searchInput.val()) {
                     that.$selectAll.click();
                     that.close();
@@ -367,10 +367,10 @@
             this.options.isOpen = true;
             this.$choice.find('>div').addClass('open');
             this.$drop[this.animateMethod('show')]();
-            // fix filter bug: no results show
+
             this.$selectAll.parent().show();
             this.$noResults.hide();
-            // Fix #77: 'All selected' when no options
+
             if (!this.$el.children().length) {
                 this.$selectAll.parent().hide();
                 this.$noResults.show();
@@ -437,14 +437,14 @@
             if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
             }
-            // set selects to select
+
             this.$el.val(this.getSelects()).trigger('change');
-            // add selected class to selected li
+
             this.$drop.find('li').removeClass('selected');
             this.$drop.find('input:checked').each(function () {
                 $(this).parents('li').first().addClass('selected');
             });
-            // trigger <select> change event
+
             if (!isInit) {
                 this.$el.trigger('change');
             }

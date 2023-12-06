@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 const { queryRunner } = require("../helper/queryRunner");
 const { selectQuery, userPermissionProtected, userPermissionAuth, countTenantQuery, adminPermissionQuery } = require("../constants/queries");
-// const { decryptJwtToken } = require("../helper/EnccryptDecryptToken");
+
 const config = process.env;
 const verifyToken = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
       const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
       console.log("Token ID "+decoded.UserPermissionID);
       const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
-      // console.log(result[0][0])
+
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0].llnalordId]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0].PlanID]);
       console.log("result[0][0].PlanID");
@@ -37,8 +37,8 @@ const verifyToken = async (req, res, next) => {
         return resultObject;
       } 
       
-      // Example usage for different fields
-      // const id = result[0][0].id;
+
+
       const role = result[0][0].Urole;
       const llDashboard = splitAndConvertToObject(result[0][0].llDashboard);
       const properties = splitAndConvertToObject(result[0][0].properties);
@@ -66,18 +66,18 @@ const verifyToken = async (req, res, next) => {
       const planProspects = splitAndConvertToObject(planCountResult[0][0].prospect);
       const planNNN = splitAndConvertToObject(planCountResult[0][0].NNN);
       
-      // console.log(result[0][0])
+
       if(futurePlanId[0]?.length!=0){
         
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
 
-// Get the current date
+
 const currentDate = new Date();
 
-// Calculate the time difference in milliseconds
+
 const timeDifference = targetDate - currentDate;
 
-// Convert the time difference to days
+
 const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 req.user = {
   email: decoded.email,
@@ -217,20 +217,20 @@ req.user = {
       const futurePlanId=await queryRunner(selectQuery("futurePlanUser", "landlordId"),[result[0][0]?.id]);
       const planCountResult=await queryRunner(selectQuery("plan", "id"),[result[0][0]?.PlanID]);
       const countTenantResult=await queryRunner(countTenantQuery,[result[0][0]?.id]);
-      // console.log(planCountResult[0]);
+
       if(futurePlanId[0]?.length!=0){
         
         const targetDate = new Date(futurePlanId[0][futurePlanId[0].length-1].fsubscriptionCreated_at);
 
-// Get the current date
+
 const currentDate = new Date();
 
-// Calculate the time difference in milliseconds
+
 const timeDifference = targetDate - currentDate;
 
-// Convert the time difference to days
+
 const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-        // console.log(result[0][0].active);
+
         req.user = {
           email: decoded.email,
           userId: result[0][0].id,
@@ -265,7 +265,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
           create_at: result[0][0].created_at,
           futurePlanId:futurePlanId[0][futurePlanId[0].length-1].fplanId,
           daysRemaining:daysRemaining,
-          // countTenantResult planCountResult
+
           totalTenantAllow : planCountResult[0][0].totalTenants,
       totalTenantHave : countTenantResult[0][0].totalTenant,
       planInvoice : planCountResult[0][0].invoice,
@@ -279,8 +279,8 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   
         };
       }else{
-        // console.log(futurePlanId[0][futurePlanId[0].length-1]);
-      // console.log(result[0][0].active);
+
+
       req.user = {
         email: decoded.email,
         userId: result[0][0].id,
@@ -315,7 +315,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
         create_at: result[0][0].created_at,
         totalTenantHave : countTenantResult[0][0].totalTenant,
         totalTenantAllow : planCountResult[0][0].totalTenants,
-      // totalTenantHave : countTenantResult[0][0].totalTenant,
+
       planInvoice : planCountResult[0][0].invoice,
       planPortal : planCountResult[0][0].portal,
       planReporting : planCountResult[0][0].reporting,
@@ -328,7 +328,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
       }
       
       next();
-      // console.log("hello")
+
     } catch (err) {
       console.log(err);
       return res.status(400).send("Invalid Token");
@@ -336,7 +336,7 @@ const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   }
 };
 
-// sssssssssssssssssssssssssssssssss
+
 const verifyTokenTenant = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
@@ -412,7 +412,7 @@ const verifySuperAdmin = async (req, res, next) => {
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
 
-        // Example usage for different fields
+
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].userid;
         const overView = splitAndConvertToObject(selectResult[0][i].overView);

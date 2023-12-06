@@ -1,11 +1,11 @@
 (function ($) {
     "use strict";
 
-     // Preloader -------------------------------------*/
+
  $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
-// Email validation
+
 $(document).on('input', 'input[type="email"]', function () {
     var email = $(this).val();
     var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
@@ -20,18 +20,18 @@ $(document).on('input', 'input[type="email"]', function () {
     } 
 });
 
-    // PAGE LOADING
+
     $(window).on("load", function (e) {
         $("#global-loader").fadeOut("slow");
     })
 
-    // COLOR THEME
+
     $(document).on("click", "a[data-theme]", function () {
         $("head link#theme").attr("href", $(this).data("theme"));
         $(this).toggleClass('active').siblings().removeClass('active');
     });
 
-    // FULL SCREEN
+
     $(document).on("click", ".fullscreen-button", function toggleFullScreen() {
         $('.fullscreen-button').addClass('fullscreen-button');
         if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
@@ -58,7 +58,7 @@ $(document).on('input', 'input[type="email"]', function () {
         }
     })
 
-    // BACK TO TOP BUTTON
+
     $(window).on("scroll", function (e) {
         if ($(this).scrollTop() > 0) {
             $('#back-to-top').fadeIn('slow');
@@ -74,7 +74,7 @@ $(document).on('input', 'input[type="email"]', function () {
     });
 
 
-    // COVER IMAGE
+
     $(".cover-image").each(function () {
         var attr = $(this).attr('data-bs-image-src');
         if (typeof attr !== typeof undefined && attr !== false) {
@@ -82,7 +82,7 @@ $(document).on('input', 'input[type="email"]', function () {
         }
     });
 
-    // QUANTITY CART INCREASE AND DECREASE
+
         $('.add').on('click', function () {
             var $qty = $(this).closest('div').find('.qty');
             var currentVal = parseInt($qty.val());
@@ -98,7 +98,7 @@ $(document).on('input', 'input[type="email"]', function () {
             }
         });
 
-    // CHART CIRCLE
+
     if ($('.chart-circle').length) {
         $('.chart-circle').each(function () {
             let $this = $(this);
@@ -114,37 +114,37 @@ $(document).on('input', 'input[type="email"]', function () {
         });
     }
 
-    // MODAL
-    // SHOWING MODAL WITH EFFECT
+
+
     $('.modal-effect').on('click', function (e) {
         e.preventDefault();
         var effect = $(this).attr('data-bs-effect');
         $('#modaldemo8').addClass(effect);
     });
 
-    // HIDE MODAL WITH EFFECT
+
     $('#modaldemo8').on('hidden.bs.modal', function (e) {
         $(this).removeClass(function (index, className) {
             return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
         });
     });
 
-    // CARD
+
     const DIV_CARD = 'div.card';
 
-    // TOOLTIP
+
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
-    // POPOVER
+
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
     })
 
-    // BY DEFAULT, BOOTSTRAP DOESN'T AUTO CLOSE POPOVER AFTER APPEARING IN THE PAGE 
+
     $(document).on('click', function (e) {
         $('[data-toggle="popover"],[data-original-title]').each(function () {
             //the 'is' for buttons that trigger popups
@@ -156,7 +156,7 @@ $(document).on('input', 'input[type="email"]', function () {
         });
     });
 
-    // TOAST
+
     var toastElList = [].slice.call(document.querySelectorAll('.toast'))
     var toastList = toastElList.map(function (toastEl) {
         return new bootstrap.Toast(toastEl)
@@ -165,7 +165,7 @@ $(document).on('input', 'input[type="email"]', function () {
         $('.toast').toast('show');
     })
 
-    //  FUNCTION FOR REMOVE CARD
+
     $(document).on('click', '[data-bs-toggle="card-remove"]', function (e) {
         let $card = $(this).closest(DIV_CARD);
         $card.remove();
@@ -174,7 +174,7 @@ $(document).on('input', 'input[type="email"]', function () {
     });
 
 
-    // FUNCTIONS FOR COLLAPSED CARD
+
     $(document).on('click', '[data-bs-toggle="card-collapse"]', function (e) {
         let $card = $(this).closest(DIV_CARD);
         $card.toggleClass('card-collapsed');
@@ -182,7 +182,7 @@ $(document).on('input', 'input[type="email"]', function () {
         return false;
     });
 
-    // CARD FULL SCREEN
+
     $(document).on('click', '[data-bs-toggle="card-fullscreen"]', function (e) {
         let $card = $(this).closest(DIV_CARD);
         $card.toggleClass('card-fullscreen').removeClass('card-collapsed');
@@ -191,7 +191,7 @@ $(document).on('input', 'input[type="email"]', function () {
     });
 
 
-    // INPUT FILE BROWSER
+
     $(document).on('change', '.file-browserinput', function () {
         var input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -199,7 +199,7 @@ $(document).on('input', 'input[type="email"]', function () {
         input.trigger('fileselect', [numFiles, label]);
     }); // We can watch for our custom `fileselect` event like this
 
-    // FILE UPLOAD
+
     $('.file-browserinput').on('fileselect', function (event, numFiles, label) {
         var input = $(this).parents('.input-group').find(':text'),
             log = numFiles > 1 ? numFiles + ' files selected' : label;
@@ -212,7 +212,7 @@ $(document).on('input', 'input[type="email"]', function () {
 
 
 
-    // ______________ SWITCHER-toggle ______________//
+
 
 	$('.layout-setting').on("click", function(e) {
 		if (!(document.querySelector('body').classList.contains('dark-mode'))) {
@@ -256,7 +256,7 @@ $(document).on('input', 'input[type="email"]', function () {
 	});
 
 
-    // LIGHT THEME START
+
     $(document).on("click", '#myonoffswitch1', function () {
         if (this.checked) {
             $('body').addClass('light-mode');
@@ -272,10 +272,10 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body')?.removeClass('gradient-header');
             $('body')?.removeClass('dark-header');
 
-            // remove dark theme properties	
+
             localStorage.removeItem('sashdarkPrimary')
 
-            // remove light theme properties
+
             localStorage.removeItem('sashprimaryColor')
             localStorage.removeItem('sashprimaryHoverColor')
             localStorage.removeItem('sashprimaryBorderColor')
@@ -284,7 +284,7 @@ $(document).on('input', 'input[type="email"]', function () {
             document.querySelector('html').style.removeProperty('--primary-bg-border', localStorage.darkPrimary);
             document.querySelector('html').style.removeProperty('--dark-primary', localStorage.darkPrimary);
 
-            // removing dark theme properties
+
             localStorage.removeItem('sashdarkPrimary')
             localStorage.removeItem('sashtransparentBgColor');
             localStorage.removeItem('sashtransparentThemeColor');
@@ -308,9 +308,9 @@ $(document).on('input', 'input[type="email"]', function () {
         }
         localStorageBackup();
     });
-    // LIGHT THEME END
 
-    // DARK THEME START
+
+
     $(document).on("click", '#myonoffswitch2', function () {
         if (this.checked) {
             $('body').addClass('dark-mode');
@@ -327,7 +327,7 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body')?.removeClass('gradient-header');
             $('body')?.removeClass('header-light');
 
-            // remove light theme properties
+
             localStorage.removeItem('sashprimaryColor')
             localStorage.removeItem('sashprimaryHoverColor')
             localStorage.removeItem('sashprimaryBorderColor')
@@ -337,7 +337,7 @@ $(document).on('input', 'input[type="email"]', function () {
             document.querySelector('html').style.removeProperty('--primary-bg-border', localStorage.darkPrimary);
             document.querySelector('html').style.removeProperty('--dark-primary', localStorage.darkPrimary);
 
-            // removing light theme data 
+
             localStorage.removeItem('sashprimaryColor')
             localStorage.removeItem('sashprimaryHoverColor')
             localStorage.removeItem('sashprimaryBorderColor')
@@ -363,9 +363,9 @@ $(document).on('input', 'input[type="email"]', function () {
         }
         localStorageBackup()
     });
-    // DARK THEME END
 
-    // TRANSPARENT THEME START
+
+
     $(document).on("click", '#myonoffswitchTransparent', function () {
         if (this.checked) {
             $('body').addClass('transparent-mode');
@@ -389,12 +389,12 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body')?.removeClass('header-light');
             $('body')?.removeClass('dark-header');
 
-            // remove light theme properties
+
             localStorage.removeItem('sashprimaryColor')
             localStorage.removeItem('sashprimaryHoverColor')
             localStorage.removeItem('sashprimaryBorderColor')
 
-            // removing light theme data 
+
             localStorage.removeItem('sashdarkPrimary');
             localStorage.removeItem('sashprimaryColor')
             localStorage.removeItem('sashprimaryHoverColor')
@@ -424,9 +424,9 @@ $(document).on('input', 'input[type="email"]', function () {
         $('body').removeClass('bg-img3');
         $('body').removeClass('bg-img4');
     });
-    // TRANSPARENT THEME END
 
-    // BACKGROUND IMAGE STYLE START
+
+
 
     $(document).on("click", '#bgimage1', function () {
         $(this).addClass('activee');
@@ -575,9 +575,9 @@ $(document).on('input', 'input[type="email"]', function () {
         checkOptions();
     })
 
-    // BACKGROUND IMAGE STYLE END
 
-    // LIGHT LEFTMENU START
+
+
     $(document).on("click", '#myonoffswitch3', function () {
         if (this.checked) {
             $('body').addClass('light-menu');
@@ -588,9 +588,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('light-menu');
         }
     });
-    // LIGHT LEFTMENU END
 
-    // COLOR LEFTMENU START
+
+
     $(document).on("click", '#myonoffswitch4', function () {
         if (this.checked) {
             $('body').addClass('color-menu');
@@ -601,9 +601,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('color-menu');
         }
     });
-    // COLOR LEFTMENU END
 
-    // DARK LEFTMENU START
+
+
     $(document).on("click", '#myonoffswitch5', function () {
         if (this.checked) {
             $('body').addClass('dark-menu');
@@ -614,9 +614,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('dark-menu');
         }
     });
-    // DARK LEFTMENU END
 
-    // GRADIENT LEFTMENU START
+
+
     $(document).on("click", '#myonoffswitch19', function () {
         if (this.checked) {
             $('body').addClass('gradient-menu');
@@ -627,9 +627,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('gradient-menu');
         }
     });
-    // GRADIENT LEFTMENU END
 
-    // LIGHT HEADER START
+
+
     $(document).on("click", '#myonoffswitch6', function () {
         if (this.checked) {
             $('body').addClass('header-light');
@@ -640,9 +640,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('header-light');
         }
     });
-    // LIGHT HEADER END
 
-    // COLOR HEADER START
+
+
     $(document).on("click", '#myonoffswitch7', function () {
         if (this.checked) {
             $('body').addClass('color-header');
@@ -653,9 +653,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('color-header');
         }
     });
-    // COLOR HEADER END
 
-    // DARK HEADER START
+
+
     $(document).on("click", '#myonoffswitch8', function () {
         if (this.checked) {
             $('body').addClass('dark-header');
@@ -666,9 +666,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('dark-header');
         }
     });
-    // DARK HEADER END
 
-    // GRADIENT HEADER START
+
+
     $(document).on("click", '#myonoffswitch20', function () {
         if (this.checked) {
             $('body').addClass('gradient-header');
@@ -679,9 +679,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('gradient-header');
         }
     });
-    // GRADIENT HEADER END
 
-    // FULL WIDTH LAYOUT START
+
+
     $(document).on("click", '#myonoffswitch9', function () {
         if (this.checked) {
             $('body').addClass('layout-fullwidth');
@@ -691,9 +691,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('layout-fullwidth');
         }
     });
-    // FULL WIDTH LAYOUT END
 
-    // BOXED LAYOUT START
+
+
     $(document).on("click", '#myonoffswitch10', function () {
         if (this.checked) {
             $('body').addClass('layout-boxed');
@@ -703,10 +703,10 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('layout-boxed');
         }
     });
-    // BOXED LAYOUT END
 
 
-          // FULL WIDTH LAYOUT START
+
+
           $(document).on("click", '#myonoffswitch99', function () {
             if (this.checked) {
                 $('body').addClass('layout-fullwidth');
@@ -716,9 +716,9 @@ $(document).on('input', 'input[type="email"]', function () {
                 $('body').removeClass('layout-fullwidth');
             }
         });
-        // FULL WIDTH LAYOUT END
+
     
-        // BOXED LAYOUT START
+
         $(document).on("click", '#myonoffswitch100', function () {
             if (this.checked) {
                 $('body').addClass('layout-boxed');
@@ -728,10 +728,10 @@ $(document).on('input', 'input[type="email"]', function () {
                 $('body').removeClass('layout-boxed');
             }
         });
-        // BOXED LAYOUT END
+
         
 
-    // HEADER POSITION STYLES START
+
     $(document).on("click", '#myonoffswitch11', function () {
         if (this.checked) {
             $('body').addClass('fixed-layout');
@@ -748,9 +748,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('scrollable-layout');
         }
     });
-    // HEADER POSITION STYLES END
 
-    // DEFAULT SIDEMENU START
+
+
     $(document).on("click", '#myonoffswitch13', function () {
         if (this.checked) {
             $('body').addClass('default-menu');
@@ -765,9 +765,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('default-menu');
         }
     });
-    // DEFAULT SIDEMENU END
 
-    // ICON OVERLAY SIDEMENU START
+
+
     $(document).on("click", '#myonoffswitch15', function () {
         if (this.checked) {
             $('body').addClass('icon-overlay');
@@ -784,9 +784,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('sidenav-toggled');
         }
     });
-    // ICON OVERLAY SIDEMENU END
 
-    // ICONTEXT SIDEMENU START
+
+
     $(document).on("click", '#myonoffswitch14', function () {
         if (this.checked) {
             $('body').addClass('icontext-menu');
@@ -802,9 +802,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('sidenav-toggled');
         }
     });
-    // ICONTEXT SIDEMENU END
 
-    // CLOSED SIDEMENU START
+
+
     $(document).on("click", '#myonoffswitch16', function () {
         if (this.checked) {
             $('body').addClass('closed-leftmenu');
@@ -821,9 +821,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').addClass('default-menu');
         }
     });
-    // CLOSED SIDEMENU END
 
-    // HOVER SUBMENU START
+
+
     $(document).on("click", '#myonoffswitch17', function () {
         if (this.checked) {
             $('body').addClass('hover-submenu');
@@ -840,9 +840,9 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('sidenav-toggled');
         }
     });
-    // HOVER SUBMENU END
 
-    // HOVER SUBMENU STYLE-1 START
+
+
     $(document).on("click", '#myonoffswitch18', function () {
         if (this.checked) {
             $('body').addClass('hover-submenu1');
@@ -859,14 +859,14 @@ $(document).on('input', 'input[type="email"]', function () {
             $('body').removeClass('sidenav-toggled');
         }
     });
-    // HOVER SUBMENU STYLE-1 END
 
-    // ACCORDION STYLE
+
+
     $(document).on("click", '[data-bs-toggle="collapse"]', function () {
         $(this).toggleClass('active').siblings().removeClass('active');
     });
 
-    // EMAIL INBOX
+
     $(".clickable-row").on('click', function () {
         window.location = $(this).data("href");
     });
@@ -885,7 +885,7 @@ $(document).on('input', 'input[type="email"]', function () {
                 e.classList.remove('is-expanded')
             })
             var animationSpeed = 300;
-            // first level
+
             var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
             var ul = parent.find('ul:visible').slideUp(animationSpeed);
             ul.removeClass('open');
@@ -911,17 +911,17 @@ $(document).on('input', 'input[type="email"]', function () {
         $('body').removeClass('closed-leftmenu');
         $('body').removeClass('hover-submenu');
         $('body').removeClass('hover-submenu1');
-        // // To enable no-wrap horizontal style
+
         $('#slide-left').removeClass('d-none');
         $('#slide-right').removeClass('d-none');
         localStorage.setItem("sashhorizontal", "true");
         localStorage.removeItem("sashsidebarMini");
         localStorage.removeItem("sashhorizontalHover");
         document.querySelector('.horizontal .side-menu')?.classList.add('flex-nowrap')
-        // To enable wrap horizontal style
-        // $('#slide-left').addClass('d-none');
-        // $('#slide-right').addClass('d-none');
-        // document.querySelector('.horizontal .side-menu').style.flexWrap = 'wrap'
+
+
+
+
         
     } 
 
@@ -945,7 +945,7 @@ $(document).on('input', 'input[type="email"]', function () {
                 e.classList.remove('is-expanded')
             })
             var animationSpeed = 300;
-            // first level
+
             var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
             var ul = parent.find('ul:visible').slideUp(animationSpeed);
             ul.removeClass('open');
@@ -955,9 +955,9 @@ $(document).on('input', 'input[type="email"]', function () {
         }
         $('body').addClass('horizontal-hover');
         $('body').addClass('horizontal');
-        // $('#slide-left').addClass('d-none');
-        // $('#slide-right').addClass('d-none');
-        // document.querySelector('.horizontal .side-menu').style.flexWrap = 'wrap'
+
+
+
         $('#slide-left').addClass('d-none');
         $('#slide-right').addClass('d-none');
         document.querySelector('.horizontal .side-menu')?.classList.add('flex-nowrap')
@@ -994,7 +994,7 @@ $(document).on('input', 'input[type="email"]', function () {
         (document.getElementById("style").setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.rtl.min.css"));
         var carousel = $('.owl-carousel');
         $.each(carousel, function (index, element) {
-            // element == this
+
             var carouselData = $(element).data('owl.carousel');
             carouselData.settings.rtl = true; //don't know if both are necessary
             carouselData.options.rtl = true;
@@ -1006,20 +1006,20 @@ $(document).on('input', 'input[type="email"]', function () {
 
 })(jQuery);
 
-// REPLY
+
 function replay() {
     "use strict";
 
     let replayButtom = document.querySelectorAll('.reply a')
-    // Creating Div
+
     let Div = document.createElement('div')
     Div.setAttribute('class', "comment mt-5 d-grid")
-    // creating textarea
+
     let textArea = document.createElement('textarea')
     textArea.setAttribute('class', "form-control")
     textArea.setAttribute('rows', "5")
     textArea.innerText = "Your Comment";
-    // creating Cancel buttons
+
     let cancelButton = document.createElement('button');
     cancelButton.setAttribute('class', "btn btn-danger");
     cancelButton.innerText = "Cancel";
@@ -1027,12 +1027,12 @@ function replay() {
     let buttonDiv = document.createElement('div')
     buttonDiv.setAttribute('class', "btn-list ms-auto mt-2")
 
-    // Creating submit button
+
     let submitButton = document.createElement('button');
     submitButton.setAttribute('class', "btn btn-success ms-3");
     submitButton.innerText = "Submit";
 
-    // appending text are to div
+
     Div.append(textArea)
     Div.append(buttonDiv);
     buttonDiv.append(cancelButton);
@@ -1054,13 +1054,13 @@ function replay() {
 }
 replay()
 
-// OFF-CANVAS STYLE
+
 $('.off-canvas').on('click', function () {
     $('body').addClass('overflow-y-scroll');
     $('body').addClass('pe-0');
 });
 
-// RTL STYLE START
+
 $(document).on("click", '#myonoffswitch24', function () {
     if (this.checked) {
         $('body').addClass('rtl');
@@ -1073,7 +1073,7 @@ $(document).on("click", '#myonoffswitch24', function () {
         (document.getElementById("style").setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.rtl.min.css"));
         var carousel = $('.owl-carousel');
         $.each(carousel, function (index, element) {
-            // element == this
+
             var carouselData = $(element).data('owl.carousel');
             carouselData.settings.rtl = true; //don't know if both are necessary
             carouselData.options.rtl = true;
@@ -1083,9 +1083,9 @@ $(document).on("click", '#myonoffswitch24', function () {
         localStorage.removeItem('sashltr')
     }
 });
-// RTL STYLE END
 
-// LTR STYLE START
+
+
 $(document).on("click", '#myonoffswitch23', function () {
     if (this.checked) {
         $('body').addClass('ltr');
@@ -1098,7 +1098,7 @@ $(document).on("click", '#myonoffswitch23', function () {
         (document.getElementById("style").setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.min.css"));
         var carousel = $('.owl-carousel');
         $.each(carousel, function (index, element) {
-            // element == this
+
             var carouselData = $(element).data('owl.carousel');
             carouselData.settings.rtl = false; //don't know if both are necessary
             carouselData.options.rtl = false;
@@ -1108,7 +1108,7 @@ $(document).on("click", '#myonoffswitch23', function () {
         localStorage.removeItem('sashrtl')
     }
 });
-// LTR STYLE END
+
 
 
 $(document).on("click", '#myonoffswitch34', function () {
@@ -1143,7 +1143,7 @@ $(document).on("click", '#myonoffswitch34', function () {
     }
 });
 
-// HORIZONTAL
+
 $(document).on("click", '#myonoffswitch35', function () {
     if (this.checked) {
         if( !document.querySelector('.login-img') ){
@@ -1157,7 +1157,7 @@ $(document).on("click", '#myonoffswitch35', function () {
                 e.classList.remove('is-expanded')
             })
             var animationSpeed = 300;
-            // first level
+
             var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
             var ul = parent.find('ul:visible').slideUp(animationSpeed);
             ul.removeClass('open');
@@ -1183,23 +1183,23 @@ $(document).on("click", '#myonoffswitch35', function () {
         $('body').removeClass('closed-leftmenu');
         $('body').removeClass('hover-submenu');
         $('body').removeClass('hover-submenu1');
-        // // To enable no-wrap horizontal style
+
         $('#slide-left').removeClass('d-none');
         $('#slide-right').removeClass('d-none');
         localStorage.setItem("sashhorizontal", "true");
         localStorage.removeItem("sashsidebarMini");
         localStorage.removeItem("sashhorizontalHover");
         document.querySelector('.horizontal .side-menu')?.classList.add('flex-nowrap')
-        // To enable wrap horizontal style
-        // $('#slide-left').addClass('d-none');
-        // $('#slide-right').addClass('d-none');
-        // document.querySelector('.horizontal .side-menu').style.flexWrap = 'wrap'
+
+
+
+
     }
 });
 
-// HORIZONTAL END
 
-// HORIZONTAL HOVER
+
+
 $(document).on("click", '#myonoffswitch111', function () {
     if (this.checked) {
         if( !document.querySelector('.login-img') ){
@@ -1212,7 +1212,7 @@ $(document).on("click", '#myonoffswitch111', function () {
                 e.classList.remove('is-expanded')
             })
             var animationSpeed = 300;
-            // first level
+
             var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
             var ul = parent.find('ul:visible').slideUp(animationSpeed);
             ul.removeClass('open');
@@ -1222,9 +1222,9 @@ $(document).on("click", '#myonoffswitch111', function () {
         }
         $('body').addClass('horizontal-hover');
         $('body').addClass('horizontal');
-        // $('#slide-left').addClass('d-none');
-        // $('#slide-right').addClass('d-none');
-        // document.querySelector('.horizontal .side-menu').style.flexWrap = 'wrap'
+
+
+
         $('#slide-left').addClass('d-none');
         $('#slide-right').addClass('d-none');
         document.querySelector('.horizontal .side-menu')?.classList.add('flex-nowrap')
@@ -1250,61 +1250,61 @@ $(document).on("click", '#myonoffswitch111', function () {
     } 
 });
 
-// HORIZONTAL HOVER END
 
-// CHECK OPTIONS
+
+
 function checkOptions() {
     "use strict";
-    // rtl
+
 	if (document.querySelector('body').classList.contains('rtl')) {
 		$('#myonoffswitch24').prop('checked', true);
 	}
-	// horizontal
+
 	if (document.querySelector('body').classList.contains('horizontal')) {
 		$('#myonoffswitch35').prop('checked', true);
 	}
-	// horizontal-hover
+
 	if (document.querySelector('body').classList.contains('horizontal-hover')) {
 		$('#myonoffswitch111').prop('checked', true);
 	}
 
-    // light header 
+
     if (document.querySelector('body').classList.contains('header-light')) {
         $('#myonoffswitch6').prop('checked', true);
     }
-    // color header 
+
     if (document.querySelector('body').classList.contains('color-header')) {
         $('#myonoffswitch7').prop('checked', true);
     }
-    // gradient header 
+
     if (document.querySelector('body').classList.contains('gradient-header')) {
         $('#myonoffswitch20').prop('checked', true);
     }
-    // dark header 
+
     if (document.querySelector('body').classList.contains('dark-header')) {
         $('#myonoffswitch8').prop('checked', true);
     }
 
-    // light menu
+
     if (document.querySelector('body').classList.contains('light-menu')) {
         $('#myonoffswitch3').prop('checked', true);
     }
-    // color menu
+
     if (document.querySelector('body').classList.contains('color-menu')) {
         $('#myonoffswitch4').prop('checked', true);
     }
-    // gradient menu
+
     if (document.querySelector('body').classList.contains('gradient-menu')) {
         $('#myonoffswitch19').prop('checked', true);
     }
-    // dark menu
+
     if (document.querySelector('body').classList.contains('dark-menu')) {
         $('#myonoffswitch5').prop('checked', true);
     }
 }
 checkOptions();
 
-// RESET SWITCHER TO DEFAULT
+
 function resetData() {
     "use strict";
 
@@ -1342,7 +1342,7 @@ function resetData() {
 
     document.querySelector('html').setAttribute("dir","ltr");
 
-	// resetting horizontal to vertical
+
     $('body').removeClass('horizontal');
     $('body').removeClass('horizontal-hover');
     $(".main-content").removeClass("hor-content");

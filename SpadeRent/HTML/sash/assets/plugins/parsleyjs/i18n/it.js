@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('it', {
   defaultMessage: "Questo valore sembra essere non valido.",
   type: {

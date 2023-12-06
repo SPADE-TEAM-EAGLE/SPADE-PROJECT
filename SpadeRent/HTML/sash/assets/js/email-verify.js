@@ -4,7 +4,7 @@ let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
         email_verify_password.addEventListener('keyup', confirmPasswordValidation1_verify);
-        // var spantag11 = document.getElementById("passnotmatch1");
+
 
         function confirmPasswordValidation1_verify() {
 
@@ -19,7 +19,7 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
 $(document).ready(function () {
     $.ajax({
         url: 'https://backend.app.spaderent.com/api/spade/protected',
-        // https://backend.app.spaderent.com/api/spade/protected
+
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -53,7 +53,7 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+
         }
     });
     $.ajax({
@@ -84,7 +84,7 @@ $(document).ready(function () {
             console.log('Error occurred while fetching state and city data.');
             console.log(xhr);
             console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+
         }
     });
 

@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('da', {
   defaultMessage: "Indtast venligst en korrekt værdi.",
   type: {

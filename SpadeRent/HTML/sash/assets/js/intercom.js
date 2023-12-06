@@ -15,23 +15,23 @@ $.ajax({
     
         };
       
-        // Function to open the Intercom side popup
+
         function openIntercomPopup() {
             const articleid=8210506
-        //   window.Intercom('showNewMessage', '#help-center-article-' + articleid);;
+
         window.Intercom('showSpace', 'help');
 
           
         }
       
-        // Attach a click event listener to your custom button
+
         document.querySelectorAll('.customIntercomButton').forEach(element => {
     element.addEventListener('click', openIntercomPopup);
     
 });
 
         
-        // Load the Intercom widget
+
         (function() {
           var w = window;
           var ic = w.Intercom;

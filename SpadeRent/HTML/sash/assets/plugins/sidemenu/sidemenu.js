@@ -1,17 +1,17 @@
 (function () {
     "use strict";
     var slideMenu = $('.side-menu');
-    // Toggle Sidebar
+
     $(document).on('click', '[data-bs-toggle="sidebar"]', function (event) {
         event.preventDefault();
         $('.app').toggleClass('sidenav-toggled');
     });
     responsive();
-   // clearing the clicking functions already present on the element
+
    $("[data-bs-toggle='slide']").off('click');
    $("[data-bs-toggle='sub-slide']").off('click');
    $("[data-bs-toggle='sub-slide2']").off('click');
-   // initiating the click function
+
    $("[data-bs-toggle='slide']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -37,7 +37,7 @@
            e.preventDefault();
        }
    });
-   // Activate sidebar slide toggle
+
    $("[data-bs-toggle='sub-slide']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -63,7 +63,7 @@
            e.preventDefault();
        }
    });
-   // Activate sidebar slide toggle
+
    $("[data-bs-toggle='sub-slide2']").on('click', function (e) {
        var $this = $(this);
        var checkElement = $this.next();
@@ -89,7 +89,7 @@
            e.preventDefault();
        }
    });
-   // To close the sub menu dropdown by clicking on inner content
+
    $('.hor-content').on('click', function () {
        $('.side-menu li').each(function () {
            $('.side-menu ul.open').slideUp(300)
@@ -176,17 +176,17 @@ function responsive() {
         }
     }
 }
-// function hovermenu() {
-//     $(".app-sidebar").hover(function () {
-//         if ($('.app').hasClass('sidenav-toggled')) {
-//             $('.app').addClass('sidenav-toggled-open');
-//         }
-//     }, function () {
-//         if ($('.app').hasClass('sidenav-toggled')) {
-//             $('.app').removeClass('sidenav-toggled-open');
-//         }
-//     });
-// }
+
+
+
+
+
+
+
+
+
+
+
 //________________Horizontal js
 jQuery(function () {
     'use strict';
@@ -195,24 +195,24 @@ jQuery(function () {
         jQuery('body').wrapInner('<div class="horizontalMenucontainer" />');
     });
 }());
-// for Icon-text Menu
+
 //icontext(); 
-// default layout
+
 hovermenu();
-// ______________HOVER JS start
-// function hovermenu() {
-//     $(".app-sidebar").hover(function () {
-//         if ($('body').hasClass('sidenav-toggled')) {
-//             $('body').addClass('sidenav-toggled-open');
-//         }
-//     }, function () {
-//         if ($('body').hasClass('sidenav-toggled')) {
-//             $('body').removeClass('sidenav-toggled-open');
-//         }
-//     });
-// }
-// ______________HOVER JS end
-// ______________ICON-OVERLAY JS start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function iconoverlay() {
     $(document).on('click', ".app-content", function (event) {
         $('body').removeClass('sidenav-toggled-open');
@@ -232,8 +232,8 @@ function iconoverlay() {
     //Fire it when the page first loads:
     alterClass();
 }
-// ______________ICON-OVERLAY JS end
-// ______________ICON-TEXT JS start
+
+
 function icontext() {
     $(".app-sidebar").off("mouseenter mouseleave");
     $(document).on('click', ".app-sidebar", function (event) {
@@ -259,14 +259,14 @@ function icontext() {
     //Fire it when the page first loads:
     alterClass();
 }
-// ______________ICON-TEXT JS end
+
 let slideLeft = document.querySelector(".slide-left");
 let slideRight = document.querySelector(".slide-right");
 slideLeft.addEventListener("click", () => {
     slideClick()
 }, true)
 slideRight.addEventListener("click", () => { slideClick() }, true)
-// used to remove is-expanded class and remove class on clicking arrow buttons
+
 function slideClick() {
     let slide = document.querySelectorAll(".slide");
     let slideMenu = document.querySelectorAll(".slide-menu");
@@ -282,7 +282,7 @@ function slideClick() {
         }
     });
 }
-// horizontal arrows
+
 var sideMenu = $(".side-menu");
 var slide = "100px";
 let menuWidth = document.querySelector('.horizontal-main')
@@ -297,7 +297,7 @@ $(window).resize(
         let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]);
         let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]);
         let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
-        // to check and adjst the menu on screen size change
+
         if ($('body').hasClass('ltr')) {
             if (marginLeftValue > -check == false && (menuWidth?.offsetWidth - menuContainerWidth) < menuItems.scrollWidth) {
                 sideMenu.stop(false, true).animate({
@@ -344,7 +344,7 @@ $(window).resize(
                     e.classList.remove('is-expanded')
                 })
                 var animationSpeed = 300;
-                // first level
+
                 var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
                 var ul = parent.find('ul:visible').slideUp(animationSpeed);
                 ul.removeClass('open');
@@ -432,7 +432,7 @@ $(document).on("click", ".ltr #slide-left", function () {
     let marginLeftValue = Math.ceil(window.getComputedStyle(menuItems).marginLeft.split('px')[0]) + 100;
     if (marginLeftValue < 0) {
         sideMenu.stop(false, true).animate({
-            // marginRight : 0,
+
             marginLeft: "+=" + slide
         }, {
             duration: 400
@@ -446,16 +446,16 @@ $(document).on("click", ".ltr #slide-left", function () {
     }
     if (marginLeftValue >= 0) {
         sideMenu.stop(false, true).animate({
-            // marginRight : 0,
+
             marginLeft: 0
         }, {
             duration: 400
         })
         if(menuWidth?.offsetWidth < menuItems.scrollWidth){
-            // $("#slide-left").addClass("d-none");
+
         }
     }
-    // to remove dropdown when clicking arrows in horizontal menu
+
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -475,7 +475,7 @@ $(document).on("click", ".ltr #slide-right", function () {
     let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
     if (marginLeftValue > -check) {
         sideMenu.stop(false, true).animate({
-            // marginLeft : 0,
+
             marginLeft: "-=" + slide,
             marginRight: 0,
         }, {
@@ -484,7 +484,7 @@ $(document).on("click", ".ltr #slide-right", function () {
     }
     else {
         sideMenu.stop(false, true).animate({
-            // marginLeft : 0,
+
             marginRight: 0,
             marginLeft: -check
         }, {
@@ -495,7 +495,7 @@ $(document).on("click", ".ltr #slide-right", function () {
     if (marginLeftValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
-    // to remove dropdown when clicking arrows in horizontal menu
+
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -514,7 +514,7 @@ $(document).on("click", ".rtl #slide-left", function () {
     let marginRightValue = Math.ceil(window.getComputedStyle(menuItems).marginRight.split('px')[0]) + 100;
     if (marginRightValue < 0) {
         sideMenu.stop(false, true).animate({
-            // marginRight : 0,
+
             marginLeft: 0,
             marginRight: "+=" + slide
         }, {
@@ -530,13 +530,13 @@ $(document).on("click", ".rtl #slide-left", function () {
     if (marginRightValue >= 0) {
         $("#slide-left").addClass("d-none");
         sideMenu.stop(false, true).animate({
-            // marginRight : 0,
+
             marginLeft: 0
         }, {
             duration: 400
         })
     }
-    // to remove dropdown when clicking arrows in horizontal menu
+
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -556,7 +556,7 @@ $(document).on("click", ".rtl #slide-right", function () {
     let check = menuItems.scrollWidth + (0 - menuWidth?.offsetWidth) + menuContainerWidth;
     if (marginRightValue > -check) {
         sideMenu.stop(false, true).animate({
-            // marginLeft : 0,
+
             marginLeft: 0,
             marginRight: "-=" + slide
         }, {
@@ -565,7 +565,7 @@ $(document).on("click", ".rtl #slide-right", function () {
     }
     else {
         sideMenu.stop(false, true).animate({
-            // marginLeft : 0,
+
             marginLeft: 0,
             marginRight: -check
         }, {
@@ -576,7 +576,7 @@ $(document).on("click", ".rtl #slide-right", function () {
     if (marginRightValue != 0) {
         $("#slide-left").removeClass("d-none");
     }
-    // to remove dropdown when clicking arrows in horizontal menu
+
     let subNavSub = document.querySelectorAll('.sub-nav-sub');
     subNavSub.forEach((e) => {
         e.style.display = '';
@@ -586,7 +586,7 @@ $(document).on("click", ".rtl #slide-right", function () {
         e.style.display = '';
     })
 });
-// FOOTER
+
 document.getElementById("year").innerHTML = new Date().getFullYear();
 document.querySelector('.main-content').addEventListener('click', ()=>{
     if (document.querySelector('body').classList.contains('horizontal')) {
@@ -595,7 +595,7 @@ document.querySelector('.main-content').addEventListener('click', ()=>{
             e.classList.remove('is-expanded')
         })
         var animationSpeed = 300;
-        // first level
+
         var parent = $("[data-bs-toggle='sub-slide']").parents('ul');
         var ul = parent.find('ul:visible').slideUp(animationSpeed);
         ul.removeClass('open');

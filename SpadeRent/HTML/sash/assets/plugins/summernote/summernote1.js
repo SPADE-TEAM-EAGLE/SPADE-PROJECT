@@ -3349,7 +3349,7 @@
 							}), this.button({
 								className: "dropdown-toggle",
 								contents: this.ui.dropdownButtonContents("", this.options),
-								// tooltip: this.lang.color.more,
+
 								data: {
 									toggle: "dropdown"
 								}
@@ -3363,7 +3363,7 @@
 											colorsName: r.options.colorsName,
 											eventName: n.data("event"),
 											container: r.options.container,
-											// tooltip: r.options.tooltip
+
 										}).render())
 									}));
 									var e = [
@@ -3376,7 +3376,7 @@
 											colorsName: e,
 											eventName: o.data("event"),
 											container: r.options.container,
-											// tooltip: r.options.tooltip
+
 										}).render())
 									})), t.find("input[type=color]").each((function(e, n) {
 										i()(n).change((function() {
@@ -5231,18 +5231,18 @@
 						},
 						button: function(e, n) {
 							return r.a.create('<button type="button" class="note-btn btn btn-default btn-sm" tabindex="-1">', (function(e, n) {
-								// n && n.tooltip && e.attr({
-								// 	title: n.tooltip,
-								// 	"aria-label": n.tooltip
-								// })
-								// .tooltip({
-								// 	container: n.container || t.container,
-								// 	trigger: "hover",
-								// 	placement: "bottom"
-								// })
-								// .on("click", (function(t) {
-								// 	i()(t.currentTarget).tooltip("hide")
-								// })),
+
+
+
+
+
+
+
+
+
+
+
+
 								 n && n.codeviewButton && e.addClass("note-codeview-keep")
 							}))(e, n)
 						},

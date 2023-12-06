@@ -4,20 +4,20 @@
 	License: http://www.opensource.org/licenses/mit-license.php
 */
 var Base = function() {
-	// dummy
+
 };
 Base.extend = function(_instance, _static) { // subclass
 	"use strict";
 	var extend = Base.prototype.extend;
-	// build the prototype
+
 	Base._prototyping = true;
 	var proto = new this();
 	extend.call(proto, _instance);
 	proto.base = function() {
-	// call this method from any other method to invoke that method's ancestor
+
 	};
 	delete Base._prototyping;
-	// create the wrapper for the constructor function
+
 	//var constructor = proto.constructor.valueOf(); //-dean
 	var constructor = proto.constructor;
 	var klass = proto.constructor = function() {
@@ -31,7 +31,7 @@ Base.extend = function(_instance, _static) { // subclass
 			}
 		}
 	};
-	// build the class interface
+
 	klass.ancestor = this;
 	klass.extend = this.extend;
 	klass.forEach = this.forEach;
@@ -43,7 +43,7 @@ Base.extend = function(_instance, _static) { // subclass
 		return (type == "object") ? klass : constructor.valueOf();
 	};
 	extend.call(klass, _static);
-	// class initialisation
+
 	if (typeof klass.init == "function") klass.init();
 	return klass;
 };
@@ -52,12 +52,12 @@ Base.prototype = {
 		if (arguments.length > 1) { // extending with a name/value pair
 			var ancestor = this[source];
 			if (ancestor && (typeof value == "function") && // overriding a method?
-				// the valueOf() comparison is to avoid circular references
+
 				(!ancestor.valueOf || ancestor.valueOf() != value.valueOf()) &&
 				/\bbase\b/.test(value)) {
-				// get the underlying method
+
 				var method = value.valueOf();
-				// override
+
 				value = function() {
 					var previous = this.base || Base.prototype.base;
 					this.base = ancestor;
@@ -65,7 +65,7 @@ Base.prototype = {
 					this.base = previous;
 					return returnValue;
 				};
-				// point to the underlying method
+
 				value.valueOf = function(type) {
 					return (type == "object") ? value : method;
 				};
@@ -74,21 +74,21 @@ Base.prototype = {
 			this[source] = value;
 		} else if (source) { // extending with an object literal
 			var extend = Base.prototype.extend;
-			// if this object has a customised extend method then use it
+
 			if (!Base._prototyping && typeof this != "function") {
 				extend = this.extend || extend;
 			}
 			var proto = {toSource: null};
-			// do the "toString" and other methods manually
+
 			var hidden = ["constructor", "toString", "valueOf"];
-			// if we are prototyping then include the constructor
+
 			var i = Base._prototyping ? 0 : 1;
 			while (key = hidden[i++]) {
 				if (source[key] != proto[key]) {
 					extend.call(this, key, source[key]);
 				}
 			}
-			// copy each of the source object's properties to this object
+
 			for (var key in source) {
 				if (!proto[key]) extend.call(this, key, source[key]);
 			}
@@ -96,7 +96,7 @@ Base.prototype = {
 		return this;
 	}
 };
-// initialise
+
 Base = Base.extend({
 	constructor: function() {
 		this.extend(arguments[0]);
@@ -114,10 +114,10 @@ Base = Base.extend({
 	implement: function() {
 		for (var i = 0; i < arguments.length; i++) {
 			if (typeof arguments[i] == "function") {
-				// if it's a function, call it
+
 				arguments[i](this.prototype);
 			} else {
-				// add the interface using the extend method
+
 				this.prototype.extend(arguments[i]);
 			}
 		}
@@ -576,7 +576,7 @@ var FlipClock;
 			this.running = false;
 			this.base(options);	
 			this.$el = $(obj).addClass(this.classes.wrapper);
-			// Depcrated support of the $wrapper property.
+
 			this.$wrapper = this.$el;
 			this.original = (digit instanceof Date) ? digit : (digit ? Math.round(digit) : 0);
 			this.time = new FlipClock.Time(this, this.original, {
@@ -794,7 +794,7 @@ var FlipClock;
 			this.digit = digit;
 			this.lastDigit = digit;
 			this.$el = this.createList();
-			// Depcrated support of the $obj property.
+
 			this.$obj = this.$el;
 			if(digit > 0) {
 				this.select(digit);
@@ -1674,7 +1674,7 @@ var FlipClock;
 	 * @param  object  An object of properties to override the default	
 	 */
 	FlipClock.HourlyCounterFace = FlipClock.Face.extend({
-		// clearExcessDigits: true,
+
 		/**
 		 * Constructor
 		 *

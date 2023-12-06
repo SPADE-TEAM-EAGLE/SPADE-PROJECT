@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('no', {
   defaultMessage: "Verdien er ugyldig.",
   type: {

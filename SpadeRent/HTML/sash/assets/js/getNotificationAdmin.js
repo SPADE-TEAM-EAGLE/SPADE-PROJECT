@@ -43,23 +43,23 @@ function GetNotification(){
       }
       console.log(response);
       const notification = response.Notification
-        // {
-        //     "id": 3,
-        //     "landlordId": "386",
-        //     "fName": "aaaaa",
-        //     "lName": "ssssssssss",
-        //     "planId": "3",
-        //     "created_deleted": "Deleted",
-        //     "c_dTime": "2023-11-18T10:36:00.000Z",
-        //     "readNotification": "1"
-        // },
-      // filter out based on data notification.notify = 0 then unread else read
+
+
+
+
+
+
+
+
+
+
+
       const unread = notification.filter((item) => item.readNotification == 0);
       const read = notification.filter((item) => item.readNotification == 1);
       console.log(unread, "unread");
       console.log(read, "read");
       console.log(notification, "all");
-      // all
+
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -105,7 +105,7 @@ function GetNotification(){
       });
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
-        // read-notification-container
+
         const colorClass = item.readNotification == 0 ? "my_blue" : "bg-transparent";
   
         $("#inbox-notification-container").append(
@@ -188,7 +188,7 @@ function GetNotification(){
       console.log("Error occurred while fetching state and city data.");
       console.log(xhr);
       console.log(error);
-      // console.log('Error occurred while fetching state and city data.');
+
     },
   });
 
@@ -222,7 +222,7 @@ function updateAllNotifyRead() {
 
 function updateDataNotify(notificationId, type) {
   console.log(notificationId, type);
-  // $('#preloader').css('display','flex')
+
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
     type: "PUT",
@@ -234,7 +234,7 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      // alert(type)
+
       if(type == "Customers"){
         window.location.href="./Customers.html";
       }else{
@@ -245,7 +245,7 @@ function updateDataNotify(notificationId, type) {
       console.log(response);
     },
     error: function (xhr, status, error) {
-      // $('#preloader').css('display','none')
+
 
       console.log("Error: " + error);
     },

@@ -30,7 +30,7 @@ const config = process.env;
 exports.createUserPermissionUser = async function (req, res) {
   const { firstName, lastName, email, phone, password, Ustatus, role, images } = req.body;
   const { userId } = req.user;
-  // const { userId } = req.body;
+
   const currentDate = new Date();
 
   try {
@@ -48,7 +48,7 @@ exports.createUserPermissionUser = async function (req, res) {
       return res.status(201).send("Email already exists");
     }
     const hashPassword = await hashedPassword(password);
-    // generate a unique identifier for the user
+
     const salt = bcrypt.genSaltSync(10);
     const id = bcrypt
       .hashSync(lastName + new Date().getTime().toString(), salt)
@@ -79,10 +79,10 @@ exports.createUserPermissionUser = async function (req, res) {
     return res.status(400).json({ message: error.message });
   }
 };
-// User Check Email
+
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
-  // const { email } = req.body;
+
   const { userId } = req.user;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
@@ -120,11 +120,11 @@ exports.userCheckEmail = async function (req, res) {
   }
 };
 
-// User get By Id
+
 exports.userPermissionGetById = async function (req, res) {
-  // const { id } = req.query;
+
   const { id } = req.body;
-  // const { userId } = req.user;;
+
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "id"), [
       id,
@@ -145,7 +145,7 @@ exports.userPermissionGetById = async function (req, res) {
   }
 };
 
-// update User 
+
 exports.updateUserPermissionUsers = async function (req, res) {
   const { firstName, lastName, email, phone, Ustatus, role, id, images } = req.body;
   console.log(req.body)
@@ -186,7 +186,7 @@ exports.updateUserPermissionUsers = async function (req, res) {
   }
 };
 
-// User Permission Delete
+
 exports.userPermissionUsersDelete = async function (req, res) {
   const { id } = req.body;
   try {
@@ -209,7 +209,7 @@ exports.userPermissionUsersDelete = async function (req, res) {
   }
 };
 
-// User get All Users
+
 exports.userPermissionGetAll = async function (req, res) {
 
   const { userId } = req.user;
@@ -234,10 +234,10 @@ exports.userPermissionGetAll = async function (req, res) {
     });
   }
 };
-// Get User Roles
+
 exports.userPermissionRoles = async function (req, res) {
   const { userId } = req.user;
-  // const { userId } = req.body;
+
   function splitAndConvertToObject(value) {
     const resultObject = {};
 
@@ -260,7 +260,7 @@ exports.userPermissionRoles = async function (req, res) {
       for (let i = 0; i < selectResult[0].length; i++) {
         const data = {};
 
-        // Example usage for different fields
+
         const id = selectResult[0][i].id;
         const role = selectResult[0][i].Urole;
         const llDashboard = splitAndConvertToObject(selectResult[0][i].llDashboard);
@@ -317,10 +317,10 @@ exports.userPermissionRoles = async function (req, res) {
   }
 };
 
-// Tenant status CP Start 
+
 exports.userPermissionUpdate = async function (req, res) {
   const { role, columnName, permission } = req.body;
-  // const currentDate = new Date();
+
   try {
     const updateResult = await queryRunner(`UPDATE userRoles SET ${columnName} = "${permission}" WHERE id = ${role}`);
     if (updateResult[0].affectedRows > 0) {

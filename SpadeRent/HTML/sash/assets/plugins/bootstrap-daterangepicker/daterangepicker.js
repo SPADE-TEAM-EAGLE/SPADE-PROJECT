@@ -5,16 +5,16 @@
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
 * @website: http://www.daterangepicker.com/
 */
-// Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        // AMD. Make globaly available as well
+
         define(['moment', 'jquery'], function (moment, jquery) {
             if (!jquery.fn) jquery.fn = {}; // webpack server rendering
             return factory(moment, jquery);
         });
     } else if (typeof module === 'object' && module.exports) {
-        // Node / Browserify
+
         //isomorphic issue
         var jQuery = (typeof window != 'undefined') ? window.jQuery : undefined;
         if (!jQuery) {
@@ -24,7 +24,7 @@
         var moment = (typeof window != 'undefined' && typeof window.moment != 'undefined') ? window.moment : require('moment');
         module.exports = factory(moment, jQuery);
     } else {
-        // Browser globals
+
         root.daterangepicker = factory(root.moment, root.jQuery);
     }
 }(this, function(moment, $) {
@@ -130,7 +130,7 @@
         this.container = $(options.template).appendTo(this.parentEl);
 
         //
-        // handle all the possible options overriding defaults
+
         //
 
         if (typeof options.locale === 'object') {
@@ -196,11 +196,11 @@
         if (typeof options.maxDate === 'object')
             this.maxDate = moment(options.maxDate);
 
-        // sanity check for bad options
+
         if (this.minDate && this.startDate.isBefore(this.minDate))
             this.startDate = this.minDate.clone();
 
-        // sanity check for bad options
+
         if (this.maxDate && this.endDate.isAfter(this.maxDate))
             this.endDate = this.maxDate.clone();
 
@@ -273,7 +273,7 @@
         if (typeof options.alwaysShowCalendars === 'boolean')
             this.alwaysShowCalendars = options.alwaysShowCalendars;
 
-        // update day names order to firstDay
+
         if (this.locale.firstDay != 0) {
             var iterator = this.locale.firstDay;
             while (iterator > 0) {
@@ -319,8 +319,8 @@
                 else
                     end = moment(options.ranges[range][1]);
 
-                // If the start or end date exceed those allowed by the minDate or dateLimit
-                // options, shorten the range to the allowable period.
+
+
                 if (this.minDate && start.isBefore(this.minDate))
                     start = this.minDate.clone();
 
@@ -330,8 +330,8 @@
                 if (maxDate && end.isAfter(maxDate))
                     end = maxDate.clone();
 
-                // If the end of the range is before the minimum or the start of the range is
-                // after the maximum, don't display this range option at all.
+
+
                 if ((this.minDate && end.isBefore(this.minDate, this.timepicker ? 'minute' : 'day')) 
                   || (maxDate && start.isAfter(maxDate, this.timepicker ? 'minute' : 'day')))
                     continue;
@@ -409,7 +409,7 @@
         this.container.find('.cancelBtn').html(this.locale.cancelLabel);
 
         //
-        // event listeners
+
         //
 
         this.container.find('.calendar')
@@ -447,7 +447,7 @@
         }
 
         //
-        // if attached to a text input, set the initial value
+
         //
 
         if (this.element.is('input') && !this.singleDatePicker && this.autoUpdateInput) {
@@ -630,7 +630,7 @@
         renderCalendar: function(side) {
 
             //
-            // Build the matrix of dates that will populate the calendar
+
             //
 
             var calendar = side == 'left' ? this.leftCalendar : this.rightCalendar;
@@ -693,7 +693,7 @@
             }
 
             //
-            // Display the calendar
+
             //
 
             var minDate = side == 'left' ? this.minDate : this.startDate;
@@ -705,7 +705,7 @@
             html += '<thead>';
             html += '<tr>';
 
-            // add empty cell for week number
+
             if (this.showWeekNumbers || this.showISOWeekNumbers)
                 html += '<th></th>';
 
@@ -760,7 +760,7 @@
             html += '</tr>';
             html += '<tr>';
 
-            // add week number label
+
             if (this.showWeekNumbers || this.showISOWeekNumbers)
                 html += '<th class="week">' + this.locale.weekLabel + '</th>';
 
@@ -784,7 +784,7 @@
             for (var row = 0; row < 6; row++) {
                 html += '<tr>';
 
-                // add week number
+
                 if (this.showWeekNumbers)
                     html += '<td class="week">' + calendar[row][0].week() + '</td>';
                 else if (this.showISOWeekNumbers)
@@ -863,8 +863,8 @@
 
         renderTimePicker: function(side) {
 
-            // Don't bother updating the time picker if it's currently disabled
-            // because an end date hasn't been clicked yet
+
+
             if (side == 'right' && !this.endDate) return;
 
             var html, selected, minDate, maxDate = this.maxDate;
@@ -906,7 +906,7 @@
             }
 
             //
-            // hours
+
             //
 
             html = '<select class="hourselect">';
@@ -938,7 +938,7 @@
             html += '</select> ';
 
             //
-            // minutes
+
             //
 
             html += ': <select class="minuteselect">';
@@ -965,7 +965,7 @@
             html += '</select> ';
 
             //
-            // seconds
+
             //
 
             if (this.timePickerSeconds) {
@@ -994,7 +994,7 @@
             }
 
             //
-            // AM/PM
+
             //
 
             if (!this.timePicker24Hour) {
@@ -1101,20 +1101,20 @@
         show: function(e) {
             if (this.isShowing) return;
 
-            // Create a click proxy that is private to this instance of datepicker, for unbinding
+
             this._outsideClickProxy = $.proxy(function(e) { this.outsideClick(e); }, this);
 
-            // Bind global datepicker mousedown for hiding and
+
             $(document)
               .on('mousedown.daterangepicker', this._outsideClickProxy)
-              // also support mobile devices
+
               .on('touchend.daterangepicker', this._outsideClickProxy)
-              // also explicitly play nice with Bootstrap dropdowns, which stopPropagation when clicking them
+
               .on('click.daterangepicker', '[data-toggle=dropdown]', this._outsideClickProxy)
-              // and also close when focus changes to outside the picker (eg. tabbing between controls)
+
               .on('focusin.daterangepicker', this._outsideClickProxy);
 
-            // Reposition the picker if the window is resized while it's open
+
             $(window).on('resize.daterangepicker', $.proxy(function(e) { this.move(e); }, this));
 
             this.oldStartDate = this.startDate.clone();
@@ -1161,10 +1161,10 @@
 
         outsideClick: function(e) {
             var target = $(e.target);
-            // if the page is clicked anywhere except within the daterangerpicker/button
-            // itself then call this.hide()
+
+
             if (
-                // ie modal dialog fix
+
                 e.type == "focusin" ||
                 target.closest(this.element).length ||
                 target.closest(this.container).length ||
@@ -1252,7 +1252,7 @@
 
             //ignore mouse movements while an above-calendar text input has focus
             //if (this.container.find('input[name=daterangepicker_start]').is(":focus") || this.container.find('input[name=daterangepicker_end]').is(":focus"))
-            //    return;
+
 
             //ignore dates that can't be selected
             if (!$(e.target).hasClass('available')) return;
@@ -1308,12 +1308,12 @@
             var date = cal.hasClass('left') ? this.leftCalendar.calendar[row][col] : this.rightCalendar.calendar[row][col];
 
             //
-            // this function needs to do a few things:
-            // * alternate between selecting a start and end date for the range,
-            // * if the time picker is enabled, apply the hour/minute/second from the select boxes to the clicked date
-            // * if autoapply is enabled, and an end date was chosen, apply the selection
-            // * if single date picker mode, and time picker isn't enabled, apply the selection immediately
-            // * if one of the inputs above the calendars was focused, cancel that manual input
+
+
+
+
+
+
             //
 
             if (this.endDate || date.isBefore(this.startDate, 'day')) { //picking start
@@ -1419,7 +1419,7 @@
                 leftOrRight = isLeft ? 'left' : 'right',
                 cal = this.container.find('.calendar.'+leftOrRight);
 
-            // Month must be Number for new moment versions
+
             var month = parseInt(cal.find('.monthselect').val(), 10);
             var year = cal.find('.yearselect').val();
 
@@ -1530,15 +1530,15 @@
 
         formInputsFocused: function(e) {
 
-            // Highlight the focused input
+
             this.container.find('input[name="daterangepicker_start"], input[name="daterangepicker_end"]').removeClass('active');
             $(e.target).addClass('active');
 
-            // Set the state such that if the user goes back to using a mouse, 
-            // the calendars are aware we're selecting the end of the range, not
-            // the start. This allows someone to edit the end of a date range without
-            // re-selecting the beginning, by clicking on the end date input then
-            // using the calendar.
+
+
+
+
+
             var isRight = $(e.target).closest('.calendar').hasClass('right');
             if (isRight) {
                 this.endDate = null;
@@ -1550,10 +1550,10 @@
 
         formInputsBlurred: function(e) {
 
-            // this function has one purpose right now: if you tab from the first
-            // text input to the second in the UI, the endDate is nulled so that
-            // you can click another, but if you tab out without clicking anything
-            // or changing the input value, the old endDate should be retained
+
+
+
+
 
             if (!this.endDate) {
                 var val = this.container.find('input[name="daterangepicker_end"]').val();
@@ -1567,12 +1567,12 @@
         },
 
         formInputsKeydown: function(e) {
-            // This function ensures that if the 'enter' key was pressed in the input, then the calendars
-            // are updated with the startDate and endDate.
-            // This behaviour is automatic in Chrome/Firefox/Edge but not in IE 11 hence why this exists.
-            // Other browsers and versions of IE are untested and the behaviour is unknown.
+
+
+
+
             if (e.keyCode === 13) {
-                // Prevent the calendar from being updated twice on Chrome/Firefox/Edge
+
                 e.preventDefault(); 
                 this.formInputsChanged(e);
             }

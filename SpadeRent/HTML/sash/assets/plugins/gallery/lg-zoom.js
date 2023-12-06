@@ -50,9 +50,9 @@
         this.core.s = _extends({}, zoomDefaults, this.core.s);
         if (this.core.s.zoom && this.core.doCss()) {
             this.init();
-            // Store the zoomable timeout value just to clear it while closing
+
             this.zoomabletimeout = false;
-            // Set the initial value center
+
             this.pageX = window.innerWidth / 2;
             this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
         }
@@ -70,16 +70,16 @@
             utils.addClass(_this.core.outer, 'lg-use-transition-for-zoom');
         }
         this.core.outer.querySelector('.lg-toolbar').insertAdjacentHTML('beforeend', zoomIcons);
-        // Add zoomable class
+
         utils.on(_this.core.el, 'onSlideItemLoad.lgtmzoom', function (event) {
-            // delay will be 0 except first time
+
             var _speed = _this.core.s.enableZoomAfter + event.detail.delay;
-            // set _speed value 0 if gallery opened from direct url and if it is first slide
+
             if (utils.hasClass(document.body, 'lg-from-hash') && event.detail.delay) {
-                // will execute only once
+
                 _speed = 0;
             } else {
-                // Remove lg-from-hash to enable starting animation.
+
                 utils.removeClass(document.body, 'lg-from-hash');
             }
             _this.zoomabletimeout = setTimeout(function () {
@@ -97,7 +97,7 @@
             var image = _this.core.outer.querySelector('.lg-current .lg-image');
             var _x;
             var _y;
-            // Find offset manually to avoid issue after zoom
+
             var offsetX = (window.innerWidth - image.clientWidth) / 2;
             var offsetY = (window.innerHeight - image.clientHeight) / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
             _x = _this.pageX - offsetX;
@@ -157,10 +157,10 @@
             }, 10);
         };
         var tapped = false;
-        // event triggered after appending slide content
+
         utils.on(_this.core.el, 'onAferAppendSlide.lgtmzoom', function (event) {
             var index = event.detail.index;
-            // Get the current element
+
             var image = _this.core.___slide[index].querySelector('.lg-image');
             if (!_this.core.isTouch) {
                 utils.on(image, 'dblclick', function (event) {
@@ -182,7 +182,7 @@
                 });
             }
         });
-        // Update zoom on resize and orientationchange
+
         utils.on(window, 'resize.lgzoom scroll.lgzoom orientationchange.lgzoom', function () {
             _this.pageX = window.innerWidth / 2;
             _this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
@@ -203,12 +203,12 @@
         utils.on(document.getElementById('lg-actual-size'), 'click.lg', function (event) {
             actualSize(event, _this.core.___slide[_this.core.index].querySelector('.lg-image'), _this.core.index, true);
         });
-        // Reset zoom on slide change
+
         utils.on(_this.core.el, 'onBeforeSlide.lgtm', function () {
             scale = 1;
             _this.resetZoom();
         });
-        // Drag option after zoom
+
         if (!_this.core.isTouch) {
             _this.zoomDrag();
         }
@@ -216,7 +216,7 @@
             _this.zoomSwipe();
         }
     };
-    // Reset zoom effect
+
     Zoom.prototype.resetZoom = function () {
         utils.removeClass(this.core.outer, 'lg-zoomed');
         for (var i = 0; i < this.core.___slide.length; i++) {
@@ -232,7 +232,7 @@
                 this.core.___slide[j].querySelector('.lg-image').removeAttribute('data-scale');
             }
         }
-        // Reset pagx pagy values to center
+
         this.pageX = window.innerWidth / 2;
         this.pageY = window.innerHeight / 2 + (document.documentElement.scrollTop || document.body.scrollTop);
     };
@@ -241,9 +241,9 @@
         var startCoords = {};
         var endCoords = {};
         var isMoved = false;
-        // Allow x direction drag
+
         var allowX = false;
-        // Allow Y direction drag
+
         var allowY = false;
         for (var i = 0; i < _this.core.___slide.length; i++) {
             /*jshint loopfunc: true */
@@ -275,7 +275,7 @@
                         x: e.targetTouches[0].pageX,
                         y: e.targetTouches[0].pageY
                     };
-                    // reset opacity and transition duration
+
                     utils.addClass(_this.core.outer, 'lg-zoom-dragging');
                     if (allowY) {
                         distanceY = -Math.abs(_el.getAttribute('data-y')) + (endCoords.y - startCoords.y);
@@ -317,14 +317,14 @@
         var endCoords = {};
         var isDraging = false;
         var isMoved = false;
-        // Allow x direction drag
+
         var allowX = false;
-        // Allow Y direction drag
+
         var allowY = false;
         for (var i = 0; i < _this.core.___slide.length; i++) {
             /*jshint loopfunc: true */
             utils.on(_this.core.___slide[i], 'mousedown.lgzoom', function (e) {
-                // execute only on .lg-object
+
                 var image = _this.core.___slide[_this.core.index].querySelector('.lg-object');
                 allowY = image.offsetHeight * image.getAttribute('data-scale') > _this.core.outer.querySelector('.lg').clientHeight;
                 allowX = image.offsetWidth * image.getAttribute('data-scale') > _this.core.outer.querySelector('.lg').clientWidth;
@@ -336,7 +336,7 @@
                             y: e.pageY
                         };
                         isDraging = true;
-                        // ** Fix for webkit cursor issue https://code.google.com/p/chromium/issues/detail?id=26723
+
                         _this.core.outer.scrollLeft += 1;
                         _this.core.outer.scrollLeft -= 1;
                         utils.removeClass(_this.core.outer, 'lg-grab');
@@ -355,7 +355,7 @@
                     x: e.pageX,
                     y: e.pageY
                 };
-                // reset opacity and transition duration
+
                 utils.addClass(_this.core.outer, 'lg-zoom-dragging');
                 if (allowY) {
                     distanceY = -Math.abs(_el.getAttribute('data-y')) + (endCoords.y - startCoords.y);
@@ -379,7 +379,7 @@
             if (isDraging) {
                 isDraging = false;
                 utils.removeClass(_this.core.outer, 'lg-zoom-dragging');
-                // Fix for chrome mouse move on click
+
                 if (isMoved && (startCoords.x !== endCoords.x || startCoords.y !== endCoords.y)) {
                     endCoords = {
                         x: e.pageX,
@@ -438,7 +438,7 @@
     };
     Zoom.prototype.destroy = function () {
         var _this = this;
-        // Unbind all events added by lightGallery zoom plugin
+
         utils.off(_this.core.el, '.lgzoom');
         utils.off(window, '.lgzoom');
         for (var i = 0; i < _this.core.___slide.length; i++) {

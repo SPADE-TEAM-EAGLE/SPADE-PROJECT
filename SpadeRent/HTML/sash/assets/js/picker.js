@@ -5,7 +5,7 @@ const themeContainer1 = document.querySelector('.theme-container1');
 const pickrContainer2 = document.querySelector('.pickr-container2');
 const themeContainer2 = document.querySelector('.theme-container2');
 
-// CLASSIC
+
 const themes = [
     [
         'classic',
@@ -57,24 +57,24 @@ for (const [theme, config] of themes) {
         const el = document.createElement('p');
         pickrContainer.appendChild(el);
 
-        // Delete previous instance
+
         if (pickr) {
             pickr.destroyAndRemove();
         }
 
-        // Apply active class
+
         for (const btn of buttons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
 
-        // Create fresh instance
+
         pickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#6c5ffc'
         }, config));
 
-        // Set events
+
         pickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {
@@ -101,7 +101,7 @@ for (const [theme, config] of themes) {
 
 buttons[0].click();
 
-// MONOLITH
+
 const monolithThemes = [
     [
         'monolith',
@@ -147,24 +147,24 @@ for (const [theme, config] of monolithThemes) {
         const el = document.createElement('p');
         pickrContainer1.appendChild(el);
 
-        // Delete previous instance
+
         if (monolithPickr) {
             monolithPickr.destroyAndRemove();
         }
 
-        // Apply active class
+
         for (const btn of monolithButtons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
 
-        // Create fresh instance
+
         monolithPickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#fc5296'
         }, config));
 
-        // Set events
+
         monolithPickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {
@@ -191,7 +191,7 @@ for (const [theme, config] of monolithThemes) {
 
 monolithButtons[0].click();
 
-// NANO
+
 const nanoThemes = [
     [
         'nano',
@@ -237,24 +237,24 @@ for (const [theme, config] of nanoThemes) {
         const el = document.createElement('p');
         pickrContainer2.appendChild(el);
 
-        // Delete previous instance
+
         if (nanoPickr) {
             nanoPickr.destroyAndRemove();
         }
 
-        // Apply active class
+
         for (const btn of nanoButtons) {
             btn.classList[btn === button ? 'add' : 'remove']('active');
         }
 
-        // Create fresh instance
+
         nanoPickr = new Pickr(Object.assign({
             el,
             theme,
             default: '#05c3fb'
         }, config));
 
-        // Set events
+
         nanoPickr.on('init', instance => {
             console.log('Event: "init"', instance);
         }).on('hide', instance => {

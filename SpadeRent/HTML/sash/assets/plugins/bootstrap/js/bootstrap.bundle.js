@@ -46,9 +46,9 @@
 
     if (!selector || selector === '#') {
       let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
-      // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
-      // `document.querySelector` will rightfully complain it is invalid.
-      // See https://github.com/twbs/bootstrap/issues/32273
+
+
+
 
       if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
         return null;
@@ -121,7 +121,7 @@
 
   const getElement = obj => {
     if (isElement$1(obj)) {
-      // it's a jQuery object or a node element
+
       return obj.jquery ? obj[0] : obj;
     }
 
@@ -203,7 +203,7 @@
 
 
   const reflow = element => {
-    // eslint-disable-next-line no-unused-expressions
+
     element.offsetHeight;
   };
 
@@ -223,7 +223,7 @@
 
   const onDOMContentLoaded = callback => {
     if (document.readyState === 'loading') {
-      // add listener on the first call when the document is in loading state
+
       if (!DOMContentLoadedCallbacks.length) {
         document.addEventListener('DOMContentLoaded', () => {
           DOMContentLoadedCallbacks.forEach(callback => callback());
@@ -434,7 +434,7 @@
       handler = delegationFn;
       delegationFn = null;
     } // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
-    // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+
 
 
     if (customEventsRegex.test(originalTypeEvent)) {
@@ -495,7 +495,7 @@
   }
 
   function getTypeEvent(event) {
-    // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+
     event = event.replace(stripNameRegex, '');
     return customEvents[event] || event;
   }
@@ -520,7 +520,7 @@
       const isNamespace = originalTypeEvent.startsWith('.');
 
       if (typeof originalHandler !== 'undefined') {
-        // Simplest case: handler is passed, remove that listener ONLY.
+
         if (!events || !events[typeEvent]) {
           return;
         }
@@ -628,10 +628,10 @@
       }
 
       const instanceMap = elementMap.get(element); // make it clear we only want one instance per element
-      // can be removed later when multiple key/instances are fine to be used
+
 
       if (!instanceMap.has(key) && instanceMap.size !== 0) {
-        // eslint-disable-next-line no-console
+
         console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
         return;
       }
@@ -780,7 +780,7 @@
    */
 
   class Alert extends BaseComponent {
-    // Getters
+
     static get NAME() {
       return NAME$d;
     } // Public
@@ -869,14 +869,14 @@
    */
 
   class Button extends BaseComponent {
-    // Getters
+
     static get NAME() {
       return NAME$c;
     } // Public
 
 
     toggle() {
-      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
+
       this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
     } // Static
 
@@ -1175,8 +1175,8 @@
     }
 
     nextWhenVisible() {
-      // Don't call next when the page isn't visible
-      // or the carousel or its parent isn't visible
+
+
       if (!document.hidden && isVisible(this._element)) {
         this.next();
       }
@@ -1298,7 +1298,7 @@
       };
 
       const move = event => {
-        // ensure swiping with one touch and not pinching
+
         this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
       };
 
@@ -1310,13 +1310,13 @@
         this._handleSwipe();
 
         if (this._config.pause === 'hover') {
-          // If it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
-          // would stop cycling until user tapped out of it;
-          // here, we listen for touchend, explicitly pause the carousel
-          // (as if it's the second time we tap on it, mouseenter compat event
-          // is NOT fired) and after a timeout (to allow for mouse compatibility
-          // events to fire) we explicitly restart cycling
+
+
+
+
+
+
+
           this.pause();
 
           if (this.touchTimeout) {
@@ -1448,7 +1448,7 @@
       }
 
       if (!activeElement || !nextElement) {
-        // Some weirdness is happening, so we bail
+
         return;
       }
 
@@ -1904,7 +1904,7 @@
 
 
   EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
-    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+
     if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
       event.preventDefault();
     }
@@ -1986,7 +1986,7 @@
   }
 
   function isShadowRoot(node) {
-    // IE 11 has no ShadowRoot
+
     if (typeof ShadowRoot === 'undefined') {
       return false;
     }
@@ -1995,7 +1995,7 @@
     return node instanceof OwnElement || node instanceof ShadowRoot;
   }
 
-  // and applies them to the HTMLElements such as popper and arrow
+
 
   function applyStyles(_ref) {
     var state = _ref.state;
@@ -2007,8 +2007,8 @@
       if (!isHTMLElement(element) || !getNodeName(element)) {
         return;
       } // Flow doesn't support to extend this property, but it's the most
-      // effective way to apply styles to an HTMLElement
-      // $FlowFixMe[cannot-write]
+
+
 
 
       Object.assign(element.style, style);
@@ -2082,29 +2082,29 @@
     return placement.split('-')[0];
   }
 
-  // import { isHTMLElement } from './instanceOf';
+
   function getBoundingClientRect(element, // eslint-disable-next-line unused-imports/no-unused-vars
   includeScale) {
 
     var rect = element.getBoundingClientRect();
     var scaleX = 1;
     var scaleY = 1; // FIXME:
-    // `offsetWidth` returns an integer while `getBoundingClientRect`
-    // returns a float. This results in `scaleX` or `scaleY` being
-    // non-1 when it should be for elements that aren't a full pixel in
-    // width or height.
-    // if (isHTMLElement(element) && includeScale) {
-    //   const offsetHeight = element.offsetHeight;
-    //   const offsetWidth = element.offsetWidth;
-    //   // Do not attempt to divide by 0, otherwise we get `Infinity` as scale
-    //   // Fallback to 1 in case both values are `0`
-    //   if (offsetWidth > 0) {
-    //     scaleX = rect.width / offsetWidth || 1;
-    //   }
-    //   if (offsetHeight > 0) {
-    //     scaleY = rect.height / offsetHeight || 1;
-    //   }
-    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return {
       width: rect.width / scaleX,
@@ -2118,11 +2118,11 @@
     };
   }
 
-  // means it doesn't take into account transforms.
+
 
   function getLayoutRect(element) {
     var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
-    // Fixes https://github.com/popperjs/popper-core/issues/1223
+
 
     var width = element.offsetWidth;
     var height = element.offsetHeight;
@@ -2175,7 +2175,7 @@
   }
 
   function getDocumentElement(element) {
-    // $FlowFixMe[incompatible-return]: assume body is always available
+
     return ((isElement(element) ? element.ownerDocument : // $FlowFixMe[prop-missing]
     element.document) || window.document).documentElement;
   }
@@ -2186,12 +2186,12 @@
     }
 
     return (// this is a quicker (but less type safe) way to save quite some bytes from the bundle
-      // $FlowFixMe[incompatible-return]
-      // $FlowFixMe[prop-missing]
+
+
       element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
       element.parentNode || ( // DOM Element detected
       isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
-      // $FlowFixMe[incompatible-call]: HTMLElement is a Node
+
       getDocumentElement(element) // fallback
 
     );
@@ -2205,7 +2205,7 @@
 
     return element.offsetParent;
   } // `.offsetParent` reports `null` for fixed elements, while absolute elements
-  // return the containing block
+
 
 
   function getContainingBlock(element) {
@@ -2213,7 +2213,7 @@
     var isIE = navigator.userAgent.indexOf('Trident') !== -1;
 
     if (isIE && isHTMLElement(element)) {
-      // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
+
       var elementCss = getComputedStyle$1(element);
 
       if (elementCss.position === 'fixed') {
@@ -2225,8 +2225,8 @@
 
     while (isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0) {
       var css = getComputedStyle$1(currentNode); // This is non-exhaustive but covers the most common CSS properties that
-      // create a containing block.
-      // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
+
+
 
       if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
         return currentNode;
@@ -2237,7 +2237,7 @@
 
     return null;
   } // Gets the closest ancestor positioned element. Handles some edge cases,
-  // such as table ancestors and cross browser bugs.
+
 
 
   function getOffsetParent(element) {
@@ -2320,7 +2320,7 @@
     var arrowOffsetParent = getOffsetParent(arrowElement);
     var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
     var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
-    // outside of the popper bounds
+
 
     var min = paddingObject[minProp];
     var max = clientSize - arrowRect[len] - paddingObject[maxProp];
@@ -2379,8 +2379,8 @@
     bottom: 'auto',
     left: 'auto'
   }; // Round the offsets to the nearest suitable subpixel based on the DPR.
-  // Zooming can change the DPR, but it seems to report a value that will
-  // cleanly divide the values into the appropriate subpixels.
+
+
 
   function roundOffsetsByDPR(_ref) {
     var x = _ref.x,
@@ -2594,13 +2594,13 @@
   }
 
   function getWindowScrollBarX(element) {
-    // If <html> has a CSS width greater than the viewport, then this will be
-    // incorrect for RTL.
-    // Popper 1 is broken in this case and never had a bug report so let's assume
-    // it's not an issue. I don't think anyone ever specifies width on <html>
-    // anyway.
-    // Browsers where the left scrollbar doesn't cause an issue report `0` for
-    // this (e.g. Edge 2019, IE11, Safari)
+
+
+
+
+
+
+
     return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
   }
 
@@ -2612,21 +2612,21 @@
     var height = html.clientHeight;
     var x = 0;
     var y = 0; // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
-    // can be obscured underneath it.
-    // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
-    // if it isn't open, so if this isn't available, the popper will be detected
-    // to overflow the bottom of the screen too early.
+
+
+
+
 
     if (visualViewport) {
       width = visualViewport.width;
       height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
-      // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-      // errors due to floating point numbers, so we need to check precision.
-      // Safari returns a number <= 0, usually < -1 when pinch-zoomed
-      // Feature detection fails in mobile emulation mode in Chrome.
-      // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
-      // 0.001
-      // Fallback here: "Not Safari" userAgent
+
+
+
+
+
+
+
 
       if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
         x = visualViewport.offsetLeft;
@@ -2642,7 +2642,7 @@
     };
   }
 
-  // of the `<html>` and `<body>` rect bounds if horizontally scrollable
+
 
   function getDocumentRect(element) {
     var _element$ownerDocumen;
@@ -2668,7 +2668,7 @@
   }
 
   function isScrollParent(element) {
-    // Firefox wants us to check `-x` and `-y` variations as well
+
     var _getComputedStyle = getComputedStyle$1(element),
         overflow = _getComputedStyle.overflow,
         overflowX = _getComputedStyle.overflowX,
@@ -2679,7 +2679,7 @@
 
   function getScrollParent(node) {
     if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {
-      // $FlowFixMe[incompatible-return]: assume body is always available
+
       return node.ownerDocument.body;
     }
 
@@ -2738,8 +2738,8 @@
   function getClientRectFromMixedType(element, clippingParent) {
     return clippingParent === viewport ? rectToClientRect(getViewportRect(element)) : isHTMLElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
   } // A "clipping parent" is an overflowable container with the characteristic of
-  // clipping (or hiding) overflowing elements with a position different from
-  // `initial`
+
+
 
 
   function getClippingParents(element) {
@@ -2756,7 +2756,7 @@
       return isElement(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !== 'body';
     });
   } // Gets the maximum area that the element is visible in due to any number of
-  // clipping parents
+
 
 
   function getClippingRect(element, boundary, rootBoundary) {
@@ -2875,7 +2875,7 @@
     });
     var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
     var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
-    // 0 or negative = within the clipping rect
+
 
     var overflowOffsets = {
       top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
@@ -3031,7 +3031,7 @@
     }
 
     if (makeFallbackChecks) {
-      // `2` may be desired in some cases – research later
+
       var numberOfChecks = flipVariations ? 3 : 1;
 
       var _loop = function _loop(_i) {
@@ -3191,10 +3191,10 @@
   function popperOffsets(_ref) {
     var state = _ref.state,
         name = _ref.name;
-    // Offsets are the actual position the popper needs to have to be
-    // properly positioned near its reference element
-    // This is the most basic placement, and will be adjusted by
-    // the modifiers in the next step
+
+
+
+
     state.modifiersData[name] = computeOffsets({
       reference: state.rects.reference,
       element: state.rects.popper,
@@ -3268,7 +3268,7 @@
       var additive = tether ? -popperRect[len] / 2 : 0;
       var minLen = variation === start ? referenceRect[len] : popperRect[len];
       var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
-      // outside the reference bounds
+
 
       var arrowElement = state.elements.arrow;
       var arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : {
@@ -3278,10 +3278,10 @@
       var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : getFreshSideObject();
       var arrowPaddingMin = arrowPaddingObject[mainSide];
       var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
-      // to include its full size in the calculation. If the reference is small
-      // and near the edge of a boundary, the popper can overflow even if the
-      // reference is not overflowing as well (e.g. virtual elements with no
-      // width or height)
+
+
+
+
 
       var arrowLen = within(0, referenceRect[len], arrowRect[len]);
       var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue;
@@ -3349,7 +3349,7 @@
     var scaleY = rect.height / element.offsetHeight || 1;
     return scaleX !== 1 || scaleY !== 1;
   } // Returns the composite rect of an element relative to its offsetParent.
-  // Composite means it takes into account transforms as well as layout.
+
 
 
   function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
@@ -3418,7 +3418,7 @@
 
     modifiers.forEach(function (modifier) {
       if (!visited.has(modifier.name)) {
-        // check for visited object
+
         sort(modifier);
       }
     });
@@ -3426,7 +3426,7 @@
   }
 
   function orderModifiers(modifiers) {
-    // order based on dependencies
+
     var orderedModifiers = order(modifiers); // order based on phase
 
     return modifierPhases.reduce(function (acc, phase) {
@@ -3522,7 +3522,7 @@
             reference: isElement(reference) ? listScrollParents(reference) : reference.contextElement ? listScrollParents(reference.contextElement) : [],
             popper: listScrollParents(popper)
           }; // Orders the modifiers based on their dependencies and `phase`
-          // properties
+
 
           var orderedModifiers = orderModifiers(mergeByName([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
 
@@ -3533,11 +3533,11 @@
           runModifierEffects();
           return instance.update();
         },
-        // Sync update – it will always be executed, even if not necessary. This
-        // is useful for low frequency updates where sync behavior simplifies the
-        // logic.
-        // For high frequency updates (e.g. `resize` and `scroll` events), always
-        // prefer the async Popper#update method
+
+
+
+
+
         forceUpdate: function forceUpdate() {
           if (isDestroyed) {
             return;
@@ -3546,7 +3546,7 @@
           var _state$elements = state.elements,
               reference = _state$elements.reference,
               popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
-          // anymore
+
 
           if (!areValidElements(reference, popper)) {
 
@@ -3558,16 +3558,16 @@
             reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy === 'fixed'),
             popper: getLayoutRect(popper)
           }; // Modifiers have the ability to reset the current update cycle. The
-          // most common use case for this is the `flip` modifier changing the
-          // placement, which then needs to re-run all the modifiers, because the
-          // logic was previously ran for the previous placement and is therefore
-          // stale/incorrect
+
+
+
+
 
           state.reset = false;
           state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
-          // is filled with the initial data specified by the modifier. This means
-          // it doesn't persist and is fresh on each update.
-          // To ensure persistent data, use `${name}#persistent`
+
+
+
 
           state.orderedModifiers.forEach(function (modifier) {
             return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
@@ -3597,8 +3597,8 @@
             }
           }
         },
-        // Async and optimistically optimized update – it will not be executed if
-        // not necessary (debounced to run at most once-per-tick)
+
+
         update: debounce(function () {
           return new Promise(function (resolve) {
             instance.forceUpdate();
@@ -3621,10 +3621,10 @@
           options.onFirstUpdate(state);
         }
       }); // Modifiers have the ability to execute arbitrary code before the first
-      // update cycle runs. They will be executed in the same order as the update
-      // cycle. This is useful when a modifier adds some persistent data that
-      // other modifiers need to use, but the modifier is run after the dependent
-      // one.
+
+
+
+
 
       function runModifierEffects() {
         state.orderedModifiers.forEach(function (_ref3) {
@@ -3828,9 +3828,9 @@
       } else {
         this._createPopper(parent);
       } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
+
+
 
 
       if ('ontouchstart' in document.documentElement && !parent.closest(SELECTOR_NAVBAR_NAV)) {
@@ -3883,7 +3883,7 @@
       if (hideEvent.defaultPrevented) {
         return;
       } // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
+
 
 
       if ('ontouchstart' in document.documentElement) {
@@ -3912,7 +3912,7 @@
       typeCheckConfig(NAME$9, config, this.constructor.DefaultType);
 
       if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
-        // Popper virtual elements require a getBoundingClientRect method
+
         throw new TypeError(`${NAME$9.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
       }
 
@@ -4030,7 +4030,7 @@
       if (!items.length) {
         return;
       } // if target isn't included in items (e.g. when expanding the dropdown)
-      // allow cycling to get the last item in case key equals ARROW_UP_KEY
+
 
 
       getNextActiveElement(items, target, key === ARROW_DOWN_KEY, !items.includes(target)).focus();
@@ -4102,13 +4102,13 @@
     }
 
     static dataApiKeydownHandler(event) {
-      // If not input/textarea:
-      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
-      // If input/textarea:
-      //  - If space key => not a dropdown command
-      //  - If key is other than escape
-      //    - If key is not up or down => not a dropdown command
-      //    - If trigger inside the menu => not a dropdown command
+
+
+
+
+
+
+
       if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
         return;
       }
@@ -4189,7 +4189,7 @@
     }
 
     getWidth() {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+
       const documentWidth = document.documentElement.clientWidth;
       return Math.abs(window.innerWidth - documentWidth);
     }
@@ -4287,10 +4287,10 @@
   const Default$7 = {
     className: 'modal-backdrop',
     isVisible: true,
-    // if false, we use the backdrop helper without adding any element to the dom
+
     isAnimated: false,
     rootElement: 'body',
-    // give the choice to place backdrop under different elements
+
     clickCallback: null
   };
   const DefaultType$7 = {
@@ -4410,7 +4410,7 @@
    */
   const Default$6 = {
     trapElement: null,
-    // The element to trap focus inside of
+
     autofocus: true
   };
   const DefaultType$6 = {
@@ -4675,7 +4675,7 @@
     _initializeBackDrop() {
       return new Backdrop({
         isVisible: Boolean(this._config.backdrop),
-        // 'static' option will be translated to true, and booleans will keep their value
+
         isAnimated: this._isAnimated()
       });
     }
@@ -4701,7 +4701,7 @@
       const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        // Don't move modal's DOM position
+
         document.body.append(this._element);
       }
 
@@ -4845,8 +4845,8 @@
 
       this._element.focus();
     } // ----------------------------------------------------------------------
-    // the following methods are used to handle overflowing modals
-    // ----------------------------------------------------------------------
+
+
 
 
     _adjustDialog() {
@@ -4904,7 +4904,7 @@
 
     EventHandler.one(target, EVENT_SHOW$3, showEvent => {
       if (showEvent.defaultPrevented) {
-        // only register focus restorer if modal will actually get shown
+
         return;
       }
 
@@ -5165,7 +5165,7 @@
     }
 
     EventHandler.one(target, EVENT_HIDDEN$2, () => {
-      // focus on trigger when it is closed
+
       if (isVisible(this)) {
         this.focus();
       }
@@ -5236,7 +5236,7 @@
   };
 
   const DefaultAllowlist = {
-    // Global attributes allowed on any supplied element below.
+
     '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
     a: ['target', 'href', 'title', 'rel'],
     area: [],
@@ -5499,7 +5499,7 @@
       if (showEvent.defaultPrevented || !isInTheDom) {
         return;
       } // A trick to recreate a tooltip in case a new title is given by using the NOT documented `data-bs-original-title`
-      // This will be removed later in favor of a `setContent` method
+
 
 
       if (this.constructor.NAME === 'tooltip' && this.tip && this.getTitle() !== this.tip.querySelector(SELECTOR_TOOLTIP_INNER).innerHTML) {
@@ -5548,9 +5548,9 @@
       if (customClass) {
         tip.classList.add(...customClass.split(' '));
       } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
+
+
 
 
       if ('ontouchstart' in document.documentElement) {
@@ -5606,7 +5606,7 @@
       }
 
       tip.classList.remove(CLASS_NAME_SHOW$2); // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
+
 
       if ('ontouchstart' in document.documentElement) {
         [].concat(...document.body.children).forEach(element => EventHandler.off(element, 'mouseover', noop));
@@ -5941,8 +5941,8 @@
           config[key] = this._config[key];
         }
       } // In the future can be replaced with:
-      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
-      // `Object.fromEntries(keysWithDifferentValues)`
+
+
 
 
       return config;
@@ -6059,7 +6059,7 @@
    */
 
   class Popover extends Tooltip {
-    // Getters
+
     static get Default() {
       return Default$2;
     }
@@ -6301,8 +6301,8 @@
         SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, link.closest(SELECTOR_DROPDOWN$1)).classList.add(CLASS_NAME_ACTIVE$1);
       } else {
         SelectorEngine.parents(link, SELECTOR_NAV_LIST_GROUP$1).forEach(listGroup => {
-          // Set triggered links parents as active
-          // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
+
+
           SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inside .nav-item
 
           SelectorEngine.prev(listGroup, SELECTOR_NAV_ITEMS).forEach(navItem => {
@@ -6396,7 +6396,7 @@
    */
 
   class Tab extends BaseComponent {
-    // Getters
+
     static get NAME() {
       return NAME$1;
     } // Public

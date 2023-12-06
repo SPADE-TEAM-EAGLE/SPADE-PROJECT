@@ -101,8 +101,8 @@ $(function() {
 $(function() {
     'use strict'
 
-    // We use an inline data source in the example, usually data would
-    // be fetched from a server
+
+
     var data = [],
         totalPoints = 300;
 
@@ -110,7 +110,7 @@ $(function() {
     'use strict'
 
         if (data.length > 0) data = data.slice(1);
-        // Do a random walk
+
         while (data.length < totalPoints) {
             var prev = data.length > 0 ? data[data.length - 1] : 50,
                 y = prev + Math.random() * 10 - 5;
@@ -487,7 +487,7 @@ $(function() {
     $("#example-1").click();
 });
 
-// A custom label formatter used by several of the plots
+
 function labelFormatter(label, series) {
 	'use strict'
     return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";

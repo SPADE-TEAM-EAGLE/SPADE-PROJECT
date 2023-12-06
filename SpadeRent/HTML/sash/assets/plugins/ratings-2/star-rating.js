@@ -1,5 +1,5 @@
 $(function() {
-  // basic use comes with defaults values
+
   $(".my-rating").starRating({
     initialRating: 4.0,
     starSize: 35,
@@ -15,7 +15,7 @@ $(function() {
     strokeWidth: 0,
     useGradient: false
   });
-  // example grabing rating from markup, and custom colors
+
   $(".my-rating-4").starRating({
     totalStars: 5,
     starShape: 'rounded',
@@ -25,7 +25,7 @@ $(function() {
     activeColor: '#f1c40f',
     useGradient: false
   });
-  // specify the gradient start and end for the selected stars
+
   $(".my-rating-5").starRating({
     starSize: 35,
     strokeWidth: 0,

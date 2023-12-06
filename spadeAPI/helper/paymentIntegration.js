@@ -4,14 +4,14 @@ const { request } = require('https'); // Use the built-in https module for HTTPS
 const sha256 = require('js-sha256');
 const utf8 = require('utf8');
 const { query } = require('express');
-// const { queryRunner } = require('./queryRunner');
+
 const { selectQuery, updateUserBank, insertUserBankFuture,paymentACHQuery,paymentACHRequestQuery } = require('../constants/queries');
 safecharge.initiate(config.merchantId, config.merchantSiteId, config.Secret_Key);
 const { paymentMail } = require("../sendmail/sendmail");
 const { queryRunner } = require('./queryRunner')
 const { updateUser } = require("./../constants/queries")
 
-// ############################ timestamp #################################
+
 function getTimestamp() {
   const now = new Date();
   const year = now.getFullYear();
@@ -23,7 +23,7 @@ function getTimestamp() {
   return `${year}${month}${day}${hours}${minutes}${seconds}`;
 }
 const timestamp = getTimestamp();
-// ############################ timestamp #################################
+
 
 exports.saveCard = async (req, res) => {
   const { currency, amount } = req.body;
@@ -55,9 +55,9 @@ exports.saveCard = async (req, res) => {
     response.on('end', () => {
       try {
         const data = JSON.parse(responseData);
-        // console.log(data);
+
         res.status(200).json({
-          // data
+
           sessionToken: data.sessionToken,
           clientUniqueId: data.clientUniqueId,
           merchantId: data.merchantId,
@@ -79,7 +79,7 @@ exports.saveCard = async (req, res) => {
       error,
     })
   });
-  // Send the request body
+
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
@@ -115,9 +115,9 @@ exports.openOrder = async (req, res) => {
     response.on('end', () => {
       try {
         const data = JSON.parse(responseData);
-        // console.log(data);
+
         res.status(200).json({
-          // data
+
           sessionToken: data.sessionToken,
           clientUniqueId: data.clientUniqueId,
           merchantId: data.merchantId,
@@ -139,18 +139,18 @@ exports.openOrder = async (req, res) => {
       error,
     })
   });
-  // Send the request body
+
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
 
-// ###################################### CREATE USER #############################################################
+
 exports.createUserPayment = async (req, res) => {
   const { userId, firstName, lastName, address, state, city, zip, countryCode, phone, locale, email, county } = req.body;
   const requestData = {
-    // merchantId: "6400701569295268447",
-    // merchantSiteId: "244298",
-    // clientRequestId: "561ccf70-336b-11ee-a309-4f00ef0ed1ad",
+
+
+
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
     userTokenId: userId,
@@ -165,16 +165,16 @@ exports.createUserPayment = async (req, res) => {
     phone: phone,
     locale: "en_US",
     email: email,
-    // dateOfBirth: "01-01998",
+
     county: "USA",
     timeStamp: timestamp,
     checksum: sha256(config.merchantId + config.merchantSiteId + userId + config.clientRequestId + firstName + lastName + address + state + city + zip + countryCode + phone + "en_US" + email + "USA" + timestamp + config.Secret_Key),
-    // checksum: sha256("6400701569295268447"+"244298"+"123"+"561ccf70-336b-11ee-a309-4f00ef0ed1ad"+"John"+ "Smith"+"US"+"john.smith@test.com"+timestamp+"xp8GrYWC6n9wHbxWuDwRPtAPICRLbBvvY2DuLYVRu8v5ip4GHPNymd0MA8KsEpbU"),
-    // checksumConcatenation: config.merchantId+config.merchantSiteId+"123"+config.clientRequestId+"John"+ "Smith"+timestamp+config.Secret_Key 
+
+
   };
-  // 90547429
-  // Console checksum
-  // console.log(requestData.checksumConcatenation);
+
+
+
   console.log(requestData.checksum);
 
   const requestOptions = {
@@ -184,7 +184,7 @@ exports.createUserPayment = async (req, res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
-    // const reqq = request("https://secure.safecharge.com/ppp/api/v1/createUser.do", requestOptions, (response) => {
+
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -216,9 +216,9 @@ exports.createUserPayment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### CREATE USER #############################################################
 
-// ###################################### Get USER Details #############################################################
+
+
 exports.getUserDetailsPayment = async (req, res) => {
   const requestData = {
     merchantId: config.merchantId,
@@ -236,7 +236,7 @@ exports.getUserDetailsPayment = async (req, res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
-    // const reqq = request("https://secure.safecharge.com/ppp/api/v1/getUserDetails.do", requestOptions, (response) => {
+
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -267,9 +267,9 @@ exports.getUserDetailsPayment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### Get USER Details #############################################################
 
-// ###################################### Create Plan #############################################################
+
+
 exports.createPlanPayment = async (req, res) => {
   const { name, initialAmount, recurringAmount, currency } = req.body;
   const requestData = {
@@ -289,17 +289,17 @@ exports.createPlanPayment = async (req, res) => {
       month: "1",
       year: "0"
     },
-    // endAfter: {
-    //     day: "0",
-    //     month: "0",
-    //     year: "0"
-    // },
+
+
+
+
+
     timeStamp: timestamp,
-    // clientRequestId: config.clientRequestId,
-    // timeStamp: timestamp,
+
+
     checksum: sha256(config.merchantId + config.merchantSiteId + name + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key),
   };
-  // console.log(requestData.checksum);
+
   const requestOptions = {
     method: "POST",
     headers: {
@@ -307,7 +307,7 @@ exports.createPlanPayment = async (req, res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
-    // const reqq = request("https://secure.safecharge.com/ppp/api/createPlan.do", requestOptions, (response) => {
+
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -360,24 +360,24 @@ exports.editPlanPayment = async (req, res) => {
       month: "1",
       year: "0"
     },
-    // endAfter: {
-    //     day: "0",
-    //     month: "0",
-    //     year: "0"
-    // },
+
+
+
+
+
     timeStamp: timestamp,
-    // clientRequestId: config.clientRequestId,
-    // timeStamp: timestamp,
+
+
     checksum: sha256(config.merchantId + config.merchantSiteId + planId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key),
   };
-  // console.log(requestData.checksum);
+
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     }
   };
-  // const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
+
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/createPlan.do", requestOptions, (response) => {
     let responseData = '';
     response.on('data', (chunk) => {
@@ -409,16 +409,16 @@ exports.editPlanPayment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### Create Plan #############################################################
 
-// ###################################### Create Subsription #############################################################
+
+
 exports.createSubscriptionPayment = async (req, res) => {
   const { initialAmount, recurringAmount, currency, planId, userTokenId, upoId, userNuveiId } = req.body;
   const subscriptionDate = new Date();
   const requestData = {
     merchantId: config.merchantId,
     merchantSiteId: config.merchantSiteId,
-    // planId: planId,
+
     userTokenId: userTokenId,
     userPaymentOptionId: upoId,
     initialAmount: initialAmount,
@@ -433,7 +433,7 @@ exports.createSubscriptionPayment = async (req, res) => {
 
     timeStamp: timestamp,
 
-    // checksum: sha256(config.merchantId+config.merchantSiteId+userTokenId+planId+upoId+initialAmount+recurringAmount+currency+timestamp+config.Secret_Key),
+
   };
   console.log(config.merchantId, config.merchantSiteId, userTokenId, planId, upoId, initialAmount, recurringAmount, currency, timestamp, config.Secret_Key)
   console.log(config.merchantId + config.merchantSiteId + userTokenId + planId + upoId + initialAmount + recurringAmount + currency + timestamp + config.Secret_Key);
@@ -486,7 +486,7 @@ exports.createSubscriptionPayment = async (req, res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/createSubscription.do", requestOptions, (response) => {
-    // const reqq = request("https://secure.safecharge.com/ppp/api/createSubscription.do", requestOptions, (response) => {
+
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -535,7 +535,6 @@ exports.createSubscriptionPayment = async (req, res) => {
   reqq.end();
 };
 
-// ###################################### Create Subsription #############################################################
 
 
 
@@ -559,7 +558,8 @@ exports.createSubscriptionPayment = async (req, res) => {
 
 
 
-// ###################################### Create Subsription Setting #############################################################
+
+
 exports.createSubscriptionPaymentSetting = async (req, res) => {
  
   const {
@@ -590,7 +590,7 @@ exports.createSubscriptionPaymentSetting = async (req, res) => {
     timeStamp: timestamp,
   };
 
-// Format the subscriptionCreatedDate as "YYYY-MM-DD HH:MM:SS"
+
 function formatDateForSQL(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -614,7 +614,7 @@ return daysDiff;
   }
   const result = await queryRunner(selectQuery("plan", "id"), [correctPlanId]);
   const { nuveiId, monthlyAnnual, plantotalAmount, planName } = result[0][0];
-  // Additional code block (if userId is defined)
+
   const UserResult = await queryRunner(selectQuery("users", "id"), [userTokenId]);
   console.log(UserResult[0][0])
   const { subscriptionCreated_at, PlanID } = UserResult[0][0];
@@ -625,23 +625,23 @@ return daysDiff;
 
 
 
-  // Move Annually to Monthly
-// if(planId > PlanID && currentPlanMonthlyAnnual != monthlyAnnual){
-//   return res.status(200).json({
-//     Message : "unable to downgrade",
-//     Reason : "you want to switch Annually to monthly kindly contact to support team"
-//   });
-// }
 
 
-  // Annually Downgrade
+
+
+
+
+
+
+
+
   if (planId < PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4 ){
     return res.status(200).json({
       Message : "unable to downgrade",
       Reason : "you want to switch Annually Upgrade to downgrade kindly contact to support team"
     });
   }
-  // Monthly
+
   let daysDifference;
   if (monthlyAnnual == "Monthly") {
     console.log(UserResult[0][0]);
@@ -657,41 +657,41 @@ return daysDiff;
       year: subscriptionCreated_at.getFullYear(),
     };
 
-    // Calculate the difference in days
+
     daysDifference = (subscriptionDate - subscriptionCreated_at) / (1000 * 60 * 60 * 24);
-    // daysDifference = dayDifference(subscriptionCreated_at);
+
     daysDifference = Math.max(0, Math.round(daysDifference));
 
-    // Calculate the difference in months
+
     let monthsDifference = (currentDate.year - createdDate.year) * 12 + (currentDate.month - createdDate.month);
     monthsDifference = Math.max(0, monthsDifference);
 
-    // Calculate the difference in years
+
     let yearsDifference = currentDate.year - createdDate.year;
     yearsDifference = Math.max(0, yearsDifference);
-    // Monthly Upgrade
+
     if (
       currentDate.month == createdDate.month &&
       currentDate.year == createdDate.year &&
       planId > PlanID &&
       monthlyAnnual == "Monthly"
     ) {
-      // console.log("Monthly if in")
+
       let remainingDays = daysDifference;
-      // console.log(remainingDays)
+
       remainingDays = 30 - remainingDays;
-      // console.log(remainingDays)
+
       let initialAmountChange = existPlanAmount / 30;
-      // console.log(initialAmountChange)
+
       initialAmountChange = remainingDays * initialAmountChange;
-      // console.log(initialAmountChange)
-      // console.log(requestData.initialAmount)
+
+
       initialAmountChange = requestData.initialAmount - initialAmountChange;
-      // console.log(initialAmountChange)
+
       requestData.initialAmount = initialAmountChange;
     }
   }
-  // let daysDifferenceAnnually;
+
   if (planId < PlanID && monthlyAnnual == "Annually") {
  
 const currentDate = new Date();
@@ -708,7 +708,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
   }
 
   if (monthlyAnnual == "Monthly") {
-    // requestData.recurringAmount = initialAmount;
+
     requestData.recurringPeriod = {
       day: "0",
       month: "1",
@@ -731,7 +731,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "20"
     };
   }
-  // Monthly Downgrade 
+
   if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly") {
     let AddDays = 30 - daysDifference;
     subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
@@ -752,7 +752,7 @@ const monthsDifference = (currentDate.getMonth() + 1) - (subscriptionCreated_at.
       year: "20"
     };
   }
-// Move Monthly to Annually
+
 let daysDifferenceMtoA; 
 if(planId < PlanID && currentPlanMonthlyAnnual == "Monthly" && monthlyAnnual == "Annually" && PlanID >= 5 && PlanID <= 7 && planId >= 2 && planId <= 4 ){
   const currentDate = new Date();
@@ -820,19 +820,19 @@ if(planId > PlanID && PlanID==1){
           console.log(planId + " " + UserResult[0][0].PlanID);
           const data = JSON.parse(responseData);
           console.log(data);
-          // if (planId < UserResult[0][0].PlanID && monthlyAnnual == "Monthly" || monthlyAnnual == "Annually") {
+
             const selectUserResult = await queryRunner(selectQuery('users', 'id'), [userTokenId]);
             const Name = selectUserResult[0][0].FirstName + " "+ selectUserResult[0][0].LastName;
             const email = selectUserResult[0][0].Email;
             const mailSubject = "Thank You for Subscribing to Spade Rent";
             if (
               planId < UserResult[0][0].PlanID || planId < PlanID
-              //  && currentPlanMonthlyAnnual !== monthlyAnnual
+
             ) {
               const subscriptionDate = new Date();
               let subscriptionCreatedDateFormatted;
             
-              // Get user data
+
 
                 AddDays = 30 - daysDifference;
                 subscriptionDate.setDate(subscriptionDate.getDate() + AddDays);
@@ -856,10 +856,10 @@ if(planId > PlanID && PlanID==1){
               }
             }
             
-           // For Yearly
+
           else {
             const subscriptionDateQuery = new Date();
-            // console.log(userNuveiId + " " + data.subscriptionId + " " + subscriptionDate + " " + userTokenId);
+
             const result = await queryRunner(updateUserBank, [userNuveiId, data.subscriptionId, subscriptionDateQuery, userTokenId]);
             paymentMail(Name,subscriptionDateQuery,requestData.initialAmount,email,planName, mailSubject); 
             if (result[0].affectedRows == 1) {
@@ -889,10 +889,10 @@ if(planId > PlanID && PlanID==1){
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### Create Subsription #############################################################
 
 
-// ###################################### Cancel Subscription #############################################################
+
+
 exports.cancelSubscription = async (req, res) => {
   const { subscriptionId } = req.body;
   const requestData = {
@@ -909,7 +909,7 @@ exports.cancelSubscription = async (req, res) => {
     }
   };
   const reqq = request("https://ppp-test.nuvei.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
-    // const reqq = request("https://secure.safecharge.com/ppp/api/cancelSubscription.do", requestOptions, (response) => {
+
     let responseData = '';
     response.on('data', (chunk) => {
       responseData += chunk;
@@ -940,11 +940,11 @@ exports.cancelSubscription = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### Cancel Subscription #############################################################
 
 
 
-// ###################################### Payment 2 Payment #############################################################
+
+
 exports.Payment2Payment = async (req, res) => {
   const { sessionToken, amount, currency, senderDetails, recipientDetails } = req.body;
   console.log(req.body)
@@ -998,7 +998,6 @@ exports.Payment2Payment = async (req, res) => {
   reqq.write(JSON.stringify(requestData));
   reqq.end();
 };
-// ###################################### Payment 2 Payment #############################################################
 
 
 
@@ -1012,7 +1011,8 @@ exports.Payment2Payment = async (req, res) => {
 
 
 
-// ###################################### Payment 2 Payment #############################################################
+
+
 exports.paymentACHVerification = async (req, res) => {
   const { ppp_status, ppp_TransactionID, TransactionId, userid, merchant_unique_id,email, totalAmount, currency, Status } = req.body;
   console.log("req.body");
@@ -1042,4 +1042,4 @@ exports.paymentACHVerification = async (req, res) => {
   }
       }
 
-// ###################################### Payment 2 Payment #############################################################
+

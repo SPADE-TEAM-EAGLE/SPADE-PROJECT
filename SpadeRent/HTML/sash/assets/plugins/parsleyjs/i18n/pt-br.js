@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('pt-br', {
   defaultMessage: "Este valor parece ser inválido.",
   type: {

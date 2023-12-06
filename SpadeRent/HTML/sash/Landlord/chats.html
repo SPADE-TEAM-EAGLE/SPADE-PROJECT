@@ -1360,19 +1360,19 @@
                             $('.span_upgrade_now').hide()
                             $('.span_upgrade_now_div').hide()
                         }
-                        // if (response.image !== " " && response.image !== null && response.image !== "") {
-                        //     $("#user-img").attr("src", response.image)
-                        //     $("#user-img-dark").attr("src", response.image)
-                        // }
+
+
+
+
                         localStorage.setItem("landlordName",response.userName)
                     if (response.image !== " " && response.image !== null && response.image !== "") {
-                        // $("#user-img").parent().removeClass("d-none")
-                        // $("#user-img-dark").parent().removeClass("d-none")
+
+
                         $("#user-img").attr("src", response.image)
                         $("#user-img-dark").attr("src", response.image)
                         $(".profileImage").parent().remove()
                     }else{
-                        // $(".profileImage").removeClass("d-none")
+
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -1766,8 +1766,8 @@
                                                 var newBgImageUrl = `url('` + localStorage.getItem("tenantImg") + `')`;
                                                 $(".person").css("background-image", newBgImageUrl);
                                             } else {
-                                                // var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-                                                // $(".person").css("background-image", newBgImageUrl);
+
+
                                                 $(".person").css("background-image", "");
                                                 $(".person").addClass("profileImage")
                                                 $(".person").text(
@@ -1777,8 +1777,8 @@
                                             }
                                         } else {
                                             localStorage.setItem("tenantImg", null)
-                                            // var newBgImageUrl = "url('../assets/images/users/5.jpg')";
-                                            // $(".person").css("background-image", newBgImageUrl);
+
+
                                             $(".person").css("background-image", "");
                                             $(".person").addClass("profileImage") 
                                             $(".person").text(
@@ -2134,9 +2134,9 @@
                         imageContainer.textContent = localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
                             localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase();
                     }
-                    // Append the imageContainer to the document or a specific parent element
-                    // For example, assuming you have a parentElement, you can use:
-                    // parentElement.appendChild(imageContainer);
+
+
+
                     mainContainer.appendChild(messageContainer);
                     messageContainer.appendChild(messageText);
                     messageContainer.appendChild(timestampSpan);

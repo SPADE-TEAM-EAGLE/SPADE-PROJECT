@@ -1,5 +1,5 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
+
+
 Parsley.addMessages('sk', {
   defaultMessage: "Prosím zadajte správnu hodnotu.",
   type: {

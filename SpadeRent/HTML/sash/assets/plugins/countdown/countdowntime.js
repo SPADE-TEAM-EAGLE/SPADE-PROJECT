@@ -38,8 +38,8 @@
           if(Date.parse(deadline) < Date.parse(timeNow)) {
             var deadline = new Date(Date.parse(new Date()) + endDate * 24 * 60 * 60 * 1000 + endHours * 60 * 60 * 1000); 
           }
-          
-          
+
+
           initializeClock(deadline);
 
           function getTimeRemaining(endtime) { 

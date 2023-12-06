@@ -2,7 +2,7 @@
  "use strict"; // Start of use strict
 $(function() {
     "use strict";
-    // Just the defaults.
+
     $("span.pie").peity("pie",{
         width: '50',
         height: '50'
@@ -52,9 +52,9 @@ $(function() {
         width: '100',
         height: '100'
     })
-    // Using data attributes
+
     $(".data-attributes span").peity("donut")
-    // Evented example.
+
     $("select").change(function() {
         var text = $(this).val() + "/" + 5
         $(this)
@@ -64,7 +64,7 @@ $(function() {
         $("#notice").text("Chart updated: " + text)
     }).change()
     $("span.graph").peity("pie")
-    // Updating charts.
+
     var updatingChart = $(".updating-chart").peity("line", { width: "100%",height:150 })
     setInterval(function() {
         var random = Math.round(Math.random() * 20)

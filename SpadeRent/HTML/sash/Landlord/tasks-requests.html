@@ -1325,7 +1325,7 @@
                                                             <strong class="text-dark">Sort by:</strong>
                                                         </a>
                                                     </li>
-                                                    
+
                                                     <li class="d-flex justify-content-between">
                                                         <a class="text-dark" href="javascript:void(0)">Ascending</a>
                                                         <div class="form-check m-0">
@@ -1858,19 +1858,19 @@
                 },
                 success: function ({ userName, image,create_at,planID,...rest }) {
                     adjustPlan(rest)
-            //         if(image!==" " && image!==null && image!== ""){
-            //     $("#user-img").attr("src", image)
-            //     $("#user-img-dark").attr("src", image)
-            // } 
+
+
+
+
             localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
-                        // $("#user-img").parent().removeClass("d-none")
-                        // $("#user-img-dark").parent().removeClass("d-none")
+
+
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
                         $(".profileImage").parent().remove()
                     }else{
-                        // $(".profileImage").removeClass("d-none")
+
                         $("#user-img").parent().remove()
                         $("#user-img-dark").parent().remove()
                         $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
@@ -2201,7 +2201,7 @@ if (task.dueDate) {
     var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
     var month = (targetDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if necessary
     var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
-    // var formattedDueDate = `${month}/${day}/${year}`;
+
     if (month === null || day === null || year === null || month === "NaN" || day === "NaN" || year === "NaN" ) {
   var formattedDueDate = null;
 } else {
@@ -2408,12 +2408,12 @@ if (task.dueDate) {
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        // console.log($(a).find('.rentAmount').text())
+
 
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
 
-                        // console.log(parseInt($(a).find('.serial-number').text()))
+
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb);
                         return idA - idB;
@@ -2424,7 +2424,7 @@ if (task.dueDate) {
                         const matcha = $(a).find('.serial-number').text()
                         const matchb = $(b).find('.serial-number').text()
 
-                        // console.log(parseInt($(a).find('.rentAmount').text()))
+
                         var idA = parseInt(matcha);
                         var idB = parseInt(matchb); 
                         return idB - idA;

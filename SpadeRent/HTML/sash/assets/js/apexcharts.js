@@ -239,7 +239,7 @@
             B = f & 0x0000ff;
         return '#' + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
       } // beautiful color shading blending code
-      // http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+
 
     }, {
       key: "shadeColor",
@@ -274,7 +274,7 @@
 
         return array;
       } // to extend defaults with user options
-      // credit: http://stackoverflow.com/questions/27936772/deep-object-merging-in-es6-es7#answer-34749873
+
 
     }, {
       key: "extend",
@@ -355,7 +355,7 @@
 
           return cloneResult;
         } else if (Object.prototype.toString.call(source) === '[object Null]') {
-          // fixes an issue where null values were converted to {}
+
           return null;
         } else if (Object.prototype.toString.call(source) === '[object Date]') {
           return source;
@@ -609,14 +609,14 @@
         var msie = ua.indexOf('MSIE ');
 
         if (msie > 0) {
-          // IE 10 or older => return version number
+
           return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
         }
 
         var trident = ua.indexOf('Trident/');
 
         if (trident > 0) {
-          // IE 11 => return version number
+
           var rv = ua.indexOf('rv:');
           return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
         }
@@ -624,7 +624,7 @@
         var edge = ua.indexOf('Edge/');
 
         if (edge > 0) {
-          // Edge (IE 12+) => return version number
+
           return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
         } // other browser
 
@@ -806,7 +806,7 @@
         }
 
         if (w.config.chart.animations.dynamicAnimation.enabled && w.globals.dataChanged && w.config.chart.type !== 'bar') {
-          // disabled due to this bug - https://github.com/apexcharts/vue-apexcharts/issues/75
+
           delayFactor = 0;
         }
 
@@ -853,8 +853,8 @@
 
         var disableAnimationForCorrupPath = function disableAnimationForCorrupPath(path) {
           if (w.config.chart.type === 'radar') {
-            // radar chart drops the path to bottom and hence a corrup path looks ugly
-            // therefore, disable animation for such a case
+
+
             speed = 1;
           }
 
@@ -874,7 +874,7 @@
         }
 
         el.plot(pathFrom).animate(1, w.globals.easing, delay).plot(pathFrom).animate(speed, w.globals.easing, delay).plot(pathTo).afterAll(function () {
-          // a flag to indicate that the original mount function can return true now as animation finished here
+
           if (Utils.isNumber(j)) {
             if (j === w.globals.series[w.globals.maxValsInArrayIndex].length - 2 && w.globals.shouldAnimate) {
               _this.animationCompleted(el);
@@ -928,7 +928,7 @@
       key: "addNormalFilter",
       value: function addNormalFilter(el, i) {
         var w = this.w; // revert shadow if it was there
-        // but, ignore marker as marker don't have dropshadow yet
+
 
         if (w.config.chart.dropShadow.enabled && !el.node.classList.contains('apexcharts-marker')) {
           this.dropShadow(el, w.config.chart.dropShadow, i);
@@ -1036,7 +1036,7 @@
         var shadowBlur = add.flood(Array.isArray(color) ? color[i] : color, opacity).composite(add.sourceAlpha, 'in').offset(left, top).gaussianBlur(blur).merge(add.source);
         return add.blend(add.source, shadowBlur);
       } // directly adds dropShadow to the element and returns the same element.
-      // the only way it is different from the addShadow() function is that addShadow is chainable to other filters, while this function discards all filters and add dropShadow
+
 
     }, {
       key: "dropShadow",
@@ -1052,7 +1052,7 @@
         el.unfilter(true);
 
         if (Utils.isIE() && w.config.chart.type === 'radialBar') {
-          // in radialbar charts, dropshadow is clipping actual drawing in IE
+
           return el;
         }
 
@@ -1061,7 +1061,7 @@
           var shadowBlur = null;
 
           if (Utils.isSafari() || Utils.isFirefox() || Utils.isIE()) {
-            // safari/firefox/IE have some alternative way to use this filter
+
             shadowBlur = add.flood(color, opacity).composite(add.sourceAlpha, 'in').offset(left, top).gaussianBlur(blur);
           } else {
             shadowBlur = add.flood(color, opacity).composite(add.sourceAlpha, 'in').offset(left, top).gaussianBlur(blur).merge(add.source);
@@ -1481,7 +1481,7 @@
         var g;
 
         if (gfrom.length < 9 && gfrom.indexOf('#') === 0) {
-          // if the hex contains alpha and is of 9 digit, skip the opacity
+
           gfrom = Utils.hexToRgba(gfrom, opacityFrom);
         }
 
@@ -1862,7 +1862,7 @@
         textObj.textContent = textString;
 
         if (textString.length > 0) {
-          // ellipsis is needed
+
           if (textObj.getComputedTextLength() >= width / 1.1) {
             for (var x = textString.length - 3; x > 0; x -= 3) {
               if (textObj.getSubStringLength(0, x) <= width / 1.1) {
@@ -2175,12 +2175,12 @@
         var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
         if (index === null) {
-          // non-plot chart types - pie / donut / circle
+
           return this.w.config.series.reduce(function (acc, cur) {
             return acc + cur;
           }, 0);
         } else {
-          // axis charts - supporting multiple series
+
           return this.w.globals.series[index].reduce(function (acc, cur) {
             return acc + cur;
           }, 0);
@@ -2193,12 +2193,12 @@
         var r = [];
 
         if (index === null) {
-          // non-plot chart types - pie / donut / circle
+
           r = this.w.config.series.filter(function (d) {
             return d !== null;
           });
         } else {
-          // axis charts - supporting multiple series
+
           r = this.w.config.series[index].data.filter(function (d) {
             return d !== null;
           });
@@ -2268,7 +2268,7 @@
               total += ser[j];
             }
           } else {
-            // for pie/donuts/gauges
+
             total += ser;
           }
 
@@ -2372,7 +2372,7 @@
         }
 
         if (gl.minY !== Number.MIN_VALUE && Math.abs(gl.minY) !== 0) {
-          // Negative numbers present in series
+
           gl.hasNegs = true;
         }
 
@@ -2633,7 +2633,7 @@
     }, {
       key: "_getYAxisAnnotationWidth",
       value: function _getYAxisAnnotationWidth(anno) {
-        // issue apexcharts.js#2009
+
         var w = this.w;
         var width = w.globals.gridWidth;
 
@@ -2975,7 +2975,7 @@
           }
         },
         customSVG: {
-          // this will be deprecated in the next major version as it is going to be replaced with a better alternative below
+
           SVG: undefined,
           cssClass: undefined,
           offsetX: 0,
@@ -3100,7 +3100,7 @@
             animations: {
               enabled: true,
               easing: 'easeinout',
-              // linear, easeout, easein, easeinout, swing, bounce, elastic
+
               speed: 800,
               animateGradually: {
                 delay: 150,
@@ -3155,7 +3155,7 @@
             selection: {
               enabled: false,
               type: 'x',
-              // selectedPoints: undefined, // default datapoints that should be selected automatically
+
               fill: {
                 color: '#24292e',
                 opacity: 0.1
@@ -3245,9 +3245,9 @@
             bar: {
               horizontal: false,
               columnWidth: '70%',
-              // should be in percent 0 - 100
+
               barHeight: '70%',
-              // should be in percent 0 - 100
+
               distributed: false,
               borderRadius: 0,
               rangeBarOverlap: true,
@@ -3260,7 +3260,7 @@
               },
               dataLabels: {
                 position: 'top',
-                // top, center, bottom
+
                 maxItems: 100,
                 hideOverflowingLabels: true,
                 orientation: 'horizontal' // TODO: provide stackedLabels for stacked charts which gives additions of values
@@ -3347,7 +3347,7 @@
                 strokeWidth: '97%',
                 opacity: 1,
                 margin: 5,
-                // margin is in pixels
+
                 dropShadow: {
                   enabled: false,
                   top: 0,
@@ -3404,16 +3404,16 @@
               endAngle: 360,
               expandOnClick: true,
               dataLabels: {
-                // These are the percentage values which are displayed on slice
+
                 offset: 0,
-                // offset by which labels will move outside
+
                 minAngleToShowLabel: 10
               },
               donut: {
                 size: '65%',
                 background: 'transparent',
                 labels: {
-                  // These are the inner labels appearing inside donut
+
                   show: false,
                   name: {
                     show: true,
@@ -3469,7 +3469,7 @@
               offsetX: 0,
               offsetY: 0,
               polygons: {
-                // strokeColor: '#e8e8e8', // should be deprecated in the minor version i.e 3.2
+
                 strokeWidth: 1,
                 strokeColors: '#e8e8e8',
                 connectorColors: '#e8e8e8',
@@ -3525,7 +3525,7 @@
           fill: {
             type: 'solid',
             colors: undefined,
-            // array of colors
+
             opacity: 0.85,
             gradient: {
               shade: 'dark',
@@ -3541,13 +3541,13 @@
             image: {
               src: [],
               width: undefined,
-              // optional
+
               height: undefined // optional
 
             },
             pattern: {
               style: 'squares',
-              // String | Array of Strings
+
               width: 6,
               height: 6,
               strokeWidth: 2
@@ -3570,12 +3570,12 @@
             },
             row: {
               colors: undefined,
-              // takes as array which will be repeated on rows
+
               opacity: 0.5
             },
             column: {
               colors: undefined,
-              // takes an array which will be repeated on columns
+
               opacity: 0.5
             },
             padding: {
@@ -3593,10 +3593,10 @@
             showForZeroSeries: true,
             floating: false,
             position: 'bottom',
-            // whether to position legends in 1 of 4
-            // direction - top, bottom, left, right
+
+
             horizontalAlign: 'center',
-            // when position top/bottom, you can specify whether to align legends left, right or center
+
             inverseOrder: false,
             fontSize: '12px',
             fontFamily: undefined,
@@ -3646,9 +3646,9 @@
             fillOpacity: 1,
             shape: 'circle',
             width: 8,
-            // only applicable when shape is rect/square
+
             height: 8,
-            // only applicable when shape is rect/square
+
             radius: 2,
             offsetX: 0,
             offsetY: 0,
@@ -3673,7 +3673,7 @@
             }
           },
           responsive: [],
-          // breakpoints should follow ascending order 400, then 700, then 1000
+
           series: undefined,
           states: {
             normal: {
@@ -3727,12 +3727,12 @@
           stroke: {
             show: true,
             curve: 'smooth',
-            // "smooth" / "straight" / "stepline"
+
             lineCap: 'butt',
-            // round, butt , square
+
             width: 2,
             colors: undefined,
-            // array of colors
+
             dashArray: 0 // single value or array of values
 
           },
@@ -3741,9 +3741,9 @@
             enabledOnSeries: undefined,
             shared: true,
             followCursor: false,
-            // when disabled, the tooltip will show on top of the series instead of mouse position
+
             intersect: false,
-            // when enabled, tooltip will only show when user directly hovers over point
+
             inverseOrder: false,
             custom: undefined,
             fillSeriesColor: false,
@@ -3756,10 +3756,10 @@
               highlightDataSeries: false
             },
             x: {
-              // x value
+
               show: true,
               format: 'dd MMM',
-              // dd/MM, dd MMM yy, dd MMM yyyy
+
               formatter: undefined // a custom user supplied formatter function
 
             },
@@ -3785,7 +3785,7 @@
             fixed: {
               enabled: false,
               position: 'topRight',
-              // topRight, topLeft, bottomRight, bottomLeft
+
               offsetX: 0,
               offsetY: 0
             }
@@ -3794,7 +3794,7 @@
             type: 'category',
             categories: [],
             convertedCatToNumeric: false,
-            // internal property which should not be altered outside
+
             sorted: false,
             offsetX: 0,
             offsetY: 0,
@@ -3818,7 +3818,7 @@
               offsetY: 0,
               format: undefined,
               formatter: undefined,
-              // custom formatter function which will override format
+
               datetimeUTC: true,
               datetimeFormatter: {
                 year: 'yyyy',
@@ -3865,7 +3865,7 @@
             crosshairs: {
               show: true,
               width: 1,
-              // tickWidth/barWidth or an integer
+
               position: 'back',
               opacity: 0.9,
               stroke: {
@@ -3875,7 +3875,7 @@
               },
               fill: {
                 type: 'solid',
-                // solid, gradient
+
                 color: '#B1B9C4',
                 gradient: {
                   colorFrom: '#D8E3F0',
@@ -3907,9 +3907,9 @@
           theme: {
             mode: 'light',
             palette: 'palette1',
-            // If defined, it will overwrite globals.colors variable
+
             monochrome: {
-              // monochrome allows you to select just 1 color and fill out the rest with light/dark shade (intensity can be selected)
+
               enabled: false,
               color: '#008FFB',
               shadeTo: 'light',
@@ -3970,7 +3970,7 @@
             w.globals.dom.elGraphical.add(annoArray[i]);
 
             if (initialAnim && !w.globals.resized && !w.globals.dataChanged) {
-              // fixes apexcharts/apexcharts.js#685
+
               if (w.config.chart.type !== 'scatter' && w.config.chart.type !== 'bubble' && w.globals.dataPoints > 1) {
                 annoElArray[i].classList.add('apexcharts-element-hidden');
               }
@@ -4338,7 +4338,7 @@
 
         if (fillColor.indexOf('rgb') === -1) {
           if (fillColor.length < 9) {
-            // if the hex contains alpha and is of 9 digit, skip the opacity
+
             defaultColor = Utils.hexToRgba(fillColor, fillOpacity);
           }
         } else {
@@ -4628,7 +4628,7 @@
                 elPointsWrap.add(point);
               }
             } else {
-              // dynamic array creation - multidimensional
+
               if (typeof w.globals.pointsArray[seriesIndex] === 'undefined') w.globals.pointsArray[seriesIndex] = [];
               w.globals.pointsArray[seriesIndex].push([p.x[q], p.y[q]]);
             }
@@ -4745,7 +4745,7 @@
             var finishRadius = w.globals.markers.size[realIndex];
 
             if (zRatio !== Infinity) {
-              // means we have a bubble
+
               finishRadius = w.globals.seriesZ[realIndex][dataPointIndex] / zRatio;
               var bubble = w.config.plotOptions.bubble;
 
@@ -4851,7 +4851,7 @@
             prevPathJ = w.globals.previousPaths[realIndex] && w.globals.previousPaths[realIndex][j];
 
             if (typeof prevPathJ !== 'undefined' && prevPathJ !== null) {
-              // series containing less elements will ignore these values and revert to 0
+
               prevX = prevPathJ.x;
               prevY = prevPathJ.y;
               prevR = typeof prevPathJ.r !== 'undefined' ? prevPathJ.r : finishRadius;
@@ -4919,7 +4919,7 @@
       this.ctx = ctx;
       this.w = ctx.w;
     } // When there are many datalabels to be printed, and some of them overlaps each other in the same series, this method will take care of that
-    // Also, when datalabels exceeds the drawable area and get clipped off, we need to adjust and move some pixels to make them visible again
+
 
 
     _createClass(DataLabels, [{
@@ -4952,7 +4952,7 @@
           if ( // next label forward and x not intersecting
           x > lastDataLabelRect.x + lastDataLabelRect.width + 2 || y > lastDataLabelRect.y + lastDataLabelRect.height + 2 || x + width < lastDataLabelRect.x // next label is going to be drawn backwards
           ) {
-              // the 2 indexes don't override, so OK to draw next label
+
               drawnextLabel = true;
             }
         }
@@ -4973,8 +4973,8 @@
       value: function drawDataLabel(pos, i, j) {
         var _this = this;
         var strokeWidth = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 2;
-        // this method handles line, area, bubble, scatter charts as those charts contains markers/points which have pre-defined x/y positions
-        // all other charts like radar / bars / heatmaps will define their own drawDataLabel routine
+
+
         var w = this.w;
         var graphics = new Graphics(this.ctx);
         var dataLabelsConfig = w.config.dataLabels;
@@ -4996,7 +4996,7 @@
           y = pos.y[q] + dataLabelsConfig.offsetY + strokeWidth;
 
           if (!isNaN(x)) {
-            // a small hack as we have 2 points for the first val to connect it
+
             if (j === 1 && q === 0) dataPointIndex = 0;
             if (j === 1 && q === 1) dataPointIndex = 1;
             var val = w.globals.series[i][dataPointIndex];
@@ -5072,7 +5072,7 @@
         if (offsetCorrection) {
           correctedLabels = this.dataLabelsCorrection(x, y, text, i, j, alwaysDrawDataLabel, parseInt(dataLabelsConfig.style.fontSize, 10));
         } // when zoomed, we don't need to correct labels offsets,
-        // but if normally, labels get cropped, correct them
+
 
 
         if (!w.globals.zoomed) {
@@ -5105,9 +5105,9 @@
         var offY = dataLabelsConfig.offsetY;
 
         if (w.config.chart.type === 'bar' || w.config.chart.type === 'rangeBar') {
-          // for certain chart types, we handle offsets while calculating datalabels pos
-          // why? because bars/column may have negative values and based on that
-          // offsets becomes reversed
+
+
+
           offX = 0;
           offY = 0;
         }
@@ -5549,7 +5549,7 @@
           }
 
           if (val === 0 && w.config.chart.stacked) {
-            // in a stacked bar/column chart, 0 value should be neglected as it will overlap on the next element
+
             text = '';
           }
 
@@ -5571,7 +5571,7 @@
           }
 
           if (this.barCtx.isTimelineBar && this.barCtx.barOptions.dataLabels.hideOverflowingLabels) {
-            // hide the datalabel if it cannot fit into the rect
+
             var txRect = graphics.getTextRects(text, parseFloat(dataLabelsConfig.style.fontSize));
 
             if (barWidth < txRect.width) {
@@ -5580,12 +5580,12 @@
           }
 
           if (w.config.chart.stacked && this.barCtx.barOptions.dataLabels.hideOverflowingLabels) {
-            // if there is not enough space to draw the label in the bar/column rect, check hideOverflowingLabels property to prevent overflowing on wrong rect
-            // Note: This issue is only seen in stacked charts
+
+
             if (this.barCtx.isHorizontal) {
-              // FIXED: Don't always hide the stacked negative side label
-              // A negative value will result in a negative bar width
-              // Only hide the text when the width is smaller (a higher negative number) than the negative bar width.
+
+
+
               if (barWidth > 0 && textRects.width / 1.6 > barWidth || barWidth < 0 && textRects.width / 1.6 < barWidth) {
                 text = '';
               }
@@ -5833,7 +5833,7 @@
         var activeIndex = 0;
 
         if (w.config.series.length > 1) {
-          // active series flag is required to know if user has not deactivated via legend click
+
           var activeSeriesIndex = w.config.series.map(function (s, index) {
             var hasBars = false;
 
@@ -5931,7 +5931,7 @@
         }
 
         if (!w.globals.axisCharts) {
-          // for non-axis charts (i.e., circular charts, pathFrom is not usable. We need whole series)
+
           w.globals.previousPaths = w.globals.series;
         }
       }
@@ -6010,7 +6010,7 @@
           w.globals.dom.Paper.add(titleText);
         }
       } // When user clicks on legends, the collapsed series is filled with [0,0,0,...,0]
-      // This is because we don't want to alter the series' length as it is used at many places
+
 
     }, {
       key: "setNullSeriesToZeroValues",
@@ -6084,7 +6084,7 @@
           }
 
           if (w.globals.isXNumeric) {
-            // get max visible items
+
             for (var j = 0; j < series[sl].length; j++) {
               if (w.globals.seriesX[sl][j] > w.globals.minX && w.globals.seriesX[sl][j] < w.globals.maxX) {
                 this.barCtx.visibleItems++;
@@ -6096,7 +6096,7 @@
         }
 
         if (this.barCtx.seriesLen === 0) {
-          // A small adjustment when combo charts are used
+
           this.barCtx.seriesLen = 1;
         }
 
@@ -6117,7 +6117,7 @@
         var dataPoints = w.globals.dataPoints;
 
         if (this.barCtx.isTimelineBar) {
-          // timeline rangebar chart
+
           dataPoints = w.globals.labels.length;
         }
 
@@ -6128,7 +6128,7 @@
         }
 
         if (this.barCtx.isHorizontal) {
-          // height divided into equal parts
+
           yDivision = w.globals.gridHeight / dataPoints;
           barHeight = yDivision / seriesLen;
 
@@ -6141,7 +6141,7 @@
           zeroW = this.barCtx.baseLineInvertedY + w.globals.padHorizontal + (this.barCtx.isReversed ? w.globals.gridWidth : 0) - (this.barCtx.isReversed ? this.barCtx.baseLineInvertedY * 2 : 0);
           y = (yDivision - barHeight * this.barCtx.seriesLen) / 2;
         } else {
-          // width divided into equal parts
+
           xDivision = w.globals.gridWidth / this.barCtx.visibleItems;
 
           if (w.config.xaxis.convertedCatToNumeric) {
@@ -6151,7 +6151,7 @@
           barWidth = xDivision / this.barCtx.seriesLen * parseInt(this.barCtx.barOptions.columnWidth, 10) / 100;
 
           if (w.globals.isXNumeric) {
-            // max barwidth should be equal to minXDiff to avoid overlap
+
             var xRatio = this.barCtx.xRatio;
 
             if (w.config.xaxis.convertedCatToNumeric) {
@@ -6296,7 +6296,7 @@
         }
 
         pathTo = pathTo + graphics.line(x1, newPath.y2) + newPath.pathWithRadius + graphics.line(x2 - strokeWidth, newPath.y2) + sl + sl + 'z'; // the lines in pathFrom are repeated to equal it to the points of pathTo
-        // this is to avoid weird animation (bug in svg.js)
+
 
         pathFrom = pathFrom + graphics.line(x1, y1) + sl + sl + sl + sl + sl + graphics.line(x1, y1);
 
@@ -6523,11 +6523,11 @@
           var x = void 0,
               y = void 0,
               xDivision = void 0,
-              // xDivision is the GRIDWIDTH divided by number of datapoints (columns)
+
           yDivision = void 0,
-              // yDivision is the GRIDHEIGHT divided by number of datapoints (bars)
+
           zeroH = void 0,
-              // zeroH is the baseline where 0 meets y axis
+
           zeroW = void 0; // zeroW is the baseline where 0 meets x axis
 
           var yArrj = []; // hold y values of current iterating series
@@ -6942,7 +6942,7 @@
         output = this.getTimeStamp(output);
         return output;
       } // This fixes the difference of x-axis labels between chrome/safari
-      // Fixes #1726, #1544, #1485, #1255
+
 
     }, {
       key: "parseDateWithTimezone",
@@ -7159,11 +7159,11 @@
           var x = void 0,
               y = void 0,
               xDivision = void 0,
-              // xDivision is the GRIDWIDTH divided by number of datapoints (columns)
+
           yDivision = void 0,
-              // yDivision is the GRIDHEIGHT divided by number of datapoints (bars)
+
           zeroH = void 0,
-              // zeroH is the baseline where 0 meets y axis
+
           zeroW = void 0; // zeroW is the baseline where 0 meets x axis
 
           var realIndex = w.globals.comboCharts ? seriesIndex[i] : i; // el to which series will be drawn
@@ -7225,8 +7225,8 @@
               var srty = (yDivision - barHeight * seriesLen) / 2;
 
               if (typeof w.config.series[i].data[j] === 'undefined') {
-                // no data exists for further indexes, hence we need to get out the innr loop.
-                // As we are iterating over total datapoints, there is a possiblity the series might not have data for j index
+
+
                 break;
               }
 
@@ -8382,7 +8382,7 @@
         this.chartType = opts.chart.type;
 
         if (this.chartType === 'histogram') {
-          // technically, a histogram can be drawn by a column chart with no spaces in between
+
           opts.chart.type = 'bar';
           opts = Utils.extend({
             plotOptions: {
@@ -8422,7 +8422,7 @@
           this.checkForDarkTheme(opts); // check locally passed options
 
           opts.xaxis = opts.xaxis || window.Apex.xaxis || {}; // an important boolean needs to be set here
-          // otherwise all the charts will have this flag set to true window.Apex.xaxis is set globally
+
 
           if (!responsiveOverride) {
             opts.xaxis.convertedCatToNumeric = false;
@@ -8436,8 +8436,8 @@
 
           newDefaults = Utils.extend(config, chartDefaults);
         } // config should cascade in this fashion
-        // default-config < global-apex-variable-config < user-defined-config
-        // get GLOBALLY defined options and merge with the default config
+
+
 
 
         var mergedWithDefaultConfig = Utils.extend(newDefaults, window.Apex); // get the merged config and extend with user defined config
@@ -8475,11 +8475,11 @@
         if (opts.yaxis.constructor !== Array && window.Apex.yaxis && window.Apex.yaxis.constructor !== Array) {
           opts.yaxis = Utils.extend(opts.yaxis, window.Apex.yaxis);
         } // as we can't extend nested object's array with extend, we need to do it first
-        // user can provide either an array or object in yaxis config
+
 
 
         if (opts.yaxis.constructor !== Array) {
-          // convert the yaxis to array if user supplied object
+
           opts.yaxis = [Utils.extend(options.yAxis, opts.yaxis)];
         } else {
           opts.yaxis = Utils.extendArray(opts.yaxis, options.yAxis);
@@ -8496,7 +8496,7 @@
         if (w && !series) {
           series = w.config.series;
         } // A logarithmic chart works correctly when each series has a corresponding y-axis
-        // If this is not the case, we manually create yaxis for multi-series log chart
+
 
 
         if (isLogY && series.length !== opts.yaxis.length && series.length) {
@@ -8594,7 +8594,7 @@
         }
 
         if (config.chart.type === 'bar' && config.plotOptions.bar.horizontal) {
-          // No multiple yaxis for bars
+
           if (config.yaxis.length > 1) {
             throw new Error('Multiple Y Axis for bars are not supported. Switch to column chart by setting plotOptions.bar.horizontal=false');
           } // if yaxis is reversed in horizontal bar chart, you should draw the y-axis on right side
@@ -8673,11 +8673,11 @@
         gl.seriesColors = [];
         gl.stackedSeriesTotals = [];
         gl.seriesXvalues = []; // we will need this in tooltip (it's x position)
-        // when we will have unequal x values, we will need
-        // some way to get x value depending on mouse pointer
+
+
 
         gl.seriesYvalues = []; // we will need this when deciding which series
-        // user hovered on
+
 
         gl.labels = [];
         gl.categoryLabels = [];
@@ -8726,9 +8726,9 @@
       value: function globalVars(config) {
         return {
           chartID: null,
-          // chart ID - apexcharts-cuid
+
           cuid: null,
-          // chart ID - random numbers excluding "apexcharts" part
+
           events: {
             beforeMount: [],
             mounted: [],
@@ -8766,44 +8766,44 @@
           animationEnded: false,
           isTouchDevice: 'ontouchstart' in window || navigator.msMaxTouchPoints,
           isDirty: false,
-          // chart has been updated after the initial render. This is different than dataChanged property. isDirty means user manually called some method to update
+
           isExecCalled: false,
-          // whether user updated the chart through the exec method
+
           initialConfig: null,
-          // we will store the first config user has set to go back when user finishes interactions like zooming and come out of it
+
           initialSeries: [],
           lastXAxis: [],
           lastYAxis: [],
           columnSeries: null,
           labels: [],
-          // store the text to draw on x axis
-          // Don't mutate the labels, many things including tooltips depends on it!
+
+
           timescaleLabels: [],
-          // store the timescaleLabels Labels in another variable
+
           noLabelsProvided: false,
-          // if user didn't provide any categories/labels or x values, fallback to 1,2,3,4...
+
           allSeriesCollapsed: false,
           collapsedSeries: [],
-          // when user collapses a series, it goes into this array
+
           collapsedSeriesIndices: [],
-          // this stores the index of the collapsedSeries instead of whole object for quick access
+
           ancillaryCollapsedSeries: [],
-          // when user collapses an "alwaysVisible" series, it goes into this array
+
           ancillaryCollapsedSeriesIndices: [],
-          // this stores the index of the ancillaryCollapsedSeries whose y-axis is always visible
+
           risingSeries: [],
-          // when user re-opens a collapsed series, it goes here
+
           dataFormatXNumeric: false,
-          // boolean value to indicate user has passed numeric x values
+
           capturedSeriesIndex: -1,
           capturedDataPointIndex: -1,
           selectedDataPoints: [],
           goldenPadding: 35,
-          // this value is used at a lot of places for spacing purpose
+
           invalidLogScale: false,
-          // if a user enabled log scale but the data provided is not valid to generate a log scale, turn on this flag
+
           ignoreYAxisIndexes: [],
-          // when series are being collapsed in multiple y axes, ignore certain index
+
           yAxisSameScaleIndices: [],
           maxValsInArrayIndex: 0,
           radialSize: 0,
@@ -8814,74 +8814,74 @@
           yaxis: null,
           mousedown: false,
           lastClientPosition: {},
-          // don't reset this variable this the chart is destroyed. It is used to detect right or left mousemove in panning
+
           visibleXRange: undefined,
           yValueDecimal: 0,
-          // are there floating numbers in the series. If yes, this represent the len of the decimals
+
           total: 0,
           SVGNS: 'http://www.w3.org/2000/svg',
-          // svg namespace
+
           svgWidth: 0,
-          // the whole svg width
+
           svgHeight: 0,
-          // the whole svg height
+
           noData: false,
-          // whether there is any data to display or not
+
           locale: {},
-          // the current locale values will be preserved here for global access
+
           dom: {},
-          // for storing all dom nodes in this particular property
+
           memory: {
             methodsToExec: []
           },
           shouldAnimate: true,
           skipLastTimelinelabel: false,
-          // when last label is cropped, skip drawing it
+
           skipFirstTimelinelabel: false,
-          // when first label is cropped, skip drawing it
+
           delayedElements: [],
-          // element which appear after animation has finished
+
           axisCharts: true,
-          // chart type = line or area or bar
-          // (refer them also as plot charts in the code)
+
+
           isDataXYZ: false,
-          // bool: data was provided in a {[x,y,z]} pattern
+
           resized: false,
-          // bool: user has resized
+
           resizeTimer: null,
-          // timeout function to make a small delay before
-          // drawing when user resized
+
+
           comboCharts: false,
-          // bool: whether it's a combination of line/column
+
           dataChanged: false,
-          // bool: has data changed dynamically
+
           previousPaths: [],
-          // array: when data is changed, it will animate from
-          // previous paths
+
+
           allSeriesHasEqualX: true,
           pointsArray: [],
-          // store the points positions here to draw later on hover
-          // format is - [[x,y],[x,y]... [x,y]]
+
+
           dataLabelsRects: [],
-          // store the positions of datalabels to prevent collision
+
           lastDrawnDataLabelsIndexes: [],
           hasNullValues: false,
-          // bool: whether series contains null values
+
           easing: null,
-          // function: animation effect to apply
+
           zoomed: false,
-          // whether user has zoomed or not
+
           gridWidth: 0,
-          // drawable width of actual graphs (series paths)
+
           gridHeight: 0,
-          // drawable height of actual graphs (series paths)
+
           rotateXLabels: false,
           defaultLabels: false,
           xLabelFormatter: undefined,
-          // formatter for x axis labels
+
           yLabelFormatters: [],
           xaxisTooltipFormatter: undefined,
-          // formatter for x axis tooltip
+
           ttKeyFormatter: undefined,
           ttVal: undefined,
           ttZFormatter: undefined,
@@ -9010,10 +9010,10 @@
         for (var j = 0; j < ser[i].data.length; j++) {
           if (typeof ser[i].data[j][1] !== 'undefined') {
             if (Array.isArray(ser[i].data[j][1]) && ser[i].data[j][1].length === 4 && !isBoxPlot) {
-              // candlestick nested ohlc format
+
               this.twoDSeries.push(Utils.parseNumber(ser[i].data[j][1][3]));
             } else if (ser[i].data[j].length >= 5) {
-              // candlestick non-nested ohlc format
+
               this.twoDSeries.push(Utils.parseNumber(ser[i].data[j][4]));
             } else {
               this.twoDSeries.push(Utils.parseNumber(ser[i].data[j][1]));
@@ -9023,7 +9023,7 @@
           }
 
           if (cnf.xaxis.type === 'datetime') {
-            // if timestamps are provided and xaxis type is datetime,
+
             var ts = new Date(ser[i].data[j][0]);
             ts = new Date(ts).getTime();
             this.twoDSeriesX.push(ts);
@@ -9048,7 +9048,7 @@
         var activeI = i;
 
         if (gl.collapsedSeriesIndices.indexOf(i) > -1) {
-          // fix #368
+
           activeI = this.activeSeriesIndex;
         }
 
@@ -9082,14 +9082,14 @@
           var isXDate = !isXArr && !!dt.isValidDate(ser[activeI].data[_j2].x.toString());
 
           if (isXString || isXDate) {
-            // user supplied '01/01/2017' or a date string (a JS date object is not supported)
+
             if (isXString || cnf.xaxis.convertedCatToNumeric) {
               var isRangeColumn = gl.isBarHorizontal && gl.isRangeData;
 
               if (cnf.xaxis.type === 'datetime' && !isRangeColumn) {
                 this.twoDSeriesX.push(dt.parseDate(ser[activeI].data[_j2].x));
               } else {
-                // a category and not a numeric x value
+
                 this.fallbackToCategory = true;
                 this.twoDSeriesX.push(ser[activeI].data[_j2].x);
               }
@@ -9103,11 +9103,11 @@
               }
             }
           } else if (isXArr) {
-            // a multiline label described in array format
+
             this.fallbackToCategory = true;
             this.twoDSeriesX.push(ser[activeI].data[_j2].x);
           } else {
-            // a numeric value in x property
+
             gl.isXNumeric = true;
             gl.dataFormatXNumeric = true;
             this.twoDSeriesX.push(ser[activeI].data[_j2].x);
@@ -9232,7 +9232,7 @@
               y2: ser[i].data[_j3].y[1],
               rangeName: id
             }; // mutating config object by adding a new property
-            // TODO: As this is specifically for timeline rangebar charts, update the docs mentioning the series only supports xy format
+
 
             ser[i].data[_j3].rangeName = id;
             var uI = uniqueKeys.findIndex(function (t) {
@@ -9338,7 +9338,7 @@
         var handleDates = function handleDates() {
           for (var j = 0; j < xlabels.length; j++) {
             if (typeof xlabels[j] === 'string') {
-              // user provided date strings
+
               var isDate = dt.isValidDate(xlabels[j]);
 
               if (isDate) {
@@ -9347,7 +9347,7 @@
                 throw new Error('You have provided invalid Date format. Please provide a valid JavaScript Date');
               }
             } else {
-              // user provided timestamps
+
               _this.twoDSeriesX.push(xlabels[j]);
             }
           }
@@ -9388,8 +9388,8 @@
             }
           } else {
             if (cnf.xaxis.type === 'datetime') {
-              // user didn't supplied [{x,y}] or [[x,y]], but single array in data.
-              // Also labels/categories were supplied differently
+
+
               gl.isXNumeric = true;
               handleDates();
               gl.seriesX.push(this.twoDSeriesX);
@@ -9457,13 +9457,13 @@
         var gl = this.w.globals;
 
         if (cnf.xaxis.categories.length > 0) {
-          // user provided labels in xaxis.category prop
+
           gl.labels = cnf.xaxis.categories;
         } else if (cnf.labels.length > 0) {
-          // user provided labels in labels props
+
           gl.labels = cnf.labels.slice();
         } else if (this.fallbackToCategory) {
-          // user provided labels in x prop in [{ x: 3, y: 55 }] data, and those labels are already stored in gl.labels[0], so just re-arrange the gl.labels array
+
           gl.labels = gl.labels[0];
 
           if (gl.seriesRangeBarTimeline.length) {
@@ -9513,7 +9513,7 @@
 
           gl.isXNumeric = true;
         } // no series to pull labels from, put a 0-10 series
-        // possibly, user collapsed all series. Hence we can't work with above calc
+
 
 
         if (labelArr.length === 0) {
@@ -9552,10 +9552,10 @@
         this.ctx.core.isMultipleY();
 
         if (gl.axisCharts) {
-          // axisCharts includes line / area / column / scatter
+
           this.parseDataAxisCharts(ser);
         } else {
-          // non-axis charts are pie / donut
+
           this.parseDataNonAxisCharts(ser);
         }
 
@@ -9575,7 +9575,7 @@
         this.coreUtils.getPercentSeries();
 
         if (!gl.dataFormatXNumeric && (!gl.isXNumeric || cnf.xaxis.type === 'numeric' && cnf.labels.length === 0 && cnf.xaxis.categories.length === 0)) {
-          // x-axis labels couldn't be detected; hence try searching every option in config
+
           this.handleExternalLabelsData(ser);
         } // check for multiline xaxis
 
@@ -9596,8 +9596,8 @@
 
         var w = this.w;
         w.globals.ignoreYAxisIndexes = w.globals.collapsedSeries.map(function (collapsed, i) {
-          // fix issue #1215
-          // if stacked, not returning collapsed.index to preserve yaxis
+
+
           if (_this2.w.globals.isMultipleYAxis && !w.config.chart.stacked) {
             return collapsed.index;
           }
@@ -9630,7 +9630,7 @@
 
         if (w.config.xaxis.type === 'datetime') {
           if (w.config.xaxis.labels.formatter === undefined) {
-            // if user has not specified a custom formatter, use the default tooltip.x.format
+
             if (w.config.tooltip.x.formatter === undefined) {
               var datetimeObj = new DateTime(this.ctx);
               return datetimeObj.formatDate(datetimeObj.getDate(val), w.config.tooltip.x.format);
@@ -9701,7 +9701,7 @@
         } else {
           w.globals.xLabelFormatter = function (val) {
             if (Utils.isNumber(val)) {
-              // numeric xaxis may have smaller range, so defaulting to 1 decimal
+
               if (!w.config.xaxis.convertedCatToNumeric && w.config.xaxis.type === 'numeric' && w.globals.dataPoints < 50) {
                 return val.toFixed(1);
               }
@@ -9897,14 +9897,14 @@
         var w = this.w;
 
         if (i === 0) {
-          // check if first label is being truncated
+
           if (w.globals.skipFirstTimelinelabel) {
             label.text = '';
           }
         }
 
         if (i === labelsLen - 1) {
-          // check if last label is being truncated
+
           if (w.globals.skipLastTimelinelabel) {
             label.text = '';
           }
@@ -9938,7 +9938,7 @@
         var coreUtils = new CoreUtils(this.ctx);
         return !w.config.yaxis[index].show || !w.config.yaxis[index].showForNullSeries && coreUtils.isSeriesNull(index) && w.globals.collapsedSeriesIndices.indexOf(index) === -1;
       } // get the label color for y-axis
-      // realIndex is the actual series index, while i is the tick Index
+
 
     }, {
       key: "getYAxisForeColor",
@@ -9995,9 +9995,9 @@
     _createClass(Exports, [{
       key: "fixSvgStringForIe11",
       value: function fixSvgStringForIe11(svgData) {
-        // IE11 generates broken SVG that we have to fix by using regex
+
         if (!Utils.isIE11()) {
-          // not IE11 - noop
+
           return svgData;
         } // replace second occurrence of "xmlns" attribute with "xmlns:xlink" with correct url + add xmlns:svgjs
 
@@ -10075,8 +10075,8 @@
           var svgData = _this.getSvgString();
 
           if (window.canvg && Utils.isIE11()) {
-            // use canvg as a polyfill to workaround ie11 considering a canvas with loaded svg 'unsafe'
-            // without ignoreClear we lose our background color; without ignoreDimensions some grid lines become invisible
+
+
             var v = window.canvg.Canvg.fromString(ctx, svgData, {
               ignoreClear: true,
               ignoreDimensions: true
@@ -10098,7 +10098,7 @@
               ctx.drawImage(img, 0, 0);
 
               if (canvas.msToBlob) {
-                // IE and Edge can't navigate to data urls, so we return the blob instead
+
                 var _blob = canvas.msToBlob();
 
                 resolve({
@@ -10164,8 +10164,8 @@
           if (!w.globals.axisCharts) {
             cat = w.config.labels[i];
           } else {
-            // xy charts
-            // non datetime
+
+
             if (w.config.xaxis.type === 'category' || w.config.xaxis.convertedCatToNumeric) {
               if (w.globals.isBarHorizontal) {
                 var lbFormatter = w.globals.yLabelFormatters[0];
@@ -10313,7 +10313,7 @@
       this.xaxisLabels = w.globals.labels.slice();
 
       if (w.globals.timescaleLabels.length > 0 && !w.globals.isBarHorizontal) {
-        //  timeline labels are there and chart is not rangeabr timeline
+
         this.xaxisLabels = w.globals.timescaleLabels.slice();
       }
 
@@ -10344,7 +10344,7 @@
       }
 
       this.xaxisBorderHeight = w.config.xaxis.axisBorder.height; // For bars, we will only consider single y xais,
-      // as we are not providing multiple yaxis for bar charts
+
 
       this.yaxis = w.config.yaxis[0];
     }
@@ -10389,7 +10389,7 @@
           var x = xPos - colWidth / 2 + w.config.xaxis.labels.offsetX;
 
           if (_i === 0 && labelsLen === 1 && colWidth / 2 === xPos && w.globals.dataPoints === 1) {
-            // single datapoint
+
             x = w.globals.gridWidth / 2;
           }
 
@@ -10697,7 +10697,7 @@
         }
 
         if (yAxisTextsInversed.length > 0) {
-          // truncate rotated y axis in bar chart (x axis)
+
           var firstLabelPosX = yAxisTextsInversed[yAxisTextsInversed.length - 1].getBBox();
           var lastLabelPosX = yAxisTextsInversed[0].getBBox();
 
@@ -10715,10 +10715,10 @@
           }
         }
       } // renderXAxisBands() {
-      //   let w = this.w;
-      //   let plotBand = document.createElementNS(w.globals.SVGNS, 'rect')
-      //   w.globals.dom.elGraphical.add(plotBand)
-      // }
+
+
+
+
 
     }]);
 
@@ -10743,7 +10743,7 @@
       this.isTimelineBar = w.config.xaxis.type === 'datetime' && w.globals.seriesRangeBarTimeline.length;
 
       if (w.globals.timescaleLabels.length > 0) {
-        //  timescaleLabels labels are there
+
         this.xaxisLabels = w.globals.timescaleLabels.slice();
       }
     } // when using sparklines or when showing no grid, we need to have a grid area which is reused at many places for other calculations as well
@@ -10775,7 +10775,7 @@
         var elgrid = null;
 
         if (gl.axisCharts) {
-          // grid is drawn after xaxis and yaxis are drawn
+
           elgrid = this.renderGrid();
           this.drawGridArea(elgrid.el);
         }
@@ -10949,7 +10949,7 @@
               y2 = _ref6.y2;
 
           if (typeof w.config.xaxis.tickAmount !== 'undefined' && w.config.xaxis.tickAmount !== 'dataPoints') {
-            // user has specified tickamount in a category x-axis chart
+
             var visibleLabels = w.globals.dom.baseEl.querySelectorAll('.apexcharts-text.apexcharts-xaxis-label tspan:not(:empty)');
             visibleLabels.forEach(function (d, i) {
               var textRect = d.getBBox();
@@ -10967,7 +10967,7 @@
           } else {
             for (var i = 0; i < xC + (w.globals.isXNumeric ? 0 : 1); i++) {
               if (i === 0 && xC === 1 && w.globals.dataPoints === 1) {
-                // single datapoint
+
                 x1 = w.globals.gridWidth / 2;
                 x2 = x1;
               }
@@ -11009,7 +11009,7 @@
             }
 
             if (w.config.xaxis.convertedCatToNumeric) {
-              // in case of a convertedCatToNumeric, some labels might be skipped due to hideOverLapping labels, hence use this var to get the visible ticks
+
               xCount = w.globals.xaxisLabelsCount;
             }
 
@@ -11236,7 +11236,7 @@
       this.ctx = ctx;
       this.w = ctx.w;
     } // http://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axiss
-    // This routine creates the Y axis values for a graph.
+
 
 
     _createClass(Range, [{
@@ -11255,7 +11255,7 @@
         }
 
         if (yMin === Number.MIN_VALUE && yMax === 0 || !Utils.isNumber(yMin) && !Utils.isNumber(yMax) || yMin === Number.MIN_VALUE && yMax === -Number.MAX_VALUE) {
-          // when all values are 0
+
           yMin = 0;
           yMax = ticks;
           var linearScale = this.linearScale(yMin, yMax, ticks);
@@ -11263,25 +11263,25 @@
         }
 
         if (yMin > yMax) {
-          // if somehow due to some wrong config, user sent max less than min,
-          // adjust the min/max again
+
+
           console.warn('axis.min cannot be greater than axis.max');
           yMax = yMin + 0.1;
         } else if (yMin === yMax) {
-          // If yMin and yMax are identical, then
-          // adjust the yMin and yMax values to actually
-          // make a graph. Also avoids division by zero errors.
+
+
+
           yMin = yMin === 0 ? 0 : yMin - 0.5; // some small value
 
           yMax = yMax === 0 ? 2 : yMax + 0.5; // some small value
         } // Calculate Min amd Max graphical labels and graph
-        // increments.  The number of ticks defaults to
-        // 10 which is the SUGGESTED value.  Any tick value
-        // entered is used as a suggested value which is
-        // adjusted to be a 'pretty' value.
+
+
+
+
         //
-        // Output will be an array of the Y axis values that
-        // encompass the Y values.
+
+
 
 
         var result = [];
@@ -11311,7 +11311,7 @@
         }
 
         var stepSize = magMsd * magPow; // build Y label array.
-        // Lower and upper bounds calculations
+
 
         var lb = stepSize * Math.floor(yMin / stepSize);
         var ub = stepSize * Math.ceil(yMax / stepSize); // Build array
@@ -11442,14 +11442,14 @@
           gl.yAxisScale[index] = this.logarithmicScale(maxY);
         } else {
           if (maxY === -Number.MAX_VALUE || !Utils.isNumber(maxY)) {
-            // no data in the chart. Either all series collapsed or user passed a blank array
+
             gl.yAxisScale[index] = this.linearScale(0, 5, 5);
           } else {
-            // there is some data. Turn off the allSeriesCollapsed flag
+
             gl.allSeriesCollapsed = false;
 
             if ((y.min !== undefined || y.max !== undefined) && !y.forceNiceScale) {
-              // fix https://github.com/apexcharts/apexcharts.js/issues/492
+
               gl.yAxisScale[index] = this.linearScale(minY, maxY, y.tickAmount, index);
             } else {
               var noMinMaxProvided = cnf.yaxis[index].max === undefined && cnf.yaxis[index].min === undefined || cnf.yaxis[index].forceNiceScale;
@@ -11468,7 +11468,7 @@
         var diff = Math.abs(maxX - minX);
 
         if (maxX === -Number.MAX_VALUE || !Utils.isNumber(maxX)) {
-          // no data in the chart. Either all series collapsed or user passed a blank array
+
           gl.xAxisScale = this.linearScale(0, 5, 5);
         } else {
           gl.xAxisScale = this.linearScale(minX, maxX, x.tickAmount ? x.tickAmount : diff < 5 && diff > 1 ? diff + 1 : 5, 0);
@@ -11490,9 +11490,9 @@
         cnf.yaxis.forEach(function (yaxe, i) {
           var index = i;
           cnf.series.forEach(function (s, si) {
-            // if seriesName matches and that series is not collapsed, we use that scale
-            // fix issue #1215
-            // proceed even if si is in gl.collapsedSeriesIndices
+
+
+
             if (s.name === yaxe.seriesName) {
               index = si;
 
@@ -11577,7 +11577,7 @@
         var sameScaleMaxYArr = [];
         minYArr.forEach(function (minYValue, yi) {
           indices.forEach(function (scale, i) {
-            // we compare only the yIndex which exists in the indices array
+
             if (scale.indexOf(yi) > -1) {
               if (typeof sameScaleMinYArr[i] === 'undefined') {
                 sameScaleMinYArr[i] = [];
@@ -11613,10 +11613,10 @@
             var maxY = sameScaleMax[si];
 
             if (cnf.chart.stacked) {
-              // for stacked charts, we need to add the values
+
               maxY = 0;
               s.forEach(function (ind, k) {
-                // fix incorrectly adjust y scale issue #1215
+
                 if (ind.value !== -Number.MAX_VALUE) {
                   maxY += ind.value;
                 }
@@ -11662,8 +11662,8 @@
         var w = ctx.w;
 
         if (w.globals.isMultipleYAxis || w.globals.collapsedSeries.length) {
-          // The autoScale option for multiple y-axis is turned off as it leads to buggy behavior.
-          // Also, when a series is collapsed, it results in incorrect behavior. Hence turned it off for that too - fixes apexcharts.js#795
+
+
           console.warn('autoScaleYaxis is not supported in a multi-yaxis chart.');
           return yaxis;
         }
@@ -11855,7 +11855,7 @@
 
         if (cnf.chart.type === 'bar') {
           if (minY < 0 && maxY < 0) {
-            // all negative values in a bar chart, hence make the max to 0
+
             maxY = 0;
           }
 
@@ -11881,7 +11881,7 @@
         var lowestYInAllSeries = Number.MAX_VALUE;
 
         if (gl.isMultipleYAxis) {
-          // we need to get minY and maxY for multiple y axis
+
           for (var i = 0; i < gl.series.length; i++) {
             var minYMaxYArr = this.getMinYMaxY(i, lowestYInAllSeries, null, i + 1);
             gl.minYArr.push(minYMaxYArr.minY);
@@ -11899,7 +11899,7 @@
         if (cnf.chart.stacked) {
           this._setStackedMinMax();
         } // if the numbers are too big, reduce the range
-        // for eg, if number is between 100000-110000, putting 0 as the lowest value is not so good idea. So change the gl.minY for line/area/candlesticks/boxPlot
+
 
 
         if (cnf.chart.type === 'line' || cnf.chart.type === 'area' || cnf.chart.type === 'candlestick' || cnf.chart.type === 'boxPlot' || cnf.chart.type === 'rangeBar' && !gl.isBarHorizontal) {
@@ -11908,7 +11908,7 @@
               var diff = gl.maxY - lowestYInAllSeries;
 
               if (lowestYInAllSeries >= 0 && lowestYInAllSeries <= 10 || cnf.yaxis[0].min !== undefined || cnf.yaxis[0].max !== undefined) {
-                // if minY is already 0/low value, we don't want to go negatives here - so this check is essential.
+
                 diff = 0;
               }
 
@@ -11928,12 +11928,12 @@
         }
 
         cnf.yaxis.forEach(function (yaxe, index) {
-          // override all min/max values by user defined values (y axis)
+
           if (yaxe.max !== undefined) {
             if (typeof yaxe.max === 'number') {
               gl.maxYArr[index] = yaxe.max;
             } else if (typeof yaxe.max === 'function') {
-              // fixes apexcharts.js/issues/2098
+
               gl.maxYArr[index] = yaxe.max(gl.isMultipleYAxis ? gl.maxYArr[index] : gl.maxY);
             } // gl.maxY is for single y-axis chart, it will be ignored in multi-yaxis
 
@@ -11945,7 +11945,7 @@
             if (typeof yaxe.min === 'number') {
               gl.minYArr[index] = yaxe.min;
             } else if (typeof yaxe.min === 'function') {
-              // fixes apexcharts.js/issues/2098
+
               gl.minYArr[index] = yaxe.min(gl.isMultipleYAxis ? gl.minYArr[index] === Number.MIN_VALUE ? 0 : gl.minYArr[index] : gl.minY);
             } // gl.minY is for single y-axis chart, it will be ignored in multi-yaxis
 
@@ -12114,7 +12114,7 @@
     }, {
       key: "setZRange",
       value: function setZRange() {
-        // minZ, maxZ starts here
+
         var gl = this.w.globals;
         if (!gl.isDataXYZ) return;
 
@@ -12159,11 +12159,11 @@
         var gl = this.w.globals;
 
         if (gl.isXNumeric) {
-          // get the least x diff if numeric x axis is present
+
           gl.seriesX.forEach(function (sX, i) {
             if (sX.length === 1) {
-              // a small hack to prevent overlapping multiple bars when there is just 1 datapoint in bar series.
-              // fix #811
+
+
               sX.push(gl.seriesX[gl.maxValsInArrayIndex][gl.seriesX[gl.maxValsInArrayIndex].length - 1]);
             } // fix #983 (clone the array to avoid side effects)
 
@@ -12183,7 +12183,7 @@
             });
 
             if (gl.dataPoints === 1 && gl.minXDiff === Number.MAX_VALUE) {
-              // fixes apexcharts.js #1221
+
               gl.minXDiff = 0.5;
             }
           });
@@ -12204,12 +12204,12 @@
 
             for (var i = 0; i < gl.series.length; i++) {
               if (gl.series[i][j] !== null && Utils.isNumber(gl.series[i][j])) {
-                // 0.0001 fixes #185 when values are very small
+
                 gl.series[i][j] > 0 ? poss = poss + parseFloat(gl.series[i][j]) + 0.0001 : negs = negs + parseFloat(gl.series[i][j]);
               }
 
               if (i === gl.series.length - 1) {
-                // push all the totals to the array for future use
+
                 stackedPoss.push(poss);
                 stackedNegs.push(negs);
               }
@@ -12788,7 +12788,7 @@
       key: "setCurrentLocaleValues",
       value: function setCurrentLocaleValues(localeName) {
         var locales = this.w.config.chart.locales; // check if user has specified locales in global Apex variable
-        // if yes - then extend those with local chart's locale
+
 
         if (window.Apex.chart && window.Apex.chart.locales && window.Apex.chart.locales.length > 0) {
           locales = this.w.config.chart.locales.concat(window.Apex.chart.locales);
@@ -12800,7 +12800,7 @@
         })[0];
 
         if (selectedLocale) {
-          // create a complete locale object by extending defaults so you don't get undefined errors.
+
           var ret = Utils.extend(en, selectedLocale); // store these locale options in global var for ease access
 
           this.w.globals.locale = ret.options;
@@ -12893,7 +12893,7 @@
           var xcrosshairs = graphics.drawRect();
 
           if (w.config.xaxis.crosshairs.width === 1) {
-            // to prevent drawing 2 lines, convert rect to line
+
             xcrosshairs = graphics.drawLine();
           }
 
@@ -12966,7 +12966,7 @@
       this.ctx = ctx;
       this.w = ctx.w;
     } // the opts parameter if not null has to be set overriding everything
-    // as the opts is set by user externally
+
 
 
     _createClass(Responsive, [{
@@ -13162,9 +13162,9 @@
 
         this.pushExtraColors(w.globals.markers.colors);
       } // When the number of colors provided is less than the number of series, this method
-      // will push same colors to the list
-      // params:
-      // distributed is only valid for distributed column/bar charts
+
+
+
 
     }, {
       key: "pushExtraColors",
@@ -13357,7 +13357,7 @@
         var elLegendWrap = w.globals.dom.baseEl.querySelector('.apexcharts-legend');
 
         if (!w.config.legend.height && (w.config.legend.position === 'top' || w.config.legend.position === 'bottom')) {
-          // avoid legend to take up all the space
+
           elLegendWrap.style.maxHeight = w.globals.svgHeight / 2 + 'px';
         }
 
@@ -13395,7 +13395,7 @@
         var valArr = val;
 
         if (w.globals.isMultiLineX) {
-          // if the xaxis labels has multiline texts (array)
+
           var maxArrs = arr.map(function (xl, idx) {
             return Array.isArray(xl) ? xl.length : 1;
           });
@@ -13560,7 +13560,7 @@
         }); //  get the longest string from the labels array and also apply label formatter to it
 
         var val = labels.reduce(function (a, b) {
-          // if undefined, maybe user didn't pass the datetime(x) values
+
           if (typeof a === 'undefined') {
             console.error('You have possibly supplied invalid Date format. Please supply a valid JavaScript Date');
             return 0;
@@ -13578,7 +13578,7 @@
 
         return rect;
       } // In certain cases, the last labels gets cropped in xaxis.
-      // Hence, we add some additional padding based on the label length to avoid the last label being cropped or we don't draw it at all
+
 
     }, {
       key: "additionalPaddingXLabels",
@@ -13600,14 +13600,14 @@
 
         var rightPad = function rightPad(yaxe) {
           if (_this.dCtx.timescaleLabels && _this.dCtx.timescaleLabels.length) {
-            // for timeline labels, we take the last label and check if it exceeds gridWidth
+
             var firstimescaleLabel = _this.dCtx.timescaleLabels[0];
             var lastTimescaleLabel = _this.dCtx.timescaleLabels[_this.dCtx.timescaleLabels.length - 1];
             var lastLabelPosition = lastTimescaleLabel.position + lbWidth / 1.75 - // replace + with - ;
-            // allow the last label to intersect with the right y axis
+
             _this.dCtx.yAxisWidthRight;
             var firstLabelPosition = firstimescaleLabel.position - lbWidth / 1.75 + // remove conditional since the first label is always at the very left
-            // allow the first label to intersect with the left y axes
+
             _this.dCtx.yAxisWidthLeft;
 
             if (lastLabelPosition > gl.svgWidth - gl.translateX) {
@@ -13618,7 +13618,7 @@
               gl.skipFirstTimelinelabel = true;
             }
           } else if (xtype === 'datetime') {
-            // If user has enabled DateTime, but uses own's formatter
+
             if (_this.dCtx.gridPad.right < lbWidth && !gl.rotateXLabels) {
               gl.skipLastTimelinelabel = true;
             }
@@ -13631,16 +13631,16 @@
 
         var padYAxe = function padYAxe(yaxe, i) {
           if (isCollapsed(i)) return; // the code below causes issue apexcharts.js#1989
-          // after testing with other use-cases, this has no actual value, hence commented
-          // if (xtype !== 'datetime') {
-          //   if (
-          //     this.dCtx.gridPad.left < lbWidth / 2 - this.dCtx.yAxisWidthLeft &&
-          //     !gl.rotateXLabels &&
-          //     !cnf.xaxis.labels.trim
-          //   ) {
-          //     this.dCtx.xPadLeft = lbWidth / 2 + 1
-          //   }
-          // }
+
+
+
+
+
+
+
+
+
+
 
           rightPad();
         };
@@ -13985,10 +13985,10 @@
         this.lgRect = this.dimHelpers.getLegendsRect();
 
         if (gl.axisCharts) {
-          // for line / area / scatter / column
+
           this.setDimensionsForAxisCharts();
         } else {
-          // for pie / donuts / circle
+
           this.setDimensionsForNonAxisCharts();
         }
 
@@ -14013,7 +14013,7 @@
         w.globals.yLabelsCoords = [];
         w.globals.yTitleCoords = [];
         w.config.yaxis.map(function (yaxe, index) {
-          // store the labels and titles coords in global vars
+
           w.globals.yLabelsCoords.push({
             width: yaxisLabelCoords[index].width,
             index: index
@@ -14248,7 +14248,7 @@
         gl.dom.elLegendWrap.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
         elForeign.appendChild(gl.dom.elLegendWrap);
         elForeign.appendChild(this.getLegendStyles()); //gl.dom.elGraphical.node.insertAdjacentElement('afterend', elForeign)
-        // the above line causes issue #1907
+
 
         gl.dom.Paper.node.insertBefore(elForeign, gl.dom.elGraphical.node);
       }
@@ -14293,7 +14293,7 @@
             });
           }
         } else {
-          // for non-axis charts i.e pie / donuts
+
           var _seriesEl = w.globals.dom.Paper.select(" .apexcharts-series[rel='".concat(seriesCnt + 1, "'] path"));
 
           var type = w.config.chart.type;
@@ -14457,7 +14457,7 @@
           if (!Utils.isIE11()) {
             this.legendHelpers.appendToForeignObject();
           } else {
-            // IE11 doesn't supports foreignObject, hence append it to <head>
+
             document.getElementsByTagName('head')[0].appendChild(this.legendHelpers.getLegendStyles());
           }
 
@@ -14724,7 +14724,7 @@
             series.toggleSeriesOnHover(e, e.target);
           }
         } else {
-          // for heatmap handling
+
           if (hoverOverLegend) {
             var seriesCnt = parseInt(e.target.getAttribute('rel'), 10) - 1;
             this.ctx.events.fireEvent('legendHover', [this.ctx, seriesCnt, this.w]);
@@ -14946,7 +14946,7 @@
         }];
 
         if (!this.w.globals.allSeriesHasEqualX) {
-          // if it is a multi series, and all series have variable x values, export CSV won't work
+
           menuItems.splice(2, 1);
         }
 
@@ -15133,7 +15133,7 @@
         }
 
         if (w.config.xaxis.convertedCatToNumeric) {
-          // in category charts, avoid zooming out beyond min and max
+
           if (newMinX < 1) {
             newMinX = 1;
             newMaxX = w.globals.dataPoints;
@@ -15167,8 +15167,8 @@
         }
 
         if (!w.config.chart.group) {
-          // if chart in a group, prevent yaxis update here
-          // fix issue #650
+
+
           options.yaxis = yaxis;
         }
 
@@ -15250,9 +15250,9 @@
           ch.updateHelpers.revertDefaultAxisMinMax();
 
           if (typeof w.config.chart.events.beforeResetZoom === 'function') {
-            // here, user get an option to control xaxis and yaxis when resetZoom is called
-            // at this point, whatever is returned from w.config.chart.events.beforeResetZoom
-            // is set as the new xaxis/yaxis min/max
+
+
+
             var resetZoomRange = w.config.chart.events.beforeResetZoom(ch, w);
 
             if (resetZoomRange) {
@@ -15268,7 +15268,7 @@
           }
 
           w.globals.zoomed = false; // if user has some series collapsed before hitting zoom reset button,
-          // those series should stay collapsed
+
 
           var series = ch.ctx.series.emptyCollapsedSeries(Utils.clone(w.globals.initialSeries));
 
@@ -15439,11 +15439,11 @@
         }
 
         if (e.type === 'mouseup' || e.type === 'touchend' || e.type === 'mouseleave') {
-          // we will be calling getBoundingClientRect on each mousedown/mousemove/mouseup
+
           var _gridRectDim = me.gridRect.getBoundingClientRect();
 
           if (me.w.globals.mousedown) {
-            // user released the drag, now do all the calculations
+
             me.endX = me.clientX - _gridRectDim.left;
             me.endY = me.clientY - _gridRectDim.top;
             me.dragX = Math.abs(me.endX - me.startX);
@@ -15550,7 +15550,7 @@
           var scalingAttrs = {
             transform: 'translate(' + translateX + ', ' + translateY + ')'
           }; // change styles based on zoom or selection
-          // zoom is Enabled and user has dragged, so draw blue rect
+
 
           if (w.globals.zoomEnabled && this.dragged) {
             if (width < 0) width = 1; // fixes apexcharts.js#1168
@@ -15616,10 +15616,10 @@
         var selectionRect = {};
 
         if (Math.abs(selectionWidth + startX) > w.globals.gridWidth) {
-          // user dragged the mouse outside drawing area to the right
+
           selectionWidth = w.globals.gridWidth - startX;
         } else if (me.clientX - gridRectDim.left < 0) {
-          // user dragged the mouse outside drawing area to the left
+
           selectionWidth = startX;
         } // inverse selection X
 
@@ -15690,7 +15690,7 @@
         w.globals.selection = draggedProps; // update selection ends
 
         if (typeof w.config.chart.events.selection === 'function' && w.globals.selectionEnabled) {
-          // a small debouncer is required when resizing to avoid freezing the chart
+
           clearTimeout(this.w.globals.selectionResizeTimer);
           this.w.globals.selectionResizeTimer = window.setTimeout(function () {
             var gridRectDim = _this3.gridRect.getBoundingClientRect();
@@ -15814,8 +15814,8 @@
             };
 
             if (!w.config.chart.group) {
-              // if chart in a group, prevent yaxis update here
-              // fix issue #650
+
+
               options.yaxis = yaxis;
             }
 
@@ -15860,7 +15860,7 @@
         var me = context; // check to make sure there is data to compare against
 
         if (typeof w.globals.lastClientPosition.x !== 'undefined') {
-          // get the change from last position to this position
+
           var deltaX = w.globals.lastClientPosition.x - me.clientX;
           var deltaY = w.globals.lastClientPosition.y - me.clientY; // check which direction had the highest amplitude and then figure out direction by checking if the value is greater or less than zero
 
@@ -15963,8 +15963,8 @@
         };
 
         if (!w.config.chart.group) {
-          // if chart in a group, prevent yaxis update here
-          // fix issue #650
+
+
           options.yaxis = yaxis;
         }
 
@@ -16085,7 +16085,7 @@
           j = closest.j;
 
           if (capturedSeries !== null) {
-            // initial push, it should be a little smaller than the 1st val
+
             seriesXValArr = w.globals.seriesXvalues[capturedSeries];
             closest = this.closestInArray(hoverX, seriesXValArr);
             j = closest.index;
@@ -16246,8 +16246,8 @@
     }, {
       key: "getAllMarkers",
       value: function getAllMarkers() {
-        // first get all marker parents. This parent class contains series-index
-        // which helps to sort the markers as they are dynamic
+
+
         var markersWraps = this.w.globals.dom.baseEl.querySelectorAll('.apexcharts-series-markers-wrap');
         markersWraps = _toConsumableArray(markersWraps);
         markersWraps.sort(function (a, b) {
@@ -16556,14 +16556,14 @@
         ttItemsChildren = ttItems[t].children;
 
         if (w.config.tooltip.fillSeriesColor) {
-          //  elTooltip.style.backgroundColor = pColor
+
           ttItems[t].style.backgroundColor = pColor;
           ttItemsChildren[0].style.display = 'none';
         }
 
         if (ttCtx.showTooltipTitle) {
           if (ttCtx.tooltipTitle === null) {
-            // get it once if null, and store it in class property
+
             ttCtx.tooltipTitle = w.globals.dom.baseEl.querySelector('.apexcharts-tooltip-title');
           }
 
@@ -16607,31 +16607,31 @@
         }
 
         if (shared && ttItemsChildren[0]) {
-          // hide when no Val or series collapsed
+
           if (typeof val === 'undefined' || val === null || w.globals.collapsedSeriesIndices.indexOf(t) > -1) {
             ttItemsChildren[0].parentNode.style.display = 'none';
           } else {
             ttItemsChildren[0].parentNode.style.display = w.config.tooltip.items.display;
           } // TODO: issue #1240 needs to be looked at again. commenting it because this also hides single series values with 0 in it (shared tooltip)
-          // if (w.globals.stackedSeriesTotals[j] === 0) {
-          //   // shared tooltip and all values are null, so we need to hide the x value too
-          //   let allYZeroForJ = false
-          //   for (let si = 1; si < w.globals.seriesYvalues.length; si++) {
-          //     if (
-          //       w.globals.seriesYvalues[si][j] ===
-          //       w.globals.seriesYvalues[si - 1][j]
-          //     ) {
-          //       allYZeroForJ = true
-          //     }
-          //   }
-          //   if (allYZeroForJ) {
-          //     ttCtx.tooltipTitle.style.display = 'none'
-          //   } else {
-          //     ttCtx.tooltipTitle.style.display = w.config.tooltip.items.display
-          //   }
-          // } else {
-          //   ttCtx.tooltipTitle.style.display = w.config.tooltip.items.display
-          // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
       }
@@ -16641,10 +16641,10 @@
         var w = this.w;
 
         if (shared) {
-          // make all tooltips active
+
           this.tooltipUtil.toggleAllTooltipSeriesGroups('enable');
         } else {
-          // disable all tooltip text groups
+
           this.tooltipUtil.toggleAllTooltipSeriesGroups('disable'); // enable the first tooltip text group
 
           var firstTooltipSeriesGroup = w.globals.dom.baseEl.querySelector('.apexcharts-tooltip-series-group');
@@ -16681,7 +16681,7 @@
             xVal = filteredSeriesX[i][j];
 
             if (filteredSeriesX[i].length === 0) {
-              // a series (possibly the first one) might be collapsed, so get the next active index
+
               var firstActiveSeriesIndex = this.tooltipUtil.getFirstActiveXArray(filteredSeriesX);
               xVal = filteredSeriesX[firstActiveSeriesIndex][j];
             }
@@ -16946,7 +16946,7 @@
           y = ttCtx.e.clientY + w.globals.translateY - seriesBound.top - tooltipRect.ttHeight / 2;
         } else {
           if (w.globals.isBarHorizontal) {
-            // non follow shared tooltip in a horizontal bar chart
+
             y = y - tooltipRect.ttHeight;
           } else {
             if (tooltipRect.ttHeight / 2 + y > w.globals.gridHeight) {
@@ -16985,7 +16985,7 @@
           this.moveDynamicPointOnHover(j, i);
         }
       } // This function is used when you need to show markers/points only on hover -
-      // DIFFERENT X VALUES in multiple series
+
 
     }, {
       key: "moveDynamicPointOnHover",
@@ -16999,7 +16999,7 @@
         var serType = w.config.series[capturedSeries].type;
 
         if (serType && (serType === 'column' || serType === 'candlestick' || serType === 'boxPlot')) {
-          // fix error mentioned in #811
+
           return;
         }
 
@@ -17020,7 +17020,7 @@
           this.moveTooltip(cx, cy, hoverSize);
         }
       } // This function is used when you need to show markers/points only on hover -
-      // SAME X VALUES in multiple series
+
 
     }, {
       key: "moveDynamicPointsOnHover",
@@ -17047,9 +17047,9 @@
             var pointArr = pointsArr[p];
 
             if (w.globals.comboCharts) {
-              // in a combo chart, if column charts are present, markers will not match with the number of series, hence this patch to push a null value in points array
+
               if (typeof pointArr === 'undefined') {
-                // nodelist to array
+
                 points.splice(p, 0, null);
               }
             }
@@ -17167,7 +17167,7 @@
           var pointsMain = elsSeries[i].querySelector(".apexcharts-series-markers-wrap");
 
           if (pointsMain !== null) {
-            // it can be null as we have tooltips in donut/bar charts
+
             var point = void 0;
             var PointClasses = "apexcharts-marker w".concat((Math.random() + 1).toString(36).substring(4));
 
@@ -17547,11 +17547,11 @@
           if (w.globals.comboCharts) {
             i = parseInt(bar.parentNode.getAttribute('data:realIndex'), 10);
           } // if (w.config.tooltip.shared) {
-          // this check not needed  at the moment
-          //   const yDivisor = w.globals.gridHeight / (w.globals.series.length)
-          //   const hoverY = ttCtx.clientY - ttCtx.seriesBound.top
-          //   j = Math.ceil(hoverY / yDivisor)
-          // }
+
+
+
+
+
 
 
           ttCtx.tooltipLabels.drawSeriesTexts({
@@ -17587,7 +17587,7 @@
 
               y = cy - ttCtx.dataPointsDividedHeight + bh / 2 - ttCtx.tooltipRect.ttHeight / 2;
             } else {
-              // if columns
+
               if (w.globals.isXNumeric) {
                 x = cx - bw / 2;
               } else {
@@ -17857,7 +17857,7 @@
         }
 
         if (w.config.markers.size === 0 || w.globals.markers.largestSize === 0) {
-          // when user don't want to show points all the time, but only on when hovering on series
+
           this.marker.drawDynamicPoints(this);
         } // no visible series, exit
 
@@ -18000,7 +18000,7 @@
           var lineAreaPoints = w.globals.dom.baseEl.querySelectorAll('.apexcharts-line-series .apexcharts-marker, .apexcharts-area-series .apexcharts-marker');
 
           if (lineAreaPoints.length > 0) {
-            // if we find any lineSeries, addEventListeners for them
+
             this.addPathsEventListeners(lineAreaPoints, seriesHoverParams);
           } // combo charts may have bars, so add event listeners here too
 
@@ -18162,7 +18162,7 @@
             tooltipRect: ttCtx.tooltipRect
           });
         } else {
-          // non-plot charts i.e pie/donut/circle
+
           ttCtx.nonAxisChartsTooltips({
             e: e,
             opt: opt,
@@ -18241,7 +18241,7 @@
               }
 
               if (this.tooltipUtil.hasMarkers()) {
-                // intersect - line/area/scatter/bubble
+
                 this.intersect.handleMarkerTooltip({
                   e: e,
                   opt: opt,
@@ -18331,8 +18331,8 @@
         if (capturedSeries !== null) {
           this.handleStickyCapturedSeries(e, capturedSeries, opt, j);
         } else {
-          // couldn't capture any series. check if shared X is same,
-          // if yes, draw a grouped tooltip
+
+
           if (this.tooltipUtil.isXoverlap(j) || w.globals.isBarHorizontal) {
             this.create(e, this, 0, j, opt.ttItems);
           }
@@ -18498,7 +18498,7 @@
             this.barSeriesHeight = this.tooltipUtil.getBarsHeight(bars);
 
             if (this.barSeriesHeight > 0) {
-              // hover state, activate snap filter
+
               var graphics = new Graphics(this.ctx);
               var paths = w.globals.dom.Paper.select(".apexcharts-bar-area[j='".concat(j, "']")); // de-activate first
 
@@ -18659,16 +18659,16 @@
           _this.xArrj = [];
           _this.xArrjF = [];
           _this.xArrjVal = []; // if (!this.horizontal) {
-          // this.xArrj.push(x + barWidth / 2)
-          // }
-          // fix issue #1215;
-          // where all stack bar disappear after collapsing the first series
-          // sol: if only 1 arr in this.prevY(this.prevY.length === 1) and all are NaN
+
+
+
+
+
 
           if (_this.prevY.length === 1 && _this.prevY[0].every(function (val) {
             return isNaN(val);
           })) {
-            // make this.prevY[0] all zeroH
+
             _this.prevY[0] = _this.prevY[0].map(function (val) {
               return zeroH;
             }); // make this.prevYF[0] all 0
@@ -18770,7 +18770,7 @@
         var barHeight, barWidth;
 
         if (this.isHorizontal) {
-          // height divided into equal parts
+
           yDivision = w.globals.gridHeight / w.globals.dataPoints;
           barHeight = yDivision;
           barHeight = barHeight * parseInt(w.config.plotOptions.bar.barHeight, 10) / 100;
@@ -18778,12 +18778,12 @@
 
           y = (yDivision - barHeight) / 2;
         } else {
-          // width divided into equal parts
+
           xDivision = w.globals.gridWidth / w.globals.dataPoints;
           barWidth = xDivision;
 
           if (w.globals.isXNumeric && w.globals.dataPoints > 1) {
-            // the check (w.globals.dataPoints > 1) fixes apexcharts.js #1617
+
             xDivision = w.globals.minXDiff / this.xRatio;
             barWidth = xDivision * parseInt(this.barOptions.columnWidth, 10) / 100;
           } else {
@@ -18839,7 +18839,7 @@
 
           barXPosition = bXP;
         } else {
-          // the first series will not have prevX values
+
           barXPosition = zeroW;
         }
 
@@ -18903,8 +18903,8 @@
         var prevBarH = 0;
 
         for (var k = 0; k < this.prevYF.length; k++) {
-          // fix issue #1215
-          // in case where this.prevYF[k][j] is NaN, use 0 instead
+
+
           prevBarH = prevBarH + (!isNaN(this.prevYF[k][j]) ? this.prevYF[k][j] : 0);
         }
 
@@ -18916,7 +18916,7 @@
           if (this.prevY[i - 1] !== undefined) {
             for (var ii = 1; ii < p; ii++) {
               if (!isNaN(this.prevY[i - ii][j])) {
-                // find the previous available value to give prevYValue
+
                 prevYValue = this.prevY[i - ii][j]; // if found it, break the loop
 
                 break;
@@ -18925,7 +18925,7 @@
           }
 
           for (var _ii = 1; _ii < p; _ii++) {
-            // find the previous available value(non-NaN) to give bYP
+
             if (this.prevYVal[i - _ii][j] < 0) {
               bYP = this.series[i][j] >= 0 ? prevYValue - prevBarH + (this.isReversed ? prevBarH : 0) * 2 : prevYValue; // found it? break the loop
 
@@ -18938,7 +18938,7 @@
           }
 
           if (typeof bYP === 'undefined') bYP = w.globals.gridHeight; // if this.prevYF[0] is all 0 resulted from line #486
-          // AND every arr starting from the second only contains NaN
+
 
           if (this.prevYF[0].every(function (val) {
             return val === 0;
@@ -18947,14 +18947,14 @@
               return isNaN(val);
             });
           })) {
-            // Use the same calc way as line #485
+
             barYPosition = w.globals.gridHeight - zeroH;
           } else {
-            // Nothing special
+
             barYPosition = bYP;
           }
         } else {
-          // the first series will not have prevY values, also if the prev index's series X doesn't matches the current index's series X, then start from zero
+
           barYPosition = w.globals.gridHeight - zeroH;
         }
 
@@ -19034,7 +19034,7 @@
           var x = void 0,
               y = void 0,
               xDivision = void 0,
-              // xDivision is the GRIDWIDTH divided by number of datapoints (columns)
+
           zeroH = void 0; // zeroH is the baseline where 0 meets y axis
 
           var yArrj = []; // hold y values of current iterating series
@@ -19213,7 +19213,7 @@
         if (this.isBoxPlot) {
           pathTo = [graphics.move(barXPosition, y1) + graphics.line(barXPosition + barWidth / 2, y1) + graphics.line(barXPosition + barWidth / 2, l1) + graphics.line(barXPosition + barWidth / 4, l1) + graphics.line(barXPosition + barWidth - barWidth / 4, l1) + graphics.line(barXPosition + barWidth / 2, l1) + graphics.line(barXPosition + barWidth / 2, y1) + graphics.line(barXPosition + barWidth, y1) + graphics.line(barXPosition + barWidth, m) + graphics.line(barXPosition, m) + graphics.line(barXPosition, y1 + strokeWidth / 2), graphics.move(barXPosition, m) + graphics.line(barXPosition + barWidth, m) + graphics.line(barXPosition + barWidth, y2) + graphics.line(barXPosition + barWidth / 2, y2) + graphics.line(barXPosition + barWidth / 2, l2) + graphics.line(barXPosition + barWidth - barWidth / 4, l2) + graphics.line(barXPosition + barWidth / 4, l2) + graphics.line(barXPosition + barWidth / 2, l2) + graphics.line(barXPosition + barWidth / 2, y2) + graphics.line(barXPosition, y2) + graphics.line(barXPosition, m) + 'z'];
         } else {
-          // candlestick
+
           pathTo = [graphics.move(barXPosition, y2) + graphics.line(barXPosition + barWidth / 2, y2) + graphics.line(barXPosition + barWidth / 2, l1) + graphics.line(barXPosition + barWidth / 2, y2) + graphics.line(barXPosition + barWidth, y2) + graphics.line(barXPosition + barWidth, y1) + graphics.line(barXPosition + barWidth / 2, y1) + graphics.line(barXPosition + barWidth / 2, l2) + graphics.line(barXPosition + barWidth / 2, y1) + graphics.line(barXPosition, y1) + graphics.line(barXPosition, y2 - strokeWidth / 2)];
         }
 
@@ -19467,7 +19467,7 @@
         }
 
         for (var i = rev ? 0 : heatSeries.length - 1; rev ? i < heatSeries.length : i >= 0; rev ? i++ : i--) {
-          // el to which series will be drawn
+
           var elSeries = graphics.group({
             class: "apexcharts-series apexcharts-heatmap-series",
             seriesName: Utils.escapeString(w.globals.seriesNames[i]),
@@ -19701,7 +19701,7 @@
         var total = 0;
 
         for (var k = 0; k < series.length; k++) {
-          // CALCULATE THE TOTAL
+
           total += Utils.negToZero(series[k]);
         }
 
@@ -19726,7 +19726,7 @@
         }
 
         for (var i = 0; i < series.length; i++) {
-          // CALCULATE THE ANGLES
+
           var angle = this.fullAngle * Utils.negToZero(series[i]) / total;
           sectorAngleArr.push(angle);
 
@@ -19742,14 +19742,14 @@
           var prevTotal = 0;
 
           for (var _k = 0; _k < w.globals.previousPaths.length; _k++) {
-            // CALCULATE THE PREV TOTAL
+
             prevTotal += Utils.negToZero(w.globals.previousPaths[_k]);
           }
 
           var previousAngle;
 
           for (var _i = 0; _i < w.globals.previousPaths.length; _i++) {
-            // CALCULATE THE PREVIOUS ANGLES
+
             previousAngle = this.fullAngle * Utils.negToZero(w.globals.previousPaths[_i]) / prevTotal;
             this.prevSectorAngleArr.push(previousAngle);
           }
@@ -19767,7 +19767,7 @@
         var translateY = halfH - w.globals.gridHeight / 2 * scaleSize;
 
         if (this.chartType === 'donut') {
-          // draw the inner circle and add some text to it
+
           var circle = graphics.drawCircle(this.donutSize);
           circle.attr({
             cx: this.centerX,
@@ -20009,7 +20009,7 @@
         }
 
         if (opts.i === w.config.series.length - 1) {
-          // some adjustments for the last overlapping paths
+
           if (angle + toStartAngle > this.fullAngle) {
             opts.endAngle = opts.endAngle - (angle + toStartAngle);
           } else if (angle + toStartAngle < this.fullAngle) {
@@ -20040,7 +20040,7 @@
         var fromAngle = fromStartAngle < toStartAngle ? this.fullAngle + fromStartAngle - toStartAngle : fromStartAngle - toStartAngle;
 
         if (w.globals.dataChanged && opts.shouldSetPrevPaths) {
-          // to avoid flicker when updating, set prev path first and then animate from there
+
           if (opts.prevEndAngle) {
             path = me.getPiePath({
               me: me,
@@ -20123,7 +20123,7 @@
           });
           return;
         } else {
-          // reset all elems
+
           var allEls = w.globals.dom.baseEl.getElementsByClassName('apexcharts-pie-area');
           Array.prototype.forEach.call(allEls, function (pieSlice) {
             pieSlice.setAttribute('data:pieClicked', 'false');
@@ -21357,8 +21357,8 @@
 
         if (j === 0) {
           var xPT1st = this.lineCtx.categoryAxisCorrection + w.config.markers.offsetX; // the first point for line series
-          // we need to check whether it's not a time series, because a time series may
-          // start from the middle of the x axis
+
+
 
           if (w.globals.isXNumeric) {
             xPT1st = (w.globals.seriesX[realIndex][0] - w.globals.minX) / this.lineCtx.xRatio + w.config.markers.offsetX;
@@ -21423,10 +21423,10 @@
         if (typeof series[i][0] !== 'undefined') {
           if (w.config.chart.stacked) {
             if (i > 0) {
-              // 1st y value of previous series
+
               lineYPosition = this.lineCtx.prevSeriesY[i - 1][0];
             } else {
-              // the first series will not have prevY values
+
               lineYPosition = this.lineCtx.zeroY;
             }
           } else {
@@ -21435,11 +21435,11 @@
 
           prevY = lineYPosition - series[i][0] / this.lineCtx.yRatio[this.lineCtx.yaxisIndex] + (this.lineCtx.isReversed ? series[i][0] / this.lineCtx.yRatio[this.lineCtx.yaxisIndex] : 0) * 2;
         } else {
-          // the first value in the current series is null
+
           if (w.config.chart.stacked && i > 0 && typeof series[i][0] === 'undefined') {
-            // check for undefined value (undefined value will occur when we clear the series while user clicks on legend to hide serieses)
+
             for (var s = i - 1; s >= 0; s--) {
-              // for loop to get to 1st previous value until we get it
+
               if (series[s][0] !== null && typeof series[s][0] !== 'undefined') {
                 lineYPosition = this.lineCtx.prevSeriesY[s][0];
                 prevY = lineYPosition;
@@ -21646,7 +21646,7 @@
         var linePath, areaPath, pathFromLine, pathFromArea;
 
         if (series[i][0] === null) {
-          // when the first value itself is null, we need to move the pointer to a location where a null value is not found
+
           for (var s = 0; s < series[i].length; s++) {
             if (series[i][s] !== null) {
               prevX = this.xDivision * s;
@@ -21737,7 +21737,7 @@
           var lineFill = null;
 
           if (type === 'line') {
-            // fillable lines only for lineChart
+
             lineFill = fill.fillPath({
               seriesNumber: realIndex,
               i: i
@@ -21806,7 +21806,7 @@
 
           if (w.config.chart.stacked) {
             if (i > 0 && w.globals.collapsedSeries.length < w.config.series.length - 1) {
-              // a collapsed series in a stacked bar chart may provide wrong result for the next series, hence find the prevIndex of prev series which is not collapsed - fixes apexcharts.js#1372
+
               var prevIndex = function prevIndex(pi) {
                 var pii = pi;
 
@@ -21822,7 +21822,7 @@
 
               lineYPosition = this.prevSeriesY[prevIndex(i - 1)][j + 1];
             } else {
-              // the first series will not have prevY values
+
               lineYPosition = this.zeroY;
             }
           } else {
@@ -21925,7 +21925,7 @@
             this.elPointsMain.add(elPointsWrap);
           }
         } else {
-          // scatter / bubble chart points creation
+
           this.scatter.draw(this.elSeries, j, {
             realIndex: realIndex,
             pointsPos: pointsPos,
@@ -21968,7 +21968,7 @@
             curve = w.config.stroke.curve[i];
           }
         } // logic of smooth curve derived from chartist
-        // CREDITS: https://gionkunz.github.io/chartist-js/
+
 
 
         if (curve === 'smooth') {
@@ -21996,7 +21996,7 @@
           pY = y;
 
           if (j === series[i].length - 2) {
-            // last loop, close path
+
             areaPath = areaPath + graphics.curve(pX, pY, x, y, x, areaBottomY) + graphics.move(x, y) + 'z';
 
             if (!w.globals.hasNullValues) {
@@ -22025,7 +22025,7 @@
           }
 
           if (j === series[i].length - 2) {
-            // last loop, close path
+
             areaPath = areaPath + graphics.line(x, areaBottomY) + graphics.move(x, y) + 'z';
             linePaths.push(linePath);
             areaPaths.push(areaPath);
@@ -22047,7 +22047,7 @@
         var w = this.w;
 
         if (series[i][j] === null && w.config.markers.showNullDataPoints || series[i].length === 1) {
-          // fixes apexcharts.js#1282, #1252
+
           var elPointsWrap = this.markers.plotChartMarkers(pointsPos, realIndex, j + 1, this.strokeWidth - w.config.markers.strokeWidth / 2, true);
 
           if (elPointsWrap !== null) {
@@ -22103,7 +22103,7 @@
         this.shortestEdge = function () {
           return Math.min(this.height, this.width);
         }; // getCoordinates - for a row of boxes which we've placed
-        //                  return an array of their cartesian coordinates
+
 
 
         this.getCoordinates = function (row) {
@@ -22129,8 +22129,8 @@
 
           return coordinates;
         }; // cutArea - once we've placed some boxes into an row we then need to identify the remaining area,
-        //           this function takes the area of the boxes we've placed and calculates the location and
-        //           dimensions of the remaining space and returns a container box defined by the remaining area
+
+
 
 
         this.cutArea = function (area) {
@@ -22149,8 +22149,8 @@
           return newcontainer;
         };
       } // normalize - the Bruls algorithm assumes we're passing in areas that nicely fit into our
-      //             container box, this method takes our raw data and normalizes the data values into
-      //             area values so that this assumption is valid.
+
+
 
 
       function normalize(data, area) {
@@ -22165,8 +22165,8 @@
 
         return normalizeddata;
       } // treemapMultidimensional - takes multidimensional data (aka [[23,11],[11,32]] - nested array)
-      //                           and recursively calls itself using treemapSingledimensional
-      //                           to create a patchwork of treemaps and merge them
+
+
 
 
       function treemapMultidimensional(data, width, height, xoffset, yoffset) {
@@ -22178,7 +22178,7 @@
         var i;
 
         if (isArray(data[0])) {
-          // if we've got more dimensions of depth
+
           for (i = 0; i < data.length; i++) {
             mergeddata[i] = sumMultidimensionalArray(data[i]);
           }
@@ -22202,8 +22202,8 @@
         var rawtreemap = squarify(normalize(data, width * height), [], new Container(xoffset, yoffset, width, height), []);
         return flattenTreemap(rawtreemap);
       } // flattenTreemap - squarify implementation returns an array of arrays of coordinates
-      //                  because we have a new array everytime we switch to building a new row
-      //                  this converts it into an array of coordinates.
+
+
 
 
       function flattenTreemap(rawtreemap) {
@@ -22218,8 +22218,8 @@
 
         return flattreemap;
       } // squarify  - as per the Bruls paper
-      //             plus coordinates stack and containers so we get
-      //             usable data out of it
+
+
 
 
       function squarify(data, currentrow, container, stack) {
@@ -22246,7 +22246,7 @@
 
         return stack;
       } // improveRatio - implements the worse calculation and comparision as given in Bruls
-      //                (note the error in the original paper; fixed here)
+
 
 
       function improvesRatio(currentrow, nextnode, length) {
@@ -22260,11 +22260,11 @@
         newrow.push(nextnode);
         var currentratio = calculateRatio(currentrow, length);
         var newratio = calculateRatio(newrow, length); // the pseudocode in the Bruls paper has the direction of the comparison
-        // wrong, this is the correct one.
+
 
         return currentratio >= newratio;
       } // calculateRatio - calculates the maximum width to height ratio of the
-      //                  boxes in this row
+
 
 
       function calculateRatio(row, length) {
@@ -22481,8 +22481,8 @@
         });
         return ret;
       } // This calculates a font-size based upon
-      // average label length and the size of the box the label is
-      // going into. The maximum font size is set in chart config.
+
+
 
     }, {
       key: "getFontSize",
@@ -22527,10 +22527,10 @@
         var averagelabelsize = totalLabelLength(this.labels) / countLabels(this.labels);
 
         function fontSize(width, height) {
-          // the font size should be proportional to the size of the box (and the value)
-          // otherwise you can end up creating a visual distortion where two boxes of identical
-          // size have different sized labels, and thus make it look as if the two boxes
-          // represent different sizes
+
+
+
+
           var area = width * height;
           var arearoot = Math.pow(area, 0.5);
           return Math.min(arearoot / averagelabelsize, parseInt(w.config.dataLabels.style.fontSize, 10));
@@ -22693,8 +22693,8 @@
             this.generateMinuteScale(params);
             break;
         } // first, we will adjust the month values index
-        // as in the upper function, it is starting from 0
-        // we will start them from 1
+
+
 
 
         var adjustedMonthInTimeScaleArray = this.timeScaleArray.map(function (ts) {
@@ -22744,7 +22744,7 @@
 
           switch (_this.tickInterval) {
             case 'years':
-              // make years label denser
+
               if (ts.unit === 'year') {
                 shouldNotSkipUnit = true;
               }
@@ -22847,9 +22847,9 @@
         var reformattedTimescaleArray = this.formatDates(filteredTimeScale);
         var removedOverlappingTS = this.removeOverlappingTS(reformattedTimescaleArray);
         w.globals.timescaleLabels = removedOverlappingTS.slice(); // at this stage, we need to re-calculate coords of the grid as timeline labels may have altered the xaxis labels coords
-        // The reason we can't do this prior to this stage is because timeline labels depends on gridWidth, and as the ticks are calculated based on available gridWidth, there can be unknown number of ticks generated for different minX and maxX
-        // Dependency on Dimensions(), need to refactor correctly
-        // TODO - find an alternate way to avoid calling this Heavy method twice
+
+
+
 
         var dimensions = new Dimensions(this.ctx);
         dimensions.plotCoords();
@@ -22859,7 +22859,7 @@
       value: function determineInterval(daysDiff) {
         switch (true) {
           case daysDiff > 1825:
-            // difference is more than 5 years
+
             this.tickInterval = 'years';
             break;
 
@@ -22888,7 +22888,7 @@
             break;
 
           case daysDiff > 0.1 && daysDiff <= 2:
-            // less than  2 days
+
             this.tickInterval = 'hours';
             break;
 
@@ -22930,7 +22930,7 @@
             month: Utils.monthMod(currentMonth + 1)
           });
         } else if (firstVal.minDate === 1 && firstVal.minMonth === 0) {
-          // push the first tick in the array
+
           this.timeScaleArray.push({
             position: firstTickPosition,
             value: firstTickValue,
@@ -22971,7 +22971,7 @@
         var yrCounter = 0;
 
         if (firstVal.minDate > 1) {
-          // remainingDaysofFirstMonth is used to reacht the 2nd tick position
+
           var remainingDaysOfFirstMonth = dt.determineDaysOfMonths(currentMonth + 1, firstVal.minYear) - currentMonthDate + 1; // calculate the first tick position
 
           firstTickPosition = remainingDaysOfFirstMonth * daysWidthOnXAxis;
@@ -22999,7 +22999,7 @@
             month: _month
           });
         } else {
-          // push the first tick in the array
+
           this.timeScaleArray.push({
             position: firstTickPosition,
             value: firstTickValue,
@@ -23071,7 +23071,7 @@
         var month = changeMonth(date, currentMonth, currentYear);
 
         if (firstVal.minHour === 0 && firstVal.minDate === 1) {
-          // the first value is the first day of month
+
           firstTickPosition = 0;
           val = Utils.monthMod(firstVal.minMonth);
           unit = 'month';
@@ -23304,7 +23304,7 @@
           var dateToFormat = dt.getDate(dt.parseDate(raw));
 
           if (!_this2.utc) {
-            // Fixes #1726, #1544, #1485, #1255
+
             dateToFormat = dt.getDate(dt.parseDateWithTimezone(raw));
           }
 
@@ -23485,7 +23485,7 @@
           if (typeof ser[st].type !== 'undefined') {
             if (ser[st].type === 'column' || ser[st].type === 'bar') {
               if (gl.series.length > 1 && cnf.plotOptions.bar.horizontal) {
-                // horizontal bars not supported in mixed charts, hence show a warning
+
                 console.warn('Horizontal bars are not supported in a mixed/combo chart. Please turn off `plotOptions.bar.horizontal`');
               }
 
@@ -23517,7 +23517,7 @@
               boxplotSeries.i.push(st);
               comboCount++;
             } else {
-              // user has specified type, but it is not valid (other than line/area/column)
+
               console.warn('You have specified an unrecognized chart type. Available types for this property are line/area/column/bar/scatter/bubble');
             }
 
@@ -23687,7 +23687,7 @@
         });
 
         if (heightUnit !== '%') {
-          // fixes https://github.com/apexcharts/apexcharts.js/issues/2059
+
           var offsetY = cnf.chart.sparkline.enabled ? 0 : gl.axisCharts ? cnf.chart.parentHeightOffset : 0;
           gl.dom.Paper.node.parentNode.parentNode.style.minHeight = gl.svgHeight + offsetY + 'px';
         }
@@ -23772,7 +23772,7 @@
     }, {
       key: "isMultipleY",
       value: function isMultipleY() {
-        // user has supplied an array in yaxis property. So, turn on multipleYAxis flag
+
         if (this.w.config.yaxis.constructor === Array && this.w.config.yaxis.length > 1) {
           this.w.globals.isMultipleYAxis = true;
           return true;
@@ -23841,7 +23841,7 @@
         if (!w.config.chart.brush.enabled) {
           return;
         } // if user has not defined a custom function for selection - we handle the brush chart
-        // otherwise we leave it to the user to define the functionality for selection
+
 
 
         if (typeof w.config.chart.events.selection !== 'function') {
@@ -23930,7 +23930,7 @@
         }
 
         if (this.ctx.w.globals.isExecCalled) {
-          // If the user called exec method, we don't want to get grouped charts as user specifically provided a chartID to update
+
           charts = [this.ctx];
           this.ctx.w.globals.isExecCalled = false;
         }
@@ -23953,14 +23953,14 @@
             options = CoreUtils.extendArrayProps(ch.config, options, w); // fixes #914, #623
 
             if (ch.w.globals.chartID !== _this.ctx.w.globals.chartID) {
-              // don't overwrite series of synchronized charts
+
               delete options.series;
             }
 
             w.config = Utils.extend(w.config, options);
 
             if (overwriteInitialConfig) {
-              // we need to forget the lastXAxis and lastYAxis is user forcefully overwriteInitialConfig. If we do not do this, and next time when user zooms the chart after setting yaxis.min/max or xaxis.min/max - the stored lastXAxis will never allow the chart to use the updated min/max by user.
+
               w.globals.lastXAxis = options.xaxis ? Utils.clone(options.xaxis) : [];
               w.globals.lastYAxis = options.yaxis ? Utils.clone(options.yaxis) : []; // After forgetting lastAxes, we need to restore the new config in initialConfig/initialSeries
 
@@ -24007,7 +24007,7 @@
 
           w.config.series = existingSeries;
         } else {
-          // non-axis chart (pie/radialbar)
+
           w.config.series = newSeries.slice();
         }
 
@@ -24039,7 +24039,7 @@
         if (w.globals.axisCharts) {
           elPath = w.globals.dom.Paper.select("".concat(parent, " path[j='").concat(dataPointIndex, "'], ").concat(parent, " circle[j='").concat(dataPointIndex, "'], ").concat(parent, " rect[j='").concat(dataPointIndex, "']")).members[0];
         } else {
-          // dataPointIndex will be undefined here, hence using seriesIndex
+
           if (typeof dataPointIndex === 'undefined') {
             elPath = w.globals.dom.Paper.select("".concat(parent, " path[j='").concat(seriesIndex, "']")).members[0];
 
@@ -24137,14 +24137,14 @@
 
         w.config.yaxis.map(function (yaxe, index) {
           if (w.globals.zoomed) {
-            // user has zoomed, check the last yaxis
+
             getLastYAxis(index);
           } else {
-            // user hasn't zoomed, check the last yaxis first
+
             if (typeof yaxis[index] !== 'undefined') {
               getLastYAxis(index);
             } else {
-              // if last y-axis don't exist, check the original yaxis
+
               if (typeof _this3.ctx.opts.yaxis[index] !== 'undefined') {
                 yaxe.min = _this3.ctx.opts.yaxis[index].min;
                 yaxe.max = _this3.ctx.opts.yaxis[index].max;
@@ -24173,8 +24173,8 @@
       root.SVG = factory(root, root.document);
     }
   })(typeof window !== 'undefined' ? window : undefined, function (window, document) {
-    // Find global reference - uses 'this' by default when available,
-    // falls back to 'window' otherwise (for bundlers like Webpack)
+
+
     var globalRef = typeof this !== 'undefined' ? this : window; // The main wrapping element
 
     var SVG = globalRef.SVG = function (element) {
@@ -24197,7 +24197,7 @@
 
     SVG.supported = function () {
       return true; // !!document.createElementNS &&
-      //     !! document.createElementNS(SVG.ns,'svg').createSVGRect
+
     }(); // Don't bother to continue if SVG is not supported
 
 
@@ -24211,7 +24211,7 @@
 
 
     SVG.create = function (name) {
-      // create element
+
       var element = document.createElementNS(this.ns, name); // apply unique id
 
       element.setAttribute('id', this.eid(name));
@@ -24242,7 +24242,7 @@
 
 
     SVG.invent = function (config) {
-      // Create element initializer
+
       var initializer = typeof config.create === 'function' ? config.create : function () {
         this.constructor.call(this, SVG.create(config.create));
       }; // Inherit prototype
@@ -24266,7 +24266,7 @@
 
 
     SVG.adopt = function (node) {
-      // check for presence of node
+
       if (!node) return null; // make sure a node isn't already adopted
 
       if (node.instance) return node.instance; // initialize variables
@@ -24301,7 +24301,7 @@
 
 
     SVG.prepare = function () {
-      // Select document body and create invisible svg element
+
       var body = document.getElementsByTagName('body')[0],
           draw = (body ? new SVG.Doc(body) : SVG.adopt(document.documentElement).nested()).size(2, 0); // Create parser object
 
@@ -24324,48 +24324,48 @@
     }, false); // Storage for regular expressions
 
     SVG.regex = {
-      // Parse unit value
+
       numberAndUnit: /^([+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?)([a-z%]*)$/i,
-      // Parse hex value
+
       hex: /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i,
-      // Parse rgb value
+
       rgb: /rgb\((\d+),(\d+),(\d+)\)/,
-      // Parse reference id
+
       reference: /#([a-z0-9\-_]+)/i,
-      // splits a transformation chain
+
       transforms: /\)\s*,?\s*/,
-      // Whitespace
+
       whitespace: /\s/g,
-      // Test hex value
+
       isHex: /^#[a-f0-9]{3,6}$/i,
-      // Test rgb value
+
       isRgb: /^rgb\(/,
-      // Test css declaration
+
       isCss: /[^:]+:[^;]+;?/,
-      // Test for blank string
+
       isBlank: /^(\s+)?$/,
-      // Test for numeric string
+
       isNumber: /^[+-]?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
-      // Test for percent value
+
       isPercent: /^-?[\d\.]+%$/,
-      // Test for image url
+
       isImage: /\.(jpg|jpeg|png|gif|svg)(\?[^=]+.*)?/i,
-      // split at whitespace and comma
+
       delimiter: /[\s,]+/,
-      // The following regex are used to parse the d attribute of a path
-      // Matches all hyphens which are not after an exponent
+
+
       hyphen: /([^e])\-/gi,
-      // Replaces and tests for all path letters
+
       pathLetters: /[MLHVCSQTAZ]/gi,
-      // yes we need this one, too
+
       isPathLetter: /[MLHVCSQTAZ]/i,
-      // matches 0.154.23.45
+
       numbersWithDots: /((\d?\.\d+(?:e[+-]?\d+)?)((?:\.\d+(?:e[+-]?\d+)?)+))+/gi,
-      // matches .
+
       dots: /\./g
     };
     SVG.utils = {
-      // Map function
+
       map: function map(array, block) {
         var il = array.length,
             result = [];
@@ -24376,7 +24376,7 @@
 
         return result;
       },
-      // Filter function
+
       filter: function filter(array, block) {
         var il = array.length,
             result = [];
@@ -24396,9 +24396,9 @@
       }
     };
     SVG.defaults = {
-      // Default attribute values
+
       attrs: {
-        // fill and stroke
+
         'fill-opacity': 1,
         'stroke-opacity': 1,
         'stroke-width': 0,
@@ -24407,23 +24407,23 @@
         fill: '#000000',
         stroke: '#000000',
         opacity: 1,
-        // position
+
         x: 0,
         y: 0,
         cx: 0,
         cy: 0,
-        // size
+
         width: 0,
         height: 0,
-        // radius
+
         r: 0,
         rx: 0,
         ry: 0,
-        // gradient
+
         offset: 0,
         'stop-opacity': 1,
         'stop-color': '#000000',
-        // text
+
         'font-size': 16,
         'font-family': 'Helvetica, Arial, sans-serif',
         'text-anchor': 'start'
@@ -24440,14 +24440,14 @@
 
       if (typeof color === 'string') {
         if (SVG.regex.isRgb.test(color)) {
-          // get rgb values
+
           match = SVG.regex.rgb.exec(color.replace(SVG.regex.whitespace, '')); // parse numeric values
 
           this.r = parseInt(match[1]);
           this.g = parseInt(match[2]);
           this.b = parseInt(match[3]);
         } else if (SVG.regex.isHex.test(color)) {
-          // get hex values
+
           match = SVG.regex.hex.exec(fullHex(color)); // parse numeric values
 
           this.r = parseInt(match[1], 16);
@@ -24462,30 +24462,30 @@
     };
 
     SVG.extend(SVG.Color, {
-      // Default to hex conversion
+
       toString: function toString() {
         return this.toHex();
       },
-      // Build hex value
+
       toHex: function toHex() {
         return '#' + compToHex(this.r) + compToHex(this.g) + compToHex(this.b);
       },
-      // Build rgb value
+
       toRgb: function toRgb() {
         return 'rgb(' + [this.r, this.g, this.b].join() + ')';
       },
-      // Calculate true brightness
+
       brightness: function brightness() {
         return this.r / 255 * 0.30 + this.g / 255 * 0.59 + this.b / 255 * 0.11;
       },
-      // Make color morphable
+
       morph: function morph(color) {
         this.destination = new SVG.Color(color);
         return this;
       },
-      // Get morphed color at given position
+
       at: function at(pos) {
-        // make sure a destination is defined
+
         if (!this.destination) return this; // normalise pos
 
         pos = pos < 0 ? 0 : pos > 1 ? 1 : pos; // generate morphed color
@@ -24497,7 +24497,7 @@
         });
       }
     }); // Testers
-    // Test if given value is a color string
+
 
     SVG.Color.test = function (color) {
       color += '';
@@ -24527,15 +24527,15 @@
     };
 
     SVG.extend(SVG.Array, {
-      // Convert array to string
+
       toString: function toString() {
         return this.value.join(' ');
       },
-      // Real value
+
       valueOf: function valueOf() {
         return this.value;
       },
-      // Parse whitespace separated string
+
       parse: function parse(array) {
         array = array.valueOf(); // if already is an array, no need to parse it
 
@@ -24612,22 +24612,22 @@
     SVG.PathArray.prototype = new SVG.Array();
     SVG.PathArray.prototype.constructor = SVG.PathArray;
     SVG.extend(SVG.PathArray, {
-      // Convert array to string
+
       toString: function toString() {
         return arrayToString(this.value);
       },
-      // Move path string
+
       move: function move(x, y) {
-        // get bounding box of current situation
+
         var box = this.bbox(); // get relative offset
 
         x -= box.x;
         y -= box.y;
         return this;
       },
-      // Get morphed path array at given position
+
       at: function at(pos) {
-        // make sure a destination is defined
+
         if (!this.destination) return this;
         var sourceArray = this.value,
             destinationArray = this.destination.value,
@@ -24635,7 +24635,7 @@
             pathArray = new SVG.PathArray(),
             il,
             jl; // Animate has specified in the SVG spec
-        // See: https://www.w3.org/TR/SVG11/paths.html#PathElement
+
 
         for (var i = 0, il = sourceArray.length; i < il; i++) {
           array[i] = [sourceArray[i][0]];
@@ -24643,10 +24643,10 @@
           for (var j = 1, jl = sourceArray[i].length; j < jl; j++) {
             array[i][j] = sourceArray[i][j] + (destinationArray[i][j] - sourceArray[i][j]) * pos;
           } // For the two flags of the elliptical arc command, the SVG spec say:
-          // Flags and booleans are interpolated as fractions between zero and one, with any non-zero value considered to be a value of one/true
-          // Elliptical arc command as an array followed by corresponding indexes:
-          // ['A', rx, ry, x-axis-rotation, large-arc-flag, sweep-flag, x, y]
-          //   0    1   2        3                 4             5      6  7
+
+
+
+
 
 
           if (array[i][0] === 'A') {
@@ -24659,9 +24659,9 @@
         pathArray.value = array;
         return pathArray;
       },
-      // Absolutize and parse path to array
+
       parse: function parse(array) {
-        // if it's already a patharray, no need to parse it
+
         if (array instanceof SVG.PathArray) return array.valueOf(); // prepare for parsing
 
         var s,
@@ -24699,7 +24699,7 @@
             len = array.length;
 
         do {
-          // Test if we have a path letter
+
           if (SVG.regex.isPathLetter.test(array[index])) {
             s = array[index];
             ++index; // If last letter was a move command and we got no new, it defaults to [L]ine
@@ -24714,7 +24714,7 @@
 
         return arr;
       },
-      // Get bounding box of path
+
       bbox: function bbox() {
         if (!SVG.parser.draw) {
           SVG.prepare();
@@ -24726,20 +24726,20 @@
     }); // Module for unit convertions
 
     SVG.Number = SVG.invent({
-      // Initialize
+
       create: function create(value, unit) {
-        // initialize defaults
+
         this.value = 0;
         this.unit = unit || ''; // parse value
 
         if (typeof value === 'number') {
-          // ensure a valid numeric value
+
           this.value = isNaN(value) ? 0 : !isFinite(value) ? value < 0 ? -3.4e+38 : +3.4e+38 : value;
         } else if (typeof value === 'string') {
           unit = value.match(SVG.regex.numberAndUnit);
 
           if (unit) {
-            // make value numeric
+
             this.value = parseFloat(unit[1]); // normalize
 
             if (unit[5] == '%') {
@@ -24758,40 +24758,40 @@
           }
         }
       },
-      // Add methods
+
       extend: {
-        // Stringalize
+
         toString: function toString() {
           return (this.unit == '%' ? ~~(this.value * 1e8) / 1e6 : this.unit == 's' ? this.value / 1e3 : this.value) + this.unit;
         },
         toJSON: function toJSON() {
           return this.toString();
         },
-        // Convert to primitive
+
         valueOf: function valueOf() {
           return this.value;
         },
-        // Add number
+
         plus: function plus(number) {
           number = new SVG.Number(number);
           return new SVG.Number(this + number, this.unit || number.unit);
         },
-        // Subtract number
+
         minus: function minus(number) {
           number = new SVG.Number(number);
           return new SVG.Number(this - number, this.unit || number.unit);
         },
-        // Multiply number
+
         times: function times(number) {
           number = new SVG.Number(number);
           return new SVG.Number(this * number, this.unit || number.unit);
         },
-        // Divide number
+
         divide: function divide(number) {
           number = new SVG.Number(number);
           return new SVG.Number(this / number, this.unit || number.unit);
         },
-        // Convert to different unit
+
         to: function to(unit) {
           var number = new SVG.Number(this);
 
@@ -24801,7 +24801,7 @@
 
           return number;
         },
-        // Make number morphable
+
         morph: function morph(number) {
           this.destination = new SVG.Number(number);
 
@@ -24811,9 +24811,9 @@
 
           return this;
         },
-        // Get morphed number at given position
+
         at: function at(pos) {
-          // Make sure a destination is defined
+
           if (!this.destination) return this; // Generate new morphed number
 
           return new SVG.Number(this.destination).minus(this).times(pos).plus(this);
@@ -24821,9 +24821,9 @@
       }
     });
     SVG.Element = SVG.invent({
-      // Initialize node
+
       create: function create(node) {
-        // make stroke value accessible dynamically
+
         this._stroke = SVG.defaults.attrs.stroke;
         this._event = null; // initialize data object
 
@@ -24836,48 +24836,48 @@
           this._stroke = node.getAttribute('stroke') || this._stroke;
         }
       },
-      // Add class methods
+
       extend: {
-        // Move over x-axis
+
         x: function x(_x) {
           return this.attr('x', _x);
         },
-        // Move over y-axis
+
         y: function y(_y) {
           return this.attr('y', _y);
         },
-        // Move by center over x-axis
+
         cx: function cx(x) {
           return x == null ? this.x() + this.width() / 2 : this.x(x - this.width() / 2);
         },
-        // Move by center over y-axis
+
         cy: function cy(y) {
           return y == null ? this.y() + this.height() / 2 : this.y(y - this.height() / 2);
         },
-        // Move element to given x and y values
+
         move: function move(x, y) {
           return this.x(x).y(y);
         },
-        // Move element by its center
+
         center: function center(x, y) {
           return this.cx(x).cy(y);
         },
-        // Set width of element
+
         width: function width(_width) {
           return this.attr('width', _width);
         },
-        // Set height of element
+
         height: function height(_height) {
           return this.attr('height', _height);
         },
-        // Set element size to given width and height
+
         size: function size(width, height) {
           var p = proportionalSize(this, width, height);
           return this.width(new SVG.Number(p.width)).height(new SVG.Number(p.height));
         },
-        // Clone element
+
         clone: function clone(parent) {
-          // write dom data to the dom so the clone can pickup the data
+
           this.writeDataToDom(); // clone element and assign new id
 
           var clone = assignNewId(this.node.cloneNode(true)); // insert the clone in the given parent or after myself
@@ -24885,7 +24885,7 @@
           if (parent) parent.add(clone);else this.after(clone);
           return clone;
         },
-        // Remove element
+
         remove: function remove() {
           if (this.parent()) {
             this.parent().removeElement(this);
@@ -24893,49 +24893,49 @@
 
           return this;
         },
-        // Replace element
+
         replace: function replace(element) {
           this.after(element).remove();
           return element;
         },
-        // Add element to given container and return self
+
         addTo: function addTo(parent) {
           return parent.put(this);
         },
-        // Add element to given container and return container
+
         putIn: function putIn(parent) {
           return parent.add(this);
         },
-        // Get / set id
+
         id: function id(_id) {
           return this.attr('id', _id);
         },
-        // Show element
+
         show: function show() {
           return this.style('display', '');
         },
-        // Hide element
+
         hide: function hide() {
           return this.style('display', 'none');
         },
-        // Is element visible?
+
         visible: function visible() {
           return this.style('display') != 'none';
         },
-        // Return id on string conversion
+
         toString: function toString() {
           return this.attr('id');
         },
-        // Return array of classes on the node
+
         classes: function classes() {
           var attr = this.attr('class');
           return attr == null ? [] : attr.trim().split(SVG.regex.delimiter);
         },
-        // Return true if class exists on the node, false otherwise
+
         hasClass: function hasClass(name) {
           return this.classes().indexOf(name) != -1;
         },
-        // Add class to the node
+
         addClass: function addClass(name) {
           if (!this.hasClass(name)) {
             var array = this.classes();
@@ -24945,7 +24945,7 @@
 
           return this;
         },
-        // Remove class from the node
+
         removeClass: function removeClass(name) {
           if (this.hasClass(name)) {
             this.attr('class', this.classes().filter(function (c) {
@@ -24955,15 +24955,15 @@
 
           return this;
         },
-        // Toggle the presence of a class on the node
+
         toggleClass: function toggleClass(name) {
           return this.hasClass(name) ? this.removeClass(name) : this.addClass(name);
         },
-        // Get referenced element form attribute value
+
         reference: function reference(attr) {
           return SVG.get(this.attr(attr));
         },
-        // Returns the parent element instance
+
         parent: function parent(type) {
           var parent = this; // check for parent
 
@@ -24979,11 +24979,11 @@
             parent = SVG.adopt(parent.node.parentNode);
           }
         },
-        // Get parent document
+
         doc: function doc() {
           return this instanceof SVG.Doc ? this : this.parent(SVG.Doc);
         },
-        // return array of all ancestors of given type up to the root svg
+
         parents: function parents(type) {
           var parents = [],
               parent = this;
@@ -24996,21 +24996,21 @@
 
           return parents;
         },
-        // matches the element vs a css selector
+
         matches: function matches(selector) {
           return _matches(this.node, selector);
         },
-        // Returns the svg node to call native svg methods on it
+
         native: function native() {
           return this.node;
         },
-        // Import raw svg
+
         svg: function svg(_svg) {
-          // create temporary holder
+
           var well = document.createElement('svg'); // act as a setter if svg is given
 
           if (_svg && this instanceof SVG.Parent) {
-            // dump raw svg
+
             well.innerHTML = '<svg>' + _svg.replace(/\n/, '').replace(/<([\w:-]+)([^<]+?)\/>/g, '<$1$2></$1>') + '</svg>'; // transplant nodes
 
             for (var i = 0, il = well.firstChild.childNodes.length; i < il; i++) {
@@ -25018,7 +25018,7 @@
             } // otherwise act as a getter
 
           } else {
-            // create a wrapping svg element in case of partial content
+
             well.appendChild(_svg = document.createElement('svg')); // write svgjs data to the dom
 
             this.writeDataToDom(); // insert a copy of this node
@@ -25031,9 +25031,9 @@
 
           return this;
         },
-        // write svgjs data to the dom
+
         writeDataToDom: function writeDataToDom() {
-          // dump variables recursively
+
           if (this.each || this.lines) {
             var fn = this.each ? this : this.lines();
             fn.each(function () {
@@ -25051,7 +25051,7 @@
 
           return this;
         },
-        // set given data to the elements data property
+
         setData: function setData(o) {
           this.dom = o;
           return this;
@@ -25092,24 +25092,24 @@
         this.start = +new Date() + this.delay;
         this.finish = this.start + this.duration;
         this.ease = o.ease; // this.loop is incremented from 0 to this.loops
-        // it is also incremented when in an infinite loop (when this.loops is true)
+
 
         this.loop = 0;
         this.loops = false;
         this.animations = {// functionToCall: [list of morphable objects]
-          // e.g. move: [SVG.Number, SVG.Number]
+
         };
         this.attrs = {// holds all attributes which are not represented from a function svg.js provides
-          // e.g. someAttr: SVG.Number
+
         };
         this.styles = {// holds all styles which should be animated
-          // e.g. fill-color: SVG.Color
+
         };
         this.transforms = [// holds all transformations as transformation objects
-          // e.g. [SVG.Rotate, SVG.Translate, SVG.Matrix]
+
         ];
         this.once = {// functions to fire at a specific position
-          // e.g. "0.5": function foo(){}
+
         };
       }
     });
@@ -25122,7 +25122,7 @@
         this.paused = false;
         this.lastPos = 0;
         this.pos = 0; // The absolute position of an animation is its position in the context of its complete duration (including delay and loops)
-        // When performing a delay, absPos is below 0 and when performing a loop, its value is above 1
+
 
         this.absPos = 0;
         this._speed = 1;
@@ -25170,28 +25170,28 @@
 
           return this._target;
         },
-        // returns the absolute position at a given time
+
         timeToAbsPos: function timeToAbsPos(timestamp) {
           return (timestamp - this.situation.start) / (this.situation.duration / this._speed);
         },
-        // returns the timestamp from a given absolute positon
+
         absPosToTime: function absPosToTime(absPos) {
           return this.situation.duration / this._speed * absPos + this.situation.start;
         },
-        // starts the animationloop
+
         startAnimFrame: function startAnimFrame() {
           this.stopAnimFrame();
           this.animationFrame = window.requestAnimationFrame(function () {
             this.step();
           }.bind(this));
         },
-        // cancels the animationframe
+
         stopAnimFrame: function stopAnimFrame() {
           window.cancelAnimationFrame(this.animationFrame);
         },
-        // kicks off the animation - only does something when the queue is currently not active and at least one situation is set
+
         start: function start() {
-          // dont start if already started
+
           if (!this.active && this.situation) {
             this.active = true;
             this.startCurrent();
@@ -25199,7 +25199,7 @@
 
           return this;
         },
-        // start the current situation
+
         startCurrent: function startCurrent() {
           this.situation.start = +new Date() + this.situation.delay / this._speed;
           this.situation.finish = this.situation.start + this.situation.duration / this._speed;
@@ -25225,7 +25225,7 @@
         * @return this
         */
         dequeue: function dequeue() {
-          // stop current animation
+
           this.stop(); // get next animation from queue
 
           this.situation = this.situations.shift();
@@ -25234,15 +25234,15 @@
             if (this.situation instanceof SVG.Situation) {
               this.start();
             } else {
-              // If it is not a SVG.Situation, then it is a function, we execute it
+
               this.situation.call(this);
             }
           }
 
           return this;
         },
-        // updates all animations to the current state of the element
-        // this is important when one property could be changed from another property
+
+
         initAnimations: function initAnimations() {
           var source;
           var s = this.situation;
@@ -25258,13 +25258,13 @@
             if (!Array.isArray(s.animations[i])) {
               s.animations[i] = [s.animations[i]];
             } // if(s.animations[i].length > source.length) {
-            //  source.concat = source.concat(s.animations[i].slice(source.length, s.animations[i].length))
-            // }
+
+
 
 
             for (var j = source.length; j--;) {
-              // The condition is because some methods return a normal number instead
-              // of a SVG.Number
+
+
               if (s.animations[i][j] instanceof SVG.Number) {
                 source[j] = new SVG.Number(source[j]);
               }
@@ -25308,7 +25308,7 @@
           }
 
           if (jumpToEnd && this.situation) {
-            // initialize the situation if it was not
+
             !active && this.startCurrent();
             this.atEnd();
           }
@@ -25328,7 +25328,7 @@
           this.target().on('finished.fx', wrapper);
           return this._callStart();
         },
-        // adds a callback which is called whenever one animation step is performed
+
         during: function during(fn) {
           var c = this.last(),
               wrapper = function wrapper(e) {
@@ -25344,7 +25344,7 @@
           });
           return this._callStart();
         },
-        // calls after ALL animations in the queue are finished
+
         afterAll: function afterAll(fn) {
           var wrapper = function wrapper(e) {
             fn.call(this);
@@ -25358,7 +25358,7 @@
         last: function last() {
           return this.situations.length ? this.situations[this.situations.length - 1] : this.situation;
         },
-        // adds one property to the animations
+
         add: function add(method, args, type) {
           this.last()[type || 'animations'][method] = args;
           return this._callStart();
@@ -25369,7 +25369,7 @@
         *  @return this
         */
         step: function step(ignoreTime) {
-          // convert current time to an absolute position
+
           if (!ignoreTime) this.absPos = this.timeToAbsPos(+new Date()); // This part convert an absolute position to a position
 
           if (this.situation.loops !== false) {
@@ -25391,11 +25391,11 @@
             }
 
             if (this.situation.reversing) {
-              // Toggle reversed if an odd number of loops as occured since the last call of step
+
               this.situation.reversed = this.situation.reversed != Boolean((this.situation.loop - lastLoop) % 2);
             }
           } else {
-            // If there are no loop, the absolute position must not be above 1
+
             this.absPos = Math.min(this.absPos, 1);
             this.pos = this.absPos;
           } // while the absolute position can be below 0, the position must not be below 0
@@ -25420,7 +25420,7 @@
             fx: this,
             situation: this.situation
           }); // the user may call stop or finish in the during callback
-          // so make sure that we still have a valid situation
+
 
           if (!this.situation) {
             return this;
@@ -25430,7 +25430,7 @@
           this.eachAt(); // do final code when situation is finished
 
           if (this.pos == 1 && !this.situation.reversed || this.situation.reversed && this.pos == 0) {
-            // stop animation callback
+
             this.stopAnimFrame(); // fire finished callback with current situation as parameter
 
             this.target().fire('finished', {
@@ -25451,7 +25451,7 @@
 
             if (this.active) this.dequeue();else this.clearCurrent();
           } else if (!this.paused && this.active) {
-            // we continue animating when we are not at the end
+
             this.startAnimFrame();
           } // save last eased position for once callback triggering
 
@@ -25459,7 +25459,7 @@
           this.lastPos = eased;
           return this;
         },
-        // calculates the step for every property and calls block with it
+
         eachAt: function eachAt() {
           var len,
               at,
@@ -25492,11 +25492,11 @@
 
 
           if (s.transforms.length) {
-            // get initial initialTransformation
+
             at = s.initialTransformation;
 
             for (var i = 0, len = s.transforms.length; i < len; i++) {
-              // get next transformation in chain
+
               var a = s.transforms[i]; // multiply matrix directly
 
               if (a instanceof SVG.Matrix) {
@@ -25524,7 +25524,7 @@
 
           return this;
         },
-        // adds an once-callback which is called at a specific position and never again
+
         once: function once(pos, fn, isEased) {
           var c = this.last();
           if (!isEased) pos = c.ease(pos);
@@ -25539,9 +25539,9 @@
         }
       },
       parent: SVG.Element,
-      // Add method to parent elements
+
       construct: {
-        // Get fx module or create a new one, then animate with given duration and ease
+
         animate: function animate(o, ease, delay) {
           return (this.fx || (this.fx = new SVG.FX(this))).animate(o, ease, delay);
         },
@@ -25567,11 +25567,11 @@
 
     SVG.MorphObj = SVG.invent({
       create: function create(from, to) {
-        // prepare color for morphing
+
         if (SVG.Color.isColor(to)) return new SVG.Color(from).morph(to); // check if we have a list of values
 
         if (SVG.regex.delimiter.test(from)) {
-          // prepare path for morphing
+
           if (SVG.regex.pathLetters.test(from)) return new SVG.PathArray(from).morph(to); // prepare value list for morphing
           else return new SVG.Array(from).morph(to);
         } // prepare number for morphing
@@ -25592,9 +25592,9 @@
       }
     });
     SVG.extend(SVG.FX, {
-      // Add animatable attributes
+
       attr: function attr(a, v, relative) {
-        // apply attributes individually
+
         if (_typeof(a) === 'object') {
           for (var key in a) {
             this.attr(key, a[key]);
@@ -25605,9 +25605,9 @@
 
         return this;
       },
-      // Add animatable plot
+
       plot: function plot(a, b, c, d) {
-        // Lines can be plotted with 4 arguments
+
         if (arguments.length == 4) {
           return this.plot([a, b, c, d]);
         }
@@ -25618,7 +25618,7 @@
     SVG.Box = SVG.invent({
       create: function create(x, y, width, height) {
         if (_typeof(x) === 'object' && !(x instanceof SVG.Element)) {
-          // chromes getBoundingClientRect has no x and y property
+
           return SVG.Box.call(this, x.left != null ? x.left : x.x, x.top != null ? x.top : x.y, x.width, x.height);
         } else if (arguments.length == 4) {
           this.x = x;
@@ -25632,7 +25632,7 @@
       }
     });
     SVG.BBox = SVG.invent({
-      // Initialize
+
       create: function create(element) {
         SVG.Box.apply(this, [].slice.call(arguments)); // get values if element is given
 
@@ -25641,7 +25641,7 @@
 
           try {
             if (!document.documentElement.contains) {
-              // This is IE - it does not support contains() for top-level SVGs
+
               var topParent = element.node;
 
               while (topParent.parentNode) {
@@ -25650,16 +25650,16 @@
 
               if (topParent != document) throw new Error('Element not in the dom');
             } else {} // the element is NOT in the dom, throw error
-            // disabling the check below which fixes issue #76
-            // if (!document.documentElement.contains(element.node)) throw new Exception('Element not in the dom')
-            // find native bbox
+
+
+
 
 
             box = element.node.getBBox();
           } catch (e) {
             if (element instanceof SVG.Shape) {
               if (!SVG.parser.draw) {
-                // fixes apexcharts/vue-apexcharts #14
+
                 SVG.prepare();
               }
 
@@ -25679,13 +25679,13 @@
           SVG.Box.call(this, box);
         }
       },
-      // Define ancestor
+
       inherit: SVG.Box,
-      // Define Parent
+
       parent: SVG.Element,
-      // Constructor
+
       construct: {
-        // Get bounding box
+
         bbox: function bbox() {
           return new SVG.BBox(this);
         }
@@ -25693,7 +25693,7 @@
     });
     SVG.BBox.prototype.constructor = SVG.BBox;
     SVG.Matrix = SVG.invent({
-      // Initialize
+
       create: function create(source) {
         var base = arrayToMatrix([1, 0, 0, 1, 0, 0]); // ensure source as object
 
@@ -25703,21 +25703,21 @@
           this[abcdef[i]] = source[abcdef[i]] != null ? source[abcdef[i]] : base[abcdef[i]];
         }
       },
-      // Add methods
+
       extend: {
-        // Extract individual transformations
+
         extract: function extract() {
-          // find delta transform points
+
           var px = deltaTransformPoint(this, 0, 1),
               py = deltaTransformPoint(this, 1, 0),
               skewX = 180 / Math.PI * Math.atan2(px.y, px.x) - 90;
           return {
-            // translation
+
             x: this.e,
             y: this.f,
             transformedX: (this.e * Math.cos(skewX * Math.PI / 180) + this.f * Math.sin(skewX * Math.PI / 180)) / Math.sqrt(this.a * this.a + this.b * this.b),
             transformedY: (this.f * Math.cos(skewX * Math.PI / 180) + this.e * Math.sin(-skewX * Math.PI / 180)) / Math.sqrt(this.c * this.c + this.d * this.d),
-            // rotation
+
             rotation: skewX,
             a: this.a,
             b: this.b,
@@ -25728,31 +25728,31 @@
             matrix: new SVG.Matrix(this)
           };
         },
-        // Clone matrix
+
         clone: function clone() {
           return new SVG.Matrix(this);
         },
-        // Morph one matrix into another
+
         morph: function morph(matrix) {
-          // store new destination
+
           this.destination = new SVG.Matrix(matrix);
           return this;
         },
-        // Multiplies by given matrix
+
         multiply: function multiply(matrix) {
           return new SVG.Matrix(this.native().multiply(parseMatrix(matrix).native()));
         },
-        // Inverses matrix
+
         inverse: function inverse() {
           return new SVG.Matrix(this.native().inverse());
         },
-        // Translate matrix
+
         translate: function translate(x, y) {
           return new SVG.Matrix(this.native().translate(x || 0, y || 0));
         },
-        // Convert to native SVGMatrix
+
         native: function native() {
-          // create new matrix
+
           var matrix = SVG.parser.native.createSVGMatrix(); // update with current values
 
           for (var i = abcdef.length - 1; i >= 0; i--) {
@@ -25761,21 +25761,21 @@
 
           return matrix;
         },
-        // Convert matrix to string
+
         toString: function toString() {
-          // Construct the matrix directly, avoid values that are too small
+
           return 'matrix(' + float32String(this.a) + ',' + float32String(this.b) + ',' + float32String(this.c) + ',' + float32String(this.d) + ',' + float32String(this.e) + ',' + float32String(this.f) + ')';
         }
       },
-      // Define parent
+
       parent: SVG.Element,
-      // Add parent method
+
       construct: {
-        // Get current matrix
+
         ctm: function ctm() {
           return new SVG.Matrix(this.node.getCTM());
         },
-        // Get current screen matrix
+
         screenCTM: function screenCTM() {
           /* https://bugzilla.mozilla.org/show_bug.cgi?id=1344537
              This is needed because FF does not return the transformation matrix
@@ -25793,7 +25793,7 @@
       }
     });
     SVG.Point = SVG.invent({
-      // Initialize
+
       create: function create(x, y) {
         var source,
             base = {
@@ -25811,37 +25811,37 @@
           x: x,
           y: y != null ? y : x
         } : base; // If y has no value, then x is used has its value
-        // merge source
+
 
         this.x = source.x;
         this.y = source.y;
       },
-      // Add methods
+
       extend: {
-        // Clone point
+
         clone: function clone() {
           return new SVG.Point(this);
         },
-        // Morph one point into another
+
         morph: function morph(x, y) {
-          // store new destination
+
           this.destination = new SVG.Point(x, y);
           return this;
         }
       }
     });
     SVG.extend(SVG.Element, {
-      // Get point
+
       point: function point(x, y) {
         return new SVG.Point(x, y).transform(this.screenCTM().inverse());
       }
     });
     SVG.extend(SVG.Element, {
-      // Set svg element attribute
+
       attr: function attr(a, v, n) {
-        // act as full getter
+
         if (a == null) {
-          // get an object of attributes
+
           a = {};
           v = this.node.attributes;
 
@@ -25851,19 +25851,19 @@
 
           return a;
         } else if (_typeof(a) === 'object') {
-          // apply every attribute individually if an object is passed
+
           for (var v_ in a) {
             this.attr(v_, a[v_]);
           }
         } else if (v === null) {
-          // remove value
+
           this.node.removeAttribute(a);
         } else if (v == null) {
-          // act as a getter if the first and only argument is not an object
+
           v = this.node.getAttribute(a);
           return v == null ? SVG.defaults.attrs[a] : SVG.regex.isNumber.test(v) ? parseFloat(v) : v;
         } else {
-          // BUG FIX: some browsers will render a stroke if a color is given even though stroke width is 0
+
           if (a == 'stroke-width') {
             this.attr('stroke', parseFloat(v) > 0 ? this._stroke : null);
           } else if (a == 'stroke') {
@@ -25896,12 +25896,12 @@
 
 
           if (a == 'leading') {
-            // ... call the leading method instead
+
             if (this.leading) {
               this.leading(v);
             }
           } else {
-            // set given attribute on node
+
             typeof n === 'string' ? this.node.setAttributeNS(n, a, v.toString()) : this.node.setAttribute(a, v.toString());
           } // rebuild if required
 
@@ -25915,15 +25915,15 @@
       }
     });
     SVG.extend(SVG.Element, {
-      // Add transformations
+
       transform: function transform(o, relative) {
-        // get target in case of the fx module, otherwise reference this
+
         var target = this,
             matrix;
-   // act as a getter
+
 
         if (_typeof(o) !== 'object') {
-          // get current matrix
+
           matrix = new SVG.Matrix(target).extract();
           return typeof o === 'string' ? matrix[o] : matrix;
         } // get current matrix
@@ -25943,15 +25943,15 @@
       }
     });
     SVG.extend(SVG.Element, {
-      // Reset all transformations
+
       untransform: function untransform() {
         return this.attr('transform', null);
       },
-      // merge the whole transformation chain into one matrix and returns it
+
       matrixify: function matrixify() {
         var matrix = (this.attr('transform') || ''). // split transformations
         split(SVG.regex.transforms).slice(0, -1).map(function (str) {
-          // generate key => value pairs
+
           var kv = str.trim().split('(');
           return [kv[0], kv[1].split(SVG.regex.delimiter).map(function (str) {
             return parseFloat(str);
@@ -25963,7 +25963,7 @@
         }, new SVG.Matrix());
         return matrix;
       },
-      // add an element to another parent without changing the visual representation on the screen
+
       toParent: function toParent(parent) {
         if (this == parent) return this;
         var ctm = this.screenCTM();
@@ -25971,7 +25971,7 @@
         this.addTo(parent).untransform().transform(pCtm.multiply(ctm));
         return this;
       },
-      // same as above with parent equals root-svg
+
       toDoc: function toDoc() {
         return this.toParent(this.doc());
       }
@@ -26011,19 +26011,19 @@
       }
     });
     SVG.extend(SVG.Element, {
-      // Dynamic style generator
+
       style: function style(s, v) {
         if (arguments.length == 0) {
-          // get full style
+
           return this.node.style.cssText || '';
         } else if (arguments.length < 2) {
-          // apply every style individually if an object is passed
+
           if (_typeof(s) === 'object') {
             for (var v_ in s) {
               this.style(v_, s[v_]);
             }
           } else if (SVG.regex.isCss.test(s)) {
-            // parse css string
+
             s = s.split(/\s*;\s*/) // filter out suffix ; and stuff like ;;
             .filter(function (e) {
               return !!e;
@@ -26035,7 +26035,7 @@
               this.style(v[0], v[1]);
             }
           } else {
-            // act as a getter if the first and only argument is not an object
+
             return this.node.style[camelCase(s)];
           }
         } else {
@@ -26046,21 +26046,21 @@
       }
     });
     SVG.Parent = SVG.invent({
-      // Initialize node
+
       create: function create(element) {
         this.constructor.call(this, element);
       },
-      // Inherit from
+
       inherit: SVG.Element,
-      // Add class methods
+
       extend: {
-        // Returns all child elements
+
         children: function children() {
           return SVG.utils.map(SVG.utils.filterSVGElements(this.node.childNodes), function (node) {
             return SVG.adopt(node);
           });
         },
-        // Add given element at a position
+
         add: function add(element, i) {
           if (i == null) {
             this.node.appendChild(element.node);
@@ -26070,32 +26070,32 @@
 
           return this;
         },
-        // Basically does the same as `add()` but returns the added element instead
+
         put: function put(element, i) {
           this.add(element, i);
           return element;
         },
-        // Checks if the given element is a child
+
         has: function has(element) {
           return this.index(element) >= 0;
         },
-        // Gets index of given element
+
         index: function index(element) {
           return [].slice.call(this.node.childNodes).indexOf(element.node);
         },
-        // Get a element at the given index
+
         get: function get(i) {
           return SVG.adopt(this.node.childNodes[i]);
         },
-        // Get first child
+
         first: function first() {
           return this.get(0);
         },
-        // Get the last child
+
         last: function last() {
           return this.get(this.node.childNodes.length - 1);
         },
-        // Iterates over all children and invokes a given block
+
         each: function each(block, deep) {
           var il,
               children = this.children();
@@ -26112,14 +26112,14 @@
 
           return this;
         },
-        // Remove a given child
+
         removeElement: function removeElement(element) {
           this.node.removeChild(element.node);
           return this;
         },
-        // Remove all elements in this container
+
         clear: function clear() {
-          // remove children
+
           while (this.node.hasChildNodes()) {
             this.node.removeChild(this.node.lastChild);
           } // remove defs reference
@@ -26128,7 +26128,7 @@
           delete this._defs;
           return this;
         },
-        // Get defs
+
         defs: function defs() {
           return this.doc().defs();
         }
@@ -26152,26 +26152,26 @@
       }
     });
     SVG.Container = SVG.invent({
-      // Initialize node
+
       create: function create(element) {
         this.constructor.call(this, element);
       },
-      // Inherit from
+
       inherit: SVG.Parent
     });
     SVG.ViewBox = SVG.invent({
-      // Define parent
+
       parent: SVG.Container,
-      // Add parent method
+
       construct: {}
     }) // Add events to elements
     ;
     ['click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', // , 'mouseenter' -> not supported by IE
-    // , 'mouseleave' -> not supported by IE
+
     'touchstart', 'touchmove', 'touchleave', 'touchend', 'touchcancel'].forEach(function (event) {
-      // add event to SVG.Element
+
       SVG.Element.prototype[event] = function (f) {
-        // bind event to element rather than element node
+
         SVG.on(this.node, event, f);
         return this;
       };
@@ -26182,7 +26182,7 @@
     SVG.listenerId = 0; // Add event binder in the SVG namespace
 
     SVG.on = function (node, event, listener, binding, options) {
-      // create listener, get object-index
+
       var l = listener.bind(binding || node.instance || node),
           index = (SVG.handlerMap.indexOf(node) + 1 || SVG.handlerMap.push(node)) - 1,
           ev = event.split('.')[0],
@@ -26217,12 +26217,12 @@
         if (!listener) return; // remove listener reference
 
         if (SVG.listeners[index][ev] && SVG.listeners[index][ev][ns || '*']) {
-          // remove listener
+
           node.removeEventListener(ev, SVG.listeners[index][ev][ns || '*'][listener], false);
           delete SVG.listeners[index][ev][ns || '*'][listener];
         }
       } else if (ns && ev) {
-        // remove all listeners for a namespaced event
+
         if (SVG.listeners[index][ev] && SVG.listeners[index][ev][ns]) {
           for (var listener_ in SVG.listeners[index][ev][ns]) {
             SVG.off(node, [ev, ns].join('.'), listener_);
@@ -26231,7 +26231,7 @@
           delete SVG.listeners[index][ev][ns];
         }
       } else if (ns) {
-        // remove all listeners for a specific namespace
+
         for (var event_ in SVG.listeners[index]) {
           for (var namespace in SVG.listeners[index][event_]) {
             if (ns === namespace) {
@@ -26240,7 +26240,7 @@
           }
         }
       } else if (ev) {
-        // remove all listeners for the event
+
         if (SVG.listeners[index][ev]) {
           for (var namespace in SVG.listeners[index][ev]) {
             SVG.off(node, [ev, namespace].join('.'));
@@ -26249,7 +26249,7 @@
           delete SVG.listeners[index][ev];
         }
       } else {
-        // remove all listeners on a given node
+
         for (var event_ in SVG.listeners[index]) {
           SVG.off(node, event_);
         }
@@ -26261,19 +26261,19 @@
 
 
     SVG.extend(SVG.Element, {
-      // Bind given event to listener
+
       on: function on(event, listener, binding, options) {
         SVG.on(this.node, event, listener, binding, options);
         return this;
       },
-      // Unbind event from listener
+
       off: function off(event, listener) {
         SVG.off(this.node, event, listener);
         return this;
       },
-      // Fire given event
+
       fire: function fire(event, data) {
-        // Dispatch event
+
         if (event instanceof window.Event) {
           this.node.dispatchEvent(event);
         } else {
@@ -26291,40 +26291,40 @@
       }
     });
     SVG.Defs = SVG.invent({
-      // Initialize node
+
       create: 'defs',
-      // Inherit from
+
       inherit: SVG.Container
     });
     SVG.G = SVG.invent({
-      // Initialize node
+
       create: 'g',
-      // Inherit from
+
       inherit: SVG.Container,
-      // Add class methods
+
       extend: {
-        // Move over x-axis
+
         x: function x(_x2) {
           return _x2 == null ? this.transform('x') : this.transform({
             x: _x2 - this.x()
           }, true);
         }
       },
-      // Add parent method
+
       construct: {
-        // Create a group element
+
         group: function group() {
           return this.put(new SVG.G());
         }
       }
     });
     SVG.Doc = SVG.invent({
-      // Initialize node
+
       create: function create(element) {
         if (element) {
-          // ensure the presence of a dom element
+
           element = typeof element === 'string' ? document.getElementById(element) : element; // If the target is an svg element, use that element as the main wrapper.
-          // This allows svg.js to work with svg documents as well.
+
 
           if (element.nodeName == 'svg') {
             this.constructor.call(this, element);
@@ -26338,18 +26338,18 @@
           this.namespace().defs();
         }
       },
-      // Inherit from
+
       inherit: SVG.Container,
-      // Add class methods
+
       extend: {
-        // Add namespaces
+
         namespace: function namespace() {
           return this.attr({
             xmlns: SVG.ns,
             version: '1.1'
           }).attr('xmlns:xlink', SVG.xlink, SVG.xmlns).attr('xmlns:svgjs', SVG.svgjs, SVG.xmlns);
         },
-        // Creates and returns defs element
+
         defs: function defs() {
           if (!this._defs) {
             var defs; // Find or create a defs element in this instance
@@ -26366,12 +26366,12 @@
 
           return this._defs;
         },
-        // custom parent method
+
         parent: function parent() {
           if (!this.node.parentNode || this.node.parentNode.nodeName == '#document') return null;
           return this.node.parentNode;
         },
-        // Removes the doc from the DOM
+
         remove: function remove() {
           if (this.parent()) {
             this.parent().removeChild(this.node);
@@ -26380,7 +26380,7 @@
           return this;
         },
         clear: function clear() {
-          // remove children
+
           while (this.node.hasChildNodes()) {
             this.node.removeChild(this.node.lastChild);
           } // remove defs reference
@@ -26395,7 +26395,7 @@
           return this;
         },
         clone: function clone(parent) {
-          // write dom data to the dom so the clone can pickup the data
+
           this.writeDataToDom(); // get reference to node
 
           var node = this.node; // clone element and assign new id
@@ -26417,23 +26417,23 @@
     SVG.extend(SVG.Element, {// Get all siblings, including myself
     });
     SVG.Gradient = SVG.invent({
-      // Initialize node
+
       create: function create(type) {
         this.constructor.call(this, SVG.create(type + 'Gradient')); // store type
 
         this.type = type;
       },
-      // Inherit from
+
       inherit: SVG.Container,
-      // Add class methods
+
       extend: {
-        // Add a color stop
+
         at: function at(offset, color, opacity) {
           return this.put(new SVG.Stop()).update(offset, color, opacity);
         },
-        // Update gradient
+
         update: function update(block) {
-          // remove all stops
+
           this.clear(); // invoke passed block
 
           if (typeof block === 'function') {
@@ -26442,23 +26442,23 @@
 
           return this;
         },
-        // Return the fill id
+
         fill: function fill() {
           return 'url(#' + this.id() + ')';
         },
-        // Alias string convertion to fill
+
         toString: function toString() {
           return this.fill();
         },
-        // custom attr to handle transform
+
         attr: function attr(a, b, c) {
           if (a == 'transform') a = 'gradientTransform';
           return SVG.Container.prototype.attr.call(this, a, b, c);
         }
       },
-      // Add parent method
+
       construct: {
-        // Create gradient element in defs
+
         gradient: function gradient(type, block) {
           return this.defs().gradient(type, block);
         }
@@ -26466,7 +26466,7 @@
     }); // Add animatable methods to both gradient and fx module
 
     SVG.extend(SVG.Gradient, SVG.FX, {
-      // From position
+
       from: function from(x, y) {
         return (this._target || this).type == 'radial' ? this.attr({
           fx: new SVG.Number(x),
@@ -26476,7 +26476,7 @@
           y1: new SVG.Number(y)
         });
       },
-      // To position
+
       to: function to(x, y) {
         return (this._target || this).type == 'radial' ? this.attr({
           cx: new SVG.Number(x),
@@ -26489,19 +26489,19 @@
     }); // Base gradient generation
 
     SVG.extend(SVG.Defs, {
-      // define gradient
+
       gradient: function gradient(type, block) {
         return this.put(new SVG.Gradient(type)).update(block);
       }
     });
     SVG.Stop = SVG.invent({
-      // Initialize node
+
       create: 'stop',
-      // Inherit from
+
       inherit: SVG.Element,
-      // Add class methods
+
       extend: {
-        // add color stops
+
         update: function update(o) {
           if (typeof o === 'number' || o instanceof SVG.Number) {
             o = {
@@ -26520,19 +26520,19 @@
       }
     });
     SVG.Pattern = SVG.invent({
-      // Initialize node
+
       create: 'pattern',
-      // Inherit from
+
       inherit: SVG.Container,
-      // Add class methods
+
       extend: {
-        // Return the fill id
+
         fill: function fill() {
           return 'url(#' + this.id() + ')';
         },
-        // Update pattern by rebuilding
+
         update: function update(block) {
-          // remove content
+
           this.clear(); // invoke passed block
 
           if (typeof block === 'function') {
@@ -26541,26 +26541,26 @@
 
           return this;
         },
-        // Alias string convertion to fill
+
         toString: function toString() {
           return this.fill();
         },
-        // custom attr to handle transform
+
         attr: function attr(a, b, c) {
           if (a == 'transform') a = 'patternTransform';
           return SVG.Container.prototype.attr.call(this, a, b, c);
         }
       },
-      // Add parent method
+
       construct: {
-        // Create pattern element in defs
+
         pattern: function pattern(width, height, block) {
           return this.defs().pattern(width, height, block);
         }
       }
     });
     SVG.extend(SVG.Defs, {
-      // Define gradient
+
       pattern: function pattern(width, height, block) {
         return this.put(new SVG.Pattern()).update(block).attr({
           x: 0,
@@ -26572,149 +26572,149 @@
       }
     });
     SVG.Shape = SVG.invent({
-      // Initialize node
+
       create: function create(element) {
         this.constructor.call(this, element);
       },
-      // Inherit from
+
       inherit: SVG.Element
     });
     SVG.Symbol = SVG.invent({
-      // Initialize node
+
       create: 'symbol',
-      // Inherit from
+
       inherit: SVG.Container,
       construct: {
-        // create symbol
+
         symbol: function symbol() {
           return this.put(new SVG.Symbol());
         }
       }
     });
     SVG.Use = SVG.invent({
-      // Initialize node
+
       create: 'use',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // Use element as a reference
+
         element: function element(_element, file) {
-          // Set lined element
+
           return this.attr('href', (file || '') + '#' + _element, SVG.xlink);
         }
       },
-      // Add parent method
+
       construct: {
-        // Create a use element
+
         use: function use(element, file) {
           return this.put(new SVG.Use()).element(element, file);
         }
       }
     });
     SVG.Rect = SVG.invent({
-      // Initialize node
+
       create: 'rect',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add parent method
+
       construct: {
-        // Create a rect element
+
         rect: function rect(width, height) {
           return this.put(new SVG.Rect()).size(width, height);
         }
       }
     });
     SVG.Circle = SVG.invent({
-      // Initialize node
+
       create: 'circle',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add parent method
+
       construct: {
-        // Create circle element, based on ellipse
+
         circle: function circle(size) {
           return this.put(new SVG.Circle()).rx(new SVG.Number(size).divide(2)).move(0, 0);
         }
       }
     });
     SVG.extend(SVG.Circle, SVG.FX, {
-      // Radius x value
+
       rx: function rx(_rx) {
         return this.attr('r', _rx);
       },
-      // Alias radius x value
+
       ry: function ry(_ry) {
         return this.rx(_ry);
       }
     });
     SVG.Ellipse = SVG.invent({
-      // Initialize node
+
       create: 'ellipse',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add parent method
+
       construct: {
-        // Create an ellipse
+
         ellipse: function ellipse(width, height) {
           return this.put(new SVG.Ellipse()).size(width, height).move(0, 0);
         }
       }
     });
     SVG.extend(SVG.Ellipse, SVG.Rect, SVG.FX, {
-      // Radius x value
+
       rx: function rx(_rx2) {
         return this.attr('rx', _rx2);
       },
-      // Radius y value
+
       ry: function ry(_ry2) {
         return this.attr('ry', _ry2);
       }
     }); // Add common method
 
     SVG.extend(SVG.Circle, SVG.Ellipse, {
-      // Move over x-axis
+
       x: function x(_x3) {
         return _x3 == null ? this.cx() - this.rx() : this.cx(_x3 + this.rx());
       },
-      // Move over y-axis
+
       y: function y(_y2) {
         return _y2 == null ? this.cy() - this.ry() : this.cy(_y2 + this.ry());
       },
-      // Move by center over x-axis
+
       cx: function cx(x) {
         return x == null ? this.attr('cx') : this.attr('cx', x);
       },
-      // Move by center over y-axis
+
       cy: function cy(y) {
         return y == null ? this.attr('cy') : this.attr('cy', y);
       },
-      // Set width of element
+
       width: function width(_width2) {
         return _width2 == null ? this.rx() * 2 : this.rx(new SVG.Number(_width2).divide(2));
       },
-      // Set height of element
+
       height: function height(_height2) {
         return _height2 == null ? this.ry() * 2 : this.ry(new SVG.Number(_height2).divide(2));
       },
-      // Custom size function
+
       size: function size(width, height) {
         var p = proportionalSize(this, width, height);
         return this.rx(new SVG.Number(p.width).divide(2)).ry(new SVG.Number(p.height).divide(2));
       }
     });
     SVG.Line = SVG.invent({
-      // Initialize node
+
       create: 'line',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // Get array
+
         array: function array() {
           return new SVG.PointArray([[this.attr('x1'), this.attr('y1')], [this.attr('x2'), this.attr('y2')]]);
         },
-        // Overwrite native plot() method
+
         plot: function plot(x1, y1, x2, y2) {
           if (x1 == null) {
             return this.array();
@@ -26731,74 +26731,74 @@
 
           return this.attr(x1);
         },
-        // Move by left top corner
+
         move: function move(x, y) {
           return this.attr(this.array().move(x, y).toLine());
         },
-        // Set element size to given width and height
+
         size: function size(width, height) {
           var p = proportionalSize(this, width, height);
           return this.attr(this.array().size(p.width, p.height).toLine());
         }
       },
-      // Add parent method
+
       construct: {
-        // Create a line element
+
         line: function line(x1, y1, x2, y2) {
-          // make sure plot is called as a setter
-          // x1 is not necessarily a number, it can also be an array, a string and a SVG.PointArray
+
+
           return SVG.Line.prototype.plot.apply(this.put(new SVG.Line()), x1 != null ? [x1, y1, x2, y2] : [0, 0, 0, 0]);
         }
       }
     });
     SVG.Polyline = SVG.invent({
-      // Initialize node
+
       create: 'polyline',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add parent method
+
       construct: {
-        // Create a wrapped polyline element
+
         polyline: function polyline(p) {
-          // make sure plot is called as a setter
+
           return this.put(new SVG.Polyline()).plot(p || new SVG.PointArray());
         }
       }
     });
     SVG.Polygon = SVG.invent({
-      // Initialize node
+
       create: 'polygon',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add parent method
+
       construct: {
-        // Create a wrapped polygon element
+
         polygon: function polygon(p) {
-          // make sure plot is called as a setter
+
           return this.put(new SVG.Polygon()).plot(p || new SVG.PointArray());
         }
       }
     }); // Add polygon-specific functions
 
     SVG.extend(SVG.Polyline, SVG.Polygon, {
-      // Get array
+
       array: function array() {
         return this._array || (this._array = new SVG.PointArray(this.attr('points')));
       },
-      // Plot new path
+
       plot: function plot(p) {
         return p == null ? this.array() : this.clear().attr('points', typeof p === 'string' ? p : this._array = new SVG.PointArray(p));
       },
-      // Clear array cache
+
       clear: function clear() {
         delete this._array;
         return this;
       },
-      // Move by left top corner
+
       move: function move(x, y) {
         return this.attr('points', this.array().move(x, y));
       },
-      // Set element size to given width and height
+
       size: function size(width, height) {
         var p = proportionalSize(this, width, height);
         return this.attr('points', this.array().size(p.width, p.height));
@@ -26806,67 +26806,67 @@
     }); // unify all point to point elements
 
     SVG.extend(SVG.Line, SVG.Polyline, SVG.Polygon, {
-      // Define morphable array
+
       morphArray: SVG.PointArray,
-      // Move by left top corner over x-axis
+
       x: function x(_x4) {
         return _x4 == null ? this.bbox().x : this.move(_x4, this.bbox().y);
       },
-      // Move by left top corner over y-axis
+
       y: function y(_y3) {
         return _y3 == null ? this.bbox().y : this.move(this.bbox().x, _y3);
       },
-      // Set width of element
+
       width: function width(_width3) {
         var b = this.bbox();
         return _width3 == null ? b.width : this.size(_width3, b.height);
       },
-      // Set height of element
+
       height: function height(_height3) {
         var b = this.bbox();
         return _height3 == null ? b.height : this.size(b.width, _height3);
       }
     });
     SVG.Path = SVG.invent({
-      // Initialize node
+
       create: 'path',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // Define morphable array
+
         morphArray: SVG.PathArray,
-        // Get array
+
         array: function array() {
           return this._array || (this._array = new SVG.PathArray(this.attr('d')));
         },
-        // Plot new path
+
         plot: function plot(d) {
           return d == null ? this.array() : this.clear().attr('d', typeof d === 'string' ? d : this._array = new SVG.PathArray(d));
         },
-        // Clear array cache
+
         clear: function clear() {
           delete this._array;
           return this;
         }
       },
-      // Add parent method
+
       construct: {
-        // Create a wrapped path element
+
         path: function path(d) {
-          // make sure plot is called as a setter
+
           return this.put(new SVG.Path()).plot(d || new SVG.PathArray());
         }
       }
     });
     SVG.Image = SVG.invent({
-      // Initialize node
+
       create: 'image',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // (re)load image	
+
         load: function load(url) {
           if (!url) return this;
           var self = this,
@@ -26905,7 +26905,7 @@
           });
           return this.attr('href', img.src = this.src = url, SVG.xlink);
         },
-        // Add loaded callback	
+
         loaded: function loaded(_loaded) {
           this._loaded = _loaded;
           return this;
@@ -26915,16 +26915,16 @@
           return this;
         }
       },
-      // Add parent method
+
       construct: {
-        // create image element, load image and set its size	
+
         image: function image(source, width, height) {
           return this.put(new SVG.Image()).load(source).size(width || 0, height || width || 0);
         }
       }
     });
     SVG.Text = SVG.invent({
-      // Initialize node
+
       create: function create() {
         this.constructor.call(this, SVG.create('text'));
         this.dom.leading = new SVG.Number(1.3); // store leading value for rebuilding
@@ -26932,32 +26932,32 @@
         this._rebuild = true; // enable automatic updating of dy values
 
         this._build = false; // disable build mode for adding multiple lines
-        // set default font
+
 
         this.attr('font-family', SVG.defaults.attrs['font-family']);
       },
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // Move over x-axis
+
         x: function x(_x5) {
-          // act as getter
+
           if (_x5 == null) {
             return this.attr('x');
           }
 
           return this.attr('x', _x5);
         },
-        // Set the text content
+
         text: function text(_text) {
-          // act as getter
+
           if (typeof _text === 'undefined') {
             var _text = '';
             var children = this.node.childNodes;
 
             for (var i = 0, len = children.length; i < len; ++i) {
-              // add newline if its not the first child and newLined is set to true
+
               if (i != 0 && children[i].nodeType != 3 && SVG.adopt(children[i]).dom.newLined == true) {
                 _text += '\n';
               } // add content of this node
@@ -26973,10 +26973,10 @@
           this.clear().build(true);
 
           if (typeof _text === 'function') {
-            // call block
+
             _text.call(this, this);
           } else {
-            // store text and make sure text is not blank
+
             _text = _text.split('\n'); // build new lines
 
             for (var i = 0, il = _text.length; i < il; i++) {
@@ -26987,13 +26987,13 @@
 
           return this.build(false).rebuild();
         },
-        // Set font size
+
         size: function size(_size) {
           return this.attr('font-size', _size).rebuild();
         },
-        // Set / get leading
+
         leading: function leading(value) {
-          // act as getter
+
           if (value == null) {
             return this.dom.leading;
           } // act as setter
@@ -27002,7 +27002,7 @@
           this.dom.leading = new SVG.Number(value);
           return this.rebuild();
         },
-        // Get all the first level lines
+
         lines: function lines() {
           var node = (this.textPath && this.textPath() || this).node; // filter tspans and map them to SVG.js instances
 
@@ -27012,9 +27012,9 @@
 
           return new SVG.Set(lines);
         },
-        // Rebuild appearance type
+
         rebuild: function rebuild(_rebuild) {
-          // store new rebuild flag if given
+
           if (typeof _rebuild === 'boolean') {
             this._rebuild = _rebuild;
           } // define position of all lines
@@ -27043,54 +27043,54 @@
 
           return this;
         },
-        // Enable / disable build mode
+
         build: function build(_build) {
           this._build = !!_build;
           return this;
         },
-        // overwrite method from parent to set data properly
+
         setData: function setData(o) {
           this.dom = o;
           this.dom.leading = new SVG.Number(o.leading || 1.3);
           return this;
         }
       },
-      // Add parent method
+
       construct: {
-        // Create text element
+
         text: function text(_text2) {
           return this.put(new SVG.Text()).text(_text2);
         },
-        // Create plain text element
+
         plain: function plain(text) {
           return this.put(new SVG.Text()).plain(text);
         }
       }
     });
     SVG.Tspan = SVG.invent({
-      // Initialize node
+
       create: 'tspan',
-      // Inherit from
+
       inherit: SVG.Shape,
-      // Add class methods
+
       extend: {
-        // Set text content
+
         text: function text(_text3) {
           if (_text3 == null) return this.node.textContent + (this.dom.newLined ? '\n' : '');
           typeof _text3 === 'function' ? _text3.call(this, this) : this.plain(_text3);
           return this;
         },
-        // Shortcut dx
+
         dx: function dx(_dx) {
           return this.attr('dx', _dx);
         },
-        // Shortcut dy
+
         dy: function dy(_dy) {
           return this.attr('dy', _dy);
         },
-        // Create new line
+
         newLine: function newLine() {
-          // fetch text parent
+
           var t = this.parent(SVG.Text); // mark new line
 
           this.dom.newLined = true; // apply new hy¡n
@@ -27100,9 +27100,9 @@
       }
     });
     SVG.extend(SVG.Text, SVG.Tspan, {
-      // Create plain text node
+
       plain: function plain(text) {
-        // clear if build mode is disabled
+
         if (this._build === false) {
           this.clear();
         } // create text node
@@ -27111,7 +27111,7 @@
         this.node.appendChild(document.createTextNode(text));
         return this;
       },
-      // Create a tspan
+
       tspan: function tspan(text) {
         var node = (this.textPath && this.textPath() || this).node,
             tspan = new SVG.Tspan(); // clear if build mode is disabled
@@ -27124,7 +27124,7 @@
         node.appendChild(tspan.node);
         return tspan.text(text);
       },
-      // Clear all lines
+
       clear: function clear() {
         var node = (this.textPath && this.textPath() || this).node; // remove existing child nodes
 
@@ -27134,27 +27134,27 @@
 
         return this;
       },
-      // Get length of text element
+
       length: function length() {
         return this.node.getComputedTextLength();
       }
     });
     SVG.TextPath = SVG.invent({
-      // Initialize node
+
       create: 'textPath',
-      // Inherit from
+
       inherit: SVG.Parent,
-      // Define parent class
+
       parent: SVG.Text,
-      // Add parent method
+
       construct: {
         morphArray: SVG.PathArray,
-        // return the array of the path track element
+
         array: function array() {
           var track = this.track();
           return track ? track.array() : null;
         },
-        // Plot path if any
+
         plot: function plot(d) {
           var track = this.track(),
               pathArray = null;
@@ -27165,7 +27165,7 @@
 
           return d == null ? pathArray : this;
         },
-        // Get the path track element
+
         track: function track() {
           var path = this.textPath();
 
@@ -27173,7 +27173,7 @@
             return path.reference('href');
           }
         },
-        // Get the textPath child
+
         textPath: function textPath() {
           if (this.node.firstChild && this.node.firstChild.nodeName == 'textPath') {
             return SVG.adopt(this.node.firstChild);
@@ -27182,16 +27182,16 @@
       }
     });
     SVG.Nested = SVG.invent({
-      // Initialize node
+
       create: function create() {
         this.constructor.call(this, SVG.create('svg'));
         this.style('overflow', 'visible');
       },
-      // Inherit from
+
       inherit: SVG.Container,
-      // Add parent method
+
       construct: {
-        // Create nested svg document
+
         nested: function nested() {
           return this.put(new SVG.Nested());
         }
@@ -27231,49 +27231,49 @@
       SVG.extend(SVG.Element, SVG.FX, extension);
     });
     SVG.extend(SVG.Element, SVG.FX, {
-      // Map translate to transform
+
       translate: function translate(x, y) {
         return this.transform({
           x: x,
           y: y
         });
       },
-      // Map matrix to transform
+
       matrix: function matrix(m) {
         return this.attr('transform', new SVG.Matrix(arguments.length == 6 ? [].slice.call(arguments) : m));
       },
-      // Opacity
+
       opacity: function opacity(value) {
         return this.attr('opacity', value);
       },
-      // Relative move over x axis
+
       dx: function dx(x) {
         return this.x(new SVG.Number(x).plus(this instanceof SVG.FX ? 0 : this.x()), true);
       },
-      // Relative move over y axis
+
       dy: function dy(y) {
         return this.y(new SVG.Number(y).plus(this instanceof SVG.FX ? 0 : this.y()), true);
       }
     });
     SVG.extend(SVG.Path, {
-      // Get path length
+
       length: function length() {
         return this.node.getTotalLength();
       },
-      // Get point at length
+
       pointAt: function pointAt(length) {
         return this.node.getPointAtLength(length);
       }
     });
     SVG.Set = SVG.invent({
-      // Initialize
+
       create: function create(members) {
-        // Set initial state
+
         Array.isArray(members) ? this.members = members : this.clear();
       },
-      // Add class methods
+
       extend: {
-        // Add element to set
+
         add: function add() {
           var il,
               elements = [].slice.call(arguments);
@@ -27284,7 +27284,7 @@
 
           return this;
         },
-        // Remove element from set
+
         remove: function remove(element) {
           var i = this.index(element); // remove given child
 
@@ -27294,7 +27294,7 @@
 
           return this;
         },
-        // Iterate over all members
+
         each: function each(block) {
           for (var i = 0, il = this.members.length; i < il; i++) {
             block.apply(this.members[i], [i, this.members]);
@@ -27302,53 +27302,53 @@
 
           return this;
         },
-        // Restore to defaults
+
         clear: function clear() {
-          // initialize store
+
           this.members = [];
           return this;
         },
-        // Get the length of a set
+
         length: function length() {
           return this.members.length;
         },
-        // Checks if a given element is present in set
+
         has: function has(element) {
           return this.index(element) >= 0;
         },
-        // retuns index of given element in set
+
         index: function index(element) {
           return this.members.indexOf(element);
         },
-        // Get member at given index
+
         get: function get(i) {
           return this.members[i];
         },
-        // Get first member
+
         first: function first() {
           return this.get(0);
         },
-        // Get last member
+
         last: function last() {
           return this.get(this.members.length - 1);
         },
-        // Default value
+
         valueOf: function valueOf() {
           return this.members;
         }
       },
-      // Add parent method
+
       construct: {
-        // Create a new set
+
         set: function set(members) {
           return new SVG.Set(members);
         }
       }
     });
     SVG.FX.Set = SVG.invent({
-      // Initialize node
+
       create: function create(set) {
-        // store reference to set
+
         this.set = set;
       }
     }); // Alias methods
@@ -27397,9 +27397,9 @@
 
     SVG.extend(SVG.Element, {});
     SVG.extend(SVG.Element, {
-      // Remember arbitrary data
+
       remember: function remember(k, v) {
-        // remember every item in an object individually
+
         if (_typeof(arguments[0]) === 'object') {
           for (var v_ in k) {
             this.remember(v_, k[v_]);
@@ -27414,7 +27414,7 @@
 
         return this;
       },
-      // Erase a given memory
+
       forget: function forget() {
         if (arguments.length == 0) {
           this._memory = {};
@@ -27426,7 +27426,7 @@
 
         return this;
       },
-      // Initialize or return local memory object
+
       memory: function memory() {
         return this._memory || (this._memory = {});
       }
@@ -27445,7 +27445,7 @@
     };
 
     SVG.extend(SVG.Parent, {
-      // Scoped select method
+
       select: function select(query) {
         return SVG.select(query, this.node);
       }
@@ -27574,7 +27574,7 @@
 
 
     function assignNewId(node) {
-      // do the same for SVG child nodes as well
+
       for (var i = node.childNodes.length - 1; i >= 0; i--) {
         if (node.childNodes[i] instanceof window.SVGElement) {
           assignNewId(node.childNodes[i]);
@@ -27607,7 +27607,7 @@
       var m = (url || '').toString().match(SVG.regex.reference);
       if (m) return m[1];
     } // If values like 1e-88 are passed, this is not a valid 32 bit float,
-    // but in those cases, we are so close to 0 that 0 works well!
+
 
 
     function float32String(v) {
@@ -27618,7 +27618,7 @@
     var abcdef = 'abcdef'.split(''); // Add CustomEvent to IE9 and IE10	
 
     if (typeof window.CustomEvent !== 'function') {
-      // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent	
+
       var CustomEventPoly = function CustomEventPoly(event, options) {
         options = options || {
           bubbles: false,
@@ -27644,12 +27644,12 @@
   * Copyright (c) 2016 Wout Fierens; Licensed MIT */
   (function() {
 
-    // Main filter class
+
     SVG.Filter = SVG.invent({
       create: 'filter',
       inherit: SVG.Parent,
       extend: {
-        // Static strings
+
         source:           'SourceGraphic',
         sourceAlpha:      'SourceAlpha',
         background:       'BackgroundImage',
@@ -27658,7 +27658,7 @@
         stroke:           'StrokePaint',
 
         autoSetIn: true,
-        // Custom put method for leaner code
+
         put: function(element, i) {
           this.add(element, i);
 
@@ -27671,74 +27671,74 @@
 
           return element
         },
-        // Blend effect
+
         blend: function(in1, in2, mode) {
           return this.put(new SVG.BlendEffect(in1, in2, mode))
         },
-        // ColorMatrix effect
+
         colorMatrix: function(type, values) {
           return this.put(new SVG.ColorMatrixEffect(type, values))
         },
-        // ConvolveMatrix effect
+
         convolveMatrix: function(matrix) {
           return this.put(new SVG.ConvolveMatrixEffect(matrix))
         },
-        // ComponentTransfer effect
+
         componentTransfer: function(components) {
           return this.put(new SVG.ComponentTransferEffect(components))
         },
-        // Composite effect
+
         composite: function(in1, in2, operator) {
           return this.put(new SVG.CompositeEffect(in1, in2, operator))
         },
-        // Flood effect
+
         flood: function(color, opacity) {
           return this.put(new SVG.FloodEffect(color, opacity))
         },
-        // Offset effect
+
         offset: function(x, y) {
           return this.put(new SVG.OffsetEffect(x,y))
         },
-        // Image effect
+
         image: function(src) {
           return this.put(new SVG.ImageEffect(src))
         },
-        // Merge effect
+
         merge: function() {
           //pass the array of arguments to the constructor because we dont know if the user gave us an array as the first arguemnt or wether they listed the effects in the arguments
           var args = [undefined];
           for(var i in arguments) args.push(arguments[i]);
           return this.put(new (SVG.MergeEffect.bind.apply(SVG.MergeEffect,args)))
         },
-        // Gaussian Blur effect
+
         gaussianBlur: function(x,y) {
           return this.put(new SVG.GaussianBlurEffect(x,y))
         },
-        // Morphology effect
+
         morphology: function(operator,radius){
           return this.put(new SVG.MorphologyEffect(operator,radius))
         },
-        // DiffuseLighting effect
+
         diffuseLighting: function(surfaceScale,diffuseConstant,kernelUnitLength){
           return this.put(new SVG.DiffuseLightingEffect(surfaceScale,diffuseConstant,kernelUnitLength))
         },
-        // DisplacementMap effect
+
         displacementMap: function(in1,in2,scale,xChannelSelector,yChannelSelector){
           return this.put(new SVG.DisplacementMapEffect(in1,in2,scale,xChannelSelector,yChannelSelector))
         },
-        // SpecularLighting effect
+
         specularLighting: function(surfaceScale,diffuseConstant,specularExponent,kernelUnitLength){
           return this.put(new SVG.SpecularLightingEffect(surfaceScale,diffuseConstant,specularExponent,kernelUnitLength))
         },
-        // Tile effect
+
         tile: function(){
           return this.put(new SVG.TileEffect());
         },
-        // Turbulence effect
+
         turbulence: function(baseFrequency,numOctaves,seed,stitchTiles,type){
           return this.put(new SVG.TurbulenceEffect(baseFrequency,numOctaves,seed,stitchTiles,type))
         },
-        // Default string value
+
         toString: function() {
           return 'url(#' + this.attr('id') + ')'
         }
@@ -27747,7 +27747,7 @@
 
     //add .filter function
     SVG.extend(SVG.Defs, {
-      // Define filter
+
       filter: function(block) {
         var filter = this.put(new SVG.Filter);
 
@@ -27759,13 +27759,13 @@
       }
     });
     SVG.extend(SVG.Container, {
-      // Define filter on defs
+
       filter: function(block) {
         return this.defs().filter(block)
       }
     });
     SVG.extend(SVG.Element, SVG.G, SVG.Nested, {
-      // Create filter element in defs and store reference
+
       filter: function(block) {
         this.filterer = block instanceof SVG.Element ?
           block : this.doc().filter(block);
@@ -27778,7 +27778,7 @@
 
         return this.filterer
       },
-      // Remove filter
+
       unfilter: function(remove) {
         /* also remove the filter node */
         if (this.filterer && remove === true)
@@ -27792,45 +27792,45 @@
       }
     });
 
-    // Create SVG.Effect class
+
     SVG.Effect = SVG.invent({
       create: function(){
         this.constructor.call(this);
       },
       inherit: SVG.Element,
       extend: {
-        // Set in attribute
+
         in: function(effect) {
           return effect == null? this.parent() && this.parent().select('[result="'+this.attr('in')+'"]').get(0) || this.attr('in') : this.attr('in', effect)
         },
-        // Named result
+
         result: function(result) {
           return result == null? this.attr('result') : this.attr('result',result)
         },
-        // Stringification
+
         toString: function() {
           return this.result()
         }
       }
     });
 
-    // create class for parent effects like merge
-    // Inherit from SVG.Parent
+
+
     SVG.ParentEffect = SVG.invent({
       create: function(){
         this.constructor.call(this);
       },
       inherit: SVG.Parent,
       extend: {
-        // Set in attribute
+
         in: function(effect) {
           return effect == null? this.parent() && this.parent().select('[result="'+this.attr('in')+'"]').get(0) || this.attr('in') : this.attr('in', effect)
         },
-        // Named result
+
         result: function(result) {
           return result == null? this.attr('result') : this.attr('result',result)
         },
-        // Stringification
+
         toString: function() {
           return this.result()
         }
@@ -27839,67 +27839,67 @@
 
     //chaining
     var chainingEffects = {
-      // Blend effect
+
       blend: function(in2, mode) {
         return this.parent() && this.parent().blend(this, in2, mode) //pass this as the first input
       },
-      // ColorMatrix effect
+
       colorMatrix: function(type, values) {
         return this.parent() && this.parent().colorMatrix(type, values).in(this)
       },
-      // ConvolveMatrix effect
+
       convolveMatrix: function(matrix) {
         return this.parent() && this.parent().convolveMatrix(matrix).in(this)
       },
-      // ComponentTransfer effect
+
       componentTransfer: function(components) {
         return this.parent() && this.parent().componentTransfer(components).in(this)
       },
-      // Composite effect
+
       composite: function(in2, operator) {
         return this.parent() && this.parent().composite(this, in2, operator) //pass this as the first input
       },
-      // Flood effect
+
       flood: function(color, opacity) {
         return this.parent() && this.parent().flood(color, opacity) //this effect dont have inputs
       },
-      // Offset effect
+
       offset: function(x, y) {
         return this.parent() && this.parent().offset(x,y).in(this)
       },
-      // Image effect
+
       image: function(src) {
         return this.parent() && this.parent().image(src) //this effect dont have inputs
       },
-      // Merge effect
+
       merge: function() {
         return this.parent() && this.parent().merge.apply(this.parent(),[this].concat(arguments)) //pass this as the first argument
       },
-      // Gaussian Blur effect
+
       gaussianBlur: function(x,y) {
         return this.parent() && this.parent().gaussianBlur(x,y).in(this)
       },
-      // Morphology effect
+
       morphology: function(operator,radius){
         return this.parent() && this.parent().morphology(operator,radius).in(this)
       },
-      // DiffuseLighting effect
+
       diffuseLighting: function(surfaceScale,diffuseConstant,kernelUnitLength){
         return this.parent() && this.parent().diffuseLighting(surfaceScale,diffuseConstant,kernelUnitLength).in(this)
       },
-      // DisplacementMap effect
+
       displacementMap: function(in2,scale,xChannelSelector,yChannelSelector){
         return this.parent() && this.parent().displacementMap(this,in2,scale,xChannelSelector,yChannelSelector) //pass this as the first input
       },
-      // SpecularLighting effect
+
       specularLighting: function(surfaceScale,diffuseConstant,specularExponent,kernelUnitLength){
         return this.parent() && this.parent().specularLighting(surfaceScale,diffuseConstant,specularExponent,kernelUnitLength).in(this)
       },
-      // Tile effect
+
       tile: function(){
         return this.parent() && this.parent().tile().in(this)
       },
-      // Turbulence effect
+
       turbulence: function(baseFrequency,numOctaves,seed,stitchTiles,type){
         return this.parent() && this.parent().turbulence(baseFrequency,numOctaves,seed,stitchTiles,type).in(this)
       }
@@ -27921,7 +27921,7 @@
       }
     });
 
-    // Create all different effects
+
     var effects = {
       blend: function(in1,in2,mode){
         this.attr({
@@ -28002,7 +28002,7 @@
       }
     };
 
-    // Create all parent effects
+
     var parentEffects = {
       merge: function(){
         var children;
@@ -28080,7 +28080,7 @@
       },
     };
 
-    // Create child effects like PointLight and MergeNode
+
     var childEffects = {
       distantLight: function(azimuth, elevation){
         this.attr({
@@ -28110,13 +28110,13 @@
       }
     }
 
-    // Create compontent functions
+
     ;(['r', 'g', 'b', 'a']).forEach(function(c) {
       /* create class */
       childEffects['Func' + c.toUpperCase()] = function(type) {
         this.attr('type',type);
 
-        // take diffent arguments based on the type
+
         switch(type){
           case 'table':
             this.attr('tableValues',arguments[1]);
@@ -28203,7 +28203,7 @@
       });
     });
 
-    // Effect-specific extensions
+
     SVG.extend(SVG.MergeEffect,{
       in: function(effect){
         if(effect instanceof SVG.MergeNode)
@@ -28220,7 +28220,7 @@
       }
     });
 
-    // Presets
+
     SVG.filter = {
       sepiatone:  [ .343, .669, .119, 0, 0
                   , .249, .626, .130, 0, 0
@@ -28228,7 +28228,7 @@
                   , .000, .000, .000, 1, 0 ]
     };
 
-    // Helpers
+
     function normaliseMatrix(matrix) {
       /* convert possible array value to string */
       if (Array.isArray(matrix))
@@ -28278,27 +28278,27 @@
         ,  destOffsetNextM = false;
 
       while(true){
-        // stop if there is no M anymore
+
         if(startOffsetM === false && destOffsetM === false) break
 
-        // find the next M in path array
+
         startOffsetNextM = findNextM(startArr, startOffsetM === false ? false : startOffsetM+1);
          destOffsetNextM = findNextM( destArr,  destOffsetM === false ? false :  destOffsetM+1);
 
-        // We have to add one M to the startArray
+
         if(startOffsetM === false){
           var bbox = new SVG.PathArray(result.start).bbox();
 
-          // when the last block had no bounding box we simply take the first M we got
+
           if(bbox.height == 0 || bbox.width == 0){
             startOffsetM =  startArr.push(startArr[0]) - 1;
           }else {
-            // we take the middle of the bbox instead when we got one
+
             startOffsetM = startArr.push( ['M', bbox.x + bbox.width/2, bbox.y + bbox.height/2 ] ) - 1;
           }
         }
 
-        // We have to add one M to the destArray
+
         if( destOffsetM === false){
           var bbox = new SVG.PathArray(result.dest).bbox();
 
@@ -28309,20 +28309,20 @@
           }
         }
 
-        // handle block from M to next M
+
         var result = handleBlock(startArr, startOffsetM, startOffsetNextM, destArr, destOffsetM, destOffsetNextM);
 
-        // update the arrays to their new values
+
         startArr = startArr.slice(0, startOffsetM).concat(result.start, startOffsetNextM === false ? [] : startArr.slice(startOffsetNextM));
          destArr =  destArr.slice(0,  destOffsetM).concat(result.dest ,  destOffsetNextM === false ? [] :  destArr.slice( destOffsetNextM));
 
-        // update offsets
+
         startOffsetM = startOffsetNextM === false ? false : startOffsetM + result.start.length;
          destOffsetM =  destOffsetNextM === false ? false :  destOffsetM + result.dest.length;
 
       }
 
-      // copy back arrays
+
       this.value = startArr;
       this.destination = new SVG.PathArray();
       this.destination.value = destArr;
@@ -28333,11 +28333,11 @@
 
 
 
-  // sorry for the long declaration
-  // slices out one block (from M to M) and syncronize it so the types and length match
+
+
   function handleBlock(startArr, startOffsetM, startOffsetNextM, destArr, destOffsetM, destOffsetNextM, undefined$1){
 
-    // slice out the block we need
+
     var startArrTemp = startArr.slice(startOffsetM, startOffsetNextM || undefined$1)
       ,  destArrTemp =  destArr.slice( destOffsetM,  destOffsetNextM || undefined$1);
 
@@ -28347,35 +28347,35 @@
 
     do{
 
-      // convert shorthand types to long form
+
       startArrTemp[i] = simplyfy.call(posStart, startArrTemp[i]);
        destArrTemp[i] = simplyfy.call(posDest ,  destArrTemp[i]);
 
-      // check if both shape types match
-      // 2 elliptical arc curve commands ('A'), are considered different if the
-      // flags (large-arc-flag, sweep-flag) don't match
+
+
+
       if(startArrTemp[i][0] != destArrTemp[i][0] || startArrTemp[i][0] == 'M' ||
           (startArrTemp[i][0] == 'A' &&
             (startArrTemp[i][4] != destArrTemp[i][4] || startArrTemp[i][5] != destArrTemp[i][5])
           )
         ) {
 
-        // if not, convert shapes to beziere
+
         Array.prototype.splice.apply(startArrTemp, [i, 1].concat(toBeziere.call(posStart, startArrTemp[i])));
          Array.prototype.splice.apply(destArrTemp, [i, 1].concat(toBeziere.call(posDest, destArrTemp[i])));
 
       } else {
 
-        // only update positions otherwise
+
         startArrTemp[i] = setPosAndReflection.call(posStart, startArrTemp[i]);
          destArrTemp[i] = setPosAndReflection.call(posDest ,  destArrTemp[i]);
 
       }
 
-      // we are at the end at both arrays. stop here
+
       if(++i == startArrTemp.length && i == destArrTemp.length) break
 
-      // destArray is longer. Add one element
+
       if(i == startArrTemp.length){
         startArrTemp.push([
           'C',
@@ -28388,7 +28388,7 @@
         ]);
       }
 
-      // startArr is longer. Add one element
+
       if(i == destArrTemp.length){
         destArrTemp.push([
           'C',
@@ -28404,11 +28404,11 @@
 
     }while(true)
 
-    // return the updated block
+
     return {start:startArrTemp, dest:destArrTemp}
   }
 
-  // converts shorthand types to long form
+
   function simplyfy(val){
 
     switch(val[0]){
@@ -28449,7 +28449,7 @@
 
   }
 
-  // updates reflection point and current position
+
   function setPosAndReflection(val){
 
     var len = val.length;
@@ -28462,7 +28462,7 @@
     return val
   }
 
-  // converts all types to cubic beziere
+
   function toBeziere(val){
     var retVal = [val];
 
@@ -28498,7 +28498,7 @@
 
   }
 
-  // finds the next position of type M
+
   function findNextM(arr, offset){
 
     if(offset === false) return false
@@ -28514,14 +28514,14 @@
 
 
 
-  // Convert an arc segment into equivalent cubic Bezier curves
-  // Depending on the arc, up to 4 curves might be used to represent it since a
-  // curve gives a good approximation for only a quarter of an ellipse
-  // The curves are returned as an array of SVG curve commands:
-  // [ ['C', x1, y1, x2, y2, x, y] ... ]
+
+
+
+
+
   function arcToBeziere(pos, val) {
-      // Parameters extraction, handle out-of-range parameters as specified in the SVG spec
-      // See: https://www.w3.org/TR/SVG11/implnote.html#ArcOutOfRangeParameters
+
+
       var rx = Math.abs(val[1]), ry = Math.abs(val[2]), xAxisRotation = val[3] % 360
         , largeArcFlag = val[4], sweepFlag = val[5], x = val[6], y = val[7]
         , A = new SVG.Point(pos), B = new SVG.Point(x, y)
@@ -28529,14 +28529,14 @@
         , deltaTeta, nbSectors, f, arcSegPoints, angle, sinAngle, cosAngle, pt, i, il
         , retVal = [], x1, y1, x2, y2;
 
-      // Ensure radii are non-zero
+
       if(rx === 0 || ry === 0 || (A.x === B.x && A.y === B.y)) {
-        // treat this arc as a straight line segment
+
         return [['C', A.x, A.y, B.x, B.y, B.x, B.y]]
       }
 
-      // Ensure radii are large enough using the algorithm provided in the SVG spec
-      // See: https://www.w3.org/TR/SVG11/implnote.html#ArcCorrectionOutOfRangeRadii
+
+
       primedCoord = new SVG.Point((A.x-B.x)/2, (A.y-B.y)/2).transform(new SVG.Matrix().rotate(xAxisRotation));
       lambda = (primedCoord.x * primedCoord.x) / (rx * rx) + (primedCoord.y * primedCoord.y) / (ry * ry);
       if(lambda > 1) {
@@ -28545,56 +28545,56 @@
         ry = lambda*ry;
       }
 
-      // To simplify calculations, we make the arc part of a unit circle (rayon is 1) instead of an ellipse
+
       mat = new SVG.Matrix().rotate(xAxisRotation).scale(1/rx, 1/ry).rotate(-xAxisRotation);
       A = A.transform(mat);
       B = B.transform(mat);
 
-      // Calculate the horizontal and vertical distance between the initial and final point of the arc
+
       k = [B.x-A.x, B.y-A.y];
 
-      // Find the length of the chord formed by A and B
+
       cSquare = k[0]*k[0] + k[1]*k[1];
       c = Math.sqrt(cSquare);
 
-      // Calculate the ratios of the horizontal and vertical distance on the length of the chord
+
       k[0] /= c;
       k[1] /= c;
 
-      // Calculate the distance between the circle center and the chord midpoint
-      // using this formula: t = sqrt(r^2 - c^2 / 4)
-      // where t is the distance between the cirle center and the chord midpoint,
-      //       r is the rayon of the circle and c is the chord length
-      // From: http://www.ajdesigner.com/phpcircle/circle_segment_chord_t.php
-      // Because of the imprecision of floating point numbers, cSquare might end
-      // up being slightly above 4 which would result in a negative radicand
-      // To prevent that, a test is made before computing the square root
+
+
+
+
+
+
+
+
       t = (cSquare < 4) ? Math.sqrt(1 - cSquare/4) : 0;
 
-      // For most situations, there are actually two different ellipses that
-      // satisfy the constraints imposed by the points A and B, the radii rx and ry,
-      // and the xAxisRotation
-      // When the flags largeArcFlag and sweepFlag are equal, it means that the
-      // second ellipse is used as a solution
-      // See: https://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
+
+
+
+
+
+
       if(largeArcFlag === sweepFlag) {
           t *= -1;
       }
 
-      // Calculate the coordinates of the center of the circle from the midpoint of the chord
-      // This is done by multiplying the ratios calculated previously by the distance between
-      // the circle center and the chord midpoint and using these values to go from the midpoint
-      // to the center of the circle
-      // The negative of the vertical distance ratio is used to modify the x coordinate while
-      // the horizontal distance ratio is used to modify the y coordinate
-      // That is because the center of the circle is perpendicular to the chord and perpendicular
-      // lines are negative reciprocals
+
+
+
+
+
+
+
+
       O = new SVG.Point((B.x+A.x)/2 + t*-k[1], (B.y+A.y)/2 + t*k[0]);
-      // Move the center of the circle at the origin
+
       OA = new SVG.Point(A.x-O.x, A.y-O.y);
       OB = new SVG.Point(B.x-O.x, B.y-O.y);
 
-      // Calculate the start and end angle
+
       tetaStart = Math.acos(OA.x/Math.sqrt(OA.x*OA.x + OA.y*OA.y));
       if (OA.y < 0) {
         tetaStart *= -1;
@@ -28604,23 +28604,23 @@
         tetaEnd *= -1;
       }
 
-      // If sweep-flag is '1', then the arc will be drawn in a "positive-angle" direction,
-      // make sure that the end angle is above the start angle
+
+
       if (sweepFlag && tetaStart > tetaEnd) {
         tetaEnd += 2*Math.PI;
       }
-      // If sweep-flag is '0', then the arc will be drawn in a "negative-angle" direction,
-      // make sure that the end angle is below the start angle
+
+
       if (!sweepFlag && tetaStart < tetaEnd) {
         tetaEnd -= 2*Math.PI;
       }
 
-      // Find the number of Bezier curves that are required to represent the arc
-      // A cubic Bezier curve gives a good enough approximation when representing at most a quarter of a circle
+
+
       nbSectors = Math.ceil(Math.abs(tetaStart-tetaEnd) * 2/Math.PI);
 
-      // Calculate the coordinates of the points of all the Bezier curves required to represent the arc
-      // For an in-depth explanation of this part see: http://pomax.github.io/bezierinfo/#circles_cubic
+
+
       arcSegPoints = [];
       angle = tetaStart;
       deltaTeta = (tetaEnd-tetaStart)/nbSectors;
@@ -28635,12 +28635,12 @@
         angle += deltaTeta;
       }
 
-      // Remove the first control point of the first segment point and remove the second control point of the last segment point
-      // These two control points are not used in the approximation of the arc, that is why they are removed
+
+
       arcSegPoints[0][0] = arcSegPoints[0][1].clone();
       arcSegPoints[arcSegPoints.length-1][2] = arcSegPoints[arcSegPoints.length-1][1].clone();
 
-      // Revert the transformation that was applied to make the arc part of a unit circle instead of an ellipse
+
       mat = new SVG.Matrix().rotate(xAxisRotation).scale(rx, ry).rotate(-xAxisRotation);
       for (i = 0, il = arcSegPoints.length; i < il; i++) {
         arcSegPoints[i][0] = arcSegPoints[i][0].transform(mat);
@@ -28649,7 +28649,7 @@
       }
 
 
-      // Convert the segments points to SVG curve commands
+
       for (i = 1, il = arcSegPoints.length; i < il; i++) {
         pt = arcSegPoints[i-1][2];
         x1 = pt.x;
@@ -28675,14 +28675,14 @@
   * Copyright (c) 2019 Wout Fierens; Licensed MIT */
   (function() {
 
-    // creates handler, saves it
+
     function DragHandler(el){
       el.remember('_draggable', this);
       this.el = el;
     }
 
 
-    // Sets new parameter, starts dragging
+
     DragHandler.prototype.init = function(constraint, val){
       var _this = this;
       this.constraint = constraint;
@@ -28691,7 +28691,7 @@
       this.el.on('touchstart.drag', function(e){ _this.start(e); });
     };
 
-    // transforms one point from screen to user coords
+
     DragHandler.prototype.transformPoint = function(event, offset){
         event = event || window.event;
         var touches = event.changedTouches && event.changedTouches[0] || event;
@@ -28700,7 +28700,7 @@
         return this.p.matrixTransform(this.m)
     };
 
-    // gets elements bounding box with special handling of groups, nested and use
+
     DragHandler.prototype.getBBox = function(){
 
       var box = this.el.bbox();
@@ -28715,10 +28715,10 @@
       return box
     };
 
-    // start dragging
+
     DragHandler.prototype.start = function(e){
 
-      // check for left button
+
       if(e.type == 'click'|| e.type == 'mousedown' || e.type == 'mousemove'){
         if((e.which || e.buttons) != 1){
             return
@@ -28727,29 +28727,29 @@
 
       var _this = this;
 
-      // fire beforedrag event
+
       this.el.fire('beforedrag', { event: e, handler: this });
       if(this.el.event().defaultPrevented) return;
 
-      // prevent browser drag behavior as soon as possible
+
       e.preventDefault();
 
-      // prevent propagation to a parent that might also have dragging enabled
+
       e.stopPropagation();
 
-      // search for parent on the fly to make sure we can call
-      // draggable() even when element is not in the dom currently
+
+
       this.parent = this.parent || this.el.parent(SVG.Nested) || this.el.parent(SVG.Doc);
       this.p = this.parent.node.createSVGPoint();
 
-      // save current transformation matrix
+
       this.m = this.el.node.getScreenCTM().inverse();
 
       var box = this.getBBox();
 
       var anchorOffset;
 
-      // fix text-anchor in text-element (#37)
+
       if(this.el instanceof SVG.Text){
         anchorOffset = this.el.node.getComputedTextLength();
 
@@ -28764,23 +28764,23 @@
       }
 
       this.startPoints = {
-        // We take absolute coordinates since we are just using a delta here
+
         point: this.transformPoint(e, anchorOffset),
         box:   box,
         transform: this.el.transform()
       };
 
-      // add drag and end events to window
+
       SVG.on(window, 'mousemove.drag', function(e){ _this.drag(e); });
       SVG.on(window, 'touchmove.drag', function(e){ _this.drag(e); });
       SVG.on(window, 'mouseup.drag', function(e){ _this.end(e); });
       SVG.on(window, 'touchend.drag', function(e){ _this.end(e); });
 
-      // fire dragstart event
+
       this.el.fire('dragstart', {event: e, p: this.startPoints.point, m: this.m, handler: this});
     };
 
-    // while dragging
+
     DragHandler.prototype.drag = function(e){
 
       var box = this.getBBox()
@@ -28800,12 +28800,12 @@
 
       if(this.el.event().defaultPrevented) return p
 
-      // move the element to its new position, if possible by constraint
+
       if (typeof c == 'function') {
 
         var coord = c.call(this.el, x, y, this.m);
 
-        // bool, just show us if movement is allowed or not
+
         if (typeof coord == 'boolean') {
           coord = {
             x: coord,
@@ -28813,7 +28813,7 @@
           };
         }
 
-        // if true, we just move. If !false its a number and we move it there
+
         if (coord.x === true) {
           this.el.x(x);
         } else if (coord.x !== false) {
@@ -28828,7 +28828,7 @@
 
       } else if (typeof c == 'object') {
 
-        // keep element within constrained box
+
         if (c.minX != null && x < c.minX) {
           x = c.minX;
           gx = x - this.startPoints.box.x;
@@ -28856,19 +28856,19 @@
           this.el.move(x, y);
       }
 
-      // so we can use it in the end-method, too
+
       return p
     };
 
     DragHandler.prototype.end = function(e){
 
-      // final drag
+
       var p = this.drag(e);
 
-      // fire dragend event
+
       this.el.fire('dragend', { event: e, p: p, m: this.m, handler: this });
 
-      // unbind events
+
       SVG.off(window, 'mousemove.drag');
       SVG.off(window, 'touchmove.drag');
       SVG.off(window, 'mouseup.drag');
@@ -28877,12 +28877,12 @@
     };
 
     SVG.extend(SVG.Element, {
-      // Make element draggable
-      // Constraint might be an object (as described in readme.md) or a function in the form "function (x, y)" that gets called before every move.
-      // The function can return a boolean or an object of the form {x, y}, to which the element will be moved. "False" skips moving, true moves to raw x, y.
+
+
+
       draggable: function(value, constraint) {
 
-        // Check the parameters and reassign if needed
+
         if (typeof value == 'function' || typeof value == 'object') {
           constraint = value;
           value = true;
@@ -28890,7 +28890,7 @@
 
         var dragHandler = this.remember('_draggable') || new DragHandler(this);
 
-        // When no parameter is given, value is true
+
         value = typeof value === 'undefined' ? true : value;
 
         if(value) dragHandler.init(constraint || {}, value);
@@ -28915,7 +28915,7 @@
       this.pointSelection = {isSelected: false};
       this.rectSelection = {isSelected: false};
 
-      // helper list with position settings of each type of point
+
       this.pointsList = {
         lt: [ 0, 0 ],
         rt: [ 'width', 0 ],
@@ -28927,10 +28927,10 @@
         l: [ 0, 'height' ]
       };
 
-      // helper function to get point coordinates based on settings above and an object (bbox in our case)
+
       this.pointCoord = function (setting, object, isPointCentered) {
         var coord = typeof setting !== 'string' ? setting : object[setting];
-        // Top, bottom, right and left points are placed in the center of element width/height
+
         return isPointCentered ? coord / 2 : coord
       };
 
@@ -28949,10 +28949,10 @@
       var bbox = this.el.bbox();
       this.options = {};
 
-      // store defaults list of points in order to verify users config
+
       var points = this.el.selectize.defaults.points;
 
-      // Merging the defaults and the options-object together
+
       for (var i in this.el.selectize.defaults) {
           this.options[i] = this.el.selectize.defaults[i];
           if (options[i] !== undefined) {
@@ -28960,7 +28960,7 @@
           }
       }
 
-      // prepare & validate list of points to be added (or excluded)
+
       var pointsLists = ['points', 'pointsExclude'];
 
       for (var i in pointsLists) {
@@ -28968,21 +28968,21 @@
 
         if (typeof option === 'string') {
           if (option.length > 0) {
-            // if set as comma separated string list => convert it into an array
+
             option = option.split(/\s*,\s*/i);
           } else {
             option = [];
           }
         } else if (typeof option === 'boolean' && pointsLists[i] === 'points') {
-          // this is not needed, but let's have it for legacy support
+
           option = option ? points : [];
         }
 
         this.options[pointsLists[i]] = option;
       }
 
-      // intersect correct all points options with users config (exclude unwanted points)
-      // ES5 -> NO arrow functions nor Array.includes()
+
+
       this.options.points = [ points, this.options.points ].reduce(
         function (a, b) {
           return a.filter(
@@ -28993,7 +28993,7 @@
         }
       );
 
-      // exclude pointsExclude, if wanted
+
       this.options.points = [ this.options.points, this.options.pointsExclude ].reduce(
         function (a, b) {
           return a.filter(
@@ -29008,7 +29008,7 @@
       this.nested = (this.nested || this.parent.group());
       this.nested.matrix(new SVG.Matrix(this.el).translate(bbox.x, bbox.y));
 
-      // When deepSelect is enabled and the element is a line/polyline/polygon, draw only points for moving
+
       if (this.options.deepSelect && ['line', 'polyline', 'polygon'].indexOf(this.el.type) !== -1) {
           this.selectPoints(value);
       } else {
@@ -29024,21 +29024,21 @@
 
       this.pointSelection.isSelected = value;
 
-      // When set is already there we dont have to create one
+
       if (this.pointSelection.set) {
           return this;
       }
 
-      // Create our set of elements
+
       this.pointSelection.set = this.parent.set();
-      // draw the points and mark the element as selected
+
       this.drawPoints();
 
       return this;
 
   };
 
-  // create the point-array which contains the 2 points of a line or simply the points-array of polyline/polygon
+
   SelectHandler.prototype.getPointArray = function () {
       var bbox = this.el.bbox();
 
@@ -29047,12 +29047,12 @@
       });
   };
 
-  // Draws a points
+
   SelectHandler.prototype.drawPoints = function () {
 
       var _this = this, array = this.getPointArray();
 
-      // go through the array of points
+
       for (var i = 0, len = array.length; i < len; ++i) {
 
           var curriedEvent = (function (k) {
@@ -29067,8 +29067,8 @@
               };
           })(i);
 
-          // add every point to the set
-          // add css-classes and a touchstart-event which fires our event for moving points
+
+
           var point = this.drawPoint(array[i][0], array[i][1])
                           .addClass(this.options.classPoints)
                           .addClass(this.options.classPoints + '_point')
@@ -29078,7 +29078,7 @@
       }
   };
 
-  // The function to draw single point
+
   SelectHandler.prototype.drawPoint = function (cx, cy) {
       var pointType = this.options.pointType;
 
@@ -29096,19 +29096,19 @@
       }
   };
 
-  // The function to draw the circle point
+
   SelectHandler.prototype.drawCircle = function (cx, cy) {
       return this.nested.circle(this.options.pointSize)
                         .center(cx, cy);
   };
 
-  // The function to draw the rect point
+
   SelectHandler.prototype.drawRect = function (cx, cy) {
       return this.nested.rect(this.options.pointSize, this.options.pointSize)
                         .center(cx, cy);
   };
 
-  // every time a point is moved, we have to update the positions of our point
+
   SelectHandler.prototype.updatePointSelection = function () {
       var array = this.getPointArray();
 
@@ -29128,7 +29128,7 @@
           height: bbox.height
       });
 
-      // set.get(1) is always in the upper left corner. no need to move it
+
       if (this.options.points.length) {
         this.options.points.map(function (point, index) {
           var coords = _this.pointCoords(point, bbox);
@@ -29150,10 +29150,10 @@
 
       this.rectSelection.isSelected = value;
 
-      // when set is already p
+
       this.rectSelection.set = this.rectSelection.set || this.parent.set();
 
-      // helperFunction to create a mouse-down function which triggers the event specified in `eventName`
+
       function getMoseDownFunc(eventName) {
           return function (ev) {
               ev = ev || window.event;
@@ -29166,12 +29166,12 @@
           };
       }
 
-      // create the selection-rectangle and add the css-class
+
       if (!this.rectSelection.set.get(0)) {
           this.rectSelection.set.add(this.nested.rect(bbox.width, bbox.height).addClass(this.options.classRect));
       }
 
-      // Draw Points at the edges, if enabled
+
       if (this.options.points.length && this.rectSelection.set.length() < 2) {
           var ename ="touchstart", mname = "mousedown";
 
@@ -29190,7 +29190,7 @@
           });
       }
 
-      // draw rotationPint, if enabled
+
       if (this.options.rotationPoint && ((this.options.points && !this.rectSelection.set.get(9)) || (!this.options.points && !this.rectSelection.set.get(1)))) {
 
           var curriedEvent = function (ev) {
@@ -29259,7 +29259,7 @@
       //var _this = this;
 
       if (!this.rectSelection.isSelected && this.rectSelection.set) {
-          // stop watching the element, remove the selection
+
           this.rectSelection.set.each(function () {
               this.remove();
           });
@@ -29269,7 +29269,7 @@
       }
 
       if (!this.pointSelection.isSelected && this.pointSelection.set) {
-          // Remove all points, clear the set, stop watching the element
+
           this.pointSelection.set.each(function () {
               this.remove();
           });
@@ -29287,10 +29287,10 @@
 
 
   SVG.extend(SVG.Element, {
-      // Select element with mouse
+
       selectize: function (value, options) {
 
-          // Check the parameters and reassign if needed
+
           if (typeof value === 'object') {
               options = value;
               value = true;
@@ -29340,8 +29340,8 @@
       };
 
       ResizeHandler.prototype._extractPosition = function(event) {
-          // Extract a position from a mouse/touch event.
-          // Returns { x: .., y: .. }
+
+
           return {
               x: event.clientX != null ? event.clientX : event.touches[0].clientX,
               y: event.clientY != null ? event.clientY : event.touches[0].clientY
@@ -29360,7 +29360,7 @@
 
           this.options = {};
 
-          // Merge options and defaults
+
           for (var i in this.el.resize.defaults) {
               this.options[i] = this.el.resize.defaults[i];
               if (typeof options[i] !== 'undefined') {
@@ -29368,7 +29368,7 @@
               }
           }
 
-          // We listen to all these events which are specifying different edges
+
           this.el.on('lt.resize', function(e){ _this.resize(e || window.event); });  // Left-Top
           this.el.on('rt.resize', function(e){ _this.resize(e || window.event); });  // Right-Top
           this.el.on('rb.resize', function(e){ _this.resize(e || window.event); });  // Right-Bottom
@@ -29383,7 +29383,7 @@
 
           this.el.on('point.resize', function(e){ _this.resize(e || window.event); }); // Point-Moving
 
-          // This call ensures, that the plugin reacts to a change of snapToGrid immediately
+
           this.update();
 
       };
@@ -29423,36 +29423,36 @@
               rotation: this.el.transform().rotation  // The current rotation of the element
           };
 
-          // Add font-size parameter if the element type is text
+
           if (this.el.type === "text") {
               this.parameters.fontSize = this.el.attr()["font-size"];
           }
 
-          // the i-param in the event holds the index of the point which is moved, when using `deepSelect`
+
           if (event.detail.i !== undefined) {
 
-              // get the point array
+
               var array = this.el.array().valueOf();
 
-              // Save the index and the point which is moved
+
               this.parameters.i = event.detail.i;
               this.parameters.pointCoords = [array[event.detail.i][0], array[event.detail.i][1]];
           }
 
-          // Lets check which edge of the bounding-box was clicked and resize the this.el according to this
+
           switch (event.type) {
 
-              // Left-Top-Edge
+
               case 'lt':
-                  // We build a calculating function for every case which gives us the new position of the this.el
+
                   this.calc = function (diffX, diffY) {
-                      // The procedure is always the same
-                      // First we snap the edge to the given grid (snapping to 1px grid is normal resizing)
+
+
                       var snap = this.snapToGrid(diffX, diffY);
 
-                      // Now we check if the new height and width still valid (> 0)
+
                       if (this.parameters.box.width - snap[0] > 0 && this.parameters.box.height - snap[1] > 0) {
-                          // ...if valid, we resize the this.el (which can include moving because the coord-system starts at the left-top and this edge is moving sometimes when resized)
+
 
                           /*
                            * but first check if the element is text box, so we can change the font size instead of
@@ -29472,9 +29472,9 @@
                   };
                   break;
 
-              // Right-Top
+
               case 'rt':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 1 << 1);
                       if (this.parameters.box.width + snap[0] > 0 && this.parameters.box.height - snap[1] > 0) {
@@ -29491,9 +29491,9 @@
                   };
                   break;
 
-              // Right-Bottom
+
               case 'rb':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 0);
                       if (this.parameters.box.width + snap[0] > 0 && this.parameters.box.height + snap[1] > 0) {
@@ -29510,9 +29510,9 @@
                   };
                   break;
 
-              // Left-Bottom
+
               case 'lb':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 1);
                       if (this.parameters.box.width - snap[0] > 0 && this.parameters.box.height + snap[1] > 0) {
@@ -29529,13 +29529,13 @@
                   };
                   break;
 
-              // Top
+
               case 't':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 1 << 1);
                       if (this.parameters.box.height - snap[1] > 0) {
-                          // Disable the font-resizing if it is not from the corner of bounding-box
+
                           if (this.parameters.type === "text") {
                               return;
                           }
@@ -29545,9 +29545,9 @@
                   };
                   break;
 
-              // Right
+
               case 'r':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 0);
                       if (this.parameters.box.width + snap[0] > 0) {
@@ -29560,9 +29560,9 @@
                   };
                   break;
 
-              // Bottom
+
               case 'b':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 0);
                       if (this.parameters.box.height + snap[1] > 0) {
@@ -29575,9 +29575,9 @@
                   };
                   break;
 
-              // Left
+
               case 'l':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
                       var snap = this.snapToGrid(diffX, diffY, 1);
                       if (this.parameters.box.width - snap[0] > 0) {
@@ -29590,58 +29590,58 @@
                   };
                   break;
 
-              // Rotation
+
               case 'rot':
-                  // s.a.
+
                   this.calc = function (diffX, diffY) {
 
-                      // yes this is kinda stupid but we need the mouse coords back...
+
                       var current = {x: diffX + this.parameters.p.x, y: diffY + this.parameters.p.y};
 
-                      // start minus middle
+
                       var sAngle = Math.atan2((this.parameters.p.y - this.parameters.box.y - this.parameters.box.height / 2), (this.parameters.p.x - this.parameters.box.x - this.parameters.box.width / 2));
 
-                      // end minus middle
+
                       var pAngle = Math.atan2((current.y - this.parameters.box.y - this.parameters.box.height / 2), (current.x - this.parameters.box.x - this.parameters.box.width / 2));
 
                       var angle = this.parameters.rotation + (pAngle - sAngle) * 180 / Math.PI + this.options.snapToAngle / 2;
 
-                      // We have to move the element to the center of the box first and change the rotation afterwards
-                      // because rotation always works around a rotation-center, which is changed when moving the element
-                      // We also set the new rotation center to the center of the box.
+
+
+
                       this.el.center(this.parameters.box.cx, this.parameters.box.cy).rotate(angle - (angle % this.options.snapToAngle), this.parameters.box.cx, this.parameters.box.cy);
                   };
                   break;
 
-              // Moving one single Point (needed when an element is deepSelected which means you can move every single point of the object)
+
               case 'point':
                   this.calc = function (diffX, diffY) {
 
-                      // Snapping the point to the grid
+
                       var snap = this.snapToGrid(diffX, diffY, this.parameters.pointCoords[0], this.parameters.pointCoords[1]);
 
-                      // Get the point array
+
                       var array = this.el.array().valueOf();
 
-                      // Changing the moved point in the array
+
                       array[this.parameters.i][0] = this.parameters.pointCoords[0] + snap[0];
                       array[this.parameters.i][1] = this.parameters.pointCoords[1] + snap[1];
 
-                      // And plot the new this.el
+
                       this.el.plot(array);
                   };
           }
 
           this.el.fire('resizestart', {dx: this.parameters.x, dy: this.parameters.y, event: event});
-          // When resizing started, we have to register events for...
-          // Touches.
+
+
           SVG.on(window, 'touchmove.resize', function(e) {
               _this.update(e || window.event);
           });
           SVG.on(window, 'touchend.resize', function() {
               _this.done();
           });
-          // Mouse.
+
           SVG.on(window, 'mousemove.resize', function (e) {
               _this.update(e || window.event);
           });
@@ -29651,7 +29651,7 @@
 
       };
 
-      // The update-function redraws the element every time the mouse is moving
+
       ResizeHandler.prototype.update = function (event) {
 
           if (!event) {
@@ -29661,7 +29661,7 @@
               return;
           }
 
-          // Calculate the difference between the mouseposition at start and now
+
           var txPt = this._extractPosition(event);
           var p = this.transformPoint(txPt.x, txPt.y);
 
@@ -29670,15 +29670,15 @@
 
           this.lastUpdateCall = [diffX, diffY];
 
-          // Calculate the new position and height / width of the element
+
           this.calc(diffX, diffY);
 
-         // Emit an event to say we have changed.
+
           this.el.fire('resizing', {dx: diffX, dy: diffY, event: event});
       };
 
-      // Is called on mouseup.
-      // Removes the update-function from the mousemove event
+
+
       ResizeHandler.prototype.done = function () {
           this.lastUpdateCall = null;
           SVG.off(window, 'mousemove.resize');
@@ -29688,18 +29688,18 @@
           this.el.fire('resizedone');
       };
 
-      // The flag is used to determine whether the resizing is used with a left-Point (first bit) and top-point (second bit)
-      // In this cases the temp-values are calculated differently
+
+
       ResizeHandler.prototype.snapToGrid = function (diffX, diffY, flag, pointCoordsY) {
 
           var temp;
 
-          // If `pointCoordsY` is given, a single Point has to be snapped (deepSelect). That's why we need a different temp-value
+
           if (typeof pointCoordsY !== 'undefined') {
-              // Note that flag = pointCoordsX in this case
+
               temp = [(flag + diffX) % this.options.snapToGrid, (pointCoordsY + diffY) % this.options.snapToGrid];
           } else {
-              // We check if the flag is set and if not we set a default-value (both bits set - which means upper-left-edge)
+
               flag = flag == null ? 1 | 1 << 1 : flag;
               temp = [(this.parameters.box.x + diffX + (flag & 1 ? 0 : this.parameters.box.width)) % this.options.snapToGrid, (this.parameters.box.y + diffY + (flag & (1 << 1) ? 0 : this.parameters.box.height)) % this.options.snapToGrid];
           }
@@ -29722,7 +29722,7 @@
 
       };
 
-      // keep element within constrained box
+
       ResizeHandler.prototype.constraintToBox = function (diffX, diffY, flag, pointCoordsY) {
           //return [diffX, diffY]
           var c = this.options.constraint || {};
@@ -29767,11 +29767,11 @@
           var newAspectRatio = newW / newH;
 
           if (newAspectRatio < aspectRatio) {
-              // Height is too big. Adapt it
+
               updatedSnap[1] = newW / aspectRatio - this.parameters.box.height;
               isReverse && (updatedSnap[1] = -updatedSnap[1]);
           } else if (newAspectRatio > aspectRatio) {
-              // Width is too big. Adapt it
+
               updatedSnap[0] = this.parameters.box.width - newH * aspectRatio;
               isReverse && (updatedSnap[0] = -updatedSnap[0]);
           }
@@ -29780,7 +29780,7 @@
       };
 
       SVG.extend(SVG.Element, {
-          // Resize element with mouse
+
           resize: function (options) {
 
               (this.remember('_resizeHandler') || new ResizeHandler(this)).init(options || {});
@@ -30080,7 +30080,7 @@
         var baseEl = this.w.globals.dom.baseEl;
 
         if (baseEl) {
-          // see https://github.com/apexcharts/vue-apexcharts/issues/275
+
           this.ctx.eventList.forEach(function (event) {
             baseEl.removeEventListener(event, _this.ctx.events.documentEvent);
           });
@@ -30089,7 +30089,7 @@
         var domEls = this.w.globals.dom;
 
         if (this.ctx.el !== null) {
-          // remove all child elements - resetting the whole chart
+
           while (this.ctx.el.firstChild) {
             this.ctx.el.removeChild(this.ctx.el.firstChild);
           }
@@ -30144,9 +30144,9 @@
       value: function render() {
         var _this = this;
 
-        // main method
+
         return new Promise(function (resolve, reject) {
-          // only draw chart, if element found
+
           if (_this.el !== null) {
             if (typeof Apex._chartInstances === 'undefined') {
               Apex._chartInstances = [];
@@ -30223,7 +30223,7 @@
         }
 
         if (gl.svgWidth === 0) {
-          // if the element is hidden, skip drawing
+
           gl.animationEnded = true;
           return null;
         }
@@ -30250,7 +30250,7 @@
 
         this.formatters.setLabelFormatters();
         this.titleSubtitle.draw(); // legend is calculated here before coreCalculations because it affects the plottable area
-        // if there is some data to show or user collapsed all series, then proceed drawing legend
+
 
         if (!gl.noData || gl.collapsedSeries.length === gl.series.length || w.config.legend.showForSingleSeries) {
           this.legend.init();
@@ -30263,14 +30263,14 @@
           this.core.coreCalculations();
 
           if (w.config.xaxis.type !== 'category') {
-            // as we have minX and maxX values, determine the default DateTimeFormat for time series
+
             this.formatters.setLabelFormatters();
           }
 
           this.ctx.toolbar.minX = w.globals.minX;
           this.ctx.toolbar.maxX = w.globals.maxX;
         } // we need to generate yaxis for heatmap separately as we are not showing numerics there, but seriesNames. There are some tweaks which are required for heatmap to align labels correctly which are done in below function
-        // Also we need to do this before calculating Dimensions plotCoords() method of Dimensions
+
 
 
         this.formatters.heatmapLabelFormatters(); // We got plottable area here, next task would be to calculate axis areas
@@ -30312,7 +30312,7 @@
         var me = this;
         var w = me.w;
         return new Promise(function (resolve, reject) {
-          // no data to display
+
           if (me.el === null) {
             return reject(new Error('Not enough data to display or target element not found'));
           } else if (graphData === null || w.globals.allSeriesCollapsed) {
@@ -30377,7 +30377,7 @@
           }
 
           if (!w.globals.noData) {
-            // draw tooltips at the end
+
             if (w.config.tooltip.enabled && !w.globals.noData) {
               me.w.globals.tooltip.drawTooltip(graphData.xyRatios);
             }
@@ -30456,7 +30456,7 @@
         var updateSyncedCharts = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
         var overwriteInitialConfig = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
         var w = this.w; // when called externally, clear some global variables
-        // fixes apexcharts.js#1488
+
 
         w.globals.selection = undefined;
 
@@ -30468,7 +30468,7 @@
               return _this3.updateHelpers._extendSeries(s, i);
             });
           } // user updated the series via updateOptions() function.
-          // Hence, we need to reset axis min/max to avoid zooming issues
+
 
 
           this.updateHelpers.revertDefaultAxisMinMax();
