@@ -1015,11 +1015,11 @@ exports.Payment2Payment = async (req, res) => {
 // ###################################### Payment 2 Payment #############################################################
 exports.paymentACHVerification = async (req, res) => {
   const { ppp_status, ppp_TransactionID, TransactionId, userid, merchant_unique_id,email, totalAmount, currency, Status } = req.body;
-  // console.log("req.body");
+  console.log("req.body");
   console.log(req.body);
-  // console.log("req.query")
+  console.log("req.query")
   console.log(req.query)
-  // console.log("req.params")
+  console.log("req.params")
   console.log(req.params)
   const currentDate = new Date();
   try {
@@ -1029,7 +1029,7 @@ exports.paymentACHVerification = async (req, res) => {
       if(updateUserResult[0].affectedRows > 0){
         res.status(200).json({message:"transaction status updated"})
       }else{
-        res.status(400).json({message:"Error in update user"})
+        res.status(200).json({message:"Error in update user"})
       }
     }else{
       res.status(200).json({message:"transaction is not saved"})
@@ -1037,7 +1037,7 @@ exports.paymentACHVerification = async (req, res) => {
    
   }catch(error){
     console.log(error);
-    res.status(400).send(error.message);
+    res.status(200).send(error.message);
 
   }
       }

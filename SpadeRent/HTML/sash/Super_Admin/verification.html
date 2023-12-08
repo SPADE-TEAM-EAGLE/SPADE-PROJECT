@@ -309,12 +309,12 @@ var encodedId = encodeURIComponent(encryptedId);
                 var verification = $("#verification").val();
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/adminVerifyResetEmailCode',
-                    type: 'GET',
+                    type: 'POST',
                     contentType: "application/json; charset=utf-8",
-                    data: {
+                    data: JSON.stringify({
                         id: Id,
                         token: verification
-                    },
+                    }),
                     success: function(response) {
                         document.getElementById("verification-spans").style.display = "none";
                         var encryptedToken = sjcl.encrypt(password, response.token.toString());
