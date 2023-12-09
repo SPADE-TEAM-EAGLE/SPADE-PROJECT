@@ -61,7 +61,7 @@ const config = process.env;
               message: 'All Invoice get successful'
             })
           } else {
-            res.status(200).json({
+            res.status(404).json({
               message: 'No data found'
             })
           }
@@ -431,12 +431,12 @@ exports.unpaidAmountTenant = async (req, res) => {
     // console.log(tenantAmountResult)
     if (tenantAmountResult[0][0].length > 0) {
       res.status(200).json({
+        message : "Tenant unpaid Invoice Amount",
         data : tenantAmountResult[0][0].totalAmount,
-        message : "Tenant unpaid Invoice Amount"
       });
     }else{
-      res.status(200).json({
-        message : "Tenant unpaid Invoice : All invoices Paid"
+      res.status(404).json({
+        message : "Tenant unpaid Invoice : All invoices Paid Not found"
       });
     }
   } catch (error) {
@@ -454,7 +454,7 @@ exports.updateAuthTenant = async (req, res) => {
     if(updateAuth[0].affectedRows>0){
       res.status(200).json({message:`2 Factor Authentication ${auth==0?"turned off":"turned on"}`})
     }else{
-      res.status(400).json({message:"Error in updating 2 Factor Authentication"})
+      res.status(422).json({message:"Error in updating 2 Factor Authentication"})
     }
   } catch (error) {
     console.log(error)
@@ -476,7 +476,7 @@ exports.getInvoiceCategoriesTenant = async (req, res) => {
         data: invoiceImagecheckresult[0],
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
