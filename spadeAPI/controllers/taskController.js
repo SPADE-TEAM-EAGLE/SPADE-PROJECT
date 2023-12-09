@@ -862,7 +862,7 @@ exports.addVendorCategory = async (req, res) => {
           categoryID: insertedId[0]?.insertId,
         });
       } else {
-        res.status(200).json({
+        res.status(409).json({
           message: "Category already exists",
           categoryID: categoryToInsert.id,
         });
@@ -1013,7 +1013,7 @@ exports.VendorCheckEmail = async function (req, res) {
   ]);
 
     if (selectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     } 
