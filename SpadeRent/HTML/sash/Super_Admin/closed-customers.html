@@ -1194,15 +1194,15 @@ if (selectedFilter === 'alphabets') {
 }
 else if (selectedFilter === 'ascending') {
     rows.sort(function (a, b) {
-        var idA = parseInt($(a).find('.landlordId').text());
-        var idB = parseInt($(b).find('.landlordId').text());
+        var idA = parseInt($(a).find('.landlordId').text().split("-")[1]);
+        var idB = parseInt($(b).find('.landlordId').text().split("-")[1]);
         return idA - idB;
     });
 }
 else if (selectedFilter === 'descending') {
     rows.sort(function (a, b) {
-        var idA = parseInt($(a).find('.landlordId').text());
-        var idB = parseInt($(b).find('.landlordId').text());
+        var idA = parseInt($(a).find('.landlordId').text().split("-")[1]);
+        var idB = parseInt($(b).find('.landlordId').text().split("-")[1]);
         return idB - idA;
     });
 }
