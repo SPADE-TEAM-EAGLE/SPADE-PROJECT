@@ -306,8 +306,9 @@ exports.getTotalAmountUnpaid =
 
 exports.getTenantTotalAmountPaid =
   "SELECT SUM(invoice.totalAmount) AS totalPaid FROM invoice WHERE invoice.tenantID = ? AND invoice.status = 'paid'";
-exports.getTenantTotalAmountUnpaid =
-  "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.tenantID = ? AND invoice.status = 'Unpaid'";
+  exports.getTenantTotalAmountUnpaid =
+  "SELECT SUM(invoice.totalAmount) AS totalUnPaid FROM invoice WHERE invoice.tenantID = ? AND invoice.status != 'paid'";
+
 exports.getTenantTotalAmount =
   "SELECT SUM(invoice.totalAmount) AS totalAmount FROM invoice WHERE invoice.tenantID = ?";
 
@@ -1154,3 +1155,4 @@ exports.insertInUserPermissionUsers =
   exports.messageDelete = `SELECT * FROM spade_Rent.messages where sender = ? OR receiverID = ?`;
   exports.paymentACHQuery = "INSERT INTO paymentACH (tenantId,merchantUniqueId,totalAmount,Status,TransactionId, ppp_TransactionID) VALUES (?,?,?,?,?,?)";;
   exports.paymentACHRequestQuery = "INSERT INTO paymentACHLogs (tenantId,body,query,params, date, status) VALUES (?,?,?,?,?,?)";;
+ exports.updateTenantInvoiceStatus="UPDATE invoice SET status = ? WHERE tenantID = ?";

@@ -30,7 +30,7 @@
         >
         <script>
         if (!localStorage.getItem("authtoken")) {
-            window.location = "./login_module.html"
+            window.location = "../Tenant/login_module.html"
         }
         </script>
      <link rel="stylesheet" href="../assets/pageCss/tenantCss/index.css">
@@ -811,8 +811,67 @@
                                     </div>
                                 </div>
                             </div>
-
-
+                            <div
+                            class="modal fade"
+                            id="succesModal_invoice"
+                            tabindex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content success-modal-content">
+                                    <div class="modal-header">
+                                        <button
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            id="succes-close"
+                                        >
+                                            <span aria-hidden="true">
+                                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title d-flex align-items-center ps-1">
+                                                <strong class="color-primary">Congratulations!&nbsp;</strong>
+                                                <i class="fi fi-rs-check-circle text-success"></i>
+                                            </h2>
+                                            <p class="ms-2 mb-0 text-start">Your dues are successfully paid!!!</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer" style="border-top: 0"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                        class="modal fade"
+                        id="myModal_declined"
+                        tabindex="-1"
+                        role="dialog"
+                    >
+                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                            <div class="modal-content tx-size-sm">
+                                <div class="modal-body text-center p-5">
+                                    <div class="p-5">
+                                        <button aria-label="Close" class="btn-close position-absolute mt-0 btn-pill text-dark" data-bs-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
+                                        <h4 class="text-dark tx-semibold" style="font-size: 22px;">
+                                            <span>Error Processing Payment
+                                            </h4>
+                                            <p class="fw-bold text-dark fs-18 mb-1"> Please check your security code, card details and connection and try again.</p>
+                                            <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                                            <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                                            <button aria-label="Close" class="btn btn-primary btn-pill w-auto mt-2" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             <div
                                 class="modal fade"
                                 id="upgradetopro-ach-modal"
@@ -1612,7 +1671,7 @@
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
+                        window.location = '../Tenant/login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
@@ -1652,6 +1711,11 @@
                     $("#amount-outstanding").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    
+                    if(!totalAmountUnpaid.totalUnPaid){
+                        
+                        $(".btn-paynow-banner").parent().parent().addClass("d-none")
+                    }
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
@@ -1858,7 +1922,7 @@ if (task.priority == 'High') {
                         } else if ($('body').hasClass('light-mode')) {
                             localStorage.setItem("sashlightMode", true)
                         }
-                        window.open('./login_module.html', "_self")
+                        window.open('../Tenant/login_module.html', "_self")
                         console.log('Done');
                     },
                     error: function (xhr, status, error) {
@@ -1888,31 +1952,7 @@ if (task.priority == 'High') {
         }
                             </script>
                             <script src="../assets/js/tenantPayment.js"></script>
-                            <script>
-
-        $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccount",
-                    type: "GET",
-                    contentType: "application/json",
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("authtoken"),
-                    },
-                    success: function (response) {
-                        $("#account").empty()
-                        $("#account").append(`<option value="">Select Account</option>`)
-                        $("#table_body_bank_account").empty()
-                        var tbody = $("#table_body_bank_account");
-                        if (response?.data) {
-                            response.data.forEach(function (entry, index) {
-                                $("#account").append(`<option value="${entry.UPOID}">${entry.accountName}</option>`)
-                            });
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
-                });
-                            </script>
+                            
                             <script>
     var helloGuys = true;
     $(document).ajaxStop(function () {

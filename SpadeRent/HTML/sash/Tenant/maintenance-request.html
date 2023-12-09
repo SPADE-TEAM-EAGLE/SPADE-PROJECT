@@ -23,7 +23,7 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
     <script>
         if (!localStorage.getItem("authtoken")) {
-            window.location = "./login_module.html"
+            window.location = "../Tenant/login_module.html"
         }
     </script>
    <link rel="stylesheet" href="../assets/pageCss/tenantCss/maintenance-request.css">
@@ -1007,6 +1007,67 @@
                                 </div>
                             </div>
                             <div
+                            class="modal fade"
+                            id="succesModal_invoice"
+                            tabindex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content success-modal-content">
+                                    <div class="modal-header">
+                                        <button
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            id="succes-close"
+                                        >
+                                            <span aria-hidden="true">
+                                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                                        <div class="text-justify ps-2 border-model-line">
+                                            <h2 class="modal-title d-flex align-items-center ps-1">
+                                                <strong class="color-primary">Congratulations!&nbsp;</strong>
+                                                <i class="fi fi-rs-check-circle text-success"></i>
+                                            </h2>
+                                            <p class="ms-2 mb-0 text-start">Your dues are successfully paid!!!</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer" style="border-top: 0"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                        class="modal fade"
+                        id="myModal_declined"
+                        tabindex="-1"
+                        role="dialog"
+                    >
+                        <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                            <div class="modal-content tx-size-sm">
+                                <div class="modal-body text-center p-5">
+                                    <div class="p-5">
+                                        <button aria-label="Close" class="btn-close position-absolute mt-0 btn-pill text-dark" data-bs-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
+                                        <h4 class="text-dark tx-semibold" style="font-size: 22px;">
+                                            <span>Error Processing Payment
+                                            </h4>
+                                            <p class="fw-bold text-dark fs-18 mb-1"> Please check your security code, card details and connection and try again.</p>
+                                            <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                                            <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                                            <button aria-label="Close" class="btn btn-primary btn-pill w-auto mt-2" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div
                                 class="modal fade"
                                 id="upgradetopro-card-modal"
                                 tabindex="-1"
@@ -1885,6 +1946,10 @@
                     console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    if(!totalAmountUnpaid.totalUnPaid){
+                        
+                        $(".btn-paynow-banner").parent().parent().addClass("d-none")
+                    }
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
@@ -1900,6 +1965,7 @@
     <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
 
     <script>
+        var userData;
         function formatDateMDY(date) {
             var createdDateFormat = new Date(date);
             var day = createdDateFormat.getDate();
@@ -1922,6 +1988,7 @@
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
+                    userData=response
                     $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
                     $("#header-user").text(toTitleCase(response.userName))
@@ -1932,7 +1999,7 @@
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
+                        window.location = '../Tenant/login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
@@ -2674,7 +2741,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         } else if ($('body').hasClass('light-mode')) {
                             localStorage.setItem("sashlightMode", true)
                         }
-                        window.open('./login_module.html', "_self")
+                        window.open('../Tenant/login_module.html', "_self")
                         console.log('Done');
                     },
                     error: function (xhr, status, error) {

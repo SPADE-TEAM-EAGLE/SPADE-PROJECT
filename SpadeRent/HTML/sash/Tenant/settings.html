@@ -29,10 +29,11 @@
         <link href="../assets/switcher/demo.css" rel="stylesheet">
         <script>
         if (!localStorage.getItem("authtoken")) {
-            window.location = "./login_module.html"
+            window.location = "../Tenant/login_module.html"
         }
         </script>
         <link rel="stylesheet" href="../assets/pageCss/tenantCss/settings.css">
+        <link rel="stylesheet" href="../assets/pageCss/tenantCss/index.css">
     </head>
     <body class="app sidebar-mini ltr light-mode" onload="DarkLightChecked()">
         <div id="preloader" class="tlp-preloader">
@@ -96,6 +97,675 @@
             </div>
             <div id="flotback-chart" class="flot-background" style="display: none;"></div>
         </div>
+
+        <div
+        class="modal fade"
+        id="surePaynow"
+        tabindex="-1"
+        role="dialog"
+    >
+        <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <img src="../assets/images/cross-circle.svg">
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body text-center text-dark">
+                    <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo" alt="">
+                    <h3 class="mt-5 mb-0">
+                        <b>Spade Tenant</b>
+                    </h3>
+                    <h4>Spade Rent</h4>
+                    <h2>
+                        <b>Do you want to pay your due balance?</b>
+                    </h2>
+                    <button
+                        class="btn btn-primary btn-pill m-2"
+                        id="upgradetopro-btn"
+                        type="button"
+                        style="width: fit-content;"
+                    >
+                        &nbsp; Paynow &nbsp;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="modal fade"
+        id="selectMethod"
+        tabindex="-1"
+        role="dialog"
+    >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body mb-5">
+                    <div class="pricing-tabs">
+                        <div class="pri-tabs-heading text-center">
+                            <ul class="nav nav-price mt-5">
+                                <li>
+                                    <a data-bs-toggle="tab" href="#existing" id="card-modal">Credit/Debit Card</a>
+                                </li>
+                                <li>
+                                    <a class="active show" data-bs-toggle="tab" href="#new-account" id="ach-modal">ACH</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="tab-content">
+                            <div class="tab-pane pb-0 active show" id="new-account">
+                                <div class="container p-0">
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-lg-66">
+                                            <div class="cardd">
+                                                <div class="card-headerr">
+                                                    <h3 class="text-center fw-bold">
+                                                        Add your
+                                                        <span class="text-primary">Payment</span>
+                                                        information
+                                                    </h3>
+                                                    <div class="heading-payment px-0">
+                                                        <p class="payment-paragraph">
+                                                            <img src="../assets/images/add-payment.png" alt="Pineapple" class="add-payment-img">
+                                                            <strong>
+                                                                Spade Rent -
+                                                                <span id="plan-name">Basic</span>
+                                                                Plan
+                                                            </strong>
+                                                            <strong style="float: right;">Total</strong>
+                                                            <br>
+                                                            <span>$
+                                                                <span id="payment-amount">39.99</span>
+                                                                / Per
+                                                                <span id="payment-month">Month</span>
+                                                            </span>
+                                                            <span style="float: right;">$
+                                                                <span id="payment-total">479.88</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bodyy p-0">
+                                                    <div class="row">
+                                                        <form action="/charge" method="post" id="payment-form">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-number" data-tid="scwsdk.form.card_number_label">
+                                                                            Card
+                                                                        number
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-number" class="input form-controlll"></div>
+                                                                        <div class="underline"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input">
+                                                                        Amount
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input
+                                                                            id="amount"
+                                                                            type="text"
+                                                                            class="form-control"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                            style="padding: 1rem 0.75rem !important;"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-expiry" data-tid="scwsdk.form.card_expiry_label">
+                                                                            Expiration
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-expiry" class="input empty form-controlll"></div>
+                                                                        <div class="underline"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-cvc" data-tid="scwsdk.form.card_cvc_label">
+                                                                            CVV
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-cvc" class="input empty form-controlll"></div>
+                                                                        <div class="underline "></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                                            <div class="col-lg-12">
+                                                            </form>
+                                                            <button onclick="main()" class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                Submit
+                                                            Payment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="existing">
+                                <div class="container p-0">
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-lg-66">
+                                            <div class="cardd">
+                                                <div class="card-headerr">
+                                                    <div class="row">
+                                                        <div class="col-lg-2"></div>
+                                                        <div class="col-lg-8">
+                                                            <h3 class="text-center fw-bold">
+                                                                Streamline Your
+                                                                <br>
+                                                                <span class="text-primary">
+                                                                    Rental
+                                                                Property Management
+                                                                </span>
+                                                                <br>
+                                                                and simplify your accounting tasks.
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="heading-payment px-0">
+                                                        <p class="payment-paragraph">
+                                                            <img src="../assets/images/add-payment.png" alt="Pineapple" class="add-payment-img">
+                                                            <strong>
+                                                                Spade Rent -
+                                                                <span id="plan-name">Basic</span>
+                                                                Plan
+                                                            </strong>
+                                                            <strong style="float: right;">Total</strong>
+                                                            <br>
+                                                            <span>$
+                                                                <span id="payment-amount">39.99</span>
+                                                                / Per
+                                                                <span id="payment-month">Month</span>
+                                                            </span>
+                                                            <span style="float: right;">$
+                                                                <span id="payment-total">479.88</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bodyy p-0">
+                                                    <div class="row">
+                                                        <form action="/charge" method="post" id="payment-form">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label for="inputState" class="fw-bold">
+                                                                        Account Name
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <select id="account" class="form-select form-control form new-account-dropdown" required>
+                                                                        <option selected>
+                                                                            Choose...
+                                                                        </option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">
+                                                                        Account
+                                                                    is required!
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input">
+                                                                        Amount
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input
+                                                                            id="amount-existing"
+                                                                            type="text"
+                                                                            class="form-control py-4"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4" style="display: flex; justify-content: center; align-items: center;">
+                                                            <div class="col-lg-12">
+                                                            </form>
+                                                            <button onclick="main()" class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                Submit
+                                                            Payment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="modal fade"
+        id="upgradetopro-card-modal"
+        tabindex="-1"
+        role="dialog"
+    >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body mb-5">
+                    <div class="pricing-tabs">
+                        <div class="pri-tabs-heading text-center">
+                            <ul class="nav nav-price mt-5">
+                                <li>
+                                    <a data-bs-toggle="tab" href="#existing-card">Existing</a>
+                                </li>
+                                <li>
+                                    <a class="active show" data-bs-toggle="tab" href="#new-account-card">New Account</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane pb-0 active show" id="new-account-card">
+                                <div class="container p-0">
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-lg-66">
+                                            <div class="cardd">
+                                                <div class="card-headerr">
+                                                    <h3 class="text-center fw-bold">
+                                                        Add your
+                                                        <span class="text-primary">Payment</span>
+                                                        information
+                                                    </h3>
+                                                    <div class="heading-payment px-0">
+                                                        <p class="payment-paragraph">
+                                                            <img src="../assets/images/add-payment.png" alt="Pineapple" class="add-payment-img">
+                                                            <strong>
+                                                                
+                                                            </strong>
+                                                            <strong style="float: right;">Total</strong>
+                                                            <br>
+                                                            
+                                                            <span style="float: right;">$
+                                                                <span id="payment-total-card">479.88</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bodyy p-0">
+                                                    <div class="row">
+                                                        <form action="/charge" method="post" id="payment-form-card">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-number" data-tid="scwsdk.form.card_number_label">
+                                                                            Card
+                                                                        number
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-number" class="input form-controlll"></div>
+                                                                        <div class="underline"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input-card">
+                                                                        Amount
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input
+                                                                            id="amount-card"
+                                                                            type="text"
+                                                                            class="form-control"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                            style="padding: 1rem 0.75rem !important;"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-expiry" data-tid="scwsdk.form.card_expiry_label">
+                                                                            Expiration
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-expiry" class="input empty form-controlll"></div>
+                                                                        <div class="underline"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <div class="field form-group">
+                                                                        <label class="fw-bold" for="card-cvc" data-tid="scwsdk.form.card_cvc_label">
+                                                                            CVV
+                                                                            <span class="text-danger"> *</span>
+                                                                        </label>
+                                                                        <div id="card-cvc" class="input empty form-controlll"></div>
+                                                                        <div class="underline "></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                                            <div class="col-lg-12">
+                                                            </form>
+                                                            <button onclick="main()" class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                Submit
+                                                            Payment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="existing-card">
+                                <div class="container p-0">
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-lg-66">
+                                            <div class="cardd">
+                                                <div class="card-headerr">
+                                                    <div class="row">
+                                                        <div class="col-lg-2"></div>
+                                                        <div class="col-lg-8">
+                                                            <h3 class="text-center fw-bold">
+                                                                Streamline Your
+                                                                <br>
+                                                                <span class="text-primary">
+                                                                    Rental
+                                                                Property Management
+                                                                </span>
+                                                                <br>
+                                                                and simplify your accounting tasks.
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="heading-payment px-0">
+                                                        <p class="payment-paragraph">
+                                                            <img src="../assets/images/add-payment.png" alt="Pineapple" class="add-payment-img">
+                                                            <strong>
+                                                                
+                                                            </strong>
+                                                            <strong style="float: right;">Total</strong>
+                                                            <br>
+                                                            <!-- <span>$
+                                                                <span id="payment-amount">39.99</span>
+                                                                / Per
+                                                                <span id="payment-month">Month</span>
+                                                            </span> -->
+                                                            <span style="float: right;">$
+                                                                <span id="payment-total-existing-card">479.88</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bodyy p-0">
+                                                    <div class="row">
+                                                        <form action="/charge" method="post" id="payment-form">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label for="inputState" class="fw-bold">
+                                                                        Account Name
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <select id="account" class="form-select form-control form new-account-dropdown" required>
+                                                                        <option selected>
+                                                                            Choose...
+                                                                        </option>
+                                                                    </select>
+                                                                    <span class="text-danger d-none">
+                                                                        Account
+                                                                    is required!
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input">
+                                                                        Amount
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input
+                                                                            id="amount-existing"
+                                                                            type="text"
+                                                                            class="form-control py-4"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4" style="display: flex; justify-content: center; align-items: center;">
+                                                            <div class="col-lg-12">
+                                                            </form>
+                                                            <button onclick="main()" class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                Submit
+                                                            Payment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+    class="modal fade"
+    id="succesModal_invoice"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-modal-content">
+            <div class="modal-header">
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    id="succes-close"
+                >
+                    <span aria-hidden="true">
+                        <i class="fi fi-rs-circle-xmark text-dark"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                <div class="text-justify ps-2 border-model-line">
+                    <h2 class="modal-title d-flex align-items-center ps-1">
+                        <strong class="color-primary">Congratulations!&nbsp;</strong>
+                        <i class="fi fi-rs-check-circle text-success"></i>
+                    </h2>
+                    <p class="ms-2 mb-0 text-start">Your dues are successfully paid!!!</p>
+                </div>
+                
+            </div>
+            <div class="modal-footer" style="border-top: 0"></div>
+        </div>
+    </div>
+</div>
+<div
+class="modal fade"
+id="myModal_declined"
+tabindex="-1"
+role="dialog"
+>
+<div class="modal-dialog modal-dialog-centered text-center " role="document">
+    <div class="modal-content tx-size-sm">
+        <div class="modal-body text-center p-5">
+            <div class="p-5">
+                <button aria-label="Close" class="btn-close position-absolute mt-0 btn-pill text-dark" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="../assets/images/logo_loginmodule.png" class="model-account-close-logo mb-2" alt="">
+                <h4 class="text-dark tx-semibold" style="font-size: 22px;">
+                    <span>Error Processing Payment
+                    </h4>
+                    <p class="fw-bold text-dark fs-18 mb-1"> Please check your security code, card details and connection and try again.</p>
+                    <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                    <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                    <button aria-label="Close" class="btn btn-primary btn-pill w-auto mt-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div
+        class="modal fade"
+        id="upgradetopro-ach-modal"
+        tabindex="-1"
+        role="dialog"
+    >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body mb-5">
+                    <div class="pricing-tabs">
+                        
+                        <div class="tab-content">
+                            <div class="tab-pane pb-0 active show" id="new-account-card">
+                                <div class="container p-0">
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="col-lg-66">
+                                            <div class="cardd">
+                                                <div class="card-headerr">
+                                                    <h3 class="text-center fw-bold">
+                                                        Add your
+                                                        <span class="text-primary">Payment</span>
+                                                        information
+                                                    </h3>
+                                                    <div class="heading-payment px-0">
+                                                        <p class="payment-paragraph">
+                                                            <img src="../assets/images/add-payment.png" alt="Pineapple" class="add-payment-img">
+                                                            <strong>
+                                                                
+                                                            </strong>
+                                                            <strong style="float: right;">Total</strong>
+                                                            <br>
+                                                            
+                                                            <span style="float: right;">$
+                                                                <span id="payment-total-ach">479.88</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bodyy p-0">
+                                                    <div class="row">
+                                                        <form action="/charge" method="post" id="payment-form-card">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input-card">
+                                                                        Account Number
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        
+                                                                        <input
+                                                                            id="account-number-ach"
+                                                                            type="text"
+                                                                            class="form-control"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                            style="padding: 1rem 0.75rem !important;"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input-card">
+                                                                        Routing Number
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        
+                                                                        <input
+                                                                            id="routing-number-ach"
+                                                                            type="text"
+                                                                            class="form-control"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                            style="padding: 1rem 0.75rem !important;"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xl-6">
+                                                                    <label class="fw-bold" for="amount" id="amount-payable-input-card">
+                                                                        Amount
+                                                                        <span class="text-danger"> *</span>
+                                                                    </label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input
+                                                                            id="amount-ach"
+                                                                            type="text"
+                                                                            class="form-control"
+                                                                            aria-label="Amount (to the nearest dollar)"
+                                                                            style="padding: 1rem 0.75rem !important;"
+                                                                        >
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-2" style="display: flex; justify-content: center; align-items: center;">
+                                                            <div class="col-lg-12">
+                                                            </form>
+                                                            <button id="submit-ach" class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                Submit
+                                                            Payment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
         <div
             class="modal fade"
             id="infoModal_account"
@@ -1558,21 +2228,7 @@
                                                                             >
                                                                             <div class="valid-feedback">Looks good!</div>
                                                                         </div>
-                                                                        <div class="col-xl-12 mb-3">
-                                                                            <div class="form-group">
-                                                                                <select name="country" class="form-control form-select select2" data-bs-placeholder="Select Country">
-                                                                                    <option value="br" selected>
-                                                                                        Select
-                                                                                    Account Type
-                                                                                    </option>
-                                                                                    <option value="cz">
-                                                                                        Czech Republic
-                                                                                    </option>
-                                                                                    <option value="de">Germany</option>
-                                                                                    <option value="pl">Poland</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                        
                                                                         <div class="col-xl-12 mb-5">
                                                                             <input
                                                                                 type="text"
@@ -1616,7 +2272,8 @@
                                                         <h1 class="text-primary balnce-price mb-0">
                                                             <b id="outstanding-amount">$ 0.00</b>
                                                         </h1>
-                                                        <button class="btn btn-primary paynow-mobile-responsive-tenant-close-account text-primaryy btn-pill m-2" id="form2show" style="width: fit-content; border: transparent;">
+                                                        <button data-bs-target="#surePaynow"
+                                                        data-bs-toggle="modal" class="btn btn-primary paynow-mobile-responsive-tenant-close-account text-primaryy btn-pill m-2" id=""  style="width: fit-content; border: transparent;">
                                                             <b>
                                                                 Pay
                                                             Now
@@ -1733,6 +2390,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                    
                                                                                 <div class="col-xl-6 col-sm-6 col-md-12" style="display: flex; justify-content: end;">
                                                                                     <button
                                                                                         class="btn btn-light text-primaryy btn-pill m-2"
@@ -2705,7 +3363,7 @@
                 });
                 </script>
                 <script>
-                var tenantData;
+                var tenantData;var userData;
                 function getData(){
                     $.ajax({
                     url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
@@ -2810,7 +3468,8 @@
                         console.log(error);
                     }
                 });
-                }
+                
+            }
                 getData()
                 var file; var image_url = " "; var image_key = " ";
                 $(function () {
@@ -2882,6 +3541,10 @@
                                 }, 2000);
                             } else if (response.message == "Tenant has paid invoices") {
                                 $("#requestcloseaccount").modal("show")
+                                setTimeout(function () {
+                                    $('#requestcloseaccount').modal('hide');
+                                    window.location = '../Tenant/login_module.html';
+                                }, 2000);
                             }
                         },
                         error: function (xhr, status, error) {
@@ -2992,6 +3655,7 @@
                     },
                     success: function (response) {
                         tenantData = response
+                        userData=response
                         $("#firstName").val(response.firstName)
                         $("#lastName").val(response.lastName)
                         $("#city").val(response.city)
@@ -3029,7 +3693,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {
                         $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
+                        window.location = '../Tenant/login_module.html';
                     }, 2000);
                     console.log('Error occurred while fetching state and city data.');
                     console.log(xhr);
@@ -3075,6 +3739,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
         })
     });
                 </script>
+
                 <script>
                 var header = document.getElementById("myDIV");
                 var btns = header.getElementsByClassName("btnn");
@@ -3148,7 +3813,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     }else if($('body').hasClass('light-mode')){
                         localStorage.setItem("sashlightMode",true)
                     }
-                    window.open('./login_module.html', "_self")
+                    window.open('../Tenant/login_module.html', "_self")
                                 console.log('Done');
                             },
                             error: function (xhr, status, error) {
@@ -3185,219 +3850,7 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                 
                 <script>
-                    var userIp;
-            var level="Primary";
-            var sfc = SafeCharge({
-                env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
-                merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
-                merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
-            });
-            var ScFields = sfc.fields({
-                fonts: [
-                    { cssUrl: 'https://fonts.googleapis.com/css2?family=Alex+Brush&family=Berkshire+Swash&family=Figtree&family=Great+Vibes&family=Inter&family=Tilt+Prism&display=swap' }, // include your custom fonts
-                ]
-            })
-            var ScFieldStyles = {
-                base: {
-                    color: '#000',
-                    fontWeight: 500,
-                    fontFamily: 'Figtree',
-                    fontSmoothing: 'antialiased',
-                    '::placeholder': {
-                        color: '#000',
-                    },
-                    ':-webkit-autofill': {
-                        color: '#000',
-                    },
-                },
-                invalid: {
-                    color: '#000',
-                    '::placeholder': {
-                        color: '#000',
-                    },
-                },
-            };
-            var ScFieldClasses = {
-                focus: 'focused',
-                empty: 'empty',
-                invalid: 'invalid',
-                complete: 'complete',
-            };
-            var scard = ScFields.create('ccNumber', {
-                style: ScFieldStyles,
-                classes: ScFieldClasses,
-            });
-            scard.attach('#card-number');
-            var cardExpiry = ScFields.create('ccExpiration', {
-                style: ScFieldStyles,
-                classes: ScFieldClasses,
-            });
-            cardExpiry.attach('#card-expiry');
-            var cardCvc = ScFields.create('ccCvc', {
-                style: ScFieldStyles,
-                classes: ScFieldClasses,
-            });
-            cardCvc.attach('#card-cvc');
-            $(".btn-level").on("click",function(){
-                level= $(this).attr("id")
-                $(this).addClass("border-primary")
-                $("#level").val(level)
-            })
-            
-            $.get('https://api.ipify.org?format=json',
-                        function (response) {
-                            userIp=response.ip;
-                        }, "json")
-            function main() {
-                $("#preloader").css("display", "flex")
-                $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/openOrder',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        amount: "0",
-                        currency: "USD",
-                        userId: tenantData.userId,
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                            sfc.createPayment({
-                            sessionToken: response.sessionToken, //received from openOrder API
-                            clientUniqueId: "695701003",
-                            merchantId: "6400701569295268447",
-                            merchantSiteId: "244298",
-                            cardHolderName: (tenantData.firstName + " " + tenantData.lastName),
-                            paymentOption: scard,
-                            billingAddress: {
-                                email: tenantData.email,
-                                country: "US"
-                            }
-                        }, function (res) {
-                            console.log(res.userPaymentOptionId)
-                            if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                                $.ajax({
-                                    url: "https://backend.app.spaderent.com/api/spade/CreateBankAccountTenant",
-                                    type: "POST",
-                                    contentType: "application/json",
-                                    headers: {
-                                        Authorization: "Bearer " + localStorage.getItem("authtoken")
-                                    },
-                                    data: JSON.stringify({
-                                        userId: tenantData.userId,
-                                        UPOID: res.userPaymentOptionId,
-                                        accountName: $("#accountName").val(),
-                                        description: $("#description-bank").val(),
-                                        active: true,
-                                        accountTypeTenant:level
-                                    }),
-                                    success: function (response) {
-                                        $("#preloader").css("display", "none")
-                                        $("#successfully_changed_text").text("Account added Succesfully!!!")
-                                        $("#successfully_changed").modal("show")
-                                        setTimeout(function () {
-                                            $("#successfully_changed").modal("hide");
-                                        }, 2000);
-                                        getData()
-                                    },
-                                    error: function () {
-                                        $("#preloader").css("display", "none")
-                                        $("#myModal_warning_declined").modal("show")
-                                        setTimeout(function () {
-                                            $("#myModal_warning_declined").modal("hide");
-                                        }, 2000);
-                                    }
-                                })
-                            }else{
-                                $("#preloader").css("display", "none")
-                                $("#myModal_warning_declined").modal("show")
-                                setTimeout(function () {
-                                    $("#myModal_warning_declined").modal("hide");
-                                }, 2000);
-                            }
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
-                    }
-                });
-            }
-            
-            
-            $("#save-ach").click(()=>{
-                $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/openOrder',
-                type: 'POST',
-                data: JSON.stringify({
-                    amount: "1.25",
-                    currency: "USD",
-                    "userTokenId": "280",
-                }),
-                contentType: "application/json; charset=utf-8",
-                processData: false,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    console.log(scard)
                     
-                    sfc.createPayment({
-  sessionToken: response.sessionToken,
-  paymentOption: {
-    alternativePaymentMethod: {
-      paymentMethod: "apmgw_ACH",
-      AccountNumber: $("#account-number").val(),
-      RoutingNumber: $("#routing-number").val()
-    }
-  },
-  deviceDetails: {
-    ipAddress: userIp
-  },
-  billingAddress: {
-    firstName: "John",
-    lastName: "Smith",
-    email: "john.smith@email.com",
-    phone: "6175551414",
-    address: "22 Main Street",
-    city: "Boston",
-    zip: "02460",
-    state: "MA",
-    country: "US"
-  },
-  userDetails: {
-    firstName: "John",
-    lastName: "Smith",
-    email: "john.smith@email.com",
-    phone: "6175551414",
-    address: "22 Main Street",
-    city: "Boston",
-    zip: "02460",
-    state: "MA",
-    country: "US",
-    identification: "280"
-  }
-}, function(res) {
-  console.log(res);
-
-})
-                
-                        },
-                error: function (xhr, status, error) {
-                    console.log(xhr)
-                    console.log(status)
-                    console.log(error)
-                    console.error('Error sending data:', error);
-                }
-            });
-            
-        
-        })
-            
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
                 type: 'GET',
@@ -3410,7 +3863,9 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#outstanding-amount").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
-                    if(totalAmountUnpaid.totalUnPaid<=0){
+                    if(!totalAmountUnpaid.totalUnPaid){
+                        $(".paynow-mobile-responsive-tenant-close-account").hide()
+                        $("#text-hide").hide()
                         $("#form2show").hide()
                         $("#form3").show()
                     }
@@ -3423,7 +3878,364 @@ $('#profile').css('background-image', 'url(' + response.image + ')').addClass('h
                     console.log('Error: ' + error);
                 }
             });
+            $.ajax({
+    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
+    type: "GET",
+    contentType: "application/json",
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
+        console.log(response)
+        if (response.data.length > 0) {
+            $("#account").empty();
+            $("#account").append(`<option value="">Select Account</option>`);
+            response.data.forEach((element) => {
+                $("#account").append(
+                    `<option value="${element.UPOID}">${element.accountName}</option>`
+                );
+            });
+        }
+    },
+    error: function (xhr, status, error) {
+        console.log(error);
+    }
+});
+
+
+
+$.get('https://api.ipify.org?format=json',
+                        function (response) {
+                            userIp=response.ip;
+                        }, "json")
+var sfc = SafeCharge({
+    env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+    merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+    merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+});
+var ScFields = sfc.fields({
+    fonts: [
+        { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
+    ]
+})
+var ScFieldStyles = {
+    base: {
+        color: '#32325D',
+        fontWeight: 500,
+        fontFamily: 'Roboto, Consolas, Menlo, monospace',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
+        '::placeholder': {
+            color: '#CFD7DF',
+        },
+        ':-webkit-autofill': {
+            color: '#e39f48',
+        },
+    },
+    invalid: {
+        color: '#E25950',
+        '::placeholder': {
+            color: '#FFCCA5',
+        },
+    },
+};
+var ScFieldClasses = {
+    focus: 'focused',
+    empty: 'empty',
+    invalid: 'invalid',
+    complete: 'complete',
+    number: 'card-number'
+};
+var scard = ScFields.create('ccNumber', {
+    style: ScFieldStyles,
+    classes: ScFieldClasses,
+    id: 'card-number-input'
+});
+scard.attach('#card-number');
+var cardExpiry = ScFields.create('ccExpiration', {
+    style: ScFieldStyles,
+    classes: ScFieldClasses,
+});
+cardExpiry.attach('#card-expiry');
+var cardCvc = ScFields.create('ccCvc', {
+    style: ScFieldStyles,
+    classes: ScFieldClasses,
+});
+cardCvc.attach('#card-cvc');
+function main() {
+        $("#preloader").css("display", "flex")
+        $.ajax({
+            url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+            type: 'POST',
+            data: JSON.stringify({
+                amount: $("#amount-card").val(),
+                currency: "USD",
+                userId: userData.userId,
+            }),
+            contentType: "application/json; charset=utf-8",
+            processData: false,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            },
+            success: function (response) {
+                if ($("#new-account-card").hasClass("active")) {
+                    sfc.createPayment({
+                        sessionToken: response.sessionToken, //received from openOrder API
+                        clientUniqueId: "695701003",
+                        merchantId: "6400701569295268447",
+                        merchantSiteId: "244298",
+                        cardHolderName: (userData.firstName + " " + userData.lastName),
+                        paymentOption: scard,
+                        billingAddress: {
+                            email: userData.email,
+                            country: "US"
+                        }
+                    }, function (res) {
+                        if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    status: "paid",
+                                }),
+                                contentType: "application/json",
+                                
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    
+                                    $("#preloader").css("display", "none")
+                                    $("#succesModal_invoice").modal("show")
+                                    setTimeout(function () {
+                                        $("#succesModal_invoice").modal("hide");
+                                        window.location.reload();
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(xhr)
+                                    console.log(status)
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    console.log(error)
+                                    console.error('Error sending data:', error);
+                                }
+                            });                            
+                        
+                        } else {
+                            $("#upgradetopro-card-modal").modal("hide")
+                            $("#preloader").css("display", "none")
+                            $("#myModal_declined").modal("show")
+                            setTimeout(function () {
+                                $("#myModal_declined").modal("hide");
+                            }, 2000);
+                        }
+                    });
+                } else {
+                    sfc.createPayment({
+                        sessionToken: response.sessionToken, //received from openOrder API
+                        clientUniqueId: "695701003",
+                        merchantId: "6400701569295268447",
+                        merchantSiteId: "244298",
+                        cardHolderName: (userData.firstName + " " + userData.lastName),
+                        paymentOption: {
+                            userPaymentOptionId: $("#account").val(),
+                        },
+                        billingAddress: {
+                            email: userData.email,
+                            country: "US"
+                        }
+                    }, function (res) {
+                        if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    status: "paid",
+                                }),
+                                contentType: "application/json",
+                                
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    
+                                    $("#preloader").css("display", "none")
+                                    $("#succesModal_invoice").modal("show")
+                                    setTimeout(function () {
+                                        $("#succesModal_invoice").modal("hide");
+                                        window.location.reload();
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(xhr)
+                                    console.log(status)
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    console.log(error)
+                                    console.error('Error sending data:', error);
+                                }
+                            });    
+                        
+                        } else {
+                            $("#upgradetopro-card-modal").modal("hide")
+                            $("#preloader").css("display", "none")
+                            $("#myModal_declined").modal("show")
+                            setTimeout(function () {
+                                $("#myModal_declined").modal("hide");
+                            }, 2000);
+                        }
+                    });
+                }
+                console.log(response)
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr)
+                $("#upgradetopro-card-modal").modal("hide")
+                            $("#preloader").css("display", "none")
+                console.log(status)
+                console.log(error)
+                console.error('Error sending data:', error);
+            }
+        });
+    }
+            
+            
+$("#submit-ach").on("click",function(){
+    $("#preloader").css("display", "flex")
+    $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+        type: 'POST',
+        data: JSON.stringify({
+            amount: $("#amount-ach").val(),
+            currency: "USD",
+            "userTokenId": userData.userId,
+        }),
+        contentType: "application/json; charset=utf-8",
+        processData: false,
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function (response) {
+            console.log(scard)
+            
+            sfc.createPayment({
+sessionToken: response.sessionToken,
+paymentOption: {
+alternativePaymentMethod: {
+paymentMethod: "apmgw_ACH",
+AccountNumber: $("#account-number-ach").val(),
+RoutingNumber: $("#routing-number-ach").val()
+}
+},
+deviceDetails: {
+ipAddress: userIp
+},
+billingAddress: {
+firstName: userData.firstName,
+lastName: userData.lastName,
+email: userData.email,
+phone: userData.phoneNumber,
+address: userData.address,
+city: userData.city,
+zip: userData.zipCode,
+state: "abcd",
+country: "US",
+},
+userDetails: {
+firstName: userData.firstName,
+lastName: userData.lastName,
+email: userData.email,
+phone: userData.phoneNumber,
+address: userData.address,
+city: userData.city,
+zip: userData.zipCode,
+state: "abcd",
+country: "US",
+identification: userData.userId
+}
+}, function(res) {
+if(res?.transactionStatus?.toLowerCase()=="pending"){
+    $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+        type: 'POST',
+        data: JSON.stringify({
+            status: "pending",
+        }),
+        contentType: "application/json",
+        
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function (response) {
+            $("#upgradetopro-ach-modal").modal("hide")
+            
+            $("#preloader").css("display", "none")
+            $("#succesModal_invoice").modal("show")
+            setTimeout(function () {
+                $("#succesModal_invoice").modal("hide");
+                window.location.reload();
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr)
+            console.log(status)
+            $("#upgradetopro-ach-modal").modal("hide")
+            $("#preloader").css("display", "none")
+            console.log(error)
+            console.error('Error sending data:', error);
+        }
+    });    
+}
+else {
+    $("#upgradetopro-ach-modal").modal("hide")
+    $("#preloader").css("display", "none")
+    $("#myModal_declined").modal("show")
+    setTimeout(function () {
+        $("#myModal_declined").modal("hide");
+    }, 2000);
+}
+})
+        
+                },
+        error: function (xhr, status, error) {
+            console.log(xhr)
+            console.log(status)
+            console.log(error)
+            console.error('Error sending data:', error);
+        }
+    });
+    
+})
+
+
+
+
+$("#upgradetopro-btn").on("click", function () {
+    console.log("clicked")
+    $("#closeaccount,#surePaynow").modal("hide");
+    const amount = $("#outstanding-amount").text().split("$")[1];
+    
+    $("#amount-card,#amount-ach").val(amount)
+    $("#amount-existing").val(amount)
+    $("#payment-total-card,#payment-total-ach").text(amount)
+    $("#payment-total-existing-card").text(amount)
+    $("#selectMethod").modal("show");
+})
+$("#card-modal").on("click", function () {
+    $("#selectMethod").modal("hide");
+    $("#upgradetopro-card-modal").modal("show");
+    
+})
+$("#ach-modal").on("click", function () {
+    $("#selectMethod").modal("hide");
+    $("#upgradetopro-ach-modal").modal("show");
+    
+})
                 </script>
+                <script></script>
                 <script>
             var helloGuys = true;
             $(document).ajaxStop(function () {

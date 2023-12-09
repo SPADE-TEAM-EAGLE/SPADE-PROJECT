@@ -1,3 +1,29 @@
+$.ajax({
+    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
+    type: "GET",
+    contentType: "application/json",
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("authtoken"),
+    },
+    success: function (response) {
+        console.log(response)
+        if (response.data.length > 0) {
+            $("#account").empty();
+            $("#account").append(`<option value="">Select Account</option>`);
+            response.data.forEach((element) => {
+                $("#account").append(
+                    `<option value="${element.UPOID}">${element.accountName}</option>`
+                );
+            });
+        }
+    },
+    error: function (xhr, status, error) {
+        console.log(error);
+    }
+});
+
+
+
 $.get('https://api.ipify.org?format=json',
                         function (response) {
                             userIp=response.ip;
@@ -86,9 +112,38 @@ function main() {
                         }
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                            
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    status: "paid",
+                                }),
+                                contentType: "application/json",
+                                
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    
+                                    $("#preloader").css("display", "none")
+                                    $("#succesModal_invoice").modal("show")
+                                    setTimeout(function () {
+                                        $("#succesModal_invoice").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(xhr)
+                                    console.log(status)
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    console.log(error)
+                                    console.error('Error sending data:', error);
+                                }
+                            });                            
+                        
                         } else {
-                            $("#upgradetopro").modal("hide")
+                            $("#upgradetopro-card-modal").modal("hide")
                             $("#preloader").css("display", "none")
                             $("#myModal_declined").modal("show")
                             setTimeout(function () {
@@ -112,10 +167,38 @@ function main() {
                         }
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                            
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    status: "paid",
+                                }),
+                                contentType: "application/json",
+                                
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    
+                                    $("#preloader").css("display", "none")
+                                    $("#succesModal_invoice").modal("show")
+                                    setTimeout(function () {
+                                        $("#succesModal_invoice").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(xhr)
+                                    console.log(status)
+                                    $("#upgradetopro-card-modal").modal("hide")
+                                    $("#preloader").css("display", "none")
+                                    console.log(error)
+                                    console.error('Error sending data:', error);
+                                }
+                            });    
                         
                         } else {
-                            $("#upgradetopro").modal("hide")
+                            $("#upgradetopro-card-modal").modal("hide")
                             $("#preloader").css("display", "none")
                             $("#myModal_declined").modal("show")
                             setTimeout(function () {
@@ -128,6 +211,8 @@ function main() {
             },
             error: function (xhr, status, error) {
                 console.log(xhr)
+                $("#upgradetopro-card-modal").modal("hide")
+                            $("#preloader").css("display", "none")
                 console.log(status)
                 console.log(error)
                 console.error('Error sending data:', error);
@@ -144,7 +229,7 @@ $("#submit-ach").on("click",function(){
         data: JSON.stringify({
             amount: $("#amount-ach").val(),
             currency: "USD",
-            "userTokenId": "280",
+            "userTokenId": userData.userId,
         }),
         contentType: "application/json; charset=utf-8",
         processData: false,
@@ -190,8 +275,45 @@ country: "US",
 identification: userData.userId
 }
 }, function(res) {
-console.log(res);
-
+if(res?.transactionStatus?.toLowerCase()=="pending"){
+    $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+        type: 'POST',
+        data: JSON.stringify({
+            status: "pending",
+        }),
+        contentType: "application/json",
+        
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function (response) {
+            $("#upgradetopro-ach-modal").modal("hide")
+            
+            $("#preloader").css("display", "none")
+            $("#succesModal_invoice").modal("show")
+            setTimeout(function () {
+                $("#succesModal_invoice").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr)
+            console.log(status)
+            $("#upgradetopro-ach-modal").modal("hide")
+            $("#preloader").css("display", "none")
+            console.log(error)
+            console.error('Error sending data:', error);
+        }
+    });    
+}
+else {
+    $("#upgradetopro-ach-modal").modal("hide")
+    $("#preloader").css("display", "none")
+    $("#myModal_declined").modal("show")
+    setTimeout(function () {
+        $("#myModal_declined").modal("hide");
+    }, 2000);
+}
 })
         
                 },
@@ -209,8 +331,10 @@ console.log(res);
 
 
 $("#upgradetopro-btn").on("click", function () {
-    $("#closeaccount").modal("hide");
+    console.log("clicked")
+    $("#closeaccount,#surePaynow").modal("hide");
     const amount = $("#amount-payable").text().split("$")[1];
+    
     $("#amount-card,#amount-ach").val(amount)
     $("#amount-existing").val(amount)
     $("#payment-total-card,#payment-total-ach").text(amount)
