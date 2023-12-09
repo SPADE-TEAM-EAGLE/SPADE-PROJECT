@@ -38,7 +38,7 @@ exports.signInAdmin = async(req,res)=>{
     try {
       const checkResult = await queryRunner(selectQuery("superAdmin","email"),[email]);
       if(checkResult[0].length == 0){
-          res.status(201).json({message:"Admin is not found"})
+          res.status(404).json({message:"Admin is not found"})
         }else if(await bcrypt.compare(password, checkResult[0][0].password)){
             const id = checkResult[0][0].id; 
             const token = jwt.sign({ email, id }, config.JWT_SECRET_KEY, {
@@ -49,7 +49,7 @@ exports.signInAdmin = async(req,res)=>{
                 token : token
         })
       }else{
-        res.status(201).json({message:"Incorrect Password"})
+        res.status(401).json({message:"Incorrect Password"})
       }
     }catch(error){
       return res.status(500).json({
@@ -69,9 +69,9 @@ exports.allLandlord = async (req, res) => {
   try {
     const allLandlordCheckResult = await queryRunner(allLandlordQuery);
     if (allLandlordCheckResult[0].length == 0) {
-      res.status(201).json({ message: "Landlord is not found" })
+      res.status(404).json({ message: "Landlord is not found" })
     } else {
-      res.status(201).json({
+      res.status(200).json({
         message: "Get All Landlord",
         data: allLandlordCheckResult[0]
       })
@@ -131,7 +131,7 @@ exports.deleteLandlord = async (req, res) => {
 
       }
     } else {
-      res.status(400).json({ message: "Landlord is not found" })
+      res.status(404).json({ message: "Landlord is not found" })
     }
   } catch(error) {
     return res.status(500).json({
@@ -151,9 +151,9 @@ exports.allClosedLandlord = async (req, res) => {
   try {
     const allClosedLandlordResult = await queryRunner(deleteLandlordQuery);
     if (allClosedLandlordResult[0].length == 0) {
-      res.status(201).json({ message: "Landlord Closed Account is not found" })
+      res.status(404).json({ message: "Landlord Closed Account is not found" })
     } else {
-      res.status(201).json({
+      res.status(200).json({
         message: "Get All Closed Account",
         data: allClosedLandlordResult[0]
       })
@@ -180,7 +180,7 @@ exports.allClosedLandlord = async (req, res) => {
         email,
       ]);
       if (selectResult[0].length > 0) {
-        return res.status(201).send("Email already exists");
+        return res.status(409).send("Email already exists");
       }
       const hashPassword = await hashedPassword(password);
       // // generate a unique identifier for the user
@@ -196,10 +196,10 @@ exports.allClosedLandlord = async (req, res) => {
         await sendMailLandlord(email, mailSubject, name);
         return res.status(200).json({ message: "Users Permission User added successfully" });
       } else {
-        return res.status(500).send("Failed to add User Permission User");
+        return res.status(422).send("Failed to add User Permission User");
       }
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(500).json({ message: error.message });
     }
     
 };
@@ -211,9 +211,9 @@ exports.allUserAdmin = async (req, res) => {
   try {
     const allUserAdminResult = await queryRunner(selectQuery("superAdmin"));
     if (allUserAdminResult[0].length == 0) {
-      res.status(201).json({ message: "Super Admin Users is not found" })
+      res.status(404).json({ message: "Super Admin Users is not found" })
     } else {
-      res.status(201).json({
+      res.status(200).json({
         message: "Get All Super Admin Users",
         data: allUserAdminResult[0]
       })
@@ -243,12 +243,12 @@ exports.userAdminGetById = async function (req, res) {
         data: selectResult[0][0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No admin user Found",
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       message: error.message,
     });
   }
@@ -268,11 +268,11 @@ exports.userAdminGetById = async function (req, res) {
         if (insertResult[0].affectedRows > 0) {
           return res.status(200).json({ message: "User Updated Successfully" });
         } else {
-          return res.status(500).send("Failed to Update User Permission User");
+          return res.status(422).send("Failed to Update User Permission User");
         }
       } catch (error) {
         console.log(error)
-        return res.status(400).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
       }
     };
       // ######################################## user Admin Edit ########################################
@@ -312,12 +312,12 @@ exports.userAdminDelete = async function (req, res) {
         message: "Admin User Deleted Successsful"
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No admin user Found",
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       message: error.message,
     });
   }
@@ -335,7 +335,7 @@ exports.totalCustomer = async function (req, res) {
         totalLandlord: selectResult[0]
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No Landlord Found",
       });
     }
@@ -378,7 +378,7 @@ exports.updateAdminProfile = async function (req, res) {
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
-      res.status(200).json({
+      res.status(404).json({
         message: "User not found",
       });
     }
@@ -422,7 +422,7 @@ exports.updateAdminProfile = async function (req, res) {
                     totalLandlord: selectResult[0]
                   });
                 } else {
-                  res.status(200).json({
+                  res.status(404).json({
                     message: "No Landlord Found",
                   });
                 }
@@ -495,7 +495,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
         data: dataArray,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No User Roles Found",
       });
     }
@@ -533,7 +533,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
 
           res.status(200).json({ ...futurePlanId[0][futurePlanId[0].length - 1], ...planCountResult[0][0], ...selectResult[0][0] });
         } else {
-          res.status(200).send("No user found");
+          res.status(404).send("No user found");
         }
       } catch (error) {
         return res.status(500).json({
@@ -554,7 +554,7 @@ exports.adminUserPermissionRoles = async function (req, res) {
         const isUserExist = selectResult[0][0];
         if (!isUserExist) {
           // throw new Error("User not found");
-          res.status(200).json({
+          res.status(404).json({
             message: "User not found",
           });
         }
@@ -718,7 +718,7 @@ exports.updatePasswordAdmin = async (req, res) => {
         res.status(500).send("Error");
       }
     } else {
-      res.status(201).send("Password Does not match ");
+      res.status(401).send("Password Does not match ");
     }
   } catch (error) {
     return res.status(500).json({
