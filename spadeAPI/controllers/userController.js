@@ -221,15 +221,15 @@ exports.checkemail = async function (req, res) {
       email,
     ]);
     if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     }else if(selectResult[0].length > 0 ){
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     }else if (LandlordSelectResult[0].length > 0){
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     } 
@@ -291,7 +291,7 @@ exports.Signin = async function (req, res) {
             message: "Successful Login",
           });
         } else {
-          res.status(200).json({
+          res.status(403).json({
             // token: token,
             // body: selectResult[0][0],
             message: "Your Account is Closed",
@@ -340,7 +340,7 @@ exports.Signin = async function (req, res) {
         const timeDiff = currentDate - subscriptionDate;
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     if (daysDiff >= 30) {
-        return res.status(200).json({
+        return res.status(403).json({
           message: "Your Subscription is expired"
         }); 
     }
@@ -520,7 +520,7 @@ exports.Signin = async function (req, res) {
               }
             }
           } else {
-            res.status(200).json({
+            res.status(403).json({
               // token: token,
               // body: selectResult[0][0],
               message: "Your Account is Closed",
@@ -541,7 +541,7 @@ exports.Signin = async function (req, res) {
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
     if (daysDiff >= 30) {
-        return res.status(200).json({
+        return res.status(403).json({
           message: "Your Subscription is expired"
         }); 
     }
@@ -743,14 +743,14 @@ exports.Signin = async function (req, res) {
             }
           }
         } else {
-          res.status(200).json({
+          res.status(403).json({
             // token: token,
             // body: selectResult[0][0],
             message: "Your Account is Closed",
           });
         }
       } else {
-        res.status(400).send("Incorrect Password");
+        res.status(401).send("Incorrect Password");
       }
     }
   } catch (error) {
@@ -806,7 +806,7 @@ exports.updateUserProfile = async function (req, res) {
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
-      res.status(200).json({
+      res.status(404).json({
         message: "User not found",
       });
     }
@@ -857,7 +857,7 @@ exports.updatePlanId = async function (req, res) {
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
-      res.status(200).json({
+      res.status(404).json({
         message: "User not found",
       });
     }
@@ -1019,7 +1019,7 @@ exports.updatePassword = async (req, res) => {
         res.status(500).send("Error");
       }
     } else {
-      res.status(201).send("Password Does not match ");
+      res.status(401).send("Password Does not match ");
     }
   } catch (error) {
     console.log(error);
@@ -1369,7 +1369,7 @@ exports.getproperty = async (req, res) => {
       });
       // }
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No Property data found",
       });
     }
@@ -1419,7 +1419,7 @@ exports.propertyDelete = async (req, res) => {
       [id, "Occupied"]
     );
     if (propertyUnitscheckresult[0].length > 0) {
-      res.status(200).json({
+      res.status(403).json({
         message: " You are not able to delete Property (your unit is occupied)",
         units : propertyUnitscheckresult[0],
       });
@@ -1455,7 +1455,7 @@ exports.propertyDelete = async (req, res) => {
           });
         }
       } else {
-        res.status(200).json({
+        res.status(404).json({
           message: "No Property Image data found ",
         });
       }
@@ -1810,7 +1810,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
         message: "Get Property Units Tenant",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -1930,7 +1930,7 @@ exports.getpropertyUnits = async (req, res) => {
         message: "property Units",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -1975,7 +1975,7 @@ exports.viewPropertyTenant = async (req, res) => {
         user: userName,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -2029,7 +2029,7 @@ exports.viewAllPropertyTenant = async (req, res) => {
         user: userName,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -2230,7 +2230,7 @@ console.log(Id)
         message: "Task data retrieved successfully",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No property Task data found",
       });
     }
@@ -2283,7 +2283,7 @@ exports.verifyMailCheck = async (req, res) => {
             });
           }
         } else {
-          return res.status(200).json({
+          return res.status(403).json({
             message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }
@@ -2359,7 +2359,7 @@ exports.verifyEmailUpdate = async (req, res) => {
           });
         }
       } else {
-        return res.status(200).json({
+        return res.status(401).json({
           message: " token code is not match ",
         });
       }

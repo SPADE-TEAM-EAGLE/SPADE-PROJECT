@@ -93,17 +93,17 @@ exports.userCheckEmail = async function (req, res) {
       email,
     ]);
     if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
     } else if (selectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
     } else if (LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
@@ -134,7 +134,7 @@ exports.userPermissionGetById = async function (req, res) {
         data: selectResult[0][0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No user Found",
       });
     }
@@ -198,7 +198,7 @@ exports.userPermissionUsersDelete = async function (req, res) {
         message: "User Deleted Successsful"
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No user Found",
       });
     }
@@ -223,7 +223,7 @@ exports.userPermissionGetAll = async function (req, res) {
         data: selectResult[0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No user Found",
       });
     }
@@ -305,7 +305,7 @@ exports.userPermissionRoles = async function (req, res) {
         data: dataArray,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No User Roles Found",
       });
     }
