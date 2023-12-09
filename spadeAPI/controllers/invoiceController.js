@@ -780,7 +780,7 @@ exports.deleteVendCategories = async (req, res) => {
         message: "Vendor Categories deleted successfully",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
