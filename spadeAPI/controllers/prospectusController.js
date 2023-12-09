@@ -441,15 +441,15 @@ exports.prospectusTime = async (req, res) => {
                 insertedSources: SourcesResult
             });
         }else{
-            res.status(200).json({
+            res.status(4009).json({
                 message: "prospectus Sources Already Exist",
                 insertedSources: existSourcesResult
             });
         }
     } catch (error) {
         console.log(error);
-        return res.status(400).json({
-            message: "Error ",
+        return res.status(500).json({
+            message: "Internal Server Error ",
             error: error.message,
           });
 
@@ -468,7 +468,7 @@ exports.prospectusTime = async (req, res) => {
                 [userId]
             );
             if (prospectusSourcesResult[0].length == 0) {
-                res.status(200).json({
+                res.status(404).json({
                                 message: " prospectus data not found",
                             });
                
@@ -480,8 +480,8 @@ exports.prospectusTime = async (req, res) => {
             }
 
     } catch (error) {
-        return res.status(400).json({
-            message: "Error ",
+        return res.status(500).json({
+            message: "Internal Server Error ",
             error: error.message,
           });
 
@@ -503,7 +503,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
             endDate
         ]);
         if (sourcesCampaignInsightResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         res.status(200).json({
             message: " prospectus Engaged and Nurturing get successful",
@@ -535,7 +535,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
             endDate
         ]);
         if (dashboardProspectusInsightResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         res.status(200).json({
             message: "  Dashboard prospectus Insight get successful",
@@ -564,7 +564,7 @@ exports.prospectTimeGraph = async (req, res) => {
             endDate,
         ]);
         if (prospectTimeGraphResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         const prospects = prospectTimeGraphResult[0].map(row => {
             const isAfter15th = new Date(row.createdDate).getDate() > 15;
