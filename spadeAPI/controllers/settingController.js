@@ -175,12 +175,12 @@ exports.changeEmail = async (req, res) => {
   const { email } = req.body;
   const { userId } = req.user;
   if (!email) {
-    return res.status(201).json({ message: "Email Not found" });
+    return res.status(404).json({ message: "Email Not found" });
   }
   const checkUserResult = await queryRunner(selectQuery("users", "Email"),[email]);
   console.log(email);
     if (checkUserResult[0].length > 0) {
-      return res.status(201).json({ message: "Email ALready Exist kindly change your Email" });
+      return res.status(409).json({ message: "Email ALready Exist kindly change your Email" });
     }
   const mailSubject = "Spade Email Change Request";
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -220,26 +220,20 @@ exports.changeEmail = async (req, res) => {
 
 // ####################################### Verify token ##########################################
 exports.changeEmailVerifyToken = async (req, res) => { 
-  // console.log(req);
   const { token,email } = req.body;
-  // console.log(token + " " + email)
   const { userId } = req.user;
   try {
-    
     const currentDate = new Date();
     const selectResult = await queryRunner(selectQuery("users", "id", "token"),[userId,token]);
     if (selectResult[0].length > 0) {
-      // const token = selectResult[0][0].token;
-
       const updateResult = await queryRunner(updateUserEmail, [email, currentDate, userId]);
-
       if (updateResult[0].affectedRows === 0) {
-        return res.status(400).json({ message: "Error in verify token" });
+        return res.status(422).json({ message: "Error in verify token" });
       } else {
         return res.status(200).json({ message: "Email updated Successful", id: userId, email : email });
       }
     } else {
-      res.status(201).json({
+      res.status(401).json({
         message: "Cannot Validate!!!",
       });
     }
