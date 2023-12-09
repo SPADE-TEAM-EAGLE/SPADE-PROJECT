@@ -3000,3 +3000,14 @@ exports.UpdateUserNuveiId = async(req,res)=>{
 exports.DMNS=async(req,res)=>{
     console.log(req)
 }
+
+exports.ACHLogCheck = async(req,res)=>{
+  try {
+    console.log("ACHLogCheck");
+      res.status(200).json({message:"ACH Log Check"})
+  }catch(error){
+    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+
+  }
+}

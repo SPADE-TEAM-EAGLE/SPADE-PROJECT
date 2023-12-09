@@ -323,8 +323,8 @@ router.get("/getUser",verifySuperAdmin,superAdmin.getUserforAdmin);
 router.get("/adminUserPermissionRoles",verifySuperAdmin,superAdmin.adminUserPermissionRoles);
 router.put("/adminUserPermissionUpdate",verifySuperAdmin,superAdmin.adminUserPermissionUpdate);
 router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
-router.get("/adminResetEmail",superAdmin.adminResetEmail);
-router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
+router.post("/adminResetEmail",superAdmin.adminResetEmail);
+router.post("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
 router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
 router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
@@ -334,4 +334,5 @@ router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossed
 router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
 router.post("/paymentACHVerification",paymentIntegration.paymentACHVerification);
 router.get("/VendorCheckEmail/:email", verifyToken, taskController.VendorCheckEmail);
+router.post("/ACHLogCheck", userController.ACHLogCheck);
 

@@ -30,7 +30,7 @@ exports.CreateBankAccount = async (req, res) => {
             }
             const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant,nickName,digits,cardBrand,cardType]);
             if (createResult[0].affectedRows === 0) {
-                res.status(400).send("Error");
+                res.status(409).send("Error occur in inserting bank account");
             } else {
                 res.status(200).json({ message: "Bank account added successfully", data: createResult[0].insertId });
             }

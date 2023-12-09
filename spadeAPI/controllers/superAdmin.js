@@ -615,8 +615,8 @@ exports.adminUserPermissionRoles = async function (req, res) {
 
 //  ############################# Reset Email ############################################################
 exports.adminResetEmail = async (req, res) => {
-  const { email } = req.query;
-  // const { email } = req.body;
+  // const { email } = req.query;
+  const { email } = req.body;
 
   // console.log(email);
   const mailSubject = "Spade Reset Email";
@@ -656,8 +656,8 @@ exports.adminResetEmail = async (req, res) => {
 
 //  ############################# Verify Reset Email Code ############################################################
 exports.adminVerifyResetEmailCode = async (req, res) => {
-  const { id, token } = req.query;
-  // const { id, token } = req.body;
+  // const { id, token } = req.query;
+  const { id, token } = req.body;
 // console.log(req.query)
   try {
     const selectResult = await queryRunner(
