@@ -76,7 +76,7 @@ exports.createTenants = async (req, res) => {
       email,
     ]);
     if (tenantsCheck[0].length > 0) {
-      res.status(200).json({
+      res.status(409).json({
         message: `Tenants Already exist on this email ${email} `,
       });
     } else {
@@ -396,10 +396,10 @@ exports.updatePasswordTenant = async (req, res) => {
           message: "Successful password saved",
         });
       } else {
-        res.status(500).send("Error");
+        res.status(422).send("Error");
       }
     } else {
-      res.status(201).send("Password Does not match ");
+      res.status(401).send("Password Does not match ");
     }
   } catch (error) {
     return res.status(500).json({ message: "Error", error: error.message });
@@ -555,7 +555,7 @@ exports.tenantDelete = async (req, res) => {
       );
 
       if (tenantAllPaidInvoiceResult[0].length > 0) {
-        res.status(200).json({
+        res.status(422).json({
           message: "Tenant Invoice is pending Kindly Paid invoice ",
         });
       } else {
@@ -627,14 +627,14 @@ exports.tenantDelete = async (req, res) => {
           });
         } else {
           // tenantCheckResult
-          res.status(200).json({
+          res.status(422).json({
             message: "Error occur in delete tenant ",
           });
         }
       }
     } else {
       // tenantCheckResult
-      res.status(200).json({
+      res.status(404).json({
         message: "No tenant found ",
       });
     }
@@ -785,7 +785,7 @@ exports.updateTenants = async (req, res) => {
           });
         }
       } else {
-        res.status(200).json({
+        res.status(404).json({
           message: "Tenants is not found",
         });
       }
@@ -971,7 +971,7 @@ exports.updateTenantProfile = async (req, res) => {
           data: tenantsInsert[0],
         });
       } else {
-        res.status(200).json({
+        res.status(404).json({
           message: "Tenants is not found",
         });
       }
@@ -997,7 +997,7 @@ exports.GettenantAttachEmailPhone = async (req, res) => {
     ]);
       if (tenantAlternateEmailResult[0].length === 0 && tenantAlternatePhoneResult[0].length === 0) {
         // throw new Error("No data Found in tenant attach file");
-return res.status(201).json({ Info: "No data found in tenant attach file" });
+return res.status(404).json({ Info: "No data found in tenant attach file" });
 
       }else{
         res.status(200).json({
@@ -1044,7 +1044,7 @@ exports.checkUnpaidInvoices = async (req, res) => {
       console.log(allResults)
     }
     if (allResults.length === 0) {
-      return res.status(201).json({ Info: "No data found in tenant " });
+      return res.status(404).json({ Info: "No data found in tenant " });
     } else {
       res.status(200).json({
         message: "tenants get successful",
@@ -1197,7 +1197,7 @@ exports.checkEmailTenants = async function (req, res) {
   ]);
 
     if (selectResult[0].length > 0 ) {
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     } 

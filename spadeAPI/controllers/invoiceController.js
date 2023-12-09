@@ -198,14 +198,11 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 //  ############################# View All Invoices Start ############################################################
 exports.getAllInvoices = async (req, res) => {
   try {
-    // const { userId } = req.body;
-    // console.log(111)
+
     const { userId,businessLogo } = req.user;
-    // console.log(userId)
     const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [
       userId,
     ]);
-    // console.log(getAllInvoicesResult[0])
     if (getAllInvoicesResult[0].length > 0) {
       for (let i = 0; i < getAllInvoicesResult[0].length; i++) {
         const invoiceID = getAllInvoicesResult[0][i].invoiceID;
@@ -229,7 +226,7 @@ exports.getAllInvoices = async (req, res) => {
         message: "All Invoice successful",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -769,7 +766,7 @@ exports.deleteVendCategories = async (req, res) => {
       [catId]
     );
     if (VendorCategoryCheckResult[0].length > 0) {
-      res.status(200).json({
+      res.status(422).json({
         Message: `Unable To Delete this Category`,
         Reason: `This Category is assign to ${VendorCategoryCheckResult[0][0].firstName} ${VendorCategoryCheckResult[0][0].lastName}`,
       });
@@ -783,7 +780,7 @@ exports.deleteVendCategories = async (req, res) => {
         message: "Vendor Categories deleted successfully",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -804,9 +801,16 @@ exports.invoiceAmountCount = async (req, res) => {
     const { userId } = req.user; 
     const {start, end } = req.params; 
     const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, start, end]);
+    if(invoiceAmountResult[0].length > 0){
       res.status(200).json({
         data : invoiceAmountResult
       });
+    }else{
+      res.status(404).json({
+        Message : "No data Fond"
+      });
+    }
+      
     // }
   } catch (error) {
     res.status(400).json({

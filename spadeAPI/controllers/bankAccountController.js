@@ -76,7 +76,6 @@ const userType = "Landlord";
 exports.GetBankAccount = async (req, res) => {
     const { userId,userType } = req.user;
     console.log(req.user)
-    // const { userId } = req.body;
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -84,7 +83,7 @@ exports.GetBankAccount = async (req, res) => {
             if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data not found");
+                res.status(404).send("Bank Account data not found");
             }
         } catch (error) {
             console.log(error);
@@ -94,8 +93,7 @@ exports.GetBankAccount = async (req, res) => {
 
 exports.GetBankAccountAdmin = async (req, res) => {
     const { userId,userType } = req.query;
-    console.log(req.query)
-    // const { userId } = req.body;
+    // console.log(req.query)
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -103,7 +101,7 @@ exports.GetBankAccountAdmin = async (req, res) => {
             if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data not found");
+                res.status(404).send("Bank Account data not found");
             }
         } catch (error) {
             console.log(error);
@@ -121,7 +119,7 @@ exports.updateBankAccountStatus = async (req, res) => {
             if(getResult[0].affectedRows > 0) {
                 res.status(200).json({message : "Status Updated Successful", data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account status is not updated");
+                res.status(422).send("Bank Account status is not updated");
             }
         } catch (error) {
             console.log(error);
@@ -142,7 +140,7 @@ exports.updateBankAccountTenant = async (req, res) => {
             if(getResult[0].affectedRows > 0) {
                 res.status(200).json({message : "BankAccount Updated Successful", data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data is not updated");
+                res.status(422).send("Bank Account data is not updated");
             }
         } catch (error) {
             console.log(error);
@@ -184,7 +182,7 @@ exports.updateBankAccountTenant = async (req, res) => {
                 if(getResult[0].affectedRows > 0) {
                     res.status(200).json({message : "Property Account Updated Successful"});
                 } else {
-                    res.status(201).send("Property Account is not updated");
+                    res.status(422).send("Property Account is not updated");
                 }
             } catch (error) {
                 console.log(error);
