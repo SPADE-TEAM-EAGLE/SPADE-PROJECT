@@ -1,5 +1,5 @@
 $.ajax({
-    url: "http://localhost:3000/api/spade/GetBankAccountTenant",
+    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
     type: "GET",
     contentType: "application/json",
     headers: {
@@ -85,7 +85,7 @@ cardCvc.attach('#card-cvc');
 function main() {
         $("#preloader").css("display", "flex")
         $.ajax({
-            url: 'http://localhost:3000/api/spade/openOrder',
+            url: 'https://backend.app.spaderent.com/api/spade/openOrder',
             type: 'POST',
             data: JSON.stringify({
                 amount: $("#amount-card").val(),
@@ -113,7 +113,7 @@ function main() {
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     status: "paid",
@@ -168,7 +168,7 @@ function main() {
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+                                url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     status: "paid",
@@ -224,7 +224,7 @@ function main() {
 $("#submit-ach").on("click",function(){
     $("#preloader").css("display", "flex")
     $.ajax({
-        url: 'http://localhost:3000/api/spade/openOrder',
+        url: 'https://backend.app.spaderent.com/api/spade/openOrder',
         type: 'POST',
         data: JSON.stringify({
             amount: $("#amount-ach").val(),
@@ -277,7 +277,7 @@ identification: userData.userId
 }, function(res) {
 if(res?.transactionStatus?.toLowerCase()=="pending"){
     $.ajax({
-        url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+        url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
         type: 'POST',
         data: JSON.stringify({
             status: "pending",
