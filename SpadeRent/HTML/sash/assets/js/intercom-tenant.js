@@ -1,6 +1,6 @@
 var username;
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+    url: 'http://localhost:3000/api/spade/protectedTenant',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

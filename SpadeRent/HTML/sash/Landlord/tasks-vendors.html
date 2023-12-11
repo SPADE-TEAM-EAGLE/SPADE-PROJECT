@@ -1473,7 +1473,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1555,7 +1555,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1582,7 +1582,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1607,7 +1607,7 @@
             });
         });
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1655,7 +1655,7 @@
                 }
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1732,7 +1732,7 @@
             }
             function getVendorCategoryFunction() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                    url: 'http://localhost:3000/api/spade/getVendorCategory',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -1798,7 +1798,7 @@
                 var category = $("#category").val();
                 if (category == "Choose..." || category == "Add vendor categories first!!") {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1824,7 +1824,7 @@
                             formData.append('categoryID', category);
                             console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1881,7 +1881,7 @@
                     var currentDisplayStyle = categoryCol.css('display');
                     if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "") {
                         $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1907,7 +1907,7 @@
                             formData.append('categoryID', category);
                             console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1972,7 +1972,7 @@
                         formData.append('categoryID', category);
                         console.log(status)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                            url: 'http://localhost:3000/api/spade/addVendor',
                             type: 'POST',
                             data: JSON.stringify({
                                 firstName: firstName,
@@ -2019,7 +2019,7 @@
             });
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
+                    url: 'http://localhost:3000/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2103,7 +2103,7 @@
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
+                    url: `http://localhost:3000/api/spade/deleteVendor/${vendorID}`,
                     type: 'DELETE',
                     contentType: false,
                     processData: false,
@@ -2146,7 +2146,7 @@
             })
             $("#save").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
+                    url: `http://localhost:3000/api/spade/updateVendor`,
                     type: 'PUT',
                     data: JSON.stringify({
                         vendId: vendorID,
@@ -2188,7 +2188,7 @@
             })
             $("#email").on("input",function(){
                 $.ajax({
-                    url:`https://backend.app.spaderent.com/api/spade/VendorCheckEmail/${$("#email").val()}`,
+                    url:`http://localhost:3000/api/spade/VendorCheckEmail/${$("#email").val()}`,
                     type:"GET",
                     contentType: "application/json",
                     headers:{
@@ -2353,7 +2353,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2387,7 +2387,7 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2410,7 +2410,7 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
