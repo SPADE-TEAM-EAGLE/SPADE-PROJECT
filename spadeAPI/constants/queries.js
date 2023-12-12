@@ -1156,3 +1156,4 @@ exports.insertInUserPermissionUsers =
   exports.paymentACHQuery = "INSERT INTO paymentACH (tenantId,merchantUniqueId,totalAmount,Status,TransactionId, ppp_TransactionID) VALUES (?,?,?,?,?,?)";;
   exports.paymentACHRequestQuery = "INSERT INTO paymentACHLogs (tenantId,body,query,params, date, status) VALUES (?,?,?,?,?,?)";;
  exports.updateTenantInvoiceStatus="UPDATE invoice SET status = ? WHERE tenantID = ?";
+ exports.updateTenantIndividualInvoiceStatus="UPDATE invoice SET status = ? WHERE tenantID = ? AND id = ?";

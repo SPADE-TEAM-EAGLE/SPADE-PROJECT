@@ -288,7 +288,7 @@
                                                     </div>
                                                     <div class="col-12 mb-2">
                                                         <div class="d-flex justify-content-between">
-                                                            <a href="../Landlor../Tenant/login_module" class="text-dark">Login as Landlord</a>
+                                                            <a href="../Landlord/login_module.html" class="text-dark">Login as Landlord</a>
                                                             <a href="forget-password.html" class="blue-color">Forgot Password?</a>
                                                         </div>
                                                     </div>
@@ -379,7 +379,7 @@
                 var email = $("#login-email").val();
                 var password = $("#id_password1").val();
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/Signin',
+                    url: 'http://localhost:3000/api/spade/Signin',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data:JSON.stringify({
@@ -441,7 +441,7 @@
         $("#verify_otp_auth").on("click",function(){
           $("#verify_otp_auth").prop("disabled",true)
           $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyAuthCode',
+            url: 'http://localhost:3000/api/spade/verifyAuthCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

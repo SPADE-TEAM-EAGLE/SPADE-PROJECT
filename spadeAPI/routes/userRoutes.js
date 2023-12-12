@@ -338,4 +338,5 @@ router.post("/paymentACHVerification",paymentIntegration.paymentACHVerification)
 router.get("/VendorCheckEmail/:email", verifyToken, taskController.VendorCheckEmail);
 router.post("/ACHLogCheck", userController.ACHLogCheck);
 router.post("/tenantUpdateAllInvoices",verifyTokenTenant,tenantController.tenantUpdateAllInvoices);
+router.post("/tenantUpdateIndividualInvoices",verifyTokenTenant,tenantController.tenantUpdateIndividualInvoices);
 

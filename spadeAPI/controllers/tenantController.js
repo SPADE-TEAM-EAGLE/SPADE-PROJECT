@@ -36,7 +36,8 @@ const {
   tenantStatusCountQuery,
   tenantsCount,
   tenantsIdUpdate,
-  updateTenantInvoiceStatus
+  updateTenantInvoiceStatus,
+  updateTenantIndividualInvoiceStatus
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -1225,6 +1226,24 @@ exports.tenantUpdateAllInvoices = async (req, res) => {
     );
     res.status(200).json({
       message: "All Invoices Updated Successfully",
+    });
+  }catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+}
+exports.tenantUpdateIndividualInvoices = async (req, res) => {
+  try {
+    const {status,id}=req.body;
+    const { userId } = req.user;
+    
+    const tenantAllPaidInvoiceResult = await queryRunner(
+      updateTenantIndividualInvoiceStatus,
+      [status,userId,id]
+    );
+    res.status(200).json({
+      message: "Invoice Updated Successfully",
     });
   }catch (error) {
     res.status(400).json({

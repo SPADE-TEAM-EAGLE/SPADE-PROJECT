@@ -2086,7 +2086,7 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2106,7 +2106,7 @@
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                url: 'http://localhost:3000/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2330,7 +2330,7 @@
         var categoryData;var landlordId;
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2362,7 +2362,7 @@
                 }
             });
             $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/invoiceCategoryTenant',
+                        url: 'http://localhost:3000/api/spade/invoiceCategoryTenant',
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2558,7 +2558,7 @@
 
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
+                url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2582,7 +2582,7 @@
                         return date.toLocaleDateString('en-US', options);
                     }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getAllInvoicesTenant',
+                url: 'http://localhost:3000/api/spade/getAllInvoicesTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2616,13 +2616,34 @@
                             var propertyName = '<td class="propertyName" style="font-weight: 600;">' + invoice.propertyName + `<br><small>${invoice.tPhone}</small>` + '</td>';
                             var invoiceAmount;
                             if(invoice.invoiceType=="One Time Invoice"){
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "Not set" : formatDate(invoice.dueDate)) : "Not set")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>'+'<span class="amount-to-extract">'+invoice.totalAmount+'</span>'+ `<br><small>Next Due Date: ${(invoice.dueDate ? (formatDate(invoice.dueDate) == "Invalid Date" ? "Not set" : formatDate(invoice.dueDate)) : "Not set")}</small>` + '</td>';
                             }
                             else{
-                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' + invoice.totalAmount + `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
+                            invoiceAmount = '<td class="rentAmount" style="font-weight: 600;">' + '<span>$ </span>' +'<span class="amount-to-extract">'+invoice.totalAmount+'</span>'+ `<br><small>Next Due Date: ${(invoice.recurringNextDate ? (formatDate(invoice.recurringNextDate) == "Invalid Date" ? "Not set" : formatDate(invoice.recurringNextDate)) : "Not set")}</small>` + '</td>';
                             }
                             var status = `<td class="status" style="font-weight: 600;${invoice.status === "Unpaid" ? 'color:blue;' : 'color:green'}">` + invoice.status + '</td>';
-                            var dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                            var dropdownMenu;
+                            if(invoice?.status=="paid"){
+                                dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
+                                                                    data-bs-toggle="dropdown"></i>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-dark view-btnn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal-invoice"><i class="fi fi-rs-eye"></i> &nbsp; View</a>
+                                                                    </li>
+                                                                    
+                                                                    <li><a class="dropdown-item text-dark view-btn"
+                                                                            data-bs-effect="effect-scale"
+                                                                            data-bs-toggle="modal"
+                                                                            href="#viewModal"><i class="fi fi-rs-file-invoice-dollar"></i> &nbsp; View PDF Invoice</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>`
+                            
+                            }
+                            else{
+                                dropdownMenu = `<td><i class="fe fe-more-vertical three-dots"
                                                                     data-bs-toggle="dropdown"></i>
                                                                 <ul class="dropdown-menu">
                                                                     <li><a class="dropdown-item text-dark view-btnn"
@@ -2631,7 +2652,7 @@
                                                                             href="#viewModal-invoice"><i class="fi fi-rs-eye"></i> &nbsp; View</a>
                                                                     </li>
                                                                     <li><a class="dropdown-item text-dark"
-                                                                        data-bs-target="#closeaccount" data-bs-toggle="modal"
+                                                                        id="individual-payment"
                                                                            href="#" ><i class="fi fi-rs-dollar"></i> &nbsp; Pay</a>
                                                                     </li>
                                                                     <li><a class="dropdown-item text-dark view-btn"
@@ -2641,7 +2662,11 @@
                                                                     </li>
                                                                 </ul>
                                                             </td>`
-                            var row = '<tr>' + invoiceNumber+serial + memoDescription + invoiceDate +
+                            
+                            }
+                            
+                            
+                                                            var row = '<tr>' + invoiceNumber+serial + memoDescription + invoiceDate +
                                 propertyName + invoiceAmount + status + dropdownMenu + '</tr>';
                             tableBody.append(row);
                         });
@@ -2678,7 +2703,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                    url: 'http://localhost:3000/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
