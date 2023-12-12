@@ -302,7 +302,7 @@
                                     Please enter your credentials to sign in to your account
                                 </span>
                                 <div class="login-form mt-5">
-                                    <form action="">
+                                    <form  id="login_form">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group text-start">
@@ -341,7 +341,7 @@
                                             </div>
                                             <div class="col-12 mb-2 pb-2">
                                                 <div class="form-group"></div>
-                                                <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="submit-login">
+                                                <button type="submit" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="submit-login">
                                                     Login
                                                     <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2" alt="">
                                                 </button>
@@ -395,7 +395,8 @@ togglePassword1.addEventListener("click", function (e) {
         </script>
         <script>
           $(document).ready(function () {
-  $("#submit-login").on("click", function () {
+            $('#login_form').on("submit", function(event) {
+    event.preventDefault();
     var email = $("#login-email").val();
     var password = $("#id_password1").val();
     var requestData = {

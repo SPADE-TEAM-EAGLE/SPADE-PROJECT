@@ -242,7 +242,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="login-form">
-                                            <form action="">
+                                            <form id="login_form">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group text-start">
@@ -281,11 +281,12 @@
                                                     </div>
                                                     <div class="col-12 mb-2 pb-5">
                                                         <div class="form-group"></div>
-                                                        <button type="button" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="next1">
+                                                        <button type="submit" class="btn btn-lg btn-block btnn bg-blue btnstyle" id="next1">
                                                             Login
                                                             <img src="../assets/images/arrow.svg" class="float-right mt-3 mr-2 " alt="">
                                                         </button>
                                                     </div>
+
                                                     <div class="col-12 mb-2">
                                                         <div class="d-flex justify-content-between">
                                                             <a href="../Landlord/login_module.html" class="text-dark">Login as Landlord</a>
@@ -375,7 +376,8 @@
         <script>
       $(document).ready(function() {
         let userId; let emailChange;var authToken;
-            $(document).on("click", "#next1", function(a) {
+            $('#login_form').on("submit", function(a) {
+                a.preventDefault();
                 var email = $("#login-email").val();
                 var password = $("#id_password1").val();
                 $.ajax({
