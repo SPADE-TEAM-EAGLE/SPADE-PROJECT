@@ -1,0 +1,1597 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
+        <meta name="author" content="Spruko Technologies Private Limited">
+        <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+        <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css">
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico">
+        <title>Sash – Bootstrap 5 Admin & Dashboard Template</title>
+        <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/dark-style.css" rel="stylesheet">
+        <link href="../assets/css/transparent-style.css" rel="stylesheet">
+        <link href="../assets/css/skin-modes.css" rel="stylesheet">
+        <link href="../assets/css/icons.css" rel="stylesheet">
+        <link
+            id="theme"
+            rel="stylesheet"
+            type="text/css"
+            media="all"
+            href="../assets/colors/color1.css"
+        >
+        <script>
+         if(!localStorage.getItem("authtoken")){
+                window.location="../Tenant/login_module.html"
+            }
+        </script>
+        <link rel="stylesheet" href="../assets/pageCss/tenantCss/new-notification.css">
+    </head>
+    <body class="app sidebar-mini ltr light-mode">
+        <div id="preloader" class="tlp-preloader">
+            <div class="animation-preloader">
+                <div class="tlp-spinner"></div>
+                <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="addModal"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title">Create
+                                <strong class="color-primary">New Property</strong>
+                            </h2>
+                            <span class="">
+                                Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.
+                            </span>
+                        </div>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                <img src="../assets/images/cross-circle.svg">
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="accordion-item mb-4" id="accordion-item1">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button
+                                    class="accordion-button text-white"
+                                    id="accordian-button-1"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    onclick="checkFieldsFilled('accordion-item1')"
+                                    id="accordion-button1"
+                                    data-bs-target="#collapseOne"
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                >
+                                    <span class="m-0 me-4 fs-1" style="font-weight: bold;">01</span>
+                                    <h3 class="m-0">
+                                        <strong>Property Information</strong>
+                                        <i class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    </h3>
+                                </button>
+                            </h2>
+                            <div
+                                id="collapseOne"
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample"
+                            >
+                                <div class="accordion-body">
+                                    <form class="row g-3" enctype="multipart/form-data">
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-bold">Property Photo</label>
+                                            <div class="custom-file" style="border: 1px dashed #00000087;">
+                                                <input
+                                                    id="fileInput"
+                                                    type="file"
+                                                    name="image"
+                                                    class="custom-file-input form"
+                                                    accept=".jpg, .png, image/jpeg, image/png"
+                                                    aria-label="hello"
+                                                    multiple
+                                                >
+                                                <span className="d-none"></span>
+                                                <label class="custom-file-label" for="fileInput">
+                                                    <i class="fi fi-rs-cloud-upload"></i>
+                                                    <div class="custom-file-text">
+                                                        <span>Upload Photo here</span>
+                                                        <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="selected-files">
+                                                <div class="file-grid"></div>
+                                            </div>
+                                            <span class="text-danger d-none">Photos are required!</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label fw-bold">Property ID</label>
+                                            <input type="text" class="form-control form" id="propertyId">
+                                            <span class="text-danger d-none">Property ID is required!</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputPassword4" class="form-label fw-bold">Property Name
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control form" id="propertyName">
+                                            <span class="text-danger d-none">Property name required!</span>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputAddress" class="form-label fw-bold">Address
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control form"
+                                                id="address"
+                                                placeholder="Enter Address"
+                                            >
+                                            <span class="text-danger d-none">Address is required!</span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputCity" class="form-label fw-bold">City
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control form" id="city">
+                                            <span class="text-danger d-none">City is required!</span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputState" class="form-label fw-bold">State
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <select id="state" class="form-select form">
+                                                <option selected>Choose...</option>
+                                                <option>Sindh</option>
+                                                <option>Punjab</option>
+                                                <option>Balochistan</option>
+                                                <option>KPK</option>
+                                            </select>
+                                            <span class="text-danger d-none">State is required!</span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputZip" class="form-label fw-bold">Zip
+                                                <spnan class="text-danger">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control form" id="zip">
+                                            <span class="text-danger d-none">Zip is required!</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputState" class="form-label fw-bold">Property Type
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <select id="propertyType" class="form-select form">
+                                                <option selected>Choose...</option>
+                                                <option>Single Family</option>
+                                                <option>Multi-Family</option>
+                                                <option>Multi-Commercial</option>
+                                            </select>
+                                            <span class="text-danger d-none">Property Type is required!</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputPassword4" class="form-label fw-bold">Property Total SF
+                                                <spnan class="text-danger">*
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control form" id="propertyTotalSF">
+                                            <span class="text-danger d-none">Property Total SF is required!</span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="accordion-item2">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button
+                                    class="accordion-button collapsed text-white"
+                                    onclick="checkFieldsFilled('accordion-item2')"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo"
+                                    aria-expanded="false"
+                                    aria-controls="collapseTwo"
+                                >
+                                    <span class="m-0 me-4 fs-1" style="font-weight: bold;">02</span>
+                                    <h3 class="m-0">
+                                        <strong>Property Unit Information</strong>
+                                        <i class="fi fi-rs-angle-circle-down chevron icon"></i>
+                                    </h3>
+                                </button>
+                            </h2>
+                            <div
+                                id="collapseTwo"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample"
+                            >
+                                <form class="row g-3 m-1" enctype="multipart/form-data">
+                                    <div class="col-12 mb-3">
+                                        <label for="inputAddress" class="form-label fw-bold">Number of Units
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control px-2"
+                                            id="units"
+                                            placeholder=" "
+                                        >
+                                        <span class="text-danger d-none">Units are required!</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
+                        <button
+                            class="btn text-light button"
+                            style="background-color:#1467B0;"
+                            id="next"
+                            disabled
+                        >Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal_delete">
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                            <div class="card-header border-0 pt-3">
+                                <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <img src="../assets/images/cross-circle.svg">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#f07f8f" d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z"/>
+                                        <circle
+                                            cx="12"
+                                            cy="17"
+                                            r="1"
+                                            fill="#e62a45"
+                                        />
+                                        <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z"/>
+                                    </svg>
+                                </span>
+                                <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                                <p class="card-text">This will delete your property. Are you sure?</p>
+                            </div>
+                            <div class="card-footer text-center border-0 pt-0">
+                                <div class="row">
+                                    <div class="text-center">
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="btn btn-white me-2"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        >cancel</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="myModal_edit"
+            aria-labelledby="myModal"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title">Update
+                                <strong class="color-primary" id="property-name">New Property</strong>
+                            </h2>
+                            <span class="">
+                                Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.
+                            </span>
+                        </div>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                <img src="../assets/images/cross-circle.svg">
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Property Photo</label>
+                                <div class="custom-file" style="border: 1px dashed #00000087;">
+                                    <input
+                                        id="fileInput_update"
+                                        type="file"
+                                        name="image"
+                                        class="custom-file-input form"
+                                        accept=".jpg, .png, image/jpeg, image/png"
+                                        aria-label="hello"
+                                        multiple
+                                    >
+                                    <span className="d-none"></span>
+                                    <label class="custom-file-label" for="fileInput_update">
+                                        <i class="fi fi-rs-cloud-upload"></i>
+                                        <div class="custom-file-text">
+                                            <span>Upload Photo here</span>
+                                            <span>JPEG, PNG and PDF, file size no more than 10MB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="selected-files">
+                                    <div class="file-grid"></div>
+                                </div>
+                                <span class="text-danger d-none">Photos are required!</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label fw-bold">Property Name
+                                    <spnan class="text-danger">*
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control form" id="propertyName_update">
+                                <span class="text-danger d-none">Property name required!</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputAddress" class="form-label fw-bold">Number of Units
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control px-2"
+                                    id="unit_update"
+                                    placeholder=" "
+                                >
+                                <span class="text-danger d-none">Units are required!</span>
+                            </div>
+                            <div class="col-12">
+                                <label for="inputAddress" class="form-label fw-bold">Address
+                                    <spnan class="text-danger">
+                                        *
+                                    </span>
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control form"
+                                    id="address_update"
+                                    placeholder="Enter Address"
+                                >
+                                <span class="text-danger d-none">Address is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputCity" class="form-label fw-bold">City
+                                    <spnan class="text-danger">
+                                        *
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control form" id="city_update">
+                                <span class="text-danger d-none">City is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">State
+                                    <spnan class="text-danger">
+                                        *
+                                    </span>
+                                </label>
+                                <select id="state_update" class="form-select form">
+                                    <option selected>Choose...</option>
+                                    <option>Sindh</option>
+                                    <option>Punjab</option>
+                                    <option>Balochistan</option>
+                                    <option>KPK</option>
+                                </select>
+                                <span class="text-danger d-none">State is required!</span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputZip" class="form-label fw-bold">Zip
+                                    <spnan class="text-danger">
+                                        *
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control form" id="zip_update">
+                                <span class="text-danger d-none">Zip is required!</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputState" class="form-label fw-bold">Property Type
+                                    <spnan class="text-danger">
+                                        *
+                                    </span>
+                                </label>
+                                <select id="propertyType_update" class="form-select form">
+                                    <option selected>Choose...</option>
+                                    <option>Single Family</option>
+                                    <option>Multi-Family</option>
+                                    <option>Multi-Commercial</option>
+                                </select>
+                                <span class="text-danger d-none">Property Type is required!</span>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label fw-bold">Property Total SF
+                                    <spnan class="text-danger">*
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control form" id="propertyTotalSF_update">
+                                <span class="text-danger d-none">Property Total SF is required!</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="update">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modaldemo8">
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <div class="text-justify">
+                            <h2 class="modal-title">Create
+                                <strong class="color-primary">New Property</strong>
+                            </h2>
+                            <span class="">
+                                Spade Rent allows you to add a range of commercial and residential properties,
+                            from condos and single-family homes to retail stores and parking lots.
+                            </span>
+                        </div>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Why We Use Electoral College, Not Popular Vote</h6>
+                        <p>
+                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                        using 'Content here, content here', making it look like readable English.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Save changes</button>
+                        <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="page-main">
+                <div class="app-header header sticky" id="navbar-placeholder">
+                    <div class="container-fluid main-container">
+                        <div class="d-flex">
+                            <a
+                                aria-label="Hide Sidebar"
+                                class="app-sidebar__toggle"
+                                data-bs-toggle="sidebar"
+                                href="javascript:void(0)"
+                            ></a>
+                            <a class="logo-horizontal " href="index.html">
+                                <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
+                                <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
+                            </a>
+                            <div class="d-flex order-lg-2 ms-auto header-right-icons">
+                                <button
+                                    class="navbar-toggler navresponsive-toggler d-lg-none ms-auto"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent-4"
+                                    aria-controls="navbarSupportedContent-4"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation"
+                                >
+                                    <span class="navbar-toggler-icon fe fe-more-vertical"></span>
+                                </button>
+                                <div class="navbar navbar-collapse responsive-navbar p-0">
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                                        <div class="d-flex order-lg-2">
+                                            <div class="d-flex country mt-1">
+                                                <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                                                    <span class="dark-layout text-dark">
+                                                        <i class="fe fe-moon"></i>
+                                                    </span>
+                                                    <span class="light-layout">
+                                                        <i class="fe fe-sun"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="d-flex country">
+                                                <img src="../assets\header-img\question.svg" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            </div>
+                                            <div class="d-flex country">
+                                                <img src="../assets\header-img\question-light.webp" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            </div>
+                                            <div class="d-flex country">
+                                                <img src="../assets\header-img\spade.svg" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
+                                            </div>
+                                            <div class="dropdown  d-flex notifications">
+                                                <a class="nav-link icon" data-bs-toggle="sidebar-right" data-target=".sidebar-right">
+                                                    <i class="fe fe-bell"></i>
+                                                    <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
+                                                </a>
+                                            </div>
+                                            <div class="d-flex country">
+                                                <img src="../assets\header-img\circlels.png" class="avatarr profile-user nav-link brroundd cover-image light-layout">
+                                            </div>
+                                            <div class="dropdown d-flex profile-1 country">
+                                                <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
+                                                    <span class="side-menu__item dynamic-text-head text-dark" style="padding: 10px 10px;">Spade Admin</span>
+                                                    <i class="fe fe-chevron-down dark-mode text-dark" style="font-size: 20px; font-weight: 800;"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sticky" id="sidebar-placeholder">
+                    <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+                    <div class="app-sidebar">
+                        <div class="side-header">
+                            <a class="header-brand1" href="index.html">
+                                <img src="../assets/images/logo_white.png" class="header-brand-img desktop-logo" alt="logo">
+                                <img src="../assets/images/logo_loginmodule.png" class="header-brand-img toggle-logo" alt="logo">
+                                <img src="../assets/images/logo_loginmodule.png" class="header-brand-img light-logo" alt="logo">
+                                <img src="../assets/images/Artboard GÇô 1.svg" class="header-brand-img light-logo1" alt="logo">
+                            </a>
+                        </div>
+                        <div class="main-sidemenu">
+                            <div class="slide-left disabled" id="slide-left">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#7b8191"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/>
+                                </svg>
+                            </div>
+                            <ul class="side-menu">
+                                <li class="sub-category">
+                                    </li>
+                                <a href="settings.html">
+                                    <li class="slide">
+                                        <div class="M-0 mt-3 mb-4 sidebar-count-box" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                                            <div class="card-header pb-0 border-bottom-0">
+                                                <i class="side-menu__icon fi fi-rs-rocket-lunch mb-0"></i>
+                                                <h3 class="card-title side-menu__label">
+                                                    &nbsp; Complete your Profile
+                                                </h3>
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="side-menu__label progress progress-md mt-5">
+                                                    <div class="progress-bar bg-info" style="width: 0%;">20%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
+                                <div class="top-tabs">
+                                    <li class="slide">
+                                        <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+                                            <i class="side-menu__icon fi fi-rs-dashboard"></i>
+                                            <span class="side-menu__label">Overview</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide card-demo">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="invoicing.html">
+                                            <i class="side-menu__icon fi fi-rs-file-invoice-dollar"></i>
+                                            <span class="side-menu__label">Invoices</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide card-demo1">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="maintenance-request.html">
+                                            <i class="side-menu__icon fi fi-rs-list-check"></i>
+                                            <span class="side-menu__label">Requests</span>
+                                        </a>
+                                    </li>
+                                    <li class="slide">
+                                        <a class="side-menu__item" data-bs-toggle="slide" href="chats.html">
+                                            <i class="side-menu__icon fi fi-rs-comment"></i>
+                                            <span class="side-menu__label">Chat</span>
+                                            <span class="badge bg-primary side-badge" id="chatCounter"></span>
+                                        </a>
+                                    </li>
+                                </div>
+                                <div style="position: absolute; bottom: 0; width: 94%;">
+                                    <li>
+                                        <div style="border: 1px solid rgba(0, 0, 0, 0.1);"></div>
+                                        <a class="side-menu__item has-link" href="settings.html" target="_self">
+                                            <i class="side-menu__icon fi fi-rs-settings"></i>
+                                            <span class="side-menu__label">Settings</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                            <div class="slide-right" id="slide-right">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#7b8191"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content app-content mt-0">
+                    <div class="side-app">
+                        <div class="main-container container-fluid">
+                            <div class="card mt-5" style="background: linear-gradient(180deg, #232323 0%, #434343 100%); background: url(../assets/header-img/tenant-dashboard.png); background-size: cover; background-repeat: no-repeat;">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h1 class="page-titlee text-white" style="font-weight: 700; margin-bottom: 0px; border-radius: 40px;">
+                                                <span style="font-weight: 300;">Welcome</span>
+                                            </h1>
+                                            <div style="width: 100px; height: 6px; background-color: #1467B0; border-radius: 40px;"></div>
+                                            <h4 class="mt-3 text-white mb-3" style="font-weight: 300;">Balance Due</h4>
+                                            <h1 class="mt-3 text-white font-weight-900" style="font-weight: 800; margin-bottom: 0px;">$356.00</h1>
+                                            <div style="display: flex; align-items: center;">
+                                                <i class="side-menu__icon fi fi-rs-calendar text-white"></i>
+                                                <span class="side-menu__labell text-white">&nbsp;&nbsp; Your next payment of $356.00 is due on 5/1/2023&emsp;
+                                                    <a href="#" class="btn btn-primary btn-pill">Pay Now</a>
+                                                </span>
+                                            </div>
+                                            <div style="display: flex; align-items: center;">
+                                                <i class="side-menu__icon fi fi-rs-building text-white"></i>
+                                                <span class="side-menu__labell text-white">&nbsp;&nbsp;
+                                                    <span>
+                                                        <b>Pensgate St</b>
+                                                    </span>
+                                                    <br>&nbsp;&nbsp;
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-xl-8 col-md-8">
+                                    <div class="card border p-0 pb-3">
+                                        <div class="card-body text-center p-0">
+                                            <span class="">
+                                                <img src="../assets/images/new-notification.png" alt="">
+                                            </span>
+                                            <h1 class="mt-3" style="font-weight: 700;line-height: 2.5rem;">No New
+                                                <span style="color: #1467B0;">Notifications</span>
+                                            </h1>
+                                            <p class="card-text px-5" style="font-size: 17px;">All notification will show here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 bg-recentorder" style="display: none;">
+                        <h3 class="card-title text-white">Recent Orders</h3>
+                        <div class="chartjs-wrapper-demo">
+                            <canvas id="recentorders" class="chart-dropshadow"></canvas>
+                        </div>
+                    </div>
+                    <div id="flotback-chart" class="flot-background" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar sidebar-right sidebar-animate">
+        <div class="panel panel-primary card mb-0 shadow-none border-0">
+            <div class="tab-menu-heading border-0 d-flex p-3">
+                <div class="card-title mb-0">
+                    <i class="fe fe-bell me-2"></i>
+                    <span class=" pulse"></span>
+                    Notifications
+                </div>
+                <div class="card-options ms-auto">
+                    <a
+                        href="javascript:void(0);"
+                        class="sidebar-icon text-end float-end me-3 mb-1"
+                        data-bs-toggle="sidebar-right"
+                        data-target=".sidebar-right"
+                    >
+                        <i class="fe fe-x text-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                <div class="tabs-menu border-bottom">
+                    <ul class="nav panel-tabs">
+                        <li class="">
+                            <a href="#side1" class="active" data-bs-toggle="tab">
+                                <i class="fe fe-settings me-1"></i>Feeds
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#side2" data-bs-toggle="tab">
+                                <i class="fe fe-message-circle"></i> Chat
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#side3" data-bs-toggle="tab">
+                                <i class="fe fe-anchor me-1"></i>Timeline
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="side1">
+                        <div class="p-3 fw-semibold ps-5">Feeds</div>
+                        <div class="card-body pt-2">
+                            <div class="browser-stats">
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle brround bg-primary-transparent">
+                                            <i class="fe fe-user text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">New user registered</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent">
+                                            <i class="fe fe-shopping-cart text-secondary"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">New order delivered</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent">
+                                            <i class="fe fe-bell text-danger"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">You have pending tasks</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent">
+                                            <i class="fe fe-gitlab text-warning"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">New version arrived</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent">
+                                            <i class="fe fe-database text-pink"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">Server #1 overloaded</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-info brround bg-info-transparent">
+                                            <i class="fe fe-check-circle text-info"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">New project launched</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 fw-semibold ps-5">Settings</div>
+                        <div class="card-body pt-2">
+                            <div class="browser-stats">
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle brround bg-primary-transparent">
+                                            <i class="fe fe-settings text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">General Settings</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-secondary brround bg-secondary-transparent">
+                                            <i class="fe fe-map-pin text-secondary"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">Map Settings</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-danger brround bg-danger-transparent">
+                                            <i class="fe fe-headphones text-danger"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">Support Settings</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-warning brround bg-warning-transparent">
+                                            <i class="fe fe-credit-card text-warning"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">Payment Settings</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-2 mb-sm-0 mb-3">
+                                        <span class="feeds avatar-circle avatar-circle-pink brround bg-pink-transparent">
+                                            <i class="fe fe-bell text-pink"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-10 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between ms-2">
+                                            <h6 class="">Notification Settings</h6>
+                                            <div>
+                                                <a href="javascript:void(0)">
+                                                    <i class="fe fe-settings me-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="side2">
+                        <div class="list-group list-group-flush">
+                            <div class="pt-3 fw-semibold ps-5">Today</div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
+                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg">
+                                        <span class="avatar-status bg-success"></span>
+                                    </span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Rose Bush</div>
+                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/10.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Claude Strophobia</div>
+                                        <p class="mb-0 fs-12 text-muted">
+                                            Hi we can explain our new project......
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/13.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Eileen Dover</div>
+                                        <p class="mb-0 fs-12 text-muted"> New product Launching...</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/12.jpg">
+                                        <span class="avatar-status bg-success"></span>
+                                    </span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Willie Findit</div>
+                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/15.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Manny Jah</div>
+                                        <p class="mb-0 fs-12 text-muted">
+                                            Hi we can explain our new project......
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
+                                        <p class="mb-0 fs-12 text-muted"> Hey! there I' am available....</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pt-3 fw-semibold ps-5">Yesterday</div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/7.jpg">
+                                        <span class="avatar-status bg-success"></span>
+                                    </span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Simon Sais</div>
+                                        <p class="mb-0 fs-12 text-muted">Schedule Realease......</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Laura Biding</div>
+                                        <p class="mb-0 fs-12 text-muted">
+                                            Hi we can explain our new project......
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg">
+                                        <span class="avatar-status bg-success"></span>
+                                    </span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Addie Minstra</div>
+                                        <p class="mb-0 fs-12 text-muted">Contact me for details....</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Ivan Notheridiya</div>
+                                        <p class="mb-0 fs-12 text-muted">
+                                            Hi we can explain our new project......
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/14.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Dulcie Veeta</div>
+                                        <p class="mb-0 fs-12 text-muted"> Okay...I will be waiting for you</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"></span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Florinda Carasco</div>
+                                        <p class="mb-0 fs-12 text-muted">New product Launching...</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-center">
+                                <div class="me-2">
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg">
+                                        <span class="avatar-status bg-success"></span>
+                                    </span>
+                                </div>
+                                <div class="">
+                                    <a href="chat.html">
+                                        <div class="fw-semibold text-dark" data-bs-toggle="modal" data-target="#chatmodel">Cherry Blossom</div>
+                                        <p class="mb-0 fs-12 text-muted">cherryblossom@gmail.com</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="side3">
+                        <ul class="task-list timeline-task">
+                            <li class="d-sm-flex mt-4">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">Task Finished
+                                        <span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>
+                                    </h6>
+                                    <p class="text-muted fs-12">Adam Berry finished task on
+                                        <a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">New Comment
+                                        <span class="text-muted fs-11 mx-2 fw-normal">
+                                            05
+                                            July 2021
+                                        </span>
+                                    </h6>
+                                    <p class="text-muted fs-12">Victoria commented on Project
+                                        <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">New Comment
+                                        <span class="text-muted fs-11 mx-2 fw-normal">
+                                            25
+                                            June 2021
+                                        </span>
+                                    </h6>
+                                    <p class="text-muted fs-12">Victoria commented on Project
+                                        <a href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">Task Overdue
+                                        <span class="text-muted fs-11 mx-2 fw-normal">
+                                            14
+                                            June 2021
+                                        </span>
+                                    </h6>
+                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task
+                                        <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">Task Overdue
+                                        <span class="text-muted fs-11 mx-2 fw-normal">
+                                            29
+                                            June 2021
+                                        </span>
+                                    </h6>
+                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task
+                                        <a href="javascript:void(0)" class="fw-semibold"> Integrated management</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">Task Finished
+                                        <span class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>
+                                    </h6>
+                                    <p class="text-muted fs-12">Adam Berry finished task on
+                                        <a href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                    </p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2">
+                                        <span class="fe fe-edit"></span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-muted">
+                                        <span class="fe fe-trash-2"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="country-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title">Choose Country</h6>
+                    <button
+                        aria-label="Close"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        type="button"
+                    >
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="row p-3">
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/us_flag.jpg" class="me-3 language">
+                                </span>
+                                USA
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/italy_flag.jpg" class="me-3 language">
+                                </span>
+                                Italy
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/spain_flag.jpg" class="me-3 language">
+                                </span>
+                                Spain
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/india_flag.jpg" class="me-3 language">
+                                </span>
+                                India
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/french_flag.jpg" class="me-3 language">
+                                </span>
+                                French
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/russia_flag.jpg" class="me-3 language">
+                                </span>
+                                Russia
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/germany_flag.jpg" class="me-3 language">
+                                </span>
+                                Germany
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/argentina.jpg" class="me-3 language">
+                                </span>
+                                Argentina
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/malaysia.jpg" class="me-3 language">
+                                </span>
+                                Malaysia
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-2">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
+                                <span class="country-selector">
+                                    <img alt="" src="../assets/images/flags/turkey.jpg" class="me-3 language">
+                                </span>
+                                Turkey
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-md-12 col-sm-12 text-center">
+                    Copyright ©
+                    <a href="javascript:void(0)">Spade, LLC.</a>
+                    <span id="year">2023</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<a href="#top" id="back-to-top">
+    <i class="fe fe-chevron-up"></i>
+</a>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script>
+</script>
+<script src="../assets/js/jquery.sparkline.min.js"></script>
+<script src="../assets/js/sticky.js"></script>
+<script src="../assets/js/circle-progress.min.js"></script>
+<script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
+<script src="../assets/plugins/peitychart/peitychart.init.js"></script>
+<script src="../assets/plugins/sidebar/sidebar.js"></script>
+<script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+<script src="../assets/plugins/chart/Chart.bundle.js"></script>
+<script src="../assets/plugins/chart/rounded-barchart.js"></script>
+<script src="../assets/plugins/chart/utils.js"></script>
+<script src="../assets/plugins/select2/select2.full.min.js"></script>
+<script src="../assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="../assets/plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="../assets/js/apexcharts.js"></script>
+<script src="../assets/plugins/apexchart/irregular-data-series.js"></script>
+<script src="../assets/plugins/flot/jquery.flot.js"></script>
+<script src="../assets/plugins/flot/jquery.flot.fillbetween.js"></script>
+<script src="../assets/plugins/flot/chart.flot.sampledata.js"></script>
+<script src="../assets/plugins/flot/dashboard.sampledata.js"></script>
+<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+<script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+<script src="../assets/js/typehead.js"></script>
+<script src="../assets/js/index1.js"></script>
+<script src="../assets/js/themeColors.js"></script>
+<script>
+        var helloGuys = true;
+        $(document).ajaxStop(function () {
+            if (helloGuys) {
+                helloGuys = false;
+                var customScript = document.createElement('script');
+                customScript.src = "../assets/js/custom.js";
+                document.head.appendChild(customScript);
+            }
+        });
+</script>
+<script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll.js"></script>
+<script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+<script src="../assets/js/chat.js"></script>
+<script src="../assets/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="../assets/plugins/charts-c3/c3-chart.js"></script>
+<script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
+<script src="../assets/plugins/chart/Chart.bundle.js"></script>
+<script src="../assets/plugins/chart/utils.js"></script>
+<script src="../assets/js/charts.js"></script>
+<script>
+        const form1Inputs = document.querySelectorAll('#accordion-item1 .form');
+        form1Inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+        const form2Inputs = document.querySelectorAll('#accordion-item2 .form-control');
+        form2Inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+        const check = 0
+        const updateformInputs = document.querySelectorAll('#myModal_edit .form-control');
+        updateformInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (validateInput(input)) {
+                    input.nextElementSibling.classList.add('d-none');
+                } else {
+                    input.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+        counter = 0
+        const draftButton = document.getElementById('draft');
+        const nextButton = document.getElementById('next');
+        let isForm1Valid = false;
+        let isForm2Valid = false;
+        function checkFieldsFilled(id) {
+            if (id === "accordion-item2" && counter === 0) {
+                counter += 1
+                return
+            }
+            const accordionItem = document.getElementById(id);
+            const formFields = accordionItem.querySelectorAll("input, select");
+            let allFieldsFilled = true;
+            formFields.forEach(function(field) {
+                if (field.value === "") {
+                    allFieldsFilled = false;
+                }
+            });
+            const chevronIcon = accordionItem.querySelector(".icon");
+            if (accordionItem.querySelector(".accordion-button").classList.contains("collapsed")) {
+                if (allFieldsFilled) {
+                    chevronIcon.classList.remove("fi-rs-exclamation");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-check");
+                    chevronIcon.classList.add("tick");
+                } else {
+                    chevronIcon.classList.remove("fi-rs-check");
+                    chevronIcon.classList.remove("chevron");
+                    chevronIcon.classList.add("fi-rs-exclamation");
+                    chevronIcon.classList.add("cross");
+                }
+            } else {
+                chevronIcon.classList.remove("fi-rs-check");
+                chevronIcon.classList.add("chevron");
+                chevronIcon.classList.remove("fi-rs-exclamation");
+                chevronIcon.classList.remove("cross");
+                chevronIcon.classList.remove("tick");
+            }
+            if (id === "accordion-item1") {
+                form1Inputs.forEach(input => {
+                    if (validateInput(input)) {
+                        input.nextElementSibling.classList.add('d-none');
+                    } else {
+                        input.nextElementSibling.classList.remove('d-none');
+                    }
+                });
+            } else if (id === "accordion-item2") {
+                form2Inputs.forEach(input => {
+                    if (validateInput(input)) {
+                        input.nextElementSibling.classList.add('d-none');
+                    } else {
+                        input.nextElementSibling.classList.remove('d-none');
+                    }
+                });
+            } else {
+                updateformInputs.forEach(input => {
+                    if (validateInput(input)) {
+                        input.nextElementSibling.classList.add('d-none');
+                    } else {
+                        input.nextElementSibling.classList.remove('d-none');
+                    }
+                });
+            }
+            if (id === 'accordion-item1') {
+                isForm1Valid = validateForm(document.getElementById('accordion-item1'));
+            } else if (id === 'accordion-item1') {
+                isForm2Valid = validateForm(document.getElementById('accordion-item2'));
+            } else {
+                updateFormValid = validateForm(document.getElementById('myModal_edit'));
+            }
+            if (isForm1Valid && isForm2Valid) {
+                draftButton.disabled = false;
+                nextButton.disabled = false;
+            } else {
+                draftButton.disabled = true;
+                nextButton.disabled = true;
+            }
+        }
+        function validateInput(inputElement) {
+            if (inputElement.value.trim() === '' || inputElement.value.trim() === "Choose...") {
+                inputElement.style.border = '1px solid red';
+                return false
+            } else {
+                inputElement.style.border = '1px solid #ced4da'
+                return true
+            }
+        }
+        function validateForm(form) {
+            let inputs
+            if (form.id === "accordion-item1") {
+                inputs = form.querySelectorAll('.form');
+            } else if (form.id === "accordion-item2") {
+                inputs = form.querySelectorAll('.form-control');
+            }
+            let isValid = true;
+            inputs.forEach(input => {
+                validateInput(input);
+                if (input.value.trim() === '') {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+</script>
+<script>
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const logo = document.getElementById('logo');
+        if (userPrefersDark) {
+            logo.src = '../assets/header-img/comment.svg';
+        } else {
+            logo.src = '../assets/header-img/question.svg';
+        }
+</script>
+</body>
+</html>
