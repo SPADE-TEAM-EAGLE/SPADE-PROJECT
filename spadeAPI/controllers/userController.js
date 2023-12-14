@@ -340,7 +340,8 @@ exports.Signin = async function (req, res) {
         const timeDiff = currentDate - subscriptionDate;
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     if (daysDiff >= 30) {
-        return res.status(403).json({
+        return res.status(200).json({
+          token: token,
           message: "Your Subscription is expired"
         }); 
     }
@@ -542,6 +543,7 @@ exports.Signin = async function (req, res) {
 
     if (daysDiff >= 30) {
         return res.status(403).json({
+          token: token,
           message: "Your Subscription is expired"
         }); 
     }
