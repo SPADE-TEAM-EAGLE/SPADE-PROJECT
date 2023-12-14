@@ -1549,14 +1549,14 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -1564,7 +1564,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1605,13 +1605,13 @@
                 validateField($(this));
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     adjustPlan(response)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -1651,26 +1651,26 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
@@ -1685,7 +1685,7 @@ $(".plan_remaining_days_data").each(function(){
             $("#send-invite").click(() => {
                 $('#preloader').css('display', 'flex')
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
+                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantId
@@ -1696,23 +1696,23 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(1111)
+                        // console.log(1111)
                         $("#succesModal_email").modal("show")
                         $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             })
-            console.log(3464565455656546)
+            // console.log(3464565455656546)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1738,12 +1738,12 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                 }
             });
             function getData() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachEmailPhone',
+                    url: 'http://localhost:3000/api/spade/GettenantAttachEmailPhone',
                     type: 'GET',
                     data: {
                         tenantID: tenantId
@@ -1784,7 +1784,7 @@ $(".plan_remaining_days_data").each(function(){
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log(xhr.responseText);
+                        // console.log(xhr.responseText);
                     }
                 });
             }
@@ -1794,7 +1794,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#add-item-phone").on("click", () => {
                 phoneLength++;
-                console.log($("#add-item-containerPhone").children().length,phoneLength)
+                // console.log($("#add-item-containerPhone").children().length,phoneLength)
                 if($("#add-item-containerPhone").children().length<6 && phoneLength<3){
                     $("#add-item-containerPhone").append(`<div class="col-12 row"><div class="col-md-6 mt-2">
                                                                             <select class="form-control form-select select2" data-bs-placeholder="Select" required>
@@ -1855,13 +1855,13 @@ $(".plan_remaining_days_data").each(function(){
                     });
                     }
                 });
-                console.log(emailArray,phone)
+                // console.log(emailArray,phone)
                 formData.append("alternatePhone", JSON.stringify(phone));
                 formData.append("alternateEmail", JSON.stringify(emailArray));
                 formData.append("tenantID", tenantId);
-                console.log(formData)
+                // console.log(formData)
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/addAlternateEmailPhone",
+                    url: "http://localhost:3000/api/spade/addAlternateEmailPhone",
                     type: "POST",
                     data: JSON.stringify({
                         alternatePhone: phone,
@@ -1882,7 +1882,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                     ,
                     error: function (xhr, status, error) {
-                        console.error("Error sending data: " + error);
+                      // console.error("Error sending data: " + error);
                     }
                 });
             });
@@ -1918,7 +1918,7 @@ $(".plan_remaining_days_data").each(function(){
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1926,7 +1926,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1940,10 +1940,10 @@ $(".plan_remaining_days_data").each(function(){
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });

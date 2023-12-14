@@ -1387,14 +1387,14 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1402,7 +1402,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1414,20 +1414,20 @@
 <script>
             $(document).ready(function () {
                 $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
                 $('#email_verification').on('click', function () {
@@ -1442,7 +1442,7 @@
 <script>
             var selectedFiles = [];
                             function dropHandler(ev) {
-  console.log("File(s) dropped");
+  // console.log("File(s) dropped");
   ev.preventDefault();
   if (ev.dataTransfer.items) {
     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -1454,20 +1454,20 @@
     });
   } else {
     [...ev.dataTransfer.files].forEach((file, i) => {
-      console.log(`… file[${i}].name = ${file.name}`);
+      // console.log(`… file[${i}].name = ${file.name}`);
     });
   }
 }
 function dragOverHandler(ev) {
-  console.log("File(s) in drop zone");
+  // console.log("File(s) in drop zone");
   ev.preventDefault();
 }
                     function updateSelectedFilesContainer() {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -1534,7 +1534,7 @@ function dragOverHandler(ev) {
             let taskId;
             $(document).ready(function () {
                 $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1577,13 +1577,13 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
                     method: 'GET',
                     contentType: "application/json; charset=utf-8",
                     headers: {
@@ -1595,7 +1595,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#property").empty()
                         $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
                         response.data[0].forEach((property) => {
-                            console.log(property);
+                            // console.log(property);
                             var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
                             var optionValue = property.tenantID;
                             $("#property").append($("<option></option>").text(optionText).val(optionValue));
@@ -1605,7 +1605,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                    url: 'http://localhost:3000/api/spade/getVendorAssignTo',
                     method: 'GET',
                     contentType: "application/json; charset=utf-8",
                     headers: {
@@ -1654,7 +1654,7 @@ $(".plan_remaining_days_data").each(function(){
                         var allFieldsFilled = accordion1Fields.filter(function () {
                             return $(this).val() === '' || $(this).val() === 'Choose...';
                         }).length === 0;
-                        console.log()
+                        // console.log()
                         return allFieldsFilled;
                     }
                     var accordion1Fields = $('#addModal input[required], #addModal select[required]');
@@ -1662,7 +1662,7 @@ $(".plan_remaining_days_data").each(function(){
                     var allFieldsFilled = accordion1Fields.filter(function () {
                         return $(this).val() === '' || $(this).val() === 'Choose...';
                     }).length === 0;
-                    console.log()
+                    // console.log()
                     return allFieldsFilled;
                 }
                 function updateButtonStatus(update) {
@@ -1766,7 +1766,7 @@ $(".plan_remaining_days_data").each(function(){
                             formData.append('image', selectedFiles[i]);  
                         }
                         $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/upload',
+                                url: 'http://localhost:3000/api/spade/upload',
                                 type: 'POST',
                                 data: formData,
                                 contentType: false,
@@ -1789,7 +1789,7 @@ $(".plan_remaining_days_data").each(function(){
                                         images: imageArray,
                                     }
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                                        url: 'http://localhost:3000/api/spade/addTasks',
                                         type: 'POST',
                                         data: JSON.stringify(taskData),
                                         contentType: 'application/json',
@@ -1814,7 +1814,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                         }
                                     });
                                 },
@@ -1823,7 +1823,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                 }
                             });
                     }else{
@@ -1840,7 +1840,7 @@ $(".plan_remaining_days_data").each(function(){
                                         images: [],
                                     }
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                                        url: 'http://localhost:3000/api/spade/addTasks',
                                         type: 'POST',
                                         data: JSON.stringify(taskData),
                                         contentType: 'application/json',
@@ -1865,7 +1865,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                         }
                                     });
                     }
@@ -1887,7 +1887,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
                 $('#myModal_edit').find('input, select').on('input change', function () {
                     var updateButton = document.getElementById('update');
-                    console.log(updateButton)
+                    // console.log(updateButton)
                     var isFilled = true;
                     $('#myModal_edit').find('input, select').each(function (index) {
                         var value = $(this).val().trim();
@@ -1922,7 +1922,7 @@ $(".plan_remaining_days_data").each(function(){
                 $('input[type="checkbox"]').change(function () {
                     var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                     var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                    console.log(columnIndex, isColumnVisible)
+                    // console.log(columnIndex, isColumnVisible)
                     $('table').find('tr').each(function () {
                         var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                         isColumnVisible ? column.show() : column.hide();
@@ -1980,7 +1980,7 @@ $(".plan_remaining_days_data").each(function(){
                 function updateTable() {
                     $('#table_body').empty();
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                        url: 'http://localhost:3000/api/spade/allproperty',
                         type: 'GET',
                         contentType: false,
                         processData: false,
@@ -2005,7 +2005,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 }
@@ -2052,7 +2052,7 @@ $(".plan_remaining_days_data").each(function(){
                     });
                     formData.append("existingImages", existingImageNames)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        url: 'http://localhost:3000/api/spade/updateTasks',
                         type: 'PUT',
                         data: formData,
                         contentType: false,
@@ -2068,7 +2068,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 });
@@ -2076,7 +2076,7 @@ $(".plan_remaining_days_data").each(function(){
                     e.preventDefault();
                     $('#myModal_delete').modal('hide');
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                        url: 'http://localhost:3000/api/spade/deleteTask',
                         type: 'DELETE',
                         data: JSON.stringify({
                             "taskID": taskId
@@ -2094,12 +2094,12 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 })
                 function getData() {
-                    console.log(2)
+                    // console.log(2)
                     $("#global-loader").fadeIn("fast")
                 }
                 getData()
@@ -2132,22 +2132,22 @@ $(".plan_remaining_days_data").each(function(){
 <script>
                 $(document).ready(() => {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                        url: 'http://localhost:3000/api/spade/verifyMailCheck',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("here")
+                            // console.log("here")
                             if (response.message == "Email is verified") {
                                 $("#account-text").remove()
                                 $("#email_verification").remove()
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                 })
@@ -2156,7 +2156,7 @@ $(".plan_remaining_days_data").each(function(){
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2164,7 +2164,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if(localStorage.getItem("htmlLayout")){
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -2178,10 +2178,10 @@ $(".plan_remaining_days_data").each(function(){
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });

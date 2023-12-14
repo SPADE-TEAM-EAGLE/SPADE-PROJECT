@@ -2344,14 +2344,14 @@
             <script>
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                        url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("getMessagesCountLandlord");
-                            console.log(response.Count['count(message)']);
+                          // console.log("getMessagesCountLandlord");
+                          // console.log(response.Count['count(message)']);
                             $('#chatCounter').text(response.Count['count(message)'])
                         },
                         error: function (xhr, status, error) {
@@ -2360,7 +2360,7 @@
                                 $('#myModal_warning').modal('hide');
                                 window.location = '../Tenant/login_module.html';
                             }, 2000);
-                            console.log(error);
+                          // console.log(error);
                         }
                     });
                 });
@@ -2795,9 +2795,9 @@
             <script>
                 $("#document").ready(() => {
                     $("#save").click(() => {
-                        console.log($("#current_password_reset").val(), $("#id_password1").val())
+                      // console.log($("#current_password_reset").val(), $("#id_password1").val())
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/changePasswordTenant',
+                            url: 'http://localhost:3000/api/spade/changePasswordTenant',
                             type: 'PUT',
                             data: JSON.stringify({
                                 currentPassword: $("#current_password_reset").val(),
@@ -2829,7 +2829,7 @@
                                     }, 2000);
                                 }
                                 else {
-                                    console.log('API error:', error);
+                                  // console.log('API error:', error);
                                 }
                             }
                         })
@@ -2902,7 +2902,7 @@
                 var tenantData; var userData;
                 function getData() {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
+                        url: "http://localhost:3000/api/spade/GetBankAccountTenant",
                         type: "GET",
                         contentType: "application/json",
                         headers: {
@@ -3001,7 +3001,7 @@
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                          // console.log(error);
                         }
                     });
 
@@ -3019,13 +3019,13 @@
                     $('#profile').removeClass('dragging hasImage');
                     if (e.originalEvent) {
                         file = e.originalEvent.dataTransfer.files[0];
-                        console.log(file);
+                      // console.log(file);
                         var reader = new FileReader();
                         //attach event handlers here...
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log("11111111111111111");
-                            console.log(reader.result);
+                          // console.log("11111111111111111");
+                          // console.log(reader.result);
                             if (reader.result) {
                                 $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                             }
@@ -3033,7 +3033,7 @@
                     }
                 })
                 $('#profile').on('click', function (e) {
-                    console.log('clicked')
+                  // console.log('clicked')
                     $('#mediaFile').click();
                 });
                 window.addEventListener("dragover", function (e) {
@@ -3048,19 +3048,19 @@
                     var input = e.target;
                     if (input.files && input.files[0]) {
                         file = input.files[0];
-                        console.log(file)
+                      // console.log(file)
                         var reader = new FileReader();
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log("22222222222");
-                            console.log(reader.result);
+                          // console.log("22222222222");
+                          // console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                         }
                     }
                 })
                 $("#close-request").on("click", function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/tenantAllPaidInvoice',
+                        url: 'http://localhost:3000/api/spade/tenantAllPaidInvoice',
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3084,7 +3084,7 @@
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching invoices.');
+                          // console.log('Error occurred while fetching invoices.');
                             if (xhr?.responseJSON?.message == "Password is incorrect") {
                                 $("#infoModal_account").modal("show");
                                 setTimeout(function () {
@@ -3115,10 +3115,10 @@
                     }
                     const userForm = new FormData()
                     if (file) {
-                        console.log(file)
+                      // console.log(file)
                         userForm.append("image", file)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
+                            url: 'http://localhost:3000/api/spade/uploadTenant',
                             type: 'POST',
                             data: userForm,
                             headers: {
@@ -3127,11 +3127,11 @@
                             contentType: false,
                             processData: false,
                             success: function (response) {
-                                console.log(response.images[0].image_url);
+                              // console.log(response.images[0].image_url);
                                 userData.Image = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
+                                    url: 'http://localhost:3000/api/spade/updateTenantProfile',
                                     method: 'PUT',
                                     data: JSON.stringify(userData),
                                     contentType: 'application/json',
@@ -3147,19 +3147,19 @@
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log('Error occurred while fetching state and city data.');
-                                        console.log(xhr);
-                                        console.log(error);
+                                      // console.log('Error occurred while fetching state and city data.');
+                                      // console.log(xhr);
+                                      // console.log(error);
                                     }
                                 });
                             },
                             error: function (error) {
-                                console.error('Error submitting image:', error);
+                              // console.error('Error submitting image:', error);
                             }
                         });
                     } else {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/updateTenantProfile',
+                            url: 'http://localhost:3000/api/spade/updateTenantProfile',
                             method: 'PUT',
                             data: JSON.stringify(userData),
                             contentType: 'application/json',
@@ -3176,15 +3176,15 @@
                                 getData()
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                              // console.log('Error occurred while fetching state and city data.');
+                              // console.log(xhr);
+                              // console.log(error);
                             }
                         });
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                    url: 'http://localhost:3000/api/spade/protectedTenant',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3202,7 +3202,7 @@
                         $("#businessName").val(response.businessName)
                         $("#phone").val(response.phoneNumber)
                         function toTitleCase(str) {
-                            console.log(str)
+                          // console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -3231,9 +3231,9 @@
                             $('#myModal_warning').modal('hide');
                             window.location = '../Tenant/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 });
                 $('#2f-Auth').change(function () {
@@ -3243,7 +3243,7 @@
                         auth = 0
                     }
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAuthTenant",
+                        url: "http://localhost:3000/api/spade/updateAuthTenant",
                         type: "PUT",
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3333,7 +3333,7 @@
                 function logout() {
                     $(document).ready(function () {
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                            url: 'http://localhost:3000/api/spade/inactiveTenant',
                             type: 'PUT',
                             contentType: false,
                             processData: false,
@@ -3341,7 +3341,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response);
+                              // console.log(response);
                                 localStorage.removeItem('authtoken');
                                 localStorage.clear();
                                 if ($('body').hasClass('dark-mode')) {
@@ -3350,10 +3350,10 @@
                                     localStorage.setItem("sashlightMode", true)
                                 }
                                 window.open('../Tenant/login_module.html', "_self")
-                                console.log('Done');
+                              // console.log('Done');
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+                              // console.log(error);
                             }
                         });
                     });
@@ -3392,7 +3392,7 @@
             <script>
 
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                    url: 'http://localhost:3000/api/spade/getTenantDashData',
                     type: 'GET',
                     contentType: "application/json; charset=utf-8",
                     headers: {
@@ -3400,7 +3400,7 @@
                     },
                     success: function (response) {
                         const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                        console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                      // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                         $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                         $("#outstanding-amount").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                         if (!totalAmountUnpaid.totalUnPaid) {
@@ -3415,18 +3415,18 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
+                    url: "http://localhost:3000/api/spade/GetBankAccountTenant",
                     type: "GET",
                     contentType: "application/json",
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         if (response.data.length > 0) {
                             $("#account").empty();
                             $("#account").append(`<option value="">Select Account</option>`);
@@ -3438,7 +3438,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                      // console.log(error);
                     }
                 });
 
@@ -3505,7 +3505,7 @@
                 function main() {
                     $("#preloader").css("display", "flex")
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                        url: 'http://localhost:3000/api/spade/openOrder',
                         type: 'POST',
                         data: JSON.stringify({
                             amount: $("#amount-card").val(),
@@ -3533,7 +3533,7 @@
                                 }, function (res) {
                                     if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                         $.ajax({
-                                            url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                            url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
                                             type: 'POST',
                                             data: JSON.stringify({
                                                 status: "paid",
@@ -3554,12 +3554,12 @@
                                                 }, 2000);
                                             },
                                             error: function (xhr, status, error) {
-                                                console.log(xhr)
-                                                console.log(status)
+                                              // console.log(xhr)
+                                              // console.log(status)
                                                 $("#upgradetopro-card-modal").modal("hide")
                                                 $("#preloader").css("display", "none")
-                                                console.log(error)
-                                                console.error('Error sending data:', error);
+                                              // console.log(error)
+                                              // console.error('Error sending data:', error);
                                             }
                                         });
 
@@ -3589,7 +3589,7 @@
                                 }, function (res) {
                                     if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                         $.ajax({
-                                            url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                            url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
                                             type: 'POST',
                                             data: JSON.stringify({
                                                 status: "paid",
@@ -3610,12 +3610,12 @@
                                                 }, 2000);
                                             },
                                             error: function (xhr, status, error) {
-                                                console.log(xhr)
-                                                console.log(status)
+                                              // console.log(xhr)
+                                              // console.log(status)
                                                 $("#upgradetopro-card-modal").modal("hide")
                                                 $("#preloader").css("display", "none")
-                                                console.log(error)
-                                                console.error('Error sending data:', error);
+                                              // console.log(error)
+                                              // console.error('Error sending data:', error);
                                             }
                                         });
 
@@ -3629,15 +3629,15 @@
                                     }
                                 });
                             }
-                            console.log(response)
+                          // console.log(response)
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
+                          // console.log(xhr)
                             $("#upgradetopro-card-modal").modal("hide")
                             $("#preloader").css("display", "none")
-                            console.log(status)
-                            console.log(error)
-                            console.error('Error sending data:', error);
+                          // console.log(status)
+                          // console.log(error)
+                          // console.error('Error sending data:', error);
                         }
                     });
                 }
@@ -3646,7 +3646,7 @@
                 $("#submit-ach").on("click", function () {
                     $("#preloader").css("display", "flex")
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/openOrder',
+                        url: 'http://localhost:3000/api/spade/openOrder',
                         type: 'POST',
                         data: JSON.stringify({
                             amount: $("#amount-ach").val(),
@@ -3659,7 +3659,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(scard)
+                          // console.log(scard)
 
                             sfc.createPayment({
                                 sessionToken: response.sessionToken,
@@ -3699,7 +3699,7 @@
                             }, function (res) {
                                 if (res?.transactionStatus?.toLowerCase() == "pending") {
                                     $.ajax({
-                                        url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
+                                        url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
                                         type: 'POST',
                                         data: JSON.stringify({
                                             status: "pending",
@@ -3720,12 +3720,12 @@
                                             }, 2000);
                                         },
                                         error: function (xhr, status, error) {
-                                            console.log(xhr)
-                                            console.log(status)
+                                          // console.log(xhr)
+                                          // console.log(status)
                                             $("#upgradetopro-ach-modal").modal("hide")
                                             $("#preloader").css("display", "none")
-                                            console.log(error)
-                                            console.error('Error sending data:', error);
+                                          // console.log(error)
+                                          // console.error('Error sending data:', error);
                                         }
                                     });
                                 }
@@ -3741,10 +3741,10 @@
 
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
-                            console.log(status)
-                            console.log(error)
-                            console.error('Error sending data:', error);
+                          // console.log(xhr)
+                          // console.log(status)
+                          // console.log(error)
+                          // console.error('Error sending data:', error);
                         }
                     });
 
@@ -3754,7 +3754,7 @@
 
 
                 $("#upgradetopro-btn").on("click", function () {
-                    console.log("clicked")
+                  // console.log("clicked")
                     $("#closeaccount,#surePaynow").modal("hide");
                     const amount = $("#outstanding-amount").text().split("$")[1];
 

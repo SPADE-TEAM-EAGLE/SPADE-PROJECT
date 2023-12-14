@@ -4,6 +4,6 @@ const ac = new Autocomplete(field, {
     maximumItems: 100,
     threshold: 1,
     onSelectItem: ({label, value}) => {
-        console.log("user selected:", label, value);
+      // console.log("user selected:", label, value);
     }
 });

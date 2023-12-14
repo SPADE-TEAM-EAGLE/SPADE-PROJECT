@@ -307,7 +307,7 @@ var encodedId = encodeURIComponent(encryptedId);
             $(document).on("click", "#continue", function(a) {
                 var verification = $("#verification").val();
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/verifyResetEmailCodeTenant',
+                    url: 'http://localhost:3000/api/spade/verifyResetEmailCodeTenant',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -322,7 +322,7 @@ var encodedId = encodeURIComponent(encryptedId);
                     error: function(xhr, status, error) {
                         document.getElementById("verification-spans").style.display = "block";
                         $("#verification").addClass("is-invalid")
-                        console.error(xhr.responseText);
+                      // console.error(xhr.responseText);
                     }
                 });
             });
@@ -365,7 +365,7 @@ var password = 'your-secret-password';
 const Id = sjcl.decrypt(password, encryptedId);
 var encodedId = encodeURIComponent(encryptedId);
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/resendCodeTenants',
+                    url: 'http://localhost:3000/api/spade/resendCodeTenants',
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -383,7 +383,7 @@ var encodedId = encodeURIComponent(encryptedId);
                         interval = setInterval(countDown, 1000);
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
+                      // console.error(xhr.responseText);
                     }
                 });
             });

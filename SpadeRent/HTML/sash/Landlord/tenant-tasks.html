@@ -1375,14 +1375,14 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1390,7 +1390,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1403,13 +1403,13 @@
 <script>
         $(document).ready(function() {
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -1449,26 +1449,26 @@ $(".plan_remaining_days_data").each(function(){
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
@@ -1481,7 +1481,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1506,7 +1506,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                 }
             });
             function toTitleCase(str) {
@@ -1515,7 +1515,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
+                url: 'http://localhost:3000/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -1525,8 +1525,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log("tenantTask");
-                    console.log(response);
+                    // console.log("tenantTask");
+                    // console.log(response);
                     if(response?.message=="No tenant Task data found"){
                         var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         $('#table_body').append(row);
@@ -1632,15 +1632,15 @@ var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p styl
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                 }
             })
             $('input[type="checkbox"]').click(function() {
-            console.log($(this).closest('li').index())
+            // console.log($(this).closest('li').index())
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-            console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
+            // console.log(columnIndex, isColumnVisible)
+            // console.log( $(this).find('th:nth-child(' + (columnIndex) + ')'))
                     $('table').find('tr').each(function() {
                 var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                 isColumnVisible ? column.show() : column.hide();
@@ -1709,7 +1709,7 @@ function filterTable(selectedFilter) {
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                url: 'http://localhost:3000/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,
@@ -1717,7 +1717,7 @@ function filterTable(selectedFilter) {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(localStorage.getItem("htmlLayout")){
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
@@ -1731,10 +1731,10 @@ function filterTable(selectedFilter) {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    // console.log('Done');
                 },
                 error: function (xhr, status, error) {
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });

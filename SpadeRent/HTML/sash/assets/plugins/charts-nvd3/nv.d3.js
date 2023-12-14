@@ -43,7 +43,7 @@ if (nv.dev) {
 }
 nv.log = function() {
     if (nv.dev && window.console && console.log && console.log.apply)
-        console.log.apply(console, arguments);
+      // console.log.apply(console, arguments);
     else if (nv.dev && window.console && typeof console.log == "function" && Function.prototype.bind) {
         var log = Function.prototype.bind.call(console.log, console);
         log.apply(console, arguments);

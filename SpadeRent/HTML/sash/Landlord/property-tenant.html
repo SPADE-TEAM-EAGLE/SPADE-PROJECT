@@ -1136,14 +1136,14 @@
     var unitsPermission;
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1151,7 +1151,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1163,7 +1163,7 @@
 <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1207,26 +1207,26 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function() {
@@ -1260,7 +1260,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
             let columnsToHide = []
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1272,7 +1272,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1286,13 +1286,13 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -1342,9 +1342,9 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
     }
 });
-            console.log(propertyId)
+            // console.log(propertyId)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewPropertyTenant',
+                url: 'http://localhost:3000/api/spade/viewPropertyTenant',
                 type: 'GET',
                 data: {
                     "id": propertyId
@@ -1363,10 +1363,10 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         tableBody.append(row);
                     }
                     else {
-                        console.log(data[0][0])
+                        // console.log(data[0][0])
                         tableBody.empty();
                         data[0]?.forEach(function (tenant,index) {
-                            console.log(tenant)
+                            // console.log(tenant)
                             var serial='<td class="serial-number">'+(index+1)+'</td>';
                             var tenantID = '<td>' + tenant.tenantID + '</td>';
                             var tenantName = '<td class="tenant-id tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + '</td>';
@@ -1428,7 +1428,7 @@ if (tenant.leaseEndDate) {
                             propertyId = propertyIdElement.text();
                             const data = response.data[0].find(obj => obj.id.toString() === propertyId);
                             selectedFiles = data.images
-                            console.log(data.city)
+                            // console.log(data.city)
                             var option = $('<option>').text(data.city).val(data.city);
                             $('#city_update').append(option);
                             option.prop('selected', true);
@@ -1454,7 +1454,7 @@ if (tenant.leaseEndDate) {
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log(error)
+                    // console.log(error)
                     $("#myModal_warning").modal("show");
                           setTimeout(function() {
                              $('#myModal_warning').modal('hide');
@@ -1468,7 +1468,7 @@ if (tenant.leaseEndDate) {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1476,7 +1476,7 @@ if (tenant.leaseEndDate) {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if(localStorage.getItem("htmlLayout")){
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1490,10 +1490,10 @@ if (tenant.leaseEndDate) {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1504,7 +1504,7 @@ if (tenant.leaseEndDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1519,7 +1519,7 @@ if (tenant.leaseEndDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1566,7 +1566,7 @@ if (tenant.leaseEndDate) {
                 case "Add":
                     break;
                 case "View":
-                    console.log($("#nav_links li:eq('1')"))
+                    // console.log($("#nav_links li:eq('1')"))
                     $("#nav_links li:eq('1')").addClass("d-none")
                     break;
                 case "Delete":

@@ -1742,14 +1742,14 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                  // console.log("getMessagesCountLandlord");
+                  // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -1758,11 +1758,11 @@
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log(error);
+                  // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                url: 'http://localhost:3000/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1770,7 +1770,7 @@
                 },
                 success: function (response) {
                     const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                  // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     if (!totalAmountUnpaid.totalUnPaid) {
@@ -1783,7 +1783,7 @@
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
         });
@@ -1803,14 +1803,14 @@
         }
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
                     function toTitleCase(str) {
-                        console.log(str)
+                      // console.log(str)
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
@@ -1828,9 +1828,9 @@
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
         })
@@ -1838,7 +1838,7 @@
         var taskInfo = []
         function areAllFieldsFilled(update) {
             if (update) {
-                console.log("this is for update")
+              // console.log("this is for update")
                 var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
@@ -1849,12 +1849,12 @@
             var allFieldsFilled = accordion1Fields.filter(function () {
                 return $(this).val() === '' || $(this).val() === 'Choose...';
             }).length === 0;
-            console.log()
+          // console.log()
             return allFieldsFilled;
         }
         function updateButtonStatus(update) {
             if (update) {
-                console.log("update button")
+              // console.log("update button")
                 var allFieldsFilled = areAllFieldsFilled(update);
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
@@ -1863,7 +1863,7 @@
                 }
             } else {
                 var allFieldsFilled = areAllFieldsFilled();
-                console.log(allFieldsFilled)
+              // console.log(allFieldsFilled)
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
                 } else {
@@ -1903,7 +1903,7 @@
             resetAccordions()
         });
         $('#close,#top-close').on('click', function (e) {
-            console.log(333)
+          // console.log(333)
             e.preventDefault()
             $("#addModal .select2-selection__rendered").empty()
             resetAccordions()
@@ -1914,7 +1914,7 @@
 
         function getData() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
+                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -1922,12 +1922,12 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                  // console.log(response);
                     if (false) {
                         window.location = './new-property.html'
                     } else {
                         function toTitleCase(str) {
-                            console.log(str)
+                          // console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -1944,7 +1944,7 @@
                                 });
                             }
                         }
-                        console.log(tableBody)
+                      // console.log(tableBody)
                         if (response?.data[0].length == 0) {
                             tableBody.append(`<tr><td colspan="12" style="text-align: center;">No Task Found</td></tr>`)
                         } else {
@@ -2071,7 +2071,7 @@
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log(error)
+                  // console.log(error)
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -2131,7 +2131,7 @@
                     formData.append('image', selectedFiles[i]);
                 }
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
+                    url: 'http://localhost:3000/api/spade/uploadTenant',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2150,7 +2150,7 @@
                             images: imageArray,
                         }
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                            url: 'http://localhost:3000/api/spade/addTasksTenant',
                             type: 'POST',
                             data: JSON.stringify(taskData),
                             contentType: 'application/json',
@@ -2172,7 +2172,7 @@
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                              // console.log('Error: ' + error);
                             }
                         });
                     },
@@ -2181,7 +2181,7 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
             } else {
@@ -2194,7 +2194,7 @@
                     images: [],
                 }
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                    url: 'http://localhost:3000/api/spade/addTasksTenant',
                     type: 'POST',
                     data: JSON.stringify(taskData),
                     contentType: 'application/json',
@@ -2216,7 +2216,7 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2225,8 +2225,8 @@
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(selectedFiles.length)
-                console.log(file)
+              // console.log(selectedFiles.length)
+              // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2259,7 +2259,7 @@
                         );
                     }
                 }
-                console.log(file)
+              // console.log(file)
                 if (file instanceof File) {
                     fileElement
                         .append(
@@ -2314,10 +2314,10 @@
                 });
             } else if (selectedFilter === 'recently-added') {
                 rows.sort(function (a, b) {
-                    console.log($(a), $(b))
+                  // console.log($(a), $(b))
                     var createdAtA = new Date($(a).find('.task-id').attr('data-id'));
                     var createdAtB = new Date($(b).find('.task-id').attr('data-id'));
-                    console.log(createdAtA, createdAtB)
+                  // console.log(createdAtA, createdAtB)
                     return createdAtB - createdAtA;
                 });
             }
@@ -2338,7 +2338,7 @@
         $('#fileInput').on('change', function () {
             var files = Array.from($(this)[0].files);
             files.forEach(function (file) {
-                console.log(file)
+              // console.log(file)
                 file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
             });
             updateSelectedFilesContainer(); // Update the selected files container
@@ -2366,7 +2366,7 @@
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                console.log(data)
+              // console.log(data)
                 if (data.ImageKey) {
                     selectedFiles = data.ImageKey.split(",")
                     updateSelectedFilesContainer()
@@ -2376,10 +2376,10 @@
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes);
-                console.log($("#notes_view"))
+              // console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
                 data.AssignTo.forEach((item) => {
-                    console.log(item);
+                  // console.log(item);
                     $("#view-task-line-item").append(`
         <tr class="tr">
             <td>
@@ -2425,21 +2425,21 @@
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
+                url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log($("#tenant-address"))
+                  // console.log($("#tenant-address"))
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
             function updateSelectedFilesContainer() {
@@ -2464,19 +2464,19 @@
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file))
                             );
-                            console.log(file)
+                          // console.log(file)
                         } else if (file?.endsWith('.pdf')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
                             );
-                            console.log(file, "pdf")
+                          // console.log(file, "pdf")
                         } else {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                             );
-                            console.log(file)
+                          // console.log(file)
                         }
                     }
                     if (file instanceof File) {
@@ -2540,7 +2540,7 @@
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+              // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2552,7 +2552,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                    url: 'http://localhost:3000/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2560,7 +2560,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         localStorage.removeItem('authtoken');
                         localStorage.clear();
                         if ($('body').hasClass('dark-mode')) {
@@ -2569,10 +2569,10 @@
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('../Tenant/login_module.html', "_self")
-                        console.log('Done');
+                      // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                      // console.log(error);
                     }
                 });
             });

@@ -3353,14 +3353,14 @@
             <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -3368,7 +3368,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -3378,26 +3378,26 @@
             let result;
             let columnsToHide = []
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#tab66 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab66').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3406,7 +3406,7 @@
             $('#tab88 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab88').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3415,7 +3415,7 @@
             $('#tab99 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab99').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3424,7 +3424,7 @@
             $('#tab55 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab55').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3433,7 +3433,7 @@
             $('#tab77 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab77').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3674,7 +3674,7 @@ const currentDate = new Date();
                     var now = new Date();
                     var firstDayOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
                     var firstDayOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-                    console.log(date >= firstDayOfLastMonth && date < firstDayOfThisMonth);
+                    // console.log(date >= firstDayOfLastMonth && date < firstDayOfThisMonth);
                     if (date >= firstDayOfLastMonth && date < firstDayOfThisMonth) {
                         return "lastmonth";
                     }
@@ -3683,7 +3683,7 @@ const currentDate = new Date();
                     var now = new Date();
                     var firstDayOfThisYear = new Date(now.getFullYear(), 0, 1);
                     var firstDayOfLastYear = new Date(now.getFullYear() - 1, 0, 1);
-                    console.log(date >= firstDayOfLastYear && date < firstDayOfThisYear);
+                    // console.log(date >= firstDayOfLastYear && date < firstDayOfThisYear);
                     if (date >= firstDayOfLastYear && date < firstDayOfThisYear) {
                         return "lastyear";
                     }
@@ -3711,7 +3711,7 @@ const currentDate = new Date();
         return "sixmonths";
     }
 }
-                console.log(eval(`${type}(createdAt)`))
+                // console.log(eval(`${type}(createdAt)`))
                 return eval(`${type}(createdAt)`);
             }
             function constructPropertyTable(propertyData, id) {
@@ -3723,7 +3723,7 @@ const currentDate = new Date();
                         if ($("#propertySelect option:contains('" + property.propertyName + "')").length === 0) {
                             $("#propertySelect").append($('<option></option>').text(property.propertyName).val(property.id));
                         }
-                        console.log(index)
+                        // console.log(index)
                         var newRowHtml = '<tr>' +
                             '<td style="font-weight: 600;">' + (index + 1) + '</td>' +
                             '<td class="propertyName" style="font-weight: 600;">' + (property.propertyName?property.propertyName:"Not set") + '</td>' +
@@ -3759,8 +3759,8 @@ const currentDate = new Date();
                     $("#table_body_lease_report").append('<tr><td colspan="9" style="text-align: center;">No Data Found</td></tr>');
                 }
                 else {
-                    console.log("leaseData");
-                    console.log(leaseData);
+                    // console.log("leaseData");
+                    // console.log(leaseData);
                     leaseData.forEach((lease, index) => {
                         var remainingDays;
                         if (lease.LeaseExpire) {
@@ -3772,13 +3772,13 @@ const currentDate = new Date();
                             remainingDays = 'Not set';
                         }
                         var leaseDays;
-                        console.log("jnfdnjdnfndjfn",lease.LeaseStart,lease.LeaseExpire)
+                        // console.log("jnfdnjdnfndjfn",lease.LeaseStart,lease.LeaseExpire)
                         if(lease.LeaseStart && lease.LeaseExpire){
                             var leaseStartDate = new Date(lease.LeaseStart);
                             var leaseEndDate = new Date(lease.LeaseExpire);
                             var timeDiff = Math.abs(leaseEndDate - leaseStartDate);
                             leaseDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                            console.log("remiamfmkmkmfkdmfmdfmsf",leaseDays);
+                            // console.log("remiamfmkmkmfkdmfmdfmsf",leaseDays);
                             if (leaseDays>1){
                                 leaseDays = leaseDays + " days";
                             }else{
@@ -3956,7 +3956,7 @@ if (task.priority == 'High') {
             function constructPropertyTableTenant(propertyData, id) {
                 $("#table_body_tenant_report").empty()
                 propertyData.forEach((tenant, index) => {
-                    console.log(tenant)
+                    // console.log(tenant)
                     if ($("#tenantSelect option:contains('" + tenant.firstName + " " + tenant.lastName + "')").length === 0) {
                         $("#tenantSelect").append($('<option></option>').text(tenant.firstName + " " + tenant.lastName).val(tenant.tenantID));
                     }
@@ -3981,7 +3981,7 @@ if (task.priority == 'High') {
                     $('#table_body_tenant_report').append(newRowHtml);
                 });
             }
-            console.log("hhdhdhcc");
+            // console.log("hhdhdhcc");
             function formatDate(dateString) {
     var date = new Date(dateString);
     var options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -3990,7 +3990,7 @@ if (task.priority == 'High') {
         .replace(/ /g, '-');;
 }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4032,13 +4032,13 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/propertyReport',
+                url: 'http://localhost:3000/api/spade/propertyReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -4084,12 +4084,12 @@ $(".plan_remaining_days_data").each(function(){
                     if (xhr.status === 401) {
                         $("#myModal_warning").modal("show");
                     } else {
-                        console.log('API error:', error);
+                        // console.log('API error:', error);
                     }
                 }
             });
             function filterAndRenderTable(selectedValue) {
-                console.log(selectedValue)
+                // console.log(selectedValue)
                 if (selectedValue) {
                     if (selectedValue == "Occupied" || selectedValue == "Vacant") {
                         if ($("#propertySelect").val() && $("#propertySelect").val()!="All") {
@@ -4099,7 +4099,7 @@ $(".plan_remaining_days_data").each(function(){
                         } 
                         else {
                             var filteredData = propertyData.filter((property) => {
-                                console.log(property?.occupancy_status==selectedValue)
+                                // console.log(property?.occupancy_status==selectedValue)
                                 return property?.occupancy_status == selectedValue
                             });
                         }
@@ -4138,7 +4138,7 @@ $(".plan_remaining_days_data").each(function(){
             }
             function filterAndRenderTableInvoice(timeValue, typeValue) {
                 if (timeValue && typeValue) {
-                    console.log(timeValue, typeValue)
+                    // console.log(timeValue, typeValue)
                     if (timeValue == "All" && typeValue !== "All") {
                         var filteredData = invoiceData.filter((invoice) => {
                             return invoice?.status?.toLowerCase() == typeValue.toLowerCase()
@@ -4147,7 +4147,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                     else if (timeValue !== "All" && typeValue == "All") {
                         var filteredData = invoiceData.filter((invoice) => {
-                            console.log(invoiceCreatedDateConversion(invoice?.created_at, timeValue), timeValue)
+                            // console.log(invoiceCreatedDateConversion(invoice?.created_at, timeValue), timeValue)
                             return invoiceCreatedDateConversion(invoice?.created_at, timeValue) == timeValue
                         });
                         constructInvoiceTable(filteredData);
@@ -4165,7 +4165,7 @@ $(".plan_remaining_days_data").each(function(){
                             var currentDate = new Date();
                             var timeDiff = Math.abs(leaseDate - currentDate);
                             daysDifference = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                            console.log(daysDifference)
+                            // console.log(daysDifference)
                 if (daysDifference <= 15) {
                     return "15";
                 } else if (daysDifference <= 30) {
@@ -4203,13 +4203,13 @@ $(".plan_remaining_days_data").each(function(){
             }
             $("#propertySelect,#reportTypeSelect").on('change', function () {
                 var selectedValue = $(this).val();
-                console.log($(this).attr("id"), selectedValue)
+                // console.log($(this).attr("id"), selectedValue)
                 filterAndRenderTable(selectedValue);
             });
             $("#invoiceTimeSelect,#invoiceTypeSelect").on('change', function () {
                 var timeValue = $('#invoiceTimeSelect').val();
                 var typeValue = $('#invoiceTypeSelect').val();
-                console.log(timeValue, typeValue)
+                // console.log(timeValue, typeValue)
                 if (typeValue === "All" && timeValue === "All") {
                     constructInvoiceTable(invoiceData);
                 } else {
@@ -4219,9 +4219,9 @@ $(".plan_remaining_days_data").each(function(){
             function isOverdue(created_at) {
                 var now = new Date();
                 var createdAt = new Date(created_at);
-                console.log(createdAt, now)
+                // console.log(createdAt, now)
                 if (createdAt <= now) {
-                    console.log("overdue")
+                    // console.log("overdue")
                     return "overdue";
                 } else {
                     return "not overdue";
@@ -4229,7 +4229,7 @@ $(".plan_remaining_days_data").each(function(){
             }
             $("#taskStatusSelect").on("change", function () {
                 var selectedValue = $(this).val();
-                console.log("jnnsddsuhusahdusa", selectedValue)
+                // console.log("jnnsddsuhusahdusa", selectedValue)
                 if (selectedValue === "All") {
                     constructTaskTable(taskData);
                 } else {
@@ -4253,12 +4253,12 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#leaseFilterSelect").on('change', function () {
                 var selectedValue = $(this).val();
-                console.log("lease:",selectedValue)
+                // console.log("lease:",selectedValue)
                 filterAndRenderTableLeads(selectedValue);
             });
             $("#tenantSelect").on('change', function () {
                 var selectedValue = $(this).val();
-                console.log("tenant: ",selectedValue)
+                // console.log("tenant: ",selectedValue)
                 filterAndRenderTableTenant(selectedValue);
             });
             $(document).on('input', '#typehead', function () {
@@ -4324,7 +4324,7 @@ $(".plan_remaining_days_data").each(function(){
                 return '$ ' + numericAmount.toFixed(2);
             }
             $(".filter li").click(function () {
-                console.log($(this))
+                // console.log($(this))
                 var selectedFilter = $(this).find('a').text().trim();
                 $('#selectedFilterText').text(selectedFilter);
                 filterTable(selectedFilter);
@@ -4351,7 +4351,7 @@ $(".plan_remaining_days_data").each(function(){
                 });
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/invoiceReport',
+                url: 'http://localhost:3000/api/spade/invoiceReport',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -4373,7 +4373,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
+                url: 'http://localhost:3000/api/spade/getAllTask',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 processData: false,
@@ -4406,7 +4406,7 @@ $(".plan_remaining_days_data").each(function(){
                     if (xhr.status === 401) {
                         $("#myModal_warning").modal("show");
                     } else {
-                        console.log('API error:', error);
+                        // console.log('API error:', error);
                     }
                 }
             });
@@ -4481,18 +4481,18 @@ $(".plan_remaining_days_data").each(function(){
                 $('#profile').removeClass('dragging hasImage');
                 if (e.originalEvent) {
                     var file = e.originalEvent.dataTransfer.files[0];
-                    console.log(file);
+                    // console.log(file);
                     var reader = new FileReader();
                     //attach event handlers here...
                     reader.readAsDataURL(file);
                     reader.onload = function (e) {
-                        console.log(reader.result);
+                        // console.log(reader.result);
                         $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                     }
                 }
             })
             $('#profile').on('click', function (e) {
-                console.log('clicked')
+                // console.log('clicked')
                 $('#mediaFile').click();
             });
             window.addEventListener("dragover", function (e) {
@@ -4510,7 +4510,7 @@ $(".plan_remaining_days_data").each(function(){
                     var reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = function (e) {
-                        console.log(reader.result);
+                        // console.log(reader.result);
                         $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                     }
                 }
@@ -4581,7 +4581,7 @@ $(".plan_remaining_days_data").each(function(){
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        url: 'http://localhost:3000/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
@@ -4589,7 +4589,7 @@ $(".plan_remaining_days_data").each(function(){
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                             if (localStorage.getItem("htmlLayout")) {
                                 const htmlLayoutValue = localStorage.getItem("htmlLayout");
                                 localStorage.clear();
@@ -4603,10 +4603,10 @@ $(".plan_remaining_days_data").each(function(){
                                 localStorage.setItem("sashlightMode", true)
                             }
                             window.open('./login_module.html', "_self")
-                            console.log('Done');
+                            // console.log('Done');
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                            // console.log(error);
                         }
                     });
                 });
@@ -4621,7 +4621,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead').val() == "") {
                     let count = 1;
                     $("#table_body_property_report tr").each(function (item, index) {
-                        //console.log(count, parseInt($("#lengthSelectBox").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox").val()))
                         if (count > parseInt($("#lengthSelectBox").val())) {
                             $(this).hide()
                         }
@@ -4634,7 +4634,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_lease').val() == "") {
                     let count = 1;
                     $("#table_body_lease_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox2").val()))
                         if (count > parseInt($("#lengthSelectBox2").val())) {
                             $(this).hide()
                         }
@@ -4647,7 +4647,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_tenant').val() == "") {
                     let count = 1;
                     $("#table_body_tenant_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox3").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox3").val()))
                         if (count > parseInt($("#lengthSelectBox3").val())) {
                             $(this).hide()
                         }
@@ -4660,7 +4660,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_invoice').val() == "") {
                     let count = 1;
                     $("#table_body_invoice_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox4").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox4").val()))
                         if (count > parseInt($("#lengthSelectBox4").val())) {
                             $(this).hide()
                         }
@@ -4673,7 +4673,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_task').val() == "") {
                     let count = 1;
                     $("#table_body_task_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox5").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox5").val()))
                         if (count > parseInt($("#lengthSelectBox5").val())) {
                             $(this).hide()
                         }
@@ -4688,7 +4688,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead').val() == "") {
                     let count = 1;
                     $("#table_body_property_report tr").each(function (item, index) {
-                        //console.log(count, parseInt($("#lengthSelectBox").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox").val()))
                         if (count > parseInt($("#lengthSelectBox").val())) {
                             $(this).hide()
                         }
@@ -4701,7 +4701,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_lease').val() == "") {
                     let count = 1;
                     $("#table_body_lease_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox2").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox2").val()))
                         if (count > parseInt($("#lengthSelectBox2").val())) {
                             $(this).hide()
                         }
@@ -4714,7 +4714,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_tenant').val() == "") {
                     let count = 1;
                     $("#table_body_tenant_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox3").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox3").val()))
                         if (count > parseInt($("#lengthSelectBox3").val())) {
                             $(this).hide()
                         }
@@ -4727,7 +4727,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_invoice').val() == "") {
                     let count = 1;
                     $("#table_body_invoice_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox4").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox4").val()))
                         if (count > parseInt($("#lengthSelectBox4").val())) {
                             $(this).hide()
                         }
@@ -4740,7 +4740,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($('#typehead_task').val() == "") {
                     let count = 1;
                     $("#table_body_task_report tr").each(function (item, index) {
-                        console.log(count, parseInt($("#lengthSelectBox5").val()))
+                        // console.log(count, parseInt($("#lengthSelectBox5").val()))
                         if (count > parseInt($("#lengthSelectBox5").val())) {
                             $(this).hide()
                         }

@@ -1473,14 +1473,14 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1488,7 +1488,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1555,14 +1555,14 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -1570,7 +1570,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1582,20 +1582,20 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1607,7 +1607,7 @@
             });
         });
         $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1625,7 +1625,7 @@
                 });
             },
             error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
+                // console.log('Error occurred while fetching state and city data.');
             }
         });
     </script>
@@ -1655,7 +1655,7 @@
                 }
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1700,7 +1700,7 @@
             let vendorData;
             function resetAccordions() {
                 $('#addModal input, #addModal textarea, #addModal select').each(function () {
-                    console.log($(this))
+                    // console.log($(this))
                     $(this).removeClass('border-danger');
                     $(this).removeClass('border-green');
                 });
@@ -1732,7 +1732,7 @@
             }
             function getVendorCategoryFunction() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
+                    url: 'http://localhost:3000/api/spade/getVendorCategory',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -1740,7 +1740,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response.data)
+                        // console.log(response.data)
                         $("#category").empty()
                         if (response?.data?.length === 0) {
                             $("#category").prop("disabled", true);
@@ -1798,7 +1798,7 @@
                 var category = $("#category").val();
                 if (category == "Choose..." || category == "Add vendor categories first!!") {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1809,8 +1809,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("addVendorCategory");
-                            console.log(response.insertedCategories);
+                            // console.log("addVendorCategory");
+                            // console.log(response.insertedCategories);
                             category = response?.categoryID
                             formData.append('firstName', firstName);
                             formData.append('lastName', lastName);
@@ -1822,9 +1822,9 @@
                             formData.append('workPhone', workPhone);
                             formData.append('email', email);
                             formData.append('categoryID', category);
-                            console.log(status)
+                            // console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1845,7 +1845,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                     $('#preloader').fadeOut('slow', function () {
                                         $(this).hide();
                                     });
@@ -1873,7 +1873,7 @@
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log(xhr.responseText);
+                            // console.log(xhr.responseText);
                         }
                     });
                 } else {
@@ -1881,7 +1881,7 @@
                     var currentDisplayStyle = categoryCol.css('display');
                     if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "") {
                         $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
+                        url: 'http://localhost:3000/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1892,8 +1892,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("addVendorCategory");
-                            console.log(response.insertedCategories);
+                            // console.log("addVendorCategory");
+                            // console.log(response.insertedCategories);
                             category = response.insertedCategories
                             formData.append('firstName', firstName);
                             formData.append('lastName', lastName);
@@ -1905,9 +1905,9 @@
                             formData.append('workPhone', workPhone);
                             formData.append('email', email);
                             formData.append('categoryID', category);
-                            console.log(status)
+                            // console.log(status)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                                url: 'http://localhost:3000/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1928,7 +1928,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                     success: function (response) {
-                                        console.log(response)
+                                        // console.log(response)
                                         $('#preloader').fadeOut('slow', function () {
                                             $(this).hide();
                                         });
@@ -1956,7 +1956,7 @@
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log(xhr.responseText);
+                                // console.log(xhr.responseText);
                             }
                         });
                     } else {
@@ -1970,9 +1970,9 @@
                         formData.append('workPhone', workPhone);
                         formData.append('email', email);
                         formData.append('categoryID', category);
-                        console.log(status)
+                        // console.log(status)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
+                            url: 'http://localhost:3000/api/spade/addVendor',
                             type: 'POST',
                             data: JSON.stringify({
                                 firstName: firstName,
@@ -1993,7 +1993,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response)
+                                // console.log(response)
                                 $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });
@@ -2019,7 +2019,7 @@
             });
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
+                    url: 'http://localhost:3000/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2027,7 +2027,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "No data found") {
                             $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
                         }
@@ -2103,7 +2103,7 @@
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
+                    url: `http://localhost:3000/api/spade/deleteVendor/${vendorID}`,
                     type: 'DELETE',
                     contentType: false,
                     processData: false,
@@ -2111,7 +2111,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "Vendor Deleted successful") {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
@@ -2146,7 +2146,7 @@
             })
             $("#save").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
+                    url: `http://localhost:3000/api/spade/updateVendor`,
                     type: 'PUT',
                     data: JSON.stringify({
                         vendId: vendorID,
@@ -2188,7 +2188,7 @@
             })
             $("#email").on("input",function(){
                 $.ajax({
-                    url:`https://backend.app.spaderent.com/api/spade/VendorCheckEmail/${$("#email").val()}`,
+                    url:`http://localhost:3000/api/spade/VendorCheckEmail/${$("#email").val()}`,
                     type:"GET",
                     contentType: "application/json",
                     headers:{
@@ -2196,7 +2196,7 @@
                     },
                     success:function(response){
                         if(response.message == "Email already exists "){
-                            console.log("email already exists")
+                            // console.log("email already exists")
                             $("#email").addClass("border-danger")
                             $("#email").removeClass("border-green")
                             $("#email-exist").removeClass("d-none")
@@ -2208,15 +2208,15 @@
                             $("#next").removeClass("disabled")
                         }
                     },error:function(xhr,status,error){
-                        console.log(xhr)
-                        console.log(error)
+                        // console.log(xhr)
+                        // console.log(error)
                     }
                 })
             })
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2233,7 +2233,7 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt($(a).find('.rentAmount').text());
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idA - idB;
@@ -2286,10 +2286,10 @@
                 var displayStyle = inputFieldCol.css("display");
                 var inputValue = inputField.val();
                 if (displayStyle == "block" && inputValue == "") {
-                    console.log(displayStyle);
+                    // console.log(displayStyle);
                     allFieldsFilled = false;
                 }
-                console.log(allFieldsFilled);
+                // console.log(allFieldsFilled);
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
                 } else {
@@ -2339,7 +2339,7 @@
                 var email = $(this).val();
                 var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
                 if (!email.match(emailRegex)) {
-                    console.log("invalid");
+                    // console.log("invalid");
                     $(this).addClass("border-danger")
                     $(this).removeClass("border-green")
                 } else {
@@ -2353,7 +2353,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2361,7 +2361,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -2375,10 +2375,10 @@
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -2387,22 +2387,22 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -2410,22 +2410,22 @@
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -2435,7 +2435,7 @@
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -2450,7 +2450,7 @@
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -2479,7 +2479,7 @@
             };
             input2.on('input', function () {
                 reset2();
-                console.log("in phone input");
+                // console.log("in phone input");
                 if (input2.val().trim()) {
                     if (iti2.isValidNumber()) {
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti2.getNumber(), iti2.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
@@ -2517,7 +2517,7 @@
         };
         input3.addEventListener('input', () => {
             reset3();
-            console.log("in phone input")
+            // console.log("in phone input")
             if (input3.value.trim()) {
                 if (iti3.isValidNumber()) {
                     validMsg3.classList.remove("d-none");
@@ -2554,7 +2554,7 @@
         };
         input4.addEventListener('input', () => {
             reset4();
-            console.log("in phone input")
+            // console.log("in phone input")
             if (input4.value.trim()) {
                 if (iti4.isValidNumber()) {
                     validMsg4.classList.remove("d-none");
@@ -2591,7 +2591,7 @@
             };
             input1.addEventListener('input', () => {
                 reset();
-                console.log("in phone input")
+                // console.log("in phone input")
                 if (input1.value.trim()) {
                     if (iti1.isValidNumber()) {
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti1.getNumber(), iti1.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);

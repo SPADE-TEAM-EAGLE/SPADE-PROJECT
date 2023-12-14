@@ -1268,14 +1268,14 @@
         <script>
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1284,7 +1284,7 @@
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1293,10 +1293,10 @@
             function initializeWebSocket() {
                 var socket = io('https://engage.app.spaderent.com');
                 socket.on('connect', function () {
-                    console.log('WebSocket connected');
+                    // console.log('WebSocket connected');
                 });
                 socket.on('connect_error', function (error) {
-                    console.error('WebSocket connection error:', error);
+                  // console.error('WebSocket connection error:', error);
                 });
                 return socket;
             }
@@ -1312,27 +1312,27 @@
             localStorage.removeItem('tenantName');
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                    url: 'http://localhost:3000/api/spade/ProfileComplete',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                         $(".progress").html(myprogress)
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
                 let id;
                 let userEmail;
                 let emailChange = false;
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1340,8 +1340,8 @@
                     success: function (response) {
                         adjustPlan(response)
                         localStorage.setItem("landlordName", response.userName)
-                        console.log("protected");
-                        console.log(response);
+                        // console.log("protected");
+                        // console.log(response);
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1381,13 +1381,13 @@
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/activeUser',
+                    url: 'http://localhost:3000/api/spade/activeUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1395,10 +1395,10 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
                 $('#send-text').on('click', function (ev) {
@@ -1413,7 +1413,7 @@
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -1423,10 +1423,10 @@
                             },
                             success: function (response) {
                                 socket.emit('chatMessage', messageData);
-                                console.log(messageData);
+                                // console.log(messageData);
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+                                // console.log(error);
                             }
                         });
                     }
@@ -1443,7 +1443,7 @@
                             receiverID: Number(localStorage.getItem("tenantId"))
                         };
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                            url: 'http://localhost:3000/api/spade/createNewMessage',
                             type: 'POST',
                             data: JSON.stringify(messageData),
                             contentType: 'application/json',
@@ -1452,11 +1452,11 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(messageData);
+                                // console.log(messageData);
                                 socket.emit('chatMessage', messageData);
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+                                // console.log(error);
                             }
                         });
                     }
@@ -1479,12 +1479,12 @@
                 socket.on('recieveMessage', (message) => {
                     updateTime();
                     chatMessages.push(message.message);
-                    console.log(message);
+                    // console.log(message);
                     if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "tenant") {
                         return;
                     }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
-                        console.log("check rec", message);
+                        // console.log("check rec", message);
                         messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
                             <div class="profileImage me-1 ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()}</div>
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" && localStorage.getItem("tenantImg") !== "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? '' : 'd-none'}""></div>
@@ -1515,7 +1515,7 @@
                 });
             }
             function dropHandler(ev) {
-                console.log("File(s) dropped");
+                // console.log("File(s) dropped");
                 ev.preventDefault();
                 if (ev.dataTransfer.items) {
                     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -1527,12 +1527,12 @@
                     });
                 } else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
-                        console.log(`… file[${i}].name = ${file.name}`);
+                        // console.log(`… file[${i}].name = ${file.name}`);
                     });
                 }
             }
             function dragOverHandler(ev) {
-                console.log("File(s) in drop zone");
+                // console.log("File(s) in drop zone");
                 ev.preventDefault();
             }
             $(document).on('click', '.delete-file', function () {
@@ -1545,8 +1545,8 @@
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -1631,7 +1631,7 @@
                     }
                     var str = "";
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'http://localhost:3000/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -1640,14 +1640,14 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response.images);
+                            // console.log(response.images);
                             response.images?.forEach(function (value, index, array) {
                                 str += value.image_url;
                                 if (index < array.length - 1) {
                                     str += ",";
                                 }
                             });
-                            console.log(str);
+                            // console.log(str);
                             var messageData2 = {
                                 chatId: localStorage.getItem("chatId"),
                                 message: str,
@@ -1656,7 +1656,7 @@
                                 receiverID: Number(localStorage.getItem("tenantId"))
                             };
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/createNewMessage',
+                                url: 'http://localhost:3000/api/spade/createNewMessage',
                                 type: 'POST',
                                 data: JSON.stringify(messageData2),
                                 contentType: 'application/json',
@@ -1665,7 +1665,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(messageData2);
+                                    // console.log(messageData2);
                                     socket.emit('chatMessage', messageData2);
                                     $("#loading-btn").css("display", "none");
                                     $("#submit-photo").css("display", "inline-block")
@@ -1675,7 +1675,7 @@
                                     chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                                 },
                                 error: function (xhr, status, error) {
-                                    console.log(error);
+                                    // console.log(error);
                                 }
                             });
                         },
@@ -1684,7 +1684,7 @@
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 }
@@ -1703,7 +1703,7 @@
                         recieverId: String(tenatId)
                     };
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/accessChats',
+                        url: 'http://localhost:3000/api/spade/accessChats',
                         type: 'POST',
                         data: JSON.stringify(tenantIdd),
                         contentType: 'application/json',
@@ -1712,7 +1712,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response[0]);
+                            // console.log(response[0]);
                             function myGreeting() {
                                 chatId = response[0].id;
                                 tenatIid = tenatId;
@@ -1722,7 +1722,7 @@
                                 localStorage.setItem("tenantName", tenatName)
                                 socket.emit('joinRoom', { chatId: localStorage.getItem("chatId") });
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountLandlord',
+                                    url: 'http://localhost:3000/api/spade/updateMessagesCountLandlord',
                                     type: 'PUT',
                                     data: JSON.stringify({
                                         sender: tenatId
@@ -1732,23 +1732,23 @@
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        console.log("updateMessagesCountLandlord");
-                                        console.log(response);
+                                        // console.log("updateMessagesCountLandlord");
+                                        // console.log(response);
                                         $(`#chat` + tenatId).text('0')
                                         $(`#chat` + tenatId).removeClass('bg-success').addClass('bg-primary')
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(error);
+                                        // console.log(error);
                                     }
                                 });
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(tenatId) + '/tenant',
+                                    url: 'http://localhost:3000/api/spade/getUserById/' + Number(tenatId) + '/tenant',
                                     type: 'GET',
                                     contentType: false,
                                     processData: false,
                                     success: function (response) {
-                                        console.log("getUserById");
-                                        console.log(response);
+                                        // console.log("getUserById");
+                                        // console.log(response);
                                         var imgggg = response.data.image;
                                         $(".person").removeClass("profileImage")
                                         if (response.data.image != null && response.data.image != " ") {
@@ -1780,7 +1780,7 @@
                                             $('#online').hide()
                                         }
                                         $.ajax({
-                                            url: 'https://backend.app.spaderent.com/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
+                                            url: 'http://localhost:3000/api/spade/LandlordMessages/' + localStorage.getItem("chatId"),
                                             type: 'GET',
                                             contentType: 'application/json',
                                             processData: false,
@@ -1789,14 +1789,14 @@
                                             },
                                             success: function (response) {
                                                 $.ajax({
-                                                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                                                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                                                     method: 'GET',
                                                     headers: {
                                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                                     },
                                                     success: function (response) {
-                                                        console.log("getMessagesCountLandlord");
-                                                        console.log(response.Count['count(message)']);
+                                                        // console.log("getMessagesCountLandlord");
+                                                        // console.log(response.Count['count(message)']);
                                                         $('#chatCounter').text(response.Count['count(message)'])
                                                     },
                                                     error: function (xhr, status, error) {
@@ -1805,7 +1805,7 @@
                                                             $('#myModal_warning').modal('hide');
                                                             window.location = '../Landlord/login_module.html';
                                                         }, 2000);
-                                                        console.log(error);
+                                                        // console.log(error);
                                                     }
                                                 });
                                                 var messs1 = "";
@@ -1814,7 +1814,7 @@
                                                 $('#person-name-bold').text(tenatName)
                                                 $('#chatLoader').addClass('d-none')
                                                 $('#chat').removeClass('d-none')
-                                                console.log(response.data.length);
+                                                // console.log(response.data.length);
                                                 if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
                                                     var randomImg = "../assets/images/users/5.jpg";
                                                     for (var i = 0; i < response.data.length; i++) {
@@ -1889,26 +1889,26 @@
                                                 messDiv.scrollTop(scrollBottom);
                                             },
                                             error: function (xhr, status, error) {
-                                                console.log(error);
+                                                // console.log(error);
                                             }
                                         });
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(error);
+                                        // console.log(error);
                                     }
                                 });
                             }
                             myGreeting();
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                            // console.log(error);
                         }
                     });
                 });
             };
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                    url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -1916,8 +1916,8 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("viewAllPropertyTenant");
-                        console.log(response);
+                        // console.log("viewAllPropertyTenant");
+                        // console.log(response);
                         var randomImg1 = "../assets/images/users/5.jpg";
                         var tab_pane = $('#tab-pane-ll');
                         tab_pane.empty();
@@ -1929,9 +1929,9 @@
                             tab_pane.append(row);
                         } else {
                             response.data[0]?.forEach(function (tenant) {
-                                console.log("viewAllPropertyTenant")
-                                console.log(tenant)
-                                console.log(tenant.tenantImages?.split(",")[0])
+                                // console.log("viewAllPropertyTenant")
+                                // console.log(tenant)
+                                // console.log(tenant.tenantImages?.split(",")[0])
                                 var row = `
                                     <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                         <div class="main-img-user">
@@ -1964,7 +1964,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1973,7 +1973,7 @@
             function logout() {
                 $(document).ready(function () {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                        url: 'http://localhost:3000/api/spade/inactiveUser',
                         type: 'PUT',
                         contentType: false,
                         processData: false,
@@ -1981,7 +1981,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                             if (localStorage.getItem("htmlLayout")) {
                                 const htmlLayoutValue = localStorage.getItem("htmlLayout");
                                 localStorage.clear();
@@ -1995,10 +1995,10 @@
                                 localStorage.setItem("sashlightMode", true)
                             }
                             window.open('./login_module.html', "_self")
-                            console.log('Done');
+                            // console.log('Done');
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                            // console.log(error);
                         }
                     });
                 });

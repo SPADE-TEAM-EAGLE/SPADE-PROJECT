@@ -1,13 +1,13 @@
 var username;
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    url: 'http://localhost:3000/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
     success: function ({ userName, email, userId, image }) {
         username=userName
-        console.log(username)
+      // console.log(username)
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",

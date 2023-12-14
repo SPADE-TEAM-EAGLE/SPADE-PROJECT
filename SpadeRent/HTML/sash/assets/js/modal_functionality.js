@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    url: 'http://localhost:3000/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -14,9 +14,9 @@ $.ajax({
     $("#header-user").text(toTitleCase(userName))
     },
     error: function(xhr, status, error) {
-        console.log('Error occurred while fetching state and city data.');
-        console.log(xhr);
-        console.log(error);
+      // console.log('Error occurred while fetching state and city data.');
+      // console.log(xhr);
+      // console.log(error);
     }
 });
 function checkFieldsStatus(accordionId) {
@@ -80,7 +80,7 @@ function checkFieldsFilled(id) {
             chevronIcon.classList.add("tick");
             break;
         case 3:
-            console.log(2)
+          // console.log(2)
             chevronIcon.classList.remove("fi-rs-exclamation");
             chevronIcon.classList.add("chevron");
             chevronIcon.classList.remove("cross");
@@ -183,23 +183,23 @@ fileElement
 }
 $(document).ready(function () {
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/getStates',
+        url: 'http://localhost:3000/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
-            console.log(data)
+          // console.log(data)
             var stateDropdown = $('#state');
             var stateDropdown1 = $('#state1');
                 states=data
             data.forEach(function(state) {
-                console.log(stateDropdown)
+              // console.log(stateDropdown)
                 stateDropdown.append($('<option></option>').text(state.states).val(state.states));
                 stateDropdown1.append($('<option></option>').text(state.states).val(state.states));
             });
         },
         error: function(xhr, status, error) {
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     function areAllFieldsFilled() {
@@ -263,7 +263,7 @@ $(document).ready(function () {
     });
     $('#fileInput').on('change', function () {
         var files = Array.from($(this)[0].files);
-        console.log(files)
+      // console.log(files)
         files.forEach(function (file) {
             file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
         });
@@ -325,7 +325,7 @@ $(document).on('click', '#next', function(e) {
 $("#addModal").modal("hide")
 $('#preloader').css('display','flex')
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            url: 'http://localhost:3000/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -347,7 +347,7 @@ $('#preloader').css('display','flex')
                     images: imageArray
                 };
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    url: 'http://localhost:3000/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -389,8 +389,8 @@ $('#preloader').css('display','flex')
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
                        }
-                        console.log('Error: ' + error);
-                        console.log(xhr)
+                      // console.log('Error: ' + error);
+                      // console.log(xhr)
                     }
                 });
             },
@@ -399,7 +399,7 @@ $('#preloader').css('display','flex')
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                          // console.log('Error: ' + error);
             }
         });
     } else {
@@ -417,7 +417,7 @@ $('#preloader').css('display','flex')
         $("#addModal").modal("hide")
         $('#preloader').css('display','flex')
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/property',
+            url: 'http://localhost:3000/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',

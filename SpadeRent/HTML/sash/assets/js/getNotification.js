@@ -21,13 +21,13 @@ function convertTimestamp(timestamp) {
 }
 function GetNotification(){
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/notify",
+    url: "http://localhost:3000/api/spade/notify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      console.log(response);
+    // console.log(response);
       const notification = [
         ...response.invoiceNotify,
         ...response.propertyNotify,
@@ -39,9 +39,9 @@ function GetNotification(){
       );
       const unread = notification.filter((item) => item.notify === 0);
       const read = notification.filter((item) => item.notify === 1);
-      console.log(unread, "unread");
-      console.log(read, "read");
-      console.log(notification, "all");
+    // console.log(unread, "unread");
+    // console.log(read, "read");
+    // console.log(notification, "all");
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -165,7 +165,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "task");
           });
         }
@@ -257,7 +257,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "task");
           });
         } else if (item.tenantID) {
@@ -287,7 +287,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "task");
           });
         }
@@ -323,7 +323,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "invoice");
           });
         } else if (item.propertyID) {
@@ -357,7 +357,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "property");
           });
         } else if (item.taskID) {
@@ -389,7 +389,7 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "task");
           });
         } else if (item.tenantID) { 
@@ -421,16 +421,16 @@ function GetNotification(){
           );
           $(".notification-item").on("click", function () {
             const itemId = $(this).data("id");
-            console.log("itemId", itemId);
+          // console.log("itemId", itemId);
             updateDataNotify(itemId, "tenant");
           });
         }
       });
     },
     error: function (xhr, status, error) {
-      console.log("Error occurred while fetching state and city data.");
-      console.log(xhr);
-      console.log(error);
+    // console.log("Error occurred while fetching state and city data.");
+    // console.log(xhr);
+    // console.log(error);
     },
   });
 }  
@@ -441,7 +441,7 @@ $("#updateAllNotifyRead").on("click", function () {
 });
 function getNotifyData(){
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/notify",
+    url: "http://localhost:3000/api/spade/notify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -449,16 +449,16 @@ function getNotifyData(){
     success: function (response) {
     },
     error: function (xhr, status, error) {
-      console.log("Error occurred while fetching state and city data.");
-      console.log(xhr);
-      console.log(error);
+    // console.log("Error occurred while fetching state and city data.");
+    // console.log(xhr);
+    // console.log(error);
     },
   });
 }
 function updateAllNotifyRead() {
   getNotifyData()
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
+    url: "http://localhost:3000/api/spade/updateAllNotifyRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
@@ -468,16 +468,16 @@ function updateAllNotifyRead() {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      console.log(response);
+    // console.log(response);
     },
     error: function (xhr, status, error) {
-      console.log("Error: " + error);
+    // console.log("Error: " + error);
     },
   });
 }
 function updateDataNotify(notificationId, type) {
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
+    url: "http://localhost:3000/api/spade/updateReadUnRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
@@ -498,10 +498,10 @@ function updateDataNotify(notificationId, type) {
       }else if(type == "tenant"){
         window.location.href="./add-tenant.html";
       }
-      console.log(response);
+    // console.log(response);
     },
     error: function (xhr, status, error) {
-      console.log("Error: " + error);
+    // console.log("Error: " + error);
     },
   });
 }

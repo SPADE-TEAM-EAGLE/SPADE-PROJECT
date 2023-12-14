@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function callAPI() {
       $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+        url: 'http://localhost:3000/api/spade/inactiveUser',
     type: 'PUT',
     contentType: false,
     processData: false,
@@ -9,7 +9,7 @@ $(document).ready(function() {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
     },
         success: function(response) {
-          console.log('API call successful:', response);
+        // console.log('API call successful:', response);
         },
         error: function(xhr, status, error) {
           console.error('Error in API call:', error);
@@ -19,16 +19,16 @@ $(document).ready(function() {
     let pageReloaded = false;
     setTimeout(function() {
       pageReloaded = false;
-      console.log(pageReloaded)
+    // console.log(pageReloaded)
     }, 5000);
     let navigationEntries = window.performance.getEntriesByType('navigation');
     if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
       pageReloaded = true;
     }
-  console.log(pageReloaded)
+// console.log(pageReloaded)
     $(window).on('unload', function(event) {
       if (!pageReloaded) {
-        console.log(pageReloaded)
+      // console.log(pageReloaded)
         callAPI();
         alert('API call made');
       }

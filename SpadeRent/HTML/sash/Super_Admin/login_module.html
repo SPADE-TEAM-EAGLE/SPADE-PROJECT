@@ -404,7 +404,7 @@ togglePassword1.addEventListener("click", function (e) {
       password: password
     };
     $.ajax({
-      url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
+      url: "http://localhost:3000/api/spade/signInAdmin",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(requestData),
@@ -443,7 +443,7 @@ togglePassword1.addEventListener("click", function (e) {
     setTimeout(function () {
       $("#myModal_warning_connection").modal("hide");
     }, 2000);
-    console.log(error);
+  // console.log(error);
   }
   if ($('body').hasClass('dark-mode')) {
     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');

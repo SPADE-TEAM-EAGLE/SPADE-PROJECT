@@ -1280,14 +1280,14 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -1295,7 +1295,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1307,20 +1307,20 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1356,7 +1356,7 @@
     }
 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1400,9 +1400,9 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
@@ -1417,14 +1417,14 @@ $(".plan_remaining_days_data").each(function(){
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+                url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1449,11 +1449,11 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/propertyTask',
+                            url: 'http://localhost:3000/api/spade/propertyTask',
                             type: 'GET',
                             data: {
                                 Id:propertyId
@@ -1463,8 +1463,8 @@ $(".plan_remaining_days_data").each(function(){
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-console.log("propertyTask");
-console.log(response);
+// console.log("propertyTask");
+// console.log(response);
                         var tableBody = $('#table_body');
                         tableBody.empty();
                         function toTitleCase(str) {
@@ -1472,8 +1472,8 @@ console.log(response);
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            console.log("propertyTask");
-                            console.log(response);
+                            // console.log("propertyTask");
+                            // console.log(response);
                             if(response == "Error Get property Task" || response.message == "No property Task data found"){
                                 var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
                         tableBody.append(row);
@@ -1566,7 +1566,7 @@ if (task.dueDate) {
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                             }
                         })
                     })
@@ -1575,7 +1575,7 @@ if (task.dueDate) {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1583,7 +1583,7 @@ if (task.dueDate) {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1597,10 +1597,10 @@ if (task.dueDate) {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1611,7 +1611,7 @@ if (task.dueDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1626,7 +1626,7 @@ if (task.dueDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1673,7 +1673,7 @@ if (task.dueDate) {
                 case "Add":
                     break;
                 case "View":
-                    console.log($("#nav_links li:eq('1')"))
+                    // console.log($("#nav_links li:eq('1')"))
                     $("#nav_links li:eq('1')").addClass("d-none")
                     break;
                 case "Delete":

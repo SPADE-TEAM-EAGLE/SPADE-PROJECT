@@ -1047,14 +1047,14 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
@@ -1062,7 +1062,7 @@
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1076,7 +1076,7 @@
         var unitsPermission;
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1120,26 +1120,26 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1362,7 +1362,7 @@ $(".plan_remaining_days_data").each(function(){
                 formData.append('image', files[i]);
             }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/property',
+                url: 'http://localhost:3000/api/spade/property',
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -1372,7 +1372,7 @@ $(".plan_remaining_days_data").each(function(){
                 },
                 crossDomain: true,
                 success: function (response) {
-                    console.log(response)
+                    // console.log(response)
                     window.location('../Landlord/properties-all.html')
                 },
                 error: function (xhr, status, error) {
@@ -1380,7 +1380,7 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         });
@@ -1396,7 +1396,7 @@ $(".plan_remaining_days_data").each(function(){
         $("#add-units").click(() => {
             $("#add-units").prop("disabled", true)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
+                url: 'http://localhost:3000/api/spade/addMoreUnits',
                 type: 'POST',
                 data: JSON.stringify({
                     "propertyID": propertyId
@@ -1415,12 +1415,12 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             })
         })
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
+            url: 'http://localhost:3000/api/spade/viewProperty',
             type: 'GET',
             data: {
                 propertyId
@@ -1446,12 +1446,12 @@ $('#property_size').text(data.propertySQFT)
                 setTimeout(function () {
                     $('#myModal_warning_connection').modal('hide');
                 }, 2000);
-                console.log('Error: ' + error);
+                // console.log('Error: ' + error);
             }
         });
         function getData() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
+                url: 'http://localhost:3000/api/spade/PropertyUnits',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1465,7 +1465,7 @@ $('#property_size').text(data.propertySQFT)
                     propertyName,
                     propertyAddress
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     const units = data[0];
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -1540,13 +1540,13 @@ $('#property_size').text(data.propertySQFT)
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         }
         getData()
         $(document).on("click",'.done-option',function (e) {
-                        console.log(22)
+                        // console.log(22)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         const unitId = unitIdElement.text();
@@ -1560,11 +1560,11 @@ $('#property_size').text(data.propertySQFT)
                                 cellValue = $(this).text()
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
-                        console.log(propertyId)
+                        // console.log(propertyId)
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
+                            url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
                             data: JSON.stringify({
                                 id: values[0],
@@ -1578,7 +1578,7 @@ $('#property_size').text(data.propertySQFT)
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response)
+                                // console.log(response)
                                 getData()
                             },
                             error: function (xhr, status, error) {
@@ -1586,7 +1586,7 @@ $('#property_size').text(data.propertySQFT)
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         })
                     });
@@ -1598,7 +1598,7 @@ $('#property_size').text(data.propertySQFT)
                         unitIdElement = $(this).closest("tr").find(".unit-id");
                         unitId = unitIdElement.text();
                         values=[]
-                        console.log(values)
+                        // console.log(values)
                         $(`#${unitId}`).find('td').each(function () {
                             let cellValue = "";
                             const input = $(this).find('input')
@@ -1608,7 +1608,7 @@ $('#property_size').text(data.propertySQFT)
                                 cellValue = $(this).text()
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
                         $("#unit-id-delete").text(values[3] !== "" ? values[3] : "Not set")
                         $("#myModal_delete").modal("show");
@@ -1616,7 +1616,7 @@ $('#property_size').text(data.propertySQFT)
                     $('#confirmDelete').click(function (e) {
                         $("#myModal_delete").modal("hide");
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
+                            url: 'http://localhost:3000/api/spade/deleteMoreUnits',
                             type: 'DELETE',
                             data: JSON.stringify({
                                 "propertyID": propertyId,
@@ -1639,13 +1639,13 @@ $('#property_size').text(data.propertySQFT)
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     })
                     $(document).on("click",".edit-option",function () {
                         $(this).closest('td').find('.done-option').removeAttr('disabled');
-                        console.log(1)
+                        // console.log(1)
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         $(this).addClass("d-none")
                         $(this).next().removeClass('d-none');
@@ -1661,7 +1661,7 @@ $('#property_size').text(data.propertySQFT)
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1669,7 +1669,7 @@ $('#property_size').text(data.propertySQFT)
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1683,10 +1683,10 @@ $('#property_size').text(data.propertySQFT)
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1733,7 +1733,7 @@ $('#property_size').text(data.propertySQFT)
         case "Add":
             break;
         case "View":
-            console.log($("#nav_links li:eq('1')"))
+            // console.log($("#nav_links li:eq('1')"))
             $("#nav_links li:eq('1')").addClass("d-none")
             break;
         case "Delete":

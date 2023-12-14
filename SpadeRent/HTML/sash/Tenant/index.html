@@ -1454,14 +1454,14 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                  // console.log("getMessagesCountLandlord");
+                  // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -1470,7 +1470,7 @@
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log(error);
+                  // console.log(error);
                 }
             });
         });
@@ -1492,14 +1492,14 @@
         $(document).ready(() => {
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
                     function toTitleCase(str) {
-                        console.log(str)
+                      // console.log(str)
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
@@ -1517,31 +1517,31 @@
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
+                url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response)
+                  // console.log(response)
                 },
                 error: function (xhr, status, error) {
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                url: 'http://localhost:3000/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1549,7 +1549,7 @@
                 },
                 success: function (response) {
                     const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                  // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#invoice-amount").text("$ " + (totalAmount.totalAmount || 0))
                     $("#amount-paid").text("$ " + (totalAmountPaid.totalPaid || 0))
                     $("#amount-outstanding").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
@@ -1566,12 +1566,12 @@
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
-                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
+                var apiUrl = 'http://localhost:3000/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
                 $.ajax({
                     url: apiUrl,
                     method: 'GET',
@@ -1579,13 +1579,13 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         taskInfo = response.data[0]
                         tableBody.empty(); // Clear existing table data
                         var filteredTasks = [];
                         if (tabId === 'tab21') {
                             filteredTasks = response.data[0].filter(function (task) {
-                                console.log(task.created_at)
+                              // console.log(task.created_at)
                                 var taskDate = new Date(task.created_at).toLocaleDateString();
                                 var currentDate = new Date().toLocaleDateString();
                                 return taskDate === currentDate;
@@ -1615,7 +1615,7 @@
                                 var row = $('<tr></tr>');
                                 var createdDate = moment(task.created_at);
                                 var currentDate = moment();
-                                console.log(createdDate, currentDate);
+                              // console.log(createdDate, currentDate);
                                 var timeDiff = moment.duration(currentDate.diff(createdDate));
                                 var daysDiff = timeDiff.asDays();
                                 var hoursDiff = timeDiff.asHours();
@@ -1699,7 +1699,7 @@
                         }
                     },
                     error: function (error) {
-                        console.log('Error fetching data from API:', error);
+                      // console.log('Error fetching data from API:', error);
                     }
                 });
             }
@@ -1732,7 +1732,7 @@
                 grid: COL_WIDTH - GUTTER_WIDTH,
                 handles: 'se',
                 resize: function (e, ui) {
-                    console.log('resized', ui.size)
+                  // console.log('resized', ui.size)
                     $(this).css('width', '').removeClass(function (index, css) {
                         return (css.match(/(^|\s)col-sm-\S+/g) || []).join(' ')
                     })
@@ -1742,7 +1742,7 @@
             var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
             $(window).resize(function () {
                 colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0]
-                console.log('set colWidth to', colWidth, $('.main-container').width())
+              // console.log('set colWidth to', colWidth, $('.main-container').width())
             })
         })
     </script>
@@ -1751,7 +1751,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                    url: 'http://localhost:3000/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1759,7 +1759,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         localStorage.removeItem('authtoken');
                         localStorage.clear();
                         if ($('body').hasClass('dark-mode')) {
@@ -1768,10 +1768,10 @@
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('../Tenant/login_module.html', "_self")
-                        console.log('Done');
+                      // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                      // console.log(error);
                     }
                 });
             });

@@ -3104,14 +3104,14 @@
                 $('#addProspectSourceCol1').css('display', 'block')
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -3119,7 +3119,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -3140,12 +3140,12 @@
                     $field.addClass('border-danger').removeClass('border-green');
                     $errorMessage.removeClass('d-none');
                     $('#update').prop('disabled', true);
-                    console.log("empty");
+                    // console.log("empty");
                 } else {
                     $field.removeClass('border-danger').addClass('border-green');
                     $errorMessage.addClass('d-none');
                     $('#update').prop('disabled', false);
-                    console.log("filles");
+                    // console.log("filles");
                 }
             }
             $('#editModal #accordion-item1 :input[required], #editModal #accordion-item2 :input[required]').on('input change', function () {
@@ -3158,7 +3158,7 @@
             })
             $('#addModal_units_close').click(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3167,7 +3167,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#propertyInfo');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -3212,13 +3212,13 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
             $('#addModal_units').on('hidden.bs.modal', function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3227,7 +3227,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#propertyInfo');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -3272,13 +3272,13 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             });
             function getData2() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
+                    url: 'http://localhost:3000/api/spade/PropertyUnits',
                     type: 'GET',
                     data: {
                         propertyId: propertyId2
@@ -3292,7 +3292,7 @@
                         propertyName,
                         propertyAddress
                     }) {
-                        console.log(data)
+                        // console.log(data)
                         const units = data[0];
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -3372,14 +3372,14 @@
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             }
             $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
+                                url: 'http://localhost:3000/api/spade/addMoreUnits',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2
@@ -3398,7 +3398,7 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         })
@@ -3415,11 +3415,11 @@
                                     cellValue = $(this).text()
                                 }
                                 values.push(cellValue)
-                                console.log(values)
+                                // console.log(values)
                             });
-                            console.log(propertyId2)
+                            // console.log(propertyId2)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
+                                url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     id: values[0],
@@ -3433,7 +3433,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
@@ -3441,7 +3441,7 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         });
@@ -3460,7 +3460,7 @@
                                 values.push(cellValue)
                             });
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
+                                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
                                 type: 'DELETE',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2,
@@ -3472,7 +3472,7 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(1)
+                                    // console.log(1)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
@@ -3480,13 +3480,13 @@
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         })
                         $(document).on("click",".edit-option1",function () {
                             $(this).closest('td').find('.done-option').removeAttr('disabled');
-                            console.log(1)
+                            // console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
                             $(this).next().removeClass('d-none');
@@ -3498,7 +3498,7 @@
                             });
                         })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3527,7 +3527,7 @@
                     $("#header-user").text(toTitleCase(userName))
                     userEmail = email
                     id1 = userId
-                    console.log($("#user-email"))
+                    // console.log($("#user-email"))
                     $("#user-email").val(email)
                     const createdDate_div = new Date(create_at);
 const currentDate_div = new Date();
@@ -3547,13 +3547,13 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3562,7 +3562,7 @@ $(".plan_remaining_days_data").each(function(){
                 },
                 success: function (response) {
                     var properties = response.data;
-                    console.log(response.data)
+                    // console.log(response.data)
                     var propertySelect = $('#propertyInfo');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
@@ -3581,7 +3581,7 @@ $(".plan_remaining_days_data").each(function(){
                         });
                         var propertyUnitSelect = $('#unitInfo');
                         propertyUnitSelect.empty()
-                        console.log(selectedProperty)
+                        // console.log(selectedProperty)
                         if (selectedProperty.vacantUnits.length === 0) {
                             propertyUnitSelect.prop("disabled", true);
                             propertyUnitSelect.append($('<option></option>')
@@ -3606,7 +3606,7 @@ $(".plan_remaining_days_data").each(function(){
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $("#list-view").hide();
@@ -3625,7 +3625,7 @@ $(".plan_remaining_days_data").each(function(){
             $('#tab29 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab29').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3634,7 +3634,7 @@ $(".plan_remaining_days_data").each(function(){
             $('#tab30 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab30').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3643,7 +3643,7 @@ $(".plan_remaining_days_data").each(function(){
             $('#tab32 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab32').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3727,7 +3727,7 @@ $(".plan_remaining_days_data").each(function(){
                 if ($("#sourceCampaign_update").val() !== "Choose..." && $("#addProspectSource1").val() == "") {
                     data.sourceCampaign = $("#sourceCampaign_update").val()
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                        url: "http://localhost:3000/api/spade/updateProspectus",
                         type: "PUT",
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -3735,7 +3735,7 @@ $(".plan_remaining_days_data").each(function(){
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response)
+                            // console.log(response)
                             $("#editModal").modal("hide");
                             $("#myModal_success").find('p').text('Successfully Updated')
                             $("#myModal_success").modal("show");
@@ -3755,7 +3755,7 @@ $(".plan_remaining_days_data").each(function(){
                 } else {
                     sourceCampaign = JSON.parse(`["${$("#addProspectSource1").val()}"]`);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        url: 'http://localhost:3000/api/spade/prospectusSources',
                         type: 'POST',
                         data: JSON.stringify({
                             Sourcess: sourceCampaign
@@ -3765,14 +3765,14 @@ $(".plan_remaining_days_data").each(function(){
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("prospectusSources");
-                            console.log(response.insertedSources[0])
-                            console.log(response.message)
+                            // console.log("prospectusSources");
+                            // console.log(response.insertedSources[0])
+                            // console.log(response.message)
                             if (response.message == "prospectus Sources added successfully") {
                                 var sourceCampaign = response.insertedSources[0].insertId;
                                 data.sourceCampaign = sourceCampaign
                                 $.ajax({
-                                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                                    url: "http://localhost:3000/api/spade/updateProspectus",
                                     type: "PUT",
                                     data: JSON.stringify(data),
                                     contentType: 'application/json',
@@ -3780,7 +3780,7 @@ $(".plan_remaining_days_data").each(function(){
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
-                                        console.log(response)
+                                        // console.log(response)
                                         $("#editModal").modal("hide");
                                         $("#myModal_success").find('p').text('Successfully Updated')
                                         $("#myModal_success").modal("show");
@@ -3800,7 +3800,7 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                            // console.log(error);
                         }
                     });
                 }
@@ -3840,7 +3840,7 @@ $(".plan_remaining_days_data").each(function(){
             });
             var propsectData = [];
             function formatRentAmount(amount) {
-                console.log(amount)
+                // console.log(amount)
                 if (amount >= 1000000) {
                     return "$ " + (amount / 1000000).toFixed(1) + "M";
                 } else if (amount >= 1000) {
@@ -3898,7 +3898,7 @@ $(".plan_remaining_days_data").each(function(){
                 $("#table-body-disqualified").empty()
                 $("#table-body-qualified").empty()
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getProspectusSources",
+                    url: "http://localhost:3000/api/spade/getProspectusSources",
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -3918,11 +3918,11 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+                        // console.log(error)
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getProspectus',
+                    url: 'http://localhost:3000/api/spade/getProspectus',
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -3931,7 +3931,7 @@ $(".plan_remaining_days_data").each(function(){
                     success: function (response) {
                         propsectData = response.data;
                         let totalRentDefault = 0;
-                        console.log(response.data)
+                        // console.log(response.data)
                         response?.data?.forEach(function (item, index) {
                             var row = $('<tr>');
                             var prospectus = item?.prospectus;
@@ -3944,7 +3944,7 @@ $(".plan_remaining_days_data").each(function(){
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + formatRentAmount(prospectus.rentAmount) + '</span>'));
                             var originalDate = new Date(prospectus.createdDate);
-                                console.log(originalDate)
+                                // console.log(originalDate)
                             var formattedDate = (originalDate.getMonth()+1) + '-' + originalDate.getDate() + '-' + originalDate.getFullYear();
                             row.append($('<td>').html('<span class="fw-bold">' + formattedDate + '</span>'));
                             if (prospectus?.prospectusStatus?.toLowerCase() == "qualified") {
@@ -3965,7 +3965,7 @@ $(".plan_remaining_days_data").each(function(){
                                 var newStatus = $(this).data('status');
                                 dropdownToggle.text(newStatus);
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                    url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                     type: 'PUT',
                                     data: JSON.stringify({
                                         prospectusid: prospectus?.id,
@@ -3979,7 +3979,7 @@ $(".plan_remaining_days_data").each(function(){
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
-                                        console.error('Error updating status:', error);
+                                      // console.error('Error updating status:', error);
                                     }
                                 });
                             });
@@ -4029,7 +4029,7 @@ $(".plan_remaining_days_data").each(function(){
             var startDate = formatDate(oneMonthAgo); // Format the date if needed
             var endDate = formatDate(currentDate);
             var year = new Date().getFullYear();
-            console.log(year)
+            // console.log(year)
             $("#prospect-status-start-date").val(startDate)
             $("#prospect-status-end-date").val(endDate)
             $("#source-campaign-start-date").val(startDate)
@@ -4046,15 +4046,15 @@ $(".plan_remaining_days_data").each(function(){
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        console.log("prospectTimeGraph");
-                        console.log(response);
+                        // console.log("prospectTimeGraph");
+                        // console.log(response);
                         $("#prospect-timeline").empty();
                         if (response?.data?.length > 0) {
                             response?.data?.forEach(function (item) {
@@ -4082,14 +4082,14 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response?.data) {
                             const labels = [];
                             const data = [];
@@ -4117,7 +4117,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4131,7 +4131,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${year}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4157,7 +4157,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#prospect-year").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4180,14 +4180,14 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#source-campaign-start-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${$(this).val()}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response?.data) {
                             const labels = [];
                             const data = [];
@@ -4208,21 +4208,21 @@ $(".plan_remaining_days_data").each(function(){
                             }
                             updateSourceCampaignChart(labels, data)
                         }
-                        console.log(response)
+                        // console.log(response)
                     }, error: function (xhr, status, error) {
                     }
                 })
             })
             $("#source-campaign-end-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response?.data) {
                             const labels = [];
                             const data = [];
@@ -4244,7 +4244,7 @@ $(".plan_remaining_days_data").each(function(){
                             updateSourceCampaignChart(labels, data)
                         }
                         else {
-                            console.log("No data")
+                            // console.log("No data")
                             updateSourceCampaignChart([], [])
                         }
                     }, error: function (xhr, status, error) {
@@ -4253,7 +4253,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#prospect-status-start-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4269,7 +4269,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#prospect-status-end-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4289,7 +4289,7 @@ $(".plan_remaining_days_data").each(function(){
                 let totalActiveAmount = 0;
                 $('#nurturing-propsect-kanban .card .card-body .rent-amount').each(function () {
                     var value = parseFloat($(this).text().split("$")[1].trim(" ").includes("k") ? $(this).text().split("$")[1].trim(" ").split("k")[0] * 1000 : $(this).text().split("$")[1].trim(" ").includes("M") ? $(this).text().split("$")[1].trim(" ").split("M")[0] * 1000000 : $(this).text().split("$")[1].trim(" "));
-                    console.log(value)
+                    // console.log(value)
                     totalNurtureAmount += value;
                 })
                 $('#engaged-propsect-kanban .card .card-body .rent-amount').each(function () {
@@ -4352,10 +4352,10 @@ $(".plan_remaining_days_data").each(function(){
                     },
                     receive: function (event, ui) {
                         var parentId = $(this).children().first().attr('id').split("card")[1];
-                        console.log(parentId)
+                        // console.log(parentId)
                         if ($(this).hasClass("qualified")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4366,17 +4366,17 @@ $(".plan_remaining_days_data").each(function(){
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log($("#" + parentId))
+                                    // console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
-                                    console.error('Error updating status:', error);
+                                  // console.error('Error updating status:', error);
                                 }
                             });
                         } else if ($(this).hasClass("disqualified")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4387,18 +4387,18 @@ $(".plan_remaining_days_data").each(function(){
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log($("#" + parentId))
+                                    // console.log($("#" + parentId))
                                     $("#card" + parentId).remove();
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
-                                    console.error('Error updating status:', error);
+                                  // console.error('Error updating status:', error);
                                 }
                             });
                         }
                         else if ($(this).hasClass("new")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4412,13 +4412,13 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
-                                    console.error('Error updating status:', error);
+                                  // console.error('Error updating status:', error);
                                 }
                             });
                         }
                         else if ($(this).hasClass("engaged")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4432,13 +4432,13 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
-                                    console.error('Error updating status:', error);
+                                  // console.error('Error updating status:', error);
                                 }
                             });
                         }
                         else if ($(this).hasClass("nurturing")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4452,7 +4452,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
-                                    console.error('Error updating status:', error);
+                                  // console.error('Error updating status:', error);
                                 }
                             });
                         }
@@ -4478,7 +4478,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteProspectus/${prospectID}`,
+                    url: `http://localhost:3000/api/spade/deleteProspectus/${prospectID}`,
                     type: "DELETE",
                     data: JSON.stringify({
                         prospectusid: prospectID
@@ -4498,7 +4498,7 @@ $(".plan_remaining_days_data").each(function(){
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
+                        // console.log(xhr)
                         $("#myModal_delete").modal("hide")
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
@@ -4531,7 +4531,7 @@ $(".plan_remaining_days_data").each(function(){
                 $("#potentialRentAmount_update").val(filteredData.prospectus.rentAmount);
                 $("#status_update").val(filteredData.prospectus.prospectusStatus);
                 $("#editModal").modal("show")
-                console.log(filteredData)
+                // console.log(filteredData)
             })
             $(document).on('click', '#next', function (e) {
                 e.preventDefault();
@@ -4549,7 +4549,7 @@ $(".plan_remaining_days_data").each(function(){
                 $("#addModal").modal("hide")
                 $('#preloader').css('display', 'flex')
                 $('#addProspectSourceCol').css('display', 'none')
-                console.log($("#addProspectSource").val())
+                // console.log($("#addProspectSource").val())
                 if ($("#sourceCampaign").val() !== "Choose..." && $("#addProspectSource").val() == "") {
                     sourceCampaign = $("#sourceCampaign").val();
                     var data = {
@@ -4566,7 +4566,7 @@ $(".plan_remaining_days_data").each(function(){
                         prospectusStatus: "active"
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                        url: 'http://localhost:3000/api/spade/addprospectus',
                         type: 'POST',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -4606,7 +4606,7 @@ $(".plan_remaining_days_data").each(function(){
                 } else {
                     sourceCampaign = JSON.parse(`["${$("#addProspectSource").val()}"]`);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        url: 'http://localhost:3000/api/spade/prospectusSources',
                         type: 'POST',
                         data: JSON.stringify({
                             Sourcess: sourceCampaign
@@ -4616,9 +4616,9 @@ $(".plan_remaining_days_data").each(function(){
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("prospectusSources");
-                            console.log(response.insertedSources[0])
-                            console.log(response.message)
+                            // console.log("prospectusSources");
+                            // console.log(response.insertedSources[0])
+                            // console.log(response.message)
                             if (response.message == "prospectus Sources added successfully") {
                                 var sourceCampaign = response.insertedSources[0].insertId;
                                 var data = {
@@ -4635,7 +4635,7 @@ $(".plan_remaining_days_data").each(function(){
                                     prospectusStatus: "active"
                                 }
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                                    url: 'http://localhost:3000/api/spade/addprospectus',
                                     type: 'POST',
                                     data: JSON.stringify(data),
                                     contentType: 'application/json',
@@ -4675,26 +4675,26 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+                            // console.log(error);
                         }
                     });
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -4721,7 +4721,7 @@ $(".plan_remaining_days_data").each(function(){
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -4729,7 +4729,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -4743,10 +4743,10 @@ $(".plan_remaining_days_data").each(function(){
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -4755,22 +4755,22 @@ $(".plan_remaining_days_data").each(function(){
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -5250,8 +5250,8 @@ $(".plan_remaining_days_data").each(function(){
                 }
             }
             if (leadsInsightsPermission) {
-                console.log("leadsInsightsPermission")
-                console.log(leadsInsightsPermission)
+                // console.log("leadsInsightsPermission")
+                // console.log(leadsInsightsPermission)
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
                 for (const action of actions) {
                     if (!leadsInsightsPermission[action]) {
@@ -5322,8 +5322,8 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     }
                     if (leadsInsightsPermission) {
-                        console.log("leadsInsightsPermission")
-                        console.log(leadsInsightsPermission)
+                        // console.log("leadsInsightsPermission")
+                        // console.log(leadsInsightsPermission)
                         const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
                         for (const action of actions) {
                             if (!leadsInsightsPermission[action]) {

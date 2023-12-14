@@ -3,11 +3,11 @@ $(document).on("input", 'input[type="email"]', function () {
   var email = $(this).val();
   var email_span = $(this).siblings(".text-danger");
   if (!emailRegex.test(email)) {
-    console.log("email not ok");
+  // console.log("email not ok");
     $(this).addClass("border-danger").removeClass("border-green");
     email_span.removeClass("d-none");
   } else {
-    console.log("email  ok");
+  // console.log("email  ok");
     $(this).addClass("border-green").removeClass("border-danger");
     email_span.addClass("d-none");
   }
@@ -19,10 +19,10 @@ $(document).on(
     var input_select_value = $(this).val();
     var input_select_value_span = $(this).siblings(".text-danger");
     if (input_select_value === "") {
-      console.log("input or select is empty");
+    // console.log("input or select is empty");
       $(this).addClass("border-danger").removeClass("border-green");
     } else {
-      console.log("input or select is filled");
+    // console.log("input or select is filled");
       $(this).addClass("border-green").removeClass("border-danger");
     }
   }
@@ -61,12 +61,12 @@ $('input[type="tel"]').each(function () {
           intlTelInputUtils.numberFormat.NATIONAL
         );
         input.val(formattedNumber);
-        console.log("Valid phone. Formatted number:", formattedNumber);
+      // console.log("Valid phone. Formatted number:", formattedNumber);
         validMsg.removeClass("d-none");
         input.removeClass("border-danger");
         input.addClass("border-green");
       } else {
-        console.log("Invalid phone");
+      // console.log("Invalid phone");
         input.addClass("border-danger");
         input.removeClass("border-green");
         input.addClass("error");
@@ -97,12 +97,12 @@ $(document).ready(function () {
           ($(this).is('input[type="email"]') && !emailRegex.test(modalValid)) ||
           ($(this).is('input[name="zip"]') && modalValid.length !== 5)
         ) {
-          console.log("checker not Ok");
+        // console.log("checker not Ok");
           $(this).removeClass("border-green").addClass("border-danger");
           modalValid_span.text("This field is required!");
           modalValid_span.removeClass("d-none");
         } else {
-          console.log("checker Ok");
+        // console.log("checker Ok");
           $(this).removeClass("border-danger").addClass("border-green");
           modalValid_span.text("This field is required!");
           modalValid_span.addClass("d-none");
@@ -127,7 +127,7 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
           $(this).val("Choose...");
           $(this).removeClass("border-green").removeClass("border-danger");
           $(this).siblings("span").addClass("d-none");
-          console.log($(this).siblings("span"));
+        // console.log($(this).siblings("span"));
         } else {
           $(this).val("");
           $(this).removeClass("border-green").removeClass("border-danger");

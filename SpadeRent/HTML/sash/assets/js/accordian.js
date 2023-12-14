@@ -282,7 +282,7 @@ if(!isEmpty2 && !isEmpty1){
                 //first accordian
                 var isEmpty1 = true;
                 $(".inputField").each(function() {
-                    console.log("this",$(this))
+                  // console.log("this",$(this))
                     if($(this).hasClass("valid")){
                         isEmpty1 = false;
                         $(this).addClass('border-green');
@@ -317,7 +317,7 @@ if(!isEmpty2 && !isEmpty1){
                     $(".accordion-item .icon").eq(0).removeClass("cross");
                     $(".accordion-item .icon").eq(0).addClass("tick");
                 }
-                console.log("isEmpty1",isEmpty1)
+              // console.log("isEmpty1",isEmpty1)
         if(!isEmpty1){
             $("#next-add-bank").addClass('d-none')
             $("#next-bank").removeClass("d-none")
@@ -327,7 +327,7 @@ if(!isEmpty2 && !isEmpty1){
         //first accordian
         var isEmpty1 = true;
         $("#next-add-bank-property .inputField").each(function() {
-            console.log("this",$(this))
+          // console.log("this",$(this))
             if($(this).hasClass("valid")){
                 isEmpty1 = false;
                 $(this).addClass('border-green');

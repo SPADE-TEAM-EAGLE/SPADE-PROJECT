@@ -21,7 +21,7 @@ function convertTimestamp(timestamp) {
 }
 function GetNotification(){
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/getAdminNotification",
+    url: "http://localhost:3000/api/spade/getAdminNotification",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -35,13 +35,13 @@ function GetNotification(){
         "3":"Yearly-Pro",
         "4":"Yearly-Premium",
       }
-      console.log(response);
+    // console.log(response);
       const notification = response.Notification
       const unread = notification.filter((item) => item.readNotification == 0);
       const read = notification.filter((item) => item.readNotification == 1);
-      console.log(unread, "unread");
-      console.log(read, "read");
-      console.log(notification, "all");
+    // console.log(unread, "unread");
+    // console.log(read, "read");
+    // console.log(notification, "all");
       $(".all_span").text(`(${notification.length})`);
       $(".inbox_span").text(`(${read.length})`);
       $(".Unread_span").text(`(${unread.length})`);
@@ -146,14 +146,14 @@ function GetNotification(){
       $(".notification-item").on("click", function () {
         const itemId = $(this).data("id");
         const type=$(this).find(".created-deleted").text().trim().toLowerCase()=="created"?"Customers":"closed-customers";
-        console.log(type)
+      // console.log(type)
         updateDataNotify(itemId, type);
       });
     },
     error: function (xhr, status, error) {
-      console.log("Error occurred while fetching state and city data.");
-      console.log(xhr);
-      console.log(error);
+    // console.log("Error occurred while fetching state and city data.");
+    // console.log(xhr);
+    // console.log(error);
     },
   });
 }  
@@ -165,24 +165,24 @@ $("#updateAllNotifyRead").on("click", function () {
 function updateAllNotifyRead() {
   GetNotification()
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAllAdminNotification",
+    url: "http://localhost:3000/api/spade/updateAllAdminNotification",
     type: "PUT",
     contentType: "application/json",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-      console.log(response);
+    // console.log(response);
     },
     error: function (xhr, status, error) {
-      console.log("Error: " + error);
+    // console.log("Error: " + error);
     },
   });
 }
 function updateDataNotify(notificationId, type) {
-  console.log(notificationId, type);
+// console.log(notificationId, type);
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
+    url: "http://localhost:3000/api/spade/updateAdminNotification",
     type: "PUT",
     data: JSON.stringify({
       id: notificationId,
@@ -199,10 +199,10 @@ function updateDataNotify(notificationId, type) {
       }
       $('#preloader').css('display','none')
       GetNotification();
-      console.log(response);
+    // console.log(response);
     },
     error: function (xhr, status, error) {
-      console.log("Error: " + error);
+    // console.log("Error: " + error);
     },
   });
 }

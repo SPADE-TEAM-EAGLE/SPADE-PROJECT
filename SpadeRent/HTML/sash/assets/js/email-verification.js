@@ -14,7 +14,7 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         }
 $(document).ready(function () {
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/protected',
+        url: 'http://localhost:3000/api/spade/protected',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -33,7 +33,7 @@ $(document).ready(function () {
             $("#header-user").text(toTitleCase(userName))
             userEmail = email
             id1 = userId
-            console.log($("#user-email"))
+          // console.log($("#user-email"))
             $("#user-email").val(email)
         },
         error: function (xhr, status, error) {
@@ -42,13 +42,13 @@ $(document).ready(function () {
                 $('#myModal_warning').modal('hide');
                 window.location = '../Landlord/login_module.html';
             }, 2000);
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+        url: 'http://localhost:3000/api/spade/verifyMailCheck',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -70,9 +70,9 @@ $(document).ready(function () {
             }
         },
         error: function (xhr, status, error) {
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $("#modaldemo00").on("hidden.bs.modal", () => {
@@ -101,7 +101,7 @@ $(document).ready(function () {
         }
         else{
             $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                url: "http://localhost:3000/api/spade/checkemail",
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 data: {
@@ -128,7 +128,7 @@ $(document).ready(function () {
     $(document).on("click", "#save-email", () => {
         emailChange = true
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
+            url: 'http://localhost:3000/api/spade/emailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -148,7 +148,7 @@ $(document).ready(function () {
     })
     $("#send-email").on("click", () => {
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+            url: 'http://localhost:3000/api/spade/resendCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -165,7 +165,7 @@ $(document).ready(function () {
     })
     $("#verify-btn").on("click", () => {
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+            url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -175,7 +175,7 @@ $(document).ready(function () {
                 password: $("#email-verify-password").val(),
             }),
             success: function (response) {
-                console.log(response)
+              // console.log(response)
                 if (response.message == " Email verified successful ") {
                     localStorage.setItem("authtoken", response.token);
                     $("#modaldemo8").modal("hide")

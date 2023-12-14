@@ -2013,14 +2013,14 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
@@ -2028,7 +2028,7 @@
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -2040,20 +2040,20 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2068,7 +2068,7 @@
 <script>
         var selectedFiles = [];
         function dropHandler(ev) {
-            console.log("File(s) dropped");
+            // console.log("File(s) dropped");
             ev.preventDefault();
             if (ev.dataTransfer.items) {
                 [...ev.dataTransfer.items].forEach((item, i) => {
@@ -2080,20 +2080,20 @@
                 });
             } else {
                 [...ev.dataTransfer.files].forEach((file, i) => {
-                    console.log(`… file[${i}].name = ${file.name}`);
+                    // console.log(`… file[${i}].name = ${file.name}`);
                 });
             }
         }
         function dragOverHandler(ev) {
-            console.log("File(s) in drop zone");
+            // console.log("File(s) in drop zone");
             ev.preventDefault();
         }
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(selectedFiles.length)
-                console.log(file)
+                // console.log(selectedFiles.length)
+                // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2162,7 +2162,7 @@
         var taskPermissions;
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2206,24 +2206,24 @@ $(".plan_remaining_days_data").each(function(){
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response.data[0])
+                    // console.log(response.data[0])
                     $("#property").empty()
                     $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
                     response.data[0].forEach((property) => {
-                        console.log(property);
+                        // console.log(property);
                         var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
                         var optionValue = property.tenantID;
                         $("#property").append($("<option></option>").text(optionText).val(optionValue));
@@ -2232,7 +2232,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2268,7 +2268,7 @@ $(".plan_remaining_days_data").each(function(){
             })
             function areAllFieldsFilled(update) {
                 if (update) {
-                    console.log("this is for update")
+                    // console.log("this is for update")
                     var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
                     var allFieldsFilled = accordion1Fields.filter(function () {
                         return $(this).val() === '' || $(this).val() === 'Choose...';
@@ -2279,12 +2279,12 @@ $(".plan_remaining_days_data").each(function(){
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0;
-                console.log()
+                // console.log()
                 return allFieldsFilled;
             }
             function updateButtonStatus(update) {
                 if (update) {
-                    console.log("update button")
+                    // console.log("update button")
                     var allFieldsFilled = areAllFieldsFilled(update);
                     if (allFieldsFilled) {
                         $('#next').removeClass("disabled");
@@ -2293,7 +2293,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 } else {
                     var allFieldsFilled = areAllFieldsFilled();
-                    console.log(allFieldsFilled)
+                    // console.log(allFieldsFilled)
                     if (allFieldsFilled) {
                         $('#next').removeClass("disabled");
                     } else {
@@ -2349,7 +2349,7 @@ return NewDate
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                console.log(data)
+                // console.log(data)
                 if (data.taskImages) {
                     selectedFiles = data.taskImages
                 } else {
@@ -2360,11 +2360,11 @@ return NewDate
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes || "Not set");
-                console.log($("#notes_view"))
+                // console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
                 if(data?.AssignTo?.length > 0){
                     data.AssignTo.forEach((item) => {
-console.log(item)
+// console.log(item)
 $("#view-task-line-item").append(`<tr class="tr">
                             <td>
                                 <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
@@ -2444,7 +2444,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
             }
             $('#close,#top-close').on('click', function (e) {
-                console.log(333)
+                // console.log(333)
                 e.preventDefault()
                 $("#addModal .select2-selection__rendered").empty()
                 resetAccordions()
@@ -2472,7 +2472,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'http://localhost:3000/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2495,7 +2495,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 images: imageArray,
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                                url: 'http://localhost:3000/api/spade/addTasks',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2520,7 +2520,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         },
@@ -2529,7 +2529,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 } else {
@@ -2546,7 +2546,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         images: [],
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                        url: 'http://localhost:3000/api/spade/addTasks',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -2570,7 +2570,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 }
@@ -2601,7 +2601,7 @@ $("#view-task-line-item").append(`<tr class="tr">
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2637,10 +2637,10 @@ $("#view-task-line-item").append(`<tr class="tr">
                     });
                 }else if (selectedFilter === 'recently-added') {
         rows.sort(function (a, b) {
-            console.log($(a),$(b))
+            // console.log($(a),$(b))
             var createdAtA = new Date($(a).find('.task-id').attr('data-id'));
             var createdAtB = new Date($(b).find('.task-id').attr('data-id'));
-            console.log(createdAtA, createdAtB)
+            // console.log(createdAtA, createdAtB)
             return createdAtB - createdAtA;
         });
     }
@@ -2672,7 +2672,7 @@ $("#view-task-line-item").append(`<tr class="tr">
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+                    url: 'http://localhost:3000/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2697,7 +2697,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2749,7 +2749,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        url: 'http://localhost:3000/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2772,7 +2772,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                url: 'http://localhost:3000/api/spade/updateTasks',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -2793,7 +2793,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         }, error: function () {
@@ -2814,7 +2814,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         images: []
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        url: 'http://localhost:3000/api/spade/updateTasks',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -2835,7 +2835,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 }
@@ -2844,7 +2844,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                    url: 'http://localhost:3000/api/spade/deleteTask',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "taskID": taskId
@@ -2867,15 +2867,15 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
             function getData() {
-                console.log(2)
+                // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
+                    url: 'http://localhost:3000/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2883,7 +2883,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (response.data[0].length === 0) {
                             localStorage.setItem("task", "false")
                             window.location = './new-tasks.html'
@@ -2896,9 +2896,9 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 });
                             }
                             taskInfo = response.data[0]
-                            console.log
+                            // console.log
                             response.data[0]?.forEach(function (task, index) {
-                                console.log(task?.taskImages[0])
+                                // console.log(task?.taskImages[0])
                                 var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
                                 if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
@@ -3006,7 +3006,7 @@ if (task.priority == 'High') {
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                                 taskId = taskIdElement.attr("id")
                                 const data = response.data[0].find(obj => obj.id.toString() == taskId);
-                                console.log(taskId)
+                                // console.log(taskId)
                                 if (data.taskImages) {
                                     selectedFiles = data.taskImages
                                 } else {
@@ -3037,7 +3037,7 @@ if (task.priority == 'High') {
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+                        // console.log(error)
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -3066,7 +3066,7 @@ if (task.priority == 'High') {
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3074,7 +3074,7 @@ if (task.priority == 'High') {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -3088,10 +3088,10 @@ if (task.priority == 'High') {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -3100,22 +3100,22 @@ if (task.priority == 'High') {
 <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -3125,7 +3125,7 @@ if (task.priority == 'High') {
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -3140,7 +3140,7 @@ if (task.priority == 'High') {
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }

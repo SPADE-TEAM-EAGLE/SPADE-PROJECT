@@ -2832,7 +2832,7 @@
                 updateSelectedFilesContainer1(); // Update the selected files container
             });
             function dropHandler(ev) {
-                console.log("File(s) dropped");
+              // console.log("File(s) dropped");
                 ev.preventDefault();
                 if (ev.dataTransfer.items) {
                     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -2845,22 +2845,22 @@
                 }
                 else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
-                        console.log(`… file[${i}].name = ${file.name}`);
+                      // console.log(`… file[${i}].name = ${file.name}`);
                     });
                 }
             }
             function dragOverHandler(ev) {
-                console.log("File(s) in drop zone");
+              // console.log("File(s) in drop zone");
                 ev.preventDefault();
             }
             function updateSelectedFilesContainer1() {
                 var selectedFilesContainer = $('.file-grid');
-                console.log(selectedFilesContainer)
+              // console.log(selectedFilesContainer)
                 selectedFilesContainer.empty();
-                console.log(selectedFiles)
+              // console.log(selectedFiles)
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                  // console.log(selectedFiles.length)
+                  // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -2906,7 +2906,7 @@
                             )
                             .appendTo(selectedFilesContainer);
                     } else if (file instanceof Object) {
-                        console.log(file)
+                      // console.log(file)
                         if (file.imageURL) {
                             fileElement
                                 .append(
@@ -2937,13 +2937,13 @@
             }
             function getAllUserAdminData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -3004,14 +3004,14 @@
                             image_key = response.imageKey
                         }
                         $.ajax({
-                            url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionRoles",
+                            url: "http://localhost:3000/api/spade/adminUserPermissionRoles",
                             type: "GET",
                             headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log("adminUserPermissionRoles");
-                                console.log(response.data);
+                              // console.log("adminUserPermissionRoles");
+                              // console.log(response.data);
                                 response?.data.forEach(element => {
                                     if (element.role == "Manager") {
                                         if (!element.appearance.View) {
@@ -3551,7 +3551,7 @@
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+                              // console.log(error);
                             }
                         })
                     },
@@ -3561,13 +3561,13 @@
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3593,13 +3593,13 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -3614,22 +3614,22 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
+                      // console.log('Error occurred while fetching state and city data.');
                     }
                 });
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allUserAdmin",
+                    url: "http://localhost:3000/api/spade/allUserAdmin",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         $("#table_body_user").empty()
                         if (response?.data) {
                             userAdminData = response?.data;
-                            console.log(userAdminData);
+                          // console.log(userAdminData);
                             response?.data.forEach((element, index) => {
                                 var roleLabel;
 if (element.roleId == 2) {
@@ -3688,19 +3688,19 @@ if (element.roleId == 2) {
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+                      // console.log(error)
                     },
                 });
             }
             getAllUserAdminData()
             function getAllStates() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
                     }) {
-                        console.log(data)
+                      // console.log(data)
                         var stateDropdown = $('#state_user');
                         var stateDropdown2 = $('#state_user_update');
                         states = data
@@ -3714,9 +3714,9 @@ if (element.roleId == 2) {
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 });
             }
@@ -3729,10 +3729,10 @@ if (element.roleId == 2) {
                         checkedClasses.push($(this).closest('td').attr('class'));
                     }
                 });
-                console.log(checkedClasses);
+              // console.log(checkedClasses);
                 if ($(this).closest('tr').attr("class")) {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionUpdate",
+                        url: "http://localhost:3000/api/spade/adminUserPermissionUpdate",
                         type: "PUT",
                         data: JSON.stringify({
                             role: UsersRolesId,
@@ -3755,7 +3755,7 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 } else {
@@ -3779,10 +3779,10 @@ if (element.roleId == 2) {
                 })
                 if (selectedFiles.length >= 1 && newFiles == true) {
                     var uploadFormData = new FormData();
-                    console.log(selectedFiles[0]);
+                  // console.log(selectedFiles[0]);
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3791,12 +3791,12 @@ if (element.roleId == 2) {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("uploadAdmin");
-                            console.log(response);
+                          // console.log("uploadAdmin");
+                          // console.log(response);
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                                url: "http://localhost:3000/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3818,7 +3818,7 @@ if (element.roleId == 2) {
                                 contentType: "application/json",
                                 success: function (data) {
                                     $("#preloader").css("display", "none")
-                                    console.log(data);
+                                  // console.log(data);
                                     $('#edit-user-permissions').modal('hide')
                                     if (data.message == "User Updated Successfully") {
                                         $("#myModal_success p").text("User updated succesfully")
@@ -3834,7 +3834,7 @@ if (element.roleId == 2) {
                                 error: function (err) {
                                     $("#preloader").css("display", "none")
                                     $('.file-grid').empty()
-                                    console.log(err);
+                                  // console.log(err);
                                 }
                             })
                         },
@@ -3843,12 +3843,12 @@ if (element.roleId == 2) {
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 20000);
-                            console.log('Error: ' + error);
+                          // console.log('Error: ' + error);
                         }
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3870,7 +3870,7 @@ if (element.roleId == 2) {
                         contentType: "application/json",
                         success: function (data) {
                             $("#preloader").css("display", "none")
-                            console.log(data);
+                          // console.log(data);
                             $('#edit-user-permissions').modal('hide')
                             if (data.message == "User Updated Successfully") {
                                 $("#myModal_success p").text("User updated succesfully")
@@ -3883,13 +3883,13 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 }
                 else {
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
+                        url: "http://localhost:3000/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3911,7 +3911,7 @@ if (element.roleId == 2) {
                         contentType: "application/json",
                         success: function (data) {
                             $("#preloader").css("display", "none")
-                            console.log(data);
+                          // console.log(data);
                             $('#edit-user-permissions').modal('hide')
                             if (data.message == "User Updated Successfully") {
                                 $("#myModal_success p").text("User updated succesfully")
@@ -3924,7 +3924,7 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 }
@@ -3939,8 +3939,8 @@ if (element.roleId == 2) {
                         break;
                     }
                 }
-                console.log("userAdminDataNew")
-                console.log(userAdminDataNew)
+              // console.log("userAdminDataNew")
+              // console.log(userAdminDataNew)
                 $("#userid_update").val(userAdminDataNew.id)
                 $("#firstName_user_update").val(userAdminDataNew.fName)
                 $("#lastName_user_update").val(userAdminDataNew.lName)
@@ -3998,7 +3998,7 @@ if (userAdminDataNew.roleId == 2) {
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/userAdminDelete",
+                    url: "http://localhost:3000/api/spade/userAdminDelete",
                     type: "DELETE",
                     data: JSON.stringify({ id: deleteUserId }),
                     contentType: "application/json",
@@ -4006,7 +4006,7 @@ if (userAdminDataNew.roleId == 2) {
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         if (response.message == "Admin User Deleted Successsful") {
                             $("#delete-user-admin").modal("hide")
                             $("#myModal_success p").text("User deleted succesfully")
@@ -4019,7 +4019,7 @@ if (userAdminDataNew.roleId == 2) {
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
                         $("#preloader").css("display", "none")
-                        console.log(error)
+                      // console.log(error)
                     }
                 })
             })
@@ -4029,7 +4029,7 @@ if (userAdminDataNew.roleId == 2) {
                     var uploadFormData = new FormData();
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -4038,12 +4038,12 @@ if (userAdminDataNew.roleId == 2) {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("uploadAdmin");
-                            console.log(response);
+                          // console.log("uploadAdmin");
+                          // console.log(response);
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
+                                url: 'http://localhost:3000/api/spade/createUserAdmin',
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -4064,8 +4064,8 @@ if (userAdminDataNew.roleId == 2) {
                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log("createUserAdmin");
-                                    console.log(response);
+                                  // console.log("createUserAdmin");
+                                  // console.log(response);
                                     $("#preloader").css("display", "none")
                                     $('#add-user-permissions').modal('hide')
                                     if (response.message == "Users Permission User added successfully") {
@@ -4095,12 +4095,12 @@ if (userAdminDataNew.roleId == 2) {
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 20000);
-                            console.log('Error: ' + error);
+                          // console.log('Error: ' + error);
                         }
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
+                        url: 'http://localhost:3000/api/spade/createUserAdmin',
                         type: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify({
@@ -4121,7 +4121,7 @@ if (userAdminDataNew.roleId == 2) {
                             Authorization: "Bearer " + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                          // console.log(response);
                             $("#preloader").css("display", "none")
                             $('#add-user-permissions').modal('hide')
                             if (response.message == "Users Permission User added successfully") {
