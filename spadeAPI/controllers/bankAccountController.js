@@ -176,9 +176,9 @@ exports.updateBankAccountTenant = async (req, res) => {
    
       //  ############################# Update bank Account Status ############################################################
     exports.updatePropertyBankAccount = async (req, res) => {
-        const { id, UPOID, accountName} = req.body;
+        const { id, description, accountName,isActive} = req.body;
             try {
-                const getResult = await queryRunner(updatePropertyBankAccountQuery,[UPOID, accountName, id]); 
+                const getResult = await queryRunner(updatePropertyBankAccountQuery,[accountName,description,isActive, id]); 
                 if(getResult[0].affectedRows > 0) {
                     res.status(200).json({message : "Property Account Updated Successful"});
                 } else {

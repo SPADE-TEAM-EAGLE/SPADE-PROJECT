@@ -1116,7 +1116,7 @@ exports.insertInUserPermissionUsers =
   exports.addUserRoles = "INSERT INTO userRoles (Urole, userId) VALUES (?,?)";
   exports.insertUserBankFuture = "INSERT INTO futurePlanUser (landlordId,fuserNuveiId,fplanId,fsubscriptionId,fuserTokenId,fsubscriptionCreated_at) VALUES (?,?,?,?,?,?)";
   
-  exports.updatePropertyBankAccountQuery = "UPDATE property SET UPOID = ?, accountName = ? WHERE id = ?";
+  exports.updatePropertyBankAccountQuery = "UPDATE property SET accountName = ?, description = ?, isActive = ? WHERE id = ?";
   exports.UpdatePropertyUnitCount = "UPDATE users SET paidUnits = ? WHERE id = ?";
   exports.UnitCounts = "select count(id) as count from spade_Rent.propertyunits where landlordId = ?";
   exports.UpdateUserNuveiIdQuery = "UPDATE users SET nuveiId = ? WHERE id = ?";

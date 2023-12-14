@@ -525,6 +525,8 @@
               $("#infoModal").modal("show")
             }
             else if(response.message=="Your Subscription is expired"){
+              console.log(authToken)
+              localStorage.setItem("authtoken",response.token)
               window.location="./trial-expired.html";
             }
           },
@@ -545,7 +547,7 @@
               setTimeout(function () {
                 $('#myModal_warning_connection').modal('hide');
               }, 2000);
-              console.log(xhr.responseText);
+              console.log(xhr.responseText.token);
             }
           },
         });

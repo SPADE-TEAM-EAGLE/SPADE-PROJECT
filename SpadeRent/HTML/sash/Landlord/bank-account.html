@@ -908,9 +908,30 @@
                                                 <h4 class="h4 mb-0 mt-3 font-weight-bold">
                                                     <b>Status</b>
                                                 </h4>
-                                                <p class="card-text text-success mt-2">Active</p>
+                                                <p class="card-text text-success mt-2" id="status-text"></p>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-xl-8 col-sm-8">
+                                        <div class="card border p-0 inner-cards">
+                                            <div class="card-body text-center">
+                                                <span class="">
+                                                    <img
+                                                        src="../assets/images/logo-images/Group 10414.png"
+                                                        alt=""
+                                                        height="60"
+                                                        width="60"
+                                                    >
+                                                </span>
+                                                <h4 class="h4 mb-0 mt-3 font-weight-bold">
+                                                    <b>Description</b>
+                                                </h4>
+                                                <p class="card-text text-success mt-2" id="description-text"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8 col-sm-8 pb-5 mt-5">
+                                        <a class='btn btn-outline-default btn-pill button'>Connect to Bank</a>
                                     </div>
                                 </div>
                             </div>
@@ -1238,6 +1259,10 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             }
                     $("#property_name").text(toTitleCase(data?.propertyName))
                     $("#account-holder-name").text(toTitleCase(data?.accountName))
+                    console.log("guygghggjgjgjgjjg",data.status)
+                    $("#status-text").text(data.isActive==1?'Active':"Not Started")
+                    $("#description-text").text(toTitleCase(data?.description))
+
                     $("#property_address").text(toTitleCase(data?.address)+", "+toTitleCase(data?.city)+", "+toTitleCase(data?.state))
                     $("#property_type").text(data?.propertyType)
                     $("#property_units").text(data?.units)
