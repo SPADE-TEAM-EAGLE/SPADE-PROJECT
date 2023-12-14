@@ -1454,7 +1454,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1492,7 +1492,7 @@
         $(document).ready(() => {
 
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1523,7 +1523,7 @@
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
+                url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1541,7 +1541,7 @@
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                url: 'http://localhost:3000/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1571,7 +1571,7 @@
             });
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
-                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
+                var apiUrl = 'http://localhost:3000/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
                 $.ajax({
                     url: apiUrl,
                     method: 'GET',
@@ -1751,7 +1751,7 @@
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                    url: 'http://localhost:3000/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

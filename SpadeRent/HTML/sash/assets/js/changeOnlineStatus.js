@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function callAPI() {
       $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+        url: 'http://localhost:3000/api/spade/inactiveUser',
     type: 'PUT',
     contentType: false,
     processData: false,
