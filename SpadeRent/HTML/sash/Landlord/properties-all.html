@@ -1954,7 +1954,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1986,7 +1986,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2185,7 +2185,7 @@
         var propertyShow;
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2231,7 +2231,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -2383,7 +2383,7 @@ $(".plan_remaining_days_data").each(function(){
                     $("#addModal").modal("hide")
     $('#preloader').css('display','flex')
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -2407,7 +2407,7 @@ $(".plan_remaining_days_data").each(function(){
                             $('#addmodal_body').removeClass('d-none')
                             $('#addmodal_body_loader').addClass('d-none')
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/property',
+                                url: 'https://backend.app.spaderent.com/api/spade/property',
                                 type: 'POST',
                                 data: JSON.stringify(propertyData),
                                 contentType: 'application/json',
@@ -2484,7 +2484,7 @@ $(".plan_remaining_days_data").each(function(){
                     $("#addModal").modal("hide")
     $('#preloader').css('display','flex')
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/property',
+                        url: 'https://backend.app.spaderent.com/api/spade/property',
                         type: 'POST',
                         data: JSON.stringify(propertyData),
                         contentType: 'application/json',
@@ -2650,7 +2650,7 @@ $(".plan_remaining_days_data").each(function(){
         function updateTable() {
             $('#table_body').empty();
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2720,7 +2720,7 @@ $(".plan_remaining_days_data").each(function(){
                     formData.append('image', file);
                 });
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/upload',
+                    url: 'https://backend.app.spaderent.com/api/spade/upload',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2743,7 +2743,7 @@ $(".plan_remaining_days_data").each(function(){
                             images: imageArray
                         }
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/updateProperty',
+                            url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                             type: 'PUT',
                             data: JSON.stringify(formData),
                             contentType: 'application/json',
@@ -2801,7 +2801,7 @@ $(".plan_remaining_days_data").each(function(){
                     images: []
                 }
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/updateProperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/updateProperty',
                     type: 'PUT',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
@@ -2834,7 +2834,7 @@ $(".plan_remaining_days_data").each(function(){
             e.preventDefault();
             $('#myModal_delete').modal('hide');
             $.ajax({
-                url: 'http://localhost:3000/api/spade/propertyDelete',
+                url: 'https://backend.app.spaderent.com/api/spade/propertyDelete',
                 type: 'DELETE',
                 data: JSON.stringify({
                     "id": propertyId
@@ -2890,7 +2890,7 @@ $(".plan_remaining_days_data").each(function(){
         function getData(selectedFilter = "alphabets") {
             $("#global-loader").fadeIn("fast")
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3077,7 +3077,7 @@ $(".plan_remaining_days_data").each(function(){
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3114,7 +3114,7 @@ $(".plan_remaining_days_data").each(function(){
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

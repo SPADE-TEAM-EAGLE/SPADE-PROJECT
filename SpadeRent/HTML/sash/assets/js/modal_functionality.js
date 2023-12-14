@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://localhost:3000/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -92,7 +92,7 @@ function checkFieldsFilled(id) {
 }
 var selectedFiles = [];
 function dropHandler(ev) {
-console.log("File(s) dropped");
+// console.log("File(s) dropped");
 ev.preventDefault();
 if (ev.dataTransfer.items) {
 [...ev.dataTransfer.items].forEach((item, i) => {
@@ -104,20 +104,20 @@ updateSelectedFilesContainer()
 });
 } else {
 [...ev.dataTransfer.files].forEach((file, i) => {
-console.log(`… file[${i}].name = ${file.name}`);
+// console.log(`… file[${i}].name = ${file.name}`);
 });
 }
 }
 function dragOverHandler(ev) {
-console.log("File(s) in drop zone");
+// console.log("File(s) in drop zone");
 ev.preventDefault();
 }
 function updateSelectedFilesContainer() {
 var selectedFilesContainer = $('.file-grid');
 selectedFilesContainer.empty();
 selectedFiles.forEach(function (file, index) {
-console.log(selectedFiles.length)
-console.log(file)
+// console.log(selectedFiles.length)
+// console.log(file)
 var fileElement = $('<div>')
 .addClass('selected-file');
 if (file.type && file.type.includes('image')) {
@@ -183,7 +183,7 @@ fileElement
 }
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/spade/getStates',
+        url: 'https://backend.app.spaderent.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
           // console.log(data)
@@ -325,7 +325,7 @@ $(document).on('click', '#next', function(e) {
 $("#addModal").modal("hide")
 $('#preloader').css('display','flex')
         $.ajax({
-            url: 'http://localhost:3000/api/spade/upload',
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -347,7 +347,7 @@ $('#preloader').css('display','flex')
                     images: imageArray
                 };
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -417,7 +417,7 @@ $('#preloader').css('display','flex')
         $("#addModal").modal("hide")
         $('#preloader').css('display','flex')
         $.ajax({
-            url: 'http://localhost:3000/api/spade/property',
+            url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',

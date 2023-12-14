@@ -1137,7 +1137,7 @@
         var unitsPermission;
         $(document).ready(function() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1188,7 +1188,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1220,7 +1220,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
             // console.log(propertyId)
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewProperty',
+                url: 'https://backend.app.spaderent.com/api/spade/viewProperty',
                 type: 'GET',
                 data: {
                     propertyId
@@ -1277,7 +1277,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1315,7 +1315,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

@@ -14,7 +14,7 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         }
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/spade/protected',
+        url: 'https://backend.app.spaderent.com/api/spade/protected',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
     });
     $.ajax({
-        url: 'http://localhost:3000/api/spade/verifyMailCheck',
+        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -101,7 +101,7 @@ $(document).ready(function () {
         }
         else{
             $.ajax({
-                url: "http://localhost:3000/api/spade/checkemail",
+                url: "https://backend.app.spaderent.com/api/spade/checkemail",
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 data: {
@@ -118,7 +118,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error($("#save-email"));
+                    // console.error($("#save-email"));
                     $("#save-email").addClass("disabled")
                     $("#verify-email-span").removeClass("d-none")
                 },
@@ -128,7 +128,7 @@ $(document).ready(function () {
     $(document).on("click", "#save-email", () => {
         emailChange = true
         $.ajax({
-            url: 'http://localhost:3000/api/spade/emailUpdate',
+            url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -142,13 +142,13 @@ $(document).ready(function () {
                 $("#save-email").addClass("d-none")
             },
             error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
     $("#send-email").on("click", () => {
         $.ajax({
-            url: 'http://localhost:3000/api/spade/resendCode',
+            url: 'https://backend.app.spaderent.com/api/spade/resendCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -159,13 +159,13 @@ $(document).ready(function () {
                 $("#modaldemo8").modal("show")
             },
             error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
     $("#verify-btn").on("click", () => {
         $.ajax({
-            url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
+            url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -189,7 +189,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 document.getElementById("verification-spans").style.display = "block";
                 $("#verification").addClass("is-invalid")
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })

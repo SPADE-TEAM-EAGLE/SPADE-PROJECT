@@ -1780,7 +1780,7 @@
                     <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1851,7 +1851,7 @@ $('#preloader').css('display','none');
                     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1963,10 +1963,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -1999,10 +1999,10 @@ $('#preloader').css('display','none');
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/dashboardProspectusInsight/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2035,10 +2035,10 @@ $('#preloader').css('display','none');
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2070,10 +2070,10 @@ $('#preloader').css('display','none');
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2105,10 +2105,10 @@ $('#preloader').css('display','none');
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2152,10 +2152,10 @@ $('#preloader').css('display','none');
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/getDashTaskData/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2198,7 +2198,7 @@ $('#preloader').css('display','none');
             $("#startDate_property").on('change', function () {
                 startDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2220,7 +2220,7 @@ $('#preloader').css('display','none');
             $("#endDate_property").on('change', function () {
                 endDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2242,7 +2242,7 @@ $('#preloader').css('display','none');
             $("#startDate_account").on('change', function () {
                 startDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2275,7 +2275,7 @@ $('#preloader').css('display','none');
             $("#endDate_account").on('change', function () {
                 endDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2309,10 +2309,10 @@ $('#preloader').css('display','none');
                 startDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2341,10 +2341,10 @@ $('#preloader').css('display','none');
                 endDate = $(this).val()
                 let uri;
                 if($("#property-select").val()=="All"){
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}`
                 }
                 else{
-                    uri= `http://localhost:3000/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
+                    uri= `https://backend.app.spaderent.com/api/spade/TenantStatusCP/` + `${startDate}/${endDate}/${$("#property-select").val()}`
                 }
                 $.ajax({
                     url: uri,
@@ -2372,7 +2372,7 @@ $('#preloader').css('display','none');
             $("#startDate_amount").on('change', function () {
                 startDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2396,7 +2396,7 @@ $('#preloader').css('display','none');
             $("#endDate_amount").on('change', function () {
                 endDate = $(this).val()
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2426,7 +2426,7 @@ $('#preloader').css('display','none');
             })
             let id; let emailChange = false;
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2484,7 +2484,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/allproperty',
+                url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2518,7 +2518,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/TenantStatusCP/${startDate}/${endDateTenantFormatted}`,
+                url: `https://backend.app.spaderent.com/api/spade/TenantStatusCP/${startDate}/${endDateTenantFormatted}`,
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2546,7 +2546,7 @@ $('#preloader').css('display','none');
                 }
                 else{
                     $.ajax({
-                url: `http://localhost:3000/api/spade/getPropertyDashboard/${$(this).val()}`,
+                url: `https://backend.app.spaderent.com/api/spade/getPropertyDashboard/${$(this).val()}`,
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2613,7 +2613,7 @@ $('#preloader').css('display','none');
                 }
         })
         $.ajax({
-                url: `http://localhost:3000/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/invoiceAmountCount/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2648,7 +2648,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                    url: `http://localhost:3000/api/spade/dashboardProspectusInsight/${startDate}/${endDate}`,
+                    url: `https://backend.app.spaderent.com/api/spade/dashboardProspectusInsight/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -2676,7 +2676,7 @@ $('#preloader').css('display','none');
                     }
                 })
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashInvoiceData/${startDate}/${endDateTenantFormatted}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashInvoiceData/${startDate}/${endDateTenantFormatted}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2699,7 +2699,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashTaskData/${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashTaskData/${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2736,7 +2736,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: `http://localhost:3000/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
+                url: `https://backend.app.spaderent.com/api/spade/getDashPropertyData/` + `${startDate}/${endDate}`,
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2772,7 +2772,7 @@ $('#preloader').css('display','none');
                 emailChange = true
                 // console.log(id)
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/emailUpdate',
+                    url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({
@@ -2793,7 +2793,7 @@ $('#preloader').css('display','none');
             })
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
-                var apiUrl = 'http://localhost:3000/api/spade/getAllTask'; // Replace with your API endpoint URL
+                var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTask'; // Replace with your API endpoint URL
                 $.ajax({
                     url: apiUrl,
                     method: 'GET',
@@ -2973,7 +2973,7 @@ if (task.priority == 'High') {
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/inactiveUser',
+                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,

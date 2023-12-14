@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function callAPI() {
       $.ajax({
-        url: 'http://localhost:3000/api/spade/inactiveUser',
+        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
     type: 'PUT',
     contentType: false,
     processData: false,
@@ -12,7 +12,7 @@ $(document).ready(function() {
         // console.log('API call successful:', response);
         },
         error: function(xhr, status, error) {
-          console.error('Error in API call:', error);
+          // console.error('Error in API call:', error);
         }
       });
     }

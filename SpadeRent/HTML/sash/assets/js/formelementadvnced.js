@@ -113,7 +113,7 @@
 			"container": "transfer",
 			"valueName": "value",
 			"callable" : function (data, names) {
-				console.log("Selected ID：" + data)
+				// console.log("Selected ID：" + data)
 				$("#selectedItemSpan").text(names)
 			}
 		};

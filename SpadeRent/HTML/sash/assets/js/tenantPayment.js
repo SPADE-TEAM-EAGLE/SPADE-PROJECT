@@ -1,5 +1,5 @@
 $.ajax({
-    url: "http://localhost:3000/api/spade/GetBankAccountTenant",
+    url: "https://backend.app.spaderent.com/api/spade/GetBankAccountTenant",
     type: "GET",
     contentType: "application/json",
     headers: {
@@ -85,7 +85,7 @@ cardCvc.attach('#card-cvc');
 function main() {
         $("#preloader").css("display", "flex")
         $.ajax({
-            url: 'http://localhost:3000/api/spade/openOrder',
+            url: 'https://backend.app.spaderent.com/api/spade/openOrder',
             type: 'POST',
             data: JSON.stringify({
                 amount: $("#amount-card").val(),
@@ -114,7 +114,7 @@ function main() {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                             if($("#amount-payable").text().split("$")[1]== $("#amount-card").val()){
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+                                    url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                     type: 'POST',
                                     data: JSON.stringify({
                                         status: "paid",
@@ -139,12 +139,12 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });      
                             }else{
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/tenantUpdateIndividualInvoices',
+                                    url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateIndividualInvoices',
                                     type: 'POST',
                                     data: JSON.stringify({
                                         status: "paid",
@@ -170,7 +170,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }
@@ -204,7 +204,7 @@ function main() {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                             if($("#amount-payable").text().split("$")[1]== $("#amount-card").val()){
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+                                    url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                     type: 'POST',
                                     data: JSON.stringify({
                                         status: "paid",
@@ -229,12 +229,12 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }else{
                                 $.ajax({
-                                    url: 'http://localhost:3000/api/spade/tenantUpdateIndividualInvoices',
+                                    url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateIndividualInvoices',
                                     type: 'POST',
                                     data: JSON.stringify({
                                         status: "paid",
@@ -260,7 +260,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }
@@ -285,7 +285,7 @@ function main() {
                             $("#preloader").css("display", "none")
               // console.log(status)
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });
     }
@@ -294,7 +294,7 @@ function main() {
 $("#submit-ach").on("click",function(){
     $("#preloader").css("display", "flex")
     $.ajax({
-        url: 'http://localhost:3000/api/spade/openOrder',
+        url: 'https://backend.app.spaderent.com/api/spade/openOrder',
         type: 'POST',
         data: JSON.stringify({
             amount: $("#amount-ach").val(),
@@ -348,7 +348,7 @@ identification: userData.userId
 if(res?.transactionStatus?.toLowerCase()=="pending"){
     if($("#amount-payable").text().split("$")[1]==$("#amount-ach").val()){
         $.ajax({
-            url: 'http://localhost:3000/api/spade/tenantUpdateAllInvoices',
+            url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
             type: 'POST',
             data: JSON.stringify({
                 status: "pending",
@@ -373,12 +373,12 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });      
     }else{
         $.ajax({
-            url: 'http://localhost:3000/api/spade/tenantUpdateIndividualInvoices',
+            url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateIndividualInvoices',
                                     type: 'POST',
                                     data: JSON.stringify({
                                         status: "pending",
@@ -404,7 +404,7 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });     
     }
@@ -425,7 +425,7 @@ else {
           // console.log(xhr)
           // console.log(status)
           // console.log(error)
-            console.error('Error sending data:', error);
+            // console.error('Error sending data:', error);
         }
     });
     

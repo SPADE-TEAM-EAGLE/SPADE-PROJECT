@@ -220,10 +220,10 @@ function cardbtnchange1()
         }
     }
 });
-console.log(document.getElementById("plan-name"))
+// console.log(document.getElementById("plan-name"))
 document.getElementById("payment-month").innerHTML = time;
-console.log(time)
-console.log(document.getElementById(cardId))
+// console.log(time)
+// console.log(document.getElementById(cardId))
 document.getElementById("plan-name").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
 document.getElementById("plan-name-card").innerHTML = document.getElementById(cardId).getElementsByClassName("card-headerr")[0].getElementsByTagName("strong")[0].textContent.trim()
 var amount = this.closest('.pricing-card').getElementsByClassName('amount-payable')[0].textContent;
@@ -231,7 +231,7 @@ seletedPlanID = cardId;
 if(time=="Year"){
   amount = parseFloat(amount) * 12;
 }
-console.log(amount)
+// console.log(amount)
 document.getElementById("amount").value = amount;
 document.getElementById("amount").value = amount;
 document.getElementById("payment-amount").innerHTML = amount;
@@ -335,7 +335,7 @@ $(document).ready(function() {
   $("#email").on("input",()=>{
       var email = $("#email").val();
       $.ajax({
-          url: "http://localhost:3000/api/spade/checkemail",
+          url: "https://backend.app.spaderent.com/api/spade/checkemail",
           type: "GET",
           contentType: "application/json",
           data: {

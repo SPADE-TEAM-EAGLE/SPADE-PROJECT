@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function callAPI() {
       $.ajax({
-        url: 'http://localhost:3000/api/spade/inactiveTenant',
+        url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
     type: 'PUT',
     contentType: false,
     processData: false,
@@ -11,7 +11,7 @@ $(document).ready(function() {
         success: function(response) {
         },
         error: function(xhr, status, error) {
-          console.error('Error in API call:', error);
+          // console.error('Error in API call:', error);
         }
       });
     }
