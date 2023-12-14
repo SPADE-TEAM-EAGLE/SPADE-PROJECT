@@ -688,7 +688,7 @@ LEFT JOIN invoiceimages AS ii ON i.id = ii.invoiceID
 WHERE
 i.landlordID = ?
 GROUP BY
-i.id;
+i.id
 `;
 exports.resendEmailQuery =
   "SELECT *, invoice.id as invoiceId FROM tenants JOIN invoice ON tenants.id = invoice.tenantID WHERE invoice.id = ?";
