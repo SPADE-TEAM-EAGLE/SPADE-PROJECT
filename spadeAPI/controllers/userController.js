@@ -533,8 +533,13 @@ exports.Signin = async function (req, res) {
           res.status(400).send("Incorrect Password");
          }
         
-      } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
-          if(selectResult[0][0].PlanID == 1)
+      } 
+      else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
+        const id = selectResult[0][0].id;
+        const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
+          expiresIn: "3h",
+        }); 
+        if(selectResult[0][0].PlanID == 1)
       {
         const currentDate = new Date();
         const subscriptionDate = new Date(selectResult[0][0].created_at);
@@ -548,10 +553,10 @@ exports.Signin = async function (req, res) {
         }); 
     }
       }
-        const id = selectResult[0][0].id;
-        const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
-          expiresIn: "3h",
-        });
+        // const id = selectResult[0][0].id;
+        // const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
+        //   expiresIn: "3h",
+        // });
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
 
