@@ -1147,6 +1147,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1202,6 +1203,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1224,6 +1226,7 @@ $(".plan_remaining_days_data").each(function(){
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -1454,6 +1457,7 @@ if (tenant.leaseEndDate) {
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log(error)
                     $("#myModal_warning").modal("show");
                           setTimeout(function() {
@@ -1493,6 +1497,7 @@ if (tenant.leaseEndDate) {
                         // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });

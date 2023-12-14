@@ -967,6 +967,7 @@
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -999,6 +1000,7 @@ $("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix
 $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1025,6 +1027,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                   // console.log('Error occurred while fetching state and city data.');
                 }
             });
@@ -1083,6 +1086,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
 }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.log(error)
                     },
                 });
@@ -1128,6 +1132,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         }
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#delete-user-admin").modal("hide")
                         $("#preloader").css("display", "none")
                       // console.log(error)

@@ -1438,6 +1438,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1503,6 +1504,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#header-user").text(toTitleCase(response.userName))
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         localStorage.removeItem('authtoken');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
@@ -1526,6 +1528,7 @@ $(".plan_remaining_days_data").each(function(){
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -1555,6 +1558,7 @@ $.ajax({
         $("#user-address").text(response.data[0].property.address+" | "+response.data[0].property.city+" | "+response.data[0].property.state+" | "+response.data[0].property.zipCode)
     },
     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
     }
 });
             $(".company-name").text()
@@ -1613,6 +1617,7 @@ $.ajax({
                     // console.log('Done');
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log(error);
                 }
             });

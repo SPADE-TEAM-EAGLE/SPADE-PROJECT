@@ -3115,6 +3115,7 @@
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -3208,6 +3209,7 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
@@ -3268,6 +3270,7 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
@@ -3368,6 +3371,7 @@
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
@@ -3393,6 +3397,7 @@
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#add-units1").prop("disabled", false)
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
@@ -3437,6 +3442,7 @@
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
@@ -3476,6 +3482,7 @@
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
@@ -3542,6 +3549,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -3602,6 +3610,7 @@ $(".plan_remaining_days_data").each(function(){
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
@@ -3744,6 +3753,7 @@ $(".plan_remaining_days_data").each(function(){
                                 getData()
                             }, 2000);
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#editModal").modal("hide");
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
@@ -3789,6 +3799,7 @@ $(".plan_remaining_days_data").each(function(){
                                             getData()
                                         }, 2000);
                                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#editModal").modal("hide");
                                         $("#myModal_warning_connection").modal("show");
                                         setTimeout(function () {
@@ -3800,6 +3811,7 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log(error);
                         }
                     });
@@ -3918,6 +3930,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error)
                     }
                 })
@@ -3979,6 +3992,7 @@ $(".plan_remaining_days_data").each(function(){
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                       // console.error('Error updating status:', error);
                                     }
                                 });
@@ -4010,6 +4024,7 @@ $(".plan_remaining_days_data").each(function(){
                         $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#table-body-qualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
                         $("#table-body-disqualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
                         $("#table-body").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
@@ -4079,6 +4094,7 @@ $(".plan_remaining_days_data").each(function(){
                         else {
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
@@ -4114,6 +4130,7 @@ $(".plan_remaining_days_data").each(function(){
                             createSourceCampaignChart([], [],0)
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
@@ -4128,6 +4145,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
                         $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
@@ -4149,6 +4167,7 @@ $(".plan_remaining_days_data").each(function(){
                         });
                         createQDChart(qualified, disqualified)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             }
@@ -4175,6 +4194,7 @@ $(".plan_remaining_days_data").each(function(){
                         });
                         updateQDChart(qualified, disqualified)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -4210,6 +4230,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
                         // console.log(response)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -4248,6 +4269,7 @@ $(".plan_remaining_days_data").each(function(){
                             updateSourceCampaignChart([], [])
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -4264,6 +4286,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
                         $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -4280,6 +4303,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#engaged-prospect").text(response.data.Engaged ? response.data.Engaged : 0)
                         $("#nurture-prospect").text(response.data.Nurturing ? response.data.Nurturing : 0)
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -4371,6 +4395,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                   // console.error('Error updating status:', error);
                                 }
                             });
@@ -4392,6 +4417,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                   // console.error('Error updating status:', error);
                                 }
                             });
@@ -4412,6 +4438,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                   // console.error('Error updating status:', error);
                                 }
                             });
@@ -4432,6 +4459,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                   // console.error('Error updating status:', error);
                                 }
                             });
@@ -4452,6 +4480,7 @@ $(".plan_remaining_days_data").each(function(){
                                     countValues()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                   // console.error('Error updating status:', error);
                                 }
                             });
@@ -4498,6 +4527,7 @@ $(".plan_remaining_days_data").each(function(){
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(xhr)
                         $("#myModal_delete").modal("hide")
                         $("#myModal_warning_connection").modal("show");
@@ -4588,6 +4618,7 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             if (xhr.responseJSON.error === 'No data found') {
                                 $('#addModal').modal('hide');
                                 $('#infoModal').modal('show');
@@ -4657,6 +4688,7 @@ $(".plan_remaining_days_data").each(function(){
                                         }
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         if (xhr.responseJSON.error === 'No data found') {
                                             $('#addModal').modal('hide');
                                             $('#infoModal').modal('show');
@@ -4675,6 +4707,7 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log(error);
                         }
                     });
@@ -4692,6 +4725,7 @@ $(".plan_remaining_days_data").each(function(){
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -4746,6 +4780,7 @@ $(".plan_remaining_days_data").each(function(){
                         // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });
@@ -4768,6 +4803,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);

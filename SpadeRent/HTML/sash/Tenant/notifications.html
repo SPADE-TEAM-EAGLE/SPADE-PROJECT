@@ -1129,6 +1129,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1309,6 +1310,7 @@
                           // console.log('Done');
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                           // console.log(error);
                         }
                     });

@@ -1291,6 +1291,7 @@
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1318,6 +1319,7 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -1395,6 +1397,7 @@ $(".plan_remaining_days_data").each(function(){
                     unitsPermission = units;
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1445,6 +1448,7 @@ $(".plan_remaining_days_data").each(function(){
                     $("#property_address").text(toTitleCase(data.address) + ", " + toTitleCase(data.city) + ", " + toTitleCase(data.state))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
@@ -1562,6 +1566,7 @@ if (task.dueDate) {
                             }
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
@@ -1600,6 +1605,7 @@ if (task.dueDate) {
                         // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });

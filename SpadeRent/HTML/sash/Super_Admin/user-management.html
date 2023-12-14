@@ -3551,11 +3551,13 @@
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                               // console.log(error);
                             }
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -3588,6 +3590,7 @@ $("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix
 $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -3614,6 +3617,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.log('Error occurred while fetching state and city data.');
                     }
                 });
@@ -3688,6 +3692,7 @@ if (element.roleId == 2) {
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.log(error)
                     },
                 });
@@ -3710,6 +3715,7 @@ if (element.roleId == 2) {
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
@@ -3839,6 +3845,7 @@ if (element.roleId == 2) {
                             })
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -4018,6 +4025,7 @@ if (userAdminDataNew.roleId == 2) {
                         }
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloader").css("display", "none")
                       // console.log(error)
                     }
@@ -4091,6 +4099,7 @@ if (userAdminDataNew.roleId == 2) {
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');

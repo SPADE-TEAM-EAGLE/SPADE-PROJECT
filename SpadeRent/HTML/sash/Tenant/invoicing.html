@@ -1957,6 +1957,7 @@
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1983,6 +1984,7 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
@@ -2211,6 +2213,7 @@
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -2232,6 +2235,7 @@
                             categoryData = response.data
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                           // console.log('Error occurred while fetching state and city data.');
                           // console.log(xhr);
                           // console.log(error);
@@ -2268,7 +2272,7 @@
                 $("#table-body").append(
                     `<tr class="text-black">
                         <td>${month}/${day}/${year}</td>
-                                                    <td>INV-10012</td>
+                                                    <td>${data.cInvoiceId}</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                     <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "Not set"}</td>
                                                     <td>Due On Receipt</td>
@@ -2429,6 +2433,7 @@
                   // console.log("tenant", tenantData)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
@@ -2583,6 +2588,7 @@
                       // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.log(error);
                     }
                 });

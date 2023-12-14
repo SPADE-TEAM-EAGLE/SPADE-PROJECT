@@ -1248,6 +1248,7 @@
                     $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1439,6 +1440,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.log(error)
                     },
                 });

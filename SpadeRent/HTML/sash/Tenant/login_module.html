@@ -463,6 +463,7 @@
               }
             },
             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
               $("#verify_otp_auth").prop("disabled",false)
               if(xhr.responseJSON.message=="OTP expired"){
                 $("#info-text").text("OTP expired!!!")

@@ -1788,6 +1788,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1822,6 +1823,7 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -2066,6 +2068,7 @@ $(".plan_remaining_days_data").each(function(){
                     $("#header-user").text(toTitleCase(userName))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -2089,6 +2092,7 @@ $(".plan_remaining_days_data").each(function(){
                         // console.log('API response:', response);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('API error:', error);
                     }
                 });
@@ -2290,11 +2294,17 @@ print = true
                     }, 2000);
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+$("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
                                         // console.log('API error:', error);
                                     }
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
@@ -2349,6 +2359,11 @@ print = true
                     }, 2000);
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+$("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
                                         // console.log('API error:', error);
                                     }
                                 });
@@ -2372,6 +2387,7 @@ print = true
                             })
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('Error occurred while fetching state and city data.');
                             // console.log(xhr);
                             // console.log(error);
@@ -2412,6 +2428,7 @@ print = true
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error)
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
@@ -2730,6 +2747,7 @@ if (!categoryExists) {
 });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $('#save-categories').prop('disabled', false);
                             // console.log('Error occurred:', error);
                         }
@@ -3065,6 +3083,7 @@ function resetAccordions() {
                         getData()
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
@@ -3216,6 +3235,7 @@ function resetAccordions() {
                             GetNotification();
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('API error:', error);
                         }
                     });
@@ -3241,6 +3261,7 @@ function resetAccordions() {
                         getData()
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
@@ -3282,6 +3303,7 @@ function resetAccordions() {
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -3318,6 +3340,7 @@ function resetAccordions() {
                         // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });

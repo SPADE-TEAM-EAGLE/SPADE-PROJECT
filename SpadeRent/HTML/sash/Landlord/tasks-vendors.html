@@ -1484,6 +1484,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1566,6 +1567,7 @@
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1593,6 +1595,7 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -1625,6 +1628,7 @@
                 });
             },
             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 // console.log('Error occurred while fetching state and city data.');
             }
         });
@@ -1695,6 +1699,7 @@
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 }
             });
             let vendorData;
@@ -1769,6 +1774,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         if (xhr.responseJSON.message == "No vendor category data found") {
                             $("#category").empty()
                             $("#category").prop("disabled", true);
@@ -1865,10 +1871,12 @@
                                     resetAccordions()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -1948,10 +1956,12 @@
                                         resetAccordions()
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     }
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
@@ -2012,6 +2022,7 @@
                                 resetAccordions()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             }
                         });
                     }
@@ -2058,6 +2069,7 @@
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         var tableBody = $('#table_body');
                         tableBody.empty();
                         $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
@@ -2124,6 +2136,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         if (xhr.responseJSON.message == 'Vendor not Deleted successful') {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
@@ -2177,6 +2190,7 @@
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_edit").modal("hide");
                         $("#myModal_warning_connection").modal("show");
                         getData()
@@ -2378,6 +2392,7 @@
                         // console.log('Done');
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });
@@ -2400,6 +2415,7 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -2423,6 +2439,7 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);

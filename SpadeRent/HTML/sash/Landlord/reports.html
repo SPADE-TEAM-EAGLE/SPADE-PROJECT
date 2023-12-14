@@ -3364,6 +3364,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -3389,6 +3390,7 @@
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);
@@ -4027,6 +4029,7 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -4081,6 +4084,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     if (xhr.status === 401) {
                         $("#myModal_warning").modal("show");
                     } else {
@@ -4370,6 +4374,7 @@ $(".plan_remaining_days_data").each(function(){
                         constructInvoiceTable(invoiceData)
                     }
                 }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 }
             })
             $.ajax({
@@ -4403,6 +4408,7 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     if (xhr.status === 401) {
                         $("#myModal_warning").modal("show");
                     } else {
@@ -4606,6 +4612,7 @@ $(".plan_remaining_days_data").each(function(){
                             // console.log('Done');
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log(error);
                         }
                     });

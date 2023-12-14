@@ -9199,6 +9199,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -9753,6 +9754,7 @@
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('API error:', error);
                         }
                     });
@@ -10046,6 +10048,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             } else {
                             }
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         }
                     })
                     $.ajax({
@@ -10099,6 +10102,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             $('#table_body_users').append(`<tr><td colspan="5" class="text-center">No Data Found</td></tr>`);
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
@@ -10140,6 +10144,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 });
                 $.ajax({
@@ -10165,6 +10170,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -10212,6 +10218,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                     }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -10270,6 +10277,7 @@ if (taxable == 1) {
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -10340,6 +10348,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching invoices.');
                         // console.log(xhr);
                         // console.log(error);
@@ -10364,6 +10373,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -10401,6 +10411,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error);
                     }
                 });
@@ -10420,6 +10431,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         tenantData = response.data[0]
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(error)
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
@@ -10430,6 +10442,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -10504,6 +10517,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#table_body_users").empty()
                         getData()
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloaders").css("display", "none")
                         // console.log(error)
                     }
@@ -10568,11 +10582,13 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     $("#table_body_users").empty()
                                     getData()
                                 }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     // console.log(error)
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#preloaders").css("display", "none")
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
@@ -10603,6 +10619,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $("#table_body_users").empty()
                             getData()
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#preloaders").css("display", "none")
                             // console.log(error)
                         }
@@ -10826,6 +10843,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -10855,6 +10873,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                             getData()
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -10890,6 +10909,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('Error occurred while fetching invoices.');
                             if (xhr?.responseJSON?.message == "Password is incorrect") {
                                 $("#info-text").text("Password is incorrect")
@@ -10943,6 +10963,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log(error);
                         }
                     });
@@ -10971,6 +10992,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('Error occurred while fetching state and city data.');
                             // console.log(xhr);
                             // console.log(error);
@@ -11010,6 +11032,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#save-vendor").prop('disabled', false);
                             // console.log('Error occurred:', error);
                         }
@@ -11062,6 +11085,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $('#save-categories').prop('disabled', false);
                             // console.log('Error occurred:', error);
                         }
@@ -11284,6 +11308,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $(".progress").html(myprogress)
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log('Error occurred while fetching state and city data.');
                             // console.log(xhr);
                             // console.log(error);
@@ -11345,6 +11370,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#save_profile").prop("disabled", false)
                                         // console.log('Error occurred while fetching state and city data.');
                                         // console.log(xhr);
@@ -11376,6 +11402,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 getData()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#save_profile").prop("disabled", false)
                                 // console.log('Error occurred while fetching state and city data.');
                                 // console.log(xhr);
@@ -11448,6 +11475,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#save").prop("disabled", false)
                             if (xhr.responseJSON.error == "Incorrect Password") {
                                 $("#myModal_incorrect").modal("show")
@@ -11502,6 +11530,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000)
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             if (xhr.responseJSON.message == "Error in updating 2 Factor Authentication") {
                                 $("#myModal_incorrect_auth").modal("show")
                                 setTimeout(() => {
@@ -11715,6 +11744,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             window.open('./login_module.html', "_self")
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             // console.log(error);
                         }
                     });
@@ -11844,6 +11874,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         }
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#myModal_warning").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning').modal('hide');
@@ -11856,6 +11887,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -11902,6 +11934,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $("#myModal_warning").modal("hide");
@@ -11938,6 +11971,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $("#myModal_warning").modal("hide");
@@ -12091,6 +12125,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                 }, 2000);
                                                             },
                                                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                                 $("#myModal_warning_connection").modal("show")
                                                                 setTimeout(function () {
                                                                     $("#myModal_warning_connection").modal("hide");
@@ -12140,6 +12175,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             })
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
@@ -12225,6 +12261,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                 getData()
                                                             },
                                                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                                 $("#myModal_warning_connection").modal("show")
                                                                 setTimeout(function () {
                                                                     $("#myModal_warning_connection").modal("hide");
@@ -12244,6 +12281,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     }
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
@@ -12266,6 +12304,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         // console.log(response)
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(xhr)
                         // console.log(status)
                         // console.log(error)
@@ -12340,6 +12379,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#already-exist,#already-exist-update").removeClass("d-none")
                             $("#next-add-user-permission").attr("disabled", true)
                             isValidEmail = false;
@@ -12449,6 +12489,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
@@ -12904,6 +12945,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(xhr)
                         // console.log(status)
                         // console.log(error)
@@ -13043,6 +13085,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         // console.log(xhr)
                         // console.log(status)
                         // console.log(error)
