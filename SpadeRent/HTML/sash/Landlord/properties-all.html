@@ -1960,17 +1960,20 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1989,14 +1992,17 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2032,7 +2038,7 @@
             } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
                 return 2;
             } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                console.log(2)
+                // console.log(2)
                 return 3;
             } else {
                 return 0;
@@ -2071,7 +2077,7 @@
                     chevronIcon.classList.add("tick");
                     break;
                 case 3:
-                    console.log(2)
+                    // console.log(2)
                     chevronIcon.classList.remove("fi-rs-exclamation");
                     chevronIcon.classList.add("chevron");
                     chevronIcon.classList.remove("cross");
@@ -2083,7 +2089,7 @@
         }
         var selectedFiles = [];
         function dropHandler(ev) {
-            console.log("File(s) dropped");
+            // console.log("File(s) dropped");
             ev.preventDefault();
             if (ev.dataTransfer.items) {
                 [...ev.dataTransfer.items].forEach((item, i) => {
@@ -2095,22 +2101,22 @@
                 });
             } else {
                 [...ev.dataTransfer.files].forEach((file, i) => {
-                    console.log(`… file[${i}].name = ${file.name}`);
+                    // console.log(`… file[${i}].name = ${file.name}`);
                 });
             }
         }
         function dragOverHandler(ev) {
-            console.log("File(s) in drop zone");
+            // console.log("File(s) in drop zone");
             ev.preventDefault();
         }
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
-            console.log(selectedFilesContainer)
+            // console.log(selectedFilesContainer)
             selectedFilesContainer.empty();
-            console.log(selectedFiles)
+            // console.log(selectedFiles)
             selectedFiles.forEach(function (file, index) {
-                console.log(selectedFiles.length)
-                console.log(file)
+                // console.log(selectedFiles.length)
+                // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2156,7 +2162,7 @@
                         )
                         .appendTo(selectedFilesContainer);
                 } else if (file instanceof Object) {
-                    console.log(file)
+                    // console.log(file)
                     if (file.imageURL) {
                         fileElement
                             .append(
@@ -2211,14 +2217,17 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2227,7 +2236,7 @@ $(".plan_remaining_days_data").each(function(){
                 success: function ({
                     data
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     var stateDropdown = $('#state');
                     var stateupdateDropdown = $('#state_update');
                     states = data
@@ -2236,13 +2245,16 @@ $(".plan_remaining_days_data").each(function(){
                     });
                 },
                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             function areAllFieldsFilled() {
@@ -2403,7 +2415,7 @@ $(".plan_remaining_days_data").each(function(){
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response);
+                                    // console.log(response);
                                     var password = 'your-secret-password';
                                     var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
                                     var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -2425,6 +2437,10 @@ $(".plan_remaining_days_data").each(function(){
                                     }
                                 },
                                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                                   
                                     if (xhr.responseJSON.error === 'Property Already Exist') {
                                         $('#addModal').modal('hide');
                                         $('#infoModal').modal('show');
@@ -2442,11 +2458,15 @@ $(".plan_remaining_days_data").each(function(){
                             });
                         },
                         error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                                  
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 } else {
@@ -2495,6 +2515,10 @@ $(".plan_remaining_days_data").each(function(){
                             }
                         },
                         error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                                   
                             $('#addmodal_body').removeClass('d-none')
                             $('#addmodal_body_loader').addClass('d-none')
                             if (xhr.responseJSON.error === 'Property Already Exist') {
@@ -2560,8 +2584,8 @@ $(".plan_remaining_days_data").each(function(){
         $('input[type="checkbox"]').change(function () {
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-            console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
+            // console.log(columnIndex, isColumnVisible)
+            // console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             $('table').find('tr').each(function () {
                 var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                 isColumnVisible ? column.show() : column.hide();
@@ -2579,14 +2603,14 @@ $(".plan_remaining_days_data").each(function(){
             } else if (selectedFilter === 'created-at') {
                 rows.sort(function (a, b) {
                     var idA = new Date($(a).find('.created-at').text());
-                    console.log(idA)
+                    // console.log(idA)
                     var idB = new Date($(b).find('.created-at').text());
                     return idB - idA;
                 });
             }
             else if (selectedFilter === 'ascending') {
                 rows.sort(function (a, b) {
-                    console.log($(a).find('.serial-number').text())
+                    // console.log($(a).find('.serial-number').text())
                     var idA = parseInt($(a).find('.serial-number').text());
                     var idB = parseInt($(b).find('.serial-number').text());
                     return idA - idB;
@@ -2648,11 +2672,14 @@ $(".plan_remaining_days_data").each(function(){
                         });
                 },
                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         }
@@ -2664,7 +2691,7 @@ $(".plan_remaining_days_data").each(function(){
             $('#accordion-item1').find('.file-grid').empty();
         });
         $(document).on('click', '#update', function (e) {
-            console.log("he;;")
+            // console.log("he;;")
             e.preventDefault();
             $('#preloader').css('display', 'flex')
             $("#myModal_edit").modal("hide");
@@ -2737,18 +2764,19 @@ $(".plan_remaining_days_data").each(function(){
                                 }, 2000);
                             },
                             error: function (xhr, status, error) {
-                                $('#preloader').fadeOut('slow', function () {
-                                $(this).hide();
-                            });
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     },
                     error: function (xhr, status, error) {
+                                    
                         $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -2756,7 +2784,7 @@ $(".plan_remaining_days_data").each(function(){
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             } else {
@@ -2794,6 +2822,7 @@ $(".plan_remaining_days_data").each(function(){
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+                                    
                         $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -2832,11 +2861,14 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         })
@@ -2884,7 +2916,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#header-user").text(toTitleCase(response.user))
                         tableBody.empty();
                         propertyApiData = response?.data[0];
-                        console.log(response.data[0].length);
+                        // console.log(response.data[0].length);
                         response.data[0].forEach(function (property, index) {
                             var password = 'your-secret-password';
                             var encryptedPropertyId = sjcl.encrypt(password, property.id.toString());
@@ -2954,7 +2986,7 @@ $(".plan_remaining_days_data").each(function(){
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
                             propertyId = propertyIdElement.text();
                             const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                            console.log(data)
+                            // console.log(data)
                             var stateupdateDropdown = $('#state_update');
                             states.forEach(function (state) {
                                 if (state.states === data.state) {
@@ -3014,7 +3046,10 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log(error)
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                    // console.log(error)
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -3050,7 +3085,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -3064,10 +3099,13 @@ $(".plan_remaining_days_data").each(function(){
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                        // console.log(error);
                     }
                 });
             });
@@ -3082,16 +3120,19 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -3101,7 +3142,7 @@ $(".plan_remaining_days_data").each(function(){
         if ($('#typehead').val() == "") {
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                //console.log(count, parseInt($("#lengthSelectBox").val()))
+                // console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }
@@ -3116,7 +3157,7 @@ $(".plan_remaining_days_data").each(function(){
         if ($('#typehead').val() == "") {
             let count = 1;
             $("#table_body tr").each(function (item, index) {
-                //console.log(count, parseInt($("#lengthSelectBox").val()))
+                // console.log(count, parseInt($("#lengthSelectBox").val()))
                 if (count > parseInt($("#lengthSelectBox").val())) {
                     $(this).hide()
                 }

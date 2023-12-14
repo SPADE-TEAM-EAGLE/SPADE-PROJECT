@@ -61,23 +61,23 @@ for (const [theme, config] of themes) {
             default: '#6c5ffc'
         }, config));
         pickr.on('init', instance => {
-            console.log('Event: "init"', instance);
+          // console.log('Event: "init"', instance);
         }).on('hide', instance => {
-            console.log('Event: "hide"', instance);
+          // console.log('Event: "hide"', instance);
         }).on('show', (color, instance) => {
-            console.log('Event: "show"', color, instance);
+          // console.log('Event: "show"', color, instance);
         }).on('save', (color, instance) => {
-            console.log('Event: "save"', color, instance);
+          // console.log('Event: "save"', color, instance);
         }).on('clear', instance => {
-            console.log('Event: "clear"', instance);
+          // console.log('Event: "clear"', instance);
         }).on('change', (color, source, instance) => {
-            console.log('Event: "change"', color, source, instance);
+          // console.log('Event: "change"', color, source, instance);
         }).on('changestop', (source, instance) => {
-            console.log('Event: "changestop"', source, instance);
+          // console.log('Event: "changestop"', source, instance);
         }).on('cancel', instance => {
-            console.log('cancel', pickr.getColor().toRGBA().toString(0));
+          // console.log('cancel', pickr.getColor().toRGBA().toString(0));
         }).on('swatchselect', (color, instance) => {
-            console.log('Event: "swatchselect"', color, instance);
+          // console.log('Event: "swatchselect"', color, instance);
         });
     });
     themeContainer.appendChild(button);
@@ -134,23 +134,23 @@ for (const [theme, config] of monolithThemes) {
             default: '#fc5296'
         }, config));
         monolithPickr.on('init', instance => {
-            console.log('Event: "init"', instance);
+          // console.log('Event: "init"', instance);
         }).on('hide', instance => {
-            console.log('Event: "hide"', instance);
+          // console.log('Event: "hide"', instance);
         }).on('show', (color, instance) => {
-            console.log('Event: "show"', color, instance);
+          // console.log('Event: "show"', color, instance);
         }).on('save', (color, instance) => {
-            console.log('Event: "save"', color, instance);
+          // console.log('Event: "save"', color, instance);
         }).on('clear', instance => {
-            console.log('Event: "clear"', instance);
+          // console.log('Event: "clear"', instance);
         }).on('change', (color, source, instance) => {
-            console.log('Event: "change"', color, source, instance);
+          // console.log('Event: "change"', color, source, instance);
         }).on('changestop', (source, instance) => {
-            console.log('Event: "changestop"', source, instance);
+          // console.log('Event: "changestop"', source, instance);
         }).on('cancel', instance => {
-            console.log('cancel', monolithPickr.getColor().toRGBA().toString(0));
+          // console.log('cancel', monolithPickr.getColor().toRGBA().toString(0));
         }).on('swatchselect', (color, instance) => {
-            console.log('Event: "swatchselect"', color, instance);
+          // console.log('Event: "swatchselect"', color, instance);
         });
     });
     themeContainer1.appendChild(button);
@@ -207,23 +207,23 @@ for (const [theme, config] of nanoThemes) {
             default: '#05c3fb'
         }, config));
         nanoPickr.on('init', instance => {
-            console.log('Event: "init"', instance);
+          // console.log('Event: "init"', instance);
         }).on('hide', instance => {
-            console.log('Event: "hide"', instance);
+          // console.log('Event: "hide"', instance);
         }).on('show', (color, instance) => {
-            console.log('Event: "show"', color, instance);
+          // console.log('Event: "show"', color, instance);
         }).on('save', (color, instance) => {
-            console.log('Event: "save"', color, instance);
+          // console.log('Event: "save"', color, instance);
         }).on('clear', instance => {
-            console.log('Event: "clear"', instance);
+          // console.log('Event: "clear"', instance);
         }).on('change', (color, source, instance) => {
-            console.log('Event: "change"', color, source, instance);
+          // console.log('Event: "change"', color, source, instance);
         }).on('changestop', (source, instance) => {
-            console.log('Event: "changestop"', source, instance);
+          // console.log('Event: "changestop"', source, instance);
         }).on('cancel', instance => {
-            console.log('cancel', nanoPickr.getColor().toRGBA().toString(0));
+          // console.log('cancel', nanoPickr.getColor().toRGBA().toString(0));
         }).on('swatchselect', (color, instance) => {
-            console.log('Event: "swatchselect"', color, instance);
+          // console.log('Event: "swatchselect"', color, instance);
         });
     });
     themeContainer2.appendChild(button);

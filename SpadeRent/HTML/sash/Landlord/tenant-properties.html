@@ -1429,16 +1429,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1466,7 +1467,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -1500,15 +1501,16 @@ $(".plan_remaining_days_data").each(function(){
                         $("#header-user").text(toTitleCase(response.userName))
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         localStorage.removeItem('authtoken');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             $.ajax({
@@ -1518,14 +1520,15 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
@@ -1540,7 +1543,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function() {
                     var column = $(this).find('th:nth-child(' + (columnIndex+2) + '), td:nth-child(' + (columnIndex+2) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -1557,7 +1560,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function(a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt($(a).find('.serial-number').text());
                         var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;
@@ -1610,7 +1613,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     data
                 }) {
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
-                    console.log(data[0])
+                    // console.log(data[0])
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage?data[0][0].tenantImage:"../assets/images/icons/Group 10344.png")
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
                     if(data[0].length==0){
@@ -1654,7 +1657,7 @@ row.append(leaseEndDate);
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                 }
             });
         })
@@ -1671,7 +1674,7 @@ row.append(leaseEndDate);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(localStorage.getItem("htmlLayout")){
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
@@ -1685,10 +1688,11 @@ row.append(leaseEndDate);
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    // console.log('Done');
                 },
                 error: function (xhr, status, error) {
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log(error);
                 }
             });
         });
@@ -1699,7 +1703,7 @@ row.append(leaseEndDate);
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1714,7 +1718,7 @@ row.append(leaseEndDate);
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }

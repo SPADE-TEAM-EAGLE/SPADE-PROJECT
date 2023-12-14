@@ -1209,7 +1209,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("ProtectedAdmin");
+                  // console.log("ProtectedAdmin");
                     if (response.userPeremission.length > 0) {
                         $(document).ajaxStop(function () {
                             const permissionTypes = ["overView", "customers", "appearance", "profile", "closedAccount", "userManagement", "changePlan", "closeLandlord"];
@@ -1248,14 +1248,15 @@
                     $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             })
             function convertDateFormat(sqlDate) {
@@ -1401,7 +1402,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         $("#table_body_close_report").empty()
                         if (response.data) {
                             response?.data.forEach((element, index) => {
@@ -1439,7 +1440,8 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+$('#preloader').css('display','none');
+                      // console.log(error)
                     },
                 });
             }
@@ -1616,7 +1618,7 @@
             if ($('#typehead2').val() == "") {
                 let count = 1;
                 $("#table_body_close_report tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                  // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -1629,7 +1631,7 @@
             if ($('#typehead3').val() == "") {
                 let count = 1;
                 $("#table_body_trial_report tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox3").val()))
+                  // console.log(count, parseInt($("#lengthSelectBox3").val()))
                     if (count > parseInt($("#lengthSelectBox3").val())) {
                         $(this).hide()
                     }
@@ -1657,7 +1659,7 @@
             if ($('#typehead2').val() == "") {
                 let count = 1;
                 $("#table_body_close_report tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox2").val()))
+                  // console.log(count, parseInt($("#lengthSelectBox2").val()))
                     if (count > parseInt($("#lengthSelectBox2").val())) {
                         $(this).hide()
                     }
@@ -1670,7 +1672,7 @@
             if ($('#typehead3').val() == "") {
                 let count = 1;
                 $("#table_body_trial_report tr").each(function (item, index) {
-                    console.log(count, parseInt($("#lengthSelectBox3").val()))
+                  // console.log(count, parseInt($("#lengthSelectBox3").val()))
                     if (count > parseInt($("#lengthSelectBox3").val())) {
                         $(this).hide()
                     }

@@ -6,7 +6,7 @@ $.ajax({
         Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
-        console.log(response)
+      // console.log(response)
         if (response.data.length > 0) {
             $("#account").empty();
             $("#account").append(`<option value="">Select Account</option>`);
@@ -18,7 +18,7 @@ $.ajax({
         }
     },
     error: function (xhr, status, error) {
-        console.log(error);
+      // console.log(error);
     }
 });
 
@@ -134,11 +134,11 @@ function main() {
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(xhr)
-                                        console.log(status)
+                                      // console.log(xhr)
+                                      // console.log(status)
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
-                                        console.log(error)
+                                      // console.log(error)
                                         console.error('Error sending data:', error);
                                     }
                                 });      
@@ -165,11 +165,11 @@ function main() {
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(xhr)
-                                        console.log(status)
+                                      // console.log(xhr)
+                                      // console.log(status)
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
-                                        console.log(error)
+                                      // console.log(error)
                                         console.error('Error sending data:', error);
                                     }
                                 });   
@@ -224,11 +224,11 @@ function main() {
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(xhr)
-                                        console.log(status)
+                                      // console.log(xhr)
+                                      // console.log(status)
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
-                                        console.log(error)
+                                      // console.log(error)
                                         console.error('Error sending data:', error);
                                     }
                                 });   
@@ -255,11 +255,11 @@ function main() {
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log(xhr)
-                                        console.log(status)
+                                      // console.log(xhr)
+                                      // console.log(status)
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
-                                        console.log(error)
+                                      // console.log(error)
                                         console.error('Error sending data:', error);
                                     }
                                 });   
@@ -277,14 +277,14 @@ function main() {
                         }
                     });
                 }
-                console.log(response)
+              // console.log(response)
             },
             error: function (xhr, status, error) {
-                console.log(xhr)
+              // console.log(xhr)
                 $("#upgradetopro-card-modal").modal("hide")
                             $("#preloader").css("display", "none")
-                console.log(status)
-                console.log(error)
+              // console.log(status)
+              // console.log(error)
                 console.error('Error sending data:', error);
             }
         });
@@ -307,7 +307,7 @@ $("#submit-ach").on("click",function(){
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
         },
         success: function (response) {
-            console.log(scard)
+          // console.log(scard)
             
             sfc.createPayment({
 sessionToken: response.sessionToken,
@@ -368,11 +368,11 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 }, 2000);
             },
             error: function (xhr, status, error) {
-                console.log(xhr)
-                console.log(status)
+              // console.log(xhr)
+              // console.log(status)
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
-                console.log(error)
+              // console.log(error)
                 console.error('Error sending data:', error);
             }
         });      
@@ -399,11 +399,11 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 }, 2000);
             },
             error: function (xhr, status, error) {
-                console.log(xhr)
-                console.log(status)
+              // console.log(xhr)
+              // console.log(status)
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
-                console.log(error)
+              // console.log(error)
                 console.error('Error sending data:', error);
             }
         });     
@@ -422,9 +422,9 @@ else {
         
                 },
         error: function (xhr, status, error) {
-            console.log(xhr)
-            console.log(status)
-            console.log(error)
+          // console.log(xhr)
+          // console.log(status)
+          // console.log(error)
             console.error('Error sending data:', error);
         }
     });
@@ -437,12 +437,12 @@ var individual = false;
 var invoiceId;
 $("#upgradetopro-btn").on("click", function () {
     $("#closeaccount,#surePaynow").modal("hide");
-    console.log(individual)
+  // console.log(individual)
     if(individual){
         
         individual=false;
     }else{
-        console.log("clicked")
+      // console.log("clicked")
         
         const amount = $("#amount-payable").text().split("$")[1];
         

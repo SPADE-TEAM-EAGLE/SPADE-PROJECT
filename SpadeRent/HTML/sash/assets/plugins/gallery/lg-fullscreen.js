@@ -93,7 +93,7 @@
     };
     Fullscreen.prototype.destroy = function () {
         if(document.querySelector('.lg-outer').classList.contains('lg-fullscreen-on')){
-            console.log('triggered');
+          // console.log('triggered');
             this.exitFullscreen();
         }
         utils.off(document, '.lgfullscreen');

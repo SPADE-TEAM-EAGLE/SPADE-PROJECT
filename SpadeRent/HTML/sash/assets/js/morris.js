@@ -34,7 +34,7 @@ $(function(e) {
         labels: ['Y', 'Z'],
         resize: true
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
     /*---- morrisBar3----*/
     new Morris.Area({
@@ -262,7 +262,7 @@ $(function(e) {
             return x + "%"
         }
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
     /*---- morrisBar9----*/
     new Morris.Donut({

@@ -1407,7 +1407,7 @@
                             }
                         });
                     }
-                        console.log(response);
+                      // console.log(response);
                         $("#header-user").text(toTitleCase(response?.firstName) + " " + toTitleCase(response.lastName))
                         $("#firstName").val(response.firstName);
                         $("#lastName").val(response.lastName);
@@ -1426,14 +1426,15 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -1452,7 +1453,8 @@
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                      // console.log('Error occurred while fetching state and city data.');
                     }
                 });
             }
@@ -1485,7 +1487,7 @@
                         contentType: false,
                         processData: false,
                         success: function (response) {
-                            console.log(response.images[0].image_url);
+                          // console.log(response.images[0].image_url);
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
@@ -1506,15 +1508,16 @@
                                     getData()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#save_profile").prop("disabled", false)
-                                    console.log('Error occurred while fetching state and city data.');
-                                    console.log(xhr);
-                                    console.log(error);
+                                  // console.log('Error occurred while fetching state and city data.');
+                                  // console.log(xhr);
+                                  // console.log(error);
                                 }
                             });
                         },
                         error: function (error) {
-                            console.error('Error submitting image:', error);
+                          // console.error('Error submitting image:', error);
                         }
                     });
                 } else {
@@ -1536,10 +1539,11 @@
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#save_profile").prop("disabled", false)
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+                          // console.log('Error occurred while fetching state and city data.');
+                          // console.log(xhr);
+                          // console.log(error);
                         }
                     });
                 }
@@ -1559,13 +1563,13 @@
             $('#profile').removeClass('dragging hasImage');
             if (e.originalEvent) {
                 file = e.originalEvent.dataTransfer.files[0];
-                console.log(file);
+              // console.log(file);
                 var reader = new FileReader();
                 //attach event handlers here...
                 reader.readAsDataURL(file);
                 reader.onload = function (e) {
-                    console.log("11111111111111111");
-                    console.log(reader.result);
+                  // console.log("11111111111111111");
+                  // console.log(reader.result);
                     if (reader.result) {
                         $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                     }
@@ -1573,7 +1577,7 @@
             }
         })
         $('#profile').on('click', function (e) {
-            console.log('clicked')
+          // console.log('clicked')
             $('#mediaFile').click();
         });
         window.addEventListener("dragover", function (e) {
@@ -1588,12 +1592,12 @@
             var input = e.target;
             if (input.files && input.files[0]) {
                 file = input.files[0];
-                console.log(file)
+              // console.log(file)
                 var reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = function (e) {
-                    console.log("22222222222");
-                    console.log(reader.result);
+                  // console.log("22222222222");
+                  // console.log(reader.result);
                     $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                 }
             }

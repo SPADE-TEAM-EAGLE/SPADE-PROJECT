@@ -531,6 +531,7 @@
             }
           },
           error: function (xhr, status, error) {
+$('#preloader').css('display','none');
             if (xhr.responseText == "Email not found") {
               $("#id_password1").removeClass("is-invalid");
               $("#login-email").addClass("is-invalid");
@@ -547,7 +548,7 @@
               setTimeout(function () {
                 $('#myModal_warning_connection').modal('hide');
               }, 2000);
-              console.log(xhr.responseText.token);
+              // console.log(xhr.responseText);
             }
           },
         });
@@ -580,6 +581,7 @@
               }
             },
             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
               $("#verify_otp_auth").prop("disabled",false)
               if(xhr.responseJSON.message=="OTP expired"){
                 $("#info-text").text("OTP expired!!!")
@@ -621,7 +623,8 @@
             $("#save-email").addClass("d-none")
           },
           error: function (xhr, status, error) {
-            console.error(xhr.responseText);
+$('#preloader').css('display','none');
+          // console.error(xhr.responseText);
           }
         });
       })
@@ -638,7 +641,8 @@
             $("#modaldemo8").modal("show")
           },
           error: function (xhr, status, error) {
-            console.error(xhr.responseText);
+$('#preloader').css('display','none');
+          // console.error(xhr.responseText);
           }
         });
       })
@@ -654,7 +658,7 @@
             password: $("#id_password1").val(),
           }),
           success: function (response) {
-            console.log(response)
+            // console.log(response)
             if (response.message == " Email verified successful ") {
               localStorage.setItem("authtoken", response.token);
               $("#modaldemo8").modal("hide")
@@ -669,9 +673,10 @@
             }
           },
           error: function (xhr, status, error) {
+$('#preloader').css('display','none');
             document.getElementById("verification-spans").style.display = "block";
             $("#verification").addClass("is-invalid")
-            console.error(xhr.responseText);
+          // console.error(xhr.responseText);
           }
         });
       })

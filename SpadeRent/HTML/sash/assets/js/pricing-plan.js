@@ -1,5 +1,5 @@
 function adjustPlan(data){
-    console.log(data)
+  // console.log(data)
     if(data.planNNN=="Not Available"){
         $("#collapse1").hide();
         $("input[value='Triple Net Lease']").parent().hide();
@@ -62,6 +62,6 @@ function adjustPlan(data){
             default:
                 break;
         }
-        console.log($(this).text());
+      // console.log($(this).text());
     })
 }

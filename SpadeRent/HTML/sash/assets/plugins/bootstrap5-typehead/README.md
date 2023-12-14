@@ -6,7 +6,7 @@ const ac = new Autocomplete(field, {
     data: [{label: "I'm a label", value: 42}],
     maximumItems: 5,
     onSelectItem: ({label, value}) => {
-        console.log("user selected:", label, value);
+      // console.log("user selected:", label, value);
     }
 });
 ac.setData([
@@ -21,7 +21,7 @@ const ac = new Autocomplete(field, {
     label: "name",
     value: "text",
     onSelectItem: ({label, value}) => {
-        console.log("user selected:", label, value);
+      // console.log("user selected:", label, value);
     }
 });
 ```
@@ -32,7 +32,7 @@ const ac = new Autocomplete(field, {
     label: null,
     value: null,
     onSelectItem: ({label, value}) => {
-        console.log("user selected:", label, value);
+      // console.log("user selected:", label, value);
     }
 });
 ```

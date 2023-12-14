@@ -1053,16 +1053,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1115,14 +1116,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -1132,14 +1134,15 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1372,15 +1375,16 @@ $(".plan_remaining_days_data").each(function(){
                 },
                 crossDomain: true,
                 success: function (response) {
-                    console.log(response)
+                    // console.log(response)
                     window.location('../Landlord/properties-all.html')
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         });
@@ -1410,12 +1414,13 @@ $(".plan_remaining_days_data").each(function(){
                     getData()
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#add-units").prop("disabled", false)
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             })
         })
@@ -1442,11 +1447,12 @@ $(".plan_remaining_days_data").each(function(){
 $('#property_size').text(data.propertySQFT)
             },
             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 $("#myModal_warning_connection").modal("show");
                 setTimeout(function () {
                     $('#myModal_warning_connection').modal('hide');
                 }, 2000);
-                console.log('Error: ' + error);
+                // console.log('Error: ' + error);
             }
         });
         function getData() {
@@ -1465,7 +1471,7 @@ $('#property_size').text(data.propertySQFT)
                     propertyName,
                     propertyAddress
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     const units = data[0];
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -1536,17 +1542,18 @@ $('#property_size').text(data.propertySQFT)
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         }
         getData()
         $(document).on("click",'.done-option',function (e) {
-                        console.log(22)
+                        // console.log(22)
                         e.preventDefault();
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         const unitId = unitIdElement.text();
@@ -1560,9 +1567,9 @@ $('#property_size').text(data.propertySQFT)
                                 cellValue = $(this).text()
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
-                        console.log(propertyId)
+                        // console.log(propertyId)
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                             type: 'PUT',
@@ -1578,15 +1585,16 @@ $('#property_size').text(data.propertySQFT)
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response)
+                                // console.log(response)
                                 getData()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         })
                     });
@@ -1598,7 +1606,7 @@ $('#property_size').text(data.propertySQFT)
                         unitIdElement = $(this).closest("tr").find(".unit-id");
                         unitId = unitIdElement.text();
                         values=[]
-                        console.log(values)
+                        // console.log(values)
                         $(`#${unitId}`).find('td').each(function () {
                             let cellValue = "";
                             const input = $(this).find('input')
@@ -1608,7 +1616,7 @@ $('#property_size').text(data.propertySQFT)
                                 cellValue = $(this).text()
                             }
                             values.push(cellValue)
-                            console.log(values)
+                            // console.log(values)
                         });
                         $("#unit-id-delete").text(values[3] !== "" ? values[3] : "Not set")
                         $("#myModal_delete").modal("show");
@@ -1635,17 +1643,18 @@ $('#property_size').text(data.propertySQFT)
                                 getData()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     })
                     $(document).on("click",".edit-option",function () {
                         $(this).closest('td').find('.done-option').removeAttr('disabled');
-                        console.log(1)
+                        // console.log(1)
                         const unitIdElement = $(this).closest("tr").find(".unit-id");
                         $(this).addClass("d-none")
                         $(this).next().removeClass('d-none');
@@ -1669,7 +1678,7 @@ $('#property_size').text(data.propertySQFT)
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1683,10 +1692,11 @@ $('#property_size').text(data.propertySQFT)
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -1733,7 +1743,7 @@ $('#property_size').text(data.propertySQFT)
         case "Add":
             break;
         case "View":
-            console.log($("#nav_links li:eq('1')"))
+            // console.log($("#nav_links li:eq('1')"))
             $("#nav_links li:eq('1')").addClass("d-none")
             break;
         case "Delete":

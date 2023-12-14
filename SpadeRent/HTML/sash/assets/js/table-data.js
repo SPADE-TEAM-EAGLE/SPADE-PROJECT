@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-    console.log("ammi g");
+  // console.log("ammi g");
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {

@@ -412,7 +412,7 @@
               }
                         }
                         else{
-                          console.log("Server Error!");
+                        // console.log("Server Error!");
                         }
                     },
                     error: function(xhr, status, error) {
@@ -428,7 +428,7 @@
               $("#email_span").hide();
               $("#pass_span").show();
             } else {
-              console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             }
                     }
                 });
@@ -463,6 +463,7 @@
               }
             },
             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
               $("#verify_otp_auth").prop("disabled",false)
               if(xhr.responseJSON.message=="OTP expired"){
                 $("#info-text").text("OTP expired!!!")

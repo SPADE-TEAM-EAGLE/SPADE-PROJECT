@@ -2,8 +2,8 @@
 var ctx1 = document.getElementById("chartBar21").getContext('2d');
 var myChartProspect;
 function createProspectChart(labels, data){
-    console.log("Inside the function!!!!")
-    console.log(labels, data)
+  // console.log("Inside the function!!!!")
+  // console.log(labels, data)
     myChartProspect = new Chart(ctx1, {
         type: 'bar',
         data: {
@@ -96,7 +96,7 @@ function createInvoiceChart(data){
     });
 }
 function updateInvoiceChart(data){
-    console.log(data)
+  // console.log(data)
     myChartInvoice.data.datasets[0].data = data;
     myChartInvoice.update();
 }
@@ -139,7 +139,7 @@ var chart = c3.generate({
   /*---- morrisBar8----*/
   var donutChartInstance;
   function createDonutChart(data){
-    console.log(data)
+  // console.log(data)
     donutChartInstance = new Morris.Donut({
         element: 'morrisBar88',
         data: data,
@@ -151,11 +151,11 @@ var chart = c3.generate({
             return x + "%";
         }
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
   }
   function updateDonutChart(data){
-    console.log(data)
+  // console.log(data)
     donutChartInstance.setData(data);
   }
  /* Account status chart-donut*/
@@ -265,7 +265,7 @@ function createPropertyStatus(data){
 }
 function updatePropertyStatus(data)
 {
-    console.log(data)
+  // console.log(data)
     myPieChart6.data.datasets[0].data = data;
     myPieChart6.update();
 }

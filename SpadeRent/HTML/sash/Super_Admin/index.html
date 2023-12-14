@@ -1203,7 +1203,7 @@
                 },
                 success: function (response) {
                     response?.totalLandlord.forEach(function (element, index) {
-                        console.log(element);
+                      // console.log(element);
                         if (element.planName == "Basic") {
                             $('#totalBasic').text(element.userCount)
                         } else if (element.planName == "Pro") {
@@ -1220,13 +1220,14 @@
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
                     }, 2000);
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             })
             $.ajax({
@@ -1270,13 +1271,14 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
                     }, 2000);
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             })
             
@@ -1288,7 +1290,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("ProtectedAdmin");
+                      // console.log("ProtectedAdmin");
                         if(response.userPeremission.length > 0){
                             $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -1345,14 +1347,15 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -1377,14 +1380,15 @@
                         $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -1403,7 +1407,8 @@
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                      // console.log('Error occurred while fetching state and city data.');
                     }
                 });
             }

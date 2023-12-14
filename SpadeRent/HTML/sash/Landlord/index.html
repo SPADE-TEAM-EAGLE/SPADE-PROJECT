@@ -1786,16 +1786,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1804,7 +1805,7 @@
                     <script>
                     </script>
                     <script>
-        console.log(document.getElementById('customIntercomButton'))
+        // console.log(document.getElementById('customIntercomButton'))
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
             app_id: "fjpx1kt1",
@@ -1856,14 +1857,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1902,7 +1904,7 @@
             $('input[type="checkbox"],.remove-card').on('change', function () {
                 var cardId = $(this).data('card');
                 var card = $('#' + cardId);
-                console.log(card)
+                // console.log(card)
                 if ($(this).is(':checked')) {
                     card.show();
                     localStorage.setItem(cardId, 'true');
@@ -1914,7 +1916,7 @@
             $('.remove-card').on('click', function () {
                 var cardId = $(this).closest('.col-lg-6').attr('id');
                 var card = $('#' + cardId);
-                console.log($(this).closest('.col-lg-6').attr('id'))
+                // console.log($(this).closest('.col-lg-6').attr('id'))
                 if ($(this).is(':checked')) {
                     card.show();
                     localStorage.setItem(cardId, 'true');
@@ -1989,6 +1991,7 @@ endDateTenantFormatted = formatDate(endDateTenant);
                             updateProspectChart([],[])
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -2024,6 +2027,7 @@ endDateTenantFormatted = formatDate(endDateTenant);
                             updateProspectChart([],[])
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             })
@@ -2055,9 +2059,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2089,9 +2094,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2135,9 +2141,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2181,9 +2188,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2196,15 +2204,16 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
                         propertyData = [response?.property[0]?.propertyCount, response?.property[0]?.vacantCount, response?.property[0]?.occupiedCount]
                         updatePropertyStatus(propertyData)
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2218,14 +2227,15 @@ endDateTenantFormatted = formatDate(endDateTenant);
                     },
                     success: function (response) {
                         $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
-                        console.log(response)
+                        // console.log(response)
                         propertyData = [response?.property[0]?.propertyCount, response?.property[0]?.vacantCount, response?.property[0]?.occupiedCount]
                         updatePropertyStatus(propertyData)
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2255,9 +2265,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         ]);
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2287,9 +2298,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         ]);
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2321,7 +2333,7 @@ endDateTenantFormatted = formatDate(endDateTenant);
                                             setTimeout(function() {
                                                 $('#myModal_warning_connection').modal('hide');
                                             }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                 })
             })
@@ -2353,7 +2365,7 @@ endDateTenantFormatted = formatDate(endDateTenant);
                                             setTimeout(function() {
                                                 $('#myModal_warning_connection').modal('hide');
                                             }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                 })
             })
@@ -2374,9 +2386,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         $("#outstanding-amount").text("$ " + pendingBalance);
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2397,9 +2410,10 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         $("#outstanding-amount").text("$ " + pendingBalance);
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -2424,8 +2438,8 @@ endDateTenantFormatted = formatDate(endDateTenant);
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
-                    console.log(rest)
-                    console.log(llDashboard)
+                    // console.log(rest)
+                    // console.log(llDashboard)
                     llDashboardObject=llDashboard
             localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -2442,8 +2456,8 @@ endDateTenantFormatted = formatDate(endDateTenant);
                         $("#header-user").text(toTitleCase(userName))
                     userEmail = email
                     id = userId
-                    console.log($("#user-email"))
-                    console.log(parseInt(planID))
+                    // console.log($("#user-email"))
+                    // console.log(parseInt(planID))
                     $("#user-email").val(email)
 const createdDate_div = new Date(create_at);
 const currentDate_div = new Date();
@@ -2458,14 +2472,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2477,10 +2492,10 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response?.data[0])
+                    // console.log(response?.data[0])
                     if(response?.data[0]){
                         var properties = response?.data[0];
-                        console.log(properties)
+                        // console.log(properties)
                     var propertySelect = $('#property-select');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
@@ -2499,7 +2514,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $.ajax({
@@ -2522,7 +2537,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $("#property-select").on("change",function(){
@@ -2539,7 +2554,7 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function(response) {
-                    console.log(response?.property[0])
+                    // console.log(response?.property[0])
                     propertyData = [response?.property[0]?.propertyCount, response?.property[0]?.vacantCount, response?.property[0]?.occupiedCount]
                         updatePropertyStatus(propertyData)
                         var totalDeposit = parseInt(response?.property[0]?.totalPaidAmount) || 0;
@@ -2569,14 +2584,14 @@ $(".plan_remaining_days_data").each(function(){
                             var taskCount = parseInt(response?.property[0]?.totalTask) || 0; // Handle 0 taskCount case
                             if (onGoingTaskCount !== null) {
                                 var incompletePercent = (parseInt(onGoingTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
-                                console.log(incompletePercent)
+                                // console.log(incompletePercent)
                                 $("#task-incomplete-percent").text(incompletePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-incomplete-percent").text("0.000 %");
                             }
                             if (finishedTaskCount !== null) {
                                 var completePercent = (parseInt(finishedTaskCount) / (taskCount == 0 ? 1 : taskCount)) * 100;
-                                console.log(completePercent)
+                                // console.log(completePercent)
                                 $("#task-complete-percent").text(completePercent.toFixed(3) + " %");
                             } else {
                                 $("#task-complete-percent").text("0.000 %");
@@ -2592,7 +2607,7 @@ $(".plan_remaining_days_data").each(function(){
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
                 }
@@ -2604,11 +2619,11 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response?.data[0][0])
+                    // console.log(response?.data[0][0])
                     var totalDeposit = parseInt(response?.data[0][0]?.TotalDeposit) || 0;
                     var pendingBalance = parseInt(response?.data[0][0]?.PendingBalance) || 0;
                     var totalAmount = parseInt(response?.data[0][0]?.TotalAmount) || 0; // Avoid division by zero
-                    console.log(totalDeposit, pendingBalance, totalAmount)
+                    // console.log(totalDeposit, pendingBalance, totalAmount)
                     $("#total-deposit").text("$ " + totalDeposit);
                     $("#pending-balance").text("$ " + pendingBalance);
                     $("#invoicing-amount").text("$ " + totalAmount);
@@ -2626,9 +2641,10 @@ $(".plan_remaining_days_data").each(function(){
                         ]);
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2639,7 +2655,7 @@ $(".plan_remaining_days_data").each(function(){
                     contentType: "application/json",
                     type: "GET",
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response?.data) {
                             const labels = [];
                             const data = [];
@@ -2649,13 +2665,14 @@ $(".plan_remaining_days_data").each(function(){
                             data.push(response?.data[0]?.Disqualified)
                             labels.push("Qualified")
                             data.push(response?.data[0]?.Qualified)
-                            console.log(labels, data)
+                            // console.log(labels, data)
                             createProspectChart(labels, data)
                         }
                         else{
                             createProspectChart([],[])
                         }
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 })
             $.ajax({
@@ -2675,9 +2692,10 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2711,9 +2729,10 @@ else {
 }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2724,14 +2743,15 @@ else {
                 },
                 success: function (response) {
                     $("#totalProperties_chart").text(response?.property[0]?.propertyCount)
-                    console.log(response?.property[0]?.propertyCount)
+                    // console.log(response?.property[0]?.propertyCount)
                     propertyData = [response?.property[0]?.propertyCount, response?.property[0]?.vacantCount, response?.property[0]?.occupiedCount]
                     createPropertyStatus(propertyData)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $("#change-email").on("click", () => {
@@ -2750,7 +2770,7 @@ else {
                     }
             $(document).on("click", "#save-email", () => {
                 emailChange = true
-                console.log(id)
+                // console.log(id)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/emailUpdate',
                     type: 'PUT',
@@ -2766,7 +2786,8 @@ else {
                         $("#save-email").addClass("d-none")
                     },
                     error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
+$('#preloader').css('display','none');
+                      // console.error(xhr.responseText);
                     }
                 });
             })
@@ -2798,14 +2819,14 @@ else {
                                     return daysSinceCreation <= 7;
                                 });
                             } else if (tabId === 'tab23') {
-                                console.log("this is tab23")
+                                // console.log("this is tab23")
                                 filteredTasks = response.data[0].filter(function (task) {
                                     var taskDate = new Date(task.created_at);
                                     var currentDate = new Date();
                                     var monthsSinceCreation = (currentDate.getMonth() - taskDate.getMonth()) + 12 * (currentDate.getFullYear() - taskDate.getFullYear());
                                     return monthsSinceCreation <= 1;
                                 });
-                                console.log(filteredTasks)
+                                // console.log(filteredTasks)
                             }
                             function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function (txt) {
@@ -2910,7 +2931,7 @@ if (task.priority == 'High') {
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error fetching data from API:', error);
+                        // console.log('Error fetching data from API:', error);
                     }
                 });
             }
@@ -2933,11 +2954,11 @@ if (task.priority == 'High') {
         var spantag11 = document.getElementById("passnotmatch1");
         function confirmPasswordValidation1() {
             if (validconfirmPassword1.value.match(password_validate1)) {
-                console.log(11)
+                // console.log(11)
                 validconfirmPassword1.classList.add("border-green");
                 spantag11.style.display = "none";
             } else {
-                console.log(21)
+                // console.log(21)
                 validconfirmPassword1.classList.remove("border-green");
                 spantag11.style.display = "block";
             }
@@ -2960,7 +2981,7 @@ if (task.priority == 'High') {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(localStorage.getItem("htmlLayout")){
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
@@ -2974,10 +2995,11 @@ if (task.priority == 'High') {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    // console.log('Done');
                 },
                 error: function (xhr, status, error) {
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log(error);
                 }
             });
         });
@@ -3008,7 +3030,7 @@ if (task.priority == 'High') {
                 grid: COL_WIDTH - GUTTER_WIDTH,
                 handles: 'se',
                 resize: function (e, ui) {
-                    console.log('resized', ui.size);
+                    // console.log('resized', ui.size);
                     $(this)
                         .css('width', '')
                         .removeClass(function (index, css) {
@@ -3020,7 +3042,7 @@ if (task.priority == 'High') {
             var colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
             $(window).resize(function () {
                 colWidth = COL_WIDTHS[$('.main-container').width()] || COL_WIDTHS[0];
-                console.log('set colWidth to', colWidth, $('.main-container').width());
+                // console.log('set colWidth to', colWidth, $('.main-container').width());
             });
             d.on('dragend', function () {
                 var htmlLayout = $('#container').html();
@@ -3159,7 +3181,7 @@ $('#property-status').hide()
         }
     });
     $(document).ajaxStop(function () {
-        console.log("ajaxStop",llDashboardObject)
+        // console.log("ajaxStop",llDashboardObject)
         if(llDashboardObject){
                 const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
             for (const action of actions) {
@@ -3178,7 +3200,7 @@ $('#property-status').hide()
         case "Edit":
         $("#customize-dashboard").remove()
             $(".remove-card").each(function(){
-                console.log($(this).parent())
+                // console.log($(this).parent())
                 $(this).parent().closest(".fe-more-vertical").remove();
             })
             break;

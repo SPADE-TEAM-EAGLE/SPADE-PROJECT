@@ -9477,16 +9477,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -9561,7 +9562,7 @@
                             }
                         }
                     });
-                    console.log(data)
+                    // console.log(data)
                     $.ajax({
                         url: "http://localhost:3000/api/spade/emailtemplates",
                         type: "PUT",
@@ -9571,10 +9572,10 @@
                         },
                         contentType: "application/json",
                         success: function (data) {
-                            console.log(data);
+                            // console.log(data);
                         },
                         error: function (err) {
-                            console.log(err);
+                            // console.log(err);
                         }
                     })
                 });
@@ -9783,7 +9784,7 @@
                     const divContent = divToSave.innerHTML;
                     const summernoteDiv = document.getElementById('myform_editor');
                     const htmlContent = summernoteDiv.innerHTML;
-                    console.log(htmlContent);
+                    // console.log(htmlContent);
                 });
                 $('#close_invoice_template_button').click(function () {
                     const tab11_tab_preview = document.getElementById('tab11_tab_preview');
@@ -9879,7 +9880,7 @@
             var settingPermissions = []
             let uerPermissionId; var seletedPlanID; var userPermissionData;
             function dropHandler(ev) {
-                console.log("File(s) dropped");
+                // console.log("File(s) dropped");
                 ev.preventDefault();
                 if (ev.dataTransfer.items) {
                     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -9892,22 +9893,22 @@
                 }
                 else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
-                        console.log(`… file[${i}].name = ${file.name}`);
+                        // console.log(`… file[${i}].name = ${file.name}`);
                     });
                 }
             }
             function dragOverHandler(ev) {
-                console.log("File(s) in drop zone");
+                // console.log("File(s) in drop zone");
                 ev.preventDefault();
             }
             function updateSelectedFilesContainer1() {
                 var selectedFilesContainer = $('.file-grid');
-                console.log(selectedFilesContainer)
+                // console.log(selectedFilesContainer)
                 selectedFilesContainer.empty();
-                console.log(selectedFiles)
+                // console.log(selectedFiles)
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -9953,7 +9954,7 @@
                             )
                             .appendTo(selectedFilesContainer);
                     } else if (file instanceof Object) {
-                        console.log(file)
+                        // console.log(file)
                         if (file.imageURL) {
                             fileElement
                                 .append(
@@ -10012,12 +10013,12 @@
                         ...data1,
                         ...data2
                     };
-                    console.log("djsndksjnjsnfjnsjfsjnfjndsjfnjdsn")
-                    console.log($(`input[name="status"][value="${data.status}"]`))
+                    // console.log("djsndksjnjsnfjnsjfsjnfjndsjfnjdsn")
+                    // console.log($(`input[name="status"][value="${data.status}"]`))
                     $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
                 });
                 $(document).on('click', ".resend-option", function () {
-                    console.log(invoiceId)
+                    // console.log(invoiceId)
                     $.ajax({
                         url: 'http://localhost:3000/api/spade/resendEmail',
                         type: 'GET', // Change the method to POST
@@ -10037,7 +10038,8 @@
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
-                            console.log('API error:', error);
+$('#preloader').css('display','none');
+                            // console.log('API error:', error);
                         }
                     });
                 })
@@ -10093,14 +10095,14 @@
                                 localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                         }
                         const createdDate = new Date(response.create_at);
-                        const currentDate = new Date();
-                        console.log(createdDate)
-                        const timeDifference = currentDate - createdDate;
-                        console.log(timeDifference)
-                        const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                        $("#remaining-days").text(30 - daysPassed)
-                        $("#remaining-days-plan").text(30 - daysPassed)
-                        $("#remaining-days-plan-days").text((30 - daysPassed) > 1 ? " days" : " day")
+const currentDate = new Date();
+// console.log(createdDate)
+const timeDifference = currentDate - createdDate;
+// console.log(timeDifference)
+const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+$("#remaining-days").text(30 - daysPassed)
+$("#remaining-days-plan").text(30 - daysPassed)
+$("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#firstName").val(toTitleCase(response.firstName))
                         $("#lastName").val(toTitleCase(response.lastName))
                         $("#email").val(response.email)
@@ -10160,7 +10162,7 @@
                         if (4 >= parseInt(response.planID)) {
                             [2, 3, 4].forEach(function (item) {
                                 if (item < parseInt(response.planID)) {
-                                    console.log(names[item])
+                                    // console.log(names[item])
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).append("Downgrade " + names[item]);
                                     $(`#${item}`).removeClass("bg-primary");
@@ -10172,7 +10174,7 @@
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
                                     currentSelectedId = response.planID
-                                    console.log("Selected ID ajwhduisahduhdsuhdhdufhkd", currentSelectedId)
+                                    // console.log("Selected ID ajwhduisahduhdsuhdhdufhkd", currentSelectedId)
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [5, 6, 7].forEach(function (item) {
@@ -10196,7 +10198,7 @@
                         else if (4 < parseInt(response.planID)) {
                             [5, 6, 7].forEach(function (item) {
                                 if (item < parseInt(response.planID)) {
-                                    console.log(names[item])
+                                    // console.log(names[item])
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).append("Downgrade " + names[item]);
                                     $(`#${item}`).removeClass("bg-primary");
@@ -10208,7 +10210,7 @@
                                     $(`#${item}`).removeClass("text-white");
                                 } else if (item == parseInt(response.planID)) {
                                     currentSelectedId = response.planID
-                                    console.log("Selected ID ajwhduisahduhdsuhdhdufhkd", currentSelectedId)
+                                    // console.log("Selected ID ajwhduisahduhdsuhdhdufhkd", currentSelectedId)
                                     $(`#${item} .card-btnn span`).empty();
                                     $(`#${item} .card-btnn span`).text("Selected");
                                     [2, 3, 4].forEach(function (item) {
@@ -10718,14 +10720,15 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             }
@@ -10734,7 +10737,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 const filteredData = userPermissionData.find((user) => {
                     return user.id == $(this).closest("tr").find(".user-id").attr("id")
                 })
-                console.log(filteredData)
+                // console.log(filteredData)
                 $("#firstName_user_update").val(filteredData.UFirstName)
                 $("#lastName_user_update").val(filteredData.ULastName)
                 $("#email_user_update").val(filteredData.UEmail)
@@ -10756,7 +10759,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 const filteredData = userPermissionData.find((user) => {
                     return user.id == $(this).closest("tr").find(".user-id").attr("id")
                 })
-                console.log(filteredData)
+                // console.log(filteredData)
                 $("#firstName_user_view").text(filteredData.UFirstName)
                 $("#lastName_user_view").text(filteredData.ULastName)
                 $("#email_user_view").text(filteredData.UEmail)
@@ -10782,7 +10785,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     },
                     success: function (response) {
                         $("#preloaders").css("display", "none")
-                        console.log(response)
+                        // console.log(response)
                         $("#myModal_success p").text("User deleted succesfully!!!")
                         $("#myModal_success").modal("show")
                         setTimeout(function () {
@@ -10792,8 +10795,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#table_body_users").empty()
                         getData()
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloaders").css("display", "none")
-                        console.log(error)
+                        // console.log(error)
                     }
                 })
             })
@@ -10846,7 +10850,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 },
                                 success: function (response) {
                                     $("#preloaders").css("display", "none")
-                                    console.log(response)
+                                    // console.log(response)
                                     $("#myModal_success p").text("User succesfully updated!!!")
                                     $("#myModal_success").modal("show")
                                     setTimeout(function () {
@@ -10856,17 +10860,19 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                     $("#table_body_users").empty()
                                     getData()
                                 }, error: function (xhr, status, error) {
-                                    console.log(error)
+$('#preloader').css('display','none');
+                                    // console.log(error)
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#preloaders").css("display", "none")
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     })
                 } else {
@@ -10881,7 +10887,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         },
                         success: function (response) {
                             $("#preloaders").css("display", "none")
-                            console.log(response)
+                            // console.log(response)
                             $("#myModal_success p").text("User succesfully updated!!!")
                             $("#myModal_success").modal("show")
                             setTimeout(function () {
@@ -10891,8 +10897,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $("#table_body_users").empty()
                             getData()
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#preloaders").css("display", "none")
-                            console.log(error)
+                            // console.log(error)
                         }
                     });
                 }
@@ -10937,7 +10944,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     validconfirmPassword1.classList.add("border-red");
                     spantag11.style.display = "block";
                 }
-                console.log(confirmPassword1.value == validconfirmPassword1.value, validconfirmPassword1.value.match(password_validate1))
+                // console.log(confirmPassword1.value == validconfirmPassword1.value, validconfirmPassword1.value.match(password_validate1))
                 if (confirmPassword1.value == validconfirmPassword1.value && validconfirmPassword1.value.match(password_validate1)) {
                     confirmPassword1.classList.add("border-green");
                     confirmPassword1.classList.remove("border-red");
@@ -11023,7 +11030,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         ...data1,
                         ...data2
                     }
-                    console.log(data)
+                    // console.log(data)
                     $("#tenantName").text(data.firstName + " " + data.lastName)
                     $("#invoiceType").text(data.invoiceType)
                     $("#dueDate").text(data.dueDate)
@@ -11082,7 +11089,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     const invoiceSerialElement = $(this).closest("tr").find(".serial");
                     if (invoiceIdElement.length > 0) {
                         invoiceId = invoiceIdElement.text();
-                        console.log(invoiceId);
+                        // console.log(invoiceId);
                     }
                 });
                 let selectedValue;
@@ -11114,11 +11121,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     })
                 })
@@ -11143,6 +11151,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                             getData()
                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -11178,7 +11187,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching invoices.');
+$('#preloader').css('display','none');
+                            // console.log('Error occurred while fetching invoices.');
                             if (xhr?.responseJSON?.message == "Password is incorrect") {
                                 $("#info-text").text("Password is incorrect")
                                 $("#infoModal_account").modal("show");
@@ -11231,7 +11241,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log(error);
                         }
                     });
                 })
@@ -11259,9 +11270,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                 })
@@ -11279,7 +11291,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             data.push(row);
                         }
                     });
-                    console.log(data)
+                    // console.log(data)
                     $.ajax({
                         url: 'http://localhost:3000/api/spade/addVendorCategory', // Replace with your actual backend endpoint URL
                         method: 'POST',
@@ -11298,8 +11310,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#save-vendor").prop('disabled', false);
-                            console.log('Error occurred:', error);
+                            // console.log('Error occurred:', error);
                         }
                     });
                 })
@@ -11350,8 +11363,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $('#save-categories').prop('disabled', false);
-                            console.log('Error occurred:', error);
+                            // console.log('Error occurred:', error);
                         }
                     });
                 });
@@ -11362,11 +11376,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 })
                 $('.card-btnn-small').click(function () {
                     var cardId = $(this).closest('.pricing-card').attr('id');
-                    console.log(currentSelectedId)
-                    console.log(userData)
+                    // console.log(currentSelectedId)
+                    // console.log(userData)
                     var time;
                     $(".large-nav-price li a").each(function () {
-                        console.log($(this), $(this).hasClass("active"))
+                        // console.log($(this), $(this).hasClass("active"))
                         if ($(this).hasClass("active")) {
                             if ("#annualyear" == $(this).attr("href")) {
                                 time = "Year"
@@ -11375,7 +11389,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 time = "Month"
                                 selectedTime = time
                             }
-                            console.log(time)
+                            // console.log(time)
                         }
                     })
                     if (time == "Month" && currentSelectedId > cardId) {
@@ -11389,8 +11403,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #payment-total").text(amount)
                         $("#downgradeConfirm").modal("show")
                     }
-                    console.log("kmknnjnjtdfbgcsgbgcdx")
-                    console.log(time == "Year" && currentSelectedId > cardId)
+                    // console.log("kmknnjnjtdfbgcsgbgcdx")
+                    // console.log(time == "Year" && currentSelectedId > cardId)
                     if (time == "Year" && currentSelectedId > cardId) {
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
@@ -11401,7 +11415,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#upgradetopro #amount").val(amount)
                         $("#upgradetopro #payment-amount").text(amount)
                         $("#upgradetopro #payment-total").text(amount)
-                        console.log($("#downgradeConfirm-yearly"))
+                        // console.log($("#downgradeConfirm-yearly"))
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else {
@@ -11421,11 +11435,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
                 $('.card-btnn').click(function () {
                     var cardId = $(this).closest('.pricing-card').attr('id');
-                    console.log(currentSelectedId)
-                    console.log(userData)
+                    // console.log(currentSelectedId)
+                    // console.log(userData)
                     var time;
                     $(".large-nav-price li a").each(function () {
-                        console.log($(this), $(this).hasClass("active"))
+                        // console.log($(this), $(this).hasClass("active"))
                         if ($(this).hasClass("active")) {
                             if ("#annualyear" == $(this).attr("href")) {
                                 time = "Year"
@@ -11434,7 +11448,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 time = "Month"
                                 selectedTime = time
                             }
-                            console.log(time)
+                            // console.log(time)
                         }
                     })
                     console.log(parseInt(currentSelectedId), parseInt(cardId))
@@ -11496,7 +11510,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         $("#downgradeConfirm").modal("show")
                     }
                     else {
-                        console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
+                        // console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -11527,14 +11541,14 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         //attach event handlers here...
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log("2222222222222222222");
-                            console.log(reader.result);
+                            // console.log("2222222222222222222");
+                            // console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                         }
                     }
                 })
                 $('#profile').on('click', function (e) {
-                    console.log('clicked')
+                    // console.log('clicked')
                     $('#mediaFile').click();
                 });
                 window.addEventListener("dragover", function (e) {
@@ -11549,11 +11563,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     var input = e.target;
                     if (input.files && input.files[0]) {
                         file = input.files[0];
-                        console.log(file)
+                        // console.log(file)
                         var reader = new FileReader();
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log(reader.result);
+                            // console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                             submitImage(reader.result);
                         }
@@ -11567,14 +11581,15 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                             var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                             $(".progress").html(myprogress)
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                 }
@@ -11611,7 +11626,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             contentType: false,
                             processData: false,
                             success: function (response) {
-                                console.log(response.images[0].image_url);
+                                // console.log(response.images[0].image_url);
                                 userData.imageUrl = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
@@ -11633,15 +11648,16 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#save_profile").prop("disabled", false)
-                                        console.log('Error occurred while fetching state and city data.');
-                                        console.log(xhr);
-                                        console.log(error);
+                                        // console.log('Error occurred while fetching state and city data.');
+                                        // console.log(xhr);
+                                        // console.log(error);
                                     }
                                 });
                             },
                             error: function (error) {
-                                console.error('Error submitting image:', error);
+                              // console.error('Error submitting image:', error);
                             }
                         });
                     } else {
@@ -11664,10 +11680,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 getData()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#save_profile").prop("disabled", false)
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                     }
@@ -11675,7 +11692,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 $(document).on('change', '.category-tax', function () {
                     var category = $(this).closest('tr').find('.category').val();
                     var taxable = $(this).is(':checked');
-                    console.log(taxable, category)
+                    // console.log(taxable, category)
                     if (taxable) {
                         var optionExists = $('#categories option[value="' + category + '"]').length > 0;
                         if (!optionExists) {
@@ -11710,7 +11727,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 });
                 $("#save").click(() => {
                     $("#save").prop("disabled", true)
-                    console.log($("#current_password_reset").val(), $("#id_password1_new").val())
+                    // console.log($("#current_password_reset").val(), $("#id_password1_new").val())
                     $.ajax({
                         url: 'http://localhost:3000/api/spade/changePasssword',
                         type: 'PUT',
@@ -11736,6 +11753,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#save").prop("disabled", false)
                             if (xhr.responseJSON.error == "Incorrect Password") {
                                 $("#myModal_incorrect").modal("show")
@@ -11746,7 +11764,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             else if (xhr.status === 401) {
                                 $("#myModal_warning").modal("show")
                             } else {
-                                console.log('API error:', error);
+                                // console.log('API error:', error);
                             }
                         }
                     });
@@ -11790,6 +11808,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000)
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             if (xhr.responseJSON.message == "Error in updating 2 Factor Authentication") {
                                 $("#myModal_incorrect_auth").modal("show")
                                 setTimeout(() => {
@@ -11869,7 +11888,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     updateSaveButton()
                 })
                 function updateSaveButton() {
-                    console.log("fgytuytuytg")
+                    // console.log("fgytuytuytg")
                     $("#add-item-container1 input[name='category']").each(function () {
                         if ($(this).val() == "") {
                             $("#save-categories").prop("disabled", true)
@@ -11922,7 +11941,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     updateSaveVendorButton()
                 })
                 function updateSaveVendorButton() {
-                    console.log("fgytuytuytg")
+                    // console.log("fgytuytuytg")
                     $("#add-item-container5 .vendor-category").each(function () {
                         if ($(this).val() == "") {
                             $("#save-vendor").prop("disabled", true)
@@ -12003,7 +12022,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             window.open('./login_module.html', "_self")
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log(error);
                         }
                     });
                 });
@@ -12089,7 +12109,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                 if (selectedFiles.length >= 1) {
                     var uploadFormData = new FormData();
                     var file = $('#fileInput_business')[0].files[0];
-                    console.log(file)
+                    // console.log(file)
                     uploadFormData.append('image', file);
                     var str = "";
                     $.ajax({
@@ -12102,7 +12122,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -12132,22 +12152,24 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         }
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#myModal_warning").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning').modal('hide');
                                         }, 2000);
-                                        console.log(xhr);
-                                        console.log(error);
+                                        // console.log(xhr);
+                                        // console.log(error);
                                     }
                                 });
                                 $('.file-grid').empty()
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
-                            console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -12174,7 +12196,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "Email Sent") {
                             $("#verifyEmailSpan").hide();
                             $("#emailVerifyModal").modal("show");
@@ -12183,24 +12205,25 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             $("#verifyEmailSpan").html(response.message);
                         }
                         else {
-                            console.log("Some thing wents wrong");
+                            // console.log("Some thing wents wrong");
                             setTimeout(function () {
                                 $("#emailVerifyModalError").modal("show");
                             }, 2000);
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $("#myModal_warning").modal("hide");
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 })
             })
             $("#verifyEmailSubmit").click(() => {
                 data = { token: $("#verificationToken").val(), email: $("#emailVerify").val() }
-                console.log(data.token + " " + data.email + "   aaaaa");
+                // console.log(data.token + " " + data.email + "   aaaaa");
                 $.ajax({
                     url: "http://localhost:3000/api/spade/changeEmailVerifyToken",
                     type: "PUT",
@@ -12210,7 +12233,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "Email updated Successful") {
                             $("#emailVerifyModal").modal("hide");
                             setTimeout(function () {
@@ -12218,19 +12241,20 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }, 2000);
                         }
                         else {
-                            console.log("Some thing wents wrong");
-                            console.log(response.message);
+                            // console.log("Some thing wents wrong");
+                            // console.log(response.message);
                             setTimeout(function () {
                                 $("#emailVerifyModalError").modal("show");
                             }, 2000);
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $("#myModal_warning").modal("hide");
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 })
             })
@@ -12344,7 +12368,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             Authorization: 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
-                                            console.log(userData)
+                                            // console.log(userData)
                                             $.ajax({
                                                 url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
@@ -12383,6 +12407,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                 }, 2000);
                                                             },
                                                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                                 $("#myModal_warning_connection").modal("show")
                                                                 setTimeout(function () {
                                                                     $("#myModal_warning_connection").modal("hide");
@@ -12432,6 +12457,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     })
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
@@ -12477,7 +12503,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                             Authorization: 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
-                                            console.log(userData)
+                                            // console.log(userData)
                                             $.ajax({
                                                 url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
@@ -12517,6 +12543,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                                 getData()
                                                             },
                                                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                                 $("#myModal_warning_connection").modal("show")
                                                                 setTimeout(function () {
                                                                     $("#myModal_warning_connection").modal("hide");
@@ -12536,6 +12563,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                     }
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
@@ -12555,13 +12583,14 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 }
                             });
                         }
-                        console.log(response)
+                        // console.log(response)
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             }
@@ -12632,6 +12661,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             }
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#already-exist,#already-exist-update").removeClass("d-none")
                             $("#next-add-user-permission").attr("disabled", true)
                             isValidEmail = false;
@@ -12741,11 +12771,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     } else {
@@ -12817,7 +12848,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     });
                 }
                 $("#checkbox-container-parent input[type=checkbox]").change(function () {
-                    console.log($(this).parent().parent().parent())
+                    // console.log($(this).parent().parent().parent())
                     const columnName = $(this).parent().parent().parent().attr("data-id")
                     let permission = "";
                     $(this).parent().parent().parent().children().each(function () {
@@ -12930,7 +12961,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         } else {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                            // console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                         }
                                         break;
                                     case "Delete":
@@ -12955,7 +12986,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                         } else {
                                             $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                             $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                            console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                            // console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                         }
                                         break;
                                     case "Delete":
@@ -12994,7 +13025,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 } else {
                                                     $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                                     $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                                    console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                                    // console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                                 }
                                                 break;
                                             case "Delete":
@@ -13019,7 +13050,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                                 } else {
                                                     $("#top-panel li:eq(" + index + ")").addClass("d-none")
                                                     $("#tab-pane .tab-pane-hide:eq(" + index + ")").addClass("d-none")
-                                                    console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
+                                                    // console.log($("#tab-pane .tab-pane-hide:eq(" + index + ")"))
                                                 }
                                                 break;
                                             case "Delete":
@@ -13137,7 +13168,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response.sessionToken)
+                        // console.log(response.sessionToken)
                         sfc.createPayment({
                             sessionToken: response?.sessionToken, //received from openOrder API
                             clientUniqueId: "695701003",
@@ -13150,9 +13181,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 country: "US"
                             }
                         }, function (res) {
-                            console.log(res.userPaymentOptionId)
+                            // console.log(res.userPaymentOptionId)
                             if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                                console.log(res)
+                                // console.log(res)
                                 $.ajax({
                                     url: "http://localhost:3000/api/spade/CreateBankAccount",
                                     type: "POST",
@@ -13200,10 +13231,11 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                         $("#preloader").css("display", "none")
                         $("#myModal_warning_declined").modal("show")
                         setTimeout(function () {
@@ -13324,7 +13356,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             $('#tab16 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab16').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -13333,7 +13365,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
             $('#tab13 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#tab13').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();

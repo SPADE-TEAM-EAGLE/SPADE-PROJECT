@@ -876,7 +876,7 @@
                             </div>
                             <div class="over_view" id="Overview">
                                 <div class="row">
-                                    <div class="col-xl-4 col-sm-6">
+                                    <div class="col-xl-4 col-sm-6 d-flex">
                                         <div class="card border p-0 inner-cards">
                                             <div class="card-body text-center">
                                                 <span class="">
@@ -894,7 +894,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-sm-6">
+                                    <div class="col-xl-4 col-sm-6 d-flex">
                                         <div class="card border p-0 inner-cards">
                                             <div class="card-body text-center">
                                                 <span class="">
@@ -1197,14 +1197,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -1214,14 +1215,15 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("property"));
@@ -1237,7 +1239,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             $("#viewTenants").attr("href", `./property-tenant.html?property=${encodedPropertyId}`)
                         $("#viewTasks").attr("href", `./property-task.html?property=${encodedPropertyId}`)
             $("#viewBank").attr("href", `./bank-account.html?property=${encodedPropertyId}`)
-            console.log(propertyId)
+            // console.log(propertyId)
             $.ajax({
                 url: 'http://localhost:3000/api/spade/viewProperty',
                 type: 'GET',
@@ -1251,7 +1253,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     function toTitleCase(str) {
                                 return str?.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1277,7 +1279,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log(xhr.responseText);
+                            // console.log(xhr.responseText);
                 }
             });
         });
@@ -1306,16 +1308,17 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1345,7 +1348,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if(localStorage.getItem("htmlLayout")){
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1359,10 +1362,11 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -1403,7 +1407,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
             case "Add":
                 break;
             case "View":
-                console.log($("#nav_links li:eq('1')"))
+                // console.log($("#nav_links li:eq('1')"))
                 $("#nav_links li:eq('1')").addClass("d-none")
                 break;
             case "Delete":

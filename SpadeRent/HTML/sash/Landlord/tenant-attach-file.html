@@ -1827,7 +1827,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -1861,15 +1861,16 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         localStorage.removeItem('authtoken');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
                 $.ajax({
@@ -1879,16 +1880,17 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1908,7 +1910,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)  
          function dropHandler(ev) {
-                console.log("File(s) dropped");
+                // console.log("File(s) dropped");
                 ev.preventDefault();
                 if (ev.dataTransfer.items) {
                     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -1920,12 +1922,12 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     });
                 } else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
-                        console.log(`… file[${i}].name = ${file.name}`);
+                        // console.log(`… file[${i}].name = ${file.name}`);
                     });
                 }
             }
             function dragOverHandler(ev) {
-                console.log("File(s) in drop zone");
+                // console.log("File(s) in drop zone");
                 ev.preventDefault();
             }
             $(document).on('click', '.delete-file', function () {
@@ -1943,8 +1945,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -2039,7 +2041,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         $("#addModal").modal("hide")
                 $("#succesModal").modal("show")
                         var imageArray = response.images;
-                        console.log(imageArray)
+                        // console.log(imageArray)
                         var tenantData = {
                             tenantID: tenantId,
                             images: imageArray
@@ -2062,24 +2064,26 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                }
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#submit-photo").prop("disabled", false)
                                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                             }
                         });
                         selectedFiles=[]
                         updateSelectedFilesContainer()
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                      location.reload()
                         $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                     }
                 })})
             $.ajax({
@@ -2089,14 +2093,15 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             let tenantData;
@@ -2114,7 +2119,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     data
                 }) {
                     tenantData=data[0][0]
-                    console.log(data[0])
+                    // console.log(data[0])
                     $(".company-name").text(`${data[0][0].companyName} | ${data[0][0].firstName + " " + data[0][0].lastName}`)
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
                 },
@@ -2124,7 +2129,7 @@ const table = $('#table_body');
 $('input[type="checkbox"]').change(function() {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function() {
                     var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2148,7 +2153,7 @@ function getData(){
     },
     success: function (response) {
         const data = response.data;
-        console.log(tenantData)
+        // console.log(tenantData)
         table.empty()
         data.forEach(function (item, index) {
             const newRow = `
@@ -2217,7 +2222,7 @@ $(document).on("click",'.delete-option',function(e) {
                                 getData()
                             },
                             error:function(xhr,status,error){
-                                console.log(xhr.responseText)
+                                // console.log(xhr.responseText)
                             }
                         })
                     });

@@ -1999,9 +1999,9 @@ function getData(){
                         currentSelectedId=response?.PlanID 
                         const createdDate = new Date(response.created_at);
 const currentDate = new Date();
-console.log(createdDate)
+// console.log(createdDate)
 const timeDifference = currentDate - createdDate;
-console.log(timeDifference)
+// console.log(timeDifference)
 const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 $("#remaining-days").text(30 - daysPassed)
 $("#remaining-days-plan").text(parseInt(30 - daysPassed)+1)
@@ -2017,37 +2017,39 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                 },
                 success: function (response) {
                     response.data.forEach((card) => {
-                        console.log("in thif consdition",currentSelectedId)
+                      // console.log("in thif consdition",currentSelectedId)
                         if (currentSelectedId == card.id) {
-                            console.log("in thif consdition")
+                          // console.log("in thif consdition")
                                 if (parseInt(currentSelectedId) < 5) {
                                     currentPrice = parseInt(card?.planDiscountedAmount) * 12
                                 } else {
-                                    console.log(currentSelectedId == card.id)
+                                  // console.log(currentSelectedId == card.id)
                                     currentPrice = card.planDiscountedAmount
-                                    console.log(userData)
+                                  // console.log(userData)
                                 }
                             }
-                        console.log($(`#${card.id} .amount-payable`))
+                      // console.log($(`#${card.id} .amount-payable`))
                         $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                         $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
                     })
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 20000);
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
     $.ajax({
@@ -2070,12 +2072,13 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 20000);
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
             $.ajax({
@@ -2113,7 +2116,8 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                      // console.log(error);
                     }
                 });
 }        
@@ -2132,10 +2136,10 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                 })
             $('.card-btnn').click(function () {
                     var cardId = $(this).closest('.pricing-card').attr('id');
-                console.log(userData)
+              // console.log(userData)
                 var time;
                 $(".large-nav-price li a").each(function () {
-                    console.log($(this), $(this).hasClass("active"))
+                  // console.log($(this), $(this).hasClass("active"))
                     if ($(this).hasClass("active")) {
                         if ("#annualyear" == $(this).attr("href")) {
                             time = "Year"
@@ -2144,15 +2148,15 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             time = "Month"
                             selectedTime = time
                         }
-                        console.log(time)
+                      // console.log(time)
                     }
                 })
-                    console.log(parseInt(currentSelectedId),parseInt(cardId))
+                  // console.log(parseInt(currentSelectedId),parseInt(cardId))
                     if(future){
                         $("#downgradenotPossible").modal("show");
                     }
                     else if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)>=5 && parseInt(cardId)<=7) {
-                        console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
+                      // console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -2165,7 +2169,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#downgradeConfirm").modal("show")
                     } 
                     else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId)>=2 && parseInt(currentSelectedId)<=4) {
-                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
+                      // console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -2179,7 +2183,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(cardId)<=7 && parseInt(cardId)>=5 && parseInt(currentSelectedId)<=4  && parseInt(currentSelectedId)>=2) {
-                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
+                      // console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -2192,7 +2196,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(currentSelectedId) <= 7 && parseInt(currentSelectedId) >= 5 && parseInt(cardId) <= 4 ) {
-                        console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjd")
+                      // console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjd")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -2206,7 +2210,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#downgradeConfirm").modal("show")
                     }
                     else {
-                        console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
+                      // console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -2227,7 +2231,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
             function main() {
                 $("#preloader").css("display", "flex")
                 userData.currentPrice=currentPrice;
-                console.log(userData)
+              // console.log(userData)
                 var sfc = SafeCharge({
                 env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
                 merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
@@ -2274,8 +2278,8 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                             Authorization: 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
-                                            console.log(userData)
-                                            console.log(amount.value)
+                                          // console.log(userData)
+                                          // console.log(amount.value)
                                             $.ajax({
                                                 url: "http://localhost:3000/api/spade/createSubscriptionPaymentSetting",
                                                 type: "POST",
@@ -2315,6 +2319,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                                                 getData()
                                                             },
                                                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                                 $("#myModal_warning_connection").modal("show")
                                                                 setTimeout(function () {
                                                                     $("#myModal_warning_connection").modal("hide");
@@ -2334,6 +2339,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                                     }
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_declined").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_declined").modal("hide");
@@ -2354,10 +2360,11 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             });
                         },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                      // console.log(xhr)
+                      // console.log(status)
+                      // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             }

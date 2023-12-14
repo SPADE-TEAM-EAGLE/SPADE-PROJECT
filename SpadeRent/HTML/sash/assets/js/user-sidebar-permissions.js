@@ -5,12 +5,12 @@ $.ajax({
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
     success: function (response) {
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(0))
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(1))
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(2))
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(3))
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(4))
-        console.log($("#offcanvasExample .offcanvas-body .row").children().eq(5))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(0))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(1))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(2))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(3))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(4))
+      // console.log($("#offcanvasExample .offcanvas-body .row").children().eq(5))
         if(response?.llDashboard?.Restrict){
             if (window.location.href.indexOf('index.html') !== -1) {
                 $("#sidebar-placeholder .side-menu li a[href='index.html']").parent().hide();
@@ -21,12 +21,12 @@ $.ajax({
             }
         }
         if(response?.properties?.Restrict){
-            console.log("here",window.location.href.indexOf('properties-all.html'))
+          // console.log("here",window.location.href.indexOf('properties-all.html'))
             if (window.location.href.indexOf('properties-all.html') !== -1) {
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
-                console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
+              // console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
-                    console.log($(this).text().trim(""))
+                  // console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
                         $(this).parent().parent().parent().remove()
                     }
@@ -35,9 +35,9 @@ $.ajax({
             }   
             if (window.location.href.indexOf('new-property.html') !== -1) {
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
-                console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
+              // console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
-                    console.log($(this).text().trim(""))
+                  // console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
                         $(this).parent().parent().parent().remove()
                     }
@@ -46,9 +46,9 @@ $.ajax({
             }
             else{
                 $("#sidebar-placeholder .side-menu li a[href='properties-all.html']").parent().hide();
-                console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
+              // console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
-                    console.log($(this).text().trim(""))
+                  // console.log($(this).text().trim(""))
                     if($(this).text().trim("") == "Property"){
                         $(this).parent().parent().parent().remove()
                     }
@@ -150,9 +150,9 @@ $.ajax({
             if (window.location.href.indexOf('prospects.html') > -1) {
                 $("#sidebar-placeholder .side-menu li a[href='prospects.html']").parent().hide();
                 history.back();
-                console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
+              // console.log($("#offcanvasExample .offcanvas-body .row .card-title"))
                 $("#offcanvasExample .offcanvas-body .row .card-title").each(function(){
-                    console.log($(this))
+                  // console.log($(this))
                     if($(this).text().trim("") == "Prospect"){
                         console
                         $(this).parent().parent().parent().remove()
@@ -180,6 +180,6 @@ $.ajax({
         }
     },
     error: function (error) {
-        console.log(error);
+      // console.log(error);
     }
 })

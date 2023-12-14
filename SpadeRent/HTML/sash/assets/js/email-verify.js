@@ -34,7 +34,7 @@ $(document).ready(function () {
             $("#header-user").text(toTitleCase(userName))
             userEmail = email
             id1 = userId
-            console.log($("#user-email"))
+          // console.log($("#user-email"))
             $("#user-email").val(email)
         },
         error: function (xhr, status, error) {
@@ -43,9 +43,9 @@ $(document).ready(function () {
                 $('#myModal_warning').modal('hide');
                 window.location = '../Landlord/login_module.html';
             }, 2000);
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $.ajax({
@@ -71,9 +71,9 @@ $(document).ready(function () {
             }
         },
         error: function (xhr, status, error) {
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $('#email_verification').on('click', function() {

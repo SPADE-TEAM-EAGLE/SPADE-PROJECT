@@ -2350,17 +2350,18 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("getMessagesCountLandlord");
-                            console.log(response.Count['count(message)']);
+                          // console.log("getMessagesCountLandlord");
+                          // console.log(response.Count['count(message)']);
                             $('#chatCounter').text(response.Count['count(message)'])
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning').modal('hide');
                                 window.location = '../Tenant/login_module.html';
                             }, 2000);
-                            console.log(error);
+                          // console.log(error);
                         }
                     });
                 });
@@ -2795,7 +2796,7 @@
             <script>
                 $("#document").ready(() => {
                     $("#save").click(() => {
-                        console.log($("#current_password_reset").val(), $("#id_password1").val())
+                      // console.log($("#current_password_reset").val(), $("#id_password1").val())
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/changePasswordTenant',
                             type: 'PUT',
@@ -2817,6 +2818,7 @@
                                 }, 2000);
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 if (xhr.status === 401) {
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
@@ -2829,7 +2831,7 @@
                                     }, 2000);
                                 }
                                 else {
-                                    console.log('API error:', error);
+                                  // console.log('API error:', error);
                                 }
                             }
                         })
@@ -3001,7 +3003,8 @@
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+$('#preloader').css('display','none');
+                          // console.log(error);
                         }
                     });
 
@@ -3019,13 +3022,13 @@
                     $('#profile').removeClass('dragging hasImage');
                     if (e.originalEvent) {
                         file = e.originalEvent.dataTransfer.files[0];
-                        console.log(file);
+                      // console.log(file);
                         var reader = new FileReader();
                         //attach event handlers here...
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log("11111111111111111");
-                            console.log(reader.result);
+                          // console.log("11111111111111111");
+                          // console.log(reader.result);
                             if (reader.result) {
                                 $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                             }
@@ -3033,7 +3036,7 @@
                     }
                 })
                 $('#profile').on('click', function (e) {
-                    console.log('clicked')
+                  // console.log('clicked')
                     $('#mediaFile').click();
                 });
                 window.addEventListener("dragover", function (e) {
@@ -3048,12 +3051,12 @@
                     var input = e.target;
                     if (input.files && input.files[0]) {
                         file = input.files[0];
-                        console.log(file)
+                      // console.log(file)
                         var reader = new FileReader();
                         reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            console.log("22222222222");
-                            console.log(reader.result);
+                          // console.log("22222222222");
+                          // console.log(reader.result);
                             $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
                         }
                     }
@@ -3084,7 +3087,8 @@
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching invoices.');
+$('#preloader').css('display','none');
+                          // console.log('Error occurred while fetching invoices.');
                             if (xhr?.responseJSON?.message == "Password is incorrect") {
                                 $("#infoModal_account").modal("show");
                                 setTimeout(function () {
@@ -3115,7 +3119,7 @@
                     }
                     const userForm = new FormData()
                     if (file) {
-                        console.log(file)
+                      // console.log(file)
                         userForm.append("image", file)
                         $.ajax({
                             url: 'http://localhost:3000/api/spade/uploadTenant',
@@ -3127,7 +3131,7 @@
                             contentType: false,
                             processData: false,
                             success: function (response) {
-                                console.log(response.images[0].image_url);
+                              // console.log(response.images[0].image_url);
                                 userData.Image = response.images[0].image_url
                                 userData.imageKey = response.images[0].image_key
                                 $.ajax({
@@ -3147,14 +3151,15 @@
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log('Error occurred while fetching state and city data.');
-                                        console.log(xhr);
-                                        console.log(error);
+$('#preloader').css('display','none');
+                                      // console.log('Error occurred while fetching state and city data.');
+                                      // console.log(xhr);
+                                      // console.log(error);
                                     }
                                 });
                             },
                             error: function (error) {
-                                console.error('Error submitting image:', error);
+                              // console.error('Error submitting image:', error);
                             }
                         });
                     } else {
@@ -3176,9 +3181,10 @@
                                 getData()
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+$('#preloader').css('display','none');
+                              // console.log('Error occurred while fetching state and city data.');
+                              // console.log(xhr);
+                              // console.log(error);
                             }
                         });
                     }
@@ -3202,7 +3208,7 @@
                         $("#businessName").val(response.businessName)
                         $("#phone").val(response.phoneNumber)
                         function toTitleCase(str) {
-                            console.log(str)
+                          // console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -3226,14 +3232,15 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Tenant/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 });
                 $('#2f-Auth').change(function () {
@@ -3260,6 +3267,7 @@
                             }, 2000)
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             if (xhr.responseJSON.message == "Error in updating 2 Factor Authentication") {
                                 $("#myModal_incorrect_auth").modal("show")
                                 setTimeout(() => {
@@ -3341,7 +3349,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response);
+                              // console.log(response);
                                 localStorage.removeItem('authtoken');
                                 localStorage.clear();
                                 if ($('body').hasClass('dark-mode')) {
@@ -3350,10 +3358,11 @@
                                     localStorage.setItem("sashlightMode", true)
                                 }
                                 window.open('../Tenant/login_module.html', "_self")
-                                console.log('Done');
+                              // console.log('Done');
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+$('#preloader').css('display','none');
+                              // console.log(error);
                             }
                         });
                     });
@@ -3400,7 +3409,7 @@
                     },
                     success: function (response) {
                         const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                        console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                      // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                         $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                         $("#outstanding-amount").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                         if (!totalAmountUnpaid.totalUnPaid) {
@@ -3411,11 +3420,12 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
                 $.ajax({
@@ -3426,7 +3436,7 @@
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         if (response.data.length > 0) {
                             $("#account").empty();
                             $("#account").append(`<option value="">Select Account</option>`);
@@ -3438,7 +3448,8 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                      // console.log(error);
                     }
                 });
 
@@ -3554,12 +3565,13 @@
                                                 }, 2000);
                                             },
                                             error: function (xhr, status, error) {
-                                                console.log(xhr)
-                                                console.log(status)
+$('#preloader').css('display','none');
+                                              // console.log(xhr)
+                                              // console.log(status)
                                                 $("#upgradetopro-card-modal").modal("hide")
                                                 $("#preloader").css("display", "none")
-                                                console.log(error)
-                                                console.error('Error sending data:', error);
+                                              // console.log(error)
+                                              // console.error('Error sending data:', error);
                                             }
                                         });
 
@@ -3610,12 +3622,13 @@
                                                 }, 2000);
                                             },
                                             error: function (xhr, status, error) {
-                                                console.log(xhr)
-                                                console.log(status)
+$('#preloader').css('display','none');
+                                              // console.log(xhr)
+                                              // console.log(status)
                                                 $("#upgradetopro-card-modal").modal("hide")
                                                 $("#preloader").css("display", "none")
-                                                console.log(error)
-                                                console.error('Error sending data:', error);
+                                              // console.log(error)
+                                              // console.error('Error sending data:', error);
                                             }
                                         });
 
@@ -3629,15 +3642,16 @@
                                     }
                                 });
                             }
-                            console.log(response)
+                          // console.log(response)
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
+$('#preloader').css('display','none');
+                          // console.log(xhr)
                             $("#upgradetopro-card-modal").modal("hide")
                             $("#preloader").css("display", "none")
-                            console.log(status)
-                            console.log(error)
-                            console.error('Error sending data:', error);
+                          // console.log(status)
+                          // console.log(error)
+                          // console.error('Error sending data:', error);
                         }
                     });
                 }
@@ -3659,7 +3673,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(scard)
+                          // console.log(scard)
 
                             sfc.createPayment({
                                 sessionToken: response.sessionToken,
@@ -3720,12 +3734,13 @@
                                             }, 2000);
                                         },
                                         error: function (xhr, status, error) {
-                                            console.log(xhr)
-                                            console.log(status)
+$('#preloader').css('display','none');
+                                          // console.log(xhr)
+                                          // console.log(status)
                                             $("#upgradetopro-ach-modal").modal("hide")
                                             $("#preloader").css("display", "none")
-                                            console.log(error)
-                                            console.error('Error sending data:', error);
+                                          // console.log(error)
+                                          // console.error('Error sending data:', error);
                                         }
                                     });
                                 }
@@ -3741,10 +3756,11 @@
 
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
-                            console.log(status)
-                            console.log(error)
-                            console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                          // console.log(xhr)
+                          // console.log(status)
+                          // console.log(error)
+                          // console.error('Error sending data:', error);
                         }
                     });
 
@@ -3754,7 +3770,7 @@
 
 
                 $("#upgradetopro-btn").on("click", function () {
-                    console.log("clicked")
+                  // console.log("clicked")
                     $("#closeaccount,#surePaynow").modal("hide");
                     const amount = $("#outstanding-amount").text().split("$")[1];
 

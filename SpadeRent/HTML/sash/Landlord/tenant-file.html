@@ -1343,16 +1343,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1366,7 +1367,7 @@
 <script>
         var selectedFiles = [];
                             function dropHandler(ev) {
-  console.log("File(s) dropped");
+  // console.log("File(s) dropped");
   ev.preventDefault();
   if (ev.dataTransfer.items) {
     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -1378,12 +1379,12 @@
     });
   } else {
     [...ev.dataTransfer.files].forEach((file, i) => {
-      console.log(`… file[${i}].name = ${file.name}`);
+      // console.log(`… file[${i}].name = ${file.name}`);
     });
   }
 }
 function dragOverHandler(ev) {
-  console.log("File(s) in drop zone");
+  // console.log("File(s) in drop zone");
   ev.preventDefault();
 }
                     function updateSelectedFilesContainer() {
@@ -1395,8 +1396,8 @@ function dragOverHandler(ev) {
                             $("#submit-pics").prop("disabled", true);
                         }
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -1468,7 +1469,7 @@ function dragOverHandler(ev) {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         adjustPlan(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -1502,15 +1503,16 @@ $(".plan_remaining_days_data").each(function(){
                         $("#header-user").text(toTitleCase(response.userName))
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         localStorage.removeItem('authtoken');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Landlord/login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             $.ajax({
@@ -1520,14 +1522,15 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             const encryptedPropertyId = decodeURIComponent((new URL(document.location)).searchParams.get("tenant"));
@@ -1598,7 +1601,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     },
                     success: function (response) {
                         var imageArray = response.images;
-                        console.log(imageArray)
+                        // console.log(imageArray)
                         var tenantData = {
                             tenantID: tenantId,
                             images: imageArray
@@ -1613,7 +1616,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     },
                             success: function ({message}) {
                                 $("#submit-pics").prop("disabled", false)
-                                console.log(message==" Tenant Files save successful")
+                                // console.log(message==" Tenant Files save successful")
                                 $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });
@@ -1625,6 +1628,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                                getData()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });
@@ -1633,22 +1637,23 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                             }
                         });
                         selectedFiles=[]
                         updateSelectedFilesContainer()
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                     }
                 })})
                 $('#fileInput').on('change', function () {
-                    console.log(1)
+                    // console.log(1)
                     var files = Array.from($(this)[0].files);
                     files.forEach(function (file) {
                         file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
@@ -1688,7 +1693,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(localStorage.getItem("htmlLayout")){
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
@@ -1702,10 +1707,11 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    // console.log('Done');
                 },
                 error: function (xhr, status, error) {
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log(error);
                 }
             });
         });

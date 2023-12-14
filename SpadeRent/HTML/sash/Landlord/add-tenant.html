@@ -1947,16 +1947,17 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1976,14 +1977,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2060,7 +2062,8 @@
                             $("#email-exist").addClass("d-none")
                         }
                     }, error: function (xhr, status, error) {
-                        console.log(error)
+$('#preloader').css('display','none');
+                        // console.log(error)
                     }
                 })
             })
@@ -2075,7 +2078,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2114,11 +2117,12 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -2133,7 +2137,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2172,11 +2176,12 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             });
@@ -2196,7 +2201,7 @@
                         propertyName,
                         propertyAddress
                     }) {
-                        console.log(data)
+                        // console.log(data)
                         const units = data[0];
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -2287,17 +2292,18 @@
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#add-units1").prop("disabled", false)
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         })
                         $('.done-option1').click(function (e) {
-                            console.log(22)
+                            // console.log(22)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2311,9 +2317,9 @@
                                     cellValue = $(this).text()
                                 }
                                 values.push(cellValue)
-                                console.log(values)
+                                // console.log(values)
                             });
-                            console.log(propertyId2)
+                            // console.log(propertyId2)
                             $.ajax({
                                 url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
@@ -2329,20 +2335,21 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         });
                         $('.delete-option1').click(function (e) {
-                            console.log(333)
+                            // console.log(333)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2370,21 +2377,22 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(1)
+                                    // console.log(1)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         })
                         $(".edit-option1").click(function () {
                             $(this).closest('td').find('.done-option').removeAttr('disabled');
-                            console.log(1)
+                            // console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
                             $(this).next().removeClass('d-none');
@@ -2397,11 +2405,12 @@
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2421,7 +2430,8 @@
                     });
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
             let tenantIdElement
@@ -2473,11 +2483,12 @@
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $("#add-item").on("click", () => {
@@ -2609,17 +2620,18 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(1111)
+                        // console.log(1111)
                         $('#succesModal').modal('show')
                             setTimeout(function () {
                                 $('#succesModal').modal('hide')
                             }, 2000);
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                        // console.error('Error sending data:', error);
                     }
                 });
             })
@@ -2627,7 +2639,7 @@
                 edit = true
                 tenantIdElement = $(this).closest("tr").find(".tenant-id");
                 const tenants = tenantData.find(obj => obj.tenantID == tenantIdElement.text());
-                console.log(tenants)
+                // console.log(tenants)
                 $('#baseRent').prop('required', false);
                 $('#tripleNet').prop('required', false);
                 $('#leaseStart').prop('required', false);
@@ -2705,7 +2717,7 @@
             })
             $("#save").on("click", () => {
                 edit = false
-                console.log(tenantIdElement.text())
+                // console.log(tenantIdElement.text())
                 sendData("updateTenants", "PUT", tenantIdElement.text())
             })
             function sendData(uri, method, tenantID) {
@@ -2757,20 +2769,21 @@
                             getData()
                             resetAccordions()
                             id = response.tenantId
-                            console.log(tenantID)
+                            // console.log(tenantID)
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                        // console.error('Error sending data:', error);
                     }
                 });
             }
             $("#send-email-invite").click(() => {
                 $("#succesModal").modal("hide")
-                console.log(tenantID)
+                // console.log(tenantID)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/sendInvitationLink',
                     type: 'POST',
@@ -2790,15 +2803,16 @@
                         getData()
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                        // console.error('Error sending data:', error);
                     }
                 });
             })
             $("#succesModal,#infoModal").on('hide.bs.modal', function () {
-                console.log("hello")
+                // console.log("hello")
                 resetAccordions()
             })
             $("#successfully_changed").on('hide.bs.modal', function () {
@@ -2806,7 +2820,7 @@
             })
             function setEditable(edit) {
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").addClass("d-none")
                 $(".title-text").empty()
@@ -2825,12 +2839,12 @@
                 $("#submit").addClass("d-none")
             }
             $(document).on("click", "#next", () => {
-                console.log(2222)
+                // console.log(2222)
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").removeClass("d-none")
-                console.log($(".title-text").text())
+                // console.log($(".title-text").text())
                 $(".title-text").empty()
                 $(".title-text").append(`<h2 class="modal-title">View <strong class="color-primary" id="title-sub">Tenant Summary</strong></h2><span class="">Post your properties to thousands of potential investors,
                             tenants and interested individuals.</span>`)
@@ -2876,7 +2890,7 @@
                 } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
                     return 2;
                 } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                    console.log(2)
+                    // console.log(2)
                     return 3;
                 } else {
                     return 0;
@@ -2884,7 +2898,7 @@
             }
             var counter = 0
             function checkFieldsFilled(id) {
-                console.log(id)
+                // console.log(id)
                 const status = checkFieldsStatus(id)
                 if (id === "accordion-item2" && counter === 0) {
                     counter += 1
@@ -2899,7 +2913,7 @@
                     }
                 });
                 const chevronIcon = accordionItem.querySelector(".icon");
-                console.log(status)
+                // console.log(status)
                 switch (status) {
                     case 0:
                         break;
@@ -2917,7 +2931,7 @@
                         chevronIcon.classList.add("tick");
                         break;
                     case 3:
-                        console.log(2)
+                        // console.log(2)
                         chevronIcon.classList.remove("fi-rs-exclamation");
                         chevronIcon.classList.add("chevron");
                         chevronIcon.classList.remove("cross");
@@ -3055,7 +3069,7 @@
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 3) + '), td:nth-child(' + (columnIndex + 3) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3089,7 +3103,7 @@
                 } else if (selectedFilter === 'created-at') {
                     rows.sort(function (a, b) {
                         var idA = new Date($(a).find('.created-at').text());
-                        console.log(idA)
+                        // console.log(idA)
                         var idB = new Date($(b).find('.created-at').text());
                         return idB - idA;
                     });
@@ -3122,29 +3136,29 @@
             $(".modal").on("click", ".btn-close,.btn-close-bottom", function () {
                 $('#addUnitBtn').hide()
                 resetAccordions("update")
-                console.log("this is accordinon")
+                // console.log("this is accordinon")
             });
             $(".modal").on("hidden.bs.modal", function () {
                 $('#addUnitBtn').hide()
                 if (!$(this).is("#addModal_units")) {
                     resetAccordions("update");
-                    console.log("This is accordion");
+                    // console.log("This is accordion");
                 }
             });
             input.addEventListener('change', reset);
             input.addEventListener('keyup', reset);
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
-                console.log(files)
+                // console.log(files)
                 files.forEach(function (file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             $('#fileInput_update').on('change', function () {
-                console.log($(this)[0].files)
+                // console.log($(this)[0].files)
                 var files = Array.from($(this)[0].files);
-                console.log(files)
+                // console.log(files)
                 files.forEach(function (file) {
                     selectedFiles.push(file); // Add each file to the selected files array
                 });
@@ -3162,7 +3176,7 @@
             }
         });
         $(document).on('click', '#next1', function (e) {
-            console.log(2222)
+            // console.log(2222)
             e.preventDefault();
             var formData = new FormData();
             var propertyName = $("#propertyName").val();
@@ -3199,11 +3213,12 @@
                     getData()
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         });
@@ -3255,11 +3270,12 @@
                     getData();
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         });
@@ -3284,7 +3300,8 @@ $.ajax({
                                     $("#succesModal_delete").modal("hide");
                                 }, 2000);
                             }, error: function (xhr, status, error) {
-                                console.log(error)
+$('#preloader').css('display','none');
+                                // console.log(error)
                             }
                         })
 })
@@ -3318,11 +3335,12 @@ $.ajax({
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         })
@@ -3367,14 +3385,15 @@ $.ajax({
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             function formatDate(dateString) {
@@ -3392,12 +3411,12 @@ $.ajax({
                 },
                 success: function (response) {
                     if (response.message == "No data found") {
-                        console.log("tenantData")
+                        // console.log("tenantData")
                         localStorage.setItem("tenants", "false")
                         window.location = "./new-tenant.html"
                     }
                     tenantData = response.data[0]
-                    console.log(tenantData)
+                    // console.log(tenantData)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3460,6 +3479,7 @@ $.ajax({
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 }
             });
             $.ajax({
@@ -3472,7 +3492,7 @@ $.ajax({
                 },
                 success: function (response) {
                     var properties = response.data; // Assuming the response data is an array of property objects
-                    console.log("property", response.data)
+                    // console.log("property", response.data)
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
@@ -3511,18 +3531,19 @@ $.ajax({
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
         }
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
-            console.log(selectedFiles)
+            // console.log(selectedFiles)
             selectedFiles.forEach(function (file, index) {
                 var fileElement = $('<div>')
                     .addClass('selected-file')
@@ -3670,9 +3691,9 @@ $.ajax({
         var tenantToDelete = []
         $("#myButton").click(function () {
             $('#table_body tr').each(function () {
-                console.log($(this).find('.checkbox input.myCheckbox'))
+                // console.log($(this).find('.checkbox input.myCheckbox'))
                 var checkbox = $(this).find('.checkbox input.myCheckbox');
-                console.log((checkbox.is(':checked')))
+                // console.log((checkbox.is(':checked')))
                 if (checkbox.is(':checked')) {
                     var tenantId = $(this).find('.tenant-id').text();
                     tenantToDelete.push(tenantId)
@@ -3690,7 +3711,7 @@ $.ajax({
                 },
                 success: function (response) {
                     if (response.Info == "No data found in tenant ") {
-                        console.log(tenantToDelete)
+                        // console.log(tenantToDelete)
                         $('#myModal_delete_bulk').modal('show');
                     }
                     else {
@@ -3710,7 +3731,8 @@ $.ajax({
                         $("#unPaidModal").modal("show");
                     }
                 }, error: function (xhr, status, error) {
-                    console.log(error)
+$('#preloader').css('display','none');
+                    // console.log(error)
                 }
             })
         });
@@ -3727,7 +3749,7 @@ $.ajax({
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -3741,10 +3763,11 @@ $.ajax({
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -3759,16 +3782,17 @@ $.ajax({
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -3794,7 +3818,7 @@ $(document).ready(() => {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -3809,7 +3833,7 @@ $(document).ready(() => {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }

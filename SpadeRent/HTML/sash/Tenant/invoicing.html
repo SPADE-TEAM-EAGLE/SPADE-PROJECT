@@ -1952,17 +1952,18 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                  // console.log("getMessagesCountLandlord");
+                  // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log(error);
+                  // console.log(error);
                 }
             });
             $.ajax({
@@ -1974,7 +1975,7 @@
                 },
                 success: function (response) {
                     const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                  // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     if (!totalAmountUnpaid.totalUnPaid) {
@@ -1983,11 +1984,12 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
         });
@@ -2144,7 +2146,7 @@
         function filterTable(selectedFilter) {
             var tableBody = $('#table_body');
             var rows = tableBody.find('tr');
-            console.log(selectedFilter)
+          // console.log(selectedFilter)
             if (selectedFilter === 'alphabets') {
                 rows.sort(function (a, b) {
                     var textA = $(a).find('.propertyName').text().toLowerCase();
@@ -2169,7 +2171,7 @@
                 rows.sort(function (a, b) {
                     var idA = $(a).find('.serial-number').text().toLowerCase();
                     var idB = $(b).find('.serial-number').text().toLowerCase();
-                    console.log(idA, idB)
+                  // console.log(idA, idB)
                     return idB - idA;
                 });
             }
@@ -2198,7 +2200,7 @@
                 success: function (response) {
                     userData = response
                     function toTitleCase(str) {
-                        console.log(str)
+                      // console.log(str)
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
@@ -2211,14 +2213,15 @@
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
             $.ajax({
@@ -2228,13 +2231,14 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: async function (response) {
-                            console.log(response)
+                          // console.log(response)
                             categoryData = response.data
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+$('#preloader').css('display','none');
+                          // console.log('Error occurred while fetching state and city data.');
+                          // console.log(xhr);
+                          // console.log(error);
                         }
                     });
             let invoiceData;
@@ -2249,14 +2253,14 @@
                     ...data1,
                     ...tenantData
                 }
-                console.log(data)
+              // console.log(data)
                 $("#client-id").empty()
                 $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #1467B0;">BILLED TO</h5>
                                     <p class="text-black">${data.firstName + " " + data.lastName}<br>${data.tAddress
                     }<br>${data.tCity},
                                         ${data.tState}<br>${data.tZipcode}<br>${data.tPhoneNumber}</p>`)
-                console.log(1)
+              // console.log(1)
                 $("#owner-id").empty()
                 $("#owner-id").append(`                                    <h5 class="text-black fw-bold">${data.companyName}</h5>
                                     <p class="text-black">${data.pAddress}<br>${data.pCity}, ${data.pState}<br>${data.pZipCode}<br>${data.landlordPhone}</p>`)
@@ -2268,7 +2272,7 @@
                 $("#table-body").append(
                     `<tr class="text-black">
                         <td>${month}/${day}/${year}</td>
-                                                    <td>INV-10012</td>
+                                                    <td>${data.cInvoiceId}</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                     <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "Not set"}</td>
                                                     <td>Due On Receipt</td>
@@ -2281,7 +2285,7 @@
                     const taxAmount = (parseFloat(item.amount) * parseFloat(item.tax !== "" ? item.tax : 0)) / 100;
                     totalTaxAmount += taxAmount;
                     let categoryname;
-                    console.log(categoryData)
+                  // console.log(categoryData)
                     if (item.category == "rent") {
                         categoryname = "Rent Amount"
                     } else if (item.category == "triple") {
@@ -2293,7 +2297,7 @@
                     else if (item.category == "base") {
                         categoryname = "Base Rent"
                     } else {
-                        console.log(item.category)
+                      // console.log(item.category)
                         const category = categoryData.filter((categorydata) => {
                             return categorydata.id == item.category
                         })
@@ -2365,7 +2369,7 @@
                 $("#view-invoice-line-item").empty()
                 data.memo.forEach((item) => {
                     const category = categoryData.filter((cat) => { return item.category == cat.id })
-                    console.log(item)
+                  // console.log(item)
                     if (category.length == 0) {
                         let categoryname;
                         if (item.category == "rent") {
@@ -2426,14 +2430,15 @@
                 },
                 success: function (response) {
                     tenantData = response.data
-                    console.log("tenant", tenantData)
+                  // console.log("tenant", tenantData)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
             function formatDate(dateString) {
@@ -2450,8 +2455,8 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getAllInvoicesTenant");
-                    console.log(response?.message == "No data found");
+                  // console.log("getAllInvoicesTenant");
+                  // console.log(response?.message == "No data found");
                     var tableBody = $('#table_body');
                     tableBody.empty();
                     if (response?.message == "No data found") {
@@ -2550,7 +2555,7 @@
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+              // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2571,7 +2576,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         localStorage.removeItem('authtoken');
                         localStorage.clear();
                         if ($('body').hasClass('dark-mode')) {
@@ -2580,10 +2585,11 @@
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('../Tenant/login_module.html', "_self")
-                        console.log('Done');
+                      // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                      // console.log(error);
                     }
                 });
             });

@@ -917,7 +917,7 @@ function getData(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -974,14 +974,15 @@ function getData(){
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -1006,14 +1007,15 @@ function getData(){
                         $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -1032,7 +1034,8 @@ function getData(){
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                      // console.log('Error occurred while fetching state and city data.');
                     }
                 });
                 $.ajax({
@@ -1056,7 +1059,7 @@ function getData(){
                             row.append("<td class='propertyAddress'><p style='font-weight: 600;' class='mb-1'>" + item.Email + "</p><span>" + item.Phone + "</span></td>");
                             var background;
                             var color;
-                            console.log(item.planName);
+                          // console.log(item.planName);
                             if (item.planName == "Basic") {
                                 background = "#f7c14259";
                                 color = "#F7C042";
@@ -1096,7 +1099,7 @@ function getData(){
                             var dropdownMenu = $("<ul class='dropdown-menu dropdown-menu-top'>");
                                 if (item.planName !== "Trial") {
                                     if(item.userNuveiId){
-                                        console.log(item.planName,item.userNuveiId,(item.planName !== "Trial" || !item.userNuveiId))
+                                      // console.log(item.planName,item.userNuveiId,(item.planName !== "Trial" || !item.userNuveiId))
                                     dropdownMenu.append("<li class='permissionRestrict_changePlan'><a class='dropdown-item text-dark change-plan' href='./update-plan.html?user=" + (encodeURIComponent(sjcl.encrypt(password, item.landlordId.toString()))) + "' style='display: flex; align-items: start;'>Change Plan</a></li>");
                                     }
                                 }
@@ -1115,7 +1118,7 @@ function getData(){
             getData();
             $(document).on("click", ".close-landlord", function () {
                 landlordId = $(this).closest("tr").find(".landlordId").text();
-                console.log(landlordId)
+              // console.log(landlordId)
                 $("#delete-user-admin").modal("show");
             })
             $("#confirmDelete-user").on("click", function () {
@@ -1132,8 +1135,8 @@ function getData(){
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log("closedLandlord");
-                        console.log(response);
+                      // console.log("closedLandlord");
+                      // console.log(response);
                         $("#myModal_success p").text("User deleted succesfully")
                         $("#myModal_success").modal("show")
                         setTimeout(function () {
@@ -1142,19 +1145,20 @@ function getData(){
                         getData()
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#delete-user-admin").modal("hide")
                         $("#preloader").css("display", "none")
-                        console.log(error)
+                      // console.log(error)
                     }
                 })
             })
             $('input[type="checkbox"]').change(function () {
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-            console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
+          // console.log(columnIndex, isColumnVisible)
+          // console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             $('table').find('tr').each(function () {
-                console.log($(this))
+              // console.log($(this))
                 var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });
@@ -1213,7 +1217,7 @@ function getData(){
             } else if (selectedFilter === 'created-at') {
                 rows.sort(function (a, b) {
                     var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
-                    console.log(idA)
+                  // console.log(idA)
                     var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
                     return idB - idA;
                 });

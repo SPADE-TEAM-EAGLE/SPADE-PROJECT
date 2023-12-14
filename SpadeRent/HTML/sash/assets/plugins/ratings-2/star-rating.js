@@ -45,7 +45,7 @@ $(function() {
     minRating: 2,
     callback: function(currentRating, $el){
       alert('rated ' +  currentRating);
-      console.log('DOM Element ', $el);
+    // console.log('DOM Element ', $el);
     }
   });
   $(".my-rating-7").starRating({
@@ -65,11 +65,11 @@ $(function() {
     strokeWidth: 0,
     disableAfterRate: false,
     onHover: function(currentIndex, currentRating, $el){
-      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
+    // console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
       $('.live-rating').text(currentIndex);
     },
     onLeave: function(currentIndex, currentRating, $el){
-      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
+    // console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
       $('.live-rating').text(currentRating);
     }
   });

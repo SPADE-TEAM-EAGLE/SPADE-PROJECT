@@ -4,7 +4,7 @@ $(document).ready(function() {
     var example2 = new BSTable("new-edit", {
         $addButton: $('#table2-new-row-button'),
         onEdit:function() {
-            console.log("EDITED");
+          // console.log("EDITED");
         },
     });
     example2.init();

@@ -1758,12 +1758,13 @@
                     }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 20000);
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -1774,16 +1775,17 @@
                 },
                 success: function (response) {
                     response.data.forEach((card) => {
-                        console.log($(`#${card.id} .amount-payable`))
+                        // console.log($(`#${card.id} .amount-payable`))
                         $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                         $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
                     })
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             var sfc = SafeCharge({
@@ -1847,10 +1849,10 @@
             });
             $('.card-btnn').click(function () {
                 var cardId = $(this).closest('.pricing-card').attr('id');
-                console.log(userData)
+                // console.log(userData)
                 var time;
                 $(".large-nav-price li a").each(function () {
-                    console.log($(this), $(this).hasClass("active"))
+                    // console.log($(this), $(this).hasClass("active"))
                     if ($(this).hasClass("active")) {
                         if ("#annualyear" == $(this).attr("href")) {
                             time = "Year"
@@ -1859,10 +1861,10 @@
                             time = "Month"
                             selectedTime = time
                         }
-                        console.log(time)
+                        // console.log(time)
                     }
                 })
-                console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
+                // console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjdljsalkdj")
                 $("#payment-month").text("Year")
                 $("#payment-month").text(time)
                 $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -1948,6 +1950,7 @@
                                                     window.location="./Signup-success.html";
                                                 },
                                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                                     $("#myModal_warning_connection").modal("show")
                                                     setTimeout(function () {
                                                         $("#myModal_warning_connection").modal("hide");
@@ -1956,6 +1959,7 @@
                                             });
                                         },
                                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                             $("#myModal_warning_declined").modal("show")
                                             setTimeout(function () {
                                                 $("#myModal_warning_declined").modal("hide");
@@ -1973,10 +1977,11 @@
                             });
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             }

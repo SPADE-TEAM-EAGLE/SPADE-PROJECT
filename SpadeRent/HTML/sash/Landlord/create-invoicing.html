@@ -2908,16 +2908,17 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -2939,14 +2940,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2996,25 +2998,26 @@
                         $('.span_upgrade_now_div').hide()
                     }
                     bussinessLogoImg = response.businessLogo ? response.businessLogo : "../assets/images/Artboard GÇô 1.svg";
-                    console.log("bussinessLogoImg");
-                    console.log(bussinessLogoImg);
+                    // console.log("bussinessLogoImg");
+                    // console.log(bussinessLogoImg);
                     $("#bussinessLogo").attr("src", "data:image/png;base64," + bussinessLogoImg)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         });
         var selectedFiles = [];
         function dropHandler(ev) {
-            console.log("File(s) dropped");
+            // console.log("File(s) dropped");
             ev.preventDefault();
             if (ev.dataTransfer.items) {
                 [...ev.dataTransfer.items].forEach((item, i) => {
@@ -3026,20 +3029,20 @@
                 });
             } else {
                 [...ev.dataTransfer.files].forEach((file, i) => {
-                    console.log(`… file[${i}].name = ${file.name}`);
+                    // console.log(`… file[${i}].name = ${file.name}`);
                 });
             }
         }
         function dragOverHandler(ev) {
-            console.log("File(s) in drop zone");
+            // console.log("File(s) in drop zone");
             ev.preventDefault();
         }
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(selectedFiles.length)
-                console.log(file)
+                // console.log(selectedFiles.length)
+                // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -3106,9 +3109,9 @@
         $(document).ready(function () {
             $(document).on("click", "#preview", function () {
                 var text = $("#preview").text().trim();
-                console.log(text.startsWith("Preview"));
+                // console.log(text.startsWith("Preview"));
                 if ($('#preview').text().trim().startsWith("Edit")) {
-                    console.log(222)
+                    // console.log(222)
                     $("#previewHeading").empty()
                     $("#previewHeading").append(`Create <strong class="color-primary">New Invoice</strong>`)
                     $("#addModal input,#addModal textarea").prop("readonly", false)
@@ -3124,7 +3127,7 @@
                     })
                 } else if ($('#preview').text().trim().startsWith("Preview")) {
                     $("#previewHeading").empty()
-                    console.log(22222)
+                    // console.log(22222)
                     $("#previewHeading").append(`Preview <strong class="color-primary">Invoice</strong>`)
                     $("#addModal input,#addModal textarea").prop("readonly", true)
                     $("#addModal input[type='file']").prop("disabled", true)
@@ -3180,7 +3183,7 @@
             })
             $(document).on("click", "#preview_update", function () {
                 if ($('#preview_update').text().trim().startsWith("Edit")) {
-                    console.log(222)
+                    // console.log(222)
                     $("#previewHeading_update").empty()
                     $("#previewHeading_update").append(`Edit <strong class="color-primary">New Invoice</strong>`)
                     $("#myModal_edit input,#myModal_edit textarea").prop("readonly", false)
@@ -3196,7 +3199,7 @@
                     })
                 } else if ($('#preview_update').text().trim().startsWith("Preview")) {
                     $("#previewHeading_update").empty()
-                    console.log(22222)
+                    // console.log(22222)
                     $("#previewHeading_update").append(`Preview <strong class="color-primary">Invoice</strong>`)
                     $("#myModal_edit input,#myModal_edit textarea").prop("readonly", true)
                     $("#myModal_edit input[type='file']").prop("disabled", true)
@@ -3282,7 +3285,7 @@
                 return fileName;
             }
             function saveAndPrint(tenant, data) {
-                console.log(data, "dfsdfsfdfsdfsdfsdffdfsdfsdfsdfsfdfsfsfs")
+                // console.log(data, "dfsdfsfdfsdfsdfsdffdfsdfsdfsdfsfdfsfsfs")
                 $("#client-id").empty()
                 $("#client-id").append(`<h5 class="fw-bold" style="color: 
                                 #1467B0;">BILLED TO</h5>
@@ -3301,7 +3304,7 @@
                 $("#table-body").append(
                     `<tr class="text-black">
                         <td>${day}/${month}/${year}</td>
-                                                    <td>INV-${data.invoiceID}</td>
+                                                    <td>INV-${data.cInvoiceId}</td>
                                                     <td>$ ${data.totalAmount}</td>
                                                     <td>${data.dueDate}</td>
                                                     <td>Due On Receipt</td>
@@ -3326,12 +3329,12 @@
                     } else if (item.category == "base") {
                         categoryname = "Base Rent"
                     } else {
-                        console.log(categoryData)
+                        // console.log(categoryData)
                         const category = categoryData.filter((categorydata) => {
-                            console.log(categorydata.id == item.category)
+                            // console.log(categorydata.id == item.category)
                             return categorydata.id.toString() == item.category
                         })
-                        console.log(category)
+                        // console.log(category)
                         categoryname = category[0]?.categorieName
                     }
                     $("#memo-table").append(`
@@ -3375,7 +3378,7 @@
                 `)
                 })
                 var content = document.getElementById('htmlContent');
-                console.log(content)
+                // console.log(content)
                 var originalContent = document.body.innerHTML;
                 document.body.innerHTML = content.innerHTML;
                 window.print();
@@ -3462,7 +3465,7 @@
                                     },
                                     success: function (response) {
                                         const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
-                                        console.log(tenant)
+                                        // console.log(tenant)
                                         invoiceId = response.invoiceId
                                         $('#addModal input[type="text"], #addModal input[type="date"], #addModal textarea').val('');
                                         $('#addModal select').prop('selectedIndex', 0);
@@ -3490,16 +3493,18 @@
                                         }
                                     },
                                     error: function (xhr, status, error) {
-                                        console.log('API error:', error);
+$('#preloader').css('display','none');
+                                        // console.log('API error:', error);
                                     }
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     } else {
@@ -3518,7 +3523,7 @@
                             images: [],
                             lineItems: lineItems
                         }
-                        console.log(data)
+                        // console.log(data)
                         $("#addModal").modal("hide")
                         $('#preloader').css('display', 'flex')
                         $.ajax({
@@ -3531,7 +3536,7 @@
                             },
                             success: function (response) {
                                 const tenant = tenantData.find(obj => obj.tenantID == selectedTenant)
-                                console.log(tenant)
+                                // console.log(tenant)
                                 $("#addModal").modal("hide")
                                 invoiceId = response.invoiceId
                                 GetNotification();
@@ -3554,7 +3559,8 @@
                                 }
                             },
                             error: function (xhr, status, error) {
-                                console.log('API error:', error);
+$('#preloader').css('display','none');
+                                // console.log('API error:', error);
                             }
                         });
                     }
@@ -3575,8 +3581,8 @@
                             window.location = './new-invoice.html'
                         }
                         tenantData = response.data[0]
-                        console.log("viewAllPropertyTenant")
-                        console.log(response)
+                        // console.log("viewAllPropertyTenant")
+                        // console.log(response)
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3599,7 +3605,8 @@
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+$('#preloader').css('display','none');
+                        // console.log(error)
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -3616,8 +3623,8 @@
                     success: async function (response) {
                         categoryData = response.data
                             tenantData = response.data[0]
-                            console.log("viewAllPropertyTenant")
-                            console.log(response)
+                            // console.log("viewAllPropertyTenant")
+                            // console.log(response)
                             function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function (txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -3640,6 +3647,7 @@
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         }
                     });
                     $.ajax({
@@ -3655,9 +3663,10 @@
                             })
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                     function formatDate(dateString) {
@@ -3678,7 +3687,7 @@
                                 localStorage.setItem("invoice", "false")
                                 window.location = './new-invoice.html'
                             }
-                            console.log(tenantData)
+                            // console.log(tenantData)
                             invoiceData = response.data[0]
                             var tableBody = $('#table_body');
                             tableBody.empty();
@@ -3731,7 +3740,7 @@
                                 e.preventDefault();
                                 const tenantIdElement = $(this).closest("tr").find(".tenant-id");
                                 tenantID = tenantIdElement.text();
-                                console.log(invoiceData)
+                                // console.log(invoiceData)
                                 const data = invoiceData.find(obj => obj.id.toString() === propertyId);
                                 updateSelectedFilesContainer()
                                 $("#propertyId_update").val(data.id);
@@ -3748,12 +3757,13 @@
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         }
                     });
                 }
                 getData()
                 function filterInvoiceData(type) {
-                    console.log(type)
+                    // console.log(type)
                     function formatDate(dateString) {
                         const date = new Date(dateString);
                         const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -3787,7 +3797,7 @@
                             localStorage.setItem("invoice", "false")
                             window.location = './new-invoice.html'
                         }
-                        console.log(tenantData)
+                        // console.log(tenantData)
                         invoiceData = response.data[0]
                         var tableBody = $('#table_body');
                         tableBody.empty();
@@ -3840,7 +3850,7 @@
                             e.preventDefault();
                             const tenantIdElement = $(this).closest("tr").find(".tenant-id");
                             tenantID = tenantIdElement.text();
-                            console.log(invoiceData)
+                            // console.log(invoiceData)
                             const data = invoiceData.find(obj => obj.id.toString() === propertyId);
                             updateSelectedFilesContainer()
                             $("#propertyId_update").val(data.id);
@@ -3857,11 +3867,12 @@
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 });
             getData()
             function filterInvoiceData(type) {
-                console.log(type)
+                // console.log(type)
                 function formatDate(dateString) {
                     const date = new Date(dateString);
                     const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -3935,7 +3946,7 @@
                         return tenant.propertyName
                     }
                 })
-                console.log("property", propertyName)
+                // console.log("property", propertyName)
                 $("#propertyName").empty()
                 $("#propertyUnit").empty()
                 $("[name='property']").empty()
@@ -4014,7 +4025,7 @@
                 }
             });
             function optionExists(value) {
-                console.log($("[name='category']").find('option[value="' + value + '"]').length > 0)
+                // console.log($("[name='category']").find('option[value="' + value + '"]').length > 0)
                 return $("[name='category']").find('option[value="' + value + '"]').length > 0;
             }
             var counter;
@@ -4050,7 +4061,7 @@
             $(document).on('change', '.category-tax-add', function () {
                 var category = $(this).closest('tr').find('.category-add').val();
                 var taxable = $(this).is(':checked');
-                console.log(taxable, category)
+                // console.log(taxable, category)
                 if (taxable) {
                     var optionExists = $('#categories-add option[value="' + category + '"]').length > 0;
                     if (!optionExists) {
@@ -4086,7 +4097,7 @@
             $(document).on("input", "[name='categories-add']", function () {
                 var atLeastOneFilled = false;
                 $("[name='categories-add']").each(function () {
-                    console.log($(this).val())
+                    // console.log($(this).val())
                     if ($(this).val() !== '' && $(this).val() !== null) {
                         atLeastOneFilled = true;
                         return false; // Exit the loop early if a filled input is found
@@ -4133,7 +4144,7 @@
                         data.push(row);
                     }
                 });
-                console.log(data)
+                // console.log(data)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                     method: 'POST',
@@ -4163,8 +4174,9 @@
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $('#save-categories').prop('disabled', false);
-                        console.log('Error occurred:', error);
+                        // console.log('Error occurred:', error);
                     }
                 });
             });
@@ -4201,7 +4213,7 @@
             $(document).on('change', '.category-tax-add-update', function () {
                 var category = $(this).closest('tr').find('.category-add-update').val();
                 var taxable = $(this).is(':checked');
-                console.log(taxable, category)
+                // console.log(taxable, category)
                 if (taxable) {
                     var optionExists = $('#categories-add-update option[value="' + category + '"]').length > 0;
                     if (!optionExists) {
@@ -4237,7 +4249,7 @@
             $(document).on("input", "[name='categories-add-update']", function () {
                 var atLeastOneFilled = false;
                 $("[name='categories-add-update']").each(function () {
-                    console.log($(this).val())
+                    // console.log($(this).val())
                     if ($(this).val() !== '' && $(this).val() !== null) {
                         atLeastOneFilled = true;
                         return false; // Exit the loop early if a filled input is found
@@ -4284,7 +4296,7 @@
                         data.push(row);
                     }
                 });
-                console.log(data)
+                // console.log(data)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/addInvoiceCategory', // Replace with your actual backend endpoint URL
                     method: 'POST',
@@ -4314,15 +4326,16 @@
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $('#save-categories-add-update').prop('disabled', false);
-                        console.log('Error occurred:', error);
+                        // console.log('Error occurred:', error);
                     }
                 });
             });
             $(document).on("click", "#add-item1", () => {
                 const property = $("#tenants").attr("data-value");
                 const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
-                console.log(categoryData)
+                // console.log(categoryData)
                 if (property == "Choose...") {
                     $("#add-item-container1").append(`
       <tr class="tr">
@@ -4388,7 +4401,7 @@
             $(document).on("click", "#add-item1_update", () => {
                 const property = $("#tenants_update").val()
                 const propertyName = tenantData.filter((tenant) => tenant.tenantID == property);
-                console.log(propertyName)
+                // console.log(propertyName)
                 if (property == "Choose...") {
                     $("#add-item-container1_update").append(`
       <tr class="tr">
@@ -4455,14 +4468,14 @@
                 var total = 0;
                 $("input[name='amount" + isUpdate + "']").each(function () {
                     var inputValue = $(this).val();
-                    console.log(inputValue);
+                    // console.log(inputValue);
                     var tax = $(this).closest(".tr").find("input[name='tax" + isUpdate + "']").val();
                     if (inputValue !== "") {
                         var numericValue = parseFloat(inputValue);
                         if (!isNaN(numericValue)) {
-                            console.log(tax)
+                            // console.log(tax)
                             total += numericValue + ((numericValue * parseFloat(tax == "" ? 0 : tax)) / 100);
-                            console.log(total)
+                            // console.log(total)
                         }
                     }
                 });
@@ -4470,7 +4483,7 @@
                     total = 0.00;
                 }
                 if (total === 0) {
-                    console.log($("#totalText" + isUpdate))
+                    // console.log($("#totalText" + isUpdate))
                     $("#totalText" + isUpdate).text("$ 0.00");
                 } else {
                     $("#totalText" + isUpdate).text("$ " + total);
@@ -4486,7 +4499,7 @@
                 }
             });
             $('#add-item-container1_update').on('click', '#del-btn_update', function () {
-                console.log(11)
+                // console.log(11)
                 var $row = $(this).closest('.tr');
                 var $rowsContainer = $row.parent();
                 if ($rowsContainer.children('.tr').length > 1) {
@@ -4520,7 +4533,7 @@
             $('#customize_btn_check input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('#myTable').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -4610,7 +4623,8 @@ return idB - idA;
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
-                        console.log('API error:', error);
+$('#preloader').css('display','none');
+                        // console.log('API error:', error);
                     }
                 });
             })
@@ -4631,7 +4645,7 @@ return idB - idA;
                         break;
                 }
                 const invoiceIdElement = $(this).closest("tr").find(".invoice-id");
-                console.log(invoiceIdElement.text())
+                // console.log(invoiceIdElement.text())
                 invoiceId = invoiceIdElement.text();
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
                 const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID)
@@ -4654,8 +4668,8 @@ return idB - idA;
         ${clientState}<br>${clientZipcode}<br>United States<br>${clientPhoneNumber}<br>${clientEmail}
     </p>
 `);
-                console.log("PDF VIEW");
-                console.log(userData);
+                // console.log("PDF VIEW");
+                // console.log(userData);
 $("#owner-id").empty()
 $("#owner-id").append(`
     <h5 class="text-black fw-bold">${userData.businessName?userData.businessName:"Not set"}</h5>
@@ -4671,7 +4685,7 @@ $("#owner-id").append(`
                 $("#table-body").append(
                     `<tr class="text-black">
         <td>${month}/${day}/${year}</td>
-        <td>INV-${data.invoiceID}</td>
+        <td>${data.cInvoiceId}</td>
         <td>$ ${data.totalAmount ? data.totalAmount : 0}</td>
         <td>${data.dueDate ? `${data.dueDate.split("-")[1]}-${data.dueDate.split("-")[2]}-${data.dueDate.split("-")[0]}` : "Not set"}</td>
         <td>Due On Receipt</td>
@@ -4755,8 +4769,8 @@ $("#owner-id").append(`
                 $("#tenantName").text(data.firstName + " " + data.lastName)
                 $("#invoiceType").text(data.invoiceType)
                 if (data.invoiceType == "One Time Invoice") {
-                    console.log("mydata")
-                    console.log(data)
+                    // console.log("mydata")
+                    // console.log(data)
                     var dateObj = new Date(data?.dueDate);
                     var day = dateObj.getDate();
                     var month = dateObj.getMonth() + 1;
@@ -4764,8 +4778,8 @@ $("#owner-id").append(`
                     var formattedDateHere = month + "-" + day + "-" + year;
                     $("#dueDate-view").text(formattedDateHere != "NaN-NaN-NaN" ? formattedDateHere : "Not set" )
                 } else {
-                    console.log("mydata")
-                    console.log(data)
+                    // console.log("mydata")
+                    // console.log(data)
                     var dateObj = new Date(data?.recurringNextDate);
                     var day = dateObj.getDate();
                     var month = dateObj.getMonth() + 1;
@@ -4833,9 +4847,9 @@ $("#owner-id").append(`
                 const invoiceSerialElement = $(this).closest("tr").find(".serial-number");
                 if (invoiceIdElement.length > 0) {
                     invoiceId = invoiceIdElement.text();
-                    console.log(invoiceId);
+                    // console.log(invoiceId);
                 } else {
-                    console.log("Invoice ID element not found.");
+                    // console.log("Invoice ID element not found.");
                 }
                 const data1 = invoiceData.find(obj => obj.invoiceID == invoiceId);
                 const data2 = tenantData.find(obj => obj.tenantID == data1.tenantID);
@@ -4843,9 +4857,9 @@ $("#owner-id").append(`
                     ...data1,
                     ...data2
                 };
-                console.log($(".invoice-numebr"))
+                // console.log($(".invoice-numebr"))
                 $(".invoice-number").each(function () {
-                    console.log($(this))
+                    // console.log($(this))
                     $(this).text("#Invoice Number: INV-" + invoiceSerialElement.text())
                 })
             });
@@ -4856,7 +4870,7 @@ $("#owner-id").append(`
                     ...data1,
                     ...data2
                 };
-                console.log(data)
+                // console.log(data)
                 $(`input[name="status"][value="${data.status}"]`).prop('checked', true);
             });
             $(document).on('click', '.delete-option', function () {
@@ -4885,11 +4899,12 @@ $("#owner-id").append(`
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -4901,7 +4916,7 @@ $("#owner-id").append(`
                     ...data1,
                     ...data2
                 };
-                console.log(data)
+                // console.log(data)
                 $("#tenants_update").empty()
                 tenantData.forEach(function (tenant) {
                     if (tenant.tenantID == data.tenantID) {
@@ -4925,7 +4940,7 @@ $("#owner-id").append(`
                     }
                     $("#terms_update").empty()
                     $("#terms_update").append($('<option></option>').text((data.terms)).val((data.terms)).attr("selected", "selected"))
-                    console.log()
+                    // console.log()
                 }
                 const property = $("#tenants_update").val()
                 const propertyName = tenantData.filter((tenant) => {
@@ -4966,7 +4981,7 @@ $("#owner-id").append(`
                                         </tr>`
                     )
                     if ($("[name='category_update']").eq(index).val() == "Choose...") {
-                        console.log(category == "rent")
+                        // console.log(category == "rent")
                         $("[name='category_update']").append($('<option></option>').text("Rent Amount").val("rent").prop("selected", category === "rent" ? true : false));
                         $("[name='category_update']").append($('<option></option>').text("Maintainance").val("rent").prop("selected", category === "maintainance" ? true : false));
                         if (propertyName[0].gross_or_triple_lease === "Triple Net Lease") {
@@ -5048,12 +5063,12 @@ $("#owner-id").append(`
                             amount: amount
                         });
                     });
-                    console.log(lineItems)
+                    // console.log(lineItems)
                     var formData = new FormData();
                     var buttonText = $(this).text();
                     var invoiceData = {}
                     if (buttonText !== "Save" && buttonText.indexOf("Print") === -1) {
-                        console.log("here")
+                        // console.log("here")
                         invoiceData.sendmails = "Yes"
                     }
                     var existingImageNames = [];
@@ -5117,20 +5132,22 @@ $("#owner-id").append(`
                                         }, 2000);
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         $("#myModal_warning_connection").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning_connection').modal('hide');
                                         }, 2000);
-                                        console.log('Error: ' + error);
+                                        // console.log('Error: ' + error);
                                     }
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         })
                     } else {
@@ -5169,11 +5186,12 @@ $("#owner-id").append(`
                                 }, 2000);
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                                // console.log('Error: ' + error);
                             }
                         });
                     }
@@ -5204,11 +5222,12 @@ $("#owner-id").append(`
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 })
             })
@@ -5258,7 +5277,7 @@ $("#owner-id").append(`
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -5272,10 +5291,11 @@ $("#owner-id").append(`
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -5331,16 +5351,17 @@ $("#owner-id").append(`
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })

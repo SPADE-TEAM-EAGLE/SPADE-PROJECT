@@ -7,7 +7,7 @@ $.ajax({
     },
     success: function ({ userName, email, userId, image }) {
         username=userName
-        console.log(username)
+      // console.log(username)
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",

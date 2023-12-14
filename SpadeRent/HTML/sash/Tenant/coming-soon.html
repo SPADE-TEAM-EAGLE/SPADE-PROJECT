@@ -954,17 +954,18 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                      // console.log("getMessagesCountLandlord");
+                      // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = '../Tenant/login_module.html';
                         }, 2000);
-                        console.log(error);
+                      // console.log(error);
                     }
                 });
             });
@@ -989,7 +990,7 @@
                 },
                 success: function (response) {
                     function toTitleCase(str) {
-                            console.log(str)
+                          // console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -1001,14 +1002,15 @@
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                                  },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function() {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
        })
@@ -1025,7 +1027,7 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                          // console.log(response);
                             localStorage.removeItem('authtoken');
                             localStorage.clear();
                             if($('body').hasClass('dark-mode')){
@@ -1034,10 +1036,11 @@
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('../Tenant/login_module.html', "_self")
-                            console.log('Done');
+                          // console.log('Done');
                         },
                         error: function (xhr, status, error) {
-                            console.log(error);
+$('#preloader').css('display','none');
+                          // console.log(error);
                         }
                     });
                 });

@@ -2079,7 +2079,7 @@
                     subscribtionPlanChat.find('button').text('Subscribe Now!')
                 }
                 $(document).on('click', '.btn-free', function () {
-                    console.log('Button clicked.');
+                    // console.log('Button clicked.');
                     var pricingCard = $(this).closest('.pricing-card');
                     if (pricingCard.length > 0) {
                         var cardId = pricingCard.attr('id');
@@ -2205,6 +2205,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         document.getElementById("email-span-invalid").style.display = "block";
                         $("#next1").attr("disabled", true)
                     },
@@ -2218,16 +2219,17 @@
                 },
                 success: function (response) {
                     response.data.forEach((card) => {
-                        console.log($(`#${card.id} .amount-payable`))
+                        // console.log($(`#${card.id} .amount-payable`))
                         $(`#${card.id} .total-amount`).text(card.plantotalAmount)
                         $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                         $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
                     })
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $(document).on("click", "#next3", function (a) {
@@ -2304,13 +2306,16 @@
                                 window.location.href = "./Signup-success.html";
                             }, 2000);
                                         },
-                                        error: function (xhr, status, error) {}
+                                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');}
                                             })
                                         }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                         }
                                     })
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 }
                             })
                         } else {
@@ -2318,6 +2323,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloader").css("display", "none");
                         $("#myModal_warning").modal("show");
                         if (xhr.responseText == "Email already exists") {
@@ -2465,7 +2471,7 @@
                                     country: "US"
                                 }
                             }, function (res) {
-                                console.log(res)
+                                // console.log(res)
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
                                         url: "http://localhost:3000/api/spade/createSubscriptionPayment",
@@ -2534,6 +2540,7 @@
                                             })
                                         },
                                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                             $.ajax({
                                                 url: "http://localhost:3000/api/spade/deleteUser",
                                                 type: "DELETE",
@@ -2542,12 +2549,13 @@
                                                     userId: userId
                                                 }),
                                                 success: function (response) {
-                                                    console.log(response)
+                                                    // console.log(response)
                                                 },
                                                 error: function (xhr, status, error) {
-                                                    console.log(xhr)
-                                                    console.log(status)
-                                                    console.log(error)
+$('#preloader').css('display','none');
+                                                    // console.log(xhr)
+                                                    // console.log(status)
+                                                    // console.log(error)
                                                 }
                                             })
                                             $("#preloader").css("display", "none")
@@ -2566,12 +2574,13 @@
                                             userId: userId
                                         }),
                                         success: function (response) {
-                                            console.log(response)
+                                            // console.log(response)
                                         },
                                         error: function (xhr, status, error) {
-                                            console.log(xhr)
-                                            console.log(status)
-                                            console.log(error)
+$('#preloader').css('display','none');
+                                            // console.log(xhr)
+                                            // console.log(status)
+                                            // console.log(error)
                                         }
                                     })
                                     $("#preloader").css("display", "none")
@@ -2584,9 +2593,10 @@
                             });
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
-                            console.log(status)
-                            console.log(error)
+$('#preloader').css('display','none');
+                            // console.log(xhr)
+                            // console.log(status)
+                            // console.log(error)
                             $.ajax({
                                 url: "http://localhost:3000/api/spade/deleteUser",
                                 type: "DELETE",
@@ -2595,12 +2605,13 @@
                                     userId: userId
                                 }),
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                 },
                                 error: function (xhr, status, error) {
-                                    console.log(xhr)
-                                    console.log(status)
-                                    console.log(error)
+$('#preloader').css('display','none');
+                                    // console.log(xhr)
+                                    // console.log(status)
+                                    // console.log(error)
                                 }
                             })
                             $("#preloader").css("display", "none")
@@ -2612,10 +2623,11 @@
                     })
                 },
                 error: function (xhr, status, error) {
-                    console.log(xhr)
-                    console.log(status)
-                    console.log(error)
-                    console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                    // console.log(xhr)
+                    // console.log(status)
+                    // console.log(error)
+                  // console.error('Error sending data:', error);
                     $.ajax({
                         url: "http://localhost:3000/api/spade/deleteUser",
                         type: "DELETE",
@@ -2624,12 +2636,13 @@
                             userId: userId
                         }),
                         success: function (response) {
-                            console.log(response)
+                            // console.log(response)
                         },
                         error: function (xhr, status, error) {
-                            console.log(xhr)
-                            console.log(status)
-                            console.log(error)
+$('#preloader').css('display','none');
+                            // console.log(xhr)
+                            // console.log(status)
+                            // console.log(error)
                         }
                     })
                     $("#preloader").css("display", "none")

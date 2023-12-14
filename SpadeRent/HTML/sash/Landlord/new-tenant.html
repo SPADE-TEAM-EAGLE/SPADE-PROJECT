@@ -1888,17 +1888,18 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
@@ -1916,14 +1917,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -1961,7 +1963,8 @@
                         $("#email-exist").addClass("d-none")
                     }
                 },error: function (xhr, status, error) {
-                    console.log(error)
+$('#preloader').css('display','none');
+                    // console.log(error)
                 }
             })
             })
@@ -1976,7 +1979,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2017,11 +2020,12 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -2036,7 +2040,7 @@
                     },
                     success: function (response) {
                         var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2077,11 +2081,12 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -2101,7 +2106,7 @@
                         propertyName,
                         propertyAddress
                     }) {
-                        console.log(data)
+                        // console.log(data)
                         const units = data[0];
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -2192,17 +2197,18 @@
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#add-units1").prop("disabled", false)
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         })
                         $('.done-option1').click(function (e) {
-                            console.log(22)
+                            // console.log(22)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2216,9 +2222,9 @@
                                     cellValue = $(this).text()
                                 }
                                 values.push(cellValue)
-                                console.log(values)
+                                // console.log(values)
                             });
-                            console.log(propertyId2)
+                            // console.log(propertyId2)
                             $.ajax({
                                 url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
@@ -2234,20 +2240,21 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         });
                         $('.delete-option1').click(function (e) {
-                            console.log(333)
+                            // console.log(333)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2275,21 +2282,22 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(1)
+                                    // console.log(1)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         })
                         $(".edit-option1").click(function () {
                             $(this).closest('td').find('.done-option').removeAttr('disabled');
-                            console.log(1)
+                            // console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
                             $(this).next().removeClass('d-none');
@@ -2302,11 +2310,12 @@
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2324,7 +2333,7 @@
             let tenantID;
             $("#send-email-invite").click(() => {
                 $("#preloader").css("display", "flex");
-                console.log(tenantID)
+                // console.log(tenantID)
                 $.ajax({
                     url: 'http://localhost:3000/api/spade/sendInvitationLink',
                     type: 'POST',
@@ -2342,11 +2351,12 @@
                         window.location = './add-tenant.html'
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloader").css("display", "none");
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             })
@@ -2366,7 +2376,8 @@
                     });
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
             $.ajax({
@@ -2415,14 +2426,15 @@ $(".plan_remaining_days_data").each(function(){
                     $("#header-user").text(toTitleCase(userName))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2464,7 +2476,7 @@ $(".plan_remaining_days_data").each(function(){
                             propertyUnitSelect.append($('<option></option>')
                                 .text("Choose..."))
                             selectedProperty.vacantUnits.forEach(function (unit) {
-                                console.log(unit.unitNumber)
+                                // console.log(unit.unitNumber)
                                 var option = $('<option></option>')
                                     .text(unit.unitNumber)
                                     .val(unit.id);
@@ -2474,11 +2486,12 @@ $(".plan_remaining_days_data").each(function(){
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                 }
             });
             $("#add-item").on("click", () => {
@@ -2511,7 +2524,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $('input[name="yesno"]').change(function () {
-                console.log($(this).val())
+                // console.log($(this).val())
                 if ($(this).val() === 'yes') {
                     if (!$('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('show');
@@ -2570,7 +2583,7 @@ $(".plan_remaining_days_data").each(function(){
                 formData.propertyUnitID = document.getElementById('unit').value;
                 formData.rentAmount = document.getElementById('rent').value;
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                console.log(document.getElementById('baseRent'))
+                // console.log(document.getElementById('baseRent'))
                 if (formData.gross_or_triple_lease == "Gross Lease") {
                     formData.leaseStartDate = document.getElementById('leaseStart2').value;
                     formData.leaseEndDate = document.getElementById('leaseEnd2').value;
@@ -2597,7 +2610,7 @@ $(".plan_remaining_days_data").each(function(){
                 return formData;
             }
             $("#submit").on("click", () => {
-                console.log(2)
+                // console.log(2)
                 sendData()
             })
             function sendData() {
@@ -2635,10 +2648,11 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+$('#preloader').css('display','none');
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             }
@@ -2650,9 +2664,9 @@ resetAccordions()
 window.location = './add-tenant.html';
 })
             $(document).on('click', "#next", () => {
-                console.log(1)
+                // console.log(1)
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").removeClass("d-none")
                 $(".title-text").empty()
@@ -2672,9 +2686,9 @@ window.location = './add-tenant.html';
                 accordions.find('.accordion-collapse').addClass("show");
             })
             $("#edit-btn").on('click', () => {
-                console.log(1)
+                // console.log(1)
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").addClass("d-none")
                 $(".title-text").empty()
@@ -2713,7 +2727,7 @@ window.location = './add-tenant.html';
                 } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
                     return 2;
                 } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                    console.log(2)
+                    // console.log(2)
                     return 3;
                 } else {
                     return 0;
@@ -2721,7 +2735,7 @@ window.location = './add-tenant.html';
             }
             var counter = 0
             function checkFieldsFilled(id) {
-                console.log(id)
+                // console.log(id)
                 const status = checkFieldsStatus(id)
                 if (id === "accordion-item2" && counter === 0) {
                     counter += 1
@@ -2736,7 +2750,7 @@ window.location = './add-tenant.html';
                     }
                 });
                 const chevronIcon = accordionItem.querySelector(".icon");
-                console.log(status)
+                // console.log(status)
                 switch (status) {
                     case 0:
                         break;
@@ -2754,7 +2768,7 @@ window.location = './add-tenant.html';
                         chevronIcon.classList.add("tick");
                         break;
                     case 3:
-                        console.log(2)
+                        // console.log(2)
                         chevronIcon.classList.remove("fi-rs-exclamation");
                         chevronIcon.classList.add("chevron");
                         chevronIcon.classList.remove("cross");
@@ -2808,7 +2822,7 @@ window.location = './add-tenant.html';
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    console.log($(this).val())
+                    // console.log($(this).val())
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
@@ -2850,7 +2864,7 @@ window.location = './add-tenant.html';
             });
             function setEditable() {
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").addClass("d-none")
                 $(".title-text").empty()
@@ -2900,7 +2914,7 @@ window.location = './add-tenant.html';
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2920,7 +2934,7 @@ window.location = './add-tenant.html';
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -2934,10 +2948,11 @@ window.location = './add-tenant.html';
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -2982,16 +2997,17 @@ window.location = './add-tenant.html';
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -3001,7 +3017,7 @@ window.location = './add-tenant.html';
             var email = $(this).val();
             var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
             if (!email.match(emailRegex)) {
-                console.log("invalid");
+                // console.log("invalid");
                 $(this).addClass("border-danger")
                 $(this).removeClass("border-green")
             } else {

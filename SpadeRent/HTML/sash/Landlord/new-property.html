@@ -1359,16 +1359,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
@@ -1386,14 +1387,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function() {
@@ -1460,9 +1462,14 @@ $(".plan_remaining_days_data").each(function(){
                         }
                                  },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+setTimeout(function () {
+                        $('#myModal_warning_connection').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
 </script>
@@ -1475,16 +1482,17 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("here")
+                        // console.log("here")
                         if (response.message == "Email is verified") {
                             $("#account-text").remove()
                             $("#email_verification").remove()
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log('Error occurred while fetching state and city data.');
+                        // console.log(xhr);
+                        // console.log(error);
                     }
                 });
             })
@@ -1501,7 +1509,7 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     if(localStorage.getItem("htmlLayout")){
                         const htmlLayoutValue = localStorage.getItem("htmlLayout");
                         localStorage.clear();
@@ -1515,10 +1523,11 @@ $(".plan_remaining_days_data").each(function(){
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                    console.log('Done');
+                    // console.log('Done');
                 },
                 error: function (xhr, status, error) {
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log(error);
                 }
             });
         });

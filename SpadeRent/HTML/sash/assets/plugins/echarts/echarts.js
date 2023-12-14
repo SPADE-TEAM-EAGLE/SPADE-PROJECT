@@ -3426,7 +3426,7 @@ if (debugMode === 1) {
 else if (debugMode > 1) {
     log = function () {
         for (var k in arguments) {
-            console.log(arguments[k]);
+          // console.log(arguments[k]);
         }
     };
 }
@@ -17130,7 +17130,7 @@ echartsProto.setOption = function (option, notMerge, lazyUpdate) {
  * @DEPRECATED
  */
 echartsProto.setTheme = function () {
-    console.log('ECharts#setTheme() is DEPRECATED in ECharts 3.0');
+  // console.log('ECharts#setTheme() is DEPRECATED in ECharts 3.0');
 };
 /**
  * @return {module:echarts/model/Global}
