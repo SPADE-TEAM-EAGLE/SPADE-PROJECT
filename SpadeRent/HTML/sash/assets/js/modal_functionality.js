@@ -92,7 +92,7 @@ function checkFieldsFilled(id) {
 }
 var selectedFiles = [];
 function dropHandler(ev) {
-console.log("File(s) dropped");
+// console.log("File(s) dropped");
 ev.preventDefault();
 if (ev.dataTransfer.items) {
 [...ev.dataTransfer.items].forEach((item, i) => {
@@ -104,20 +104,20 @@ updateSelectedFilesContainer()
 });
 } else {
 [...ev.dataTransfer.files].forEach((file, i) => {
-console.log(`… file[${i}].name = ${file.name}`);
+// console.log(`… file[${i}].name = ${file.name}`);
 });
 }
 }
 function dragOverHandler(ev) {
-console.log("File(s) in drop zone");
+// console.log("File(s) in drop zone");
 ev.preventDefault();
 }
 function updateSelectedFilesContainer() {
 var selectedFilesContainer = $('.file-grid');
 selectedFilesContainer.empty();
 selectedFiles.forEach(function (file, index) {
-console.log(selectedFiles.length)
-console.log(file)
+// console.log(selectedFiles.length)
+// console.log(file)
 var fileElement = $('<div>')
 .addClass('selected-file');
 if (file.type && file.type.includes('image')) {

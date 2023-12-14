@@ -11,7 +11,7 @@ $(document).ready(function() {
         success: function(response) {
         },
         error: function(xhr, status, error) {
-          console.error('Error in API call:', error);
+          // console.error('Error in API call:', error);
         }
       });
     }

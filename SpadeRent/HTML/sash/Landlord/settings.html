@@ -10347,7 +10347,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 if (response?.data) {
                                     userPermissionData = response?.data;
                                     response?.data?.forEach(function (user) {
-                                        console.log(user)
+                                        // console.log(user)
                                         let statusClass = user.UStatus === 'Active' ? 'text-success' : '';
                                         let newRow = `
                         <tr>
@@ -10437,7 +10437,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                             },
                             success: function (response) {
                                 response.data.forEach((card) => {
-                                    console.log("Selected ID ajwhduisahduhdsuhdhdufhkd", currentSelectedId)
+                                    
                                     if (currentSelectedId == card.id) {
                                         if (parseInt(currentSelectedId) < 5) {
                                             userData.currentPrice = parseInt(card?.planDiscountedAmount) * 12
@@ -10445,16 +10445,16 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                             userData.currentPrice = card.planDiscountedAmount
                                         }
                                     }
-                                    console.log("Propertyhfgyhfhfhfghfghndsdngdfgn", userData)
+                                    // console.log("Propertyhfgyhfhfhfghfghndsdngdfgn", userData)
                                     $(`#${card.id} .total-amount`).text("$ " + card.plantotalAmount)
                                     $(`#${card.id} .amount-payable`).text(card.planDiscountedAmount)
                                     $(`#${(card.id * 4)} .amount-payable`).text(card.planDiscountedAmount)
                                 })
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10467,7 +10467,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 $("#table_body_bank_account_property").empty()
                                 if (response?.data[0]) {
                                     var properties = response?.data[0];
-                                    console.log(properties)
+                                    
                                     var propertySelect = $('#propertySelect');
                                     propertySelect.empty(); // Clear existing options
                                     propertySelect.append($('<option></option>')
@@ -10494,7 +10494,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                         }
                                     });
                                     if (counterAccount == 0) {
-                                        console.log("segfjhfdgfsgfjhsdgfjhsdgfsgdfsgfgfgghrfgikwerhrwj", counterAccount);
+                                        // console.log("segfjhfdgfsgfjhsdgfjhsdgfsgdfsgfgfgghrfgikwerhrwj", counterAccount);
                                         $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);
                                     }
                                 } else {
@@ -10502,9 +10502,9 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 }
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10560,9 +10560,9 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 })
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10630,9 +10630,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 }
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching invoices.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching invoices.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10642,7 +10642,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response)
+                                // console.log(response)
                                 if (response.email == "yes") {
                                     $("input[name='example-radios3'][value='Enable']").prop("checked", true);
                                 } else {
@@ -10654,9 +10654,9 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 }
                             },
                             error: function (xhr, status, error) {
-                                console.log('Error occurred while fetching state and city data.');
-                                console.log(xhr);
-                                console.log(error);
+                                // console.log('Error occurred while fetching state and city data.');
+                                // console.log(xhr);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10691,7 +10691,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 }
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+                                // console.log(error);
                             }
                         });
                         $.ajax({
@@ -10710,7 +10710,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                                 tenantData = response.data[0]
                             },
                             error: function (xhr, status, error) {
-                                console.log(error)
+                                // console.log(error)
                                 $("#myModal_warning").modal("show");
                                 // setTimeout(function () {
                                 //     $('#myModal_warning').modal('hide');
@@ -11451,12 +11451,12 @@ $('#preloader').css('display','none');
                             // console.log(time)
                         }
                     })
-                    console.log(parseInt(currentSelectedId), parseInt(cardId))
+                    // console.log(parseInt(currentSelectedId), parseInt(cardId))
                     if (future) {
                         $("#downgradenotPossible").modal("show");
                     }
                     else if (time == "Month" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId) >= 5 && parseInt(cardId) <= 7) {
-                        console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
+                        // console.log(time == "Month" && parseInt(currentSelectedId) > parseInt(cardId))
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -11469,7 +11469,7 @@ $('#preloader').css('display','none');
                         $("#downgradeConfirm").modal("show")
                     }
                     else if (time == "Year" && parseInt(currentSelectedId) > parseInt(cardId) && parseInt(currentSelectedId) >= 2 && parseInt(currentSelectedId) <= 4) {
-                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
+                        // console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdaksj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -11483,7 +11483,7 @@ $('#preloader').css('display','none');
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(cardId) <= 7 && parseInt(cardId) >= 5 && parseInt(currentSelectedId) <= 4 && parseInt(currentSelectedId) >= 2) {
-                        console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
+                        // console.log("jskdjkjsdkjskdjskjdasjdkasjdkajskdjakdjkasjdkajdakdsddsdsfdsfdfdswwwj")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
@@ -11496,7 +11496,7 @@ $('#preloader').css('display','none');
                         $("#downgradeConfirm-yearly").modal("show")
                     }
                     else if (parseInt(currentSelectedId) <= 7 && parseInt(currentSelectedId) >= 5 && parseInt(cardId) <= 4) {
-                        console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjd")
+                        // console.log("bdmbfmdbfmdmdmnbdmnbdmnnmgbdmnnmgmndfksdjd")
                         $("#payment-month").text("Year")
                         $("#payment-month").text(time)
                         $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))

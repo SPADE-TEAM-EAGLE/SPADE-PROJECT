@@ -139,7 +139,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });      
                             }else{
@@ -170,7 +170,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }
@@ -229,7 +229,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }else{
@@ -260,7 +260,7 @@ function main() {
                                         $("#upgradetopro-card-modal").modal("hide")
                                         $("#preloader").css("display", "none")
                                       // console.log(error)
-                                        console.error('Error sending data:', error);
+                                        // console.error('Error sending data:', error);
                                     }
                                 });   
                             }
@@ -285,7 +285,7 @@ function main() {
                             $("#preloader").css("display", "none")
               // console.log(status)
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });
     }
@@ -373,7 +373,7 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });      
     }else{
@@ -404,7 +404,7 @@ if(res?.transactionStatus?.toLowerCase()=="pending"){
                 $("#upgradetopro-ach-modal").modal("hide")
                 $("#preloader").css("display", "none")
               // console.log(error)
-                console.error('Error sending data:', error);
+                // console.error('Error sending data:', error);
             }
         });     
     }
@@ -425,7 +425,7 @@ else {
           // console.log(xhr)
           // console.log(status)
           // console.log(error)
-            console.error('Error sending data:', error);
+            // console.error('Error sending data:', error);
         }
     });
     

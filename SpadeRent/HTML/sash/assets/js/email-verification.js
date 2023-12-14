@@ -118,7 +118,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error($("#save-email"));
+                    // console.error($("#save-email"));
                     $("#save-email").addClass("disabled")
                     $("#verify-email-span").removeClass("d-none")
                 },
@@ -142,7 +142,7 @@ $(document).ready(function () {
                 $("#save-email").addClass("d-none")
             },
             error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
@@ -159,7 +159,7 @@ $(document).ready(function () {
                 $("#modaldemo8").modal("show")
             },
             error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
@@ -189,7 +189,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 document.getElementById("verification-spans").style.display = "block";
                 $("#verification").addClass("is-invalid")
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
