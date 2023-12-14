@@ -2937,7 +2937,7 @@
             }
             function getAllUserAdminData() {
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/protectedAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3004,7 +3004,7 @@
                             image_key = response.imageKey
                         }
                         $.ajax({
-                            url: "http://localhost:3000/api/spade/adminUserPermissionRoles",
+                            url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionRoles",
                             type: "GET",
                             headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3569,7 +3569,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/getAdminRevenue",
+                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3602,7 +3602,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -3622,7 +3622,7 @@ $('#preloader').css('display','none');
                     }
                 });
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/allUserAdmin",
+                    url: "https://backend.app.spaderent.com/api/spade/allUserAdmin",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -3700,7 +3700,7 @@ $('#preloader').css('display','none');
             getAllUserAdminData()
             function getAllStates() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getStates',
+                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -3738,7 +3738,7 @@ $('#preloader').css('display','none');
               // console.log(checkedClasses);
                 if ($(this).closest('tr').attr("class")) {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/adminUserPermissionUpdate",
+                        url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionUpdate",
                         type: "PUT",
                         data: JSON.stringify({
                             role: UsersRolesId,
@@ -3788,7 +3788,7 @@ $('#preloader').css('display','none');
                   // console.log(selectedFiles[0]);
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -3802,7 +3802,7 @@ $('#preloader').css('display','none');
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: "http://localhost:3000/api/spade/updateAdminUser",
+                                url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3855,7 +3855,7 @@ $('#preloader').css('display','none');
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -3896,7 +3896,7 @@ $('#preloader').css('display','none');
                 }
                 else {
                     $.ajax({
-                        url: "http://localhost:3000/api/spade/updateAdminUser",
+                        url: "https://backend.app.spaderent.com/api/spade/updateAdminUser",
                         type: "PUT",
                         data: JSON.stringify({
                             firstName: capitalizeFirstLetter($("#firstName_user_update").val()),
@@ -4005,7 +4005,7 @@ if (userAdminDataNew.roleId == 2) {
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "http://localhost:3000/api/spade/userAdminDelete",
+                    url: "https://backend.app.spaderent.com/api/spade/userAdminDelete",
                     type: "DELETE",
                     data: JSON.stringify({ id: deleteUserId }),
                     contentType: "application/json",
@@ -4037,7 +4037,7 @@ $('#preloader').css('display','none');
                     var uploadFormData = new FormData();
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/uploadAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
                         type: 'POST',
                         data: uploadFormData,
                         contentType: false,
@@ -4051,7 +4051,7 @@ $('#preloader').css('display','none');
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/createUserAdmin',
+                                url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
                                 type: 'POST',
                                 contentType: "application/json",
                                 data: JSON.stringify({
@@ -4109,7 +4109,7 @@ $('#preloader').css('display','none');
                     });
                 } else {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/createUserAdmin',
+                        url: 'https://backend.app.spaderent.com/api/spade/createUserAdmin',
                         type: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify({

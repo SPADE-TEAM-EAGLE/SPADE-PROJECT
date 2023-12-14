@@ -21,7 +21,7 @@ function convertTimestamp(timestamp) {
 }
 function GetNotification(){
   $.ajax({
-    url: "http://localhost:3000/api/spade/notify",
+    url: "https://backend.app.spaderent.com/api/spade/notify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -441,7 +441,7 @@ $("#updateAllNotifyRead").on("click", function () {
 });
 function getNotifyData(){
   $.ajax({
-    url: "http://localhost:3000/api/spade/notify",
+    url: "https://backend.app.spaderent.com/api/spade/notify",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -458,7 +458,7 @@ function getNotifyData(){
 function updateAllNotifyRead() {
   getNotifyData()
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAllNotifyRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateAllNotifyRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
@@ -477,7 +477,7 @@ function updateAllNotifyRead() {
 }
 function updateDataNotify(notificationId, type) {
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateReadUnRead",
+    url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
     data: JSON.stringify({
       notify: 1,
