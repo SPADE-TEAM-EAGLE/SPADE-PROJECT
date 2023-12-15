@@ -2316,6 +2316,18 @@ $(".plan_remaining_days_data").each(function(){
                 }
                 updateButtonStatus();
             });
+            $("#propertyType").on("change",function(){
+                console.log($(this).val())
+                if ($(this).val() == "Single Family") {
+    $("#units").val(1);
+    $("#units").prop("disabled", true);
+} else {
+    $("#units").val(''); // Reset the value to empty string
+    $("#units").prop("disabled", false);
+}
+
+                
+            })
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
