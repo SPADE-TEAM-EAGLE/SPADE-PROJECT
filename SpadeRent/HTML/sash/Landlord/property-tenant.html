@@ -1285,6 +1285,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
                 },
                 error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
