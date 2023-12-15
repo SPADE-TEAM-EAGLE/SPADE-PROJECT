@@ -687,15 +687,16 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input
-                                            type="text"
-                                            class="form-control px-2"
-                                            id="units"
-                                            pattern="[0-9]{5}"
-                                            placeholder="Enter Number of Units"
-                                            maxlength="3"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                            required
-                                        >
+    type="number"
+    class="form-control px-2"
+    id="units"
+    placeholder="Enter Number of Units (Max: 199)"
+    min="0" 
+    max="199" 
+    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+    required
+>
+
                                         <span class="text-danger d-none">Units are required!</span>
                                     </div>
                                 </form>
@@ -2328,6 +2329,12 @@ $(".plan_remaining_days_data").each(function(){
 
                 
             })
+            
+            $("#units").on("input",function(){
+                
+                if ($(this).val() >=199) {
+    $("#units").val(199);}})
+            
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
