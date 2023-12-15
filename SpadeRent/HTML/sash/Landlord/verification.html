@@ -322,6 +322,7 @@ var encodedToken = encodeURIComponent(encryptedToken);
                         window.open(`new_password.html?id=${encodedId}&token=${encodedToken}`, "_self")
                     },
                     error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                         document.getElementById("verification-spans").style.display = "block";
                         $("#verification").addClass("is-invalid")
                     }
@@ -397,6 +398,7 @@ var encodedId = encodeURIComponent(encryptedId);
                         interval = setInterval(countDown, 1000);
                     },
                     error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                     }
                 });
             });

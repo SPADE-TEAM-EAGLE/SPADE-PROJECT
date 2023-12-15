@@ -61,12 +61,10 @@ $('input[type="tel"]').each(function () {
           intlTelInputUtils.numberFormat.NATIONAL
         );
         input.val(formattedNumber);
-      // console.log("Valid phone. Formatted number:", formattedNumber);
         validMsg.removeClass("d-none");
         input.removeClass("border-danger");
         input.addClass("border-green");
       } else {
-      // console.log("Invalid phone");
         input.addClass("border-danger");
         input.removeClass("border-green");
         input.addClass("error");
@@ -97,12 +95,10 @@ $(document).ready(function () {
           ($(this).is('input[type="email"]') && !emailRegex.test(modalValid)) ||
           ($(this).is('input[name="zip"]') && modalValid.length !== 5)
         ) {
-        // console.log("checker not Ok");
           $(this).removeClass("border-green").addClass("border-danger");
           modalValid_span.text("This field is required!");
           modalValid_span.removeClass("d-none");
         } else {
-        // console.log("checker Ok");
           $(this).removeClass("border-danger").addClass("border-green");
           modalValid_span.text("This field is required!");
           modalValid_span.addClass("d-none");
@@ -127,7 +123,6 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
           $(this).val("Choose...");
           $(this).removeClass("border-green").removeClass("border-danger");
           $(this).siblings("span").addClass("d-none");
-        // console.log($(this).siblings("span"));
         } else {
           $(this).val("");
           $(this).removeClass("border-green").removeClass("border-danger");

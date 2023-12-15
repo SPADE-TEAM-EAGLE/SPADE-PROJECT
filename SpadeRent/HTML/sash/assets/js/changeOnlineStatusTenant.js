@@ -11,6 +11,7 @@ $(document).ready(function() {
         success: function(response) {
         },
         error: function(xhr, status, error) {
+$('#preloader').css('display','none');
           // console.error('Error in API call:', error);
         }
       });

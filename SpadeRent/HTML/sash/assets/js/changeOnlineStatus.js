@@ -12,6 +12,7 @@ $(document).ready(function() {
         // console.log('API call successful:', response);
         },
         error: function(xhr, status, error) {
+$('#preloader').css('display','none');
           // console.error('Error in API call:', error);
         }
       });
