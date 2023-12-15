@@ -83,7 +83,8 @@ const {
   propertyIdUpdate,
   propertyCount,
   updateActiveUser,
-  messageDelete
+  messageDelete,
+  checkPropertyUnitQuery
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -2053,45 +2054,57 @@ exports.viewAllPropertyTenant = async (req, res) => {
 exports.addMoreUnits = async (req, res) => {
   const { propertyID } = req.body;
   const { userId,paidUnits } = req.user;
-
+ 
   try {
-    const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
-      propertyID,
-      "",
-      "",
-      "",
-      "Vacant",
-      userId
-    ]);
-    if (propertyUnitResult[0].affectedRows > 0) {
-      const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
+    const checkPropertyUnitResult = await queryRunner(checkPropertyUnitQuery,[propertyID]);
+    console.log(checkPropertyUnitResult[0])
+    if (checkPropertyUnitResult[0].length > 0){
+      const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
         propertyID,
+        "",
+        "",
+        "",
+        "Vacant",
+        userId
       ]);
-      if (selectaddMoreUnitsResult[0].length > 0) {
-        const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
-        const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [
-          unitCount,
+      if (propertyUnitResult[0].affectedRows > 0) {
+        const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
           propertyID,
         ]);
-        const unitCountLandlord = paidUnits + 1;
-        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
-        
-        if (updateaddMoreUnitsResult[0].affectedRows > 0) {
-          res.status(200).json({
-            data: unitCount,
-            message: "total unit",
-          });
-        } else {
-          res.status(400).json({
-            message: "Error occurs in Updating unit in database",
-          });
+        if (selectaddMoreUnitsResult[0].length > 0) {
+          const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
+          const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [
+            unitCount,
+            propertyID,
+          ]);
+          const unitCountLandlord = paidUnits + 1;
+          const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+          
+          if (updateaddMoreUnitsResult[0].affectedRows > 0) {
+            res.status(200).json({
+              data: unitCount,
+              message: "total unit",
+            });
+          } else {
+            res.status(400).json({
+              message: "Error occurs in Updating unit in database",
+            });
+          }
         }
+      } else {
+        res.status(400).json({
+          message: "Unit not inserted",
+        });
       }
-    } else {
-      res.status(400).json({
-        message: "Unit not inserted",
+    }else{
+      res.status(203).json({
+        message: "Your property type is Single Family",
       });
     }
+
+    
+
+
   } catch (error) {
     // console.error("Error:", error);
     res.status(500).json({ message: "Error", error: error.message });;

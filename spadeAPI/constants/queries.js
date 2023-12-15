@@ -1157,3 +1157,4 @@ exports.insertInUserPermissionUsers =
   exports.paymentACHRequestQuery = "INSERT INTO paymentACHLogs (tenantId,body,query,params, date, status) VALUES (?,?,?,?,?,?)";;
  exports.updateTenantInvoiceStatus="UPDATE invoice SET status = ? WHERE tenantID = ?";
  exports.updateTenantIndividualInvoiceStatus="UPDATE invoice SET status = ? WHERE tenantID = ? AND id = ?";
+ exports.checkPropertyUnitQuery=`SELECT * FROM spade_Rent.property where id  = ? and propertyType != "Single Family"`;
