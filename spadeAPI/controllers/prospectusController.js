@@ -21,7 +21,8 @@ const {
     dashboardProspectusInsight,
     prospectTimeGraphQuery,
     prospectusCount,
-    prospectusIdUpdate
+    prospectusIdUpdate,
+    checkProspectusId
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -42,11 +43,21 @@ exports.addprospectus = async (req, res) => {
         rentAmount,
         prospectusStatus,
     } = req.body;
-    const { userId } = req.user;
+    const { userId, idPattern} = req.user;
     // const { userId } = req.body;
     const currentDate = new Date();
     // console.log(userId)
     try {
+        const prospectusIdCheckresult = await queryRunner(checkProspectusId, [userId]);
+        let prospectusId;
+        if (prospectusIdCheckresult[0].length > 0) {
+            prospectusId = prospectusIdCheckresult[0][0].cprospectusId.split("-");
+          let lastPart = parseInt(prospectusId[prospectusId.length - 1], 10) + 1;
+          lastPart = lastPart.toString().padStart(4, '0');
+          prospectusId = `SR-${idPattern}-PROSP-${lastPart}`;
+        } else {
+            prospectusId = `SR-${idPattern}-PROSP-0001`;
+        }
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
@@ -60,16 +71,17 @@ exports.addprospectus = async (req, res) => {
             moveDate,
             rentAmount,
             prospectusStatus,
-            currentDate
+            currentDate,
+            prospectusId
         ]);
         if (prospectusResult.affectedRows === 0) {
             return res.status(400).send("No data found");
         }
         const prospectusID = prospectusResult[0].insertId;
-        const prospectusCountIdResult = await queryRunner(prospectusCount , [userId]);
-        let customProspectusId = prospectusCountIdResult[0][0].count + 1;
-        customProspectusId = lastName+customProspectusId;
-        const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
+        // const prospectusCountIdResult = await queryRunner(prospectusCount , [userId]);
+        // let customProspectusId = prospectusCountIdResult[0][0].count + 1;
+        // customProspectusId = lastName+customProspectusId;
+        // const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
         //}
 
         res.status(200).json({
