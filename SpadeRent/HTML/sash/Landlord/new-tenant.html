@@ -955,17 +955,21 @@
                         <div class="col-md-12">
                             <div class="card inner-cards">
                                 <div class="card-header justify-content-start">
-                                    <div class="column-flex-direction d-flex align-items-center">
-                                        <button class="btn btn-primary btn-pill pt-1 pb-1 done-option1" id="add-units1">
+                                    <div class="column-flex-direction flex-column d-flex align-items-start justify-content-between">
+                                        <button class="btn btn-primary btn-pill pt-1 pb-1 mb-2" id="add-units1">
                                             Add
-                                            Units
+                                    Units
                                         </button>
-                                        <p class="ms-3">
-                                            <b>
-                                                Instruction: Please fill Unit Information individually one at
-                                                a time.
-                                            </b>
-                                        </p>
+                                        <ol class="list-group list-group-numbered">
+                                            <h3 class="fw-bold mb-1">
+                                                Instructions:
+                                            </h3>
+                                            <li>Please fill Unit Information individually one at
+                                                a time.</li>
+                                            <li class="d-none" id="single-family-text">You cannot add more units as your property type is <span class="text-primary">Signle Family</span>.</li>
+                                            <li class="d-none" id="multi-text">You have reached your total units limit which is<span class="text-primary">199</span>.</li>
+        
+                                        </ol>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
@@ -1939,13 +1943,37 @@ $('#preloader').css('display','none');
         });
 </script>
 <script>
-        var selectedFiles = [];
+        var selectedFiles = [];var properties;
         $(document).ready(function () {
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#property').val()
+                console.log(properties)
+                const filteredProperty=properties.filter((property)=>{
+                    return property.id==propertyId2;
+                })
+                if(filteredProperty[0]?.propertyType=="Single Family"){
+                    $("#add-units1").hide()
+                    $("#single-family-text").removeClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                    
+                    
+                }
+                else if(filteredProperty[0]?.units>=199){
+                    $("#add-units1").hide()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").removeClass("d-none")
+                }
+                else{
+                    $("#add-units1").show()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                }
                 getData2()
+
+                
             })
+            
             $("#email").on("input",function(){
                 $.ajax({    
                 url: 'https://backend.app.spaderent.com/api/spade/checkEmailTenants',
@@ -1979,7 +2007,7 @@ $('#preloader').css('display','none');
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
+                        properties = response.data; // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
@@ -2040,7 +2068,7 @@ $('#preloader').css('display','none');
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
+                        properties = response.data; // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
@@ -2195,6 +2223,13 @@ $('#preloader').css('display','none');
                                 },
                                 success: function (response) {
                                     $("#add-units1").prop("disabled", false)
+                                    if(response.data>=199){
+                                        $("#add-units1").hide()
+                                        $("#multi-text").removeClass("d-none")
+                                    }else{
+                                        $("#add-units1").show()
+                                        $("#multi-text").addClass("d-none")
+                                    }
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
@@ -2447,7 +2482,7 @@ $('#preloader').css('display','none');
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    var properties = response.data; // Assuming the response data is an array of property objects
+                    properties = response.data; // Assuming the response data is an array of property objects
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
