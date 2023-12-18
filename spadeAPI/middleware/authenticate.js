@@ -15,6 +15,18 @@ const verifyToken = async (req, res, next) => {
         // const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
         // console.log("Token ID "+decoded.UserPermissionID);
         const result = await queryRunner(userPermissionAuth, [decoded.UserPermissionID]);
+                      // ############################### For ID Pattern ###################################################
+                      let idPattern;
+                      if (result[0][0].BusinessName !== null && result[0][0].BusinessName !== "") {
+                        idPattern = result[0][0].BusinessName.substring(0, 3).toUpperCase();
+                      } else {
+                        idPattern =
+                          (result[0][0].FirstName.substring(0, 2) || "").toUpperCase() +
+                          (result[0][0].LastName.substring(0, 1) || "").toUpperCase();
+                      }
+                      
+             // ############################### For ID Pattern ###################################################
+
         const futurePlanId = await queryRunner(selectQuery("futurePlanUser", "landlordId"), [result[0][0].llnalordId]);
         const planCountResult = await queryRunner(selectQuery("plan", "id"), [result[0][0].PlanID]);
         // console.log("result[0][0].PlanID");
@@ -133,6 +145,7 @@ const verifyToken = async (req, res, next) => {
             planChat,
             planProspects,
             planNNN,
+            idPattern,
 
           };
         } else {
@@ -194,6 +207,7 @@ const verifyToken = async (req, res, next) => {
             planChat,
             planProspects,
             planNNN,
+            idPattern,
 
           };
         }
@@ -212,7 +226,21 @@ const verifyToken = async (req, res, next) => {
 
         const result = await queryRunner(selectQuery("users", "Email"), [
           decoded.email,
+          // "superadmin@gmail.com",
         ]);
+        // console.log(result)
+                // ############################### For ID Pattern ###################################################
+                let idPattern;
+                if (result[0][0].BusinessName !== null && result[0][0].BusinessName !== "") {
+                  idPattern = result[0][0].BusinessName.substring(0, 3).toUpperCase();
+                } else {
+                  idPattern =
+                    (result[0][0].FirstName.substring(0, 2) || "").toUpperCase() +
+                    (result[0][0].LastName.substring(0, 1) || "").toUpperCase();
+                }
+                
+       // ############################### For ID Pattern ###################################################
+
         const futurePlanId = await queryRunner(selectQuery("futurePlanUser", "landlordId"), [result[0][0]?.id]);
         const planCountResult = await queryRunner(selectQuery("plan", "id"), [result[0][0]?.PlanID]);
         const countTenantResult = await queryRunner(countTenantQuery, [result[0][0]?.id]);
@@ -274,7 +302,7 @@ const verifyToken = async (req, res, next) => {
             planChat: planCountResult[0][0].chat,
             planProspects: planCountResult[0][0].prospect,
             planNNN: planCountResult[0][0].NNN,
-
+            idPattern,
 
           };
         } else {
@@ -322,7 +350,7 @@ const verifyToken = async (req, res, next) => {
             planChat: planCountResult[0][0].chat,
             planProspects: planCountResult[0][0].prospect,
             planNNN: planCountResult[0][0].NNN,
-
+            idPattern,
           };
         }
 

@@ -26,7 +26,9 @@ const {
   taskCount,
   updateVendor,
   taskCountId,
-  taskIdUpdate
+  taskIdUpdate,
+  checkvendorId,
+  cVendorId
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -46,7 +48,7 @@ exports.addVendors = async (req, res) => {
     email,
     categoryID,
   } = req.body;
-  const { userId } = req.user;
+  const { userId, idPattern } = req.user;
   // console.log(userId)
   try {
     const vendorCheckResult = await queryRunner(
@@ -56,6 +58,16 @@ exports.addVendors = async (req, res) => {
     if (vendorCheckResult[0].length > 0) {
       return res.send("Vendor already exists");
     } else {
+      const vendorIdCheckresult = await queryRunner(checkvendorId, [userId]);
+      let vendorId;
+      if (vendorIdCheckresult[0].length > 0) {
+        vendorId = vendorIdCheckresult[0][0].cVendorId.split("-");
+        let lastPart = parseInt(vendorId[vendorId.length - 1], 10) + 1;
+        lastPart = lastPart.toString().padStart(4, '0');
+        vendorId = `SR-${idPattern}-VNDR-${lastPart}`;
+      } else {
+        vendorId = `SR-${idPattern}-VNDR-0001`;
+      }
       // console.log(userId)
       const vendorResult = await queryRunner(addVendor, [
         firstName,
@@ -70,6 +82,7 @@ exports.addVendors = async (req, res) => {
         email,
         categoryID,
         userId,
+        vendorId,
       ]);
       if (vendorResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -209,7 +222,7 @@ exports.addTasks = async (req, res) => {
   } = req.body;
   // console.log(req.body);
   const vendorID = assignee;
-  const { userId, userName,taskEmail } = req.user;
+  const { userId, userName,taskEmail, idPattern } = req.user;
   // const { userId, userName,taskEmail } = req.body;
 
   const currentDate = new Date();
@@ -222,7 +235,17 @@ exports.addTasks = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
-      // taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID
+      const taskIdCheckresult = await queryRunner(checkTaskid, [userId]);
+      let taskId;
+      if (taskIdCheckresult[0].length > 0) {
+        taskId = taskIdCheckresult[0][0].cTaskId.split("-");
+        let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
+        lastPart = lastPart.toString().padStart(4, '0');
+        taskId = `SR-${idPattern}-TASK-${lastPart}`;
+      } else {
+        taskId = `SR-${idPattern}-TASK-0001`;
+      }
+
       const TasksResult = await queryRunner(addTasksQuery, [
         task,
         property,
@@ -235,6 +258,7 @@ exports.addTasks = async (req, res) => {
         currentDate,
         userName,
         userId,
+        taskId
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -242,10 +266,10 @@ exports.addTasks = async (req, res) => {
       // else {
         const tasksID = TasksResult[0].insertId;
         // for task id
-        const taskCountIdResult = await queryRunner(taskCountId, [userId]);
-        let customTaskId = taskCountIdResult[0][0].count + 1;
-        customTaskId = task+customTaskId;
-        const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
+        // const taskCountIdResult = await queryRunner(taskCountId, [userId]);
+        // let customTaskId = taskCountIdResult[0][0].count + 1;
+        // customTaskId = task+customTaskId;
+        // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
         if(images){
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];

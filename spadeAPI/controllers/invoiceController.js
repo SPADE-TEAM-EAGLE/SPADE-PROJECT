@@ -52,7 +52,7 @@ exports.createInvoice = async (req, res) => {
     images
   } = req.body;
   try {
-    const { userId,userName,businessName,invoiceEmail } = req.user;
+    const { userId,userName,businessName,invoiceEmail, idPattern } = req.user;
     // const { userId,userName,businessName,invoiceEmail } = req.body;
     const currentDate = new Date();
     const notify = 0;
@@ -62,10 +62,10 @@ exports.createInvoice = async (req, res) => {
     } else {
       // select tenants
       const invoiceID = invoiceResult[0].insertId;
-      const invoiceCountIdResult = await queryRunner(invoiceCount, [userId]);
-      let customInvoiceId = invoiceCountIdResult[0][0].count + 1;
-      customInvoiceId = "Invoice"+customInvoiceId;
-      const invoiceIdUpdateResult = await queryRunner(invoiceIdUpdate ,[customInvoiceId, invoiceID]);
+      // const invoiceCountIdResult = await queryRunner(invoiceCount, [userId]);
+      // let customInvoiceId = invoiceCountIdResult[0][0].count + 1;
+      // customInvoiceId = "Invoice"+customInvoiceId;
+      // const invoiceIdUpdateResult = await queryRunner(invoiceIdUpdate ,[customInvoiceId, invoiceID]);
       const selectTenantsResult = await queryRunner(
         selectQuery("tenants", "id"),
         [tenantID]

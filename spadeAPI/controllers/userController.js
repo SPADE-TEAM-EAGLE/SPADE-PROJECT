@@ -84,7 +84,8 @@ const {
   propertyCount,
   updateActiveUser,
   messageDelete,
-  checkPropertyUnitQuery
+  checkPropertyUnitQuery,
+  checkPropertyid
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -1236,7 +1237,7 @@ exports.property = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId, email,paidUnits,userName } = req.user;
+    const { userId, email,paidUnits,userName, idPattern } = req.user;
     // const { userId, email,paidUnits,userName } = req.body;
     if (
       !propertyName ||
@@ -1256,9 +1257,17 @@ exports.property = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
-    // console.log("1");
     const status = "Non-active";
-    console.log(userId);
+    const propertyIdCheckresult = await queryRunner(checkPropertyid, [userId]);
+    let propertyId;
+    if (propertyIdCheckresult[0].length > 0) {
+      propertyId = propertyIdCheckresult[0][0].cPropertyId.split("-");
+      let lastPart = parseInt(propertyId[propertyId.length - 1], 10) + 1;
+      lastPart = lastPart.toString().padStart(4, '0');
+      propertyId = `SR-${idPattern}-PROP-${lastPart}`;
+    } else {
+      propertyId = `SR-${idPattern}-PROP-0001`;
+    }
     // this line insert data into property table
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
@@ -1272,6 +1281,7 @@ exports.property = async (req, res) => {
       status,
       units,
       currentDate,
+      propertyId
     ]);
     // console.log("2");
     // if property data not inserted into property table then throw error
@@ -1315,10 +1325,10 @@ exports.property = async (req, res) => {
     const mailSubject = "New Property Added";
     await propertyMail(propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email )
     
-    const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
-    let customPropertyId = propertyCountIdResult[0][0].count + 1;
-    customPropertyId = propertyName+customPropertyId;
-    const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
+    // const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
+    // let customPropertyId = propertyCountIdResult[0][0].count + 1;
+    // customPropertyId = propertyName+customPropertyId;
+    // const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,
@@ -3033,3 +3043,39 @@ exports.ACHLogCheck = async(req,res)=>{
 
   }
 }
+
+
+
+
+
+
+
+
+
+// exports.UserCheckName = async (req, res) => {
+//   try {
+//     const { userId } = req.params;
+//     console.log(userId);
+//     const userResult = await queryRunner(selectQuery("users", "id"), [userId]);
+
+//     if (userResult[0].length > 0) {
+//       console.log(userResult[0][0].BusinessName);
+
+//       if (userResult[0][0].BusinessName !== null && userResult[0][0].BusinessName !== "") {
+//         const BusinessName = userResult[0][0].BusinessName.substring(0, 3);
+//         return res.status(200).json({ BusinessName: BusinessName });
+//       } else {
+//         const userName =
+//           (userResult[0][0].FirstName.substring(0, 2) || "") +
+//           (userResult[0][0].LastName.substring(0, 1) || "");
+//         return res.status(200).json({ userName });
+//       }
+//     } else {
+//       res.status(400).json({ message: "Error in deleting user" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Error", error: error.message });
+//   }
+// };
+

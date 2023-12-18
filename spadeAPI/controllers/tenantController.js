@@ -37,7 +37,8 @@ const {
   tenantsCount,
   tenantsIdUpdate,
   updateTenantInvoiceStatus,
-  updateTenantIndividualInvoiceStatus
+  updateTenantIndividualInvoiceStatus,
+  checktenantId
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -70,7 +71,7 @@ exports.createTenants = async (req, res) => {
       increaseRent,
       increaseRentData,
     } = req.body;
-    const { userId } = req.user;
+    const { userId, idPattern } = req.user;
     // const { userId } = req.body;
     // console.log(req.body)
     const tenantsCheck = await queryRunner(selectQuery("tenants", "email"), [
@@ -85,6 +86,16 @@ exports.createTenants = async (req, res) => {
       const ran = Math.floor(100000 + Math.random() * 900000);
       const tenantPassword = "Spade" + ran;
       const hashPassword = await hashedPassword(tenantPassword);
+      const tenantIdCheckresult = await queryRunner(checktenantId, [userId]);
+    let tenantId;
+    if (tenantIdCheckresult[0].length > 0) {
+      tenantId = tenantIdCheckresult[0][0].cTenantId.split("-");
+      let lastPart = parseInt(tenantId[tenantId.length - 1], 10) + 1;
+      lastPart = lastPart.toString().padStart(4, '0');
+      tenantId = `SR-${idPattern}-TNT-${lastPart}`;
+    } else {
+      tenantId = `SR-${idPattern}-TNT-0001`;
+    }
       const tenantsInsert = await queryRunner(insertTenants, [
         userId,
         firstName,
@@ -107,6 +118,7 @@ exports.createTenants = async (req, res) => {
         increaseRent,
         hashPassword,
         currentDate,
+        tenantId
       ]);
 
       if (tenantsInsert[0].affectedRows > 0) {
@@ -116,20 +128,13 @@ exports.createTenants = async (req, res) => {
           [status, propertyUnitID, propertyID]
         );
         if (propertyUnitsResult[0].affectedRows > 0) {
-          const tenantCountIdResult = await queryRunner(tenantsCount, [userId]);
+          // const tenantCountIdResult = await queryRunner(tenantsCount, [userId]);
           // console.log(tenantCountIdResult[0][0].count)
-          let customTenantId = tenantCountIdResult[0][0].count + 1;
+          // let customTenantId = tenantCountIdResult[0][0].count + 1;
           // console.log(customTenantId)
-          
-          customTenantId = lastName+customTenantId;
+          // customTenantId = lastName+customTenantId;
           // console.log(customTenantId)
-          const tenantIdUpdateResult = await queryRunner(tenantsIdUpdate ,[customTenantId, tenantsInsert[0].insertId]);
-          // const selectTenantsResult = await queryRunner(
-          //   selectQuery("users", "id"),
-          //   [userId]
-          // );
-          // const landlordEmail = selectTenantsResult[0][0].Email;
-          // const landlordName = selectTenantsResult[0][0].FirstName + " " + selectTenantsResult[0][0].LastName;
+          // const tenantIdUpdateResult = await queryRunner(tenantsIdUpdate ,[customTenantId, tenantsInsert[0].insertId]);
           if (increaseRent == 'No') {
             res.status(200).json({
               message: "Tenants save Successful",
@@ -145,7 +150,6 @@ exports.createTenants = async (req, res) => {
               for (let i = 0; i < increaseRentData.length; i++) {
                 const increaseDate = increaseRentData[i].date;
                 const increaseRentAmount = increaseRentData[i].amount;
-                // console.log(increaseDate,increaseRentAmount,propertyID)
                 const increaseRentDataResult = await queryRunner(
                   insertincreaseRentData,
                   [tenantID, propertyID, increaseDate, increaseRentAmount]
