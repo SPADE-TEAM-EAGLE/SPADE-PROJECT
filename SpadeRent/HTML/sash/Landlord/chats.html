@@ -1294,6 +1294,7 @@ $('#preloader').css('display','none');
             function initializeWebSocket() {
                 var socket = io('https://engage.app.spaderent.com');
                 socket.on('connect', function () {
+                    console.log('connected');
                     $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/activeUser',
                     type: 'PUT',
@@ -1314,24 +1315,25 @@ $('#preloader').css('display','none');
                 return socket;
             }
             var socket = initializeWebSocket();
-            window.onbeforeunload = function () {
-                socket.on('disconnect', function () {
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-                        type: 'PUT',
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            
-                        },
-                        error: function (xhr, status, error) {
-                        }
-                    });
-                });
-            };
+            window.addEventListener('beforeunload', function () {
+    socket.disconnect();
+    console.log('disconnected');
+    $.ajax({
+        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+        type: 'PUT',
+        contentType: false,
+        processData: false,
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+        },
+        success: function (response) {
+console.log("code working properly")
+        },
+        error: function (xhr, status, error) {
+            console.log("Not working properly")
+        }
+    });
+});
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
