@@ -393,18 +393,23 @@
                             <div class="col-md-12">
                                 <div class="card inner-cards">
                                     <div class="card-header justify-content-start">
-                                        <div class="column-flex-direction d-flex align-items-center">
-                                            <button class="btn btn-primary btn-pill pt-1 pb-1" id="add-units1">
+                                        <div class="column-flex-direction flex-column d-flex align-items-start justify-content-between">
+                                            <button class="btn btn-primary btn-pill pt-1 pb-1 mb-2" id="add-units1">
                                                 Add
                                         Units
                                             </button>
-                                            <p class="ms-3">
-                                                <b>
-                                                    Instruction: Please fill Unit Information individually one at
-                                            a time.
-                                                </b>
-                                            </p>
+                                            <ol class="list-group list-group-numbered">
+                                                <h3 class="fw-bold mb-1">
+                                                    Instructions:
+                                                </h3>
+                                                <li>Please fill Unit Information individually one at
+                                                    a time.</li>
+                                                <li class="d-none" id="single-family-text">You cannot add more units as your property type is <span class="text-primary">Signle Family</span>.</li>
+                                                <li class="d-none" id="multi-text">You have reached your total units limit which is<span class="text-primary">199</span>.</li>
+                                    
+                                            </ol>
                                         </div>
+                                        
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
@@ -1172,6 +1177,46 @@
                                     <span class="custom-switch-indicator custom-switch-indicator-md"></span>
                                     <span class="custom-switch-description text-dark fw-bold">Property Status</span>
                                 </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="myModal_warning_connection"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/>
+                                        <circle
+                                            cx="12"
+                                            cy="16"
+                                            r="1"
+                                            fill="#f7b731"
+                                        />
+                                        <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/>
+                                    </svg>
+                                </span>
+                                <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                                <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                                <p class="card-text text-dark m-0">
+                                    Kindly check your internet connection or please try again
+                                later.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -3133,7 +3178,7 @@ $('#preloader').css('display','none');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script>
-        var prospectID; var prospectusStatus; var prospectPermission; var leadsInsightsPermission;
+        var properties;var prospectID; var prospectusStatus; var prospectPermission; var leadsInsightsPermission;
         $(document).ready(function () {
             function validateField($field) {
                 var $errorMessage = $field.next('.text-danger');
@@ -3155,6 +3200,28 @@ $('#preloader').css('display','none');
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#propertyInfo').val()
+                console.log(properties)
+                console.log(propertyId2)
+                const filteredProperty=properties.filter((property)=>{
+                    return property.id==propertyId2;
+                })
+                if(filteredProperty[0]?.propertyType=="Single Family"){
+                    $("#add-units1").hide()
+                    $("#single-family-text").removeClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                    
+                    
+                }
+                else if(filteredProperty[0]?.units>=199){
+                    $("#add-units1").hide()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").removeClass("d-none")
+                }
+                else{
+                    $("#add-units1").show()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                }
                 getData2()
             })
             $('#addModal_units_close').click(() => {
@@ -3167,7 +3234,7 @@ $('#preloader').css('display','none');
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
+                        properties = response.data; // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         var propertySelect = $('#propertyInfo');
                         propertySelect.empty(); // Clear existing options
@@ -3228,7 +3295,7 @@ $('#preloader').css('display','none');
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
+                        properties = response.data; // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         var propertySelect = $('#propertyInfo');
                         propertySelect.empty(); // Clear existing options
@@ -3394,6 +3461,13 @@ $('#preloader').css('display','none');
                                 },
                                 success: function (response) {
                                     $("#add-units1").prop("disabled", false)
+                                    if(response.data>=199){
+                                        $("#add-units1").hide()
+                                        $("#multi-text").removeClass("d-none")
+                                    }else{
+                                        $("#add-units1").show()
+                                        $("#multi-text").addClass("d-none")
+                                    }
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
@@ -3569,7 +3643,7 @@ $('#preloader').css('display','none');
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    var properties = response.data;
+                    properties = response.data;
                     // console.log(response.data)
                     var propertySelect = $('#propertyInfo');
                     propertySelect.empty(); // Clear existing options
@@ -4576,7 +4650,7 @@ $('#preloader').css('display','none');
                 var potentialRentAmount = $("#potentialRentAmount").val();
                 var status = $("#status").val();
                 var sourceCampaign;
-                $("#addModal").modal("hide")
+                
                 $('#preloader').css('display', 'flex')
                 $('#addProspectSourceCol').css('display', 'none')
                 // console.log($("#addProspectSource").val())
@@ -4604,6 +4678,7 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
+                            $("#addModal").modal("hide")
                             if (response.message == " prospectus created successful") {
                                 $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
@@ -4619,19 +4694,19 @@ $('#preloader').css('display','none');
                         },
                         error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                            if (xhr.responseJSON.error === 'No data found') {
-                                $('#addModal').modal('hide');
-                                $('#infoModal').modal('show');
-                                setTimeout(function () {
-                                    $('#infoModal').modal('hide');
-                                }, 2000);
-                            } else {
-                                $('#addModal').modal('hide');
-                                $("#myModal_warning_connection").modal("show");
-                                setTimeout(function () {
-                                    $('#myModal_warning_connection').modal('hide');
-                                }, 2000);
-                            }
+                            // if (xhr.responseJSON.error === 'No data found') {
+                            //     // $('#addModal').modal('hide');
+                            //     $('#infoModal').modal('show');
+                            //     setTimeout(function () {
+                            //         $('#infoModal').modal('hide');
+                            //     }, 2000);
+                            // } else {
+                            //     // $('#addModal').modal('hide');
+                            // }
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
                         }
                     });
                 } else {
@@ -4674,6 +4749,7 @@ $('#preloader').css('display','none');
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
+                                        $("#addModal").modal("hide")
                                         if (response.message == " prospectus created successful") {
                                             $('#preloader').fadeOut('slow', function () {
                                                 $(this).hide();
@@ -4689,19 +4765,19 @@ $('#preloader').css('display','none');
                                     },
                                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                                        if (xhr.responseJSON.error === 'No data found') {
-                                            $('#addModal').modal('hide');
-                                            $('#infoModal').modal('show');
-                                            setTimeout(function () {
-                                                $('#infoModal').modal('hide');
-                                            }, 2000);
-                                        } else {
-                                            $('#addModal').modal('hide');
-                                            $("#myModal_warning_connection").modal("show");
-                                            setTimeout(function () {
-                                                $('#myModal_warning_connection').modal('hide');
-                                            }, 2000);
-                                        }
+                                        // if (xhr.responseJSON.error === 'No data found') {
+                                        //     // $('#addModal').modal('hide');
+                                        //     $('#infoModal').modal('show');
+                                        //     setTimeout(function () {
+                                        //         $('#infoModal').modal('hide');
+                                        //     }, 2000);
+                                        // } else {
+                                        //     // $('#addModal').modal('hide');
+                                        // }
+                                        $("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                        }, 2000);
                                     }
                                 });
                             }

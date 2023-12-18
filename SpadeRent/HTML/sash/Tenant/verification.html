@@ -320,6 +320,7 @@ var encodedId = encodeURIComponent(encryptedId);
                         window.open(`new_password.html?id=${encodedId}&token=${verification}`, "_self")
                     },
                     error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                         document.getElementById("verification-spans").style.display = "block";
                         $("#verification").addClass("is-invalid")
                       // console.error(xhr.responseText);
@@ -383,6 +384,7 @@ var encodedId = encodeURIComponent(encryptedId);
                         interval = setInterval(countDown, 1000);
                     },
                     error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                       // console.error(xhr.responseText);
                     }
                 });

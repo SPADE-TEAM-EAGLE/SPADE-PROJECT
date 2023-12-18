@@ -118,6 +118,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                     // console.error($("#save-email"));
                     $("#save-email").addClass("disabled")
                     $("#verify-email-span").removeClass("d-none")

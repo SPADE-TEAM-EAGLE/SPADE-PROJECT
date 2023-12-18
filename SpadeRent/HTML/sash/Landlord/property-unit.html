@@ -1442,6 +1442,12 @@ $('#preloader').css('display','none');
                         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                     });
                 }
+                if(data.propertyType=="Single Family"){
+                    $("#add-units").hide();
+                }
+                if(data.units>=199){
+                    $("#add-units").hide();
+                }
                 $("#property_name").text(toTitleCase(data.propertyName))
                 $("#property_address").text(toTitleCase(data.address) + ", " + toTitleCase(data.city) + ", " + toTitleCase(data.state))
 $('#property_size').text(data.propertySQFT)

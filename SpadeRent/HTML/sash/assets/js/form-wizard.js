@@ -157,15 +157,38 @@ const reset = () => {
   errorMsg.classList.add("hide");
   validMsg.classList.add("hide");
 };
-input.addEventListener('keyup', () => {
+// input.addEventListener('keyup', () => { 
+//   reset();
+//   if (input.value.trim()) {
+//     if (iti.isValidNumber()) {
+//       input.classList.remove("is-invalid");
+//       input.classList.add("is-valid");
+//     } else {
+//     input.classList.add("is-invalid");
+//     input.classList.remove("is-valid");
+//     }
+//   }
+// });
+input.addEventListener("input", () => {
   reset();
   if (input.value.trim()) {
     if (iti.isValidNumber()) {
-      input.classList.remove("is-invalid");
-      input.classList.add("is-valid");
+      const formattedNumber = intlTelInputUtils.formatNumber(
+        iti.getNumber(),
+        iti.getSelectedCountryData().iso2,
+        intlTelInputUtils.numberFormat.NATIONAL
+      );
+      input.value = formattedNumber;
+      validMsg.classList.remove("d-none");
+      input.classList.remove("border-danger");
+      input.classList.add("border-green");
     } else {
-    input.classList.add("is-invalid");
-    input.classList.remove("is-valid");
+      input.classList.add("border-danger");
+      input.classList.remove("border-green");
+      input.classList.add("error");
+      const errorCode = iti.getValidationError();
+      errorMsg.innerHTML = errorMap[errorCode];
+      errorMsg.classList.remove("d-none");
     }
   }
 });
@@ -356,6 +379,7 @@ $(document).ready(function() {
               }
           },
           error: function(xhr, status, error) {
+$('#preloader').css('display','none');
               document.getElementById("email-span-invalid").style.display = "block";
               valid=false
               button1()

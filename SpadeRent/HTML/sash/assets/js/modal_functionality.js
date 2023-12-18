@@ -14,6 +14,7 @@ $.ajax({
     $("#header-user").text(toTitleCase(userName))
     },
     error: function(xhr, status, error) {
+$('#preloader').css('display','none');
       // console.log('Error occurred while fetching state and city data.');
       // console.log(xhr);
       // console.log(error);
@@ -197,6 +198,7 @@ $(document).ready(function () {
             });
         },
         error: function(xhr, status, error) {
+$('#preloader').css('display','none');
           // console.log('Error occurred while fetching state and city data.');
           // console.log(xhr);
           // console.log(error);
@@ -322,7 +324,7 @@ $(document).on('click', '#next', function(e) {
         for (var i = 0; i < selectedFiles.length; i++) {
             uploadFormData.append('image', selectedFiles[i]);
         }
-$("#addModal").modal("hide")
+// $("#addModal").modal("hide")
 $('#preloader').css('display','flex')
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/upload',
@@ -355,6 +357,7 @@ $('#preloader').css('display','flex')
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        $("#addModal").modal("hide")
                         var password = 'your-secret-password';
                         var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
                         var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -376,25 +379,29 @@ $('#preloader').css('display','flex')
                 }
                     },
                     error: function (xhr, status, error) {
-                        if(xhr.responseJSON.error==='Property Already Exist'){
-                            $('#addModal').modal('hide');
-                            $('#infoModal').modal('show');
-                            setTimeout(function() {
-                                $('#infoModal').modal('hide');
-                            }, 2000);
-                        }
-                       else{
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function() {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
-                       }
+                    //     if(xhr.responseJSON.error==='Property Already Exist'){
+                    //         $('#addModal').modal('hide');
+                    //         $('#infoModal').modal('show');
+                    //         setTimeout(function() {
+                    //             $('#infoModal').modal('hide');
+                    //         }, 2000);
+                    //     }
+                    //    else{
+                    // }
+                    $('#preloader').fadeOut('slow', function() {
+                        $(this).hide();
+                    });
+                    $("#myModal_warning_connection").modal("show");
+                    setTimeout(function() {
+                        $('#myModal_warning_connection').modal('hide');
+                    }, 2000);
                       // console.log('Error: ' + error);
                       // console.log(xhr)
                     }
                 });
             },
             error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                 $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
@@ -414,7 +421,7 @@ $('#preloader').css('display','flex')
             units: units,
             images: []
         };
-        $("#addModal").modal("hide")
+        // $("#addModal").modal("hide")
         $('#preloader').css('display','flex')
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/property',
@@ -425,6 +432,7 @@ $('#preloader').css('display','flex')
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
             },
             success: function (response) {
+                $("#addModal").modal("hide")
                 var password = 'your-secret-password';
                 var encryptedPropertyId = sjcl.encrypt(password, response.propertyId.toString());
                 var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
@@ -446,19 +454,23 @@ $('#preloader').css('display','flex')
         }
             },
             error: function (xhr, status, error) {
-                if(xhr.responseJSON.error==='Property Already Exist'){
-                    $('#addModal').modal('hide');
-                    $('#infoModal').modal('show');
-                    setTimeout(function() {
-                        $('#infoModal').modal('hide');
-                    }, 2000);
-                }else{
-                    $('#addModal').modal('hide');
-                    $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
-                }
+
+                // if(xhr.responseJSON.error==='Property Already Exist'){
+                //     $('#addModal').modal('hide');
+                //     $('#infoModal').modal('show');
+                //     setTimeout(function() {
+                //         $('#infoModal').modal('hide');
+                //     }, 2000);
+                // }else{
+                //     $('#addModal').modal('hide');
+                // }
+                $('#preloader').fadeOut('slow', function() {
+                    $(this).hide();
+                });
+                $("#myModal_warning_connection").modal("show");
+                        setTimeout(function() {
+                            $('#myModal_warning_connection').modal('hide');
+                        }, 2000);
             }
         });
     }
