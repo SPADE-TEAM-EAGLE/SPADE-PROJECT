@@ -1197,6 +1197,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
+                                                            <th>ID</th>
                                                             <th>Company name</th>
                                                             <th>Vendor name</th>
                                                             <th>Phone number</th>
@@ -2066,7 +2067,7 @@ $("#myModal_warning_connection").modal("show");
                             $(".add-btn-vendor").attr("disabled", true);
                         }
                         response.data[0]?.forEach(function (vendor, index) {
-                            var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
+                            var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td><td style="font-weight: 600;">' + (vendor.cVendorId? vendor.cVendorId :"Not set") + '</td>';
                             var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + " " + vendor.lastName + '</td>';
                             var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
                             var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
