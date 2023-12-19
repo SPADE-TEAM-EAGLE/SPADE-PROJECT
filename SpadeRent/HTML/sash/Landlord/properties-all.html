@@ -2889,13 +2889,23 @@ setTimeout(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                                    $('#preloader').fadeOut('slow', function() {
+                    $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
-                    $("#myModal_warning_connection").modal("show");
+console.log(xhr)
+                if(xhr?.responseJSON==" You are not able to delete Property (your unit is occupied)"){
+                        $("#infoModal_delete").modal("show");
+                        setTimeout(function () {
+                            $("#infoModal_delete").modal("hide");
+                        }, 2000);
+                    }
+else{
+    $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
+}
+                    
                     // console.log('Error: ' + error);
                 }
             });

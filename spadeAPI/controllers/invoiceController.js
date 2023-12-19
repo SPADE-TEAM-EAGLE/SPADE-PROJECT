@@ -53,6 +53,7 @@ exports.createInvoice = async (req, res) => {
     images,
     invoiceId,
   } = req.body;
+  console.log(invoiceId)
   try {
     const { userId,userName,businessName,invoiceEmail } = req.user;
     // const { userId,userName,businessName,invoiceEmail } = req.body;
@@ -829,15 +830,16 @@ exports.InvoiceID = async (req, res) => {
   try {
     const {userId, idPattern} = req.user
     const tenantIdCheckresult = await queryRunner(checkInvoiceId, [userId]);
+    console.log(userId,tenantIdCheckresult[0])
     let tenantId;
     if (tenantIdCheckresult[0].length > 0) {
-      tenantId = tenantIdCheckresult[0][0].cTenantId.split("-");
-      let lastPart = parseInt(tenantId[tenantId.length - 1], 10) + 1;
-      lastPart = lastPart.toString().padStart(4, '0');
-      tenantId = `SR-${idPattern}-TNT-${lastPart}`;
+      tenantId = tenantIdCheckresult[0][0]?.cInvoiceId?.split("-");
+      let lastPart = parseInt(tenantId[tenantId?.length - 1], 10) + 1;
+      lastPart = lastPart?.toString()?.padStart(4, '0');
+      tenantId = `SR-${idPattern}-INVO-${lastPart}`;
       res.status(200).json({ message: "InvoiceId",ID : tenantId });  
     } else {
-      tenantId = `SR-${idPattern}-TNT-0001`;
+      tenantId = `SR-${idPattern}-INVO-0001`;
       res.status(200).json({ message: "InvoiceId",ID : tenantId });
     }
 
