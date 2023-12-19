@@ -1,3 +1,21 @@
+$("#propertyType").on("change",function(){
+    console.log($(this).val())
+    if ($(this).val() == "Single Family") {
+$("#units").val(1);
+$("#units").prop("disabled", true);
+} else {
+$("#units").val(''); // Reset the value to empty string
+$("#units").prop("disabled", false);
+}
+
+    
+})
+
+$("#units").on("input",function(){
+    
+    if ($(this).val() >=199) {
+$("#units").val(199);}})
+
 $.ajax({
     url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',

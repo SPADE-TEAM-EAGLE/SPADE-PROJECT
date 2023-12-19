@@ -748,10 +748,15 @@ GROUP BY t.id;
 `;
 exports.addTasksQuery =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-exports.addTasksQuerytenant =
+  exports.addUserTasksQuery =
+  "INSERT INTO user_task (taskName,propertyId ,dueDate,status, priority, notes,notifyAssignee, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+  exports.addTasksQuerytenant =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
+  exports.addUserList =
+  "INSERT INTO users_assignto (taskId, userId) VALUES (?, ?)";
 exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,state,zip,workPhone,phone,email,categoryID,landlordID,cVendorId) VALUES (?,?, ?,?,?,?,?,?,?,?,?,?,?)";
 exports.getVendors = `SELECT v.*, vc.category
 FROM vendor v
@@ -1161,5 +1166,6 @@ exports.insertInUserPermissionUsers =
  exports.checkPropertyid = `SELECT * FROM property where landlordID = ? order by id desc`;
  exports.checktenantId = `SELECT * FROM tenants where landlordID = ? order by id desc`;
  exports.checkTaskid = `SELECT * FROM task where landlordID = ? order by id desc`;
+ exports.checkUserTaskid = `SELECT * FROM user_task where landlordId = ? order by id desc`;
  exports.checkProspectusId = `SELECT * FROM prospectus where landlordId = ? order by id desc`;
  exports.checkvendorId = `SELECT * FROM vendor where LandlordID = ? order by id desc`;
