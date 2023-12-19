@@ -2237,7 +2237,7 @@ $('#preloader').css('display','none');
                 var fname = $("#firstname1").val();
                 var lname = $("#lastname").val();
                 var email = $("#email").val();
-                var phone = $("#phone1").val();
+                var phone = $("#phone1")?.val()?.replace(/\D/g, "");
                 var password = $("#id_password2").val();
                 $("#preloader").css("display", "flex");
                 $.ajax({
@@ -2286,7 +2286,7 @@ $('#preloader').css('display','none');
                                             state: "",
                                             zip: "",
                                             county: "",
-                                            phone: $("#phone1").val(),
+                                            phone: $("#phone1").val().replace(/\D/g, ""),
                                         }),
                                         contentType: "application/json",
                                         success: function (resp) {
@@ -2456,7 +2456,7 @@ $('#preloader').css('display','none');
                             state: "",
                             zip: "",
                             county: "",
-                            phone: $("#phone1").val(),
+                            phone: $("#phone1").val().replace(/\D/g, ""),
                         }),
                         contentType: "application/json",
                         success: function (resp) {
@@ -2475,7 +2475,7 @@ $('#preloader').css('display','none');
                                 // console.log(res)
                                 if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
                                     $.ajax({
-                                        url: "https://backend.app.spaderent.com/api/spade/createSubscriptionPayment",
+                                        url: "http://localhost:3000/api/spade/createSubscriptionPayment",
                                         type: "POST",
                                         headers: {
                                             Authorization: "Bearer " + localStorage.getItem("authtoken")

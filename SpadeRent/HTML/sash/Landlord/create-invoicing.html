@@ -3594,7 +3594,7 @@ $("#myModal_warning_connection").modal("show");
                         // console.log("viewAllPropertyTenant")
                         // console.log(response)
                         function toTitleCase(str) {
-                            return str.replace(/\w\S*/g, function (txt) {
+                            return str?.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
                         }
@@ -3632,11 +3632,11 @@ $('#preloader').css('display','none');
                     },
                     success: async function (response) {
                         categoryData = response.data
-                            tenantData = response.data[0]
+                            
                             // console.log("viewAllPropertyTenant")
                             // console.log(response)
                             function toTitleCase(str) {
-                                return str.replace(/\w\S*/g, function (txt) {
+                                return str?.replace(/\w\S*/g, function (txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
@@ -3644,7 +3644,7 @@ $('#preloader').css('display','none');
                             $("#header-user").text(toTitleCase(response.user))
                             $("#menu").empty()
                             $("#tenants").append($('<option></option>').text("Choose..."));
-                            response?.data[0]?.forEach(function (tenant) {
+                            response?.data?.forEach(function (tenant) {
                                 var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
                                 newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                     '<img src="' + (tenant?.image?.split(",")[0] ? tenant.image.split(",")[0] : '../assets/images/icons/Group 34343434.png') + '" alt="" style="width: 65px; height: 65px;">' +

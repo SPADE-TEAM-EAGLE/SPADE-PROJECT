@@ -451,8 +451,8 @@ exports.createSubscriptionPayment = async (req, res) => {
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = initialAmount;
     requestData.recurringPeriod = {
-      day: "1",
-      month: "0",
+      day: "0",
+      month: "1",
       year: "0"
     }
     requestData.endAfter = {
