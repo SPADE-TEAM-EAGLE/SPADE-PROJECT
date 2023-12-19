@@ -8,12 +8,14 @@ const {
   insertInvoiceImage,
   recurringInvoiceCheck,
   updateUserBankRecurring,
-  recurringPlan
+  recurringPlan,
+  checkInvoiceId
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const cron = require('node-cron');
 
 const task = cron.schedule('0 9,20 * * *', async () => {
+// const task = cron.schedule('*/30 * * * * *', async () => {
   // const task = cron.schedule('* * * * *', async () => {
   console.log("run");
   const currentDate = new Date();
@@ -38,21 +40,49 @@ const task = cron.schedule('0 9,20 * * *', async () => {
       const recurringNextDate = selectTenantsResult[0][i].recurringNextDate;
       const created_atPrevious = selectTenantsResult[0][i].created_at;
       const notify = selectTenantsResult[0][i].notify;
-      // console.log("2");
+      // console.log(landlordID, tenantID, invoiceType);
       const recurringInvoiceCheckResult = await queryRunner(recurringInvoiceCheck, [landlordID, tenantID, invoiceType]);
       // console.log("3");
       if (recurringInvoiceCheckResult[0].length > 0) {
         console.log("user Exist")
       }
       else {
-        if (frequency == "monthly") {
+          // ##################### invoiceID #############################
+          const selectLandlordIDResult = await queryRunner(selectQuery('users', 'id'), [landlordID])
+          let idPattern;
+          if (selectLandlordIDResult[0][0].BusinessName !== null && selectLandlordIDResult[0][0].BusinessName !== "") {
+            idPattern = selectLandlordIDResult[0][0].BusinessName.substring(0, 3).toUpperCase();
+          } else {
+
+            idPattern =
+              (selectLandlordIDResult[0][0].FirstName.substring(0, 2) || "").toUpperCase() +
+              (selectLandlordIDResult[0][0].LastName.substring(0, 1) || "").toUpperCase();
+          }
+          const landlordIdCheckresult = await queryRunner(checkInvoiceId, [landlordID]);
+          let invoiceId;
+          if (landlordIdCheckresult[0].length > 0) {
+
+            invoiceId = landlordIdCheckresult[0][0].cInvoiceId.split("-");
+            let lastPart = parseInt(invoiceId[invoiceId.length - 1], 10) + 1;
+            lastPart = lastPart.toString().padStart(4, '0');
+            invoiceId = `SR-${idPattern}-INVO-${lastPart}`;
+          } else {
+
+            invoiceId = `SR-${idPattern}-INVO-0001`;
+          }
+          // ##################### invoiceID #############################
+
+// console.log("3.5")
+// console.log(frequency)
+        if (frequency == "Repeat Monthly") {
           // console.log("4");
           // Calculate the next date
-          const nextDate = new Date(currentDate);
+          let nextDate = new Date(currentDate);
           if (currentDate.getMonth() === 11) {
             // If current month is December, move to January of the next year
             nextDate.setFullYear(currentDate.getFullYear() + 1);
             nextDate.setMonth(0); // January (month index 0)
+            // console.log(nextDate);
           } else {
             nextDate.setMonth(currentDate.getMonth() + 1);
           }
@@ -67,8 +97,11 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           console.log("ready");
           // ############################################################# MONthly Rest of the code remains the same...
           // Recurring Next Date END 
-          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
+                  
+          // console.log("object11");
+          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate,invoiceId]);
           if (invoiceResult.affectedRows === 0) {
+
             res.status(400).send('Error occur in creating invoice');
             // console.log("object");
           } else {
@@ -104,6 +137,8 @@ const task = cron.schedule('0 9,20 * * *', async () => {
             const lineItems = lineItemsResult[0];
             const AddDate = new Date();
             AddDate.setDate(AddDate.getDate() + 5);
+
+            // console.log(tenantName, address, AddDate, terms, additionalNotes, lineItems, totalAmount, mailSubject, tenantEmail, invoiceEmail, landlordID);
             await invoiceSendMail(tenantName, address, AddDate, terms, additionalNotes, lineItems, totalAmount, mailSubject, tenantEmail, invoiceEmail, landlordID);
             if (lineItemsResult[0].length > 0) {
               for (let j = 0; j < lineItemsResult[0].length; j++) {
@@ -123,16 +158,16 @@ const task = cron.schedule('0 9,20 * * *', async () => {
               for (let j = 0; j < invoiceImagesResult[0].length; j++) {
                 const image_url = invoiceImagesResult[0][j].Image;
                 const image_key = invoiceImagesResult[0][j].ImageKey;
-                console.log(image_url, image_key);
+                // console.log(image_url, image_key);
                 const propertyImageResult = await queryRunner(insertInvoiceImage, [invoiceID, image_url, image_key]);
 
-                console.log(image_url, image_key);
+                // console.log(image_url, image_key);
               }
             }
 
           } //invoiceResult else END
           // ############################################################# MONthly Rest of the code remains the same...
-        } else if (frequency == "yearly") {
+        } else if (frequency == "Repeat Yearly") {
           // Calculate the next date
           // console.log("5");
           const nextDate = new Date(currentDate);
@@ -149,9 +184,9 @@ const task = cron.schedule('0 9,20 * * *', async () => {
           // console.log("6");
           // console.log(landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, recurringNextDate);
 
-          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate]);
+          const invoiceResult = await queryRunner(insertInvoice, [landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", createdAt, totalAmount, notify, recurringNextDate,invoiceId]);
 
-          console.log(invoiceResult);
+          // console.log(invoiceResult);
           if (invoiceResult.affectedRows === 0) {
             // console.log("7");
             res.status(400).send('Error occur in creating invoice');

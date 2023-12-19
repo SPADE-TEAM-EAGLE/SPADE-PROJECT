@@ -87,6 +87,17 @@ exports.invoiceSendMail = async (
   landlordID
 ) => {
   try {
+    console.log(tenantName,
+      address,
+      dueDate,
+      terms,
+      additionalNotes,
+      lineItems,
+      totalAmount,
+      mailSubject,
+      tenantEmail,
+      invoiceEmail,
+      landlordID);
     // console.log(id)
     const islandlordNotify = await queryRunner(selectQuery("notification", "landlordID"), [
       landlordID
