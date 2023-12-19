@@ -37,11 +37,9 @@ const errorMap = [
 $('input[type="tel"]').each(function () {
   const input = $(this);
   const errorMsg = input
-    .next(".error-msg")
-    .add(input.closest("div").siblings(".error-msg"));
+    .siblings(".error-msg");
   const validMsg = input
-    .next(".valid-msg")
-    .add(input.closest("div").siblings(".valid-msg"));
+    .siblings(".valid-msg");
   const iti = window.intlTelInput(this, {
     utilsScript: "/intl-tel-input/js/utils.js?1684676252775",
   });
