@@ -25,7 +25,8 @@ const {
   deleteVendorCategories,
   invoiceAmountQuery,
   invoiceIdUpdate,
-  invoiceCount
+  invoiceCount,
+  checkInvoiceId
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -49,14 +50,15 @@ exports.createInvoice = async (req, res) => {
     lineItems,
     sendmails,
     totalAmount,
-    images
+    images,
+    invoiceId,
   } = req.body;
   try {
-    const { userId,userName,businessName,invoiceEmail, idPattern } = req.user;
+    const { userId,userName,businessName,invoiceEmail } = req.user;
     // const { userId,userName,businessName,invoiceEmail } = req.body;
     const currentDate = new Date();
     const notify = 0;
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate,invoiceId]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {
@@ -820,3 +822,34 @@ exports.invoiceAmountCount = async (req, res) => {
 
 }
 // ####################################### Invoice Amount Count ################################################
+
+// ####################################### Invoice ID ################################################
+
+exports.InvoiceID = async (req, res) => {
+  try {
+    const {userId, idPattern} = req.user
+    const tenantIdCheckresult = await queryRunner(checkInvoiceId, [userId]);
+    let tenantId;
+    if (tenantIdCheckresult[0].length > 0) {
+      tenantId = tenantIdCheckresult[0][0].cTenantId.split("-");
+      let lastPart = parseInt(tenantId[tenantId.length - 1], 10) + 1;
+      lastPart = lastPart.toString().padStart(4, '0');
+      tenantId = `SR-${idPattern}-TNT-${lastPart}`;
+      res.status(200).json({ message: "InvoiceId",ID : tenantId });  
+    } else {
+      tenantId = `SR-${idPattern}-TNT-0001`;
+      res.status(200).json({ message: "InvoiceId",ID : tenantId });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+  }
+};
+
+
+// ####################################### Invoice ID ################################################
+
+
+
+

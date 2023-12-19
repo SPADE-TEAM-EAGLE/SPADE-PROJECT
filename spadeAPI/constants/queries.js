@@ -631,7 +631,7 @@ exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
 exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate) VALUES (?,?,?,?,?)";
 exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
 exports.insertInvoice =
-  "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate,cInvoiceId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertLineItems =
   "INSERT INTO invoicelineitems (invoiceID, category, memo,amount,tax) VALUES (?,?,?,?,?)";
 exports.insertInvoiceImage =
@@ -1169,3 +1169,4 @@ exports.insertInUserPermissionUsers =
  exports.checkUserTaskid = `SELECT * FROM user_task where landlordId = ? order by id desc`;
  exports.checkProspectusId = `SELECT * FROM prospectus where landlordId = ? order by id desc`;
  exports.checkvendorId = `SELECT * FROM vendor where LandlordID = ? order by id desc`;
+ exports.checkInvoiceId = `SELECT * FROM invoice where landlordID = ? order by id desc`;
