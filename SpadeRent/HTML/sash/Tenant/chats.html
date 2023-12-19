@@ -2058,16 +2058,16 @@ $('#preloader').css('display','none');
                           // console.log("getTenantByID");
                           // console.log(response);
                           // console.log(response)
-                            localStorage.setItem("landloadId", Number(response.data.landlordID))
+                            localStorage.setItem("landloadId", Number(response.data?.landlordID))
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.landlordID) + '/landlord',
+                                url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data?.landlordID) + '/landlord',
                                 type: 'GET',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (response) {
                                   // console.log(1111111)
                                   // console.log(response)
                                     $(".person").removeClass("profileImage")
-                                    localStorage.setItem("LandlordImg", response.data.image)
+                                    localStorage.setItem("LandlordImg", response.data?.image)
                                     if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "") {
                                         var newBgImageUrl = `url('` + localStorage.getItem("LandlordImg") + `')`;
                                         $(".person").css("background-image", newBgImageUrl);
@@ -2075,15 +2075,15 @@ $('#preloader').css('display','none');
                                         $(".person").css("background-image", "");
                                         $(".person").addClass("profileImage")
                                         $(".person").text(
-                                            response.data.FirstName.charAt(0) + response.data.LastName.charAt(0)
+                                            response.data?.FirstName.charAt(0) + response.data?.LastName.charAt(0)
                                         );
                                     }
-                                    if (response.data.isUserActive == 1) {
+                                    if (response.data?.isUserActive == 1) {
                                         $('#online').show()
                                     } else {
                                         $('#online').hide()
                                     }
-                                    $('#person-name-bold').text(response.data.FirstName + " " + response.data.LastName)
+                                    $('#person-name-bold').text(response.data?.FirstName + " " + response.data?.LastName)
                                     chatTenant()
                                 },
                                 error: function (xhr, status, error) {
@@ -2096,14 +2096,14 @@ $('#preloader').css('display','none');
                                 }
                             });
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data.tenantID) + '/tenant',
+                                url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data?.tenantID) + '/tenant',
                                 type: 'GET',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (response) {
                                   // console.log(22222)
                                   // console.log(response)
-                                    var imgggg = response.data.image;
-                                    if (response.data.image != null && response.data.image != " ") {
+                                    var imgggg = response.data?.image;
+                                    if (response.data?.image != null && response.data?.image != " ") {
                                         var urlArray = imgggg.split(",");
                                         var firstUrl = urlArray[0];
                                         localStorage.setItem("tenantImg", firstUrl)
@@ -2398,8 +2398,8 @@ $('#preloader').css('display','none');
                                         success: function (response) {
                                           // console.log("getUserById");
                                           // console.log(response);
-                                            localStorage.setItem("landlordName", response.data.FirstName + " " + response.data.LastName)
-                                            if (response.data.isUserActive == 1) {
+                                            localStorage.setItem("landlordName", response.data?.FirstName + " " + response.data?.LastName)
+                                            if (response.data?.isUserActive == 1) {
                                                 $('#online').show()
                                             } else {
                                                 $('#online').hide()
@@ -2420,9 +2420,9 @@ $('#preloader').css('display','none');
                                                     $('#chat').css('display', 'block')
                                                   // console.log("TenantMessages");
                                                   // console.log(response);
-                                                    if (response.message == 'Messages fetched successfully' && response.data.length > 0) {
+                                                    if (response.message == 'Messages fetched successfully' && response.data?.length > 0) {
                                                         var randomImg = "../assets/images/users/5.jpg";
-                                                        for (var i = 0; i < response.data.length; i++) {
+                                                        for (var i = 0; i < response.data?.length; i++) {
                                                             if (response.data[i]['userType'] == "tenant") {
                                                                 const timeArray = response.data[i]['created_at'].split(" ")[1].split(":");
                                                                 const time = timeArray.slice(0, 2).join(":");
