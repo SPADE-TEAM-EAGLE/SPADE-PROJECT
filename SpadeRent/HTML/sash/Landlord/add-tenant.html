@@ -3400,10 +3400,18 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
+if (xhr.responseJSON.message == "Tenant Invoice is pending Kindly Paid invoice ") {
+                        $("#infoModal_delete").modal("show");
+                        setTimeout(function () {
+                            $('#infoModal_delete').modal('hide');
+                        }, 2000);
+                    }else{
+                        $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
+                    }
+                    
                     // console.log('Error: ' + error);
                 }
             });

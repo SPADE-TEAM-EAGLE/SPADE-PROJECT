@@ -550,6 +550,11 @@
                                 Invoice
                             </strong>
                         </h2>
+                        <p class="p-0 m-0 fw-bold">#Invoice Number:</p>
+                        <input type="text" class="form-control" value="SR-MAM-INVO-0003" style="display: none;" id="invoice-number-edit">
+                        <button type="button" class="btn btn-primary invoice-number" id="creat-invoice-number">
+                            INV-
+                        </button>
                     </div>
                     <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -2263,7 +2268,8 @@ print = true
                                     additionalNotes: additionalNotes,
                                     totalAmount: $("#totalText").text().split(' ')[1],
                                     images: imageArray,
-                                    lineItems:lineItems
+                                    lineItems:lineItems,
+                                    invoiceId:$("#creat-invoice-number").text()
                                 }
                                 // $("#addModal").modal("hide")
                                 $('#preloader').css('display','flex')
@@ -2327,7 +2333,8 @@ $('#preloader').css('display','none');
                                     additionalNotes: additionalNotes,
                                     totalAmount: $("#totalText").text().split(' ')[1],
                                     images: [],
-                                    lineItems:lineItems
+                                    lineItems:lineItems,
+                                    invoiceId:$("#creat-invoice-number").text()
                                 }
                                 // console.log(invoiceData)
                                 // $("#addModal").modal("hide")
@@ -2375,6 +2382,22 @@ $("#myModal_warning_connection").modal("show");
             let categoryData=[]
             let tenantData = []; let invoiceData = [];
             function getData() {
+                $.ajax({
+                url: 'http://localhost:3000/api/spade/InvoiceID',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    $("#creat-invoice-number").text(response?.ID)
+                    $("#invoice-number-edit").val(response?.ID)
+                },
+                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+
+                }
+            });
+            
                 $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                         method: 'GET',
@@ -2441,6 +2464,35 @@ $('#preloader').css('display','none');
                 });
             }
             getData()
+            $('#creat-invoice-number').on('click', function() {
+        let buttonText = $(this).text();
+        let digitsPart = buttonText.match(/\d+$/)[0]; // Extract the digits part using regex
+
+        let $inputField = $('#invoice-number-edit');
+        $inputField.val(digitsPart);
+        $inputField.show();
+        $(this).hide();
+        $inputField.focus();
+    });
+
+    $('#invoice-number-edit').on('blur', function() {
+        let editedDigits = $(this).val().trim();
+        
+        // Validate the entered value
+        if (/^\d{3,10}$/.test(editedDigits)) {
+            let newButtonText = 'SR-MAM-INVO-' + editedDigits.padStart(3, '0');
+            $('#creat-invoice-number').text(newButtonText);
+        }
+
+        $(this).hide();
+        $('#creat-invoice-number').show();
+    });
+
+    $('#invoice-number-edit').on('input', function() {
+        // Allow only digits in the input field
+        let inputValue = $(this).val().replace(/\D/g, '').substring(0, 10);
+        $(this).val(inputValue);
+    });
             $(document).on("change", ".tr [name='category'], .tr [name='category_update']", function(){
                 const property = $("#tenants").attr('data-value');;
 const selectedCategoryId = $(this).val();

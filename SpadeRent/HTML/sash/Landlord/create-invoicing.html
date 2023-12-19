@@ -904,7 +904,7 @@
                         <p class="p-0 m-0 fw-bold">#Invoice Number:</p>
                         <input type="text" class="form-control" value="SR-MAM-INVO-0003" style="display: none;" id="invoice-number-edit">
                         <button type="button" class="btn btn-primary invoice-number" id="creat-invoice-number">
-                            INV-89900A
+                            INV-
                         </button>
                     </div>
                     
@@ -3025,28 +3025,6 @@ $('#preloader').css('display','none');
                 }
             });
             
-            $.ajax({
-                url: 'http://localhost:3000/api/spade/InvoiceID',
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    $("#creat-invoice-number").text(response?.ID)
-                    $("#invoice-number-edit").val(response?.ID)
-                },
-                error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
-                    // console.log('Error occurred while fetching state and city data.');
-                    // console.log(xhr);
-                    // console.log(error);
-                }
-            });
             
         });
         var selectedFiles = [];
@@ -3142,28 +3120,8 @@ $('#preloader').css('display','none');
         }
         $(document).ready(function () {
 
-    $('#creat-invoice-number').on('click', function() {
-        let buttonText = $(this).text();
-        let digitsPart = buttonText.match(/\d+$/)[0]; // Extract the digits part using regex
 
-        let $inputField = $('#invoice-number-edit');
-        $inputField.val(digitsPart);
-        $inputField.show();
-        $(this).hide();
-        $inputField.focus();
-    });
-
-    $('#invoice-number-edit').on('blur', function() {
-        let editedDigits = $(this).val().trim();
-        
-        if (/^\d{1,4}$/.test(editedDigits)) {
-            let newButtonText = 'SR-MAM-INVO-' + editedDigits.padStart(4, '0');
-            $('#creat-invoice-number').text(newButtonText);
-        }
-
-        $(this).hide();
-        $('#creat-invoice-number').show();
-    });
+  
     
     $('#creat-invoice-number').on('click', function() {
         let buttonText = $(this).text();
@@ -3674,14 +3632,12 @@ $("#myModal_warning_connection").modal("show");
                 },
                 success: function (response) {
                     $("#creat-invoice-number").text(response?.ID)
+                    $("#invoice-number-edit").val(response?.ID)
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
+                    
+                    
                     // console.log('Error occurred while fetching state and city data.');
                     // console.log(xhr);
                     // console.log(error);

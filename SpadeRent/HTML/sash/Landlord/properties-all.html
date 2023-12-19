@@ -2892,8 +2892,8 @@ setTimeout(function () {
                     $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
-console.log(xhr)
-                if(xhr?.responseJSON==" You are not able to delete Property (your unit is occupied)"){
+
+                if(xhr?.responseJSON.message==" You are not able to delete Property (your unit is occupied)"){
                         $("#infoModal_delete").modal("show");
                         setTimeout(function () {
                             $("#infoModal_delete").modal("hide");
