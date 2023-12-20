@@ -13,7 +13,8 @@ const {
   checkUserTaskid,
   addUserTasksQuery,
   addUserList,
-  userAllTask
+  userAllTask,
+  updateUserTasksQuery
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -107,9 +108,9 @@ exports.addUsersTask = async (req, res) => {
           Vendorid,
           Vendorrole,
         ]);
-        if (vendorResults.affectedRows === 0) {
-          return res.send("Error2");
-        }
+        // if (vendorResults.affectedRows === 0) {
+        //   return res.send("Error2");
+        // }
       }
       // // get data from database for email send
       // const tenantLandlordResult = await queryRunner(getLandlordTenant, [
@@ -371,3 +372,207 @@ exports.getAllUserTask = async (req, res) => {
     }
   };
 //   ############################################ DElete user Task ######################################################
+
+
+
+
+//  #############################  Update TASK Start HERE ##################################################
+exports.updateTasks = async (req, res) => {
+    const {
+        taskName,
+        property,
+        PropertyUnit,
+      taskID,
+      dueDate,
+      status,
+      priority,
+      // notes,
+      assignee,
+      notifyAssignee,
+      notes,
+      images,
+    } = req.body;
+  
+    try {
+      const currentDate = new Date();
+      const { userId,taskEmail } = req.user;
+      
+      const TasksResult = await queryRunner(updateUserTasksQuery, [
+        taskName,
+      property,
+      PropertyUnit,
+      dueDate,
+      status,
+      priority,
+      notes,
+      notifyAssignee,
+      currentDate,
+      taskID,
+      ]);
+      if (TasksResult[0].affectedRows === 0) {
+        // throw new Error("data doesn't inserted in task table");
+        res.send("Error1");
+      }
+      const propertycheckresult = await queryRunner(
+        selectQuery("userTaskImages", "taskID"),
+        [taskID]
+      );
+      // images working code start here
+      // console.log(propertycheckresult[0]);
+      if (propertycheckresult[0].length > 0) {
+        const propertyImageKeys = propertycheckresult[0].map(
+          (image) => image.ImageKey
+        );
+        // console.log("images" ,images)
+        // console.log(propertyImageKeys);
+        // Find the images to delete from S3 (present in propertycheckresult but not in images)
+        const imagesToDelete = propertycheckresult[0].filter(
+          (image) => !images.some((img) => img.imageKey === image.ImageKey)
+        );
+        // Delete images from S3
+        // console.log(imagesToDelete);
+        for (let i = 0; i < imagesToDelete.length; i++) {
+          deleteImageFromS3(imagesToDelete[i].ImageKey);
+          await queryRunner(delteImageForTaskImages, [
+            imagesToDelete[i].ImageKey,
+          ]);
+        }
+        // Find the images to insert into the database (present in images but not in propertycheckresult)
+        const imagesToInsert = images.filter(
+          (image) => !propertyImageKeys.includes(image.imageKey)
+        );
+        for (let i = 0; i < imagesToInsert.length; i++) {
+          const { image_url } = imagesToInsert[i];
+          const { image_key } = imagesToInsert[i];
+          const propertyImageResult = await queryRunner(insertInUserTaskimages, [
+            taskID,
+            image_url,
+            image_key,
+          ]);
+          // if property image data not inserted into property image table then throw error
+          if (propertyImageResult.affectedRows === 0) {
+            throw new Error("data doesn't inserted in property image table");
+          }
+        }
+      } else {
+        for (let i = 0; i < images.length - 1; i++) {
+          const { image_url } = images[i];
+          const { image_key } = images[i];
+          // console.log(taskID, image_url, image_key);
+  
+          const propertyImageResult = await queryRunner(insertInUserTaskimages, [
+            taskID,
+            image_url,
+            image_key,
+          ]);
+          // if property image data not inserted into property image table then throw error
+          if (propertyImageResult.affectedRows === 0) {
+            throw new Error("data doesn't inserted in property image table");
+          }
+        }
+      }
+      const taskVendorDeleteResult = await queryRunner(
+        deleteQuery("users_assignto", "taskId"),
+        [taskID]
+      );
+      const vendorID = assignee;
+      for (let i = 0; i < vendorID.length; i++) {
+        const { Vendorid } = vendorID[i];
+        const { Vendorrole } = vendorID[i];
+        const vendorResults = await queryRunner(addUserList, [
+            taskID,
+            Vendorid,
+            Vendorrole,
+          ]);
+        // if (vendorResults.affectedRows === 0) {
+        //   return res.send("Error2");
+        // }
+      }
+    // //   console.log( "asdcfrtgh" + property);
+    // //   console.log( "frfrf" + userId);
+    //   // // Email Send
+    //   const tenantLandlordResult = await queryRunner(getLandlordTenant, [
+    //     userId,
+    //     property,
+    //   ]);
+    //   // console.log(tenantLandlordResult)
+    //   let vendorEmailarr = [];
+    //   let vendorNamearr = [];
+    //   for (let i = 0; i < vendorID.length; i++) {
+    //     const vendorCheckResult = await queryRunner(selectQuery("vendor", "id"), [
+    //       vendorID[i],
+    //     ]);
+    //     if (vendorCheckResult.length > 0) {
+    //       let vendorName =
+    //         vendorCheckResult[0][0].firstName +
+    //         " " +
+    //         vendorCheckResult[0][0].lastName;
+    //       let vendorEmail = vendorCheckResult[0][0].email;
+    //       vendorNamearr.push(vendorName);
+    //       vendorEmailarr.push(vendorEmail);
+    //     } else {
+    //       throw new Error("Vendor not found");
+    //     }
+    //   }
+    //   const tenantName =
+    //     tenantLandlordResult[0][0].firstName +
+    //     " " +
+    //     tenantLandlordResult[0][0].lastName;
+    //   const tenantEmail = tenantLandlordResult[0][0].email;
+    //   const CompanyName = tenantLandlordResult[0][0].companyName;
+    //   const landlordName =
+    //     tenantLandlordResult[0][0].FirstName +
+    //     " " +
+    //     tenantLandlordResult[0][0].LastName;
+    //   const landlordContact = tenantLandlordResult[0][0].Phone;
+    //   const landlordEmail = tenantLandlordResult[0][0].Email;
+  
+    //   const vendorNames = vendorNamearr.toString();
+  
+    //   // if (notifyTenant.toLowerCase() === "yes") {
+    //   await taskSendMail(
+    //     tenantName,
+    //     "Property Maintenance: " + taskName,
+    //     dueDate,
+    //     landlordName,
+    //     taskName,
+    //     vendorNames,
+    //     priority,
+    //     CompanyName,
+    //     landlordContact,
+    //     userId,
+    //     tenantEmail,
+    //     taskEmail
+    //   );
+    //   // }
+    //   // if (notifyVendor.toLowerCase() === "yes") {
+    //   for (let i = 0; i < vendorEmailarr.length > 0; i++) {
+    //     console.log("vendor2");
+    //     await taskSendMail(
+    //       tenantName,
+    //       "Property Maintenance: " + taskName,
+    //       dueDate,
+    //       landlordName,
+    //       taskName,
+    //       vendorNames,
+    //       priority,
+    //       CompanyName,
+    //       landlordContact,
+    //       userId,
+    //       vendorEmailarr[i],
+    //       taskEmail
+    //     );
+    //     // }
+    //   }
+      return res.status(200).json({
+        message: " task updated successful ",
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({
+        message: error.message,
+      });
+    }
+  };
+  //  #############################  Update TASK ENDS HERE ##################################################
+  
