@@ -521,6 +521,8 @@
                 </div>
             </div>
         </div>
+
+
         <div
             class="modal fade"
             id="addModal"
@@ -531,8 +533,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title"><strong class="color-primary">Maintainance </strong>Request
-                                
+                            <h2 class="modal-title">Create
+                                <strong class="color-primary">New Task</strong>
                             </h2>
                             <span class="">
                                 The real power of tasks is keeping track of deadlines and having a
@@ -594,13 +596,12 @@
                                         placeholder="Enter Assign To"
                                         class="hide-select"
                                         id="assignee"
-                                    ></select>
-                                    <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                    >
+                                    
+                                </select>
+                                    <span class="text-danger d-none" id="vendor-span">Add assignee first!!</span>
                                     <br>
-                                    <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">
-                                        Add
-                                    Vendor!
-                                    </a>
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="inputEmail4" class="form-label fw-bold">Due Date
@@ -700,225 +701,12 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="d-flex">
-                            <label class="custom-control custom-checkbox me-2">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1"
-                                    value=""
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1"
-                                    value=""
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                        </div>
-                        <div class="">
-                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
-                            <a
-                                href="javascript:void(0)"
-                                class="btn text-light btn-pill button disabled"
-                                style="background-color:#1467B0;"
-                                id="next"
-                            >Next</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="modal fade"
-            id="addModal_task"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title">Create
-                                <strong class="color-primary">New Task</strong>
-                            </h2>
-                            <span class="">
-                                The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the tasks for later reference.
-                            </span>
-                        </div>
-                        <button
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            id="top-close"
-                        >
-                            <span aria-hidden="true">
-                                <i class="fi fi-rs-circle-xmark text-dark"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div
-                            id="collapseOne"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-md-6">
-                                    <label for="inputEmail4" class="form-label fw-bold">Task Name
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        id="task_task"
-                                        required
-                                        class="form-control"
-                                        placeholder="Enter task name"
-                                        type="text"
-                                        placeholder="Enter Task Name"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputState" class="form-label fw-bold">Related To
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        required
-                                        id="property_task"
-                                        class="form-select form select2-show-search"
-                                        placeholder="Enter Related To"
-                                    >
-                                        <option selected>Choose...</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-bold">Assign To (Optional)</label>
-                                    <select
-                                        multiple="multiple"
-                                        multiple
-                                        placeholder="Enter Assign To"
-                                        class="hide-select"
-                                        id="assignee_task"
-                                    >
-                                    
-                                </select>
-                                    <span class="text-danger d-none" id="vendor-span">Add assignee first!!</span>
-                                    <br>
-                                    
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label fw-bold">Due Date
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        id="dueDate_task"
-                                        class="form-control"
-                                        required
-                                        placeholder="MM/DD/YYYY"
-                                        type="date"
-                                        placeholder="Enter Due Date"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Status
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        id="status_task"
-                                        required
-                                        class="form-select form select2-show-search"
-                                        placeholder="Select Status"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option value="not started">Not Started</option>
-                                        <option value="in progress">In progress</option>
-                                        <option value="completed">Completed</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Priority
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        id="priority_task"
-                                        required
-                                        class="form-select form select2-show-search"
-                                        placeholder="Select Priority"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option name="high">High</option>
-                                        <option name="moderate">Moderate</option>
-                                        <option name="low">Low</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Notes (Optional)</label>
-                                    <textarea
-                                        id="notes_task"
-                                        class="form-control mb-4"
-                                        placeholder="Enter Your Description"
-                                        rows="4"
-                                    ></textarea>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
-                                    <div
-                                        class="custom-file"
-                                        style="border: 1px dashed #00000087;"
-                                        ondrop="dropHandler(event);"
-                                        ondragover="dragOverHandler(event);"
-                                    >
-                                        <input
-                                            id="fileInput_task"
-                                            type="file"
-                                            name="media"
-                                            class="custom-file-input form"
-                                            accept=".pdf,application/pdf"
-                                            aria-label="hello"
-                                            multiple
-                                        >
-                                        <span className="d-none"></span>
-                                        <label class="custom-file-label" for="fileInput_task">
-                                            <i class="fi fi-rs-cloud-upload"></i>
-                                            <div class="custom-file-text">
-                                                <span>Upload Files here</span>
-                                                <span>PDF file size no more than 5MB</span>
-                                                <small class="text-danger d-none" id="count-text">Maximum number of files reached.</small>
-                                                <small class="text-danger d-none" id="size-text">
-                                                    File size exceeds 5MB
-                                                limit.
-                                                </small>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="selected-files">
-                                        <div class="file-grid"></div>
-                                    </div>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <div class="d-flex">
                             
                             <label class="custom-control custom-checkbox">
                                 <input
                                     type="checkbox"
                                     class="custom-control-input"
-                                    name="example-checkbox1_task"
+                                    name="example-checkbox1"
                                     value=""
                                     checked=""
                                 >
@@ -1496,7 +1284,7 @@
                             <a
                                 data-bs-effect="effect-scale"
                                 data-bs-toggle="modal"
-                                href="#addModal_task"
+                                href="#addModal"
                                 class="btn btn-outline-default btn-pill ms-1 my-2"
                                 style="background-color:#1467B0;color: white;"
                             >
@@ -2097,7 +1885,7 @@
                                                             data-bs-effect="effect-scale"
                                                         data-bs-toggle="modal"
                                                         id="add_property_btn"
-                                                        href="#addModal_task"
+                                                        href="#addModal"
                                                         >
                                                         <i class="fe fe-plus me-2"></i>
                                                             <strong>ADD NEW TASK</strong>
@@ -2343,7 +2131,7 @@
     </footer>
 </div>
 <a
-    href="#addModal_task"
+    href="#addModal"
     data-bs-effect="effect-scale"
     data-bs-toggle="modal"
     id="add-tenant-side-btn"
@@ -2357,9 +2145,9 @@
 <script src="../assets/js/select2.js"></script>
 <script>
         $(document).ready(function () {
-            $('#addModal_task').on('shown.bs.modal', function () {
+            $('#addModal').on('shown.bs.modal', function () {
                 $('.select2-show-search').select2({
-                    dropdownParent: $('#addModal_task')
+                    dropdownParent: $('#addModal')
                 });
             });
             $('#myModal_edit').on('shown.bs.modal', function () {
@@ -2746,7 +2534,7 @@ $('#preloader').css('display','none');
                     }).length === 0;
                     return allFieldsFilled;
                 }
-                var accordion1Fields = $('#addModal_task input[required], #addModal_task select[required]');
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0;
@@ -2772,7 +2560,7 @@ $('#preloader').css('display','none');
                     }
                 }
             }
-            $('#addModal_task input[required], #addModal_task select[required]').on('input change', function () {
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
@@ -2900,32 +2688,32 @@ $("#view-task-line-item").append(`<tr class="tr">
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             function resetAccordions() {
-                $('#addModal_task input[type="text"]').val('');
-                $('#addModal_task input[type="date"]').val('');
-                $('#addModal_task select').prop('selectedIndex', 0);
-                $('#addModal_task textarea').val('');
-                $('#addModal_task input[type="checkbox"]').prop('checked', false);
+                $('#addModal input[type="text"]').val('');
+                $('#addModal input[type="date"]').val('');
+                $('#addModal select').prop('selectedIndex', 0);
+                $('#addModal textarea').val('');
+                $('#addModal input[type="checkbox"]').prop('checked', false);
                 $('.hide-select ul li').each(function () {
                     $(this).removeClass('selected')
                 })
-                $('#addModal_task .file-grid').empty();
+                $('#addModal .file-grid').empty();
                 $('#next').addClass("disabled");
                 $('#draft').attr("disabled", "disabled");
                 $('.ms-choice span').text("")
-                $('#addModal_task input[type="text"],#addModal_task input[type="date"],#addModal_task select,#addModal_task textarea,#addModal_task input[type="checkbox"]').removeClass('border-green border-danger')
+                $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
             }
             $('#close,#top-close').on('click', function (e) {
                 // console.log(333)
                 e.preventDefault()
-                $("#addModal_task .select2-selection__rendered").empty()
+                $("#addModal .select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles = []
                 $(".file-grid").empty()
-                $('#addModal_task').modal('hide');
+                $('#addModal').modal('hide');
             })
             $(document).on('click', '#next', function (e) {
                 e.preventDefault();
-                // $('#addModal_task').modal('hide');
+                // $('#addModal').modal('hide');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task").val();
                 var assignee = $("#assignee").val();
@@ -2974,7 +2762,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    $('#addModal_task').modal('hide');
+                                    $('#addModal').modal('hide');
                                     $('#preloader').fadeOut('slow', function () {
                                         $(this).hide();
                                     });
@@ -3028,7 +2816,7 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            $('#addModal_task').modal('hide');
+                            $('#addModal').modal('hide');
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -3054,7 +2842,7 @@ $('#preloader').css('display','none');
             
             $(document).on('click', '#next_task', function (e) {
                 e.preventDefault();
-                // $('#addModal_task').modal('hide');
+                // $('#addModal').modal('hide');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task_task").val();
                 var assignee = $("#assignee_task").val();
@@ -3095,7 +2883,7 @@ $('#preloader').css('display','none');
                                 images: imageArray,
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
+                                url: 'http://localhost:3000/api/spade/addUsersTask',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -3103,7 +2891,7 @@ $('#preloader').css('display','none');
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    $('#addModal_task').modal('hide');
+                                    $('#addModal').modal('hide');
                                     $('#preloader').fadeOut('slow', function () {
                                         $(this).hide();
                                     });
@@ -3149,7 +2937,7 @@ $('#preloader').css('display','none');
                         images: [],
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
+                        url: 'http://localhost:3000/api/spade/addUsersTask',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -3157,7 +2945,7 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            $('#addModal_task').modal('hide');
+                            $('#addModal').modal('hide');
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -3660,7 +3448,7 @@ $('#preloader').css('display','none');
                 });
             }
             getData()
-            $(document).on('input change', '#addModal_task input, #addModal_task select, #addModal_task input, #addModal_task select,#addModal_task textarea', function () {
+            $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
