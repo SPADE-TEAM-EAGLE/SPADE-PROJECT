@@ -596,8 +596,8 @@ exports.insertInProperty =
   "INSERT INTO property (landlordID, propertyName, address, city, state, zipCode, propertyType, propertySQFT,status,units,created_at,cPropertyId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertInPropertyImage =
   "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
-exports.insertInTaskImage =
-  "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
+exports.insertInTaskImage = "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
+exports.insertInUserTaskimages = "INSERT INTO userTaskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status,landlordId) VALUES (?,?,?,?,?,?)";
 exports.updateProperty =
