@@ -293,7 +293,7 @@ exports.Signin = async function (req, res) {
             message: "Successful Login",
           });
         } else {
-          res.status(403).json({
+          res.status(200).json({
             // token: token,
             // body: selectResult[0][0],
             message: "Your Account is Closed",
@@ -524,7 +524,7 @@ exports.Signin = async function (req, res) {
               }
             }
           } else {
-            res.status(403).json({
+            res.status(200).json({
               // token: token,
               // body: selectResult[0][0],
               message: "Your Account is Closed",
@@ -754,7 +754,7 @@ exports.Signin = async function (req, res) {
             }
           }
         } else {
-          res.status(403).json({
+          res.status(200).json({
             // token: token,
             // body: selectResult[0][0],
             message: "Your Account is Closed",
@@ -1439,7 +1439,7 @@ exports.propertyDelete = async (req, res) => {
       [id, "Occupied"]
     );
     if (propertyUnitscheckresult[0].length > 0) {
-      res.status(403).json({
+      res.status(200).json({
         message: " You are not able to delete Property (your unit is occupied)",
         units : propertyUnitscheckresult[0],
       });
@@ -2107,7 +2107,7 @@ exports.addMoreUnits = async (req, res) => {
         });
       }
     }else{
-      res.status(203).json({
+      res.status(200).json({
         message: "Your property type is Single Family",
       });
     }
@@ -2315,7 +2315,7 @@ exports.verifyMailCheck = async (req, res) => {
             });
           }
         } else {
-          return res.status(403).json({
+          return res.status(200).json({
             message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }

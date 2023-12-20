@@ -750,14 +750,14 @@ GROUP BY t.id;
 exports.addTasksQuery =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   exports.addUserTasksQuery =
-  "INSERT INTO user_task (taskName,propertyId ,dueDate,status, priority, notes,notifyAssignee, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO user_task (taskName,propertyId,PropertyUnitId ,dueDate,status, priority, notes,notifyAssignee, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
   exports.addTasksQuerytenant =
   "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
   exports.addUserList =
-  "INSERT INTO users_assignto (taskId, userId) VALUES (?, ?)";
+  "INSERT INTO users_assignto (taskId, userId, assignRole) VALUES (?, ?,?)";
 exports.addVendor = "INSERT INTO vendor (firstName,lastName,businessName,streetAddress,city,state,zip,workPhone,phone,email,categoryID,landlordID,cVendorId) VALUES (?,?, ?,?,?,?,?,?,?,?,?,?,?)";
 exports.getVendors = `SELECT v.*, vc.category
 FROM vendor v
@@ -1171,3 +1171,36 @@ exports.insertInUserPermissionUsers =
  exports.checkProspectusId = `SELECT * FROM prospectus where landlordId = ? order by id desc`;
  exports.checkvendorId = `SELECT * FROM vendor where LandlordID = ? order by id desc`;
  exports.checkInvoiceId = `SELECT * FROM invoice where landlordID = ? order by id desc`;
+
+ exports.AllUsertasks = `SELECT
+tk.id,
+tk.taskName,
+tk.cTaskId,
+tk.dueDate,
+tk.status,
+tk.priority,
+tk.notes,
+tk.createdBy,
+tk.created_at,
+p.propertyName,
+pu.unitNumber,
+t.firstName AS tfirstName,
+t.lastName AS tlastName,
+t.phoneNumber AS tenantPhone,
+t.id AS tenantID,
+JSON_ARRAYAGG(JSON_OBJECT('imageKey', ti.imageKey, 'Image', ti.Image)) AS taskImages
+FROM
+task AS tk
+JOIN
+tenants AS t ON tk.tenantID = t.id
+JOIN
+property AS p ON t.propertyID = p.id
+JOIN
+propertyunits AS pu ON t.propertyUnitID = pu.id
+LEFT JOIN
+taskimages AS ti ON tk.id = ti.taskID
+WHERE
+tk.landlordID = ? AND createdBy != "Tenant"
+GROUP BY
+tk.id
+`;

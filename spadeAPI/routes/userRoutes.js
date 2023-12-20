@@ -10,6 +10,7 @@ const bankAccountController = require("../controllers/bankAccountController");
 const superAdmin = require("../controllers/superAdmin");
 const { verifyToken, verifyTokenTenant, verifySuperAdmin } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
+const usersTaskController = require("../controllers/usersTaskController");
 const prospectus = require("../controllers/prospectusController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
@@ -135,7 +136,7 @@ router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory)
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
-router.post("/addUsersTask",verifyToken, taskController.addUsersTask);
+router.post("/addUsersTask",verifyToken, usersTaskController.addUsersTask);
 // router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/getAllTask",verifyToken ,taskController.getAllTask);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);

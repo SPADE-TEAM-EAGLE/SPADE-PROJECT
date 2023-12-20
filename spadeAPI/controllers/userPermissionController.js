@@ -223,7 +223,7 @@ exports.userPermissionGetAll = async function (req, res) {
         data: selectResult[0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         data:[],
         message: "No user Found",
       });
