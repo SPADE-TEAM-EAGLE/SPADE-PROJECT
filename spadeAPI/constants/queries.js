@@ -1212,3 +1212,4 @@ LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId
 WHERE ut.landlordId = ?`;
 exports.updateUserTasksQuery =
 "UPDATE user_task SET taskName = ? , propertyId = ?, PropertyUnitId = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyAssignee = ? , updated_at = ? where id = ? ";
+exports.delteImageForTaskUserImages = "DELETE FROM userTaskImages WHERE ImageKey = ?";

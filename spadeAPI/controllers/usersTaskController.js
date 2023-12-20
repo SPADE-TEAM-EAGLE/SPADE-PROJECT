@@ -14,7 +14,8 @@ const {
   addUserTasksQuery,
   addUserList,
   userAllTask,
-  updateUserTasksQuery
+  updateUserTasksQuery,
+  delteImageForTaskUserImages
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -377,7 +378,7 @@ exports.getAllUserTask = async (req, res) => {
 
 
 //  #############################  Update TASK Start HERE ##################################################
-exports.updateTasks = async (req, res) => {
+exports.updateUserTask = async (req, res) => {
     const {
         taskName,
         property,
@@ -396,7 +397,16 @@ exports.updateTasks = async (req, res) => {
     try {
       const currentDate = new Date();
       const { userId,taskEmail } = req.user;
-      
+      console.log( taskName,
+        property,
+        PropertyUnit,
+        dueDate,
+        status,
+        priority,
+        notes,
+        notifyAssignee,
+        currentDate,
+        taskID);
       const TasksResult = await queryRunner(updateUserTasksQuery, [
         taskName,
       property,
@@ -433,7 +443,7 @@ exports.updateTasks = async (req, res) => {
         // console.log(imagesToDelete);
         for (let i = 0; i < imagesToDelete.length; i++) {
           deleteImageFromS3(imagesToDelete[i].ImageKey);
-          await queryRunner(delteImageForTaskImages, [
+          await queryRunner(delteImageForTaskUserImages, [
             imagesToDelete[i].ImageKey,
           ]);
         }
