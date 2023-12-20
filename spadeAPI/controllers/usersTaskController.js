@@ -238,7 +238,7 @@ exports.getAllUserTask = async (req, res) => {
           if (assignToImagesResult[0].length > 0) {
             task.images = assignToImagesResult[0];
           }else{
-            task.images = "No Image";
+            task.images = [];
           }
 
         // for images END
