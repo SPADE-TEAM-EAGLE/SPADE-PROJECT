@@ -12,7 +12,8 @@ const {
   insertInUserTaskimages, 
   checkUserTaskid,
   addUserTasksQuery,
-  addUserList
+  addUserList,
+  userAllTask
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -45,13 +46,13 @@ exports.addUsersTask = async (req, res) => {
   const currentDate = new Date();
   try {
     // console.log(1);
-    const addTasksCheckResult = await queryRunner(
-      selectQuery("user_task", "taskName", "propertyId"),
-      [task, property]
-    );
-    if (addTasksCheckResult[0].length > 0) {
-      return res.send("Task already exists");
-    } else {
+    // const addTasksCheckResult = await queryRunner(
+    //   selectQuery("user_task", "taskName", "propertyId"),
+    //   [task, property]
+    // );
+    // if (addTasksCheckResult[0].length > 0) {
+    //   return res.send("Task already exists");
+    // } else {
       const taskIdCheckresult = await queryRunner(checkUserTaskid, [userId]);
       let taskId;
       if (taskIdCheckresult[0].length > 0) {
@@ -201,7 +202,7 @@ exports.addUsersTask = async (req, res) => {
       //   );
       //   }
       // }
-    }
+    // }
     return res.status(200).json({message : "User task created"});
   } catch (error) {
     console.log(error);
@@ -217,59 +218,122 @@ exports.addUsersTask = async (req, res) => {
 
 
 //  ############################# Get ALL users Task Start ############################################################
-// exports.getAllUserTask = async (req, res) => {
-//     const { userId } = req.user;
-//     // const { userId } = req.user;
-//     try {
-//       const allTaskResult = await queryRunner(Alltasks, [userId]);
-  
-//       if (allTaskResult.length > 0) {
-//         for (let i = 0; i < allTaskResult[0].length; i++) {
-//           const taskID = allTaskResult[0][i].id;
-//           const assignToResult = await queryRunner(
-//             selectQuery("taskassignto", "taskId"),
-//             [taskID]
-//           );
-//           const vendorIDs = assignToResult[0].map((vendor) => vendor.vendorId);
-  
-//           const vendorData = [];
-  
-//           for (let j = 0; j < vendorIDs.length; j++) {
-//             const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
-//               vendorIDs[j],
-//             ]);
-  
-//             if (vendorResult[0].length > 0) {
-//               const vendor = {
-//                 ID: vendorResult[0][0].id,
-//                 name:
-//                   vendorResult[0][0].firstName +
-//                   " " +
-//                   vendorResult[0][0].lastName,
-//                 email: vendorResult[0][0].email,
-//                 vendorPhone: vendorResult[0][0].phone,
-//               };
-//               vendorData.push(vendor);
-//             }
-//           }
-//           allTaskResult[0][i].AssignTo = vendorData;
-//         }
-//         // console.log(allTaskResult)
-//         res.status(200).json({
-//           data: allTaskResult,
-//           message: "All Tasks",
-//         });
-//       } else {
-//         res.status(400).json({
-//           message: "No Tasks data found",
-//         });
-//       }
-//     } catch (error) {
-//       return res.status(500).json({
-//         message: "Internal server Error",
-//         error: error.message,
-//     });
-//     }
-//   };
+
+exports.getAllUserTask = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const allTaskResult = await queryRunner(userAllTask, [userId]);
+
+    if (allTaskResult.length > 0) {
+      const tasksData = [];
+
+
+      for (const task of allTaskResult[0]) {
+        const taskID = task.taskid;
+        // for images start
+        const assignToImagesResult = await queryRunner(
+            selectQuery("userTaskImages", "taskID"),
+            [taskID]
+          ); 
+          if (assignToImagesResult[0].length > 0) {
+            task.images = assignToImagesResult[0];
+          }else{
+            task.images = "No Image";
+          }
+
+        // for images END
+
+        const assignToResult = await queryRunner(
+          selectQuery("users_assignto", "taskId"),
+          [taskID]
+        );
+
+        const assignToData = [];
+
+        for (const assignment of assignToResult[0]) {
+          if (assignment.assignRole === "user") {
+            const userIDs = assignment.userId;
+            const userResult = await queryRunner(
+              selectQuery("userPUsers", "id"),
+              [userIDs]
+            );
+
+            if (userResult[0].length > 0) {
+              const user = {
+                ID: userResult[0][0].id,
+                role: "User",
+                name: userResult[0][0].UFirstName + " " + userResult[0][0].ULastName,
+                email: userResult[0][0].UEmail,
+                userPhone: userResult[0][0].UPhone,
+              };
+              assignToData.push(user);
+            }
+          } else if (assignment.assignRole === "Vendor") {
+            const vendorID = assignment.userId;
+            const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
+              vendorID,
+            ]);
+
+            if (vendorResult[0].length > 0) {
+              const vendor = {
+                ID: vendorResult[0][0].id,
+                role: "Vendor",
+                name:
+                  vendorResult[0][0].firstName +
+                  " " +
+                  vendorResult[0][0].lastName,
+                email: vendorResult[0][0].email,
+                vendorPhone: vendorResult[0][0].phone,
+              };
+              assignToData.push(vendor);
+            }
+          } else if (assignment.assignRole === "landlord") {
+            const landlordID = assignment.userId;
+            const landlordResult = await queryRunner(selectQuery("users", "id"), [
+              landlordID,
+            ]);
+
+            if (landlordResult[0].length > 0) {
+              const landlord = {
+                ID: landlordResult[0][0].id,
+                role: "Landlord",
+                name:
+                  landlordResult[0][0].FirstName +
+                  " " +
+                  landlordResult[0][0].LastName,
+                email: landlordResult[0][0].Email,
+                landlordPhone: landlordResult[0][0].Phone,
+              };
+              assignToData.push(landlord);
+            }
+          } else {
+            const notFound = "No user Found";
+            assignToData.push(notFound);
+          }
+        }
+
+        task.AssignTo = assignToData;
+        
+        tasksData.push(task);
+      }
+
+      res.status(200).json({
+        data: tasksData,
+        message: "All Tasks",
+      });
+    } else {
+      res.status(404).json({
+        message: "No Tasks data found",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+    });
+  }
+};
+
   //  ############################# Get ALL users Task End ############################################################
   

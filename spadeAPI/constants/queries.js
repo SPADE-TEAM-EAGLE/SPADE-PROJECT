@@ -597,7 +597,7 @@ exports.insertInProperty =
 exports.insertInPropertyImage =
   "INSERT INTO propertyimage (propertyID, Image, imageKey) VALUES (?,?,?)";
 exports.insertInTaskImage = "INSERT INTO taskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
-exports.insertInUserTaskimages = "INSERT INTO userTaskimages (taskID, Image, ImageKey) VALUES (?,?,?)";
+exports.insertInUserTaskimages = "INSERT INTO userTaskImages (taskID, Image, ImageKey) VALUES (?,?,?)";
 exports.insertInPropertyUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status,landlordId) VALUES (?,?,?,?,?,?)";
 exports.updateProperty =
@@ -1204,3 +1204,9 @@ tk.landlordID = ? AND createdBy != "Tenant"
 GROUP BY
 tk.id
 `;
+exports.userAllTask = `
+SELECT *, ut.id as taskid
+FROM user_task AS ut
+LEFT JOIN property AS p ON p.id = ut.propertyId
+LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId
+WHERE ut.landlordId = ?`;
