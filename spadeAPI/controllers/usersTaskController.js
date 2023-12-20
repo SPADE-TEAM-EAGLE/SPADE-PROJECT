@@ -337,3 +337,37 @@ exports.getAllUserTask = async (req, res) => {
 
   //  ############################# Get ALL users Task End ############################################################
   
+
+//   ############################################ DElete user Task ######################################################
+  exports.deleteUserTask = async (req, res) => {
+    try {
+      const { taskID } = req.body;
+      const deleteTaskResult = await queryRunner(deleteQuery("user_task", "id"), [
+        taskID,
+      ]);
+      if (deleteTaskResult[0].affectedRows > 0) {
+
+        const deleteTaskImagesResult = await queryRunner(deleteQuery("userTaskImages", "taskID"), [
+            taskID,
+          ]);
+        const deleteTaskAssignToResult = await queryRunner(deleteQuery("users_assignto", "taskId"), [
+            taskID,
+          ]);
+        res.status(200).json({
+          // data: vendorResult[0],
+          message: "task Deleted Successful",
+        });
+      } else {
+        res.status(400).json({
+          message: "No task data found",
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        message: "Error Get delete task",
+        error: error.message,
+    });
+  
+    }
+  };
+//   ############################################ DElete user Task ######################################################
