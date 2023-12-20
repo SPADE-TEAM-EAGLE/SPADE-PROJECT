@@ -342,4 +342,6 @@ router.post("/tenantUpdateAllInvoices",verifyTokenTenant,tenantController.tenant
 router.post("/tenantUpdateIndividualInvoices",verifyTokenTenant,tenantController.tenantUpdateIndividualInvoices);
 // router.get("/UserCheckName/:userId",userController.UserCheckName);
 router.get("/InvoiceID", verifyToken, invoiceController.InvoiceID);
+router.get("/getAllUserTask", verifyToken, usersTaskController.getAllUserTask);
+router.delete("/deleteUserTask", verifyToken, usersTaskController.deleteUserTask);
 
