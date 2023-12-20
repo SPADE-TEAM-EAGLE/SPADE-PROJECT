@@ -1058,194 +1058,194 @@ exports.VendorCheckEmail = async function (req, res) {
 };
 
 
-exports.addUsersTask = async (req, res) => {
-  const {
-    task,
-    assignee,
-    property,
-    dueDate,
-    status,
-    priority,
-    note,
-    notifyVendor,
-    images,
+// exports.addUsersTask = async (req, res) => {
+//   const {
+//     task,
+//     assignee,
+//     property,
+//     dueDate,
+//     status,
+//     priority,
+//     note,
+//     notifyVendor,
+//     images,
 
-    // created_at,
-    // created_by,
-  } = req.body;
-  // console.log(req.body);
-  const userID = assignee;
-  const { userId, userName,taskEmail, idPattern,email } = req.user;
-  // const { userId, userName,taskEmail } = req.body;
+//     // created_at,
+//     // created_by,
+//   } = req.body;
+//   // console.log(req.body);
+//   const userID = assignee;
+//   const { userId, userName,taskEmail, idPattern,email } = req.user;
+//   // const { userId, userName,taskEmail } = req.body;
 
-  const currentDate = new Date();
-  try {
-    // console.log(1);
-    const addTasksCheckResult = await queryRunner(
-      selectQuery("user_task", "taskName", "propertyId"),
-      [task, property]
-    );
-    if (addTasksCheckResult[0].length > 0) {
-      return res.send("Task already exists");
-    } else {
-      const taskIdCheckresult = await queryRunner(checkUserTaskid, [userId]);
-      let taskId;
-      if (taskIdCheckresult[0].length > 0) {
-        taskId = taskIdCheckresult[0][0].cTaskId.split("-");
-        let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
-        lastPart = lastPart.toString().padStart(4, '0');
-        taskId = `SR-${idPattern}-TASK-${lastPart}`;
-      } else {
-        taskId = `SR-${idPattern}-TASK-0001`;
-      }
+//   const currentDate = new Date();
+//   try {
+//     // console.log(1);
+//     const addTasksCheckResult = await queryRunner(
+//       selectQuery("user_task", "taskName", "propertyId"),
+//       [task, property]
+//     );
+//     if (addTasksCheckResult[0].length > 0) {
+//       return res.send("Task already exists");
+//     } else {
+//       const taskIdCheckresult = await queryRunner(checkUserTaskid, [userId]);
+//       let taskId;
+//       if (taskIdCheckresult[0].length > 0) {
+//         taskId = taskIdCheckresult[0][0].cTaskId.split("-");
+//         let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
+//         lastPart = lastPart.toString().padStart(4, '0');
+//         taskId = `SR-${idPattern}-TASK-${lastPart}`;
+//       } else {
+//         taskId = `SR-${idPattern}-TASK-0001`;
+//       }
 
-      const TasksResult = await queryRunner(addUserTasksQuery, [
-        task,
-        property,
-        dueDate,
-        status,
-        priority,
-        note,
-        notifyVendor,
-        currentDate,
-        userName,
-        userId,
-        taskId
-      ]);
-      if (TasksResult.affectedRows === 0) {
-        return res.status(400).send("Error1");
-      }
-      // else {
-        const tasksID = TasksResult[0].insertId;
-        // for task id
-        // const taskCountIdResult = await queryRunner(taskCountId, [userId]);
-        // let customTaskId = taskCountIdResult[0][0].count + 1;
-        // customTaskId = task+customTaskId;
-        // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
-        if(images){
-      for (let i = 0; i < images.length; i++) {
-        const { image_url } = images[i];
-        const { image_key } = images[i];
-        const propertyImageResult = await queryRunner(insertInTaskImage, [
-          tasksID,
-          image_url,
-          image_key,
-        ]);
-        // if property image data not inserted into property image table then throw error
-        if (propertyImageResult.affectedRows === 0) {
-          throw new Error("data doesn't inserted in property image table");
-        }
-      }
-    }
-      //   //  add vendor
-      for (let i = 0; i < userID.length; i++) {
-        const Vendorid = userID[i];
-        const vendorResults = await queryRunner(addUserList, [
-          tasksID,
-          Vendorid,
-        ]);
-        if (vendorResults.affectedRows === 0) {
-          return res.send("Error2");
-        }
-      }
-      // // get data from database for email send
-      // const tenantLandlordResult = await queryRunner(getLandlordTenant, [
-      //   userId,
-      //   property,
-      // ]);
-      // let userEmailarr = [];
-      // let userNamearr = [];
-      // let userCheckResult;
-      // let vendorCheckResult;
-      // for (let i = 0; i < userID.length; i++) {
-      //   if(userId==userID[i]){
-      //     userCheckResult = await queryRunner(
-      //       selectQuery("users", "id"),
-      //       [userID[i]]
-      //     );
-      //     if(userCheckResult.length>0){
-      //       if(userCheckResult[0][0].email==email){
+//       const TasksResult = await queryRunner(addUserTasksQuery, [
+//         task,
+//         property,
+//         dueDate,
+//         status,
+//         priority,
+//         note,
+//         notifyVendor,
+//         currentDate,
+//         userName,
+//         userId,
+//         taskId
+//       ]);
+//       if (TasksResult.affectedRows === 0) {
+//         return res.status(400).send("Error1");
+//       }
+//       // else {
+//         const tasksID = TasksResult[0].insertId;
+//         // for task id
+//         // const taskCountIdResult = await queryRunner(taskCountId, [userId]);
+//         // let customTaskId = taskCountIdResult[0][0].count + 1;
+//         // customTaskId = task+customTaskId;
+//         // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
+//         if(images){
+//       for (let i = 0; i < images.length; i++) {
+//         const { image_url } = images[i];
+//         const { image_key } = images[i];
+//         const propertyImageResult = await queryRunner(insertInTaskImage, [
+//           tasksID,
+//           image_url,
+//           image_key,
+//         ]);
+//         // if property image data not inserted into property image table then throw error
+//         if (propertyImageResult.affectedRows === 0) {
+//           throw new Error("data doesn't inserted in property image table");
+//         }
+//       }
+//     }
+//       //   //  add vendor
+//       for (let i = 0; i < userID.length; i++) {
+//         const Vendorid = userID[i];
+//         const vendorResults = await queryRunner(addUserList, [
+//           tasksID,
+//           Vendorid,
+//         ]);
+//         if (vendorResults.affectedRows === 0) {
+//           return res.send("Error2");
+//         }
+//       }
+//       // // get data from database for email send
+//       // const tenantLandlordResult = await queryRunner(getLandlordTenant, [
+//       //   userId,
+//       //   property,
+//       // ]);
+//       // let userEmailarr = [];
+//       // let userNamearr = [];
+//       // let userCheckResult;
+//       // let vendorCheckResult;
+//       // for (let i = 0; i < userID.length; i++) {
+//       //   if(userId==userID[i]){
+//       //     userCheckResult = await queryRunner(
+//       //       selectQuery("users", "id"),
+//       //       [userID[i]]
+//       //     );
+//       //     if(userCheckResult.length>0){
+//       //       if(userCheckResult[0][0].email==email){
 
-      //       }
-      //     }
-      //   }else{
-      //     vendorCheckResult = await queryRunner(
-      //       selectQuery("userPUsers", "id"),
-      //       [userID[i]]
-      //     );
-      //     if (vendorCheckResult.length > 0) {
-      //       let vendorName =
-      //         vendorCheckResult[0][0].UFirstName +
-      //         " " +
-      //         vendorCheckResult[0][0].ULastName;
-      //       let vendorEmail = vendorCheckResult[0][0].UEmail;
-      //       userNamearr.push(vendorName);
-      //       userEmailarr.push(vendorEmail);
-      //     } 
-      //     else {
-      //       return res.send("Vendor not found");
-      //     }
-      //   }
+//       //       }
+//       //     }
+//       //   }else{
+//       //     vendorCheckResult = await queryRunner(
+//       //       selectQuery("userPUsers", "id"),
+//       //       [userID[i]]
+//       //     );
+//       //     if (vendorCheckResult.length > 0) {
+//       //       let vendorName =
+//       //         vendorCheckResult[0][0].UFirstName +
+//       //         " " +
+//       //         vendorCheckResult[0][0].ULastName;
+//       //       let vendorEmail = vendorCheckResult[0][0].UEmail;
+//       //       userNamearr.push(vendorName);
+//       //       userEmailarr.push(vendorEmail);
+//       //     } 
+//       //     else {
+//       //       return res.send("Vendor not found");
+//       //     }
+//       //   }
         
         
-      // }
-      // // console.log(tenantLandlordResult[0])
-      // // const tenantName =
-      // //   tenantLandlordResult[0][0].firstName +
-      // //   " " +
-      // //   tenantLandlordResult[0][0].lastName;
-      // // const tenantEmail = tenantLandlordResult[0][0].email;
-      // // const CompanyName = tenantLandlordResult[0][0].companyName;
-      // // const landlordName =
-      // //   tenantLandlordResult[0][0].FirstName +
-      // //   " " +
-      // //   tenantLandlordResult[0][0].LastName;
-      // // const landlordContact = tenantLandlordResult[0][0].Phone;
+//       // }
+//       // // console.log(tenantLandlordResult[0])
+//       // // const tenantName =
+//       // //   tenantLandlordResult[0][0].firstName +
+//       // //   " " +
+//       // //   tenantLandlordResult[0][0].lastName;
+//       // // const tenantEmail = tenantLandlordResult[0][0].email;
+//       // // const CompanyName = tenantLandlordResult[0][0].companyName;
+//       // // const landlordName =
+//       // //   tenantLandlordResult[0][0].FirstName +
+//       // //   " " +
+//       // //   tenantLandlordResult[0][0].LastName;
+//       // // const landlordContact = tenantLandlordResult[0][0].Phone;
 
-      // // const vendorNames = vendorNamearr.toString();
+//       // // const vendorNames = vendorNamearr.toString();
 
-      // // if (notifyTenant.toLowerCase() === "yes") {
-      // // await taskSendMail(
-      // //   tenantName,
-      // //   "Property Maintenance: " + task,
-      // //   dueDate,
-      // //   landlordName,
-      // //   task,
-      // //   vendorNames,
-      // //   priority,
-      // //   CompanyName,
-      // //   landlordContact,
-      // //   userId,
-      // //   tenantEmail,
-      // //   taskEmail
-      // // );
-      // // }
-      // if (notifyVendor.toLowerCase() === "yes") {
-      // for (let i = 0; i < vendorEmailarr.length > 0; i++) {
-      //   // console.log("vendor2");
-      //   await taskSendMail(
-      //     tenantName,
-      //     "Property Maintenance: " + task,
-      //     dueDate,
-      //     landlordName,
-      //     task,
-      //     vendorNames,
-      //     priority,
-      //     CompanyName,
-      //     landlordContact,
-      //     userId,
-      //     vendorEmailarr[i],
-      //     taskEmail
-      //   );
-      //   }
-      // }
-    }
-    return res.send("Created");
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "Internal server Error",
-      error: error.message,
-  });
-  }
-};
+//       // // if (notifyTenant.toLowerCase() === "yes") {
+//       // // await taskSendMail(
+//       // //   tenantName,
+//       // //   "Property Maintenance: " + task,
+//       // //   dueDate,
+//       // //   landlordName,
+//       // //   task,
+//       // //   vendorNames,
+//       // //   priority,
+//       // //   CompanyName,
+//       // //   landlordContact,
+//       // //   userId,
+//       // //   tenantEmail,
+//       // //   taskEmail
+//       // // );
+//       // // }
+//       // if (notifyVendor.toLowerCase() === "yes") {
+//       // for (let i = 0; i < vendorEmailarr.length > 0; i++) {
+//       //   // console.log("vendor2");
+//       //   await taskSendMail(
+//       //     tenantName,
+//       //     "Property Maintenance: " + task,
+//       //     dueDate,
+//       //     landlordName,
+//       //     task,
+//       //     vendorNames,
+//       //     priority,
+//       //     CompanyName,
+//       //     landlordContact,
+//       //     userId,
+//       //     vendorEmailarr[i],
+//       //     taskEmail
+//       //   );
+//       //   }
+//       // }
+//     }
+//     return res.send("Created");
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({
+//       message: "Internal server Error",
+//       error: error.message,
+//   });
+//   }
+// };
