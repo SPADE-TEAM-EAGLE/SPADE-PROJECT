@@ -886,6 +886,20 @@
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
                                 <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Unit
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        required
+                                        id="unit_update"
+                                        class="form-select form select2-show-search"
+                                        placeholder="Enter Related To"
+                                    >
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
                                     <label for="inputEmail4" class="form-label fw-bold">Due Date
                                         <span class="text-danger"> *</span>
                                     </label>
@@ -2425,10 +2439,11 @@ return NewDate
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
-                const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                // console.log(data)
-                if (data.taskImages) {
-                    selectedFiles = data.taskImages
+                console.log(taskId,taskInfo)
+                const data = taskInfo.find(obj => obj.taskid.toString() == taskId);
+                console.log(data)
+                if (data.images) {
+                    selectedFiles = data.images
                 } else {
                 }
                 updateSelectedFilesContainer()
@@ -2468,8 +2483,9 @@ $("#view-task-line-item").append(`<tr class="tr">
                             </td>
                         </tr>`)
                 }
-                if (data.taskImages[0].Image) {
-                    const files = data.taskImages;
+                console.log(data.images)
+                if (data?.images[0]?.Image) {
+                    const files = data.images;
                     $("#view-task-images").empty();
                     files.forEach((file) => {
                         if (file?.Image?.endsWith(".pdf") || file?.Image?.endsWith(".docx") || file?.Image?.endsWith(".doc")) {
@@ -3120,7 +3136,7 @@ $('#preloader').css('display','none');
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
+                    url: 'http://localhost:3000/api/spade/getAllUserTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3129,7 +3145,7 @@ $('#preloader').css('display','none');
                     },
                     success: function (response) {
                         // console.log(response);
-                        if (response.data[0].length === 0) {
+                        if (response?.data?.length === 0) {
                             localStorage.setItem("task", "false")
                             window.location = './new-tasks.html'
                         } else {
@@ -3140,17 +3156,17 @@ $('#preloader').css('display','none');
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            taskInfo = response.data[0]
+                            taskInfo = response.data
                             // console.log
-                            response.data[0]?.forEach(function (task, index) {
+                            response?.data?.forEach(function (task, index) {
                                 // console.log(task?.taskImages[0])
                                 var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
-                                if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
+                                if (task?.images[0]?.imageKey?.includes('pdf') || task?.images[0]?.imageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
                                 } else {
-                                    if (task?.taskImages[0]?.Image !== null) {
-                                        var image = '<td><img src="' + task?.taskImages[0]?.Image + '" alt=""></td>';
+                                    if (task?.images[0]?.Image !== null) {
+                                        var image = '<td><img src="' + task?.images[0]?.Image + '" alt=""></td>';
                                     } else {
                                         var image = '<td><img src="' + "../assets/images/Group-user.png" + '" alt=""></td>';
                                     }
@@ -3161,7 +3177,7 @@ $('#preloader').css('display','none');
                                 var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
-                                var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
+                                var taskName = `<td class="task-id propertyName" id=${task.taskid} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
                                     `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
                                 if (daysDiff > 0) {
                                     taskName += `${daysDiff} days`;
@@ -3250,17 +3266,19 @@ if (task.priority == 'High') {
                                 e.preventDefault();
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                                 taskId = taskIdElement.attr("id")
-                                const data = response.data[0].find(obj => obj.id.toString() == taskId);
+                                const data = response.data.find(obj => obj.taskid.toString() == taskId);
+                                console.log(data)
                                 // console.log(taskId)
-                                if (data.taskImages) {
-                                    selectedFiles = data.taskImages
+                                if (data.images) {
+                                    selectedFiles = data.images
                                 } else {
                                 }
                                 updateSelectedFilesContainer()
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
-                                $("#property_update").val(data.tenantID);
+                                $("#property_update").val(data.propertyId);
+                                $("#unit_update").val(parseInt(data.id));
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
@@ -3304,38 +3322,38 @@ $('#preloader').css('display','none');
                         var properties=response?.data;
                         // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
-                        var propertySelect = $('#property');
-                        propertySelect.empty(); // Clear existing options
-                        propertySelect.append($('<option></option>')
+                        
+                        $('#property,#property_update').empty(); // Clear existing options
+                        $('#property,#property_update').append($('<option></option>')
                             .text("Choose...")
                         )
                         properties.forEach(function (property) {
                             var option = $('<option></option>')
                                 .text(property.propertyName)
                                 .val(property.id);
-                            propertySelect.append(option);
+                            $('#property,#property_update').append(option);
                         });
-                        propertySelect.change(function () {
+                        $('#property,#property_update').change(function () {
                             var selectedPropertyId = $(this).val();
                             var selectedProperty = properties.find(function (property) {
                                 return property.id == selectedPropertyId;
                             });
                             var propertyUnitSelect = $('#unit');
-                            propertyUnitSelect.empty()
+                            $('#unit').empty()
                             
-                                propertyUnitSelect.append($('<option></option>')
+                                $('#unit,#unit_update').append($('<option></option>')
                                     .text("Choose..."))
                                 selectedProperty.vacantUnits.forEach(function (unit) {
                                     var option = $('<option></option>')
                                         .text(unit.unitNumber)
                                         .val(unit.id);
-                                    propertyUnitSelect.append(option);
+                                    $('#unit,#unit_update').append(option);
                                 });
                                 selectedProperty.occupiedUnits.forEach(function (unit) {
                                     var option = $('<option></option>')
                                         .text(unit.unitNumber)
                                         .val(unit.id);
-                                    propertyUnitSelect.append(option);
+                                    $('#unit,#unit_update').append(option);
                                 });
                             
                         });
