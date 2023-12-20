@@ -9,7 +9,7 @@ const { serialize } = require("cookie");
 const {
   selectQuery,
   deleteQuery,
-  insertInTaskImage, 
+  insertInUserTaskimages, 
   checkUserTaskid,
   addUserTasksQuery,
   addUserList
@@ -86,7 +86,7 @@ exports.addUsersTask = async (req, res) => {
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
-        const propertyImageResult = await queryRunner(insertInTaskImage, [
+        const propertyImageResult = await queryRunner(insertInUserTaskimages, [
           tasksID,
           image_url,
           image_key,
