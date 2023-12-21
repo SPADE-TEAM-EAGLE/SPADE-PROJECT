@@ -2743,8 +2743,26 @@ $('#preloader').css('display','none');
                         // console.log('Error: ' + error);
                     }
                 });
+                // $.ajax({
+                //             url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
+                //             type: "GET",
+                //             contentType: "application/json",
+                //             headers: {
+                //                 Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                //             },
+                //             success: function (response) {
+                //                 if (response?.data) {
+                //                     response?.data?.forEach((user)=>{
+                //                     $("#assignee_task").append($("<option></option>").text(user?.UFirstName + " " + user?.ULastName).val(user?.id));
+                //                 })
+                //                 $("#assignee_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)).val(userData?.userId));
+                //                 $("#assignee_task").multipleSelect();
+                //                 }
+                //             }, error: function (xhr, status, error) {
+                //             }
+                //         })
                 $.ajax({
-                            url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
+                            url: "https://backend.app.spaderent.com/api/spade/getVendorAssignTo",
                             type: "GET",
                             contentType: "application/json",
                             headers: {
@@ -2753,12 +2771,9 @@ $('#preloader').css('display','none');
                             success: function (response) {
                                 if (response?.data) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee_task").append($("<option></option>").text(user?.UFirstName + " " + user?.ULastName).val(user?.id));
+                                    $("#assignee_task").append($("<option></option>").text(user?.firstName + " " + user?.lastName).val(user?.id));
                                 })
-                                $("#assignee_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)).val(userData?.userId));
-                                $("#assignee_task").multipleSelect();
                                 }
-                                // $("#assignee_task").append($("<option></option>").text().val(user.id));
                             }, error: function (xhr, status, error) {
                             }
                         })
