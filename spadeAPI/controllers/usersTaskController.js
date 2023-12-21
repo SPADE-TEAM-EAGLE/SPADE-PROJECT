@@ -360,7 +360,7 @@ exports.getAllUserTask = async (req, res) => {
           message: "task Deleted Successful",
         });
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: "No task data found",
         });
       }
