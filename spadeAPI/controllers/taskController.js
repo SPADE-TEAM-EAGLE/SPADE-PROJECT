@@ -245,9 +245,9 @@ exports.addTasks = async (req, res) => {
         taskId = taskIdCheckresult[0][0].cTaskId.split("-");
         let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
         lastPart = lastPart.toString().padStart(4, '0');
-        taskId = `SR-${idPattern}-TASK-${lastPart}`;
+        taskId = `SR-${idPattern}-MREQ-${lastPart}`;
       } else {
-        taskId = `SR-${idPattern}-TASK-0001`;
+        taskId = `SR-${idPattern}-MREQ-0001`;
       }
 
       const TasksResult = await queryRunner(addTasksQuery, [

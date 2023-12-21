@@ -22,7 +22,8 @@ const {
   unpaidAmountQuery,
   updateAuthQueryTenant,
   taskCountIdTenant,
-  taskIdUpdate
+  taskIdUpdate,
+  checkTaskid
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -214,6 +215,31 @@ exports.addTasksTenant = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
+      // ######################### task ID ################################
+      const result = await queryRunner(
+        selectQuery("users", "id"),
+        [landlordID]
+        );
+        let idPattern;
+        if (result[0][0].BusinessName !== null && result[0][0].BusinessName !== "") {
+        idPattern = result[0][0].BusinessName.substring(0, 3).toUpperCase();
+      } else {
+        idPattern =
+        (result[0][0].FirstName.substring(0, 2) || "").toUpperCase() +
+        (result[0][0].LastName.substring(0, 1) || "").toUpperCase();
+      }
+      const taskIdCheckresult = await queryRunner(checkTaskid, [landlordID]);
+      let taskId;
+      if (taskIdCheckresult[0].length > 0) {
+        taskId = taskIdCheckresult[0][0].cTaskId.split("-");
+        let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
+        lastPart = lastPart.toString().padStart(4, '0');
+        taskId = `SR-${idPattern}-MREQ-${lastPart}`;
+      } else {
+        
+        taskId = `SR-${idPattern}-MREQ-0001`;
+      }
+      // ######################### task ID ################################
       const TasksResult = await queryRunner(addTasksQuerytenant, [
         task,
         userId,
@@ -225,6 +251,7 @@ exports.addTasksTenant = async (req, res) => {
         currentDate,
         "Tenant",
         landlordID,
+        taskId
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
