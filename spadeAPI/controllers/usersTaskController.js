@@ -14,7 +14,9 @@ const {
   addUserTasksQuery,
   addUserList,
   userAllTask,
-  updateUserTasksQuery
+  updateUserTasksQuery,
+  getAllTasksQuery,
+  delteImageForTaskImages
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -323,7 +325,7 @@ exports.getAllUserTask = async (req, res) => {
         message: "All Tasks",
       });
     } else {
-      res.status(404).json({
+      res.status(200).json({
         message: "No Tasks data found",
       });
     }
@@ -338,6 +340,20 @@ exports.getAllUserTask = async (req, res) => {
 
   //  ############################# Get ALL users Task End ############################################################
   
+
+
+exports.getAllTasks=async(req,res)=>{
+  const {userId}=req.user;
+  try{
+    const result=queryRunner(getAllTasksQuery,[userId])
+    res.status(200).json(result[0])
+  }catch(error){
+    res.status(400)
+  }
+  
+
+}
+
 
 //   ############################################ DElete user Task ######################################################
   exports.deleteUserTask = async (req, res) => {

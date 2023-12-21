@@ -1212,3 +1212,12 @@ LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId
 WHERE ut.landlordId = ?`;
 exports.updateUserTasksQuery =
 "UPDATE user_task SET taskName = ? , propertyId = ?, PropertyUnitId = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyAssignee = ? , updated_at = ? where id = ? ";
+exports.getAllTasksQuery=`SELECT * 
+FROM user_task
+WHERE landlordId = ?
+UNION ALL
+SELECT * 
+FROM task
+WHERE landlordID = ?
+
+ORDER BY created_at DESC`;
