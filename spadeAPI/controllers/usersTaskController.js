@@ -411,6 +411,7 @@ exports.updateUserTask = async (req, res) => {
     try {
       const currentDate = new Date();
       const { userId,taskEmail } = req.user;
+      console.log(images)
       console.log( taskName,
         property,
         PropertyUnit,

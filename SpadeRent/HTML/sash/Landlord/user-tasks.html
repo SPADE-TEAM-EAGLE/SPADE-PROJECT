@@ -2123,12 +2123,13 @@ $('#preloader').css('display','none');
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg')|| file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+                    if(file?.ImageKey){
+                        if (file?.ImageKey?.endsWith('.jpg')|| file?.ImageKey?.endsWith('.webp') || file?.ImageKey?.endsWith('.jpeg')|| file?.ImageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
                         );
-                    } else if (file?.imageKey?.endsWith('.pdf')) {
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
@@ -2138,6 +2139,24 @@ $('#preloader').css('display','none');
                             $('<div>').addClass('file-preview')
                                 .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                         );
+                    }
+                    }else{
+                        if (file?.ImageKey?.endsWith('.jpg')|| file?.ImageKey?.endsWith('.webp') || file?.ImageKey?.endsWith('.jpeg')|| file?.ImageKey?.endsWith('.png')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', file.Image))
+                        );
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                        );
+                    } else {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                        );
+                    }
                     }
                 }
                 if (file instanceof File) {
@@ -2173,7 +2192,8 @@ $('#preloader').css('display','none');
                 }
             });
         }
-        var taskInfo = []
+        var taskInfo = [];
+        var properties;
         let taskId;
         var taskPermissions;
         var userData;
@@ -2190,7 +2210,7 @@ $('#preloader').css('display','none');
                     
                     console.log("hguydgdsygygduysgfsdg",userData)
                     $("#assignee,#assignee_update").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
-                    $("#assignee,#assignee_update").multipleSelect();
+                    $("#assignee").multipleSelect();
                     adjustPlan(rest)
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -2301,12 +2321,12 @@ $('#preloader').css('display','none');
 
                                 if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee,#assignee_update").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                    $("#assignee").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
                                 })
                                 
                                 }
                                 
-                                $("#assignee,#assignee_update").multipleSelect();
+                                $("#assignee").multipleSelect();
                             }, error: function (xhr, status, error) {
                             }
                         })
@@ -2988,6 +3008,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 var message = $("#message").val();
                 var dueDate = $("#dueDate_update").val();
                 var taskName = $("#taskName_update").val();
+                var unit=$("#unit_update").val();
                 var property = $("#property_update").val();
                 var priority = $("#priority_update").val();
                 var status = $("#status_update").val();
@@ -3053,7 +3074,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
-                                PropertyUnit:$("#unit_update").val(),
+                                PropertyUnit:unit,
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
@@ -3096,7 +3117,7 @@ $('#preloader').css('display','none');
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
-                                PropertyUnit:$("#unit_update").val(),
+                                PropertyUnit:unit,
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
@@ -3130,6 +3151,7 @@ $('#preloader').css('display','none');
                     });
                 }
             });
+            
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
@@ -3192,7 +3214,7 @@ $('#preloader').css('display','none');
                                 // console.log(task?.taskImages[0])
                                 var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
-                                if (task?.images[0]?.imageKey?.includes('pdf') || task?.images[0]?.imageKey?.includes('docx')) {
+                                if (task?.images[0]?.ImageKey?.includes('pdf') || task?.images[0]?.ImageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
                                 } else {
                                     if (task?.images[0]?.Image !== null) {
@@ -3308,7 +3330,17 @@ if (task.priority == 'High') {
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
                                 $("#property_update").val(data.propertyId);
-                                $("#unit_update").val(data.id);
+                                var propertyData=properties.find((property)=>{
+                    return property.id==data.propertyId
+                })
+                console.log(propertyData)
+                propertyData.occupiedUnits.forEach((unit)=>{
+                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                })
+                propertyData.vacantUnits.forEach((unit)=>{
+                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                })
+                $("#unit_update_task").val(data.id);
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
@@ -3350,7 +3382,7 @@ $('#preloader').css('display','none');
                     },
                     success: function (response) {
                         // properties = response.data;
-                        var properties=response?.data;
+                        properties=response?.data;
                         // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         
@@ -3364,6 +3396,8 @@ $('#preloader').css('display','none');
                                 .val(property.id);
                             $('#property,#property_update').append(option);
                         });
+
+
                         $('#property,#property_update').change(function () {
                             var selectedPropertyId = $(this).val();
                             console.log(selectedPropertyId)
