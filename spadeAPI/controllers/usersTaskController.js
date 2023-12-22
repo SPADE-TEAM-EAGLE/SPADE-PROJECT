@@ -439,12 +439,12 @@ exports.updateUserTask = async (req, res) => {
         );
         // Find the images to delete from S3 (present in propertycheckresult but not in images)
         const imagesToDelete = propertycheckresult[0].filter(
-          (image) => !images.some((img) => img.imageKey === image.ImageKey)
+          (image) => !images.some((img) => img.imageKey == image.ImageKey)
         );
         // Delete images from S3
         for (let i = 0; i < imagesToDelete.length; i++) {
           deleteImageFromS3(imagesToDelete[i].ImageKey);
-          console.log(imagesToDelete[i].ImageKey)
+          // console.log(imagesToDelete[i].ImageKey)
           await queryRunner(delteImageForTaskUserImages, [
             imagesToDelete[i].ImageKey,
           ]);
@@ -453,6 +453,8 @@ exports.updateUserTask = async (req, res) => {
         const imagesToInsert = images.filter(
           (image) => !propertyImageKeys.includes(image.imageKey)
         );
+        // console.log("imagesToInsert");
+        // console.log(imagesToInsert.length);
         for (let i = 0; i < imagesToInsert.length; i++) {
           const { image_url } = imagesToInsert[i];
           const { image_key } = imagesToInsert[i];
@@ -467,7 +469,7 @@ exports.updateUserTask = async (req, res) => {
           }
         }
       } else {
-        for (let i = 0; i < images.length - 1; i++) {
+        for (let i = 0; i < images.length; i++) {
           const { image_url } = images[i];
           const { image_key } = images[i];
           // console.log(taskID, image_url, image_key);
