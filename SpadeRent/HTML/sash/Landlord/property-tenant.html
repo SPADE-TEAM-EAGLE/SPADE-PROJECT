@@ -1462,15 +1462,22 @@ if (tenant.leaseEndDate) {
                         });
                     }
                 },
-                error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                    // console.log(error)
-                    $("#myModal_warning").modal("show");
-                          setTimeout(function() {
-                             $('#myModal_warning').modal('hide');
-                             window.location = '../Landlord/login_module.html';
-                            }, 2000);
-                }
+                error: function(xhr, status, error) {
+    $('#preloader').css('display', 'none');
+
+    var tableBody = $('#table_body');
+    if (JSON.parse(xhr.responseText).message == "No data found") {  
+        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+        tableBody.html(row);  
+    } else {
+        $("#myModal_warning").modal("show");
+        setTimeout(function() {
+            $('#myModal_warning').modal('hide');
+            window.location = '../Landlord/login_module.html';
+        }, 2000);
+    }
+}
+
             })
         });
 </script>

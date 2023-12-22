@@ -3283,12 +3283,13 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
-                        // console.log('Error: ' + error);
+                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    $("#myModal_warning_connection").modal("show");
+                                                    setTimeout(function () {
+                                                        $('#myModal_warning_connection').modal('hide');
+                                                    }, 2000);
+                        }
                     }
                 });
             })
@@ -3344,11 +3345,13 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    $("#myModal_warning_connection").modal("show");
+                                                    setTimeout(function () {
+                                                        $('#myModal_warning_connection').modal('hide');
+                                                    }, 2000);
+                        }
                         // console.log('Error: ' + error);
                     }
                 });
@@ -3691,12 +3694,13 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
-                    // console.log('Error: ' + error);
+                    if(JSON.parse(xhr.responseText).message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    $("#myModal_warning_connection").modal("show");
+                                                    setTimeout(function () {
+                                                        $('#myModal_warning_connection').modal('hide');
+                                                    }, 2000);
+                        }
                 }
             });
             $("#list-view").hide();
@@ -4073,7 +4077,10 @@ $('#preloader').css('display','none');
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                        if(JSON.parse(xhr.responseText).message != "No Prospectus Data Found"){
+                            $('#preloader').css('display','none');
+                                                   
+                        }
                                       // console.error('Error updating status:', error);
                                     }
                                 });

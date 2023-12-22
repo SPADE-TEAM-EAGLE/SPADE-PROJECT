@@ -71,6 +71,8 @@
                          oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property.">
+                            <span class="text-success valid-msg d-none">✓ Valid</span>
+                                                            <span class="text-danger error-msg d-none"></span>
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -2087,9 +2089,13 @@ $("#myModal_warning_connection").modal("show");
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+if(xhr.responseJSON.message == "No data found") {
+
+
+    var tableBody = $('#table_body');
+    tableBody.empty();
+    $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+}
                     }
                 });
             }
@@ -2501,7 +2507,7 @@ $('#preloader').css('display','none');
             const input2 = $("#phone2");
             const errorMsg2 = $("#error-msg2");
             const validMsg2 = $("#valid-msg2");
-            const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap2 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti2 = window.intlTelInput(input2[0], {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });
@@ -2539,7 +2545,7 @@ $('#preloader').css('display','none');
         const input3 = document.querySelector("#workPhone_update");
         const errorMsg3 = document.querySelector("#error-msg3");
         const validMsg3 = document.querySelector("#valid-msg3");
-        const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap3 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti3 = window.intlTelInput(input3, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2576,7 +2582,7 @@ $('#preloader').css('display','none');
         const input4 = document.querySelector("#phone_update");
         const errorMsg4 = document.querySelector("#error-msg4");
         const validMsg4 = document.querySelector("#valid-msg4");
-        const errorMap4 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap4 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti4 = window.intlTelInput(input4, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2613,7 +2619,7 @@ $('#preloader').css('display','none');
         const input1 = document.querySelector("#phone");
             const errorMsg1 = document.querySelector("#error-msg");
             const validMsg1 = document.querySelector("#valid-msg");
-            const errorMap1 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap1 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti1 = window.intlTelInput(input1, {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });

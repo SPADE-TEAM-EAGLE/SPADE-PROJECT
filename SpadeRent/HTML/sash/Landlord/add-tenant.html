@@ -3554,7 +3554,14 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                    if (JSON.parse(xhr.responseText).message == "No data found") {
+                        // console.log("tenantData")
+                        localStorage.setItem("tenants", "false")
+                        window.location = "./new-tenant.html"
+                    }else{
+
+                        $('#preloader').css('display','none');
+                    }
                 }
             });
             $.ajax({

@@ -133,7 +133,7 @@
   var phone = document.querySelector("#phone1");
 const errorMsg = document.querySelector("#error-msg");
 const validMsg = document.querySelector("#valid-msg");
-const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+const errorMap = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
 const reset = () => {
   phone.classList.remove("error");
   errorMsg.innerHTML = "";

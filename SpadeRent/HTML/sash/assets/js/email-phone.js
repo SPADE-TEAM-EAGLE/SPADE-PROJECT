@@ -28,11 +28,11 @@ $(document).on(
   }
 );
 const errorMap = [
-  "Invalid number",
+  "Invalid Phone Number. Please enter a different number",
   "Invalid country code",
   "Too short",
   "Too long",
-  "Invalid number",
+  "Invalid Phone Number. Please enter a different number",
 ];
 $('input[type="tel"]').each(function () {
   const input = $(this);
@@ -59,7 +59,7 @@ $('input[type="tel"]').each(function () {
           intlTelInputUtils.numberFormat.NATIONAL
         );
         input.val(formattedNumber);
-        validMsg.removeClass("d-none");
+        // validMsg.removeClass("d-none");
         input.removeClass("border-danger");
         input.addClass("border-green");
       } else {

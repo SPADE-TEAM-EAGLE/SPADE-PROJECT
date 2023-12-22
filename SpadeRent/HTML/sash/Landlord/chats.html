@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -30,6 +31,7 @@
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/chats.css">
 </head>
+
 <body class="app sidebar-mini ltr light-mode sidenav-toggledd">
     <div id="preloader" class="tlp-preloader">
         <div class="animation-preloader">
@@ -548,8 +550,10 @@
                                             </a>
                                         </div>
                                         <div class="d-flex country">
-                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
-                                    </div>
+                                            <div style="width: 58px;height: 58px;"
+                                                class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5">
+                                            </div>
+                                        </div>
                                         <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
                                                 class="avatarr profile-user brroundd nav-link cover-image dark-layout">
@@ -1279,7 +1283,7 @@
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                        $('#preloader').css('display', 'none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
@@ -1296,7 +1300,30 @@ $('#preloader').css('display','none');
                 socket.on('connect', function () {
                     console.log('connected');
                     $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/activeUser',
+                        url: 'https://backend.app.spaderent.com/api/spade/activeUser',
+                        type: 'PUT',
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                        },
+                        error: function (xhr, status, error) {
+                        }
+                    });
+                });
+                socket.on('connect_error', function (error) {
+                    // console.error('WebSocket connection error:', error);
+                });
+                return socket;
+            }
+            var socket = initializeWebSocket();
+            window.addEventListener('beforeunload', function () {
+                socket.disconnect();
+                console.log('disconnected');
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1304,36 +1331,13 @@ $('#preloader').css('display','none');
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        console.log("code working properly")
                     },
                     error: function (xhr, status, error) {
+                        console.log("Not working properly")
                     }
                 });
-                });
-                socket.on('connect_error', function (error) {
-                  // console.error('WebSocket connection error:', error);
-                });
-                return socket;
-            }
-            var socket = initializeWebSocket();
-            window.addEventListener('beforeunload', function () {
-    socket.disconnect();
-    console.log('disconnected');
-    $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
-        type: 'PUT',
-        contentType: false,
-        processData: false,
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-        },
-        success: function (response) {
-console.log("code working properly")
-        },
-        error: function (xhr, status, error) {
-            console.log("Not working properly")
-        }
-    });
-});
+            });
             var tenantId = [];
             var chatId = 0;
             var tenantIid = 0;
@@ -1353,7 +1357,7 @@ console.log("code working properly")
                         $(".progress").html(myprogress)
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                        $('#preloader').css('display', 'none');
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -1391,22 +1395,22 @@ $('#preloader').css('display','none');
                             $('.span_upgrade_now').hide()
                             $('.span_upgrade_now_div').hide()
                         }
-                        localStorage.setItem("landlordName",response.userName)
-                    if (response.image !== " " && response.image !== null && response.image !== "") {
-                        $("#user-img").attr("src", response.image)
-                        $("#user-img-dark").attr("src", response.image)
-                        $(".profileImage").parent().remove()
-                    }else{
-                        $("#user-img").parent().remove()
-                        $("#user-img-dark").parent().remove()
-                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
-                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
-                    }
+                        localStorage.setItem("landlordName", response.userName)
+                        if (response.image !== " " && response.image !== null && response.image !== "") {
+                            $("#user-img").attr("src", response.image)
+                            $("#user-img-dark").attr("src", response.image)
+                            $(".profileImage").parent().remove()
+                        } else {
+                            $("#user-img").parent().remove()
+                            $("#user-img-dark").parent().remove()
+                            $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                                localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
+                        }
                         $("#user-name").text(toTitleCase(response.userName))
                         $("#header-user").text(toTitleCase(response.userName))
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                        $('#preloader').css('display', 'none');
                         localStorage.removeItem('authtoken');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
@@ -1430,7 +1434,7 @@ $('#preloader').css('display','none');
                         // console.log(response);
                     },
                     error: function (xhr, status, error) {
-                      $('#preloader').css('display','none');
+                        $('#preloader').css('display', 'none');
                     }
                 });
                 $('#send-text').on('click', function (ev) {
@@ -1458,7 +1462,7 @@ $('#preloader').css('display','none');
                                 // console.log(messageData);
                             },
                             error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                $('#preloader').css('display', 'none');
                                 // console.log(error);
                             }
                         });
@@ -1489,7 +1493,7 @@ $('#preloader').css('display','none');
                                 socket.emit('chatMessage', messageData);
                             },
                             error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                $('#preloader').css('display', 'none');
                                 // console.log(error);
                             }
                         });
@@ -1709,13 +1713,13 @@ $('#preloader').css('display','none');
                                     chatTenant(Number(localStorage.getItem("tenantId")), String(localStorage.getItem("tenantName")))
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                    $('#preloader').css('display', 'none');
                                     // console.log(error);
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -1774,7 +1778,7 @@ $('#preloader').css('display','none');
                                         $(`#chat` + tenatId).removeClass('bg-success').addClass('bg-primary')
                                     },
                                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                        $('#preloader').css('display', 'none');
                                         // console.log(error);
                                     }
                                 });
@@ -1806,7 +1810,7 @@ $('#preloader').css('display','none');
                                         } else {
                                             localStorage.setItem("tenantImg", null)
                                             $(".person").css("background-image", "");
-                                            $(".person").addClass("profileImage") 
+                                            $(".person").addClass("profileImage")
                                             $(".person").text(
                                                 localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()
                                             );
@@ -1837,7 +1841,7 @@ $('#preloader').css('display','none');
                                                         $('#chatCounter').text(response.Count['count(message)'])
                                                     },
                                                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                                        $('#preloader').css('display', 'none');
                                                         $("#myModal_warning").modal("show");
                                                         setTimeout(function () {
                                                             $('#myModal_warning').modal('hide');
@@ -1927,13 +1931,13 @@ $('#preloader').css('display','none');
                                                 messDiv.scrollTop(scrollBottom);
                                             },
                                             error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                                $('#preloader').css('display', 'none');
                                                 // console.log(error);
                                             }
                                         });
                                     },
                                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                        $('#preloader').css('display', 'none');
                                         // console.log(error);
                                     }
                                 });
@@ -1941,7 +1945,7 @@ $('#preloader').css('display','none');
                             myGreeting();
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             // console.log(error);
                         }
                     });
@@ -2005,7 +2009,17 @@ $('#preloader').css('display','none');
                         }
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                        $('#preloader').css('display', 'none');
+                        if (JSON.parse(xhr.responseText).message == "No data found") {
+                            var randomImg1 = "../assets/images/users/5.jpg";
+                            var tab_pane = $('#tab-pane-ll');
+                            tab_pane.empty();
+                            let tenantNames = []
+                            let tenantCountFirst = []
+                            let tenantCountLast = []
+                            var row = '<div class="mt-5 text-dark mb-5" style="text-align: center;">No Tenant Found</div>'
+                            tab_pane.append(row);
+                        }
                         // console.log(error);
                     }
                 });
@@ -2040,7 +2054,7 @@ $('#preloader').css('display','none');
                             // console.log('Done');
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             // console.log(error);
                         }
                     });
@@ -2195,4 +2209,5 @@ $('#preloader').css('display','none');
         </script>
         <script src="../assets/js/user-sidebar-permissions.js"></script>
 </body>
+
 </html>

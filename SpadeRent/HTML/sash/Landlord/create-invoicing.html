@@ -3825,7 +3825,13 @@ $('#preloader').css('display','none');
                             });
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            if (xhr.responseJSON.message == "No data found") {
+                            localStorage.setItem("invoice", "false")
+                            window.location = './new-invoice.html'
+                        }else{
+
+                            $('#preloader').css('display','none');
+                        }
                         }
                     });
                 }
@@ -3935,7 +3941,13 @@ $('#preloader').css('display','none');
                         });
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                        if (xhr.responseJSON.message == "No data found") {
+                            localStorage.setItem("invoice", "false")
+                            window.location = './new-invoice.html'
+                        }else{
+
+                            $('#preloader').css('display','none');
+                        }
                     }
                 });
             getData()

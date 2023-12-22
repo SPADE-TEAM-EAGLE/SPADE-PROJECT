@@ -2453,13 +2453,10 @@ $('#preloader').css('display','none');
                         }
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                        // console.log(error)
-                        // $("#myModal_warning").modal("show");
-                        // setTimeout(function () {
-                        //     $('#myModal_warning').modal('hide');
-                        //     window.location = '../Landlord/login_module.html';
-                        // }, 2000);
+                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                   
+                        }
                     }
                 });
             }

@@ -871,11 +871,8 @@
                                     <input id="phone" name="phone" type="tel" autocomplete="off" maxlength="10"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                    <span id="valid-msg" class="d-none text-success valid-msg">
-                                        ✓
-                                        Valid
-                                    </span>
-                                    <span id="error-msg" class="hide text-danger error-msg"></span>
+                                        <span class="text-success valid-msg d-none">✓ Valid</span>
+                                        <span class="text-danger error-msg d-none"></span>
                                 </div>
                                 <div class="col-md-12 mt-5">
                                     <div class="form-group">
@@ -1096,11 +1093,8 @@
                                     <input id="phone2" name="phone" type="tel" autocomplete="off" maxlength="10"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                    <span id="valid-msg" class="d-none text-success valid-msg">
-                                        ✓
-                                        Valid
-                                    </span>
-                                    <span id="error-msg" class="hide text-danger error-msg"></span>
+                                        <span class="text-success valid-msg d-none">✓ Valid</span>
+                                        <span class="text-danger error-msg d-none"></span>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -2202,7 +2196,8 @@
                                                         <input id="phone1" name="phone" class="form-control" type="tel" maxlength="10"
                                                             placeholder="Enter Phone" pattern="[0-9]+"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                                        <div class="valid-feedback">Looks good!</div>
+                                                            <span class="text-success valid-msg d-none">✓ Valid</span>
+                                                            <span class="text-danger error-msg d-none"></span>
                                                     </div>
                                                     <div class="col-lg-4"></div>
                                                     <div class="col-xl-8 mb-3">
@@ -9456,6 +9451,17 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <script>
+            var helloGuys = true;
+            $(document).ajaxStop(function () {
+                if (helloGuys) {
+                    helloGuys = false;
+                    var customScript = document.createElement('script');
+                    customScript.src = "../assets/js/custom1.js";
+                    document.head.appendChild(customScript);
+                }
+            });
+        </script>
+        <script>
             $(document).ready(function () {
                 $(".tabs-menu1 a").on('click', function (event) {
                     event.preventDefault();
@@ -10694,6 +10700,12 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             },
                             error: function (xhr, status, error) {
                                 // console.log(error);
+                                if(JSON.parse(xhr.responseText).message == "Bank Account data not found"){
+                                    var row = $("<tr>");
+                                    var noDataCell = $('<td colspan="12" class="text-center">').text("No Bank Account Added");
+                                    row.append(noDataCell);
+                                    tbody.append(row);
+                        }
                             }
                         });
                         $.ajax({
@@ -10713,7 +10725,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             },
                             error: function (xhr, status, error) {
                                 // console.log(error)
-                                $("#myModal_warning").modal("show");
+                                if(JSON.parse(xhr.responseText).message != "No data found"){
+
+                                    $("#myModal_warning").modal("show");
+                                }
                                 // setTimeout(function () {
                                 //     $('#myModal_warning').modal('hide');
                                 //     window.location = '../Landlord/login_module.html';
@@ -12214,12 +12229,18 @@ $('#preloader').css('display','none');
                         }
                     },
                     error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $("#myModal_warning").modal("hide");
-                        }, 2000);
-                        // console.log(error);
+                         if (xhr.responseJSON.message == "Email ALready Exist kindly change your Email") {
+                            $("#emailVerifySubmit").prop('disabled', 'true');
+                            $("#verifyEmailSpan").html(xhr.responseJSON.message);
+                        }else{
+
+                            $('#preloader').css('display','none');
+                                                    $("#myModal_warning").modal("show");
+                                                    setTimeout(function () {
+                                                        $("#myModal_warning").modal("hide");
+                                                    }, 2000);
+                                                    // console.log(error);
+                        }
                     }
                 })
             })
@@ -12663,10 +12684,19 @@ $('#preloader').css('display','none');
                             }
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                            $("#already-exist,#already-exist-update").removeClass("d-none")
-                            $("#next-add-user-permission").attr("disabled", true)
-                            isValidEmail = false;
+                            if(xhr.responseJSON.message.includes("Email already exists")){
+                                $("#" + filedId).removeClass("border-green");
+                                $("#" + filedId).addClass("border-danger");
+                                $("#already-exist,#already-exist-update").removeClass("d-none")
+                                $("#next-add-user-permission").attr("disabled", true)
+                                isValidEmail = false;
+                            }else{
+
+                                $('#preloader').css('display','none');
+                                                            $("#already-exist,#already-exist-update").removeClass("d-none")
+                                                            $("#next-add-user-permission").attr("disabled", true)
+                                                            isValidEmail = false;
+                            }
                         },
                     });
                 })
@@ -13376,17 +13406,7 @@ $('#preloader').css('display','none');
         </script>
         <script src="../assets/js/accordian.js"></script>
         <script src="../assets/js/user-sidebar-permissions.js"></script>
-        <script>
-            var helloGuys = true;
-            $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
-                    var customScript = document.createElement('script');
-                    customScript.src = "../assets/js/custom1.js";
-                    document.head.appendChild(customScript);
-                }
-            });
-        </script>
+        
 </body>
 
 </html>
