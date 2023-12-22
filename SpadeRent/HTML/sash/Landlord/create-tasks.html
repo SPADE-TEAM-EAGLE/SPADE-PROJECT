@@ -2090,7 +2090,7 @@
                     );
                 } else {
                     if(file?.imageKey){
-                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2107,7 +2107,7 @@
                         );
                     }
                     }else{
-                        if (file?.ImageKey?.endsWith('.jpg') || file?.ImageKey?.endsWith('.jpeg') || file?.ImageKey?.endsWith('.png')) {
+                        if (file?.ImageKey?.endsWith('.jpg')|| file?.ImageKey?.endsWith('.webp') || file?.ImageKey?.endsWith('.jpeg') || file?.ImageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2175,6 +2175,7 @@
                     userData = rest;
                     $("#assignee_task,#assignee_update_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
                     $("#assignee_task").multipleSelect();
+
                     adjustPlan(rest)
                     localStorage.setItem("landlordName", userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -3522,10 +3523,18 @@ $('#preloader').css('display','none');
                 $("#priority_update_task").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                 $("#status_update_task").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                 $("#myModal_edit_task .select2-selection__rendered").empty()
-                data.AssignTo.forEach(({
+                data?.AssignTo?.forEach(({
                     ID,
-                    name
+                    name,
+                    role
                 }) => {
+                    if(role=="Landlord"){
+                        ID=ID+"l"
+                    }else if(role=="Vendor"){
+                        ID=ID+"v"
+                    }else if(role=="User"){
+                        ID=ID+"u"
+                    }
                     $("#assignee_update_task").find(`option[value="${ID}"]`).prop("selected", true);
                     $("#myModal_edit_task .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}">${name}</li>`)
                 })

@@ -3335,19 +3335,27 @@ if (task.priority == 'High') {
                 })
                 console.log(propertyData)
                 propertyData.occupiedUnits.forEach((unit)=>{
-                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                    $("#unit_update").append($("<option></option>").text(unit.unitNumber).val(unit.id))
                 })
                 propertyData.vacantUnits.forEach((unit)=>{
-                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                    $("#unit_update").append($("<option></option>").text(unit.unitNumber).val(unit.id))
                 })
-                $("#unit_update_task").val(data.id);
+                $("#unit_update").val(data.id);
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
                                 data.AssignTo.forEach(({
                                     ID,
-                                    name
-                                }) => {
+                                    name,
+                                    role
+                }) => {
+                    if(role=="Landlord"){
+                        ID=ID+"l"
+                    }else if(role=="Vendor"){
+                        ID=ID+"v"
+                    }else if(role=="User"){
+                        ID=ID+"u"
+                    }
                                     $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
                                     $("#myModal_edit .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}">${name}</li>`)
                                 })
