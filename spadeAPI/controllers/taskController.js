@@ -625,7 +625,6 @@ exports.updateTasks = async (req, res) => {
         (image) => image.ImageKey
       );
       // console.log("images" ,images)
-      // console.log(propertyImageKeys);
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = propertycheckresult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
