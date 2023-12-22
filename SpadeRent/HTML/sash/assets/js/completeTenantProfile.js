@@ -1,7 +1,7 @@
 function profileComplete(){
 $(document).ready(function (){
         $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/ProfileCompleteTenant',
+    url: 'http://localhost:3000/api/spade/ProfileCompleteTenant',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

@@ -3156,7 +3156,7 @@
                 $('#addProspectSourceCol1').css('display', 'block')
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3233,7 +3233,7 @@ $('#preloader').css('display','none');
             })
             $('#addModal_units_close').click(() => {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3294,7 +3294,7 @@ $('#preloader').css('display','none');
             })
             $('#addModal_units').on('hidden.bs.modal', function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3355,7 +3355,7 @@ $('#preloader').css('display','none');
             });
             function getData2() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/PropertyUnits',
+                    url: 'http://localhost:3000/api/spade/PropertyUnits',
                     type: 'GET',
                     data: {
                         propertyId: propertyId2
@@ -3457,7 +3457,7 @@ $('#preloader').css('display','none');
             $("#add-units1").click(() => {
                             $("#add-units1").prop("disabled", true)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addMoreUnits',
+                                url: 'http://localhost:3000/api/spade/addMoreUnits',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2
@@ -3505,7 +3505,7 @@ $('#preloader').css('display','none');
                             });
                             // console.log(propertyId2)
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
+                                url: 'http://localhost:3000/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     id: values[0],
@@ -3547,7 +3547,7 @@ $('#preloader').css('display','none');
                                 values.push(cellValue)
                             });
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/deleteMoreUnits',
+                                url: 'http://localhost:3000/api/spade/deleteMoreUnits',
                                 type: 'DELETE',
                                 data: JSON.stringify({
                                     "propertyID": propertyId2,
@@ -3586,7 +3586,7 @@ $('#preloader').css('display','none');
                             });
                         })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -3642,7 +3642,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -3817,7 +3817,7 @@ $('#preloader').css('display','none');
                 if ($("#sourceCampaign_update").val() !== "Choose..." && $("#addProspectSource1").val() == "") {
                     data.sourceCampaign = $("#sourceCampaign_update").val()
                     $.ajax({
-                        url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                        url: "http://localhost:3000/api/spade/updateProspectus",
                         type: "PUT",
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -3846,7 +3846,7 @@ $('#preloader').css('display','none');
                 } else {
                     sourceCampaign = JSON.parse(`["${$("#addProspectSource1").val()}"]`);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        url: 'http://localhost:3000/api/spade/prospectusSources',
                         type: 'POST',
                         data: JSON.stringify({
                             Sourcess: sourceCampaign
@@ -3863,7 +3863,7 @@ $('#preloader').css('display','none');
                                 var sourceCampaign = response.insertedSources[0].insertId;
                                 data.sourceCampaign = sourceCampaign
                                 $.ajax({
-                                    url: "https://backend.app.spaderent.com/api/spade/updateProspectus",
+                                    url: "http://localhost:3000/api/spade/updateProspectus",
                                     type: "PUT",
                                     data: JSON.stringify(data),
                                     contentType: 'application/json',
@@ -3991,7 +3991,7 @@ $('#preloader').css('display','none');
                 $("#table-body-disqualified").empty()
                 $("#table-body-qualified").empty()
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getProspectusSources",
+                    url: "http://localhost:3000/api/spade/getProspectusSources",
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -4016,7 +4016,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getProspectus',
+                    url: 'http://localhost:3000/api/spade/getProspectus',
                     type: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -4059,7 +4059,7 @@ $('#preloader').css('display','none');
                                 var newStatus = $(this).data('status');
                                 dropdownToggle.text(newStatus);
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                    url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                     type: 'PUT',
                                     data: JSON.stringify({
                                         prospectusid: prospectus?.id,
@@ -4142,7 +4142,7 @@ $('#preloader').css('display','none');
             $("#endDate_amount").val(endDate)
             function getGraphData() {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectTimeGraph/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4179,7 +4179,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4215,7 +4215,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4230,7 +4230,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${year}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${year}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4257,7 +4257,7 @@ $('#preloader').css('display','none');
             })
             $("#prospect-year").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightQD/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightQD/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4281,7 +4281,7 @@ $('#preloader').css('display','none');
             })
             $("#source-campaign-start-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${$(this).val()}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4317,7 +4317,7 @@ $('#preloader').css('display','none');
             })
             $("#source-campaign-end-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/sourcesCampaignInsight/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4356,7 +4356,7 @@ $('#preloader').css('display','none');
             })
             $("#prospect-status-start-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${$(this).val()}/${endDate}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4373,7 +4373,7 @@ $('#preloader').css('display','none');
             })
             $("#prospect-status-end-date").on("change", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
+                    url: `http://localhost:3000/api/spade/prospectusInsightEN/${startDate}/${$(this).val()}`,
                     headers: {
                         authorization: "Bearer " + localStorage.getItem("authtoken")
                     },
@@ -4460,7 +4460,7 @@ $('#preloader').css('display','none');
                         // console.log(parentId)
                         if ($(this).hasClass("qualified")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4482,7 +4482,7 @@ $('#preloader').css('display','none');
                             });
                         } else if ($(this).hasClass("disqualified")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4505,7 +4505,7 @@ $('#preloader').css('display','none');
                         }
                         else if ($(this).hasClass("new")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4526,7 +4526,7 @@ $('#preloader').css('display','none');
                         }
                         else if ($(this).hasClass("engaged")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4547,7 +4547,7 @@ $('#preloader').css('display','none');
                         }
                         else if ($(this).hasClass("nurturing")) {
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateProspectusStatus',
+                                url: 'http://localhost:3000/api/spade/updateProspectusStatus',
                                 type: 'PUT',
                                 data: JSON.stringify({
                                     prospectusid: parentId,
@@ -4588,7 +4588,7 @@ $('#preloader').css('display','none');
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `https://backend.app.spaderent.com/api/spade/deleteProspectus/${prospectID}`,
+                    url: `http://localhost:3000/api/spade/deleteProspectus/${prospectID}`,
                     type: "DELETE",
                     data: JSON.stringify({
                         prospectusid: prospectID
@@ -4677,7 +4677,7 @@ $('#preloader').css('display','none');
                         prospectusStatus: "active"
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                        url: 'http://localhost:3000/api/spade/addprospectus',
                         type: 'POST',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -4719,7 +4719,7 @@ $('#preloader').css('display','none');
                 } else {
                     sourceCampaign = JSON.parse(`["${$("#addProspectSource").val()}"]`);
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/prospectusSources',
+                        url: 'http://localhost:3000/api/spade/prospectusSources',
                         type: 'POST',
                         data: JSON.stringify({
                             Sourcess: sourceCampaign
@@ -4748,7 +4748,7 @@ $('#preloader').css('display','none');
                                     prospectusStatus: "active"
                                 }
                                 $.ajax({
-                                    url: 'https://backend.app.spaderent.com/api/spade/addprospectus',
+                                    url: 'http://localhost:3000/api/spade/addprospectus',
                                     type: 'POST',
                                     data: JSON.stringify(data),
                                     contentType: 'application/json',
@@ -4797,7 +4797,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -4838,7 +4838,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -4873,7 +4873,7 @@ $('#preloader').css('display','none');
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+                url: 'http://localhost:3000/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

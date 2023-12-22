@@ -1164,7 +1164,7 @@
                                                                         <b></b>
                                                                     </span>
                                                                     <br>
-                                                                    <span class="btn-link add-contactInfo span-text-color" style="font-weight: bold;">https://backend.app.spaderent.com</span>
+                                                                    <span class="btn-link add-contactInfo span-text-color" style="font-weight: bold;">http://localhost:3000</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1433,7 +1433,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1471,7 +1471,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(function() {
             $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/protected',
+                    url: 'http://localhost:3000/api/spade/protected',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1523,7 +1523,7 @@ $('#preloader').css('display','none');
                     }
                 });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1544,7 +1544,7 @@ const encryptedProspectId = decodeURIComponent((new URL(document.location)).sear
 var password = 'your-secret-password';
 const prospectId = sjcl.decrypt(password, encryptedProspectId);
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/getProspectusByID',
+    url: 'http://localhost:3000/api/spade/getProspectusByID',
     type: 'GET',
     data:{
         prospectusId: prospectId
@@ -1598,7 +1598,7 @@ $('#preloader').css('display','none');
     function logout() {
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                url: 'http://localhost:3000/api/spade/inactiveUser',
                 type: 'PUT',
                 contentType: false,
                 processData: false,
