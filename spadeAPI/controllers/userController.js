@@ -1462,23 +1462,20 @@ exports.propertyDelete = async (req, res) => {
         propertyimages = propertycheckresult[0].map((image) => image.Image);
         // delete folder images
         imageToDelete(propertyimages);
-        const propertyDeleteresult = await queryRunner(
+        const propertyImageDeleteresult = await queryRunner(
           deleteQuery("propertyimage", "propertyID"),
           [id]
         );
         const propertyUnitsCountResult = await queryRunner(UnitCounts,[userId]);
         const count = propertyUnitsCountResult[0][0].count;
         const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [count,userId]);
-        if (propertyDeleteresult[0].affectedRows > 0) {
-          res.status(200).json({
-            message: " Property deleted successfully",
-          });
-        }
-      } else {
-        res.status(404).json({
-          message: "No Property Image data found ",
-        });
-      }
+        // if (propertyDeleteresult[0].affectedRows > 0) {
+          
+        // }
+      } 
+      res.status(200).json({
+        message: " Property deleted successfully",
+      });
     } else {
       res.status(400).json({
         message: "No data found",

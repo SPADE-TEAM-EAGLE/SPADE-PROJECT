@@ -2187,7 +2187,7 @@ $('#preloader').css('display','none');
                 },
                 success: function ({ userName, image,tasks,create_at,planID,...rest }) {
                     userData=rest;
-                    $("#assignee_update,#assignee").empty();
+                    
                     console.log("hguydgdsygygduysgfsdg",userData)
                     $("#assignee,#assignee_update").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
                     $("#assignee,#assignee_update").multipleSelect();
@@ -2327,11 +2327,11 @@ $('#preloader').css('display','none');
                         selectElement.append($('<option></option>').text('No Vendor available..'));
                     } else {
                         response.data.forEach((vendor) => {
-                            var optionText = (vendor.firstName + " " + vendor.lastName)+' (vendor)';
-                            var optionValue = vendor.id+'v';
+                            var optionText = ((vendor.firstName + " " + vendor.lastName)+' (vendor)');
+                            var optionValue = (vendor.id+'v');
                             var option = $('<option></option>')
-                                .val(vendor.id)
-                                .text(vendor.firstName + " " + vendor.lastName);
+                                .val(optionValue)
+                                .text(optionText);
                             selectElement.append(option);
                             $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
                             
@@ -2682,6 +2682,7 @@ $("#view-task-line-item").append(`
                 $('#preloader').css('display', 'flex')
                 var task = $("#task").val();
                 var assignee = []
+                console.log($("#assignee").val())
                 $("#assignee").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3052,7 +3053,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
-                                PropertyUnit:$("#unit").val(),
+                                PropertyUnit:$("#unit_update").val(),
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
@@ -3095,7 +3096,7 @@ $('#preloader').css('display','none');
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
-                                PropertyUnit:$("#unit").val(),
+                                PropertyUnit:$("#unit_update").val(),
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
