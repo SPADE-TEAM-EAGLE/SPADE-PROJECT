@@ -83,7 +83,9 @@ exports.GetBankAccount = async (req, res) => {
             if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
-                res.status(404).send("Bank Account data not found");
+                res.status(404).json({
+                    message: "Bank Account data not found"
+                });
             }
         } catch (error) {
             console.log(error);
