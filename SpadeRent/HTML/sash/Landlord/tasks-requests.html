@@ -1754,7 +1754,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1779,7 +1779,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(function() {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1809,7 +1809,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -1853,7 +1853,7 @@ $('#preloader').css('display','none');
     let selectedFiles=[]
     $(document).ready(()=>{
         $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1903,7 +1903,7 @@ $('#preloader').css('display','none');
                 }
             });
         $.ajax({
-                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2092,7 +2092,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getAllTaskTenantRequest',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenantRequest',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2270,6 +2270,7 @@ $('#preloader').css('display','none');
                         }, 2000);
                     }
                 });
+            
             }
             getData()
             $(document).on('click', '#save', function (e) {
@@ -2301,7 +2302,7 @@ $('#preloader').css('display','none');
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2324,7 +2325,7 @@ $('#preloader').css('display','none');
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateTasks',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -2367,7 +2368,7 @@ $('#preloader').css('display','none');
                         images: []
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/updateTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -2440,7 +2441,7 @@ $('#preloader').css('display','none');
 <script>
     $(document).ready(() => {
         $.ajax({
-            url: 'http://localhost:3000/api/spade/verifyMailCheck',
+            url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

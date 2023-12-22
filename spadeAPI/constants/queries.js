@@ -753,7 +753,7 @@ exports.addTasksQuery =
   "INSERT INTO user_task (taskName,propertyId,PropertyUnitId ,dueDate,status, priority, notes,notifyAssignee, created_at , createdBy,landlordID,cTaskId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
   exports.addTasksQuerytenant =
-  "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
+  "INSERT INTO task (taskName, tenantID, dueDate,status, priority, notes, notifyTenant, created_at , createdBy,landlordID,cTaskId) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
 exports.addVendorList =
   "INSERT INTO taskassignto (taskId, vendorId) VALUES (?, ?)";
   exports.addUserList =
@@ -1205,8 +1205,11 @@ GROUP BY
 tk.id
 `;
 exports.userAllTask = `
-SELECT *, ut.id as taskid
+SELECT *, ut.id as taskid, ut.status as taskStatus
 FROM user_task AS ut
 LEFT JOIN property AS p ON p.id = ut.propertyId
 LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId
 WHERE ut.landlordId = ?`;
+exports.updateUserTasksQuery =
+"UPDATE user_task SET taskName = ? , propertyId = ?, PropertyUnitId = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyAssignee = ? , updated_at = ? where id = ? ";
+exports.delteImageForTaskUserImages = "DELETE FROM userTaskImages WHERE ImageKey = ?";

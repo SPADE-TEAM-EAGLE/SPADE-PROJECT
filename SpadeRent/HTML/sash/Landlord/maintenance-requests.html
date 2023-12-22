@@ -2016,7 +2016,7 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2044,7 +2044,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2168,7 +2168,7 @@ $('#preloader').css('display','none');
         var userData;
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2220,7 +2220,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2242,7 +2242,7 @@ $('#preloader').css('display','none');
 
  
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2483,7 +2483,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2506,7 +2506,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 images: imageArray,
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addTasks',
+                                url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2560,7 +2560,7 @@ $('#preloader').css('display','none');
                         images: [],
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -2690,7 +2690,7 @@ $('#preloader').css('display','none');
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2769,7 +2769,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2792,7 +2792,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateTasks',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -2835,7 +2835,7 @@ $('#preloader').css('display','none');
                         images: []
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/updateTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -2866,7 +2866,7 @@ $('#preloader').css('display','none');
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/deleteTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "taskID": taskId
@@ -2898,7 +2898,7 @@ $('#preloader').css('display','none');
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getAllTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3090,7 +3090,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3125,7 +3125,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

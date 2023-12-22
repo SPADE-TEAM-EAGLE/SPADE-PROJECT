@@ -71,6 +71,8 @@
                          oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property.">
+                            <span class="text-success valid-msg d-none">✓ Valid</span>
+                                                            <span class="text-danger error-msg d-none"></span>
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -1475,7 +1477,7 @@
 <script>
             $(document).ready(function(){
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                    url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1558,7 +1560,7 @@ $('#preloader').css('display','none');
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1586,7 +1588,7 @@ $('#preloader').css('display','none');
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1612,7 +1614,7 @@ $('#preloader').css('display','none');
             });
         });
         $.ajax({
-                url: 'http://localhost:3000/api/spade/getStates',
+                url: 'https://backend.app.spaderent.com/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1661,7 +1663,7 @@ $('#preloader').css('display','none');
                 }
             })
             $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1739,7 +1741,7 @@ $('#preloader').css('display','none');
             }
             function getVendorCategoryFunction() {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getVendorCategory',
+                    url: 'https://backend.app.spaderent.com/api/spade/getVendorCategory',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -1806,7 +1808,7 @@ $('#preloader').css('display','none');
                 var category = $("#category").val();
                 if (category == "Choose..." || category == "Add vendor categories first!!") {
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1832,7 +1834,7 @@ $('#preloader').css('display','none');
                             formData.append('categoryID', category);
                             // console.log(status)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addVendor',
+                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1896,7 +1898,7 @@ $('#preloader').css('display','none');
                     var currentDisplayStyle = categoryCol.css('display');
                     if (currentDisplayStyle === 'block' && ($('#add_category_input').val()) != "") {
                         $.ajax({
-                        url: 'http://localhost:3000/api/spade/addVendorCategory',
+                        url: 'https://backend.app.spaderent.com/api/spade/addVendorCategory',
                         type: 'POST',
                         data: JSON.stringify({
                             categories: $('#add_category_input').val()
@@ -1922,7 +1924,7 @@ $('#preloader').css('display','none');
                             formData.append('categoryID', category);
                             // console.log(status)
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addVendor',
+                                url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
                                 data: JSON.stringify({
                                     firstName: firstName,
@@ -1994,7 +1996,7 @@ $('#preloader').css('display','none');
                         formData.append('categoryID', category);
                         // console.log(status)
                         $.ajax({
-                            url: 'http://localhost:3000/api/spade/addVendor',
+                            url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                             type: 'POST',
                             data: JSON.stringify({
                                 firstName: firstName,
@@ -2047,7 +2049,7 @@ $("#myModal_warning_connection").modal("show");
             });
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getAllVendors',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2087,9 +2089,13 @@ $("#myModal_warning_connection").modal("show");
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+if(xhr.responseJSON.message == "No data found") {
+
+
+    var tableBody = $('#table_body');
+    tableBody.empty();
+    $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+}
                     }
                 });
             }
@@ -2132,7 +2138,7 @@ $('#preloader').css('display','none');
             })
             $("#confirmDelete").on("click", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/deleteVendor/${vendorID}`,
+                    url: `https://backend.app.spaderent.com/api/spade/deleteVendor/${vendorID}`,
                     type: 'DELETE',
                     contentType: false,
                     processData: false,
@@ -2176,7 +2182,7 @@ $('#preloader').css('display','none');
             })
             $("#save").on("click", function () {
                 $.ajax({
-                    url: `http://localhost:3000/api/spade/updateVendor`,
+                    url: `https://backend.app.spaderent.com/api/spade/updateVendor`,
                     type: 'PUT',
                     data: JSON.stringify({
                         vendId: vendorID,
@@ -2219,7 +2225,7 @@ $('#preloader').css('display','none');
             })
             $("#email").on("input",function(){
                 $.ajax({
-                    url:`http://localhost:3000/api/spade/VendorCheckEmail/${$("#email").val()}`,
+                    url:`https://backend.app.spaderent.com/api/spade/VendorCheckEmail/${$("#email").val()}`,
                     type:"GET",
                     contentType: "application/json",
                     headers:{
@@ -2384,7 +2390,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -2419,7 +2425,7 @@ $('#preloader').css('display','none');
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2443,7 +2449,7 @@ $('#preloader').css('display','none');
     <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2501,7 +2507,7 @@ $('#preloader').css('display','none');
             const input2 = $("#phone2");
             const errorMsg2 = $("#error-msg2");
             const validMsg2 = $("#valid-msg2");
-            const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap2 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti2 = window.intlTelInput(input2[0], {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });
@@ -2539,7 +2545,7 @@ $('#preloader').css('display','none');
         const input3 = document.querySelector("#workPhone_update");
         const errorMsg3 = document.querySelector("#error-msg3");
         const validMsg3 = document.querySelector("#valid-msg3");
-        const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap3 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti3 = window.intlTelInput(input3, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2576,7 +2582,7 @@ $('#preloader').css('display','none');
         const input4 = document.querySelector("#phone_update");
         const errorMsg4 = document.querySelector("#error-msg4");
         const validMsg4 = document.querySelector("#valid-msg4");
-        const errorMap4 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap4 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti4 = window.intlTelInput(input4, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2613,7 +2619,7 @@ $('#preloader').css('display','none');
         const input1 = document.querySelector("#phone");
             const errorMsg1 = document.querySelector("#error-msg");
             const validMsg1 = document.querySelector("#valid-msg");
-            const errorMap1 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap1 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti1 = window.intlTelInput(input1, {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });

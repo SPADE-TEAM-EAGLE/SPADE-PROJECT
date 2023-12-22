@@ -1001,16 +1001,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="d-flex">
-                            <label class="custom-control custom-checkbox me-2">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1_update"
-                                    value="option1"
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
+                            
                             <label class="custom-control custom-checkbox">
                                 <input
                                     type="checkbox"
@@ -2034,7 +2025,7 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
+                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2062,7 +2053,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/ProfileComplete',
+                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -2115,9 +2106,10 @@ $('#preloader').css('display','none');
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
+            console.log(selectedFiles.length)
             selectedFiles.forEach(function (file, index) {
-                // console.log(selectedFiles.length)
-                // console.log(file)
+                
+                console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2131,7 +2123,7 @@ $('#preloader').css('display','none');
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+                    if (file?.imageKey?.endsWith('.jpg')|| file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2181,24 +2173,24 @@ $('#preloader').css('display','none');
                 }
             });
         }
-       
-        $(document).ready(function () {
-             var taskInfo = []
+        var taskInfo = []
         let taskId;
         var taskPermissions;
         var userData;
+        $(document).ready(function () {
+             
         $.ajax({
-                url: 'http://localhost:3000/api/spade/protected',
+                url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function ({ userName, image,tasks,create_at,planID,...rest }) {
                     userData=rest;
-                    $("#assignee_update,#assignee").empty();
+                    
                     console.log("hguydgdsygygduysgfsdg",userData)
-                    $("#assignee").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
-                    $("#assignee").multipleSelect();
+                    $("#assignee,#assignee_update").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
+                    $("#assignee,#assignee_update").multipleSelect();
                     adjustPlan(rest)
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -2245,7 +2237,7 @@ $('#preloader').css('display','none');
             });
             
             // $.ajax({
-            //     url: 'http://localhost:3000/api/spade/viewAllPropertyTenant',
+            //     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
             //     method: 'GET',
             //     contentType: "application/json; charset=utf-8",
             //     headers: {
@@ -2267,7 +2259,7 @@ $('#preloader').css('display','none');
 
 
             //             $.ajax({
-//                     url: 'http://localhost:3000/api/spade/allproperty',
+//                     url: 'https://backend.app.spaderent.com/api/spade/allproperty',
 //                     type: 'GET',
 //                     contentType: false,
 //                     processData: false,
@@ -2298,7 +2290,7 @@ $('#preloader').css('display','none');
                 
                 
             $.ajax({
-                            url: "http://localhost:3000/api/spade/userPermissionGetAll",
+                            url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
                             type: "GET",
                             contentType: "application/json",
                             headers: {
@@ -2309,18 +2301,18 @@ $('#preloader').css('display','none');
 
                                 if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                    $("#assignee,#assignee_update").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
                                 })
                                 
                                 }
                                 
-                                $("#assignee").multipleSelect();
+                                $("#assignee,#assignee_update").multipleSelect();
                             }, error: function (xhr, status, error) {
                             }
                         })
                         
             $.ajax({
-                url: 'http://localhost:3000/api/spade/getVendorAssignTo',
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
                 method: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2335,11 +2327,11 @@ $('#preloader').css('display','none');
                         selectElement.append($('<option></option>').text('No Vendor available..'));
                     } else {
                         response.data.forEach((vendor) => {
-                            var optionText = (vendor.firstName + " " + vendor.lastName)+' (vendor)';
-                            var optionValue = vendor.id+'v';
+                            var optionText = ((vendor.firstName + " " + vendor.lastName)+' (vendor)');
+                            var optionValue = (vendor.id+'v');
                             var option = $('<option></option>')
-                                .val(vendor.id)
-                                .text(vendor.firstName + " " + vendor.lastName);
+                                .val(optionValue)
+                                .text(optionText);
                             selectElement.append(option);
                             $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
                             
@@ -2347,6 +2339,7 @@ $('#preloader').css('display','none');
                         });
                     }
                     selectElement.multipleSelect();
+                    $("#assignee_update").multipleSelect();
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
@@ -2457,18 +2450,27 @@ return NewDate
                 if(data?.AssignTo?.length > 0){
                     data.AssignTo.forEach((item) => {
 // console.log(item)
-$("#view-task-line-item").append(`<tr class="tr">
-                            <td>
-                                <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
-                            </td>
-                            <td>
-                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
-                            </td>
-                            <td>
-                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
-                            </td>
-                        </tr>`)
-})
+$("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.landlordPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+
+
+                    })
                 }
                 else{
                     $("#view-task-line-item").append(`<tr class="tr">
@@ -2565,7 +2567,7 @@ $("#view-task-line-item").append(`<tr class="tr">
 //                         formData.append('image', selectedFiles[i]);
 //                     }
 //                     $.ajax({
-//                         url: 'http://localhost:3000/api/spade/upload',
+//                         url: 'https://backend.app.spaderent.com/api/spade/upload',
 //                         type: 'POST',
 //                         data: formData,
 //                         contentType: false,
@@ -2588,7 +2590,7 @@ $("#view-task-line-item").append(`<tr class="tr">
 //                                 images: imageArray,
 //                             }
 //                             $.ajax({
-//                                 url: 'http://localhost:3000/api/spade/addTasks',
+//                                 url: 'https://backend.app.spaderent.com/api/spade/addTasks',
 //                                 type: 'POST',
 //                                 data: JSON.stringify(taskData),
 //                                 contentType: 'application/json',
@@ -2642,7 +2644,7 @@ $("#view-task-line-item").append(`<tr class="tr">
 //                         images: [],
 //                     }
 //                     $.ajax({
-//                         url: 'http://localhost:3000/api/spade/addTasks',
+//                         url: 'https://backend.app.spaderent.com/api/spade/addTasks',
 //                         type: 'POST',
 //                         data: JSON.stringify(taskData),
 //                         contentType: 'application/json',
@@ -2680,6 +2682,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 $('#preloader').css('display', 'flex')
                 var task = $("#task").val();
                 var assignee = []
+                console.log($("#assignee").val())
                 $("#assignee").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -2721,7 +2724,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                         formData.append('image', selectedFiles[i]);
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -2744,7 +2747,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 images: imageArray,
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/addUsersTask',
+                                url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2798,7 +2801,7 @@ $('#preloader').css('display','none');
                         images: [],
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/addUsersTask',
+                        url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -2928,7 +2931,7 @@ $('#preloader').css('display','none');
             function updateTable() {
                 $('#table_body').empty();
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/allproperty',
+                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -2988,8 +2991,35 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 var property = $("#property_update").val();
                 var priority = $("#priority_update").val();
                 var status = $("#status_update").val();
-                var assignee = $("#assignee_update").val();
-                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+                var assignee = []
+                console.log($("#assignee_update").val())
+                $("#assignee_update").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
                 var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
                 var existingImageNames = [];
                 selectedFiles.forEach((file) => {
@@ -3007,7 +3037,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                         formData.append('image', file);
                     });
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/upload',
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -3018,19 +3048,19 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                             var imageArray = [...response.images, ...existingImageNames];
                             const formData = {
                                 taskID: taskId,
-                                notifyTenant: isNotifyTenantChecked,
-                                notifyVendor: isNotifyAssigneesChecked,
-                                message: message,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
+                                PropertyUnit:$("#unit_update").val(),
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'http://localhost:3000/api/spade/updateTasks',
+                                url: 'https://backend.app.spaderent.com/api/spade/updateUserTask',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -3061,19 +3091,19 @@ $('#preloader').css('display','none');
                 } else {
                     const formData = {
                         taskID: taskId,
-                        notifyTenant: isNotifyTenantChecked,
-                        notifyVendor: isNotifyAssigneesChecked,
-                        message: message,
-                        dueDate: dueDate,
-                        taskName: taskName,
-                        property: property,
-                        priority: priority,
-                        status: status,
-                        assignee: assignee,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                PropertyUnit:$("#unit_update").val(),
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
                         images: []
                     }
                     $.ajax({
-                        url: 'http://localhost:3000/api/spade/updateTasks',
+                        url: 'https://backend.app.spaderent.com/api/spade/updateUserTask',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -3104,7 +3134,7 @@ $('#preloader').css('display','none');
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/deleteTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/deleteUserTask',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "taskID": taskId
@@ -3136,7 +3166,7 @@ $('#preloader').css('display','none');
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getAllUserTask',
+                    url: 'https://backend.app.spaderent.com/api/spade/getAllUserTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3278,9 +3308,9 @@ if (task.priority == 'High') {
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
                                 $("#property_update").val(data.propertyId);
-                                $("#unit_update").val(parseInt(data.id));
+                                $("#unit_update").val(data.id);
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
-                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                $("#status_update").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
                                 data.AssignTo.forEach(({
                                     ID,
@@ -3309,8 +3339,9 @@ $('#preloader').css('display','none');
                         }, 2000);
                     }
                 });
+                
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/getPropertyUnitsTenant',
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3335,11 +3366,13 @@ $('#preloader').css('display','none');
                         });
                         $('#property,#property_update').change(function () {
                             var selectedPropertyId = $(this).val();
+                            console.log(selectedPropertyId)
                             var selectedProperty = properties.find(function (property) {
                                 return property.id == selectedPropertyId;
                             });
+                            console.log(selectedProperty)
                             var propertyUnitSelect = $('#unit');
-                            $('#unit').empty()
+                            $('#unit,#unit_update').empty()
                             
                                 $('#unit,#unit_update').append($('<option></option>')
                                     .text("Choose..."))
@@ -3391,7 +3424,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/inactiveUser',
+                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
@@ -3426,7 +3459,7 @@ $('#preloader').css('display','none');
 <script>
         $(document).ready(() => {
             $.ajax({
-                url: 'http://localhost:3000/api/spade/verifyMailCheck',
+                url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")

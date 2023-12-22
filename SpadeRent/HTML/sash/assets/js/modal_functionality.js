@@ -17,7 +17,7 @@ $("#units").on("input",function(){
 $("#units").val(199);}})
 
 $.ajax({
-    url: 'http://localhost:3000/api/spade/protected',
+    url: 'https://backend.app.spaderent.com/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -134,9 +134,10 @@ ev.preventDefault();
 function updateSelectedFilesContainer() {
 var selectedFilesContainer = $('.file-grid');
 selectedFilesContainer.empty();
+console.log(selectedFiles.length)
 selectedFiles.forEach(function (file, index) {
-// console.log(selectedFiles.length)
-// console.log(file)
+
+console.log(file)
 var fileElement = $('<div>')
 .addClass('selected-file');
 if (file.type && file.type.includes('image')) {
@@ -150,7 +151,7 @@ $('<div>').addClass('file-preview')
     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
 );
 } else {
-if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+if (file?.imageKey?.endsWith('.jpg') ||file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
 fileElement.append(
     $('<div>').addClass('file-preview')
         .append($('<img style="height:80px">').attr('src', file.Image))
@@ -202,7 +203,7 @@ fileElement
 }
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:3000/api/spade/getStates',
+        url: 'https://backend.app.spaderent.com/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
           // console.log(data)
@@ -345,7 +346,7 @@ $(document).on('click', '#next', function(e) {
 // $("#addModal").modal("hide")
 $('#preloader').css('display','flex')
         $.ajax({
-            url: 'http://localhost:3000/api/spade/upload',
+            url: 'https://backend.app.spaderent.com/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -367,7 +368,7 @@ $('#preloader').css('display','flex')
                     images: imageArray
                 };
                 $.ajax({
-                    url: 'http://localhost:3000/api/spade/property',
+                    url: 'https://backend.app.spaderent.com/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -442,7 +443,7 @@ $('#preloader').css('display','none');
         // $("#addModal").modal("hide")
         $('#preloader').css('display','flex')
         $.ajax({
-            url: 'http://localhost:3000/api/spade/property',
+            url: 'https://backend.app.spaderent.com/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',

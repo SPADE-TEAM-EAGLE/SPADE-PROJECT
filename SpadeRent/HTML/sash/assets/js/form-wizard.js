@@ -150,25 +150,24 @@ var validPhone = /^\d{11}$/;
 var input = document.querySelector("#phone1");
 const errorMsg = document.querySelector("#error-msg");
 const validMsg = document.querySelector("#valid-msg");
-const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+const errorMap = [
+  "Invalid Phone Number. Please enter a different number",
+  "Invalid country code",
+  "Too short",
+  "Too long",
+  "Invalid Phone Number. Please enter a different number",
+  "Invalid format",
+  "Number is not valid",
+  "Country code is not valid",
+  "Area code is not valid",
+  "Too many leading zeros",
+  "Not a valid number in the selected country"
+];
 const reset = () => {
   input.classList.remove("error");
-  errorMsg.innerHTML = "";
-  errorMsg.classList.add("hide");
-  validMsg.classList.add("hide");
+  errorMsg.classList.add("d-none");
+  validMsg.classList.add("d-none");
 };
-// input.addEventListener('keyup', () => { 
-//   reset();
-//   if (input.value.trim()) {
-//     if (iti.isValidNumber()) {
-//       input.classList.remove("is-invalid");
-//       input.classList.add("is-valid");
-//     } else {
-//     input.classList.add("is-invalid");
-//     input.classList.remove("is-valid");
-//     }
-//   }
-// });
 input.addEventListener("input", () => {
   reset();
   if (input.value.trim()) {
@@ -179,21 +178,23 @@ input.addEventListener("input", () => {
         intlTelInputUtils.numberFormat.NATIONAL
       );
       input.value = formattedNumber;
-      validMsg.classList.remove("d-none");
+      // validMsg.classList.remove("d-none");
       input.classList.remove("border-danger");
+      input.classList.remove("is-invalid");
       input.classList.add("border-green");
+      input.classList.add("is-valid");
     } else {
+      input.classList.remove("is-valid");
       input.classList.add("border-danger");
+      input.classList.add("is-invalid");
       input.classList.remove("border-green");
       input.classList.add("error");
-      const errorCode = iti.getValidationError();
+      const errorCode = iti.getValidationError() == -99 ? 2 : iti.getValidationError();
       errorMsg.innerHTML = errorMap[errorCode];
       errorMsg.classList.remove("d-none");
     }
   }
 });
-input.addEventListener('change', reset);
-input.addEventListener('keyup', reset);
 let card_btnn1 = document.getElementsByClassName("card-btnn")[0];
 let card_btnn2 = document.getElementsByClassName("card-btnn")[1];
 let card_btnn3 = document.getElementsByClassName("card-btnn")[2];
@@ -358,7 +359,7 @@ $(document).ready(function() {
   $("#email").on("input",()=>{
       var email = $("#email").val();
       $.ajax({
-          url: "http://localhost:3000/api/spade/checkemail",
+          url: "https://backend.app.spaderent.com/api/spade/checkemail",
           type: "GET",
           contentType: "application/json",
           data: {
