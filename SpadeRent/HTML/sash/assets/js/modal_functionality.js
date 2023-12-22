@@ -134,9 +134,10 @@ ev.preventDefault();
 function updateSelectedFilesContainer() {
 var selectedFilesContainer = $('.file-grid');
 selectedFilesContainer.empty();
+console.log(selectedFiles.length)
 selectedFiles.forEach(function (file, index) {
-// console.log(selectedFiles.length)
-// console.log(file)
+
+console.log(file)
 var fileElement = $('<div>')
 .addClass('selected-file');
 if (file.type && file.type.includes('image')) {
@@ -150,7 +151,7 @@ $('<div>').addClass('file-preview')
     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
 );
 } else {
-if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+if (file?.imageKey?.endsWith('.jpg') ||file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
 fileElement.append(
     $('<div>').addClass('file-preview')
         .append($('<img style="height:80px">').attr('src', file.Image))

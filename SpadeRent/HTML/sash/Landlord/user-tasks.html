@@ -521,6 +521,8 @@
                 </div>
             </div>
         </div>
+
+
         <div
             class="modal fade"
             id="addModal"
@@ -531,8 +533,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title"><strong class="color-primary">Maintainance </strong>Request
-                                
+                            <h2 class="modal-title">Create
+                                <strong class="color-primary">New Task</strong>
                             </h2>
                             <span class="">
                                 The real power of tasks is keeping track of deadlines and having a
@@ -558,7 +560,7 @@
                             data-bs-parent="#accordionExample"
                         >
                             <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="inputEmail4" class="form-label fw-bold">Task Name
                                         <span class="text-danger"> *</span>
                                     </label>
@@ -572,13 +574,27 @@
                                     >
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="inputState" class="form-label fw-bold">Related To
                                         <span class="text-danger"> *</span>
                                     </label>
                                     <select
                                         required
                                         id="property"
+                                        class="form-select form select2-show-search"
+                                        placeholder="Enter Related To"
+                                    >
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Unit
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        required
+                                        id="unit"
                                         class="form-select form select2-show-search"
                                         placeholder="Enter Related To"
                                     >
@@ -594,13 +610,12 @@
                                         placeholder="Enter Assign To"
                                         class="hide-select"
                                         id="assignee"
-                                    ></select>
-                                    <span class="text-danger d-none" id="vendor-span">Add vendors first!!</span>
+                                    >
+                                    
+                                </select>
+                                    <span class="text-danger d-none" id="vendor-span">Add assignee first!!</span>
                                     <br>
-                                    <a href="./tasks-vendors.html" id="addVendorAnchor" style="display: none;">
-                                        Add
-                                    Vendor!
-                                    </a>
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <label for="inputEmail4" class="form-label fw-bold">Due Date
@@ -700,225 +715,12 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="d-flex">
-                            <label class="custom-control custom-checkbox me-2">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1"
-                                    value=""
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1"
-                                    value=""
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                        </div>
-                        <div class="">
-                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
-                            <a
-                                href="javascript:void(0)"
-                                class="btn text-light btn-pill button disabled"
-                                style="background-color:#1467B0;"
-                                id="next"
-                            >Next</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="modal fade"
-            id="addModal_task"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title">Create
-                                <strong class="color-primary">New Task</strong>
-                            </h2>
-                            <span class="">
-                                The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the tasks for later reference.
-                            </span>
-                        </div>
-                        <button
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            id="top-close"
-                        >
-                            <span aria-hidden="true">
-                                <i class="fi fi-rs-circle-xmark text-dark"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div
-                            id="collapseOne"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-md-6">
-                                    <label for="inputEmail4" class="form-label fw-bold">Task Name
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        id="task_task"
-                                        required
-                                        class="form-control"
-                                        placeholder="Enter task name"
-                                        type="text"
-                                        placeholder="Enter Task Name"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputState" class="form-label fw-bold">Related To
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        required
-                                        id="property_task"
-                                        class="form-select form select2-show-search"
-                                        placeholder="Enter Related To"
-                                    >
-                                        <option selected>Choose...</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-bold">Assign To (Optional)</label>
-                                    <select
-                                        multiple="multiple"
-                                        multiple
-                                        placeholder="Enter Assign To"
-                                        class="hide-select"
-                                        id="assignee_task"
-                                    >
-                                    
-                                </select>
-                                    <span class="text-danger d-none" id="vendor-span">Add assignee first!!</span>
-                                    <br>
-                                    
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label fw-bold">Due Date
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        id="dueDate_task"
-                                        class="form-control"
-                                        required
-                                        placeholder="MM/DD/YYYY"
-                                        type="date"
-                                        placeholder="Enter Due Date"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Status
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        id="status_task"
-                                        required
-                                        class="form-select form select2-show-search"
-                                        placeholder="Select Status"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option value="not started">Not Started</option>
-                                        <option value="in progress">In progress</option>
-                                        <option value="completed">Completed</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Priority
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        id="priority_task"
-                                        required
-                                        class="form-select form select2-show-search"
-                                        placeholder="Select Priority"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option name="high">High</option>
-                                        <option name="moderate">Moderate</option>
-                                        <option name="low">Low</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Notes (Optional)</label>
-                                    <textarea
-                                        id="notes_task"
-                                        class="form-control mb-4"
-                                        placeholder="Enter Your Description"
-                                        rows="4"
-                                    ></textarea>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
-                                    <div
-                                        class="custom-file"
-                                        style="border: 1px dashed #00000087;"
-                                        ondrop="dropHandler(event);"
-                                        ondragover="dragOverHandler(event);"
-                                    >
-                                        <input
-                                            id="fileInput_task"
-                                            type="file"
-                                            name="media"
-                                            class="custom-file-input form"
-                                            accept=".pdf,application/pdf"
-                                            aria-label="hello"
-                                            multiple
-                                        >
-                                        <span className="d-none"></span>
-                                        <label class="custom-file-label" for="fileInput_task">
-                                            <i class="fi fi-rs-cloud-upload"></i>
-                                            <div class="custom-file-text">
-                                                <span>Upload Files here</span>
-                                                <span>PDF file size no more than 5MB</span>
-                                                <small class="text-danger d-none" id="count-text">Maximum number of files reached.</small>
-                                                <small class="text-danger d-none" id="size-text">
-                                                    File size exceeds 5MB
-                                                limit.
-                                                </small>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="selected-files">
-                                        <div class="file-grid"></div>
-                                    </div>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <div class="d-flex">
                             
                             <label class="custom-control custom-checkbox">
                                 <input
                                     type="checkbox"
                                     class="custom-control-input"
-                                    name="example-checkbox1_task"
+                                    name="example-checkbox1"
                                     value=""
                                     checked=""
                                 >
@@ -931,7 +733,7 @@
                                 href="javascript:void(0)"
                                 class="btn text-light btn-pill button"
                                 style="background-color:#1467B0;"
-                                id="next_task"
+                                id="next"
                             >Next</a>
                         </div>
                     </div>
@@ -1005,219 +807,7 @@
                 </div>
             </div>
         </div>
-        <div
-            class="modal fade"
-            id="myModal_edit_task"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="text-justify ps-2 border-model-line">
-                            <h2 class="modal-title">Post an
-                                <strong class="color-primary">Update</strong>
-                            </h2>
-                            <span class="">
-                                The real power of tasks is keeping track of deadlines and having a
-                            log of all work and communication related to the tasks for later reference.
-                            </span>
-                        </div>
-                        <button
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            id="top-close"
-                        >
-                            <span aria-hidden="true">
-                                <i class="fi fi-rs-circle-xmark text-dark"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div
-                            id="collapseOne_update"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <form class="row g-3" enctype="multipart/form-data">
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Message (Optional)</label>
-                                    <textarea
-                                        class="form-control mb-4"
-                                        placeholder="Sorry about that We will look into it."
-                                        rows="4"
-                                        placeholder="Enter Message"
-                                        id="message_update_task"
-                                    ></textarea>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label fw-bold">Task Name
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        class="form-control"
-                                        placeholder="Task name"
-                                        type="text"
-                                        placeholder="Enter Task Name"
-                                        required
-                                        id="taskName_update"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Related To
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        required
-                                        id="property_update"
-                                        required
-                                        class="form-select form select2-show-search"
-                                        placeholder="Enter Related To"
-                                    >
-                                        <option selected>Choose...</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputEmail4" class="form-label fw-bold">Due Date
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <input
-                                        class="form-control"
-                                        required
-                                        placeholder="MM/DD/YYYY"
-                                        type="date"
-                                        placeholder="Enter Due Date"
-                                        id="dueDate_update"
-                                    >
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Priority
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        class="form-select form select2-show-search"
-                                        required
-                                        placeholder="Select Priority "
-                                        id="priority_update"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option name="high">High</option>
-                                        <option name="moderate">Moderate</option>
-                                        <option name="low">Low</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label fw-bold">Status
-                                        <span class="text-danger"> *</span>
-                                    </label>
-                                    <select
-                                        class="form-select form select2-show-search"
-                                        required
-                                        placeholder="Select Status"
-                                        id="status_update"
-                                    >
-                                        <option selected>Choose...</option>
-                                        <option value="not started">Not Started</option>
-                                        <option value="in progress">In progress</option>
-                                        <option value="completed">Completed</option>
-                                    </select>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="form-label fw-bold">Assignee(s) (Optional)</label>
-                                        <select
-                                            class="form-control select2"
-                                            data-placeholder="Choose Assignee"
-                                            multiple
-                                            placeholder="Select Assignee(s)"
-                                            id="assignee_update"
-                                        ></select>
-                                    </div>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
-                                    <div
-                                        class="custom-file"
-                                        style="border: 1px dashed #00000087;"
-                                        ondrop="dropHandler(event);"
-                                        ondragover="dragOverHandler(event);"
-                                    >
-                                        <input
-                                            id="fileInput_update"
-                                            type="file"
-                                            name="media"
-                                            class="custom-file-input form"
-                                            accept=".pdf,application/pdf"
-                                            aria-label="hello"
-                                            multiple
-                                        >
-                                        <span className="d-none"></span>
-                                        <label class="custom-file-label" for="fileInput_update">
-                                            <i class="fi fi-rs-cloud-upload"></i>
-                                            <div class="custom-file-text">
-                                                <span>Upload Files here</span>
-                                                <span>PDF file size no more than 5MB</span>
-                                                <small class="text-danger d-none" id="count-text">Maximum number of files reached.</small>
-                                                <small class="text-danger d-none" id="size-text">
-                                                    File size exceeds 5MB
-                                                limit.
-                                                </small>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="selected-files">
-                                        <div class="file-grid"></div>
-                                    </div>
-                                    <span class="text-danger d-none">This field is required!</span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <div class="d-flex">
-                            <label class="custom-control custom-checkbox me-2">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1_update"
-                                    value="option1"
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1_update"
-                                    value="option1"
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Assignee(s)</span>
-                            </label>
-                        </div>
-                        <div class="">
-                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
-                            <a
-                                href="javascript:void(0)"
-                                class="btn text-light btn-pill button"
-                                style="background-color:#1467B0;"
-                                id="save"
-                            >Save</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div
             class="modal fade"
             id="myModal_edit"
@@ -1296,6 +886,20 @@
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
                                 <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Unit
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        required
+                                        id="unit_update"
+                                        class="form-select form select2-show-search"
+                                        placeholder="Enter Related To"
+                                    >
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
                                     <label for="inputEmail4" class="form-label fw-bold">Due Date
                                         <span class="text-danger"> *</span>
                                     </label>
@@ -1397,16 +1001,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="d-flex">
-                            <label class="custom-control custom-checkbox me-2">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    name="example-checkbox1_update"
-                                    value="option1"
-                                    checked=""
-                                >
-                                <span class="custom-control-label">Notify Tenant</span>
-                            </label>
+                            
                             <label class="custom-control custom-checkbox">
                                 <input
                                     type="checkbox"
@@ -1496,7 +1091,7 @@
                             <a
                                 data-bs-effect="effect-scale"
                                 data-bs-toggle="modal"
-                                href="#addModal_task"
+                                href="#addModal"
                                 class="btn btn-outline-default btn-pill ms-1 my-2"
                                 style="background-color:#1467B0;color: white;"
                             >
@@ -2097,7 +1692,7 @@
                                                             data-bs-effect="effect-scale"
                                                         data-bs-toggle="modal"
                                                         id="add_property_btn"
-                                                        href="#addModal_task"
+                                                        href="#addModal"
                                                         >
                                                         <i class="fe fe-plus me-2"></i>
                                                             <strong>ADD NEW TASK</strong>
@@ -2343,7 +1938,7 @@
     </footer>
 </div>
 <a
-    href="#addModal_task"
+    href="#addModal"
     data-bs-effect="effect-scale"
     data-bs-toggle="modal"
     id="add-tenant-side-btn"
@@ -2357,9 +1952,9 @@
 <script src="../assets/js/select2.js"></script>
 <script>
         $(document).ready(function () {
-            $('#addModal_task').on('shown.bs.modal', function () {
+            $('#addModal').on('shown.bs.modal', function () {
                 $('.select2-show-search').select2({
-                    dropdownParent: $('#addModal_task')
+                    dropdownParent: $('#addModal')
                 });
             });
             $('#myModal_edit').on('shown.bs.modal', function () {
@@ -2485,6 +2080,7 @@ $('#preloader').css('display','none');
         });
 </script>
 <script>
+    
         var selectedFiles = [];
         function dropHandler(ev) {
             // console.log("File(s) dropped");
@@ -2510,9 +2106,10 @@ $('#preloader').css('display','none');
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
+            console.log(selectedFiles.length)
             selectedFiles.forEach(function (file, index) {
-                // console.log(selectedFiles.length)
-                // console.log(file)
+                
+                console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2526,7 +2123,7 @@ $('#preloader').css('display','none');
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+                    if (file?.imageKey?.endsWith('.jpg')|| file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2581,7 +2178,8 @@ $('#preloader').css('display','none');
         var taskPermissions;
         var userData;
         $(document).ready(function () {
-            $.ajax({
+             
+        $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/protected',
                 method: 'GET',
                 headers: {
@@ -2589,6 +2187,10 @@ $('#preloader').css('display','none');
                 },
                 success: function ({ userName, image,tasks,create_at,planID,...rest }) {
                     userData=rest;
+                    
+                    console.log("hguydgdsygygduysgfsdg",userData)
+                    $("#assignee,#assignee_update").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
+                    $("#assignee,#assignee_update").multipleSelect();
                     adjustPlan(rest)
                     localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -2633,55 +2235,61 @@ $('#preloader').css('display','none');
                     // console.log(error);
                 }
             });
+            
+            // $.ajax({
+            //     url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+            //     method: 'GET',
+            //     contentType: "application/json; charset=utf-8",
+            //     headers: {
+            //         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+            //     },
+            //     success: function (response) {
+            //         // console.log(response.data[0])
+            //         $("#property").empty()
+            //         $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
+            //         response.data[0].forEach((property) => {
+            //             // console.log(property);
+            //             var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
+            //             var optionValue = property.tenantID;
+            //             $("#property").append($("<option></option>").text(optionText).val(optionValue));
+            //             $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
+            //         });
+            //     }
+            // })
+
+
+            //             $.ajax({
+//                     url: 'https://backend.app.spaderent.com/api/spade/allproperty',
+//                     type: 'GET',
+//                     contentType: false,
+//                     processData: false,
+//                     headers: {
+//                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+//                     },
+//                     success: function (response) {
+//                         $("#property").empty()
+//                     $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
+//                     response?.data[0]?.forEach((property) => {
+//                         // console.log(property);
+//                         var optionText = property.propertyName;
+//                         var optionValue = property.propertyId;
+//                         $("#property").append($("<option></option>").text(optionText).val(optionValue));
+//                         $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
+//                     });
+//                     },
+//                     error: function (xhr, status, error) {
+// $('#preloader').css('display','none');
+//                         $("#myModal_warning_connection").modal("show");
+//                         setTimeout(function () {
+//                             $('#myModal_warning_connection').modal('hide');
+//                         }, 2000);
+//                         // console.log('Error: ' + error);
+//                     }
+//                 });
+                
+                
+                
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
-                method: 'GET',
-                contentType: "application/json; charset=utf-8",
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                },
-                success: function (response) {
-                    // console.log(response.data[0])
-                    $("#property").empty()
-                    $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
-                    response.data[0].forEach((property) => {
-                        // console.log(property);
-                        var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
-                        var optionValue = property.tenantID;
-                        $("#property").append($("<option></option>").text(optionText).val(optionValue));
-                        $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
-                    });
-                }
-            })
-            $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/allproperty',
-                    type: 'GET',
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                    },
-                    success: function (response) {
-                        $("#property_task").empty()
-                    $("#property_task").append($("<option></option>").text("Choose...").prop("selected", true))
-                    response?.data[0]?.forEach((property) => {
-                        // console.log(property);
-                        var optionText = property.propertyName;
-                        var optionValue = property.propertyId;
-                        $("#property_task").append($("<option></option>").text(optionText).val(optionValue));
-                        $("#property_update_task").append($("<option></option>").text(optionText).val(optionValue));
-                    });
-                    },
-                    error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
-                        // console.log('Error: ' + error);
-                    }
-                });
-                $.ajax({
                             url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
                             type: "GET",
                             contentType: "application/json",
@@ -2689,14 +2297,16 @@ $('#preloader').css('display','none');
                                 Authorization: "Bearer " + localStorage.getItem("authtoken"),
                             },
                             success: function (response) {
-                               
-                                if (response?.data) {
+                                
+
+                                if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee_task").append($("<option></option>").text(user?.UFirstName + " " + user?.ULastName).val(user?.id));
+                                    $("#assignee,#assignee_update").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
                                 })
-                                $("#assignee_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)).val(userData?.userId));
-                                $("#assignee_task").multipleSelect();
+                                
                                 }
+                                
+                                $("#assignee,#assignee_update").multipleSelect();
                             }, error: function (xhr, status, error) {
                             }
                         })
@@ -2709,31 +2319,34 @@ $('#preloader').css('display','none');
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    $("#assignee_update").empty()
+                    
                     var selectElement = $('#assignee');
-                    selectElement.empty();
+                    
                     if (response.data.length === 0) {
                         $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
                         selectElement.append($('<option></option>').text('No Vendor available..'));
                     } else {
                         response.data.forEach((vendor) => {
-                            var optionText = vendor.firstName + " " + vendor.lastName;
-                            var optionValue = vendor.id;
+                            var optionText = ((vendor.firstName + " " + vendor.lastName)+' (vendor)');
+                            var optionValue = (vendor.id+'v');
                             var option = $('<option></option>')
-                                .val(vendor.id)
-                                .text(vendor.firstName + " " + vendor.lastName);
+                                .val(optionValue)
+                                .text(optionText);
                             selectElement.append(option);
                             $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+                            
+                            
                         });
                     }
                     selectElement.multipleSelect();
+                    $("#assignee_update").multipleSelect();
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
                     if (xhr.responseJSON.message == "No vendor data found") {
-                        $("#assignee").empty()
-                        $("#assignee").prop("disabled", true);
-                        $('#addVendorAnchor').show()
+                        // $("#assignee").empty()
+                        // $("#assignee").prop("disabled", true);
+                        // $('#addVendorAnchor').show()
                     }
                 }
             })
@@ -2746,7 +2359,7 @@ $('#preloader').css('display','none');
                     }).length === 0;
                     return allFieldsFilled;
                 }
-                var accordion1Fields = $('#addModal_task input[required], #addModal_task select[required]');
+                var accordion1Fields = $('#addModal input[required], #addModal select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
                 }).length === 0;
@@ -2772,7 +2385,7 @@ $('#preloader').css('display','none');
                     }
                 }
             }
-            $('#addModal_task input[required], #addModal_task select[required]').on('input change', function () {
+            $('#addModal input[required], #addModal select[required]').on('input change', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
@@ -2819,10 +2432,11 @@ return NewDate
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
-                const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                // console.log(data)
-                if (data.taskImages) {
-                    selectedFiles = data.taskImages
+                console.log(taskId,taskInfo)
+                const data = taskInfo.find(obj => obj.taskid.toString() == taskId);
+                console.log(data)
+                if (data.images) {
+                    selectedFiles = data.images
                 } else {
                 }
                 updateSelectedFilesContainer()
@@ -2836,18 +2450,27 @@ return NewDate
                 if(data?.AssignTo?.length > 0){
                     data.AssignTo.forEach((item) => {
 // console.log(item)
-$("#view-task-line-item").append(`<tr class="tr">
-                            <td>
-                                <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
-                            </td>
-                            <td>
-                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
-                            </td>
-                            <td>
-                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
-                            </td>
-                        </tr>`)
-})
+$("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.landlordPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+
+
+                    })
                 }
                 else{
                     $("#view-task-line-item").append(`<tr class="tr">
@@ -2862,8 +2485,9 @@ $("#view-task-line-item").append(`<tr class="tr">
                             </td>
                         </tr>`)
                 }
-                if (data.taskImages[0].Image) {
-                    const files = data.taskImages;
+                console.log(data.images)
+                if (data?.images[0]?.Image) {
+                    const files = data.images;
                     $("#view-task-images").empty();
                     files.forEach((file) => {
                         if (file?.Image?.endsWith(".pdf") || file?.Image?.endsWith(".docx") || file?.Image?.endsWith(".doc")) {
@@ -2880,7 +2504,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 }
                 $("#viewModal-tasks").modal("show")
             })
-            $('#fileInput,#fileInput_task').on('change', function () {
+            $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
                     file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
@@ -2900,35 +2524,192 @@ $("#view-task-line-item").append(`<tr class="tr">
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             function resetAccordions() {
-                $('#addModal_task input[type="text"]').val('');
-                $('#addModal_task input[type="date"]').val('');
-                $('#addModal_task select').prop('selectedIndex', 0);
-                $('#addModal_task textarea').val('');
-                $('#addModal_task input[type="checkbox"]').prop('checked', false);
+                $('#addModal input[type="text"]').val('');
+                $('#addModal input[type="date"]').val('');
+                $('#addModal select').prop('selectedIndex', 0);
+                $('#addModal textarea').val('');
+                $('#addModal input[type="checkbox"]').prop('checked', false);
                 $('.hide-select ul li').each(function () {
                     $(this).removeClass('selected')
                 })
-                $('#addModal_task .file-grid').empty();
+                $('#addModal .file-grid').empty();
                 $('#next').addClass("disabled");
                 $('#draft').attr("disabled", "disabled");
                 $('.ms-choice span').text("")
-                $('#addModal_task input[type="text"],#addModal_task input[type="date"],#addModal_task select,#addModal_task textarea,#addModal_task input[type="checkbox"]').removeClass('border-green border-danger')
+                $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
             }
             $('#close,#top-close').on('click', function (e) {
                 // console.log(333)
                 e.preventDefault()
-                $("#addModal_task .select2-selection__rendered").empty()
+                $("#addModal .select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles = []
                 $(".file-grid").empty()
-                $('#addModal_task').modal('hide');
+                $('#addModal').modal('hide');
             })
+//             $(document).on('click', '#next', function (e) {
+//                 e.preventDefault();
+//                 // $('#addModal').modal('hide');
+//                 $('#preloader').css('display', 'flex')
+//                 var task = $("#task").val();
+//                 var assignee = $("#assignee").val();
+//                 var property = $("#property").val();
+//                 var dueDate = $("#dueDate").val();
+//                 var status = $("#status").val();
+//                 var priority = $("#priority").val();
+//                 var note = $("#notes").val();
+//                 var formData = new FormData();
+//                 var taskData = {}
+//                 var isNotifyTenantChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
+//                 var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
+//                 if (selectedFiles.length >= 1) {
+//                     for (var i = 0; i < selectedFiles.length; i++) {
+//                         formData.append('image', selectedFiles[i]);
+//                     }
+//                     $.ajax({
+//                         url: 'https://backend.app.spaderent.com/api/spade/upload',
+//                         type: 'POST',
+//                         data: formData,
+//                         contentType: false,
+//                         processData: false,
+//                         headers: {
+//                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+//                         },
+//                         success: function (response) {
+//                             var imageArray = response.images;
+//                             taskData = {
+//                                 task: task,
+//                                 assignee: assignee,
+//                                 property: property,
+//                                 dueDate: dueDate,
+//                                 status: status,
+//                                 priority: priority,
+//                                 note: note,
+//                                 notifyTenant: isNotifyTenantChecked,
+//                                 notifyVendor: isNotifyAssigneesChecked,
+//                                 images: imageArray,
+//                             }
+//                             $.ajax({
+//                                 url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+//                                 type: 'POST',
+//                                 data: JSON.stringify(taskData),
+//                                 contentType: 'application/json',
+//                                 headers: {
+//                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+//                                 },
+//                                 success: function (response) {
+//                                     $('#addModal').modal('hide');
+//                                     $('#preloader').fadeOut('slow', function () {
+//                                         $(this).hide();
+//                                     });
+//                                     if (response === "Task already exists") {
+//                                         $("#infoModal").modal("show")
+//                                     }
+//                                     else {
+//                                         GetNotification();
+//                                         $("#succesModal").modal("show")
+//                                         localStorage.setItem("task", "true")
+//                                     }
+//                                 },
+//                                 error: function (xhr, status, error) {
+// $('#preloader').css('display','none');
+//                                     $("#myModal_warning_connection").modal("show");
+//                                     setTimeout(function () {
+//                                         $('#myModal_warning_connection').modal('hide');
+//                                     }, 2000);
+//                                     // console.log('Error: ' + error);
+//                                 }
+//                             });
+//                         },
+//                         error: function (xhr, status, error) {
+// $('#preloader').css('display','none');
+//                             $("#myModal_warning_connection").modal("show");
+//                             setTimeout(function () {
+//                                 $('#myModal_warning_connection').modal('hide');
+//                             }, 2000);
+//                             // console.log('Error: ' + error);
+//                         }
+//                     });
+//                 } else {
+//                     taskData = {
+//                         task: task,
+//                         assignee: assignee,
+//                         property: property,
+//                         dueDate: dueDate,
+//                         status: status,
+//                         priority: priority,
+//                         note: note,
+//                         notifyTenant: isNotifyTenantChecked,
+//                         notifyVendor: isNotifyAssigneesChecked,
+//                         images: [],
+//                     }
+//                     $.ajax({
+//                         url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+//                         type: 'POST',
+//                         data: JSON.stringify(taskData),
+//                         contentType: 'application/json',
+//                         headers: {
+//                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+//                         },
+//                         success: function (response) {
+//                             $('#addModal').modal('hide');
+//                             $('#preloader').fadeOut('slow', function () {
+//                                 $(this).hide();
+//                             });
+//                             if (response === "Task already exists") {
+//                                 $("#infoModal").modal("show")
+//                             }
+//                             else {
+//                                 GetNotification();
+//                                 $("#succesModal").modal("show")
+//                             }
+//                         },
+//                         error: function (xhr, status, error) {
+// $('#preloader').css('display','none');
+//                             $("#myModal_warning_connection").modal("show");
+//                             setTimeout(function () {
+//                                 $('#myModal_warning_connection').modal('hide');
+//                             }, 2000);
+//                             // console.log('Error: ' + error);
+//                         }
+//                     });
+//                 }
+//             });
+            
             $(document).on('click', '#next', function (e) {
                 e.preventDefault();
-                // $('#addModal_task').modal('hide');
+                // $('#addModal').modal('hide');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task").val();
-                var assignee = $("#assignee").val();
+                var assignee = []
+                console.log($("#assignee").val())
+                $("#assignee").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
                 var property = $("#property").val();
                 var dueDate = $("#dueDate").val();
                 var status = $("#status").val();
@@ -2936,7 +2717,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 var note = $("#notes").val();
                 var formData = new FormData();
                 var taskData = {}
-                var isNotifyTenantChecked = $('input[name="example-checkbox1"]:eq(0)').is(':checked') ? "yes" : "no";
+                
                 var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
                 if (selectedFiles.length >= 1) {
                     for (var i = 0; i < selectedFiles.length; i++) {
@@ -2961,12 +2742,12 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 status: status,
                                 priority: priority,
                                 note: note,
-                                notifyTenant: isNotifyTenantChecked,
+                                propertyUnit:$("#unit").val(),
                                 notifyVendor: isNotifyAssigneesChecked,
                                 images: imageArray,
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                                url: 'http://localhost:3000/api/spade/addUsersTask',
                                 type: 'POST',
                                 data: JSON.stringify(taskData),
                                 contentType: 'application/json',
@@ -2974,7 +2755,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    $('#addModal_task').modal('hide');
+                                    $('#addModal').modal('hide');
                                     $('#preloader').fadeOut('slow', function () {
                                         $(this).hide();
                                     });
@@ -3015,12 +2796,12 @@ $('#preloader').css('display','none');
                         status: status,
                         priority: priority,
                         note: note,
-                        notifyTenant: isNotifyTenantChecked,
+                        propertyUnit:$("#unit").val(),
                         notifyVendor: isNotifyAssigneesChecked,
                         images: [],
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addTasks',
+                        url: 'http://localhost:3000/api/spade/addUsersTask',
                         type: 'POST',
                         data: JSON.stringify(taskData),
                         contentType: 'application/json',
@@ -3028,136 +2809,7 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            $('#addModal_task').modal('hide');
-                            $('#preloader').fadeOut('slow', function () {
-                                $(this).hide();
-                            });
-                            if (response === "Task already exists") {
-                                $("#infoModal").modal("show")
-                            }
-                            else {
-                                GetNotification();
-                                $("#succesModal").modal("show")
-                            }
-                        },
-                        error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
-                            // console.log('Error: ' + error);
-                        }
-                    });
-                }
-            });
-            
-            $(document).on('click', '#next_task', function (e) {
-                e.preventDefault();
-                // $('#addModal_task').modal('hide');
-                $('#preloader').css('display', 'flex')
-                var task = $("#task_task").val();
-                var assignee = $("#assignee_task").val();
-                var property = $("#property_task").val();
-                var dueDate = $("#dueDate_task").val();
-                var status = $("#status_task").val();
-                var priority = $("#priority_task").val();
-                var note = $("#notes_task").val();
-                var formData = new FormData();
-                var taskData = {}
-                
-                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_task"]:eq(1)').is(':checked') ? "yes" : "no";
-                if (selectedFiles.length >= 1) {
-                    for (var i = 0; i < selectedFiles.length; i++) {
-                        formData.append('image', selectedFiles[i]);
-                    }
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/upload',
-                        type: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            var imageArray = response.images;
-                            taskData = {
-                                task: task,
-                                assignee: assignee,
-                                property: property,
-                                dueDate: dueDate,
-                                status: status,
-                                priority: priority,
-                                note: note,
-                                
-                                notifyVendor: isNotifyAssigneesChecked,
-                                images: imageArray,
-                            }
-                            $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
-                                type: 'POST',
-                                data: JSON.stringify(taskData),
-                                contentType: 'application/json',
-                                headers: {
-                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                                },
-                                success: function (response) {
-                                    $('#addModal_task').modal('hide');
-                                    $('#preloader').fadeOut('slow', function () {
-                                        $(this).hide();
-                                    });
-                                    if (response === "Task already exists") {
-                                        $("#infoModal").modal("show")
-                                    }
-                                    else {
-                                        GetNotification();
-                                        $("#succesModal").modal("show")
-                                        localStorage.setItem("task", "true")
-                                    }
-                                },
-                                error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                    $("#myModal_warning_connection").modal("show");
-                                    setTimeout(function () {
-                                        $('#myModal_warning_connection').modal('hide');
-                                    }, 2000);
-                                    // console.log('Error: ' + error);
-                                }
-                            });
-                        },
-                        error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function () {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
-                            // console.log('Error: ' + error);
-                        }
-                    });
-                } else {
-                    taskData = {
-                        task: task,
-                        assignee: assignee,
-                        property: property,
-                        dueDate: dueDate,
-                        status: status,
-                        priority: priority,
-                        note: note,
-                        
-                        notifyVendor: isNotifyAssigneesChecked,
-                        images: [],
-                    }
-                    $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
-                        type: 'POST',
-                        data: JSON.stringify(taskData),
-                        contentType: 'application/json',
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
-                        },
-                        success: function (response) {
-                            $('#addModal_task').modal('hide');
+                            $('#addModal').modal('hide');
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
                             });
@@ -3339,8 +2991,35 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 var property = $("#property_update").val();
                 var priority = $("#priority_update").val();
                 var status = $("#status_update").val();
-                var assignee = $("#assignee_update").val();
-                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+                var assignee = []
+                console.log($("#assignee_update").val())
+                $("#assignee_update").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
                 var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
                 var existingImageNames = [];
                 selectedFiles.forEach((file) => {
@@ -3369,19 +3048,19 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                             var imageArray = [...response.images, ...existingImageNames];
                             const formData = {
                                 taskID: taskId,
-                                notifyTenant: isNotifyTenantChecked,
-                                notifyVendor: isNotifyAssigneesChecked,
-                                message: message,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
                                 dueDate: dueDate,
                                 taskName: taskName,
                                 property: property,
+                                PropertyUnit:$("#unit_update").val(),
                                 priority: priority,
                                 status: status,
                                 assignee: assignee,
                                 images: imageArray
                             }
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                url: 'http://localhost:3000/api/spade/updateUserTask',
                                 type: 'PUT',
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
@@ -3412,19 +3091,19 @@ $('#preloader').css('display','none');
                 } else {
                     const formData = {
                         taskID: taskId,
-                        notifyTenant: isNotifyTenantChecked,
-                        notifyVendor: isNotifyAssigneesChecked,
-                        message: message,
-                        dueDate: dueDate,
-                        taskName: taskName,
-                        property: property,
-                        priority: priority,
-                        status: status,
-                        assignee: assignee,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                PropertyUnit:$("#unit_update").val(),
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
                         images: []
                     }
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        url: 'http://localhost:3000/api/spade/updateUserTask',
                         type: 'PUT',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -3455,7 +3134,7 @@ $('#preloader').css('display','none');
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                    url: 'http://localhost:3000/api/spade/deleteUserTask',
                     type: 'DELETE',
                     data: JSON.stringify({
                         "taskID": taskId
@@ -3487,7 +3166,7 @@ $('#preloader').css('display','none');
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getAllTask',
+                    url: 'http://localhost:3000/api/spade/getAllUserTask',
                     type: 'GET',
                     contentType: false,
                     processData: false,
@@ -3496,7 +3175,7 @@ $('#preloader').css('display','none');
                     },
                     success: function (response) {
                         // console.log(response);
-                        if (response.data[0].length === 0) {
+                        if (response?.data?.length === 0) {
                             localStorage.setItem("task", "false")
                             window.location = './new-tasks.html'
                         } else {
@@ -3507,17 +3186,17 @@ $('#preloader').css('display','none');
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
                             }
-                            taskInfo = response.data[0]
+                            taskInfo = response.data
                             // console.log
-                            response.data[0]?.forEach(function (task, index) {
+                            response?.data?.forEach(function (task, index) {
                                 // console.log(task?.taskImages[0])
                                 var serial = '<td style="font-weight: 600;" class="serial-number">' + (index + 1) + '</td>';
                                 var taskId= '<td style="font-weight: 600;">' + task.cTaskId + '</td>';
-                                if (task?.taskImages[0]?.imageKey?.includes('pdf') || task?.taskImages[0]?.imageKey?.includes('docx')) {
+                                if (task?.images[0]?.imageKey?.includes('pdf') || task?.images[0]?.imageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
                                 } else {
-                                    if (task?.taskImages[0]?.Image !== null) {
-                                        var image = '<td><img src="' + task?.taskImages[0]?.Image + '" alt=""></td>';
+                                    if (task?.images[0]?.Image !== null) {
+                                        var image = '<td><img src="' + task?.images[0]?.Image + '" alt=""></td>';
                                     } else {
                                         var image = '<td><img src="' + "../assets/images/Group-user.png" + '" alt=""></td>';
                                     }
@@ -3528,7 +3207,7 @@ $('#preloader').css('display','none');
                                 var minutesDiff = Math.floor(timeDiff / (1000 * 60));
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
-                                var taskName = `<td class="task-id propertyName" id=${task.id} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
+                                var taskName = `<td class="task-id propertyName" id=${task.taskid} data-id="${task.created_at}" style="font-weight: 600;">` + '<p style="font-weight: 600;cursor: pointer;" class="mb-1 view-task">' + task.taskName + '</p>' +
                                     `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
                                 if (daysDiff > 0) {
                                     taskName += `${daysDiff} days`;
@@ -3617,19 +3296,21 @@ if (task.priority == 'High') {
                                 e.preventDefault();
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                                 taskId = taskIdElement.attr("id")
-                                const data = response.data[0].find(obj => obj.id.toString() == taskId);
+                                const data = response.data.find(obj => obj.taskid.toString() == taskId);
+                                console.log(data)
                                 // console.log(taskId)
-                                if (data.taskImages) {
-                                    selectedFiles = data.taskImages
+                                if (data.images) {
+                                    selectedFiles = data.images
                                 } else {
                                 }
                                 updateSelectedFilesContainer()
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
-                                $("#property_update").val(data.tenantID);
+                                $("#property_update").val(data.propertyId);
+                                $("#unit_update").val(data.id);
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
-                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                $("#status_update").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
                                 data.AssignTo.forEach(({
                                     ID,
@@ -3658,9 +3339,73 @@ $('#preloader').css('display','none');
                         }, 2000);
                     }
                 });
+                
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        // properties = response.data;
+                        var properties=response?.data;
+                        // Assuming the response data is an array of property objects
+                        // console.log("property", response.data)
+                        
+                        $('#property,#property_update').empty(); // Clear existing options
+                        $('#property,#property_update').append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            $('#property,#property_update').append(option);
+                        });
+                        $('#property,#property_update').change(function () {
+                            var selectedPropertyId = $(this).val();
+                            console.log(selectedPropertyId)
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
+                            });
+                            console.log(selectedProperty)
+                            var propertyUnitSelect = $('#unit');
+                            $('#unit,#unit_update').empty()
+                            
+                                $('#unit,#unit_update').append($('<option></option>')
+                                    .text("Choose..."))
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    $('#unit,#unit_update').append(option);
+                                });
+                                selectedProperty.occupiedUnits.forEach(function (unit) {
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    $('#unit,#unit_update').append(option);
+                                });
+                            
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+                    },
+                    error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                        }, 2000);
+                        // console.log('Error: ' + error);
+                    }
+                });
+            
             }
             getData()
-            $(document).on('input change', '#addModal_task input, #addModal_task select, #addModal_task input, #addModal_task select,#addModal_task textarea', function () {
+            $(document).on('input change', '#addModal input, #addModal select, #addModal input, #addModal select,#addModal textarea', function () {
                 var $field = $(this);
                 var $errorMessage = $field.next('.text-danger');
                 if ($field.val() === '' || $field.val() === 'Choose...') {
