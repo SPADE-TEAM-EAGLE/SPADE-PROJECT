@@ -2007,20 +2007,20 @@ $('#preloader').css('display','none');
                     }
                     updateButtonStatus("_update");
                 });
-                $('#fileInput').on('change', function () {
-                    var files = Array.from($(this)[0].files);
-                    files.forEach(function (file) {
-                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
-                    });
-                    updateSelectedFilesContainer(); // Update the selected files container
+                $('#fileInput,#fileInput_task').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
-                $('#fileInput_update').on('change', function () {
-                    var files = Array.from($(this)[0].files);
-                    files.forEach(function (file) {
-                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
-                    });
-                    updateSelectedFilesContainer(); // Update the selected files container
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#fileInput_update,#fileInput_update_task').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
                 $(document).on('click', '.delete-file', function () {
                     var index = $(this).data('index');
                     selectedFiles.splice(index, 1); // Remove the selected file from the array

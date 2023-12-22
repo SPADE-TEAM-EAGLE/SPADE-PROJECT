@@ -2073,6 +2073,7 @@
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
+                console.log(file)
                 // console.log(selectedFiles.length)
                 // console.log(file)
                 var fileElement = $('<div>')
@@ -2088,7 +2089,8 @@
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
+                    if(file?.imageKey){
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2103,6 +2105,24 @@
                             $('<div>').addClass('file-preview')
                                 .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                         );
+                    }
+                    }else{
+                        if (file?.ImageKey?.endsWith('.jpg') || file?.ImageKey?.endsWith('.jpeg') || file?.ImageKey?.endsWith('.png')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', file.Image))
+                        );
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                        );
+                    } else {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                        );
+                    }
                     }
                 }
                 if (file instanceof File) {
@@ -2535,7 +2555,7 @@ $('#preloader').css('display','none');
                 });
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            $('#fileInput_update').on('change', function () {
+            $('#fileInput_update,#fileInput_update_task').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
                     file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
@@ -2634,6 +2654,8 @@ $('#preloader').css('display','none');
                                         $("#succesModal").modal("show")
                                         localStorage.setItem("task", "true")
                                     }
+                                    selectedFiles=[]
+
                                 },
                                 error: function (xhr, status, error) {
                                     $('#preloader').css('display', 'none');
@@ -2687,6 +2709,8 @@ $('#preloader').css('display','none');
                                 GetNotification();
                                 $("#succesModal").modal("show")
                             }
+                            selectedFiles=[]
+
                         },
                         error: function (xhr, status, error) {
                             $('#preloader').css('display', 'none');
@@ -2790,6 +2814,7 @@ $('#preloader').css('display','none');
                                         $("#succesModal").modal("show")
                                         localStorage.setItem("task", "true")
                                     }
+                                    selectedFiles=[]
                                 },
                                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
@@ -2843,6 +2868,7 @@ $('#preloader').css('display','none');
                                 GetNotification();
                                 $("#succesModal").modal("show")
                             }
+                            selectedFiles=[]
                         },
                         error: function (xhr, status, error) {
 $('#preloader').css('display','none');
