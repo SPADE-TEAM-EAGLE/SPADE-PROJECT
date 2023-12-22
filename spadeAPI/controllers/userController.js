@@ -3032,7 +3032,7 @@ exports.DMNS=async(req,res)=>{
 
 exports.ACHLogCheck = async(req,res)=>{
   try {
-    console.log("ACHLogCheck");
+    // console.log("ACHLogCheck");
       res.status(200).json({message:"ACH Log Check"})
   }catch(error){
     console.log(error);

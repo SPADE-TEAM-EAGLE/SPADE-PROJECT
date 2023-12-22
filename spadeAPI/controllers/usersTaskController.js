@@ -270,7 +270,7 @@ exports.getAllUserTask = async (req, res) => {
               };
               assignToData.push(user);
             }
-          } else if (assignment.assignRole === "Vendor") {
+          } else if (assignment.assignRole === "vendor") {
             const vendorID = assignment.userId;
             const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
               vendorID,
