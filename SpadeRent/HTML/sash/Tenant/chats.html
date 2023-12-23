@@ -33,7 +33,7 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode sidenav-toggledd">
-    <div id="preloader" class="tlp-preloader">
+    <div id="preloader" class="tlp-preloader d-none">
         <div class="animation-preloader">
             <div class="tlp-spinner"></div>
             <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
@@ -1145,7 +1145,8 @@
                                                                                             <input id="amount-card"
                                                                                                 type="text"
                                                                                                 class="form-control"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly
                                                                                                 style="padding: 1rem 0.75rem !important;">
                                                                                         </div>
                                                                                     </div>
@@ -1286,7 +1287,8 @@
                                                                                             <input id="amount-existing"
                                                                                                 type="text"
                                                                                                 class="form-control py-4"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly>
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1433,7 +1435,8 @@
                                                                                                 id="account-number-ach"
                                                                                                 type="text"
                                                                                                 class="form-control"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly
                                                                                                 style="padding: 1rem 0.75rem !important;">
                                                                                         </div>
                                                                                     </div>
@@ -1451,7 +1454,8 @@
                                                                                                 id="routing-number-ach"
                                                                                                 type="text"
                                                                                                 class="form-control"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly
                                                                                                 style="padding: 1rem 0.75rem !important;">
                                                                                         </div>
                                                                                     </div>
@@ -1469,7 +1473,8 @@
                                                                                             <input id="amount-ach"
                                                                                                 type="text"
                                                                                                 class="form-control"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly
                                                                                                 style="padding: 1rem 0.75rem !important;">
                                                                                         </div>
                                                                                     </div>
@@ -1579,7 +1584,8 @@
                                                                                             <input id="amount-existing"
                                                                                                 type="text"
                                                                                                 class="form-control py-4"
-                                                                                                aria-label="Amount (to the nearest dollar)" readonly>
+                                                                                                aria-label="Amount (to the nearest dollar)"
+                                                                                                readonly>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1837,6 +1843,18 @@
             <script src="../assets/js/email-phone.js"></script>
             <script src="../assets/js/changeOnlineStatusTenant.js"></script>
             <script>
+                var helloGuys = true;
+                $(document).ajaxStop(function () {
+                    if (helloGuys) {
+                        // alert(1)
+                        helloGuys = false;
+                        var customScript = document.createElement('script');
+                        customScript.src = "../assets/js/custom.js";
+                        document.head.appendChild(customScript);
+                    }
+                });
+            </script>
+            <script>
                 $(document).ready(function () {
                     $('#input-message').on('input', function () {
                         var inputLength = $(this).val().length;
@@ -1855,18 +1873,14 @@
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/updateMessagesCountTenant',
                         type: 'PUT',
-                        contentType: false,
-                        processData: false,
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                          // console.log(response);
                             $('#chatCounter').text('0')
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                          // console.log(error);
+                            $('#preloader').css('display', 'none');
                         }
                     });
                     $.ajax({
@@ -1876,18 +1890,18 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                          // console.log("getMessagesCountLandlord");
-                          // console.log(response.Count['count(message)']);
+                            // console.log("getMessagesCountLandlord");
+                            // console.log(response.Count['count(message)']);
                             $('#chatCounter').text(response.Count['count(message)'])
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             $("#myModal_warning").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning').modal('hide');
                                 window.location = '../Tenant/login_module.html';
                             }, 2000);
-                          // console.log(error);
+                            // console.log(error);
                         }
                     });
                     $.ajax({
@@ -1899,7 +1913,7 @@ $('#preloader').css('display','none');
                         },
                         success: function (response) {
                             const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                          // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                            // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                             $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                             $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                             if (!totalAmountUnpaid.totalUnPaid) {
@@ -1908,12 +1922,12 @@ $('#preloader').css('display','none');
                             }
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                          // console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                 });
@@ -1944,7 +1958,7 @@ $('#preloader').css('display','none');
                             userData = response;
                             localStorage.setItem("tenantName", response.userName)
                             function toTitleCase(str) {
-                              // console.log(str)
+                                // console.log(str)
                                 return str.replace(/\w\S*/g, function (txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                                 });
@@ -1956,15 +1970,15 @@ $('#preloader').css('display','none');
                             $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             $("#myModal_warning").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning').modal('hide');
                                 window.location = '../Tenant/login_module.html';
                             }, 2000);
-                          // console.log('Error occurred while fetching state and city data.');
-                          // console.log(xhr);
-                          // console.log(error);
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                     $.ajax({
@@ -1976,11 +1990,11 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                          // console.log(response);
+                            // console.log(response);
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                          // console.log(error);
+                            $('#preloader').css('display', 'none');
+                            // console.log(error);
                         }
                     });
                     $('#send-text').on('click', function (ev) {
@@ -2009,8 +2023,8 @@ $('#preloader').css('display','none');
                                     }, 1000);
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                  // console.log(error);
+                                    $('#preloader').css('display', 'none');
+                                    // console.log(error);
                                 }
                             });
                         }
@@ -2037,12 +2051,12 @@ $('#preloader').css('display','none');
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                  // console.log(messageData);
+                                    // console.log(messageData);
                                     socket.emit('chatMessage', messageData);
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                  // console.log(error);
+                                    $('#preloader').css('display', 'none');
+                                    // console.log(error);
                                 }
                             });
                         }
@@ -2055,17 +2069,17 @@ $('#preloader').css('display','none');
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                          // console.log("getTenantByID");
-                          // console.log(response);
-                          // console.log(response)
+                            // console.log("getTenantByID");
+                            // console.log(response);
+                            // console.log(response)
                             localStorage.setItem("landloadId", Number(response.data?.landlordID))
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/getUserById/' + Number(response.data?.landlordID) + '/landlord',
                                 type: 'GET',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (response) {
-                                  // console.log(1111111)
-                                  // console.log(response)
+                                    // console.log(1111111)
+                                    // console.log(response)
                                     $(".person").removeClass("profileImage")
                                     localStorage.setItem("LandlordImg", response.data?.image)
                                     if (localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "") {
@@ -2075,7 +2089,7 @@ $('#preloader').css('display','none');
                                         $(".person").css("background-image", "");
                                         $(".person").addClass("profileImage")
                                         $(".person").text(
-                                            response.data?.FirstName.charAt(0) + response.data?.LastName.charAt(0)
+                                            response.data?.FirstName.charAt(0).toUpperCase() + response.data?.LastName.charAt(0).toUpperCase()
                                         );
                                     }
                                     if (response.data?.isUserActive == 1) {
@@ -2087,12 +2101,12 @@ $('#preloader').css('display','none');
                                     chatTenant()
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                    $('#preloader').css('display', 'none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                  // console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                             $.ajax({
@@ -2100,34 +2114,34 @@ $('#preloader').css('display','none');
                                 type: 'GET',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (response) {
-                                  // console.log(22222)
-                                  // console.log(response)
+                                    // console.log(22222)
+                                    // console.log(response)
                                     var imgggg = response.data?.image;
                                     if (response.data?.image != null && response.data?.image != " ") {
                                         var urlArray = imgggg.split(",");
                                         var firstUrl = urlArray[0];
                                         localStorage.setItem("tenantImg", firstUrl)
                                     } else {
-                                        localStorage.setItem("tenantImg", "../assets/images/users/5.jpg")
+                                        localStorage.setItem("tenantImg", "")
                                     }
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                    $('#preloader').css('display', 'none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                  // console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                            $('#preloader').css('display', 'none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                          // console.log('Error: ' + error);
+                            // console.log('Error: ' + error);
                         }
                     });
                     var formattedTime;
@@ -2147,15 +2161,15 @@ $('#preloader').css('display','none');
                         socket.on('recieveMessage', (message) => {
                             updateTime();
                             chatMessages.push(message.message);
-                          // console.log(message);
+                            // console.log(message);
                             if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "landlord") {
                                 return;
                             }
                             if (message.userType == "landlord" && message.chatId == localStorage.getItem("chatId")) {
-                              // console.log("check rec", message.message);
+                                // console.log("check rec", message.message);
                                 messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
                                 <div class="profileImage me-1 ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase()}</div>
-    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? '' : 'd-none '}"></div>
+    <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? localStorage.getItem("LandlordImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? '' : 'd-none'}"></div>
     <div class="msg-text">`;
                                 if (message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')) {
                                     const imageUrls = message.message.split(',');
@@ -2183,7 +2197,7 @@ $('#preloader').css('display','none');
                         });
                     }
                     function dropHandler(ev) {
-                      // console.log("File(s) dropped");
+                        // console.log("File(s) dropped");
                         ev.preventDefault();
                         if (ev.dataTransfer.items) {
                             [...ev.dataTransfer.items].forEach((item, i) => {
@@ -2195,12 +2209,12 @@ $('#preloader').css('display','none');
                             });
                         } else {
                             [...ev.dataTransfer.files].forEach((file, i) => {
-                              // console.log(`… file[${i}].name = ${file.name}`);
+                                // console.log(`… file[${i}].name = ${file.name}`);
                             });
                         }
                     }
                     function dragOverHandler(ev) {
-                      // console.log("File(s) in drop zone");
+                        // console.log("File(s) in drop zone");
                         ev.preventDefault();
                     }
                     $(document).on('click', '.delete-file', function () {
@@ -2213,8 +2227,8 @@ $('#preloader').css('display','none');
                         var selectedFilesContainer = $('.file-grid');
                         selectedFilesContainer.empty();
                         selectedFiles.forEach(function (file, index) {
-                          // console.log(selectedFiles.length)
-                          // console.log(file)
+                            // console.log(selectedFiles.length)
+                            // console.log(file)
                             var fileElement = $('<div>')
                                 .addClass('selected-file');
                             if (file.type && file.type.includes('image')) {
@@ -2284,7 +2298,7 @@ $('#preloader').css('display','none');
                         files.forEach(function (file) {
                             file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                         });
-                      // console.log(selectedFiles)
+                        // console.log(selectedFiles)
                         updateSelectedFilesContainer(); // Update the selected files container
                     });
                     const inputNew = $('#input-message');
@@ -2309,14 +2323,14 @@ $('#preloader').css('display','none');
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                  // console.log(response.images);
+                                    // console.log(response.images);
                                     response.images?.forEach(function (value, index, array) {
                                         str += value.image_url;
                                         if (index < array.length - 1) {
                                             str += ",";
                                         }
                                     });
-                                  // console.log(str);
+                                    // console.log(str);
                                     var messageData2 = {
                                         chatId: localStorage.getItem("chatId"),
                                         message: str,
@@ -2334,7 +2348,7 @@ $('#preloader').css('display','none');
                                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
-                                          // console.log(messageData2);
+                                            // console.log(messageData2);
                                             socket.emit('chatMessage', messageData2);
                                             $("#loading-btn").css("display", "none");
                                             $("#submit-photo").css("display", "inline-block")
@@ -2344,18 +2358,18 @@ $('#preloader').css('display','none');
                                             chatTenant()
                                         },
                                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                          // console.log(error);
+                                            $('#preloader').css('display', 'none');
+                                            // console.log(error);
                                         }
                                     });
                                 },
                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
+                                    $('#preloader').css('display', 'none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                  // console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         }
@@ -2384,8 +2398,8 @@ $('#preloader').css('display','none');
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                              // console.log("accessTenantChats");
-                              // console.log(response[0]);
+                                // console.log("accessTenantChats");
+                                // console.log(response[0]);
                                 function myGreeting() {
                                     chatId = response[0].id;
                                     joinChatRoom(chatId);
@@ -2396,8 +2410,8 @@ $('#preloader').css('display','none');
                                         contentType: false,
                                         processData: false,
                                         success: function (response) {
-                                          // console.log("getUserById");
-                                          // console.log(response);
+                                            // console.log("getUserById");
+                                            // console.log(response);
                                             localStorage.setItem("landlordName", response.data?.FirstName + " " + response.data?.LastName)
                                             if (response.data?.isUserActive == 1) {
                                                 $('#online').show()
@@ -2413,13 +2427,13 @@ $('#preloader').css('display','none');
                                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                                 },
                                                 success: function (response) {
-                                                  // console.log("TenantMessages");
+                                                    // console.log("TenantMessages");
                                                     var messs1 = "";
                                                     var messDiv = $('#messages')
                                                     messDiv.empty();
                                                     $('#chat').css('display', 'block')
-                                                  // console.log("TenantMessages");
-                                                  // console.log(response);
+                                                    // console.log("TenantMessages");
+                                                    // console.log(response);
                                                     if (response.message == 'Messages fetched successfully' && response.data?.length > 0) {
                                                         var randomImg = "../assets/images/users/5.jpg";
                                                         for (var i = 0; i < response.data?.length; i++) {
@@ -2493,30 +2507,30 @@ $('#preloader').css('display','none');
                                                             var scrollAmount = childDiv.prop("scrollHeight") - parentDiv.prop("clientHeight") + parentDiv2.prop("clientHeight") + 100;
                                                             childDiv.animate({ scrollTop: scrollAmount }, 500);
                                                             hasScrolled++; // Set the flag to true after scrolling
-                                                          // console.log("if: " + hasScrolled);
+                                                            // console.log("if: " + hasScrolled);
                                                         } else {
-                                                          // console.log("else: " + hasScrolled);
+                                                            // console.log("else: " + hasScrolled);
                                                         }
                                                     }
                                                     scrollToBottomOnce();
                                                 },
                                                 error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                                  // console.log(error);
+                                                    $('#preloader').css('display', 'none');
+                                                    // console.log(error);
                                                 }
                                             });
                                         },
                                         error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                                          // console.log(error);
+                                            $('#preloader').css('display', 'none');
+                                            // console.log(error);
                                         }
                                     });
                                 }
                                 myGreeting();
                             },
                             error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                              // console.log(error);
+                                $('#preloader').css('display', 'none');
+                                // console.log(error);
                             }
                         });
                     }
@@ -2535,7 +2549,7 @@ $('#preloader').css('display','none');
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                              // console.log(response);
+                                // console.log(response);
                                 localStorage.removeItem('authtoken');
                                 localStorage.clear();
                                 if ($('body').hasClass('dark-mode')) {
@@ -2544,11 +2558,11 @@ $('#preloader').css('display','none');
                                     localStorage.setItem("sashlightMode", true)
                                 }
                                 window.open('../Tenant/login_module.html', "_self")
-                              // console.log('Done');
+                                // console.log('Done');
                             },
                             error: function (xhr, status, error) {
-$('#preloader').css('display','none');
-                              // console.log(error);
+                                $('#preloader').css('display', 'none');
+                                // console.log(error);
                             }
                         });
                     });
@@ -2683,17 +2697,7 @@ $('#preloader').css('display','none');
                     };
                 });
             </script>
-            <script>
-                var helloGuys = true;
-                $(document).ajaxStop(function () {
-                    if (helloGuys) {
-                        helloGuys = false;
-                        var customScript = document.createElement('script');
-                        customScript.src = "../assets/js/custom.js";
-                        document.head.appendChild(customScript);
-                    }
-                });
-            </script>
+
 </body>
 
 </html>

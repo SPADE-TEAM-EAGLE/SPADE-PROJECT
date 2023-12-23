@@ -1975,10 +1975,11 @@
                         } else {
                             response.data[0]?.forEach(function (tenant) {
                                 // console.log("viewAllPropertyTenant")
-                                // console.log(tenant)
+                                console.log(tenant.image)
                                 // console.log(tenant.tenantImages?.split(",")[0])
                                 var row = `
-                                    <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)"><div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
+                                    <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)">
+                                        <div class="media new border-top-0 " data-id="` + tenant.tenantID + `">
                                         <div class="main-img-user">
                                             <div class="profileImage ` + (tenant.image == null || tenant.image == " " || tenant.image == "" ? '' : 'd-none') + `">` + tenant.firstName.charAt(0).toUpperCase() + tenant.lastName.charAt(0).toUpperCase() + `</div>
                                             <img class="` + (tenant.image == null || tenant.image == " " || tenant.image == "" ? 'd-none' : '') + `" alt="" src="` + (tenant.image != null && tenant.image != " " && tenant.image != "" ? tenant.image : randomImg1) + `">
