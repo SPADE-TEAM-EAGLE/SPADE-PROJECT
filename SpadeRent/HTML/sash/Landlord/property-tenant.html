@@ -1466,7 +1466,7 @@ if (tenant.leaseEndDate) {
     $('#preloader').css('display', 'none');
 
     var tableBody = $('#table_body');
-    if (JSON.parse(xhr.responseText).message == "No data found") {  
+    if (xhr?.responseJSON?.message == "No data found") {  
         var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
         tableBody.html(row);  
     } else {

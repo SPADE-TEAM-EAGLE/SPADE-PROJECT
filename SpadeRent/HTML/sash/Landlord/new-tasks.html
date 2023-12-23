@@ -1939,7 +1939,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
                     $('#preloader').css('display', 'none');
-                    if (xhr.responseJSON.message == "No vendor data found") {
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
                         $('#addVendorAnchor').show()
@@ -2318,7 +2318,9 @@ $('#preloader').css('display','none');
                             }
                             else {
                                 GetNotification();
+                                
                                 $("#succesModal").modal("show")
+                                localStorage.setItem("task", "true")
                             }
                         },
                         error: function (xhr, status, error) {
