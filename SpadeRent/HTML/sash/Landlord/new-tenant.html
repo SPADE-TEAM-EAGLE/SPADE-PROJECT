@@ -2049,7 +2049,7 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
                                                     $("#myModal_warning_connection").modal("show");
                                                     setTimeout(function () {
@@ -2112,7 +2112,7 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
                                                     $("#myModal_warning_connection").modal("show");
                                                     setTimeout(function () {
@@ -2526,8 +2526,8 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-                    // console.log(JSON.parse(xhr.responseText).message);
-                    if(JSON.parse(xhr.responseText).message != "No data found"){
+                    // console.log(xhr?.responseJSON?.message);
+                    if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
                                                     $("#myModal_warning_connection").modal("show");
                                                     setTimeout(function () {

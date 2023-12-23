@@ -583,13 +583,13 @@ $('#preloader').css('display','none');
             error: function (xhr, status, error) {
 $('#preloader').css('display','none');
               $("#verify_otp_auth").prop("disabled",false)
-              if(xhr.responseJSON.message=="OTP expired"){
+              if(xhr?.responseJSON?.message=="OTP expired"){
                 $("#info-text").text("OTP expired!!!")
                 $("#infoModal").modal("show")
                 setTimeout(function () {
                   $("#infoModal").modal("hide");
                 }, 1700);
-              }else if(xhr.responseJSON.message=="Cannot Validate!!!"){
+              }else if(xhr?.responseJSON?.message=="Cannot Validate!!!"){
                 $("#info-text").text("Incorrect OTP")
                 $("#infoModal").modal("show")
                 setTimeout(function () {

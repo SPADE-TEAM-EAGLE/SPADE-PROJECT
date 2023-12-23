@@ -1983,10 +1983,7 @@
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                    }, 2000);
+                    
                     // console.log(error);
                 }
             });
@@ -2172,10 +2169,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        
                         // console.log('Error: ' + error);
                     }
                 });
@@ -2234,10 +2228,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                       
                         // console.log('Error: ' + error);
                     }
                 });
@@ -2358,10 +2349,7 @@ $('#preloader').css('display','none');
                                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
                                     $("#add-units1").prop("disabled", false)
-                                    $("#myModal_warning_connection").modal("show");
-                                    setTimeout(function () {
-                                        $('#myModal_warning_connection').modal('hide');
-                                    }, 2000);
+                                    
                                     // console.log('Error: ' + error);
                                 }
                             })
@@ -2404,10 +2392,7 @@ $('#preloader').css('display','none');
                                 },
                                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                                    $("#myModal_warning_connection").modal("show");
-                                    setTimeout(function () {
-                                        $('#myModal_warning_connection').modal('hide');
-                                    }, 2000);
+                                    
                                     // console.log('Error: ' + error);
                                 }
                             })
@@ -2446,10 +2431,7 @@ $('#preloader').css('display','none');
                                 },
                                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                                    $("#myModal_warning_connection").modal("show");
-                                    setTimeout(function () {
-                                        $('#myModal_warning_connection').modal('hide');
-                                    }, 2000);
+                                    
                                     // console.log('Error: ' + error);
                                 }
                             });
@@ -2470,10 +2452,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        
                         // console.log('Error: ' + error);
                     }
                 });
@@ -2548,10 +2527,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    
                     // console.log('Error: ' + error);
                 }
             });
@@ -2837,10 +2813,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
                             $('#preloader').css('display','none');
-                            $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
+                            
                         // console.log(xhr)
                         // console.log(status)
                         // console.log(error)
@@ -3281,10 +3254,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    
                     // console.log('Error: ' + error);
                 }
             });
@@ -3338,10 +3308,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    
                     // console.log('Error: ' + error);
                 }
             });
@@ -3403,16 +3370,13 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-if (xhr.responseJSON.message == "Tenant Invoice is pending Kindly Paid invoice ") {
+if (xhr?.responseJSON?.message == "Tenant Invoice is pending Kindly Paid invoice ") {
                         $("#infoModal_delete").modal("show");
                         setTimeout(function () {
                             $('#infoModal_delete').modal('hide');
                         }, 2000);
                     }else{
-                        $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                       
                     }
                     
                     // console.log('Error: ' + error);
@@ -3554,7 +3518,7 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-                    if (JSON.parse(xhr.responseText).message == "No data found") {
+                    if (xhr?.responseJSON?.message == "No data found") {
                         // console.log("tenantData")
                         localStorage.setItem("tenants", "false")
                         window.location = "./new-tenant.html"
@@ -3614,10 +3578,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    
                     // console.log('Error: ' + error);
                 }
             });
@@ -3814,6 +3775,10 @@ $('#preloader').css('display','none');
                     }
                 }, error: function (xhr, status, error) {
 $('#preloader').css('display','none');
+if (xhr.responseJSON.Info == "No data found in tenant ") {
+                        // console.log(tenantToDelete)
+                        $('#myModal_delete_bulk').modal('show');
+                    }
                     // console.log(error)
                 }
             })

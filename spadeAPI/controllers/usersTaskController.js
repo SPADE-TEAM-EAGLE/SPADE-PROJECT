@@ -270,7 +270,7 @@ exports.getAllUserTask = async (req, res) => {
               };
               assignToData.push(user);
             }
-          } else if (assignment.assignRole === "Vendor") {
+          } else if (assignment.assignRole === "vendor") {
             const vendorID = assignment.userId;
             const vendorResult = await queryRunner(selectQuery("vendor", "id"), [
               vendorID,
@@ -409,8 +409,10 @@ exports.updateUserTask = async (req, res) => {
     } = req.body;
   
     try {
+      console.log(images);
       const currentDate = new Date();
       const { userId,taskEmail } = req.user;
+      console.log(images)
       console.log( taskName,
         property,
         PropertyUnit,
@@ -442,29 +444,28 @@ exports.updateUserTask = async (req, res) => {
         [taskID]
       );
       // images working code start here
-      // console.log(propertycheckresult[0]);
       if (propertycheckresult[0].length > 0) {
         const propertyImageKeys = propertycheckresult[0].map(
           (image) => image.ImageKey
         );
-        // console.log("images" ,images)
-        // console.log(propertyImageKeys);
         // Find the images to delete from S3 (present in propertycheckresult but not in images)
         const imagesToDelete = propertycheckresult[0].filter(
-          (image) => !images.some((img) => img.imageKey === image.ImageKey)
+          (image) => !images.some((img) => img.ImageKey == image.ImageKey)
         );
         // Delete images from S3
-        // console.log(imagesToDelete);
         for (let i = 0; i < imagesToDelete.length; i++) {
           deleteImageFromS3(imagesToDelete[i].ImageKey);
+          // console.log(imagesToDelete[i].ImageKey)
           await queryRunner(delteImageForTaskUserImages, [
             imagesToDelete[i].ImageKey,
           ]);
         }
         // Find the images to insert into the database (present in images but not in propertycheckresult)
         const imagesToInsert = images.filter(
-          (image) => !propertyImageKeys.includes(image.imageKey)
+          (image) => !propertyImageKeys.includes(image.ImageKey)
         );
+        // console.log("imagesToInsert");
+        // console.log(imagesToInsert.length);
         for (let i = 0; i < imagesToInsert.length; i++) {
           const { image_url } = imagesToInsert[i];
           const { image_key } = imagesToInsert[i];
@@ -479,7 +480,7 @@ exports.updateUserTask = async (req, res) => {
           }
         }
       } else {
-        for (let i = 0; i < images.length - 1; i++) {
+        for (let i = 0; i < images.length; i++) {
           const { image_url } = images[i];
           const { image_key } = images[i];
           // console.log(taskID, image_url, image_key);

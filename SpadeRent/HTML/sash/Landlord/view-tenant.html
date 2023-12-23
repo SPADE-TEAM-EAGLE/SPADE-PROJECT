@@ -1706,6 +1706,9 @@ $('#preloader').css('display','none');
                     success: function (response) {
                         // console.log(1111)
                         $("#succesModal_email").modal("show")
+                        setTimeout(function () {
+                            $('#succesModal_email').modal('hide');
+                        }, 2000);
                         $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });

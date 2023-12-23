@@ -914,14 +914,14 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <div class="d-flex">
-                        <label class="custom-control custom-checkbox me-2">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
-                                value="option1" checked="">
-                            <span class="custom-control-label">Notify Tenant</span>
-                        </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1_update"
-                                value="option1" checked="">
+                            <input
+                                type="checkbox"
+                                class="custom-control-input"
+                                name="example-checkbox1_update_task"
+                                value="option1"
+                                checked=""
+                            >
                             <span class="custom-control-label">Notify Assignee(s)</span>
                         </label>
                     </div>
@@ -929,7 +929,7 @@
                         <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
                             id="close">Close</button>
                         <a href="javascript:void(0)" class="btn text-light btn-pill button"
-                            style="background-color:#1467B0;" id="save">Save</a>
+                            style="background-color:#1467B0;" id="save_task">Save</a>
                     </div>
                 </div>
             </div>
@@ -1921,16 +1921,13 @@
                     dropdownParent: $('#addModal')
                 });
             });
-            $('#addModal_task').on('shown.bs.modal', function () {
-                $('.select2-show-search').select2({
-                    dropdownParent: $('#addModal_task')
-                });
-            });
+            
             $('#myModal_edit').on('shown.bs.modal', function () {
                 $('.select2-show-search').select2({
                     dropdownParent: $('#myModal_edit')
                 });
             });
+           
         });
     </script>
     <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -2076,6 +2073,7 @@
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
+                console.log(file)
                 // console.log(selectedFiles.length)
                 // console.log(file)
                 var fileElement = $('<div>')
@@ -2091,7 +2089,8 @@
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
+                    if(file?.imageKey){
+                        if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.webp') || file?.imageKey?.endsWith('.jpeg') || file?.imageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<img style="height:80px">').attr('src', file.Image))
@@ -2106,6 +2105,24 @@
                             $('<div>').addClass('file-preview')
                                 .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                         );
+                    }
+                    }else{
+                        if (file?.ImageKey?.endsWith('.jpg')|| file?.ImageKey?.endsWith('.webp') || file?.ImageKey?.endsWith('.jpeg') || file?.ImageKey?.endsWith('.png')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', file.Image))
+                        );
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                        );
+                    } else {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                        );
+                    }
                     }
                 }
                 if (file instanceof File) {
@@ -2142,7 +2159,9 @@
             });
         }
         var taskInfo = []
+        var properties;
         let taskId;
+        var api;
         var taskPermissions;
         var userData;
         $(document).ready(function () {
@@ -2154,6 +2173,9 @@
                 },
                 success: function ({ userName, image, tasks, create_at, planID, ...rest }) {
                     userData = rest;
+                    $("#assignee_task,#assignee_update_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
+                    $("#assignee_task").multipleSelect();
+
                     adjustPlan(rest)
                     localStorage.setItem("landlordName", userName)
                     if (image !== " " && image !== null && image !== "") {
@@ -2228,7 +2250,7 @@
                     },
                     success: function (response) {
                         // properties = response.data;
-                        var properties=response?.data;
+                        properties=response?.data;
                         // Assuming the response data is an array of property objects
                         // console.log("property", response.data)
                         
@@ -2287,13 +2309,14 @@ $('#preloader').css('display','none');
                     Authorization: "Bearer " + localStorage.getItem("authtoken"),
                 },
                 success: function (response) {
-                    if (response?.data) {
-                        response?.data?.forEach((user) => {
-                            $("#assignee_task").append($("<option></option>").text(user?.UFirstName + " " + user?.ULastName).val(user?.id));
-                        })
-                        $("#assignee_task").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)).val(userData?.userId));
-                        $("#assignee_task").multipleSelect();
-                    }
+                    if (response?.data?.length>=1) {
+                                    response?.data?.forEach((user)=>{
+                                    $("#assignee_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                })
+                                
+                                }
+                                
+                                $("#assignee_task").multipleSelect();
                     // $("#assignee_task").append($("<option></option>").text().val(user.id));
                 }, error: function (xhr, status, error) {
                 }
@@ -2307,6 +2330,27 @@ $('#preloader').css('display','none');
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
+                    var selectElement = $('#assignee_task');
+                    
+                    if (response.data.length === 0) {
+                        $("#assignee_update_task").append($("<option></option>").text("No Vendor available.."));
+                        selectElement.append($('<option></option>').text('No Vendor available..'));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            var optionText = ((vendor.firstName + " " + vendor.lastName)+' (vendor)');
+                            var optionValue = (vendor.id+'v');
+                            var option = $('<option></option>')
+                                .val(optionValue)
+                                .text(optionText);
+                            selectElement.append(option);
+                            $("#assignee_update_task").append($("<option></option>").text(optionText).val(optionValue));
+                            
+                            
+                        });
+                    }
+                    selectElement.multipleSelect();
+                    $("#assignee_update_task").multipleSelect();
+                    $("#assignee_update").multipleSelect();
                     $("#assignee_update").empty()
                     var selectElement = $('#assignee');
                     selectElement.empty();
@@ -2328,13 +2372,14 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
                     $('#preloader').css('display', 'none');
-                    if (xhr.responseJSON.message == "No vendor data found") {
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
                         $('#addVendorAnchor').show()
                     }
                 }
             })
+            
             function areAllFieldsFilled(update) {
                 if (update) {
                     // console.log("this is for update")
@@ -2511,7 +2556,7 @@ $('#preloader').css('display','none');
                 });
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-            $('#fileInput_update').on('change', function () {
+            $('#fileInput_update,#fileInput_update_task').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
                     file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
@@ -2610,6 +2655,8 @@ $('#preloader').css('display','none');
                                         $("#succesModal").modal("show")
                                         localStorage.setItem("task", "true")
                                     }
+                                    selectedFiles=[]
+
                                 },
                                 error: function (xhr, status, error) {
                                     $('#preloader').css('display', 'none');
@@ -2663,6 +2710,8 @@ $('#preloader').css('display','none');
                                 GetNotification();
                                 $("#succesModal").modal("show")
                             }
+                            selectedFiles=[]
+
                         },
                         error: function (xhr, status, error) {
                             $('#preloader').css('display', 'none');
@@ -2675,13 +2724,40 @@ $('#preloader').css('display','none');
                     });
                 }
             });
-
             $(document).on('click', '#next_task', function (e) {
                 e.preventDefault();
                 // $('#addModal').modal('hide');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task_task").val();
-                var assignee = $("#assignee_task").val();
+                var assignee = []
+                console.log($("#assignee_task").val())
+                $("#assignee_task").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
                 var property = $("#property_task").val();
                 var dueDate = $("#dueDate_task").val();
                 var status = $("#status_task").val();
@@ -2689,8 +2765,8 @@ $('#preloader').css('display','none');
                 var note = $("#notes_task").val();
                 var formData = new FormData();
                 var taskData = {}
-
-                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_task"]:eq(1)').is(':checked') ? "yes" : "no";
+                
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
                 if (selectedFiles.length >= 1) {
                     for (var i = 0; i < selectedFiles.length; i++) {
                         formData.append('image', selectedFiles[i]);
@@ -2714,7 +2790,7 @@ $('#preloader').css('display','none');
                                 status: status,
                                 priority: priority,
                                 note: note,
-
+                                propertyUnit:$("#unit_task").val(),
                                 notifyVendor: isNotifyAssigneesChecked,
                                 images: imageArray,
                             }
@@ -2739,9 +2815,10 @@ $('#preloader').css('display','none');
                                         $("#succesModal").modal("show")
                                         localStorage.setItem("task", "true")
                                     }
+                                    selectedFiles=[]
                                 },
                                 error: function (xhr, status, error) {
-                                    $('#preloader').css('display', 'none');
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
@@ -2751,7 +2828,7 @@ $('#preloader').css('display','none');
                             });
                         },
                         error: function (xhr, status, error) {
-                            $('#preloader').css('display', 'none');
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -2768,7 +2845,7 @@ $('#preloader').css('display','none');
                         status: status,
                         priority: priority,
                         note: note,
-
+                        propertyUnit:$("#unit_task").val(),
                         notifyVendor: isNotifyAssigneesChecked,
                         images: [],
                     }
@@ -2792,9 +2869,10 @@ $('#preloader').css('display','none');
                                 GetNotification();
                                 $("#succesModal").modal("show")
                             }
+                            selectedFiles=[]
                         },
                         error: function (xhr, status, error) {
-                            $('#preloader').css('display', 'none');
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
@@ -2804,6 +2882,8 @@ $('#preloader').css('display','none');
                     });
                 }
             });
+            
+            
 
 
             let propertyId;
@@ -2953,6 +3033,7 @@ $('#preloader').css('display','none');
                     $('#save').removeClass('disabled')
                 }
             })
+
             $(document).on('click', '#save', function (e) {
                 e.preventDefault();
                 $("#myModal_edit").modal("hide");
@@ -3077,9 +3158,17 @@ $('#preloader').css('display','none');
             });
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
+                var uri;
+                console.log(api)
+                if(api=="usertask"){
+                    uri='https://backend.app.spaderent.com/api/spade/deleteUserTask'
+                }else if(api=="task"){
+                    console.log(api)
+                    uri='https://backend.app.spaderent.com/api/spade/deleteTask'
+                }
                 $('#myModal_delete').modal('hide');
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                    url:uri ,
                     type: 'DELETE',
                     data: JSON.stringify({
                         "taskID": taskId
@@ -3107,6 +3196,157 @@ $('#preloader').css('display','none');
                     }
                 });
             })
+            $(document).on('click', '#save_task', function (e) {
+                e.preventDefault();
+                $("#myModal_edit_task").modal("hide");
+                var formData = new FormData();
+                var message = $("#message_update_task").val();
+                var dueDate = $("#dueDate_update_task").val();
+                var taskName = $("#taskName_update_task").val();
+                var unit=$("#unit_update_task").val();
+                var property = $("#property_update_task").val();
+                var priority = $("#priority_update_task").val();
+                var status = $("#status_update_task").val();
+                var assignee = []
+                console.log($("#assignee_update_task").val())
+                $("#assignee_update_task").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update_task"]:eq(1)').is(':checked') ? "yes" : "no";
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                    if (file instanceof File) {
+                    }
+                    else {
+                        existingImageNames.push(file)
+                    }
+                })
+                if (selectedFiles.length >= 1) {
+                    var files = selectedFiles.map(function (file) {
+                        return file instanceof File ? file : file.name;
+                    });
+                    files.forEach(function (file) {
+                        formData.append('image', file);
+                    });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        }, success: function (response) {
+                            var imageArray = [...response.images, ...existingImageNames];
+                            const formData = {
+                                taskID: taskId,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                PropertyUnit:unit,
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
+                                images: imageArray
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateUserTask',
+                                type: 'PUT',
+                                data: JSON.stringify(formData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    e.preventDefault()
+                                    getData();
+                                    $("#successfully_changed_text").text("Successfully Updated");
+                                    $("#successfully_changed").modal("show");
+                                    setTimeout(function () {
+                                        $("#successfully_changed").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+                                    }, 2000);
+                                    // console.log('Error: ' + error);
+                                }
+                            });
+                        }, error: function () {
+                        }
+                    })
+                } else {
+                    const formData = {
+                        taskID: taskId,
+                                notifyAssignee: isNotifyAssigneesChecked,
+                                notes: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                PropertyUnit:unit,
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
+                        images: []
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/updateUserTask',
+                        type: 'PUT',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            e.preventDefault()
+                            getData();
+                            $("#successfully_changed_text").text("Successfully Updated");
+                            $("#successfully_changed").modal("show");
+                            setTimeout(function () {
+                                $("#successfully_changed").modal("hide");
+                            }, 2000);
+                        },
+                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                            // console.log('Error: ' + error);
+                        }
+                    });
+                }
+            });
+            
             function updateTableWithData(data) {
                 // Clear existing data from the table
                 console.log(data)
@@ -3269,14 +3509,32 @@ $('#preloader').css('display','none');
                 $("#dueDate_update_task").val(data.dueDate);
                 $("#taskName_update_task").val(data.taskName);
                 $("#property_update_task").val(data.propertyId);
+                var propertyData=properties.find((property)=>{
+                    return property.id==data.propertyId
+                })
+                console.log(propertyData)
+                propertyData.occupiedUnits.forEach((unit)=>{
+                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                })
+                propertyData.vacantUnits.forEach((unit)=>{
+                    $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
+                })
                 $("#unit_update_task").val(data.id);
                 $("#priority_update_task").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                 $("#status_update_task").find(`option[value="${data.taskStatus}"]`).prop("selected", true);
                 $("#myModal_edit_task .select2-selection__rendered").empty()
-                data.AssignTo.forEach(({
+                data?.AssignTo?.forEach(({
                     ID,
-                    name
+                    name,
+                    role
                 }) => {
+                    if(role=="Landlord"){
+                        ID=ID+"l"
+                    }else if(role=="Vendor"){
+                        ID=ID+"v"
+                    }else if(role=="User"){
+                        ID=ID+"u"
+                    }
                     $("#assignee_update_task").find(`option[value="${ID}"]`).prop("selected", true);
                     $("#myModal_edit_task .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}">${name}</li>`)
                 })
@@ -3310,6 +3568,16 @@ $('#preloader').css('display','none');
             $(document).on('click', '.delete-option', function (e) {
                 e.preventDefault(); // Prevent default anchor behavior
                 const taskIdElement = $(this).closest("tr").find(".task-id");
+                const taskType=$(this).closest("tr").find(".serial-number").next().text();
+                console.log(taskType.includes("MREQ"))
+                if(taskType.includes("MREQ")){
+                    api="task"
+                    console.log(taskType.includes("TASK"))
+                }else if(taskType.includes("TASK")){
+                    api="usertask"
+                }else{
+                    api=""
+                }
                 taskId = taskIdElement.attr("id");
                 $('#myModal_delete').modal('show');
             });

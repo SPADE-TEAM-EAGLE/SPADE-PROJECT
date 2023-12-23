@@ -3686,11 +3686,11 @@ $('#preloader').css('display','none');
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
                         // console.log(error)
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        //     window.location = '../Landlord/login_module.html';
+                        // }, 2000);
                     }
                 });
                 $.ajax({
@@ -3825,7 +3825,7 @@ $('#preloader').css('display','none');
                             });
                         },
                         error: function (xhr, status, error) {
-                            if (xhr.responseJSON.message == "No data found") {
+                            if (xhr?.responseJSON?.message == "No data found") {
                             localStorage.setItem("invoice", "false")
                             window.location = './new-invoice.html'
                         }else{
@@ -3941,7 +3941,7 @@ $('#preloader').css('display','none');
                         });
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.message == "No data found") {
+                        if (xhr?.responseJSON?.message == "No data found") {
                             localStorage.setItem("invoice", "false")
                             window.location = './new-invoice.html'
                         }else{

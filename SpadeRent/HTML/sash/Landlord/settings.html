@@ -10000,6 +10000,25 @@ $('#preloader').css('display','none');
                 });
                 updateSelectedFilesContainer1(); // Update the selected files container
             });
+            console.log("hehduhrhh8eycn ryreuururuur",$('#tab16 input[type="checkbox"]'))
+            $('#tab16 input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                
+                $('#tab16').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
+            $('#tab13 input[type="checkbox"]').change(function () {
+                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
+                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
+                // console.log(columnIndex, isColumnVisible)
+                $('#tab13').find('tr').each(function () {
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    isColumnVisible ? column.show() : column.hide();
+                });
+            });
             $(document).on('click', '.delete-file', function () {
                 var index = $(this).data('index');
                 selectedFiles.splice(index, 1); // Remove the selected file from the array
@@ -10392,6 +10411,8 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                     $('#table_body_users').append(`<tr><td colspan="5" class="text-center">No Data Found</td></tr>`);
                                 }
                             }, error: function (xhr, status, error) {
+                                $('#table_body_users').empty();
+                                $('#table_body_users').append(`<tr><td colspan="5" class="text-center">No Data Found</td></tr>`);
                             }
                         })
                         
@@ -10492,8 +10513,9 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                         if (property?.accountName) {
                                             counterAccount++
                                             var row = $("<tr>");
+                                                row.append($("<td>").text(counterAccount));
                                             row.append($("<td class='d-none upoid'>").text(property.id));
-                                            row.append($("<td>").text(counterAccount));
+                                            
                                             row.append($("<td>").html("<b>" + property.accountName + "</b>"));
                                             row.append($("<td>").text(property.description))
                                             row.append($("<td>").html('<span>'+(property.isActive==1?"Active":"Not Started")+'</span>'))
@@ -10513,6 +10535,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 // console.log('Error occurred while fetching state and city data.');
                                 // console.log(xhr);
                                 // console.log(error);
+                                $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);
                             }
                         });
                         $.ajax({
@@ -10700,7 +10723,8 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             },
                             error: function (xhr, status, error) {
                                 // console.log(error);
-                                if(JSON.parse(xhr.responseText).message == "Bank Account data not found"){
+                                
+                                if(xhr?.responseJSON?.message == "Bank Account data not found"){
                                     var row = $("<tr>");
                                     var noDataCell = $('<td colspan="12" class="text-center">').text("No Bank Account Added");
                                     row.append(noDataCell);
@@ -10725,7 +10749,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             },
                             error: function (xhr, status, error) {
                                 // console.log(error)
-                                if(JSON.parse(xhr.responseText).message != "No data found"){
+                                if(xhr?.responseJSON?.message != "No data found"){
 
                                     $("#myModal_warning").modal("show");
                                 }
@@ -10738,11 +10762,7 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
+                        
                         // console.log('Error occurred while fetching state and city data.');
                         // console.log(xhr);
                         // console.log(error);
@@ -11826,7 +11846,7 @@ $('#preloader').css('display','none');
                         },
                         error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                            if (xhr.responseJSON.message == "Error in updating 2 Factor Authentication") {
+                            if (xhr?.responseJSON?.message == "Error in updating 2 Factor Authentication") {
                                 $("#myModal_incorrect_auth").modal("show")
                                 setTimeout(() => {
                                     $("#myModal_incorrect_auth").modal("hide")
@@ -12229,9 +12249,9 @@ $('#preloader').css('display','none');
                         }
                     },
                     error: function (xhr, status, error) {
-                         if (xhr.responseJSON.message == "Email ALready Exist kindly change your Email") {
+                         if (xhr?.responseJSON?.message == "Email ALready Exist kindly change your Email") {
                             $("#emailVerifySubmit").prop('disabled', 'true');
-                            $("#verifyEmailSpan").html(xhr.responseJSON.message);
+                            $("#verifyEmailSpan").html(xhr?.responseJSON?.message);
                         }else{
 
                             $('#preloader').css('display','none');
@@ -12684,7 +12704,7 @@ $('#preloader').css('display','none');
                             }
                         },
                         error: function (xhr, status, error) {
-                            if(xhr.responseJSON.message.includes("Email already exists")){
+                            if(xhr?.responseJSON?.message.includes("Email already exists")){
                                 $("#" + filedId).removeClass("border-green");
                                 $("#" + filedId).addClass("border-danger");
                                 $("#already-exist,#already-exist-update").removeClass("d-none")
@@ -13385,24 +13405,7 @@ $('#preloader').css('display','none');
                 $("#card-cvc-bank-property").empty()
                 createNuveiFieldsProperty()
             });
-            $('#tab16 input[type="checkbox"]').change(function () {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                // console.log(columnIndex, isColumnVisible)
-                $('#tab16').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            });
-            $('#tab13 input[type="checkbox"]').change(function () {
-                var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
-                var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                // console.log(columnIndex, isColumnVisible)
-                $('#tab13').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
-                    isColumnVisible ? column.show() : column.hide();
-                });
-            });
+            
         </script>
         <script src="../assets/js/accordian.js"></script>
         <script src="../assets/js/user-sidebar-permissions.js"></script>

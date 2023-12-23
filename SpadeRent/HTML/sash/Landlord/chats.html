@@ -2011,7 +2011,7 @@
                     },
                     error: function (xhr, status, error) {
                         $('#preloader').css('display', 'none');
-                        if (JSON.parse(xhr.responseText).message == "No data found") {
+                        if (xhr?.responseJSON?.message == "No data found") {
                             var randomImg1 = "../assets/images/users/5.jpg";
                             var tab_pane = $('#tab-pane-ll');
                             tab_pane.empty();

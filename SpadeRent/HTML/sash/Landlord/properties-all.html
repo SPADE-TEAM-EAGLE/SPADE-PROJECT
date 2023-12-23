@@ -2335,11 +2335,31 @@ $(".plan_remaining_days_data").each(function(){
 
                 
             })
+            $("#propertyType_update").on("change",function(){
+                console.log($(this).val())
+                if ($(this).val() == "Single Family") {
+    $("#unit_update").val(1);
+    $("#unit_update").prop("disabled", true);
+    $("#unit_update").attr('readonly', true);
+} else {
+    $("#unit_update").val(''); // Reset the value to empty string
+    $("#unit_update").prop("disabled", false);
+    $("#unit_update").attr('readonly', false);
+
+}
+
+                
+            })
             
             $("#units").on("input",function(){
                 
                 if ($(this).val() >=199) {
     $("#units").val(199);}})
+
+    $("#unit_update").on("input",function(){
+                
+                if ($(this).val() >=199) {
+    $("#unit_update").val(199);}})
             
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);

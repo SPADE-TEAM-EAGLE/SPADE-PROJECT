@@ -1779,7 +1779,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        if (xhr.responseJSON.message == "No vendor category data found") {
+                        if (xhr?.responseJSON?.message == "No vendor category data found") {
                             $("#category").empty()
                             $("#category").prop("disabled", true);
                             $("#category").append($('<option></option>').text("Add vendor categories first!!"))
@@ -2089,7 +2089,7 @@ $("#myModal_warning_connection").modal("show");
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-if(xhr.responseJSON.message == "No data found") {
+if(xhr?.responseJSON?.message == "No data found") {
 
 
     var tableBody = $('#table_body');
@@ -2160,7 +2160,7 @@ if(xhr.responseJSON.message == "No data found") {
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        if (xhr.responseJSON.message == 'Vendor not Deleted successful') {
+                        if (xhr?.responseJSON?.message == 'Vendor not Deleted successful') {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
                             $("#delete-text").text("Error deleting vendor")
@@ -2255,7 +2255,7 @@ $('#preloader').css('display','none');
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });

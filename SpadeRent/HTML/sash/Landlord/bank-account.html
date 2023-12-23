@@ -1265,10 +1265,10 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                 });
                             }
                     $("#property_name").text(toTitleCase(data?.propertyName))
-                    $("#account-holder-name").text(toTitleCase(data?.accountName))
-                    console.log("guygghggjgjgjgjjg",data.status)
+                    $("#account-holder-name").text(data?.accountName?toTitleCase(data?.accountName):"Not Set")
+                    
                     $("#status-text").text(data.isActive==1?'Active':"Not Started")
-                    $("#description-text").text(toTitleCase(data?.description))
+                    $("#description-text").text(data?.description?toTitleCase(data?.description):"Not Set")
 
                     $("#property_address").text(toTitleCase(data?.address)+", "+toTitleCase(data?.city)+", "+toTitleCase(data?.state))
                     $("#property_type").text(data?.propertyType)
