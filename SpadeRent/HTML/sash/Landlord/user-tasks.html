@@ -1394,7 +1394,7 @@
                                             <a href="user-tasks.html" class="slide-item">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
                                         
                                         <li>
@@ -2463,7 +2463,7 @@ return NewDate
                 $("#taskName_view").text(data.taskName);
                 $("#dueDate_view").text(dateFormatChanger(data.dueDate));
                 $("#priority_view").text(data.priority);
-                $("#status_view").text(data.status);
+                $("#status_view").text(data.taskStatus);
                 $("#notes_view").text(data.notes || "Not set");
                 // console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
@@ -3217,7 +3217,7 @@ $('#preloader').css('display','none');
                                 if (task?.images[0]?.ImageKey?.includes('pdf') || task?.images[0]?.ImageKey?.includes('docx')) {
                                     var image = '<td><i style="font-size:50px" class="fi fi-rs-file"></i></td>';
                                 } else {
-                                    if (task?.images[0]?.Image !== null) {
+                                    if (task?.images[0]?.Image) {
                                         var image = '<td><img src="' + task?.images[0]?.Image + '" alt=""></td>';
                                     } else {
                                         var image = '<td><img src="' + "../assets/images/Group-user.png" + '" alt=""></td>';
@@ -3301,7 +3301,8 @@ if (task.priority == 'High') {
                                     dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                                 }
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
-                                var status = '<td class="status " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+                                console.log(task?.status)
+                                var status = '<td class="status " style="font-weight: 600;">' + (task.taskStatus ? toTitleCase(task.taskStatus) : "Not Set") + '</td>';
                                 var dropdownMenu =
                                     '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
                                     '<ul class="dropdown-menu">' +
@@ -3437,10 +3438,10 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        // $("#myModal_warning_connection").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning_connection').modal('hide');
+                        // }, 2000);
                         // console.log('Error: ' + error);
                     }
                 });

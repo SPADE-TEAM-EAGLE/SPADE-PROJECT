@@ -1102,6 +1102,13 @@
                                                             </a>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
+                                                            <a class="text-dark" href="javascript:void(0)">ID</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between">
                                                             <a class="text-dark" href="javascript:void(0)">COMPANY
                                                                 NAME</a>
                                                             <div class="form-check m-0">
@@ -1489,10 +1496,10 @@
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                        }, 2000);
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        // }, 2000);
                         // console.log(error);
                     }
                 });
@@ -1572,10 +1579,10 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                    }, 2000);
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    // }, 2000);
                     // console.log(error);
                 }
             });
@@ -2255,7 +2262,7 @@ $('#preloader').css('display','none');
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
                 // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + (columnIndex + 2) + '), td:nth-child(' + (columnIndex + 2) + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
