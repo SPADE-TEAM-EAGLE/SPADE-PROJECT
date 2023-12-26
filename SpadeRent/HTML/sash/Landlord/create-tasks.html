@@ -2485,6 +2485,70 @@ $('#preloader').css('display','none');
                         });
                     } else {
                     }
+
+                    $("#view-task-line-item").empty()
+
+                    if(data?.AssignTo?.length > 0){
+                    data.AssignTo.forEach((item) => {
+                    if(item.role=="Landlord"){
+                        $("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.landlordPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+
+
+                    }else if(item.role=="Vendor"){
+                        $("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+                    }
+// console.log(item)
+
+                    })
+                
+                }
+                else{
+                    $("#view-task-line-item").append(`<tr class="tr">
+                            <td>
+                                <p class="text-primary"><b>${"Not set"}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+                            </td>
+                        </tr>`)
+                }
                 } else {
                     if (data?.taskImages) {
                         selectedFiles = data?.taskImages
@@ -2506,17 +2570,8 @@ $('#preloader').css('display','none');
                         });
                     } else {
                     }
-                }
 
-
-                updateSelectedFilesContainer()
-                $("#taskName_view").text(data.taskName);
-                $("#dueDate_view").text(dateFormatChanger(data.dueDate));
-                $("#priority_view").text(data.priority);
-                $("#status_view").text(data.status);
-                $("#notes_view").text(data.notes || "Not set");
-                // console.log($("#notes_view"))
-                $("#view-task-line-item").empty()
+                    $("#view-task-line-item").empty()
                 if (data?.AssignTo?.length > 0) {
                     data.AssignTo.forEach((item) => {
                         // console.log(item)
@@ -2532,6 +2587,8 @@ $('#preloader').css('display','none');
                             </td>
                         </tr>`)
                     })
+                
+                
                 }
                 else {
                     $("#view-task-line-item").append(`<tr class="tr">
@@ -2546,9 +2603,23 @@ $('#preloader').css('display','none');
                             </td>
                         </tr>`)
                 }
+                }
+
+
+                updateSelectedFilesContainer()
+                $("#taskName_view").text(data.taskName);
+                $("#dueDate_view").text(dateFormatChanger(data.dueDate));
+                $("#priority_view").text(data.priority);
+                $("#status_view").text(data.status);
+                $("#notes_view").text(data.notes || "Not set");
+                // console.log($("#notes_view"))
+                
 
                 $("#viewModal-tasks").modal("show")
             })
+            
+            
+            
             $('#fileInput,#fileInput_task').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {

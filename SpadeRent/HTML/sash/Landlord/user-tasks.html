@@ -2470,8 +2470,8 @@ return NewDate
                 $("#view-task-line-item").empty()
                 if(data?.AssignTo?.length > 0){
                     data.AssignTo.forEach((item) => {
-// console.log(item)
-$("#view-task-line-item").append(`
+                    if(item.role=="Landlord"){
+                        $("#view-task-line-item").append(`
     <tr class="tr">
         <td>
             <p class="text-primary"><b>${item.name} / ${item.landlordPhone}</b></p>
@@ -2491,7 +2491,30 @@ $("#view-task-line-item").append(`
 `);
 
 
+                    }else if(item.role=="Vendor"){
+                        $("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+                    }
+// console.log(item)
+
                     })
+                
                 }
                 else{
                     $("#view-task-line-item").append(`<tr class="tr">
