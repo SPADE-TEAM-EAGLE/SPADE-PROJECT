@@ -1439,7 +1439,7 @@ exports.propertyDelete = async (req, res) => {
       [id, "Occupied"]
     );
     if (propertyUnitscheckresult[0].length > 0) {
-      res.status(200).json({
+      res.status(403).json({
         message: " You are not able to delete Property (your unit is occupied)",
         units : propertyUnitscheckresult[0],
       });
@@ -2312,7 +2312,7 @@ exports.verifyMailCheck = async (req, res) => {
             });
           }
         } else {
-          return res.status(200).json({
+          return res.status(423).json({
             message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }

@@ -127,7 +127,7 @@ exports.getAllTaskTenant = async (req, res) => {
           message: "All Tasks",
         });
       } else {
-        res.status(200).json({
+        res.status(404).json({
           message: "No Tasks data found",
         });
       }
