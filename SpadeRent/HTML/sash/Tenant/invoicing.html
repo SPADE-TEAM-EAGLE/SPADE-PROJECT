@@ -2537,7 +2537,12 @@ $('#preloader').css('display','none');
                         });
                     }
                 },
-                error: function () {
+                error: function (xhr, status, error) {
+                    if (xhr?.responseJSON?.message == "No data found") {
+                        var tableBody = $('#table_body');
+                        tableBody.empty();
+                        tableBody.append(`<tr><td colspan="12" style="text-align: center;">No Data Found</td></tr>`)
+                    }
                 }
             })
 

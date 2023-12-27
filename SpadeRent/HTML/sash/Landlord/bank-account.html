@@ -754,12 +754,14 @@
                                         </li>
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
-                                        </li><li>
+                                        </li>
+                                        <li>
                                             <a href="user-tasks.html" class="slide-item">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
+    
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
                                         </li>
@@ -1265,10 +1267,10 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                 });
                             }
                     $("#property_name").text(toTitleCase(data?.propertyName))
-                    $("#account-holder-name").text(toTitleCase(data?.accountName))
-                    console.log("guygghggjgjgjgjjg",data.status)
+                    $("#account-holder-name").text(data?.accountName?toTitleCase(data?.accountName):"Not Set")
+                    
                     $("#status-text").text(data.isActive==1?'Active':"Not Started")
-                    $("#description-text").text(toTitleCase(data?.description))
+                    $("#description-text").text(data?.description?toTitleCase(data?.description):"Not Set")
 
                     $("#property_address").text(toTitleCase(data?.address)+", "+toTitleCase(data?.city)+", "+toTitleCase(data?.state))
                     $("#property_type").text(data?.propertyType)

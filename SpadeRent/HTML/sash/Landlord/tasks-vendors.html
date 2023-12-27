@@ -984,6 +984,13 @@
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
                                     <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
+                                    <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
                                 </ul>
@@ -1100,6 +1107,13 @@
                                                                     Show
                                                                 </strong>
                                                             </a>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between">
+                                                            <a class="text-dark" href="javascript:void(0)">ID</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
                                                             <a class="text-dark" href="javascript:void(0)">COMPANY
@@ -1489,10 +1503,10 @@
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                        }, 2000);
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        // }, 2000);
                         // console.log(error);
                     }
                 });
@@ -1572,10 +1586,10 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                    }, 2000);
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    // }, 2000);
                     // console.log(error);
                 }
             });
@@ -1779,7 +1793,7 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        if (xhr.responseJSON.message == "No vendor category data found") {
+                        if (xhr?.responseJSON?.message == "No vendor category data found") {
                             $("#category").empty()
                             $("#category").prop("disabled", true);
                             $("#category").append($('<option></option>').text("Add vendor categories first!!"))
@@ -2089,7 +2103,7 @@ $("#myModal_warning_connection").modal("show");
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-if(xhr.responseJSON.message == "No data found") {
+if(xhr?.responseJSON?.message == "No data found") {
 
 
     var tableBody = $('#table_body');
@@ -2160,7 +2174,7 @@ if(xhr.responseJSON.message == "No data found") {
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        if (xhr.responseJSON.message == 'Vendor not Deleted successful') {
+                        if (xhr?.responseJSON?.message == 'Vendor not Deleted successful') {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
                             $("#delete-text").text("Error deleting vendor")

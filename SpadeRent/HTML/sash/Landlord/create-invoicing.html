@@ -1203,7 +1203,7 @@
                         id="close">Close</button>
                     <div class="btn-group rounded-split mt-2 mb-2">
                         <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
-                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-1" id="toggle-button"
+                        <button type="button" class="btn btn-pill btn-primary dropdown-toggle px-2 d-flex justify-content-center align-items-center" id="toggle-button"
                             data-bs-toggle="dropdown" aria-expanded="false" disabled>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
@@ -2339,6 +2339,13 @@
                                     <li>
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
+                                    <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
                                     <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
@@ -3825,7 +3832,7 @@ $('#preloader').css('display','none');
                             });
                         },
                         error: function (xhr, status, error) {
-                            if (xhr.responseJSON.message == "No data found") {
+                            if (xhr?.responseJSON?.message == "No data found") {
                             localStorage.setItem("invoice", "false")
                             window.location = './new-invoice.html'
                         }else{
@@ -3941,7 +3948,7 @@ $('#preloader').css('display','none');
                         });
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.message == "No data found") {
+                        if (xhr?.responseJSON?.message == "No data found") {
                             localStorage.setItem("invoice", "false")
                             window.location = './new-invoice.html'
                         }else{

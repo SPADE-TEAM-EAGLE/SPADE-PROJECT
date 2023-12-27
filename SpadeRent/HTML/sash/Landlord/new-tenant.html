@@ -1443,6 +1443,13 @@
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
                                     <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
+                                    <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
                                 </ul>
@@ -1560,7 +1567,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center align-items-center text-white">
+                            <div class="d-flex justify-content-center align-items-center text-white" id="add-more-tenants">
                                 <span class="me-2">For More Tenants</span>
                                 <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
                                     <img
@@ -2049,12 +2056,12 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                         // console.log('Error: ' + error);
                     }
@@ -2112,12 +2119,12 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                         // console.log('Error: ' + error);
                     }
@@ -2431,6 +2438,9 @@ $('#preloader').css('display','none');
                 }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
+                    if(planID==4 || planID==7){
+                        $("#add-more-tenants").remove()
+                    }
                     adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -2526,13 +2536,13 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-                    // console.log(JSON.parse(xhr.responseText).message);
-                    if(JSON.parse(xhr.responseText).message != "No data found"){
+                    // console.log(xhr?.responseJSON?.message);
+                    if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                     // console.log(xhr.responseText);
                 }

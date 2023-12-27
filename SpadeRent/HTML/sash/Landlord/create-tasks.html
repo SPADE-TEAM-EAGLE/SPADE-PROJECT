@@ -1382,7 +1382,7 @@
                                         <a href="user-tasks.html" class="slide-item">Tasks</a>
                                     </li>
                                     <li>
-                                        <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                     </li>
 
                                     <li>
@@ -2293,10 +2293,10 @@
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        // $("#myModal_warning_connection").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning_connection').modal('hide');
+                        // }, 2000);
                         // console.log('Error: ' + error);
                     }
                 });
@@ -2372,7 +2372,7 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
                     $('#preloader').css('display', 'none');
-                    if (xhr.responseJSON.message == "No vendor data found") {
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
                         $('#addVendorAnchor').show()

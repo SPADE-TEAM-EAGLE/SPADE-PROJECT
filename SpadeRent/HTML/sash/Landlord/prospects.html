@@ -1416,12 +1416,14 @@
                                         </li>
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
-                                        </li><li>
+                                        </li>
+                                        <li>
                                             <a href="user-tasks.html" class="slide-item">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
+    
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
                                         </li>
@@ -3283,12 +3285,12 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                     }
                 });
@@ -3345,7 +3347,7 @@ $('#preloader').css('display','none');
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
                                                     $("#myModal_warning_connection").modal("show");
                                                     setTimeout(function () {
@@ -3449,10 +3451,10 @@ $('#preloader').css('display','none');
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
+                        // $("#myModal_warning_connection").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning_connection').modal('hide');
+                        // }, 2000);
                         // console.log('Error: ' + error);
                     }
                 });
@@ -3694,12 +3696,12 @@ $('#preloader').css('display','none');
                     });
                 },
                 error: function (xhr, status, error) {
-                    if(JSON.parse(xhr.responseText).message != "No data found"){
+                    if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                 }
             });
@@ -4077,7 +4079,7 @@ $('#preloader').css('display','none');
                                         getData()
                                     },
                                     error: function (xhr, status, error) {
-                                        if(JSON.parse(xhr.responseText).message != "No Prospectus Data Found"){
+                                        if(xhr?.responseJSON?.message != "No Prospectus Data Found"){
                             $('#preloader').css('display','none');
                                                    
                         }
@@ -4110,6 +4112,13 @@ $('#preloader').css('display','none');
                             countValues()
                         });
                         $('#total-rent').text(formatRentAmount(totalRentDefault.toFixed(2)));
+                        if($("#table-body-qualified").children().length == 0){
+                            $("#table-body-qualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+                        }if($("#table-body-disqualified").children().length == 0){
+                            $("#table-body-disqualified").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+                        }if($("#table-body").children().length == 0){
+                            $("#table-body").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`)
+                        }
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');

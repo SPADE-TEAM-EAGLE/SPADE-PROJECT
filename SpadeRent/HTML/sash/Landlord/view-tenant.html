@@ -915,12 +915,14 @@
                                         </li>
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
-                                        </li><li>
+                                        </li>
+                                        <li>
                                             <a href="user-tasks.html" class="slide-item">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
+    
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
                                         </li>
@@ -1706,6 +1708,9 @@ $('#preloader').css('display','none');
                     success: function (response) {
                         // console.log(1111)
                         $("#succesModal_email").modal("show")
+                        setTimeout(function () {
+                            $('#succesModal_email').modal('hide');
+                        }, 2000);
                         $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });

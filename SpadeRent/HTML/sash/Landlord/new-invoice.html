@@ -921,7 +921,7 @@
                         <button type="button" class="btn btn-pill btn-primary save-invoice" disabled>Save</button>
                         <button
                             type="button"
-                            class="btn btn-pill btn-primary dropdown-toggle px-1"
+                            class="btn btn-pill btn-primary dropdown-toggle px-2 d-flex justify-content-center align-items-center"
                             id="toggle-button"
                             disabled
                             data-bs-toggle="dropdown"
@@ -1400,6 +1400,13 @@
                                     <li>
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
+                                    <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
                                     <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
@@ -2453,7 +2460,7 @@ $('#preloader').css('display','none');
                         }
                     },
                     error: function (xhr, status, error) {
-                        if(JSON.parse(xhr.responseText).message != "No data found"){
+                        if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
                                                    
                         }

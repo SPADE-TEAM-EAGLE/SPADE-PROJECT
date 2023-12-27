@@ -564,12 +564,14 @@
                                         </li>
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
-                                        </li><li>
+                                        </li>
+                                        <li>
                                             <a href="user-tasks.html" class="slide-item">Tasks</a>
                                         </li>
                                         <li>
-                                            <a href="maintenance-requests.html" class="slide-item">Maintainance Request</a>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
+    
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
                                         </li>
@@ -1297,10 +1299,10 @@
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                    }, 2000);
+                    //$("#myModal_warning").modal("show");
+                    //setTimeout(function () {
+                      //  $('#myModal_warning').modal('hide');
+                    //}, 2000);
                     // console.log(error);
                 }
             });
@@ -1454,10 +1456,10 @@ $('#preloader').css('display','none');
                 },
                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
+                    // $("#myModal_warning_connection").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning_connection').modal('hide');
+                    // }, 2000);
                     // console.log('Error: ' + error);
                 }
             });
@@ -1572,10 +1574,14 @@ if (task.dueDate) {
                             },
                             error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                                $("#myModal_warning_connection").modal("show");
-                            setTimeout(function() {
-                                $('#myModal_warning_connection').modal('hide');
-                            }, 2000);
+var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+var tableBody = $('#table_body');
+                        tableBody.empty();
+                        tableBody.append(row);
+                            //     $("#myModal_warning_connection").modal("show");
+                            // setTimeout(function() {
+                            //     $('#myModal_warning_connection').modal('hide');
+                            // }, 2000);
                     // console.log('Error: ' + error);
                             }
                         })

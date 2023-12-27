@@ -180,7 +180,11 @@ $('#preloader').css('display','none');
                 if (response.message == " Email verified successful ") {
                     localStorage.setItem("authtoken", response.token);
                     $("#modaldemo8").modal("hide")
+                    
                     $("#succesModal_verify").modal("show")
+                    setTimeout(function () {
+                        $("#succesModal_verify").modal("hide")
+                    }, 5000);
                     $("#account-text").empty()
                     $("#email_verification").remove()
                 } else if (response.message == " token code is not match ") {
