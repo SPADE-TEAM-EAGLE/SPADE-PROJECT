@@ -383,9 +383,12 @@ function updateDataNotify(notificationId, type) {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
     },
     success: function (response) {
+if(type == "task") window.location.href = "./maintenance-request.html";
+else if(type == "invoice") window.location.href = "./invoicing.html";
+else window.location.href = "./index.html";
     // console.log("updateTenantReadUnRead");
     // console.log(response);
-      GetNotification();
+      // GetNotification();
     },
     error: function (xhr, status, error) {
     // console.log("Error: " + error);
