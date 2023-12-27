@@ -1567,7 +1567,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center align-items-center text-white">
+                            <div class="d-flex justify-content-center align-items-center text-white" id="add-more-tenants">
                                 <span class="me-2">For More Tenants</span>
                                 <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
                                     <img
@@ -2058,10 +2058,10 @@ $('#preloader').css('display','none');
                     error: function (xhr, status, error) {
                         if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                         // console.log('Error: ' + error);
                     }
@@ -2121,10 +2121,10 @@ $('#preloader').css('display','none');
                     error: function (xhr, status, error) {
                         if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                         // console.log('Error: ' + error);
                     }
@@ -2438,6 +2438,9 @@ $('#preloader').css('display','none');
                 }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
+                    if(planID==4 || planID==7){
+                        $("#add-more-tenants").remove()
+                    }
                     adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -2536,10 +2539,10 @@ $('#preloader').css('display','none');
                     // console.log(xhr?.responseJSON?.message);
                     if(xhr?.responseJSON?.message != "No data found"){
                             $('#preloader').css('display','none');
-                                                    $("#myModal_warning_connection").modal("show");
-                                                    setTimeout(function () {
-                                                        $('#myModal_warning_connection').modal('hide');
-                                                    }, 2000);
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
                         }
                     // console.log(xhr.responseText);
                 }
