@@ -18,9 +18,9 @@
         <link rel="stylesheet" href="../assets/css/responsive2.css">
         <link href="../assets/css/icons.css" rel="stylesheet">
         <script>
-        if (localStorage.getItem("task") == "false") {
-            window.location = "./new-tasks.html"
-        }
+        // if (localStorage.getItem("task") == "false") {
+        //     window.location = "./new-tasks.html"
+        // }
         </script>
         <link
             id="theme"
@@ -2322,12 +2322,12 @@ $('#preloader').css('display','none');
 
                                 if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                    $("#assignee,#assignee_update").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.uRole+")").val((user?.id)+"u"));
                                 })
                                 
                                 }
                                 
-                                $("#assignee").multipleSelect();
+                                $("#assignee,#assignee_update").multipleSelect();
                             }, error: function (xhr, status, error) {
                             }
                         })
@@ -2496,6 +2496,25 @@ return NewDate
     <tr class="tr">
         <td>
             <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+                    }else{
+                        $("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.userPhone}</b></p>
         </td>
         <td>
             <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
@@ -3222,8 +3241,12 @@ $('#preloader').css('display','none');
                     success: function (response) {
                         // console.log(response);
                         if (response?.data?.length === 0) {
-                            localStorage.setItem("task", "false")
-                            window.location = './new-tasks.html'
+                            // localStorage.setItem("task", "false")
+                            // window.location = './new-tasks.html'
+                            var tableBody = $('#table_body');
+                            tableBody.empty();
+                            tableBody.append('<tr><td colspan="12" style="text-align: center;">No data found</td></tr>');
+
                         } else {
                             var tableBody = $('#table_body');
                             tableBody.empty();

@@ -501,6 +501,7 @@ exports.updateUserTask = async (req, res) => {
         [taskID]
       );
       const vendorID = assignee;
+      console.log(assignee)
       for (let i = 0; i < vendorID.length; i++) {
         const { Vendorid } = vendorID[i];
         const { Vendorrole } = vendorID[i];

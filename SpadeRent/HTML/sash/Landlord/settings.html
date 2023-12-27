@@ -9496,10 +9496,7 @@
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                        }, 2000);
+                        
                         // console.log(error);
                     }
                 });
@@ -12200,6 +12197,7 @@ $('#preloader').css('display','none');
                                         $("#myModal_warning").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning').modal('hide');
+                                            window.location="./login_module.html"
                                         }, 2000);
                                         // console.log(xhr);
                                         // console.log(error);
@@ -12803,7 +12801,7 @@ $('#preloader').css('display','none');
                                             }, 2000);
                                             resetAccordions()
                                         }
-                                        else if (response.message == "Users Permission User added successfully") {
+                                        else if (response.message == "Users Permission User added successfully ") {
                                             $("#myModal_success p").text("User succesfully created!!!")
                                             $("#myModal_success").modal("show")
                                             setTimeout(function () {

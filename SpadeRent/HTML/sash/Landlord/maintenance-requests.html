@@ -18,9 +18,9 @@
         <link rel="stylesheet" href="../assets/css/responsive2.css">
         <link href="../assets/css/icons.css" rel="stylesheet">
         <script>
-        if (localStorage.getItem("task") == "false") {
-            window.location = "./new-tasks.html"
-        }
+        // if (localStorage.getItem("task") == "false") {
+        //     window.location = "./new-tasks.html"
+        // }
         </script>
         <link
             id="theme"
@@ -2895,6 +2895,7 @@ $('#preloader').css('display','none');
                     }
                 });
             })
+            
             function getData() {
                 // console.log(2)
                 $("#global-loader").fadeIn("fast")
@@ -2908,9 +2909,10 @@ $('#preloader').css('display','none');
                     },
                     success: function (response) {
                         // console.log(response);
-                        if (response.data[0].length === 0) {
-                            localStorage.setItem("task", "false")
-                            window.location = './new-tasks.html'
+                        if (response?.data[0]?.length === 0) {
+                            var tableBody = $('#table_body');
+                            tableBody.empty();
+                            tableBody.append('<tr><td colspan="12" style="text-align: center;">No data found</td></tr>');
                         } else {
                             var tableBody = $('#table_body');
                             tableBody.empty();
@@ -3062,12 +3064,12 @@ if (task.priority == 'High') {
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        // console.log(error)
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                            window.location = '../Landlord/login_module.html';
-                        }, 2000);
+                        // // console.log(error)
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        //     window.location = '../Landlord/login_module.html';
+                        // }, 2000);
                     }
                 });
             }

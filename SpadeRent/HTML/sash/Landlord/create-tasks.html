@@ -2311,12 +2311,12 @@ $('#preloader').css('display','none');
                 success: function (response) {
                     if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                    $("#assignee_task,#assignee_update_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.uRole+")").val((user?.id)+"u"));
                                 })
                                 
                                 }
                                 
-                                $("#assignee_task").multipleSelect();
+                                $("#assignee_task,#assignee_update_task").multipleSelect();
                     // $("#assignee_task").append($("<option></option>").text().val(user.id));
                 }, error: function (xhr, status, error) {
                 }
@@ -2516,6 +2516,25 @@ $('#preloader').css('display','none');
     <tr class="tr">
         <td>
             <p class="text-primary"><b>${item.name} / ${item.vendorPhone}</b></p>
+        </td>
+        <td>
+            <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+        </td>
+        ${data.tfirstName ?
+            `<td>
+                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${data.tenantPhone}</b></p>
+            </td>` :
+            `<td>
+                <p class="text-primary"><b>Not Set</b></p>
+            </td>`
+        }
+    </tr>
+`);
+                    }else{
+                        $("#view-task-line-item").append(`
+    <tr class="tr">
+        <td>
+            <p class="text-primary"><b>${item.name} / ${item.userPhone}</b></p>
         </td>
         <td>
             <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
@@ -3692,8 +3711,13 @@ $('#preloader').css('display','none');
                     const dataFromAPI3 = response3[0].data[0];
 
                     const combinedData = [...dataFromAPI1, ...dataFromAPI2, ...dataFromAPI3];
-                    taskInfo = combinedData;
+                    if(combinedData?.length>0){
+                        taskInfo = combinedData;
                     combinedData.sort((a, b) => new Date(b?.created_at) - new Date(a?.created_at));
+                    }
+                    else{
+                        window.location="../Landlord/new-tasks.html"
+                    }
 
                     // Update the table with the combined data
                     updateTableWithData(combinedData);

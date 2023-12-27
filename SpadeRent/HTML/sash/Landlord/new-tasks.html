@@ -1878,12 +1878,12 @@ $('#preloader').css('display','none');
                 success: function (response) {
                     if (response?.data?.length>=1) {
                                     response?.data?.forEach((user)=>{
-                                    $("#assignee_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.Urole+")").val((user?.id)+"u"));
+                                    $("#assignee_task,#assignee_update_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.uRole+")").val((user?.id)+"u"));
                                 })
                                 
                                 }
                                 
-                                $("#assignee_task").multipleSelect();
+                                $("#assignee_task,#assignee_update_task").multipleSelect();
                     // $("#assignee_task").append($("<option></option>").text().val(user.id));
                 }, error: function (xhr, status, error) {
                 }

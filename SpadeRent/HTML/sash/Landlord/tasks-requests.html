@@ -2280,6 +2280,39 @@ $('#preloader').css('display','none');
             
             }
             getData()
+            $(document).on('click', '#confirmDelete', function (e) {
+                e.preventDefault();
+                $('#myModal_delete').modal('hide');
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                    type: 'DELETE',
+                    data: JSON.stringify({
+                        "taskID": taskId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        getData()
+                        $("#successfully_changed_text").text("Successfully Deleted");
+                        $("#successfully_changed").modal("show");
+                        setTimeout(function () {
+                            $("#successfully_changed").modal("hide");
+                        }, 2000);
+                    },
+                    error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                        }, 2000);
+                        // console.log('Error: ' + error);
+                    }
+                });
+            })
+            
             $(document).on('click', '#save', function (e) {
                 e.preventDefault();
                 $("#myModal_edit").modal("hide");
