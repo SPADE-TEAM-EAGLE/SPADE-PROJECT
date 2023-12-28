@@ -967,7 +967,7 @@
       element = document.querySelector(element);
     }
     if (!element || !element.nodeName) {
-      throw new Error('no element is specified to initialize PerfectScrollbar');
+      // throw new Error('no element is specified to initialize PerfectScrollbar');
     }
     this.element = element;
     element.classList.add(cls.main);

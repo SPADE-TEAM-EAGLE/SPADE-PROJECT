@@ -271,7 +271,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="prospects.html" style="color: white;">Prospect</a>
+                                        <a href="prospects.html" style="color: white;">Prospects</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -1381,7 +1381,7 @@ $('#preloader').css('display','none');
         }
 </script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
             if(unitsPermission){
                     const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
@@ -1434,10 +1434,10 @@ $('#preloader').css('display','none');
         observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 </script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

@@ -218,7 +218,7 @@
       var $starSet = $el.data(_name);
       var $stars = $starSet.$stars;
       if(newSize <= 1 || newSize > 200) {
-        console.error('star size out of bounds');
+       // console.error('star size out of bounds');
         return;
       }
       $stars = Array.prototype.slice.call($stars);

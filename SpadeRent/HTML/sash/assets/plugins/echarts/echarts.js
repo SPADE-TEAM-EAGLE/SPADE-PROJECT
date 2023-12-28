@@ -27474,7 +27474,7 @@ extendComponentView({
                 }
                 else {
                     if (__DEV__) {
-                        console.error('Can\'t draw value axis ' + i);
+                     //   console.error('Can\'t draw value axis ' + i);
                     }
                 }
                 if (showSplitLine) {
@@ -28319,7 +28319,7 @@ function resizeGeo(geoModel, api) {
         var rightBottom = boundingCoords[1];
         if (isNaN(leftTop[0]) || isNaN(leftTop[1]) || isNaN(rightBottom[0]) || isNaN(rightBottom[1])) {
             if (__DEV__) {
-                console.error('Invalid boundingCoords');
+               // console.error('Invalid boundingCoords');
             }
         }
         else {
@@ -28388,7 +28388,7 @@ function setGeoCoords(geo, model) {
 }
 if (__DEV__) {
     var mapNotExistsError = function (name) {
-        console.error('Map ' + name + ' not exists. You can download map file on http://echarts.baidu.com/download-map.html');
+      //  console.error('Map ' + name + ' not exists. You can download map file on http://echarts.baidu.com/download-map.html');
     };
 }
 var geoCreator = {
@@ -33146,7 +33146,7 @@ graphProto.addNode = function (id, dataIndex) {
     var nodesMap = this._nodesMap;
     if (nodesMap[generateNodeKey(id)]) {
         if (__DEV__) {
-            console.error('Graph nodes have duplicate name or id');
+          //  console.error('Graph nodes have duplicate name or id');
         }
         return;
     }

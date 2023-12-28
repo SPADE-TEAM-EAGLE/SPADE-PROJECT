@@ -680,7 +680,7 @@
                         elements: [_img[0]]
                     });
                 } catch (e) {
-                    console.error('Make sure you have included Picturefill version 2');
+                  //  console.error('Make sure you have included Picturefill version 2');
                 }
             }
             if (this.s.appendSubHtmlTo !== '.lg-sub-html') {
@@ -1238,11 +1238,11 @@
                 try {
                     window.lgData[el.getAttribute('lg-uid')].init();
                 } catch (err) {
-                    console.error('lightGallery has not initiated properly');
+                   // console.error('lightGallery has not initiated properly');
                 }
             }
         } catch (err) {
-            console.error('lightGallery has not initiated properly');
+          //  console.error('lightGallery has not initiated properly');
         }
     };
 });
