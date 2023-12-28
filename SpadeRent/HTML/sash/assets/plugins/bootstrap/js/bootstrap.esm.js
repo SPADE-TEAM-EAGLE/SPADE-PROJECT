@@ -488,7 +488,7 @@ const Data = {
     }
     const instanceMap = elementMap.get(element); // make it clear we only want one instance per element
     if (!instanceMap.has(key) && instanceMap.size !== 0) {
-      console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+     // console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
       return;
     }
     instanceMap.set(key, instance);

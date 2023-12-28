@@ -1798,8 +1798,6 @@
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
             <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-            <script>
-            </script>
             <script src="../assets/js/jquery.sparkline.min.js"></script>
             <script src="../assets/js/sticky.js"></script>
             <script src="../assets/js/circle-progress.min.js"></script>
@@ -1843,11 +1841,11 @@
             <script src="../assets/js/email-phone.js"></script>
             <script src="../assets/js/changeOnlineStatusTenant.js"></script>
             <script>
-                var helloGuys = true;
+                var loaderStopFirstRun = true;
                 $(document).ajaxStop(function () {
-                    if (helloGuys) {
+                    if (loaderStopFirstRun) {
                         // alert(1)
-                        helloGuys = false;
+                        loaderStopFirstRun = false;
                         var customScript = document.createElement('script');
                         customScript.src = "../assets/js/custom.js";
                         document.head.appendChild(customScript);

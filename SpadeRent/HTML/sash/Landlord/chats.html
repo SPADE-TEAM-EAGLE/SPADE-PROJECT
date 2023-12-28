@@ -410,7 +410,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="prospects.html" style="color: white;">Prospects</a>
+                                    <a href="prospects.html" style="color: white;">Prospect</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -1219,8 +1219,6 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
         <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script>
-        </script>
         <script src="../assets/js/jquery.sparkline.min.js"></script>
         <script src="../assets/js/sticky.js"></script>
         <script src="../assets/js/circle-progress.min.js"></script>
@@ -2205,16 +2203,17 @@
             }
         </script>
         <script>
-            var helloGuys = true;
+            var loaderStopFirstRun = true;
             $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
+                if (loaderStopFirstRun) {
+                    loaderStopFirstRun = false;
                     var customScript = document.createElement('script');
                     customScript.src = "../assets/js/custom.js";
                     document.head.appendChild(customScript);
                 }
             });
         </script>
+        
         <script src="../assets/js/user-sidebar-permissions.js"></script>
 </body>
 

@@ -3973,10 +3973,10 @@ $(document).ready(() => {
         observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
     </script>
     <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

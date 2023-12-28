@@ -1381,7 +1381,7 @@ $('#preloader').css('display','none');
         }
 </script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
             if(unitsPermission){
                     const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
@@ -1434,10 +1434,10 @@ $('#preloader').css('display','none');
         observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 </script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

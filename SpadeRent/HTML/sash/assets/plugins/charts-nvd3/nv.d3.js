@@ -42,7 +42,7 @@ if (nv.dev) {
     });
 }
 nv.log = function() {
-    if (nv.dev && window.console && console.log && console.log.apply)
+    if (nv.dev && window.console && console.log && console.log.apply){}
       // console.log.apply(console, arguments);
     else if (nv.dev && window.console && typeof console.log == "function" && Function.prototype.bind) {
         var log = Function.prototype.bind.call(console.log, console);
@@ -12073,7 +12073,7 @@ nv.models.sankeyChart = function() {
                 dataAvailable = true;
             }
             if(!isDataValid) {
-                console.error('NVD3 Sankey chart error:', 'invalid data format for', data);
+              //  console.error('NVD3 Sankey chart error:', 'invalid data format for', data);
                 console.info('Valid data format is: ', testData, JSON.stringify(testData));
                 showError(selection, 'Error loading chart, data is invalid');
                 return false;
