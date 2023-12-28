@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
     const roomId = data.chatId;
     // Emit the chat message to everyone in the room, including the sender
     console.log(io.to(roomId).emit("chatMessage", data.message))
-    io.to(roomId).emit("chatMessage", data.message);
+    io.to(roomId).emit("chatMessage", data);
 });
 socket.on("notification", (data) => {
  console.log("data",data);

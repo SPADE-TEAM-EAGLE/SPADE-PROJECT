@@ -1521,23 +1521,20 @@
                 var messDiv = $('#messages')
                 var randomImg = "../assets/images/users/5.jpg";
                 socket.on('chatMessage', (message) => {
-                    updateTime();
-                    
-                    chatMessages.push(message);
+                    // var messageLegth = message.length;
+                    // var newMessageLL = message[messageLegth - 1]
                     // console.log(message);
-                    console.log(chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "tenant")
-                    console.log(chatMessages)
+                    updateTime();
+                    chatMessages.push(message.message);
                     if (chatMessages.length > 1 && chatMessages[chatMessages.length - 1] === chatMessages[chatMessages.length - 2] && message.userType == "tenant") {
-                        
                         return;
                     }
                     if (message.userType == "tenant" && message.chatId == localStorage.getItem("chatId")) {
-                        // console.log("check rec", message);
                         messs2 = `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
                             <div class="profileImage me-1 ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()}</div>
     <div style="width: 36px; height: 36px; border-radius: 50%; background: url(${localStorage.getItem("tenantImg") && localStorage.getItem("tenantImg") !== "null" && localStorage.getItem("tenantImg") !== "" ? localStorage.getItem("tenantImg") : randomImg}); background-position: center; background-size: cover;" class="me-1  ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? '' : 'd-none'}""></div>
     <div class="msg-text">`;
-                        if (message.includes('.s3.amazonaws.com/') && message.includes('https')) {
+                        if (message.message.includes('.s3.amazonaws.com/') && message.message.includes('https')) {
                             const imageUrls = message.split(',');
                             imageUrls.forEach((imageUrl) => {
                                 if (imageUrl.includes('https') && imageUrl.includes('.pdf')) {
@@ -1553,7 +1550,7 @@
                                 }
                             });
                         } else {
-                            messs2 += `<span class="text">${message}</span>`;
+                            messs2 += `<span class="text">${message.message}</span>`;
                         }
                         messs2 += `<span style="float: right;" class="text-primary">${formattedTime}</span>
     </div>
