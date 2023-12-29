@@ -26,7 +26,13 @@ const {
   taskCount,
   updateVendor,
   taskCountId,
-  taskIdUpdate
+  taskIdUpdate,
+  checkvendorId,
+  cVendorId,
+  checkTaskid,
+  checkUserTaskid,
+  addUserTasksQuery,
+  addUserList
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -46,7 +52,7 @@ exports.addVendors = async (req, res) => {
     email,
     categoryID,
   } = req.body;
-  const { userId } = req.user;
+  const { userId, idPattern } = req.user;
   // console.log(userId)
   try {
     const vendorCheckResult = await queryRunner(
@@ -56,6 +62,16 @@ exports.addVendors = async (req, res) => {
     if (vendorCheckResult[0].length > 0) {
       return res.send("Vendor already exists");
     } else {
+      const vendorIdCheckresult = await queryRunner(checkvendorId, [userId]);
+      let vendorId;
+      if (vendorIdCheckresult[0].length > 0) {
+        vendorId = vendorIdCheckresult[0][0].cVendorId.split("-");
+        let lastPart = parseInt(vendorId[vendorId.length - 1], 10) + 1;
+        lastPart = lastPart.toString().padStart(4, '0');
+        vendorId = `SR-${idPattern}-VNDR-${lastPart}`;
+      } else {
+        vendorId = `SR-${idPattern}-VNDR-0001`;
+      }
       // console.log(userId)
       const vendorResult = await queryRunner(addVendor, [
         firstName,
@@ -70,6 +86,7 @@ exports.addVendors = async (req, res) => {
         email,
         categoryID,
         userId,
+        vendorId,
       ]);
       if (vendorResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -80,8 +97,10 @@ exports.addVendors = async (req, res) => {
       message: " Vendor created successful",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 
@@ -127,8 +146,10 @@ exports.updateVendor = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 // delete vendor by id
@@ -149,8 +170,10 @@ exports.deleteVendor = async (req, res) => {
         });
       }     
     } catch (error) {
-      console.log(error);
-      res.status(400).send(error);
+      return res.status(500).json({
+        message: "Internal server Error",
+        error: error.message,
+    });
     }
 }
 //  #############################  ADD VENDOR ENDS HERE ##################################################
@@ -203,7 +226,7 @@ exports.addTasks = async (req, res) => {
   } = req.body;
   // console.log(req.body);
   const vendorID = assignee;
-  const { userId, userName,taskEmail } = req.user;
+  const { userId, userName,taskEmail, idPattern } = req.user;
   // const { userId, userName,taskEmail } = req.body;
 
   const currentDate = new Date();
@@ -216,7 +239,17 @@ exports.addTasks = async (req, res) => {
     if (addTasksCheckResult[0].length > 0) {
       return res.send("Task already exists");
     } else {
-      // taskName, tenantID, dueDate,status, priority, notes, notifyTenant, notifyVendor, created_at , createdBy,landlordID
+      const taskIdCheckresult = await queryRunner(checkTaskid, [userId]);
+      let taskId;
+      if (taskIdCheckresult[0].length > 0) {
+        taskId = taskIdCheckresult[0][0].cTaskId.split("-");
+        let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
+        lastPart = lastPart.toString().padStart(4, '0');
+        taskId = `SR-${idPattern}-MREQ-${lastPart}`;
+      } else {
+        taskId = `SR-${idPattern}-MREQ-0001`;
+      }
+
       const TasksResult = await queryRunner(addTasksQuery, [
         task,
         property,
@@ -229,6 +262,7 @@ exports.addTasks = async (req, res) => {
         currentDate,
         userName,
         userId,
+        taskId
       ]);
       if (TasksResult.affectedRows === 0) {
         return res.status(400).send("Error1");
@@ -236,10 +270,10 @@ exports.addTasks = async (req, res) => {
       // else {
         const tasksID = TasksResult[0].insertId;
         // for task id
-        const taskCountIdResult = await queryRunner(taskCountId, [userId]);
-        let customTaskId = taskCountIdResult[0][0].count + 1;
-        customTaskId = task+customTaskId;
-        const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
+        // const taskCountIdResult = await queryRunner(taskCountId, [userId]);
+        // let customTaskId = taskCountIdResult[0][0].count + 1;
+        // customTaskId = task+customTaskId;
+        // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
         if(images){
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
@@ -344,7 +378,10 @@ exports.addTasks = async (req, res) => {
     return res.send("Created");
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  #############################  ADD TASK ENDS HERE ##################################################
@@ -393,13 +430,15 @@ exports.getAllTask = async (req, res) => {
         message: "All Tasks",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No Tasks data found",
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Internal server Error",
+      error: error.message,
+  });
   }
 };
 //  ############################# Get ALL Task End ############################################################
@@ -469,8 +508,10 @@ exports.taskByID = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks");
+    return res.status(500).json({
+      message: "Error Get Tasks",
+      error: error.message,
+  });  
   }
 };
 
@@ -496,7 +537,10 @@ exports.getVendorCategory = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get category ");
+    return res.status(500).json({
+      message: "Error Get category ",
+      error: error.message,
+  });
     console.log(error);
   }
 };
@@ -524,8 +568,11 @@ exports.getVendorAssignTo = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get vendor list ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get vendor list ",
+      error: error.message,
+  });
+
   }
 };
 //  #############################  Task Assign to ENDS HERE ##################################################
@@ -572,19 +619,18 @@ exports.updateTasks = async (req, res) => {
       [taskID]
     );
     // images working code start here
-    console.log(propertycheckresult[0]);
+    // console.log(propertycheckresult[0]);
     if (propertycheckresult[0].length > 0) {
       const propertyImageKeys = propertycheckresult[0].map(
         (image) => image.ImageKey
       );
       // console.log("images" ,images)
-      console.log(propertyImageKeys);
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = propertycheckresult[0].filter(
         (image) => !images.some((img) => img.imageKey === image.ImageKey)
       );
       // Delete images from S3
-      console.log(imagesToDelete);
+      // console.log(imagesToDelete);
       for (let i = 0; i < imagesToDelete.length; i++) {
         deleteImageFromS3(imagesToDelete[i].ImageKey);
         await queryRunner(delteImageForTaskImages, [
@@ -612,7 +658,7 @@ exports.updateTasks = async (req, res) => {
       for (let i = 0; i < images.length - 1; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
-        console.log(taskID, image_url, image_key);
+        // console.log(taskID, image_url, image_key);
 
         const propertyImageResult = await queryRunner(insertInTaskImage, [
           taskID,
@@ -640,6 +686,8 @@ exports.updateTasks = async (req, res) => {
         return res.send("Error2");
       }
     }
+    console.log( "asdcfrtgh" + property);
+    console.log( "frfrf" + userId);
     // // Email Send
     const tenantLandlordResult = await queryRunner(getLandlordTenant, [
       userId,
@@ -745,8 +793,11 @@ exports.deleteTask = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get delete task  ");
-    console.log(error);
+    return res.status(500).json({
+      message: "Error Get delete task",
+      error: error.message,
+  });
+
   }
 };
 //  #############################  Delete Task ENDS HERE ##################################################
@@ -838,7 +889,7 @@ exports.addVendorCategory = async (req, res) => {
           categoryID: insertedId[0]?.insertId,
         });
       } else {
-        res.status(200).json({
+        res.status(409).json({
           message: "Category already exists",
           categoryID: categoryToInsert.id,
         });
@@ -878,8 +929,10 @@ exports.addVendorCategory = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error);
-    res.status(400).send(error);
+    return res.status(500).json({
+      message: "Error",
+      error: error.message,
+  });
   }
 };
 
@@ -896,13 +949,13 @@ exports.taskCount = async (req, res) => {
     // const { userId } = req.user;
     const { userId } = req.user;
     const { startDate, endDate } = req.body;
-    console.log("2");
+    // console.log("2");
     const taskCountResult = await queryRunner(taskCount, [
       userId,
       startDate,
       endDate,
     ]);
-    console.log("3");
+    // console.log("3");
 
     res.status(200).json({
       data: taskCountResult,
@@ -960,13 +1013,16 @@ exports.getAllTaskTenantRequest = async (req, res) => {
         message: "All Tasks",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No Tasks data found",
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get Tasks" + error);
+    return res.status(500).json({
+      message: "Error Get task",
+      error: error.message,
+  });
+
   }
 };
 //  ############################# Get ALL Task End ############################################################
@@ -984,7 +1040,7 @@ exports.VendorCheckEmail = async function (req, res) {
   ]);
 
     if (selectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     } 
@@ -999,3 +1055,196 @@ exports.VendorCheckEmail = async function (req, res) {
     });
   }
 };
+
+
+
+//   const {
+//     task,
+//     assignee,
+//     property,
+//     dueDate,
+//     status,
+//     priority,
+//     note,
+//     notifyVendor,
+//     images,
+
+//     // created_at,
+//     // created_by,
+//   } = req.body;
+//   // console.log(req.body);
+//   const userID = assignee;
+//   const { userId, userName,taskEmail, idPattern,email } = req.user;
+//   // const { userId, userName,taskEmail } = req.body;
+
+//   const currentDate = new Date();
+//   try {
+//     // console.log(1);
+//     const addTasksCheckResult = await queryRunner(
+//       selectQuery("user_task", "taskName", "propertyId"),
+//       [task, property]
+//     );
+//     if (addTasksCheckResult[0].length > 0) {
+//       return res.send("Task already exists");
+//     } else {
+//       const taskIdCheckresult = await queryRunner(checkUserTaskid, [userId]);
+//       let taskId;
+//       if (taskIdCheckresult[0].length > 0) {
+//         taskId = taskIdCheckresult[0][0].cTaskId.split("-");
+//         let lastPart = parseInt(taskId[taskId.length - 1], 10) + 1;
+//         lastPart = lastPart.toString().padStart(4, '0');
+//         taskId = `SR-${idPattern}-TASK-${lastPart}`;
+//       } else {
+//         taskId = `SR-${idPattern}-TASK-0001`;
+//       }
+
+//       const TasksResult = await queryRunner(addUserTasksQuery, [
+//         task,
+//         property,
+//         dueDate,
+//         status,
+//         priority,
+//         note,
+//         notifyVendor,
+//         currentDate,
+//         userName,
+//         userId,
+//         taskId
+//       ]);
+//       if (TasksResult.affectedRows === 0) {
+//         return res.status(400).send("Error1");
+//       }
+//       // else {
+//         const tasksID = TasksResult[0].insertId;
+//         // for task id
+//         // const taskCountIdResult = await queryRunner(taskCountId, [userId]);
+//         // let customTaskId = taskCountIdResult[0][0].count + 1;
+//         // customTaskId = task+customTaskId;
+//         // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
+//         if(images){
+//       for (let i = 0; i < images.length; i++) {
+//         const { image_url } = images[i];
+//         const { image_key } = images[i];
+//         const propertyImageResult = await queryRunner(insertInTaskImage, [
+//           tasksID,
+//           image_url,
+//           image_key,
+//         ]);
+//         // if property image data not inserted into property image table then throw error
+//         if (propertyImageResult.affectedRows === 0) {
+//           throw new Error("data doesn't inserted in property image table");
+//         }
+//       }
+//     }
+//       //   //  add vendor
+//       for (let i = 0; i < userID.length; i++) {
+//         const Vendorid = userID[i];
+//         const vendorResults = await queryRunner(addUserList, [
+//           tasksID,
+//           Vendorid,
+//         ]);
+//         if (vendorResults.affectedRows === 0) {
+//           return res.send("Error2");
+//         }
+//       }
+//       // // get data from database for email send
+//       // const tenantLandlordResult = await queryRunner(getLandlordTenant, [
+//       //   userId,
+//       //   property,
+//       // ]);
+//       // let userEmailarr = [];
+//       // let userNamearr = [];
+//       // let userCheckResult;
+//       // let vendorCheckResult;
+//       // for (let i = 0; i < userID.length; i++) {
+//       //   if(userId==userID[i]){
+//       //     userCheckResult = await queryRunner(
+//       //       selectQuery("users", "id"),
+//       //       [userID[i]]
+//       //     );
+//       //     if(userCheckResult.length>0){
+//       //       if(userCheckResult[0][0].email==email){
+
+//       //       }
+//       //     }
+//       //   }else{
+//       //     vendorCheckResult = await queryRunner(
+//       //       selectQuery("userPUsers", "id"),
+//       //       [userID[i]]
+//       //     );
+//       //     if (vendorCheckResult.length > 0) {
+//       //       let vendorName =
+//       //         vendorCheckResult[0][0].UFirstName +
+//       //         " " +
+//       //         vendorCheckResult[0][0].ULastName;
+//       //       let vendorEmail = vendorCheckResult[0][0].UEmail;
+//       //       userNamearr.push(vendorName);
+//       //       userEmailarr.push(vendorEmail);
+//       //     } 
+//       //     else {
+//       //       return res.send("Vendor not found");
+//       //     }
+//       //   }
+        
+        
+//       // }
+//       // // console.log(tenantLandlordResult[0])
+//       // // const tenantName =
+//       // //   tenantLandlordResult[0][0].firstName +
+//       // //   " " +
+//       // //   tenantLandlordResult[0][0].lastName;
+//       // // const tenantEmail = tenantLandlordResult[0][0].email;
+//       // // const CompanyName = tenantLandlordResult[0][0].companyName;
+//       // // const landlordName =
+//       // //   tenantLandlordResult[0][0].FirstName +
+//       // //   " " +
+//       // //   tenantLandlordResult[0][0].LastName;
+//       // // const landlordContact = tenantLandlordResult[0][0].Phone;
+
+//       // // const vendorNames = vendorNamearr.toString();
+
+//       // // if (notifyTenant.toLowerCase() === "yes") {
+//       // // await taskSendMail(
+//       // //   tenantName,
+//       // //   "Property Maintenance: " + task,
+//       // //   dueDate,
+//       // //   landlordName,
+//       // //   task,
+//       // //   vendorNames,
+//       // //   priority,
+//       // //   CompanyName,
+//       // //   landlordContact,
+//       // //   userId,
+//       // //   tenantEmail,
+//       // //   taskEmail
+//       // // );
+//       // // }
+//       // if (notifyVendor.toLowerCase() === "yes") {
+//       // for (let i = 0; i < vendorEmailarr.length > 0; i++) {
+//       //   // console.log("vendor2");
+//       //   await taskSendMail(
+//       //     tenantName,
+//       //     "Property Maintenance: " + task,
+//       //     dueDate,
+//       //     landlordName,
+//       //     task,
+//       //     vendorNames,
+//       //     priority,
+//       //     CompanyName,
+//       //     landlordContact,
+//       //     userId,
+//       //     vendorEmailarr[i],
+//       //     taskEmail
+//       //   );
+//       //   }
+//       // }
+//     }
+//     return res.send("Created");
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({
+//       message: "Internal server Error",
+//       error: error.message,
+//   });
+//   }
+// };

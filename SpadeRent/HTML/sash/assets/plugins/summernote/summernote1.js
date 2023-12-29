@@ -8,7 +8,6 @@
 }(window, (function(t) {
 	return function(t) {
 		var e = {};
-
 		function n(o) {
 			if (e[o]) return e[o].exports;
 			var i = e[o] = {
@@ -59,7 +58,6 @@
 			"use strict";
 			var o = n(0),
 				i = n.n(o);
-
 			function r(t) {
 				return (r = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
 					return typeof t
@@ -67,7 +65,6 @@
 					return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
 				})(t)
 			}
-
 			function a(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -281,7 +278,6 @@
 			});
 			var r = "function" == typeof define && n(2),
 				a = ["sans-serif", "serif", "monospace", "cursive", "fantasy"];
-
 			function s(t) {
 				return -1 === i.a.inArray(t.toLowerCase(), a) ? "'".concat(t, "'") : t
 			}
@@ -400,19 +396,15 @@
 					return /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi.test(t)
 				}
 			};
-
 			function b(t) {
 				return t[0]
 			}
-
 			function y(t) {
 				return t[t.length - 1]
 			}
-
 			function k(t) {
 				return t.slice(1)
 			}
-
 			function w(t, e) {
 				if (t && t.length && e) {
 					if (t.indexOf) return -1 !== t.indexOf(e);
@@ -483,26 +475,21 @@
 					}
 				},
 				x = String.fromCharCode(160);
-
 			function S(t) {
 				return t && i()(t).hasClass("note-editable")
 			}
-
 			function T(t) {
 				return t = t.toUpperCase(),
 					function(e) {
 						return e && e.nodeName.toUpperCase() === t
 					}
 			}
-
 			function E(t) {
 				return t && 3 === t.nodeType
 			}
-
 			function I(t) {
 				return t && /^BR|^IMG|^HR|^IFRAME|^BUTTON|^INPUT|^AUDIO|^VIDEO|^EMBED/.test(t.nodeName.toUpperCase())
 			}
-
 			function $(t) {
 				return !S(t) && (t && /^DIV|^P|^LI|^H[1-7]/.test(t.nodeName.toUpperCase()))
 			}
@@ -510,41 +497,33 @@
 				P = T("LI");
 			var R = T("TABLE"),
 				L = T("DATA");
-
 			function A(t) {
 				return !(B(t) || F(t) || D(t) || $(t) || R(t) || z(t) || L(t))
 			}
-
 			function F(t) {
 				return t && /^UL|^OL/.test(t.nodeName.toUpperCase())
 			}
 			var D = T("HR");
-
 			function H(t) {
 				return t && /^TD|^TH/.test(t.nodeName.toUpperCase())
 			}
 			var z = T("BLOCKQUOTE");
-
 			function B(t) {
 				return H(t) || z(t) || S(t)
 			}
 			var M = T("A");
 			var O = T("BODY");
 			var j = m.isMSIE && m.browserVersion < 11 ? "&nbsp;" : "<br>";
-
 			function U(t) {
 				return E(t) ? t.nodeValue.length : t ? t.childNodes.length : 0
 			}
-
 			function W(t) {
 				var e = U(t);
 				return 0 === e || (!E(t) && 1 === e && t.innerHTML === j || !(!C.all(t.childNodes, E) || "" !== t.innerHTML))
 			}
-
 			function K(t) {
 				I(t) || U(t) || (t.innerHTML = j)
 			}
-
 			function V(t, e) {
 				for (; t;) {
 					if (e(t)) return t;
@@ -553,7 +532,6 @@
 				}
 				return null
 			}
-
 			function q(t, e) {
 				e = e || g.fail;
 				var n = [];
@@ -561,37 +539,30 @@
 					return S(t) || n.push(t), e(t)
 				})), n
 			}
-
 			function _(t, e) {
 				e = e || g.fail;
 				for (var n = []; t && !e(t);) n.push(t), t = t.nextSibling;
 				return n
 			}
-
 			function G(t, e) {
 				var n = e.nextSibling,
 					o = e.parentNode;
 				return n ? o.insertBefore(t, n) : o.appendChild(t), t
 			}
-
 			function Y(t, e) {
 				return i.a.each(e, (function(e, n) {
 					t.appendChild(n)
 				})), t
 			}
-
 			function Z(t) {
 				return 0 === t.offset
 			}
-
 			function X(t) {
 				return t.offset === U(t.node)
 			}
-
 			function Q(t) {
 				return Z(t) || X(t)
 			}
-
 			function J(t, e) {
 				for (; t && t !== e;) {
 					if (0 !== et(t)) return !1;
@@ -599,7 +570,6 @@
 				}
 				return !0
 			}
-
 			function tt(t, e) {
 				if (!e) return !1;
 				for (; t && t !== e;) {
@@ -608,16 +578,13 @@
 				}
 				return !0
 			}
-
 			function et(t) {
 				for (var e = 0; t = t.previousSibling;) e += 1;
 				return e
 			}
-
 			function nt(t) {
 				return !!(t && t.childNodes && t.childNodes.length)
 			}
-
 			function ot(t, e) {
 				var n, o;
 				if (0 === t.offset) {
@@ -629,7 +596,6 @@
 					offset: o
 				}
 			}
-
 			function it(t, e) {
 				var n, o;
 				if (U(t.node) === t.offset) {
@@ -642,7 +608,6 @@
 					offset: o
 				}
 			}
-
 			function rt(t, e) {
 				var n, o;
 				if (W(t.node)) return {
@@ -661,15 +626,12 @@
 					offset: o
 				}
 			}
-
 			function at(t) {
 				if (t.nextSibling && t.parent === t.nextSibling.parent) return E(t.nextSibling) ? t.nextSibling : at(t.nextSibling)
 			}
-
 			function st(t, e) {
 				return t.node === e.node && t.offset === e.offset
 			}
-
 			function lt(t, e) {
 				var n = e && e.isSkipPaddingBlankHTML,
 					o = e && e.isNotSplitEdgePoint,
@@ -683,7 +645,6 @@
 					a = G(t.node.cloneNode(!1), t.node);
 				return Y(a, _(r)), n || (K(t.node), K(a)), i && (W(t.node) && dt(t.node), W(a)) ? (dt(a), t.node.nextSibling) : a
 			}
-
 			function ct(t, e, n) {
 				var o = q(e.node, g.eq(t));
 				return o.length ? 1 === o.length ? lt(e, n) : o.reduce((function(t, o) {
@@ -693,11 +654,9 @@
 					}, n)
 				})) : null
 			}
-
 			function ut(t) {
 				return document.createElement(t)
 			}
-
 			function dt(t, e) {
 				if (t && t.parentNode) {
 					if (t.removeNode) return t.removeNode(e);
@@ -710,7 +669,6 @@
 				}
 			}
 			var ht = T("TEXTAREA");
-
 			function ft(t, e) {
 				var n = ht(t[0]) ? t.val() : t.html();
 				return e ? n.replace(/[\n\r]/g, "") : n
@@ -947,7 +905,6 @@
 					return t && !E(t) && C.contains(t.classList, "note-styletag")
 				}
 			};
-
 			function mt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1094,14 +1051,12 @@
 					}
 				}]) && mt(e.prototype, n), o && mt(e, o), t
 			}();
-
 			function gt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
 					o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(t, o.key, o)
 				}
 			}
-
 			function bt(t, e) {
 				var n, o, i = t.parentElement(),
 					r = document.body.createTextRange(),
@@ -1126,7 +1081,6 @@
 					offset: n
 				}
 			}
-
 			function yt(t) {
 				var e = document.body.createTextRange(),
 					n = function t(e, n) {
@@ -1581,7 +1535,6 @@
 					nameFromCode: g.invertObject(Ct),
 					code: Ct
 				};
-
 			function St(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1650,7 +1603,6 @@
 					}
 				}]) && St(e.prototype, n), o && St(e, o), t
 			}();
-
 			function Et(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1753,7 +1705,6 @@
 					}
 				}]) && Et(e.prototype, n), o && Et(e, o), t
 			}();
-
 			function $t(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1924,7 +1875,6 @@
 					}
 				}]) && $t(e.prototype, n), o && $t(e, o), t
 			}();
-
 			function Pt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1973,7 +1923,6 @@
 					}
 				}]) && Pt(e.prototype, n), o && Pt(e, o), t
 			}();
-
 			function Lt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -1987,7 +1936,6 @@
 					},
 					a = [],
 					s = [];
-
 				function l(t, e, n, o, i, r, s) {
 					var l = {
 						baseRow: n,
@@ -1998,7 +1946,6 @@
 					};
 					a[t] || (a[t] = []), a[t][e] = l
 				}
-
 				function c(t, e, n, o) {
 					return {
 						baseCell: t.baseCell,
@@ -2009,14 +1956,12 @@
 						}
 					}
 				}
-
 				function u(t, e) {
 					if (!a[t]) return e;
 					if (!a[t][e]) return e;
 					for (var n = e; a[t][n];)
 						if (n++, !a[t][n]) return n
 				}
-
 				function d(t, e) {
 					var n = u(t.rowIndex, e.cellIndex),
 						o = e.colSpan > 1,
@@ -2036,11 +1981,9 @@
 							h(t.rowIndex, m, e, a), l(t.rowIndex, m, t, e, i, !0, !0)
 						}
 				}
-
 				function h(t, e, n, o) {
 					t === r.rowPos && r.colPos >= n.cellIndex && n.cellIndex <= e && !o && r.colPos++
 				}
-
 				function f(e) {
 					switch (n) {
 						case t.where.Column:
@@ -2052,7 +1995,6 @@
 					}
 					return t.resultAction.RemoveCell
 				}
-
 				function p(e) {
 					switch (n) {
 						case t.where.Column:
@@ -2241,7 +2183,6 @@
 					}
 				}]) && Lt(e.prototype, n), o && Lt(e, o), t
 			}();
-
 			function Dt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -2710,7 +2651,6 @@
 					}
 				}]) && Dt(e.prototype, n), o && Dt(e, o), t
 			}();
-
 			function zt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -2747,7 +2687,6 @@
 					}
 				}]) && zt(e.prototype, n), o && zt(e, o), t
 			}();
-
 			function Mt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -2808,7 +2747,6 @@
 					}
 				}]) && Mt(e.prototype, n), o && Mt(e, o), t
 			}();
-
 			function jt(t) {
 				if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
 					if (Array.isArray(t) || (t = function(t, e) {
@@ -2861,13 +2799,11 @@
 					}
 				}
 			}
-
 			function Ut(t, e) {
 				(null == e || e > t.length) && (e = t.length);
 				for (var n = 0, o = new Array(e); n < e; n++) o[n] = t[n];
 				return o
 			}
-
 			function Wt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -2971,7 +2907,6 @@
 					}
 				}]) && Wt(e.prototype, n), o && Wt(e, o), t
 			}();
-
 			function Vt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3008,7 +2943,6 @@
 					}
 				}]) && Vt(e.prototype, n), o && Vt(e, o), t
 			}();
-
 			function _t(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3046,7 +2980,6 @@
 					}
 				}]) && _t(e.prototype, n), o && _t(e, o), t
 			}();
-
 			function Yt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3141,7 +3074,6 @@
 					}
 				}]) && Yt(e.prototype, n), o && Yt(e, o), t
 			}();
-
 			function Xt(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3203,7 +3135,6 @@
 						}
 					}]) && Xt(e.prototype, n), o && Xt(e, o), t
 				}();
-
 			function te(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3229,7 +3160,6 @@
 					}
 				}]) && te(e.prototype, n), o && te(e, o), t
 			}();
-
 			function ne(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3300,7 +3230,6 @@
 					}
 				}]) && ne(e.prototype, n), o && ne(e, o), t
 			}();
-
 			function ie(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3348,7 +3277,6 @@
 					}
 				}]) && ie(e.prototype, n), o && ie(e, o), t
 			}();
-
 			function ae(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -3421,7 +3349,6 @@
 							}), this.button({
 								className: "dropdown-toggle",
 								contents: this.ui.dropdownButtonContents("", this.options),
-								// tooltip: this.lang.color.more,
 								data: {
 									toggle: "dropdown"
 								}
@@ -3435,7 +3362,6 @@
 											colorsName: r.options.colorsName,
 											eventName: n.data("event"),
 											container: r.options.container,
-											// tooltip: r.options.tooltip
 										}).render())
 									}));
 									var e = [
@@ -3448,7 +3374,6 @@
 											colorsName: e,
 											eventName: o.data("event"),
 											container: r.options.container,
-											// tooltip: r.options.tooltip
 										}).render())
 									})), t.find("input[type=color]").each((function(e, n) {
 										i()(n).change((function() {
@@ -4015,7 +3940,6 @@
 					}
 				}]) && ae(e.prototype, n), o && ae(e, o), t
 			}();
-
 			function le(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4106,7 +4030,6 @@
 					}
 				}]) && le(e.prototype, n), o && le(e, o), t
 			}();
-
 			function ue(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4205,7 +4128,6 @@
 					}
 				}]) && ue(e.prototype, n), o && ue(e, o), t
 			}();
-
 			function he(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4277,7 +4199,6 @@
 					}
 				}]) && he(e.prototype, n), o && he(e, o), t
 			}();
-
 			function pe(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4355,7 +4276,6 @@
 					}
 				}]) && pe(e.prototype, n), o && pe(e, o), t
 			}();
-
 			function ve(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4416,7 +4336,6 @@
 					}
 				}]) && ve(e.prototype, n), o && ve(e, o), t
 			}();
-
 			function be(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4485,7 +4404,6 @@
 					}
 				}]) && be(e.prototype, n), o && be(e, o), t
 			}();
-
 			function ke(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4596,7 +4514,6 @@
 					}
 				}]) && ke(e.prototype, n), o && ke(e, o), t
 			}();
-
 			function Ce(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4667,7 +4584,6 @@
 					}
 				}]) && Ce(e.prototype, n), o && Ce(e, o), t
 			}();
-
 			function Se(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -4752,7 +4668,6 @@
 					}
 				}]) && Se(e.prototype, n), o && Se(e, o), t
 			}();
-
 			function Ee(t, e) {
 				for (var n = 0; n < e.length; n++) {
 					var o = e[n];
@@ -5218,7 +5133,6 @@
 			var o = n(0),
 				i = n.n(o),
 				r = n(1);
-
 			function a(t) {
 				return (a = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
 					return typeof t
@@ -5314,18 +5228,6 @@
 						},
 						button: function(e, n) {
 							return r.a.create('<button type="button" class="note-btn btn btn-default btn-sm" tabindex="-1">', (function(e, n) {
-								// n && n.tooltip && e.attr({
-								// 	title: n.tooltip,
-								// 	"aria-label": n.tooltip
-								// })
-								// .tooltip({
-								// 	container: n.container || t.container,
-								// 	trigger: "hover",
-								// 	placement: "bottom"
-								// })
-								// .on("click", (function(t) {
-								// 	i()(t.currentTarget).tooltip("hide")
-								// })),
 								 n && n.codeviewButton && e.addClass("note-codeview-keep")
 							}))(e, n)
 						},

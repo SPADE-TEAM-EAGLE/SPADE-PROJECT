@@ -1,7 +1,6 @@
 /*---- morrisBar2----*/
 $(function(e) {
     'use strict';
-
     new Morris.Area({
         element: 'morrisBar2',
         data: [{
@@ -35,9 +34,8 @@ $(function(e) {
         labels: ['Y', 'Z'],
         resize: true
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
-
     /*---- morrisBar3----*/
     new Morris.Area({
         element: 'morrisBar3',
@@ -65,7 +63,6 @@ $(function(e) {
         labels: ['Y', 'Z'],
         resize: true
     });
-
     /*---- morrisBar4----*/
     new Morris.Bar({
         element: 'morrisBar4',
@@ -150,7 +147,6 @@ $(function(e) {
         "licensed": 3215,
         "sorned": 622
     }];
-
     /*---- morrisBar5----*/
     new Morris.Bar({
         element: 'morrisBar5',
@@ -161,10 +157,8 @@ $(function(e) {
         barColors: ['#6c5ffc', '#05c3fb'],
         xLabelAngle: 0,
         resize: true
-
     });
     var nReloads = 0;
-
     function data(offset) {
         var ret = [];
         for (var x = 0; x <= 360; x += 10) {
@@ -191,14 +185,11 @@ $(function(e) {
         hideHover: true,
         resize: true
     });
-
     function update() {
         nReloads++;
         graph.setData(data(5 * nReloads));
         $('#reloadStatus').text(nReloads + ' reloads');
     }
-    // setInterval(update, 100);
-
     /*---- morrisBar7----*/
     var day_data = [{
         "period": "2012-10-01",
@@ -271,9 +262,8 @@ $(function(e) {
             return x + "%"
         }
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
-    
     /*---- morrisBar9----*/
     new Morris.Donut({
         element: 'morrisBar9',

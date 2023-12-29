@@ -3,12 +3,9 @@
 	Written by Keith Wood (wood.keith{at}optusnet.com.au) January 2008.
 	Available under the MIT (http://keith-wood.name/licence.html) license. 
 	Please attribute the author if you use it. */
-
 (function($) { // Hide scope, no $ conflict
 	'use strict';
-
 	var pluginName = 'countdown';
-
 	var Y = 0; // Years
 	var O = 1; // Months
 	var W = 2; // Weeks
@@ -16,7 +13,6 @@
 	var H = 4; // Hours
 	var M = 5; // Minutes
 	var S = 6; // Seconds
-
 	/** Create the countdown plugin.
 		<p>Sets an element to show the time remaining until a given instant.</p>
 		<p>Expects HTML like:</p>
@@ -27,11 +23,9 @@
 		@augments JQPlugin
 		@example $(selector).countdown({until: +300}) */
 	$.JQPlugin.createPlugin({
-	
 		/** The name of the plugin.
 			@default 'countdown' */
 		name: pluginName,
-
 		/** Countdown expiry callback.
 			Used with the {@linkcode module:Countdown~defaultOptions|onExpiry} option and
 			triggered when the countdown expires.
@@ -41,7 +35,6 @@
 			@example onExpiry: function() {
   alert('Done');
 } */
-
 		/** Countdown server synchronisation callback.
 			Used with the {@linkcode module:Countdown~defaultOptions|serverSync} option and
 			triggered when the countdown is initialised.
@@ -60,7 +53,6 @@
   });
   return time;
 } */
-			
 		/** Countdown tick callback.
 			Used with the {@linkcode module:Countdown~defaultOptions|onTick} option and
 			triggered on every {@linkcode module:Countdown~defaultOptions|tickInterval} ticks of the countdown.
@@ -73,7 +65,6 @@
   $('#altTime').text(periods[4] + ':' + twoDigits(periods[5]) +
     ':' + twoDigits(periods[6]));
 } */
-
 		/** Countdown which labels callback.
 			Used with the {@linkcode module:Countdown~regionalOptions|whichLabels} option and
 			triggered when the countdown is being display to determine which set of labels
@@ -85,7 +76,6 @@
 			@example whichLabels: function(num) {
   return (num === 1 ? 1 : (num >= 2 && num <= 4 ? 2 : 0));
 } */
-			
 		/** Default settings for the plugin.
 			@property {Date|number|string} [until] The date/time to count down to, or number of seconds
 						offset from now, or string of amounts and units for offset(s) from now:
@@ -169,7 +159,6 @@ timezone: -60
 			onTick: null,
 			tickInterval: 1
 		},
-
 		/** Localisations for the plugin.
 			Entries are objects indexed by the language code ('' being the default US/English).
 			Each object has the following attributes.
@@ -200,7 +189,6 @@ timezone: -60
 				isRTL: false
 			}
 		},
-
 		/* Class name for the right-to-left marker. */
 		_rtlClass: pluginName + '-rtl',
 		/* Class name for the countdown section marker. */
@@ -217,10 +205,8 @@ timezone: -60
 		_showClass: pluginName + '-show',
 		/* Class name for the description marker. */
 		_descrClass: pluginName + '-descr',
-
 		/* List of currently active countdown elements. */
 		_timerElems: [],
-
 		/** Additional setup for the countdown.
 			Apply default localisations.
 			Create the timer.
@@ -231,11 +217,9 @@ timezone: -60
 			this._serverSyncs = [];
 			var now = (typeof Date.now === 'function' ? Date.now : function() { return new Date().getTime(); });
 			var perfAvail = (window.performance && typeof window.performance.now === 'function');
-			// Shared timer for all countdowns
 			function timerCallBack(timestamp) {
 				var drawStart = (timestamp < 1e12 ? // New HTML5 high resolution timer
 					(perfAvail ? (window.performance.now() + window.performance.timing.navigationStart) : now()) :
-					// Integer milliseconds since unix epoch
 					timestamp || now());
 				if (drawStart - animationStartTime >= 1000) {
 					self._updateElems();
@@ -246,11 +230,9 @@ timezone: -60
 			var requestAnimationFrame = window.requestAnimationFrame ||
 				window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
 				window.oRequestAnimationFrame || window.msRequestAnimationFrame || null;
-				// This is when we expect a fall-back to setInterval as it's much more fluid
 			var animationStartTime = 0;
 			if (!requestAnimationFrame || $.noRequestAnimationFrame) {
 				$.noRequestAnimationFrame = null;
-				// Fall back to good old setInterval
 				$.countdown._timer = setInterval(function() { self._updateElems(); }, 1000);
 			}
 			else {
@@ -260,7 +242,6 @@ timezone: -60
 				requestAnimationFrame(timerCallBack);
 			}
 		},
-
 		/** Convert a date/time to UTC.
 			@param {number} tz The hour or minute offset from GMT, e.g. +9, -360.
 			@param {Date|number} year the date/time in that timezone or the year in that timezone.
@@ -294,7 +275,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			d.setUTCMilliseconds(ms || 0);
 			return d;
 		},
-
 		/** Convert a set of periods into seconds.
 			Averaged for months and years.
 			@param {number[]} periods The periods per year/month/week/day/hour/minute/second.
@@ -304,7 +284,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			return periods[0] * 31557600 + periods[1] * 2629800 + periods[2] * 604800 +
 				periods[3] * 86400 + periods[4] * 3600 + periods[5] * 60 + periods[6];
 		},
-
 		/** Resynchronise the countdowns with the server.
 			@example $.countdown.resync() */
 		resync: function() {
@@ -338,11 +317,9 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				}
 			}
 		},
-
 		_instSettings: function(elem, options) { // jshint unused:false
 			return {_periods: [0, 0, 0, 0, 0, 0, 0]};
 		},
-
 		/** Add an element to the list of active ones.
 			@private
 			@param {Element} elem The countdown element. */
@@ -351,7 +328,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._timerElems.push(elem);
 			}
 		},
-
 		/** See if an element is in the list of active ones.
 			@private
 			@param {Element} elem The countdown element.
@@ -359,7 +335,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		_hasElem: function(elem) {
 			return ($.inArray(elem, this._timerElems) > -1);
 		},
-
 		/** Remove an element from the list of active ones.
 			@private
 			@param {Element} elem The countdown element. */
@@ -367,7 +342,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			this._timerElems = $.map(this._timerElems,
 				function(value) { return (value === elem ? null : value); }); // delete entry
 		},
-
 		/** Update each active timer element.
 			@private */
 		_updateElems: function() {
@@ -375,7 +349,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._updateCountdown(this._timerElems[i]);
 			}
 		},
-
 		_optionsChanged: function(elem, inst, options) {
 			if (options.layout) {
 				options.layout = options.layout.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -391,7 +364,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			}
 			this._updateCountdown(elem, inst);
 		},
-
 		/** Redisplay the countdown with an updated display.
 			@private
 			@param {Element|jQuery} elem The containing element.
@@ -437,7 +409,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._removeElem(elem[0]);
 			}
 		},
-
 		/** Reset any extra labelsn and compactLabelsn entries if changing labels.
 			@private
 			@param {object} base The options to be updated.
@@ -455,7 +426,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				}
 			}
 		},
-		
 		/** Determine whether or not a value is equivalent to <code>null</code>.
 			@private
 			@param {object} value The value to test.
@@ -463,8 +433,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		_eqNull: function(value) {
 			return typeof value === 'undefined' || value === null;
 		},
-
-
 		/** Calculate internal settings for an instance.
 			@private
 			@param {jQuery} elem The containing element.
@@ -508,7 +476,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			}
 			inst._show = this._determineShow(inst);
 		},
-
 		/** Remove the countdown widget from an element.
 			@private
 			@param {jQuery} elem The containing element.
@@ -517,7 +484,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			this._removeElem(elem[0]);
 			elem.empty();
 		},
-
 		/** Pause a countdown widget at the current time.
 			Stop it running but remember and display the current time.
 			@param {Element} elem The containing element.
@@ -525,7 +491,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		pause: function(elem) {
 			this._hold(elem, 'pause');
 		},
-
 		/** Pause a countdown widget at the current time.
 			Stop the display but keep the countdown running.
 			@param {Element} elem The containing element.
@@ -533,14 +498,12 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		lap: function(elem) {
 			this._hold(elem, 'lap');
 		},
-
 		/** Resume a paused countdown widget.
 			@param {Element} elem The containing element.
 			@example $(selector).countdown('resume') */
 		resume: function(elem) {
 			this._hold(elem, null);
 		},
-
 		/** Toggle a paused countdown widget.
 			@param {Element} elem The containing element.
 			@example $(selector).countdown('toggle') */
@@ -548,7 +511,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			var inst = $.data(elem, this.name) || {};
 			this[!inst._hold ? 'pause' : 'resume'](elem);
 		},
-
 		/** Toggle a lapped countdown widget.
 			@param {Element} elem The containing element.
 			@example $(selector).countdown('toggleLap') */
@@ -556,7 +518,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			var inst = $.data(elem, this.name) || {};
 			this[!inst._hold ? 'lap' : 'resume'](elem);
 		},
-
 		/** Pause or resume a countdown widget.
 			@private
 			@param {Element} elem The containing element.
@@ -580,7 +541,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._updateCountdown(elem, inst);
 			}
 		},
-
 		/** Return the current time periods, broken down by years, months, weeks, days, hours, minutes, and seconds.
 			@param {Element} elem The containing element.
 			@return {number[]} The current periods for the countdown.
@@ -590,7 +550,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			return (!inst ? null : (inst._hold === 'pause' ? inst._savePeriods : (!inst._hold ? inst._periods :
 				this._calculatePeriods(inst, inst._show, inst.options.significant, new Date()))));
 		},
-
 		/** A time may be specified as an exact value or a relative one.
 			@private
 			@param {string|number|Date} setting The date/time value as a relative or absolute value.
@@ -652,7 +611,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			}
 			return time;
 		},
-
 		/** Determine the number of days in a month.
 			@private
 			@param {number} year The year.
@@ -661,7 +619,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		_getDaysInMonth: function(year, month) {
 			return 32 - new Date(year, month, 32).getDate();
 		},
-
 		/** Default implementation to determine which set of labels should be used for an amount.
 			Use the <code>labels</code> attribute with the same numeric suffix (if it exists).
 			@private
@@ -670,17 +627,14 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 		_normalLabels: function(num) {
 			return num;
 		},
-
 		/** Generate the HTML to display the countdown widget.
 			@private
 			@param {object} inst The current settings for this instance.
 			@return {string} The new HTML for the countdown display. */
 		_generateHTML: function(inst) {
 			var self = this;
-			// Determine what to show
 			inst._periods = (inst._hold ? inst._periods :
 				this._calculatePeriods(inst, inst._show, inst.options.significant, new Date()));
-			// Show all 'asNeeded' after first non-zero value
 			var shownNonZero = false;
 			var showCount = 0;
 			var sigCount = inst.options.significant;
@@ -733,7 +687,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				this._minDigits(inst, inst._periods[M], 2) : '') +
 				(show[S] ? (show[H] || show[M] ? inst.options.timeSeparator : '') +
 				this._minDigits(inst, inst._periods[S], 2) : '') :
-				// Full version
 				'<span class="' + this._rowClass + ' ' + this._showClass + (inst.options.significant || showCount) +
 				(inst._hold ? ' ' + this._holdingClass : '') + '">' +
 				showFull(Y) + showFull(O) + showFull(W) + showFull(D) +
@@ -741,7 +694,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				(inst.options.description ? '<span class="' + this._rowClass + ' ' + this._descrClass + '">' +
 				inst.options.description + '</span>' : '')));
 		},
-
 		/** Construct a custom layout.
 			@private
 			@param {object} inst The current settings for this instance.
@@ -798,21 +750,18 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 				s10: digit(inst._periods[S], 10), s100: digit(inst._periods[S], 100),
 				s1000: digit(inst._periods[S], 1000)};
 			var html = layout;
-			// Replace period containers: {p<}...{p>}
 			for (var i = Y; i <= S; i++) {
 				var period = 'yowdhms'.charAt(i);
 				var re = new RegExp('\\{' + period + '<\\}([\\s\\S]*)\\{' + period + '>\\}', 'g');
 				html = html.replace(re, ((!significant && show[i]) ||
 					(significant && showSignificant[i]) ? '$1' : ''));
 			}
-			// Replace period values: {pn}
 			$.each(subs, function(n, v) {
 				var re = new RegExp('\\{' + n + '\\}', 'g');
 				html = html.replace(re, v);
 			});
 			return html;
 		},
-
 		/** Ensure a numeric value has at least n digits for display.
 			@private
 			@param {object} inst The current settings for this instance.
@@ -827,7 +776,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			value = '0000000000' + value;
 			return this._translateDigits(inst, value.substr(value.length - len));
 		},
-
 		/** Translate digits into other representations.
 			@private
 			@param {object} inst The current settings for this instance.
@@ -838,7 +786,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 					return inst.options.digits[digit];
 				});
 		},
-
 		/** Translate the format into flags for each period.
 			@private
 			@param {object} inst The current settings for this instance.
@@ -856,7 +803,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			show[S] = (format.match('s') ? '?' : (format.match('S') ? '!' : null));
 			return show;
 		},
-
 		/** Calculate the requested periods between now and the target time.
 			@private
 			@param {object} inst The current settings for this instance.
@@ -866,7 +812,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			@return {number[]} The current time periods (always positive)
 					by year, month, week, day, hour, minute, second. */
 		_calculatePeriods: function(inst, show, significant, now) {
-			// Find endpoints
 			inst._now = now;
 			inst._now.setMilliseconds(0);
 			var until = new Date(inst._now.getTime());
@@ -884,10 +829,8 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 					inst._now = now = until;
 				}
 			}
-			// Calculate differences by period
 			var periods = [0, 0, 0, 0, 0, 0, 0];
 			if (show[Y] || show[O]) {
-				// Treat end of months as the same
 				var lastNow = this._getDaysInMonth(now.getFullYear(), now.getMonth());
 				var lastUntil = this._getDaysInMonth(until.getFullYear(), until.getMonth());
 				var sameDay = (until.getDate() === now.getDate() ||
@@ -902,7 +845,6 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 					(sameDay && getSecs(until) < getSecs(now)) ? -1 : 0));
 				periods[Y] = (show[Y] ? Math.floor(months / 12) : 0);
 				periods[O] = (show[O] ? months - periods[Y] * 12 : 0);
-				// Adjust for months difference and end of month if necessary
 				now = new Date(now.getTime());
 				var wasLastDay = (now.getDate() === lastNow);
 				var lastDay = this._getDaysInMonth(now.getFullYear() + periods[Y],
@@ -960,5 +902,4 @@ $.countdown.UTCDate(-7, new Date(2013, 12-1, 25, 12, 0)) */
 			return periods;
 		}
 	});
-
 })(jQuery);

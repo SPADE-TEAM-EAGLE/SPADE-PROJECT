@@ -1,6 +1,6 @@
 $(function(e) {
     "use strict";
-    console.log("ammi g");
+  // console.log("ammi g");
     //______Basic Data Table
     $('#basic-datatable').DataTable({
         language: {
@@ -8,7 +8,6 @@ $(function(e) {
             sSearch: '',
         }
     });
-    
      //______Basic Data Table
      $('#lineItemsTable').DataTable({
         language: {
@@ -28,25 +27,6 @@ $(function(e) {
         ],
     });
      //______Basic Data Table
-    //  $('#myTable').DataTable({
-    //     language: {
-    //         searchPlaceholder: 'Search...',
-    //         scrollX: "100%",
-    //         sSearch: '',
-    //     },
-    //     retrieve: true,
-    //     lengthMenu: false,
-    //     lengthChange: false, 
-    //     bInfo: false,
-    //     searching: false,
-    //     ordering: false,
-    //     columnDefs: [
-    //         {
-    //             targets: [0, 1],
-    //             orderable: false,
-    //         }
-    //     ],
-    // });
      $('#myTable').DataTable({
         language: {
             searchPlaceholder: 'Search...',
@@ -82,8 +62,6 @@ $(function(e) {
             }
         ],
     });
-    
-    
     $('#responsive-datatable2').DataTable({
         language: {
             searchPlaceholder: 'Search...',
@@ -135,7 +113,6 @@ $(function(e) {
             }
         ],
     });
-
     //______File-Export Data Table
     var table = $('#file-datatable').DataTable({
         buttons: ['copy', 'excel', 'pdf', 'colvis'],
@@ -147,7 +124,6 @@ $(function(e) {
     });
     table.buttons().container()
         .appendTo('#file-datatable_wrapper .col-md-6:eq(0)');
-
     //______Delete Data Table
     var table = $('#delete-datatable').DataTable({
         language: {
@@ -189,11 +165,5 @@ $(function(e) {
 			lengthMenu: '_MENU_ items/page',
 		}
 	});
-	
-
     //______Select2 
-    // $('.select2').select2({
-    //     minimumResultsForSearch: Infinity
-    // });
-
 });

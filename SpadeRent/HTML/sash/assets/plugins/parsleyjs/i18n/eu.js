@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('eu', {
   defaultMessage: "Balio hau baliogabekoa dirudi.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('eu', {
   check:          "%s eta %s aukeren artean hautatu behar duzu.",
   equalto:        "Balio honek berbera izan behar da."
 });
-
 Parsley.setLocale('eu');

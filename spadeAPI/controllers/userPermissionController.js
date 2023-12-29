@@ -71,9 +71,9 @@ exports.createUserPermissionUser = async function (req, res) {
     if (insertResult[0].affectedRows > 0) {
       console.log(email + " " + mailSubject + " " + name)
       await sendMailLandlord(email, mailSubject, name);
-      return res.status(200).json({ message: "Users Permission User added successfully" });
+      return res.status(200).json({ message: "Users Permission User added successfully " });
     } else {
-      return res.status(500).send("Failed to add User Permission User");
+      return res.status(500).send("Failed to add User Permission User ");
     }
   } catch (error) {
     return res.status(400).json({ message: error.message });
@@ -82,9 +82,10 @@ exports.createUserPermissionUser = async function (req, res) {
 // User Check Email
 exports.userCheckEmail = async function (req, res) {
   const { email } = req.query;
+  // const { email } = req.body;
   const { userId } = req.user;
   try {
-    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail"), [
+    const selectResult = await queryRunner(selectQuery("userPUsers", "llnalordId", "UEmail "), [
       userId,
       email,
     ]);
@@ -92,17 +93,17 @@ exports.userCheckEmail = async function (req, res) {
       email,
     ]);
     if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
     } else if (selectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
     } else if (LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "Email already exists ",
         data: selectResult,
       });
@@ -121,7 +122,8 @@ exports.userCheckEmail = async function (req, res) {
 
 // User get By Id
 exports.userPermissionGetById = async function (req, res) {
-  const { id } = req.query;
+  // const { id } = req.query;
+  const { id } = req.body;
   // const { userId } = req.user;;
   try {
     const selectResult = await queryRunner(selectQuery("userPUsers", "id"), [
@@ -132,7 +134,7 @@ exports.userPermissionGetById = async function (req, res) {
         data: selectResult[0][0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No user Found",
       });
     }
@@ -196,7 +198,7 @@ exports.userPermissionUsersDelete = async function (req, res) {
         message: "User Deleted Successsful"
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No user Found",
       });
     }
@@ -221,7 +223,8 @@ exports.userPermissionGetAll = async function (req, res) {
         data: selectResult[0],
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
+        data:[],
         message: "No user Found",
       });
     }
@@ -303,7 +306,7 @@ exports.userPermissionRoles = async function (req, res) {
         data: dataArray,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No User Roles Found",
       });
     }

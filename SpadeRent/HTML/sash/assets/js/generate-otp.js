@@ -1,8 +1,6 @@
 //GENERATE OTP
-
 $('#generate-otp').on('click', function() {
     'use strict'
-    
     var value = $(this).html().trim();
     if (value == 'proceed') {
         $(this).html('Login');

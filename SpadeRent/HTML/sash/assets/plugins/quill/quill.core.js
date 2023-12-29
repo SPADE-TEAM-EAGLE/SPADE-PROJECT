@@ -82,9 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var container_1 = __webpack_require__(17);
 var format_1 = __webpack_require__(18);
@@ -121,14 +119,10 @@ var Parchment = {
     },
 };
 exports.default = Parchment;
-
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -179,7 +173,6 @@ function create(input, value) {
     }
     var BlotClass = match;
     var node = 
-    // @ts-ignore
     input instanceof Node || input['nodeType'] === Node.TEXT_NODE ? input : BlotClass.create(value);
     return new BlotClass(node, value);
 }
@@ -188,7 +181,6 @@ function find(node, bubble) {
     if (bubble === void 0) { bubble = false; }
     if (node == null)
         return null;
-    // @ts-ignore
     if (node[exports.DATA_KEY] != null)
         return node[exports.DATA_KEY].blot;
     if (bubble)
@@ -201,7 +193,6 @@ function query(query, scope) {
     var match;
     if (typeof query === 'string') {
         match = types[query] || attributes[query];
-        // @ts-ignore
     }
     else if (query instanceof Text || query['nodeType'] === Node.TEXT_NODE) {
         match = types['text'];
@@ -225,7 +216,6 @@ function query(query, scope) {
     }
     if (match == null)
         return null;
-    // @ts-ignore
     if (scope & Scope.LEVEL & match.scope && scope & Scope.TYPE & match.scope)
         return match;
     return null;
@@ -276,23 +266,15 @@ function register() {
     return Definition;
 }
 exports.register = register;
-
-
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
-
 var diff = __webpack_require__(51);
 var equal = __webpack_require__(11);
 var extend = __webpack_require__(3);
 var op = __webpack_require__(20);
-
-
 var NULL_CHARACTER = String.fromCharCode(0);  // Placeholder char for embed in diff()
-
-
 var Delta = function (ops) {
-  // Assume we are given a well formed ops
   if (Array.isArray(ops)) {
     this.ops = ops;
   } else if (ops != null && Array.isArray(ops.ops)) {
@@ -301,8 +283,6 @@ var Delta = function (ops) {
     this.ops = [];
   }
 };
-
-
 Delta.prototype.insert = function (text, attributes) {
   var newOp = {};
   if (text.length === 0) return this;
@@ -312,12 +292,10 @@ Delta.prototype.insert = function (text, attributes) {
   }
   return this.push(newOp);
 };
-
 Delta.prototype['delete'] = function (length) {
   if (length <= 0) return this;
   return this.push({ 'delete': length });
 };
-
 Delta.prototype.retain = function (length, attributes) {
   if (length <= 0) return this;
   var newOp = { retain: length };
@@ -326,7 +304,6 @@ Delta.prototype.retain = function (length, attributes) {
   }
   return this.push(newOp);
 };
-
 Delta.prototype.push = function (newOp) {
   var index = this.ops.length;
   var lastOp = this.ops[index - 1];
@@ -336,8 +313,6 @@ Delta.prototype.push = function (newOp) {
       this.ops[index - 1] = { 'delete': lastOp['delete'] + newOp['delete'] };
       return this;
     }
-    // Since it does not matter if we insert before or after deleting at the same index,
-    // always prefer to insert first
     if (typeof lastOp['delete'] === 'number' && newOp.insert != null) {
       index -= 1;
       lastOp = this.ops[index - 1];
@@ -365,7 +340,6 @@ Delta.prototype.push = function (newOp) {
   }
   return this;
 };
-
 Delta.prototype.chop = function () {
   var lastOp = this.ops[this.ops.length - 1];
   if (lastOp && lastOp.retain && !lastOp.attributes) {
@@ -373,19 +347,15 @@ Delta.prototype.chop = function () {
   }
   return this;
 };
-
 Delta.prototype.filter = function (predicate) {
   return this.ops.filter(predicate);
 };
-
 Delta.prototype.forEach = function (predicate) {
   this.ops.forEach(predicate);
 };
-
 Delta.prototype.map = function (predicate) {
   return this.ops.map(predicate);
 };
-
 Delta.prototype.partition = function (predicate) {
   var passed = [], failed = [];
   this.forEach(function(op) {
@@ -394,11 +364,9 @@ Delta.prototype.partition = function (predicate) {
   });
   return [passed, failed];
 };
-
 Delta.prototype.reduce = function (predicate, initial) {
   return this.ops.reduce(predicate, initial);
 };
-
 Delta.prototype.changeLength = function () {
   return this.reduce(function (length, elem) {
     if (elem.insert) {
@@ -409,13 +377,11 @@ Delta.prototype.changeLength = function () {
     return length;
   }, 0);
 };
-
 Delta.prototype.length = function () {
   return this.reduce(function (length, elem) {
     return length + op.length(elem);
   }, 0);
 };
-
 Delta.prototype.slice = function (start, end) {
   start = start || 0;
   if (typeof end !== 'number') end = Infinity;
@@ -434,8 +400,6 @@ Delta.prototype.slice = function (start, end) {
   }
   return new Delta(ops);
 };
-
-
 Delta.prototype.compose = function (other) {
   var thisIter = op.iterator(this.ops);
   var otherIter = op.iterator(other.ops);
@@ -456,12 +420,9 @@ Delta.prototype.compose = function (other) {
         } else {
           newOp.insert = thisOp.insert;
         }
-        // Preserve null when composing with a retain, otherwise remove it for inserts
         var attributes = op.attributes.compose(thisOp.attributes, otherOp.attributes, typeof thisOp.retain === 'number');
         if (attributes) newOp.attributes = attributes;
         delta.push(newOp);
-      // Other op should be delete, we could be an insert or retain
-      // Insert + delete cancels out
       } else if (typeof otherOp['delete'] === 'number' && typeof thisOp.retain === 'number') {
         delta.push(otherOp);
       }
@@ -469,7 +430,6 @@ Delta.prototype.compose = function (other) {
   }
   return delta.chop();
 };
-
 Delta.prototype.concat = function (other) {
   var delta = new Delta(this.ops.slice());
   if (other.ops.length > 0) {
@@ -478,7 +438,6 @@ Delta.prototype.concat = function (other) {
   }
   return delta;
 };
-
 Delta.prototype.diff = function (other, index) {
   if (this.ops === other.ops) {
     return new Delta();
@@ -526,7 +485,6 @@ Delta.prototype.diff = function (other, index) {
   });
   return delta.chop();
 };
-
 Delta.prototype.eachLine = function (predicate, newline) {
   newline = newline || '\n';
   var iter = op.iterator(this.ops);
@@ -554,7 +512,6 @@ Delta.prototype.eachLine = function (predicate, newline) {
     predicate(line, {}, i);
   }
 };
-
 Delta.prototype.transform = function (other, priority) {
   priority = !!priority;
   if (typeof other === 'number') {
@@ -573,19 +530,16 @@ Delta.prototype.transform = function (other, priority) {
       var thisOp = thisIter.next(length);
       var otherOp = otherIter.next(length);
       if (thisOp['delete']) {
-        // Our delete either makes their delete redundant or removes their retain
         continue;
       } else if (otherOp['delete']) {
         delta.push(otherOp);
       } else {
-        // We retain either their retain or insert
         delta.retain(length, op.attributes.transform(thisOp.attributes, otherOp.attributes, priority));
       }
     }
   }
   return delta.chop();
 };
-
 Delta.prototype.transformPosition = function (index, priority) {
   priority = !!priority;
   var thisIter = op.iterator(this.ops);
@@ -604,78 +558,53 @@ Delta.prototype.transformPosition = function (index, priority) {
   }
   return index;
 };
-
-
 module.exports = Delta;
-
-
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
-
 'use strict';
-
 var hasOwn = Object.prototype.hasOwnProperty;
 var toStr = Object.prototype.toString;
-
 var isArray = function isArray(arr) {
 	if (typeof Array.isArray === 'function') {
 		return Array.isArray(arr);
 	}
-
 	return toStr.call(arr) === '[object Array]';
 };
-
 var isPlainObject = function isPlainObject(obj) {
 	if (!obj || toStr.call(obj) !== '[object Object]') {
 		return false;
 	}
-
 	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
 	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
-	// Not own constructor property must be Object
 	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
 		return false;
 	}
-
-	// Own properties are enumerated firstly, so to speed up,
-	// if last one is own, then all properties are own.
 	var key;
 	for (key in obj) { /**/ }
-
 	return typeof key === 'undefined' || hasOwn.call(obj, key);
 };
-
 module.exports = function extend() {
 	var options, name, src, copy, copyIsArray, clone;
 	var target = arguments[0];
 	var i = 1;
 	var length = arguments.length;
 	var deep = false;
-
-	// Handle a deep copy situation
 	if (typeof target === 'boolean') {
 		deep = target;
 		target = arguments[1] || {};
-		// skip the boolean and the target
 		i = 2;
 	}
 	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
 		target = {};
 	}
-
 	for (; i < length; ++i) {
 		options = arguments[i];
-		// Only deal with non-null/undefined values
 		if (options != null) {
-			// Extend the base object
 			for (name in options) {
 				src = target[name];
 				copy = options[name];
-
-				// Prevent never-ending loop
 				if (target !== copy) {
-					// Recurse if we're merging plain objects or arrays
 					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
 						if (copyIsArray) {
 							copyIsArray = false;
@@ -683,11 +612,7 @@ module.exports = function extend() {
 						} else {
 							clone = src && isPlainObject(src) ? src : {};
 						}
-
-						// Never move original objects, clone them
 						target[name] = extend(deep, clone, copy);
-
-					// Don't bring in undefined values
 					} else if (typeof copy !== 'undefined') {
 						target[name] = copy;
 					}
@@ -695,71 +620,41 @@ module.exports = function extend() {
 			}
 		}
 	}
-
-	// Return the modified object
 	return target;
 };
-
-
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.BlockEmbed = exports.bubbleFormats = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _extend = __webpack_require__(3);
-
 var _extend2 = _interopRequireDefault(_extend);
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _break = __webpack_require__(16);
-
 var _break2 = _interopRequireDefault(_break);
-
 var _inline = __webpack_require__(6);
-
 var _inline2 = _interopRequireDefault(_inline);
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var NEWLINE_LENGTH = 1;
-
 var BlockEmbed = function (_Parchment$Embed) {
   _inherits(BlockEmbed, _Parchment$Embed);
-
   function BlockEmbed() {
     _classCallCheck(this, BlockEmbed);
-
     return _possibleConstructorReturn(this, (BlockEmbed.__proto__ || Object.getPrototypeOf(BlockEmbed)).apply(this, arguments));
   }
-
   _createClass(BlockEmbed, [{
     key: 'attach',
     value: function attach() {
@@ -796,26 +691,17 @@ var BlockEmbed = function (_Parchment$Embed) {
       }
     }
   }]);
-
   return BlockEmbed;
 }(_parchment2.default.Embed);
-
 BlockEmbed.scope = _parchment2.default.Scope.BLOCK_BLOT;
-// It is important for cursor behavior BlockEmbeds use tags that are block level elements
-
-
 var Block = function (_Parchment$Block) {
   _inherits(Block, _Parchment$Block);
-
   function Block(domNode) {
     _classCallCheck(this, Block);
-
     var _this2 = _possibleConstructorReturn(this, (Block.__proto__ || Object.getPrototypeOf(Block)).call(this, domNode));
-
     _this2.cache = {};
     return _this2;
   }
-
   _createClass(Block, [{
     key: 'delta',
     value: function delta() {
@@ -916,7 +802,6 @@ var Block = function (_Parchment$Block) {
     key: 'split',
     value: function split(index) {
       var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
       if (force && (index === 0 || index >= this.length() - NEWLINE_LENGTH)) {
         var clone = this.clone();
         if (index === 0) {
@@ -933,18 +818,14 @@ var Block = function (_Parchment$Block) {
       }
     }
   }]);
-
   return Block;
 }(_parchment2.default.Block);
-
 Block.blotName = 'block';
 Block.tagName = 'P';
 Block.defaultChild = 'break';
 Block.allowedChildren = [_inline2.default, _parchment2.default.Embed, _text2.default];
-
 function bubbleFormats(blot) {
   var formats = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
   if (blot == null) return formats;
   if (typeof blot.formats === 'function') {
     formats = (0, _extend2.default)(formats, blot.formats());
@@ -954,75 +835,43 @@ function bubbleFormats(blot) {
   }
   return bubbleFormats(blot.parent, formats);
 }
-
 exports.bubbleFormats = bubbleFormats;
 exports.BlockEmbed = BlockEmbed;
 exports.default = Block;
-
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.overload = exports.expandConfig = undefined;
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 __webpack_require__(50);
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _editor = __webpack_require__(14);
-
 var _editor2 = _interopRequireDefault(_editor);
-
 var _emitter3 = __webpack_require__(8);
-
 var _emitter4 = _interopRequireDefault(_emitter3);
-
 var _module = __webpack_require__(9);
-
 var _module2 = _interopRequireDefault(_module);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _selection = __webpack_require__(15);
-
 var _selection2 = _interopRequireDefault(_selection);
-
 var _extend = __webpack_require__(3);
-
 var _extend2 = _interopRequireDefault(_extend);
-
 var _logger = __webpack_require__(10);
-
 var _logger2 = _interopRequireDefault(_logger);
-
 var _theme = __webpack_require__(34);
-
 var _theme2 = _interopRequireDefault(_theme);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var debug = (0, _logger2.default)('quill');
-
 var Quill = function () {
   _createClass(Quill, null, [{
     key: 'debug',
@@ -1049,13 +898,10 @@ var Quill = function () {
     key: 'register',
     value: function register(path, target) {
       var _this = this;
-
       var overwrite = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
       if (typeof path !== 'string') {
         var name = path.attrName || path.blotName;
         if (typeof name === 'string') {
-          // register(Blot | Attributor, overwrite)
           this.register('formats/' + name, path, target);
         } else {
           Object.keys(path).forEach(function (key) {
@@ -1075,14 +921,10 @@ var Quill = function () {
       }
     }
   }]);
-
   function Quill(container) {
     var _this2 = this;
-
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
     _classCallCheck(this, Quill);
-
     this.options = expandConfig(container, options);
     this.container = this.options.container;
     if (this.container == null) {
@@ -1133,12 +975,10 @@ var Quill = function () {
       this.disable();
     }
   }
-
   _createClass(Quill, [{
     key: 'addContainer',
     value: function addContainer(container) {
       var refNode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
       if (typeof container === 'string') {
         var className = container;
         container = document.createElement('div');
@@ -1156,15 +996,11 @@ var Quill = function () {
     key: 'deleteText',
     value: function deleteText(index, length, source) {
       var _this3 = this;
-
       var _overload = overload(index, length, source);
-
       var _overload2 = _slicedToArray(_overload, 4);
-
       index = _overload2[0];
       length = _overload2[1];
       source = _overload2[3];
-
       return modify.call(this, function () {
         return _this3.editor.deleteText(index, length);
       }, source, index, -1 * length);
@@ -1178,7 +1014,6 @@ var Quill = function () {
     key: 'enable',
     value: function enable() {
       var enabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
       this.scroll.enable(enabled);
       this.container.classList.toggle('ql-disabled', !enabled);
     }
@@ -1194,9 +1029,7 @@ var Quill = function () {
     key: 'format',
     value: function format(name, value) {
       var _this4 = this;
-
       var source = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _emitter4.default.sources.API;
-
       return modify.call(this, function () {
         var range = _this4.getSelection(true);
         var change = new _quillDelta2.default();
@@ -1218,18 +1051,13 @@ var Quill = function () {
     key: 'formatLine',
     value: function formatLine(index, length, name, value, source) {
       var _this5 = this;
-
       var formats = void 0;
-
       var _overload3 = overload(index, length, name, value, source);
-
       var _overload4 = _slicedToArray(_overload3, 4);
-
       index = _overload4[0];
       length = _overload4[1];
       formats = _overload4[2];
       source = _overload4[3];
-
       return modify.call(this, function () {
         return _this5.editor.formatLine(index, length, formats);
       }, source, index, 0);
@@ -1238,18 +1066,13 @@ var Quill = function () {
     key: 'formatText',
     value: function formatText(index, length, name, value, source) {
       var _this6 = this;
-
       var formats = void 0;
-
       var _overload5 = overload(index, length, name, value, source);
-
       var _overload6 = _slicedToArray(_overload5, 4);
-
       index = _overload6[0];
       length = _overload6[1];
       formats = _overload6[2];
       source = _overload6[3];
-
       return modify.call(this, function () {
         return _this6.editor.formatText(index, length, formats);
       }, source, index, 0);
@@ -1258,7 +1081,6 @@ var Quill = function () {
     key: 'getBounds',
     value: function getBounds(index) {
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
       var bounds = void 0;
       if (typeof index === 'number') {
         bounds = this.selection.getBounds(index, length);
@@ -1280,14 +1102,10 @@ var Quill = function () {
     value: function getContents() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.getLength() - index;
-
       var _overload7 = overload(index, length);
-
       var _overload8 = _slicedToArray(_overload7, 2);
-
       index = _overload8[0];
       length = _overload8[1];
-
       return this.editor.getContents(index, length);
     }
   }, {
@@ -1295,7 +1113,6 @@ var Quill = function () {
     value: function getFormat() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getSelection(true);
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
       if (typeof index === 'number') {
         return this.editor.getFormat(index, length);
       } else {
@@ -1327,7 +1144,6 @@ var Quill = function () {
     value: function getLines() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Number.MAX_VALUE;
-
       if (typeof index !== 'number') {
         return this.scroll.lines(index.index, index.length);
       } else {
@@ -1343,7 +1159,6 @@ var Quill = function () {
     key: 'getSelection',
     value: function getSelection() {
       var focus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
       if (focus) this.focus();
       this.update(); // Make sure we access getRange with editor in consistent state
       return this.selection.getRange()[0];
@@ -1353,14 +1168,10 @@ var Quill = function () {
     value: function getText() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.getLength() - index;
-
       var _overload9 = overload(index, length);
-
       var _overload10 = _slicedToArray(_overload9, 2);
-
       index = _overload10[0];
       length = _overload10[1];
-
       return this.editor.getText(index, length);
     }
   }, {
@@ -1372,9 +1183,7 @@ var Quill = function () {
     key: 'insertEmbed',
     value: function insertEmbed(index, embed, value) {
       var _this7 = this;
-
       var source = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Quill.sources.API;
-
       return modify.call(this, function () {
         return _this7.editor.insertEmbed(index, embed, value);
       }, source, index);
@@ -1383,17 +1192,12 @@ var Quill = function () {
     key: 'insertText',
     value: function insertText(index, text, name, value, source) {
       var _this8 = this;
-
       var formats = void 0;
-
       var _overload11 = overload(index, 0, name, value, source);
-
       var _overload12 = _slicedToArray(_overload11, 4);
-
       index = _overload12[0];
       formats = _overload12[2];
       source = _overload12[3];
-
       return modify.call(this, function () {
         return _this8.editor.insertText(index, text, formats);
       }, source, index, text.length);
@@ -1427,15 +1231,11 @@ var Quill = function () {
     key: 'removeFormat',
     value: function removeFormat(index, length, source) {
       var _this9 = this;
-
       var _overload13 = overload(index, length, source);
-
       var _overload14 = _slicedToArray(_overload13, 4);
-
       index = _overload14[0];
       length = _overload14[1];
       source = _overload14[3];
-
       return modify.call(this, function () {
         return _this9.editor.removeFormat(index, length);
       }, source, index);
@@ -1449,9 +1249,7 @@ var Quill = function () {
     key: 'setContents',
     value: function setContents(delta) {
       var _this10 = this;
-
       var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _emitter4.default.sources.API;
-
       return modify.call(this, function () {
         delta = new _quillDelta2.default(delta);
         var length = _this10.getLength();
@@ -1473,13 +1271,10 @@ var Quill = function () {
         this.selection.setRange(null, length || Quill.sources.API);
       } else {
         var _overload15 = overload(index, length, source);
-
         var _overload16 = _slicedToArray(_overload15, 4);
-
         index = _overload16[0];
         length = _overload16[1];
         source = _overload16[3];
-
         this.selection.setRange(new _selection.Range(index, length), source);
         if (source !== _emitter4.default.sources.SILENT) {
           this.selection.scrollIntoView(this.scrollingContainer);
@@ -1490,7 +1285,6 @@ var Quill = function () {
     key: 'setText',
     value: function setText(text) {
       var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _emitter4.default.sources.API;
-
       var delta = new _quillDelta2.default().insert(text);
       return this.setContents(delta, source);
     }
@@ -1498,7 +1292,6 @@ var Quill = function () {
     key: 'update',
     value: function update() {
       var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _emitter4.default.sources.USER;
-
       var change = this.scroll.update(source); // Will update selection before selection.update() does if text changes
       this.selection.update(source);
       return change;
@@ -1507,19 +1300,15 @@ var Quill = function () {
     key: 'updateContents',
     value: function updateContents(delta) {
       var _this11 = this;
-
       var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _emitter4.default.sources.API;
-
       return modify.call(this, function () {
         delta = new _quillDelta2.default(delta);
         return _this11.editor.applyDelta(delta, source);
       }, source, true);
     }
   }]);
-
   return Quill;
 }();
-
 Quill.DEFAULTS = {
   bounds: null,
   formats: null,
@@ -1532,16 +1321,13 @@ Quill.DEFAULTS = {
 };
 Quill.events = _emitter4.default.events;
 Quill.sources = _emitter4.default.sources;
-// eslint-disable-next-line no-undef
 Quill.version =  false ? 'dev' : "1.3.6";
-
 Quill.imports = {
   'delta': _quillDelta2.default,
   'parchment': _parchment2.default,
   'core/module': _module2.default,
   'core/theme': _theme2.default
 };
-
 function expandConfig(container, userConfig) {
   userConfig = (0, _extend2.default)(true, {
     container: container,
@@ -1578,7 +1364,6 @@ function expandConfig(container, userConfig) {
     }
     return config;
   }, {});
-  // Special case toolbar shorthand
   if (userConfig.modules != null && userConfig.modules.toolbar && userConfig.modules.toolbar.constructor !== Object) {
     userConfig.modules.toolbar = {
       container: userConfig.modules.toolbar
@@ -1598,9 +1383,6 @@ function expandConfig(container, userConfig) {
   }, {});
   return userConfig;
 }
-
-// Handle selection preservation and TEXT_CHANGE emission
-// common to modification APIs
 function modify(modifier, source, index, shift) {
   if (this.options.strict && !this.isEnabled() && source === _emitter4.default.sources.USER) {
     return new _quillDelta2.default();
@@ -1619,22 +1401,18 @@ function modify(modifier, source, index, shift) {
   }
   if (change.length() > 0) {
     var _emitter;
-
     var args = [_emitter4.default.events.TEXT_CHANGE, change, oldDelta, source];
     (_emitter = this.emitter).emit.apply(_emitter, [_emitter4.default.events.EDITOR_CHANGE].concat(args));
     if (source !== _emitter4.default.sources.SILENT) {
       var _emitter2;
-
       (_emitter2 = this.emitter).emit.apply(_emitter2, args);
     }
   }
   return change;
 }
-
 function overload(index, length, name, value, source) {
   var formats = {};
   if (typeof index.index === 'number' && typeof index.length === 'number') {
-    // Allow for throwaway end (used by insertText/insertEmbed)
     if (typeof length !== 'number') {
       source = value, value = name, name = length, length = index.length, index = index.index;
     } else {
@@ -1643,7 +1421,6 @@ function overload(index, length, name, value, source) {
   } else if (typeof length !== 'number') {
     source = value, value = name, name = length, length = 0;
   }
-  // Handle format being object, two format name/value strings or excluded
   if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
     formats = name;
     source = value;
@@ -1654,11 +1431,9 @@ function overload(index, length, name, value, source) {
       source = name;
     }
   }
-  // Handle optional source
   source = source || _emitter4.default.sources.API;
   return [index, length, formats, source];
 }
-
 function shiftRange(range, index, length, source) {
   if (range == null) return null;
   var start = void 0,
@@ -1667,9 +1442,7 @@ function shiftRange(range, index, length, source) {
     var _map = [range.index, range.index + range.length].map(function (pos) {
       return index.transformPosition(pos, source !== _emitter4.default.sources.USER);
     });
-
     var _map2 = _slicedToArray(_map, 2);
-
     start = _map2[0];
     end = _map2[1];
   } else {
@@ -1681,59 +1454,38 @@ function shiftRange(range, index, length, source) {
         return Math.max(index, pos + length);
       }
     });
-
     var _map4 = _slicedToArray(_map3, 2);
-
     start = _map4[0];
     end = _map4[1];
   }
   return new _selection.Range(start, end - start);
 }
-
 exports.expandConfig = expandConfig;
 exports.overload = overload;
 exports.default = Quill;
-
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Inline = function (_Parchment$Inline) {
   _inherits(Inline, _Parchment$Inline);
-
   function Inline() {
     _classCallCheck(this, Inline);
-
     return _possibleConstructorReturn(this, (Inline.__proto__ || Object.getPrototypeOf(Inline)).apply(this, arguments));
   }
-
   _createClass(Inline, [{
     key: 'formatAt',
     value: function formatAt(index, length, name, value) {
@@ -1772,120 +1524,76 @@ var Inline = function (_Parchment$Inline) {
       }
     }
   }]);
-
   return Inline;
 }(_parchment2.default.Inline);
-
 Inline.allowedChildren = [Inline, _parchment2.default.Embed, _text2.default];
-// Lower index means deeper in the DOM tree, since not found (-1) is for embeds
 Inline.order = ['cursor', 'inline', // Must be lower
 'underline', 'strike', 'italic', 'bold', 'script', 'link', 'code' // Must be higher
 ];
-
 exports.default = Inline;
-
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var TextBlot = function (_Parchment$Text) {
   _inherits(TextBlot, _Parchment$Text);
-
   function TextBlot() {
     _classCallCheck(this, TextBlot);
-
     return _possibleConstructorReturn(this, (TextBlot.__proto__ || Object.getPrototypeOf(TextBlot)).apply(this, arguments));
   }
-
   return TextBlot;
 }(_parchment2.default.Text);
-
 exports.default = TextBlot;
-
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _eventemitter = __webpack_require__(54);
-
 var _eventemitter2 = _interopRequireDefault(_eventemitter);
-
 var _logger = __webpack_require__(10);
-
 var _logger2 = _interopRequireDefault(_logger);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var debug = (0, _logger2.default)('quill:events');
-
 var EVENTS = ['selectionchange', 'mousedown', 'mouseup', 'click'];
-
 EVENTS.forEach(function (eventName) {
   document.addEventListener(eventName, function () {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-
     [].slice.call(document.querySelectorAll('.ql-container')).forEach(function (node) {
-      // TODO use WeakMap
       if (node.__quill && node.__quill.emitter) {
         var _node$__quill$emitter;
-
         (_node$__quill$emitter = node.__quill.emitter).handleDOM.apply(_node$__quill$emitter, args);
       }
     });
   });
 });
-
 var Emitter = function (_EventEmitter) {
   _inherits(Emitter, _EventEmitter);
-
   function Emitter() {
     _classCallCheck(this, Emitter);
-
     var _this = _possibleConstructorReturn(this, (Emitter.__proto__ || Object.getPrototypeOf(Emitter)).call(this));
-
     _this.listeners = {};
     _this.on('error', debug.error);
     return _this;
   }
-
   _createClass(Emitter, [{
     key: 'emit',
     value: function emit() {
@@ -1898,11 +1606,9 @@ var Emitter = function (_EventEmitter) {
       for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
         args[_key2 - 1] = arguments[_key2];
       }
-
       (this.listeners[event.type] || []).forEach(function (_ref) {
         var node = _ref.node,
             handler = _ref.handler;
-
         if (event.target === node || node.contains(event.target)) {
           handler.apply(undefined, [event].concat(args));
         }
@@ -1917,10 +1623,8 @@ var Emitter = function (_EventEmitter) {
       this.listeners[eventName].push({ node: node, handler: handler });
     }
   }]);
-
   return Emitter;
 }(_eventemitter2.default);
-
 Emitter.events = {
   EDITOR_CHANGE: 'editor-change',
   SCROLL_BEFORE_UPDATE: 'scroll-before-update',
@@ -1934,110 +1638,72 @@ Emitter.sources = {
   SILENT: 'silent',
   USER: 'user'
 };
-
 exports.default = Emitter;
-
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var Module = function Module(quill) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
   _classCallCheck(this, Module);
-
   this.quill = quill;
   this.options = options;
 };
-
 Module.DEFAULTS = {};
-
 exports.default = Module;
-
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var levels = ['error', 'warn', 'log', 'info'];
 var level = 'warn';
-
 function debug(method) {
   if (levels.indexOf(method) <= levels.indexOf(level)) {
     var _console;
-
     for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
     }
-
     (_console = console)[method].apply(_console, args); // eslint-disable-line no-console
   }
 }
-
 function namespace(ns) {
   return levels.reduce(function (logger, method) {
     logger[method] = debug.bind(console, method, ns);
     return logger;
   }, {});
 }
-
 debug.level = namespace.level = function (newLevel) {
   level = newLevel;
 };
-
 exports.default = namespace;
-
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
-
 var pSlice = Array.prototype.slice;
 var objectKeys = __webpack_require__(52);
 var isArguments = __webpack_require__(53);
-
 var deepEqual = module.exports = function (actual, expected, opts) {
   if (!opts) opts = {};
-  // 7.1. All identical values are equivalent, as determined by ===.
   if (actual === expected) {
     return true;
-
   } else if (actual instanceof Date && expected instanceof Date) {
     return actual.getTime() === expected.getTime();
-
-  // 7.3. Other pairs that do not both pass typeof value == 'object',
-  // equivalence is determined by ==.
   } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
     return opts.strict ? actual === expected : actual == expected;
-
-  // 7.4. For all other Object pairs, including Array objects, equivalence is
-  // determined by having the same number of owned properties (as verified
-  // with Object.prototype.hasOwnProperty.call), the same set of keys
-  // (although not necessarily the same order), equivalent values for every
-  // corresponding key, and an identical 'prototype' property. Note: this
-  // accounts for both named and indexed properties on Arrays.
   } else {
     return objEquiv(actual, expected, opts);
   }
 }
-
 function isUndefinedOrNull(value) {
   return value === null || value === undefined;
 }
-
 function isBuffer (x) {
   if (!x || typeof x !== 'object' || typeof x.length !== 'number') return false;
   if (typeof x.copy !== 'function' || typeof x.slice !== 'function') {
@@ -2046,15 +1712,12 @@ function isBuffer (x) {
   if (x.length > 0 && typeof x[0] !== 'number') return false;
   return true;
 }
-
 function objEquiv(a, b, opts) {
   var i, key;
   if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
     return false;
-  // an identical 'prototype' property.
   if (a.prototype !== b.prototype) return false;
   //~~~I've managed to break Object.keys through screwy arguments passing.
-  //   Converting to array solves the problem.
   if (isArguments(a)) {
     if (!isArguments(b)) {
       return false;
@@ -2079,8 +1742,6 @@ function objEquiv(a, b, opts) {
   } catch (e) {//happens when one is a string literal and the other isn't
     return false;
   }
-  // having the same number of owned properties (keys incorporates
-  // hasOwnProperty)
   if (ka.length != kb.length)
     return false;
   //the same set of keys (although not necessarily the same order),
@@ -2099,14 +1760,10 @@ function objEquiv(a, b, opts) {
   }
   return typeof a === typeof b;
 }
-
-
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var Registry = __webpack_require__(1);
 var Attributor = /** @class */ (function () {
@@ -2116,7 +1773,6 @@ var Attributor = /** @class */ (function () {
         this.keyName = keyName;
         var attributeBit = Registry.Scope.TYPE & Registry.Scope.ATTRIBUTE;
         if (options.scope != null) {
-            // Ignore type bits, force attribute bit
             this.scope = (options.scope & Registry.Scope.LEVEL) | attributeBit;
         }
         else {
@@ -2162,86 +1818,53 @@ var Attributor = /** @class */ (function () {
     return Attributor;
 }());
 exports.default = Attributor;
-
-
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.Code = undefined;
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _block = __webpack_require__(4);
-
 var _block2 = _interopRequireDefault(_block);
-
 var _inline = __webpack_require__(6);
-
 var _inline2 = _interopRequireDefault(_inline);
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Code = function (_Inline) {
   _inherits(Code, _Inline);
-
   function Code() {
     _classCallCheck(this, Code);
-
     return _possibleConstructorReturn(this, (Code.__proto__ || Object.getPrototypeOf(Code)).apply(this, arguments));
   }
-
   return Code;
 }(_inline2.default);
-
 Code.blotName = 'code';
 Code.tagName = 'CODE';
-
 var CodeBlock = function (_Block) {
   _inherits(CodeBlock, _Block);
-
   function CodeBlock() {
     _classCallCheck(this, CodeBlock);
-
     return _possibleConstructorReturn(this, (CodeBlock.__proto__ || Object.getPrototypeOf(CodeBlock)).apply(this, arguments));
   }
-
   _createClass(CodeBlock, [{
     key: 'delta',
     value: function delta() {
       var _this3 = this;
-
       var text = this.domNode.textContent;
       if (text.endsWith('\n')) {
-        // Should always be true
         text = text.slice(0, -1);
       }
       return text.split('\n').reduce(function (delta, frag) {
@@ -2252,11 +1875,9 @@ var CodeBlock = function (_Block) {
     key: 'format',
     value: function format(name, value) {
       if (name === this.statics.blotName && value) return;
-
       var _descendant = this.descendant(_text2.default, this.length() - 1),
           _descendant2 = _slicedToArray(_descendant, 1),
           text = _descendant2[0];
-
       if (text != null) {
         text.deleteAt(text.length() - 1, 1);
       }
@@ -2284,12 +1905,10 @@ var CodeBlock = function (_Block) {
     key: 'insertAt',
     value: function insertAt(index, value, def) {
       if (def != null) return;
-
       var _descendant3 = this.descendant(_text2.default, index),
           _descendant4 = _slicedToArray(_descendant3, 2),
           text = _descendant4[0],
           offset = _descendant4[1];
-
       text.insertAt(offset, value);
     }
   }, {
@@ -2305,7 +1924,6 @@ var CodeBlock = function (_Block) {
     key: 'newlineIndex',
     value: function newlineIndex(searchIndex) {
       var reverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
       if (!reverse) {
         var offset = this.domNode.textContent.slice(searchIndex).indexOf('\n');
         return offset > -1 ? searchIndex + offset : -1;
@@ -2355,95 +1973,57 @@ var CodeBlock = function (_Block) {
       return true;
     }
   }]);
-
   return CodeBlock;
 }(_block2.default);
-
 CodeBlock.blotName = 'code-block';
 CodeBlock.tagName = 'PRE';
 CodeBlock.TAB = '  ';
-
 exports.Code = Code;
 exports.default = CodeBlock;
-
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _op = __webpack_require__(20);
-
 var _op2 = _interopRequireDefault(_op);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _code = __webpack_require__(13);
-
 var _code2 = _interopRequireDefault(_code);
-
 var _cursor = __webpack_require__(24);
-
 var _cursor2 = _interopRequireDefault(_cursor);
-
 var _block = __webpack_require__(4);
-
 var _block2 = _interopRequireDefault(_block);
-
 var _break = __webpack_require__(16);
-
 var _break2 = _interopRequireDefault(_break);
-
 var _clone = __webpack_require__(21);
-
 var _clone2 = _interopRequireDefault(_clone);
-
 var _deepEqual = __webpack_require__(11);
-
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
-
 var _extend = __webpack_require__(3);
-
 var _extend2 = _interopRequireDefault(_extend);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var ASCII = /^[ -~]*$/;
-
 var Editor = function () {
   function Editor(scroll) {
     _classCallCheck(this, Editor);
-
     this.scroll = scroll;
     this.delta = this.getDelta();
   }
-
   _createClass(Editor, [{
     key: 'applyDelta',
     value: function applyDelta(delta) {
       var _this = this;
-
       var consumeNextNewline = false;
       this.scroll.update();
       var scrollLength = this.scroll.length();
@@ -2463,18 +2043,15 @@ var Editor = function () {
               consumeNextNewline = true;
             }
             _this.scroll.insertAt(index, text);
-
             var _scroll$line = _this.scroll.line(index),
                 _scroll$line2 = _slicedToArray(_scroll$line, 2),
                 line = _scroll$line2[0],
                 offset = _scroll$line2[1];
-
             var formats = (0, _extend2.default)({}, (0, _block.bubbleFormats)(line));
             if (line instanceof _block2.default) {
               var _line$descendant = line.descendant(_parchment2.default.Leaf, offset),
                   _line$descendant2 = _slicedToArray(_line$descendant, 1),
                   leaf = _line$descendant2[0];
-
               formats = (0, _extend2.default)(formats, (0, _block.bubbleFormats)(leaf));
             }
             attributes = _op2.default.attributes.diff(formats, attributes) || {};
@@ -2510,9 +2087,7 @@ var Editor = function () {
     key: 'formatLine',
     value: function formatLine(index, length) {
       var _this2 = this;
-
       var formats = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
       this.scroll.update();
       Object.keys(formats).forEach(function (format) {
         if (_this2.scroll.whitelist != null && !_this2.scroll.whitelist[format]) return;
@@ -2537,9 +2112,7 @@ var Editor = function () {
     key: 'formatText',
     value: function formatText(index, length) {
       var _this3 = this;
-
       var formats = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
       Object.keys(formats).forEach(function (format) {
         _this3.scroll.formatAt(index, length, format, formats[format]);
       });
@@ -2561,14 +2134,12 @@ var Editor = function () {
     key: 'getFormat',
     value: function getFormat(index) {
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
       var lines = [],
           leaves = [];
       if (length === 0) {
         this.scroll.path(index).forEach(function (path) {
           var _path = _slicedToArray(path, 1),
               blot = _path[0];
-
           if (blot instanceof _block2.default) {
             lines.push(blot);
           } else if (blot instanceof _parchment2.default.Leaf) {
@@ -2610,9 +2181,7 @@ var Editor = function () {
     key: 'insertText',
     value: function insertText(index, text) {
       var _this4 = this;
-
       var formats = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
       text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
       this.scroll.insertAt(index, text);
       Object.keys(formats).forEach(function (format) {
@@ -2634,12 +2203,10 @@ var Editor = function () {
     key: 'removeFormat',
     value: function removeFormat(index, length) {
       var text = this.getText(index, length);
-
       var _scroll$line3 = this.scroll.line(index + length),
           _scroll$line4 = _slicedToArray(_scroll$line3, 2),
           line = _scroll$line4[0],
           offset = _scroll$line4[1];
-
       var suffixLength = 0,
           suffix = new _quillDelta2.default();
       if (line != null) {
@@ -2660,10 +2227,8 @@ var Editor = function () {
     value: function update(change) {
       var mutations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       var cursorIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-
       var oldDelta = this.delta;
       if (mutations.length === 1 && mutations[0].type === 'characterData' && mutations[0].target.data.match(ASCII) && _parchment2.default.find(mutations[0].target)) {
-        // Optimization for character changes
         var textBlot = _parchment2.default.find(mutations[0].target);
         var formats = (0, _block.bubbleFormats)(textBlot);
         var index = textBlot.offset(this.scroll);
@@ -2688,10 +2253,8 @@ var Editor = function () {
       return change;
     }
   }]);
-
   return Editor;
 }();
-
 function combineFormats(formats, combined) {
   return Object.keys(combined).reduce(function (merged, name) {
     if (formats[name] == null) return merged;
@@ -2707,7 +2270,6 @@ function combineFormats(formats, combined) {
     return merged;
   }, {});
 }
-
 function normalizeDelta(delta) {
   return delta.reduce(function (delta, op) {
     if (op.insert === 1) {
@@ -2731,75 +2293,47 @@ function normalizeDelta(delta) {
     return delta.push(op);
   }, new _quillDelta2.default());
 }
-
 exports.default = Editor;
-
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.Range = undefined;
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _clone = __webpack_require__(21);
-
 var _clone2 = _interopRequireDefault(_clone);
-
 var _deepEqual = __webpack_require__(11);
-
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
-
 var _emitter3 = __webpack_require__(8);
-
 var _emitter4 = _interopRequireDefault(_emitter3);
-
 var _logger = __webpack_require__(10);
-
 var _logger2 = _interopRequireDefault(_logger);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var debug = (0, _logger2.default)('quill:selection');
-
 var Range = function Range(index) {
   var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
   _classCallCheck(this, Range);
-
   this.index = index;
   this.length = length;
 };
-
 var Selection = function () {
   function Selection(scroll, emitter) {
     var _this = this;
-
     _classCallCheck(this, Selection);
-
     this.emitter = emitter;
     this.scroll = scroll;
     this.composing = false;
     this.mouseDown = false;
     this.root = this.scroll.domNode;
     this.cursor = _parchment2.default.create('cursor', this);
-    // savedRange is last non-null range
     this.lastRange = this.savedRange = new Range(0, 0);
     this.handleComposition();
     this.handleDragging();
@@ -2818,7 +2352,6 @@ var Selection = function () {
       var native = _this.getNativeRange();
       if (native == null) return;
       if (native.start.node === _this.cursor.textNode) return; // cursor.restore() will handle
-      // TODO unclear if this has negative side effects
       _this.emitter.once(_emitter4.default.events.SCROLL_UPDATE, function () {
         try {
           _this.setNativeRange(native.start.node, native.start.offset, native.end.node, native.end.offset);
@@ -2832,18 +2365,15 @@ var Selection = function () {
             startOffset = _context$range.startOffset,
             endNode = _context$range.endNode,
             endOffset = _context$range.endOffset;
-
         _this.setNativeRange(startNode, startOffset, endNode, endOffset);
       }
     });
     this.update(_emitter4.default.sources.SILENT);
   }
-
   _createClass(Selection, [{
     key: 'handleComposition',
     value: function handleComposition() {
       var _this2 = this;
-
       this.root.addEventListener('compositionstart', function () {
         _this2.composing = true;
       });
@@ -2862,7 +2392,6 @@ var Selection = function () {
     key: 'handleDragging',
     value: function handleDragging() {
       var _this3 = this;
-
       this.emitter.listenDOM('mousedown', document.body, function () {
         _this3.mouseDown = true;
       });
@@ -2888,7 +2417,6 @@ var Selection = function () {
       if (nativeRange.start.node !== this.cursor.textNode) {
         var blot = _parchment2.default.find(nativeRange.start.node, false);
         if (blot == null) return;
-        // TODO Give blot ability to not split
         if (blot instanceof _parchment2.default.Leaf) {
           var after = blot.split(nativeRange.start.offset);
           blot.parent.insertBefore(this.cursor, after);
@@ -2906,7 +2434,6 @@ var Selection = function () {
     key: 'getBounds',
     value: function getBounds(index) {
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
       var scrollLength = this.scroll.length();
       index = Math.min(index, scrollLength - 1);
       length = Math.min(index + length, scrollLength - 1) - index;
@@ -2916,34 +2443,22 @@ var Selection = function () {
           leaf = _scroll$leaf2[0],
           offset = _scroll$leaf2[1];
       if (leaf == null) return null;
-
       var _leaf$position = leaf.position(offset, true);
-
       var _leaf$position2 = _slicedToArray(_leaf$position, 2);
-
       node = _leaf$position2[0];
       offset = _leaf$position2[1];
-
       var range = document.createRange();
       if (length > 0) {
         range.setStart(node, offset);
-
         var _scroll$leaf3 = this.scroll.leaf(index + length);
-
         var _scroll$leaf4 = _slicedToArray(_scroll$leaf3, 2);
-
         leaf = _scroll$leaf4[0];
         offset = _scroll$leaf4[1];
-
         if (leaf == null) return null;
-
         var _leaf$position3 = leaf.position(offset, true);
-
         var _leaf$position4 = _slicedToArray(_leaf$position3, 2);
-
         node = _leaf$position4[0];
         offset = _leaf$position4[1];
-
         range.setEnd(node, offset);
         return range.getBoundingClientRect();
       } else {
@@ -3001,7 +2516,6 @@ var Selection = function () {
     key: 'normalizedToRange',
     value: function normalizedToRange(range) {
       var _this4 = this;
-
       var positions = [[range.start.node, range.start.offset]];
       if (!range.native.collapsed) {
         positions.push([range.end.node, range.end.offset]);
@@ -3010,7 +2524,6 @@ var Selection = function () {
         var _position = _slicedToArray(position, 2),
             node = _position[0],
             offset = _position[1];
-
         var blot = _parchment2.default.find(node, true);
         var index = blot.offset(_this4.scroll);
         if (offset === 0) {
@@ -3058,7 +2571,6 @@ var Selection = function () {
     key: 'rangeToNative',
     value: function rangeToNative(range) {
       var _this5 = this;
-
       var indexes = range.collapsed ? [range.index] : [range.index, range.index + range.length];
       var args = [];
       var scrollLength = this.scroll.length();
@@ -3070,12 +2582,9 @@ var Selection = function () {
             leaf = _scroll$leaf6[0],
             offset = _scroll$leaf6[1];
         var _leaf$position5 = leaf.position(offset, i !== 0);
-
         var _leaf$position6 = _slicedToArray(_leaf$position5, 2);
-
         node = _leaf$position6[0];
         offset = _leaf$position6[1];
-
         args.push(node, offset);
       });
       if (args.length < 2) {
@@ -3091,17 +2600,13 @@ var Selection = function () {
       var bounds = this.getBounds(range.index, range.length);
       if (bounds == null) return;
       var limit = this.scroll.length() - 1;
-
       var _scroll$line = this.scroll.line(Math.min(range.index, limit)),
           _scroll$line2 = _slicedToArray(_scroll$line, 1),
           first = _scroll$line2[0];
-
       var last = first;
       if (range.length > 0) {
         var _scroll$line3 = this.scroll.line(Math.min(range.index + range.length, limit));
-
         var _scroll$line4 = _slicedToArray(_scroll$line3, 1);
-
         last = _scroll$line4[0];
       }
       if (first == null || last == null) return;
@@ -3118,7 +2623,6 @@ var Selection = function () {
       var endNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : startNode;
       var endOffset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : startOffset;
       var force = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
       debug.info('setNativeRange', startNode, startOffset, endNode, endOffset);
       if (startNode != null && (this.root.parentNode == null || startNode.parentNode == null || endNode.parentNode == null)) {
         return;
@@ -3129,7 +2633,6 @@ var Selection = function () {
         if (!this.hasFocus()) this.root.focus();
         var native = (this.getNativeRange() || {}).native;
         if (native == null || force || startNode !== native.startContainer || startOffset !== native.startOffset || endNode !== native.endContainer || endOffset !== native.endOffset) {
-
           if (startNode.tagName == "BR") {
             startOffset = [].indexOf.call(startNode.parentNode.childNodes, startNode);
             startNode = startNode.parentNode;
@@ -3155,7 +2658,6 @@ var Selection = function () {
     value: function setRange(range) {
       var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var source = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _emitter4.default.sources.API;
-
       if (typeof force === 'string') {
         source = force;
         force = false;
@@ -3173,21 +2675,17 @@ var Selection = function () {
     key: 'update',
     value: function update() {
       var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _emitter4.default.sources.USER;
-
       var oldRange = this.lastRange;
-
       var _getRange = this.getRange(),
           _getRange2 = _slicedToArray(_getRange, 2),
           lastRange = _getRange2[0],
           nativeRange = _getRange2[1];
-
       this.lastRange = lastRange;
       if (this.lastRange != null) {
         this.savedRange = this.lastRange;
       }
       if (!(0, _deepEqual2.default)(oldRange, this.lastRange)) {
         var _emitter;
-
         if (!this.composing && nativeRange != null && nativeRange.native.collapsed && nativeRange.start.node !== this.cursor.textNode) {
           this.cursor.restore();
         }
@@ -3195,70 +2693,47 @@ var Selection = function () {
         (_emitter = this.emitter).emit.apply(_emitter, [_emitter4.default.events.EDITOR_CHANGE].concat(args));
         if (source !== _emitter4.default.sources.SILENT) {
           var _emitter2;
-
           (_emitter2 = this.emitter).emit.apply(_emitter2, args);
         }
       }
     }
   }]);
-
   return Selection;
 }();
-
 function contains(parent, descendant) {
   try {
-    // Firefox inserts inaccessible nodes around video elements
     descendant.parentNode;
   } catch (e) {
     return false;
   }
-  // IE11 has bug with Text nodes
-  // https://connect.microsoft.com/IE/feedback/details/780874/node-contains-is-incorrect
   if (descendant instanceof Text) {
     descendant = descendant.parentNode;
   }
   return parent.contains(descendant);
 }
-
 exports.Range = Range;
 exports.default = Selection;
-
 /***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Break = function (_Parchment$Embed) {
   _inherits(Break, _Parchment$Embed);
-
   function Break() {
     _classCallCheck(this, Break);
-
     return _possibleConstructorReturn(this, (Break.__proto__ || Object.getPrototypeOf(Break)).apply(this, arguments));
   }
-
   _createClass(Break, [{
     key: 'insertInto',
     value: function insertInto(parent, ref) {
@@ -3284,21 +2759,15 @@ var Break = function (_Parchment$Embed) {
       return undefined;
     }
   }]);
-
   return Break;
 }(_parchment2.default.Embed);
-
 Break.blotName = 'break';
 Break.tagName = 'BR';
-
 exports.default = Break;
-
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3332,7 +2801,6 @@ var ContainerBlot = /** @class */ (function (_super) {
     ContainerBlot.prototype.build = function () {
         var _this = this;
         this.children = new linked_list_1.default();
-        // Need to be reversed for if DOM nodes already in order
         [].slice
             .call(this.domNode.childNodes)
             .reverse()
@@ -3492,11 +2960,7 @@ var ContainerBlot = /** @class */ (function (_super) {
             }
         });
         removedNodes.forEach(function (node) {
-            // Check node has actually been removed
-            // One exception is Chrome does not immediately remove IFRAMEs
-            // from DOM but MutationRecord is correct in its reported removal
             if (node.parentNode != null &&
-                // @ts-ignore
                 node.tagName !== 'IFRAME' &&
                 document.body.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
                 return;
@@ -3545,7 +3009,6 @@ function makeBlot(node) {
         catch (e) {
             blot = Registry.create(Registry.Scope.INLINE);
             [].slice.call(node.childNodes).forEach(function (child) {
-                // @ts-ignore
                 blot.domNode.appendChild(child);
             });
             if (node.parentNode) {
@@ -3557,14 +3020,10 @@ function makeBlot(node) {
     return blot;
 }
 exports.default = ContainerBlot;
-
-
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3639,14 +3098,10 @@ var FormatBlot = /** @class */ (function (_super) {
     return FormatBlot;
 }(container_1.default));
 exports.default = FormatBlot;
-
-
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3689,16 +3144,11 @@ var LeafBlot = /** @class */ (function (_super) {
     return LeafBlot;
 }(shadow_1.default));
 exports.default = LeafBlot;
-
-
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
-
 var equal = __webpack_require__(11);
 var extend = __webpack_require__(3);
-
-
 var lib = {
   attributes: {
     compose: function (a, b, keepNull) {
@@ -3720,7 +3170,6 @@ var lib = {
       }
       return Object.keys(attributes).length > 0 ? attributes : undefined;
     },
-
     diff: function(a, b) {
       if (typeof a !== 'object') a = {};
       if (typeof b !== 'object') b = {};
@@ -3732,7 +3181,6 @@ var lib = {
       }, {});
       return Object.keys(attributes).length > 0 ? attributes : undefined;
     },
-
     transform: function (a, b, priority) {
       if (typeof a !== 'object') return b;
       if (typeof b !== 'object') return undefined;
@@ -3744,11 +3192,9 @@ var lib = {
       return Object.keys(attributes).length > 0 ? attributes : undefined;
     }
   },
-
   iterator: function (ops) {
     return new Iterator(ops);
   },
-
   length: function (op) {
     if (typeof op['delete'] === 'number') {
       return op['delete'];
@@ -3759,18 +3205,14 @@ var lib = {
     }
   }
 };
-
-
 function Iterator(ops) {
   this.ops = ops;
   this.index = 0;
   this.offset = 0;
 };
-
 Iterator.prototype.hasNext = function () {
   return this.peekLength() < Infinity;
 };
-
 Iterator.prototype.next = function (length) {
   if (!length) length = Infinity;
   var nextOp = this.ops[this.index];
@@ -3796,7 +3238,6 @@ Iterator.prototype.next = function (length) {
       } else if (typeof nextOp.insert === 'string') {
         retOp.insert = nextOp.insert.substr(offset, length);
       } else {
-        // offset should === 0, length should === 1
         retOp.insert = nextOp.insert;
       }
       return retOp;
@@ -3805,20 +3246,16 @@ Iterator.prototype.next = function (length) {
     return { retain: Infinity };
   }
 };
-
 Iterator.prototype.peek = function () {
   return this.ops[this.index];
 };
-
 Iterator.prototype.peekLength = function () {
   if (this.ops[this.index]) {
-    // Should never return 0 if our index is being managed correctly
     return lib.length(this.ops[this.index]) - this.offset;
   } else {
     return Infinity;
   }
 };
-
 Iterator.prototype.peekType = function () {
   if (this.ops[this.index]) {
     if (typeof this.ops[this.index]['delete'] === 'number') {
@@ -3831,45 +3268,33 @@ Iterator.prototype.peekType = function () {
   }
   return 'retain';
 };
-
-
 module.exports = lib;
-
-
 /***/ }),
 /* 21 */
 /***/ (function(module, exports) {
-
 var clone = (function() {
 'use strict';
-
 function _instanceof(obj, type) {
   return type != null && obj instanceof type;
 }
-
 var nativeMap;
 try {
   nativeMap = Map;
 } catch(_) {
-  // maybe a reference error because no `Map`. Give it a dummy value that no
-  // value will ever be an instanceof.
   nativeMap = function() {};
 }
-
 var nativeSet;
 try {
   nativeSet = Set;
 } catch(_) {
   nativeSet = function() {};
 }
-
 var nativePromise;
 try {
   nativePromise = Promise;
 } catch(_) {
   nativePromise = function() {};
 }
-
 /**
  * Clones (copies) an Object using deep copying.
  *
@@ -3898,34 +3323,23 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     includeNonEnumerable = circular.includeNonEnumerable;
     circular = circular.circular;
   }
-  // maintain two arrays for circular references, where corresponding parents
-  // and children have the same index
   var allParents = [];
   var allChildren = [];
-
   var useBuffer = typeof Buffer != 'undefined';
-
   if (typeof circular == 'undefined')
     circular = true;
-
   if (typeof depth == 'undefined')
     depth = Infinity;
-
-  // recurse this function so we don't reset allParents and allChildren
   function _clone(parent, depth) {
-    // cloning null always returns null
     if (parent === null)
       return null;
-
     if (depth === 0)
       return parent;
-
     var child;
     var proto;
     if (typeof parent != 'object') {
       return parent;
     }
-
     if (_instanceof(parent, nativeMap)) {
       child = new nativeMap();
     } else if (_instanceof(parent, nativeSet)) {
@@ -3961,17 +3375,14 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
         proto = prototype;
       }
     }
-
     if (circular) {
       var index = allParents.indexOf(parent);
-
       if (index != -1) {
         return allChildren[index];
       }
       allParents.push(parent);
       allChildren.push(child);
     }
-
     if (_instanceof(parent, nativeMap)) {
       parent.forEach(function(value, key) {
         var keyChild = _clone(key, depth - 1);
@@ -3985,24 +3396,19 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
         child.add(entryChild);
       });
     }
-
     for (var i in parent) {
       var attrs;
       if (proto) {
         attrs = Object.getOwnPropertyDescriptor(proto, i);
       }
-
       if (attrs && attrs.set == null) {
         continue;
       }
       child[i] = _clone(parent[i], depth - 1);
     }
-
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(parent);
       for (var i = 0; i < symbols.length; i++) {
-        // Don't need to worry about cloning a symbol because it is a primitive,
-        // like a number or string.
         var symbol = symbols[i];
         var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
         if (descriptor && !descriptor.enumerable && !includeNonEnumerable) {
@@ -4016,7 +3422,6 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
         }
       }
     }
-
     if (includeNonEnumerable) {
       var allPropertyNames = Object.getOwnPropertyNames(parent);
       for (var i = 0; i < allPropertyNames.length; i++) {
@@ -4031,13 +3436,10 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
         });
       }
     }
-
     return child;
   }
-
   return _clone(parent, depth);
 }
-
 /**
  * Simple flat clone using prototype, accepts only objects, usefull for property
  * override on FLAT configuration object (no nested props).
@@ -4048,34 +3450,26 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
 clone.clonePrototype = function clonePrototype(parent) {
   if (parent === null)
     return null;
-
   var c = function () {};
   c.prototype = parent;
   return new c();
 };
-
-// private utility functions
-
 function __objToStr(o) {
   return Object.prototype.toString.call(o);
 }
 clone.__objToStr = __objToStr;
-
 function __isDate(o) {
   return typeof o === 'object' && __objToStr(o) === '[object Date]';
 }
 clone.__isDate = __isDate;
-
 function __isArray(o) {
   return typeof o === 'object' && __objToStr(o) === '[object Array]';
 }
 clone.__isArray = __isArray;
-
 function __isRegExp(o) {
   return typeof o === 'object' && __objToStr(o) === '[object RegExp]';
 }
 clone.__isRegExp = __isRegExp;
-
 function __getRegExpFlags(re) {
   var flags = '';
   if (re.global) flags += 'g';
@@ -4084,76 +3478,45 @@ function __getRegExpFlags(re) {
   return flags;
 }
 clone.__getRegExpFlags = __getRegExpFlags;
-
 return clone;
 })();
-
 if (typeof module === 'object' && module.exports) {
   module.exports = clone;
 }
-
-
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _emitter = __webpack_require__(8);
-
 var _emitter2 = _interopRequireDefault(_emitter);
-
 var _block = __webpack_require__(4);
-
 var _block2 = _interopRequireDefault(_block);
-
 var _break = __webpack_require__(16);
-
 var _break2 = _interopRequireDefault(_break);
-
 var _code = __webpack_require__(13);
-
 var _code2 = _interopRequireDefault(_code);
-
 var _container = __webpack_require__(25);
-
 var _container2 = _interopRequireDefault(_container);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 function isLine(blot) {
   return blot instanceof _block2.default || blot instanceof _block.BlockEmbed;
 }
-
 var Scroll = function (_Parchment$Scroll) {
   _inherits(Scroll, _Parchment$Scroll);
-
   function Scroll(domNode, config) {
     _classCallCheck(this, Scroll);
-
     var _this = _possibleConstructorReturn(this, (Scroll.__proto__ || Object.getPrototypeOf(Scroll)).call(this, domNode));
-
     _this.emitter = config.emitter;
     if (Array.isArray(config.whitelist)) {
       _this.whitelist = config.whitelist.reduce(function (whitelist, format) {
@@ -4161,13 +3524,11 @@ var Scroll = function (_Parchment$Scroll) {
         return whitelist;
       }, {});
     }
-    // Some reason fixes composition issues with character languages in Windows/Chrome, Safari
     _this.domNode.addEventListener('DOMNodeInserted', function () {});
     _this.optimize();
     _this.enable();
     return _this;
   }
-
   _createClass(Scroll, [{
     key: 'batchStart',
     value: function batchStart() {
@@ -4186,11 +3547,9 @@ var Scroll = function (_Parchment$Scroll) {
           _line2 = _slicedToArray(_line, 2),
           first = _line2[0],
           offset = _line2[1];
-
       var _line3 = this.line(index + length),
           _line4 = _slicedToArray(_line3, 1),
           last = _line4[0];
-
       _get(Scroll.prototype.__proto__ || Object.getPrototypeOf(Scroll.prototype), 'deleteAt', this).call(this, index, length);
       if (last != null && first !== last && offset > 0) {
         if (first instanceof _block.BlockEmbed || last instanceof _block.BlockEmbed) {
@@ -4222,7 +3581,6 @@ var Scroll = function (_Parchment$Scroll) {
     key: 'enable',
     value: function enable() {
       var enabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
       this.domNode.setAttribute('contenteditable', enabled);
     }
   }, {
@@ -4281,7 +3639,6 @@ var Scroll = function (_Parchment$Scroll) {
     value: function lines() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Number.MAX_VALUE;
-
       var getLines = function getLines(blot, index, length) {
         var lines = [],
             lengthLeft = length;
@@ -4302,7 +3659,6 @@ var Scroll = function (_Parchment$Scroll) {
     value: function optimize() {
       var mutations = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
       if (this.batch === true) return;
       _get(Scroll.prototype.__proto__ || Object.getPrototypeOf(Scroll.prototype), 'optimize', this).call(this, mutations, context);
       if (mutations.length > 0) {
@@ -4334,89 +3690,52 @@ var Scroll = function (_Parchment$Scroll) {
       }
     }
   }]);
-
   return Scroll;
 }(_parchment2.default.Scroll);
-
 Scroll.blotName = 'scroll';
 Scroll.className = 'ql-editor';
 Scroll.tagName = 'DIV';
 Scroll.defaultChild = 'block';
 Scroll.allowedChildren = [_block2.default, _block.BlockEmbed, _container2.default];
-
 exports.default = Scroll;
-
 /***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SHORTKEY = exports.default = undefined;
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _clone = __webpack_require__(21);
-
 var _clone2 = _interopRequireDefault(_clone);
-
 var _deepEqual = __webpack_require__(11);
-
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
-
 var _extend = __webpack_require__(3);
-
 var _extend2 = _interopRequireDefault(_extend);
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _op = __webpack_require__(20);
-
 var _op2 = _interopRequireDefault(_op);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _quill = __webpack_require__(5);
-
 var _quill2 = _interopRequireDefault(_quill);
-
 var _logger = __webpack_require__(10);
-
 var _logger2 = _interopRequireDefault(_logger);
-
 var _module = __webpack_require__(9);
-
 var _module2 = _interopRequireDefault(_module);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var debug = (0, _logger2.default)('quill:keyboard');
-
 var SHORTKEY = /Mac/i.test(navigator.platform) ? 'metaKey' : 'ctrlKey';
-
 var Keyboard = function (_Module) {
   _inherits(Keyboard, _Module);
-
   _createClass(Keyboard, null, [{
     key: 'match',
     value: function match(evt, binding) {
@@ -4429,12 +3748,9 @@ var Keyboard = function (_Module) {
       return binding.key === (evt.which || evt.keyCode);
     }
   }]);
-
   function Keyboard(quill, options) {
     _classCallCheck(this, Keyboard);
-
     var _this = _possibleConstructorReturn(this, (Keyboard.__proto__ || Object.getPrototypeOf(Keyboard)).call(this, quill, options));
-
     _this.bindings = {};
     Object.keys(_this.options.bindings).forEach(function (name) {
       if (name === 'list autofill' && quill.scroll.whitelist != null && !quill.scroll.whitelist['list']) {
@@ -4447,7 +3763,6 @@ var Keyboard = function (_Module) {
     _this.addBinding({ key: Keyboard.keys.ENTER, shiftKey: null }, handleEnter);
     _this.addBinding({ key: Keyboard.keys.ENTER, metaKey: null, ctrlKey: null, altKey: null }, function () {});
     if (/Firefox/i.test(navigator.userAgent)) {
-      // Need to handle delete and backspace for Firefox in the general case #1171
       _this.addBinding({ key: Keyboard.keys.BACKSPACE }, { collapsed: true }, handleBackspace);
       _this.addBinding({ key: Keyboard.keys.DELETE }, { collapsed: true }, handleDelete);
     } else {
@@ -4460,13 +3775,11 @@ var Keyboard = function (_Module) {
     _this.listen();
     return _this;
   }
-
   _createClass(Keyboard, [{
     key: 'addBinding',
     value: function addBinding(key) {
       var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var handler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
       var binding = normalize(key);
       if (binding == null || binding.key == null) {
         return debug.warn('Attempted to add invalid keyboard binding', binding);
@@ -4485,7 +3798,6 @@ var Keyboard = function (_Module) {
     key: 'listen',
     value: function listen() {
       var _this2 = this;
-
       this.quill.root.addEventListener('keydown', function (evt) {
         if (evt.defaultPrevented) return;
         var which = evt.which || evt.keyCode;
@@ -4495,22 +3807,18 @@ var Keyboard = function (_Module) {
         if (bindings.length === 0) return;
         var range = _this2.quill.getSelection();
         if (range == null || !_this2.quill.hasFocus()) return;
-
         var _quill$getLine = _this2.quill.getLine(range.index),
             _quill$getLine2 = _slicedToArray(_quill$getLine, 2),
             line = _quill$getLine2[0],
             offset = _quill$getLine2[1];
-
         var _quill$getLeaf = _this2.quill.getLeaf(range.index),
             _quill$getLeaf2 = _slicedToArray(_quill$getLeaf, 2),
             leafStart = _quill$getLeaf2[0],
             offsetStart = _quill$getLeaf2[1];
-
         var _ref = range.length === 0 ? [leafStart, offsetStart] : _this2.quill.getLeaf(range.index + range.length),
             _ref2 = _slicedToArray(_ref, 2),
             leafEnd = _ref2[0],
             offsetEnd = _ref2[1];
-
         var prefixText = leafStart instanceof _parchment2.default.Text ? leafStart.value().slice(0, offsetStart) : '';
         var suffixText = leafEnd instanceof _parchment2.default.Text ? leafEnd.value().slice(offsetEnd) : '';
         var curContext = {
@@ -4526,14 +3834,12 @@ var Keyboard = function (_Module) {
           if (binding.empty != null && binding.empty !== curContext.empty) return false;
           if (binding.offset != null && binding.offset !== curContext.offset) return false;
           if (Array.isArray(binding.format)) {
-            // any format is present
             if (binding.format.every(function (name) {
               return curContext.format[name] == null;
             })) {
               return false;
             }
           } else if (_typeof(binding.format) === 'object') {
-            // all formats must match
             if (!Object.keys(binding.format).every(function (name) {
               if (binding.format[name] === true) return curContext.format[name] != null;
               if (binding.format[name] === false) return curContext.format[name] == null;
@@ -4552,10 +3858,8 @@ var Keyboard = function (_Module) {
       });
     }
   }]);
-
   return Keyboard;
 }(_module2.default);
-
 Keyboard.keys = {
   BACKSPACE: 8,
   TAB: 9,
@@ -4567,14 +3871,12 @@ Keyboard.keys = {
   DOWN: 40,
   DELETE: 46
 };
-
 Keyboard.DEFAULTS = {
   bindings: {
     'bold': makeFormatHandler('bold'),
     'italic': makeFormatHandler('italic'),
     'underline': makeFormatHandler('underline'),
     'indent': {
-      // highlight tab or tab at beginning of list, indent or blockquote
       key: Keyboard.keys.TAB,
       format: ['blockquote', 'indent', 'list'],
       handler: function handler(range, context) {
@@ -4586,7 +3888,6 @@ Keyboard.DEFAULTS = {
       key: Keyboard.keys.TAB,
       shiftKey: true,
       format: ['blockquote', 'indent', 'list'],
-      // highlight tab or tab at beginning of list, indent or blockquote
       handler: function handler(range, context) {
         if (context.collapsed && context.offset !== 0) return true;
         this.quill.format('indent', '-1', _quill2.default.sources.USER);
@@ -4651,7 +3952,6 @@ Keyboard.DEFAULTS = {
             _quill$getLine4 = _slicedToArray(_quill$getLine3, 2),
             line = _quill$getLine4[0],
             offset = _quill$getLine4[1];
-
         var formats = (0, _extend2.default)({}, line.formats(), { list: 'checked' });
         var delta = new _quillDelta2.default().retain(range.index).insert('\n', formats).retain(line.length() - offset - 1).retain(1, { list: 'unchecked' });
         this.quill.updateContents(delta, _quill2.default.sources.USER);
@@ -4669,7 +3969,6 @@ Keyboard.DEFAULTS = {
             _quill$getLine6 = _slicedToArray(_quill$getLine5, 2),
             line = _quill$getLine6[0],
             offset = _quill$getLine6[1];
-
         var delta = new _quillDelta2.default().retain(range.index).insert('\n', context.format).retain(line.length() - offset - 1).retain(1, { header: null });
         this.quill.updateContents(delta, _quill2.default.sources.USER);
         this.quill.setSelection(range.index + 1, _quill2.default.sources.SILENT);
@@ -4683,12 +3982,10 @@ Keyboard.DEFAULTS = {
       prefix: /^\s*?(\d+\.|-|\*|\[ ?\]|\[x\])$/,
       handler: function handler(range, context) {
         var length = context.prefix.length;
-
         var _quill$getLine7 = this.quill.getLine(range.index),
             _quill$getLine8 = _slicedToArray(_quill$getLine7, 2),
             line = _quill$getLine8[0],
             offset = _quill$getLine8[1];
-
         if (offset > length) return true;
         var value = void 0;
         switch (context.prefix.trim()) {
@@ -4723,7 +4020,6 @@ Keyboard.DEFAULTS = {
             _quill$getLine10 = _slicedToArray(_quill$getLine9, 2),
             line = _quill$getLine10[0],
             offset = _quill$getLine10[1];
-
         var delta = new _quillDelta2.default().retain(range.index + line.length() - offset - 2).retain(1, { 'code-block': null }).delete(1);
         this.quill.updateContents(delta, _quill2.default.sources.USER);
       }
@@ -4734,10 +4030,8 @@ Keyboard.DEFAULTS = {
     'embed right shift': makeEmbedArrowHandler(Keyboard.keys.RIGHT, true)
   }
 };
-
 function makeEmbedArrowHandler(key, shiftKey) {
   var _ref3;
-
   var where = key === Keyboard.keys.LEFT ? 'prefix' : 'suffix';
   return _ref3 = {
     key: key,
@@ -4748,11 +4042,9 @@ function makeEmbedArrowHandler(key, shiftKey) {
     if (key === Keyboard.keys.RIGHT) {
       index += range.length + 1;
     }
-
     var _quill$getLeaf3 = this.quill.getLeaf(index),
         _quill$getLeaf4 = _slicedToArray(_quill$getLeaf3, 1),
         leaf = _quill$getLeaf4[0];
-
     if (!(leaf instanceof _parchment2.default.Embed)) return true;
     if (key === Keyboard.keys.LEFT) {
       if (shiftKey) {
@@ -4770,27 +4062,22 @@ function makeEmbedArrowHandler(key, shiftKey) {
     return false;
   }), _ref3;
 }
-
 function handleBackspace(range, context) {
   if (range.index === 0 || this.quill.getLength() <= 1) return;
-
   var _quill$getLine11 = this.quill.getLine(range.index),
       _quill$getLine12 = _slicedToArray(_quill$getLine11, 1),
       line = _quill$getLine12[0];
-
   var formats = {};
   if (context.offset === 0) {
     var _quill$getLine13 = this.quill.getLine(range.index - 1),
         _quill$getLine14 = _slicedToArray(_quill$getLine13, 1),
         prev = _quill$getLine14[0];
-
     if (prev != null && prev.length() > 1) {
       var curFormats = line.formats();
       var prevFormats = this.quill.getFormat(range.index - 1, 1);
       formats = _op2.default.attributes.diff(curFormats, prevFormats) || {};
     }
   }
-  // Check for astral symbols
   var length = /[\uD800-\uDBFF][\uDC00-\uDFFF]$/.test(context.prefix) ? 2 : 1;
   this.quill.deleteText(range.index - length, length, _quill2.default.sources.USER);
   if (Object.keys(formats).length > 0) {
@@ -4798,23 +4085,18 @@ function handleBackspace(range, context) {
   }
   this.quill.focus();
 }
-
 function handleDelete(range, context) {
-  // Check for astral symbols
   var length = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/.test(context.suffix) ? 2 : 1;
   if (range.index >= this.quill.getLength() - length) return;
   var formats = {},
       nextLength = 0;
-
   var _quill$getLine15 = this.quill.getLine(range.index),
       _quill$getLine16 = _slicedToArray(_quill$getLine15, 1),
       line = _quill$getLine16[0];
-
   if (context.offset >= line.length() - 1) {
     var _quill$getLine17 = this.quill.getLine(range.index + 1),
         _quill$getLine18 = _slicedToArray(_quill$getLine17, 1),
         next = _quill$getLine18[0];
-
     if (next) {
       var curFormats = line.formats();
       var nextFormats = this.quill.getFormat(range.index, 1);
@@ -4827,7 +4109,6 @@ function handleDelete(range, context) {
     this.quill.formatLine(range.index + nextLength - 1, length, formats, _quill2.default.sources.USER);
   }
 }
-
 function handleDeleteRange(range) {
   var lines = this.quill.getLines(range);
   var formats = {};
@@ -4843,10 +4124,8 @@ function handleDeleteRange(range) {
   this.quill.setSelection(range.index, _quill2.default.sources.SILENT);
   this.quill.focus();
 }
-
 function handleEnter(range, context) {
   var _this3 = this;
-
   if (range.length > 0) {
     this.quill.scroll.deleteAt(range.index, range.length); // So we do not trigger text-change
   }
@@ -4857,8 +4136,6 @@ function handleEnter(range, context) {
     return lineFormats;
   }, {});
   this.quill.insertText(range.index, '\n', lineFormats, _quill2.default.sources.USER);
-  // Earlier scroll.deleteAt might have messed up our selection,
-  // so insertText's built in selection preservation is not reliable
   this.quill.setSelection(range.index + 1, _quill2.default.sources.SILENT);
   this.quill.focus();
   Object.keys(context.format).forEach(function (name) {
@@ -4868,7 +4145,6 @@ function handleEnter(range, context) {
     _this3.quill.format(name, context.format[name], _quill2.default.sources.USER);
   });
 }
-
 function makeCodeBlockHandler(indent) {
   return {
     key: Keyboard.keys.TAB,
@@ -4878,12 +4154,10 @@ function makeCodeBlockHandler(indent) {
       var CodeBlock = _parchment2.default.query('code-block');
       var index = range.index,
           length = range.length;
-
       var _quill$scroll$descend = this.quill.scroll.descendant(CodeBlock, index),
           _quill$scroll$descend2 = _slicedToArray(_quill$scroll$descend, 2),
           block = _quill$scroll$descend2[0],
           offset = _quill$scroll$descend2[1];
-
       if (block == null) return;
       var scrollIndex = this.quill.getIndex(block);
       var start = block.newlineIndex(offset, true) + 1;
@@ -4915,7 +4189,6 @@ function makeCodeBlockHandler(indent) {
     }
   };
 }
-
 function makeFormatHandler(format) {
   return {
     key: format[0].toUpperCase(),
@@ -4925,7 +4198,6 @@ function makeFormatHandler(format) {
     }
   };
 }
-
 function normalize(binding) {
   if (typeof binding === 'string' || typeof binding === 'number') {
     return normalize({ key: binding });
@@ -4948,69 +4220,46 @@ function normalize(binding) {
   }
   return binding;
 }
-
 exports.default = Keyboard;
 exports.SHORTKEY = SHORTKEY;
-
 /***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Cursor = function (_Parchment$Embed) {
   _inherits(Cursor, _Parchment$Embed);
-
   _createClass(Cursor, null, [{
     key: 'value',
     value: function value() {
       return undefined;
     }
   }]);
-
   function Cursor(domNode, selection) {
     _classCallCheck(this, Cursor);
-
     var _this = _possibleConstructorReturn(this, (Cursor.__proto__ || Object.getPrototypeOf(Cursor)).call(this, domNode));
-
     _this.selection = selection;
     _this.textNode = document.createTextNode(Cursor.CONTENTS);
     _this.domNode.appendChild(_this.textNode);
     _this._length = 0;
     return _this;
   }
-
   _createClass(Cursor, [{
     key: 'detach',
     value: function detach() {
-      // super.detach() will also clear domNode.__blot
       if (this.parent != null) this.parent.removeChild(this);
     }
   }, {
@@ -5069,7 +4318,6 @@ var Cursor = function (_Parchment$Embed) {
         start = _ref[1];
         end = _ref[2];
       }
-      // Link format will insert text outside of anchor tag
       while (this.domNode.lastChild != null && this.domNode.lastChild !== this.textNode) {
         this.domNode.parentNode.insertBefore(this.domNode.lastChild, this.domNode);
       }
@@ -5091,12 +4339,9 @@ var Cursor = function (_Parchment$Embed) {
         var _map = [start, end].map(function (offset) {
           return Math.max(0, Math.min(restoreText.data.length, offset - 1));
         });
-
         var _map2 = _slicedToArray(_map, 2);
-
         start = _map2[0];
         end = _map2[1];
-
         return {
           startNode: restoreText,
           startOffset: start,
@@ -5109,7 +4354,6 @@ var Cursor = function (_Parchment$Embed) {
     key: 'update',
     value: function update(mutations, context) {
       var _this2 = this;
-
       if (mutations.some(function (mutation) {
         return mutation.type === 'characterData' && mutation.target === _this2.textNode;
       })) {
@@ -5123,98 +4367,60 @@ var Cursor = function (_Parchment$Embed) {
       return '';
     }
   }]);
-
   return Cursor;
 }(_parchment2.default.Embed);
-
 Cursor.blotName = 'cursor';
 Cursor.className = 'ql-cursor';
 Cursor.tagName = 'span';
 Cursor.CONTENTS = '\uFEFF'; // Zero width no break space
-
-
 exports.default = Cursor;
-
 /***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _block = __webpack_require__(4);
-
 var _block2 = _interopRequireDefault(_block);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Container = function (_Parchment$Container) {
   _inherits(Container, _Parchment$Container);
-
   function Container() {
     _classCallCheck(this, Container);
-
     return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
   }
-
   return Container;
 }(_parchment2.default.Container);
-
 Container.allowedChildren = [_block2.default, _block.BlockEmbed, Container];
-
 exports.default = Container;
-
 /***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ColorStyle = exports.ColorClass = exports.ColorAttributor = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var ColorAttributor = function (_Parchment$Attributor) {
   _inherits(ColorAttributor, _Parchment$Attributor);
-
   function ColorAttributor() {
     _classCallCheck(this, ColorAttributor);
-
     return _possibleConstructorReturn(this, (ColorAttributor.__proto__ || Object.getPrototypeOf(ColorAttributor)).apply(this, arguments));
   }
-
   _createClass(ColorAttributor, [{
     key: 'value',
     value: function value(domNode) {
@@ -5226,88 +4432,53 @@ var ColorAttributor = function (_Parchment$Attributor) {
       }).join('');
     }
   }]);
-
   return ColorAttributor;
 }(_parchment2.default.Attributor.Style);
-
 var ColorClass = new _parchment2.default.Attributor.Class('color', 'ql-color', {
   scope: _parchment2.default.Scope.INLINE
 });
 var ColorStyle = new ColorAttributor('color', 'color', {
   scope: _parchment2.default.Scope.INLINE
 });
-
 exports.ColorAttributor = ColorAttributor;
 exports.ColorClass = ColorClass;
 exports.ColorStyle = ColorStyle;
-
 /***/ }),
 /* 27 */,
 /* 28 */,
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _quill = __webpack_require__(5);
-
 var _quill2 = _interopRequireDefault(_quill);
-
 var _block = __webpack_require__(4);
-
 var _block2 = _interopRequireDefault(_block);
-
 var _break = __webpack_require__(16);
-
 var _break2 = _interopRequireDefault(_break);
-
 var _container = __webpack_require__(25);
-
 var _container2 = _interopRequireDefault(_container);
-
 var _cursor = __webpack_require__(24);
-
 var _cursor2 = _interopRequireDefault(_cursor);
-
 var _embed = __webpack_require__(35);
-
 var _embed2 = _interopRequireDefault(_embed);
-
 var _inline = __webpack_require__(6);
-
 var _inline2 = _interopRequireDefault(_inline);
-
 var _scroll = __webpack_require__(22);
-
 var _scroll2 = _interopRequireDefault(_scroll);
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 var _clipboard = __webpack_require__(55);
-
 var _clipboard2 = _interopRequireDefault(_clipboard);
-
 var _history = __webpack_require__(42);
-
 var _history2 = _interopRequireDefault(_history);
-
 var _keyboard = __webpack_require__(23);
-
 var _keyboard2 = _interopRequireDefault(_keyboard);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 _quill2.default.register({
   'blots/block': _block2.default,
   'blots/block/embed': _block.BlockEmbed,
@@ -5318,32 +4489,24 @@ _quill2.default.register({
   'blots/inline': _inline2.default,
   'blots/scroll': _scroll2.default,
   'blots/text': _text2.default,
-
   'modules/clipboard': _clipboard2.default,
   'modules/history': _history2.default,
   'modules/keyboard': _keyboard2.default
 });
-
 _parchment2.default.register(_block2.default, _break2.default, _cursor2.default, _inline2.default, _scroll2.default, _text2.default);
-
 exports.default = _quill2.default;
-
 /***/ }),
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var Registry = __webpack_require__(1);
 var ShadowBlot = /** @class */ (function () {
     function ShadowBlot(domNode) {
         this.domNode = domNode;
-        // @ts-ignore
         this.domNode[Registry.DATA_KEY] = { blot: this };
     }
     Object.defineProperty(ShadowBlot.prototype, "statics", {
-        // Hack for accessing inherited static methods
         get: function () {
             return this.constructor;
         },
@@ -5392,7 +4555,6 @@ var ShadowBlot = /** @class */ (function () {
     ShadowBlot.prototype.detach = function () {
         if (this.parent != null)
             this.parent.removeChild(this);
-        // @ts-ignore
         delete this.domNode[Registry.DATA_KEY];
     };
     ShadowBlot.prototype.deleteAt = function (index, length) {
@@ -5447,10 +4609,7 @@ var ShadowBlot = /** @class */ (function () {
         return this.parent.children.offset(this) + this.parent.offset(root);
     };
     ShadowBlot.prototype.optimize = function (context) {
-        // TODO clean up once we use WeakMap
-        // @ts-ignore
         if (this.domNode[Registry.DATA_KEY] != null) {
-            // @ts-ignore
             delete this.domNode[Registry.DATA_KEY].mutations;
         }
     };
@@ -5475,7 +4634,6 @@ var ShadowBlot = /** @class */ (function () {
         return index === 0 ? this : this.next;
     };
     ShadowBlot.prototype.update = function (mutations, context) {
-        // Nothing to do by default
     };
     ShadowBlot.prototype.wrap = function (name, value) {
         var wrapper = typeof name === 'string' ? Registry.create(name, value) : name;
@@ -5489,14 +4647,10 @@ var ShadowBlot = /** @class */ (function () {
     return ShadowBlot;
 }());
 exports.default = ShadowBlot;
-
-
 /***/ }),
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var attributor_1 = __webpack_require__(12);
 var class_1 = __webpack_require__(32);
@@ -5509,7 +4663,6 @@ var AttributorStore = /** @class */ (function () {
         this.build();
     }
     AttributorStore.prototype.attribute = function (attribute, value) {
-        // verb
         if (value) {
             if (attribute.add(this.domNode, value)) {
                 if (attribute.value(this.domNode) != null) {
@@ -5566,14 +4719,10 @@ var AttributorStore = /** @class */ (function () {
     return AttributorStore;
 }());
 exports.default = AttributorStore;
-
-
 /***/ }),
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -5629,14 +4778,10 @@ var ClassAttributor = /** @class */ (function (_super) {
     return ClassAttributor;
 }(attributor_1.default));
 exports.default = ClassAttributor;
-
-
 /***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -5673,56 +4818,42 @@ var StyleAttributor = /** @class */ (function (_super) {
     StyleAttributor.prototype.add = function (node, value) {
         if (!this.canAdd(node, value))
             return false;
-        // @ts-ignore
         node.style[camelize(this.keyName)] = value;
         return true;
     };
     StyleAttributor.prototype.remove = function (node) {
-        // @ts-ignore
         node.style[camelize(this.keyName)] = '';
         if (!node.getAttribute('style')) {
             node.removeAttribute('style');
         }
     };
     StyleAttributor.prototype.value = function (node) {
-        // @ts-ignore
         var value = node.style[camelize(this.keyName)];
         return this.canAdd(node, value) ? value : '';
     };
     return StyleAttributor;
 }(attributor_1.default));
 exports.default = StyleAttributor;
-
-
 /***/ }),
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 var Theme = function () {
   function Theme(quill, options) {
     _classCallCheck(this, Theme);
-
     this.quill = quill;
     this.options = options;
     this.modules = {};
   }
-
   _createClass(Theme, [{
     key: 'init',
     value: function init() {
       var _this = this;
-
       Object.keys(this.options.modules).forEach(function (name) {
         if (_this.modules[name] == null) {
           _this.addModule(name);
@@ -5737,60 +4868,38 @@ var Theme = function () {
       return this.modules[name];
     }
   }]);
-
   return Theme;
 }();
-
 Theme.DEFAULTS = {
   modules: {}
 };
 Theme.themes = {
   'default': Theme
 };
-
 exports.default = Theme;
-
 /***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _text = __webpack_require__(7);
-
 var _text2 = _interopRequireDefault(_text);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var GUARD_TEXT = '\uFEFF';
-
 var Embed = function (_Parchment$Embed) {
   _inherits(Embed, _Parchment$Embed);
-
   function Embed(node) {
     _classCallCheck(this, Embed);
-
     var _this = _possibleConstructorReturn(this, (Embed.__proto__ || Object.getPrototypeOf(Embed)).call(this, node));
-
     _this.contentNode = document.createElement('span');
     _this.contentNode.setAttribute('contenteditable', false);
     [].slice.call(_this.domNode.childNodes).forEach(function (childNode) {
@@ -5803,7 +4912,6 @@ var Embed = function (_Parchment$Embed) {
     _this.domNode.appendChild(_this.rightGuard);
     return _this;
   }
-
   _createClass(Embed, [{
     key: 'index',
     value: function index(node, offset) {
@@ -5856,7 +4964,6 @@ var Embed = function (_Parchment$Embed) {
     key: 'update',
     value: function update(mutations, context) {
       var _this2 = this;
-
       mutations.forEach(function (mutation) {
         if (mutation.type === 'characterData' && (mutation.target === _this2.leftGuard || mutation.target === _this2.rightGuard)) {
           var range = _this2.restore(mutation.target);
@@ -5865,181 +4972,120 @@ var Embed = function (_Parchment$Embed) {
       });
     }
   }]);
-
   return Embed;
 }(_parchment2.default.Embed);
-
 exports.default = Embed;
-
 /***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.AlignStyle = exports.AlignClass = exports.AlignAttribute = undefined;
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var config = {
   scope: _parchment2.default.Scope.BLOCK,
   whitelist: ['right', 'center', 'justify']
 };
-
 var AlignAttribute = new _parchment2.default.Attributor.Attribute('align', 'align', config);
 var AlignClass = new _parchment2.default.Attributor.Class('align', 'ql-align', config);
 var AlignStyle = new _parchment2.default.Attributor.Style('align', 'text-align', config);
-
 exports.AlignAttribute = AlignAttribute;
 exports.AlignClass = AlignClass;
 exports.AlignStyle = AlignStyle;
-
 /***/ }),
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BackgroundStyle = exports.BackgroundClass = undefined;
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _color = __webpack_require__(26);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var BackgroundClass = new _parchment2.default.Attributor.Class('background', 'ql-bg', {
   scope: _parchment2.default.Scope.INLINE
 });
 var BackgroundStyle = new _color.ColorAttributor('background', 'background-color', {
   scope: _parchment2.default.Scope.INLINE
 });
-
 exports.BackgroundClass = BackgroundClass;
 exports.BackgroundStyle = BackgroundStyle;
-
 /***/ }),
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.DirectionStyle = exports.DirectionClass = exports.DirectionAttribute = undefined;
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var config = {
   scope: _parchment2.default.Scope.BLOCK,
   whitelist: ['rtl']
 };
-
 var DirectionAttribute = new _parchment2.default.Attributor.Attribute('direction', 'dir', config);
 var DirectionClass = new _parchment2.default.Attributor.Class('direction', 'ql-direction', config);
 var DirectionStyle = new _parchment2.default.Attributor.Style('direction', 'direction', config);
-
 exports.DirectionAttribute = DirectionAttribute;
 exports.DirectionClass = DirectionClass;
 exports.DirectionStyle = DirectionStyle;
-
 /***/ }),
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.FontClass = exports.FontStyle = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var config = {
   scope: _parchment2.default.Scope.INLINE,
   whitelist: ['serif', 'monospace']
 };
-
 var FontClass = new _parchment2.default.Attributor.Class('font', 'ql-font', config);
-
 var FontStyleAttributor = function (_Parchment$Attributor) {
   _inherits(FontStyleAttributor, _Parchment$Attributor);
-
   function FontStyleAttributor() {
     _classCallCheck(this, FontStyleAttributor);
-
     return _possibleConstructorReturn(this, (FontStyleAttributor.__proto__ || Object.getPrototypeOf(FontStyleAttributor)).apply(this, arguments));
   }
-
   _createClass(FontStyleAttributor, [{
     key: 'value',
     value: function value(node) {
       return _get(FontStyleAttributor.prototype.__proto__ || Object.getPrototypeOf(FontStyleAttributor.prototype), 'value', this).call(this, node).replace(/["']/g, '');
     }
   }]);
-
   return FontStyleAttributor;
 }(_parchment2.default.Attributor.Style);
-
 var FontStyle = new FontStyleAttributor('font', 'font-family', config);
-
 exports.FontStyle = FontStyle;
 exports.FontClass = FontClass;
-
 /***/ }),
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SizeStyle = exports.SizeClass = undefined;
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var SizeClass = new _parchment2.default.Attributor.Class('size', 'ql-size', {
   scope: _parchment2.default.Scope.INLINE,
   whitelist: ['small', 'large', 'huge']
@@ -6048,53 +5094,33 @@ var SizeStyle = new _parchment2.default.Attributor.Style('size', 'font-size', {
   scope: _parchment2.default.Scope.INLINE,
   whitelist: ['10px', '18px', '32px']
 });
-
 exports.SizeClass = SizeClass;
 exports.SizeStyle = SizeStyle;
-
 /***/ }),
 /* 41 */,
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getLastChangeIndex = exports.default = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _quill = __webpack_require__(5);
-
 var _quill2 = _interopRequireDefault(_quill);
-
 var _module = __webpack_require__(9);
-
 var _module2 = _interopRequireDefault(_module);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var History = function (_Module) {
   _inherits(History, _Module);
-
   function History(quill, options) {
     _classCallCheck(this, History);
-
     var _this = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, quill, options));
-
     _this.lastRecorded = 0;
     _this.ignoreChange = false;
     _this.clear();
@@ -6113,7 +5139,6 @@ var History = function (_Module) {
     }
     return _this;
   }
-
   _createClass(History, [{
     key: 'change',
     value: function change(source, dest) {
@@ -6182,16 +5207,13 @@ var History = function (_Module) {
       this.change('undo', 'redo');
     }
   }]);
-
   return History;
 }(_module2.default);
-
 History.DEFAULTS = {
   delay: 1000,
   maxStack: 100,
   userOnly: false
 };
-
 function endsWithNewlineChange(delta) {
   var lastOp = delta.ops[delta.ops.length - 1];
   if (lastOp == null) return false;
@@ -6205,7 +5227,6 @@ function endsWithNewlineChange(delta) {
   }
   return false;
 }
-
 function getLastChangeIndex(delta) {
   var deleteLength = delta.reduce(function (length, op) {
     length += op.delete || 0;
@@ -6217,17 +5238,13 @@ function getLastChangeIndex(delta) {
   }
   return changeIndex;
 }
-
 exports.default = History;
 exports.getLastChangeIndex = getLastChangeIndex;
-
 /***/ }),
 /* 43 */,
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkedList = /** @class */ (function () {
     function LinkedList() {
@@ -6302,7 +5319,6 @@ var LinkedList = /** @class */ (function () {
     };
     LinkedList.prototype.iterator = function (curNode) {
         if (curNode === void 0) { curNode = this.head; }
-        // TODO use yield when we can
         return function () {
             var ret = curNode;
             if (curNode != null)
@@ -6361,14 +5377,10 @@ var LinkedList = /** @class */ (function () {
     return LinkedList;
 }());
 exports.default = LinkedList;
-
-
 /***/ }),
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -6430,33 +5442,24 @@ var ScrollBlot = /** @class */ (function (_super) {
         if (mutations === void 0) { mutations = []; }
         if (context === void 0) { context = {}; }
         _super.prototype.optimize.call(this, context);
-        // We must modify mutations directly, cannot make copy and then modify
         var records = [].slice.call(this.observer.takeRecords());
-        // Array.push currently seems to be implemented by a non-tail recursive function
-        // so we cannot just mutations.push.apply(mutations, this.observer.takeRecords());
         while (records.length > 0)
             mutations.push(records.pop());
-        // TODO use WeakMap
         var mark = function (blot, markParent) {
             if (markParent === void 0) { markParent = true; }
             if (blot == null || blot === _this)
                 return;
             if (blot.domNode.parentNode == null)
                 return;
-            // @ts-ignore
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-                // @ts-ignore
                 blot.domNode[Registry.DATA_KEY].mutations = [];
             }
             if (markParent)
                 mark(blot.parent);
         };
         var optimize = function (blot) {
-            // Post-order traversal
             if (
-            // @ts-ignore
             blot.domNode[Registry.DATA_KEY] == null ||
-                // @ts-ignore
                 blot.domNode[Registry.DATA_KEY].mutations == null) {
                 return;
             }
@@ -6504,20 +5507,16 @@ var ScrollBlot = /** @class */ (function (_super) {
         var _this = this;
         if (context === void 0) { context = {}; }
         mutations = mutations || this.observer.takeRecords();
-        // TODO use WeakMap
         mutations
             .map(function (mutation) {
             var blot = Registry.find(mutation.target, true);
             if (blot == null)
                 return null;
-            // @ts-ignore
             if (blot.domNode[Registry.DATA_KEY].mutations == null) {
-                // @ts-ignore
                 blot.domNode[Registry.DATA_KEY].mutations = [mutation];
                 return blot;
             }
             else {
-                // @ts-ignore
                 blot.domNode[Registry.DATA_KEY].mutations.push(mutation);
                 return null;
             }
@@ -6528,12 +5527,9 @@ var ScrollBlot = /** @class */ (function (_super) {
                 //@ts-ignore
                 blot.domNode[Registry.DATA_KEY] == null)
                 return;
-            // @ts-ignore
             blot.update(blot.domNode[Registry.DATA_KEY].mutations || [], context);
         });
-        // @ts-ignore
         if (this.domNode[Registry.DATA_KEY].mutations != null) {
-            // @ts-ignore
             _super.prototype.update.call(this, this.domNode[Registry.DATA_KEY].mutations, context);
         }
         this.optimize(mutations, context);
@@ -6545,14 +5541,10 @@ var ScrollBlot = /** @class */ (function (_super) {
     return ScrollBlot;
 }(container_1.default));
 exports.default = ScrollBlot;
-
-
 /***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -6566,13 +5558,10 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var format_1 = __webpack_require__(18);
 var Registry = __webpack_require__(1);
-// Shallow object comparison
 function isEqual(obj1, obj2) {
     if (Object.keys(obj1).length !== Object.keys(obj2).length)
         return false;
-    // @ts-ignore
     for (var prop in obj1) {
-        // @ts-ignore
         if (obj1[prop] !== obj2[prop])
             return false;
     }
@@ -6630,14 +5619,10 @@ var InlineBlot = /** @class */ (function (_super) {
     return InlineBlot;
 }(format_1.default));
 exports.default = InlineBlot;
-
-
 /***/ }),
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -6683,7 +5668,6 @@ var BlockBlot = /** @class */ (function (_super) {
     };
     BlockBlot.prototype.insertAt = function (index, value, def) {
         if (def == null || Registry.query(value, Registry.Scope.INLINE) != null) {
-            // Insert text or inline
             _super.prototype.insertAt.call(this, index, value, def);
         }
         else {
@@ -6706,14 +5690,10 @@ var BlockBlot = /** @class */ (function (_super) {
     return BlockBlot;
 }(format_1.default));
 exports.default = BlockBlot;
-
-
 /***/ }),
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -6735,9 +5715,6 @@ var EmbedBlot = /** @class */ (function (_super) {
         return undefined;
     };
     EmbedBlot.prototype.format = function (name, value) {
-        // super.formatAt wraps, which is what we want in general,
-        // but this allows subclasses to overwrite for formats
-        // that just apply to particular embeds
         _super.prototype.formatAt.call(this, 0, this.length(), name, value);
     };
     EmbedBlot.prototype.formatAt = function (index, length, name, value) {
@@ -6754,14 +5731,10 @@ var EmbedBlot = /** @class */ (function (_super) {
     return EmbedBlot;
 }(leaf_1.default));
 exports.default = EmbedBlot;
-
-
 /***/ }),
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -6787,7 +5760,6 @@ var TextBlot = /** @class */ (function (_super) {
     };
     TextBlot.value = function (domNode) {
         var text = domNode.data;
-        // @ts-ignore
         if (text['normalize'])
             text = text['normalize']();
         return text;
@@ -6857,15 +5829,10 @@ var TextBlot = /** @class */ (function (_super) {
     return TextBlot;
 }(leaf_1.default));
 exports.default = TextBlot;
-
-
 /***/ }),
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 var elem = document.createElement('div');
 elem.classList.toggle('test-class', false);
 if (elem.classList.contains('test-class')) {
@@ -6878,14 +5845,12 @@ if (elem.classList.contains('test-class')) {
     }
   };
 }
-
 if (!String.prototype.startsWith) {
   String.prototype.startsWith = function (searchString, position) {
     position = position || 0;
     return this.substr(position, searchString.length) === searchString;
   };
 }
-
 if (!String.prototype.endsWith) {
   String.prototype.endsWith = function (searchString, position) {
     var subjectString = this.toString();
@@ -6897,7 +5862,6 @@ if (!String.prototype.endsWith) {
     return lastIndex !== -1 && lastIndex === position;
   };
 }
-
 if (!Array.prototype.find) {
   Object.defineProperty(Array.prototype, "find", {
     value: function value(predicate) {
@@ -6911,7 +5875,6 @@ if (!Array.prototype.find) {
       var length = list.length >>> 0;
       var thisArg = arguments[1];
       var value;
-
       for (var i = 0; i < length; i++) {
         value = list[i];
         if (predicate.call(thisArg, value, i, list)) {
@@ -6922,18 +5885,13 @@ if (!Array.prototype.find) {
     }
   });
 }
-
 document.addEventListener("DOMContentLoaded", function () {
-  // Disable resizing in Firefox
   document.execCommand("enableObjectResizing", false, false);
-  // Disable automatic linkifying in IE11
   document.execCommand("autoUrlDetect", false, false);
 });
-
 /***/ }),
 /* 51 */
 /***/ (function(module, exports) {
-
 /**
  * This library modifies the diff-patch-match library by Neil Fraser
  * by removing the patch and match functionality and certain advanced
@@ -6958,8 +5916,6 @@ document.addEventListener("DOMContentLoaded", function () {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 /**
  * The data structure representing a diff is an array of tuples:
  * [[DIFF_DELETE, 'Hello'], [DIFF_INSERT, 'Goodbye'], [DIFF_EQUAL, ' world.']]
@@ -6968,8 +5924,6 @@ document.addEventListener("DOMContentLoaded", function () {
 var DIFF_DELETE = -1;
 var DIFF_INSERT = 1;
 var DIFF_EQUAL = 0;
-
-
 /**
  * Find the differences between two texts.  Simplifies the problem by stripping
  * any common prefix or suffix off the texts before diffing.
@@ -6979,35 +5933,24 @@ var DIFF_EQUAL = 0;
  * @return {Array} Array of diff tuples.
  */
 function diff_main(text1, text2, cursor_pos) {
-  // Check for equality (speedup).
   if (text1 == text2) {
     if (text1) {
       return [[DIFF_EQUAL, text1]];
     }
     return [];
   }
-
-  // Check cursor_pos within bounds
   if (cursor_pos < 0 || text1.length < cursor_pos) {
     cursor_pos = null;
   }
-
-  // Trim off common prefix (speedup).
   var commonlength = diff_commonPrefix(text1, text2);
   var commonprefix = text1.substring(0, commonlength);
   text1 = text1.substring(commonlength);
   text2 = text2.substring(commonlength);
-
-  // Trim off common suffix (speedup).
   commonlength = diff_commonSuffix(text1, text2);
   var commonsuffix = text1.substring(text1.length - commonlength);
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
-
-  // Compute the diff on the middle block.
   var diffs = diff_compute_(text1, text2);
-
-  // Restore the prefix and suffix.
   if (commonprefix) {
     diffs.unshift([DIFF_EQUAL, commonprefix]);
   }
@@ -7021,8 +5964,6 @@ function diff_main(text1, text2, cursor_pos) {
   diffs = fix_emoji(diffs);
   return diffs;
 };
-
-
 /**
  * Find the differences between two texts.  Assumes that the texts do not
  * have any common prefix or suffix.
@@ -7032,58 +5973,40 @@ function diff_main(text1, text2, cursor_pos) {
  */
 function diff_compute_(text1, text2) {
   var diffs;
-
   if (!text1) {
-    // Just add some text (speedup).
     return [[DIFF_INSERT, text2]];
   }
-
   if (!text2) {
-    // Just delete some text (speedup).
     return [[DIFF_DELETE, text1]];
   }
-
   var longtext = text1.length > text2.length ? text1 : text2;
   var shorttext = text1.length > text2.length ? text2 : text1;
   var i = longtext.indexOf(shorttext);
   if (i != -1) {
-    // Shorter text is inside the longer text (speedup).
     diffs = [[DIFF_INSERT, longtext.substring(0, i)],
              [DIFF_EQUAL, shorttext],
              [DIFF_INSERT, longtext.substring(i + shorttext.length)]];
-    // Swap insertions for deletions if diff is reversed.
     if (text1.length > text2.length) {
       diffs[0][0] = diffs[2][0] = DIFF_DELETE;
     }
     return diffs;
   }
-
   if (shorttext.length == 1) {
-    // Single character string.
-    // After the previous speedup, the character can't be an equality.
     return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
   }
-
-  // Check to see if the problem can be split in two.
   var hm = diff_halfMatch_(text1, text2);
   if (hm) {
-    // A half-match was found, sort out the return data.
     var text1_a = hm[0];
     var text1_b = hm[1];
     var text2_a = hm[2];
     var text2_b = hm[3];
     var mid_common = hm[4];
-    // Send both pairs off for separate processing.
     var diffs_a = diff_main(text1_a, text2_a);
     var diffs_b = diff_main(text1_b, text2_b);
-    // Merge the results.
     return diffs_a.concat([[DIFF_EQUAL, mid_common]], diffs_b);
   }
-
   return diff_bisect_(text1, text2);
 };
-
-
 /**
  * Find the 'middle snake' of a diff, split the problem in two
  * and return the recursively constructed diff.
@@ -7094,7 +6017,6 @@ function diff_compute_(text1, text2) {
  * @private
  */
 function diff_bisect_(text1, text2) {
-  // Cache the text lengths to prevent multiple calls.
   var text1_length = text1.length;
   var text2_length = text2.length;
   var max_d = Math.ceil((text1_length + text2_length) / 2);
@@ -7102,8 +6024,6 @@ function diff_bisect_(text1, text2) {
   var v_length = 2 * max_d;
   var v1 = new Array(v_length);
   var v2 = new Array(v_length);
-  // Setting all elements to -1 is faster in Chrome & Firefox than mixing
-  // integers and undefined.
   for (var x = 0; x < v_length; x++) {
     v1[x] = -1;
     v2[x] = -1;
@@ -7111,17 +6031,12 @@ function diff_bisect_(text1, text2) {
   v1[v_offset + 1] = 0;
   v2[v_offset + 1] = 0;
   var delta = text1_length - text2_length;
-  // If the total number of characters is odd, then the front path will collide
-  // with the reverse path.
   var front = (delta % 2 != 0);
-  // Offsets for start and end of k loop.
-  // Prevents mapping of space beyond the grid.
   var k1start = 0;
   var k1end = 0;
   var k2start = 0;
   var k2end = 0;
   for (var d = 0; d < max_d; d++) {
-    // Walk the front path one step.
     for (var k1 = -d + k1start; k1 <= d - k1end; k1 += 2) {
       var k1_offset = v_offset + k1;
       var x1;
@@ -7138,25 +6053,19 @@ function diff_bisect_(text1, text2) {
       }
       v1[k1_offset] = x1;
       if (x1 > text1_length) {
-        // Ran off the right of the graph.
         k1end += 2;
       } else if (y1 > text2_length) {
-        // Ran off the bottom of the graph.
         k1start += 2;
       } else if (front) {
         var k2_offset = v_offset + delta - k1;
         if (k2_offset >= 0 && k2_offset < v_length && v2[k2_offset] != -1) {
-          // Mirror x2 onto top-left coordinate system.
           var x2 = text1_length - v2[k2_offset];
           if (x1 >= x2) {
-            // Overlap detected.
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
-
-    // Walk the reverse path one step.
     for (var k2 = -d + k2start; k2 <= d - k2end; k2 += 2) {
       var k2_offset = v_offset + k2;
       var x2;
@@ -7174,32 +6083,24 @@ function diff_bisect_(text1, text2) {
       }
       v2[k2_offset] = x2;
       if (x2 > text1_length) {
-        // Ran off the left of the graph.
         k2end += 2;
       } else if (y2 > text2_length) {
-        // Ran off the top of the graph.
         k2start += 2;
       } else if (!front) {
         var k1_offset = v_offset + delta - k2;
         if (k1_offset >= 0 && k1_offset < v_length && v1[k1_offset] != -1) {
           var x1 = v1[k1_offset];
           var y1 = v_offset + x1 - k1_offset;
-          // Mirror x2 onto top-left coordinate system.
           x2 = text1_length - x2;
           if (x1 >= x2) {
-            // Overlap detected.
             return diff_bisectSplit_(text1, text2, x1, y1);
           }
         }
       }
     }
   }
-  // Diff took too long and hit the deadline or
-  // number of diffs equals number of characters, no commonality at all.
   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
 };
-
-
 /**
  * Given the location of the 'middle snake', split the diff in two parts
  * and recurse.
@@ -7214,15 +6115,10 @@ function diff_bisectSplit_(text1, text2, x, y) {
   var text2a = text2.substring(0, y);
   var text1b = text1.substring(x);
   var text2b = text2.substring(y);
-
-  // Compute both diffs serially.
   var diffs = diff_main(text1a, text2a);
   var diffsb = diff_main(text1b, text2b);
-
   return diffs.concat(diffsb);
 };
-
-
 /**
  * Determine the common prefix of two strings.
  * @param {string} text1 First string.
@@ -7231,12 +6127,9 @@ function diff_bisectSplit_(text1, text2, x, y) {
  *     string.
  */
 function diff_commonPrefix(text1, text2) {
-  // Quick check for common null cases.
   if (!text1 || !text2 || text1.charAt(0) != text2.charAt(0)) {
     return 0;
   }
-  // Binary search.
-  // Performance analysis: http://neil.fraser.name/news/2007/10/09/
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -7253,8 +6146,6 @@ function diff_commonPrefix(text1, text2) {
   }
   return pointermid;
 };
-
-
 /**
  * Determine the common suffix of two strings.
  * @param {string} text1 First string.
@@ -7262,13 +6153,10 @@ function diff_commonPrefix(text1, text2) {
  * @return {number} The number of characters common to the end of each string.
  */
 function diff_commonSuffix(text1, text2) {
-  // Quick check for common null cases.
   if (!text1 || !text2 ||
       text1.charAt(text1.length - 1) != text2.charAt(text2.length - 1)) {
     return 0;
   }
-  // Binary search.
-  // Performance analysis: http://neil.fraser.name/news/2007/10/09/
   var pointermin = 0;
   var pointermax = Math.min(text1.length, text2.length);
   var pointermid = pointermax;
@@ -7285,8 +6173,6 @@ function diff_commonSuffix(text1, text2) {
   }
   return pointermid;
 };
-
-
 /**
  * Do the two texts share a substring which is at least half the length of the
  * longer text?
@@ -7303,7 +6189,6 @@ function diff_halfMatch_(text1, text2) {
   if (longtext.length < 4 || shorttext.length * 2 < longtext.length) {
     return null;  // Pointless.
   }
-
   /**
    * Does a substring of shorttext exist within longtext such that the substring
    * is at least half the length of longtext?
@@ -7317,7 +6202,6 @@ function diff_halfMatch_(text1, text2) {
    * @private
    */
   function diff_halfMatchI_(longtext, shorttext, i) {
-    // Start with a 1/4 length substring at position i as a seed.
     var seed = longtext.substring(i, i + Math.floor(longtext.length / 4));
     var j = -1;
     var best_common = '';
@@ -7343,11 +6227,8 @@ function diff_halfMatch_(text1, text2) {
       return null;
     }
   }
-
-  // First check if the second quarter is the seed for a half-match.
   var hm1 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 4));
-  // Check again based on the third quarter.
   var hm2 = diff_halfMatchI_(longtext, shorttext,
                              Math.ceil(longtext.length / 2));
   var hm;
@@ -7358,11 +6239,8 @@ function diff_halfMatch_(text1, text2) {
   } else if (!hm1) {
     hm = hm2;
   } else {
-    // Both matched.  Select the longest.
     hm = hm1[4].length > hm2[4].length ? hm1 : hm2;
   }
-
-  // A half-match was found, sort out the return data.
   var text1_a, text1_b, text2_a, text2_b;
   if (text1.length > text2.length) {
     text1_a = hm[0];
@@ -7378,8 +6256,6 @@ function diff_halfMatch_(text1, text2) {
   var mid_common = hm[4];
   return [text1_a, text1_b, text2_a, text2_b, mid_common];
 };
-
-
 /**
  * Reorder and merge like edit sections.  Merge equalities.
  * Any edit section can move as long as it doesn't cross an equality.
@@ -7406,10 +6282,8 @@ function diff_cleanupMerge(diffs) {
         pointer++;
         break;
       case DIFF_EQUAL:
-        // Upon reaching an equality, check for prior redundancies.
         if (count_delete + count_insert > 1) {
           if (count_delete !== 0 && count_insert !== 0) {
-            // Factor out any common prefixies.
             commonlength = diff_commonPrefix(text_insert, text_delete);
             if (commonlength !== 0) {
               if ((pointer - count_delete - count_insert) > 0 &&
@@ -7425,7 +6299,6 @@ function diff_cleanupMerge(diffs) {
               text_insert = text_insert.substring(commonlength);
               text_delete = text_delete.substring(commonlength);
             }
-            // Factor out any common suffixies.
             commonlength = diff_commonSuffix(text_insert, text_delete);
             if (commonlength !== 0) {
               diffs[pointer][1] = text_insert.substring(text_insert.length -
@@ -7436,7 +6309,6 @@ function diff_cleanupMerge(diffs) {
                   commonlength);
             }
           }
-          // Delete the offending records and add the merged ones.
           if (count_delete === 0) {
             diffs.splice(pointer - count_insert,
                 count_delete + count_insert, [DIFF_INSERT, text_insert]);
@@ -7451,7 +6323,6 @@ function diff_cleanupMerge(diffs) {
           pointer = pointer - count_delete - count_insert +
                     (count_delete ? 1 : 0) + (count_insert ? 1 : 0) + 1;
         } else if (pointer !== 0 && diffs[pointer - 1][0] == DIFF_EQUAL) {
-          // Merge this equality with the previous one.
           diffs[pointer - 1][1] += diffs[pointer][1];
           diffs.splice(pointer, 1);
         } else {
@@ -7467,20 +6338,13 @@ function diff_cleanupMerge(diffs) {
   if (diffs[diffs.length - 1][1] === '') {
     diffs.pop();  // Remove the dummy entry at the end.
   }
-
-  // Second pass: look for single edits surrounded on both sides by equalities
-  // which can be shifted sideways to eliminate an equality.
-  // e.g: A<ins>BA</ins>C -> <ins>AB</ins>AC
   var changes = false;
   pointer = 1;
-  // Intentionally ignore the first and last element (don't need checking).
   while (pointer < diffs.length - 1) {
     if (diffs[pointer - 1][0] == DIFF_EQUAL &&
         diffs[pointer + 1][0] == DIFF_EQUAL) {
-      // This is a single edit surrounded by equalities.
       if (diffs[pointer][1].substring(diffs[pointer][1].length -
           diffs[pointer - 1][1].length) == diffs[pointer - 1][1]) {
-        // Shift the edit over the previous equality.
         diffs[pointer][1] = diffs[pointer - 1][1] +
             diffs[pointer][1].substring(0, diffs[pointer][1].length -
                                         diffs[pointer - 1][1].length);
@@ -7489,7 +6353,6 @@ function diff_cleanupMerge(diffs) {
         changes = true;
       } else if (diffs[pointer][1].substring(0, diffs[pointer + 1][1].length) ==
           diffs[pointer + 1][1]) {
-        // Shift the edit over the next equality.
         diffs[pointer - 1][1] += diffs[pointer + 1][1];
         diffs[pointer][1] =
             diffs[pointer][1].substring(diffs[pointer + 1][1].length) +
@@ -7500,20 +6363,15 @@ function diff_cleanupMerge(diffs) {
     }
     pointer++;
   }
-  // If shifts were made, the diff needs reordering and another shift sweep.
   if (changes) {
     diff_cleanupMerge(diffs);
   }
 };
-
-
 var diff = diff_main;
 diff.INSERT = DIFF_INSERT;
 diff.DELETE = DIFF_DELETE;
 diff.EQUAL = DIFF_EQUAL;
-
 module.exports = diff;
-
 /*
  * Modify a diff such that the cursor position points to the start of a change:
  * E.g.
@@ -7537,9 +6395,7 @@ function cursor_normalize_diff (diffs, cursor_pos) {
       if (cursor_pos === next_pos) {
         return [i + 1, diffs];
       } else if (cursor_pos < next_pos) {
-        // copy to prevent side effects
         diffs = diffs.slice();
-        // split d into two diff changes
         var split_pos = cursor_pos - current_pos;
         var d_left = [d[0], d[1].slice(0, split_pos)];
         var d_right = [d[0], d[1].slice(split_pos)];
@@ -7552,7 +6408,6 @@ function cursor_normalize_diff (diffs, cursor_pos) {
   }
   throw new Error('cursor_pos is out of bounds!')
 }
-
 /*
  * Modify a diff such that the edit position is "shifted" to the proposed edit location (cursor_position).
  *
@@ -7577,26 +6432,15 @@ function fix_cursor (diffs, cursor_pos) {
   var cursor_pointer = norm[0];
   var d = ndiffs[cursor_pointer];
   var d_next = ndiffs[cursor_pointer + 1];
-
   if (d == null) {
-    // Text was deleted from end of original string,
-    // cursor is now out of bounds in new string
     return diffs;
   } else if (d[0] !== DIFF_EQUAL) {
-    // A modification happened at the cursor location.
-    // This is the expected outcome, so we can return the original diff.
     return diffs;
   } else {
     if (d_next != null && d[1] + d_next[1] === d_next[1] + d[1]) {
-      // Case 1)
-      // It is possible to perform a naive shift
       ndiffs.splice(cursor_pointer, 2, d_next, d)
       return merge_tuples(ndiffs, cursor_pointer, 2)
     } else if (d_next != null && d_next[1].indexOf(d[1]) === 0) {
-      // Case 2)
-      // d[1] is a prefix of d_next[1]
-      // We can assume that d_next[0] !== 0, since d[0] === 0
-      // Shift edit locations..
       ndiffs.splice(cursor_pointer, 2, [d_next[0], d[1]], [0, d[1]]);
       var suffix = d_next[1].slice(d[1].length);
       if (suffix.length > 0) {
@@ -7604,12 +6448,10 @@ function fix_cursor (diffs, cursor_pos) {
       }
       return merge_tuples(ndiffs, cursor_pointer, 3)
     } else {
-      // Not possible to perform any modification
       return diffs;
     }
   }
 }
-
 /*
  * Check diff did not split surrogate pairs.
  * Ex. [0, '\uD83D'], [-1, '\uDC36'], [1, '\uDC2F'] -> [-1, '\uD83D\uDC36'], [1, '\uD83D\uDC2F']
@@ -7631,10 +6473,8 @@ function fix_emoji (diffs) {
         diffs[i-1][0] === DIFF_DELETE && starts_with_pair_end(diffs[i-1][1]) &&
         diffs[i][0] === DIFF_INSERT && starts_with_pair_end(diffs[i][1])) {
       compact = true;
-
       diffs[i-1][1] = diffs[i-2][1].slice(-1) + diffs[i-1][1];
       diffs[i][1] = diffs[i-2][1].slice(-1) + diffs[i][1];
-
       diffs[i-2][1] = diffs[i-2][1].slice(0, -1);
     }
   }
@@ -7649,7 +6489,6 @@ function fix_emoji (diffs) {
   }
   return fixed_diffs;
 }
-
 /*
  * Try to merge tuples with their neigbors in a given range.
  * E.g. [0, 'a'], [0, 'b'] -> [0, 'ab']
@@ -7660,7 +6499,6 @@ function fix_emoji (diffs) {
  * @return {Array} Array of merged diff tuples.
  */
 function merge_tuples (diffs, start, length) {
-  // Check from (start-1) to (start+length).
   for (var i = start + length - 1; i >= 0 && i >= start - 1; i--) {
     if (i + 1 < diffs.length) {
       var left_d = diffs[i];
@@ -7672,38 +6510,28 @@ function merge_tuples (diffs, start, length) {
   }
   return diffs;
 }
-
-
 /***/ }),
 /* 52 */
 /***/ (function(module, exports) {
-
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
-
 exports.shim = shim;
 function shim (obj) {
   var keys = [];
   for (var key in obj) keys.push(key);
   return keys;
 }
-
-
 /***/ }),
 /* 53 */
 /***/ (function(module, exports) {
-
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
-
 exports = module.exports = supportsArgumentsClass ? supported : unsupported;
-
 exports.supported = supported;
 function supported(object) {
   return Object.prototype.toString.call(object) == '[object Arguments]';
 };
-
 exports.unsupported = unsupported;
 function unsupported(object){
   return object &&
@@ -7713,17 +6541,12 @@ function unsupported(object){
     !Object.prototype.propertyIsEnumerable.call(object, 'callee') ||
     false;
 };
-
-
 /***/ }),
 /* 54 */
 /***/ (function(module, exports) {
-
 'use strict';
-
 var has = Object.prototype.hasOwnProperty
   , prefix = '~';
-
 /**
  * Constructor to create a storage for our `EE` objects.
  * An `Events` instance is a plain object whose properties are event names.
@@ -7732,24 +6555,14 @@ var has = Object.prototype.hasOwnProperty
  * @api private
  */
 function Events() {}
-
 //
-// We try to not inherit from `Object.prototype`. In some engines creating an
-// instance in this way is faster than calling `Object.create(null)` directly.
-// If `Object.create(null)` is not supported we prefix the event names with a
-// character to make sure that the built-in object properties are not
-// overridden or used as an attack vector.
 //
 if (Object.create) {
   Events.prototype = Object.create(null);
-
   //
-  // This hack is needed because the `__proto__` property is still inherited in
-  // some old browsers like Android 4, iPhone 5.1, Opera 11 and Safari 5.
   //
   if (!new Events().__proto__) prefix = false;
 }
-
 /**
  * Representation of a single event listener.
  *
@@ -7764,7 +6577,6 @@ function EE(fn, context, once) {
   this.context = context;
   this.once = once || false;
 }
-
 /**
  * Minimal `EventEmitter` interface that is molded against the Node.js
  * `EventEmitter` interface.
@@ -7776,7 +6588,6 @@ function EventEmitter() {
   this._events = new Events();
   this._eventsCount = 0;
 }
-
 /**
  * Return an array listing the events for which the emitter has registered
  * listeners.
@@ -7788,20 +6599,15 @@ EventEmitter.prototype.eventNames = function eventNames() {
   var names = []
     , events
     , name;
-
   if (this._eventsCount === 0) return names;
-
   for (name in (events = this._events)) {
     if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
   }
-
   if (Object.getOwnPropertySymbols) {
     return names.concat(Object.getOwnPropertySymbols(events));
   }
-
   return names;
 };
-
 /**
  * Return the listeners registered for a given event.
  *
@@ -7813,18 +6619,14 @@ EventEmitter.prototype.eventNames = function eventNames() {
 EventEmitter.prototype.listeners = function listeners(event, exists) {
   var evt = prefix ? prefix + event : event
     , available = this._events[evt];
-
   if (exists) return !!available;
   if (!available) return [];
   if (available.fn) return [available.fn];
-
   for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
     ee[i] = available[i].fn;
   }
-
   return ee;
 };
-
 /**
  * Calls each of the listeners registered for a given event.
  *
@@ -7834,17 +6636,13 @@ EventEmitter.prototype.listeners = function listeners(event, exists) {
  */
 EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
   var evt = prefix ? prefix + event : event;
-
   if (!this._events[evt]) return false;
-
   var listeners = this._events[evt]
     , len = arguments.length
     , args
     , i;
-
   if (listeners.fn) {
     if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
-
     switch (len) {
       case 1: return listeners.fn.call(listeners.context), true;
       case 2: return listeners.fn.call(listeners.context, a1), true;
@@ -7853,19 +6651,15 @@ EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
       case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
       case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
     }
-
     for (i = 1, args = new Array(len -1); i < len; i++) {
       args[i - 1] = arguments[i];
     }
-
     listeners.fn.apply(listeners.context, args);
   } else {
     var length = listeners.length
       , j;
-
     for (i = 0; i < length; i++) {
       if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
-
       switch (len) {
         case 1: listeners[i].fn.call(listeners[i].context); break;
         case 2: listeners[i].fn.call(listeners[i].context, a1); break;
@@ -7875,15 +6669,12 @@ EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
           if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
             args[j - 1] = arguments[j];
           }
-
           listeners[i].fn.apply(listeners[i].context, args);
       }
     }
   }
-
   return true;
 };
-
 /**
  * Add a listener for a given event.
  *
@@ -7896,14 +6687,11 @@ EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
 EventEmitter.prototype.on = function on(event, fn, context) {
   var listener = new EE(fn, context || this)
     , evt = prefix ? prefix + event : event;
-
   if (!this._events[evt]) this._events[evt] = listener, this._eventsCount++;
   else if (!this._events[evt].fn) this._events[evt].push(listener);
   else this._events[evt] = [this._events[evt], listener];
-
   return this;
 };
-
 /**
  * Add a one-time listener for a given event.
  *
@@ -7916,14 +6704,11 @@ EventEmitter.prototype.on = function on(event, fn, context) {
 EventEmitter.prototype.once = function once(event, fn, context) {
   var listener = new EE(fn, context || this, true)
     , evt = prefix ? prefix + event : event;
-
   if (!this._events[evt]) this._events[evt] = listener, this._eventsCount++;
   else if (!this._events[evt].fn) this._events[evt].push(listener);
   else this._events[evt] = [this._events[evt], listener];
-
   return this;
 };
-
 /**
  * Remove the listeners of a given event.
  *
@@ -7936,16 +6721,13 @@ EventEmitter.prototype.once = function once(event, fn, context) {
  */
 EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
   var evt = prefix ? prefix + event : event;
-
   if (!this._events[evt]) return this;
   if (!fn) {
     if (--this._eventsCount === 0) this._events = new Events();
     else delete this._events[evt];
     return this;
   }
-
   var listeners = this._events[evt];
-
   if (listeners.fn) {
     if (
          listeners.fn === fn
@@ -7965,18 +6747,14 @@ EventEmitter.prototype.removeListener = function removeListener(event, fn, conte
         events.push(listeners[i]);
       }
     }
-
     //
-    // Reset the array, or remove it completely if we have no more listeners.
     //
     if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
     else if (--this._eventsCount === 0) this._events = new Events();
     else delete this._events[evt];
   }
-
   return this;
 };
-
 /**
  * Remove all listeners, or those of the specified event.
  *
@@ -7986,7 +6764,6 @@ EventEmitter.prototype.removeListener = function removeListener(event, fn, conte
  */
 EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
   var evt;
-
   if (event) {
     evt = prefix ? prefix + event : event;
     if (this._events[evt]) {
@@ -7997,133 +6774,80 @@ EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
     this._events = new Events();
     this._eventsCount = 0;
   }
-
   return this;
 };
-
 //
-// Alias methods names because people roll like that.
 //
 EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
 EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-
 //
-// This function doesn't apply anymore.
 //
 EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
   return this;
 };
-
 //
-// Expose the prefix.
 //
 EventEmitter.prefixed = prefix;
-
 //
-// Allow `EventEmitter` to be imported as module namespace.
 //
 EventEmitter.EventEmitter = EventEmitter;
-
 //
-// Expose the module.
 //
 if ('undefined' !== typeof module) {
   module.exports = EventEmitter;
 }
-
-
 /***/ }),
 /* 55 */
 /***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.matchText = exports.matchSpacing = exports.matchNewline = exports.matchBlot = exports.matchAttributor = exports.default = undefined;
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _extend2 = __webpack_require__(3);
-
 var _extend3 = _interopRequireDefault(_extend2);
-
 var _quillDelta = __webpack_require__(2);
-
 var _quillDelta2 = _interopRequireDefault(_quillDelta);
-
 var _parchment = __webpack_require__(0);
-
 var _parchment2 = _interopRequireDefault(_parchment);
-
 var _quill = __webpack_require__(5);
-
 var _quill2 = _interopRequireDefault(_quill);
-
 var _logger = __webpack_require__(10);
-
 var _logger2 = _interopRequireDefault(_logger);
-
 var _module = __webpack_require__(9);
-
 var _module2 = _interopRequireDefault(_module);
-
 var _align = __webpack_require__(36);
-
 var _background = __webpack_require__(37);
-
 var _code = __webpack_require__(13);
-
 var _code2 = _interopRequireDefault(_code);
-
 var _color = __webpack_require__(26);
-
 var _direction = __webpack_require__(38);
-
 var _font = __webpack_require__(39);
-
 var _size = __webpack_require__(40);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var debug = (0, _logger2.default)('quill:clipboard');
-
 var DOM_KEY = '__ql-matcher';
-
 var CLIPBOARD_CONFIG = [[Node.TEXT_NODE, matchText], [Node.TEXT_NODE, matchNewline], ['br', matchBreak], [Node.ELEMENT_NODE, matchNewline], [Node.ELEMENT_NODE, matchBlot], [Node.ELEMENT_NODE, matchSpacing], [Node.ELEMENT_NODE, matchAttributor], [Node.ELEMENT_NODE, matchStyles], ['li', matchIndent], ['b', matchAlias.bind(matchAlias, 'bold')], ['i', matchAlias.bind(matchAlias, 'italic')], ['style', matchIgnore]];
-
 var ATTRIBUTE_ATTRIBUTORS = [_align.AlignAttribute, _direction.DirectionAttribute].reduce(function (memo, attr) {
   memo[attr.keyName] = attr;
   return memo;
 }, {});
-
 var STYLE_ATTRIBUTORS = [_align.AlignStyle, _background.BackgroundStyle, _color.ColorStyle, _direction.DirectionStyle, _font.FontStyle, _size.SizeStyle].reduce(function (memo, attr) {
   memo[attr.keyName] = attr;
   return memo;
 }, {});
-
 var Clipboard = function (_Module) {
   _inherits(Clipboard, _Module);
-
   function Clipboard(quill, options) {
     _classCallCheck(this, Clipboard);
-
     var _this = _possibleConstructorReturn(this, (Clipboard.__proto__ || Object.getPrototypeOf(Clipboard)).call(this, quill, options));
-
     _this.quill.root.addEventListener('paste', _this.onPaste.bind(_this));
     _this.container = _this.quill.addContainer('ql-clipboard');
     _this.container.setAttribute('contenteditable', true);
@@ -8133,13 +6857,11 @@ var Clipboard = function (_Module) {
       var _ref2 = _slicedToArray(_ref, 2),
           selector = _ref2[0],
           matcher = _ref2[1];
-
       if (!options.matchVisual && matcher === matchSpacing) return;
       _this.addMatcher(selector, matcher);
     });
     return _this;
   }
-
   _createClass(Clipboard, [{
     key: 'addMatcher',
     value: function addMatcher(selector, matcher) {
@@ -8158,14 +6880,11 @@ var Clipboard = function (_Module) {
         this.container.innerHTML = '';
         return new _quillDelta2.default().insert(text, _defineProperty({}, _code2.default.blotName, formats[_code2.default.blotName]));
       }
-
       var _prepareMatching = this.prepareMatching(),
           _prepareMatching2 = _slicedToArray(_prepareMatching, 2),
           elementMatchers = _prepareMatching2[0],
           textMatchers = _prepareMatching2[1];
-
       var delta = traverse(this.container, elementMatchers, textMatchers);
-      // Remove trailing newline
       if (deltaEndsWith(delta, '\n') && delta.ops[delta.ops.length - 1].attributes == null) {
         delta = delta.compose(new _quillDelta2.default().retain(delta.length() - 1).delete(1));
       }
@@ -8177,7 +6896,6 @@ var Clipboard = function (_Module) {
     key: 'dangerouslyPasteHTML',
     value: function dangerouslyPasteHTML(index, html) {
       var source = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _quill2.default.sources.API;
-
       if (typeof index === 'string') {
         this.quill.setContents(this.convert(index), html);
         this.quill.setSelection(0, _quill2.default.sources.SILENT);
@@ -8191,7 +6909,6 @@ var Clipboard = function (_Module) {
     key: 'onPaste',
     value: function onPaste(e) {
       var _this2 = this;
-
       if (e.defaultPrevented || !this.quill.isEnabled()) return;
       var range = this.quill.getSelection();
       var delta = new _quillDelta2.default().retain(range.index);
@@ -8201,7 +6918,6 @@ var Clipboard = function (_Module) {
       setTimeout(function () {
         delta = delta.concat(_this2.convert()).delete(range.length);
         _this2.quill.updateContents(delta, _quill2.default.sources.USER);
-        // range.length contributes to delta.length()
         _this2.quill.setSelection(delta.length() - range.length, _quill2.default.sources.SILENT);
         _this2.quill.scrollingContainer.scrollTop = scrollTop;
         _this2.quill.focus();
@@ -8211,14 +6927,12 @@ var Clipboard = function (_Module) {
     key: 'prepareMatching',
     value: function prepareMatching() {
       var _this3 = this;
-
       var elementMatchers = [],
           textMatchers = [];
       this.matchers.forEach(function (pair) {
         var _pair = _slicedToArray(pair, 2),
             selector = _pair[0],
             matcher = _pair[1];
-
         switch (selector) {
           case Node.TEXT_NODE:
             textMatchers.push(matcher);
@@ -8228,7 +6942,6 @@ var Clipboard = function (_Module) {
             break;
           default:
             [].forEach.call(_this3.container.querySelectorAll(selector), function (node) {
-              // TODO use weakmap
               node[DOM_KEY] = node[DOM_KEY] || [];
               node[DOM_KEY].push(matcher);
             });
@@ -8238,15 +6951,12 @@ var Clipboard = function (_Module) {
       return [elementMatchers, textMatchers];
     }
   }]);
-
   return Clipboard;
 }(_module2.default);
-
 Clipboard.DEFAULTS = {
   matchers: [],
   matchVisual: true
 };
-
 function applyFormat(delta, format, value) {
   if ((typeof format === 'undefined' ? 'undefined' : _typeof(format)) === 'object') {
     return Object.keys(format).reduce(function (delta, key) {
@@ -8262,13 +6972,11 @@ function applyFormat(delta, format, value) {
     }, new _quillDelta2.default());
   }
 }
-
 function computeStyle(node) {
   if (node.nodeType !== Node.ELEMENT_NODE) return {};
   var DOM_KEY = '__ql-computed-style';
   return node[DOM_KEY] || (node[DOM_KEY] = window.getComputedStyle(node));
 }
-
 function deltaEndsWith(delta, text) {
   var endText = "";
   for (var i = delta.ops.length - 1; i >= 0 && endText.length < text.length; --i) {
@@ -8278,15 +6986,12 @@ function deltaEndsWith(delta, text) {
   }
   return endText.slice(-1 * text.length) === text;
 }
-
 function isLine(node) {
   if (node.childNodes.length === 0) return false; // Exclude embed blocks
   var style = computeStyle(node);
   return ['block', 'list-item'].indexOf(style.display) > -1;
 }
-
 function traverse(node, elementMatchers, textMatchers) {
-  // Post-order
   if (node.nodeType === node.TEXT_NODE) {
     return textMatchers.reduce(function (delta, matcher) {
       return matcher(node, delta);
@@ -8308,11 +7013,9 @@ function traverse(node, elementMatchers, textMatchers) {
     return new _quillDelta2.default();
   }
 }
-
 function matchAlias(format, node, delta) {
   return applyFormat(delta, format, true);
 }
-
 function matchAttributor(node, delta) {
   var attributes = _parchment2.default.Attributor.Attribute.keys(node);
   var classes = _parchment2.default.Attributor.Class.keys(node);
@@ -8339,7 +7042,6 @@ function matchAttributor(node, delta) {
   }
   return delta;
 }
-
 function matchBlot(node, delta) {
   var match = _parchment2.default.query(node);
   if (match == null) return delta;
@@ -8355,18 +7057,15 @@ function matchBlot(node, delta) {
   }
   return delta;
 }
-
 function matchBreak(node, delta) {
   if (!deltaEndsWith(delta, '\n')) {
     delta.insert('\n');
   }
   return delta;
 }
-
 function matchIgnore() {
   return new _quillDelta2.default();
 }
-
 function matchIndent(node, delta) {
   var match = _parchment2.default.query(node);
   if (match == null || match.blotName !== 'list-item' || !deltaEndsWith(delta, '\n')) {
@@ -8383,7 +7082,6 @@ function matchIndent(node, delta) {
   if (indent <= 0) return delta;
   return delta.compose(new _quillDelta2.default().retain(delta.length() - 1).retain(1, { indent: indent }));
 }
-
 function matchNewline(node, delta) {
   if (!deltaEndsWith(delta, '\n')) {
     if (isLine(node) || delta.length() > 0 && node.nextSibling && isLine(node.nextSibling)) {
@@ -8392,7 +7090,6 @@ function matchNewline(node, delta) {
   }
   return delta;
 }
-
 function matchSpacing(node, delta) {
   if (isLine(node) && node.nextElementSibling != null && !deltaEndsWith(delta, '\n\n')) {
     var nodeHeight = node.offsetHeight + parseFloat(computeStyle(node).marginTop) + parseFloat(computeStyle(node).marginBottom);
@@ -8402,7 +7099,6 @@ function matchSpacing(node, delta) {
   }
   return delta;
 }
-
 function matchStyles(node, delta) {
   var formats = {};
   var style = node.style || {};
@@ -8416,15 +7112,12 @@ function matchStyles(node, delta) {
     delta = applyFormat(delta, formats);
   }
   if (parseFloat(style.textIndent || 0) > 0) {
-    // Could be 0.5in
     delta = new _quillDelta2.default().insert('\t').concat(delta);
   }
   return delta;
 }
-
 function matchText(node, delta) {
   var text = node.data;
-  // Word represents empty line with <o:p>&nbsp;</o:p>
   if (node.parentNode.tagName === 'O:P') {
     return delta.insert(text.trim());
   }
@@ -8432,7 +7125,6 @@ function matchText(node, delta) {
     return delta;
   }
   if (!computeStyle(node.parentNode).whiteSpace.startsWith('pre')) {
-    // eslint-disable-next-line func-style
     var replacer = function replacer(collapse, match) {
       match = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
       return match.length < 1 && collapse ? ' ' : match;
@@ -8448,14 +7140,12 @@ function matchText(node, delta) {
   }
   return delta.insert(text);
 }
-
 exports.default = Clipboard;
 exports.matchAttributor = matchAttributor;
 exports.matchBlot = matchBlot;
 exports.matchNewline = matchNewline;
 exports.matchSpacing = matchSpacing;
 exports.matchText = matchText;
-
 /***/ }),
 /* 56 */,
 /* 57 */,
@@ -8513,10 +7203,7 @@ exports.matchText = matchText;
 /* 109 */,
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
-
 module.exports = __webpack_require__(29);
-
-
 /***/ })
 /******/ ])["default"];
 });

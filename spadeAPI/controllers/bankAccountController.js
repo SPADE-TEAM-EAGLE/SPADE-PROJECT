@@ -30,13 +30,14 @@ exports.CreateBankAccount = async (req, res) => {
             }
             const createResult = await queryRunner(insertBankAccount, [userId, UPOID, accountName, description, status, currentDate, userType,accountTypeTenant,nickName,digits,cardBrand,cardType]);
             if (createResult[0].affectedRows === 0) {
-                res.status(400).send("Error");
+                res.status(409).send("Error occur in inserting bank account");
             } else {
                 res.status(200).json({ message: "Bank account added successfully", data: createResult[0].insertId });
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
+            
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
@@ -62,7 +63,7 @@ const userType = "Landlord";
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
     } else {
         res.status(400).send("One or more parameters are undefined.");
@@ -75,7 +76,6 @@ const userType = "Landlord";
 exports.GetBankAccount = async (req, res) => {
     const { userId,userType } = req.user;
     console.log(req.user)
-    // const { userId } = req.body;
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -83,18 +83,19 @@ exports.GetBankAccount = async (req, res) => {
             if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data not found");
+                res.status(404).json({
+                    message: "Bank Account data not found"
+                });
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
 
 exports.GetBankAccountAdmin = async (req, res) => {
     const { userId,userType } = req.query;
-    console.log(req.query)
-    // const { userId } = req.body;
+    // console.log(req.query)
         try {
             const getResult = await queryRunner(selectQuery("bankAccount", "userId", "userType"),
             [userId,userType]
@@ -102,11 +103,11 @@ exports.GetBankAccountAdmin = async (req, res) => {
             if (getResult[0].length > 0) {   
                 res.status(200).json({data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data not found");
+                res.status(404).send("Bank Account data not found");
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Create bank Account ############################################################
@@ -120,11 +121,11 @@ exports.updateBankAccountStatus = async (req, res) => {
             if(getResult[0].affectedRows > 0) {
                 res.status(200).json({message : "Status Updated Successful", data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account status is not updated");
+                res.status(422).send("Bank Account status is not updated");
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Update bank Account Status ############################################################
@@ -141,11 +142,11 @@ exports.updateBankAccountTenant = async (req, res) => {
             if(getResult[0].affectedRows > 0) {
                 res.status(200).json({message : "BankAccount Updated Successful", data: getResult[0] });
             } else {
-                res.status(201).send("Bank Account data is not updated");
+                res.status(422).send("Bank Account data is not updated");
             }
         } catch (error) {
             console.log(error);
-            res.status(400).send("Error");
+            res.status(500).json({ message: "Error", error: error.message });
         }
 };
   //  ############################# Update bank Account ############################################################
@@ -177,17 +178,17 @@ exports.updateBankAccountTenant = async (req, res) => {
    
       //  ############################# Update bank Account Status ############################################################
     exports.updatePropertyBankAccount = async (req, res) => {
-        const { id, UPOID, accountName} = req.body;
+        const { id, description, accountName,isActive} = req.body;
             try {
-                const getResult = await queryRunner(updatePropertyBankAccountQuery,[UPOID, accountName, id]); 
+                const getResult = await queryRunner(updatePropertyBankAccountQuery,[accountName,description,isActive, id]); 
                 if(getResult[0].affectedRows > 0) {
                     res.status(200).json({message : "Property Account Updated Successful"});
                 } else {
-                    res.status(201).send("Property Account is not updated");
+                    res.status(422).send("Property Account is not updated");
                 }
             } catch (error) {
                 console.log(error);
-                res.status(400).send("Error");
+                res.status(500).json({ message: "Error", error: error.message });
             }
     };
       //  ############################# Property Account ############################################################

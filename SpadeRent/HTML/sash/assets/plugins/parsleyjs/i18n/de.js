@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('de', {
   defaultMessage: "Die Eingabe scheint nicht korrekt zu sein.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('de', {
   check:          "Wählen Sie zwischen %s und %s Angaben.",
   equalto:        "Dieses Feld muss dem anderen entsprechen."
 });
-
 Parsley.setLocale('de');

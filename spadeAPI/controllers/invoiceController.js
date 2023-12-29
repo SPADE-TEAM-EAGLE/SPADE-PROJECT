@@ -25,7 +25,8 @@ const {
   deleteVendorCategories,
   invoiceAmountQuery,
   invoiceIdUpdate,
-  invoiceCount
+  invoiceCount,
+  checkInvoiceId
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -49,23 +50,25 @@ exports.createInvoice = async (req, res) => {
     lineItems,
     sendmails,
     totalAmount,
-    images
+    images,
+    invoiceId,
   } = req.body;
+  console.log(invoiceId)
   try {
     const { userId,userName,businessName,invoiceEmail } = req.user;
     // const { userId,userName,businessName,invoiceEmail } = req.body;
     const currentDate = new Date();
     const notify = 0;
-    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate]);
+    const invoiceResult = await queryRunner(insertInvoice, [userId, tenantID, invoiceType, startDate, endDate, frequency, dueDate, dueDays, repeatTerms, terms, additionalNotes, "Unpaid", currentDate, totalAmount,notify, startDate,invoiceId]);
     if (invoiceResult.affectedRows === 0) {
       res.status(400).send("Error occur in creating invoice");
     } else {
       // select tenants
       const invoiceID = invoiceResult[0].insertId;
-      const invoiceCountIdResult = await queryRunner(invoiceCount, [userId]);
-      let customInvoiceId = invoiceCountIdResult[0][0].count + 1;
-      customInvoiceId = "Invoice"+customInvoiceId;
-      const invoiceIdUpdateResult = await queryRunner(invoiceIdUpdate ,[customInvoiceId, invoiceID]);
+      // const invoiceCountIdResult = await queryRunner(invoiceCount, [userId]);
+      // let customInvoiceId = invoiceCountIdResult[0][0].count + 1;
+      // customInvoiceId = "Invoice"+customInvoiceId;
+      // const invoiceIdUpdateResult = await queryRunner(invoiceIdUpdate ,[customInvoiceId, invoiceID]);
       const selectTenantsResult = await queryRunner(
         selectQuery("tenants", "id"),
         [tenantID]
@@ -157,8 +160,8 @@ exports.createInvoice = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json({"Error":error});
+    // console.log(error);
+    return res.status(400).json({ message: "Error", error: error.message });
   }
  };
 //  ############################# Create Invoice END ############################################################
@@ -190,8 +193,7 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("Error Invoice Status update"+error);
+   return res.status(500).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# update Invoice Status End ############################################################
@@ -199,14 +201,11 @@ exports.putInvoiceStatusUpdates = async (req, res) => {
 //  ############################# View All Invoices Start ############################################################
 exports.getAllInvoices = async (req, res) => {
   try {
-    // const { userId } = req.body;
-    // console.log(111)
+
     const { userId,businessLogo } = req.user;
-    // console.log(userId)
     const getAllInvoicesResult = await queryRunner(getAllInvoicesquery, [
       userId,
     ]);
-    // console.log(getAllInvoicesResult[0])
     if (getAllInvoicesResult[0].length > 0) {
       for (let i = 0; i < getAllInvoicesResult[0].length; i++) {
         const invoiceID = getAllInvoicesResult[0][i].invoiceID;
@@ -230,13 +229,12 @@ exports.getAllInvoices = async (req, res) => {
         message: "All Invoice successful",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("All Invoice "+error);
+   return res.status(500).json({ message: "Error in All Invoice", error: error.message });
   }
 };
 //  ############################# View All Invoice  End ############################################################
@@ -287,8 +285,7 @@ exports.getByIdInvoices = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    res.send("Error occur in Invoice by ID"+error);
+   return res.status(400).json({ message: "Error occur in Invoice by ID", error: error.message });
   }
 };
 //  ############################# Invoice By ID End ############################################################
@@ -459,8 +456,8 @@ exports.UpdateInvoice = async (req, res) => {
     }
 
   } catch (error) {
-    console.log(error);
-    return res.status(400).send("Error occurred while updating invoice"+error);
+    // console.log(error);
+    return res.status(400).json({ message: "Error occurred while updating invoice", error: error.message });
   }
 };
 //  ############################# Update Invoice END ############################################################
@@ -503,8 +500,8 @@ exports.invoiceDelete = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error from delete invoice "+error);
-    console.log(error);
+    return res.status(400).json({ message: "Error from delete invoice ", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# Delete invoice End ############################################################
@@ -567,8 +564,9 @@ exports.resendEmail = async (req, res) => {
       message: " Resend Email successful",
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Error"+error);
+    
+    return res.status(400).json({ message: "Error Resend email ", error: error.message });
+    
   }
 };
 //  ############################# Resend Email Invoice END ############################################################
@@ -595,6 +593,7 @@ exports.resendEmail = async (req, res) => {
 exports.createInvoiceCategories = async (req, res) => {
   try {
     const data = req.body;
+    
     // console.log(data)
     const { userId } = req.user;
     let createInvoiceCategoriesResult;
@@ -667,7 +666,7 @@ exports.createInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories"+error);
+    return res.status(400).json({ message: "Error from create invoice categories ", error: error.message });
   }
 };
 // ############################# create invoice categories ############################################################
@@ -692,9 +691,10 @@ exports.updateInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from update invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
+
 exports.getInvoiceCategories = async (req, res) => {
   try {
     const { userId } = req.user;
@@ -713,7 +713,7 @@ exports.getInvoiceCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from create invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
 exports.getInvoiceCategoriesText = async (req, res) => {
@@ -730,8 +730,9 @@ exports.getInvoiceCategoriesText = async (req, res) => {
         data: invoiceImagecheckresult[0][0],
       });
     }
-  } catch {
-    res.send("Error from create invoice categories");
+  } catch(error) {
+    return res.status(400).json({ message: "Error ", error: error.message });
+
   }
 };
 exports.deleteInCategories = async (req, res) => {
@@ -753,7 +754,7 @@ exports.deleteInCategories = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete invoice categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
   }
 };
 
@@ -768,7 +769,7 @@ exports.deleteVendCategories = async (req, res) => {
       [catId]
     );
     if (VendorCategoryCheckResult[0].length > 0) {
-      res.status(200).json({
+      res.status(422).json({
         Message: `Unable To Delete this Category`,
         Reason: `This Category is assign to ${VendorCategoryCheckResult[0][0].firstName} ${VendorCategoryCheckResult[0][0].lastName}`,
       });
@@ -782,14 +783,15 @@ exports.deleteVendCategories = async (req, res) => {
         message: "Vendor Categories deleted successfully",
       });
     } else {
-      res.status(400).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
   }
   } catch (error) {
     console.log(error);
-    res.send("Error from delete Vendor categories"+error);
+    return res.status(400).json({ message: "Error ", error: error.message });
+
   }
 };
 
@@ -802,9 +804,16 @@ exports.invoiceAmountCount = async (req, res) => {
     const { userId } = req.user; 
     const {start, end } = req.params; 
     const invoiceAmountResult = await queryRunner(invoiceAmountQuery ,[userId, start, end]);
+    if(invoiceAmountResult[0].length > 0){
       res.status(200).json({
         data : invoiceAmountResult
       });
+    }else{
+      res.status(404).json({
+        Message : "No data Fond"
+      });
+    }
+      
     // }
   } catch (error) {
     res.status(400).json({
@@ -814,3 +823,35 @@ exports.invoiceAmountCount = async (req, res) => {
 
 }
 // ####################################### Invoice Amount Count ################################################
+
+// ####################################### Invoice ID ################################################
+
+exports.InvoiceID = async (req, res) => {
+  try {
+    const {userId, idPattern} = req.user
+    const tenantIdCheckresult = await queryRunner(checkInvoiceId, [userId]);
+    console.log(userId,tenantIdCheckresult[0])
+    let tenantId;
+    if (tenantIdCheckresult[0].length > 0) {
+      tenantId = tenantIdCheckresult[0][0]?.cInvoiceId?.split("-");
+      let lastPart = parseInt(tenantId[tenantId?.length - 1], 10) + 1;
+      lastPart = lastPart?.toString()?.padStart(4, '0');
+      tenantId = `SR-${idPattern}-INVO-${lastPart}`;
+      res.status(200).json({ message: "InvoiceId",ID : tenantId });  
+    } else {
+      tenantId = `SR-${idPattern}-INVO-0001`;
+      res.status(200).json({ message: "InvoiceId",ID : tenantId });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+  }
+};
+
+
+// ####################################### Invoice ID ################################################
+
+
+
+

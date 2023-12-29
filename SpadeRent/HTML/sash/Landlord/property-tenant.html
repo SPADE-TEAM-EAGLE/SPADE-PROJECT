@@ -29,337 +29,7 @@
                 window.location="./login_module.html"
             }
         </script>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        
-        .panel-body {
-            padding: 0px;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 0.938rem;
-            line-height: 1.875rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            
-            letter-spacing: 0.0145455em;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-            
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: green;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-            
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-            
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-            
-        }
-        
-        button.btn-close {
-            right: -7px;
-        }
-        .btn-close {
-            width: 2.5rem !important;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                
-                letter-spacing: 0.0145455em;
-            }
-            #top_main_image {
-                display: none;
-            }
-            
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-            .modal-footer .button-left {
-                margin: auto;
-            }
-            
-            .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-           
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-        }
-        @media (max-width:320px) {
-            
-        }
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-        </style>
+        <link rel="stylesheet" href="../assets/pageCss/landlordCss/property-tenant.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
         <div
@@ -637,7 +307,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="prospects.html" style="color: white;">Prospect</a>
+                                        <a href="prospects.html" style="color: white;">Prospects</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -772,6 +442,9 @@
                                                 </a>
                                             </div>
                                             <div class="d-flex country">
+                                                <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                        </div>
+                                            <div class="d-flex country">
                                                 <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                             </div>
                                             <div class="d-flex country">
@@ -898,6 +571,13 @@
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
                                         </li>
+                                        <li>
+                                            <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                        </li>
+                                        <li>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                        </li>
+    
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
                                         </li>
@@ -1215,6 +895,7 @@
                                                     <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable">
                                                         <thead>
                                                             <tr>
+                                                                <th>#</th>
                                                                 <th>TENANT ID</th>
                                                                 <th>TENANT NAME</th>
                                                                 <th>CONTACT INFO</th>
@@ -1468,23 +1149,24 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                         }, 2000);
-                        console.log(error);
+                        // console.log(error);
                     }
                 });
             });
 </script>
 <script src="../assets/js/intercom.js"></script>
 <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+<script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
 <script src="../assets/js/email-phone.js"></script>
 <script>
         $(document).ready(function() {
@@ -1496,10 +1178,17 @@
                 },
                 success: function ({ userName, image,units,create_at,planID,...rest }) {
                     adjustPlan(rest)
-                    if(image!==" " && image!==null && image!== ""){
-                $("#user-img").attr("src", image)
-                $("#user-img-dark").attr("src", image)
-            }
+            localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
+                        $("#user-img").attr("src", image)
+                        $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
+                    }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1521,14 +1210,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -1538,14 +1228,15 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function() {
@@ -1591,7 +1282,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
-                    console.log(data)
+                    // console.log(data)
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
                                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -1601,19 +1292,20 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     $("#property_address").text(toTitleCase(data.address)+", "+toTitleCase(data.city)+", "+toTitleCase(data.state))
                 },
                 error: function(xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log('Error: ' + error);
+                    // console.log('Error: ' + error);
                 }
             });
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
-                    var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+                    var column = $(this).find('th:nth-child(' + (columnIndex+1) + '), td:nth-child(' + (columnIndex+1) + ')');
                     isColumnVisible ? column.show() : column.hide();
                 });
             });
@@ -1628,14 +1320,14 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idA - idB;
                     });
                 } else if (selectedFilter === 'descending') {
                     rows.sort(function (a, b) {
-                        var idA = parseInt($(a).find('.rentAmount').text());
-                        var idB = parseInt($(b).find('.rentAmount').text());
+                        var idA = parseInt($(a).find('.serial-number').text());
+                        var idB = parseInt($(b).find('.serial-number').text());
                         return idB - idA;
                     });
                 }
@@ -1661,7 +1353,7 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
         $('#table_body tr:visible:gt(' + (numRowsToShow - 1) + ')').hide();
     }
 });
-            console.log(propertyId)
+            // console.log(propertyId)
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/viewPropertyTenant',
                 type: 'GET',
@@ -1682,10 +1374,11 @@ var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                         tableBody.append(row);
                     }
                     else {
-                        console.log(data[0][0])
+                        // console.log(data[0][0])
                         tableBody.empty();
-                        data[0]?.forEach(function (tenant) {
-                            console.log(tenant)
+                        data[0]?.forEach(function (tenant,index) {
+                            // console.log(tenant)
+                            var serial='<td class="serial-number">'+(index+1)+'</td>';
                             var tenantID = '<td>' + tenant.tenantID + '</td>';
                             var tenantName = '<td class="tenant-id tenantName" style="font-weight: 600;">' + tenant.firstName + " " + tenant.lastName + '</td>';
                             var contactInfo = '<td class="tenant-id" style="font-weight: 600;">' + `${tenant.tPhoneNumber ? tenant.tPhoneNumber : "Not set"}` + '</td>';
@@ -1735,7 +1428,7 @@ if (tenant.leaseEndDate) {
 } else {
     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';
 }
-                            var row = '<tr>' + tenantID + tenantName + contactInfo + rentAmount
+                            var row = '<tr>'+serial + tenantID + tenantName + contactInfo + rentAmount
                              + assignUnit + Leasestartdate + leaseEndDate + '</tr>';
                             tableBody.append(row);
                         });
@@ -1746,7 +1439,7 @@ if (tenant.leaseEndDate) {
                             propertyId = propertyIdElement.text();
                             const data = response.data[0].find(obj => obj.id.toString() === propertyId);
                             selectedFiles = data.images
-                            console.log(data.city)
+                            // console.log(data.city)
                             var option = $('<option>').text(data.city).val(data.city);
                             $('#city_update').append(option);
                             option.prop('selected', true);
@@ -1771,14 +1464,22 @@ if (tenant.leaseEndDate) {
                         });
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.log(error)
-                    $("#myModal_warning").modal("show");
-                          setTimeout(function() {
-                             $('#myModal_warning').modal('hide');
-                             window.location = '../Landlord/login_module.html';
-                            }, 2000);
-                }
+                error: function(xhr, status, error) {
+    $('#preloader').css('display', 'none');
+
+    var tableBody = $('#table_body');
+    if (xhr?.responseJSON?.message == "No data found") {  
+        var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
+        tableBody.html(row);  
+    } else {
+        $("#myModal_warning").modal("show");
+        setTimeout(function() {
+            $('#myModal_warning').modal('hide');
+            window.location = '../Landlord/login_module.html';
+        }, 2000);
+    }
+}
+
             })
         });
 </script>
@@ -1794,7 +1495,7 @@ if (tenant.leaseEndDate) {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if(localStorage.getItem("htmlLayout")){
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -1808,10 +1509,11 @@ if (tenant.leaseEndDate) {
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -1822,7 +1524,7 @@ if (tenant.leaseEndDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1837,7 +1539,7 @@ if (tenant.leaseEndDate) {
             if ($('#typehead').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -1850,7 +1552,7 @@ if (tenant.leaseEndDate) {
         })
 </script>
 <script>
-            var helloGuys = true;
+            var loaderStopFirstRun = true;
             $(document).ajaxStop(function () {
                 if(unitsPermission){
                         const actions = ["Add", "Edit", "Delete", "Restrict", "View"];
@@ -1884,7 +1586,7 @@ if (tenant.leaseEndDate) {
                 case "Add":
                     break;
                 case "View":
-                    console.log($("#nav_links li:eq('1')"))
+                    // console.log($("#nav_links li:eq('1')"))
                     $("#nav_links li:eq('1')").addClass("d-none")
                     break;
                 case "Delete":
@@ -1903,10 +1605,10 @@ if (tenant.leaseEndDate) {
             observer.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
 </script>
 <script>
-            var helloGuys = true;
+            var loaderStopFirstRun = true;
             $(document).ajaxStop(function () {
-                if (helloGuys) {
-                    helloGuys = false;
+                if (loaderStopFirstRun) {
+                    loaderStopFirstRun = false;
                     var customScript = document.createElement('script');
                     customScript.src = "../assets/js/custom.js";
                     document.head.appendChild(customScript);

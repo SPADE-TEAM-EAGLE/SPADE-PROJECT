@@ -16,7 +16,6 @@ $(document).ready(function() {
                 span.addClass('d-none');
             }   
        });
-       
        if (!isEmpty1 && $('#email-exist').hasClass('d-none')) {
            $('#collapseOne-add-tenant').removeClass('show');
            $('#collapseTwo-add-tenant').addClass('show');
@@ -168,16 +167,12 @@ $(document).ready(function() {
        }else{
            isEmpty3 = true;
        }
-
 if(!isEmpty3 && !isEmpty2 && !isEmpty1){
-    // $("#next-add-tenant").addClass('d-none')
     $("#next-add-tenant").attr("id","next")
 }
-
     });
     $("#next-add-property").click(() => {
         //first accordian
-        
         var isEmpty1 = false;
         $('#propertyName, #address, #state, #city, #zip, #propertyType, #propertyTotalSF').each(function() {
             var span = $(this).siblings('.text-danger');
@@ -201,11 +196,9 @@ if(!isEmpty3 && !isEmpty2 && !isEmpty1){
             $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
             $(".accordion-item .icon").eq(0).removeClass("cross");
             $(".accordion-item .icon").eq(0).addClass("tick");
-            
         }
         //second accordian
         var isEmpty2 = false;
-        
         if ($('#units').val() === '') {
             isEmpty2 = true;
             $('#units').addClass('border-danger').removeClass('border-green');
@@ -215,7 +208,6 @@ if(!isEmpty3 && !isEmpty2 && !isEmpty1){
             $('#units').removeClass('border-danger').addClass('border-green');
             $('#units').siblings('.text-danger').addClass('d-none');
         }
-        
         if (!isEmpty2) {
             $('#collapseOne-add-property').removeClass('show');
             $('#collapseTwo-add-property').removeClass('show');
@@ -226,12 +218,9 @@ if(!isEmpty3 && !isEmpty2 && !isEmpty1){
             $(".accordion-item .icon").eq(1).addClass("tick");
         }
 if(!isEmpty2 && !isEmpty1){
-    // $('#collapseTwo-add-property').removeClass('show');
     $("#next-add-property").addClass('d-none')
     $("#next").removeClass("d-none")
-    // $("#next-add-property").attr('id',"next")
  }
- 
      });
      $("#next-add-prospect").click(() => {
         //first accordian
@@ -258,7 +247,6 @@ if(!isEmpty2 && !isEmpty1){
             $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
             $(".accordion-item .icon").eq(0).removeClass("cross");
             $(".accordion-item .icon").eq(0).addClass("tick");
-            
         }
         //second accordian
         var isEmpty2 = false;
@@ -286,19 +274,15 @@ if(!isEmpty2 && !isEmpty1){
             $(".accordion-item .icon").eq(1).addClass("tick");
         }
 if(!isEmpty2 && !isEmpty1){
-    // $('#collapseTwo-add-property').removeClass('show');
     $("#next-add-prospect").addClass('d-none')
     $("#next").removeClass("d-none")
-    // $("#next-add-property").attr('id',"next")
  }
- 
      });
      $(document).on('click', '#next-add-bank', function() {
-        
                 //first accordian
                 var isEmpty1 = true;
                 $(".inputField").each(function() {
-                    console.log("this",$(this))
+                  // console.log("this",$(this))
                     if($(this).hasClass("valid")){
                         isEmpty1 = false;
                         $(this).addClass('border-green');
@@ -312,22 +296,18 @@ if(!isEmpty2 && !isEmpty1){
                         return true;
                     }
                 });
-                
                     var span = $("#accountName").siblings('.text-danger');
-                    
                     if ($("#accountName").val() === '' || $("#accountName").val() == 'Choose...') {
                         isEmpty1 = true;
                         $("#accountName").addClass('border-danger');
                         $("#accountName").removeClass('border-green');
                         span.removeClass('d-none');
-                        
                     }else{
                         isEmpty1 = false;
                         $("#accountName").addClass('border-green');
                         $("#accountName").removeClass('border-danger');
                         span.addClass('d-none');
                     }
-               
                 if (!isEmpty1) {
                     $('#collapseOne-add-property').removeClass('show');
                     $('#collapseTwo-add-property').addClass('show');
@@ -336,49 +316,18 @@ if(!isEmpty2 && !isEmpty1){
                     $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
                     $(".accordion-item .icon").eq(0).removeClass("cross");
                     $(".accordion-item .icon").eq(0).addClass("tick");
-                    
                 }
-                // //second accordian
-                // var isEmpty2 = false;
-                // $('#accountActive').each(function() {
-                //     var span = $(this).siblings('.text-danger');
-                //     if ($(this).val() === '' || $(this).val() == 'Choose...') {
-                //         isEmpty2 = true;
-                //         $(this).addClass('border-danger');
-                //         $(this).removeClass('border-green');
-                //         span.removeClass('d-none');
-                //         return false;
-                //     }else{
-                //         $(this).addClass('border-green');
-                //         $(this).removeClass('border-danger');
-                //         span.addClass('d-none');
-                //     }
-                // });
-                // if (!isEmpty2) {
-                //     $('#collapseOne-add-property').removeClass('show');
-                //     $('#collapseTwo-add-property').removeClass('show');
-                //     $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
-                //     $(".accordion-item .icon").eq(1).removeClass("chevron");
-                //     $(".accordion-item .icon").eq(1).addClass("fi-rs-check-circle");
-                //     $(".accordion-item .icon").eq(1).removeClass("cross");
-                //     $(".accordion-item .icon").eq(1).addClass("tick");
-                // }
-                console.log("isEmpty1",isEmpty1)
+              // console.log("isEmpty1",isEmpty1)
         if(!isEmpty1){
-            // $('#collapseTwo-add-property').removeClass('show');
             $("#next-add-bank").addClass('d-none')
             $("#next-bank").removeClass("d-none")
-            // $("#next-add-property").attr('id',"next")
          }
      });
-
-
      $(document).on('click', '#next-add-bank-property', function() {
-        
         //first accordian
         var isEmpty1 = true;
         $("#next-add-bank-property .inputField").each(function() {
-            console.log("this",$(this))
+          // console.log("this",$(this))
             if($(this).hasClass("valid")){
                 isEmpty1 = false;
                 $(this).addClass('border-green');
@@ -392,33 +341,22 @@ if(!isEmpty2 && !isEmpty1){
                 return true;
             }
         });
-        
             var span = $("#accountName-property").siblings('.text-danger');
-            
             if ($("#accountName-property").val() === '' || $("#accountName-property").val() == 'Choose...') {
                 isEmpty1 = true;
                 $("#accountName-property").addClass('border-danger');
                 $("#accountName-property").removeClass('border-green');
                 span.removeClass('d-none');
-                
             }else{
                 isEmpty1 = false;
                 $("#accountName-property").addClass('border-green');
                 $("#accountName-property").removeClass('border-danger');
                 span.addClass('d-none');
             }
-       
         if (!isEmpty1) {
             $('#collapseOne-add-bank-property').removeClass('show');
             $('#collapseTwo-add-bank-property').addClass('show');
-            // $(".accordion-item .icon").eq(0).removeClass("fi-rs-exclamation");
-            // $(".accordion-item .icon").eq(0).removeClass("chevron");
-            // $(".accordion-item .icon").eq(0).addClass("fi-rs-check-circle");
-            // $(".accordion-item .icon").eq(0).removeClass("cross");
-            // $(".accordion-item .icon").eq(0).addClass("tick");
-            
         }
-        // //second accordian
         var isEmpty2 = false;
         $('#propertySelect').each(function() {
             var span = $(this).siblings('.text-danger');
@@ -437,18 +375,10 @@ if(!isEmpty2 && !isEmpty1){
         if (!isEmpty2) {
             $('#collapseOne-add-bank-property').removeClass('show');
             $('#collapseTwo-add-bank-property').removeClass('show');
-            // $(".accordion-item .icon").eq(1).removeClass("fi-rs-exclamation");
-            // $(".accordion-item .icon").eq(1).removeClass("chevron");
-            // $(".accordion-item .icon").eq(1).addClass("fi-rs-check-circle");
-            // $(".accordion-item .icon").eq(1).removeClass("cross");
-            // $(".accordion-item .icon").eq(1).addClass("tick");
         }
-        
 if(!isEmpty1 && !isEmpty2){
-    // $('#collapseTwo-add-property').removeClass('show');
     $("#next-add-bank-property").addClass('d-none')
     $("#next-bank-property").removeClass("d-none")
-    // $("#next-add-property").attr('id',"next")
  }
 });
 });

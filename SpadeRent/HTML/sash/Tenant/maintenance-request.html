@@ -24,478 +24,11 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
     <script>
         if (!localStorage.getItem("authtoken")) {
-            window.location = "./login_module.html"
+            window.location = "../Tenant/login_module.html"
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-
-        }
-
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-
-            border-radius: 7px;
-            transition: all 1ms;
-
-        }
-
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-
-        }
-
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-
-        .selected-files {
-            margin-top: 10px;
-        }
-
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .custom-file-input {
-            visibility: hidden;
-        }
-
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-
-        .remove-file {
-            cursor: pointer;
-        }
-
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-
-        .panel-body {
-            padding: 0px;
-        }
-
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-
-        .table td {
-            vertical-align: middle !important;
-        }
-
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-
-        .modal-footer button {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-
-            letter-spacing: 0.0145455em;
-
-        }
-
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-
-        }
-
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-
-        .tick {
-            color: green;
-            font-weight: bolder
-        }
-
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-
-        }
-
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-
-        }
-
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-
-        .table-primary {
-            background: #1467B014;
-        }
-
-        .selected-file {
-            position: relative;
-        }
-
-        .file-preview {
-            width: 100%;
-        }
-
-        .file-details {
-            padding: 10px;
-        }
-
-        .delete-file {
-            position: absolute;
-            top: -1px;
-            right: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            color: #000;
-        }
-
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-
-        .color-primary {
-            color: #1467B0;
-        }
-
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-
-        }
-
-        button.btn-close {
-            right: -7px;
-        }
-
-        .btn-close {
-            width: 2.5rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-
-        .del {
-            width: 2rem !important;
-        }
-
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-
-                letter-spacing: 0.0145455em;
-            }
-
-            #top_main_image {
-                display: none;
-            }
-
-            #top_main_card {
-                height: 220px;
-            }
-
-            #nav_links {
-                top: 153px;
-            }
-        }
-
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-
-            .modal-footer .button-left {
-                margin: auto;
-            }
-
-            .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-
-            #email_verification {
-                font-size: 12px;
-            }
-
-            #top_main_image {
-                display: none;
-            }
-
-            #top_main_card {
-                height: 220px;
-            }
-
-            #nav_links {
-                top: 153px;
-            }
-        }
-
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width:320px) {}
-
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-
-            .file-details {
-                padding: 5px;
-            }
-        }
-
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-
-        .dark-mode th {
-            background: #212121 !important;
-        }
-
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-
-        .btn-light {
-            border-color: #000000 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/pageCss/tenantCss/maintenance-request.css">
+    <link rel="stylesheet" href="../assets/pageCss/tenantCss/index.css">
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -527,32 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-body text-center">
-                            <span class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                                    <path fill="#fad383"
-                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
-                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
-                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
-                                </svg>
-                            </span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">
-                                Kindly check your internet connection or please try again
-                                later.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -1008,6 +516,32 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg>
+                            </span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">
+                                Kindly check your internet connection or please try again
+                                later.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page">
         <div class="page-main">
             <div class="app-header header sticky" id="navbar-placeholder">
@@ -1232,10 +766,564 @@
                                 <h2>
                                     <b>Do you want to pay your due balance?</b>
                                 </h2>
-                                <button class="btn btn-primary btn-pill m-2" id="form1show" type="button"
-                                    data-bs-dismiss="modal" aria-label="Close" style="width: fit-content;">
+                                <button class="btn btn-primary btn-pill m-2" id="upgradetopro-btn" type="button"
+                                    style="width: fit-content;">
                                     &nbsp; Paynow &nbsp;
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="selectMethod" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <img class="change-close-color" src="../assets/images/cross-circle.svg">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="../assets/images/select-method-top-icon.png" class="" alt="">
+                                <h1 class="mt-5 mb-0">
+                                    <b style="color:#1467B0;">Choose a payment method</b>
+                                </h1>
+                                <h4>Click one of the options below</h4>
+                                <div class="pricing-tabs">
+                                    <div class="pri-tabs-heading text-center">
+                                        <ul class="nav nav-price mt-5 border border-0 justify-content-center w-100 mb-3"
+                                            style="border-radius: 0px !important;">
+                                            <li>
+                                                <a class="payment-method-tab select-method-tab m-2"
+                                                    style="border-radius: 12px !important;" data-bs-toggle="tab"
+                                                    href="#existing" id="card-modal"><img
+                                                        src="../assets/images/select-method-card.png"></a>
+                                            </li>
+                                            <li>
+                                                <a class="payment-method-tab select-method-tab m-2"
+                                                    style="border-radius: 12px !important;" data-bs-toggle="tab"
+                                                    href="#new-account" id="ach-modal"><img
+                                                        src="../assets/images/select-method-ach.png"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mx-auto mb-3" style="width: 585.008px;
+                                    height: 1px;background: #CFCFCF;"></div>
+                                <p>Your Invoice and other payments will be deducted by this payment method</p>
+                                <button class="btn btn-primary btn-pill m-2 btn-lg"
+                                    id="payment-method-continue-btn" type="button" data-bs-toggle="modal"
+                                    disabled>Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="succesModal_invoice" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content success-modal-content">
+                            <div class="modal-header">
+                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="succes-close">
+                                    <span aria-hidden="true">
+                                        <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body succes-modal" style="padding-top: 70px;padding-bottom: 70px;">
+                                <div class="text-justify ps-2 border-model-line">
+                                    <h2 class="modal-title d-flex align-items-center ps-1">
+                                        <strong class="color-primary">Congratulations!&nbsp;</strong>
+                                        <i class="fi fi-rs-check-circle text-success"></i>
+                                    </h2>
+                                    <p class="ms-2 mb-0 text-start">Your dues are successfully paid!!!</p>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer" style="border-top: 0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal_declined" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered text-center " role="document">
+                        <div class="modal-content tx-size-sm">
+                            <div class="modal-body text-center p-5">
+                                <div class="p-5">
+                                    <button aria-label="Close"
+                                        class="btn-close position-absolute mt-0 btn-pill text-dark"
+                                        data-bs-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <img src="../assets/images/logo_loginmodule.png"
+                                        class="model-account-close-logo mb-2" alt="">
+                                    <h4 class="text-dark tx-semibold" style="font-size: 22px;">
+                                        <span>Error Processing Payment
+                                    </h4>
+                                    <p class="fw-bold text-dark fs-18 mb-1"> Please check your security code, card
+                                        details and connection and try again.</p>
+                                    <p class="fw-bold text-dark fs-18 mb-1">For more information contact to support.</p>
+                                    <p class="mg-b-20 mg-x-20 fw-bold text-primary">support@spaderent.com</p>
+                                    <button aria-label="Close" class="btn btn-primary btn-pill w-auto mt-2"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="upgradetopro-card-modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body mb-5">
+                                <div class="pricing-tabs">
+                                    <div class="pri-tabs-heading text-center">
+                                        <ul class="nav nav-price mt-5">
+                                            <li>
+                                                <a data-bs-toggle="tab" href="#existing-card">Existing</a>
+                                            </li>
+                                            <li>
+                                                <a class="active show" data-bs-toggle="tab" href="#new-account-card">New
+                                                    Account</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane pb-0 active show" id="new-account-card">
+                                            <div class="container p-0">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="col-lg-66">
+                                                        <div class="cardd">
+                                                            <div class="card-headerr">
+                                                                <h3 class="text-center fw-bold">
+                                                                    Add your
+                                                                    <span class="text-primary">Payment</span>
+                                                                    information
+                                                                </h3>
+                                                                <div class="heading-payment px-0">
+                                                                    <p class="payment-paragraph">
+                                                                        <img src="../assets/images/add-payment.png"
+                                                                            alt="Pineapple" class="add-payment-img">
+                                                                        <strong>
+
+                                                                        </strong>
+                                                                        <strong style="float: right;">Total</strong>
+                                                                        <br>
+
+                                                                        <span style="float: right;">$
+                                                                            <span id="payment-total-card">479.88</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-bodyy p-0">
+                                                                <div class="row">
+                                                                    <form action="/charge" method="post"
+                                                                        id="payment-form-card">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <div class="field form-group">
+                                                                                    <label class="fw-bold"
+                                                                                        for="card-number"
+                                                                                        data-tid="scwsdk.form.card_number_label">
+                                                                                        Card
+                                                                                        number
+                                                                                        <span class="text-danger">
+                                                                                            *</span>
+                                                                                    </label>
+                                                                                    <div id="card-number"
+                                                                                        class="input form-controlll">
+                                                                                    </div>
+                                                                                    <div class="underline"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input-card">
+                                                                                    Amount
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+                                                                                    <span
+                                                                                        class="input-group-text">$</span>
+                                                                                    <input id="amount-card" type="text"
+                                                                                        class="form-control"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly
+                                                                                        style="padding: 1rem 0.75rem !important;">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <div class="field form-group">
+                                                                                    <label class="fw-bold"
+                                                                                        for="card-expiry"
+                                                                                        data-tid="scwsdk.form.card_expiry_label">
+                                                                                        Expiration
+                                                                                        <span class="text-danger">
+                                                                                            *</span>
+                                                                                    </label>
+                                                                                    <div id="card-expiry"
+                                                                                        class="input empty form-controlll">
+                                                                                    </div>
+                                                                                    <div class="underline"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <div class="field form-group">
+                                                                                    <label class="fw-bold"
+                                                                                        for="card-cvc"
+                                                                                        data-tid="scwsdk.form.card_cvc_label">
+                                                                                        CVV
+                                                                                        <span class="text-danger">
+                                                                                            *</span>
+                                                                                    </label>
+                                                                                    <div id="card-cvc"
+                                                                                        class="input empty form-controlll">
+                                                                                    </div>
+                                                                                    <div class="underline "></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row"
+                                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                                    <div class="col-lg-12">
+                                                                        </form>
+                                                                        <button onclick="main()"
+                                                                            class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                            Submit
+                                                                            Payment
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="existing-card">
+                                            <div class="container p-0">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="col-lg-66">
+                                                        <div class="cardd">
+                                                            <div class="card-headerr">
+                                                                <div class="row">
+                                                                    <div class="col-lg-2"></div>
+                                                                    <div class="col-lg-8">
+                                                                        <h3 class="text-center fw-bold">
+                                                                            Streamline Your
+                                                                            <br>
+                                                                            <span class="text-primary">
+                                                                                Rental
+                                                                                Property Management
+                                                                            </span>
+                                                                            <br>
+                                                                            and simplify your accounting tasks.
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="heading-payment px-0">
+                                                                    <p class="payment-paragraph">
+                                                                        <img src="../assets/images/add-payment.png"
+                                                                            alt="Pineapple" class="add-payment-img">
+                                                                        <strong>
+
+                                                                        </strong>
+                                                                        <strong style="float: right;">Total</strong>
+                                                                        <br>
+                                                                        <!-- <span>$
+                                                                                        <span id="payment-amount">39.99</span>
+                                                                                        / Per
+                                                                                        <span id="payment-month">Month</span>
+                                                                                    </span> -->
+                                                                        <span style="float: right;">$
+                                                                            <span
+                                                                                id="payment-total-existing-card">479.88</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-bodyy p-0">
+                                                                <div class="row">
+                                                                    <form action="/charge" method="post"
+                                                                        id="payment-form">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label for="inputState" class="fw-bold">
+                                                                                    Account Name
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <select id="account"
+                                                                                    class="form-select form-control form new-account-dropdown"
+                                                                                    required>
+                                                                                    <option selected>
+                                                                                        Choose...
+                                                                                    </option>
+                                                                                </select>
+                                                                                <span class="text-danger d-none">
+                                                                                    Account
+                                                                                    is required!
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input">
+                                                                                    Amount
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+                                                                                    <span
+                                                                                        class="input-group-text">$</span>
+                                                                                    <input id="amount-existing"
+                                                                                        type="text"
+                                                                                        class="form-control py-4"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row mt-4"
+                                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                                    <div class="col-lg-12">
+                                                                        </form>
+                                                                        <button onclick="main()"
+                                                                            class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                            Submit
+                                                                            Payment
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="upgradetopro-ach-modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="btn-close top-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body mb-5">
+                                <div class="pricing-tabs">
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane pb-0 active show" id="new-account-card">
+                                            <div class="container p-0">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="col-lg-66">
+                                                        <div class="cardd">
+                                                            <div class="card-headerr">
+                                                                <h3 class="text-center fw-bold">
+                                                                    Add your
+                                                                    <span class="text-primary">Payment</span>
+                                                                    information
+                                                                </h3>
+                                                                <div class="heading-payment px-0">
+                                                                    <p class="payment-paragraph">
+                                                                        <img src="../assets/images/add-payment.png"
+                                                                            alt="Pineapple" class="add-payment-img">
+                                                                        <strong>
+
+                                                                        </strong>
+                                                                        <strong style="float: right;">Total</strong>
+                                                                        <br>
+
+                                                                        <span style="float: right;">$
+                                                                            <span id="payment-total-ach">479.88</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-bodyy p-0">
+                                                                <div class="row">
+                                                                    <form action="/charge" method="post"
+                                                                        id="payment-form-card">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input-card">
+                                                                                    Account Number
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+
+                                                                                    <input id="account-number-ach"
+                                                                                        type="text" class="form-control"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly
+                                                                                        style="padding: 1rem 0.75rem !important;">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input-card">
+                                                                                    Routing Number
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+
+                                                                                    <input id="routing-number-ach"
+                                                                                        type="text" class="form-control"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly
+                                                                                        style="padding: 1rem 0.75rem !important;">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input-card">
+                                                                                    Amount
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+                                                                                    <span
+                                                                                        class="input-group-text">$</span>
+                                                                                    <input id="amount-ach" type="text"
+                                                                                        class="form-control"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly
+                                                                                        style="padding: 1rem 0.75rem !important;">
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row mt-2"
+                                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                                    <div class="col-lg-12">
+                                                                        </form>
+                                                                        <button id="submit-ach"
+                                                                            class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                            Submit
+                                                                            Payment
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="existing-card">
+                                            <div class="container p-0">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <div class="col-lg-66">
+                                                        <div class="cardd">
+                                                            <div class="card-headerr">
+                                                                <div class="row">
+                                                                    <div class="col-lg-2"></div>
+                                                                    <div class="col-lg-8">
+                                                                        <h3 class="text-center fw-bold">
+                                                                            Streamline Your
+                                                                            <br>
+                                                                            <span class="text-primary">
+                                                                                Rental
+                                                                                Property Management
+                                                                            </span>
+                                                                            <br>
+                                                                            and simplify your accounting tasks.
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="heading-payment px-0">
+                                                                    <p class="payment-paragraph">
+                                                                        <img src="../assets/images/add-payment.png"
+                                                                            alt="Pineapple" class="add-payment-img">
+                                                                        <strong>
+
+                                                                        </strong>
+                                                                        <strong style="float: right;">Total</strong>
+                                                                        <br>
+                                                                        <span>$
+                                                                            <span id="payment-amount">39.99</span>
+                                                                            / Per
+                                                                            <span id="payment-month">Month</span>
+                                                                        </span>
+                                                                        <span style="float: right;">$
+                                                                            <span id="payment-total">479.88</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-bodyy p-0">
+                                                                <div class="row">
+                                                                    <form action="/charge" method="post"
+                                                                        id="payment-form">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label for="inputState" class="fw-bold">
+                                                                                    Account Name
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <select id="account"
+                                                                                    class="form-select form-control form new-account-dropdown"
+                                                                                    required>
+                                                                                    <option selected>
+                                                                                        Choose...
+                                                                                    </option>
+                                                                                </select>
+                                                                                <span class="text-danger d-none">
+                                                                                    Account
+                                                                                    is required!
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xl-6">
+                                                                                <label class="fw-bold" for="amount"
+                                                                                    id="amount-payable-input">
+                                                                                    Amount
+                                                                                    <span class="text-danger"> *</span>
+                                                                                </label>
+                                                                                <div class="input-group mb-3">
+                                                                                    <span
+                                                                                        class="input-group-text">$</span>
+                                                                                    <input id="amount-existing"
+                                                                                        type="text"
+                                                                                        class="form-control py-4"
+                                                                                        aria-label="Amount (to the nearest dollar)" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row mt-4"
+                                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                                    <div class="col-lg-12">
+                                                                        </form>
+                                                                        <button onclick="main()"
+                                                                            class="btn btn-primary btn-pill btn-lg btn-block btnn fs-20">
+                                                                            Submit
+                                                                            Payment
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1651,7 +1739,7 @@
     <script src="../assets/js/email-verification.js"></script>
     <script src="../assets/js/getNotificationTenant.js"></script>
     <script src="../assets/js/email-phone.js"></script>
-    <script src="../assets/js/chnageOnlineStatusTenant.js"></script>
+    <script src="../assets/js/changeOnlineStatusTenant.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -1661,17 +1749,18 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                  // console.log("getMessagesCountLandlord");
+                  // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log(error);
+                  // console.log(error);
                 }
             });
             $.ajax({
@@ -1683,22 +1772,30 @@
                 },
                 success: function (response) {
                     const { totalAmount, totalAmountPaid, totalAmountUnpaid } = response
-                    console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
+                  // console.log(totalAmount, totalAmountPaid, totalAmountUnpaid)
                     $("#amount-payable").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
                     $("#amount-payable-span").text("$ " + (totalAmountUnpaid.totalUnPaid || 0))
+                    if (!totalAmountUnpaid.totalUnPaid) {
+
+                        $(".btn-paynow-banner").parent().parent().addClass("d-none")
+                    }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
         });
     </script>
     <script src="../assets/js/completeTenantProfile.js"></script>
+    <script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+
     <script>
+        var userData;
         function formatDateMDY(date) {
             var createdDateFormat = new Date(date);
             var day = createdDateFormat.getDate();
@@ -1716,11 +1813,12 @@
                 },
                 success: function (response) {
                     function toTitleCase(str) {
-                        console.log(str)
+                      // console.log(str)
                         return str.replace(/\w\S*/g, function (txt) {
                             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                         });
                     }
+                    userData = response
                     $("#tenant-address").empty()
                     $("#tenant-address").append(`&nbsp;&nbsp; ${response.address + " " + response.city + " " + response.state + " " + response.zipCode}`)
                     $("#header-user").text(toTitleCase(response.userName))
@@ -1728,14 +1826,15 @@
                     $("#tenant-name").append(`<span style="font-weight: 300;">Welcome</span> ${response.userName}`)
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
-                        window.location = './login_module.html';
+                        window.location = '../Tenant/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             });
         })
@@ -1743,7 +1842,7 @@
         var taskInfo = []
         function areAllFieldsFilled(update) {
             if (update) {
-                console.log("this is for update")
+              // console.log("this is for update")
                 var accordion1Fields = $('#myModal_edit input[required], #myModal_edit select[required]');
                 var allFieldsFilled = accordion1Fields.filter(function () {
                     return $(this).val() === '' || $(this).val() === 'Choose...';
@@ -1754,12 +1853,12 @@
             var allFieldsFilled = accordion1Fields.filter(function () {
                 return $(this).val() === '' || $(this).val() === 'Choose...';
             }).length === 0;
-            console.log()
+          // console.log()
             return allFieldsFilled;
         }
         function updateButtonStatus(update) {
             if (update) {
-                console.log("update button")
+              // console.log("update button")
                 var allFieldsFilled = areAllFieldsFilled(update);
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
@@ -1768,7 +1867,7 @@
                 }
             } else {
                 var allFieldsFilled = areAllFieldsFilled();
-                console.log(allFieldsFilled)
+              // console.log(allFieldsFilled)
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
                 } else {
@@ -1808,7 +1907,7 @@
             resetAccordions()
         });
         $('#close,#top-close').on('click', function (e) {
-            console.log(333)
+          // console.log(333)
             e.preventDefault()
             $("#addModal .select2-selection__rendered").empty()
             resetAccordions()
@@ -1816,6 +1915,7 @@
             $(".file-grid").empty()
             $('#addModal').modal('hide');
         })
+
         function getData() {
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
@@ -1826,12 +1926,12 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                  // console.log(response);
                     if (false) {
                         window.location = './new-property.html'
                     } else {
                         function toTitleCase(str) {
-                            console.log(str)
+                          // console.log(str)
                             return str.replace(/\w\S*/g, function (txt) {
                                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                             });
@@ -1848,12 +1948,12 @@
                                 });
                             }
                         }
-                        console.log(tableBody)
+                      // console.log(tableBody)
                         if (response?.data[0].length == 0) {
                             tableBody.append(`<tr><td colspan="12" style="text-align: center;">No Task Found</td></tr>`)
                         } else {
-                            response.data[0]?.forEach(function (task,index) {
-var countIt = `<td class="serial-number">${index+1}</td>`;
+                            response.data[0]?.forEach(function (task, index) {
+                                var countIt = `<td class="serial-number">${index + 1}</td>`;
                                 var image;
                                 if (task.ImageKey) {
                                     if (task.ImageKey.includes(',')) {
@@ -1939,7 +2039,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                                     '<ul class="dropdown-menu">' +
                                     `<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>`
                                 '</ul></td>';
-                                var row = '<tr>'+countIt + image + taskName + assignTo + dueDate +
+                                var row = '<tr>' + countIt + image + taskName + assignTo + dueDate +
                                     relatedTo + status + dropdownMenu + '</tr>';
                                 tableBody.append(row);
                             });
@@ -1975,7 +2075,8 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log(error)
+$('#preloader').css('display','none');
+                  // console.log(error)
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
@@ -1984,9 +2085,44 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
             });
         }
         getData()
+
+
+        var sfc = SafeCharge({
+            env: 'int', // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+            merchantId: '6400701569295268447', // your Merchant ID provided by Nuvei
+            merchantSiteId: '244298' // your Merchant Site ID provided by Nuvei
+        });
+        var ScFields = sfc.fields({
+            fonts: [
+                { cssUrl: 'https://fonts.googleapis.com/css?family=Roboto' }, // include your custom fonts
+            ]
+        })
+        var ScFieldStyles = {
+            base: {
+                color: '#32325D',
+                fontWeight: 500,
+                fontFamily: 'Roboto, Consolas, Menlo, monospace',
+                fontSize: '16px',
+                fontSmoothing: 'antialiased',
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+                ':-webkit-autofill': {
+                    color: '#e39f48',
+                },
+            },
+            invalid: {
+                color: '#E25950',
+                '::placeholder': {
+                    color: '#FFCCA5',
+                },
+            },
+        };
+
+
         $(document).on('click', '#next', function (e) {
             e.preventDefault();
-            $('#addModal').modal('hide');
+            // $('#addModal').modal('hide');
             var task = $("#task").val();
             var status = $("#status").val();
             var priority = $("#priority").val();
@@ -2009,6 +2145,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        // $('#addModal').modal('hide');
                         var imageArray = response.images;
                         taskData = {
                             task: task,
@@ -2027,6 +2164,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                $('#addModal').modal('hide');
                                 if (response === "Task already exists") {
                                     $("#infoModal").modal("show")
                                 }
@@ -2037,20 +2175,22 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                                 }
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log('Error: ' + error);
+                              // console.log('Error: ' + error);
                             }
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
             } else {
@@ -2071,6 +2211,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        $('#addModal').modal('hide');
                         if (response === "Task already exists") {
                             $("#infoModal").modal("show")
                         }
@@ -2081,11 +2222,12 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         }
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                      // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2094,8 +2236,8 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(selectedFiles.length)
-                console.log(file)
+              // console.log(selectedFiles.length)
+              // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2128,7 +2270,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         );
                     }
                 }
-                console.log(file)
+              // console.log(file)
                 if (file instanceof File) {
                     fileElement
                         .append(
@@ -2183,10 +2325,10 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                 });
             } else if (selectedFilter === 'recently-added') {
                 rows.sort(function (a, b) {
-                    console.log($(a), $(b))
+                  // console.log($(a), $(b))
                     var createdAtA = new Date($(a).find('.task-id').attr('data-id'));
                     var createdAtB = new Date($(b).find('.task-id').attr('data-id'));
-                    console.log(createdAtA, createdAtB)
+                  // console.log(createdAtA, createdAtB)
                     return createdAtB - createdAtA;
                 });
             }
@@ -2207,7 +2349,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
         $('#fileInput').on('change', function () {
             var files = Array.from($(this)[0].files);
             files.forEach(function (file) {
-                console.log(file)
+              // console.log(file)
                 file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
             });
             updateSelectedFilesContainer(); // Update the selected files container
@@ -2218,6 +2360,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
             updateSelectedFilesContainer(); // Update the selected files container
         });
     </script>
+    <script src="../assets/js/tenantPayment.js"></script>
     <script>
         const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         const logo = document.getElementById('logo');
@@ -2234,7 +2377,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
                 const data = taskInfo.find(obj => obj.id.toString() == taskId);
-                console.log(data)
+              // console.log(data)
                 if (data.ImageKey) {
                     selectedFiles = data.ImageKey.split(",")
                     updateSelectedFilesContainer()
@@ -2244,10 +2387,10 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                 $("#priority_view").text(data.priority);
                 $("#status_view").text(data.status);
                 $("#notes_view").text(data.notes);
-                console.log($("#notes_view"))
+              // console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
                 data.AssignTo.forEach((item) => {
-                    console.log(item);
+                  // console.log(item);
                     $("#view-task-line-item").append(`
         <tr class="tr">
             <td>
@@ -2300,14 +2443,15 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log($("#tenant-address"))
+                  // console.log($("#tenant-address"))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning_connection").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning_connection').modal('hide');
                     }, 2000);
-                    console.log('Error: ' + error);
+                  // console.log('Error: ' + error);
                 }
             });
             function updateSelectedFilesContainer() {
@@ -2332,19 +2476,19 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                                 $('<div>').addClass('file-preview')
                                     .append($('<img style="height:80px">').attr('src', file))
                             );
-                            console.log(file)
+                          // console.log(file)
                         } else if (file?.endsWith('.pdf')) {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
                             );
-                            console.log(file, "pdf")
+                          // console.log(file, "pdf")
                         } else {
                             fileElement.append(
                                 $('<div>').addClass('file-preview')
                                     .append($('<i>').addClass('fi fi-rs-file')) // Add an appropriate class for other files
                             );
-                            console.log(file)
+                          // console.log(file)
                         }
                     }
                     if (file instanceof File) {
@@ -2408,7 +2552,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+              // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2428,7 +2572,7 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         localStorage.removeItem('authtoken');
                         localStorage.clear();
                         if ($('body').hasClass('dark-mode')) {
@@ -2436,11 +2580,12 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
                         } else if ($('body').hasClass('light-mode')) {
                             localStorage.setItem("sashlightMode", true)
                         }
-                        window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        window.open('../Tenant/login_module.html', "_self")
+                      // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                      // console.log(error);
                     }
                 });
             });
@@ -2479,10 +2624,10 @@ var countIt = `<td class="serial-number">${index+1}</td>`;
         })
     </script>
     <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

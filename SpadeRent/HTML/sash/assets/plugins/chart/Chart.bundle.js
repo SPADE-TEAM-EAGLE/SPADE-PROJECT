@@ -38,7 +38,6 @@
 	}({
 		1: [function(t, e, n) {
 			var r = t(5);
-
 			function i(t) {
 				if (t) {
 					var e = [0, 0, 0],
@@ -64,7 +63,6 @@
 					return n = n || 0 == n ? d(n, 0, 1) : 1, e[3] = n, e
 				}
 			}
-
 			function a(t) {
 				if (t) {
 					var e = t.match(/^hsla?\(\s*([+-]?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/);
@@ -74,7 +72,6 @@
 					}
 				}
 			}
-
 			function o(t) {
 				if (t) {
 					var e = t.match(/^hwb\(\s*([+-]?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/);
@@ -84,23 +81,18 @@
 					}
 				}
 			}
-
 			function s(t, e) {
 				return void 0 === e && (e = void 0 !== t[3] ? t[3] : 1), "rgba(" + t[0] + ", " + t[1] + ", " + t[2] + ", " + e + ")"
 			}
-
 			function l(t, e) {
 				return "rgba(" + Math.round(t[0] / 255 * 100) + "%, " + Math.round(t[1] / 255 * 100) + "%, " + Math.round(t[2] / 255 * 100) + "%, " + (e || t[3] || 1) + ")"
 			}
-
 			function u(t, e) {
 				return void 0 === e && (e = void 0 !== t[3] ? t[3] : 1), "hsla(" + t[0] + ", " + t[1] + "%, " + t[2] + "%, " + e + ")"
 			}
-
 			function d(t, e, n) {
 				return Math.min(Math.max(e, t), n)
 			}
-
 			function h(t) {
 				var e = t.toString(16).toUpperCase();
 				return e.length < 2 ? "0" + e : e
@@ -432,7 +424,6 @@
 					l = s - o;
 				return s == o ? e = 0 : i == s ? e = (a - r) / l : a == s ? e = 2 + (r - i) / l : r == s && (e = 4 + (i - a) / l), (e = Math.min(60 * e, 360)) < 0 && (e += 360), n = (o + s) / 2, [e, 100 * (s == o ? 0 : n <= .5 ? l / (s + o) : l / (2 - s - o)), 100 * n]
 			}
-
 			function i(t) {
 				var e, n, i = t[0],
 					a = t[1],
@@ -442,32 +433,27 @@
 					l = s - o;
 				return n = 0 == s ? 0 : l / s * 1e3 / 10, s == o ? e = 0 : i == s ? e = (a - r) / l : a == s ? e = 2 + (r - i) / l : r == s && (e = 4 + (i - a) / l), (e = Math.min(60 * e, 360)) < 0 && (e += 360), [e, n, s / 255 * 1e3 / 10]
 			}
-
 			function o(t) {
 				var e = t[0],
 					n = t[1],
 					i = t[2];
 				return [a(t)[0], 100 * (1 / 255 * Math.min(e, Math.min(n, i))), 100 * (i = 1 - 1 / 255 * Math.max(e, Math.max(n, i)))]
 			}
-
 			function s(t) {
 				var e, n = t[0] / 255,
 					i = t[1] / 255,
 					a = t[2] / 255;
 				return [100 * ((1 - n - (e = Math.min(1 - n, 1 - i, 1 - a))) / (1 - e) || 0), 100 * ((1 - i - e) / (1 - e) || 0), 100 * ((1 - a - e) / (1 - e) || 0), 100 * e]
 			}
-
 			function l(t) {
 				return S[JSON.stringify(t)]
 			}
-
 			function u(t) {
 				var e = t[0] / 255,
 					n = t[1] / 255,
 					i = t[2] / 255;
 				return [100 * (.4124 * (e = .04045 < e ? Math.pow((e + .055) / 1.055, 2.4) : e / 12.92) + .3576 * (n = .04045 < n ? Math.pow((n + .055) / 1.055, 2.4) : n / 12.92) + .1805 * (i = .04045 < i ? Math.pow((i + .055) / 1.055, 2.4) : i / 12.92)), 100 * (.2126 * e + .7152 * n + .0722 * i), 100 * (.0193 * e + .1192 * n + .9505 * i)]
 			}
-
 			function d(t) {
 				var e = u(t),
 					n = e[0],
@@ -475,7 +461,6 @@
 					a = e[2];
 				return i /= 100, a /= 108.883, n = .008856 < (n /= 95.047) ? Math.pow(n, 1 / 3) : 7.787 * n + 16 / 116, [116 * (i = .008856 < i ? Math.pow(i, 1 / 3) : 7.787 * i + 16 / 116) - 16, 500 * (n - i), 200 * (i - (a = .008856 < a ? Math.pow(a, 1 / 3) : 7.787 * a + 16 / 116))]
 			}
-
 			function h(t) {
 				var e, n, i, a, r, o = t[0] / 360,
 					s = t[1] / 100,
@@ -485,7 +470,6 @@
 				for (var u = 0; u < 3; u++)(i = o + 1 / 3 * -(u - 1)) < 0 && i++, 1 < i && i--, r = 6 * i < 1 ? e + 6 * (n - e) * i : 2 * i < 1 ? n : 3 * i < 2 ? e + (n - e) * (2 / 3 - i) * 6 : e, a[u] = 255 * r;
 				return a
 			}
-
 			function c(t) {
 				var e = t[0] / 60,
 					n = t[1] / 100,
@@ -511,7 +495,6 @@
 						return [i, o, s]
 				}
 			}
-
 			function f(t) {
 				var e, n, i, a, o = t[0] / 360,
 					s = t[1] / 100,
@@ -552,7 +535,6 @@
 				}
 				return [255 * r, 255 * g, 255 * b]
 			}
-
 			function m(t) {
 				var e = t[0] / 100,
 					n = t[1] / 100,
@@ -560,45 +542,38 @@
 					a = t[3] / 100;
 				return [255 * (1 - Math.min(1, e * (1 - a) + a)), 255 * (1 - Math.min(1, n * (1 - a) + a)), 255 * (1 - Math.min(1, i * (1 - a) + a))]
 			}
-
 			function p(t) {
 				var e, n, i, a = t[0] / 100,
 					r = t[1] / 100,
 					o = t[2] / 100;
 				return n = -.9689 * a + 1.8758 * r + .0415 * o, i = .0557 * a + -.204 * r + 1.057 * o, e = .0031308 < (e = 3.2406 * a + -1.5372 * r + -.4986 * o) ? 1.055 * Math.pow(e, 1 / 2.4) - .055 : e *= 12.92, n = .0031308 < n ? 1.055 * Math.pow(n, 1 / 2.4) - .055 : n *= 12.92, i = .0031308 < i ? 1.055 * Math.pow(i, 1 / 2.4) - .055 : i *= 12.92, [255 * (e = Math.min(Math.max(0, e), 1)), 255 * (n = Math.min(Math.max(0, n), 1)), 255 * (i = Math.min(Math.max(0, i), 1))]
 			}
-
 			function v(t) {
 				var e = t[0],
 					n = t[1],
 					i = t[2];
 				return n /= 100, i /= 108.883, e = .008856 < (e /= 95.047) ? Math.pow(e, 1 / 3) : 7.787 * e + 16 / 116, [116 * (n = .008856 < n ? Math.pow(n, 1 / 3) : 7.787 * n + 16 / 116) - 16, 500 * (e - n), 200 * (n - (i = .008856 < i ? Math.pow(i, 1 / 3) : 7.787 * i + 16 / 116))]
 			}
-
 			function y(t) {
 				var e, n, i, a, r = t[0],
 					o = t[1],
 					s = t[2];
 				return a = r <= 8 ? (n = 100 * r / 903.3) / 100 * 7.787 + 16 / 116 : (n = 100 * Math.pow((r + 16) / 116, 3), Math.pow(n / 100, 1 / 3)), [e = e / 95.047 <= .008856 ? e = 95.047 * (o / 500 + a - 16 / 116) / 7.787 : 95.047 * Math.pow(o / 500 + a, 3), n, i = i / 108.883 <= .008859 ? i = 108.883 * (a - s / 200 - 16 / 116) / 7.787 : 108.883 * Math.pow(a - s / 200, 3)]
 			}
-
 			function x(t) {
 				var e, n = t[0],
 					i = t[1],
 					a = t[2];
 				return (e = 360 * Math.atan2(a, i) / 2 / Math.PI) < 0 && (e += 360), [n, Math.sqrt(i * i + a * a), e]
 			}
-
 			function _(t) {
 				return p(y(t))
 			}
-
 			function k(t) {
 				var e, n = t[0],
 					i = t[1];
 				return e = t[2] / 360 * 2 * Math.PI, [n, i * Math.cos(e), i * Math.sin(e)]
 			}
-
 			function w(t) {
 				return M[t]
 			}
@@ -1065,50 +1040,39 @@
 			e = this, n = function() {
 				"use strict";
 				var t, a;
-
 				function c() {
 					return t.apply(null, arguments)
 				}
-
 				function s(t) {
 					return t instanceof Array || "[object Array]" === Object.prototype.toString.call(t)
 				}
-
 				function l(t) {
 					return null != t && "[object Object]" === Object.prototype.toString.call(t)
 				}
-
 				function u(t) {
 					return void 0 === t
 				}
-
 				function d(t) {
 					return "number" == typeof t || "[object Number]" === Object.prototype.toString.call(t)
 				}
-
 				function h(t) {
 					return t instanceof Date || "[object Date]" === Object.prototype.toString.call(t)
 				}
-
 				function f(t, e) {
 					var n, i = [];
 					for (n = 0; n < t.length; ++n) i.push(e(t[n], n));
 					return i
 				}
-
 				function g(t, e) {
 					return Object.prototype.hasOwnProperty.call(t, e)
 				}
-
 				function m(t, e) {
 					for (var n in e) g(e, n) && (t[n] = e[n]);
 					return g(e, "toString") && (t.toString = e.toString), g(e, "valueOf") && (t.valueOf = e.valueOf), t
 				}
-
 				function p(t, e, n, i) {
 					return De(t, e, n, i, !0).utc()
 				}
-
 				function v(t) {
 					return null == t._pf && (t._pf = {
 						empty: !1,
@@ -1127,7 +1091,6 @@
 						weekdayMismatch: !1
 					}), t._pf
 				}
-
 				function b(t) {
 					if (null == t._isValid) {
 						var e = v(t),
@@ -1140,7 +1103,6 @@
 					}
 					return t._isValid
 				}
-
 				function y(t) {
 					var e = p(NaN);
 					return null != t ? m(v(e), t) : v(e).userInvalidated = !0, e
@@ -1151,7 +1113,6 @@
 					return !1
 				};
 				var r = c.momentProperties = [];
-
 				function x(t, e) {
 					var n, i, a;
 					if (u(e._isAMomentObject) || (t._isAMomentObject = e._isAMomentObject), u(e._i) || (t._i = e._i), u(e._f) || (t._f = e._f), u(e._l) || (t._l = e._l), u(e._strict) || (t._strict = e._strict), u(e._tzm) || (t._tzm = e._tzm), u(e._isUTC) || (t._isUTC = e._isUTC), u(e._offset) || (t._offset = e._offset), u(e._pf) || (t._pf = v(e)), u(e._locale) || (t._locale = e._locale), 0 < r.length)
@@ -1159,25 +1120,20 @@
 					return t
 				}
 				var e = !1;
-
 				function _(t) {
 					x(this, t), this._d = new Date(null != t._d ? t._d.getTime() : NaN), this.isValid() || (this._d = new Date(NaN)), !1 === e && (e = !0, c.updateOffset(this), e = !1)
 				}
-
 				function k(t) {
 					return t instanceof _ || null != t && null != t._isAMomentObject
 				}
-
 				function w(t) {
 					return t < 0 ? Math.ceil(t) || 0 : Math.floor(t)
 				}
-
 				function M(t) {
 					var e = +t,
 						n = 0;
 					return 0 !== e && isFinite(e) && (n = w(e)), n
 				}
-
 				function o(t, e, n) {
 					var i, a = Math.min(t.length, e.length),
 						r = Math.abs(t.length - e.length),
@@ -1185,11 +1141,9 @@
 					for (i = 0; i < a; i++)(n && t[i] !== e[i] || !n && M(t[i]) !== M(e[i])) && o++;
 					return o + r
 				}
-
 				function S(t) {
 					!1 === c.suppressDeprecationWarnings && "undefined" != typeof console && console.warn && console.warn("Deprecation warning: " + t)
 				}
-
 				function n(a, r) {
 					var o = !0;
 					return m(function() {
@@ -1207,22 +1161,18 @@
 					}, r)
 				}
 				var i, D = {};
-
 				function C(t, e) {
 					null != c.deprecationHandler && c.deprecationHandler(t, e), D[t] || (S(e), D[t] = !0)
 				}
-
 				function P(t) {
 					return t instanceof Function || "[object Function]" === Object.prototype.toString.call(t)
 				}
-
 				function T(t, e) {
 					var n, i = m({}, t);
 					for (n in e) g(e, n) && (l(t[n]) && l(e[n]) ? (i[n] = {}, m(i[n], t[n]), m(i[n], e[n])) : null != e[n] ? i[n] = e[n] : delete i[n]);
 					for (n in t) g(t, n) && !g(e, n) && l(t[n]) && (i[n] = m({}, i[n]));
 					return i
 				}
-
 				function O(t) {
 					null != t && this.set(t)
 				}
@@ -1232,27 +1182,22 @@
 					return n
 				};
 				var I = {};
-
 				function A(t, e) {
 					var n = t.toLowerCase();
 					I[n] = I[n + "s"] = I[e] = t
 				}
-
 				function F(t) {
 					return "string" == typeof t ? I[t] || I[t.toLowerCase()] : void 0
 				}
-
 				function R(t) {
 					var e, n, i = {};
 					for (n in t) g(t, n) && (e = F(n)) && (i[e] = t[n]);
 					return i
 				}
 				var L = {};
-
 				function Y(t, e) {
 					L[t] = e
 				}
-
 				function W(t, e, n) {
 					var i = "" + Math.abs(t),
 						a = e - i.length;
@@ -1262,7 +1207,6 @@
 					z = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
 					V = {},
 					H = {};
-
 				function B(t, e, n, i) {
 					var a = i;
 					"string" == typeof i && (a = function() {
@@ -1273,7 +1217,6 @@
 						return this.localeData().ordinal(a.apply(this, arguments), t)
 					})
 				}
-
 				function E(t, e) {
 					return t.isValid() ? (e = j(e, t.localeData()), V[e] = V[e] || function(i) {
 						var t, a, e, r = i.match(N);
@@ -1285,10 +1228,8 @@
 						}
 					}(e), V[e](t)) : t.localeData().invalidDate()
 				}
-
 				function j(t, e) {
 					var n = 5;
-
 					function i(t) {
 						return e.longDateFormat(t) || t
 					}
@@ -1312,31 +1253,26 @@
 					rt = /Z|[+-]\d\d(?::?\d\d)?/gi,
 					ot = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
 					st = {};
-
 				function lt(t, n, i) {
 					st[t] = P(n) ? n : function(t, e) {
 						return t && i ? i : n
 					}
 				}
-
 				function ut(t, e) {
 					return g(st, t) ? st[t](e._strict, e._locale) : new RegExp(dt(t.replace("\\", "").replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function(t, e, n, i, a) {
 						return e || n || i || a
 					})))
 				}
-
 				function dt(t) {
 					return t.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")
 				}
 				var ht = {};
-
 				function ct(t, n) {
 					var e, i = n;
 					for ("string" == typeof t && (t = [t]), d(n) && (i = function(t, e) {
 							e[n] = M(t)
 						}), e = 0; e < t.length; e++) ht[t[e]] = i
 				}
-
 				function ft(t, a) {
 					ct(t, function(t, e, n, i) {
 						n._w = n._w || {}, a(t, n._w, n, i)
@@ -1351,11 +1287,9 @@
 					xt = 6,
 					_t = 7,
 					kt = 8;
-
 				function wt(t) {
 					return Mt(t) ? 366 : 365
 				}
-
 				function Mt(t) {
 					return t % 4 == 0 && t % 100 != 0 || t % 400 == 0
 				}
@@ -1374,21 +1308,17 @@
 					return M(t) + (68 < M(t) ? 1900 : 2e3)
 				};
 				var St, Dt = Ct("FullYear", !0);
-
 				function Ct(e, n) {
 					return function(t) {
 						return null != t ? (Tt(this, e, t), c.updateOffset(this, n), this) : Pt(this, e)
 					}
 				}
-
 				function Pt(t, e) {
 					return t.isValid() ? t._d["get" + (t._isUTC ? "UTC" : "") + e]() : NaN
 				}
-
 				function Tt(t, e, n) {
 					t.isValid() && !isNaN(n) && ("FullYear" === e && Mt(t.year()) && 1 === t.month() && 29 === t.date() ? t._d["set" + (t._isUTC ? "UTC" : "") + e](n, t.month(), Ot(n, t.month())) : t._d["set" + (t._isUTC ? "UTC" : "") + e](n))
 				}
-
 				function Ot(t, e) {
 					if (isNaN(t) || isNaN(e)) return NaN;
 					var n, i = (e % (n = 12) + n) % n;
@@ -1418,7 +1348,6 @@
 				var It = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
 					At = "January_February_March_April_May_June_July_August_September_October_November_December".split("_");
 				var Ft = "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_");
-
 				function Rt(t, e) {
 					var n;
 					if (!t.isValid()) return t;
@@ -1427,13 +1356,11 @@
 						else if (!d(e = t.localeData().monthsParse(e))) return t;
 					return n = Math.min(t.date(), Ot(t.year(), e)), t._d["set" + (t._isUTC ? "UTC" : "") + "Month"](e, n), t
 				}
-
 				function Lt(t) {
 					return null != t ? (Rt(this, t), c.updateOffset(this, !0), this) : Pt(this, "Month")
 				}
 				var Yt = ot;
 				var Wt = ot;
-
 				function Nt() {
 					function t(t, e) {
 						return e.length - t.length
@@ -1446,17 +1373,14 @@
 					for (e = 0; e < 24; e++) r[e] = dt(r[e]);
 					this._monthsRegex = new RegExp("^(" + r.join("|") + ")", "i"), this._monthsShortRegex = this._monthsRegex, this._monthsStrictRegex = new RegExp("^(" + a.join("|") + ")", "i"), this._monthsShortStrictRegex = new RegExp("^(" + i.join("|") + ")", "i")
 				}
-
 				function zt(t) {
 					var e = new Date(Date.UTC.apply(null, arguments));
 					return t < 100 && 0 <= t && isFinite(e.getUTCFullYear()) && e.setUTCFullYear(t), e
 				}
-
 				function Vt(t, e, n) {
 					var i = 7 + e - n;
 					return -((7 + zt(t, 0, i).getUTCDay() - e) % 7) + i - 1
 				}
-
 				function Ht(t, e, n, i, a) {
 					var r, o, s = 1 + 7 * (e - 1) + (7 + n - i) % 7 + Vt(t, i, a);
 					return o = s <= 0 ? wt(r = t - 1) + s : s > wt(t) ? (r = t + 1, s - wt(t)) : (r = t, s), {
@@ -1464,7 +1388,6 @@
 						dayOfYear: o
 					}
 				}
-
 				function Bt(t, e, n) {
 					var i, a, r = Vt(t.year(), e, n),
 						o = Math.floor((t.dayOfYear() - r - 1) / 7) + 1;
@@ -1473,7 +1396,6 @@
 						year: a
 					}
 				}
-
 				function Et(t, e, n) {
 					var i = Vt(t, e, n),
 						a = Vt(t + 1, e, n);
@@ -1506,7 +1428,6 @@
 				var qt = ot;
 				var Zt = ot;
 				var Xt = ot;
-
 				function Jt() {
 					function t(t, e) {
 						return e.length - t.length
@@ -1519,17 +1440,14 @@
 					for (o.sort(t), s.sort(t), l.sort(t), u.sort(t), e = 0; e < 7; e++) s[e] = dt(s[e]), l[e] = dt(l[e]), u[e] = dt(u[e]);
 					this._weekdaysRegex = new RegExp("^(" + u.join("|") + ")", "i"), this._weekdaysShortRegex = this._weekdaysRegex, this._weekdaysMinRegex = this._weekdaysRegex, this._weekdaysStrictRegex = new RegExp("^(" + l.join("|") + ")", "i"), this._weekdaysShortStrictRegex = new RegExp("^(" + s.join("|") + ")", "i"), this._weekdaysMinStrictRegex = new RegExp("^(" + o.join("|") + ")", "i")
 				}
-
 				function $t() {
 					return this.hours() % 12 || 12
 				}
-
 				function Kt(t, e) {
 					B(t, 0, 0, function() {
 						return this.localeData().meridiem(this.hours(), this.minutes(), e)
 					})
 				}
-
 				function Qt(t, e) {
 					return e._meridiemParse
 				}
@@ -1615,11 +1533,9 @@
 					},
 					ie = {},
 					ae = {};
-
 				function re(t) {
 					return t ? t.toLowerCase().replace("_", "-") : t
 				}
-
 				function oe(t) {
 					var e = null;
 					if (!ie[t] && void 0 !== jn && jn && jn.exports) try {
@@ -1627,12 +1543,10 @@
 					} catch (t) {}
 					return ie[t]
 				}
-
 				function se(t, e) {
 					var n;
 					return t && ((n = u(e) ? ue(t) : le(t, e)) ? te = n : "undefined" != typeof console && console.warn && console.warn("Locale " + t + " not found. Did you forget to load it?")), te._abbr
 				}
-
 				function le(t, e) {
 					if (null === e) return delete ie[t], null;
 					var n, i = ne;
@@ -1650,7 +1564,6 @@
 						le(t.name, t.config)
 					}), se(t), ie[t]
 				}
-
 				function ue(t) {
 					var e;
 					if (t && t._locale && t._locale._abbr && (t = t._locale._abbr), !t) return te;
@@ -1670,16 +1583,13 @@
 						return te
 					}(t)
 				}
-
 				function de(t) {
 					var e, n = t._a;
 					return n && -2 === v(t).overflow && (e = n[mt] < 0 || 11 < n[mt] ? mt : n[pt] < 1 || n[pt] > Ot(n[gt], n[mt]) ? pt : n[vt] < 0 || 24 < n[vt] || 24 === n[vt] && (0 !== n[bt] || 0 !== n[yt] || 0 !== n[xt]) ? vt : n[bt] < 0 || 59 < n[bt] ? bt : n[yt] < 0 || 59 < n[yt] ? yt : n[xt] < 0 || 999 < n[xt] ? xt : -1, v(t)._overflowDayOfYear && (e < gt || pt < e) && (e = pt), v(t)._overflowWeeks && -1 === e && (e = _t), v(t)._overflowWeekday && -1 === e && (e = kt), v(t).overflow = e), t
 				}
-
 				function he(t, e, n) {
 					return null != t ? t : null != e ? e : n
 				}
-
 				function ce(t) {
 					var e, n, i, a, r, o = [];
 					if (!t._d) {
@@ -1729,7 +1639,6 @@
 						["HH", /\d\d/]
 					],
 					be = /^\/?Date\((\-?\d+)/i;
-
 				function ye(t) {
 					var e, n, i, a, r, o, s = t._i,
 						l = fe.exec(s) || ge.exec(s);
@@ -1757,7 +1666,6 @@
 					} else t._isValid = !1
 				}
 				var xe = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
-
 				function _e(t, e, n, i, a, r) {
 					var o = [function(t) {
 						var e = parseInt(t, 10); {
@@ -1780,7 +1688,6 @@
 					PDT: -420,
 					PST: -480
 				};
-
 				function we(t) {
 					var e, n, i, a = xe.exec(t._i.replace(/\([^)]*\)|[\n\t]/g, " ").replace(/(\s\s+)/g, " ").replace(/^\s\s*/, "").replace(/\s\s*$/, ""));
 					if (a) {
@@ -1795,7 +1702,6 @@
 						}(a[8], a[9], a[10]), t._d = zt.apply(null, t._a), t._d.setUTCMinutes(t._d.getUTCMinutes() - t._tzm), v(t).rfc2822 = !0
 					} else t._isValid = !1
 				}
-
 				function Me(t) {
 					if (t._f !== c.ISO_8601)
 						if (t._f !== c.RFC_2822) {
@@ -1812,7 +1718,6 @@
 						} else we(t);
 					else ye(t)
 				}
-
 				function Se(t) {
 					var e, n, i, a, r = t._i,
 						o = t._f;
@@ -1834,7 +1739,6 @@
 						}
 					}(e) : d(n) ? e._d = new Date(n) : c.createFromInputFallback(e), b(t) || (t._d = null), t))
 				}
-
 				function De(t, e, n, i, a) {
 					var r, o = {};
 					return !0 !== n && !1 !== n || (i = n, n = void 0), (l(t) && function(t) {
@@ -1845,7 +1749,6 @@
 						return !0
 					}(t) || s(t) && 0 === t.length) && (t = void 0), o._isAMomentObject = !0, o._useUTC = o._isUTC = a, o._l = n, o._i = t, o._f = e, o._strict = i, (r = new _(de(Se(o))))._nextDay && (r.add(1, "d"), r._nextDay = void 0), r
 				}
-
 				function Ce(t, e, n, i) {
 					return De(t, e, n, i, !1)
 				}
@@ -1860,7 +1763,6 @@
 						var t = Ce.apply(null, arguments);
 						return this.isValid() && t.isValid() ? this < t ? this : t : y()
 					});
-
 				function Oe(t, e) {
 					var n, i;
 					if (1 === e.length && s(e[0]) && (e = e[0]), !e.length) return Ce();
@@ -1868,7 +1770,6 @@
 					return n
 				}
 				var Ie = ["year", "quarter", "month", "week", "day", "hour", "minute", "second", "millisecond"];
-
 				function Ae(t) {
 					var e = R(t),
 						n = e.year || 0,
@@ -1891,15 +1792,12 @@
 						return !0
 					}(e), this._milliseconds = +d + 1e3 * u + 6e4 * l + 1e3 * s * 60 * 60, this._days = +o + 7 * r, this._months = +a + 3 * i + 12 * n, this._data = {}, this._locale = ue(), this._bubble()
 				}
-
 				function Fe(t) {
 					return t instanceof Ae
 				}
-
 				function Re(t) {
 					return t < 0 ? -1 * Math.round(-1 * t) : Math.round(t)
 				}
-
 				function Le(t, n) {
 					B(t, 0, 0, function() {
 						var t = this.utcOffset(),
@@ -1911,7 +1809,6 @@
 					n._useUTC = !0, n._tzm = We(rt, t)
 				});
 				var Ye = /([\+\-]|\d\d)/gi;
-
 				function We(t, e) {
 					var n = (e || "").match(t);
 					if (null === n) return null;
@@ -1919,23 +1816,19 @@
 						a = 60 * i[1] + M(i[2]);
 					return 0 === a ? 0 : "+" === i[0] ? a : -a
 				}
-
 				function Ne(t, e) {
 					var n, i;
 					return e._isUTC ? (n = e.clone(), i = (k(t) || h(t) ? t.valueOf() : Ce(t).valueOf()) - n.valueOf(), n._d.setTime(n._d.valueOf() + i), c.updateOffset(n, !1), n) : Ce(t).local()
 				}
-
 				function ze(t) {
 					return 15 * -Math.round(t._d.getTimezoneOffset() / 15)
 				}
-
 				function Ve() {
 					return !!this.isValid() && (this._isUTC && 0 === this._offset)
 				}
 				c.updateOffset = function() {};
 				var He = /^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/,
 					Be = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
-
 				function Ee(t, e) {
 					var n, i, a, r = t,
 						o = null;
@@ -1968,12 +1861,10 @@
 						return n
 					}(Ce(r.from), Ce(r.to)), (r = {}).ms = a.milliseconds, r.M = a.months), i = new Ae(r), Fe(t) && g(t, "_locale") && (i._locale = t._locale), i
 				}
-
 				function je(t, e) {
 					var n = t && parseFloat(t.replace(",", "."));
 					return (isNaN(n) ? 0 : n) * e
 				}
-
 				function Ue(t, e) {
 					var n = {
 						milliseconds: 0,
@@ -1981,14 +1872,12 @@
 					};
 					return n.months = e.month() - t.month() + 12 * (e.year() - t.year()), t.clone().add(n.months, "M").isAfter(e) && --n.months, n.milliseconds = +e - +t.clone().add(n.months, "M"), n
 				}
-
 				function Ge(i, a) {
 					return function(t, e) {
 						var n;
 						return null === e || isNaN(+e) || (C(a, "moment()." + a + "(period, number) is deprecated. Please use moment()." + a + "(number, period). See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info."), n = t, t = e, e = n), qe(this, Ee(t = "string" == typeof t ? +t : t, e), i), this
 					}
 				}
-
 				function qe(t, e, n, i) {
 					var a = e._milliseconds,
 						r = Re(e._days),
@@ -2000,13 +1889,11 @@
 				};
 				var Ze = Ge(1, "add"),
 					Xe = Ge(-1, "subtract");
-
 				function Je(t, e) {
 					var n = 12 * (e.year() - t.year()) + (e.month() - t.month()),
 						i = t.clone().add(n, "months");
 					return -(n + (e - i < 0 ? (e - i) / (i - t.clone().add(n - 1, "months")) : (e - i) / (t.clone().add(n + 1, "months") - i))) || 0
 				}
-
 				function $e(t) {
 					var e;
 					return void 0 === t ? this._locale._abbr : (null != (e = ue(t)) && (this._locale = e), this)
@@ -2015,15 +1902,12 @@
 				var Ke = n("moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.", function(t) {
 					return void 0 === t ? this.localeData() : this.locale(t)
 				});
-
 				function Qe() {
 					return this._locale
 				}
-
 				function tn(t, e) {
 					B(0, [t, t.length], 0, e)
 				}
-
 				function en(t, e, n, i, a) {
 					var r;
 					return null == t ? Bt(this, i, a).year : ((r = Et(t, i, a)) < e && (e = r), function(t, e, n, i, a) {
@@ -2071,7 +1955,6 @@
 					}), B(0, ["SSSSSSSSS", 9], 0, function() {
 						return 1e6 * this.millisecond()
 					}), A("millisecond", "ms"), Y("millisecond", 16), lt("S", Q, U), lt("SS", Q, G), lt("SSS", Q, q), rn = "SSSS"; rn.length <= 9; rn += "S") lt(rn, nt);
-
 				function sn(t, e) {
 					e[xt] = M(1e3 * ("0." + t))
 				}
@@ -2079,7 +1962,6 @@
 				var ln = Ct("Milliseconds", !1);
 				B("z", 0, 0, "zoneAbbr"), B("zz", 0, 0, "zoneName");
 				var un = _.prototype;
-
 				function dn(t) {
 					return t
 				}
@@ -2327,20 +2209,17 @@
 					return this._isDSTShifted
 				});
 				var hn = O.prototype;
-
 				function cn(t, e, n, i) {
 					var a = ue(),
 						r = p().set(i, e);
 					return a[n](r, t)
 				}
-
 				function fn(t, e, n) {
 					if (d(t) && (e = t, t = void 0), t = t || "", null != e) return cn(t, e, n, "month");
 					var i, a = [];
 					for (i = 0; i < 12; i++) a[i] = cn(t, i, n, "month");
 					return a
 				}
-
 				function gn(t, e, n, i) {
 					e = ("boolean" == typeof t ? d(e) && (n = e, e = void 0) : (e = t, t = !1, d(n = e) && (n = e, e = void 0)), e || "");
 					var a, r = ue(),
@@ -2438,24 +2317,19 @@
 					}
 				}), c.lang = n("moment.lang is deprecated. Use moment.locale instead.", se), c.langData = n("moment.langData is deprecated. Use moment.localeData instead.", ue);
 				var mn = Math.abs;
-
 				function pn(t, e, n, i) {
 					var a = Ee(e, n);
 					return t._milliseconds += i * a._milliseconds, t._days += i * a._days, t._months += i * a._months, t._bubble()
 				}
-
 				function vn(t) {
 					return t < 0 ? Math.floor(t) : Math.ceil(t)
 				}
-
 				function bn(t) {
 					return 4800 * t / 146097
 				}
-
 				function yn(t) {
 					return 146097 * t / 4800
 				}
-
 				function xn(t) {
 					return function() {
 						return this.as(t)
@@ -2469,7 +2343,6 @@
 					Dn = xn("w"),
 					Cn = xn("M"),
 					Pn = xn("y");
-
 				function Tn(t) {
 					return function() {
 						return this.isValid() ? this._data[t] : NaN
@@ -2492,11 +2365,9 @@
 						M: 11
 					};
 				var zn = Math.abs;
-
 				function Vn(t) {
 					return (0 < t) - (t < 0) || +t
 				}
-
 				function Hn() {
 					if (!this.isValid()) return this.localeData().invalidDate();
 					var t, e, n = zn(this._milliseconds) / 1e3,
@@ -3342,7 +3213,6 @@
 						var t, e, n, i, a = this.getMeta(),
 							r = this.chart.chartArea,
 							o = a.data || [];
-
 						function s(t, e, n) {
 							return Math.max(Math.min(t, n), e)
 						}
@@ -4143,7 +4013,6 @@
 			var s = t(46);
 			e.exports = function(t) {
 				var r = ["push", "pop", "shift", "splice", "unshift"];
-
 				function o(e, t) {
 					var n = e._chartjs;
 					if (n) {
@@ -4369,11 +4238,9 @@
 					var i;
 					return "string" == typeof t ? (i = parseInt(t, 10), -1 !== t.indexOf("%") && (i = i / 100 * e.parentNode[n])) : i = t, i
 				}
-
 				function h(t) {
 					return null != t && "none" !== t
 				}
-
 				function e(t, e, n) {
 					var i = document.defaultView,
 						a = g._getParentNode(t),
@@ -4610,14 +4477,12 @@
 		29: [function(t, e, n) {
 			"use strict";
 			var i = t(46);
-
 			function s(t, e) {
 				return t.native ? {
 					x: t.x,
 					y: t.y
 				} : i.getRelativePosition(t, e)
 			}
-
 			function l(t, e) {
 				var n, i, a, r, o;
 				for (i = 0, r = t.data.datasets.length; i < r; ++i)
@@ -4627,14 +4492,12 @@
 							s._view.skip || e(s)
 						}
 			}
-
 			function u(t, e) {
 				var n = [];
 				return l(t, function(t) {
 					t.inRange(e.x, e.y) && n.push(t)
 				}), n
 			}
-
 			function d(t, i, a, r) {
 				var o = Number.POSITIVE_INFINITY,
 					s = [];
@@ -4646,7 +4509,6 @@
 					}
 				}), s
 			}
-
 			function h(t) {
 				var a = -1 !== t.indexOf("x"),
 					r = -1 !== t.indexOf("y");
@@ -4656,7 +4518,6 @@
 					return Math.sqrt(Math.pow(n, 2) + Math.pow(i, 2))
 				}
 			}
-
 			function a(i, t, e) {
 				var n = s(t, i);
 				e.axis = e.axis || "x";
@@ -4768,13 +4629,11 @@
 		31: [function(t, e, n) {
 			"use strict";
 			var N = t(46);
-
 			function z(t, e) {
 				return N.where(t, function(t) {
 					return t.position === e
 				})
 			}
-
 			function V(t, a) {
 				t.forEach(function(t, e) {
 					return t._tmpIndex_ = e, t
@@ -4900,7 +4759,6 @@
 							t.left = e.chartArea.left, t.top = e.chartArea.top, t.right = e.chartArea.right, t.bottom = e.chartArea.bottom, t.update(y, x)
 						})
 					}
-
 					function Y(e) {
 						var t = N.findNextWhere(_, function(t) {
 							return t.box === e
@@ -4916,7 +4774,6 @@
 								e.update(e.fullWidth ? g : y, m / 2, n)
 							} else e.update(t.minSize.width, x)
 					}
-
 					function W(t) {
 						t.isHorizontal() ? (t.left = t.fullWidth ? r : D, t.right = t.fullWidth ? n - o : D + y, t.top = L, t.bottom = L + t.height, L = t.bottom) : (t.left = R, t.right = R + t.width, t.top = P, t.bottom = P + x, R = t.right)
 					}
@@ -4994,22 +4851,18 @@
 				i = t(27),
 				B = t(46),
 				a = t(35);
-
 			function _(t) {
 				var e, n, i = [];
 				for (e = 0, n = t.length; e < n; ++e) i.push(t[e].label);
 				return i
 			}
-
 			function E(t, e, n) {
 				var i = t.getPixelForTick(e);
 				return n && (i -= 0 === e ? (t.getPixelForTick(1) - i) / 2 : (i - t.getPixelForTick(e - 1)) / 2), i
 			}
-
 			function k(t, e, n) {
 				return B.isArray(e) ? B.longestText(t, n, e) : t.measureText(e).width
 			}
-
 			function w(t) {
 				var e = B.valueOrDefault,
 					n = x.global,
@@ -5023,7 +4876,6 @@
 					font: B.fontString(i, a, r)
 				}
 			}
-
 			function M(t) {
 				return B.options.toLineHeight(B.valueOrDefault(t.lineHeight, 1.2), B.valueOrDefault(t.fontSize, x.global.defaultFontSize))
 			}
@@ -5557,20 +5409,16 @@
 					}
 				}
 			};
-
 			function c(t, e) {
 				var n = R.color(t);
 				return n.alpha(e * n.alpha()).rgbaString()
 			}
-
 			function o(t, e) {
 				return e && (R.isArray(e) ? Array.prototype.push.apply(t, e) : t.push(e)), t
 			}
-
 			function s(t) {
 				return ("string" == typeof t || t instanceof String) && -1 < t.indexOf("\n") ? t.split("\n") : t
 			}
-
 			function Y(t) {
 				var e = i.global,
 					n = R.valueOrDefault;
@@ -5609,7 +5457,6 @@
 					borderWidth: t.borderWidth
 				}
 			}
-
 			function r(t) {
 				return o([], s(t))
 			}(e.exports = a.extend({
@@ -5973,7 +5820,6 @@
 				i = t(27),
 				d = t(46),
 				h = u.global.defaultColor;
-
 			function a(t) {
 				var e = this._view;
 				return !!e && Math.abs(t - e.x) < e.radius + e.hitRadius
@@ -6041,11 +5887,9 @@
 			"use strict";
 			var i = t(26),
 				a = t(27);
-
 			function l(t) {
 				return void 0 !== t._view.width
 			}
-
 			function r(t) {
 				var e, n, i, a, r = t._view;
 				if (l(t)) {
@@ -6093,7 +5937,6 @@
 							[e, i]
 						],
 						v = ["bottom", "left", "top", "right"].indexOf(o, 0);
-
 					function b(t) {
 						return p[(v + t) % 4]
 					} - 1 === v && (v = 0);
@@ -6541,7 +6384,6 @@
 					pointerleave: "mouseout",
 					pointerout: "mouseout"
 				};
-
 			function l(t, e) {
 				var n = f.getStyle(t, e),
 					i = n && n.match(/^(\d+)(\.\d+)?px$/);
@@ -6561,15 +6403,12 @@
 			}() && {
 				passive: !0
 			};
-
 			function y(t, e, n) {
 				t.addEventListener(e, n, i)
 			}
-
 			function o(t, e, n) {
 				t.removeEventListener(e, n, i)
 			}
-
 			function x(t, e, n, i, a) {
 				return {
 					type: t,
@@ -6579,7 +6418,6 @@
 					y: void 0 !== i ? i : null
 				}
 			}
-
 			function a(e, t, n) {
 				var i, a, r, o, s, l, u, d, h = e[g] || (e[g] = {}),
 					c = h.resizer = function(t) {
@@ -6614,7 +6452,6 @@
 					y(s, t, d)
 				}), u.reflow = !!s.offsetParent, s.classList.add(p)
 			}
-
 			function r(t) {
 				var e, n, i, a = t[g] || {},
 					r = a.resizer;
@@ -6751,7 +6588,6 @@
 					}
 				}
 			};
-
 			function g(t, e, n) {
 				var i, a = t._model || {},
 					r = a.fill;
@@ -6773,7 +6609,6 @@
 						return !1
 				}
 			}
-
 			function m(t) {
 				var e, n = t.el._model || {},
 					i = t.el._scale || {},
@@ -6789,7 +6624,6 @@
 				}
 				return null
 			}
-
 			function p(t, e, n) {
 				var i, a = t[e].fill,
 					r = [e];
@@ -6802,11 +6636,9 @@
 				}
 				return !1
 			}
-
 			function y(t) {
 				return t && !t.skip
 			}
-
 			function x(t, e, n, i, a) {
 				var r;
 				if (i && a) {
@@ -6862,7 +6694,6 @@
 				C = t(46),
 				a = t(31),
 				r = C.noop;
-
 			function P(t, e) {
 				return t.usePointStyle ? e * Math.SQRT2 : t.boxWidth
 			}
@@ -7074,7 +6905,6 @@
 					return a
 				}
 			});
-
 			function s(t, e) {
 				var n = new o({
 					ctx: t.ctx,
@@ -7190,7 +7020,6 @@
 					}
 				}
 			});
-
 			function s(t, e) {
 				var n = new o({
 					ctx: t.ctx,
@@ -7302,7 +7131,6 @@
 								l = o.chart,
 								t = l.data.datasets,
 								e = o.isHorizontal();
-
 							function u(t) {
 								return e ? t.xAxisID === o.id : t.yAxisID === o.id
 							}
@@ -7463,7 +7291,6 @@
 								s = o.chart,
 								t = s.data.datasets,
 								e = o.isHorizontal();
-
 							function l(t) {
 								return e ? t.xAxisID === o.id : t.yAxisID === o.id
 							}
@@ -7606,12 +7433,10 @@
 							}
 						}
 					};
-
 				function b(t) {
 					var e = t.options;
 					return e.angleLines.display || e.pointLabels.display ? t.chart.data.labels.length : 0
 				}
-
 				function y(t) {
 					var e = t.options.pointLabels,
 						n = _.valueOrDefault(e.fontSize, v.defaultFontSize),
@@ -7624,7 +7449,6 @@
 						font: _.fontString(n, i, a)
 					}
 				}
-
 				function p(t, e, n, i, a) {
 					return t === i || t === a ? {
 						start: e - n / 2,
@@ -7637,13 +7461,11 @@
 						end: e + n + 5
 					}
 				}
-
 				function x(t, e, n, i) {
 					if (_.isArray(e))
 						for (var a = n.y, r = 1.5 * i, o = 0; o < e.length; ++o) t.fillText(e[o], n.x, a), a += r;
 					else t.fillText(e, n.x, n.y)
 				}
-
 				function s(t) {
 					return _.isNumber(t) ? t : 0
 				}
@@ -7881,18 +7703,15 @@
 					}
 				},
 				_ = Object.keys(x);
-
 			function b(t, e) {
 				return t - e
 			}
-
 			function k(t) {
 				var e, n, i, a = {},
 					r = [];
 				for (e = 0, n = t.length; e < n; ++e) a[i = t[e]] || (a[i] = !0, r.push(i));
 				return r
 			}
-
 			function w(t, e, n, i) {
 				var a = function(t, e, n) {
 						for (var i, a, r, o = 0, s = t.length - 1; 0 <= o && o <= s;) {
@@ -7921,25 +7740,21 @@
 					u = (o[i] - r[i]) * l;
 				return r[i] + u
 			}
-
 			function M(t, e) {
 				var n = e.parser,
 					i = e.parser || e.format;
 				return "function" == typeof n ? n(t) : "string" == typeof t && "string" == typeof i ? y(t, i) : (t instanceof y || (t = y(t)), t.isValid() ? t : "function" == typeof i ? i(t) : t)
 			}
-
 			function S(t, e) {
 				if (p.isNullOrUndef(t)) return null;
 				var n = e.options.time,
 					i = M(e.getRightValue(t), n);
 				return i.isValid() ? (n.round && i.startOf(n.round), i.valueOf()) : null
 			}
-
 			function D(t) {
 				for (var e = _.indexOf(t) + 1, n = _.length; e < n; ++e)
 					if (x[_[e]].common) return _[e]
 			}
-
 			function C(t, e, n, i) {
 				var a, r = i.time,
 					o = r.unit || function(t, e, n, i) {

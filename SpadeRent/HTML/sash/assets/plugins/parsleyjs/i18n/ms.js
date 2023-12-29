@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('ms', {
   defaultMessage: "Nilai tidak sah.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('ms', {
   check:          "Anda mesti memilih diantara %s hingga %s pilihan.",
   equalto:        "Nilai dimasukkan hendaklah sama."
 });
-
 Parsley.setLocale('ms');

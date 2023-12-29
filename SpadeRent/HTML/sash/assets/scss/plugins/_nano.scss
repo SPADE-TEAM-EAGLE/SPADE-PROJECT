@@ -1,17 +1,14 @@
 /*! Pickr 1.8.2 MIT | https://github.com/Simonwep/pickr */
-
 .pickr {
     position: relative;
     overflow: visible;
     transform: translateY(0);
-
     * {
         box-sizing: border-box;
         outline: none;
         border: none;
         -webkit-appearance: none;
     }
-
     .pcr-button {
         position: relative;
         height: 2em;
@@ -24,7 +21,6 @@
             no-repeat center;
         background-size: 0;
         transition: all 0.3s;
-
         &::before {
             position: absolute;
             content: "";
@@ -38,7 +34,6 @@
             z-index: -1;
             z-index: initial;
         }
-
         &::after {
             position: absolute;
             content: "";
@@ -50,24 +45,19 @@
             background: var(--pcr-color);
             border-radius: 0.15em;
         }
-
         &.clear {
             background-size: 70%;
-
             &::before {
                 opacity: 0;
             }
-
             &:focus {
                 box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
             }
         }
-
         &.disabled {
             cursor: not-allowed;
         }
     }
-
     * {
         box-sizing: border-box;
         outline: none;
@@ -75,14 +65,12 @@
         -webkit-appearance: none;
     }
 }
-
 .pcr-app * {
     box-sizing: border-box;
     outline: none;
     border: none;
     -webkit-appearance: none;
 }
-
 .pickr {
     input {
         &:focus,
@@ -90,7 +78,6 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
         }
     }
-
     button {
         &:focus,
         &.pcr-active {
@@ -98,7 +85,6 @@
         }
     }
 }
-
 .pcr-app {
     input {
         &:focus,
@@ -106,7 +92,6 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px var(--pcr-color);
         }
     }
-
     button {
         &:focus,
         &.pcr-active {
@@ -114,34 +99,29 @@
         }
     }
 }
-
 .pickr {
     .pcr-palette,
     .pcr-slider {
         transition: box-shadow 0.3s;
     }
 }
-
 .pcr-app {
     .pcr-palette,
     .pcr-slider {
         transition: box-shadow 0.3s;
     }
 }
-
 .pickr {
     .pcr-palette:focus,
     .pcr-slider:focus {
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(0, 0, 0, 0.25);
     }
 }
-
 .pcr-app {
     .pcr-palette:focus,
     .pcr-slider:focus {
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(0, 0, 0, 0.25);
     }
-
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -155,22 +135,18 @@
     box-shadow: 0 0.15em 1.5em 0 rgba(0, 0, 0, 0.1), 0 0 1em 0 rgba(0, 0, 0, 0.03);
     left: 0;
     top: 0;
-
     &.visible {
         transition: opacity 0.3s;
         visibility: visible;
         opacity: 1;
     }
-
     .pcr-swatches {
         display: flex;
         flex-wrap: wrap;
         margin-top: 0.75em;
-
         &.pcr-last {
             margin: 0;
         }
-
         > button {
             font-size: 1em;
             position: relative;
@@ -185,7 +161,6 @@
             overflow: hidden;
             background: transparent;
             z-index: 1;
-
             &::before {
                 position: absolute;
                 content: "";
@@ -198,7 +173,6 @@
                 border-radius: 0.15em;
                 z-index: -1;
             }
-
             &::after {
                 content: "";
                 position: absolute;
@@ -211,27 +185,22 @@
                 border-radius: 0.15em;
                 box-sizing: border-box;
             }
-
             &:hover {
                 filter: brightness(1.05);
             }
-
             &:not(.pcr-active) {
                 box-shadow: none;
             }
         }
     }
-
     .pcr-interaction {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         margin: 0 -0.2em 0 -0.2em;
-
         > * {
             margin: 0 0.2em;
         }
-
         input {
             letter-spacing: 0.07em;
             font-size: 0.75em;
@@ -243,16 +212,13 @@
             transition: all 0.15s;
             padding: 0.45em 0.5em;
             margin-top: 0.75em;
-
             &:hover {
                 filter: brightness(0.975);
             }
-
             &:focus {
                 box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(66, 133, 244, 0.75);
             }
         }
-
         .pcr-result {
             color: #75797e;
             text-align: left;
@@ -262,53 +228,44 @@
             border-radius: 0.15em;
             background: #f1f3f4;
             cursor: text;
-
             &::-moz-selection,
             &::selection {
                 background: #4285f4;
                 color: #fff;
             }
         }
-
         .pcr-type.active {
             color: #fff;
             background: #4285f4;
         }
-
         .pcr-save,
         .pcr-cancel,
         .pcr-clear {
             color: #fff;
             width: auto;
         }
-
         .pcr-save,
         .pcr-cancel,
         .pcr-clear {
             color: #fff;
         }
-
         .pcr-save:hover,
         .pcr-cancel:hover,
         .pcr-clear:hover {
             filter: brightness(0.925);
         }
-
         .pcr-save {
             background: #4285f4;
         }
-
         .pcr-clear,
         .pcr-cancel {
             background: #f44250;
         }
-
         .pcr-clear:focus,
         .pcr-cancel:focus {
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85), 0 0 0 3px rgba(244, 66, 80, 0.75);
         }
     }
-
     .pcr-selection {
         .pcr-picker {
             position: absolute;
@@ -321,7 +278,6 @@
             -ms-user-select: none;
             user-select: none;
         }
-
         .pcr-color-palette,
         .pcr-color-chooser,
         .pcr-color-opacity {
@@ -335,7 +291,6 @@
             cursor: grab;
             cursor: -webkit-grab;
         }
-
         .pcr-color-palette:active,
         .pcr-color-chooser:active,
         .pcr-color-opacity:active {
@@ -343,20 +298,16 @@
             cursor: -webkit-grabbing;
         }
     }
-
     &[data-theme="nano"] {
         width: 14.25em;
         max-width: 95vw;
-
         .pcr-swatches {
             margin-top: 0.6em;
             padding: 0 0.6em;
         }
-
         .pcr-interaction {
             padding: 0 0.6em 0.6em 0.6em;
         }
-
         .pcr-selection {
             display: grid;
             grid-gap: 0.6em;
@@ -366,7 +317,6 @@
             height: 10.5em;
             width: 100%;
             align-self: flex-start;
-
             .pcr-color-preview {
                 grid-area: 2 / 1 / 4 / 1;
                 height: 100%;
@@ -375,11 +325,9 @@
                 flex-direction: row;
                 justify-content: center;
                 margin-left: 0.6em;
-
                 .pcr-last-color {
                     display: none;
                 }
-
                 .pcr-current-color {
                     position: relative;
                     background: var(--pcr-color);
@@ -387,7 +335,6 @@
                     height: 2em;
                     border-radius: 50em;
                     overflow: hidden;
-
                     &::before {
                         position: absolute;
                         content: "";
@@ -402,18 +349,15 @@
                     }
                 }
             }
-
             .pcr-color-palette {
                 grid-area: 1 / 1 / 2 / 3;
                 width: 100%;
                 height: 100%;
                 z-index: 1;
-
                 .pcr-palette {
                     border-radius: 0.15em;
                     width: 100%;
                     height: 100%;
-
                     &::before {
                         position: absolute;
                         content: "";
@@ -428,37 +372,30 @@
                     }
                 }
             }
-
             .pcr-color-chooser {
                 grid-area: 2 / 2 / 2 / 2;
             }
-
             .pcr-color-opacity {
                 grid-area: 3 / 2 / 3 / 2;
             }
-
             .pcr-color-chooser,
             .pcr-color-opacity {
                 height: 0.5em;
                 margin: 0 0.6em;
             }
-
             .pcr-color-chooser .pcr-picker,
             .pcr-color-opacity .pcr-picker {
                 top: 50%;
                 transform: translateY(-50%);
             }
-
             .pcr-color-chooser .pcr-slider,
             .pcr-color-opacity .pcr-slider {
                 flex-grow: 1;
                 border-radius: 50em;
             }
-
             .pcr-color-chooser .pcr-slider {
                 background: linear-gradient(to right, red, #ff0, lime, cyan, blue, #f0f, red);
             }
-
             .pcr-color-opacity .pcr-slider {
                 background: linear-gradient(to right, transparent, black),
                     url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
@@ -467,7 +404,6 @@
         }
     }
 }
-
 @supports (display: grid) {
     .pcr-app .pcr-swatches {
         display: grid;

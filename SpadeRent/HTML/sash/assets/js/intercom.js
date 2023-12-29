@@ -7,35 +7,22 @@ $.ajax({
     },
     success: function ({ userName, email, userId, image }) {
         username=userName
-        console.log(username)
+      // console.log(username)
         window.intercomSettings = {
           api_base: "https://api-iam.intercom.io",
           app_id: "fjpx1kt1",
           name:username, // Full name
-    
         };
-      
-        // Function to open the Intercom side popup
         function openIntercomPopup() {
             const articleid=8210506
-        //   window.Intercom('showNewMessage', '#help-center-article-' + articleid);;
         window.Intercom('showSpace', 'help');
-
-          
         }
-      
-        // Attach a click event listener to your custom button
         document.querySelectorAll('.customIntercomButton').forEach(element => {
     element.addEventListener('click', openIntercomPopup);
-    
 });
-
-        
-        // Load the Intercom widget
         (function() {
           var w = window;
           var ic = w.Intercom;
-          
           if (typeof ic === "function") {
             ic('reattach_activator');
             ic('update', w.intercomSettings);
@@ -51,7 +38,6 @@ $.ajax({
             w.Intercom = i;
             var l = function() {
               var s = d.createElement('script');
-              
               s.type = 'text/javascript';
               s.async = true;
               s.src = 'https://widget.intercom.io/widget/fjpx1kt1';
@@ -74,7 +60,5 @@ $.ajax({
             $('#myModal_warning').modal('hide');
             window.location = '../Landlord/login_module.html';
         }, 2000);
-        
     }
 });
-        

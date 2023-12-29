@@ -1,15 +1,13 @@
-// Email validation
 var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
 $(document).on("input", 'input[type="email"]', function () {
   var email = $(this).val();
   var email_span = $(this).siblings(".text-danger");
   if (!emailRegex.test(email)) {
-    console.log("email not ok");
+  // console.log("email not ok");
     $(this).addClass("border-danger").removeClass("border-green");
     email_span.removeClass("d-none");
   } else {
-    console.log("email  ok");
-
+  // console.log("email  ok");
     $(this).addClass("border-green").removeClass("border-danger");
     email_span.addClass("d-none");
   }
@@ -21,43 +19,36 @@ $(document).on(
     var input_select_value = $(this).val();
     var input_select_value_span = $(this).siblings(".text-danger");
     if (input_select_value === "") {
-      console.log("input or select is empty");
+    // console.log("input or select is empty");
       $(this).addClass("border-danger").removeClass("border-green");
     } else {
-      console.log("input or select is filled");
+    // console.log("input or select is filled");
       $(this).addClass("border-green").removeClass("border-danger");
     }
   }
 );
-
 const errorMap = [
-  "Invalid number",
+  "Invalid Phone Number. Please enter a different number",
   "Invalid country code",
   "Too short",
   "Too long",
-  "Invalid number",
+  "Invalid Phone Number. Please enter a different number",
 ];
-
 $('input[type="tel"]').each(function () {
   const input = $(this);
   const errorMsg = input
-    .next(".error-msg")
-    .add(input.closest("div").siblings(".error-msg"));
+    .siblings(".error-msg");
   const validMsg = input
-    .next(".valid-msg")
-    .add(input.closest("div").siblings(".valid-msg"));
-
+    .siblings(".valid-msg");
   const iti = window.intlTelInput(this, {
     utilsScript: "/intl-tel-input/js/utils.js?1684676252775",
   });
-
   const reset = () => {
     input.removeClass("error");
     errorMsg.html("");
     errorMsg.addClass("d-none");
     validMsg.addClass("d-none");
   };
-
   input.on("input", () => {
     reset();
     if (input.val().trim()) {
@@ -68,13 +59,10 @@ $('input[type="tel"]').each(function () {
           intlTelInputUtils.numberFormat.NATIONAL
         );
         input.val(formattedNumber);
-        console.log("Valid phone. Formatted number:", formattedNumber);
-
-        validMsg.removeClass("d-none");
+        // validMsg.removeClass("d-none");
         input.removeClass("border-danger");
         input.addClass("border-green");
       } else {
-        console.log("Invalid phone");
         input.addClass("border-danger");
         input.removeClass("border-green");
         input.addClass("error");
@@ -85,43 +73,14 @@ $('input[type="tel"]').each(function () {
     }
   });
 });
-
-// $(document).on('input change', '.modal input[required]:not([type="email"]):not([type="tel"])', function () {
-//   var inputText = $(this).val();
-//   var inputText_span = $(this).siblings('.text-danger');
-//   if (inputText == '') {
-//       $(this).addClass("border-danger").removeClass("border-green");
-//       inputText_span.removeClass('d-none');
-//   } else {
-//       $(this).addClass("border-green").removeClass("border-danger");
-//       inputText_span.addClass('d-none');
-//   }
-// });
-
-// select field validation
-// $(document).on('change', '.modal select[required]', function () {
-//   var selectText = $(this).val();
-//   var selectText_span = $(this).siblings('.text-danger');
-//   console.log(selectText);
-//   if (selectText == 'Choose...') {
-//       $(this).addClass("border-danger").removeClass("border-green");
-//       selectText_span.removeClass('d-none');
-//   } else {
-//       $(this).addClass("border-green").removeClass("border-danger");
-//       sel  ectText_span.addClass('d-none');
-//   }
-// });
 $(document).ready(function () {
   var modalOpen = false;
-
   $(".modal").on("shown.bs.modal", function () {
     modalOpen = true;
   });
-
   $(".modal").on("hidden.bs.modal", function () {
     modalOpen = false;
   });
-
   $('.modal input[required]:not([type="tel"]), .modal select[required]').on(
     "input change",
     function () {
@@ -134,12 +93,10 @@ $(document).ready(function () {
           ($(this).is('input[type="email"]') && !emailRegex.test(modalValid)) ||
           ($(this).is('input[name="zip"]') && modalValid.length !== 5)
         ) {
-          console.log("checker not Ok");
           $(this).removeClass("border-green").addClass("border-danger");
           modalValid_span.text("This field is required!");
           modalValid_span.removeClass("d-none");
         } else {
-          console.log("checker Ok");
           $(this).removeClass("border-danger").addClass("border-green");
           modalValid_span.text("This field is required!");
           modalValid_span.addClass("d-none");
@@ -148,14 +105,6 @@ $(document).ready(function () {
     }
   );
 });
-
-// $('input[type="date"]').on('change',function(){
-//   var dateValue = $(this).val().split('-');
-//   var assignDateValue = dateValue[1] + '-' +  dateValue[2] + '-' +  dateValue[0]
-//   alert(assignDateValue)
-// $(this).val(assignDateValue)
-// })
-
 $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
   "hidden.bs.modal",
   function () {
@@ -165,8 +114,6 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
       $("#error-msg" + indexx).addClass("d-none");
       $("#valid-msg" + indexx).addClass("d-none");
     }
-    // var selectedFiles = [];
-    // console.log($(this).find(".file-grid"));
     $(this)
       .find('input:not([type="radio"]), select:not(#assignee_update),textarea')
       .each(function () {
@@ -174,7 +121,6 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
           $(this).val("Choose...");
           $(this).removeClass("border-green").removeClass("border-danger");
           $(this).siblings("span").addClass("d-none");
-          console.log($(this).siblings("span"));
         } else {
           $(this).val("");
           $(this).removeClass("border-green").removeClass("border-danger");
@@ -182,25 +128,3 @@ $("#addModal, #myModal_edit,#add-user-permissions,#edit-user-permissions").on(
       });
   }
 );
-// $("input[type='date']").each(function(){
-//   $(this).attr("type","text")
-// })
-// function formatDateMDY1(date) {
-//   var createdDateFormat1 = new Date(date);
-//   var day1 = createdDateFormat1.getDate();
-//   var month1 = createdDateFormat1.getMonth() + 1;
-//   var year1 = createdDateFormat1.getFullYear();
-//   var createdDateFormatComplete1 = month1 + "/" + day1 + "/" + year1;
-//   return createdDateFormatComplete1;
-// }
-
-// $("input[type='date']").on("change", function () {
-//   $(this).attr("type", "text");
-//   $(this).val(formatDateMDY1($(this).val()));
-//   $(this).on("input", function () {
-//     if ($(this).val() == "") { 
-//       $(this).attr("type", "date");
-//     }
-//   });
-// });
-

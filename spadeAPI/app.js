@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "", // Allow requests from this origin
+    origin: "*", // Allow requests from this origin
     methods: ["GET", "POST"],
   },
 });
@@ -56,7 +56,8 @@ io.on("connection", (socket) => {
     );
     const roomId = data.chatId;
     // Emit the chat message to everyone in the room, including the sender
-    io.to(roomId).emit("chatMessage", data.message);
+    console.log(io.to(roomId).emit("chatMessage", data.message))
+    io.to(roomId).emit("chatMessage", data);
 });
 socket.on("notification", (data) => {
  console.log("data",data);

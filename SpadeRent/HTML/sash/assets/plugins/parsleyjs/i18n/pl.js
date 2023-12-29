@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('pl', {
   defaultMessage: "Wartość wygląda na nieprawidłową",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('pl', {
   check:          "Wybierz od %s do %s opcji.",
   equalto:        "Wartości nie są identyczne."
 });
-
 Parsley.setLocale('pl');

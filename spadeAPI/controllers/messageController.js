@@ -10,7 +10,7 @@ const messageClt = {
             const sender = req.user.userId;
             const { chatId, message, messageType,userType, receiverID } = req.body;
             const isRead = 1;
-            const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            const created_at = new Date()
             if (!chatId || !message || !messageType) {
                 throw new Error("Please provide all required fields");
             }
@@ -39,7 +39,7 @@ const messageClt = {
             const sender = req.user.userId;
             const { chatId, message, messageType ,userType, receiverID } = req.body;
             const isRead = 1;
-            const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            const created_at = new Date()
             if (!chatId || !message || !messageType) {
                 throw new Error("Please provide all required fields");
             }
@@ -175,9 +175,15 @@ const messageClt = {
             }
             // const getMessages = await queryRunner(selectQuery("messages", "chatId"), [chatId]);
             const  updateAllMessagesCount = await queryRunner(updateMessageCount, [userId])
+            console.log(updateAllMessagesCount[0])
             if (updateAllMessagesCount[0].affectedRows > 0) {
                 res.status(200).json({
                     message: "Messages Updated successfully",
+                    // Count: getAllMessagesCount[0][0]
+                })
+            }else{
+                res.status(200).json({
+                    message: "No messages to update",
                     // Count: getAllMessagesCount[0][0]
                 })
             }

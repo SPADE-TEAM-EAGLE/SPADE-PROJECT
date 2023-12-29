@@ -1,14 +1,11 @@
-
 $('#autofill-table').DataTable( {
     autoFill: true
 } );
-
 $('#hor-autofill').DataTable( {
     autoFill: {
         horizontal: false
     }
 } );
-
 $('#enable-autofill').DataTable( {
     autoFill: {
         enable: false
@@ -30,12 +27,10 @@ $('#enable-autofill').DataTable( {
         }
     ]
 } );
-
 $('#key-table').DataTable( {
     keys: true,
     autoFill: true
 } );
-
 //______Select2 
 $('.select2').select2({
     minimumResultsForSearch: Infinity

@@ -1,13 +1,9 @@
 //js code
-// $("#save-email").addClass("disabled")
 let id1; let userEmail; let emailChange = false
 var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         var email_verify_password = document.getElementById("email-verify-password");
         email_verify_password.addEventListener('keyup', confirmPasswordValidation1_verify);
-        // var spantag11 = document.getElementById("passnotmatch1");
-
         function confirmPasswordValidation1_verify() {
-
             if ($("#token").val() !== " " && email_verify_password.value.match(password_varify_match)) {
                 email_verify_password.classList.add("border-green");
                 $("#verify-btn").removeClass("disabled")
@@ -30,17 +26,14 @@ $(document).ready(function () {
                 });
             }
             if(image!==" " && image!==null && image!== ""){
-                
                 $("#user-img").attr("src", image)
                 $("#user-img-dark").attr("src", image)
             }
-
-
             $("#user-name").text(toTitleCase(userName))
             $("#header-user").text(toTitleCase(userName))
             userEmail = email
             id1 = userId
-            console.log($("#user-email"))
+          // console.log($("#user-email"))
             $("#user-email").val(email)
         },
         error: function (xhr, status, error) {
@@ -49,10 +42,9 @@ $(document).ready(function () {
                 $('#myModal_warning').modal('hide');
                 window.location = '../Landlord/login_module.html';
             }, 2000);
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $.ajax({
@@ -62,7 +54,6 @@ $(document).ready(function () {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
         },
         success: function (response) {
-            
             if (response.message.split(":")[0] == "Your remaining days to verify your email") {
                 if ($('body').hasClass('dark-mode')) {
                     $('.Rent-logo').attr('src', '../assets/images/logo_white.png');
@@ -74,16 +65,14 @@ $(document).ready(function () {
                 $("#user-email").val(userEmail)
                 $("#modaldemo00").modal("show")
             } else if (response.message == "Email is verified") {
-               
                 $("#account-text").addClass("d-none")
                 $("#email_verification").remove()
             }
         },
         error: function (xhr, status, error) {
-            console.log('Error occurred while fetching state and city data.');
-            console.log(xhr);
-            console.log(error);
-            // console.log('Error occurred while fetching state and city data.');
+          // console.log('Error occurred while fetching state and city data.');
+          // console.log(xhr);
+          // console.log(error);
         }
     });
     $("#modaldemo00").on("hidden.bs.modal", () => {
@@ -111,7 +100,6 @@ $(document).ready(function () {
             $("#verify-email-span").addClass("d-none")
         }
         else{
-
             $.ajax({
                 url: "https://backend.app.spaderent.com/api/spade/checkemail",
                 type: "GET",
@@ -120,7 +108,6 @@ $(document).ready(function () {
                     email: $("#user-email").val()
                 },
                 success: function(response) {
-                    
                     if(response.message == "New user")
                     {
                         $("#save-email").removeClass("disabled")
@@ -131,22 +118,16 @@ $(document).ready(function () {
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error($("#save-email"));
+$('#preloader').css('display','none');
+                    // console.error($("#save-email"));
                     $("#save-email").addClass("disabled")
                     $("#verify-email-span").removeClass("d-none")
-                    
                 },
             });
         }
-        // if ($("#user-email").val() !== userEmail) {
-        //     $("#save-email").removeClass("disabled")
-        // } else {
-        //     $("#save-email").addClass("disabled")
-        // }
     })
     $(document).on("click", "#save-email", () => {
         emailChange = true
-        // console.log(id)
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
             type: 'PUT',
@@ -159,17 +140,14 @@ $(document).ready(function () {
                 $("#user-email").prop("readonly", true)
                 $("#change-email").removeClass("d-none")
                 $("#send-email").removeClass("d-none")
-    
                 $("#save-email").addClass("d-none")
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
     $("#send-email").on("click", () => {
-        
         $.ajax({
             url: 'https://backend.app.spaderent.com/api/spade/resendCode',
             type: 'POST',
@@ -182,8 +160,7 @@ $(document).ready(function () {
                 $("#modaldemo8").modal("show")
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })
@@ -199,26 +176,25 @@ $(document).ready(function () {
                 password: $("#email-verify-password").val(),
             }),
             success: function (response) {
-                console.log(response)
+              // console.log(response)
                 if (response.message == " Email verified successful ") {
                     localStorage.setItem("authtoken", response.token);
-    
                     $("#modaldemo8").modal("hide")
+                    
                     $("#succesModal_verify").modal("show")
+                    setTimeout(function () {
+                        $("#succesModal_verify").modal("hide")
+                    }, 5000);
                     $("#account-text").empty()
                     $("#email_verification").remove()
-                    //   window.location="./index.html"
                 } else if (response.message == " token code is not match ") {
-                    // $("#modaldemo8").modal("hide")
-                    //   $("#info-text").text(response.message || response)
                     $("#infoModal_verify").modal("show")
                 }
             },
             error: function (xhr, status, error) {
-                // window.alert(xhr.statusText)
                 document.getElementById("verification-spans").style.display = "block";
                 $("#verification").addClass("is-invalid")
-                console.error(xhr.responseText);
+                // console.error(xhr.responseText);
             }
         });
     })

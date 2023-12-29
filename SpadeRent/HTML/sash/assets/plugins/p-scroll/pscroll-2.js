@@ -1,6 +1,5 @@
 (function($) {
 	"use strict";
-	
 	const ps5 = new PerfectScrollbar('.content', {
 	  useBothWheelAxes:true,
 	  suppressScrollX:true,
@@ -9,7 +8,4 @@
 	  useBothWheelAxes:true,
 	  suppressScrollX:true,
 	});
-	
-	
-
 })(jQuery);

@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('ja', {
   defaultMessage: "無効な値です。",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('ja', {
   check:          "%s から %s 個選択してください。",
   equalto:        "値が違います。"
 });
-
 Parsley.setLocale('ja');

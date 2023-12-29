@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('zh-tw', {
   defaultMessage: "這個值似乎是無效的。",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('zh-tw', {
   check:          "你必須選擇 %s 到 %s 個項目。",
   equalto:        "輸入值不同。"
 });
-
 Parsley.setLocale('zh-tw');

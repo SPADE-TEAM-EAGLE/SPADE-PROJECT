@@ -451,8 +451,8 @@ exports.createSubscriptionPayment = async (req, res) => {
   if (monthlyAnnual == "Monthly") {
     requestData.recurringAmount = initialAmount;
     requestData.recurringPeriod = {
-      day: "1",
-      month: "0",
+      day: "0",
+      month: "1",
       year: "0"
     }
     requestData.endAfter = {
@@ -636,7 +636,7 @@ return daysDiff;
 
   // Annually Downgrade
   if (planId < PlanID && monthlyAnnual == "Annually" && PlanID >= 2 && PlanID <= 4 ){
-    return res.status(200).json({
+    return res.status(403).json({
       Message : "unable to downgrade",
       Reason : "you want to switch Annually Upgrade to downgrade kindly contact to support team"
     });
@@ -1029,15 +1029,15 @@ exports.paymentACHVerification = async (req, res) => {
       if(updateUserResult[0].affectedRows > 0){
         res.status(200).json({message:"transaction status updated"})
       }else{
-        res.status(400).json({message:"Error in update user"})
+        res.status(422).json({message:"Error in update user"})
       }
     }else{
-      res.status(200).json({message:"transaction is not saved"})
+      res.status(422).json({message:"transaction is not saved"})
     }
    
   }catch(error){
     console.log(error);
-    res.status(400).send(error.message);
+    res.status(200).send(error.message);
 
   }
       }

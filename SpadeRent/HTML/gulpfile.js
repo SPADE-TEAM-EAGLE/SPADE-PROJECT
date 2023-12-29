@@ -6,10 +6,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 cssbeautify = require('gulp-cssbeautify');
 var beautify = require('gulp-beautify');
-
 /*********************************LTR****************************************/
-
-
 //_______ task for scss folder to css main style 
 gulp.task('watch', function() {
     console.log('Command executed successfully compiling SCSS in assets.');
@@ -23,7 +20,6 @@ gulp.task('watch', function() {
             stream: true
         }))
 })
-
 //_______ task for style-dark
 gulp.task('dark', function() {
     return gulp.src('sash/assets/css/dark-style.scss')
@@ -32,9 +28,7 @@ gulp.task('dark', function() {
         .pipe(beautify.css({ indent_size: 4 }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('sash/assets/css/'));
-
 });
-
 //_______ task for style-transparent
 gulp.task('transparent', function() {
     return gulp.src('sash/assets/css/transparent-style.scss')
@@ -43,10 +37,7 @@ gulp.task('transparent', function() {
         .pipe(beautify.css({ indent_size: 4 }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('sash/assets/css/'));
-
 });
-
-
 //_______task for skin-modes
 gulp.task('skins', function() {
     return gulp.src('sash/assets/css/skin-modes.scss')
@@ -55,9 +46,7 @@ gulp.task('skins', function() {
         .pipe(beautify.css({ indent_size: 4 }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('sash/assets/css/'));
-
 });
-
 //_______task for Color
 gulp.task('color', function() {
     return gulp.src('sash/assets/colors/**/*.scss')

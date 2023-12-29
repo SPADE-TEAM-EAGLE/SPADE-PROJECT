@@ -25,421 +25,7 @@
             window.location = "./login_module.html"
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        #propertyTable {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            
-            border-radius: 7px;
-            transition: all 1ms;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-            
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        
-        .panel-body {
-            padding: 0px;
-        }
-        .dark-mode .btn-close {
-            color: white;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button,
-        .modal-footer a {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            
-            letter-spacing: 0.0145455em;
-            
-        }
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-            
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: #1DBC5F;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-            
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-            
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        .delete-file {
-            position: absolute;
-            top: -1px;
-            right: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            color: #000;
-        }
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        
-        button.btn-close {
-            right: 6px;
-        }
-        .btn-close {
-            width: 1.8rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .del {
-            width: 2rem !important;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                
-                letter-spacing: 0.0145455em;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-            .modal-footer .button-left {
-                margin: auto;
-            }
-            
-            .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #typehead {
-                display: none;
-            }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
-        }
-        @media (max-width:320px) {
-            
-        }
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-    </style>
+   <link rel="stylesheet" href="../assets/pageCss/landlordCss/tasks-vendors.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
     <div id="preloader" class="tlp-preloader">
@@ -448,32 +34,7 @@
             <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
         </div>
     </div>
-    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered text-center" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-body p-0">
-                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                        <div class="card-body text-center">
-                            <span class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
-                                    <path fill="#fad383"
-                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
-                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
-                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
-                                </svg>
-                            </span>
-                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                            <p class="card-text text-dark m-0">
-                                Kindly check your internet connection or please try again
-                                later.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="modal fade" id="myModal_warning" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -506,10 +67,12 @@
                             class="Rent-logo mb-5">
                         <h1 class="mb-4 text-dark fw-bold">Verify Your Email Address</h1>
                         <h6 class="text-default mb-3">Enter a 6-digit code to verify email address</h6>
-                        <input id="token" name="token" type="tel" class="form-control form mb-2" pattern="[0-9]{5}"
-                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
+                        <input id="token" name="token" maxlength="10" type="tel" class="form-control form mb-2" pattern="[0-9]{5}"
+                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%;"
                             data-bs-placement="top" data-bs-toggle="tooltip" title=""
                             data-bs-original-title="Enter the name of the property.">
+                            <span class="text-success valid-msg d-none">✓ Valid</span>
+                                                            <span class="text-danger error-msg d-none"></span>
                         <input type="password" class="form-control form mb-2" id="email-verify-password"
                             aria-describedby="emailHelp" placeholder="Password" data-bs-placement="top"
                             data-bs-toggle="tooltip" title="" data-bs-original-title="Enter password here.">
@@ -660,7 +223,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="prospects.html" style="color: white;">Prospect</a>
+                                    <a href="prospects.html" style="color: white;">Prospects</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -836,7 +399,7 @@
                                 <label for="inputEmail3" class="form-label fw-bold">Business Phone Number
                                     <span class="text-danger"> *</span>
                                 </label>
-                                <input class="form-control" type="tel" data-bs-placement="top"
+                                <input class="form-control" type="tel" data-bs-placement="top" maxlength="10"
                                     placeholder="Enter Business Phone Number" pattern="[0-9]+"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="phone2" required>
                                 <span id="valid-msg2" class="d-none text-success">✓ Valid</span>
@@ -846,7 +409,7 @@
                                 <label for="inputEmail3" class="form-label fw-bold">Cell Phone Number
                                     <span class="text-danger"> *</span>
                                 </label>
-                                <input class="form-control" type="tel" pattern="[0-9]+"
+                                <input class="form-control" type="tel" pattern="[0-9]+" maxlength="10"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');"
                                     placeholder="Enter Cell Phone Number" id="phone" required>
                                 <span id="valid-msg" class="d-none text-success">✓ Valid</span>
@@ -986,7 +549,7 @@
                                 <label for="inputEmail3" class="form-label fw-bold">Business Phone Number
                                     <span class="text-danger"> *</span>
                                 </label>
-                                <input class="form-control" type="tel" data-bs-placement="top"
+                                <input class="form-control" type="tel" data-bs-placement="top" maxlength="10"
                                     placeholder="Enter Business Phone Number" pattern="[0-9]+"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="workPhone_update"
                                     required>
@@ -998,7 +561,7 @@
                                 <label for="inputEmail3" class="form-label fw-bold">Cell Phone Number
                                     <span class="text-danger"> *</span>
                                 </label>
-                                <input class="form-control" type="tel" placeholder="Enter Cell Phone Number"
+                                <input class="form-control" type="tel" maxlength="10" placeholder="Enter Cell Phone Number"
                                     id="phone_update" required>
                                 <span id="valid-msg4" class="d-none text-success">✓ Valid</span>
                                 <span id="error-msg4" class="hide text-danger"></span>
@@ -1213,6 +776,32 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-body p-0">
+                    <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                        <div class="card-body text-center">
+                            <span class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24">
+                                    <path fill="#fad383"
+                                        d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z" />
+                                    <circle cx="12" cy="16" r="1" fill="#f7b731" />
+                                    <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z" />
+                                </svg>
+                            </span>
+                            <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                            <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                            <p class="card-text text-dark m-0">
+                                Kindly check your internet connection or please try again
+                                later.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page">
         <div class="page-main">
             <div class="app-header header sticky" id="navbar-placeholder">
@@ -1264,6 +853,9 @@
                                                 <span class="badge bg-secondary header-badge bg-primary"
                                                     id="count_unread"></span>
                                             </a>
+                                        </div>
+                                        <div class="d-flex country">
+                                                <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
                                         </div>
                                         <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png"
@@ -1392,6 +984,13 @@
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
                                     <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
+                                    <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
                                 </ul>
@@ -1510,6 +1109,13 @@
                                                             </a>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
+                                                            <a class="text-dark" href="javascript:void(0)">ID</a>
+                                                            <div class="form-check m-0">
+                                                                <input type="checkbox" class="form-check-input mt-2"
+                                                                    id="exampleCheck1" checked>
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between">
                                                             <a class="text-dark" href="javascript:void(0)">COMPANY
                                                                 NAME</a>
                                                             <div class="form-check m-0">
@@ -1526,7 +1132,7 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
-                                                            <a class="text-dark" href="javascript:void(0)">PHONE</a>
+                                                            <a class="text-dark" href="javascript:void(0)">PHONE NUMBER</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
@@ -1540,8 +1146,7 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
-                                                            <a class="text-dark" href="javascript:void(0)">WORK
-                                                                PHONE</a>
+                                                            <a class="text-dark" href="javascript:void(0)">WORK	PHONE NUMBER</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
@@ -1607,6 +1212,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
+                                                            <th>ID</th>
                                                             <th>Company name</th>
                                                             <th>Vendor name</th>
                                                             <th>Phone number</th>
@@ -1890,16 +1496,17 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                        }, 2000);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        // }, 2000);
+                        // console.log(error);
                     }
                 });
             });
@@ -1972,23 +1579,24 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                    }, 2000);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // $("#myModal_warning").modal("show");
+                    // setTimeout(function () {
+                    //     $('#myModal_warning').modal('hide');
+                    // }, 2000);
+                    // console.log(error);
                 }
             });
         });
     </script>
     <script src="../assets/js/intercom.js"></script>
     <script src="../assets/js/getNotification.js"></script>
-    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+    <script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
     <script src="../assets/js/email-phone.js"></script> 
     <script>
         $(document).ready(function () {
@@ -1999,14 +1607,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2036,7 +1645,8 @@
                 });
             },
             error: function (xhr, status, error) {
-                console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                // console.log('Error occurred while fetching state and city data.');
             }
         });
     </script>
@@ -2084,9 +1694,16 @@
                         $('.span_upgrade_now').hide()
                         $('.span_upgrade_now_div').hide()
                     }
+                    localStorage.setItem("landlordName",userName)
                     if (image !== " " && image !== null && image !== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     $("#user-name").text(toTitleCase(userName))
                     $("#header-user").text(toTitleCase(userName))
@@ -2099,12 +1716,13 @@
                     });
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                 }
             });
             let vendorData;
             function resetAccordions() {
                 $('#addModal input, #addModal textarea, #addModal select').each(function () {
-                    console.log($(this))
+                    // console.log($(this))
                     $(this).removeClass('border-danger');
                     $(this).removeClass('border-green');
                 });
@@ -2144,7 +1762,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response.data)
+                        // console.log(response.data)
                         $("#category").empty()
                         if (response?.data?.length === 0) {
                             $("#category").prop("disabled", true);
@@ -2173,7 +1791,8 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.message == "No vendor category data found") {
+$('#preloader').css('display','none');
+                        if (xhr?.responseJSON?.message == "No vendor category data found") {
                             $("#category").empty()
                             $("#category").prop("disabled", true);
                             $("#category").append($('<option></option>').text("Add vendor categories first!!"))
@@ -2186,7 +1805,7 @@
             getVendorCategoryFunction()
             $(document).on('click', '#next', function (e) {
                 e.preventDefault()
-                $('#addModal').modal('hide');
+                // $('#addModal').modal('hide');
                 $('#preloader').css('display', 'flex')
                 var formData = new FormData();
                 var firstName = $("#firstName").val();
@@ -2213,8 +1832,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("addVendorCategory");
-                            console.log(response.insertedCategories);
+                            // console.log("addVendorCategory");
+                            // console.log(response.insertedCategories);
                             category = response?.categoryID
                             formData.append('firstName', firstName);
                             formData.append('lastName', lastName);
@@ -2226,7 +1845,7 @@
                             formData.append('workPhone', workPhone);
                             formData.append('email', email);
                             formData.append('categoryID', category);
-                            console.log(status)
+                            // console.log(status)
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
@@ -2249,7 +1868,8 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
+                                    $('#addModal').modal('hide');
                                     $('#preloader').fadeOut('slow', function () {
                                         $(this).hide();
                                     });
@@ -2269,15 +1889,21 @@
                                     resetAccordions()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+$("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                        }, 2000);
                                 }
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                            console.log(xhr.responseText);
+                            // console.log(xhr.responseText);
                         }
                     });
                 } else {
@@ -2296,8 +1922,8 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("addVendorCategory");
-                            console.log(response.insertedCategories);
+                            // console.log("addVendorCategory");
+                            // console.log(response.insertedCategories);
                             category = response.insertedCategories
                             formData.append('firstName', firstName);
                             formData.append('lastName', lastName);
@@ -2309,7 +1935,7 @@
                             formData.append('workPhone', workPhone);
                             formData.append('email', email);
                             formData.append('categoryID', category);
-                            console.log(status)
+                            // console.log(status)
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                                 type: 'POST',
@@ -2332,7 +1958,8 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                     success: function (response) {
-                                        console.log(response)
+                                        $('#addModal').modal('hide');
+                                        // console.log(response)
                                         $('#preloader').fadeOut('slow', function () {
                                             $(this).hide();
                                         });
@@ -2352,15 +1979,21 @@
                                         resetAccordions()
                                     },
                                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+$("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                        }, 2000);
                                     }
                                 });
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                 $("#myModal_warning_connection").modal("show");
                                 setTimeout(function () {
                                     $('#myModal_warning_connection').modal('hide');
                                 }, 2000);
-                                console.log(xhr.responseText);
+                                // console.log(xhr.responseText);
                             }
                         });
                     } else {
@@ -2374,7 +2007,7 @@
                         formData.append('workPhone', workPhone);
                         formData.append('email', email);
                         formData.append('categoryID', category);
-                        console.log(status)
+                        // console.log(status)
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/addVendor',
                             type: 'POST',
@@ -2397,7 +2030,8 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(response)
+                                $('#addModal').modal('hide');
+                                // console.log(response)
                                 $('#preloader').fadeOut('slow', function () {
                                     $(this).hide();
                                 });
@@ -2416,12 +2050,16 @@
                                 resetAccordions()
                             },
                             error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+$("#myModal_warning_connection").modal("show");
+                                        setTimeout(function () {
+                                            $('#myModal_warning_connection').modal('hide');
+                                        }, 2000);
                             }
                         });
                     }
                 }
             });
-            
             function getData(selectedFilter = "alphabets") {
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getAllVendors',
@@ -2432,7 +2070,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "No data found") {
                             $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
                         }
@@ -2444,7 +2082,7 @@
                             $(".add-btn-vendor").attr("disabled", true);
                         }
                         response.data[0]?.forEach(function (vendor, index) {
-                            var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td>';
+                            var serial = '<td style="font-weight: 600;">' + (index + 1) + '</td><td style="font-weight: 600;">' + (vendor.cVendorId? vendor.cVendorId :"Not set") + '</td>';
                             var vendorName = '<td class="vendorName" style="font-weight: 600;">' + vendor.firstName + " " + vendor.lastName + '</td>';
                             var businessName = '<td class="businessName" style="font-weight: 600;">' + vendor.businessName + '</td>';
                             var phone = '<td class="phone" style="font-weight: 600;">' + vendor.phone + '</td>';
@@ -2463,9 +2101,14 @@
                         });
                     },
                     error: function (xhr, status, error) {
-                        var tableBody = $('#table_body');
-                        tableBody.empty();
-                        $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+$('#preloader').css('display','none');
+if(xhr?.responseJSON?.message == "No data found") {
+
+
+    var tableBody = $('#table_body');
+    tableBody.empty();
+    $('#table_body').append('<tr><td colspan="12" class="text-center">No data found</td></tr>')
+}
                     }
                 });
             }
@@ -2516,7 +2159,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.message == "Vendor Deleted successful") {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
@@ -2529,7 +2172,8 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.message == 'Vendor not Deleted successful') {
+$('#preloader').css('display','none');
+                        if (xhr?.responseJSON?.message == 'Vendor not Deleted successful') {
                             $("#myModal_delete").modal("hide");
                             $("#delete-text").empty()
                             $("#delete-text").text("Error deleting vendor")
@@ -2582,6 +2226,7 @@
                         }, 2000);
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_edit").modal("hide");
                         $("#myModal_warning_connection").modal("show");
                         getData()
@@ -2601,7 +2246,7 @@
                     },
                     success:function(response){
                         if(response.message == "Email already exists "){
-                            console.log("email already exists")
+                            // console.log("email already exists")
                             $("#email").addClass("border-danger")
                             $("#email").removeClass("border-green")
                             $("#email-exist").removeClass("d-none")
@@ -2613,16 +2258,15 @@
                             $("#next").removeClass("disabled")
                         }
                     },error:function(xhr,status,error){
-                        console.log(xhr)
-                        console.log(error)
+                        // console.log(xhr)
+                        // console.log(error)
                     }
-                    
                 })
             })
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + (columnIndex + 1) + '), td:nth-child(' + (columnIndex + 1) + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -2639,7 +2283,7 @@
                     });
                 } else if (selectedFilter === 'ascending') {
                     rows.sort(function (a, b) {
-                        console.log(parseInt($(a).find('.rentAmount').text()))
+                        // console.log(parseInt($(a).find('.rentAmount').text()))
                         var idA = parseInt($(a).find('.rentAmount').text());
                         var idB = parseInt($(b).find('.rentAmount').text());
                         return idA - idB;
@@ -2683,9 +2327,6 @@
                 if (zipField.val().length !== 5) {
                     allFieldsFilled = false;
                 }
-                // if (phoneError) {
-                //     allFieldsFilled = false;
-                // }
                 return allFieldsFilled;
             }
             function updateButtonStatus() {
@@ -2695,10 +2336,10 @@
                 var displayStyle = inputFieldCol.css("display");
                 var inputValue = inputField.val();
                 if (displayStyle == "block" && inputValue == "") {
-                    console.log(displayStyle);
+                    // console.log(displayStyle);
                     allFieldsFilled = false;
                 }
-                console.log(allFieldsFilled);
+                // console.log(allFieldsFilled);
                 if (allFieldsFilled) {
                     $('#next').removeClass("disabled");
                 } else {
@@ -2748,7 +2389,7 @@
                 var email = $(this).val();
                 var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
                 if (!email.match(emailRegex)) {
-                    console.log("invalid");
+                    // console.log("invalid");
                     $(this).addClass("border-danger")
                     $(this).removeClass("border-green")
                 } else {
@@ -2770,7 +2411,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -2784,10 +2425,11 @@
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -2802,16 +2444,17 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -2825,16 +2468,17 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -2844,7 +2488,7 @@
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -2859,7 +2503,7 @@
             if ($('#search_input').val() == "") {
                 let count = 1;
                 $("#table_body tr").each(function (item, index) {
-                    //console.log(count, parseInt($("#lengthSelectBox").val()))
+                    // console.log(count, parseInt($("#lengthSelectBox").val()))
                     if (count > parseInt($("#lengthSelectBox").val())) {
                         $(this).hide()
                     }
@@ -2876,7 +2520,7 @@
             const input2 = $("#phone2");
             const errorMsg2 = $("#error-msg2");
             const validMsg2 = $("#valid-msg2");
-            const errorMap2 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap2 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti2 = window.intlTelInput(input2[0], {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });
@@ -2888,7 +2532,7 @@
             };
             input2.on('input', function () {
                 reset2();
-                console.log("in phone input");
+                // console.log("in phone input");
                 if (input2.val().trim()) {
                     if (iti2.isValidNumber()) {
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti2.getNumber(), iti2.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
@@ -2914,7 +2558,7 @@
         const input3 = document.querySelector("#workPhone_update");
         const errorMsg3 = document.querySelector("#error-msg3");
         const validMsg3 = document.querySelector("#valid-msg3");
-        const errorMap3 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap3 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti3 = window.intlTelInput(input3, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2926,7 +2570,7 @@
         };
         input3.addEventListener('input', () => {
             reset3();
-            console.log("in phone input")
+            // console.log("in phone input")
             if (input3.value.trim()) {
                 if (iti3.isValidNumber()) {
                     validMsg3.classList.remove("d-none");
@@ -2951,7 +2595,7 @@
         const input4 = document.querySelector("#phone_update");
         const errorMsg4 = document.querySelector("#error-msg4");
         const validMsg4 = document.querySelector("#valid-msg4");
-        const errorMap4 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        const errorMap4 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
         const iti4 = window.intlTelInput(input4, {
             utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
         });
@@ -2963,7 +2607,7 @@
         };
         input4.addEventListener('input', () => {
             reset4();
-            console.log("in phone input")
+            // console.log("in phone input")
             if (input4.value.trim()) {
                 if (iti4.isValidNumber()) {
                     validMsg4.classList.remove("d-none");
@@ -2988,7 +2632,7 @@
         const input1 = document.querySelector("#phone");
             const errorMsg1 = document.querySelector("#error-msg");
             const validMsg1 = document.querySelector("#valid-msg");
-            const errorMap1 = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+            const errorMap1 = ["Invalid Phone Number. Please enter a different number", "Invalid country code", "Too short", "Too long", "Invalid Phone Number. Please enter a different number"];
             const iti1 = window.intlTelInput(input1, {
                 utilsScript: "/intl-tel-input/js/utils.js?1684676252775"
             });
@@ -3000,7 +2644,7 @@
             };
             input1.addEventListener('input', () => {
                 reset();
-                console.log("in phone input")
+                // console.log("in phone input")
                 if (input1.value.trim()) {
                     if (iti1.isValidNumber()) {
                         var formattedNumbers = intlTelInputUtils.formatNumber(iti1.getNumber(), iti1.getSelectedCountryData().iso2, intlTelInputUtils.numberFormat.NATIONAL);
@@ -3018,10 +2662,10 @@
             });
     </script>
     <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

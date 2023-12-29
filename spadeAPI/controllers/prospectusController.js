@@ -21,7 +21,8 @@ const {
     dashboardProspectusInsight,
     prospectTimeGraphQuery,
     prospectusCount,
-    prospectusIdUpdate
+    prospectusIdUpdate,
+    checkProspectusId
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 const { deleteImageFromS3 } = require("../helper/S3Bucket");
@@ -42,11 +43,21 @@ exports.addprospectus = async (req, res) => {
         rentAmount,
         prospectusStatus,
     } = req.body;
-    const { userId } = req.user;
+    const { userId, idPattern} = req.user;
     // const { userId } = req.body;
     const currentDate = new Date();
     // console.log(userId)
     try {
+        const prospectusIdCheckresult = await queryRunner(checkProspectusId, [userId]);
+        let prospectusId;
+        if (prospectusIdCheckresult[0].length > 0) {
+            prospectusId = prospectusIdCheckresult[0][0].cprospectusId.split("-");
+          let lastPart = parseInt(prospectusId[prospectusId.length - 1], 10) + 1;
+          lastPart = lastPart.toString().padStart(4, '0');
+          prospectusId = `SR-${idPattern}-PROSP-${lastPart}`;
+        } else {
+            prospectusId = `SR-${idPattern}-PROSP-0001`;
+        }
         const prospectusResult = await queryRunner(addProspectusQuery, [
             userId,
             firstName,
@@ -60,24 +71,27 @@ exports.addprospectus = async (req, res) => {
             moveDate,
             rentAmount,
             prospectusStatus,
-            currentDate
+            currentDate,
+            prospectusId
         ]);
         if (prospectusResult.affectedRows === 0) {
             return res.status(400).send("No data found");
         }
         const prospectusID = prospectusResult[0].insertId;
-        const prospectusCountIdResult = await queryRunner(prospectusCount , [userId]);
-        let customProspectusId = prospectusCountIdResult[0][0].count + 1;
-        customProspectusId = lastName+customProspectusId;
-        const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
+        // const prospectusCountIdResult = await queryRunner(prospectusCount , [userId]);
+        // let customProspectusId = prospectusCountIdResult[0][0].count + 1;
+        // customProspectusId = lastName+customProspectusId;
+        // const prospectusIdUpdateResult = await queryRunner(prospectusIdUpdate ,[customProspectusId, prospectusID]);
         //}
 
         res.status(200).json({
             message: " prospectus created successful",
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+       return res.status(400).json({
+            message: "Error",
+            error: error.message,
+          });
     }
 };
 
@@ -124,7 +138,7 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Internal Server Error",
             error: error.message,
         });
@@ -179,7 +193,7 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Internal Server Error",
             error: error.message,
         });
@@ -194,7 +208,6 @@ const Source = getSourceResult[0].length > 0 ? getSourceResult[0][0] : [];
 exports.updateProspectus = async (req, res) => {
     const {
         firstName,
-        // middleName,
         lastName,
         phoneNumber,
         email,
@@ -206,9 +219,11 @@ exports.updateProspectus = async (req, res) => {
         prospectusStatus,
         prospectusid
     } = req.body;
+    console.log(req.body);
     const currentDate = new Date(); 
     try {
-
+        
+        console.log(UpdateProspectusQuery);
         const prospectusResult = await queryRunner(UpdateProspectusQuery, [
             firstName,
             // middleName,
@@ -226,13 +241,14 @@ exports.updateProspectus = async (req, res) => {
         ]);
         if (prospectusResult.affectedRows === 0) {
             return res.status(400).send("No data found");
-        }
+        }else{
         res.status(200).json({
             message: " prospectus updated successful",
         });
+    }
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus",
             error : error.message
         });
@@ -267,7 +283,7 @@ exports.updateProspectusStatus = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus status",
             error : error.message
         });
@@ -296,7 +312,7 @@ exports.prospectusInsightQD = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Qualified and Disqualified",
             error : error.message
         });
@@ -327,7 +343,7 @@ exports.prospectusInsightEN = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
@@ -358,8 +374,11 @@ exports.deleteProspectus = async (req, res) => {
         });
       }
     } catch (error) {
-      res.send("Error Get delete prospectus  ");
-      console.log(error);
+        return res.status(400).json({
+        message: "Error Get delete prospectus",
+        error: error.message,
+      });
+    //   console.log(error);
     }
   };
   //  #############################  Delete prospectus ENDS HERE ##################################################
@@ -387,8 +406,11 @@ exports.prospectusTime = async (req, res) => {
         });
       }
     } catch (error) {
-      res.send("Error Get Prospectus time  ");
-      console.log(error);
+        return res.status(400).json({
+            message: "Error Get Prospectus time ",
+            error: error.message,
+          });
+
     }
   };
   //  ############################# Prospectus time ENDS HERE ##################################################
@@ -431,14 +453,18 @@ exports.prospectusTime = async (req, res) => {
                 insertedSources: SourcesResult
             });
         }else{
-            res.status(200).json({
+            res.status(409).json({
                 message: "prospectus Sources Already Exist",
                 insertedSources: existSourcesResult
             });
         }
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        return res.status(500).json({
+            message: "Internal Server Error ",
+            error: error.message,
+          });
+
     }
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
@@ -454,7 +480,7 @@ exports.prospectusTime = async (req, res) => {
                 [userId]
             );
             if (prospectusSourcesResult[0].length == 0) {
-                res.status(200).json({
+                res.status(404).json({
                                 message: " prospectus data not found",
                             });
                
@@ -466,8 +492,11 @@ exports.prospectusTime = async (req, res) => {
             }
 
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+        return res.status(500).json({
+            message: "Internal Server Error ",
+            error: error.message,
+          });
+
     }
 };
   //  ############################# Prospectus Sources Campaign END HERE ##################################################
@@ -486,7 +515,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
             endDate
         ]);
         if (sourcesCampaignInsightResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         res.status(200).json({
             message: " prospectus Engaged and Nurturing get successful",
@@ -494,7 +523,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus Insight Engaged and Nurturing",
             error : error.message
         });
@@ -518,7 +547,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
             endDate
         ]);
         if (dashboardProspectusInsightResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         res.status(200).json({
             message: "  Dashboard prospectus Insight get successful",
@@ -526,7 +555,7 @@ exports.sourcesCampaignInsight = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+       return res.status(500).json({
             message: "Error occur in Dashboard prospectus Insight",
             error : error.message
         });
@@ -547,7 +576,7 @@ exports.prospectTimeGraph = async (req, res) => {
             endDate,
         ]);
         if (prospectTimeGraphResult[0].length === 0) {
-            return res.status(201).send("No data found");
+            return res.status(404).send("No data found");
         }
         const prospects = prospectTimeGraphResult[0].map(row => {
             const isAfter15th = new Date(row.createdDate).getDate() > 15;
@@ -570,7 +599,7 @@ exports.prospectTimeGraph = async (req, res) => {
         });
     } catch (error) {
         // console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error occur in prospectus time",
             error: error.message,
         });

@@ -29,416 +29,7 @@
             window.location = "./login_module.html"
         }
         </script>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        #propertyTable {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            
-            border-radius: 7px;
-            transition: all 1ms;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-            
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        
-        .panel-body {
-            padding: 0px;
-        }
-        .dark-mode .btn-close {
-            color: white;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button,
-        .modal-footer a {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            
-            letter-spacing: 0.0145455em;
-            
-        }
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-            
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: #1DBC5F;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-            
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-            
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        
-        button.btn-close {
-            right: 6px;
-        }
-        .btn-close {
-            width: 1.8rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .del {
-            width: 2rem !important;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                
-                letter-spacing: 0.0145455em;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-            .modal-footer .button-left {
-                margin: auto;
-            }
-            
-            */ .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #customize_btn {
-                display: none;
-            }
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #typehead {
-                display: none;
-            }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
-        }
-        @media (max-width:320px) {
-            
-        }
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-        </style>
+       <link rel="stylesheet" href="../assets/pageCss/landlordCss/new-tenant.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
         <div id="preloader" class="tlp-preloader">
@@ -447,46 +38,7 @@
                 <img src="../assets/images/logo-preloader.png" alt="Preloader" style="width: 65px;">
             </div>
         </div>
-        <div
-            class="modal fade"
-            id="myModal_warning_connection"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-body p-0">
-                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                            <div class="card-body text-center">
-                                <span class="">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="60"
-                                        width="60"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/>
-                                        <circle
-                                            cx="12"
-                                            cy="16"
-                                            r="1"
-                                            fill="#f7b731"
-                                        />
-                                        <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/>
-                                    </svg>
-                                </span>
-                                <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                                <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                                <p class="card-text text-dark m-0">
-                                    Kindly check your internet connection or please try again
-                                later.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div
             class="modal fade"
             id="myModal_warning"
@@ -734,7 +286,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="prospects.html" style="color: white;">Prospect</a>
+                                        <a href="prospects.html" style="color: white;">Prospects</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -945,7 +497,7 @@
                                                 autocomplete="off"
                                                 pattern="[0-9]"
                                                 placeholder="Enter Phone Number"
-                                                maxlength="13"
+                                                maxlength="10"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                 required
                                             >
@@ -1403,17 +955,21 @@
                         <div class="col-md-12">
                             <div class="card inner-cards">
                                 <div class="card-header justify-content-start">
-                                    <div class="column-flex-direction d-flex align-items-center">
-                                        <button class="btn btn-primary btn-pill pt-1 pb-1 done-option1" id="add-units1">
+                                    <div class="column-flex-direction flex-column d-flex align-items-start justify-content-between">
+                                        <button class="btn btn-primary btn-pill pt-1 pb-1 mb-2" id="add-units1">
                                             Add
-                                            Units
+                                    Units
                                         </button>
-                                        <p class="ms-3">
-                                            <b>
-                                                Instruction: Please fill Unit Information individually one at
-                                                a time.
-                                            </b>
-                                        </p>
+                                        <ol class="list-group list-group-numbered">
+                                            <h3 class="fw-bold mb-1">
+                                                Instructions:
+                                            </h3>
+                                            <li>Please fill Unit Information individually one at
+                                                a time.</li>
+                                            <li class="d-none" id="single-family-text">You cannot add more units as your property type is <span class="text-primary">Signle Family</span>.</li>
+                                            <li class="d-none" id="multi-text">You have reached your total units limit which is<span class="text-primary">199</span>.</li>
+        
+                                        </ol>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
@@ -1654,6 +1210,46 @@
             </div>
         </div>
     </div>
+    <div
+            class="modal fade"
+            id="myModal_warning_connection"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/>
+                                        <circle
+                                            cx="12"
+                                            cy="16"
+                                            r="1"
+                                            fill="#f7b731"
+                                        />
+                                        <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/>
+                                    </svg>
+                                </span>
+                                <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                                <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                                <p class="card-text text-dark m-0">
+                                    Kindly check your internet connection or please try again
+                                later.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="page">
         <div class="page-main">
             <div class="app-header header sticky" id="navbar-placeholder">
@@ -1716,6 +1312,9 @@
                                                 <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                             </a>
                                         </div>
+                                        <div class="d-flex country">
+                                            <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                    </div>
                                         <div class="d-flex country">
                                             <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                         </div>
@@ -1844,6 +1443,13 @@
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
                                     <li>
+                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                    </li>
+                                    <li>
+                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
+                                    </li>
+
+                                    <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
                                 </ul>
@@ -1961,7 +1567,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center align-items-center text-white">
+                            <div class="d-flex justify-content-center align-items-center text-white" id="add-more-tenants">
                                 <span class="me-2">For More Tenants</span>
                                 <button class="btn btn-default btn-pill" onclick="window.location.href='./settings.html#tab9'">
                                     <img
@@ -2294,24 +1900,25 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("getMessagesCountLandlord");
-                    console.log(response.Count['count(message)']);
+                    // console.log("getMessagesCountLandlord");
+                    // console.log(response.Count['count(message)']);
                     $('#chatCounter').text(response.Count['count(message)'])
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log(error);
+                    // console.log(error);
                 }
             });
         });
 </script>
 <script src="../assets/js/intercom.js"></script>
 <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+<script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
 <script src="../assets/js/email-phone.js"></script>
 <script>
         $(document).ready(function () {
@@ -2322,14 +1929,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: ` + response.count + `%;">` + response.count + `%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $('#email_verification').on('click', function () {
@@ -2342,13 +1950,37 @@
         });
 </script>
 <script>
-        var selectedFiles = [];
+        var selectedFiles = [];var properties;
         $(document).ready(function () {
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#property').val()
+                console.log(properties)
+                const filteredProperty=properties.filter((property)=>{
+                    return property.id==propertyId2;
+                })
+                if(filteredProperty[0]?.propertyType=="Single Family"){
+                    $("#add-units1").hide()
+                    $("#single-family-text").removeClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                    
+                    
+                }
+                else if(filteredProperty[0]?.units>=199){
+                    $("#add-units1").hide()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").removeClass("d-none")
+                }
+                else{
+                    $("#add-units1").show()
+                    $("#single-family-text").addClass("d-none")
+                    $("#multi-text").addClass("d-none")
+                }
                 getData2()
+
+                
             })
+            
             $("#email").on("input",function(){
                 $.ajax({    
                 url: 'https://backend.app.spaderent.com/api/spade/checkEmailTenants',
@@ -2367,7 +1999,8 @@
                         $("#email-exist").addClass("d-none")
                     }
                 },error: function (xhr, status, error) {
-                    console.log(error)
+$('#preloader').css('display','none');
+                    // console.log(error)
                 }
             })
             })
@@ -2381,8 +2014,8 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        properties = response.data; // Assuming the response data is an array of property objects
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2423,11 +2056,14 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
-                        console.log('Error: ' + error);
+                        if(xhr?.responseJSON?.message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
+                        }
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -2441,8 +2077,8 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        var properties = response.data; // Assuming the response data is an array of property objects
-                        console.log("property", response.data)
+                        properties = response.data; // Assuming the response data is an array of property objects
+                        // console.log("property", response.data)
                         var propertySelect = $('#property');
                         propertySelect.empty(); // Clear existing options
                         propertySelect.append($('<option></option>')
@@ -2483,11 +2119,14 @@
                         $('#addModal_units').modal('hide')
                     },
                     error: function (xhr, status, error) {
-                        $("#myModal_warning_connection").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning_connection').modal('hide');
-                        }, 2000);
-                        console.log('Error: ' + error);
+                        if(xhr?.responseJSON?.message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
+                        }
+                        // console.log('Error: ' + error);
                     }
                 });
             })
@@ -2507,7 +2146,7 @@
                         propertyName,
                         propertyAddress
                     }) {
-                        console.log(data)
+                        // console.log(data)
                         const units = data[0];
                         function toTitleCase(str) {
                             return str.replace(/\w\S*/g, function (txt) {
@@ -2595,20 +2234,28 @@
                                 },
                                 success: function (response) {
                                     $("#add-units1").prop("disabled", false)
+                                    if(response.data>=199){
+                                        $("#add-units1").hide()
+                                        $("#multi-text").removeClass("d-none")
+                                    }else{
+                                        $("#add-units1").show()
+                                        $("#multi-text").addClass("d-none")
+                                    }
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#add-units1").prop("disabled", false)
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         })
                         $('.done-option1').click(function (e) {
-                            console.log(22)
+                            // console.log(22)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2622,9 +2269,9 @@
                                     cellValue = $(this).text()
                                 }
                                 values.push(cellValue)
-                                console.log(values)
+                                // console.log(values)
                             });
-                            console.log(propertyId2)
+                            // console.log(propertyId2)
                             $.ajax({
                                 url: 'https://backend.app.spaderent.com/api/spade/PropertyUnitsUpdates',
                                 type: 'PUT',
@@ -2640,20 +2287,21 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(response)
+                                    // console.log(response)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             })
                         });
                         $('.delete-option1').click(function (e) {
-                            console.log(333)
+                            // console.log(333)
                             e.preventDefault();
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             const unitId = unitIdElement.text();
@@ -2681,21 +2329,22 @@
                                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log(1)
+                                    // console.log(1)
                                     getData2()
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                                     setTimeout(function () {
                                         $('#myModal_warning_connection').modal('hide');
                                     }, 2000);
-                                    console.log('Error: ' + error);
+                                    // console.log('Error: ' + error);
                                 }
                             });
                         })
                         $(".edit-option1").click(function () {
                             $(this).closest('td').find('.done-option').removeAttr('disabled');
-                            console.log(1)
+                            // console.log(1)
                             const unitIdElement = $(this).closest("tr").find(".unit-id");
                             $(this).addClass("d-none")
                             $(this).next().removeClass('d-none');
@@ -2708,11 +2357,12 @@
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error: ' + error);
+                        // console.log('Error: ' + error);
                     }
                 });
             }
@@ -2730,7 +2380,7 @@
             let tenantID;
             $("#send-email-invite").click(() => {
                 $("#preloader").css("display", "flex");
-                console.log(tenantID)
+                // console.log(tenantID)
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
                     type: 'POST',
@@ -2748,11 +2398,12 @@
                         window.location = './add-tenant.html'
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloader").css("display", "none");
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             })
@@ -2772,7 +2423,8 @@
                     });
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
                 }
             });
             $.ajax({
@@ -2786,6 +2438,9 @@
                 }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
+                    if(planID==4 || planID==7){
+                        $("#add-more-tenants").remove()
+                    }
                     adjustPlan(rest)
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -2795,9 +2450,16 @@
                     if(totalTenantHave>=totalTenantAllow){
                         $(".add-tenant-btn").prop("disabled",true);
                     }
-                    if (image !== " " && image !== null && image!== "") {
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     const createdDate_div = new Date(create_at);
 const currentDate_div = new Date();
@@ -2814,14 +2476,15 @@ $(".plan_remaining_days_data").each(function(){
                     $("#header-user").text(toTitleCase(userName))
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -2833,7 +2496,7 @@ $(".plan_remaining_days_data").each(function(){
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    var properties = response.data; // Assuming the response data is an array of property objects
+                    properties = response.data; // Assuming the response data is an array of property objects
                     var propertySelect = $('#property');
                     propertySelect.empty(); // Clear existing options
                     propertySelect.append($('<option></option>')
@@ -2863,7 +2526,7 @@ $(".plan_remaining_days_data").each(function(){
                             propertyUnitSelect.append($('<option></option>')
                                 .text("Choose..."))
                             selectedProperty.vacantUnits.forEach(function (unit) {
-                                console.log(unit.unitNumber)
+                                // console.log(unit.unitNumber)
                                 var option = $('<option></option>')
                                     .text(unit.unitNumber)
                                     .val(unit.id);
@@ -2873,11 +2536,15 @@ $(".plan_remaining_days_data").each(function(){
                     });
                 },
                 error: function (xhr, status, error) {
-                    $("#myModal_warning_connection").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning_connection').modal('hide');
-                    }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr?.responseJSON?.message);
+                    if(xhr?.responseJSON?.message != "No data found"){
+                            $('#preloader').css('display','none');
+                                                    // $("#myModal_warning_connection").modal("show");
+                                                    // setTimeout(function () {
+                                                    //     $('#myModal_warning_connection').modal('hide');
+                                                    // }, 2000);
+                        }
+                    // console.log(xhr.responseText);
                 }
             });
             $("#add-item").on("click", () => {
@@ -2910,7 +2577,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
             });
             $('input[name="yesno"]').change(function () {
-                console.log($(this).val())
+                // console.log($(this).val())
                 if ($(this).val() === 'yes') {
                     if (!$('#collapse2').hasClass('show')) {
                         $('#collapse2').collapse('show');
@@ -2969,7 +2636,7 @@ $(".plan_remaining_days_data").each(function(){
                 formData.propertyUnitID = document.getElementById('unit').value;
                 formData.rentAmount = document.getElementById('rent').value;
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                console.log(document.getElementById('baseRent'))
+                // console.log(document.getElementById('baseRent'))
                 if (formData.gross_or_triple_lease == "Gross Lease") {
                     formData.leaseStartDate = document.getElementById('leaseStart2').value;
                     formData.leaseEndDate = document.getElementById('leaseEnd2').value;
@@ -2996,12 +2663,12 @@ $(".plan_remaining_days_data").each(function(){
                 return formData;
             }
             $("#submit").on("click", () => {
-                console.log(2)
+                // console.log(2)
                 sendData()
             })
             function sendData() {
                 var formData = getFormData();
-                $("#addModal").modal("hide")
+                // $("#addModal").modal("hide")
                 $('#preloader').css('display', 'flex')
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/tenants',
@@ -3013,6 +2680,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        $("#addModal").modal("hide")
                         if (response.message.includes("Tenants Already exist on this email")) {
                             $('#preloader').fadeOut('slow', function () {
                                 $(this).hide();
@@ -3034,10 +2702,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(xhr)
-                        console.log(status)
-                        console.log(error)
-                        console.error('Error sending data:', error);
+                        $('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function() {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                        // console.log(xhr)
+                        // console.log(status)
+                        // console.log(error)
+                      // console.error('Error sending data:', error);
                     }
                 });
             }
@@ -3049,9 +2722,9 @@ resetAccordions()
 window.location = './add-tenant.html';
 })
             $(document).on('click', "#next", () => {
-                console.log(1)
+                // console.log(1)
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").removeClass("d-none")
                 $(".title-text").empty()
@@ -3071,9 +2744,9 @@ window.location = './add-tenant.html';
                 accordions.find('.accordion-collapse').addClass("show");
             })
             $("#edit-btn").on('click', () => {
-                console.log(1)
+                // console.log(1)
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").addClass("d-none")
                 $(".title-text").empty()
@@ -3112,7 +2785,7 @@ window.location = './add-tenant.html';
                 } else if (!hasEmptyFields && !hasErrorFields && hasFilledFields) {
                     return 2;
                 } else if (hasEmptyFields && !hasErrorFields && hasFilledFields) {
-                    console.log(2)
+                    // console.log(2)
                     return 3;
                 } else {
                     return 0;
@@ -3120,7 +2793,7 @@ window.location = './add-tenant.html';
             }
             var counter = 0
             function checkFieldsFilled(id) {
-                console.log(id)
+                // console.log(id)
                 const status = checkFieldsStatus(id)
                 if (id === "accordion-item2" && counter === 0) {
                     counter += 1
@@ -3135,7 +2808,7 @@ window.location = './add-tenant.html';
                     }
                 });
                 const chevronIcon = accordionItem.querySelector(".icon");
-                console.log(status)
+                // console.log(status)
                 switch (status) {
                     case 0:
                         break;
@@ -3153,7 +2826,7 @@ window.location = './add-tenant.html';
                         chevronIcon.classList.add("tick");
                         break;
                     case 3:
-                        console.log(2)
+                        // console.log(2)
                         chevronIcon.classList.remove("fi-rs-exclamation");
                         chevronIcon.classList.add("chevron");
                         chevronIcon.classList.remove("cross");
@@ -3207,7 +2880,7 @@ window.location = './add-tenant.html';
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 var isAccordion3FieldsEmpty = accordion3Fields.filter(function () {
-                    console.log($(this).val())
+                    // console.log($(this).val())
                     return $(this).val() !== '' || $(this).val() === 'Choose...';
                 }).length === 0;
                 if (!isAccordion1FieldsEmpty || !isAccordion2FieldsEmpty || !isAccordion3FieldsEmpty) {
@@ -3249,7 +2922,7 @@ window.location = './add-tenant.html';
             });
             function setEditable() {
                 var accordions = $('.accordion-item');
-                console.log(accordions)
+                // console.log(accordions)
                 accordions.addClass('open');
                 $("#edit-btn").addClass("d-none")
                 $(".title-text").empty()
@@ -3299,7 +2972,7 @@ window.location = './add-tenant.html';
             $('input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                console.log(columnIndex, isColumnVisible)
+                // console.log(columnIndex, isColumnVisible)
                 $('table').find('tr').each(function () {
                     var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                     isColumnVisible ? column.show() : column.hide();
@@ -3319,7 +2992,7 @@ window.location = './add-tenant.html';
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if (localStorage.getItem("htmlLayout")) {
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -3333,10 +3006,11 @@ window.location = './add-tenant.html';
                             localStorage.setItem("sashlightMode", true)
                         }
                         window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });
@@ -3381,16 +3055,17 @@ window.location = './add-tenant.html';
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log("here")
+                    // console.log("here")
                     if (response.message == "Email is verified") {
                         $("#account-text").remove()
                         $("#email_verification").remove()
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
         })
@@ -3400,7 +3075,7 @@ window.location = './add-tenant.html';
             var email = $(this).val();
             var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\.[A-Za-z]{2,}$/;
             if (!email.match(emailRegex)) {
-                console.log("invalid");
+                // console.log("invalid");
                 $(this).addClass("border-danger")
                 $(this).removeClass("border-green")
             } else {
@@ -3410,10 +3085,10 @@ window.location = './add-tenant.html';
         });
 </script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);

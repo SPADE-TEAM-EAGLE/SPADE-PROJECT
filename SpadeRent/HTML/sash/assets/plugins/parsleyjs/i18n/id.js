@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('id', {
   defaultMessage: "tidak valid",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('id', {
   check:          "pilih antar %s dan %s pilihan",
   equalto:        "harus sama"
 });
-
 Parsley.setLocale('id');

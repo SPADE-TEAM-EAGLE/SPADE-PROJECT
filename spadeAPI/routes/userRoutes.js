@@ -10,6 +10,7 @@ const bankAccountController = require("../controllers/bankAccountController");
 const superAdmin = require("../controllers/superAdmin");
 const { verifyToken, verifyTokenTenant, verifySuperAdmin } = require("../middleware/authenticate");
 const taskController = require("../controllers/taskController");
+const usersTaskController = require("../controllers/usersTaskController");
 const prospectus = require("../controllers/prospectusController");
 const fileUpload = require("../helper/S3Bucket");
 const notifyController = require("../controllers/notifyController");
@@ -135,20 +136,20 @@ router.post("/addVendorCategory", verifyToken, taskController.addVendorCategory)
 // router.get("/getAllVendors",verifyToken ,taskController.getAllVendors);
 router.get("/getAllVendors", verifyToken, taskController.getAllVendors);
 router.post("/addTasks", verifyToken, taskController.addTasks);
-// router.post("/addTasks", taskController.addTasks);
+router.post("/addUsersTask",verifyToken, usersTaskController.addUsersTask);
 // router.get("/getAllTask", verifyToken, taskController.getAllTask);
 router.get("/getAllTask",verifyToken ,taskController.getAllTask);
 router.get("/getAllTaskTenantRequest", verifyToken, taskController.getAllTaskTenantRequest);
 // router.get("/getAllTask", taskController.getAllTask);
 router.get("/taskByID", verifyToken, taskController.taskByID);
 router.put("/updateTenants", verifyToken, tenantController.updateTenants);
-router.get("/getStates", userController.getStates);
+router.get("/getStates",userController.getStates);
 router.get("/getVendorCategory", verifyToken,taskController.getVendorCategory);
 router.get("/getVendorAssignTo", verifyToken, taskController.getVendorAssignTo);
 router.put("/updateTasks", verifyToken, taskController.updateTasks);
-router.delete("/deleteTask", taskController.deleteTask);
+router.delete("/deleteTask", verifyToken, taskController.deleteTask);
 // router.get("/propertyTask", verifyToken, userController.propertyTask);
-router.get("/propertyTask", userController.propertyTask);
+router.get("/propertyTask", verifyToken, userController.propertyTask);
 router.get("/tenantTask", verifyToken, tenantController.tenantTask);
 // router.get("/getAllInvoicesTenant", verifyTokenTenant, tenantPortalController.getAllInvoicesTenant);
 router.get("/getAllInvoicesTenant",verifyTokenTenant,tenantPortalController.getAllInvoicesTenant);
@@ -177,6 +178,8 @@ router.put("/notify", verifyToken, notifyController.updateNotifyData);
 router.get("/notify", verifyToken, notifyController.getNotify);
 router.get("/tenantNotify", verifyTokenTenant, notifyController.getTenantNotify);
 router.put("/updateReadUnRead", verifyToken, notifyController.updateUserReadUnRead);
+//  fffffffffffffff
+
 router.put("/updateTenantReadUnRead", verifyTokenTenant, notifyController.updateTenantReadUnRead);
 router.put("/updateAllTenantNotifyRead", verifyTokenTenant, notifyController.updatetTenantAllReadNotify);
 
@@ -303,15 +306,15 @@ router.put("/UpdateUserNuveiId", userController.UpdateUserNuveiId);
 
 //                                             superAdmin
 
-router.get("/signInAdmin", superAdmin.signInAdmin);
+router.post("/signInAdmin", superAdmin.signInAdmin);
 // router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
-router.get("/allLandlord",superAdmin.allLandlord);
+router.get("/allLandlord",verifySuperAdmin ,superAdmin.allLandlord);
 router.delete("/closedLandlord",verifySuperAdmin ,superAdmin.deleteLandlord);
 // router.delete("/closedLandlord", superAdmin.deleteLandlord);
 router.get("/allClosedLandlord",verifySuperAdmin ,superAdmin.allClosedLandlord);
 // router.get("/allClosedLandlord", superAdmin.allClosedLandlord);
 // router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
-router.post("/createUserAdmin", superAdmin.createUserAdmin);
+router.post("/createUserAdmin",verifySuperAdmin ,superAdmin.createUserAdmin);
 router.get("/allUserAdmin",verifySuperAdmin ,superAdmin.allUserAdmin);
 router.put("/updateAdminUser",verifySuperAdmin ,superAdmin.updateAdminUser);
 router.delete("/userAdminDelete",verifySuperAdmin ,superAdmin.userAdminDelete);
@@ -323,8 +326,8 @@ router.get("/getUser",verifySuperAdmin,superAdmin.getUserforAdmin);
 router.get("/adminUserPermissionRoles",verifySuperAdmin,superAdmin.adminUserPermissionRoles);
 router.put("/adminUserPermissionUpdate",verifySuperAdmin,superAdmin.adminUserPermissionUpdate);
 router.get("/getAdminRevenue",verifySuperAdmin,superAdmin.getAdminRevenue);
-router.get("/adminResetEmail",superAdmin.adminResetEmail);
-router.get("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
+router.post("/adminResetEmail",superAdmin.adminResetEmail);
+router.post("/adminVerifyResetEmailCode",superAdmin.adminVerifyResetEmailCode);
 router.put("/updatePasswordAdmin",superAdmin.updatePasswordAdmin);
 router.post("/resendCodeAdmin", superAdmin.resendCodeAdmin);
 router.get("/getAdminNotification",verifySuperAdmin,superAdmin.getAdminNotification);
@@ -334,4 +337,12 @@ router.delete("/deleteClossedLandlord",verifySuperAdmin,superAdmin.deleteClossed
 router.get("/checkEmailTenants", verifyToken, tenantController.checkEmailTenants);
 router.post("/paymentACHVerification",paymentIntegration.paymentACHVerification);
 router.get("/VendorCheckEmail/:email", verifyToken, taskController.VendorCheckEmail);
+router.post("/ACHLogCheck", userController.ACHLogCheck);
+router.post("/tenantUpdateAllInvoices",verifyTokenTenant,tenantController.tenantUpdateAllInvoices);
+router.post("/tenantUpdateIndividualInvoices",verifyTokenTenant,tenantController.tenantUpdateIndividualInvoices);
+// router.get("/UserCheckName/:userId",userController.UserCheckName);
+router.get("/InvoiceID", verifyToken, invoiceController.InvoiceID);
+router.get("/getAllUserTask", verifyToken, usersTaskController.getAllUserTask);
+router.delete("/deleteUserTask", verifyToken, usersTaskController.deleteUserTask);
+router.put("/updateUserTask", verifyToken, usersTaskController.updateUserTask);
 

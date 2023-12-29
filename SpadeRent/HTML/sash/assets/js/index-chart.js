@@ -1,11 +1,9 @@
-
-
 /* Prospect chart-bar*/
 var ctx1 = document.getElementById("chartBar21").getContext('2d');
 var myChartProspect;
 function createProspectChart(labels, data){
-    console.log("Inside the function!!!!")
-    console.log(labels, data)
+  // console.log("Inside the function!!!!")
+  // console.log(labels, data)
     myChartProspect = new Chart(ctx1, {
         type: 'bar',
         data: {
@@ -18,7 +16,6 @@ function createProspectChart(labels, data){
                 borderColor: [ '#2086C8','#F82649','#09AD95'],
                 borderWidth: 2.0,
                 pointBackgroundColor: '#ffffff',
-            
             }],
             labels: labels,
         },
@@ -54,7 +51,6 @@ function createProspectChart(labels, data){
                     }
                 }]
             },
-    
             legend: {
                 labels: {
                     fontColor: "#9ba6b5"
@@ -68,14 +64,10 @@ function updateProspectChart(labels, data){
     myChartProspect.data.datasets[0].data = data;
     myChartProspect.update();
 }
-// createProspectChart([20,10,60])
-// var ctx = document.getElementById("chartPolarr");
     var myChartInvoice;
 /* invoice chart */
 function createInvoiceChart(data){
-    
     var ctx2 = document.getElementById("chartPolarr");
-    // var myChart;
     myChartInvoice = new Chart(ctx2, {
         type: 'polarArea',
         data: {
@@ -104,19 +96,15 @@ function createInvoiceChart(data){
     });
 }
 function updateInvoiceChart(data){
-    console.log(data)
+  // console.log(data)
     myChartInvoice.data.datasets[0].data = data;
     myChartInvoice.update();
 }
-// createInvoiceChart([20,10,60])
-
-
 /*Banking stats chart-bar*/
 var chart = c3.generate({
     bindto: '#chart-barr', // id of chart wrapper
     data: {
         columns: [
-            // each columns data
             ['data1', 11, 8, 15, 18, 19, 17, 15, 11, 9, 16, 17, 13],
             ['data2', 7, 7, 5, 7, 9, 12, 11, 9, 14, 12, 14, 10]
         ],
@@ -126,7 +114,6 @@ var chart = c3.generate({
             data2: '#1467B0'
         },
         names: {
-            // name of each serie
             'data1': 'Maximum',
             'data2': 'Minimum'
         }
@@ -134,7 +121,6 @@ var chart = c3.generate({
     axis: {
         x: {
             type: 'category',
-            // name of each category
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
     },
@@ -149,16 +135,11 @@ var chart = c3.generate({
         top: 0
     },
 });
-
-
-
  /* Account status chart-donut*/
   /*---- morrisBar8----*/
   var donutChartInstance;
-
-  // Step 2: Initialize the Morris Donut chart using the variable
   function createDonutChart(data){
-    console.log(data)
+  // console.log(data)
     donutChartInstance = new Morris.Donut({
         element: 'morrisBar88',
         data: data,
@@ -170,15 +151,14 @@ var chart = c3.generate({
             return x + "%";
         }
     }).on('click', function(i, row) {
-        console.log(i, row);
+      // console.log(i, row);
     });
   }
   function updateDonutChart(data){
-    console.log(data)
+  // console.log(data)
     donutChartInstance.setData(data);
   }
  /* Account status chart-donut*/
-
      /* Amount Status Chart*/
      var ctx = document.getElementById("chartAreaa");
      var myChart = new Chart(ctx, {
@@ -238,7 +218,6 @@ var chart = c3.generate({
          }
      });
      /////////////////
-
 //////////////  Property Status chart ///////////////
 var myPieChart6;
 function createPropertyStatus(data){
@@ -250,8 +229,6 @@ function createPropertyStatus(data){
             hoverBackgroundColor: ['#DACECE', '#529EE0', '#1467B0']
         }]
     };
-    
-    // Define the options for the doughnut chart, including the datalabels plugin
     var optionpie = {
         responsive: true,
         maintainAspectRatio: false,
@@ -276,33 +253,20 @@ function createPropertyStatus(data){
             return x + "%"
         }
     };
-    
-    // Get the canvas element and set its dimensions
     var canvas = document.getElementById('donutchartt');
     canvas.width = 280;
     canvas.height = 280;
-    
-    // Create the doughnut chart with the datalabels plugin
     var ctx6 = canvas.getContext('2d');
     myPieChart6 = new Chart(ctx6, {
         type: 'doughnut',
         data: datapie,
         options: optionpie
     });
-    
 }
 function updatePropertyStatus(data)
 {
-    console.log(data)
+  // console.log(data)
     myPieChart6.data.datasets[0].data = data;
     myPieChart6.update();
 }
    //////// //  Property Status chart ///////////////
-
-
-// // <!-- date start  -->
-//     $('.date').datepicker({
-//         multidate: true,
-//         format: 'dd-mm-yyyy '
-//     });
-// // <!-- date End  -->

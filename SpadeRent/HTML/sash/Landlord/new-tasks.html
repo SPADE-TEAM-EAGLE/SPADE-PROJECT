@@ -29,455 +29,10 @@
                 window.location="./login_module.html"
             }
         </script>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        #propertyTable {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_wrapper {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scroll {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollHead {
-            padding: 0;
-        }
-        #propertyTable_wrapper .dataTables_scrollBody {
-            padding: 0;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            
-            border-radius: 7px;
-            transition: all 1ms;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-            
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white !important;
-            border-radius: 4px;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-            color: #1467B0;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        
-        .panel-body {
-            padding: 0px;
-        }
-        .dark-mode .btn-close {
-            color: white;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button,
-        .modal-footer a {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            
-            letter-spacing: 0.0145455em;
-            
-        }
-        .disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            color: gray;
-        }
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-            
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: #1DBC5F;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-            
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-            
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-            font-weight: bold;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-            font-weight: bold;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        
-        button.btn-close {
-            right: 6px;
-        }
-        .btn-close {
-            width: 1.8rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .del {
-            width: 2rem !important;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                
-                letter-spacing: 0.0145455em;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-            .modal-footer .button-left {
-                margin: auto;
-            }
-            
-            */ .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #customize_btn {
-                display: none;
-            }
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #typehead {
-                display: none;
-            }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 153px;
-            }
-        }
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-            .succes-modal {
-                padding: 1rem 1rem;
-            }
-        }
-        @media (max-width:320px) {
-            
-        }
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-        </style>
+      <link rel="stylesheet" href="../assets/pageCss/landlordCss/new-tasks.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
-        <div
-            class="modal fade"
-            id="myModal_warning_connection"
-            tabindex="-1"
-            role="dialog"
-        >
-            <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-body p-0">
-                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
-                            <div class="card-body text-center">
-                                <span class="">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        height="60"
-                                        width="60"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/>
-                                        <circle
-                                            cx="12"
-                                            cy="16"
-                                            r="1"
-                                            fill="#f7b731"
-                                        />
-                                        <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/>
-                                    </svg>
-                                </span>
-                                <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
-                                <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
-                                <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div
             class="modal fade effect-scale"
             id="modaldemo8"
@@ -715,7 +270,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="prospects.html" style="color: white;">Prospect</a>
+                                        <a href="prospects.html" style="color: white;">Prospects</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -991,6 +546,154 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addModal_task" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title">Create
+                                <strong class="color-primary">New Task</strong>
+                            </h2>
+                            <span class="">
+                                The real power of tasks is keeping track of deadlines and having a
+                                log of all work and communication related to the tasks for later reference.
+                            </span>
+                        </div>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="top-close">
+                            <span aria-hidden="true">
+                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <form class="row g-3" enctype="multipart/form-data">
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label fw-bold">Task Name
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input id="task_task" required class="form-control" placeholder="Enter task name"
+                                        type="text" placeholder="Enter Task Name">
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Related To
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select required id="property_task" class="form-select form select2-show-search"
+                                        placeholder="Enter Related To">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Units
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select required id="unit_task" class="form-select form select2-show-search"
+                                        placeholder="Enter Related To">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Assign To (Optional)</label>
+                                    <select multiple="multiple" multiple placeholder="Enter Assign To"
+                                        class="select2 select2-show-search" id="assignee_task">
+    
+                                    </select>
+                                    <span class="text-danger d-none" id="vendor-span">Add assignee first!!</span>
+                                    <br>
+    
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label fw-bold">Due Date
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input id="dueDate_task" class="form-control" required placeholder="MM/DD/YYYY"
+                                        type="date" placeholder="Enter Due Date">
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Status
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select id="status_task" required class="form-select form select2-show-search"
+                                        placeholder="Select Status">
+                                        <option selected>Choose...</option>
+                                        <option value="not started">Not Started</option>
+                                        <option value="in progress">In progress</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Priority
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select id="priority_task" required class="form-select form select2-show-search"
+                                        placeholder="Select Priority">
+                                        <option selected>Choose...</option>
+                                        <option name="high">High</option>
+                                        <option name="moderate">Moderate</option>
+                                        <option name="low">Low</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Notes (Optional)</label>
+                                    <textarea id="notes_task" class="form-control mb-4" placeholder="Enter Your Description"
+                                        rows="4"></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                    <div class="custom-file" style="border: 1px dashed #00000087;"
+                                        ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                                        <input id="fileInput_task" type="file" name="media" class="custom-file-input form"
+                                            accept=".pdf,application/pdf" aria-label="hello" multiple>
+                                        <span className="d-none"></span>
+                                        <label class="custom-file-label" for="fileInput_task">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Files here</span>
+                                                <span>PDF file size no more than 5MB</span>
+                                                <small class="text-danger d-none" id="count-text">Maximum number of files
+                                                    reached.</small>
+                                                <small class="text-danger d-none" id="size-text">
+                                                    File size exceeds 5MB
+                                                    limit.
+                                                </small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="selected-files">
+                                        <div class="file-grid"></div>
+                                    </div>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <div class="d-flex">
+    
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="example-checkbox1_task" value=""
+                                    checked="">
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal"
+                                id="close">Close</button>
+                            <a href="javascript:void(0)" class="btn text-light btn-pill button"
+                                style="background-color:#1467B0;" id="next_task">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div
             class="modal fade"
             id="infoModal"
@@ -1177,6 +880,43 @@
                 </div>
             </div>
         </div>
+        <div
+            class="modal fade"
+            id="myModal_warning_connection"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"/>
+                                        <circle
+                                            cx="12"
+                                            cy="16"
+                                            r="1"
+                                            fill="#f7b731"
+                                        />
+                                        <path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"/>
+                                    </svg>
+                                </span>
+                                <h4 class="h4 mb-0 mt-3 fw-bold">Warning</h4>
+                                <p class="card-text text-dark m-0">Sorry! Something went wrong.</p>
+                                <p class="card-text text-dark m-0">Kindly check your internet connection or please try again later.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="page">
             <div class="page-main">
                 <div class="app-header header sticky" id="navbar-placeholder">
@@ -1239,6 +979,9 @@
                                                     <span class="badge bg-secondary header-badge bg-primary" id="count_unread"></span>
                                                 </a>
                                             </div>
+                                            <div class="d-flex country">
+                                                <div style="width: 58px;height: 58px;" class="profileImage avatarr profile-user brroundd nav-link cover-image fs-20 ms-5"></div>
+                                        </div>
                                             <div class="d-flex country">
                                                 <img id="user-img-dark" src="../assets/images/icons/Group 34343434.png" class="avatarr profile-user brroundd nav-link cover-image dark-layout">
                                             </div>
@@ -1365,6 +1108,11 @@
                                         </li>
                                         <li>
                                             <a href="create-tasks.html" class="slide-item">All</a>
+                                        </li><li>
+                                            <a href="user-tasks.html" class="slide-item">Tasks</a>
+                                        </li>
+                                        <li>
+                                            <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
                                         </li>
                                         <li>
                                             <a href="tasks-requests.html" class="slide-item">Requests</a>
@@ -1484,21 +1232,66 @@
                                         </div>
                                         <div class="card-footer text-center border-0">
                                             <div class="row">
-                                                <div class="text-center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-primary btn-pill btn-xl font-weight-bold"
-                                                        id="add_property_btn"
-                                                        data-bs-effect="effect-scale"
-                                                        data-bs-toggle="modal"
-                                                        href="#addModal"
-                                                    >
-                                                        <i class="fe fe-plus me-2"></i>
-                                                        <strong>
-                                                            ADD NEW
-                                                        TASK
-                                                        </strong>
-                                                    </button>
+                                                <div class="text-center d-flex align-items-center justify-content-center">
+                                                    <button type="button"
+                                                    class="btn btn-primary btn-pill mx-2 laptop-button" id="task_btn"
+                                                    data-bs-toggle="dropdown" aria-expanded="true">
+                                                    <i class="fe fe-plus me-2"></i>
+                                                    <strong>ADD NEW
+                                                        TASK</strong>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu"
+                                                    style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 41px, 0px);"
+                                                    data-popper-placement="bottom-start">
+                                                    <li>
+                                                        <a class="mx-2 laptop-button" id="add_property_btn_task"
+                                                            data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                            href="#addModal_task">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                height="23" viewBox="0 0 22 23" fill="none">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M6.59255 0.306203C6.78902 0.110149 7.05548 0 7.33333 0H15.7143C17.4501 0 18.8571 1.4042 18.8571 3.13636V7.31818C18.8571 7.89557 18.3881 8.36364 17.8095 8.36364C17.2309 8.36364 16.7619 7.89557 16.7619 7.31818V3.13636C16.7619 2.55898 16.2929 2.09091 15.7143 2.09091H8.38095V7.31818C8.38095 7.89557 7.91193 8.36364 7.33333 8.36364H2.09524V19.8636C2.09524 20.441 2.56428 20.9091 3.14286 20.9091H6.28571C6.86429 20.9091 7.33333 21.3771 7.33333 21.9545C7.33333 22.5319 6.86429 23 6.28571 23H3.14286C1.40711 23 0 21.5958 0 19.8636V7.31818C0 7.04091 0.110377 6.77499 0.306837 6.57893L6.59255 0.306203ZM3.57679 6.27273H6.28571V3.5694L3.57679 6.27273ZM15.7143 18.8182C12.8806 18.8182 11.5238 20.5702 11.5238 21.9545C11.5238 22.5319 11.0548 23 10.4762 23C9.89759 23 9.42857 22.5319 9.42857 21.9545C9.42857 20.0458 10.6259 18.3082 12.5664 17.3968C11.9174 16.6604 11.5238 15.6943 11.5238 14.6364C11.5238 12.3268 13.4 10.4545 15.7143 10.4545C18.0286 10.4545 19.9048 12.3268 19.9048 14.6364C19.9048 15.6943 19.5112 16.6604 18.8622 17.3968C20.8027 18.3082 22 20.0458 22 21.9545C22 22.5319 21.531 23 20.9524 23C20.3738 23 19.9048 22.5319 19.9048 21.9545C19.9048 20.5702 18.548 18.8182 15.7143 18.8182ZM15.7143 16.7273C16.8715 16.7273 17.8095 15.7912 17.8095 14.6364C17.8095 13.4816 16.8715 12.5455 15.7143 12.5455C14.5571 12.5455 13.619 13.4816 13.619 14.6364C13.619 15.7912 14.5571 16.7273 15.7143 16.7273Z"
+                                                                    fill="black" />
+                                                            </svg>
+
+                                                            <strong>
+                                                                Task
+                                                            </strong>
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-flex justify-content-between">
+                                                        <a class="mx-2 laptop-button" id="add_property_btn"
+                                                            data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                            href="#addModal">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="27"
+                                                                height="25" viewBox="0 0 27 25" fill="none">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M11 8.5C11 8.22386 11.398 8 11.8889 8H18.1111C18.602 8 19 8.22386 19 8.5C19 8.77614 18.602 9 18.1111 9H11.8889C11.398 9 11 8.77614 11 8.5Z"
+                                                                    fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M9.70711 5.29289C10.0976 5.68342 10.0976 6.31658 9.70711 6.70711L6.70711 9.70711C6.31658 10.0976 5.68342 10.0976 5.29289 9.70711L4.29289 8.70711C3.90237 8.31658 3.90237 7.68342 4.29289 7.29289C4.68342 6.90237 5.31658 6.90237 5.70711 7.29289L6 7.58579L8.29289 5.29289C8.68342 4.90237 9.31658 4.90237 9.70711 5.29289Z"
+                                                                    fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M11 15.5C11 15.2239 11.398 15 11.8889 15H18.1111C18.602 15 19 15.2239 19 15.5C19 15.7761 18.602 16 18.1111 16H11.8889C11.398 16 11 15.7761 11 15.5Z"
+                                                                    fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M9.70711 13.2929C10.0976 13.6834 10.0976 14.3166 9.70711 14.7071L6.70711 17.7071C6.31658 18.0976 5.68342 18.0976 5.29289 17.7071L4.29289 16.7071C3.90237 16.3166 3.90237 15.6834 4.29289 15.2929C4.68342 14.9024 5.31658 14.9024 5.70711 15.2929L6 15.5858L8.29289 13.2929C8.68342 12.9024 9.31658 12.9024 9.70711 13.2929Z"
+                                                                    fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M1.97337 1.97337C3.40094 0.545797 5.53715 0 8.2907 0H14.7093C17.4629 0 19.5991 0.545797 21.0266 1.97337C22.4542 3.40094 23 5.53715 23 8.2907V14.7093C23 17.4629 22.4542 19.5991 21.0266 21.0266C19.5991 22.4542 17.4629 23 14.7093 23H8.2907C5.53715 23 3.40094 22.4542 1.97337 21.0266C0.545797 19.5991 0 17.4629 0 14.7093V8.2907C0 5.53715 0.545797 3.40094 1.97337 1.97337ZM3.10803 3.10803C2.12862 4.08743 1.60465 5.69541 1.60465 8.2907V14.7093C1.60465 17.3046 2.12862 18.9126 3.10803 19.892C4.08743 20.8714 5.69541 21.3953 8.2907 21.3953H14.7093C17.3046 21.3953 18.9126 20.8714 19.892 19.892C20.8714 18.9126 21.3953 17.3046 21.3953 14.7093V8.2907C21.3953 5.69541 20.8714 4.08743 19.892 3.10803C18.9126 2.12862 17.3046 1.60465 14.7093 1.60465H8.2907C5.69541 1.60465 4.08743 2.12862 3.10803 3.10803Z"
+                                                                    fill="black" />
+                                                                <circle cx="20" cy="18" r="7" fill="black" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M18.6667 17C18.6667 16.2636 19.2636 15.6667 20 15.6667C20.7364 15.6667 21.3333 16.2636 21.3333 17C21.3333 17.7364 20.7364 18.3333 20 18.3333C19.2636 18.3333 18.6667 17.7364 18.6667 17ZM21.2748 18.5412C21.7178 18.1743 22 17.6201 22 17C22 15.8954 21.1046 15 20 15C18.8954 15 18 15.8954 18 17C18 17.6201 18.2822 18.1743 18.7252 18.5412C17.6614 18.9153 17 19.7491 17 20.6667C17 20.8508 17.1492 21 17.3333 21C17.5174 21 17.6667 20.8508 17.6667 20.6667C17.6667 19.9102 18.4518 19 20 19C21.5482 19 22.3333 19.9102 22.3333 20.6667C22.3333 20.8508 22.4826 21 22.6667 21C22.8508 21 23 20.8508 23 20.6667C23 19.7491 22.3386 18.9153 21.2748 18.5412Z"
+                                                                    fill="white" />
+                                                            </svg>
+                                                            <strong>
+                                                                Maintainance Request
+                                                            </strong>
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -1704,19 +1497,18 @@
 <script src="../assets/js/select2.js"></script>
 <script>
         $(document).ready(function () {
-            $('.select2-show-search').select2({
+            $('#addModal').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
                     dropdownParent: $('#addModal')
                 });
-                $('#addModal').on('shown.bs.modal', function () {
-                   $('.select2-show-search').select2({
-                       dropdownParent: $('#addModal')
-                   });
-               });
-               $('#myModal_edit').on('shown.bs.modal', function () {
-                   $('.select2-show-search').select2({
-                   dropdownParent: $('#myModal_edit')
-               });
-               });
+            });
+            
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+            });
+           
         });
 </script>
 <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -1749,10 +1541,10 @@
 <script src="../assets/js/index1.js"></script>
 <script src="../assets/js/themeColors.js"></script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);
@@ -1799,23 +1591,24 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("getMessagesCountLandlord");
-                        console.log(response.Count['count(message)']);
+                        // console.log("getMessagesCountLandlord");
+                        // console.log(response.Count['count(message)']);
                         $('#chatCounter').text(response.Count['count(message)'])
                     },
                     error: function (xhr, status, error) {
-                        $("#myModal_warning").modal("show");
-                        setTimeout(function () {
-                            $('#myModal_warning').modal('hide');
-                        }, 2000);
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // $("#myModal_warning").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning').modal('hide');
+                        // }, 2000);
+                        // console.log(error);
                     }
                 });
             });
 </script>
 <script src="../assets/js/intercom.js"></script>
 <script src="../assets/js/getNotification.js"></script>
-<script src="../assets/js/push_notification.js"></script><script src="../assets/js/chnageOnlineStatus.js"></script>
+<script src="../assets/js/push_notification.js"></script><script src="../assets/js/changeOnlineStatus.js"></script>
 <script src="../assets/js/email-phone.js"></script>
 <script>
             $(document).ready(function () {
@@ -1826,14 +1619,15 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var myprogress = `<div class="progress-bar bg-info" style="width: `+response.count+`%;">`+response.count+`%</div>`;
                     $(".progress").html(myprogress)
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+$('#preloader').css('display','none');
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
                 $('#email_verification').on('click', function () {
@@ -1848,7 +1642,7 @@
 <script>
             var selectedFiles = [];
                             function dropHandler(ev) {
-  console.log("File(s) dropped");
+  // console.log("File(s) dropped");
   ev.preventDefault();
   if (ev.dataTransfer.items) {
     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -1860,20 +1654,20 @@
     });
   } else {
     [...ev.dataTransfer.files].forEach((file, i) => {
-      console.log(`… file[${i}].name = ${file.name}`);
+      // console.log(`… file[${i}].name = ${file.name}`);
     });
   }
 }
 function dragOverHandler(ev) {
-  console.log("File(s) in drop zone");
+  // console.log("File(s) in drop zone");
   ev.preventDefault();
 }
                     function updateSelectedFilesContainer() {
                 var selectedFilesContainer = $('.file-grid');
                 selectedFilesContainer.empty();
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                    // console.log(selectedFiles.length)
+                    // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -1947,9 +1741,18 @@ function dragOverHandler(ev) {
                 },
                 success: function ({ userName, image , create_at,planID,...rest }) {
                     adjustPlan(rest)
-                    if (image !== " " && image !== null && image!== "") {
+                    $("#assignee_task,#assignee_update_task").append($("<option></option>").text((rest?.firstName + " " + rest?.lastName)+" (Assign yourself)").val((rest?.userId)+"l"));
+                    $("#assignee_task").multipleSelect();
+                    localStorage.setItem("landlordName",userName)
+                    if (image !== " " && image !== null && image !== "") {
                         $("#user-img").attr("src", image)
                         $("#user-img-dark").attr("src", image)
+                        $(".profileImage").parent().remove()
+                    }else{
+                        $("#user-img").parent().remove()
+                        $("#user-img-dark").parent().remove()
+                        $(".profileImage").text(localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() +
+                            localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase());
                     }
                     function toTitleCase(str) {
                         return str.replace(/\w\S*/g, function (txt) {
@@ -1971,14 +1774,15 @@ $(".plan_remaining_days_data").each(function(){
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = '../Landlord/login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                    // console.log('Error occurred while fetching state and city data.');
+                    // console.log(xhr);
+                    // console.log(error);
                 }
             });
             $.ajax({
@@ -1994,7 +1798,7 @@ $(".plan_remaining_days_data").each(function(){
                         $("#property").empty()
                         $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
                         response.data[0].forEach((property) => {
-                            console.log(property);
+                            // console.log(property);
                             var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
                             var optionValue = property.tenantID;
                             $("#property").append($("<option></option>").text(optionText).val(optionValue));
@@ -2004,48 +1808,146 @@ $(".plan_remaining_days_data").each(function(){
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
-                    method: 'GET',
-                    contentType: "application/json; charset=utf-8",
+                    url: 'https://backend.app.spaderent.com/api/spade/getPropertyUnitsTenant',
+                    type: 'GET',
+                    contentType: false,
+                    processData: false,
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        function toTitleCase(str) {
-                            return str.replace(/\w\S*/g, function (txt) {
-                                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        // properties = response.data;
+                        var properties=response?.data;
+                        // Assuming the response data is an array of property objects
+                        // console.log("property", response.data)
+                        
+                        $('#property_task,#property_update_task').empty(); // Clear existing options
+                        $('#property_task,#property_update_task').append($('<option></option>')
+                            .text("Choose...")
+                        )
+                        properties.forEach(function (property) {
+                            var option = $('<option></option>')
+                                .text(property.propertyName)
+                                .val(property.id);
+                            $('#property_task,#property_update_task').append(option);
+                        });
+                        $('#property_task,#property_update_task').change(function () {
+                            var selectedPropertyId = $(this).val();
+                            var selectedProperty = properties.find(function (property) {
+                                return property.id == selectedPropertyId;
                             });
-                        }
-                        $("#user-name").text(toTitleCase(response.user))
-                        $("#header-user").text(toTitleCase(response.user))
-                        var selectElement = $('#assignee');
+                            var propertyUnitSelect = $('#unit_task');
+                            $('#unit_task,#unit_update_task').empty()
+                            
+                                $('#unit_task,#unit_update_task').append($('<option></option>')
+                                    .text("Choose..."))
+                                selectedProperty.vacantUnits.forEach(function (unit) {
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    $('#unit_task,#unit_update_task').append(option);
+                                });
+                                selectedProperty.occupiedUnits.forEach(function (unit) {
+                                    var option = $('<option></option>')
+                                        .text(unit.unitNumber)
+                                        .val(unit.id);
+                                    $('#unit_task,#unit_update_task').append(option);
+                                });
+                            
+                        });
+                        $('#addUnitBtn').hide()
+                        $('#addModal_units').modal('hide')
+                    },
+                    error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                        // $("#myModal_warning_connection").modal("show");
+                        // setTimeout(function () {
+                        //     $('#myModal_warning_connection').modal('hide');
+                        // }, 2000);
+                        // console.log('Error: ' + error);
+                    }
+                });
+            
+            $.ajax({
+                url: "https://backend.app.spaderent.com/api/spade/userPermissionGetAll",
+                type: "GET",
+                contentType: "application/json",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("authtoken"),
+                },
+                success: function (response) {
+                    if (response?.data?.length>=1) {
+                                    response?.data?.forEach((user)=>{
+                                    $("#assignee_task,#assignee_update_task").append($("<option></option>").text((user?.UFirstName + " " + user?.ULastName)+' ('+user?.uRole+")").val((user?.id)+"u"));
+                                })
+                                
+                                }
+                                
+                                $("#assignee_task,#assignee_update_task").multipleSelect();
+                    // $("#assignee_task").append($("<option></option>").text().val(user.id));
+                }, error: function (xhr, status, error) {
+                }
+            })
+
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    var selectElement = $('#assignee_task');
+                    
+                    if (response.data.length === 0) {
+                        $("#assignee_update_task").append($("<option></option>").text("No Vendor available.."));
+                        selectElement.append($('<option></option>').text('No Vendor available..'));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            var optionText = ((vendor.firstName + " " + vendor.lastName)+' (vendor)');
+                            var optionValue = (vendor.id+'v');
+                            var option = $('<option></option>')
+                                .val(optionValue)
+                                .text(optionText);
+                            selectElement.append(option);
+                            $("#assignee_update_task").append($("<option></option>").text(optionText).val(optionValue));
+                            
+                            
+                        });
+                    }
+                    selectElement.multipleSelect();
+                    $("#assignee_update_task").multipleSelect();
+                    $("#assignee_update").multipleSelect();
+                    $("#assignee_update").empty()
+                    var selectElement = $('#assignee');
                     selectElement.empty();
-                        $("#assignee_update").empty()
-                        $("#assignee_update").append($("<option></option>").text("Choose..."))
-                        if (response.data.length === 0) {
-                            selectElement.append($('<option></option>').text('No Vendor available..'));
-                            $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
-                        } else {
-                            response.data.forEach((vendor) => {
-                                var optionText = vendor.firstName + " " + vendor.lastName;
-                                var optionValue = vendor.id;
-                                var option = $('<option></option>')
+                    if (response.data.length === 0) {
+                        $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
+                        selectElement.append($('<option></option>').text('No Vendor available..'));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            var optionText = vendor.firstName + " " + vendor.lastName;
+                            var optionValue = vendor.id;
+                            var option = $('<option></option>')
                                 .val(vendor.id)
                                 .text(vendor.firstName + " " + vendor.lastName);
                             selectElement.append(option);
-                                $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
-                            });
-                        }
+                            $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+                        });
+                    }
                     selectElement.multipleSelect();
-                    },
-                    error: function (xhr, status, error) {
-                    if(xhr.responseJSON.message=="No vendor data found"){
+                },
+                error: function (xhr, status, error) {
+                    $('#preloader').css('display', 'none');
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
                         $("#assignee").empty()
                         $("#assignee").prop("disabled", true);
                         $('#addVendorAnchor').show()
                     }
                 }
-                })
+            })
+            
+                
                 function areAllFieldsFilled(update) {
                     if (update) {
                         var accordion1Fields = $('#editModal input[required], #editModal select[required]');
@@ -2053,7 +1955,7 @@ $(".plan_remaining_days_data").each(function(){
                         var allFieldsFilled = accordion1Fields.filter(function () {
                             return $(this).val() === '' || $(this).val() === 'Choose...';
                         }).length === 0;
-                        console.log()
+                        // console.log()
                         return allFieldsFilled;
                     }
                     var accordion1Fields = $('#addModal input[required], #addModal select[required]');
@@ -2061,7 +1963,7 @@ $(".plan_remaining_days_data").each(function(){
                     var allFieldsFilled = accordion1Fields.filter(function () {
                         return $(this).val() === '' || $(this).val() === 'Choose...';
                     }).length === 0;
-                    console.log()
+                    // console.log()
                     return allFieldsFilled;
                 }
                 function updateButtonStatus(update) {
@@ -2105,20 +2007,20 @@ $(".plan_remaining_days_data").each(function(){
                     }
                     updateButtonStatus("_update");
                 });
-                $('#fileInput').on('change', function () {
-                    var files = Array.from($(this)[0].files);
-                    files.forEach(function (file) {
-                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
-                    });
-                    updateSelectedFilesContainer(); // Update the selected files container
+                $('#fileInput,#fileInput_task').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
-                $('#fileInput_update').on('change', function () {
-                    var files = Array.from($(this)[0].files);
-                    files.forEach(function (file) {
-                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
-                    });
-                    updateSelectedFilesContainer(); // Update the selected files container
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+            $('#fileInput_update,#fileInput_update_task').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
                 $(document).on('click', '.delete-file', function () {
                     var index = $(this).data('index');
                     selectedFiles.splice(index, 1); // Remove the selected file from the array
@@ -2146,7 +2048,7 @@ $(".plan_remaining_days_data").each(function(){
                 })
                 $(document).on('click', '#next', function (e) {
                     e.preventDefault();
-                    $('#addModal').modal('hide');
+                    // $('#addModal').modal('hide');
                     $('#preloader').css('display','flex')
                     var task = $("#task").val();
                     var assignee = $("#assignee").val();
@@ -2196,6 +2098,7 @@ $(".plan_remaining_days_data").each(function(){
                                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
+                                            $('#addModal').modal('hide');
                                             $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
@@ -2209,20 +2112,22 @@ $(".plan_remaining_days_data").each(function(){
                                             }
                                         },
                                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                         }
                                     });
                                 },
                                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                     $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                 }
                             });
                     }else{
@@ -2247,6 +2152,7 @@ $(".plan_remaining_days_data").each(function(){
                                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                         },
                                         success: function (response) {
+                                            $('#addModal').modal('hide');
                                             $('#preloader').fadeOut('slow', function() {
     $(this).hide();
 });
@@ -2260,15 +2166,175 @@ $(".plan_remaining_days_data").each(function(){
                                             }
                                         },
                                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                                         }
                                     });
                     }
                 });
+                $(document).on('click', '#next_task', function (e) {
+                e.preventDefault();
+                // $('#addModal').modal('hide');
+                $('#preloader').css('display', 'flex')
+                var task = $("#task_task").val();
+                var assignee = []
+                console.log($("#assignee_task").val())
+                $("#assignee_task").val()?.forEach((item) => {
+    if (item) {
+        let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
+        let role = '';
+        switch (item.slice(-1)) {
+            case 'l':
+                role = 'landlord';
+                break;
+            case 'v':
+                role = 'vendor';
+                break;
+            case 'u':
+                role = 'user';
+                break;
+            default:
+                // Handle if none of the conditions match
+                break;
+        }
+        if (role !== '') {
+            let obj = {
+                Vendorid: id,
+                Vendorrole: role
+            };
+            assignee.push(obj);
+        }
+    }
+});
+                var property = $("#property_task").val();
+                var dueDate = $("#dueDate_task").val();
+                var status = $("#status_task").val();
+                var priority = $("#priority_task").val();
+                var note = $("#notes_task").val();
+                var formData = new FormData();
+                var taskData = {}
+                
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1"]:eq(1)').is(':checked') ? "yes" : "no";
+                if (selectedFiles.length >= 1) {
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        formData.append('image', selectedFiles[i]);
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            var imageArray = response.images;
+                            taskData = {
+                                task: task,
+                                assignee: assignee,
+                                property: property,
+                                dueDate: dueDate,
+                                status: status,
+                                priority: priority,
+                                note: note,
+                                propertyUnit:$("#unit_task").val(),
+                                notifyVendor: isNotifyAssigneesChecked,
+                                images: imageArray,
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
+                                type: 'POST',
+                                data: JSON.stringify(taskData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    $('#addModal_task').modal('hide');
+                                    $('#preloader').fadeOut('slow', function () {
+                                        $(this).hide();
+                                    });
+                                    if (response === "Task already exists") {
+                                        $("#infoModal").modal("show")
+                                    }
+                                    else {
+                                        GetNotification();
+                                        $("#succesModal").modal("show")
+                                        localStorage.setItem("task", "true")
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+                                    }, 2000);
+                                    // console.log('Error: ' + error);
+                                }
+                            });
+                        },
+                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                            // console.log('Error: ' + error);
+                        }
+                    });
+                } else {
+                    taskData = {
+                        task: task,
+                        assignee: assignee,
+                        property: property,
+                        dueDate: dueDate,
+                        status: status,
+                        priority: priority,
+                        note: note,
+                        propertyUnit:$("#unit_task").val(),
+                        notifyVendor: isNotifyAssigneesChecked,
+                        images: [],
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/addUsersTask',
+                        type: 'POST',
+                        data: JSON.stringify(taskData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            $('#addModal_task').modal('hide');
+                            $('#preloader').fadeOut('slow', function () {
+                                $(this).hide();
+                            });
+                            if (response === "Task already exists") {
+                                $("#infoModal").modal("show")
+                            }
+                            else {
+                                GetNotification();
+                                
+                                $("#succesModal").modal("show")
+                                localStorage.setItem("task", "true")
+                            }
+                        },
+                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                            // console.log('Error: ' + error);
+                        }
+                    });
+                }
+            });
+            
                 let propertyId;
                 function formatFileSize(bytes) {
                     if (bytes === 0) return '0 Bytes';
@@ -2286,7 +2352,7 @@ $(".plan_remaining_days_data").each(function(){
                 }
                 $('#myModal_edit').find('input, select').on('input change', function () {
                     var updateButton = document.getElementById('update');
-                    console.log(updateButton)
+                    // console.log(updateButton)
                     var isFilled = true;
                     $('#myModal_edit').find('input, select').each(function (index) {
                         var value = $(this).val().trim();
@@ -2321,7 +2387,7 @@ $(".plan_remaining_days_data").each(function(){
                 $('input[type="checkbox"]').change(function () {
                     var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                     var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-                    console.log(columnIndex, isColumnVisible)
+                    // console.log(columnIndex, isColumnVisible)
                     $('table').find('tr').each(function () {
                         var column = $(this).find('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
                         isColumnVisible ? column.show() : column.hide();
@@ -2400,11 +2466,12 @@ $(".plan_remaining_days_data").each(function(){
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 }
@@ -2463,11 +2530,12 @@ $(".plan_remaining_days_data").each(function(){
                             e.preventDefault()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 });
@@ -2489,16 +2557,17 @@ $(".plan_remaining_days_data").each(function(){
                             getData()
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function() {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 2000);
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                         }
                     });
                 })
                 function getData() {
-                    console.log(2)
+                    // console.log(2)
                     $("#global-loader").fadeIn("fast")
                 }
                 getData()
@@ -2537,16 +2606,17 @@ $(".plan_remaining_days_data").each(function(){
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("here")
+                            // console.log("here")
                             if (response.message == "Email is verified") {
                                 $("#account-text").remove()
                                 $("#email_verification").remove()
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.log('Error occurred while fetching state and city data.');
-                            console.log(xhr);
-                            console.log(error);
+$('#preloader').css('display','none');
+                            // console.log('Error occurred while fetching state and city data.');
+                            // console.log(xhr);
+                            // console.log(error);
                         }
                     });
                 })
@@ -2563,7 +2633,7 @@ $(".plan_remaining_days_data").each(function(){
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         if(localStorage.getItem("htmlLayout")){
                             const htmlLayoutValue = localStorage.getItem("htmlLayout");
                             localStorage.clear();
@@ -2577,10 +2647,11 @@ $(".plan_remaining_days_data").each(function(){
                         localStorage.setItem("sashlightMode",true)
                     }
                     window.open('./login_module.html', "_self")
-                        console.log('Done');
+                        // console.log('Done');
                     },
                     error: function (xhr, status, error) {
-                        console.log(error);
+$('#preloader').css('display','none');
+                        // console.log(error);
                     }
                 });
             });

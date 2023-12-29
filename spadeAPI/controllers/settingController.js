@@ -58,7 +58,10 @@ exports.changePasssword = async function (req, res) {
           res.status(401).json({ error: "Incorrect Password" });
         }  
     } catch (error) {
-      res.status(400).send(error.message);
+      return res.status(400).json({
+        message: "Error ",
+        error: error.message,
+      });
     }
   };
   //  ############################# Update Setting Password END ############################################################
@@ -102,8 +105,10 @@ exports.changePasswordTenant = async function (req, res) {
         res.status(400).send("Incorrect Password");
       }  
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
 //  ############################# Update Setting tennant Password END ############################################################
@@ -123,8 +128,9 @@ exports.emailtemplates = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      message: error.message,
+    return res.status(400).json({
+      message: "Error ",
+      error: error.message,
     });
   }
 };
@@ -156,8 +162,10 @@ exports.updateBusinessLogo = async (req, res) => {
       }
 
   } catch (error) {
-    res.status(400).send("Error4" + error);
-    console.log(error);
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
   }
 };
 //  ############################# Landlord business logo End ############################################################
@@ -167,12 +175,12 @@ exports.changeEmail = async (req, res) => {
   const { email } = req.body;
   const { userId } = req.user;
   if (!email) {
-    return res.status(201).json({ message: "Email Not found" });
+    return res.status(404).json({ message: "Email Not found" });
   }
   const checkUserResult = await queryRunner(selectQuery("users", "Email"),[email]);
   console.log(email);
     if (checkUserResult[0].length > 0) {
-      return res.status(201).json({ message: "Email ALready Exist kindly change your Email" });
+      return res.status(409).json({ message: "Email ALready Exist kindly change your Email" });
     }
   const mailSubject = "Spade Email Change Request";
   const random = Math.floor(100000 + Math.random() * 900000);
@@ -200,8 +208,11 @@ exports.changeEmail = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error" });
+   return res.status(400).json({
+      message: "Error ",
+      error: error.message,
+    });
+
   }
 };
 // ####################################### Change Email ##########################################
@@ -209,32 +220,26 @@ exports.changeEmail = async (req, res) => {
 
 // ####################################### Verify token ##########################################
 exports.changeEmailVerifyToken = async (req, res) => { 
-  // console.log(req);
   const { token,email } = req.body;
-  // console.log(token + " " + email)
   const { userId } = req.user;
   try {
-    
     const currentDate = new Date();
     const selectResult = await queryRunner(selectQuery("users", "id", "token"),[userId,token]);
     if (selectResult[0].length > 0) {
-      // const token = selectResult[0][0].token;
-
       const updateResult = await queryRunner(updateUserEmail, [email, currentDate, userId]);
-
       if (updateResult[0].affectedRows === 0) {
-        return res.status(400).json({ message: "Error in verify token" });
+        return res.status(422).json({ message: "Error in verify token" });
       } else {
         return res.status(200).json({ message: "Email updated Successful", id: userId, email : email });
       }
     } else {
-      res.status(201).json({
+      res.status(401).json({
         message: "Cannot Validate!!!",
       });
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error",error : error });
+    return res.status(500).json({ message: "Internal Server Error",error : error.message });
   }
 };
 // ####################################### Change Email ##########################################
@@ -274,7 +279,7 @@ const Image=req.files[0];
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal Server Error", error: error });
+    return res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 // ####################################### Base64 END ##########################################

@@ -83,7 +83,9 @@ const {
   propertyIdUpdate,
   propertyCount,
   updateActiveUser,
-  messageDelete
+  messageDelete,
+  checkPropertyUnitQuery,
+  checkPropertyid
   // updatePropertyBankAccountQuery
 } = require("../constants/queries");
 
@@ -192,7 +194,11 @@ exports.createUser = async function (req, res) {
 
       }catch (error){
         console.log(error)
-        return res.status(500).send("Failed to add user");
+        return res.status(500).json({
+          message : "Failed to add user",
+          error : error.message
+        })
+        // send("Failed to add user");
       }
       
       
@@ -200,7 +206,10 @@ exports.createUser = async function (req, res) {
       return res.status(500).send("Failed to add user");
     }
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({
+      message : "Failed to add user",
+       message: error.message 
+      });
   }
 };
 exports.checkemail = async function (req, res) {
@@ -214,15 +223,15 @@ exports.checkemail = async function (req, res) {
       email,
     ]);
     if (selectResult[0].length > 0 && LandlordSelectResult[0].length > 0) {
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     }else if(selectResult[0].length > 0 ){
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     }else if (LandlordSelectResult[0].length > 0){
-      return res.status(201).json({
+      return res.status(409).json({
           message: "Email already exists ",
       });
     } 
@@ -334,6 +343,8 @@ exports.Signin = async function (req, res) {
         const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     if (daysDiff >= 30) {
         return res.status(200).json({
+          token: token,
+          body:selectUserPermissionResult[0][0],
           message: "Your Subscription is expired"
         }); 
     }
@@ -525,8 +536,13 @@ exports.Signin = async function (req, res) {
           res.status(400).send("Incorrect Password");
          }
         
-      } else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
-          if(selectResult[0][0].PlanID == 1)
+      } 
+      else if (await bcrypt.compare(password, selectResult[0][0].Password)) {
+        const id = selectResult[0][0].id;
+        const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
+          expiresIn: "3h",
+        }); 
+        if(selectResult[0][0].PlanID == 1)
       {
         const currentDate = new Date();
         const subscriptionDate = new Date(selectResult[0][0].created_at);
@@ -535,14 +551,16 @@ exports.Signin = async function (req, res) {
 
     if (daysDiff >= 30) {
         return res.status(200).json({
+          token: token,
+          body:selectResult[0][0],
           message: "Your Subscription is expired"
         }); 
     }
       }
-        const id = selectResult[0][0].id;
-        const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
-          expiresIn: "3h",
-        });
+        // const id = selectResult[0][0].id;
+        // const token = jwt.sign({ email, id}, config.JWT_SECRET_KEY, {
+        //   expiresIn: "3h",
+        // });
         // const emai = "umairnazakat2222@gmail.com"
         //  const emailMessage =  await verifyMailCheck(email);
 
@@ -743,7 +761,7 @@ exports.Signin = async function (req, res) {
           });
         }
       } else {
-        res.status(400).send("Incorrect Password");
+        res.status(401).send("Incorrect Password");
       }
     }
   } catch (error) {
@@ -764,7 +782,7 @@ exports.Signinall = async function (req, res) {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({message:"Error", error:error.message});
   }
 };
 exports.updateUserProfile = async function (req, res) {
@@ -799,7 +817,7 @@ exports.updateUserProfile = async function (req, res) {
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
-      res.status(200).json({
+      res.status(404).json({
         message: "User not found",
       });
     }
@@ -850,7 +868,7 @@ exports.updatePlanId = async function (req, res) {
     const isUserExist = selectResult[0][0];
     if (!isUserExist) {
       // throw new Error("User not found");
-      res.status(200).json({
+      res.status(404).json({
         message: "User not found",
       });
     }
@@ -893,7 +911,7 @@ exports.createResetEmail = async (req, res) => {
         userid,
       ]);
       if (updateResult[0].affectedRows === 0) {
-        res.status(400).send("Errorqqq");
+        res.status(400).send("Error");
       } else {
         res.status(200).json({ message: "Sended", id: userid });
       }
@@ -902,7 +920,7 @@ exports.createResetEmail = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Reset Email ############################################################
@@ -938,7 +956,7 @@ exports.verifyResetEmailCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 
@@ -982,7 +1000,7 @@ exports.verifyAuthCode = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).send("Error");
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Verify Reset Email Code ############################################################
@@ -1012,11 +1030,11 @@ exports.updatePassword = async (req, res) => {
         res.status(500).send("Error");
       }
     } else {
-      res.status(201).send("Password Does not match ");
+      res.status(401).send("Password Does not match ");
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error" + error);
+    res.status(400).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Update Password ############################################################
@@ -1049,8 +1067,8 @@ exports.resendCode = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).send("Error");
-    console.log(error);
+    res.status(400).json({ message: "Error", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# resend Code ############################################################
@@ -1219,7 +1237,7 @@ exports.property = async (req, res) => {
     images,
   } = req.body;
   try {
-    const { userId, email,paidUnits,userName } = req.user;
+    const { userId, email,paidUnits,userName, idPattern } = req.user;
     // const { userId, email,paidUnits,userName } = req.body;
     if (
       !propertyName ||
@@ -1239,9 +1257,17 @@ exports.property = async (req, res) => {
     if (propertycheckresult[0].length > 0) {
       throw new Error("Property Already Exist");
     }
-    // console.log("1");
     const status = "Non-active";
-    console.log(userId);
+    const propertyIdCheckresult = await queryRunner(checkPropertyid, [userId]);
+    let propertyId;
+    if (propertyIdCheckresult[0].length > 0) {
+      propertyId = propertyIdCheckresult[0][0].cPropertyId.split("-");
+      let lastPart = parseInt(propertyId[propertyId.length - 1], 10) + 1;
+      lastPart = lastPart.toString().padStart(4, '0');
+      propertyId = `SR-${idPattern}-PROP-${lastPart}`;
+    } else {
+      propertyId = `SR-${idPattern}-PROP-0001`;
+    }
     // this line insert data into property table
     const propertyResult = await queryRunner(insertInProperty, [
       userId,
@@ -1255,6 +1281,7 @@ exports.property = async (req, res) => {
       status,
       units,
       currentDate,
+      propertyId
     ]);
     // console.log("2");
     // if property data not inserted into property table then throw error
@@ -1298,10 +1325,10 @@ exports.property = async (req, res) => {
     const mailSubject = "New Property Added";
     await propertyMail(propertyName,pAddress,propertyType,propertySQFT,units,userName,mailSubject,email )
     
-    const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
-    let customPropertyId = propertyCountIdResult[0][0].count + 1;
-    customPropertyId = propertyName+customPropertyId;
-    const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
+    // const propertyCountIdResult = await queryRunner(propertyCount, [userId]);
+    // let customPropertyId = propertyCountIdResult[0][0].count + 1;
+    // customPropertyId = propertyName+customPropertyId;
+    // const propertyIdUpdateResult = await queryRunner(propertyIdUpdate ,[customPropertyId, propertyResult[0].insertId]);
     res.status(200).json({
       message: "Property created successful!!!",
       propertyId: propertyResult[0].insertId,
@@ -1362,7 +1389,7 @@ exports.getproperty = async (req, res) => {
       });
       // }
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No Property data found",
       });
     }
@@ -1412,7 +1439,7 @@ exports.propertyDelete = async (req, res) => {
       [id, "Occupied"]
     );
     if (propertyUnitscheckresult[0].length > 0) {
-      res.status(200).json({
+      res.status(403).json({
         message: " You are not able to delete Property (your unit is occupied)",
         units : propertyUnitscheckresult[0],
       });
@@ -1435,23 +1462,20 @@ exports.propertyDelete = async (req, res) => {
         propertyimages = propertycheckresult[0].map((image) => image.Image);
         // delete folder images
         imageToDelete(propertyimages);
-        const propertyDeleteresult = await queryRunner(
+        const propertyImageDeleteresult = await queryRunner(
           deleteQuery("propertyimage", "propertyID"),
           [id]
         );
         const propertyUnitsCountResult = await queryRunner(UnitCounts,[userId]);
         const count = propertyUnitsCountResult[0][0].count;
         const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [count,userId]);
-        if (propertyDeleteresult[0].affectedRows > 0) {
-          res.status(200).json({
-            message: " Property deleted successfully",
-          });
-        }
-      } else {
-        res.status(200).json({
-          message: "No Property Image data found ",
-        });
-      }
+        // if (propertyDeleteresult[0].affectedRows > 0) {
+          
+        // }
+      } 
+      res.status(200).json({
+        message: " Property deleted successfully",
+      });
     } else {
       res.status(400).json({
         message: "No data found",
@@ -1803,7 +1827,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
         message: "Get Property Units Tenant",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -1811,6 +1835,7 @@ exports.getPropertyUnitsTenant = async (req, res) => {
     console.error(error);
     res.status(500).json({
       message: "Error occurred while getting property units tenant",
+     error: error.message
     });
   }
 };
@@ -1894,6 +1919,7 @@ exports.getPropertyTenant = async (req, res) => {
     console.error(error);
     res.status(500).json({
       message: "Error occurred while getting property units tenant",
+      error: error.message
     });
   }
 };
@@ -1921,7 +1947,7 @@ exports.getpropertyUnits = async (req, res) => {
         message: "property Units",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -1966,7 +1992,7 @@ exports.viewPropertyTenant = async (req, res) => {
         user: userName,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -2020,7 +2046,7 @@ exports.viewAllPropertyTenant = async (req, res) => {
         user: userName,
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No data found",
       });
     }
@@ -2035,48 +2061,60 @@ exports.viewAllPropertyTenant = async (req, res) => {
 exports.addMoreUnits = async (req, res) => {
   const { propertyID } = req.body;
   const { userId,paidUnits } = req.user;
-
+ 
   try {
-    const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
-      propertyID,
-      "",
-      "",
-      "",
-      "Vacant",
-      userId
-    ]);
-    if (propertyUnitResult[0].affectedRows > 0) {
-      const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
+    const checkPropertyUnitResult = await queryRunner(checkPropertyUnitQuery,[propertyID]);
+    console.log(checkPropertyUnitResult[0])
+    if (checkPropertyUnitResult[0].length > 0){
+      const propertyUnitResult = await queryRunner(insertInPropertyUnits, [
         propertyID,
+        "",
+        "",
+        "",
+        "Vacant",
+        userId
       ]);
-      if (selectaddMoreUnitsResult[0].length > 0) {
-        const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
-        const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [
-          unitCount,
+      if (propertyUnitResult[0].affectedRows > 0) {
+        const selectaddMoreUnitsResult = await queryRunner(getUnitsCount, [
           propertyID,
         ]);
-        const unitCountLandlord = paidUnits + 1;
-        const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
-        
-        if (updateaddMoreUnitsResult[0].affectedRows > 0) {
-          res.status(200).json({
-            data: unitCount,
-            message: "total unit",
-          });
-        } else {
-          res.status(400).json({
-            message: "Error occurs in Updating unit in database",
-          });
+        if (selectaddMoreUnitsResult[0].length > 0) {
+          const unitCount = selectaddMoreUnitsResult[0][0].unitCount;
+          const updateaddMoreUnitsResult = await queryRunner(putUnitsUpdate, [
+            unitCount,
+            propertyID,
+          ]);
+          const unitCountLandlord = paidUnits + 1;
+          const propertyUnitCountResult = await queryRunner(UpdatePropertyUnitCount, [unitCountLandlord,userId]);
+          
+          if (updateaddMoreUnitsResult[0].affectedRows > 0) {
+            res.status(200).json({
+              data: unitCount,
+              message: "total unit",
+            });
+          } else {
+            res.status(400).json({
+              message: "Error occurs in Updating unit in database",
+            });
+          }
         }
+      } else {
+        res.status(400).json({
+          message: "Unit not inserted",
+        });
       }
-    } else {
-      res.status(400).json({
-        message: "Unit not inserted",
+    }else{
+      res.status(200).json({
+        message: "Your property type is Single Family",
       });
     }
+
+    
+
+
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    // console.error("Error:", error);
+    res.status(500).json({ message: "Error", error: error.message });;
   }
 };
 
@@ -2124,8 +2162,8 @@ exports.deleteMoreUnits = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error:", error);
-    res.sendStatus(500);
+    // console.error("Error:", error);
+    res.status(500).json({ message: "Error", error: error.message });
   }
 };
 //  ############################# Delete property units End ############################################################
@@ -2146,8 +2184,8 @@ exports.getStates = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send("Error Get states ");
-    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+    // console.log(error);
   }
 };
 //  ############################# Get Property States End ############################################################
@@ -2155,6 +2193,7 @@ exports.getStates = async (req, res) => {
 //  ############################# Task property ############################################################
 exports.propertyTask = async (req, res) => {
   const { Id } = req.query;
+  // const { Id } = req.body;
 console.log(Id)
   try {
     const taskByIDResult = await queryRunner(propertyTaskQuery, [Id]);
@@ -2220,13 +2259,12 @@ console.log(Id)
         message: "Task data retrieved successfully",
       });
     } else {
-      res.status(200).json({
+      res.status(404).json({
         message: "No property Task data found",
       });
     }
   } catch (error) {
-    console.log("Error:", error);
-    res.send("Error Get property Task");
+    res.status(500).json({ message: "Error", error: error.message });
 }
 };
 
@@ -2274,7 +2312,7 @@ exports.verifyMailCheck = async (req, res) => {
             });
           }
         } else {
-          return res.status(200).json({
+          return res.status(423).json({
             message: `Your account is locked due to email verification. Please verify your email.`,
           });
         }
@@ -2283,7 +2321,7 @@ exports.verifyMailCheck = async (req, res) => {
       return res.status(400).send("landlord is not found");
     }
   } catch (error) {
-    res.send("Error occurred while verifying the landlord's email: " + error);
+    res.status(500).json({ message: "Error occurred while verifying the landlord's email", error: error.message });
   }
 };
 
@@ -2314,7 +2352,7 @@ exports.emailUpdate = async (req, res) => {
       return res.send("User is not found");
     }
   } catch (error) {
-    res.send("Error Get Email updated landlord  " + error);
+    res.status(500).json({ message: "Error Get Email updated landlord", error: error.message });
     console.log(error);
   }
 };
@@ -2350,7 +2388,7 @@ exports.verifyEmailUpdate = async (req, res) => {
           });
         }
       } else {
-        return res.status(200).json({
+        return res.status(401).json({
           message: " token code is not match ",
         });
       }
@@ -2358,8 +2396,7 @@ exports.verifyEmailUpdate = async (req, res) => {
       return res.send("User is not found");
     }
   } catch (error) {
-    res.send("Error Get Email Verified updated landlord  " + error);
-    console.log(error);
+    res.status(500).json({ message: "Error Get Email Verified updated landlord", error: error.message });
   }
 };
 //  ############################# verify Email Update End ############################################################
@@ -2414,8 +2451,8 @@ exports.getAllProperty = async (req, res) => {
 
 exports.getTaskReportData = async (req, res) => {
   try {
-    // const { userId } = req.user;
-    const { userId } = req.body;
+    const { userId } = req.user;
+    // const { userId } = req.body;
     const getAllPropertyData = await queryRunner(getTaskReportData, [userId]);
     // console.log(getAllPropertyData);
     res.status(200).json({
@@ -2832,21 +2869,21 @@ exports.ProfileComplete = async (req, res) => {
   }
 };
 
-exports.filterOutDashbordDataByProperty = async (req, res) => {
-  try {
-    const { propertyId } = req.params;
-    const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
-      propertyId,
-    ]);
-    res.status(200).json({
-      property: getAllPropertyData[0],
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: error.message,
-    });
-  }
-};
+// exports.filterOutDashbordDataByProperty = async (req, res) => {
+//   try {
+//     const { propertyId } = req.params;
+//     const getAllPropertyData = await queryRunner(getPropertyDashboardData, [
+//       propertyId,
+//     ]);
+//     res.status(200).json({
+//       property: getAllPropertyData[0],
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: error.message,
+//     });
+//   }
+// };
 // check property etc
 exports.checkSystem = async (req, res) => {
   try {
@@ -2965,7 +3002,8 @@ exports.deleteUser=async(req,res)=>{
     }else{
       res.status(400).json({message:"Error in deleting user"})
     }
-  }catch{
+  }catch(error){
+    res.status(500).json({ message: "Error", error: error.message });
 
   }
 }
@@ -2983,7 +3021,7 @@ exports.UpdateUserNuveiId = async(req,res)=>{
     }
   }catch(error){
     console.log(error);
-    res.status(400).send(error.message);
+    res.status(500).json({ message: "Error", error: error.message });
 
   }
 }
@@ -2991,3 +3029,50 @@ exports.UpdateUserNuveiId = async(req,res)=>{
 exports.DMNS=async(req,res)=>{
     console.log(req)
 }
+
+exports.ACHLogCheck = async(req,res)=>{
+  try {
+    // console.log("ACHLogCheck");
+      res.status(200).json({message:"ACH Log Check"})
+  }catch(error){
+    console.log(error);
+    res.status(500).json({ message: "Error", error: error.message });
+
+  }
+}
+
+
+
+
+
+
+
+
+
+// exports.UserCheckName = async (req, res) => {
+//   try {
+//     const { userId } = req.params;
+//     console.log(userId);
+//     const userResult = await queryRunner(selectQuery("users", "id"), [userId]);
+
+//     if (userResult[0].length > 0) {
+//       console.log(userResult[0][0].BusinessName);
+
+//       if (userResult[0][0].BusinessName !== null && userResult[0][0].BusinessName !== "") {
+//         const BusinessName = userResult[0][0].BusinessName.substring(0, 3);
+//         return res.status(200).json({ BusinessName: BusinessName });
+//       } else {
+//         const userName =
+//           (userResult[0][0].FirstName.substring(0, 2) || "") +
+//           (userResult[0][0].LastName.substring(0, 1) || "");
+//         return res.status(200).json({ userName });
+//       }
+//     } else {
+//       res.status(400).json({ message: "Error in deleting user" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Error", error: error.message });
+//   }
+// };
+

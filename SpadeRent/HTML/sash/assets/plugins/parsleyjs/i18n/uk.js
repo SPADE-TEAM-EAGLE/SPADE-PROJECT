@@ -1,6 +1,3 @@
-// Validation errors messages for Parsley
-// Load this after Parsley
-
 Parsley.addMessages('uk', {
   defaultMessage: "Некоректне значення.",
   type: {
@@ -25,5 +22,4 @@ Parsley.addMessages('uk', {
   check:          "Виберіть від %s до %s значень.",
   equalto:        "Це значення повинно збігатися."
 });
-
 Parsley.setLocale('uk');

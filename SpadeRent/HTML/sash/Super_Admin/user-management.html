@@ -29,701 +29,7 @@
             window.location = "./login_module.html"
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        .panel-body {
-            padding: 0px;
-        }
-        .recent-title {
-            font-size: 22px;
-            font-weight: 800;
-        }
-        .comingsoon-heading {
-            font-size: 60px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            margin-top: 60px;
-        }
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .custom-file-input::-webkit-file-upload-button {
-            visibility: hidden;
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
-            width: 7px;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgb(136, 136, 136, 0.2);
-            
-            border-radius: 7px;
-            transition: all 1ms;
-            
-        }
-        .modal-dialog.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
-            background-color: rgb(136, 136, 136, 0.5);
-            
-        }
-        .custom-file-input::before {
-            content: 'Select Files';
-            display: inline-block;
-            background: #007bff;
-            color: #fff;
-            padding: 4px 8px;
-            outline: none;
-            white-space: nowrap;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .custom-file-input:hover::before {
-            background: #0069d9;
-        }
-        .custom-file-input:active::before {
-            background: #0062cc;
-        }
-        .custom-file-input.selected::before {
-            content: 'Change Files';
-            background: #28a745;
-        }
-        .dark-mode .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: white !important;
-            border-radius: 50px !important;
-        }
-        .create-new-link {
-            background: transparent !important;
-            border: 3px solid #1467B0 !important;
-            color: black;
-            border-radius: 50px !important;
-        }
-        .selected-files {
-            margin-top: 10px;
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 4px 8px;
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 4px;
-        }
-        .dark-mode .selected-files span {
-            display: inline-block;
-            margin-right: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: white;
-            border-radius: 4px;
-        }
-        .custom-file-input {
-            visibility: hidden;
-        }
-        .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: #fff;
-        }
-        .dark-mode .custom-file-label {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 12px;
-            background-color: transparent;
-        }
-        .custom-file-label i {
-            margin-bottom: 5px;
-            font-size: 3rem;
-        }
-        .custom-file-text {
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 5px;
-        }
-        .custom-file-text span {
-            display: block;
-            font-size: 14px;
-        }
-        .remove-file {
-            cursor: pointer;
-        }
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        
-        .panel-body {
-            padding: 0px;
-        }
-        .accordion-item:first-of-type {
-            border-bottom-left-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:last-of-type {
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-        }
-        .table-primary th {
-            font-weight: 600 !important;
-            vertical-align: middle !important;
-        }
-        .border-model-line {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-gap: 10px;
-        }
-        .selected-file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .file-preview {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .file-details {
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        .table td {
-            vertical-align: middle !important;
-        }
-        
-        .modal-footer .button-left {
-            background-color: #1F1F1F;
-            margin: 0rem 1rem;
-            color: white;
-        }
-        .modal-footer button {
-            border-radius: 2.75rem;
-            padding: 4px 30px;
-            font-family: 'Figtree';
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.875rem;
-            font-size: 0.77rem;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-            
-            letter-spacing: 0.0145455em;
-            
-        }
-        .modal-footer .button {
-            font-size: 0.938rem;
-        }
-        .accordion-button::after {
-            content: "";
-            display: inline-block;
-            
-        }
-        .chevron,
-        .tick,
-        .cross {
-            position: absolute;
-            right: 15px;
-        }
-        .tick {
-            color: green;
-            font-weight: bolder
-        }
-        .cross {
-            color: red;
-            font-weight: bolder
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s;
-            
-        }
-        .accordion-button[aria-expanded="true"] .chevron {
-            transform: rotate(-180deg);
-            
-        }
-        .table tbody img {
-            width: 40px;
-            border: transparent;
-            border-radius: 5px;
-            height: 40px;
-        }
-        .rounded-pill-Single-Family {
-            color: #4A4AFF !important;
-            background: #E6E6F2 !important;
-        }
-        .rounded-pill-Multi-Family {
-            color: #0BAAB8 !important;
-            background: #C8F3F7 !important;
-        }
-        .rounded-pill-Multi-Commercial {
-            background: #FFF9E5 !important;
-            color: #F5CA38 !important;
-        }
-        .table-primary {
-            background: #1467B014;
-        }
-        .selected-file {
-            position: relative;
-        }
-        .file-preview {
-            width: 100%;
-        }
-        .file-details {
-            padding: 10px;
-        }
-        .delete-file {
-            position: absolute;
-            top: -1px;
-            right: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            color: #000;
-        }
-        .btn-group>.btn-group:not(:last-child)>.btn,
-        .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-        .color-primary {
-            color: #1467B0;
-        }
-        .border-model-line {
-            border-left: 5px solid #1467B0;
-        }
-        .accordion-item:first-of-type .accordion-button {
-            border-top-right-radius: calc(0.5rem - 1px);
-            border-top-left-radius: calc(0.5rem - 1px);
-        }
-        .selected-files span {
-            display: inline-block;
-            margin-right: 0px;
-            padding: 0px;
-            background: none;
-            color: #333;
-            
-        }
-        
-        button.btn-close {
-            right: 5px;
-        }
-        .btn-close {
-            width: 2.5rem;
-            opacity: 1;
-            position: absolute;
-            top: 6px;
-        }
-        .del {
-            width: 2rem !important;
-        }
-        .btn-close:hover,
-        .btn-close:focus {
-            color: #000;
-            text-decoration: none;
-            opacity: 1;
-        }
-        @media (max-width:992px) {
-            .modal-footer button {
-                border-radius: 2.75rem;
-                padding: 4px 30px;
-                font-family: 'Figtree';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 0.8rem;
-                line-height: 1.875rem;
-                
-                letter-spacing: 0.0145455em;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 165px;
-            }
-        }
-        @media (max-width:425px) {
-            .modal-footer {
-                flex-direction: column !important;
-                justify-content: flex-center !important;
-            }
-            .modal-footer .button-left {
-                margin: auto;
-            }
-            
-            .border-model-line h2 {
-                font-size: 1.6rem;
-            }
-            .accordion-button h3 {
-                font-size: 15px;
-            }
-            #filter_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #customize_btn {
-                display: none;
-            }
-            #add_property_btn {
-                font-size: 12px;
-                margin: 0 !important;
-            }
-            #typehead {
-                display: none;
-            }
-            #email_verification {
-                font-size: 12px;
-            }
-            #top_main_image {
-                display: none;
-            }
-            #top_main_card {
-                height: 220px;
-            }
-            #nav_links {
-                top: 165px;
-            }
-        }
-        @media (max-width:375px) {
-            .border-model-line h2 {
-                font-size: 1.4rem;
-            }
-        }
-        @media (max-width:320px) {
-            
-        }
-        @media (max-width: 767px) {
-            .file-select-area {
-                display: block;
-                text-align: center;
-            }
-            .selected-files {
-                margin-top: 10px;
-                text-align: center;
-            }
-            .file-details {
-                padding: 5px;
-            }
-        }
-        th,
-        td {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-        }
-        .dark-mode th {
-            background: #212121 !important;
-        }
-        .light-mode th {
-            background: #ECF3F9 !important;
-        }
-        .btn-light {
-            border-color: #000000 !important;
-        }
-        
-        .tabs-menu1 ul li a {
-            padding: 10px 0px 6px 0px;
-            margin-right: 30px;
-            display: block;
-            color: white;
-        }
-        .tabs-menu1 ul li .active {
-            border-bottom: 4px solid orange;
-        }
-        .nav.panel-tabs a.active {
-            color: white;
-        }
-        .tab-menu-heading {
-            padding: 0px;
-            border-bottom: 0px solid #e9edf4 !important;
-            font-size: 16px;
-            font-weight: 500;
-        }
-        .card-bodyy {
-            -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-            padding: 25px 25px 0px 25px;
-            margin: 0;
-            position: relative;
-        }
-        .h2-personal-inf {
-            color: #1467B0;
-            font-weight: 800;
-            margin-bottom: 0px;
-        }
-        .p-personal-inf {
-            font-size: 16px;
-        }
-        
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        #mediaFile {
-            position: absolute;
-            top: -1000px;
-        }
-        
-        
-        
-.card-color {
-            cursor: pointer;
-        }
-        .card-color.active {
-            background-color: #1467B0;
-            cursor: pointer;
-            color: white;
-        }
-        #profile.dragging {
-            background-image: none !important;
-        }
-        #profile.dragging .dashes {
-            animation-duration: 10s;
-            animation-name: spin;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-            opacity: 1 !important;
-        }
-        #profile.dragging label {
-            opacity: 0.5 !important;
-        }
-        #profile.hasImage .dashes,
-        #profile.hasImage label,
-        #profile.hasImage div .upload-imgg {
-            opacity: 0;
-            pointer-events: none;
-            user-select: none;
-        }
-        h1 {
-            
-            font-size: 28px;
-            font-weight: normal;
-            letter-spacing: 1px;
-        }
-        .stat {
-            width: 50%;
-            text-align: center;
-            float: left;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        input[type="radio"][id^="cb"] {
-            display: none;
-        }
-        .label {
-            border: 0px solid #fff;
-            display: block;
-            position: relative;
-            cursor: pointer;
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-        .label:before {
-            background-color: white;
-            color: white;
-            content: " ";
-            display: block;
-            border-radius: 25%;
-            border: 1px solid grey;
-            position: absolute;
-            top: 15px;
-            left: 95px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            line-height: 28px;
-            transition-duration: 0.4s;
-            transform: scale(0);
-        }
-        .stat .label {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .stat .num {
-            font-size: 21px;
-            padding: 3px 0;
-        }
-        .editable {
-            position: relative;
-        }
-        .editable i {
-            position: absolute;
-            top: 10px;
-            right: -20px;
-            opacity: 0.3;
-        }
-        button {
-            width: 100%;
-            
-            line-height: 40px;
-            color: #fff;
-            border: none;
-            background-color: #ea4c89;
-            margin-top: 30px;
-            font-size: 13px;
-            -webkit-font-smoothing: antialiased;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .iti input[type=text],
-        .iti input[type=tel] {
-            width: 100% !important;
-        }
-        .iti {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 4px;
-            width: 100%;
-        }
-        .col-lgg-3 {
-            -ms-flex: 0 0 20%;
-            flex: 0 0 20%;
-            max-width: 20%;
-        }
-        @media (max-width: 600px) {
-            .nav {
-                width: 610px;
-            }
-            .tab-menu-heading {
-                overflow-x: scroll;
-            }
-            .tabs-menu1 ul li a {
-                padding: 10px 0px 6px 0px !important;
-                margin-right: 20px;
-                display: block;
-                color: white;
-            }
-        }
-        .dark-mode .tab-menu-heading {
-            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-            background-color: transparent !important;
-        }
-        .dark-mode .nav.panel-tabs a.active {
-            color: white;
-        }
-        #myonoffswitch1,
-        #myonoffswitch2 {
-            border-radius: 18px;
-            width: -webkit-fill-available;
-        }
-        .activee {
-            border-radius: 25px !important;
-            border: 5px solid #1467B0 !important;
-        }
-        .btn-actives:focus {
-            border: 2px solid black;
-        }
-        .btn-default:not(:disabled):not(.disabled):active,
-        .btn-default:not(:disabled):not(.disabled).active {
-            border: 2px solid #1467B0;
-        }
-        .btn-actives:active {
-            border: 2px solid black;
-        }
-        .btn-actives .active {
-            border: 2px solid black;
-        }
-        .card-title-primary {
-            font-size: 23px;
-            font-weight: 800;
-            color: #1467B0;
-        }
-        .card-title-primary1 {
-            font-size: 23px;
-            font-weight: 800;
-        }
-        .card-holder {
-            font-size: 17px;
-            margin-bottom: 15px;
-        }
-        
-        
-        .card-primary {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #1467B0;
-            border: inherit !important;
-            background-clip: border-box;
-            border-radius: 7px;
-            box-shadow: 0px 4px 51px -8px rgba(0, 0, 0, 0.57) !important;
-            color: white;
-        }
-        .settings-icon {
-            border: 0px solid transparent;
-            border-radius: 36px;
-            padding: 11px 15px;
-            font-size: 20px;
-        }
-        .settings-icon,
-        .bg-primary-transparent,
-        .text-primary.active {
-            background-color: #f8e7e7;
-        }
-        .model-account-close-logo {
-            border: 4px solid orange;
-            border-radius: 50%;
-            padding: 10px 17px 10px 17px;
-        }
-        .model-account-request-close-logo {
-            width: 120px;
-        }
-        .form-row {
-            text-align: left;
-        }
-        .balance-due {
-            font-weight: 400;
-        }
-        .balnce-price {
-            font-size: 55px;
-            text-align: left;
-        }
-        label {
-            display: flex !important;
-            justify-content: left;
-        }
-        .bg-white-black {
-            background-color: lightblue;
-        }
-        .header{
-            padding-bottom: 1rem !important;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/pageCss/superCss/user-management.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
     <div id="preloader" class="tlp-preloader">
@@ -845,14 +151,11 @@
                                             *
                                             </span>
                                     </label>
-                                    <input id="phone_user_update" name="phone" type="tel" autocomplete="off"
+                                    <input id="phone_user_update" name="phone" type="tel" autocomplete="off" maxlength="10"
                                         placeholder="Enter Phone Number" pattern="[0-9]{5}" required
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                    <span id="valid-msg" class="d-none text-success valid-msg">
-                                        ✓
-                                        Valid
-                                    </span>
-                                    <span id="error-msg" class="hide text-danger error-msg"></span>
+                                        <span class="text-success valid-msg d-none">✓ Valid</span>
+                                        <span class="text-danger error-msg d-none"></span>
                                 </div>
                                 <div class="col-md-12 mt-5 d-none">
                                     <div class="form-group">
@@ -1164,6 +467,295 @@
             </div>
         </div>
     </div>
+    <div class="modal fade permissionAdd_userManagement" id="add-user-permissions" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-justify ps-2 border-model-line title-text">
+                        <h2 class="modal-title">
+                            Add
+                            <strong class="color-primary" id="title-sub">
+                                New
+                                User
+                            </strong>
+                        </h2>
+                        <span class="">
+                            Post your properties to thousands of
+                            potential investors,
+                            tenants and interested individuals.
+                        </span>
+                    </div>
+                    <button type="button" class="btn btn-primary me-4 mt-3 d-none"
+                        id="edit-btn">
+                        <i class="fi fi-rs-pencil" style="display:block"></i>
+                        <small>
+                            Edit
+                            Details
+                        </small>
+                    </button>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="fi fi-rs-circle-xmark text-dark"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="collapseOne-add-tenant"
+                        class="accordion-collapse collapse show"
+                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <form class="row g-3" enctype="multipart/form-data">
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label fw-bold">
+                                        First Name
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="text" class="form-control form"
+                                        placeholder="Enter First Name" id="firstName_user"
+                                        required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">
+                                        First name
+                                        is required!
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPassword4" class="form-label fw-bold">
+                                        Last Name
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="text" class="form-control form"
+                                        placeholder="Enter Last Name" id="lastName_user"
+                                        required pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    <span class="text-danger d-none">
+                                        Last name
+                                        required!
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label fw-bold">
+                                        Email
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="email" class="form-control form"
+                                        placeholder="Enter Email" pattern="[A-Za-z0-9_\.@]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
+                                        id="email_user" required>
+                                    <span class="text-danger d-none">
+                                        Email is
+                                        required!
+                                    </span>
+                                    <small class="d-none" style="color: #e82646 !important;"
+                                        id="already-exist">
+                                        Email
+                                        already
+                                        exist!
+                                    </small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputState" class="form-label fw-bold">
+                                        Phone Number
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input id="phone_user" name="phone" type="tel" maxlength="10"
+                                        autocomplete="off" placeholder="Enter Phone Number"
+                                        pattern="[0-9]{5}"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        required>
+                                        <span class="text-success valid-msg d-none">✓ Valid</span>
+                                        <span class="text-danger error-msg d-none"></span>
+                                </div>
+                                <div class="col-md-12 mt-5">
+                                    <div class="form-group">
+                                        <label for="validationCustom01">
+                                            <b>Password</b>
+                                            <spnan class="text-danger">
+                                                *
+                                                </span>
+                                        </label>
+                                        <input type="password" class="form-control"
+                                            id="password_user" aria-describedby="emailHelp"
+                                            placeholder="Enter Password" required>
+                                        <i class="fi fi-rs-eye text-dark fs-20"
+                                            id="togglePassworduserpermission1" style="cursor: pointer;
+                                                            float: right;
+                                                            margin-top: -30px;
+                                                            margin-right: 15px;
+                                                            color: #4573D2;"></i>
+                                        <span class="mt-1 text-danger" id="passnotmatch1"
+                                            style="display: none;">
+                                            MUST be atleast 8 characters long,
+                                            Must contain atleast
+                                            One Uppercase and One symbol.
+                                        </span>
+                                        <div class="mt-3" style="display: none;">
+                                            <img src="../assets/images/info.svg" alt=""
+                                                height="11px" width="11px">
+                                            <span class="">
+                                                <span style="font-weight:700;">MUST</span>
+                                                be 8-12
+                                                characters. Must contain atleast
+                                                One Uppercase and
+                                                One
+                                                symbol.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label fw-bold">
+                                            Role
+                                            <spnan class="text-danger">
+                                                *
+                                                </span>
+                                        </label>
+                                        <select id="role_user"
+                                            class="form-select form form-select" required>
+                                            <option value="2">Manager</option>
+                                            <option value="3">Staff</option>
+                                        </select>
+                                        <span class="text-danger d-none">
+                                            State
+                                            is required!
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputState" class="form-label fw-bold">
+                                        Address
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                        id="address_user" placeholder="Enter Address"
+                                        required>
+                                    <span class="text-danger d-none">
+                                        Address
+                                        is required!
+                                    </span>
+                                </div>
+                                <div class="col-md-12 col-lg-4 col-xl-4">
+                                    <label for="inputState" class="form-label fw-bold">
+                                        City
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="text" class="form-control" id="city_user"
+                                        pattern="[A-Za-z\s]+"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                                        placeholder="Enter City" required>
+                                    <span class="text-danger d-none">
+                                        City
+                                        is required!
+                                    </span>
+                                </div>
+                                <div class="col-md-12 col-lg-4 col-xl-4">
+                                    <label for="inputState" class="form-label fw-bold">
+                                        Sate
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <select id="state_user"
+                                        class="form-select form form-select select2-show-search"
+                                        required>
+                                        </select>
+                                    <span class="text-danger d-none">
+                                        state
+                                        is required!
+                                    </span>
+                                </div>
+                                <div class="col-md-12 col-lg-4 col-xl-4">
+                                    <label for="inputState" class="form-label fw-bold">
+                                        Zip Code
+                                        <spnan class="text-danger">
+                                            *
+                                            </span>
+                                    </label>
+                                    <input type="text" class="form-control" id="zip_user"
+                                        placeholder="Enter Zipcode" pattern="[0-9]{5}"
+                                        placeholder="A valid 5-digit zip code" maxlength="5"
+                                        minlength="5"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        required>
+                                    <span class="text-danger d-none">
+                                        Zip Code
+                                        is required!
+                                    </span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">
+                                        User Photo
+                                        (Optional)
+                                    </label>
+                                    <div class="custom-file"
+                                        style="border: 1px dashed #00000087;"
+                                        ondrop="dropHandler(event);"
+                                        ondragover="dragOverHandler(event);">
+                                        <input id="fileInput_user" type="file" name="image"
+                                            placeholder="Enter Photo"
+                                            class="custom-file-input form"
+                                            accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
+                                            aria-label="hello" multiple="">
+                                        <span classname="d-none"></span>
+                                        <label class="custom-file-label"
+                                            for="fileInput_user">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Photo here</span>
+                                                <span>
+                                                    JPEG and PNG, file size no
+                                                    more than 5MB
+                                                </span>
+                                                <small class="text-danger d-none"
+                                                    id="count-text">
+                                                    Maximum
+                                                    number of
+                                                    files reached.
+                                                </small>
+                                                <small class="text-danger d-none"
+                                                    id="size-text">
+                                                    File size
+                                                    exceeds 5MB limit.
+                                                </small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="selected-files text-white">
+                                        <div class="file-grid"></div>
+                                    </div>
+                                    <span class="text-danger d-none">
+                                        Photos are
+                                        required!
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-close-bottom btn-outline-default btn-pill button"
+                        data-bs-dismiss="modal" id="close"
+                        style="width: fit-content;">Close</button>
+                    <button class="btn text-light button saveBtn"
+                        style="background-color:#1467B0; width: fit-content;"
+                        id="add-new-user-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal_warning_connection" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <div class="modal-content modal-content-demo">
@@ -1407,300 +999,7 @@
                                 <div
                                     style="height: 7px; width: 80px; background-color: #1467B0; border-radius: 30px; margin-bottom: 15px;">
                                 </div>
-                                <div class="modal fade permissionAdd_userManagement" id="add-user-permissions" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="text-justify ps-2 border-model-line title-text">
-                                                    <h2 class="modal-title">
-                                                        Add
-                                                        <strong class="color-primary" id="title-sub">
-                                                            New
-                                                            User
-                                                        </strong>
-                                                    </h2>
-                                                    <span class="">
-                                                        Post your properties to thousands of
-                                                        potential investors,
-                                                        tenants and interested individuals.
-                                                    </span>
-                                                </div>
-                                                <button type="button" class="btn btn-primary me-4 mt-3 d-none"
-                                                    id="edit-btn">
-                                                    <i class="fi fi-rs-pencil" style="display:block"></i>
-                                                    <small>
-                                                        Edit
-                                                        Details
-                                                    </small>
-                                                </button>
-                                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">
-                                                        <i class="fi fi-rs-circle-xmark text-dark"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="collapseOne-add-tenant"
-                                                    class="accordion-collapse collapse show"
-                                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <form class="row g-3" enctype="multipart/form-data">
-                                                            <div class="col-md-6">
-                                                                <label for="inputEmail4" class="form-label fw-bold">
-                                                                    First Name
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="text" class="form-control form"
-                                                                    placeholder="Enter First Name" id="firstName_user"
-                                                                    required pattern="[A-Za-z\s]+"
-                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                <span class="text-danger d-none">
-                                                                    First name
-                                                                    is required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="inputPassword4" class="form-label fw-bold">
-                                                                    Last Name
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="text" class="form-control form"
-                                                                    placeholder="Enter Last Name" id="lastName_user"
-                                                                    required pattern="[A-Za-z\s]+"
-                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                                                <span class="text-danger d-none">
-                                                                    Last name
-                                                                    required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="inputCity" class="form-label fw-bold">
-                                                                    Email
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="email" class="form-control form"
-                                                                    placeholder="Enter Email" pattern="[A-Za-z0-9_\.@]+"
-                                                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9_\.@]/g, '').replace(/(@{2,})/g, '@')"
-                                                                    id="email_user" required>
-                                                                <span class="text-danger d-none">
-                                                                    Email is
-                                                                    required!
-                                                                </span>
-                                                                <small class="d-none" style="color: #e82646 !important;"
-                                                                    id="already-exist">
-                                                                    Email
-                                                                    already
-                                                                    exist!
-                                                                </small>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="inputState" class="form-label fw-bold">
-                                                                    Phone Number
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input id="phone_user" name="phone" type="tel"
-                                                                    autocomplete="off" placeholder="Enter Phone Number"
-                                                                    pattern="[0-9]{5}"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                                <span id="valid-msg"
-                                                                    class="d-none text-success valid-msg">
-                                                                    ✓
-                                                                    Valid
-                                                                </span>
-                                                                <span id="error-msg"
-                                                                    class="hide text-danger error-msg"></span>
-                                                            </div>
-                                                            <div class="col-md-12 mt-5">
-                                                                <div class="form-group">
-                                                                    <label for="validationCustom01">
-                                                                        <b>Password</b>
-                                                                        <spnan class="text-danger">
-                                                                            *
-                                                                            </span>
-                                                                    </label>
-                                                                    <input type="password" class="form-control"
-                                                                        id="password_user" aria-describedby="emailHelp"
-                                                                        placeholder="Enter Password" required>
-                                                                    <i class="fi fi-rs-eye text-dark fs-20"
-                                                                        id="togglePassworduserpermission1" style="cursor: pointer;
-                                                                                        float: right;
-                                                                                        margin-top: -30px;
-                                                                                        margin-right: 15px;
-                                                                                        color: #4573D2;"></i>
-                                                                    <span class="mt-1 text-danger" id="passnotmatch1"
-                                                                        style="display: none;">
-                                                                        MUST be atleast 8 characters long,
-                                                                        Must contain atleast
-                                                                        One Uppercase and One symbol.
-                                                                    </span>
-                                                                    <div class="mt-3" style="display: none;">
-                                                                        <img src="../assets/images/info.svg" alt=""
-                                                                            height="11px" width="11px">
-                                                                        <span class="">
-                                                                            <span style="font-weight:700;">MUST</span>
-                                                                            be 8-12
-                                                                            characters. Must contain atleast
-                                                                            One Uppercase and
-                                                                            One
-                                                                            symbol.
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="inputState" class="form-label fw-bold">
-                                                                        Role
-                                                                        <spnan class="text-danger">
-                                                                            *
-                                                                            </span>
-                                                                    </label>
-                                                                    <select id="role_user"
-                                                                        class="form-select form form-select" required>
-                                                                        <option value="2">Manager</option>
-                                                                        <option value="3">Staff</option>
-                                                                    </select>
-                                                                    <span class="text-danger d-none">
-                                                                        State
-                                                                        is required!
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="inputState" class="form-label fw-bold">
-                                                                    Address
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="text" class="form-control"
-                                                                    id="address_user" placeholder="Enter Address"
-                                                                    required>
-                                                                <span class="text-danger d-none">
-                                                                    Address
-                                                                    is required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-12 col-lg-4 col-xl-4">
-                                                                <label for="inputState" class="form-label fw-bold">
-                                                                    City
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="text" class="form-control" id="city_user"
-                                                                    pattern="[A-Za-z\s]+"
-                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                                                                    placeholder="Enter City" required>
-                                                                <span class="text-danger d-none">
-                                                                    City
-                                                                    is required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-12 col-lg-4 col-xl-4">
-                                                                <label for="inputState" class="form-label fw-bold">
-                                                                    Sate
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <select id="state_user"
-                                                                    class="form-select form form-select select2-show-search"
-                                                                    required>
-                                                                    </select>
-                                                                <span class="text-danger d-none">
-                                                                    state
-                                                                    is required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-12 col-lg-4 col-xl-4">
-                                                                <label for="inputState" class="form-label fw-bold">
-                                                                    Zip Code
-                                                                    <spnan class="text-danger">
-                                                                        *
-                                                                        </span>
-                                                                </label>
-                                                                <input type="text" class="form-control" id="zip_user"
-                                                                    placeholder="Enter Zipcode" pattern="[0-9]{5}"
-                                                                    placeholder="A valid 5-digit zip code" maxlength="5"
-                                                                    minlength="5"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                                    required>
-                                                                <span class="text-danger d-none">
-                                                                    Zip Code
-                                                                    is required!
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label class="form-label fw-bold">
-                                                                    User Photo
-                                                                    (Optional)
-                                                                </label>
-                                                                <div class="custom-file"
-                                                                    style="border: 1px dashed #00000087;"
-                                                                    ondrop="dropHandler(event);"
-                                                                    ondragover="dragOverHandler(event);">
-                                                                    <input id="fileInput_user" type="file" name="image"
-                                                                        placeholder="Enter Photo"
-                                                                        class="custom-file-input form"
-                                                                        accept=".jpg, .png, image/jpeg, image/png,.pdf,application/pdf"
-                                                                        aria-label="hello" multiple="">
-                                                                    <span classname="d-none"></span>
-                                                                    <label class="custom-file-label"
-                                                                        for="fileInput_user">
-                                                                        <i class="fi fi-rs-cloud-upload"></i>
-                                                                        <div class="custom-file-text">
-                                                                            <span>Upload Photo here</span>
-                                                                            <span>
-                                                                                JPEG and PNG, file size no
-                                                                                more than 5MB
-                                                                            </span>
-                                                                            <small class="text-danger d-none"
-                                                                                id="count-text">
-                                                                                Maximum
-                                                                                number of
-                                                                                files reached.
-                                                                            </small>
-                                                                            <small class="text-danger d-none"
-                                                                                id="size-text">
-                                                                                File size
-                                                                                exceeds 5MB limit.
-                                                                            </small>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-                                                                <div class="selected-files text-white">
-                                                                    <div class="file-grid"></div>
-                                                                </div>
-                                                                <span class="text-danger d-none">
-                                                                    Photos are
-                                                                    required!
-                                                                </span>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-close-bottom btn-outline-default btn-pill button"
-                                                    data-bs-dismiss="modal" id="close"
-                                                    style="width: fit-content;">Close</button>
-                                                <button class="btn text-light button saveBtn"
-                                                    style="background-color:#1467B0; width: fit-content;"
-                                                    id="add-new-user-submit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="row">
@@ -3435,10 +2734,10 @@
     <script src="../assets/plugins/intl-tel-input-master/utils.js"></script>
     <script src="../assets/js/themeColors.js"></script>
     <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);
@@ -3526,7 +2825,7 @@
                 updateSelectedFilesContainer1(); // Update the selected files container
             });
             function dropHandler(ev) {
-                console.log("File(s) dropped");
+              // console.log("File(s) dropped");
                 ev.preventDefault();
                 if (ev.dataTransfer.items) {
                     [...ev.dataTransfer.items].forEach((item, i) => {
@@ -3539,22 +2838,22 @@
                 }
                 else {
                     [...ev.dataTransfer.files].forEach((file, i) => {
-                        console.log(`… file[${i}].name = ${file.name}`);
+                      // console.log(`… file[${i}].name = ${file.name}`);
                     });
                 }
             }
             function dragOverHandler(ev) {
-                console.log("File(s) in drop zone");
+              // console.log("File(s) in drop zone");
                 ev.preventDefault();
             }
             function updateSelectedFilesContainer1() {
                 var selectedFilesContainer = $('.file-grid');
-                console.log(selectedFilesContainer)
+              // console.log(selectedFilesContainer)
                 selectedFilesContainer.empty();
-                console.log(selectedFiles)
+              // console.log(selectedFiles)
                 selectedFiles.forEach(function (file, index) {
-                    console.log(selectedFiles.length)
-                    console.log(file)
+                  // console.log(selectedFiles.length)
+                  // console.log(file)
                     var fileElement = $('<div>')
                         .addClass('selected-file');
                     if (file.type && file.type.includes('image')) {
@@ -3600,7 +2899,7 @@
                             )
                             .appendTo(selectedFilesContainer);
                     } else if (file instanceof Object) {
-                        console.log(file)
+                      // console.log(file)
                         if (file.imageURL) {
                             fileElement
                                 .append(
@@ -3637,7 +2936,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -3704,8 +3003,8 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log("adminUserPermissionRoles");
-                                console.log(response.data);
+                              // console.log("adminUserPermissionRoles");
+                              // console.log(response.data);
                                 response?.data.forEach(element => {
                                     if (element.role == "Manager") {
                                         if (!element.appearance.View) {
@@ -4245,19 +3544,21 @@
                                 });
                             },
                             error: function (xhr, status, error) {
-                                console.log(error);
+$('#preloader').css('display','none');
+                              // console.log(error);
                             }
                         })
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -4282,14 +3583,15 @@ $("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix
 $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
                 $.ajax({
@@ -4308,7 +3610,8 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                      // console.log('Error occurred while fetching state and city data.');
                     }
                 });
                 $.ajax({
@@ -4319,11 +3622,11 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         $("#table_body_user").empty()
                         if (response?.data) {
                             userAdminData = response?.data;
-                            console.log(userAdminData);
+                          // console.log(userAdminData);
                             response?.data.forEach((element, index) => {
                                 var roleLabel;
 if (element.roleId == 2) {
@@ -4382,7 +3685,8 @@ if (element.roleId == 2) {
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+$('#preloader').css('display','none');
+                      // console.log(error)
                     },
                 });
             }
@@ -4394,7 +3698,7 @@ if (element.roleId == 2) {
                     success: function ({
                         data
                     }) {
-                        console.log(data)
+                      // console.log(data)
                         var stateDropdown = $('#state_user');
                         var stateDropdown2 = $('#state_user_update');
                         states = data
@@ -4404,13 +3708,14 @@ if (element.roleId == 2) {
                         });
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning_connection").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning_connection').modal('hide');
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 });
             }
@@ -4423,7 +3728,7 @@ if (element.roleId == 2) {
                         checkedClasses.push($(this).closest('td').attr('class'));
                     }
                 });
-                console.log(checkedClasses);
+              // console.log(checkedClasses);
                 if ($(this).closest('tr').attr("class")) {
                     $.ajax({
                         url: "https://backend.app.spaderent.com/api/spade/adminUserPermissionUpdate",
@@ -4449,7 +3754,7 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 } else {
@@ -4473,7 +3778,7 @@ if (element.roleId == 2) {
                 })
                 if (selectedFiles.length >= 1 && newFiles == true) {
                     var uploadFormData = new FormData();
-                    console.log(selectedFiles[0]);
+                  // console.log(selectedFiles[0]);
                     uploadFormData.append('image', selectedFiles[0]);
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
@@ -4485,8 +3790,8 @@ if (element.roleId == 2) {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("uploadAdmin");
-                            console.log(response);
+                          // console.log("uploadAdmin");
+                          // console.log(response);
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
@@ -4512,7 +3817,7 @@ if (element.roleId == 2) {
                                 contentType: "application/json",
                                 success: function (data) {
                                     $("#preloader").css("display", "none")
-                                    console.log(data);
+                                  // console.log(data);
                                     $('#edit-user-permissions').modal('hide')
                                     if (data.message == "User Updated Successfully") {
                                         $("#myModal_success p").text("User updated succesfully")
@@ -4528,16 +3833,17 @@ if (element.roleId == 2) {
                                 error: function (err) {
                                     $("#preloader").css("display", "none")
                                     $('.file-grid').empty()
-                                    console.log(err);
+                                  // console.log(err);
                                 }
                             })
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 20000);
-                            console.log('Error: ' + error);
+                          // console.log('Error: ' + error);
                         }
                     });
                 } else if (selectedFiles.length >= 1 && newFiles == false) {
@@ -4564,7 +3870,7 @@ if (element.roleId == 2) {
                         contentType: "application/json",
                         success: function (data) {
                             $("#preloader").css("display", "none")
-                            console.log(data);
+                          // console.log(data);
                             $('#edit-user-permissions').modal('hide')
                             if (data.message == "User Updated Successfully") {
                                 $("#myModal_success p").text("User updated succesfully")
@@ -4577,7 +3883,7 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 }
@@ -4605,7 +3911,7 @@ if (element.roleId == 2) {
                         contentType: "application/json",
                         success: function (data) {
                             $("#preloader").css("display", "none")
-                            console.log(data);
+                          // console.log(data);
                             $('#edit-user-permissions').modal('hide')
                             if (data.message == "User Updated Successfully") {
                                 $("#myModal_success p").text("User updated succesfully")
@@ -4618,7 +3924,7 @@ if (element.roleId == 2) {
                         },
                         error: function (err) {
                             $("#preloader").css("display", "none")
-                            console.log(err);
+                          // console.log(err);
                         }
                     })
                 }
@@ -4633,8 +3939,8 @@ if (element.roleId == 2) {
                         break;
                     }
                 }
-                console.log("userAdminDataNew")
-                console.log(userAdminDataNew)
+              // console.log("userAdminDataNew")
+              // console.log(userAdminDataNew)
                 $("#userid_update").val(userAdminDataNew.id)
                 $("#firstName_user_update").val(userAdminDataNew.fName)
                 $("#lastName_user_update").val(userAdminDataNew.lName)
@@ -4700,7 +4006,7 @@ if (userAdminDataNew.roleId == 2) {
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log(response);
+                      // console.log(response);
                         if (response.message == "Admin User Deleted Successsful") {
                             $("#delete-user-admin").modal("hide")
                             $("#myModal_success p").text("User deleted succesfully")
@@ -4712,8 +4018,9 @@ if (userAdminDataNew.roleId == 2) {
                         }
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#preloader").css("display", "none")
-                        console.log(error)
+                      // console.log(error)
                     }
                 })
             })
@@ -4732,8 +4039,8 @@ if (userAdminDataNew.roleId == 2) {
                             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log("uploadAdmin");
-                            console.log(response);
+                          // console.log("uploadAdmin");
+                          // console.log(response);
                             var imageUser = response.images[0].image_url;
                             var imageKey = response.images[0].image_key;
                             $.ajax({
@@ -4758,8 +4065,7 @@ if (userAdminDataNew.roleId == 2) {
                                     Authorization: "Bearer " + localStorage.getItem("authtoken")
                                 },
                                 success: function (response) {
-                                    console.log("createUserAdmin");
-                                    console.log(response);
+                                  // console.log(response);
                                     $("#preloader").css("display", "none")
                                     $('#add-user-permissions').modal('hide')
                                     if (response.message == "Users Permission User added successfully") {
@@ -4785,11 +4091,12 @@ if (userAdminDataNew.roleId == 2) {
                             });
                         },
                         error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                             $("#myModal_warning_connection").modal("show");
                             setTimeout(function () {
                                 $('#myModal_warning_connection').modal('hide');
                             }, 20000);
-                            console.log('Error: ' + error);
+                          // console.log('Error: ' + error);
                         }
                     });
                 } else {
@@ -4815,7 +4122,7 @@ if (userAdminDataNew.roleId == 2) {
                             Authorization: "Bearer " + localStorage.getItem("authtoken")
                         },
                         success: function (response) {
-                            console.log(response);
+                          // console.log(response);
                             $("#preloader").css("display", "none")
                             $('#add-user-permissions').modal('hide')
                             if (response.message == "Users Permission User added successfully") {

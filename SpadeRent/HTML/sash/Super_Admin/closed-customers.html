@@ -33,31 +33,7 @@
             window.location = "./login_module.html"
         }
         </script>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        .border {
-            border: 0px solid #e9edf4 !important;
-            padding: 0.75rem;
-            vertical-align: top;
-            border: 1px solid #e9edf4;
-        }
-        .panel-body {
-            padding: 0px;
-        }
-        .recent-title {
-            font-size: 22px;
-            font-weight: 800;
-        }
-        .comingsoon-heading {
-            font-size: 60px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            margin-top: 60px;
-        }
-        .header{
-            padding-bottom: 1rem !important;
-        }
-        </style>
+        <link rel="stylesheet" href="../assets/pageCss/superCss/closed-customers.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
         <div id="preloader" class="tlp-preloader">
@@ -561,6 +537,17 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
+                                                                <a class="text-dark" href="javascript:void(0)">PURCHASE DATE</a>
+                                                                <div class="form-check m-0">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input mt-2"
+                                                                        id="exampleCheck1"
+                                                                        checked
+                                                                    >
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">ClOSURE DATE</a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -632,9 +619,7 @@
                                                 <table class="table-hover table border text-nowrap text-md-nowrap mb-0 w-100" id="responsive-datatable">
                                                     <thead>
                                                         <tr>
-                                                            
                                                             <th>customer id</th>
-                                                            
                                                             <th>Name</th>
                                                             <th>Contact</th>
                                                             <th>subscription</th>
@@ -875,10 +860,10 @@
 <script src="../assets/js/themeColors.js"></script>
 <script src="../assets/js/getNotificationAdmin.js"></script>
 <script>
-        var helloGuys = true;
+        var loaderStopFirstRun = true;
         $(document).ajaxStop(function () {
-            if (helloGuys) {
-                helloGuys = false;
+            if (loaderStopFirstRun) {
+                loaderStopFirstRun = false;
                 var customScript = document.createElement('script');
                 customScript.src = "../assets/js/custom.js";
                 document.head.appendChild(customScript);
@@ -925,7 +910,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
-                    console.log(response);
+                  // console.log(response);
                     if(response.userPeremission.length > 0){
                     $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -982,14 +967,15 @@
                         }
                 },
                 error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                     $("#myModal_warning").modal("show");
                     setTimeout(function () {
                         $('#myModal_warning').modal('hide');
                         window.location = './login_module.html';
                     }, 2000);
-                    console.log('Error occurred while fetching state and city data.');
-                    console.log(xhr);
-                    console.log(error);
+                  // console.log('Error occurred while fetching state and city data.');
+                  // console.log(xhr);
+                  // console.log(error);
                 }
             })
             $.ajax({
@@ -1014,14 +1000,15 @@ $("#month-yearly").text("$" + (response?.data?.annually ? formatNumberWithSuffix
 $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix(parseFloat(response.data.monthly)) : '0.00'));
                     },
                     error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#myModal_warning").modal("show");
                         setTimeout(function () {
                             $('#myModal_warning').modal('hide');
                             window.location = './login_module.html';
                         }, 2000);
-                        console.log('Error occurred while fetching state and city data.');
-                        console.log(xhr);
-                        console.log(error);
+                      // console.log('Error occurred while fetching state and city data.');
+                      // console.log(xhr);
+                      // console.log(error);
                     }
                 })
             $.ajax({
@@ -1040,7 +1027,8 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                     });
                 },
                 error: function (xhr, status, error) {
-                    console.log('Error occurred while fetching state and city data.');
+$('#preloader').css('display','none');
+                  // console.log('Error occurred while fetching state and city data.');
                 }
             });
             }
@@ -1055,7 +1043,7 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log(response)
+                      // console.log(response)
                         $("#table_body").empty()
                         if (response.data) {
                             userAdminData = response?.data;
@@ -1071,7 +1059,6 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                                     ColorOfPlan = `style="background-color: #f7c14259;color: #F7C042;"`
                                 }
                                 $('#table_body').append(` <tr data-id="${element.closedLandlordId}">
-                                                       
                                                         <td class="landlordId" style="font-weight: 600;">US-${element.closedLandlordId}</td>
                                                         <td style="font-weight: 600;" class="landlordName"><b>${element.fName ? element.fName : "N/A"} ${element.lName ? element.lName : "N/A"}</b></td>
                                                         <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1">${element.email ? element.email : "N/A"}</p><span>${element.phone ? element.phone : "N/A"}</span></td>
@@ -1099,7 +1086,8 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
 }
                     },
                     error: function (xhr, status, error) {
-                        console.log(error)
+$('#preloader').css('display','none');
+                      // console.log(error)
                     },
                 });
             }
@@ -1131,8 +1119,8 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         Authorization: "Bearer " + localStorage.getItem("authtoken"),
                     },
                     success: function (response) {
-                        console.log("closedLandlord");
-                        console.log(response);
+                      // console.log("closedLandlord");
+                      // console.log(response);
                         $("#delete-user-admin").modal("hide")
                         if(response.message == "Clossed Landlord is deleted"){
                             $("#myModal_success p").text("User deleted succesfully")
@@ -1144,9 +1132,10 @@ $("#month-revenue").text("$" + (response?.data?.monthly ? formatNumberWithSuffix
                         }
                         $("#preloader").css("display", "none")
                     }, error: function (xhr, status, error) {
+$('#preloader').css('display','none');
                         $("#delete-user-admin").modal("hide")
                         $("#preloader").css("display", "none")
-                        console.log(error)
+                      // console.log(error)
                     }
                 })
             })
@@ -1203,22 +1192,22 @@ if (selectedFilter === 'alphabets') {
 } else if (selectedFilter === 'created-at') {
     rows.sort(function (a, b) {
         var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
-        console.log(idA)
+      // console.log(idA)
         var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
         return idB - idA;
     });
 }
 else if (selectedFilter === 'ascending') {
     rows.sort(function (a, b) {
-        var idA = parseInt($(a).find('.landlordId').text());
-        var idB = parseInt($(b).find('.landlordId').text());
+        var idA = parseInt($(a).find('.landlordId').text().split("-")[1]);
+        var idB = parseInt($(b).find('.landlordId').text().split("-")[1]);
         return idA - idB;
     });
 }
 else if (selectedFilter === 'descending') {
     rows.sort(function (a, b) {
-        var idA = parseInt($(a).find('.landlordId').text());
-        var idB = parseInt($(b).find('.landlordId').text());
+        var idA = parseInt($(a).find('.landlordId').text().split("-")[1]);
+        var idB = parseInt($(b).find('.landlordId').text().split("-")[1]);
         return idB - idA;
     });
 }
@@ -1227,10 +1216,10 @@ tableBody.empty().append(rows);
 $('input[type="checkbox"]').change(function () {
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
             var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked
-            console.log(columnIndex, isColumnVisible)
-            console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
+          // console.log(columnIndex, isColumnVisible)
+          // console.log($(this).find('th:nth-child(' + (columnIndex) + ')'))
             $('table').find('tr').each(function () {
-                console.log($(this))
+              // console.log($(this))
                 var column = $(this).find('th:nth-child(' + (columnIndex) + '), td:nth-child(' + (columnIndex) + ')');
                 isColumnVisible ? column.show() : column.hide();
             });

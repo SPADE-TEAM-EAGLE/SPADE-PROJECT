@@ -1,6 +1,5 @@
 $(function() {
 	'use strict'
-	
 	var icons = Quill.import('ui/icons');
 	icons['bold'] = '<i class="fa fa-bold" aria-hidden="true"><\/i>';
 	icons['italic'] = '<i class="fa fa-italic" aria-hidden="true"><\/i>';
