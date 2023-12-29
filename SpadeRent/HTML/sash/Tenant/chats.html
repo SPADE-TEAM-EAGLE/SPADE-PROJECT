@@ -2451,7 +2451,7 @@
                                                         for (var i = 0; i < response.data?.length; i++) {
                                                             if (response.data[i]['userType'] == "tenant") {
                                                                 const timeObj = new Date(response?.data[i]['created_at']);
-                                                                console.log(timeObj)
+                                                                // console.log(timeObj)
                                                                 const time = `${timeObj?.getHours()?.toString()?.padStart(2, '0')}:${timeObj?.getMinutes()?.toString()?.padStart(2, '0')}`;
                                                                 messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: end;">
     <div class="msg-text owner">`;
@@ -2480,7 +2480,7 @@
 </div>`;
                                                             } else if (response.data[i]['userType'] == "landlord") {
                                                                 const timeObj = new Date(response?.data[i]['created_at']);
-                                                                console.log(timeObj)
+                                                                // console.log(timeObj)
                                                                 const time = `${timeObj?.getHours()?.toString()?.padStart(2, '0')}:${timeObj?.getMinutes()?.toString()?.padStart(2, '0')}`;
                                                                 messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
                                                                 <div class="profileImage me-1 ${localStorage.getItem("LandlordImg") != "null" && localStorage.getItem("LandlordImg") != " " && localStorage.getItem("LandlordImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("landlordName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("landlordName").split(' ')[1].charAt(0).toUpperCase()}</div>

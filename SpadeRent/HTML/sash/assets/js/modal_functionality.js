@@ -1,5 +1,5 @@
 $("#propertyType").on("change",function(){
-    console.log($(this).val())
+    // console.log($(this).val())
     if ($(this).val() == "Single Family") {
 $("#units").val(1);
 $("#units").prop("disabled", true);
