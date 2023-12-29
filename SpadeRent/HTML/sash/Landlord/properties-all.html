@@ -36,7 +36,19 @@
         }
         </script>
         <link rel="stylesheet" href="../assets/pageCss/landlordCss/properties-all.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
         
         <div
@@ -2326,7 +2338,7 @@ $(".plan_remaining_days_data").each(function(){
                 updateButtonStatus();
             });
             $("#propertyType").on("change",function(){
-                console.log($(this).val())
+              // console.log($(this).val())
                 if ($(this).val() == "Single Family") {
     $("#units").val(1);
     $("#units").prop("disabled", true);
@@ -2338,7 +2350,7 @@ $(".plan_remaining_days_data").each(function(){
                 
             })
             $("#propertyType_update").on("change",function(){
-                console.log($(this).val())
+              // console.log($(this).val())
                 if ($(this).val() == "Single Family") {
     $("#unit_update").val(1);
     $("#unit_update").prop("disabled", true);

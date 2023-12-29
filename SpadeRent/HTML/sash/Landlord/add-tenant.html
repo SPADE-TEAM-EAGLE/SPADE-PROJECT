@@ -29,6 +29,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/add-tenant.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 <body class="app sidebar-mini ltr light-mode">
     
@@ -2077,7 +2089,7 @@ $('#preloader').css('display','none');
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#property').val()
-                console.log(properties)
+              // console.log(properties)
                 const filteredProperty=properties.filter((property)=>{
                     return property.id==propertyId2;
                 })
@@ -3400,7 +3412,7 @@ if (xhr?.responseJSON?.message == "Tenant Invoice is pending Kindly Paid invoice
                 success: function ({ image, tenants,userName, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
-                    console.log("djifhsdufhusdhfsdfh",planID)
+                  // console.log("djifhsdufhusdhfsdfh",planID)
                     if(planID==4 || planID==7){
                         $("#add-more-tenants").remove()
                     }

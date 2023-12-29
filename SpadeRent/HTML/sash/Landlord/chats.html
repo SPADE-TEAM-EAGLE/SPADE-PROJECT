@@ -30,6 +30,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/chats.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 
 <body class="app sidebar-mini ltr light-mode sidenav-toggledd">
@@ -1303,7 +1315,7 @@
             function initializeWebSocket() {
                 var socket = io('http://localhost:3000');
                 socket.on('connect', function () {
-                    console.log('connected');
+                  // console.log('connected');
                     $.ajax({
                         url: 'https://backend.app.spaderent.com/api/spade/activeUser',
                         type: 'PUT',
@@ -1326,7 +1338,7 @@
             var socket = initializeWebSocket();
             window.addEventListener('beforeunload', function () {
                 socket.disconnect();
-                console.log('disconnected');
+              // console.log('disconnected');
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
                     type: 'PUT',
@@ -1336,10 +1348,10 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
-                        console.log("code working properly")
+                      // console.log("code working properly")
                     },
                     error: function (xhr, status, error) {
-                        console.log("Not working properly")
+                      // console.log("Not working properly")
                     }
                 });
             });
@@ -1463,7 +1475,7 @@
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
-                                console.log(socket.emit('chatMessage', messageData))
+                              // console.log(socket.emit('chatMessage', messageData))
                                 socket.emit('chatMessage', messageData);
                                 // console.log(messageData);
                             },
@@ -1869,7 +1881,7 @@
                                                     for (var i = 0; i < response.data.length; i++) {
                                                         if (response.data[i]['userType'] == "landlord") {
                                                             const timeObj = new Date(response?.data[i]['created_at']);
-                                                                console.log(timeObj)
+                                                              // console.log(timeObj)
                                                                 const time = `${timeObj?.getHours()?.toString()?.padStart(2, '0')}:${timeObj?.getMinutes()?.toString()?.padStart(2, '0')}`;
                                                             messs1 += `<div class="d-flex " style="align-items: flex-start;justify-content: end;"> 
                                                                 <div class="msg-text owner">`;
@@ -1902,7 +1914,7 @@
                                                             </div>`;
                                                         } else if (response.data[i]['userType'] == "tenant") {
                                                             const timeObj = new Date(response?.data[i]['created_at']);
-                                                                console.log(timeObj)
+                                                              // console.log(timeObj)
                                                                 const time = `${timeObj?.getHours()?.toString()?.padStart(2, '0')}:${timeObj?.getMinutes()?.toString()?.padStart(2, '0')}`;
                                                             messs1 += `<div class="d-flex" style="align-items: flex-start; justify-content: flex-start;">
                                                                 <div class="profileImage me-1 ${localStorage.getItem("tenantImg") != "null" && localStorage.getItem("tenantImg") != " " && localStorage.getItem("tenantImg") != "" ? 'd-none' : ''}" style="width: 36px;height: 36px;"> ${localStorage.getItem("tenantName").split(' ')[0].charAt(0).toUpperCase() + localStorage.getItem("tenantName").split(' ')[1].charAt(0).toUpperCase()}</div>
@@ -1984,7 +1996,7 @@
                         } else {
                             response.data[0]?.forEach(function (tenant) {
                                 // console.log("viewAllPropertyTenant")
-                                console.log(tenant.image)
+                              // console.log(tenant.image)
                                 // console.log(tenant.tenantImages?.split(",")[0])
                                 var row = `
                                     <a href="javascript:void(0)" onclick="chatTenant(` + tenant.tenantID + `,'` + tenant.firstName + ` ` + tenant.lastName + `',this)">
