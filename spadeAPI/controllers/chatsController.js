@@ -51,10 +51,6 @@ const chatsController = {
       const isChat = await queryRunner(checkTenantsChatQuery, [recieverId , senderId, senderId ,recieverId]);
 
         console.log(isChat[0])
-      // const isChat = await queryRunner(
-      //     selectQuery("chats", "senderId", "receiverID"),
-      //     [senderId, recieverId]
-      // );
       const created_at = new Date()
         .toISOString()
         .slice(0, 19)
