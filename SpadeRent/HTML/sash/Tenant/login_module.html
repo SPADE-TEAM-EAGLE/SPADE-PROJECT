@@ -34,10 +34,16 @@
         <link rel="stylesheet" href="../assets/pageCss/tenantCss/login_module.css">
         <script language="JavaScript">
             function suppressJSError() {
-            return true;
+                return true;
             }
-            window.onerror=suppressJSError;
-            </script>
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
     </head>
     <body>
         <div

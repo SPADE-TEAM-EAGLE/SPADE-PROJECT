@@ -594,7 +594,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="prospects.html" style="color: white;">Prospects</a>
+                                    <a href="prospects.html" style="color: white;">Prospect</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -1933,13 +1933,6 @@
                                     <li>
                                         <a href="create-tasks.html" class="slide-item">All</a>
                                     </li>
-                                    <li>
-                                        <a href="user-tasks.html" class="slide-item">Tasks</a>
-                                    </li>
-                                    <li>
-                                        <a href="maintenance-requests.html" class="slide-item">Maintenance Request</a>
-                                    </li>
-
                                     <li>
                                         <a href="tasks-requests.html" class="slide-item">Requests</a>
                                     </li>
@@ -9458,10 +9451,10 @@
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
         <script>
-            var loaderStopFirstRun = true;
+            var helloGuys = true;
             $(document).ajaxStop(function () {
-                if (loaderStopFirstRun) {
-                    loaderStopFirstRun = false;
+                if (helloGuys) {
+                    helloGuys = false;
                     var customScript = document.createElement('script');
                     customScript.src = "../assets/js/custom1.js";
                     document.head.appendChild(customScript);
@@ -9496,7 +9489,10 @@
                     },
                     error: function (xhr, status, error) {
 $('#preloader').css('display','none');
-                        
+                        $("#myModal_warning").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning').modal('hide');
+                        }, 2000);
                         // console.log(error);
                     }
                 });
@@ -10753,10 +10749,10 @@ ${toShow !== "paid" ? '<li><a class="dropdown-item text-dark status-option" data
                             },
                             error: function (xhr, status, error) {
                                 // console.log(error)
-                                // if(xhr?.responseJSON?.message != "No data found"){
+                                if(xhr?.responseJSON?.message != "No data found"){
 
-                                //     $("#myModal_warning").modal("show");
-                                // }
+                                    $("#myModal_warning").modal("show");
+                                }
                                 // setTimeout(function () {
                                 //     $('#myModal_warning').modal('hide');
                                 //     window.location = '../Landlord/login_module.html';
@@ -12197,7 +12193,6 @@ $('#preloader').css('display','none');
                                         $("#myModal_warning").modal("show");
                                         setTimeout(function () {
                                             $('#myModal_warning').modal('hide');
-                                            window.location="./login_module.html"
                                         }, 2000);
                                         // console.log(xhr);
                                         // console.log(error);
@@ -12801,7 +12796,7 @@ $('#preloader').css('display','none');
                                             }, 2000);
                                             resetAccordions()
                                         }
-                                        else if (response.message == "Users Permission User added successfully ") {
+                                        else if (response.message == "Users Permission User added successfully") {
                                             $("#myModal_success p").text("User succesfully created!!!")
                                             $("#myModal_success").modal("show")
                                             setTimeout(function () {

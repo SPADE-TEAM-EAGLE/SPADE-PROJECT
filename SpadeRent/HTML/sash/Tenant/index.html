@@ -27,10 +27,16 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
     <script language="JavaScript">
         function suppressJSError() {
-        return true;
+            return true;
         }
-        window.onerror=suppressJSError;
-        </script>
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
         
     <script>
         if (!localStorage.getItem("authtoken")) {

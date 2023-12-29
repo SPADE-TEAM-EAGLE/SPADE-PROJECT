@@ -31,10 +31,16 @@
     </script>
     <script language="JavaScript">
         function suppressJSError() {
-        return true;
+            return true;
         }
-        window.onerror=suppressJSError;
-        </script>
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
     <link rel="stylesheet" href="../assets/pageCss/tenantCss/settings.css">
     <link rel="stylesheet" href="../assets/pageCss/tenantCss/index.css">
 </head>
@@ -1721,7 +1727,7 @@
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                     </div>
                                                                     <div class="col-xl-6 mb-5 mt-5">
-                                                                        <div id="card-expiry"
+                                                                        <div id="card-expiry_store"
                                                                             class="input empty form-control"
                                                                             style="padding: 8px 0px 12px 12px;"></div>
                                                                         <div class="underline"></div>
@@ -1734,7 +1740,7 @@
                                                                                 Card
                                                                                 number
                                                                             </label>
-                                                                            <div id="card-number"
+                                                                            <div id="card-number_store"
                                                                                 class="input form-control"
                                                                                 style="padding: 8px 0px 12px 12px;">
                                                                             </div>
@@ -1745,14 +1751,14 @@
                                                                             style="display: flex; margin-top: -44px; float: right;">
                                                                     </div>
                                                                     <div class="col-xl-6 mb-5">
-                                                                        <div id="card-cvc"
+                                                                        <div id="card-cvc_store"
                                                                             class="input empty form-control"
                                                                             style="padding: 8px 0px 12px 12px;"></div>
                                                                         <div class="underline "></div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-5">
                                                                         <input type="text" class="form-control"
-                                                                            id="description-bank"
+                                                                            id="description-bank_store"
                                                                             placeholder="Description..." required>
                                                                     </div>
                                                                     <div class="col-md-6 mb-5">
@@ -1782,20 +1788,20 @@
                                                                 <div class="form-row mt-5" id="ach-card">
                                                                     <div class="col-xl-6 mb-5">
                                                                         <input type="number" class="form-control"
-                                                                            id="account-number"
+                                                                            id="account-number_store"
                                                                             placeholder="Account Number" required>
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                     </div>
                                                                     <div class="col-xl-6 mb-5">
                                                                         <input type="number" class="form-control"
-                                                                            id="routing-number"
+                                                                            id="routing-number_store"
                                                                             placeholder="Routing Number" required>
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                     </div>
 
                                                                     <div class="col-xl-12 mb-5">
                                                                         <input type="text" class="form-control"
-                                                                            id="account-holder-number"
+                                                                            id="account-holder-number_store"
                                                                             placeholder="Account Holder Name" required>
                                                                         <div class="valid-feedback">Looks good!</div>
                                                                     </div>
@@ -3509,17 +3515,17 @@ $('#preloader').css('display','none');
                     classes: ScFieldClasses,
                     id: 'card-number-input'
                 });
-                scard.attach('#card-number');
+                scard.attach('#card-number_store');
                 var cardExpiry = ScFields.create('ccExpiration', {
                     style: ScFieldStyles,
                     classes: ScFieldClasses,
                 });
-                cardExpiry.attach('#card-expiry');
+                cardExpiry.attach('#card-expiry_store');
                 var cardCvc = ScFields.create('ccCvc', {
                     style: ScFieldStyles,
                     classes: ScFieldClasses,
                 });
-                cardCvc.attach('#card-cvc');
+                cardCvc.attach('#card-cvc_store');
                 function main() {
                     $("#preloader").css("display", "flex")
                     $.ajax({

@@ -31,10 +31,16 @@
         <title>Spade Rent | Forget-password</title>
         <script language="JavaScript">
             function suppressJSError() {
-            return true;
+                return true;
             }
-            window.onerror=suppressJSError;
-            </script>
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
         <link rel="stylesheet" href="../assets/pageCss/superCss/verification.css">
     </head>
     <body onload="check()">

@@ -31,10 +31,16 @@
         </script>
         <script language="JavaScript">
             function suppressJSError() {
-            return true;
+                return true;
             }
-            window.onerror=suppressJSError;
-            </script>
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
        <link rel="stylesheet" href="../assets/pageCss/tenantCss/coming-soon.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
