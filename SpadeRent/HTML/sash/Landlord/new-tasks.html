@@ -30,7 +30,19 @@
             }
         </script>
       <link rel="stylesheet" href="../assets/pageCss/landlordCss/new-tasks.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
         
         <div
@@ -2182,7 +2194,7 @@ $('#preloader').css('display','none');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task_task").val();
                 var assignee = []
-                console.log($("#assignee_task").val())
+              // console.log($("#assignee_task").val())
                 $("#assignee_task").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string

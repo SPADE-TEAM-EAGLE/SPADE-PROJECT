@@ -35,6 +35,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/create-invoicing.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 <body class="app sidebar-mini ltr light-mode">
     
@@ -3678,7 +3690,7 @@ $('#preloader').css('display','none');
                         $("#menu").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
                         response?.data[0]?.forEach(function (tenant) {
-                            console.log("dsijdijisdjijdijsidjis",tenant)
+                          // console.log("dsijdijisdjijdijsidjis",tenant)
                             var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
                             newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                 '<img src="' + (tenant?.image?.split(",")[0] ? tenant.image.split(",")[0] : '../assets/images/icons/Group 34343434.png') + '" alt="" style="width: 65px; height: 65px;">' +
@@ -5039,7 +5051,7 @@ $('#preloader').css('display','none');
                 $("#dueDate_update").val(data.dueDate)
                 let sum = 0
                 $('#add-item-container1_update').empty()
-                console.log("fdsfsdmfsdfksdfd",data?.memo)
+              // console.log("fdsfsdmfsdfksdfd",data?.memo)
                 data.memo.forEach(({
                     memo,
                     category,

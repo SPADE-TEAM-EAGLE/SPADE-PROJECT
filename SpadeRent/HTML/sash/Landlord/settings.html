@@ -45,6 +45,18 @@
         document.addEventListener('DOMContentLoaded', openTabFromFragment);
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/settings.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 
 <body class="app sidebar-mini ltr light-mode" onload="DarkLightChecked()">
@@ -9433,7 +9445,7 @@
         <script src="../assets/plugins/wysiwyag/wysiwyag.js"></script>
         <script src="../assets/plugins/summernote/summernote1.js"></script>
         <script src="../assets/js/summernote.js"></script>
-        <script src="../assets/plugins/quill/quill.min.js"></script>
+        <!-- <script src="../assets/plugins/quill/quill.min.js"></script> -->
         <script src="../assets/js/form-editor2.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <script src="../assets/js/froala.js"></script>
@@ -10000,7 +10012,7 @@ $('#preloader').css('display','none');
                 });
                 updateSelectedFilesContainer1(); // Update the selected files container
             });
-            console.log("hehduhrhh8eycn ryreuururuur",$('#tab16 input[type="checkbox"]'))
+          // console.log("hehduhrhh8eycn ryreuururuur",$('#tab16 input[type="checkbox"]'))
             $('#tab16 input[type="checkbox"]').change(function () {
                 var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element
                 var isColumnVisible = $(this).prop('checked'); // Check if the checkbox is checked or unchecked

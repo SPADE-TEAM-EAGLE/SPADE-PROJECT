@@ -32,6 +32,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/create-tasks.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -2073,7 +2085,7 @@
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(file)
+              // console.log(file)
                 // console.log(selectedFiles.length)
                 // console.log(file)
                 var fileElement = $('<div>')
@@ -2820,7 +2832,7 @@ $('#preloader').css('display','none');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task_task").val();
                 var assignee = []
-                console.log($("#assignee_task").val())
+              // console.log($("#assignee_task").val())
                 $("#assignee_task").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3249,11 +3261,11 @@ $('#preloader').css('display','none');
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
                 var uri;
-                console.log(api)
+              // console.log(api)
                 if(api=="usertask"){
                     uri='https://backend.app.spaderent.com/api/spade/deleteUserTask'
                 }else if(api=="task"){
-                    console.log(api)
+                  // console.log(api)
                     uri='https://backend.app.spaderent.com/api/spade/deleteTask'
                 }
                 $('#myModal_delete').modal('hide');
@@ -3298,7 +3310,7 @@ $('#preloader').css('display','none');
                 var priority = $("#priority_update_task").val();
                 var status = $("#status_update_task").val();
                 var assignee = []
-                console.log($("#assignee_update_task").val())
+              // console.log($("#assignee_update_task").val())
                 $("#assignee_update_task").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3439,7 +3451,7 @@ $('#preloader').css('display','none');
             
             function updateTableWithData(data) {
                 // Clear existing data from the table
-                console.log(data)
+              // console.log(data)
                 var tableBody = $('#table_body');
                 tableBody.empty();
                 function toTitleCase(str) {
@@ -3593,7 +3605,7 @@ $('#preloader').css('display','none');
                         selectedFiles = data.images
                     } else {
                     }
-                    console.log(data)
+                  // console.log(data)
                     updateSelectedFilesContainer()
                 $("#message_update_task").val(data.notes);
                 $("#dueDate_update_task").val(data.dueDate);
@@ -3602,7 +3614,7 @@ $('#preloader').css('display','none');
                 var propertyData=properties.find((property)=>{
                     return property.id==data.propertyId
                 })
-                console.log(propertyData)
+              // console.log(propertyData)
                 propertyData.occupiedUnits.forEach((unit)=>{
                     $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
                 })
@@ -3634,7 +3646,7 @@ $('#preloader').css('display','none');
                         selectedFiles = data.taskImages
                     } else {
                     }
-                    console.log(data)
+                  // console.log(data)
 
                 updateSelectedFilesContainer()
                 $("#message").val(data.notes);
@@ -3659,10 +3671,10 @@ $('#preloader').css('display','none');
                 e.preventDefault(); // Prevent default anchor behavior
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 const taskType=$(this).closest("tr").find(".serial-number").next().text();
-                console.log(taskType.includes("MREQ"))
+              // console.log(taskType.includes("MREQ"))
                 if(taskType.includes("MREQ")){
                     api="task"
-                    console.log(taskType.includes("TASK"))
+                  // console.log(taskType.includes("TASK"))
                 }else if(taskType.includes("TASK")){
                     api="usertask"
                 }else{
@@ -4028,7 +4040,7 @@ $('#preloader').css('display','none');
                 //                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 //                                 taskId = taskIdElement.attr("id")
                 //                                 const data = response.data.find(obj => obj.taskid.toString() == taskId);
-                //                                 console.log(data)
+                //                               // console.log(data)
                 //                                 // console.log(taskId)
                 //                                 if (data.images) {
                 //                                     selectedFiles = data.images

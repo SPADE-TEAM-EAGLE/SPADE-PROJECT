@@ -31,7 +31,19 @@
             }
         </script>
        <link rel="stylesheet" href="../assets/pageCss/landlordCss/new-invoice.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
         
         <div
@@ -3195,7 +3207,7 @@ $('#preloader').css('display','none');
                 $("#propertyName_update").val(propertyName[0].propertyName)
                 $("#dueDate_update").val(data.dueDate)
                 $('#add-item-container1_update').empty()
-                console.log("akrjjfjndfhfndshfdnfgfd dbfhdufdifdfd",data.memo)
+              // console.log("akrjjfjndfhfndshfdnfgfd dbfhdufdifdfd",data.memo)
                 data.memo.forEach(({ memo, category, amount }) => {
                     $('#add-item-container1_update').append(
                         `<tr class="tr">

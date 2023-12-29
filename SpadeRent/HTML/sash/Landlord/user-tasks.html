@@ -35,7 +35,19 @@
         }
         </script>
         <link rel="stylesheet" href="../assets/pageCss/landlordCss/create-tasks.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
       
         <div
@@ -2107,10 +2119,10 @@ $('#preloader').css('display','none');
         function updateSelectedFilesContainer() {
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
-            console.log(selectedFiles.length)
+          // console.log(selectedFiles.length)
             selectedFiles.forEach(function (file, index) {
                 
-                console.log(file)
+              // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
                 if (file.type && file.type.includes('image')) {
@@ -2209,7 +2221,7 @@ $('#preloader').css('display','none');
                 success: function ({ userName, image,tasks,create_at,planID,...rest }) {
                     userData=rest;
                     
-                    console.log("hguydgdsygygduysgfsdg",userData)
+                  // console.log("hguydgdsygygduysgfsdg",userData)
                     $("#assignee,#assignee_update").append($("<option></option>").text((userData?.firstName + " " + userData?.lastName)+" (Assign yourself)").val((userData?.userId)+"l"));
                     $("#assignee").multipleSelect();
                     adjustPlan(rest)
@@ -2453,9 +2465,9 @@ return NewDate
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
-                console.log(taskId,taskInfo)
+              // console.log(taskId,taskInfo)
                 const data = taskInfo.find(obj => obj.taskid.toString() == taskId);
-                console.log(data)
+              // console.log(data)
                 if (data.images) {
                     selectedFiles = data.images
                 } else {
@@ -2548,7 +2560,7 @@ return NewDate
                             </td>
                         </tr>`)
                 }
-                console.log(data.images)
+              // console.log(data.images)
                 if (data?.images[0]?.Image) {
                     const files = data.images;
                     $("#view-task-images").empty();
@@ -2745,7 +2757,7 @@ return NewDate
                 $('#preloader').css('display', 'flex')
                 var task = $("#task").val();
                 var assignee = []
-                console.log($("#assignee").val())
+              // console.log($("#assignee").val())
                 $("#assignee").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3056,7 +3068,7 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                 var priority = $("#priority_update").val();
                 var status = $("#status_update").val();
                 var assignee = []
-                console.log($("#assignee_update").val())
+              // console.log($("#assignee_update").val())
                 $("#assignee_update").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3348,7 +3360,7 @@ if (task.priority == 'High') {
                                     dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                                 }
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
-                                console.log(task?.status)
+                              // console.log(task?.status)
                                 var status = '<td class="status " style="font-weight: 600;">' + (task.taskStatus ? toTitleCase(task.taskStatus) : "Not Set") + '</td>';
                                 var dropdownMenu =
                                     '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
@@ -3367,7 +3379,7 @@ if (task.priority == 'High') {
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                                 taskId = taskIdElement.attr("id")
                                 const data = response.data.find(obj => obj.taskid.toString() == taskId);
-                                console.log(data)
+                              // console.log(data)
                                 // console.log(taskId)
                                 if (data.images) {
                                     selectedFiles = data.images
@@ -3381,7 +3393,7 @@ if (task.priority == 'High') {
                                 var propertyData=properties.find((property)=>{
                     return property.id==data.propertyId
                 })
-                console.log(propertyData)
+              // console.log(propertyData)
                 propertyData.occupiedUnits.forEach((unit)=>{
                     $("#unit_update").append($("<option></option>").text(unit.unitNumber).val(unit.id))
                 })
@@ -3456,11 +3468,11 @@ $('#preloader').css('display','none');
 
                         $('#property,#property_update').change(function () {
                             var selectedPropertyId = $(this).val();
-                            console.log(selectedPropertyId)
+                          // console.log(selectedPropertyId)
                             var selectedProperty = properties.find(function (property) {
                                 return property.id == selectedPropertyId;
                             });
-                            console.log(selectedProperty)
+                          // console.log(selectedProperty)
                             var propertyUnitSelect = $('#unit');
                             $('#unit,#unit_update').empty()
                             

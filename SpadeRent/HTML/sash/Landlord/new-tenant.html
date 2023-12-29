@@ -30,7 +30,19 @@
         }
         </script>
        <link rel="stylesheet" href="../assets/pageCss/landlordCss/new-tenant.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
         <div id="preloader" class="tlp-preloader">
             <div class="animation-preloader">
@@ -1955,7 +1967,7 @@ $('#preloader').css('display','none');
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#property').val()
-                console.log(properties)
+              // console.log(properties)
                 const filteredProperty=properties.filter((property)=>{
                     return property.id==propertyId2;
                 })
