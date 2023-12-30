@@ -27,7 +27,7 @@ $(document).ready(function() {
        }
        //second accordian
        var isEmpty2 = false;
-       $('#property, #unit, #rent').each(function() {
+       $('#property, #unit, #rent, #leaseStart , #leaseEnd').each(function() {
         var span = $(this).siblings('.text-danger');
            if ($(this).val() == '' || $(this).val() == 'Choose...' || $(this).val() == 'No unit available!!') {
                isEmpty2 = true;
@@ -55,63 +55,9 @@ $(document).ready(function() {
        var lease = $("input[name='lease']:checked").val();
        var yesno = $("input[name='yesno']:checked").val();
        var isEmpty3 = false;
-       if (lease == "Gross Lease" && yesno == "yes") {
-           var date1 = false;
-           $('.input-amount,#leaseStart2,#leaseEnd2').each(function() {
-            var span = $(this).siblings('.text-danger');
-               if ($(this).val() === '' || $(this).val() === 'Choose...') {
-                var span = $(this).siblings('.text-danger');
-                $(this).addClass('border-danger');
-                $(this).removeClass('border-green');
-                span.removeClass('d-none');
-                   date1 = true;
-                   isEmpty3 = true;
-                   return false;
-               }else{
-                $(this).addClass('border-green');
-                    $(this).removeClass('border-danger');
-                    span.addClass('d-none');
-               }
-           });
-           if (!date1) {
-               $("#collapseThree-add-tenant").removeClass("show");
-               $(".accordion-item .icon").eq(2).removeClass("fi-rs-exclamation");
-               $(".accordion-item .icon").eq(2).removeClass("chevron");
-               $(".accordion-item .icon").eq(2).addClass("fi-rs-check-circle");
-               $(".accordion-item .icon").eq(2).removeClass("cross");
-               $(".accordion-item .icon").eq(2).addClass("tick");
-               isEmpty3 = false;
-           }
-       } else if (lease == "Gross Lease" && yesno == "no") {
-        var date1 = false;
-        $('#leaseStart2,#leaseEnd2').each(function() {
-            var span = $(this).siblings('.text-danger');
-            if ($(this).val() == '') {
-             var span = $(this).siblings('.text-danger');
-             $(this).addClass('border-danger');
-             $(this).removeClass('border-green');
-             span.removeClass('d-none');
-                date1 = true;
-                isEmpty3 = true;
-                return false;
-            }else{
-             $(this).addClass('border-green');
-                 $(this).removeClass('border-danger');
-                 span.addClass('d-none');
-            }
-        });
-        if (!date1) {
-            $("#collapseThree-add-tenant").removeClass("show");
-            $(".accordion-item .icon").eq(2).removeClass("fi-rs-exclamation");
-            $(".accordion-item .icon").eq(2).removeClass("chevron");
-            $(".accordion-item .icon").eq(2).addClass("fi-rs-check-circle");
-            $(".accordio    n-item .icon").eq(2).removeClass("cross");
-            $(".accordion-item .icon").eq(2).addClass("tick");
-            isEmpty3 = false;
-        }
-       } else if (lease == "Triple Net Lease" && yesno == "yes") {
+        if (yesno == "yes") {
            var date2 = false;
-           $('.input-amount , #leaseStart , #leaseEnd').each(function() {
+           $('.input-amount').each(function() {
             var span = $(this).siblings('.text-danger');
             if ($(this).val() === '' || $(this).val() === 'Choose...') {
                 var span = $(this).siblings('.text-danger');
@@ -137,35 +83,8 @@ $(document).ready(function() {
                isEmpty3 = false;
            }
        }
-       else if(lease == "Triple Net Lease" && yesno == "no"){
-           var date3 = false;
-           $(' #leaseStart , #leaseEnd').each(function() {
-            var span = $(this).siblings('.text-danger');
-            if ($(this).val() === '' || $(this).val() === 'Choose...') {
-                var span = $(this).siblings('.text-danger');
-                $(this).addClass('border-danger');
-                $(this).removeClass('border-green');
-                span.removeClass('d-none');
-                   date3 = true;
-                   isEmpty3 = true;
-                   return false;
-               }else{
-                $(this).addClass('border-green');
-                    $(this).removeClass('border-danger');
-                    span.addClass('d-none');
-               }
-           });
-           if (!date3) {
-               $("#collapseThree-add-tenant").removeClass("show");
-               $(".accordion-item .icon").eq(2).removeClass("fi-rs-exclamation");
-               $(".accordion-item .icon").eq(2).removeClass("chevron");
-               $(".accordion-item .icon").eq(2).addClass("fi-rs-check-circle");
-               $(".accordion-item .icon").eq(2).removeClass("cross");
-               $(".accordion-item .icon").eq(2).addClass("tick");
-               isEmpty3 = false;
-           } 
-       }else{
-           isEmpty3 = true;
+       else{
+           isEmpty3 = false;
        }
 if(!isEmpty3 && !isEmpty2 && !isEmpty1){
     $("#next-add-tenant").attr("id","next")
