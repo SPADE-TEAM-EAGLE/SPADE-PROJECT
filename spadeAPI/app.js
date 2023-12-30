@@ -15,10 +15,7 @@ const server = http.createServer(app); // Use http.createServer to create the se
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors({
-  origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com","*"], // Allow requests from this origin
-  methods: ["GET", "POST"],
-})); 
+app.use(cors()); 
 
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
