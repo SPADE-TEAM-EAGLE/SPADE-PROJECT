@@ -811,6 +811,31 @@
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Rent amount is required!</span>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">
+                                            Lease Start
+                                            Date
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="date" class="form-control position-relative"
+                                            id="leaseStart" placeholder="Enter Lease Start Date"
+                                            required>
+                                        <span class="text-danger d-none">This field is
+                                            required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputPassword4" class="form-label">
+                                            Lease End
+                                            Date
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="date" class="form-control" id="leaseEnd"
+                                            required placeholder="Enter Lease End Date">
+                                        <span class="text-danger d-none">
+                                            Rent amount is
+                                            required!
+                                        </span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -846,13 +871,13 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
+                                                name="lease" id="flexCheckChecked1" href="#" role="button"
                                                 aria-expanded="false" aria-controls="collapseExample1">
                                             <label class="form-check-label" for="flexCheckChecked1">
                                                 Triple Net Lease
                                             </label>
                                         </div>
-                                        <div class="collapse" id="collapse1">
+                                        <div class="collapse show d-block" id="collapse1">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
@@ -892,7 +917,7 @@
                                                                 required!
                                                             </span>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <!-- <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">
                                                                 Lease Start
                                                                 Date
@@ -916,12 +941,12 @@
                                                                 Rent amount is
                                                                 required!
                                                             </span>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="collapse show" id="collapse3">
+                                        <!-- <div class="collapse show" id="collapse3">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
@@ -954,7 +979,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">
@@ -965,13 +990,13 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="yes" name="yesno"
                                                 id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2" required>
+                                                aria-expanded="false" aria-controls="collapseExample2" required checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno" checked
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" 
                                                 required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
@@ -979,7 +1004,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 row">
-                                        <div class="collapse" id="collapse2">
+                                        <div class="collapse show" id="collapse2">
                                             <div class="card card-body">
                                                 <div class="text-justify" id="add-item-container">
                                                     <div class="row row-multiple mb-2 pb-3">
@@ -2602,27 +2627,27 @@ $('#preloader').css('display','none');
                     })
                 }
             });
-            $('input[name="lease"]').change(function () {
-                if ($(this).val() === 'Triple Net Lease') {
-                    $('#collapse1').collapse('show');
-                    $('#collapse3').collapse('hide');
-                    $('#baseRent').prop('required', true);
-                    $('#tripleNet').prop('required', true);
-                    $('#leaseStart').prop('required', true);
-                    $('#leaseEnd').prop('required', true);
-                    $('#leaseStart2').prop('required', false);
-                    $('#leaseEnd2').prop('required', false);
-                } else if ($(this).val() === 'Gross Lease') {
-                    $('#collapse1').collapse('hide');
-                    $('#collapse3').collapse('show');
-                    $('#leaseStart2').prop('required', true);
-                    $('#leaseEnd2').prop('required', true);
-                    $('#baseRent').prop('required', false);
-                    $('#tripleNet').prop('required', false);
-                    $('#leaseStart').prop('required', false);
-                    $('#leaseEnd').prop('required', false);
-                }
-            });
+            // $('input[name="lease"]').change(function () {
+            //     if ($(this).val() === 'Triple Net Lease') {
+            //         $('#collapse1').collapse('show');
+            //         $('#collapse3').collapse('hide');
+            //         $('#baseRent').prop('required', true);
+            //         $('#tripleNet').prop('required', true);
+            //         $('#leaseStart').prop('required', true);
+            //         $('#leaseEnd').prop('required', true);
+            //         $('#leaseStart2').prop('required', false);
+            //         $('#leaseEnd2').prop('required', false);
+            //     } else if ($(this).val() === 'Gross Lease') {
+            //         $('#collapse1').collapse('hide');
+            //         $('#collapse3').collapse('show');
+            //         $('#leaseStart2').prop('required', true);
+            //         $('#leaseEnd2').prop('required', true);
+            //         $('#baseRent').prop('required', false);
+            //         $('#tripleNet').prop('required', false);
+            //         $('#leaseStart').prop('required', false);
+            //         $('#leaseEnd').prop('required', false);
+            //     }
+            // });
             function getFormData(tenantID) {
                 var formData = {};
                 formData.tenantID = tenantID
@@ -2639,17 +2664,21 @@ $('#preloader').css('display','none');
                 formData.propertyUnitID = document.getElementById('unit').value;
                 formData.rentAmount = document.getElementById('rent').value;
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                if (formData.gross_or_triple_lease == "Gross Lease") {
-                    formData.leaseStartDate = document.getElementById('leaseStart2').value;
-                    formData.leaseEndDate = document.getElementById('leaseEnd2').value;
-                    formData.baseRent = document.getElementById('baseRent').value;
-                    formData.tripleNet = document.getElementById('tripleNet').value;
-                } else {
-                    formData.baseRent = document.getElementById('baseRent').value;
+                // if (formData.gross_or_triple_lease == "Gross Lease") {
+                //     formData.leaseStartDate = document.getElementById('leaseStart2').value;
+                //     formData.leaseEndDate = document.getElementById('leaseEnd2').value;
+                //     formData.baseRent = document.getElementById('baseRent').value;
+                //     formData.tripleNet = document.getElementById('tripleNet').value;
+                // } else {
+                //     formData.baseRent = document.getElementById('baseRent').value;
+                //     formData.tripleNet = document.getElementById('tripleNet').value;
+                //     formData.leaseStartDate = document.getElementById('leaseStart').value;
+                //     formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                // }
+                formData.baseRent = document.getElementById('baseRent').value;
                     formData.tripleNet = document.getElementById('tripleNet').value;
                     formData.leaseStartDate = document.getElementById('leaseStart').value;
                     formData.leaseEndDate = document.getElementById('leaseEnd').value;
-                }
                 formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
                 var rowData = [];
                 $('.row-multiple').each(function () {
