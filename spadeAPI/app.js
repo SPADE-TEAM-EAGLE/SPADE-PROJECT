@@ -15,7 +15,10 @@ const server = http.createServer(app); // Use http.createServer to create the se
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors()); 
+app.use(cors({
+  origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com"], // Allow requests from this origin
+  methods: ["GET", "POST"],
+})); 
 
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -24,12 +27,13 @@ app.use((req, res, next) => {
   next();
 });
 
-const io = new Server(server, {
+const io1 = new Server(server, {
   cors: {
-    origin: "*", // Allow requests from this origin
+    origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com"], // Allow requests from this origin
     methods: ["GET", "POST"],
   },
 });
+const io = io1.of("/message");
 app.use((req, res, next) => {
   req.io = io; // Attach io to the request object
   next();
