@@ -16,7 +16,7 @@ const server = http.createServer(app); // Use http.createServer to create the se
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors({
-  origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com"], // Allow requests from this origin
+  origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com","*"], // Allow requests from this origin
   methods: ["GET", "POST"],
 })); 
 
