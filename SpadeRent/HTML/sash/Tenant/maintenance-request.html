@@ -2384,6 +2384,9 @@ $('#preloader').css('display','none');
     </script>
     <script>
         $(document).ready(() => {
+            function CapitalLetter(message) {
+        return (message.charAt(0).toUpperCase() + message.slice(1));
+            }
             $(document).on('click', ".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -2397,7 +2400,7 @@ $('#preloader').css('display','none');
                 $("#taskName_view").text(data.taskName);
                 $("#dueDate_view").text(formatDateMDY(data.dueDate) != "NaN-NaN-NaN" ? formatDateMDY(data.dueDate) : "Not set");
                 $("#priority_view").text(data.priority);
-                $("#status_view").text(data.status);
+                $("#status_view").text(CapitalLetter(data.status));
                 $("#notes_view").text(data.notes);
               // console.log($("#notes_view"))
                 $("#view-task-line-item").empty()
