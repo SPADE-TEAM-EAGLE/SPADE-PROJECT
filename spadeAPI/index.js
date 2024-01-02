@@ -6,14 +6,21 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const { connect } = require("./config/connection");
 const app = express();
+
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 const corseOptions={
   credentials:true,
-  optionSuccessStatus:200
+  optionSuccessStatus:200,
+  origin: ["https://admin.socket.io", "https://app.spaderent.com","https://admin.spaderent.com", "https://backend.app.spaderent.com"],
+  methods: ["GET", "POST","PUT","DELETE"],
 }
 app.use(cors(corseOptions));
+
+
 app.options("*",cors())
+
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
   res.header("Pragma", "no-cache");
@@ -25,4 +32,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 connect();
+
+// Remove the app.listen() block
+
 module.exports = app; // Export the app object
