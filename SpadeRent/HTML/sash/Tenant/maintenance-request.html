@@ -1403,7 +1403,7 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
                                                 <a href="javascript:void(0)">
-                                                    <strong>Filter by:</strong>
+                                                    <strong>Columns to show</strong>
                                                 </a>
                                             </li>
                                             <li class="d-flex justify-content-between">
@@ -2435,11 +2435,10 @@ $('#preloader').css('display','none');
                 }
                 if (data.ImageKey !== null) {
                     const images = data.ImageKey.split(",")
-                    $("#view-task-images").empty()
                     images.forEach((image) => {
                         if (image.endsWith(".pdf")) {
                             $("#view-task-images").append(
-                                $('<div>').addClass('file-preview d-inline')
+                                $(`<a href="${image}" class="text-dark" style="width: 100px;height: 115px !important;">`).addClass('file-preview d-inline-block')
                                     .append($('<i style="font-size:100px">').addClass('fi fi-rs-file-pdf'))
                             );
                         } else {
