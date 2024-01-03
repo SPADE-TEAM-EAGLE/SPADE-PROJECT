@@ -495,7 +495,7 @@
         var email = $("#login-email").val();
         var password = $("#id_password1").val();
         $.ajax({
-          url: "https://backend.app.spaderent.com/api/spade/Signin",
+          url: "http://localhost:3000/api/spade/Signin",
           type: "POST",
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify({
@@ -574,7 +574,7 @@ $('#preloader').css('display','none');
         $("#verify_otp_auth").on("click",function(){
           $("#verify_otp_auth").prop("disabled",true)
           $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyAuthCode',
+            url: 'http://localhost:3000/api/spade/verifyAuthCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -621,7 +621,7 @@ $('#preloader').css('display','none');
       $(document).on("click", "#save-email", () => {
         emailChange = true
         $.ajax({
-          url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
+          url: 'http://localhost:3000/api/spade/emailUpdate',
           type: 'PUT',
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify({
@@ -642,7 +642,7 @@ $('#preloader').css('display','none');
       })
       $("#send-email").on("click", () => {
         $.ajax({
-          url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+          url: 'http://localhost:3000/api/spade/resendCode',
           type: 'POST',
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify({
@@ -660,7 +660,7 @@ $('#preloader').css('display','none');
       })
       $("#verify-btn").on("click", () => {
         $.ajax({
-          url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+          url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
           type: 'PUT',
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify({

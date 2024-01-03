@@ -1755,7 +1755,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountTenant',
+                url: 'http://localhost:3000/api/spade/getMessagesCountTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1776,7 +1776,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantDashData',
+                url: 'http://localhost:3000/api/spade/getTenantDashData',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -1818,7 +1818,7 @@ $('#preloader').css('display','none');
         }
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protectedTenant',
+                url: 'http://localhost:3000/api/spade/protectedTenant',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1930,7 +1930,7 @@ $('#preloader').css('display','none');
 
         function getData() {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant',
+                url: 'http://localhost:3000/api/spade/getAllTaskTenant',
                 type: 'GET',
                 contentType: false,
                 processData: false,
@@ -2148,7 +2148,7 @@ $('#preloader').css('display','none');
                     formData.append('image', selectedFiles[i]);
                 }
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/uploadTenant',
+                    url: 'http://localhost:3000/api/spade/uploadTenant',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -2168,7 +2168,7 @@ $('#preloader').css('display','none');
                             images: imageArray,
                         }
                         $.ajax({
-                            url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                            url: 'http://localhost:3000/api/spade/addTasksTenant',
                             type: 'POST',
                             data: JSON.stringify(taskData),
                             contentType: 'application/json',
@@ -2215,7 +2215,7 @@ $('#preloader').css('display','none');
                     images: [],
                 }
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/addTasksTenant',
+                    url: 'http://localhost:3000/api/spade/addTasksTenant',
                     type: 'POST',
                     data: JSON.stringify(taskData),
                     contentType: 'application/json',
@@ -2451,7 +2451,7 @@ $('#preloader').css('display','none');
                 $("#viewModal-tasks").modal("show")
             })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantByID',
+                url: 'http://localhost:3000/api/spade/getTenantByID',
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
                 headers: {
@@ -2579,7 +2579,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveTenant',
+                    url: 'http://localhost:3000/api/spade/inactiveTenant',
                     type: 'PUT',
                     contentType: false,
                     processData: false,

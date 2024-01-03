@@ -1568,7 +1568,7 @@
 <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
+                url: 'http://localhost:3000/api/spade/getMessagesCountLandlord',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1625,7 +1625,7 @@ $('#preloader').css('display','none');
                 validateField($(this));
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/protected',
+                url: 'http://localhost:3000/api/spade/protected',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1678,7 +1678,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/ProfileComplete',
+                url: 'http://localhost:3000/api/spade/ProfileComplete',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1707,7 +1707,7 @@ $('#preloader').css('display','none');
             $("#send-invite").click(() => {
                 $('#preloader').css('display', 'flex')
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/sendInvitationLink',
+                    url: 'http://localhost:3000/api/spade/sendInvitationLink',
                     type: 'POST',
                     data: JSON.stringify({
                         tenantID: tenantId
@@ -1738,7 +1738,7 @@ $('#preloader').css('display','none');
             })
             // console.log(3464565455656546)
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1770,7 +1770,7 @@ $('#preloader').css('display','none');
             });
             function getData() {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/GettenantAttachEmailPhone',
+                    url: 'http://localhost:3000/api/spade/GettenantAttachEmailPhone',
                     type: 'GET',
                     data: {
                         tenantID: tenantId
@@ -1888,7 +1888,7 @@ $('#preloader').css('display','none');
                 formData.append("tenantID", tenantId);
                 // console.log(formData)
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/addAlternateEmailPhone",
+                    url: "http://localhost:3000/api/spade/addAlternateEmailPhone",
                     type: "POST",
                     data: JSON.stringify({
                         alternatePhone: phone,
@@ -1946,7 +1946,7 @@ $('#preloader').css('display','none');
         function logout() {
             $(document).ready(function () {
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/inactiveUser',
+                    url: 'http://localhost:3000/api/spade/inactiveUser',
                     type: 'PUT',
                     contentType: false,
                     processData: false,
