@@ -907,6 +907,8 @@
                                                 <span class="text">Thank You</span>
                                             </div>
                                         </div>
+                                        <span class="text-danger ms-2" id="field-span"></span>
+
                                         <div class="field">
                                             <input id="input-message" class="input-message" type="text"
                                                 placeholder="Type Message..." maxlength="255">
@@ -1274,12 +1276,17 @@
         <script src="../assets/js/pricing-plan.js"></script>
         <script>
             $(document).ready(function () {
+                $('#field-span').hide();
                 $('#input-message').on('input', function () {
                     var inputLength = $(this).val().length;
                     if (inputLength === 255) {
+                        $('#field-span').text("Max length is 255 characters");
+                        $('#field-span').show();
                         $(this).removeClass('border-green').addClass('border-red');
                         $(this).addClass('text-danger');
                     } else {
+                        $('#field-span').text("");
+                        $('#field-span').hide();
                         $(this).removeClass('border-red').addClass('border-green');
                         $(this).removeClass('text-danger');
                     }
@@ -1749,6 +1756,10 @@
                 }
             })
             function chatTenant(tenatId, tenatName, element) {
+                $('#input-message').val("")
+                $('#field-span').hide();
+                $('#input-message').removeClass("border-green").removeClass("border-red")
+                $('.send-file').css('right','13px')
                 $('#chatLoader').removeClass('d-none')
                 $('#chat').addClass('d-none')
                 fetchChatMessages()
