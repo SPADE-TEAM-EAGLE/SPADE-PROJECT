@@ -12,7 +12,9 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 const corseOptions={
   credentials:true,
-  optionSuccessStatus:200
+  optionSuccessStatus:200,
+  origin: ["https://admin.socket.io", "https://app.spaderent.com","https://admin.spaderent.com", "https://backend.app.spaderent.com"],
+  methods: ["GET", "POST","PUT","DELETE"],
 }
 app.use(cors(corseOptions));
 
@@ -34,4 +36,3 @@ connect();
 // Remove the app.listen() block
 
 module.exports = app; // Export the app object
-

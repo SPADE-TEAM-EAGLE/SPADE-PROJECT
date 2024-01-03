@@ -2151,9 +2151,14 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
                                 var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${(task.tfirstName+" "+task.tlastName)} - `;
                                 if (daysDiff > 0) {
-                                    taskName += `${daysDiff} days`;
+                                    if(daysDiff==1){
+                                        taskName += `${daysDiff} day`;
+                                    }else{
+                                        taskName += `${daysDiff} days`;
+                                    }
+                                    
                                 } else if (hoursDiff > 0) {
                                     taskName += `${hoursDiff} hours`;
                                 } else {

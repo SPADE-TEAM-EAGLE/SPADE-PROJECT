@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 const io1 = new Server(server, {
   cors: {
-    origin: ["https://admin.socket.io", "https://app.spaderent.com", "https://backend.app.spaderent.com"], // Allow requests from this origin
+    origin: "*", // Allow requests from this origin
     methods: ["GET", "POST"],
   },
 });
