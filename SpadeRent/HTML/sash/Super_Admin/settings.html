@@ -1363,7 +1363,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-phone.js"></script>
     <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -1375,12 +1375,13 @@
         $(document).ready(function () {
             function getData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        adminData=response;
                         if(response.userPeremission.length > 0){
                         const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function (element) {
@@ -1451,7 +1452,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1491,7 +1492,7 @@ $('#preloader').css('display','none');
                 if (file) {
                     userForm.append("image", file)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: userForm,
                         headers: {
@@ -1504,7 +1505,7 @@ $('#preloader').css('display','none');
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                                url: 'http://localhost:3000/api/spade/updateAdminProfile',
                                 method: 'PUT',
                                 data: JSON.stringify(userData),
                                 contentType: 'application/json',
@@ -1535,7 +1536,7 @@ $('#preloader').css('display','none');
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                        url: 'http://localhost:3000/api/spade/updateAdminProfile',
                         method: 'PUT',
                         data: JSON.stringify(userData),
                         contentType: 'application/json',

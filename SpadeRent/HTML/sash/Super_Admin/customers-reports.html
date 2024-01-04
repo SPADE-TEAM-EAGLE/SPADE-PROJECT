@@ -1205,6 +1205,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <script src="../assets/js/charts.js"></script>
     <script>
+        var adminData;
         $(document).ready(function () {
             function toTitleCase(str) {
                 return str.replace(
@@ -1215,13 +1216,14 @@
                 );
             }
             $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
                   // console.log("ProtectedAdmin");
+                  adminData=response;
                     if (response.userPeremission.length > 0) {
                         $(document).ajaxStop(function () {
                             const permissionTypes = ["overView", "customers", "appearance", "profile", "closedAccount", "userManagement", "changePlan", "closeLandlord"];
@@ -1281,7 +1283,7 @@ $('#preloader').css('display','none');
             }
             function getActiveCustomer() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+                    url: "http://localhost:3000/api/spade/allLandlord",
                     type: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1407,7 +1409,7 @@ $('#preloader').css('display','none');
             var userAdminData;
             function getAllClosedLandlord() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allClosedLandlord",
+                    url: "http://localhost:3000/api/spade/allClosedLandlord",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {

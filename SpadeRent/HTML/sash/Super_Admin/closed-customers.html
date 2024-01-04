@@ -904,7 +904,7 @@
             }
 </script>
 <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -916,13 +916,14 @@
         $(document).ready(function () {
             function getData(){
                 $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                url: "http://localhost:3000/api/spade/protectedAdmin",
                 type: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                 },
                 success: function (response) {
                   // console.log(response);
+                  adminData=response;
                     if(response.userPeremission.length > 0){
                     $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -991,7 +992,7 @@ $('#preloader').css('display','none');
                 }
             })
             $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1024,7 +1025,7 @@ $('#preloader').css('display','none');
                     }
                 })
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                url: 'http://localhost:3000/api/spade/getStates',
                 method: 'GET',
                 success: function ({
                     data
@@ -1048,7 +1049,7 @@ $('#preloader').css('display','none');
             var userAdminData;
             function getAllClosedLandlord() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allClosedLandlord",
+                    url: "http://localhost:3000/api/spade/allClosedLandlord",
                     type: "GET",
                     contentType: 'application/json',
                     headers: {
@@ -1121,7 +1122,7 @@ $('#preloader').css('display','none');
                 $("#preloader").css("display", "flex")
                 var deleteUserId = $(this).attr('data-id');
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/deleteClossedLandlord",
+                    url: "http://localhost:3000/api/spade/deleteClossedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         id: deleteUserId

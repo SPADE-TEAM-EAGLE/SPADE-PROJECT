@@ -327,7 +327,7 @@
                                                         placeholder="Enter Email"
                                                     >
                                                     <span class="text-danger" style="display: none" id="email_span">
-                                                        Sorry! incorrect email
+                                                        Sorry! email not found
                           address
                                                     </span>
                                                 </div>
@@ -416,7 +416,7 @@ togglePassword1.addEventListener("click", function (e) {
       password: password
     };
     $.ajax({
-      url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
+      url: "http://localhost:3000/api/spade/signInAdmin",
           type: "POST",
           contentType: "application/json; charset=utf-8",
       data: JSON.stringify(requestData),
@@ -424,12 +424,15 @@ togglePassword1.addEventListener("click", function (e) {
         handleSignInResponse(response);
       },
       error: function (error) {
+        
         handleError(error);
       }
     });
   });
   function handleSignInResponse(response) {
     if (response.message == "SignIn Successful") {
+        $("#email_span").hide()
+        $("#pass_span").hide()
       $("#login-email").addClass("is-valid").removeClass("is-invalid")
             $("#id_password1").addClass("is-valid").removeClass("is-invalid")
             $("#myModal_success").modal("show");
@@ -450,11 +453,24 @@ togglePassword1.addEventListener("click", function (e) {
               $("#pass_span").show()
     }
   }
-  function handleError(error) {
-    $("#myModal_warning_connection").modal("show");
+  function handleError(error,xhr) {
+    console.log(error.responseJSON.message)
+    
+    if(error.responseJSON.message=="Admin is not found"){
+        $("#email_span").show()
+        $("#pass_span").hide()
+    }
+    else if(error.responseJSON.message=="Incorrect Password"){
+        $("#pass_span").show()
+        $("#email_span").hide()
+    }
+    else{
+        $("#myModal_warning_connection").modal("show");
     setTimeout(function () {
       $("#myModal_warning_connection").modal("hide");
     }, 2000);
+    }
+    
   // console.log(error);
   }
   if ($('body').hasClass('dark-mode')) {

@@ -902,7 +902,7 @@
     <script src="../assets/js/getNotificationAdmin.js"></script>
     <script src="../assets/js/charts.js"></script>
     <script>
-        var image_url = " "; var image_key = " "; var landlordId;
+        var image_url = " "; var image_key = " "; var landlordId;var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -922,13 +922,14 @@
 }            
 function getData(){
                 $.ajax({ 
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
                       // console.log(response);
+                      adminData=response;
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -997,7 +998,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/getAdminRevenue",
+                    url: "http://localhost:3000/api/spade/getAdminRevenue",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1030,7 +1031,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1050,7 +1051,7 @@ $('#preloader').css('display','none');
                     }
                 });
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/allLandlord",
+                    url: "http://localhost:3000/api/spade/allLandlord",
                     type: "GET",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("authtoken")
@@ -1135,7 +1136,7 @@ $('#preloader').css('display','none');
             $("#confirmDelete-user").on("click", function () {
                 $("#delete-user-admin").modal("hide")
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/closedLandlord",
+                    url: "http://localhost:3000/api/spade/closedLandlord",
                     type: "DELETE",
                     data: JSON.stringify({
                         landlordId: landlordId,

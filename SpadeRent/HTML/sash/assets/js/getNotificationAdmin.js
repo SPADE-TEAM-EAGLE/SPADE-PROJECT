@@ -21,7 +21,7 @@ function convertTimestamp(timestamp) {
 }
 function GetNotification(){
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/getAdminNotification",
+    url: "http://localhost:3000/api/spade/getAdminNotification",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -35,10 +35,16 @@ function GetNotification(){
         "3":"Yearly-Pro",
         "4":"Yearly-Premium",
       }
-    // console.log(response);
-      const notification = response.Notification
-      const unread = notification.filter((item) => item.readNotification == 0);
-      const read = notification.filter((item) => item.readNotification == 1);
+      const adminCreatedDate = new Date(adminData?.AdminCreatedDate);
+
+      const notification = response?.Notification?.filter((item) => {
+        return new Date(item?.c_dTime) > adminCreatedDate;
+      });
+      
+
+
+      const unread = notification?.filter((item) => item.readNotification == 0);
+      const read = notification?.filter((item) => item.readNotification == 1);
     // console.log(unread, "unread");
     // console.log(read, "read");
     // console.log(notification, "all");
@@ -165,7 +171,7 @@ $("#updateAllNotifyRead").on("click", function () {
 function updateAllNotifyRead() {
   GetNotification()
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAllAdminNotification",
+    url: "http://localhost:3000/api/spade/updateAllAdminNotification",
     type: "PUT",
     contentType: "application/json",
     headers: {
@@ -182,7 +188,7 @@ function updateAllNotifyRead() {
 function updateDataNotify(notificationId, type) {
 // console.log(notificationId, type);
   $.ajax({
-    url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
+    url: "http://localhost:3000/api/spade/updateAdminNotification",
     type: "PUT",
     data: JSON.stringify({
       id: notificationId,
