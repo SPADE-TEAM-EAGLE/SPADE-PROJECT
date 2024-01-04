@@ -1205,7 +1205,7 @@ GROUP BY
 tk.id
 `;
 exports.userAllTask = `
-SELECT *, ut.id as taskid, ut.status as taskStatus
+SELECT *, ut.id as taskid, ut.status as taskStatus, ut.created_at as taskCreatedAt
 FROM user_task AS ut
 LEFT JOIN property AS p ON p.id = ut.propertyId
 LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId

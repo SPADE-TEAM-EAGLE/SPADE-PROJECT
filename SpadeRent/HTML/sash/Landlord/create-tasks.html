@@ -2671,24 +2671,26 @@ $('#preloader').css('display','none');
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             function resetAccordions() {
-                $('#addModal input[type="text"]').val('');
-                $('#addModal input[type="date"]').val('');
-                $('#addModal select').prop('selectedIndex', 0);
-                $('#addModal textarea').val('');
-                $('#addModal input[type="checkbox"]').prop('checked', false);
+                $('#addModal input[type="text"],#addModal_task input[type="text"]').val('');
+                $('#addModal input[type="date"],#addModal_task input[type="date"]').val('');
+                $('#addModal select,#addModal_task select').prop('selectedIndex', 0);
+                $('#addModal textarea,#addModal_task textarea').val('');
+                $('#addModal input[type="checkbox"],#addModal_task input[type="checkbox"]').prop('checked', false);
                 $('.hide-select ul li').each(function () {
                     $(this).removeClass('selected')
                 })
-                $('#addModal .file-grid').empty();
-                $('#next').addClass("disabled");
+                $('#addModal .file-grid,#addModal_task .file-grid').empty();
+                $('#next,#next_task').addClass("disabled");
                 $('#draft').attr("disabled", "disabled");
                 $('.ms-choice span').text("")
                 $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
+                $('#addModal_task input[type="text"],#addModal_task input[type="date"],#addModal_task select,#addModal_task textarea,#addModal_task input[type="checkbox"]').removeClass('border-green border-danger')
             }
+
             $('#close,#top-close').on('click', function (e) {
                 // console.log(333)
                 e.preventDefault()
-                $("#addModal .select2-selection__rendered").empty()
+                $("#addModal .select2-selection__rendered,#addModal_task .select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles = []
                 $(".file-grid").empty()
@@ -3499,8 +3501,12 @@ $('#preloader').css('display','none');
                             ) : "Not Set") + '</td>';
 
                     }
-
-                    var createdDate = new Date(task.created_at);
+                    if(task.taskCreatedAt){
+                        var createdDate = new Date(task.taskCreatedAt);
+                    }else{
+                        var createdDate = new Date(task.created_at);
+                    }
+                    
                     var currentDate = new Date();
                     var timeDiff = Math.abs(currentDate - createdDate);
                     var minutesDiff = Math.floor(timeDiff / (1000 * 60));
