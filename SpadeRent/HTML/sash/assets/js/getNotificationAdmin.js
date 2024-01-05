@@ -35,10 +35,16 @@ function GetNotification(){
         "3":"Yearly-Pro",
         "4":"Yearly-Premium",
       }
-    // console.log(response);
-      const notification = response.Notification
-      const unread = notification.filter((item) => item.readNotification == 0);
-      const read = notification.filter((item) => item.readNotification == 1);
+      const adminCreatedDate = new Date(adminData?.AdminCreatedDate);
+
+      const notification = response?.Notification?.filter((item) => {
+        return new Date(item?.c_dTime) > adminCreatedDate;
+      });
+      
+
+
+      const unread = notification?.filter((item) => item.readNotification == 0);
+      const read = notification?.filter((item) => item.readNotification == 1);
     // console.log(unread, "unread");
     // console.log(read, "read");
     // console.log(notification, "all");

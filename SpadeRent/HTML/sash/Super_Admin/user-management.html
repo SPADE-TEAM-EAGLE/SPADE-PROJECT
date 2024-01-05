@@ -2932,6 +2932,7 @@
                 });
             }
             var userAdminData;
+            var adminData;
             var image_url = " "; var image_key = " ";
             function toTitleCase(str) {
                 return str.replace(
@@ -2950,6 +2951,7 @@
                     },
                     success: function (response) {
                       // console.log(response);
+                      adminData=response;
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];

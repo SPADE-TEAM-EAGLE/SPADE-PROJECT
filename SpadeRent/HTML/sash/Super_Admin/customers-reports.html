@@ -1205,6 +1205,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <script src="../assets/js/charts.js"></script>
     <script>
+        var adminData;
         $(document).ready(function () {
             function toTitleCase(str) {
                 return str.replace(
@@ -1222,6 +1223,7 @@
                 },
                 success: function (response) {
                   // console.log("ProtectedAdmin");
+                  adminData=response;
                     if (response.userPeremission.length > 0) {
                         $(document).ajaxStop(function () {
                             const permissionTypes = ["overView", "customers", "appearance", "profile", "closedAccount", "userManagement", "changePlan", "closeLandlord"];

@@ -1363,7 +1363,7 @@
     <script src="../assets/js/charts.js"></script>
     <script src="../assets/js/email-phone.js"></script>
     <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -1381,6 +1381,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                     },
                     success: function (response) {
+                        adminData=response;
                         if(response.userPeremission.length > 0){
                         const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
                         permissionTypes.forEach(function (element) {

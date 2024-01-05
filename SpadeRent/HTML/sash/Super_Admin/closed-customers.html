@@ -904,7 +904,7 @@
             }
 </script>
 <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -923,6 +923,7 @@
                 },
                 success: function (response) {
                   // console.log(response);
+                  adminData=response;
                     if(response.userPeremission.length > 0){
                     $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
