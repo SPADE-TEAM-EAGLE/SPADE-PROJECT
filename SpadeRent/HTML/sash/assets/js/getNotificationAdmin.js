@@ -21,7 +21,7 @@ function convertTimestamp(timestamp) {
 }
 function GetNotification(){
   $.ajax({
-    url: "http://localhost:3000/api/spade/getAdminNotification",
+    url: "https://backend.app.spaderent.com/api/spade/getAdminNotification",
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("authtoken"),
@@ -171,7 +171,7 @@ $("#updateAllNotifyRead").on("click", function () {
 function updateAllNotifyRead() {
   GetNotification()
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAllAdminNotification",
+    url: "https://backend.app.spaderent.com/api/spade/updateAllAdminNotification",
     type: "PUT",
     contentType: "application/json",
     headers: {
@@ -188,7 +188,7 @@ function updateAllNotifyRead() {
 function updateDataNotify(notificationId, type) {
 // console.log(notificationId, type);
   $.ajax({
-    url: "http://localhost:3000/api/spade/updateAdminNotification",
+    url: "https://backend.app.spaderent.com/api/spade/updateAdminNotification",
     type: "PUT",
     data: JSON.stringify({
       id: notificationId,
