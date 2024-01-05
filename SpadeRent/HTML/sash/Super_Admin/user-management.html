@@ -29,7 +29,7 @@
             window.location = "./login_module.html"
         }
     </script>
-    <script language="JavaScript">
+    <!-- <script language="JavaScript">
         function suppressJSError() {
             return true;
         }
@@ -40,7 +40,7 @@
     
         window.onerror = suppressJSError;
         window.console.warn = suppressJSWarn;
-    </script>
+    </script> -->
     <link rel="stylesheet" href="../assets/pageCss/superCss/user-management.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
@@ -2792,12 +2792,13 @@
         }) 
     </script>
     <script>
-        $(document).ready(function () {
-            var selectedFiles = [];
-            var userAdminData;
+        var selectedFiles = [];
+            var userAdminData;var adminData;
             var states;
             var UsersRoles;
             var UsersRolesId = 2;
+        $(document).ready(function () {
+            
             $(".card-color").on("click",function(){
                 $(".card-color").removeClass("active")
                 $(this).addClass("active")  
@@ -2931,8 +2932,8 @@
                     }
                 });
             }
-            var userAdminData;
-            var adminData;
+            
+            
             var image_url = " "; var image_key = " ";
             function toTitleCase(str) {
                 return str.replace(

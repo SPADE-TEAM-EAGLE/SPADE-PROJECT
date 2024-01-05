@@ -239,6 +239,8 @@ exports.addTasksTenant = async (req, res) => {
         
         taskId = `SR-${idPattern}-TMREQ-0001`;
       }
+      // const tenantTaskID=taskId;
+      // console.log(tenantTaskID)
       // ######################### task ID ################################
       const TasksResult = await queryRunner(addTasksQuerytenant, [
         task,
@@ -261,7 +263,7 @@ exports.addTasksTenant = async (req, res) => {
       const taskCountIdResult = await queryRunner(taskCountIdTenant , [userId]);
       let customTaskId = taskCountIdResult[0][0].count + 1;
       customTaskId = task+customTaskId;
-      const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
+      // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
       if(images){ 
       for (let i = 0; i < images.length; i++) {
         const { image_url } = images[i];
