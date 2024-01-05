@@ -17,7 +17,7 @@ $("#units").on("input",function(){
 $("#units").val(199);}})
 
 $.ajax({
-    url: 'https://backend.app.spaderent.com/api/spade/protected',
+    url: 'http://localhost:3000/api/spade/protected',
     method: 'GET',
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -203,7 +203,7 @@ fileElement
 }
 $(document).ready(function () {
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/getStates',
+        url: 'http://localhost:3000/api/spade/getStates',
         method: 'GET',
         success: function({data}) {
           // console.log(data)
@@ -346,7 +346,7 @@ $(document).on('click', '#next', function(e) {
 // $("#addModal").modal("hide")
 $('#preloader').css('display','flex')
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/upload',
+            url: 'http://localhost:3000/api/spade/upload',
             type: 'POST',
             data: uploadFormData,
             contentType: false,
@@ -368,7 +368,7 @@ $('#preloader').css('display','flex')
                     images: imageArray
                 };
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/property',
+                    url: 'http://localhost:3000/api/spade/property',
                     type: 'POST',
                     data: JSON.stringify(propertyData),
                     contentType: 'application/json',
@@ -443,7 +443,7 @@ $('#preloader').css('display','none');
         // $("#addModal").modal("hide")
         $('#preloader').css('display','flex')
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/property',
+            url: 'http://localhost:3000/api/spade/property',
             type: 'POST',
             data: JSON.stringify(propertyData),
             contentType: 'application/json',

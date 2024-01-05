@@ -14,7 +14,7 @@ var password_varify_match = /^(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9\W]{8,}$/;
         }
 $(document).ready(function () {
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/protected',
+        url: 'http://localhost:3000/api/spade/protected',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
     });
     $.ajax({
-        url: 'https://backend.app.spaderent.com/api/spade/verifyMailCheck',
+        url: 'http://localhost:3000/api/spade/verifyMailCheck',
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -101,7 +101,7 @@ $(document).ready(function () {
         }
         else{
             $.ajax({
-                url: "https://backend.app.spaderent.com/api/spade/checkemail",
+                url: "http://localhost:3000/api/spade/checkemail",
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 data: {
@@ -129,7 +129,7 @@ $('#preloader').css('display','none');
     $(document).on("click", "#save-email", () => {
         emailChange = true
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/emailUpdate',
+            url: 'http://localhost:3000/api/spade/emailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -149,7 +149,7 @@ $('#preloader').css('display','none');
     })
     $("#send-email").on("click", () => {
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/resendCode',
+            url: 'http://localhost:3000/api/spade/resendCode',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
@@ -166,7 +166,7 @@ $('#preloader').css('display','none');
     })
     $("#verify-btn").on("click", () => {
         $.ajax({
-            url: 'https://backend.app.spaderent.com/api/spade/verifyEmailUpdate',
+            url: 'http://localhost:3000/api/spade/verifyEmailUpdate',
             type: 'PUT',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

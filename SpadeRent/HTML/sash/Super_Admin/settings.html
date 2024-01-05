@@ -1375,7 +1375,7 @@
         $(document).ready(function () {
             function getData() {
                 $.ajax({
-                    url: "https://backend.app.spaderent.com/api/spade/protectedAdmin",
+                    url: "http://localhost:3000/api/spade/protectedAdmin",
                     type: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
@@ -1451,7 +1451,7 @@ $('#preloader').css('display','none');
                     }
                 })
                 $.ajax({
-                    url: 'https://backend.app.spaderent.com/api/spade/getStates',
+                    url: 'http://localhost:3000/api/spade/getStates',
                     method: 'GET',
                     success: function ({
                         data
@@ -1491,7 +1491,7 @@ $('#preloader').css('display','none');
                 if (file) {
                     userForm.append("image", file)
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/uploadAdmin',
+                        url: 'http://localhost:3000/api/spade/uploadAdmin',
                         type: 'POST',
                         data: userForm,
                         headers: {
@@ -1504,7 +1504,7 @@ $('#preloader').css('display','none');
                             userData.imageUrl = response.images[0].image_url
                             userData.imageKey = response.images[0].image_key
                             $.ajax({
-                                url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                                url: 'http://localhost:3000/api/spade/updateAdminProfile',
                                 method: 'PUT',
                                 data: JSON.stringify(userData),
                                 contentType: 'application/json',
@@ -1535,7 +1535,7 @@ $('#preloader').css('display','none');
                     });
                 } else {
                     $.ajax({
-                        url: 'https://backend.app.spaderent.com/api/spade/updateAdminProfile',
+                        url: 'http://localhost:3000/api/spade/updateAdminProfile',
                         method: 'PUT',
                         data: JSON.stringify(userData),
                         contentType: 'application/json',
