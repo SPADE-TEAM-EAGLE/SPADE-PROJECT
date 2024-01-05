@@ -19,11 +19,15 @@ $(document).ready(function () {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
         },
-        success: function ({ userName, email, userId, image }) {
+        success: function ({ userName, email, userId, image,role }) {
             function toTitleCase(str) {
                 return str.replace(/\w\S*/g, function (txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
+            }
+            if(role){
+                $("#account-text").addClass("d-none")
+                $("#email_verification").remove()
             }
             if(image!==" " && image!==null && image!== ""){
                 $("#user-img").attr("src", image)

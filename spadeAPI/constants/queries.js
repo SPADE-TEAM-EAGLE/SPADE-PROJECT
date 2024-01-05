@@ -578,6 +578,8 @@ exports.insertNotify =
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
+  exports.addUserResetToken =
+  "UPDATE userPUsers SET UToken = ?, UUpdated_at = ? where UEmail = ?";
 exports.addResetTokenAdmin =
   "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
 exports.addResetTokenTenant =
@@ -838,6 +840,7 @@ tk.id,
 tk.taskName,
 tk.dueDate,
 tk.status,
+tk.cTaskId,
 tk.priority,
 tk.notes,
 tk.createdBy,

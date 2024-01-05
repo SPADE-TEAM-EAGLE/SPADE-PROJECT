@@ -2756,24 +2756,30 @@ $('#preloader').css('display','none');
                 $("#unit").append($('<option></option>').text(tenants.unitNumber).val(tenants.propertyUnitID))
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
-                if (tenants.gross_or_triple_lease === "Triple Net Lease") {
-                    $("#collapse1").addClass('show')
-                    $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
-                    $('#baseRent').prop('required', true);
-                    $('#tripleNet').prop('required', true);
+                $("#leaseStart").val(tenants?.leaseStartDate)
+                    $("#leaseEnd").val(tenants?.leaseEndDate)
+                    $("#baseRent").val(tenants?.baseRent)
+                    $("#tripleNet").val(tenants?.tripleNet)
                     $('#leaseStart').prop('required', true);
                     $('#leaseEnd').prop('required', true);
-                    $("#baseRent").val(tenants.baseRent)
-                    $("#tripleNet").val(tenants.tripleNet)
-                    $("#leaseStart").val(tenants.leaseStartDate)
-                    $("#leaseEnd").val(tenants.leaseEndDate)
+                if (tenants.gross_or_triple_lease === "Triple Net Lease") {
+                    // $("#collapse1").addClass('show')
+                    $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
+                    // $('#baseRent').prop('required', true);
+                    // $('#tripleNet').prop('required', true);
+                    // $('#leaseStart').prop('required', true);
+                    // $('#leaseEnd').prop('required', true);
+                    // $("#baseRent").val(tenants.baseRent)
+                    // $("#tripleNet").val(tenants.tripleNet)
+                    // $("#leaseStart").val(tenants.leaseStartDate)
+                    // $("#leaseEnd").val(tenants.leaseEndDate)
                 } else {
-                    $("#collapse3").addClass('show')
+                    // $("#collapse3").addClass('show')
                     $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
-                    $('#leaseStart2').prop('required', true);
-                    $('#leaseEnd2').prop('required', true);
-                    $("#leaseStart2").val(tenants.leaseStartDate)
-                    $("#leaseEnd2").val(tenants.leaseEndDate)
+                    // $('#leaseStart2').prop('required', true);
+                    // $('#leaseEnd2').prop('required', true);
+                    // $("#leaseStart2").val(tenants.leaseStartDate)
+                    // $("#leaseEnd2").val(tenants.leaseEndDate)
                 }
                 if (tenants.increaseRent === "yes") {
                     $("#collapse2").addClass('show')
@@ -2797,6 +2803,7 @@ $('#preloader').css('display','none');
                     })
                 } else {
                     $('input[name="yesno"][value="no"]').prop("checked", true);
+                    $("#collapse2").addClass('hide')
                 }
             })
             $("#submit").on("click", () => {

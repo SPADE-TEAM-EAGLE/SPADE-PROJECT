@@ -427,7 +427,7 @@
                                                                     value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between">
+                                                        <!-- <li class="d-flex justify-content-between">
                                                             <a href="javascript:void(0)" style="cursor: context-menu;"
                                                                 class="text-dark">
                                                                 Recently
@@ -437,7 +437,7 @@
                                                                 <input class="form-check-input mt-2" id="created-at"
                                                                     type="radio" name="exampleRadios" value="option1">
                                                             </div>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1227,10 +1227,15 @@ $('#preloader').css('display','none');
                     return textA.localeCompare(textB);
                 });
             } else if (selectedFilter === 'created-at') {
+            // console.log("helo")
+
                 rows.sort(function (a, b) {
+                // console.log($(a).find('.purchase-date').text().split("Purchase Date: ")[1],$(b).find('.purchase-date').text().split("Purchase Date: ")[1])
+
                     var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
                   // console.log(idA)
                     var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
+                    console.log(idB-idA)
                     return idB - idA;
                 });
             }
