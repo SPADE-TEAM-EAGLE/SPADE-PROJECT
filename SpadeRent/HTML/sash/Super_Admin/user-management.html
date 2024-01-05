@@ -2792,12 +2792,13 @@
         }) 
     </script>
     <script>
+        var selectedFiles = [];
+        var adminData;
+        var userAdminData;
+        var states;
+        var UsersRoles;
+        var UsersRolesId = 2;
         $(document).ready(function () {
-            var selectedFiles = [];
-            var userAdminData;
-            var states;
-            var UsersRoles;
-            var UsersRolesId = 2;
             $(".card-color").on("click",function(){
                 $(".card-color").removeClass("active")
                 $(this).addClass("active")  
@@ -2932,7 +2933,6 @@
                 });
             }
             var userAdminData;
-            var adminData;
             var image_url = " "; var image_key = " ";
             function toTitleCase(str) {
                 return str.replace(

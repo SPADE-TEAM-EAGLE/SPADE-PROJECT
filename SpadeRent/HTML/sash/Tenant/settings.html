@@ -3117,6 +3117,7 @@ $('#preloader').css('display','none');
                     });
                 })
                 $(document).on("click", "#save_profile", () => {
+                    $('#preloader').css('display','flex');
                     let userData = {
                         firstName: $("#firstName").val(),
                         lastName: $("#lastName").val(),
@@ -3156,6 +3157,7 @@ $('#preloader').css('display','none');
                                         'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                                     },
                                     success: function (response) {
+                                        $('#preloader').css('display','none');
                                         $("#myModal_success p").text("Succesfully Updated!!!")
                                         $("#myModal_success").modal("show")
                                         profileComplete();
@@ -3185,6 +3187,7 @@ $('#preloader').css('display','none');
                                 'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
                             },
                             success: function (response) {
+                                $('#preloader').css('display','none');
                                 profileComplete();
                                 $("#myModal_success p").text("Succesfully Updated!!!")
                                 $("#myModal_success").modal("show")
