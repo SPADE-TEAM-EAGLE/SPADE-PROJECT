@@ -25,6 +25,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
     <link rel="stylesheet" href="../assets/css/walkthrough-demo.css">
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css">
+    <script language="JavaScript">
+        function suppressJSError() {
+            return true;
+        }
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
+        
     <script>
         if (!localStorage.getItem("authtoken")) {
             window.location = "../Tenant/login_module.html"
@@ -1417,7 +1430,7 @@
     <script src="../assets/plugins/peitychart/jquery.peity.min.js"></script>
     <script src="../assets/plugins/peitychart/peitychart.init.js"></script>
     <script src="../assets/plugins/sidebar/sidebar.js"></script>
-    <script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+
     <script src="../assets/plugins/p-scroll/pscroll.js"></script>
     <script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
     <script src="../assets/plugins/chart/Chart.bundle.js"></script>
@@ -1573,6 +1586,18 @@ $('#preloader').css('display','none');
                   // console.log('Error: ' + error);
                 }
             });
+            function DateFormatter(date) {
+    var getDate = new Date(date);
+    
+    // Extract month, day, and year
+    var month = ('0' + (getDate.getMonth() + 1)).slice(-2); // Adding 1 to month since months are zero-based
+    var day = ('0' + getDate.getDate()).slice(-2);
+    var year = getDate.getFullYear();
+
+    // Format as MM-DD-YYYY
+    return month + '-' + day + '-' + year;
+}
+
             function updateTable(tabId) {
                 var tableBody = $('#' + tabId + ' tbody');
                 var apiUrl = 'https://backend.app.spaderent.com/api/spade/getAllTaskTenant'; // Replace with your API endpoint URL
@@ -1690,7 +1715,7 @@ $('#preloader').css('display','none');
                                     priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
                                 }
                                 var dueDate = '<td class="property-id " style="font-weight: 600;">' +
-                                    '<p style="font-weight: 600;" class="mb-1">' + (task.dueDate || 'Not Set') + '</p>' +
+                                    '<p style="font-weight: 600;" class="mb-1">' + (DateFormatter(task.dueDate) != "aN-aN-NaN"  ? DateFormatter(task.dueDate) : 'Not Set') + '</p>' +
                                     '<span class="font-weight-normal ' + priorityClass + '">' + priorityIcon + task.priority + '</span>' +
                                     '</td>';
                                 var status = '<td class="task-id" style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + toTitleCase(task.status) + '</p>' + '</tr>';

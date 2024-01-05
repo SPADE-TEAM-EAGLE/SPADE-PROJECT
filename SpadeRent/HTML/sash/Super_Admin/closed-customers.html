@@ -33,6 +33,18 @@
             window.location = "./login_module.html"
         }
         </script>
+        <script language="JavaScript">
+            function suppressJSError() {
+                return true;
+            }
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
         <link rel="stylesheet" href="../assets/pageCss/superCss/closed-customers.css">
     </head>
     <body class="app sidebar-mini ltr light-mode">
@@ -444,7 +456,7 @@
                                                             <li class="d-flex justify-content-between">
                                                                 <a href="javascript:void(0)" style="cursor: context-menu;" class="text-dark">
                                                                     Recently
-                                                            Added
+                                                            Deleted
                                                                 </a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -504,7 +516,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
-                                                                <a class="text-dark" href="javascript:void(0)">CONTACT INFORMATION</a>
+                                                                <a class="text-dark" href="javascript:void(0)">CONTACT</a>
                                                                 <div class="form-check m-0">
                                                                     <input
                                                                         type="checkbox"
@@ -548,7 +560,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
-                                                                <a class="text-dark" href="javascript:void(0)">ClOSURE DATE</a>
+                                                                <a class="text-dark" href="javascript:void(0)">CLOSURE DATE</a>
                                                                 <div class="form-check m-0">
                                                                     <input
                                                                         type="checkbox"
@@ -892,7 +904,7 @@
             }
 </script>
 <script>
-        var image_url = " "; var image_key = " ";
+        var image_url = " "; var image_key = " ";var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -911,6 +923,7 @@
                 },
                 success: function (response) {
                   // console.log(response);
+                  adminData=response;
                     if(response.userPeremission.length > 0){
                     $(document).ajaxStop(function(){
                     const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -1065,7 +1078,7 @@ $('#preloader').css('display','none');
                                                         <td class="propertyType"><a class="like" href="javascript:;"><span class="badge btn rounded-pill-Multi-Family rounded-pill py-2 px-3" ${ColorOfPlan}><i class="fi fi-rs-dot-circle me-1"></i><b>${element.planName ? element.planName : "N/A"} Plan Purchased</b></span></a></td>
                                                         <td class="propertyAddress"><p style="font-weight: 600;" class="mb-1"><b>$${element.plantotalAmount ? element.plantotalAmount : "N/A"}/ ${element.duration ? element.duration : "N/A"}</b></p><span class='purchase-date'>Purchase Date: ${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</span></td>
                                                         <td style="font-weight: 600;">${element.landlordCreatedDate ? (element.landlordCreatedDate.split('T')[0].split('-')[1] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[2] + "/" + element.landlordCreatedDate.split('T')[0].split('-')[0]) : "N/A"}</td>
-                                                        <td style="font-weight: 600;">${element.deleted_at ? (element.deleted_at.split('T')[0].split('-')[1] + "/" + element.deleted_at.split('T')[0].split('-')[2] + "/" + element.deleted_at.split('T')[0].split('-')[0]) : "N/A"}</td>
+                                                        <td style="font-weight: 600;" class="deleted-at">${element.deleted_at ? (element.deleted_at.split('T')[0].split('-')[1] + "/" + element.deleted_at.split('T')[0].split('-')[2] + "/" + element.deleted_at.split('T')[0].split('-')[0]) : "N/A"}</td>
                                                         <td style="font-weight: 600;"><p>${element.reason ? element.reason : "N/A"}</p></td>
                                                         <td class="permissionEdit_closeLandlord">
                                 <i class="fe fe-more-vertical" data-bs-toggle="dropdown" aria-expanded="true"></i>
@@ -1191,9 +1204,9 @@ if (selectedFilter === 'alphabets') {
     });
 } else if (selectedFilter === 'created-at') {
     rows.sort(function (a, b) {
-        var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        var idA = new Date($(a).find('.deleted-at').text());
       // console.log(idA)
-        var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
+        var idB = new Date($(b).find('.deleted-at').text());
         return idB - idA;
     });
 }

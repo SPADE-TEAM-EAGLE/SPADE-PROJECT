@@ -35,6 +35,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/create-invoicing.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 <body class="app sidebar-mini ltr light-mode">
     
@@ -160,7 +172,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="properties-all.html" style="color: white;">Property</a>
+                                    <a href="properties-all.html" style="color: white;">Properties</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -173,7 +185,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Properties</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Simplify property management.
@@ -189,7 +201,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="add-tenant.html" style="color: white;">Tenant</a>
+                                    <a href="add-tenant.html" style="color: white;">Tenants</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -202,7 +214,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenants</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly add new tenants with
@@ -218,7 +230,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="create-invoicing.html" style="color: white;">Invoice</a>
+                                    <a href="create-invoicing.html" style="color: white;">Invoices</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -231,7 +243,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoices</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly onboard new tenants
@@ -260,7 +272,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospects</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly generate and manage
@@ -305,7 +317,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="tasks-vendors.html" style="color: white;">Vendor</a>
+                                    <a href="tasks-vendors.html" style="color: white;">Vendors</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -1294,9 +1306,7 @@
                             <span class="text-danger d-none">Property name is required!</span>
                         </div>
                         <div class="col-md-8 col-lg-6">
-                            <label class="form-label fw-bold fs-18">Due Date
-                                <span class="text-danger"> *</span>
-                            </label>
+                            <label class="form-label fw-bold fs-18">Due Date (Optional)</label>
                             <input type="date" class="form-control form" id="dueDate_update" required>
                             <span class="text-danger d-none">Due Date is required!</span>
                         </div>
@@ -3678,7 +3688,7 @@ $('#preloader').css('display','none');
                         $("#menu").empty()
                         $("#tenants").append($('<option></option>').text("Choose..."));
                         response?.data[0]?.forEach(function (tenant) {
-                            console.log("dsijdijisdjijdijsidjis",tenant)
+                          // console.log("dsijdijisdjijdijsidjis",tenant)
                             var newItem = $('<div class="item" data-value="' + tenant.tenantID + '" id="tenants">');
                             newItem.html(`<div style="display: flex; gap: 1rem; align-items: center;" id="${tenant.tenantID}">` +
                                 '<img src="' + (tenant?.image?.split(",")[0] ? tenant.image.split(",")[0] : '../assets/images/icons/Group 34343434.png') + '" alt="" style="width: 65px; height: 65px;">' +
@@ -5039,7 +5049,7 @@ $('#preloader').css('display','none');
                 $("#dueDate_update").val(data.dueDate)
                 let sum = 0
                 $('#add-item-container1_update').empty()
-                console.log("fdsfsdmfsdfksdfd",data?.memo)
+              // console.log("fdsfsdmfsdfksdfd",data?.memo)
                 data.memo.forEach(({
                     memo,
                     category,

@@ -24,12 +24,13 @@ app.use((req, res, next) => {
   next();
 });
 
-const io = new Server(server, {
+const io1 = new Server(server, {
   cors: {
     origin: "*", // Allow requests from this origin
     methods: ["GET", "POST"],
   },
 });
+const io = io1.of("/message");
 app.use((req, res, next) => {
   req.io = io; // Attach io to the request object
   next();

@@ -30,6 +30,18 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <title>Spade Rent | Super Admin | Login</title>
+        <script language="JavaScript">
+            function suppressJSError() {
+                return true;
+            }
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
         <link rel="stylesheet" href="../assets/pageCss/superCss/login_module.css">
     </head>
     <body>
@@ -315,7 +327,7 @@
                                                         placeholder="Enter Email"
                                                     >
                                                     <span class="text-danger" style="display: none" id="email_span">
-                                                        Sorry! incorrect email
+                                                        Sorry! email not found
                           address
                                                     </span>
                                                 </div>
@@ -405,19 +417,22 @@ togglePassword1.addEventListener("click", function (e) {
     };
     $.ajax({
       url: "https://backend.app.spaderent.com/api/spade/signInAdmin",
-      type: "POST",
-      contentType: "application/json",
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
       data: JSON.stringify(requestData),
       success: function (response) {
         handleSignInResponse(response);
       },
       error: function (error) {
+        
         handleError(error);
       }
     });
   });
   function handleSignInResponse(response) {
     if (response.message == "SignIn Successful") {
+        $("#email_span").hide()
+        $("#pass_span").hide()
       $("#login-email").addClass("is-valid").removeClass("is-invalid")
             $("#id_password1").addClass("is-valid").removeClass("is-invalid")
             $("#myModal_success").modal("show");
@@ -438,11 +453,24 @@ togglePassword1.addEventListener("click", function (e) {
               $("#pass_span").show()
     }
   }
-  function handleError(error) {
-    $("#myModal_warning_connection").modal("show");
+  function handleError(error,xhr) {
+    console.log(error.responseJSON.message)
+    
+    if(error.responseJSON.message=="Admin is not found"){
+        $("#email_span").show()
+        $("#pass_span").hide()
+    }
+    else if(error.responseJSON.message=="Incorrect Password"){
+        $("#pass_span").show()
+        $("#email_span").hide()
+    }
+    else{
+        $("#myModal_warning_connection").modal("show");
     setTimeout(function () {
       $("#myModal_warning_connection").modal("hide");
     }, 2000);
+    }
+    
   // console.log(error);
   }
   if ($('body').hasClass('dark-mode')) {

@@ -578,6 +578,8 @@ exports.insertNotify =
 exports.updateNotify = "UPDATE notification SET emailNotification = ? , pushNotification = ?, textNotification = ? WHERE landlordID = ? ";
 exports.addResetToken =
   "UPDATE users SET token = ?, updated_at = ? where id = ?";
+  exports.addUserResetToken =
+  "UPDATE userPUsers SET UToken = ?, UUpdated_at = ? where UEmail = ?";
 exports.addResetTokenAdmin =
   "UPDATE superAdmin SET token = ?, updated_at = ? where id = ?";
 exports.addResetTokenTenant =
@@ -838,6 +840,7 @@ tk.id,
 tk.taskName,
 tk.dueDate,
 tk.status,
+tk.cTaskId,
 tk.priority,
 tk.notes,
 tk.createdBy,
@@ -1205,7 +1208,7 @@ GROUP BY
 tk.id
 `;
 exports.userAllTask = `
-SELECT *, ut.id as taskid, ut.status as taskStatus
+SELECT *, ut.id as taskid, ut.status as taskStatus, ut.created_at as taskCreatedAt
 FROM user_task AS ut
 LEFT JOIN property AS p ON p.id = ut.propertyId
 LEFT JOIN propertyunits AS pu ON pu.id = ut.PropertyUnitId

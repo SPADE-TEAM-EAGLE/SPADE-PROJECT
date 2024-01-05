@@ -32,6 +32,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/create-tasks.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -271,7 +283,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="properties-all.html" style="color: white;">Property</a>
+                                    <a href="properties-all.html" style="color: white;">Properties</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -284,7 +296,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Properties</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Simplify property management.
@@ -300,7 +312,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="add-tenant.html" style="color: white;">Tenant</a>
+                                    <a href="add-tenant.html" style="color: white;">Tenants</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -313,7 +325,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenants</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly add new tenants with
@@ -329,7 +341,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="create-invoicing.html" style="color: white;">Invoice</a>
+                                    <a href="create-invoicing.html" style="color: white;">Invoices</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -342,7 +354,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoices</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly onboard new tenants
@@ -371,7 +383,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospects</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly generate and manage
@@ -416,7 +428,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="tasks-vendors.html" style="color: white;">Vendor</a>
+                                    <a href="tasks-vendors.html" style="color: white;">Vendors</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -1669,7 +1681,7 @@
                                                                     fill="white" />
                                                             </svg>
                                                             <strong>
-                                                                Maintainance Request
+                                                                Maintenance Request
                                                             </strong>
                                                         </a>
                                                     </li>
@@ -2073,7 +2085,7 @@
             var selectedFilesContainer = $('.file-grid');
             selectedFilesContainer.empty();
             selectedFiles.forEach(function (file, index) {
-                console.log(file)
+              // console.log(file)
                 // console.log(selectedFiles.length)
                 // console.log(file)
                 var fileElement = $('<div>')
@@ -2659,24 +2671,26 @@ $('#preloader').css('display','none');
                 updateSelectedFilesContainer(); // Update the selected files container
             });
             function resetAccordions() {
-                $('#addModal input[type="text"]').val('');
-                $('#addModal input[type="date"]').val('');
-                $('#addModal select').prop('selectedIndex', 0);
-                $('#addModal textarea').val('');
-                $('#addModal input[type="checkbox"]').prop('checked', false);
+                $('#addModal input[type="text"],#addModal_task input[type="text"]').val('');
+                $('#addModal input[type="date"],#addModal_task input[type="date"]').val('');
+                $('#addModal select,#addModal_task select').prop('selectedIndex', 0);
+                $('#addModal textarea,#addModal_task textarea').val('');
+                $('#addModal input[type="checkbox"],#addModal_task input[type="checkbox"]').prop('checked', false);
                 $('.hide-select ul li').each(function () {
                     $(this).removeClass('selected')
                 })
-                $('#addModal .file-grid').empty();
-                $('#next').addClass("disabled");
+                $('#addModal .file-grid,#addModal_task .file-grid').empty();
+                $('#next,#next_task').addClass("disabled");
                 $('#draft').attr("disabled", "disabled");
                 $('.ms-choice span').text("")
                 $('#addModal input[type="text"],#addModal input[type="date"],#addModal select,#addModal textarea,#addModal input[type="checkbox"]').removeClass('border-green border-danger')
+                $('#addModal_task input[type="text"],#addModal_task input[type="date"],#addModal_task select,#addModal_task textarea,#addModal_task input[type="checkbox"]').removeClass('border-green border-danger')
             }
+
             $('#close,#top-close').on('click', function (e) {
                 // console.log(333)
                 e.preventDefault()
-                $("#addModal .select2-selection__rendered").empty()
+                $("#addModal .select2-selection__rendered,#addModal_task .select2-selection__rendered").empty()
                 resetAccordions()
                 selectedFiles = []
                 $(".file-grid").empty()
@@ -2820,7 +2834,7 @@ $('#preloader').css('display','none');
                 $('#preloader').css('display', 'flex')
                 var task = $("#task_task").val();
                 var assignee = []
-                console.log($("#assignee_task").val())
+              // console.log($("#assignee_task").val())
                 $("#assignee_task").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -2906,6 +2920,7 @@ $('#preloader').css('display','none');
                                         localStorage.setItem("task", "true")
                                     }
                                     selectedFiles=[]
+                                    window.location.reload();
                                 },
                                 error: function (xhr, status, error) {
 $('#preloader').css('display','none');
@@ -2960,6 +2975,7 @@ $('#preloader').css('display','none');
                                 $("#succesModal").modal("show")
                             }
                             selectedFiles=[]
+                            window.location.reload();
                         },
                         error: function (xhr, status, error) {
 $('#preloader').css('display','none');
@@ -3249,11 +3265,11 @@ $('#preloader').css('display','none');
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
                 var uri;
-                console.log(api)
+              // console.log(api)
                 if(api=="usertask"){
                     uri='https://backend.app.spaderent.com/api/spade/deleteUserTask'
                 }else if(api=="task"){
-                    console.log(api)
+                  // console.log(api)
                     uri='https://backend.app.spaderent.com/api/spade/deleteTask'
                 }
                 $('#myModal_delete').modal('hide');
@@ -3298,7 +3314,7 @@ $('#preloader').css('display','none');
                 var priority = $("#priority_update_task").val();
                 var status = $("#status_update_task").val();
                 var assignee = []
-                console.log($("#assignee_update_task").val())
+              // console.log($("#assignee_update_task").val())
                 $("#assignee_update_task").val()?.forEach((item) => {
     if (item) {
         let id = parseInt(item); // Assuming the numeric content is at the beginning of the string
@@ -3439,7 +3455,7 @@ $('#preloader').css('display','none');
             
             function updateTableWithData(data) {
                 // Clear existing data from the table
-                console.log(data)
+              // console.log(data)
                 var tableBody = $('#table_body');
                 tableBody.empty();
                 function toTitleCase(str) {
@@ -3487,8 +3503,12 @@ $('#preloader').css('display','none');
                             ) : "Not Set") + '</td>';
 
                     }
-
-                    var createdDate = new Date(task.created_at);
+                    if(task.taskCreatedAt){
+                        var createdDate = new Date(task.taskCreatedAt);
+                    }else{
+                        var createdDate = new Date(task.created_at);
+                    }
+                    
                     var currentDate = new Date();
                     var timeDiff = Math.abs(currentDate - createdDate);
                     var minutesDiff = Math.floor(timeDiff / (1000 * 60));
@@ -3552,8 +3572,13 @@ $('#preloader').css('display','none');
                     } else if (task.priority == 'Moderate') {
                         priorityIcon = '<i class="fi fi-rs-shield-exclamation me-1 text-warning"></i>'; // Set the class for moderate priority
                     }
+                    console.log(task.dueDate)
                     if (task.dueDate) {
-                        var targetDate = new Date(task.dueDate);
+                        if(task.dueDate=="Not Set" || task.dueDate==""){
+                            dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `Not Set` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+
+                        }else{
+                            var targetDate = new Date(task.dueDate);
                         var timeDiff = targetDate.getTime() - currentDate.getTime();
                         var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                         var year = targetDate.getFullYear().toString().slice(-2); // Extract last two digits of year
@@ -3561,6 +3586,8 @@ $('#preloader').css('display','none');
                         var day = targetDate.getDate().toString().padStart(2, '0'); // Add leading zero if necessary
                         var formattedDueDate = `${month}/${day}/${year}`;
                         dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${formattedDueDate ? formattedDueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
+
+                        }
                     } else {
                         dueDate = '<td class="due-at " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + `${task.dueDate ? task.dueDate : "Not Set"}` + '</p>' + `<span class="font-weight-normal ${priorityClass}">${priorityIcon}${task.priority}</span>` + '</td>';
                     }
@@ -3593,7 +3620,7 @@ $('#preloader').css('display','none');
                         selectedFiles = data.images
                     } else {
                     }
-                    console.log(data)
+                  // console.log(data)
                     updateSelectedFilesContainer()
                 $("#message_update_task").val(data.notes);
                 $("#dueDate_update_task").val(data.dueDate);
@@ -3602,7 +3629,7 @@ $('#preloader').css('display','none');
                 var propertyData=properties.find((property)=>{
                     return property.id==data.propertyId
                 })
-                console.log(propertyData)
+              // console.log(propertyData)
                 propertyData.occupiedUnits.forEach((unit)=>{
                     $("#unit_update_task").append($("<option></option>").text(unit.unitNumber).val(unit.id))
                 })
@@ -3634,7 +3661,7 @@ $('#preloader').css('display','none');
                         selectedFiles = data.taskImages
                     } else {
                     }
-                    console.log(data)
+                  // console.log(data)
 
                 updateSelectedFilesContainer()
                 $("#message").val(data.notes);
@@ -3659,10 +3686,10 @@ $('#preloader').css('display','none');
                 e.preventDefault(); // Prevent default anchor behavior
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 const taskType=$(this).closest("tr").find(".serial-number").next().text();
-                console.log(taskType.includes("MREQ"))
+              // console.log(taskType.includes("MREQ"))
                 if(taskType.includes("MREQ")){
                     api="task"
-                    console.log(taskType.includes("TASK"))
+                  // console.log(taskType.includes("TASK"))
                 }else if(taskType.includes("TASK")){
                     api="usertask"
                 }else{
@@ -4028,7 +4055,7 @@ $('#preloader').css('display','none');
                 //                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 //                                 taskId = taskIdElement.attr("id")
                 //                                 const data = response.data.find(obj => obj.taskid.toString() == taskId);
-                //                                 console.log(data)
+                //                               // console.log(data)
                 //                                 // console.log(taskId)
                 //                                 if (data.images) {
                 //                                     selectedFiles = data.images

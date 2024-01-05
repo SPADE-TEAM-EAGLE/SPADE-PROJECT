@@ -21,6 +21,18 @@
         <link href="../assets/css/responsive2.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Berkshire+Swash&family=Great+Vibes&family=Inter&family=Tilt+Prism&display=swap" rel="stylesheet">
         <title>Trial-Expired - SpadeRent</title>
+        <script language="JavaScript">
+            function suppressJSError() {
+                return true;
+            }
+            
+            function suppressJSWarn() {
+                return true;
+            }
+        
+            window.onerror = suppressJSError;
+            window.console.warn = suppressJSWarn;
+        </script>
         <link rel="stylesheet" href="../assets/pageCss/superCss/update-plan.css">
     </head>
     <body>
@@ -1954,7 +1966,7 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                 <script>
-        var userData;var selectedPlanID;
+        var userData;var selectedPlanID;var adminData;
         $(document).ready(function () {
             const encryptedUserId = decodeURIComponent((new URL(document.location)).searchParams.get("user"));
 var password = 'your-secret-password';
@@ -2060,6 +2072,7 @@ $('#preloader').css('display','none');
                 },
                 success: function (response) {
                     $('#businessImg_col').empty()
+                    adminData=response;
                     selectedFiles = []
                     if (response.businessLogo) {
                         var imgElement = $("<img>");

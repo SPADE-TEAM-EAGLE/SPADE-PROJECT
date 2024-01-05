@@ -29,6 +29,18 @@
             window.location = "./login_module.html"
         }
     </script>
+    <script language="JavaScript">
+        function suppressJSError() {
+            return true;
+        }
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
     <link rel="stylesheet" href="../assets/pageCss/superCss/Customers.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
@@ -415,7 +427,7 @@
                                                                     value="option1">
                                                             </div>
                                                         </li>
-                                                        <li class="d-flex justify-content-between">
+                                                        <!-- <li class="d-flex justify-content-between">
                                                             <a href="javascript:void(0)" style="cursor: context-menu;"
                                                                 class="text-dark">
                                                                 Recently
@@ -425,7 +437,7 @@
                                                                 <input class="form-check-input mt-2" id="created-at"
                                                                     type="radio" name="exampleRadios" value="option1">
                                                             </div>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -463,8 +475,7 @@
                                                             </div>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
-                                                            <a class="text-dark" href="javascript:void(0)">CONTACT
-                                                                INFORMATION</a>
+                                                            <a class="text-dark" href="javascript:void(0)">CONTACT</a>
                                                             <div class="form-check m-0">
                                                                 <input type="checkbox" class="form-check-input mt-2"
                                                                     id="exampleCheck1" checked>
@@ -891,7 +902,7 @@
     <script src="../assets/js/getNotificationAdmin.js"></script>
     <script src="../assets/js/charts.js"></script>
     <script>
-        var image_url = " "; var image_key = " "; var landlordId;
+        var image_url = " "; var image_key = " "; var landlordId;var adminData;
         function toTitleCase(str) {
             return str.replace(
                 /\w\S*/g,
@@ -918,6 +929,7 @@ function getData(){
                     },
                     success: function (response) {
                       // console.log(response);
+                      adminData=response;
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
@@ -1215,10 +1227,15 @@ $('#preloader').css('display','none');
                     return textA.localeCompare(textB);
                 });
             } else if (selectedFilter === 'created-at') {
+            // console.log("helo")
+
                 rows.sort(function (a, b) {
+                // console.log($(a).find('.purchase-date').text().split("Purchase Date: ")[1],$(b).find('.purchase-date').text().split("Purchase Date: ")[1])
+
                     var idA = new Date($(a).find('.purchase-date').text().split("Purchase Date: ")[1]);
                   // console.log(idA)
                     var idB = new Date($(b).find('.purchase-date').text().split("Purchase Date: ")[1]);
+                    console.log(idB-idA)
                     return idB - idA;
                 });
             }

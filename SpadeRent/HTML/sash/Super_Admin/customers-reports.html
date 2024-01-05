@@ -29,6 +29,18 @@
             window.location = "./login_module.html"
         }
     </script>
+    <script language="JavaScript">
+        function suppressJSError() {
+            return true;
+        }
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
         <link rel="stylesheet" href="../assets/pageCss/superCss/customers-reports.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
@@ -1193,6 +1205,7 @@
     <script src="../assets/plugins/chart/utils.js"></script>
     <script src="../assets/js/charts.js"></script>
     <script>
+        var adminData;
         $(document).ready(function () {
             function toTitleCase(str) {
                 return str.replace(
@@ -1210,6 +1223,7 @@
                 },
                 success: function (response) {
                   // console.log("ProtectedAdmin");
+                  adminData=response;
                     if (response.userPeremission.length > 0) {
                         $(document).ajaxStop(function () {
                             const permissionTypes = ["overView", "customers", "appearance", "profile", "closedAccount", "userManagement", "changePlan", "closeLandlord"];

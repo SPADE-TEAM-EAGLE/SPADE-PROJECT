@@ -30,7 +30,19 @@
             }
         </script>
        <link rel="stylesheet" href="../assets/pageCss/landlordCss/tasks-requests.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body class="app sidebar-mini ltr light-mode">
         <div
             class="modal fade"
@@ -381,7 +393,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="properties-all.html" style="color: white;">Property</a>
+                                        <a href="properties-all.html" style="color: white;">Properties</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -393,7 +405,7 @@
                                         </div>
                                         <div class="main-chat-msg-name">
                                             <a href="properties-all.html">
-                                                <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                                <h5 class="mb-1 text-dark fw-bold">Create New Properties</h5>
                                             </a>
                                             <p class="text-default mt-0 mb-0 pt-0 fs-13">Simplify property management. Effortlessly create and manage rental properties with our software, making life easier for landlords and property managers.</p>
                                         </div>
@@ -405,7 +417,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="add-tenant.html" style="color: white;">Tenant</a>
+                                        <a href="add-tenant.html" style="color: white;">Tenants</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -417,7 +429,7 @@
                                         </div>
                                         <div class="main-chat-msg-name">
                                             <a href="add-tenant.html">
-                                                <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                                <h5 class="mb-1 text-dark fw-bold">Create New Tenants</h5>
                                             </a>
                                             <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly add new tenants with our rental software, streamlining the tenant onboarding process for property managers and landlords.</p>
                                         </div>
@@ -429,7 +441,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="create-invoicing.html" style="color: white;">Invoice</a>
+                                        <a href="create-invoicing.html" style="color: white;">Invoices</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -441,7 +453,7 @@
                                         </div>
                                         <div class="main-chat-msg-name">
                                             <a href="create-invoicing.html">
-                                                <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                                <h5 class="mb-1 text-dark fw-bold">Create New Invoices</h5>
                                             </a>
                                             <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly onboard new tenants with our user-friendly rental software, streamlining the tenant registration process for property managers and landlords.</p>
                                         </div>
@@ -465,7 +477,7 @@
                                         </div>
                                         <div class="main-chat-msg-name">
                                             <a href="prospects.html">
-                                                <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
+                                                <h5 class="mb-1 text-dark fw-bold">Create New Prospects</h5>
                                             </a>
                                             <p class="text-default mt-0 mb-0 pt-0 fs-13">Effortlessly generate and manage leads with our property rental software, making it easier for landlords to find potential tenants.</p>
                                         </div>
@@ -501,7 +513,7 @@
                             <div class="card h-100">
                                 <div class="card-header" style="background-color: #1467B0;color: white;">
                                     <div class="card-title fw-bold">
-                                        <a href="tasks-vendors.html" style="color: white;">Vendor</a>
+                                        <a href="tasks-vendors.html" style="color: white;">Vendors</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -2139,9 +2151,14 @@ if(task?.taskImages[0]?.imageKey?.includes('pdf')){
                                 var hoursDiff = Math.floor(minutesDiff / 60);
                                 var daysDiff = Math.floor(hoursDiff / 24);
                                 var taskName = `<td class="task-id" id=${task.id} style="font-weight: 600;">` + '<p style="font-weight: 600;" class="mb-1">' + task.taskName + '</p>' +
-                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${task.createdBy} - `;
+                                    `<span class="font-weight-normal" style="color: #9B9B9B;"> By ${(task.tfirstName+" "+task.tlastName)} - `;
                                 if (daysDiff > 0) {
-                                    taskName += `${daysDiff} days`;
+                                    if(daysDiff==1){
+                                        taskName += `${daysDiff} day`;
+                                    }else{
+                                        taskName += `${daysDiff} days`;
+                                    }
+                                    
                                 } else if (hoursDiff > 0) {
                                     taskName += `${hoursDiff} hours`;
                                 } else {

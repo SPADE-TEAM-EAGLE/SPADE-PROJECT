@@ -29,6 +29,18 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/add-tenant.css">
+<script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
 </head>
 <body class="app sidebar-mini ltr light-mode">
     
@@ -267,7 +279,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="properties-all.html" style="color: white;">Property</a>
+                                    <a href="properties-all.html" style="color: white;">Properties</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -280,7 +292,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="properties-all.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Property</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Properties</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Simplify property management.
@@ -296,7 +308,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="add-tenant.html" style="color: white;">Tenant</a>
+                                    <a href="add-tenant.html" style="color: white;">Tenants</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -309,7 +321,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="add-tenant.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenant</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Tenants</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly add new tenants with
@@ -325,7 +337,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="create-invoicing.html" style="color: white;">Invoice</a>
+                                    <a href="create-invoicing.html" style="color: white;">Invoices</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -338,7 +350,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="create-invoicing.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoice</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Invoices</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly onboard new tenants
@@ -367,7 +379,7 @@
                                     </div>
                                     <div class="main-chat-msg-name">
                                         <a href="prospects.html">
-                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospect</h5>
+                                            <h5 class="mb-1 text-dark fw-bold">Create New Prospects</h5>
                                         </a>
                                         <p class="text-default mt-0 mb-0 pt-0 fs-13">
                                             Effortlessly generate and manage
@@ -412,7 +424,7 @@
                         <div class="card h-100">
                             <div class="card-header" style="background-color: #1467B0;color: white;">
                                 <div class="card-title fw-bold">
-                                    <a href="tasks-vendors.html" style="color: white;">Vendor</a>
+                                    <a href="tasks-vendors.html" style="color: white;">Vendors</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -799,6 +811,31 @@
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <span class="text-danger d-none">Rent amount is required!</span>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">
+                                            Lease Start
+                                            Date
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="date" class="form-control position-relative"
+                                            id="leaseStart" placeholder="Enter Lease Start Date"
+                                            required>
+                                        <span class="text-danger d-none">This field is
+                                            required!</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputPassword4" class="form-label">
+                                            Lease End
+                                            Date
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="date" class="form-control" id="leaseEnd"
+                                            required placeholder="Enter Lease End Date">
+                                        <span class="text-danger d-none">
+                                            Rent amount is
+                                            required!
+                                        </span>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -834,13 +871,13 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="Triple Net Lease"
-                                                name="lease" id="flexCheckChecked1" href="#collapse1" role="button"
+                                                name="lease" id="flexCheckChecked1" href="#" role="button"
                                                 aria-expanded="false" aria-controls="collapseExample1">
                                             <label class="form-check-label" for="flexCheckChecked1">
                                                 Triple Net Lease
                                             </label>
                                         </div>
-                                        <div class="collapse" id="collapse1">
+                                        <div class="collapse show d-block" id="collapse1">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
@@ -880,7 +917,7 @@
                                                                 required!
                                                             </span>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <!-- <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">
                                                                 Lease Start
                                                                 Date
@@ -904,12 +941,12 @@
                                                                 Rent amount is
                                                                 required!
                                                             </span>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="collapse show" id="collapse3">
+                                        <!-- <div class="collapse show" id="collapse3">
                                             <div class="card card-body">
                                                 <div class="text-justify ps-2 border-model-line">
                                                     <div class="row">
@@ -942,7 +979,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-12">
                                         <label for="inputEmail4" class="form-label">
@@ -953,13 +990,13 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="yes" name="yesno"
                                                 id="flexCheckChecked2" href="#collapse2" role="button"
-                                                aria-expanded="false" aria-controls="collapseExample2" required>
+                                                aria-expanded="false" aria-controls="collapseExample2" required checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="no" name="yesno" checked
+                                            <input class="form-check-input" type="radio" value="no" name="yesno" 
                                                 required>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 No
@@ -967,7 +1004,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 row">
-                                        <div class="collapse" id="collapse2">
+                                        <div class="collapse show" id="collapse2">
                                             <div class="card card-body">
                                                 <div class="text-justify" id="add-item-container">
                                                     <div class="row row-multiple mb-2 pb-3">
@@ -2077,7 +2114,7 @@ $('#preloader').css('display','none');
             var propertyId2;
             $('#addUnitAnchor').click(() => {
                 propertyId2 = $('#property').val()
-                console.log(properties)
+              // console.log(properties)
                 const filteredProperty=properties.filter((property)=>{
                     return property.id==propertyId2;
                 })
@@ -2590,27 +2627,27 @@ $('#preloader').css('display','none');
                     })
                 }
             });
-            $('input[name="lease"]').change(function () {
-                if ($(this).val() === 'Triple Net Lease') {
-                    $('#collapse1').collapse('show');
-                    $('#collapse3').collapse('hide');
-                    $('#baseRent').prop('required', true);
-                    $('#tripleNet').prop('required', true);
-                    $('#leaseStart').prop('required', true);
-                    $('#leaseEnd').prop('required', true);
-                    $('#leaseStart2').prop('required', false);
-                    $('#leaseEnd2').prop('required', false);
-                } else if ($(this).val() === 'Gross Lease') {
-                    $('#collapse1').collapse('hide');
-                    $('#collapse3').collapse('show');
-                    $('#leaseStart2').prop('required', true);
-                    $('#leaseEnd2').prop('required', true);
-                    $('#baseRent').prop('required', false);
-                    $('#tripleNet').prop('required', false);
-                    $('#leaseStart').prop('required', false);
-                    $('#leaseEnd').prop('required', false);
-                }
-            });
+            // $('input[name="lease"]').change(function () {
+            //     if ($(this).val() === 'Triple Net Lease') {
+            //         $('#collapse1').collapse('show');
+            //         $('#collapse3').collapse('hide');
+            //         $('#baseRent').prop('required', true);
+            //         $('#tripleNet').prop('required', true);
+            //         $('#leaseStart').prop('required', true);
+            //         $('#leaseEnd').prop('required', true);
+            //         $('#leaseStart2').prop('required', false);
+            //         $('#leaseEnd2').prop('required', false);
+            //     } else if ($(this).val() === 'Gross Lease') {
+            //         $('#collapse1').collapse('hide');
+            //         $('#collapse3').collapse('show');
+            //         $('#leaseStart2').prop('required', true);
+            //         $('#leaseEnd2').prop('required', true);
+            //         $('#baseRent').prop('required', false);
+            //         $('#tripleNet').prop('required', false);
+            //         $('#leaseStart').prop('required', false);
+            //         $('#leaseEnd').prop('required', false);
+            //     }
+            // });
             function getFormData(tenantID) {
                 var formData = {};
                 formData.tenantID = tenantID
@@ -2627,17 +2664,21 @@ $('#preloader').css('display','none');
                 formData.propertyUnitID = document.getElementById('unit').value;
                 formData.rentAmount = document.getElementById('rent').value;
                 formData.gross_or_triple_lease = document.querySelector('input[name="lease"]:checked').value;
-                if (formData.gross_or_triple_lease == "Gross Lease") {
-                    formData.leaseStartDate = document.getElementById('leaseStart2').value;
-                    formData.leaseEndDate = document.getElementById('leaseEnd2').value;
-                    formData.baseRent = document.getElementById('baseRent').value;
-                    formData.tripleNet = document.getElementById('tripleNet').value;
-                } else {
-                    formData.baseRent = document.getElementById('baseRent').value;
+                // if (formData.gross_or_triple_lease == "Gross Lease") {
+                //     formData.leaseStartDate = document.getElementById('leaseStart2').value;
+                //     formData.leaseEndDate = document.getElementById('leaseEnd2').value;
+                //     formData.baseRent = document.getElementById('baseRent').value;
+                //     formData.tripleNet = document.getElementById('tripleNet').value;
+                // } else {
+                //     formData.baseRent = document.getElementById('baseRent').value;
+                //     formData.tripleNet = document.getElementById('tripleNet').value;
+                //     formData.leaseStartDate = document.getElementById('leaseStart').value;
+                //     formData.leaseEndDate = document.getElementById('leaseEnd').value;
+                // }
+                formData.baseRent = document.getElementById('baseRent').value;
                     formData.tripleNet = document.getElementById('tripleNet').value;
                     formData.leaseStartDate = document.getElementById('leaseStart').value;
                     formData.leaseEndDate = document.getElementById('leaseEnd').value;
-                }
                 formData.increaseRent = document.querySelector('input[name="yesno"]:checked').value;
                 var rowData = [];
                 $('.row-multiple').each(function () {
@@ -2715,24 +2756,30 @@ $('#preloader').css('display','none');
                 $("#unit").append($('<option></option>').text(tenants.unitNumber).val(tenants.propertyUnitID))
                 $("#zip").val(tenants.tZipcode)
                 $("#rent").val(tenants.rentAmount)
-                if (tenants.gross_or_triple_lease === "Triple Net Lease") {
-                    $("#collapse1").addClass('show')
-                    $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
-                    $('#baseRent').prop('required', true);
-                    $('#tripleNet').prop('required', true);
+                $("#leaseStart").val(tenants?.leaseStartDate)
+                    $("#leaseEnd").val(tenants?.leaseEndDate)
+                    $("#baseRent").val(tenants?.baseRent)
+                    $("#tripleNet").val(tenants?.tripleNet)
                     $('#leaseStart').prop('required', true);
                     $('#leaseEnd').prop('required', true);
-                    $("#baseRent").val(tenants.baseRent)
-                    $("#tripleNet").val(tenants.tripleNet)
-                    $("#leaseStart").val(tenants.leaseStartDate)
-                    $("#leaseEnd").val(tenants.leaseEndDate)
+                if (tenants.gross_or_triple_lease === "Triple Net Lease") {
+                    // $("#collapse1").addClass('show')
+                    $('input[name="lease"][value="Triple Net Lease"]').prop("checked", true);
+                    // $('#baseRent').prop('required', true);
+                    // $('#tripleNet').prop('required', true);
+                    // $('#leaseStart').prop('required', true);
+                    // $('#leaseEnd').prop('required', true);
+                    // $("#baseRent").val(tenants.baseRent)
+                    // $("#tripleNet").val(tenants.tripleNet)
+                    // $("#leaseStart").val(tenants.leaseStartDate)
+                    // $("#leaseEnd").val(tenants.leaseEndDate)
                 } else {
-                    $("#collapse3").addClass('show')
+                    // $("#collapse3").addClass('show')
                     $('input[name="lease"][value="Gross Lease"]').prop("checked", true);
-                    $('#leaseStart2').prop('required', true);
-                    $('#leaseEnd2').prop('required', true);
-                    $("#leaseStart2").val(tenants.leaseStartDate)
-                    $("#leaseEnd2").val(tenants.leaseEndDate)
+                    // $('#leaseStart2').prop('required', true);
+                    // $('#leaseEnd2').prop('required', true);
+                    // $("#leaseStart2").val(tenants.leaseStartDate)
+                    // $("#leaseEnd2").val(tenants.leaseEndDate)
                 }
                 if (tenants.increaseRent === "yes") {
                     $("#collapse2").addClass('show')
@@ -2756,6 +2803,7 @@ $('#preloader').css('display','none');
                     })
                 } else {
                     $('input[name="yesno"][value="no"]').prop("checked", true);
+                    $("#collapse2").addClass('hide')
                 }
             })
             $("#submit").on("click", () => {
@@ -3400,7 +3448,7 @@ if (xhr?.responseJSON?.message == "Tenant Invoice is pending Kindly Paid invoice
                 success: function ({ image, tenants,userName, create_at, planID, totalTenantAllow, totalTenantHave, ...rest }) {
                     $("#tenant-exist").text(totalTenantHave);
                     $("#total-tenant").text(totalTenantAllow);
-                    console.log("djifhsdufhusdhfsdfh",planID)
+                  // console.log("djifhsdufhusdhfsdfh",planID)
                     if(planID==4 || planID==7){
                         $("#add-more-tenants").remove()
                     }

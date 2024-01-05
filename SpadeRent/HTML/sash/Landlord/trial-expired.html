@@ -22,7 +22,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Berkshire+Swash&family=Great+Vibes&family=Inter&family=Tilt+Prism&display=swap" rel="stylesheet">
         <title>Trial-Expired - SpadeRent</title>
         <link rel="stylesheet" href="../assets/pageCss/landlordCss/trial-expired.css">
-    </head>
+    <script language="JavaScript">
+    function suppressJSError() {
+        return true;
+    }
+    
+    function suppressJSWarn() {
+        return true;
+    }
+
+    window.onerror = suppressJSError;
+    window.console.warn = suppressJSWarn;
+</script>
+</head>
     <body>
         <div class="container">
             <div id="preloader" class="tlp-preloader">
@@ -1715,7 +1727,7 @@
                 <script src="../assets/plugins/wysiwyag/wysiwyag.js"></script>
                 <script src="../assets/plugins/summernote/summernote1.js"></script>
                 <script src="../assets/js/summernote.js"></script>
-                <script src="../assets/plugins/quill/quill.min.js"></script>
+                <!-- <script src="../assets/plugins/quill/quill.min.js"></script> -->
                 <script src="../assets/js/form-editor2.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
                 <script src="../assets/js/froala.js"></script>
@@ -1869,7 +1881,7 @@ $('#preloader').css('display','none');
                 $("#payment-month").text(time)
                 $("#plan-name").text($("#" + cardId + " .card-headerr" + " strong").first().text().trim(" "))
                 amount = $(this).closest('.pricing-card').find('.amount-payable').text();
-                console.log(amount)
+              // console.log(amount)
                 seletedPlanID = cardId
                 $("#upgradetopro #amount").val(amount)
                 $("#upgradetopro #payment-amount").text(amount)

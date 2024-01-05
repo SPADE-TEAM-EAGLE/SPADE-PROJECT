@@ -29,6 +29,18 @@
             window.location = "./login_module.html"
         }
     </script>
+    <script language="JavaScript">
+        function suppressJSError() {
+            return true;
+        }
+        
+        function suppressJSWarn() {
+            return true;
+        }
+    
+        window.onerror = suppressJSError;
+        window.console.warn = suppressJSWarn;
+    </script>
     <link rel="stylesheet" href="../assets/pageCss/superCss/user-management.css">
 </head>
 <body class="app sidebar-mini ltr light-mode">
@@ -199,6 +211,7 @@
                                                 </span>
                                         </label>
                                         <select id="role_user_update" class="form-select form form-select" required>
+                                            <option value="1">Admin</option>
                                             <option value="2">Manager</option>
                                             <option value="3">Staff</option>
                                         </select>
@@ -2779,12 +2792,13 @@
         }) 
     </script>
     <script>
-        $(document).ready(function () {
-            var selectedFiles = [];
-            var userAdminData;
+        var selectedFiles = [];
+            var userAdminData;var adminData;
             var states;
             var UsersRoles;
             var UsersRolesId = 2;
+        $(document).ready(function () {
+            
             $(".card-color").on("click",function(){
                 $(".card-color").removeClass("active")
                 $(this).addClass("active")  
@@ -2918,7 +2932,8 @@
                     }
                 });
             }
-            var userAdminData;
+            
+            
             var image_url = " "; var image_key = " ";
             function toTitleCase(str) {
                 return str.replace(
@@ -2937,6 +2952,7 @@
                     },
                     success: function (response) {
                       // console.log(response);
+                      adminData=response;
                         if(response.userPeremission.length > 0){
                         $(document).ajaxStop(function(){
                             const permissionTypes = ["overView","customers","appearance","profile","closedAccount","userManagement","changePlan","closeLandlord"];
