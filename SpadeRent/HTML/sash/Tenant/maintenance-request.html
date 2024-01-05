@@ -2134,6 +2134,7 @@ $('#preloader').css('display','none');
 
         $(document).on('click', '#next', function (e) {
             e.preventDefault();
+            $('#preloader').css('display','flex');
             // $('#addModal').modal('hide');
             var task = $("#task").val();
             var status = $("#status").val();
@@ -2177,6 +2178,7 @@ $('#preloader').css('display','none');
                             },
                             success: function (response) {
                                 $('#addModal').modal('hide');
+                                $('#preloader').css('display','none');
                                 if (response === "Task already exists") {
                                     $("#infoModal").modal("show")
                                 }
@@ -2224,6 +2226,7 @@ $('#preloader').css('display','none');
                     },
                     success: function (response) {
                         $('#addModal').modal('hide');
+                        $('#preloader').css('display','none');
                         if (response === "Task already exists") {
                             $("#infoModal").modal("show")
                         }
