@@ -590,7 +590,7 @@
                                             <span class="text-danger d-none">Property Total SF is required!</span>
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="form-label fw-bold">Property Photo (Optional)</label>
+                                            <label class="form-label fw-bold">Property Photo </label>
                                             <div
                                                 class="custom-file"
                                                 style="border: 1px dashed #00000087;"
@@ -1075,7 +1075,7 @@
                                 <span class="text-danger d-none">Property Total SF is required!</span>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Property Photo (Optional)</label>
+                                <label class="form-label fw-bold">Property Photo </label>
                                 <div
                                     class="custom-file"
                                     style="border: 1px dashed #00000087;"
@@ -3053,21 +3053,39 @@ else{
                             tableBody.append(row);
                         });
                         $("#global-loader").fadeOut("slow")
-                        $(document).on("click", ".edit-option", function (e) {
+                        
+                    }
+                },
+                error: function (xhr, status, error) {
+                                    $('#preloader').fadeOut('slow', function() {
+    $(this).hide();
+});
+                    // console.log(error)
+                    $("#myModal_warning").modal("show");
+                    setTimeout(function () {
+                        $('#myModal_warning').modal('hide');
+                        window.location = '../Landlord/login_module.html';
+                    }, 2000);
+                }
+            });
+        }
+        getData()
+        $(document).on("click", ".edit-option", function (e) {
                             e.preventDefault();
                             const propertyIdElement = $(this).closest("tr").find(".property-id");
                             propertyId = propertyIdElement.text();
-                            const data = response.data[0].find(obj => obj.id.toString() === propertyId);
-                            // console.log(data)
+                            console.log(propertyId )
+                            const data = propertyApiData.find(obj => obj.id.toString() === propertyId);
+                            console.log(data)
                             var stateupdateDropdown = $('#state_update');
                             states.forEach(function (state) {
-                                if (state.states === data.state) {
+                                if (state?.states === data?.state) {
                                     stateupdateDropdown.append($('<option selected></option>').text(state.states)).val(state.states);
                                 } else {
                                     stateupdateDropdown.append($('<option></option>').text(state.states));
                                 }
                             });
-                            selectedFiles = data.images
+                            selectedFiles = data?.images
                             updateSelectedFilesContainer()
                             $("#propertyId_update").val(data.id);
                             $("#propertyName_update").val(data.propertyName);
@@ -3115,22 +3133,7 @@ else{
                             });
                             $('#myModal_delete').modal('show');
                         });
-                    }
-                },
-                error: function (xhr, status, error) {
-                                    $('#preloader').fadeOut('slow', function() {
-    $(this).hide();
-});
-                    // console.log(error)
-                    $("#myModal_warning").modal("show");
-                    setTimeout(function () {
-                        $('#myModal_warning').modal('hide');
-                        window.location = '../Landlord/login_module.html';
-                    }, 2000);
-                }
-            });
-        }
-        getData()
+                    
     </script>
     <script>
         $(document).ready(function () {

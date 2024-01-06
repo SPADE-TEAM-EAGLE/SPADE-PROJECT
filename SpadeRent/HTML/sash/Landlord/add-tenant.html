@@ -694,7 +694,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputAddress" class="form-label fw-bold">Company Name
-                                            <span class="fw-light">(Optional)</span>
+                                            <span class="fw-light"></span>
                                         </label>
                                         <input type="text" class="form-control form" id="company"
                                             placeholder="Enter Company Name">
@@ -714,7 +714,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">Phone Number
-                                            <span class="fw-light">(Optional)</span>
+                                            <span class="fw-light"></span>
                                         </label>
                                         <input id="phone" name="phone" type="tel" autocomplete="off" maxlength="10"
                                             placeholder="Enter Phone Number" pattern="[0-9]{5}"
@@ -724,14 +724,14 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress2" class="form-label fw-bold">Address
-                                            <span class="fw-light">(Optional)</span>
+                                            <span class="fw-light"></span>
                                         </label>
                                         <input type="text" class="form-control" id="address"
                                             placeholder="Enter Address">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputState" class="form-label fw-bold">City
-                                            <span class="fw-light">(Optional)</span>
+                                            <span class="fw-light"></span>
                                         </label>
                                         <input type="text" id="city" class="form-control form" placeholder="Enter City"
                                             pattern="[A-Za-z\s]+"
@@ -741,7 +741,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="inputState" class="form-label fw-bold">State
-                                                <span class="fw-light">(Optional)</span>
+                                                <span class="fw-light"></span>
                                             </label>
                                             <select id="state" class="form-select form form-select select2-show-search">
                                                 <option selected>Choose...</option>
@@ -751,7 +751,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputPassword4" class="form-label fw-bold">Zip Code
-                                            <span class="fw-light">(Optional)</span>
+                                            <span class="fw-light"></span>
                                         </label>
                                         <input class="form-control form" type="text" id="zip" name="zip"
                                             pattern="[0-9]{5}" placeholder="A valid 5-digit zip code" maxlength="5"
@@ -884,7 +884,7 @@
                                                         <div class="col-md-6">
                                                             <label for="inputEmail4" class="form-label">
                                                                 Base Rent Amount
-                                                                (Optional)
+                                                                
                                                             </label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text"
@@ -900,7 +900,7 @@
                                                         <div class="col-md-6">
                                                             <label for="inputPassword4" class="form-label">
                                                                 Triple Net
-                                                                Amount (Optional)
+                                                                Amount 
                                                             </label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text"
@@ -1012,7 +1012,7 @@
                                                             <label for="inputEmail4" class="form-label">
                                                                 Date of Rent
                                                                 Change
-                                                                (Optional)
+                                                                
                                                             </label>
                                                             <input type="date"
                                                                 class="form-control input-date dateofRentchange"
@@ -2340,7 +2340,7 @@ $('#preloader').css('display','none');
                             areaCell.append(areaInput);
                             row.append(areaCell);
                             const unitDetailsCell = $('<td colspan="3"></td>');
-                            const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
+                            const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details " value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
                             unitDetailsCell.append(unitDetailsInput);
                             row.append(unitDetailsCell);
                             const actionCell = $('<td></td>');
@@ -2577,7 +2577,7 @@ $('#preloader').css('display','none');
             });
             $("#add-item").on("click", () => {
                 $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change </label>
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange"  placeholder="Date of Rent Change">
                                           </div>
                                           <div class="col-md-5">
@@ -2627,27 +2627,8 @@ $('#preloader').css('display','none');
                     })
                 }
             });
-            // $('input[name="lease"]').change(function () {
-            //     if ($(this).val() === 'Triple Net Lease') {
-            //         $('#collapse1').collapse('show');
-            //         $('#collapse3').collapse('hide');
-            //         $('#baseRent').prop('required', true);
-            //         $('#tripleNet').prop('required', true);
-            //         $('#leaseStart').prop('required', true);
-            //         $('#leaseEnd').prop('required', true);
-            //         $('#leaseStart2').prop('required', false);
-            //         $('#leaseEnd2').prop('required', false);
-            //     } else if ($(this).val() === 'Gross Lease') {
-            //         $('#collapse1').collapse('hide');
-            //         $('#collapse3').collapse('show');
-            //         $('#leaseStart2').prop('required', true);
-            //         $('#leaseEnd2').prop('required', true);
-            //         $('#baseRent').prop('required', false);
-            //         $('#tripleNet').prop('required', false);
-            //         $('#leaseStart').prop('required', false);
-            //         $('#leaseEnd').prop('required', false);
-            //     }
-            // });
+            
+            
             function getFormData(tenantID) {
                 var formData = {};
                 formData.tenantID = tenantID
@@ -2781,13 +2762,14 @@ $('#preloader').css('display','none');
                     // $("#leaseStart2").val(tenants.leaseStartDate)
                     // $("#leaseEnd2").val(tenants.leaseEndDate)
                 }
+                
                 if (tenants.increaseRent === "yes") {
                     $("#collapse2").addClass('show')
                     $('input[name="yesno"][value="yes"]').prop("checked", true);
                     $("#add-item-container").empty()
                     tenants.increaseRentAmount.forEach(function (rentAmount) {
                         $("#add-item-container").append(`<div class="row row-multiple mb-2 pb-3"><div class="col-md-6">
-                                            <label for="inputEmail4" class="form-label">Date of Rent Change (Optional)</label>
+                                            <label for="inputEmail4" class="form-label">Date of Rent Change </label>
                                             <input type="date" class="form-control input-date dateofRentchange" name="dateofRentchange" id="dateofRentchange" value="${rentAmount.date}">
                                           </div>
                                           <div class="col-md-5">
