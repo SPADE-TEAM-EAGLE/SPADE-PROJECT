@@ -3540,9 +3540,15 @@ $('#preloader').css('display','none');
                             var day = targetDate.getDate().toString().padStart(2, '0');
                             var formattedEndDate = `${month}/${day}/${year}`;
                             if (daysLeft < 0) {
-                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block">Overdue</small>` + '</td>';
-                            } else {
-                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block fw-bold">Overdue</small>` + '</td>';
+                            } else if(daysLeft <= 10 && daysLeft > 0) {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
+                            else if(daysLeft > 10 && daysLeft <= 50) {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-warning d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
+                            else {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-primary d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
                             }
                         } else {
                             leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${tenant.leaseEndDate ? tenant.leaseEndDate : "Not set"}` + '</td>';

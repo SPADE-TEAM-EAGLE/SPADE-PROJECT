@@ -112,7 +112,7 @@ function main() {
                         }
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                            if($("#amount-payable").text().split("$")[1]== $("#amount-card").val()){
+                            if($("#amount-payable").text().split("$")[1]==$("#amount-card").val() || $("#outstanding-amount").text().split("$")[1]==$("#amount-card").val()){
                                 $.ajax({
                                     url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                     type: 'POST',
@@ -132,6 +132,8 @@ function main() {
                                         setTimeout(function () {
                                             $("#succesModal_invoice").modal("hide");
                                         }, 2000);
+                                        windows.location.reload();
+
                                     },
                                     error: function (xhr, status, error) {
                                       // console.log(xhr)
@@ -163,6 +165,8 @@ function main() {
                                         setTimeout(function () {
                                             $("#succesModal_invoice").modal("hide");
                                         }, 2000);
+                                        windows.location.reload();
+
                                     },
                                     error: function (xhr, status, error) {
                                       // console.log(xhr)
@@ -202,7 +206,7 @@ function main() {
                         }
                     }, function (res) {
                         if (res?.transactionStatus?.toLowerCase() == "approved" && res?.result?.toLowerCase() == "approved") {
-                            if($("#amount-payable").text().split("$")[1]== $("#amount-card").val()){
+                            if($("#amount-payable").text().split("$")[1]==$("#amount-card").val() || $("#outstanding-amount").text().split("$")[1]==$("#amount-card").val()){
                                 $.ajax({
                                     url: 'https://backend.app.spaderent.com/api/spade/tenantUpdateAllInvoices',
                                     type: 'POST',
@@ -222,6 +226,7 @@ function main() {
                                         setTimeout(function () {
                                             $("#succesModal_invoice").modal("hide");
                                         }, 2000);
+                                        windows.location.reload();
                                     },
                                     error: function (xhr, status, error) {
                                       // console.log(xhr)
@@ -253,6 +258,8 @@ function main() {
                                         setTimeout(function () {
                                             $("#succesModal_invoice").modal("hide");
                                         }, 2000);
+                                        windows.location.reload();
+
                                     },
                                     error: function (xhr, status, error) {
                                       // console.log(xhr)
@@ -443,8 +450,11 @@ $("#upgradetopro-btn").on("click", function () {
         individual=false;
     }else{
       // console.log("clicked")
-        
-        const amount = $("#amount-payable").text().split("$")[1];
+      let amount;
+      amount = $("#outstanding-amount").text().split("$")[1];
+        if(!amount){
+            amount = $("#amount-payable").text().split("$")[1];
+        }
         
         $("#amount-card,#amount-ach").val(amount)
         $("#amount-existing").val(amount)
@@ -474,6 +484,7 @@ $(document).on("click","#individual-payment",function(){
     
 // })
 $(".payment-method-tab").on("click", function () {
+    console.log("clicked")
     $(".payment-method-tab").removeClass("active-payment-method");
     $(this).addClass("active-payment-method");
     $("#payment-method-continue-btn").attr("data-bs-target", "#upgradetopro-" + $(this).attr("id"));

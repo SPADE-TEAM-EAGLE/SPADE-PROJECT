@@ -1082,6 +1082,17 @@
                                                             </a>
                                                         </li>
                                                         <li class="d-flex justify-content-between">
+                                                            <a href="javascript:void(0)" class="text-dark">PROPERTY ID</a>
+                                                            <div class="form-check m-0">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    class="form-check-input mt-2"
+                                                                    id="exampleCheck1"
+                                                                    checked
+                                                                >
+                                                            </div>
+                                                        </li>
+                                                        <li class="d-flex justify-content-between">
                                                             <a href="javascript:void(0)" class="text-dark">IMAGE</a>
                                                             <div class="form-check m-0">
                                                                 <input
@@ -1188,6 +1199,8 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th class="d-none">PROPERTY ID</th>
+                                                            <th>PROPERTY ID</th>
+
                                                             <th>IMAGE</th>
                                                             <th>PROPERTY NAME</th>
                                                             <th>RENT AMOUNT</th>
@@ -1619,7 +1632,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
     return date.toLocaleDateString('en-US', options);
 }
             $.ajax({
-                url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
+                url: 'http://localhost:3000/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
                     id: tenantId
@@ -1643,6 +1656,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         var row = $('<tr>');
                         row.append('<td class="serial-number">'+(index+1)+'</td>');
                         row.append('<td class="d-none">' + item.propertyID + '</td>');
+                        row.append('<td>' + item.cPropertyId + '</td>');
                         row.append('<td><img src="' + (item?.images?.split(',')[0]?item?.images?.split(',')[0]:'../assets/images/Group-user.png') + '" alt=""></td>');
                         row.append('<td class="property-name">' + item.propertyName + '</td>');
                         row.append('<td class="rentAmount"><p style="font-weight: bold;" class="mb-1">' +"$ "+ item.rentAmount + '</p><span style="color: #6E6893;">Next Due Date: ' + (item.recurringNextDate?(item.recurringNextDate!==""?formatDate(item.recurringNextDate):"Not set"):"Not set") + '</span></td>');
@@ -1659,10 +1673,16 @@ if (item.leaseEndDate) {
     var day = targetDate.getDate().toString().padStart(2, '0');
     var formattedEndDate = `${month}-${day}-${year}`;
     if (daysLeft < 0) {
-        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + 'Overdue' + '</td>';
-    } else {
-        leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="${daysLeft > 10 ? 'text-primary' : 'text-danger'} d-block">` + daysLeft + ' day(s) remaining</small>' + '</td>';
-    }
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block fw-bold">Overdue</small>` + '</td>';
+                            } else if(daysLeft <= 10 && daysLeft > 0) {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-danger d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
+                            else if(daysLeft > 10 && daysLeft <= 50) {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-warning d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
+                            else {
+                                leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${formattedEndDate ? formattedEndDate : "Not set"}` + `<small class="text-primary d-block fw-bold">` + daysLeft + ' day(s) remaining</small>' + '</td>';
+                            }
 } else {
     leaseEndDate = '<td class="leaseEndDate" style="font-weight: 600;">' + `${item.leaseEndDate ? item.leaseEndDate : "Not set"}` + '</td>';
 }

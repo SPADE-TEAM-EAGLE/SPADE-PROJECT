@@ -852,6 +852,8 @@
                                                                 <th>DUE AT</th>
                                                                 <th>RELATED TO</th>
                                                                 <th>STATUS</th>
+                                                                <th>ACTION</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody id="table_body"></tbody>
@@ -1579,6 +1581,7 @@ if (task.dueDate) {
 }
                                 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                                 var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
+                                
                                 var row = '<tr>'+serial + image + taskName + assignTo + dueDate +
                                     relatedTo + status + '</tr>';
                                 tableBody.append(row);})
@@ -1586,6 +1589,7 @@ if (task.dueDate) {
                             },
                             error: function (xhr, status, error) {
 $('#preloader').css('display','none');
+
 var row = '<tr><td colspan="12" style="text-align: center;">No data found</td></tr>';
 var tableBody = $('#table_body');
                         tableBody.empty();

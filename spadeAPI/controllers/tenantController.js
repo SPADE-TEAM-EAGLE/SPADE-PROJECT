@@ -670,6 +670,7 @@ exports.getTenantsByID = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Error Get Tenants By ID", error: error.message });
 
   }
@@ -860,6 +861,7 @@ exports.updateTenants = async (req, res) => {
 //  ############################# Task tenant ############################################################
 exports.tenantTask = async (req, res) => {
   const { Id } = req.query;
+  console.log(Id);
   try {
     const taskByIDResult = await queryRunner(tenantTaskQuery, [Id]);
     if (taskByIDResult.length > 0) {
@@ -909,9 +911,10 @@ exports.tenantTask = async (req, res) => {
                 businessName: vendorResult[0][0].businessName,
                 streetAddress: vendorResult[0][0].streetAddress,
                 workNumber: vendorResult[0][0].workNumber,
-                mobileNumber: vendorResult[0][0].mobileNumber,
+                mobileNumber: vendorResult[0][0].phone,
                 email: vendorResult[0][0].email,
                 category: VendorCategoryResult[0][0].category,
+                ID: vendorResult[0][0].id,
               };
               vendorData.push(vendorDataObject);
             } else {
