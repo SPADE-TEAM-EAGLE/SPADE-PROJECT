@@ -630,7 +630,7 @@ exports.getUnitsCount =
 exports.insertMoreUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
-exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate) VALUES (?,?,?,?,?)";
+exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate,uploadedById,userRole) VALUES (?,?,?,?,?,?,?)";
 exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
 exports.insertInvoice =
   "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate,cInvoiceId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -1106,7 +1106,7 @@ WHERE
 `;
 exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
 exports.userPermissionLogin = "SELECT *,UP.id as UPID FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id WHERE UP.UEmail = ?";
-exports.userPermissionAuth = "SELECT * FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
+exports.userPermissionAuth = "SELECT  *, UP.id as Uid FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
 exports.insertInUserPermissionUsers =
   "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at,UImage,UImageKey) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
   exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ?,UImage=?,UImageKey=? WHERE id = ?"; 

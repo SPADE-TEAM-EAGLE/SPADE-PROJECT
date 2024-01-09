@@ -450,7 +450,7 @@ exports.tenantAttachFile = async (req, res) => {
   // console.log(1)
   const { tenantID, images } = req.body;
 
-  const { userId } = req.user;
+  const { userId, UID, URole } = req.user;
   // const { userId } = req.body;
   const currentDate = new Date();
   try {
@@ -464,7 +464,9 @@ exports.tenantAttachFile = async (req, res) => {
         tenantID,
         image_url,
         image_key,
-        currentDate
+        currentDate,
+        UID, 
+        URole
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
