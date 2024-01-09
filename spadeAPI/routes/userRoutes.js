@@ -114,8 +114,8 @@ router.post('/addAlternateEmailPhone', verifyToken, tenantController.addAlternat
 // router.post('/addAlternateEmailPhone' , tenantController.addAlternateEmailPhone);
 router.post('/tenantAttachFile', verifyToken, tenantController.tenantAttachFile); 
 router.delete('/tenantAttachFileDelete', verifyToken, tenantController.tenantAttachFileDelete);
-router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
-// router.get('/GettenantAttachFile', tenantController.GettenantAttachFile);
+// router.get('/GettenantAttachFile', verifyToken, tenantController.GettenantAttachFile);
+router.get('/GettenantAttachFile', tenantController.GettenantAttachFile);
 router.delete('/tenantDelete', verifyToken, tenantController.tenantDelete);
 // router.delete('/tenantDelete', tenantController.tenantDelete);
 router.get('/getTenantsByID', verifyToken, tenantController.getTenantsByID);

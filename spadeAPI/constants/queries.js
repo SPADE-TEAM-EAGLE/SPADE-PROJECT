@@ -631,7 +631,7 @@ exports.insertMoreUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
 exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate,uploadedById,userRole) VALUES (?,?,?,?,?,?,?)";
-exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
+exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate,tf.uploadedById,tf.userRole, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
 exports.insertInvoice =
   "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate,cInvoiceId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertLineItems =
@@ -1216,3 +1216,5 @@ WHERE ut.landlordId = ?`;
 exports.updateUserTasksQuery =
 "UPDATE user_task SET taskName = ? , propertyId = ?, PropertyUnitId = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyAssignee = ? , updated_at = ? where id = ? ";
 exports.delteImageForTaskUserImages = "DELETE FROM userTaskImages WHERE ImageKey = ?";
+exports.userPermissionUserData = "SELECT UFirstName,ULastName,UImage,UImageKey FROM userPUsers where id = ?";
+exports.landlordData = "SELECT FirstName,LastName,image,imageKey FROM users where id = ?";
