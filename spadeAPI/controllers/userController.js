@@ -335,20 +335,7 @@ exports.Signin = async function (req, res) {
         if (selectUserPermissionResult[0].length === 0) {
           res.status(400).send("Email not found");
         } else if (await bcrypt.compare(password, selectUserPermissionResult[0][0].UPassword)) {
-            if(selectUserPermissionResult[0][0].PlanID == 1)
-      {
-        const currentDate = new Date();
-        const subscriptionDate = new Date(selectUserPermissionResult[0][0].created_at);
-        const timeDiff = currentDate - subscriptionDate;
-        const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    if (daysDiff >= 30) {
-        return res.status(200).json({
-          token: token,
-          body:selectUserPermissionResult[0][0],
-          message: "Your Subscription is expired"
-        }); 
-    }
-      }
+        
           const id = selectUserPermissionResult[0][0].llnalordId;
           const role = selectUserPermissionResult[0][0].URole;
           const UserPermissionID = selectUserPermissionResult[0][0].UPID;
@@ -356,6 +343,23 @@ exports.Signin = async function (req, res) {
           const token = jwt.sign({ email, id, role, UserPermissionID}, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
+        
+        
+          if(selectUserPermissionResult[0][0].PlanID == 1)
+      {
+        const currentDate = new Date();
+        const subscriptionDate = new Date(selectUserPermissionResult[0][0].created_at);
+        const timeDiff = currentDate - subscriptionDate;
+        const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    if (daysDiff >=30) {
+        return res.status(200).json({
+          token: token,
+          body:selectUserPermissionResult[0][0],
+          message: "Your Subscription is expired "
+        }); 
+    }
+      }
+
           // ################################# Count ##############################################
           const userId = selectUserPermissionResult[0][0].llnalordId;
           console.log(userId);

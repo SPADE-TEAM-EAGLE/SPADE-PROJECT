@@ -38,7 +38,9 @@ const {
   tenantsIdUpdate,
   updateTenantInvoiceStatus,
   updateTenantIndividualInvoiceStatus,
-  checktenantId
+  checktenantId,
+  landlordData,
+  userPermissionUserData
 } = require("../constants/queries");
 const { hashedPassword } = require("../helper/hash");
 const { queryRunner } = require("../helper/queryRunner");
@@ -450,7 +452,7 @@ exports.tenantAttachFile = async (req, res) => {
   // console.log(1)
   const { tenantID, images } = req.body;
 
-  const { userId } = req.user;
+  const { userId, UID, URole } = req.user;
   // const { userId } = req.body;
   const currentDate = new Date();
   try {
@@ -464,7 +466,9 @@ exports.tenantAttachFile = async (req, res) => {
         tenantID,
         image_url,
         image_key,
-        currentDate
+        currentDate,
+        UID, 
+        URole
       ]);
       // if property image data not inserted into property image table then throw error
       if (propertyImageResult.affectedRows === 0) {
@@ -530,19 +534,46 @@ exports.GettenantAttachFile = async (req, res) => {
   // const { tenantID } = req.body; 
 
   try {
-      const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
-      if (GettenantAttachFileResult[0].length === 0) {
-        throw new Error("No data Found in tenant attach file");
+    const GettenantAttachFileResult = await queryRunner(getTenantAttachFile, [tenantID]);
+    if (GettenantAttachFileResult[0].length === 0) {
+      throw new Error("No data Found in tenant attach file");
+    }
+
+    for (let i = 0; i < GettenantAttachFileResult[0].length; i++) {
+      if (GettenantAttachFileResult[0][i].userRole == "Owner") {
+        const landlordResult = await queryRunner(landlordData, [
+          GettenantAttachFileResult[0][i].uploadedById
+        ]);
+
+        if (landlordResult[0].length > 0) {
+          GettenantAttachFileResult[0][i].userdata = landlordResult[0][0];
+        } else {
+          GettenantAttachFileResult[0][i].userdata = [];
+        }
+      } else {
+        const userPermissionUser = await queryRunner(userPermissionUserData, [
+          GettenantAttachFileResult[0][i].uploadedById
+        ]);
+
+        if (userPermissionUser[0].length > 0) {
+          GettenantAttachFileResult[0][i].userdata = userPermissionUser[0][0];
+        } else {
+          GettenantAttachFileResult[0][i].userdata = [];
+        }
       }
+    }
+
     res.status(200).json({
-      message: " Tenant Files save successful",
-      data : GettenantAttachFileResult[0]
+      message: "Tenant Files save successful",
+      data: GettenantAttachFileResult[0]
     });
   } catch (error) {
-    return res.status(500).json({ message: "Error ", error: error.message });
-    console.log(error);
+    console.error(error);
+    return res.status(500).json({ message: "Error", error: error.message });
   }
 };
+
+
 //  ############################# Add Tenant Attach File End ############################################################
 
 //  ############################# Delete Tenant Start ############################################################
