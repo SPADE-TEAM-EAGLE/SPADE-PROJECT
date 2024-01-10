@@ -902,13 +902,14 @@ exports.tenantTask = async (req, res) => {
           selectQuery("taskimages", "taskID"),
           [taskID]
         );
+        console.log(TaskImagesResult[0]);
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.taskImages
+            (image) => image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
-          taskByIDResult[0][j].taskImages = ["No Task Images Found"];
+          taskByIDResult[0][j].taskImages = [];
         }
         const TaskAssignToResult = await queryRunner(
           selectQuery("taskassignto", "taskId"),

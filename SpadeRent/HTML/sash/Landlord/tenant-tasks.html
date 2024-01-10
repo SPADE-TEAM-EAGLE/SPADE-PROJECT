@@ -190,7 +190,7 @@
                                         <span class="text-danger"> *</span>
                                     </label>
                                     <select
-                                        class="form-select form "
+                                        class="form-select form select2-show-search"
                                         required
                                         placeholder="Select Priority "
                                         id="priority_update"
@@ -207,7 +207,7 @@
                                         <span class="text-danger"> *</span>
                                     </label>
                                     <select
-                                        class="form-select form"
+                                        class="form-select form select2-show-search"
                                         required
                                         placeholder="Select Status"
                                         id="status_update"
@@ -1808,7 +1808,21 @@
 <script src="../assets/plugins/chart/utils.js"></script>
 <script src="../assets/js/pricing-plan.js"></script>
 <script src="../assets/js/charts.js"></script>
+<script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+<script src="../assets/plugins/multipleselect/multi-select.js"></script>
 <script>
+    $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+            });
+        });
             $(document).ready(function(){
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
@@ -1849,7 +1863,7 @@ $('#preloader').css('display','none');
                 [...ev.dataTransfer.items].forEach((item, i) => {
                     if (item.kind === "file") {
                         const file = item.getAsFile();
-                        file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                        file?.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file?.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
                         updateSelectedFilesContainer()
                     }
                 });
@@ -1871,23 +1885,23 @@ $('#preloader').css('display','none');
                 // console.log(file)
                 var fileElement = $('<div>')
                     .addClass('selected-file');
-                if (file.type && file.type.includes('image')) {
+                if (file?.type && file?.type.includes('image')) {
                     fileElement.append(
                         $('<div>').addClass('file-preview')
                             .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
                     );
-                } else if (file.type && file.type.includes('pdf')) {
+                } else if (file?.type && file?.type.includes('pdf')) {
                     fileElement.append(
                         $('<div>').addClass('file-preview')
                             .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
                     );
                 } else {
-                    if (file?.imageKey?.endsWith('.jpg') || file?.imageKey?.endsWith('.jpeg')|| file?.imageKey?.endsWith('.png')) {
+                    if (file?.ImageKey?.endsWith('.jpg') || file?.ImageKey?.endsWith('.jpeg')|| file?.ImageKey?.endsWith('.png')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
-                                .append($('<img style="height:80px">').attr('src', file.Image))
+                                .append($('<img style="height:80px">').attr('src', file?.Image))
                         );
-                    } else if (file?.imageKey?.endsWith('.pdf')) {
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
                         fileElement.append(
                             $('<div>').addClass('file-preview')
                                 .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
@@ -1904,7 +1918,7 @@ $('#preloader').css('display','none');
                         .append(
                             $('<div>')
                                 .addClass('file-details')
-                                .append($('<span>').text(file.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                                .append($('<span>').text(file?.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
                         )
                         .append(
                             $('<span>')
@@ -1914,7 +1928,7 @@ $('#preloader').css('display','none');
                         )
                         .appendTo(selectedFilesContainer);
                 } else if (file instanceof Object) {
-                    if (file.Image) {
+                    if (file?.Image) {
                         fileElement
                             .append(
                                 $('<div>')
@@ -2047,7 +2061,7 @@ $('#preloader').css('display','none');
                 }
             });
             $.ajax({
-                url: 'http://localhost:3000/api/spade/tenantTask',
+                url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
                 type: 'GET',
                 data: {
                     Id: tenantId
@@ -2072,7 +2086,19 @@ $('#preloader').css('display','none');
                     tableBody.empty();
                     response.data[0] ?.forEach(function(task,index) {
                         var serial='<td class="serial-number">'+(index+1)+'</td>';
-                        var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
+                        // console.log(task?.taskImages[0].Image)
+                        if(task?.taskImages?.length>0){
+                            if(task?.taskImages[0]?.Image?.includes(".pdf")){
+                                var image = `<td><i class="fi fi-rs-file" style="font-size:35px"></td>`;
+                            }
+                            else{
+                                var image = `<td><img src="${task.taskImages[0].Image}" alt=""></td>`;
+                            }
+                            // var image = `<td><img src="${task.taskImages[0].Image}" alt=""></td>`;
+                        }
+                        else{
+                            var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
+                        }   
                         var createdDate = new Date(task.created_at);
                         var currentDate = new Date();
                         var timeDiff = Math.abs(currentDate - createdDate);
@@ -2192,6 +2218,44 @@ $('#preloader').css('display','none');
                 }
             })
 
+
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    $("#assignee_update").empty()
+                    var selectElement = $('#assignee');
+                    selectElement.empty();
+                    if (response.data.length === 0) {
+                        $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
+                        selectElement.append($('<option></option>').text('No Vendor available..'));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            var optionText = vendor.firstName + " " + vendor.lastName;
+                            var optionValue = vendor.id;
+                            var option = $('<option></option>')
+                                .val(vendor.id)
+                                .text(vendor.firstName + " " + vendor.lastName);
+                            selectElement.append(option);
+                            $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+                        });
+                    }
+                    selectElement.multipleSelect();
+                },
+                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
+                        $("#assignee").empty()
+                        $("#assignee").prop("disabled", true);
+                        $('#addVendorAnchor').show()
+                    }
+                }
+            })
+            
             }
            getData();
             function toTitleCase(str) {
@@ -2205,14 +2269,20 @@ $('#preloader').css('display','none');
 var NewDate = (mydate != "Not set" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "Not set")
 return NewDate
 }
+$(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
 $('#fileInput_update').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
-                    file.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                    file?.size <= 5 * 1024 * 1024 && selectedFiles?.length < 5 ? selectedFiles.push(file) : file?.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
                 });
                 updateSelectedFilesContainer(); // Update the selected files container
             });
-$(document).on('click', ".edit-option", function (e) {
+
+            $(document).on('click', ".edit-option", function (e) {
 
                                 e.preventDefault();
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
@@ -2223,11 +2293,13 @@ $(document).on('click', ".edit-option", function (e) {
                                     selectedFiles = data.taskImages
                                 } else {
                                 }
+                                
                                 updateSelectedFilesContainer()
                                 $("#message").val(data.notes);
                                 $("#dueDate_update").val(data.dueDate);
                                 $("#taskName_update").val(data.taskName);
-                                $("#property_update").val(data.tenantID);
+                                $("#property_update").val(tenantData.tenantID);
+                                $("#property_update").prop("disabled", true);
                                 $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
                                 $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
                                 $("#myModal_edit .select2-selection__rendered").empty()
@@ -2290,18 +2362,18 @@ $("#view-task-line-item").append(`<tr class="tr">
                             </td>
                         </tr>`)
                 }
-                if (data.taskImages[0].Image) {
+                if (data?.taskImages[0]?.Image) {
                     const files = data.taskImages;
                     $("#view-task-images").empty();
                     files.forEach((file) => {
                         if (file?.Image?.endsWith(".pdf") || file?.Image?.endsWith(".docx") || file?.Image?.endsWith(".doc")) {
                             $("#view-task-images").append(`
-                <a href="${file.Image}" download="${file.imageKey}">
+                <a href="${file?.Image}" download="${file?.imageKey}">
                     <i class="fi fi-rs-file-pdf" style="font-size: 50px;"></i>
                 </a>&nbsp;`);
                         } else {
                             $("#view-task-images").append(`
-                <img src="${file.Image}" width="200px" height="200px" alt="">&nbsp;`);
+                <img src="${file?.Image}" width="200px" height="200px" alt="">&nbsp;`);
                         }
                     });
                 } else {
@@ -2314,6 +2386,129 @@ $("#view-task-line-item").append(`<tr class="tr">
                                 taskId = taskIdElement.attr("id");
                                 $('#myModal_delete').modal('show');
                             });
+                            $(document).on('click', '#save', function (e) {
+                e.preventDefault();
+                $("#myModal_edit").modal("hide");
+                var formData = new FormData();
+                var message = $("#message").val();
+                var dueDate = $("#dueDate_update").val();
+                var taskName = $("#taskName_update").val();
+                var property = $("#property_update").val();
+                var priority = $("#priority_update").val();
+                var status = $("#status_update").val();
+                var assignee = $("#assignee_update").val();
+                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                    if (file instanceof File) {
+                    }
+                    else {
+                        existingImageNames.push(file)
+                    }
+                })
+                if (selectedFiles.length >= 1) {
+                    var files = selectedFiles.map(function (file) {
+                        return file instanceof File ? file : file?.name;
+                    });
+                    files.forEach(function (file) {
+                        formData.append('image', file);
+                    });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        }, success: function (response) {
+                            var imageArray = [...response.images, ...existingImageNames];
+                            const formData = {
+                                taskID: taskId,
+                                notifyTenant: isNotifyTenantChecked,
+                                notifyVendor: isNotifyAssigneesChecked,
+                                message: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
+                                images: imageArray
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                type: 'PUT',
+                                data: JSON.stringify(formData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    e.preventDefault()
+                                    getData();
+                                    $("#successfully_changed_text").text("Successfully Updated");
+                                    $("#successfully_changed").modal("show");
+                                    setTimeout(function () {
+                                        $("#successfully_changed").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+                                    }, 2000);
+                                    // console.log('Error: ' + error);
+                                }
+                            });
+                        }, error: function () {
+                        }
+                    })
+                } else {
+                    const formData = {
+                        taskID: taskId,
+                        notifyTenant: isNotifyTenantChecked,
+                        notifyVendor: isNotifyAssigneesChecked,
+                        message: message,
+                        dueDate: dueDate,
+                        taskName: taskName,
+                        property: property,
+                        priority: priority,
+                        status: status,
+                        assignee: assignee,
+                        images: []
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        type: 'PUT',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            e.preventDefault()
+                            getData();
+                            $("#successfully_changed_text").text("Successfully Updated");
+                            $("#successfully_changed").modal("show");
+                            setTimeout(function () {
+                                $("#successfully_changed").modal("hide");
+                            }, 2000);
+                        },
+                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                            // console.log('Error: ' + error);
+                        }
+                    });
+                }
+            });
+            
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');

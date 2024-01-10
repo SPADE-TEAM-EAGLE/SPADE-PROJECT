@@ -877,7 +877,7 @@ exports.updateTenants =
 exports.selectVendorCategory =
   "SELECT * FROM `vendorcategory` JOIN `vendor` ON `vendorcategory`.`id` = `vendor`.`categoryID` WHERE `vendor`.`LandlordID` = ?";
 
-exports.propertyTaskQuery = ` SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at, p.propertyName, p.address, pu.unitNumber, t.firstName AS tfirstName, t.lastName AS tlastName FROM task AS tk JOIN tenants AS t ON tk.tenantID = t.id left JOIN property AS p ON t.propertyID = p.id left JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
+exports.propertyTaskQuery = ` SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at, p.propertyName, p.address, pu.unitNumber, t.firstName AS tfirstName, t.lastName AS tlastName,t.phoneNumber AS tPhoneNumber, t.id AS tenantID FROM task AS tk JOIN tenants AS t ON tk.tenantID = t.id left JOIN property AS p ON t.propertyID = p.id left JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
 exports.tenantTaskQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery =

@@ -8862,6 +8862,8 @@
                                                                                 <th>ACCOUNT</th>
                                                                                 <th>DESCRIPTION</th>
                                                                                 <th>STATUS</th>
+                                                                                <th></th>
+
 
                                                                             </tr>
                                                                         </thead>
@@ -9460,6 +9462,8 @@
         <script src="../assets/plugins/input-mask/jquery.mask.min.js"></script>
         <script src="../assets/plugins/chart/Chart.bundle.js"></script>
         <script src="../assets/plugins/chart/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+        
         <script>
             var helloGuys = true;
             $(document).ajaxStop(function () {
@@ -10496,6 +10500,8 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 // console.log(error);
                             }
                         });
+                        var password = 'your-secret-password';
+
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/allProperty',
                             method: 'GET',
@@ -10520,13 +10526,18 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                     });
                                     var counterAccount = 0;
                                     properties?.forEach(function (property, index) {
+                                        console.log(property)
+
                                         if (property?.accountName) {
+                                            console.log(property.id)
+                                    var encryptedPropertyId = sjcl.encrypt(password, property?.id?.toString());
+                                    var encodedPropertyId = encodeURIComponent(encryptedPropertyId);
                                             counterAccount++
                                             var row = $("<tr>");
                                                 row.append($("<td>").text(counterAccount));
                                             row.append($("<td class='d-none upoid'>").text(property.id));
                                             
-                                            row.append($("<td>").html("<b>" + property.accountName + "</b>"));
+                                            row.append($("<td>").html(`<a href='./view-account.html?account=${encodedPropertyId}'><b>` + property.accountName + "</b></a>"));
                                             row.append($("<td>").text(property.description))
                                             row.append($("<td>").html('<span>'+(property.isActive==1?"Active":"Not Started")+'</span>'))
                                             row.append($("<td>").html("<a class='btn btn-outline-default btn-pill button'>Connect to bank</a>"));
@@ -10548,6 +10559,7 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                                 $("#table_body_bank_account_property").append(`<tr><td colspan="12" class="text-center">No Data Found</td></tr>`);
                             }
                         });
+                        
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/invoiceCategory',
                             method: 'GET',
@@ -13395,6 +13407,8 @@ $('#preloader').css('display','none');
                                 })
                             
             }
+            
+            
             $("#addModal-account").on("hidden.bs.modal", function () {
                 $("#accountName").val("")
                 $("#addModal-account input").removeClass("border-green border-danger")

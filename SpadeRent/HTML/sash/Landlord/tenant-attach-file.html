@@ -1499,6 +1499,17 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
+                                                                <a class="text-dark" href="javascript:void(0)">OWNER</a>
+                                                                <div class="form-check m-0">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input mt-2"
+                                                                        id="exampleCheck1"
+                                                                        checked
+                                                                    >
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">DATE UPLOAD</a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -1571,6 +1582,8 @@
                                                                 <th>#</th>
                                                                 <th>File name</th>
                                                                 <th>Properties</th>
+                                                                <th>Owner</th>
+
                                                                 <th>Date upload</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -2067,7 +2080,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         };
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
-                            // url: 'http://localhost:3000/api/spade/tenantAttachFile',
+                            // url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',
@@ -2176,6 +2189,12 @@ function getData(){
         // console.log(tenantData)
         table.empty()
         data.forEach(function (item, index) {
+            var ownerImg;
+            if(item?.userdata?.image){
+                ownerImg = item?.userdata?.image;
+            }else{
+                ownerImg = "../assets/images/circle-user.png";
+            }
             const newRow = `
                 <tr>
                     <td style="font-weight: 600;">${index + 1}</td>
@@ -2190,6 +2209,10 @@ function getData(){
                     <td class="propertyAddress">
                         <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
                         <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
+                    </td>
+                    <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
+                        <img src="${ownerImg}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <p class="mt-2">${item?.userdata?.FirstName + " " + item?.userdata?.LastName}</p>
                     </td>
                     <td>${formatDate(item.uploadDate)}</td>
                     <td>

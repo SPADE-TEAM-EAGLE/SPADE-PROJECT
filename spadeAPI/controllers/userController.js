@@ -2211,11 +2211,11 @@ console.log(Id)
         // this is for task images
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.Image
+            (image) => image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
-          taskByIDResult[0][j].taskImages = ["No Task Images Found"];
+          taskByIDResult[0][j].taskImages = [];
         }
         const TaskAssignToResult = await queryRunner(
           selectQuery("taskassignto", "taskId"),
@@ -2249,6 +2249,7 @@ console.log(Id)
                 mobileNumber: vendorResult[0][0].mobileNumber,
                 email: vendorResult[0][0].email,
                 category: VendorCategoryResult[0][0].category,
+                ID: vendorResult[0][0].id,
               };
               vendorData.push(vendorDataObject);
             } else {

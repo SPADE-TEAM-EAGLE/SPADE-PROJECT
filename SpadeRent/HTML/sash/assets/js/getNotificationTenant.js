@@ -52,7 +52,7 @@ function GetNotification() {
         if (item.invoiceID) {
           const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${item.invoiceID
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item invoice" data-id="${item.invoiceID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -77,7 +77,7 @@ function GetNotification() {
         } else if (item.propertyID) {
           const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${item.propertyID
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item property" data-id="${item.propertyID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -103,7 +103,7 @@ function GetNotification() {
         } else if (item.taskID) {
           const colorClass = item.tenantNotify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${item.taskID
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item task" data-id="${item.taskID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -131,7 +131,7 @@ function GetNotification() {
       read?.forEach((item) => {
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item invoice" data-id="${item.invoiceID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -155,7 +155,7 @@ function GetNotification() {
           );
         } else if (item.propertyID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.propertyID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item property" data-id="${item.propertyID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -180,7 +180,7 @@ function GetNotification() {
           );
         } else if (item.taskID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.taskID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${item.taskID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -202,18 +202,18 @@ function GetNotification() {
             )}</span>
             </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "task");
+          // });
         }
       });
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
         if (item.invoiceID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.invoiceID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item invoice" data-id="${item.invoiceID
             }">
                         <div class="d-flex align-items-center">
                         <div class="me-2">
@@ -235,14 +235,14 @@ function GetNotification() {
             )}</span>
                       </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "invoice");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "invoice");
+          // });
         } else if (item.propertyID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.propertyID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item property" data-id="${item.propertyID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -265,14 +265,14 @@ function GetNotification() {
             )}</span>
              </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "property");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "property");
+          // });
         } else if (item.taskID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${item.taskID
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${item.taskID
             }">
                 <div class="d-flex align-items-center">
                 <div class="me-2">
@@ -294,11 +294,11 @@ function GetNotification() {
             )}</span>
             </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "task");
+          // });
         }
       });
     },
@@ -310,6 +310,25 @@ function GetNotification() {
   });
 }
 GetNotification();
+$(document).on("click", ".notification-item", function () {
+  const itemId = $(this).data("id");
+  let type = "";
+  
+  if($(this).hasClass("invoice")){
+    type = "invoice";
+  }
+  else if($(this).hasClass("property")){
+    type = "property";
+  }
+  else if($(this).hasClass("task")){
+    type = "task";
+  }
+  else if($(this).hasClass("tenant")){
+    type = "tenant";
+  }
+  console.log($(this))
+  updateDataNotify(itemId, type);
+});
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
   GetNotification();
