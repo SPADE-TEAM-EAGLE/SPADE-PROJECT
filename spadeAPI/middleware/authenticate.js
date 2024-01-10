@@ -228,8 +228,8 @@ const verifyToken = async (req, res, next) => {
     } else {
       try {
 
-        const result = await queryRunner(selectQuery("users", "Email"), [
-          decoded.email,
+        const result = await queryRunner(selectQuery("users", "id"), [
+          decoded.id,
           // "superadmin@gmail.com",
         ]);
         // console.log(result)
@@ -392,8 +392,8 @@ const verifyTokenTenant = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    const result = await queryRunner(selectQuery("tenants", "email"), [
-      decoded.email,
+    const result = await queryRunner(selectQuery("tenants", "id"), [
+      decoded.id,
     ]);
 
     req.user = {
