@@ -452,7 +452,7 @@ const verifySuperAdmin = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    const result = await queryRunner(selectQuery("superAdmin", "email"), [decoded.email]);
+    const result = await queryRunner(selectQuery("superAdmin", "id"), [decoded.id]);
 
 
 
