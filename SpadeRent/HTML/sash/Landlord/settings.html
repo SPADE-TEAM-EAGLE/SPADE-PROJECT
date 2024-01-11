@@ -9412,6 +9412,7 @@
                         dropdownParent: $('#edit-user-permissions')
                     });
                 });
+                $("#state,#state1").select2();
             });
         </script>
         <script src="../assets/js/jquery.sparkline.min.js"></script>
@@ -10150,10 +10151,10 @@ $("#remaining-days-plan-days").text((30 - daysPassed)>1?" days":" day")
                         $("#streetAddress").val(toTitleCase(response.streetAddress || ""))
                         $("#businessAddress").val(toTitleCase(response.BusinessAddress || ""))
                         $("#city1").val(toTitleCase(response.BAcity || ""))
-                        $("#state1").val(toTitleCase(response.BAstate || ""))
+                        $("#state1").val(toTitleCase(response.BAstate || "")).trigger("change")
                         $("#zipcode1").val(response.BAzipCode)
                         $("#city").val(toTitleCase(response.city || ""))
-                        $("#state").val(toTitleCase(response.state || ""))
+                        $("#state").val(toTitleCase(response.state || "")).trigger("change")
                         $("#zipcode").val(response.zipCode)
                         $("#emailVerify").val(response.email)
                         if (response?.role) {
