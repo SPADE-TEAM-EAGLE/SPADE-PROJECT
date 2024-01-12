@@ -33,6 +33,7 @@ function GetNotification(){
         ...response.propertyNotify,
         ...response.taskNotify,
         ...response.tenantNotify,
+        ...response.userTaskNotify
       ];
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -107,7 +108,37 @@ function GetNotification(){
           )}</span>
            </div></div>`
           );
-        } else if (item.taskID) {
+        } 
+        else if (item.taskID && item.propertyName) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item task" data-id="${
@@ -135,7 +166,9 @@ function GetNotification(){
           )}</span>
           </div></div>`
           );
-        } else if (item.tenantID) {
+        }
+       
+        else if (item.tenantID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
             `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item tenant" data-id="${
@@ -225,7 +258,37 @@ function GetNotification(){
           )}</span>
            </div></div>`
           );
-        } else if (item.taskID) {
+        } 
+        else if (item.taskID && item.propertyName) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
           $("#inbox-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${
               item.taskID
@@ -357,7 +420,37 @@ function GetNotification(){
           // // console.log("itemId", itemId);
           //   updateDataNotify(itemId, "property");
           // });
-        } else if (item.taskID) {
+        } 
+        else if (item.taskID && item.propertyName) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
           $("#unread-notification-container").append(
             `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${
               item.taskID
@@ -446,6 +539,9 @@ GetNotification();
   else if($(this).hasClass("task")){
     type = "task";
   }
+  else if($(this).hasClass("user_task")){
+    type = "userTask";
+  }
   else if($(this).hasClass("tenant")){
     type = "tenant";
   }
@@ -510,8 +606,12 @@ function updateDataNotify(notificationId, type) {
       if(type == "property"){
         window.location.href="./properties-all.html";
       }else if(type == "task"){
-        window.location.href="./create-tasks.html";
-      }else if(type == "invoice"){
+        window.location.href="./maintenance-requests.html";
+      }
+      else if(type == "userTask"){
+        window.location.href="./user-tasks.html";
+      }
+      else if(type == "invoice"){
         window.location.href="./create-invoicing.html";
       }else if(type == "tenant"){
         window.location.href="./add-tenant.html";
