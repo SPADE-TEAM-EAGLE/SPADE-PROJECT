@@ -12,6 +12,7 @@ const {
   updatePropertyNotifyReadUnRead,
   updateTenantNotifyReadUnRead,
   updateTaskNotifyReadUnRead,
+  updateUserTaskNotifyReadUnRead,
   updateInvoiceNotifyReadUnRead,
   updateAllNotifyReadQuery,
   updateTenantPropertyNotifyReadUnRead,
@@ -157,6 +158,7 @@ const notifyController = {
         property: updatePropertyNotifyReadUnRead,
         tenant: updateTenantNotifyReadUnRead,
         task: updateTaskNotifyReadUnRead,
+        userTask: updateUserTaskNotifyReadUnRead,
         invoice: updateInvoiceNotifyReadUnRead,
       };
       const updateQueryFunction = updateFunctions[type];

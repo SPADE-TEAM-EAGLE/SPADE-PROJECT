@@ -197,6 +197,8 @@ exports.updateTenantNotifyReadUnRead =
   "UPDATE tenants SET notify = ?  WHERE id = ? ";
 exports.updateTaskNotifyReadUnRead =
   "UPDATE task SET notify = ?  WHERE id = ? ";
+  exports.updateUserTaskNotifyReadUnRead =
+  "UPDATE user_task SET notify = ?  WHERE id = ? ";
 exports.updateInvoiceNotifyReadUnRead =
   "UPDATE invoice SET notify = ?  WHERE id = ? ";
 
