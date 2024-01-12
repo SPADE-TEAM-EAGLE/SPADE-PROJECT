@@ -18,6 +18,7 @@ const {
   updateTenantTaskNotifyReadUnRead,
   updateTenantInvoiceNotifyReadUnRead,
   updateAllTenantNotifyReadQuery,
+  getUserTaskNotify
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
@@ -104,6 +105,7 @@ const notifyController = {
   getNotify: async (req, res) => {
     //get property , tenants , task invoice from tables individually
     const { userId } = req.user;
+    // const { userId } = req.body;
     try {
       // get data from property table
       const getTenantsNotify = await queryRunner(getTenantNotify, [userId]);
