@@ -110,6 +110,7 @@ const notifyController = {
       const property = await queryRunner(getPropertyNotify, [userId]);
       // get data from task table
       const task = await queryRunner(getTaskNotify, [userId]);
+      const user_task=await queryRunner(getTaskNotify,[userId]);
       // add all above steps on my video
       // get data from invoice table
       const invoice = await queryRunner(getInvoiceNotify, [userId]);

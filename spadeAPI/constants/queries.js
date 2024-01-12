@@ -447,7 +447,33 @@ GROUP BY
 ORDER BY 
     task.created_at DESC;
 `;
-
+exports.getUserTaskNotify = `SELECT 
+    task.id AS taskID,
+    task.taskName,
+    task.notify,  
+    task.status,
+    task.priority,
+    task.created_at,
+    tenants.firstName,
+    tenants.lastName,
+    tenants.email,
+    tenants.Address,
+    tenants.city,
+    GROUP_CONCAT(userTaskImages.Image) AS Image,
+    GROUP_CONCAT(userTaskImages.ImageKey) AS ImageKey
+FROM 
+    user_task
+  LEFT JOIN
+  userTaskImages ON task.id = userTaskImages.taskID
+JOIN 
+    tenants ON task.tenantID = tenants.id
+WHERE 
+    task.landlordID = ?
+GROUP BY 
+    task.id, task.taskName, task.status, task.priority, task.created_at
+ORDER BY 
+    task.created_at DESC;
+`;
 exports.getInvoiceNotify = `SELECT 
 invoice.id AS invoiceID,
 invoice.invoiceType,
