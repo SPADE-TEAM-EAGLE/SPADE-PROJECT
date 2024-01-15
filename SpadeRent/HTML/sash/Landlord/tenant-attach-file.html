@@ -30,7 +30,7 @@
             }
         </script>
        <link rel="stylesheet" href="../assets/pageCss/landlordCss/tenant-attach-file.css">
-    <script language="JavaScript">
+    <!-- <script language="JavaScript">
     function suppressJSError() {
         return true;
     }
@@ -41,7 +41,7 @@
 
     window.onerror = suppressJSError;
     window.console.warn = suppressJSWarn;
-</script>
+</script> -->
 </head>
     <body class="app sidebar-mini ltr light-mode">
         <div
@@ -2190,7 +2190,10 @@ function getData(){
         table.empty()
         data.forEach(function (item, index) {
             var ownerImg;
-            if(item?.userdata?.image){
+            console.log(item?.userdata?.image)
+            if(item?.userdata?.FirstName){
+                console.log("landlord")
+                if(item?.userdata?.image){
                 ownerImg = item?.userdata?.image;
             }else{
                 ownerImg = "../assets/images/circle-user.png";
@@ -2233,6 +2236,54 @@ function getData(){
                 </tr>
             `;
             table.append(newRow);
+            }
+            else{
+                console.log("users")
+                if(item?.userdata?.UImage){
+                ownerImg = item?.userdata?.UImage;
+            }else{
+                ownerImg = "../assets/images/circle-user.png";
+            }
+            const newRow = `
+                <tr>
+                    <td style="font-weight: 600;">${index + 1}</td>
+                    <td class="file-id" id="${item.id}">
+                        <div style="font-weight: 600; display: flex; gap: 1rem;">
+                            ${item?.Image?.split(",")[0].endsWith(".pdf") ? `<i class="fi fi-rs-file-pdf fs-20" style="display: flex; align-items: center;"></i>` : `<img src="${item?.Image?.split(",")[0]}" alt="">`}
+                            <p style="color: #9B9B9B;" class="mb-1">${item.ImageKey}<br>
+                                <span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"><a class="fw-bold" href="${item.Image}">Download</a></span>
+                            </p>
+                        </div>
+                    </td>
+                    <td class="propertyAddress">
+                        <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
+                        <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
+                    </td>
+                    <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
+                        <img src="${ownerImg}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <p class="mt-2">${item?.userdata?.UFirstName + " " + item?.userdata?.ULastName}</p>
+                    </td>
+                    <td>${formatDate(item.uploadDate)}</td>
+                    <td>
+                        <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                        <ul class="dropdown-menu dropdown-menu-top">
+                            <li>
+                                <a class="download-option dropdown-item text-success" href="javascript:void(0)" style="display: flex; align-items: center;">
+                                    <i class="fi fi-rs-download fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Download
+                                </a>
+                            </li>
+                            <li>
+                                <a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;">
+                                    <i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            `;
+            table.append(newRow);
+            }
+            
         });
     },
     error: function () {

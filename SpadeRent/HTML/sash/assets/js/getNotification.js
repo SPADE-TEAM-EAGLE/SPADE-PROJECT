@@ -28,13 +28,25 @@ function GetNotification(){
     },
     success: function (response) {
     // console.log(response);
-      const notification = [
+    let notification = [];
+    if(response?.userTaskNotify){
+      notification = [
         ...response.invoiceNotify,
         ...response.propertyNotify,
         ...response.taskNotify,
         ...response.tenantNotify,
         ...response?.userTaskNotify
       ];
+    }else{
+      notification = [
+        ...response.invoiceNotify,
+        ...response.propertyNotify,
+        ...response.taskNotify,
+        ...response.tenantNotify,
+        // ...response?.userTaskNotify
+      ];
+    }
+      
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
