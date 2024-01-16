@@ -1534,7 +1534,7 @@
                                                                 placeholder="Password" data-bs-placement="top"
                                                                 data-bs-toggle="tooltip" title=""
                                                                 data-bs-original-title="Enter password here.">
-                                                            <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1"
+                                                            <i class="fi fi-rs-eye text-dark fs-20 togglePassword" id="togglePassword1"
                                                                 style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
@@ -1561,7 +1561,7 @@
                                                                 placeholder="Confirm Password" data-bs-placement="top"
                                                                 data-bs-toggle="tooltip" title=""
                                                                 data-bs-original-title="Enter the same password here.">
-                                                            <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword2"
+                                                            <i class="fi fi-rs-eye text-dark fs-20 togglePassword" id="togglePassword2"
                                                                 style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
@@ -2890,19 +2890,28 @@ $('#preloader').css('display','none');
                         document.getElementById("save").disabled = true;
                     }
                 }
-                const togglePassword11 = document.querySelector("#current_password");
-                const password11 = document.querySelector("#current_password_acount_close");
-                togglePassword11.addEventListener("click", function (e) {
-                    const type =
-                        password11.getAttribute("type") === "password" ? "text" : "password";
-                    password11.setAttribute("type", type);
-                });
+                // const togglePassword11 = document.querySelector("#current_password");
+                // const password11 = document.querySelector("#current_password_acount_close");
+                // togglePassword11.addEventListener("click", function (e) {
+                //     const type =
+                //         password11.getAttribute("type") === "password" ? "text" : "password";
+                //     password11.setAttribute("type", type);
+                // });
                 const togglePassword22 = document.querySelector("#togglePassword2");
                 const password22 = document.querySelector("#id_password2");
                 togglePassword22.addEventListener("click", function (e) {
+                    console.log("togglePassword22");    
                     const type =
                         password22.getAttribute("type") === "password" ? "text" : "password";
                     password22.setAttribute("type", type);
+                });
+                const togglePassword11 = document.querySelector("#togglePassword1");
+                const password11 = document.querySelector("#id_password1");
+                togglePassword11.addEventListener("click", function (e) {
+                    
+                    const type =
+                        password11.getAttribute("type") === "password" ? "text" : "password";
+                    password11.setAttribute("type", type);
                 });
                 $(document).ready(function () {
                     $('#togglePassword1').click(function () {
