@@ -669,6 +669,7 @@ exports.updateTasks = async (req, res) => {
         }
       }
     } else {
+      
       console.log("heeuyeguyger",images)
       for (let i = 0; i < images?.length; i++) {
         const { image_url } = images[i];

@@ -2348,7 +2348,10 @@ $('#preloader').css('display','none');
                     if (file instanceof File) {
                     }
                     else {
-                        existingImageNames.push(file)
+                        if(file?.Image){
+                            existingImageNames.push(file)
+                        }
+                        
                     }
                 })
                 if (selectedFiles.length >= 1) {

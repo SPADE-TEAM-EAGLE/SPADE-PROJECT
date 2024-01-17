@@ -2775,7 +2775,9 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                     if (file instanceof File) {
                     }
                     else {
-                        existingImageNames.push(file)
+                        if(file?.Image){
+                            existingImageNames.push(file)
+                        }
                     }
                 })
                 if (selectedFiles.length >= 1) {

@@ -27,7 +27,7 @@
         }
     </script>
     <link rel="stylesheet" href="../assets/pageCss/landlordCss/property-task.css">
-    <!-- <script language="JavaScript">
+    <script language="JavaScript">
     function suppressJSError() {
         return true;
     }
@@ -38,7 +38,7 @@
 
     window.onerror = suppressJSError;
     window.console.warn = suppressJSWarn;
-</script> -->
+</script>
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -2132,7 +2132,9 @@ $('#preloader').css('display','none');
                 if (file instanceof File) {
                 }
                 else {
-                    existingImageNames.push(file)
+                    if(file?.Image){
+                            existingImageNames.push(file)
+                        }
                 }
             })
             if (selectedFiles.length >= 1) {
