@@ -1439,7 +1439,7 @@
                                                     <div class="col-lg-6"></div>
                                                     <div class="col-xl-6 mb-3">
                                                         <label for="validationCustom02">
-                                                            <b>Business Name (Optional)</b>
+                                                            <b>Business Name </b>
                                                         </label>
                                                         <input type="text" class="form-control" id="businessName"
                                                             placeholder="Enter business name" required>
@@ -1455,7 +1455,7 @@
                                                         <div class="row">
                                                             <div class="col-xl-6 mb-3">
                                                                 <label for="saddress1">
-                                                                    <b>Address (Optional)</b>
+                                                                    <b>Address </b>
                                                                 </label>
                                                                 <input type="text" class="form-control" id="address"
                                                                     placeholder="Enter mailing Address" required="">
@@ -1464,7 +1464,7 @@
                                                             <div class="col-lg-6"></div>
                                                             <div class="col-xl-2 mb-3">
                                                                 <label for="validationCustom02">
-                                                                    <b>City (Optional)</b>
+                                                                    <b>City </b>
                                                                 </label>
                                                                 <input type="text" class="form-control" id="city"
                                                                     pattern="[A-Za-z\s]+"
@@ -1475,7 +1475,7 @@
                                                             <div class="col-xl-2 mb-3">
                                                                 <div class="form-group">
                                                                     <label for="inputState" class="form-labell fw-bold">
-                                                                        <b>State (Optional)</b>
+                                                                        <b>State </b>
                                                                     </label>
                                                                     <select id="state"
                                                                         class="form-select form form-select" required>
@@ -1487,7 +1487,7 @@
                                                             </div>
                                                             <div class="col-xl-2 mb-3">
                                                                 <label for="zip">
-                                                                    <b>Zip Code (Optional)</b>
+                                                                    <b>Zip Code </b>
                                                                 </label>
                                                                 <input type="text" class="form-control" id="zip"
                                                                     pattern="[0-9]{5}"
@@ -1534,7 +1534,7 @@
                                                                 placeholder="Password" data-bs-placement="top"
                                                                 data-bs-toggle="tooltip" title=""
                                                                 data-bs-original-title="Enter password here.">
-                                                            <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword1"
+                                                            <i class="fi fi-rs-eye text-dark fs-20 togglePassword" id="togglePassword1"
                                                                 style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
@@ -1561,7 +1561,7 @@
                                                                 placeholder="Confirm Password" data-bs-placement="top"
                                                                 data-bs-toggle="tooltip" title=""
                                                                 data-bs-original-title="Enter the same password here.">
-                                                            <i class="fi fi-rs-eye text-dark fs-20" id="togglePassword2"
+                                                            <i class="fi fi-rs-eye text-dark fs-20 togglePassword" id="togglePassword2"
                                                                 style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
@@ -2040,7 +2040,7 @@
                                                                         data-bs-toggle="tooltip" title=""
                                                                         data-bs-original-title="Enter password here.">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#current_password" style="cursor: pointer;
+                                                                        toggle="#current_password_acount_close" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -2060,7 +2060,7 @@
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Confirm Password">
                                                                     <i class="fi fi-rs-eye text-dark fs-20 toggle-password"
-                                                                        toggle="#confirm_password" style="cursor: pointer;
+                                                                        toggle="#confirm_password_acount_close" style="cursor: pointer;
                                                                 float: right;
                                                                 margin-top: -30px;
                                                                 margin-right: 15px;
@@ -2403,6 +2403,8 @@ $('#preloader').css('display','none');
                     }
                 }
             </script>
+                       
+
             <script>
                 //dark and light mode settings
                 const labelInputs = document.querySelectorAll(".label");
@@ -2888,19 +2890,28 @@ $('#preloader').css('display','none');
                         document.getElementById("save").disabled = true;
                     }
                 }
-                const togglePassword11 = document.querySelector("#togglePassword1");
-                const password11 = document.querySelector("#id_password1");
-                togglePassword11.addEventListener("click", function (e) {
-                    const type =
-                        password11.getAttribute("type") === "password" ? "text" : "password";
-                    password11.setAttribute("type", type);
-                });
+                // const togglePassword11 = document.querySelector("#current_password");
+                // const password11 = document.querySelector("#current_password_acount_close");
+                // togglePassword11.addEventListener("click", function (e) {
+                //     const type =
+                //         password11.getAttribute("type") === "password" ? "text" : "password";
+                //     password11.setAttribute("type", type);
+                // });
                 const togglePassword22 = document.querySelector("#togglePassword2");
                 const password22 = document.querySelector("#id_password2");
                 togglePassword22.addEventListener("click", function (e) {
+                    console.log("togglePassword22");    
                     const type =
                         password22.getAttribute("type") === "password" ? "text" : "password";
                     password22.setAttribute("type", type);
+                });
+                const togglePassword11 = document.querySelector("#togglePassword1");
+                const password11 = document.querySelector("#id_password1");
+                togglePassword11.addEventListener("click", function (e) {
+                    
+                    const type =
+                        password11.getAttribute("type") === "password" ? "text" : "password";
+                    password11.setAttribute("type", type);
                 });
                 $(document).ready(function () {
                     $('#togglePassword1').click(function () {
@@ -2912,6 +2923,18 @@ $('#preloader').css('display','none');
                         $(this).toggleClass('fi-rs-eye fi-rs-crossed-eye');
                     });
                 });
+        //         $(".toggle-password").click(function() {
+        //             console.log($(this).attr("type"))
+        //     // Get the input field associated with the clicked eye icon
+        //     var $passwordField =$(this);
+
+        //     // Toggle the type attribute of the password field
+        //     if ($passwordField.attr("type") === "password") {
+        //         $passwordField.attr("type", "text");
+        //     } else {
+        //         $passwordField.attr("type", "password");
+        //     }
+        // });
             </script>
             <script>
                 var tenantData; var userData;
@@ -3785,29 +3808,29 @@ $('#preloader').css('display','none');
 
 
 
-                $("#upgradetopro-btn").on("click", function () {
-                  // console.log("clicked")
-                    $("#closeaccount,#surePaynow").modal("hide");
-                    const amount = $("#outstanding-amount").text().split("$")[1];
+                // $("#upgradetopro-btn").on("click", function () {
+                //   // console.log("clicked")
+                //     $("#closeaccount,#surePaynow").modal("hide");
+                //     const amount = $("#outstanding-amount").text().split("$")[1];
 
-                    $("#amount-card,#amount-ach").val(amount)
-                    $("#amount-existing").val(amount)
-                    $("#payment-total-card,#payment-total-ach").text(amount)
-                    $("#payment-total-existing-card").text(amount)
-                    $("#selectMethod").modal("show");
-                })
-                $("#card-modal").on("click", function () {
-                    $("#selectMethod").modal("hide");
-                    $("#upgradetopro-card-modal").modal("show");
+                //     $("#amount-card,#amount-ach").val(amount)
+                //     $("#amount-existing").val(amount)
+                //     $("#payment-total-card,#payment-total-ach").text(amount)
+                //     $("#payment-total-existing-card").text(amount)
+                //     $("#selectMethod").modal("show");
+                // })
+                // $("#card-modal").on("click", function () {
+                //     $("#selectMethod").modal("hide");
+                //     $("#upgradetopro-card-modal").modal("show");
 
-                })
-                $("#ach-modal").on("click", function () {
-                    $("#selectMethod").modal("hide");
-                    $("#upgradetopro-ach-modal").modal("show");
+                // })
+                // $("#ach-modal").on("click", function () {
+                //     $("#selectMethod").modal("hide");
+                //     $("#upgradetopro-ach-modal").modal("show");
 
-                })
+                // })
             </script>
-            <script></script>
+             <script src="../assets/js/tenantPayment.js"></script>
             <script>
                 var loaderStopFirstRun = true;
                 $(document).ajaxStop(function () {

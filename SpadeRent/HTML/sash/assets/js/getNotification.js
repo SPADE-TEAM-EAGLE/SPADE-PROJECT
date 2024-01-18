@@ -28,12 +28,25 @@ function GetNotification(){
     },
     success: function (response) {
     // console.log(response);
-      const notification = [
+    let notification = [];
+    if(response?.userTaskNotify){
+      notification = [
         ...response.invoiceNotify,
         ...response.propertyNotify,
         ...response.taskNotify,
         ...response.tenantNotify,
+        ...response?.userTaskNotify
       ];
+    }else{
+      notification = [
+        ...response.invoiceNotify,
+        ...response.propertyNotify,
+        ...response.taskNotify,
+        ...response.tenantNotify,
+        // ...response?.userTaskNotify
+      ];
+    }
+      
       notification.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
@@ -52,7 +65,7 @@ function GetNotification(){
         if (item.invoiceID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item invoice" data-id="${
               item.invoiceID
             }">
               <div class="d-flex align-items-center">
@@ -80,7 +93,7 @@ function GetNotification(){
         } else if (item.propertyID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center ${colorClass}  justify-content-between notification-item property" data-id="${
               item.propertyID
             }">
               <div class="d-flex align-items-center">
@@ -107,10 +120,40 @@ function GetNotification(){
           )}</span>
            </div></div>`
           );
-        } else if (item.taskID) {
+        } 
+        else if (item.taskID && item.propertyName) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item task" data-id="${
               item.taskID
             }">
               <div class="d-flex align-items-center">
@@ -135,10 +178,12 @@ function GetNotification(){
           )}</span>
           </div></div>`
           );
-        } else if (item.tenantID) {
+        }
+       
+        else if (item.tenantID) {
           const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
           $("#notification-container").append(
-            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item tenant" data-id="${
               item.tenantID
             }">
               <div class="d-flex align-items-center">
@@ -163,18 +208,15 @@ function GetNotification(){
           )}</span> 
           </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          
         }
-      });
+      }
+      );
       $("#inbox-notification-container").empty();
       read?.forEach((item) => {
         if (item.invoiceID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item invoice" data-id="${
               item.invoiceID
             }">
               <div class="d-flex align-items-center">
@@ -201,7 +243,7 @@ function GetNotification(){
           );
         } else if (item.propertyID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item property" data-id="${
               item.propertyID
             }">
               <div class="d-flex align-items-center">
@@ -228,9 +270,39 @@ function GetNotification(){
           )}</span>
            </div></div>`
           );
-        } else if (item.taskID) {
+        } 
+        else if (item.taskID && item.propertyName) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${
               item.taskID
             }">
               <div class="d-flex align-items-center">
@@ -255,14 +327,14 @@ function GetNotification(){
           )}</span>
           </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "task");
+          // });
         } else if (item.tenantID) {
           $("#inbox-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item tenant" data-id="${
               item.tenantID
             }">
             <div class="d-flex align-items-center">
@@ -285,18 +357,18 @@ function GetNotification(){
         <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(item.created_at)}</span>
         </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "task");
+          // });
         }
       });
       $("#unread-notification-container").empty();
       unread?.forEach((item) => {
         if (item.invoiceID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item invoice" data-id="${
               item.invoiceID
             }">
                       <div class="d-flex align-items-center">
@@ -321,14 +393,14 @@ function GetNotification(){
                   )}</span>
                     </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "invoice");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "invoice");
+          // });
         } else if (item.propertyID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item property" data-id="${
               item.propertyID
             }">
               <div class="d-flex align-items-center">
@@ -355,14 +427,44 @@ function GetNotification(){
           )}</span>
            </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "property");
-          });
-        } else if (item.taskID) {
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "property");
+          // });
+        } 
+        else if (item.taskID && item.propertyName) {
+          const colorClass = item.notify === 0 ? "my_blue" : "bg-transparent";
+          $("#notification-container").append(
+            `<div class="list-group-item d-flex align-items-center ${colorClass} justify-content-between notification-item user_task" data-id="${
+              item.taskID
+            }">
+              <div class="d-flex align-items-center">
+              <div class="me-2">
+              <span class="avatar avatar-md brround cover-image" style="background-image:url('${
+                ( item.Image? item.Image.split(",")[0] : '../assets/images/icons/Group 10350.png' )
+               }')!important; ">
+              </div>
+              <div class="">
+                  <a href="javascript:void(0);">
+                      <div class="fw-semibold text-dark fw-bold fs-15" data-bs-toggle="modal" data-target="#chatmodel">${
+                        item.taskName
+                      }</div> <span class="text-dark">${item.priority} | ${
+              item.status
+            }</span>
+                      <p class="mb-0 fw-bold text-dark fs-15 ">Task Assigned</p>
+                  </a>
+              </div>
+          </div><div class="">
+          <span class="fs-12 text-dark" style="text-wrap: nowrap;">${convertTimestamp(
+            item.created_at
+          )}</span>
+          </div></div>`
+          );
+        }
+        else if (item.taskID) {
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item task" data-id="${
               item.taskID
             }">
               <div class="d-flex align-items-center">
@@ -387,14 +489,14 @@ function GetNotification(){
           )}</span>
           </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "task");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "task");
+          // });
         } else if (item.tenantID) { 
           $("#unread-notification-container").append(
-            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item" data-id="${
+            `<div class="list-group-item d-flex align-items-center justify-content-between notification-item tenant" data-id="${
               item.tenantID
             }">
               <div class="d-flex align-items-center">
@@ -419,11 +521,11 @@ function GetNotification(){
           )}</span>
           </div></div>`
           );
-          $(".notification-item").on("click", function () {
-            const itemId = $(this).data("id");
-          // console.log("itemId", itemId);
-            updateDataNotify(itemId, "tenant");
-          });
+          // $(".notification-item").on("click", function () {
+          //   const itemId = $(this).data("id");
+          // // console.log("itemId", itemId);
+          //   updateDataNotify(itemId, "tenant");
+          // });
         }
       });
     },
@@ -435,6 +537,29 @@ function GetNotification(){
   });
 }  
 GetNotification();
+
+  $(document).on("click", ".notification-item", function () {
+  const itemId = $(this).data("id");
+  let type = "";
+  
+  if($(this).hasClass("invoice")){
+    type = "invoice";
+  }
+  else if($(this).hasClass("property")){
+    type = "property";
+  }
+  else if($(this).hasClass("task")){
+    type = "task";
+  }
+  else if($(this).hasClass("user_task")){
+    type = "userTask";
+  }
+  else if($(this).hasClass("tenant")){
+    type = "tenant";
+  }
+  console.log($(this))
+  updateDataNotify(itemId, type);
+});
 $("#updateAllNotifyRead").on("click", function () {
   updateAllNotifyRead();
   GetNotification();
@@ -476,6 +601,7 @@ function updateAllNotifyRead() {
   });
 }
 function updateDataNotify(notificationId, type) {
+  console.log(notificationId, type);
   $.ajax({
     url: "https://backend.app.spaderent.com/api/spade/updateReadUnRead",
     type: "PUT",
@@ -492,8 +618,12 @@ function updateDataNotify(notificationId, type) {
       if(type == "property"){
         window.location.href="./properties-all.html";
       }else if(type == "task"){
-        window.location.href="./create-tasks.html";
-      }else if(type == "invoice"){
+        window.location.href="./maintenance-requests.html";
+      }
+      else if(type == "userTask"){
+        window.location.href="./user-tasks.html";
+      }
+      else if(type == "invoice"){
         window.location.href="./create-invoicing.html";
       }else if(type == "tenant"){
         window.location.href="./add-tenant.html";

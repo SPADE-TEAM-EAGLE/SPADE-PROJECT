@@ -89,6 +89,8 @@ const verifyToken = async (req, res, next) => {
           req.user = {
             email: decoded.email,
             userId: result[0][0].llnalordId,
+            UID: result[0][0].Uid,
+            URole: "User",
             userType: "Landlord",
             userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
             businessName: result[0][0].BusinessName,
@@ -152,6 +154,8 @@ const verifyToken = async (req, res, next) => {
           req.user = {
             email: decoded.email,
             userId: result[0][0].llnalordId,
+            UID: result[0][0].Uid,
+            URole: "User",
             userType: "Landlord",
             userName: result[0][0].UFirstName + " " + result[0][0].ULastName,
             businessName: result[0][0].BusinessName,
@@ -224,8 +228,8 @@ const verifyToken = async (req, res, next) => {
     } else {
       try {
 
-        const result = await queryRunner(selectQuery("users", "Email"), [
-          decoded.email,
+        const result = await queryRunner(selectQuery("users", "id"), [
+          decoded.id,
           // "superadmin@gmail.com",
         ]);
         // console.log(result)
@@ -261,6 +265,8 @@ const verifyToken = async (req, res, next) => {
           req.user = {
             email: decoded.email,
             userId: result[0][0].id,
+            UID: result[0][0].id,
+            URole: "Owner",
             userType: "Landlord",
             nuveiUserId: result[0][0].nuveiId,
             userName: result[0][0].FirstName + " " + result[0][0].LastName,
@@ -311,6 +317,8 @@ const verifyToken = async (req, res, next) => {
           req.user = {
             email: decoded.email,
             userId: result[0][0].id,
+            UID: result[0][0].id,
+            URole: "Owner",
             userType: "Landlord",
             nuveiUserId: result[0][0].nuveiId,
             userName: result[0][0].FirstName + " " + result[0][0].LastName,
@@ -384,8 +392,8 @@ const verifyTokenTenant = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    const result = await queryRunner(selectQuery("tenants", "email"), [
-      decoded.email,
+    const result = await queryRunner(selectQuery("tenants", "id"), [
+      decoded.id,
     ]);
 
     req.user = {
@@ -444,7 +452,7 @@ const verifySuperAdmin = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
-    const result = await queryRunner(selectQuery("superAdmin", "email"), [decoded.email]);
+    const result = await queryRunner(selectQuery("superAdmin", "id"), [decoded.id]);
 
 
 

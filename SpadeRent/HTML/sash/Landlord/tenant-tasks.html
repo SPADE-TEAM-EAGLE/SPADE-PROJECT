@@ -95,6 +95,421 @@
             </div>
         </div>
         <div
+            class="modal fade"
+            id="myModal_edit"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title">Post an
+                                <strong class="color-primary">Update</strong>
+                            </h2>
+                            <span class="">
+                                The real power of tasks is keeping track of deadlines and having a
+                            log of all work and communication related to the tasks for later reference.
+                            </span>
+                        </div>
+                        <button
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="top-close"
+                        >
+                            <span aria-hidden="true">
+                                <i class="fi fi-rs-circle-xmark text-dark"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div
+                            id="collapseOne_update"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample"
+                        >
+                            <form class="row g-3" enctype="multipart/form-data">
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Message </label>
+                                    <textarea
+                                        class="form-control mb-4"
+                                        placeholder="Sorry about that We will look into it."
+                                        rows="4"
+                                        placeholder="Enter Message"
+                                        id="message"
+                                    ></textarea>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label fw-bold">Task Name
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input
+                                        class="form-control"
+                                        placeholder="Task name"
+                                        type="text"
+                                        placeholder="Enter Task Name"
+                                        required
+                                        id="taskName_update"
+                                    >
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Related To
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        required
+                                        id="property_update"
+                                        required
+                                        class="form-select form select2-show-search"
+                                        placeholder="Enter Related To"
+                                    >
+                                        <option selected>Choose...</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputEmail4" class="form-label fw-bold">Due Date
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input
+                                        class="form-control"
+                                        required
+                                        placeholder="MM/DD/YYYY"
+                                        type="date"
+                                        placeholder="Enter Due Date"
+                                        id="dueDate_update"
+                                    >
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Priority
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        class="form-select form select2-show-search"
+                                        required
+                                        placeholder="Select Priority "
+                                        id="priority_update"
+                                    >
+                                        <option selected>Choose...</option>
+                                        <option name="high">High</option>
+                                        <option name="moderate">Moderate</option>
+                                        <option name="low">Low</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label fw-bold">Status
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <select
+                                        class="form-select form select2-show-search"
+                                        required
+                                        placeholder="Select Status"
+                                        id="status_update"
+                                    >
+                                        <option selected>Choose...</option>
+                                        <option value="not started">Not Started</option>
+                                        <option value="in progress">In progress</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label fw-bold">Assignee(s) </label>
+                                        <select
+                                            class="form-control select2"
+                                            data-placeholder="Choose Assignee"
+                                            multiple
+                                            placeholder="Select Assignee(s)"
+                                            id="assignee_update"
+                                        ></select>
+                                    </div>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Media/ Files </label>
+                                    <div
+                                        class="custom-file"
+                                        style="border: 1px dashed #00000087;"
+                                        ondrop="dropHandler(event);"
+                                        ondragover="dragOverHandler(event);"
+                                    >
+                                        <input
+                                            id="fileInput_update"
+                                            type="file"
+                                            name="media"
+                                            class="custom-file-input form"
+                                            accept=".pdf,application/pdf"
+                                            aria-label="hello"
+                                            multiple
+                                        >
+                                        <span className="d-none"></span>
+                                        <label class="custom-file-label" for="fileInput_update">
+                                            <i class="fi fi-rs-cloud-upload"></i>
+                                            <div class="custom-file-text">
+                                                <span>Upload Files here</span>
+                                                <span>PDF file size no more than 5MB</span>
+                                                <small class="text-danger d-none" id="count-text">Maximum number of files reached.</small>
+                                                <small class="text-danger d-none" id="size-text">
+                                                    File size exceeds 5MB
+                                                limit.
+                                                </small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="selected-files">
+                                        <div class="file-grid"></div>
+                                    </div>
+                                    <span class="text-danger d-none">This field is required!</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <div class="d-flex">
+                            <label class="custom-control custom-checkbox me-2">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    name="example-checkbox1_update"
+                                    value="option1"
+                                    checked=""
+                                >
+                                <span class="custom-control-label">Notify Tenant</span>
+                            </label>
+                            <label class="custom-control custom-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    name="example-checkbox1_update"
+                                    value="option1"
+                                    checked=""
+                                >
+                                <span class="custom-control-label">Notify Assignee(s)</span>
+                            </label>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-outline-default btn-pill button" data-bs-dismiss="modal" id="close">Close</button>
+                            <a
+                                href="javascript:void(0)"
+                                class="btn text-light btn-pill button"
+                                style="background-color:#1467B0;"
+                                id="save"
+                            >Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="successfully_changed"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem">
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#13bfa6" d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z" opacity=".99"/>
+                                        <path fill="#71d8c9" d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z"/>
+                                    </svg>
+                                </span>
+                                <p class="card-text text-dark" id="successfully_changed_text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal_delete">
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-body p-0">
+                        <div class="card border p-0 pb-3" style="margin-bottom: 0rem;">
+                            <div class="card-header border-0 pt-3">
+                                <button class="btn-close del" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="fi fi-rs-circle-xmark text-dark"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="card-body text-center">
+                                <span class="">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="60"
+                                        width="60"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path fill="#f07f8f" d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z"/>
+                                        <circle
+                                            cx="12"
+                                            cy="17"
+                                            r="1"
+                                            fill="#e62a45"
+                                        />
+                                        <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z"/>
+                                    </svg>
+                                </span>
+                                <h4 class="h4 mb-0 mt-3 fw-bold fs-4">Warning</h4>
+                                <p class="card-text">This will delete your task. Are you sure?</p>
+                            </div>
+                            <div class="card-footer text-center border-0 pt-0">
+                                <div class="row">
+                                    <div class="text-center">
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="btn btn-white me-2"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        >Cancel</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger" id="confirmDelete">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="modal fade"
+            id="viewModal-tasks"
+            tabindex="-1"
+            role="dialog"
+        >
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-justify ps-2 border-model-line">
+                            <h2 class="modal-title mb-0">View
+                                <strong class="color-primary">Tasks</strong>
+                            </h2>
+                        </div>
+                        <button
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="viewModal-tasks"
+                        >
+                            <span aria-hidden="true">
+                                <i class="fi fi-rs-circle-xmark text-dark text-dark"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label>
+                                    <b>Task Name</b>
+                                </label>
+                                <p class="text-primary">
+                                    <b id="taskName_view"></b>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    <b>Due Date</b>
+                                </label>
+                                <p class="text-primary">
+                                    <b id="dueDate_view">June-06-2023</b>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    <b>Priority</b>
+                                </label>
+                                <p class="text-primary">
+                                    <b id="priority_view">High Priority</b>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    <b>Status</b>
+                                </label>
+                                <p class="text-danger">
+                                    <b id="status_view">
+                                        <i class="fi fi-rs-clock-three" style="color: #FB233B;"></i>
+                                        Unpaid
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <label>
+                                    <b>Notes</b>
+                                </label>
+                                <p class="text-primary">
+                                    <b id="notes_view">
+                                        Lorem, ipsum dolor sit amet consectetur
+                                    adipisicing elit.
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <div style="display: flex;">
+                                    <p class="text-primary">
+                                        <b>Line Items</b>
+                                    </p>
+                                    <hr style="height: 2px; background: black; width: 88%; margin-left: 83px; position: absolute; margin-top: 10px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 mb-5">
+                                <div class="table-responsive">
+                                    <table class="table-hover table text-nowrap table-borderless text-md-nowrap mg-b-0 mb-0" id="lineItemsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Vendor</th>
+                                                <th>Property</th>
+                                                <th>Tenant</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="view-task-line-item">
+                                            <tr class="tr">
+                                                <td>
+                                                    <p class="text-primary">
+                                                        <b> / 0321-2045564</b>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary">
+                                                        <b>Test / 200</b>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-primary">
+                                                        <b>John Smith / 0321-2045564</b>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-5 mb-5" id="view-task-images"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
             class="modal fade effect-scale"
             id="modaldemo8"
             tabindex="-1"
@@ -966,6 +1381,8 @@
                                                     <th>DUE AT</th>
                                                     <th>RELATED TO</th>
                                                     <th>STATUS</th>
+                                                    
+                                                    <th>ACTION</th>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -1102,7 +1519,7 @@
                                 ></textarea>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                <label class="form-label fw-bold">Media/ Files </label>
                                 <div class="custom-file" style="border: 1px dashed #00000087;">
                                     <input
                                         id="fileInput"
@@ -1391,7 +1808,21 @@
 <script src="../assets/plugins/chart/utils.js"></script>
 <script src="../assets/js/pricing-plan.js"></script>
 <script src="../assets/js/charts.js"></script>
+<script src="../assets/plugins/multipleselect/multiple-select.js"></script>
+<script src="../assets/plugins/multipleselect/multi-select.js"></script>
 <script>
+    $(document).ready(function () {
+            $('#addModal').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#addModal')
+                });
+            });
+            $('#myModal_edit').on('shown.bs.modal', function () {
+                $('.select2-show-search').select2({
+                    dropdownParent: $('#myModal_edit')
+                });
+            });
+        });
             $(document).ready(function(){
                 $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/getMessagesCountLandlord',
@@ -1421,6 +1852,101 @@ $('#preloader').css('display','none');
 <script src="../assets/js/email-phone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
 <script>
+    var taskInfo = [];
+    var taskId;
+    var tenantData={};
+    var selectedFiles = [];
+        function dropHandler(ev) {
+            // console.log("File(s) dropped");
+            ev.preventDefault();
+            if (ev.dataTransfer.items) {
+                [...ev.dataTransfer.items].forEach((item, i) => {
+                    if (item.kind === "file") {
+                        const file = item.getAsFile();
+                        file?.size <= 5 * 1024 * 1024 && selectedFiles.length < 5 ? selectedFiles.push(file) : file?.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array
+                        updateSelectedFilesContainer()
+                    }
+                });
+            } else {
+                [...ev.dataTransfer.files].forEach((file, i) => {
+                    // console.log(`… file[${i}].name = ${file.name}`);
+                });
+            }
+        }
+        function dragOverHandler(ev) {
+            // console.log("File(s) in drop zone");
+            ev.preventDefault();
+        }
+        function updateSelectedFilesContainer() {
+            var selectedFilesContainer = $('.file-grid');
+            selectedFilesContainer.empty();
+            selectedFiles.forEach(function (file, index) {
+                // console.log(selectedFiles.length)
+                // console.log(file)
+                var fileElement = $('<div>')
+                    .addClass('selected-file');
+                if (file?.type && file?.type.includes('image')) {
+                    fileElement.append(
+                        $('<div>').addClass('file-preview')
+                            .append($('<img style="height:80px">').attr('src', URL.createObjectURL(file)))
+                    );
+                } else if (file?.type && file?.type.includes('pdf')) {
+                    fileElement.append(
+                        $('<div>').addClass('file-preview')
+                            .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf')) // Add your PDF icon class here
+                    );
+                } else {
+                    if (file?.ImageKey?.endsWith('.jpg') || file?.ImageKey?.endsWith('.jpeg')|| file?.ImageKey?.endsWith('.png')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<img style="height:80px">').attr('src', file?.Image))
+                        );
+                    } else if (file?.ImageKey?.endsWith('.pdf')) {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file-pdf'))
+                        );
+                    } else {
+                        fileElement.append(
+                            $('<div>').addClass('file-preview')
+                                .append($('<i style="font-size:50px">').addClass('fi fi-rs-file')) // Add an appropriate class for other files
+                        );
+                    }
+                }
+                if (file instanceof File) {
+                    fileElement
+                        .append(
+                            $('<div>')
+                                .addClass('file-details')
+                                .append($('<span>').text(file?.type.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                        )
+                        .append(
+                            $('<span>')
+                                .addClass('delete-file')
+                                .text('X')
+                                .attr('data-index', index)
+                        )
+                        .appendTo(selectedFilesContainer);
+                } else if (file instanceof Object) {
+                    if (file?.Image) {
+                        fileElement
+                            .append(
+                                $('<div>')
+                                    .addClass('file-details')
+                                    .append($('<span>').text(file?.imageKey?.includes('pdf') ? "PDF-" + (index + 1) : "Image-" + (index + 1)))
+                            )
+                            .append(
+                                $('<span>')
+                                    .addClass('delete-file')
+                                    .text('X')
+                                    .attr('data-index', index)
+                            )
+                            .appendTo(selectedFilesContainer);
+                    }
+                }
+            });
+        }
+        
         $(document).ready(function() {
             $.ajax({
                     url: 'https://backend.app.spaderent.com/api/spade/protected',
@@ -1502,7 +2028,8 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
             $("#viewOverview").attr("href", `./view-tenant.html?tenant=${encodedTenantId}`)
             $("#viewFiles").attr("href", `./tenant-file.html?tenant=${encodedTenantId}`)
             $("#viewTasks").attr("href", `./tenant-tasks.html?tenant=${encodedTenantId}`)
-            $.ajax({
+            function getData(){
+                $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/getTenantsByID',
                 type: 'GET',
                 data: {
@@ -1515,6 +2042,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                 success: function({
                     data
                 }) {
+                    tenantData=data[0][0];
                     $("#tenant-top-img").attr("src", data[0][0].tenantImage ? data[0][0].tenantImage : "../assets/images/icons/Group 10344.png")
                     function toTitleCase(str) {
                                 return str.replace(/\w\S*/g, function(txt) {
@@ -1532,11 +2060,6 @@ $('#preloader').css('display','none');
                     // console.log(xhr.responseText);
                 }
             });
-            function toTitleCase(str) {
-                return str.replace(/\w\S*/g, function(txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
-            }
             $.ajax({
                 url: 'https://backend.app.spaderent.com/api/spade/tenantTask',
                 type: 'GET',
@@ -1555,6 +2078,7 @@ $('#preloader').css('display','none');
                         $('#table_body').append(row);
                     }
                    else if(response?.data[0]?.length > 0){
+                    taskInfo=response.data[0];
                         $("#no-task").show()
                         $("#task-table").hide()
                     $("#property_name").text(response?.data[0][0]?.propertyName)
@@ -1562,7 +2086,19 @@ $('#preloader').css('display','none');
                     tableBody.empty();
                     response.data[0] ?.forEach(function(task,index) {
                         var serial='<td class="serial-number">'+(index+1)+'</td>';
-                        var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
+                        // console.log(task?.taskImages[0].Image)
+                        if(task?.taskImages?.length>0){
+                            if(task?.taskImages[0]?.Image?.includes(".pdf")){
+                                var image = `<td><i class="fi fi-rs-file" style="font-size:35px"></td>`;
+                            }
+                            else{
+                                var image = `<td><img src="${task.taskImages[0].Image}" alt=""></td>`;
+                            }
+                            // var image = `<td><img src="${task.taskImages[0].Image}" alt=""></td>`;
+                        }
+                        else{
+                            var image = '<td><img src="../assets/images/Group-user.png" alt=""></td>';
+                        }   
                         var createdDate = new Date(task.created_at);
                         var currentDate = new Date();
                         var timeDiff = Math.abs(currentDate - createdDate);
@@ -1616,7 +2152,7 @@ $('#preloader').css('display','none');
 }
 var currentDate = new Date();
 var dueDate = '';
-if (task.dueDate) {
+if (task.dueDate && task.dueDate != "Not Set") {
     var targetDate = new Date(task.dueDate);
     var timeDiff = targetDate.getTime() - currentDate.getTime();
     var daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -1635,14 +2171,14 @@ if (task.dueDate) {
 var relatedTo = '<td class="property-id " style="font-weight: 600;">' + '<p style="font-weight: 600;" class="mb-1">' + (task.propertyName ? toTitleCase(task.propertyName) : "Not Set") + '</p>' + `<span class="font-weight-normal text-danger">Unit Number: ${task.unitNumber}</span>` + '</td>';
                         var status = '<td class="property-id " style="font-weight: 600;">' + (task.status ? toTitleCase(task.status) : "Not Set") + '</td>';
                         var dropdownMenu =
-                            '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
-                            '<ul class="dropdown-menu">' +
-                            '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
-                            '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
-                            `<li><a class="dropdown-item text-success" href="./view-property.html?propertyId=${task.id}">View</a></li>` +
-                            '</ul></td>';
+                                    '<td><i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>' +
+                                    '<ul class="dropdown-menu">' +
+                                    `<li><a class="dropdown-item text-success view-task" data-bs-effect="effect-scale" data-bs-toggle="modal" href="#">View</a></li>` +
+                                    '<li><a class="edit-option dropdown-item text-primary" href="javascript:void(0)">Edit</a></li>' +
+                                    '<li><a class="delete-option dropdown-item text-danger" href="javascript:void(0)">Delete</a></li>' +
+                                    '</ul></td>';
                         var row = '<tr>'+serial + image + taskName + assignTo + dueDate +
-                            relatedTo + status + '</tr>';
+                            relatedTo + status +dropdownMenu +'</tr>';
                         tableBody.append(row);
                     })}
                     else{
@@ -1659,6 +2195,355 @@ $('#preloader').css('display','none');
                     // console.log(xhr.responseText);
                 }
             })
+            
+
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/viewAllPropertyTenant',
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    // console.log(response.data[0])
+                    $("#property").empty()
+                    $("#property").append($("<option></option>").text("Choose...").prop("selected", true))
+                    response.data[0].forEach((property) => {
+                        // console.log(property);
+                        var optionText = "Tenant: " + property.firstName + " " + property.lastName + " Property: " + property.propertyName;
+                        var optionValue = property.tenantID;
+                        $("#property").append($("<option></option>").text(optionText).val(optionValue));
+                        $("#property_update").append($("<option></option>").text(optionText).val(optionValue));
+                    });
+                }
+            })
+
+
+            $.ajax({
+                url: 'https://backend.app.spaderent.com/api/spade/getVendorAssignTo',
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                },
+                success: function (response) {
+                    $("#assignee_update").empty()
+                    var selectElement = $('#assignee');
+                    selectElement.empty();
+                    if (response.data.length === 0) {
+                        $("#assignee_update").append($("<option></option>").text("No Vendor available.."));
+                        selectElement.append($('<option></option>').text('No Vendor available..'));
+                    } else {
+                        response.data.forEach((vendor) => {
+                            var optionText = vendor.firstName + " " + vendor.lastName;
+                            var optionValue = vendor.id;
+                            var option = $('<option></option>')
+                                .val(vendor.id)
+                                .text(vendor.firstName + " " + vendor.lastName);
+                            selectElement.append(option);
+                            $("#assignee_update").append($("<option></option>").text(optionText).val(optionValue));
+                        });
+                    }
+                    selectElement.multipleSelect();
+                },
+                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                    if (xhr?.responseJSON?.message == "No vendor data found") {
+                        $("#assignee").empty()
+                        $("#assignee").prop("disabled", true);
+                        $('#addVendorAnchor').show()
+                    }
+                }
+            })
+            
+            }
+           getData();
+            function toTitleCase(str) {
+                return str.replace(/\w\S*/g, function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+            }
+            
+            
+            function dateFormatChanger(mydate = "Not set"){
+var NewDate = (mydate != "Not set" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "Not set")
+return NewDate
+}
+$(document).on('click', '.delete-file', function () {
+                var index = $(this).data('index');
+                selectedFiles.splice(index, 1); // Remove the selected file from the array
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+$('#fileInput_update').on('change', function () {
+                var files = Array.from($(this)[0].files);
+                files.forEach(function (file) {
+                    file?.size <= 5 * 1024 * 1024 && selectedFiles?.length < 5 ? selectedFiles.push(file) : file?.size > 5 * 1024 * 1024 ? $("#size-text").removeClass("d-none") : $("#count-text").removeClass("d-none") // Add each file to the selected files array // Add each file to the selected files array
+                });
+                updateSelectedFilesContainer(); // Update the selected files container
+            });
+
+            $(document).on('click', ".edit-option", function (e) {
+
+                                e.preventDefault();
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+                                taskId = taskIdElement.attr("id")
+                                const data = taskInfo.find(obj => obj.id.toString() == taskId);
+                                console.log(data)
+                                if (data.taskImages) {
+                                    selectedFiles = data.taskImages
+                                } else {
+                                }
+                                
+                                updateSelectedFilesContainer()
+                                $("#message").val(data.notes);
+                                $("#dueDate_update").val(data.dueDate);
+                                $("#taskName_update").val(data.taskName);
+                                $("#property_update").val(tenantData.tenantID);
+                                $("#property_update").prop("disabled", true);
+                                $("#priority_update").find(`option[name="${data.priority.toLowerCase()}"]`).prop("selected", true);
+                                $("#status_update").find(`option[value="${data.status}"]`).prop("selected", true);
+                                $("#myModal_edit .select2-selection__rendered").empty()
+                                data.vendor.forEach(({
+                                    ID,
+                                    name
+                                }) => {
+                                    $("#assignee_update").find(`option[value="${ID}"]`).prop("selected", true);
+                                    $("#myModal_edit .select2-selection__rendered").append(`<li class="select2-selection__choice" title="${name}">${name}</li>`)
+                                })
+                                $('#myModal_edit').modal('show');
+                            });
+                            
+            $(document).on('click', ".view-task", function (e) {
+                e.preventDefault();
+                const taskIdElement = $(this).closest("tr").find(".task-id");
+                taskId = taskIdElement.attr("id")
+                const data = taskInfo.find(obj => obj.id.toString() == taskId);
+                console.log(tenantData)
+                if (data.taskImages) {
+                    selectedFiles = data.taskImages
+                } else {
+                }
+                updateSelectedFilesContainer()
+                $("#taskName_view").text(data.taskName);
+                $("#dueDate_view").text(data.dueDate!="Not Set"?dateFormatChanger(data.dueDate):data.dueDate);
+                $("#priority_view").text(data.priority);
+                $("#status_view").text(data.status);
+                $("#notes_view").text(data.notes || "Not set");
+                // console.log($("#notes_view"))
+                $("#view-task-line-item").empty()
+                
+                if(data?.vendor?.length > 0){
+                    data.vendor.forEach((item) => {
+// console.log(item)
+$("#view-task-line-item").append(`<tr class="tr">
+                            <td>
+                                <p class="text-primary"><b>${item.name} / ${item.email}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${tenantData.tEmail}</b></p>
+                            </td>
+                        </tr>`)
+})
+                }
+                else{
+                    console.log(tenantData.tEmail)
+                    $("#view-task-line-item").append(`<tr class="tr">
+                            <td>
+                                <p class="text-primary"><b>${"Not set"}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.propertyName} / ${data.unitNumber}</b></p>
+                            </td>
+                            <td>
+                                <p class="text-primary"><b>${data.tfirstName + " " + data.tlastName} / ${tenantData.tEmail}</b></p>
+                            </td>
+                        </tr>`)
+                }
+                if (data?.taskImages[0]?.Image) {
+                    const files = data.taskImages;
+                    $("#view-task-images").empty();
+                    files.forEach((file) => {
+                        if (file?.Image?.endsWith(".pdf") || file?.Image?.endsWith(".docx") || file?.Image?.endsWith(".doc")) {
+                            $("#view-task-images").append(`
+                <a href="${file?.Image}" download="${file?.imageKey}">
+                    <i class="fi fi-rs-file-pdf" style="font-size: 50px;"></i>
+                </a>&nbsp;`);
+                        } else {
+                            $("#view-task-images").append(`
+                <img src="${file?.Image}" width="200px" height="200px" alt="">&nbsp;`);
+                        }
+                    });
+                } else {
+                }
+                $("#viewModal-tasks").modal("show")
+            })
+            $(document).on('click', ".delete-option",function (e) {
+                                e.preventDefault(); // Prevent default anchor behavior
+                                const taskIdElement = $(this).closest("tr").find(".task-id");
+                                taskId = taskIdElement.attr("id");
+                                $('#myModal_delete').modal('show');
+                            });
+                            $(document).on('click', '#save', function (e) {
+                e.preventDefault();
+                $("#myModal_edit").modal("hide");
+                var formData = new FormData();
+                var message = $("#message").val();
+                var dueDate = $("#dueDate_update").val();
+                var taskName = $("#taskName_update").val();
+                var property = $("#property_update").val();
+                var priority = $("#priority_update").val();
+                var status = $("#status_update").val();
+                var assignee = $("#assignee_update").val();
+                var isNotifyTenantChecked = $('input[name="example-checkbox1_update"]:eq(0)').is(':checked') ? "yes" : "no";
+                var isNotifyAssigneesChecked = $('input[name="example-checkbox1_update"]:eq(1)').is(':checked') ? "yes" : "no";
+                var existingImageNames = [];
+                selectedFiles.forEach((file) => {
+                    if (file instanceof File) {
+                    }
+                    else {
+                        if(file?.Image){
+                            existingImageNames.push(file)
+                        }
+                    }
+                })
+                if (selectedFiles.length >= 1) {
+                    var files = selectedFiles.map(function (file) {
+                        return file instanceof File ? file : file?.name;
+                    });
+                    files.forEach(function (file) {
+                        formData.append('image', file);
+                    });
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/upload',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        }, success: function (response) {
+                            var imageArray = [...response.images, ...existingImageNames];
+                            const formData = {
+                                taskID: taskId,
+                                notifyTenant: isNotifyTenantChecked,
+                                notifyVendor: isNotifyAssigneesChecked,
+                                message: message,
+                                dueDate: dueDate,
+                                taskName: taskName,
+                                property: property,
+                                priority: priority,
+                                status: status,
+                                assignee: assignee,
+                                images: imageArray
+                            }
+                            $.ajax({
+                                url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                                type: 'PUT',
+                                data: JSON.stringify(formData),
+                                contentType: 'application/json',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                                },
+                                success: function (response) {
+                                    e.preventDefault()
+                                    getData();
+                                    $("#successfully_changed_text").text("Successfully Updated");
+                                    $("#successfully_changed").modal("show");
+                                    setTimeout(function () {
+                                        $("#successfully_changed").modal("hide");
+                                    }, 2000);
+                                },
+                                error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                                    $("#myModal_warning_connection").modal("show");
+                                    setTimeout(function () {
+                                        $('#myModal_warning_connection').modal('hide');
+                                    }, 2000);
+                                    // console.log('Error: ' + error);
+                                }
+                            });
+                        }, error: function () {
+                        }
+                    })
+                } else {
+                    const formData = {
+                        taskID: taskId,
+                        notifyTenant: isNotifyTenantChecked,
+                        notifyVendor: isNotifyAssigneesChecked,
+                        message: message,
+                        dueDate: dueDate,
+                        taskName: taskName,
+                        property: property,
+                        priority: priority,
+                        status: status,
+                        assignee: assignee,
+                        images: []
+                    }
+                    $.ajax({
+                        url: 'https://backend.app.spaderent.com/api/spade/updateTasks',
+                        type: 'PUT',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                        },
+                        success: function (response) {
+                            e.preventDefault()
+                            getData();
+                            $("#successfully_changed_text").text("Successfully Updated");
+                            $("#successfully_changed").modal("show");
+                            setTimeout(function () {
+                                $("#successfully_changed").modal("hide");
+                            }, 2000);
+                        },
+                        error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                            $("#myModal_warning_connection").modal("show");
+                            setTimeout(function () {
+                                $('#myModal_warning_connection').modal('hide');
+                            }, 2000);
+                            // console.log('Error: ' + error);
+                        }
+                    });
+                }
+            });
+            
+            $(document).on('click', '#confirmDelete', function (e) {
+                e.preventDefault();
+                $('#myModal_delete').modal('hide');
+                $.ajax({
+                    url: 'https://backend.app.spaderent.com/api/spade/deleteTask',
+                    type: 'DELETE',
+                    data: JSON.stringify({
+                        "taskID": taskId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("authtoken")
+                    },
+                    success: function (response) {
+                        getData()
+                        $("#successfully_changed_text").text("Successfully Deleted");
+                        $("#successfully_changed").modal("show");
+                        setTimeout(function () {
+                            $("#successfully_changed").modal("hide");
+                        }, 2000);
+                    },
+                    error: function (xhr, status, error) {
+$('#preloader').css('display','none');
+                        $("#myModal_warning_connection").modal("show");
+                        setTimeout(function () {
+                            $('#myModal_warning_connection').modal('hide');
+                        }, 2000);
+                        // console.log('Error: ' + error);
+                    }
+                });
+            })
+            
             $('input[type="checkbox"]').click(function() {
             // console.log($(this).closest('li').index())
             var columnIndex = $(this).closest('li').index(); // Get the index of the corresponding <li> element

@@ -12,12 +12,14 @@ const {
   updatePropertyNotifyReadUnRead,
   updateTenantNotifyReadUnRead,
   updateTaskNotifyReadUnRead,
+  updateUserTaskNotifyReadUnRead,
   updateInvoiceNotifyReadUnRead,
   updateAllNotifyReadQuery,
   updateTenantPropertyNotifyReadUnRead,
   updateTenantTaskNotifyReadUnRead,
   updateTenantInvoiceNotifyReadUnRead,
   updateAllTenantNotifyReadQuery,
+  getUserTaskNotify
 } = require("../constants/queries");
 const { queryRunner } = require("../helper/queryRunner");
 
@@ -104,12 +106,14 @@ const notifyController = {
   getNotify: async (req, res) => {
     //get property , tenants , task invoice from tables individually
     const { userId } = req.user;
+    // const { userId } = req.body;
     try {
       // get data from property table
       const getTenantsNotify = await queryRunner(getTenantNotify, [userId]);
       const property = await queryRunner(getPropertyNotify, [userId]);
       // get data from task table
       const task = await queryRunner(getTaskNotify, [userId]);
+      const user_task=await queryRunner(getUserTaskNotify,[userId]);
       // add all above steps on my video
       // get data from invoice table
       const invoice = await queryRunner(getInvoiceNotify, [userId]);
@@ -118,6 +122,7 @@ const notifyController = {
         propertyNotify: property[0],
         taskNotify: task[0],
         invoiceNotify: invoice[0],
+        userTaskNotify: user_task[0],
       });
     } catch (error) {
       res.status(400).json({
@@ -153,6 +158,7 @@ const notifyController = {
         property: updatePropertyNotifyReadUnRead,
         tenant: updateTenantNotifyReadUnRead,
         task: updateTaskNotifyReadUnRead,
+        userTask: updateUserTaskNotifyReadUnRead,
         invoice: updateInvoiceNotifyReadUnRead,
       };
       const updateQueryFunction = updateFunctions[type];

@@ -276,7 +276,7 @@ exports.addTasks = async (req, res) => {
         // customTaskId = task+customTaskId;
         // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
         if(images){
-      for (let i = 0; i < images.length; i++) {
+      for (let i = 0; i < images?.length; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
         const propertyImageResult = await queryRunner(insertInTaskImage, [
@@ -623,12 +623,19 @@ exports.updateTasks = async (req, res) => {
     // console.log(propertycheckresult[0]);
     if (propertycheckresult[0].length > 0) {
       const propertyImageKeys = propertycheckresult[0].map(
-        (image) => image.ImageKey
+        (image) => image?.ImageKey
       );
       // console.log("images" ,images)
       // Find the images to delete from S3 (present in propertycheckresult but not in images)
       const imagesToDelete = propertycheckresult[0].filter(
-        (image) => !images.some((img) => img.imageKey === image.ImageKey)
+        (image) => !images?.some((img) => {
+          if(img?.ImageKey){
+            return img?.ImageKey === image.ImageKey
+          }
+          else{
+            return img?.imageKey === image.ImageKey
+          }
+        })
       );
       // Delete images from S3
       // console.log(imagesToDelete);
@@ -639,8 +646,14 @@ exports.updateTasks = async (req, res) => {
         ]);
       }
       // Find the images to insert into the database (present in images but not in propertycheckresult)
-      const imagesToInsert = images.filter(
-        (image) => !propertyImageKeys.includes(image.imageKey)
+      const imagesToInsert = images?.filter(
+        (image) => {
+          if(image?.imageKey){
+            return !propertyImageKeys.includes(image?.imageKey)
+          }else{
+            return !propertyImageKeys.includes(image?.ImageKey)
+          }
+        }
       );
       for (let i = 0; i < imagesToInsert.length; i++) {
         const { image_url } = imagesToInsert[i];
@@ -656,7 +669,9 @@ exports.updateTasks = async (req, res) => {
         }
       }
     } else {
-      for (let i = 0; i < images.length - 1; i++) {
+      
+      console.log("heeuyeguyger",images)
+      for (let i = 0; i < images?.length; i++) {
         const { image_url } = images[i];
         const { image_key } = images[i];
         // console.log(taskID, image_url, image_key);
@@ -666,6 +681,7 @@ exports.updateTasks = async (req, res) => {
           image_url,
           image_key,
         ]);
+        console.log(propertyImageResult);
         // if property image data not inserted into property image table then throw error
         if (propertyImageResult.affectedRows === 0) {
           throw new Error("data doesn't inserted in property image table");
@@ -1123,7 +1139,7 @@ exports.VendorCheckEmail = async function (req, res) {
 //         // customTaskId = task+customTaskId;
 //         // const taskIdUpdateResult = await queryRunner(taskIdUpdate ,[customTaskId, tasksID]);
 //         if(images){
-//       for (let i = 0; i < images.length; i++) {
+//       for (let i = 0; i < images?.length; i++) {
 //         const { image_url } = images[i];
 //         const { image_key } = images[i];
 //         const propertyImageResult = await queryRunner(insertInTaskImage, [

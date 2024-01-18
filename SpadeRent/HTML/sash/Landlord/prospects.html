@@ -1881,7 +1881,20 @@
                                                                                             </li>
                                                                                             <li class="d-flex justify-content-between">
                                                                                                 <a class="text-dark" href="javascript:void(0)">
-                                                                                                    PROSPECTS
+                                                                                                    PROSPECT ID
+                                                                                                </a>
+                                                                                                <div class="form-check m-0">
+                                                                                                    <input
+                                                                                                        type="checkbox"
+                                                                                                        class="form-check-input mt-2"
+                                                                                                        id="exampleCheck1"
+                                                                                                        checked
+                                                                                                    >
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="d-flex justify-content-between">
+                                                                                                <a class="text-dark" href="javascript:void(0)">
+                                                                                                    PROSPECT
                                                                                                 NAME
                                                                                                 </a>
                                                                                                 <div class="form-check m-0">
@@ -2010,7 +2023,8 @@
                                                                                     <table class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100" id="responsive-datatable">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>PROSPECTS NAME</th>
+                                                                                                <th>PROSPECT ID</th>
+                                                                                        <th>PROSPECT NAME</th>
                                                                                                 <th>SOURCE CAMPAIGN</th>
                                                                                                 <th>PROPERTY NAME</th>
                                                                                                 <th>TOTAL UNITS</th>
@@ -2290,6 +2304,19 @@
                                                                                     </li>
                                                                                     <li class="d-flex justify-content-between">
                                                                                         <a class="text-dark" href="javascript:void(0)">
+                                                                                            PROSPECT ID
+                                                                                        </a>
+                                                                                        <div class="form-check m-0">
+                                                                                            <input
+                                                                                                type="checkbox"
+                                                                                                class="form-check-input mt-2"
+                                                                                                id="exampleCheck1"
+                                                                                                checked
+                                                                                            >
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="d-flex justify-content-between">
+                                                                                        <a class="text-dark" href="javascript:void(0)">
                                                                                             PROSPECTS
                                                                                         NAME
                                                                                         </a>
@@ -2419,7 +2446,8 @@
                                                                             <table class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100" id="responsive-datatable2">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>PROSPECTS NAME</th>
+                                                                                        <th>PROSPECT ID</th>
+                                                                                        <th>PROSPECT NAME</th>
                                                                                         <th>source campaign</th>
                                                                                         <th>property name</th>
                                                                                         <th>TOTAL UNITS</th>
@@ -2615,6 +2643,19 @@
                                                                                     </li>
                                                                                     <li class="d-flex justify-content-between">
                                                                                         <a class="text-dark" href="javascript:void(0)">
+                                                                                            PROSPECT ID
+                                                                                        </a>
+                                                                                        <div class="form-check m-0">
+                                                                                            <input
+                                                                                                type="checkbox"
+                                                                                                class="form-check-input mt-2"
+                                                                                                id="exampleCheck1"
+                                                                                                checked
+                                                                                            >
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="d-flex justify-content-between">
+                                                                                        <a class="text-dark" href="javascript:void(0)">
                                                                                             PROSPECTS
                                                                                         NAME
                                                                                         </a>
@@ -2744,7 +2785,8 @@
                                                                             <table class="table border text-nowrap text-md-nowrap mb-0 p-0 w-100" id="responsive-datatable3">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>PROSPECTS NAME</th>
+                                                                                        <th>PROSPECT ID</th>
+                                                                                        <th>PROSPECT NAME</th>
                                                                                         <th>source campaign</th>
                                                                                         <th>property name</th>
                                                                                         <th>TOTAL UNITS</th>
@@ -3433,7 +3475,7 @@ $('#preloader').css('display','none');
                             areaCell.append(areaInput);
                             row.append(areaCell);
                             const unitDetailsCell = $('<td colspan="3"></td>');
-                            const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details (Optional)" value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
+                            const unitDetailsInput = $(`<input type="text" class="form-control ${unit.unitNumber ? "for-light" : ""}" style="min-width: 100px;" id="inputEmail5" placeholder="Enter Unit Details " value='${unit.unitDetails}' ${unit.Area ? "readonly" : ""}>`);
                             unitDetailsCell.append(unitDetailsInput);
                             row.append(unitDetailsCell);
                             const actionCell = $('<td></td>');
@@ -4049,8 +4091,9 @@ $('#preloader').css('display','none');
                             var prospectus = item?.prospectus;
                             var property = item?.property;
                             var source = item?.Source;
+                            row.append($('<td>').text(prospectus.cprospectusId));
                             row.append($('<td>').text(prospectus.firstName + ' ' + prospectus.lastName));
-                            row.append($('<td>').html('<span class="fw-bold">' + prospectus.sourceCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
+                            row.append($('<td>').html('<span class="fw-bold">' + source?.sourcesCampaign + '</span><br><small>' + "https:spaderent.com" + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.propertyName + '</span><br><small>' + (property.address + ", " + property.city + ", " + property.state) + '</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + property.totalunits + '</span><br><small class="text-primary"><i class="fe fe-circle me-1 text-primary"></i>' + property.totalVacant + ' (Vacant)</small><br><small class="text-danger"><i class="fe fe-circle me-1 text-danger"></i>' + property.totalOccupied + ' (Occupied)</small>'));
                             row.append($('<td>').html('<span class="fw-bold">' + prospectus.email + '</span><br><small>(' + prospectus.phoneNumber + ')</small>'));

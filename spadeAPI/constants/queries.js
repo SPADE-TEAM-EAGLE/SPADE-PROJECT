@@ -197,6 +197,8 @@ exports.updateTenantNotifyReadUnRead =
   "UPDATE tenants SET notify = ?  WHERE id = ? ";
 exports.updateTaskNotifyReadUnRead =
   "UPDATE task SET notify = ?  WHERE id = ? ";
+  exports.updateUserTaskNotifyReadUnRead =
+  "UPDATE user_task SET notify = ?  WHERE id = ? ";
 exports.updateInvoiceNotifyReadUnRead =
   "UPDATE invoice SET notify = ?  WHERE id = ? ";
 
@@ -447,7 +449,31 @@ GROUP BY
 ORDER BY 
     task.created_at DESC;
 `;
-
+exports.getUserTaskNotify = `
+SELECT 
+user_task.id AS taskID,
+user_task.landlordID,
+user_task.taskName,
+user_task.notify,  
+user_task.status,
+user_task.priority,
+user_task.created_at,
+property.propertyName,
+property.address,
+property.propertyType,
+GROUP_CONCAT(userTaskImages.Image) AS Image,
+GROUP_CONCAT(userTaskImages.ImageKey) AS ImageKey
+FROM 
+user_task
+LEFT JOIN
+userTaskImages ON user_task.id = userTaskImages.taskID
+JOIN 
+property ON user_task.propertyId = property.id
+WHERE 
+user_task.landlordID = ?
+GROUP BY 
+user_task.id, user_task.taskName, user_task.status, user_task.priority, user_task.created_at ORDER BY user_task.created_at DESC
+`;
 exports.getInvoiceNotify = `SELECT 
 invoice.id AS invoiceID,
 invoice.invoiceType,
@@ -630,8 +656,8 @@ exports.getUnitsCount =
 exports.insertMoreUnits =
   "INSERT INTO propertyunits (propertyID, unitNumber,Area,unitDetails,status) VALUES (?,?,?,?,?)";
 exports.putUnitsUpdate = "UPDATE property SET  units = ?  where id = ? ";
-exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate) VALUES (?,?,?,?,?)";
-exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
+exports.insertTenantAttachFile = "INSERT INTO tenantattachfiles (landlordID, tenantID, Image,imageKey, uploadDate,uploadedById,userRole) VALUES (?,?,?,?,?,?,?)";
+exports.getTenantAttachFile = "SELECT tf.id, tf.Image, tf.ImageKey, tf.uploadDate,tf.uploadedById,tf.userRole, t.firstName,t.lastName, p.propertyName, p.address, p.city, p.state, p.zipCode  FROM tenantattachfiles as tf join tenants as t ON tf.tenantID = t.id join property as p ON t.propertyID = p.id where tf.tenantID = ? ";
 exports.insertInvoice =
   "INSERT INTO invoice (landlordID, tenantID, invoiceType, startDate, endDate, frequency, dueDate,daysDue, repeatTerms, terms,note,status,created_at,totalAmount,notify, recurringNextDate,cInvoiceId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 exports.insertLineItems =
@@ -640,7 +666,7 @@ exports.insertInvoiceImage =
   "INSERT INTO invoiceimages (invoiceID, Image,imageKey) VALUES (?,?,?)";
 exports.updateUnitsTenant =
   "UPDATE propertyunits SET  status = ?  where id = ? ";
-exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress, p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
+exports.getTenantsById = `SELECT l.Phone AS landlordPhone, p.id AS propertyID, p.propertyName, p.address AS pAddress,p.cPropertyId ,p.city AS pCity, p.state AS pState, p.zipCode AS pZipCode, p.propertyType, p.propertySQFT, p.status AS pStatus, p.units AS pUnits, t.id AS tenantID, t.landlordID, t.firstName, t.lastName, t.companyName, i.recurringNextDate,t.email AS tEmail, t.phoneNumber AS tPhoneNumber, t.Address AS tAddress,t.image AS tenantImage ,t.city AS tCity, t.state AS tState, t.zipcode AS tZipcode, t.rentAmount, t.gross_or_triple_lease, t.baseRent, t.tripleNet, t.leaseStartDate, t.leaseEndDate, t.increaseRent, pu.unitNumber, pu.Area AS unitArea, pu.unitDetails, pu.status AS unitStatus, GROUP_CONCAT(pi.image) AS images
 FROM tenants AS t
 LEFT JOIN property AS p ON t.propertyID = p.id
 LEFT JOIN invoice AS i ON t.id = i.tenantID
@@ -877,7 +903,7 @@ exports.updateTenants =
 exports.selectVendorCategory =
   "SELECT * FROM `vendorcategory` JOIN `vendor` ON `vendorcategory`.`id` = `vendor`.`categoryID` WHERE `vendor`.`LandlordID` = ?";
 
-exports.propertyTaskQuery = ` SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at, p.propertyName, p.address, pu.unitNumber, t.firstName AS tfirstName, t.lastName AS tlastName FROM task AS tk JOIN tenants AS t ON tk.tenantID = t.id left JOIN property AS p ON t.propertyID = p.id left JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
+exports.propertyTaskQuery = ` SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy, tk.created_at, p.propertyName, p.address, pu.unitNumber, t.firstName AS tfirstName, t.lastName AS tlastName,t.phoneNumber AS tPhoneNumber, t.id AS tenantID FROM task AS tk JOIN tenants AS t ON tk.tenantID = t.id left JOIN property AS p ON t.propertyID = p.id left JOIN propertyunits AS pu ON t.propertyUnitID = pu.id WHERE t.propertyID = ?`;
 exports.tenantTaskQuery =
   "SELECT tk.id, tk.taskName, tk.dueDate, tk.status, tk.priority, tk.notes, tk.createdBy,tk.created_at, p.propertyName, pu.unitNumber, t.firstName as tfirstName, t.lastName as tlastName FROM `task`as tk JOIN tenants as t ON tk.tenantID = t.id JOIN property as p ON t.propertyID = p.id JOIN propertyunits as pu ON t.propertyUnitID = pu.id where tk.tenantID  = ?";
 exports.getAllInvoiceTenantQuery =
@@ -1106,7 +1132,7 @@ WHERE
 `;
 exports.userPermissionProtected = "SELECT * FROM userPUsers as UP JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.UEmail = ?";
 exports.userPermissionLogin = "SELECT *,UP.id as UPID FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id WHERE UP.UEmail = ?";
-exports.userPermissionAuth = "SELECT * FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
+exports.userPermissionAuth = "SELECT  *, UP.id as Uid FROM userPUsers as UP JOIN users as US ON UP.llnalordId = US.id JOIN userRoles as UR ON UP.URole = UR.id WHERE UP.id = ?";
 exports.insertInUserPermissionUsers =
   "INSERT INTO userPUsers (llnalordId, UFirstName, ULastName, UEmail, UPhone, UPassword, UStatus,URole,UCreated_at,UImage,UImageKey) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?, ?)";
   exports.updateUserPermissionUsers = "UPDATE userPUsers SET UFirstName = ?, ULastName = ?, UEmail = ?, UPhone = ?, UStatus = ?, URole = ?, UUpdated_at = ?,UImage=?,UImageKey=? WHERE id = ?"; 
@@ -1216,3 +1242,5 @@ WHERE ut.landlordId = ?`;
 exports.updateUserTasksQuery =
 "UPDATE user_task SET taskName = ? , propertyId = ?, PropertyUnitId = ? , dueDate = ? , status = ? , priority = ? , notes = ? , notifyAssignee = ? , updated_at = ? where id = ? ";
 exports.delteImageForTaskUserImages = "DELETE FROM userTaskImages WHERE ImageKey = ?";
+exports.userPermissionUserData = "SELECT UFirstName,ULastName,UImage,UImageKey FROM userPUsers where id = ?";
+exports.landlordData = "SELECT FirstName,LastName,image,imageKey FROM users where id = ?";

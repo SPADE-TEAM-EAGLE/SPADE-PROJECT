@@ -335,20 +335,7 @@ exports.Signin = async function (req, res) {
         if (selectUserPermissionResult[0].length === 0) {
           res.status(400).send("Email not found");
         } else if (await bcrypt.compare(password, selectUserPermissionResult[0][0].UPassword)) {
-            if(selectUserPermissionResult[0][0].PlanID == 1)
-      {
-        const currentDate = new Date();
-        const subscriptionDate = new Date(selectUserPermissionResult[0][0].created_at);
-        const timeDiff = currentDate - subscriptionDate;
-        const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    if (daysDiff >= 30) {
-        return res.status(200).json({
-          token: token,
-          body:selectUserPermissionResult[0][0],
-          message: "Your Subscription is expired"
-        }); 
-    }
-      }
+        
           const id = selectUserPermissionResult[0][0].llnalordId;
           const role = selectUserPermissionResult[0][0].URole;
           const UserPermissionID = selectUserPermissionResult[0][0].UPID;
@@ -356,6 +343,23 @@ exports.Signin = async function (req, res) {
           const token = jwt.sign({ email, id, role, UserPermissionID}, config.JWT_SECRET_KEY, {
             expiresIn: "3h",
           });
+        
+        
+          if(selectUserPermissionResult[0][0].PlanID == 1)
+      {
+        const currentDate = new Date();
+        const subscriptionDate = new Date(selectUserPermissionResult[0][0].created_at);
+        const timeDiff = currentDate - subscriptionDate;
+        const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    if (daysDiff >=30) {
+        return res.status(200).json({
+          token: token,
+          body:selectUserPermissionResult[0][0],
+          message: "Your Subscription is expired "
+        }); 
+    }
+      }
+
           // ################################# Count ##############################################
           const userId = selectUserPermissionResult[0][0].llnalordId;
           console.log(userId);
@@ -2207,11 +2211,11 @@ console.log(Id)
         // this is for task images
         if (TaskImagesResult[0].length > 0) {
           const taskImages = TaskImagesResult[0].map(
-            (image) => image.Image
+            (image) => image
           );
           taskByIDResult[0][j].taskImages = taskImages;
         } else {
-          taskByIDResult[0][j].taskImages = ["No Task Images Found"];
+          taskByIDResult[0][j].taskImages = [];
         }
         const TaskAssignToResult = await queryRunner(
           selectQuery("taskassignto", "taskId"),
@@ -2245,6 +2249,7 @@ console.log(Id)
                 mobileNumber: vendorResult[0][0].mobileNumber,
                 email: vendorResult[0][0].email,
                 category: VendorCategoryResult[0][0].category,
+                ID: vendorResult[0][0].id,
               };
               vendorData.push(vendorDataObject);
             } else {

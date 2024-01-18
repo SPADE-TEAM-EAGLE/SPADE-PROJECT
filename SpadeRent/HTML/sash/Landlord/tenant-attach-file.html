@@ -808,7 +808,7 @@
                                     <span class="text-danger d-none">Assignee is required!</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                    <label class="form-label fw-bold">Media/ Files </label>
                                     <div class="custom-file" style="border: 1px dashed #00000087;">
                                         <input
                                             id="fileInput_update"
@@ -1499,6 +1499,17 @@
                                                                 </div>
                                                             </li>
                                                             <li class="d-flex justify-content-between">
+                                                                <a class="text-dark" href="javascript:void(0)">OWNER</a>
+                                                                <div class="form-check m-0">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="form-check-input mt-2"
+                                                                        id="exampleCheck1"
+                                                                        checked
+                                                                    >
+                                                                </div>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between">
                                                                 <a class="text-dark" href="javascript:void(0)">DATE UPLOAD</a>
                                                                 <div class="form-check m-0">
                                                                     <input
@@ -1571,6 +1582,8 @@
                                                                 <th>#</th>
                                                                 <th>File name</th>
                                                                 <th>Properties</th>
+                                                                <th>Owner</th>
+
                                                                 <th>Date upload</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -2067,6 +2080,7 @@ var encodedTenantId = encodeURIComponent(encryptedPropertyId);
                         };
                         $.ajax({
                             url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
+                            // url: 'https://backend.app.spaderent.com/api/spade/tenantAttachFile',
                             type: 'POST',
                             data: JSON.stringify(tenantData),
                     contentType: 'application/json',
@@ -2175,6 +2189,15 @@ function getData(){
         // console.log(tenantData)
         table.empty()
         data.forEach(function (item, index) {
+            var ownerImg;
+            console.log(item?.userdata?.image)
+            if(item?.userdata?.FirstName){
+                console.log("landlord")
+                if(item?.userdata?.image){
+                ownerImg = item?.userdata?.image;
+            }else{
+                ownerImg = "../assets/images/circle-user.png";
+            }
             const newRow = `
                 <tr>
                     <td style="font-weight: 600;">${index + 1}</td>
@@ -2189,6 +2212,10 @@ function getData(){
                     <td class="propertyAddress">
                         <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
                         <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
+                    </td>
+                    <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
+                        <img src="${ownerImg}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <p class="mt-2">${item?.userdata?.FirstName + " " + item?.userdata?.LastName}</p>
                     </td>
                     <td>${formatDate(item.uploadDate)}</td>
                     <td>
@@ -2209,6 +2236,54 @@ function getData(){
                 </tr>
             `;
             table.append(newRow);
+            }
+            else{
+                console.log("users")
+                if(item?.userdata?.UImage){
+                ownerImg = item?.userdata?.UImage;
+            }else{
+                ownerImg = "../assets/images/circle-user.png";
+            }
+            const newRow = `
+                <tr>
+                    <td style="font-weight: 600;">${index + 1}</td>
+                    <td class="file-id" id="${item.id}">
+                        <div style="font-weight: 600; display: flex; gap: 1rem;">
+                            ${item?.Image?.split(",")[0].endsWith(".pdf") ? `<i class="fi fi-rs-file-pdf fs-20" style="display: flex; align-items: center;"></i>` : `<img src="${item?.Image?.split(",")[0]}" alt="">`}
+                            <p style="color: #9B9B9B;" class="mb-1">${item.ImageKey}<br>
+                                <span class="font-weight-normal" style="color: #9B9B9B; font-weight: 200;"><a class="fw-bold" href="${item.Image}">Download</a></span>
+                            </p>
+                        </div>
+                    </td>
+                    <td class="propertyAddress">
+                        <p style="font-weight: 600;" class="mb-1">${item.propertyName}</p>
+                        <span style="color: #9B9B9B;">${item.address+", "+item.city+", "+item.state+", "+item.zipCode }</span>
+                    </td>
+                    <td style="display: flex; align-items: center; gap: 0.5rem; border: none;">
+                        <img src="${ownerImg}" alt="" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <p class="mt-2">${item?.userdata?.UFirstName + " " + item?.userdata?.ULastName}</p>
+                    </td>
+                    <td>${formatDate(item.uploadDate)}</td>
+                    <td>
+                        <i class="fe fe-more-vertical" data-bs-toggle="dropdown"></i>
+                        <ul class="dropdown-menu dropdown-menu-top">
+                            <li>
+                                <a class="download-option dropdown-item text-success" href="javascript:void(0)" style="display: flex; align-items: center;">
+                                    <i class="fi fi-rs-download fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Download
+                                </a>
+                            </li>
+                            <li>
+                                <a class="delete-option dropdown-item text-danger" href="javascript:void(0)" style="display: flex; align-items: center;">
+                                    <i class="fi fi-rs-cross-small fs-20" style="display: flex; align-items: center;"></i> &nbsp;&nbsp;Delete
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            `;
+            table.append(newRow);
+            }
+            
         });
     },
     error: function () {

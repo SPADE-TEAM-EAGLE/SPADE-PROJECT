@@ -599,7 +599,7 @@
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-bold">Assign To (Optional)</label>
+                                    <label class="form-label fw-bold">Assign To </label>
                                     <select
                                         multiple="multiple"
                                         multiple
@@ -663,7 +663,7 @@
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold">Notes (Optional)</label>
+                                    <label class="form-label fw-bold">Notes </label>
                                     <textarea
                                         id="notes"
                                         class="form-control mb-4"
@@ -672,7 +672,7 @@
                                     ></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                    <label class="form-label fw-bold">Media/ Files </label>
                                     <div
                                         class="custom-file"
                                         style="border: 1px dashed #00000087;"
@@ -853,7 +853,7 @@
                         >
                             <form class="row g-3" enctype="multipart/form-data">
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold">Message (Optional)</label>
+                                    <label class="form-label fw-bold">Message </label>
                                     <textarea
                                         class="form-control mb-4"
                                         placeholder="Sorry about that We will look into it."
@@ -942,7 +942,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-label fw-bold">Assignee(s) (Optional)</label>
+                                        <label class="form-label fw-bold">Assignee(s) </label>
                                         <select
                                             class="form-control select2"
                                             data-placeholder="Choose Assignee"
@@ -954,7 +954,7 @@
                                     <span class="text-danger d-none">This field is required!</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold">Media/ Files (Optional)</label>
+                                    <label class="form-label fw-bold">Media/ Files </label>
                                     <div
                                         class="custom-file"
                                         style="border: 1px dashed #00000087;"
@@ -2175,6 +2175,7 @@ $('#preloader').css('display','none');
                 }
             });
         }
+        
         var taskInfo = []
         let taskId;
         var taskPermissions;
@@ -2290,6 +2291,7 @@ $('#preloader').css('display','none');
                     }
                 }
             })
+            
             function areAllFieldsFilled(update) {
                 if (update) {
                     // console.log("this is for update")
@@ -2368,7 +2370,8 @@ function dateFormatChanger(mydate = "Not set"){
 var NewDate = (mydate != "Not set" ? mydate.split('-')[1] + "-" + mydate.split('-')[2] + "-" + mydate.split('-')[0] : "Not set")
 return NewDate
 }
-            $(document).on('click', ".view-task", function (e) {
+            
+$(document).on('click', ".view-task", function (e) {
                 e.preventDefault();
                 const taskIdElement = $(this).closest("tr").find(".task-id");
                 taskId = taskIdElement.attr("id")
@@ -2433,6 +2436,7 @@ $("#view-task-line-item").append(`<tr class="tr">
                 }
                 $("#viewModal-tasks").modal("show")
             })
+            
             $('#fileInput').on('change', function () {
                 var files = Array.from($(this)[0].files);
                 files.forEach(function (file) {
@@ -2771,7 +2775,9 @@ $('#myModal_edit input[required] , #myModal_edit select[required]').on('input ch
                     if (file instanceof File) {
                     }
                     else {
-                        existingImageNames.push(file)
+                        if(file?.Image){
+                            existingImageNames.push(file)
+                        }
                     }
                 })
                 if (selectedFiles.length >= 1) {
@@ -2875,6 +2881,7 @@ $('#preloader').css('display','none');
                     });
                 }
             });
+            
             $(document).on('click', '#confirmDelete', function (e) {
                 e.preventDefault();
                 $('#myModal_delete').modal('hide');
@@ -3066,7 +3073,8 @@ if (task.priority == 'High') {
                                 })
                                 $('#myModal_edit').modal('show');
                             });
-                            $('.delete-option').click(function (e) {
+                            
+                            $(document).on('click', ".delete-option",function (e) {
                                 e.preventDefault(); // Prevent default anchor behavior
                                 const taskIdElement = $(this).closest("tr").find(".task-id");
                                 taskId = taskIdElement.attr("id");
